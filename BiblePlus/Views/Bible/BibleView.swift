@@ -37,7 +37,12 @@ private struct BibleContentView: View {
                 verses: viewModel.verses,
                 chapterTitle: viewModel.chapterTitle,
                 selectedVerseNumber: viewModel.selectedVerse?.number,
-                onVerseTap: { viewModel.selectVerse($0) }
+                isLoading: viewModel.isLoading,
+                errorMessage: viewModel.errorMessage,
+                isShowingOfflineFallback: viewModel.isShowingOfflineFallback,
+                offlineTranslationName: viewModel.translationName,
+                onVerseTap: { viewModel.selectVerse($0) },
+                onRetry: { viewModel.retryLoading() }
             )
             .background(palette.background)
             .simultaneousGesture(
@@ -102,7 +107,22 @@ private struct BibleContentView: View {
             }
 
             ToolbarItem(placement: .topBarTrailing) {
-                HStack(spacing: 16) {
+                HStack(spacing: 12) {
+                    // Translation picker capsule
+                    Button {
+                        viewModel.showTranslationPicker = true
+                    } label: {
+                        Text(viewModel.currentTranslation.apiCode)
+                            .font(BPFont.caption)
+                            .foregroundStyle(palette.accent)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 4)
+                            .overlay(
+                                Capsule()
+                                    .stroke(palette.accent, lineWidth: 1)
+                            )
+                    }
+
                     Button {
                         viewModel.goToPreviousChapter()
                     } label: {
@@ -141,6 +161,13 @@ private struct BibleContentView: View {
                     viewModel.selectChapter(chapter)
                 }
             )
+        }
+        .sheet(isPresented: $viewModel.showTranslationPicker) {
+            BibleTranslationPickerView(
+                currentTranslation: viewModel.currentTranslation,
+                onSelect: { viewModel.changeTranslation($0) }
+            )
+            .presentationDetents([.medium])
         }
         .sheet(isPresented: $showExplainChat) {
             ChatView(initialContext: explainPrompt)

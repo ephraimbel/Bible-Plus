@@ -10,16 +10,25 @@ final class BibleReaderViewModel {
     var selectedBook: BibleBook = BibleData.allBooks[0]
     var selectedChapter: Int = 1
     var showBookPicker: Bool = false
+    var showTranslationPicker: Bool = false
     var selectedVerse: VerseItem? = nil
+
+    // MARK: - Loading State
+
+    var isLoading: Bool = false
+    var errorMessage: String? = nil
+    var isShowingOfflineFallback: Bool = false
 
     // MARK: - Data
 
     var verses: [(number: Int, text: String)] = []
+    var currentTranslation: BibleTranslation = .kjv
 
     private let repository = BibleRepository.shared
     private let modelContext: ModelContext
+    private var loadTask: Task<Void, Never>?
 
-    var translationName: String { repository.currentTranslation }
+    var translationName: String { currentTranslation.displayName }
 
     var hasContent: Bool { !verses.isEmpty }
 
@@ -40,6 +49,13 @@ final class BibleReaderViewModel {
 
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
+
+        // Read user's preferred translation
+        let descriptor = FetchDescriptor<UserProfile>()
+        if let profile = try? modelContext.fetch(descriptor).first {
+            currentTranslation = profile.preferredTranslation
+        }
+        repository.setTranslation(currentTranslation)
         loadChapter()
     }
 
@@ -62,7 +78,6 @@ final class BibleReaderViewModel {
         if selectedChapter < selectedBook.chapterCount {
             selectedChapter += 1
         } else {
-            // Move to next book
             if let idx = BibleData.allBooks.firstIndex(of: selectedBook),
                idx + 1 < BibleData.allBooks.count {
                 selectedBook = BibleData.allBooks[idx + 1]
@@ -76,7 +91,6 @@ final class BibleReaderViewModel {
         if selectedChapter > 1 {
             selectedChapter -= 1
         } else {
-            // Move to previous book
             if let idx = BibleData.allBooks.firstIndex(of: selectedBook), idx > 0 {
                 selectedBook = BibleData.allBooks[idx - 1]
                 selectedChapter = selectedBook.chapterCount
@@ -88,6 +102,30 @@ final class BibleReaderViewModel {
     func selectVerse(_ verse: VerseItem) {
         selectedVerse = verse
         HapticService.lightImpact()
+    }
+
+    // MARK: - Translation
+
+    func changeTranslation(_ translation: BibleTranslation) {
+        currentTranslation = translation
+        repository.setTranslation(translation)
+
+        // Persist to UserProfile
+        let descriptor = FetchDescriptor<UserProfile>()
+        if let profile = try? modelContext.fetch(descriptor).first {
+            profile.preferredTranslation = translation
+            profile.updatedAt = Date()
+        }
+
+        showTranslationPicker = false
+        loadChapter()
+    }
+
+    // MARK: - Loading
+
+    func retryLoading() {
+        errorMessage = nil
+        loadChapter()
     }
 
     // MARK: - Actions
@@ -108,13 +146,46 @@ final class BibleReaderViewModel {
 
     func explainVersePrompt(for verse: VerseItem) -> String {
         let ref = verseReference(for: verse)
-        return "Explain this verse to me: \"\(verse.text)\" — \(ref)"
+        return "Help me understand what God is saying in \(ref): \"\(verse.text)\" — what did this mean in its original context, and what does it mean for my life today?"
     }
 
     // MARK: - Private
 
     private func loadChapter() {
-        verses = repository.verses(book: selectedBook.id, chapter: selectedChapter)
+        loadTask?.cancel()
+        isShowingOfflineFallback = false
+        errorMessage = nil
+        isLoading = true
+
+        loadTask = Task {
+            do {
+                let fetched = try await repository.verses(
+                    book: selectedBook.id,
+                    chapter: selectedChapter
+                )
+                guard !Task.isCancelled else { return }
+                verses = fetched
+                isLoading = false
+            } catch {
+                guard !Task.isCancelled else { return }
+
+                // Graceful fallback: try sync path (cached or bundled KJV)
+                let fallback = repository.versesSync(
+                    book: selectedBook.id,
+                    chapter: selectedChapter
+                )
+
+                if !fallback.isEmpty {
+                    verses = fallback
+                    isShowingOfflineFallback = currentTranslation != .kjv
+                    isLoading = false
+                } else {
+                    verses = []
+                    errorMessage = error.localizedDescription
+                    isLoading = false
+                }
+            }
+        }
     }
 }
 

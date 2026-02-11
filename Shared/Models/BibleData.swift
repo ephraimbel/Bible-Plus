@@ -6,6 +6,10 @@ struct BibleBook: Identifiable, Hashable {
     let chapterCount: Int
     let testament: Testament
 
+    var apiBookNumber: Int {
+        BibleData.apiBookNumber(for: id) ?? 1
+    }
+
     enum Testament: String {
         case old, new
 
@@ -95,5 +99,10 @@ enum BibleData {
 
     static func book(id: String) -> BibleBook? {
         allBooks.first { $0.id == id }
+    }
+
+    static func apiBookNumber(for bookID: String) -> Int? {
+        guard let index = allBooks.firstIndex(where: { $0.id == bookID }) else { return nil }
+        return index + 1
     }
 }

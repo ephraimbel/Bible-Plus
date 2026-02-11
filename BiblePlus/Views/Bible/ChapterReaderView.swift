@@ -4,15 +4,29 @@ struct ChapterReaderView: View {
     let verses: [(number: Int, text: String)]
     let chapterTitle: String
     let selectedVerseNumber: Int?
+    let isLoading: Bool
+    let errorMessage: String?
+    let isShowingOfflineFallback: Bool
+    let offlineTranslationName: String
     let onVerseTap: (VerseItem) -> Void
+    let onRetry: () -> Void
     @Environment(\.bpPalette) private var palette
 
     var body: some View {
-        if verses.isEmpty {
+        if isLoading && verses.isEmpty {
+            loadingState
+        } else if let error = errorMessage, verses.isEmpty {
+            errorState(message: error)
+        } else if verses.isEmpty {
             emptyState
         } else {
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
+                    // Offline fallback banner
+                    if isShowingOfflineFallback {
+                        offlineBanner
+                    }
+
                     // Chapter heading
                     Text(chapterTitle)
                         .font(BPFont.headingSmall)
@@ -58,6 +72,80 @@ struct ChapterReaderView: View {
         }
         .buttonStyle(.plain)
     }
+
+    // MARK: - Loading State
+
+    private var loadingState: some View {
+        VStack(spacing: 16) {
+            Spacer()
+            ProgressView()
+                .tint(palette.accent)
+            Text("Loading chapter...")
+                .font(BPFont.body)
+                .foregroundStyle(palette.textMuted)
+            Spacer()
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    // MARK: - Error State
+
+    private func errorState(message: String) -> some View {
+        VStack(spacing: 16) {
+            Spacer()
+
+            Image(systemName: "wifi.slash")
+                .font(.system(size: 48, weight: .thin))
+                .foregroundStyle(palette.accent)
+
+            Text("Couldn't Load Chapter")
+                .font(BPFont.headingSmall)
+                .foregroundStyle(palette.textPrimary)
+
+            Text(message)
+                .font(BPFont.body)
+                .foregroundStyle(palette.textMuted)
+                .multilineTextAlignment(.center)
+
+            Button {
+                onRetry()
+            } label: {
+                Text("Try Again")
+                    .font(BPFont.button)
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 24)
+                    .padding(.vertical, 10)
+                    .background(Capsule().fill(palette.accent))
+            }
+            .padding(.top, 8)
+
+            Spacer()
+        }
+        .padding(.horizontal, 32)
+    }
+
+    // MARK: - Offline Banner
+
+    private var offlineBanner: some View {
+        HStack(spacing: 6) {
+            Image(systemName: "wifi.slash")
+                .font(.system(size: 11, weight: .medium))
+            Text("Showing KJV offline. Connect to load \(offlineTranslationName).")
+                .font(BPFont.caption)
+        }
+        .foregroundStyle(palette.accent)
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 8)
+        .padding(.horizontal, 12)
+        .background(
+            RoundedRectangle(cornerRadius: 8)
+                .fill(palette.accentSoft)
+        )
+        .padding(.horizontal, 0)
+        .padding(.top, 4)
+    }
+
+    // MARK: - Empty State
 
     private var emptyState: some View {
         VStack(spacing: 16) {

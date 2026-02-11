@@ -197,6 +197,18 @@ enum BibleTranslation: String, Codable, CaseIterable, Identifiable {
         }
     }
 
+    var apiCode: String {
+        switch self {
+        case .niv: "NIV"
+        case .esv: "ESV"
+        case .kjv: "KJV"
+        case .nlt: "NLT"
+        case .nasb: "NASB"
+        case .message: "MSG"
+        case .nkjv: "NKJV"
+        }
+    }
+
     var john316: String {
         switch self {
         case .niv:
