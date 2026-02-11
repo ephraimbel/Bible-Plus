@@ -1,9 +1,10 @@
 import SwiftUI
+import SwiftData
 
 struct ImmersiveListeningView: View {
     @Bindable var viewModel: BibleReaderViewModel
     let audioService: AudioBibleService
-    let background: SanctuaryBackground
+    let initialBackground: SanctuaryBackground
     let wasAlreadyPlaying: Bool
 
     @Environment(\.dismiss) private var dismiss
@@ -13,6 +14,12 @@ struct ImmersiveListeningView: View {
     @State private var displayedVerseIndex: Int = 0
     @State private var controlsVisible = true
     @State private var hideTask: Task<Void, Never>?
+    @State private var currentBackground: SanctuaryBackground?
+    @State private var showBackgroundPicker = false
+
+    private var background: SanctuaryBackground {
+        currentBackground ?? initialBackground
+    }
 
     // MARK: - Body
 
@@ -47,6 +54,26 @@ struct ImmersiveListeningView: View {
         }
         .ignoresSafeArea()
         .statusBarHidden()
+        .sheet(isPresented: $showBackgroundPicker) {
+            ListeningBackgroundPickerView(
+                selectedBackground: background,
+                isPro: {
+                    let descriptor = FetchDescriptor<UserProfile>()
+                    return (try? modelContext.fetch(descriptor).first?.isPro) ?? false
+                }()
+            ) { bg in
+                withAnimation(.easeInOut(duration: 0.4)) {
+                    currentBackground = bg
+                }
+                // Persist to UserProfile
+                let descriptor = FetchDescriptor<UserProfile>()
+                if let profile = try? modelContext.fetch(descriptor).first {
+                    profile.selectedBackgroundID = bg.id
+                    profile.updatedAt = Date()
+                    try? modelContext.save()
+                }
+            }
+        }
         .onAppear {
             if wasAlreadyPlaying {
                 displayedVerseIndex = audioService.currentVerseIndex
@@ -125,6 +152,16 @@ struct ImmersiveListeningView: View {
                         .clipShape(Circle())
                 }
                 Spacer()
+                Button {
+                    showBackgroundPicker = true
+                } label: {
+                    Image(systemName: "photo.on.rectangle")
+                        .font(.system(size: 15, weight: .medium))
+                        .foregroundStyle(.white.opacity(0.7))
+                        .frame(width: 34, height: 34)
+                        .background(.ultraThinMaterial.opacity(0.5))
+                        .clipShape(Circle())
+                }
             }
         }
         .padding(.horizontal, 20)
@@ -361,5 +398,140 @@ struct ImmersiveListeningView: View {
         audioService.seekToVerse(index: displayedVerseIndex + 1)
         HapticService.lightImpact()
         scheduleHide()
+    }
+}
+
+// MARK: - Background Picker
+
+private struct ListeningBackgroundPickerView: View {
+    let selectedBackground: SanctuaryBackground
+    let isPro: Bool
+    let onSelect: (SanctuaryBackground) -> Void
+
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.bpPalette) private var palette
+
+    private let columns = [
+        GridItem(.flexible(), spacing: 12),
+        GridItem(.flexible(), spacing: 12),
+    ]
+
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 28) {
+                    ForEach(BackgroundCollection.allCases) { collection in
+                        let backgrounds = SanctuaryBackground.backgrounds(in: collection)
+                        if !backgrounds.isEmpty {
+                            Section {
+                                LazyVGrid(columns: columns, spacing: 12) {
+                                    ForEach(backgrounds) { bg in
+                                        backgroundCard(bg, locked: bg.isProOnly && !isPro)
+                                    }
+                                }
+                            } header: {
+                                HStack(spacing: 6) {
+                                    Text(collection.displayName)
+                                        .font(BPFont.button)
+                                        .foregroundStyle(.secondary)
+
+                                    if collection.isProOnly {
+                                        Image(systemName: "crown.fill")
+                                            .font(.system(size: 11))
+                                            .foregroundStyle(Color(hex: "C9A96E"))
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .padding(20)
+            }
+            .background(palette.background)
+            .navigationTitle("Backgrounds")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(palette.background, for: .navigationBar)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Done") { dismiss() }
+                        .foregroundStyle(palette.accent)
+                }
+            }
+        }
+        .presentationDetents([.large])
+        .presentationBackground(palette.background)
+    }
+
+    @ViewBuilder
+    private func backgroundCard(_ bg: SanctuaryBackground, locked: Bool) -> some View {
+        Button {
+            if !locked {
+                HapticService.selection()
+                onSelect(bg)
+            }
+        } label: {
+            ZStack {
+                if let imageName = bg.imageName,
+                   let uiImage = SanctuaryBackground.loadImage(named: imageName) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .aspectRatio(1.2, contentMode: .fit)
+                        .clipped()
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                } else {
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(
+                            LinearGradient(
+                                colors: bg.gradientColors.map { Color(hex: $0) },
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+                        .aspectRatio(1.2, contentMode: .fit)
+                }
+
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(.black.opacity(0.2))
+
+                VStack(spacing: 4) {
+                    if locked {
+                        Image(systemName: "lock.fill")
+                            .font(.system(size: 16))
+                            .foregroundStyle(.white.opacity(0.7))
+                    } else if selectedBackground.id == bg.id {
+                        Image(systemName: "checkmark.circle.fill")
+                            .font(.system(size: 22))
+                            .foregroundStyle(.white)
+                    }
+
+                    Text(bg.name)
+                        .font(BPFont.caption)
+                        .foregroundStyle(.white)
+                        .lineLimit(1)
+                }
+
+                if bg.hasVideo || bg.hasImage {
+                    VStack {
+                        HStack {
+                            Spacer()
+                            Text(bg.hasVideo ? "ANIMATED" : "IMAGE")
+                                .font(.system(size: 8, weight: .bold))
+                                .foregroundStyle(.white)
+                                .padding(.horizontal, 6)
+                                .padding(.vertical, 2)
+                                .background(Color(hex: "C9A96E").opacity(0.85))
+                                .clipShape(Capsule())
+                                .padding(6)
+                        }
+                        Spacer()
+                    }
+                }
+            }
+            .opacity(locked ? 0.6 : 1.0)
+        }
+        .buttonStyle(.plain)
+        .disabled(locked)
     }
 }

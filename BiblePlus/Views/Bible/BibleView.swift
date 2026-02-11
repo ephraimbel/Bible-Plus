@@ -580,7 +580,7 @@ private struct BibleContentView: View {
             ImmersiveListeningView(
                 viewModel: viewModel,
                 audioService: audioService,
-                background: resolvedBackground,
+                initialBackground: resolvedBackground,
                 wasAlreadyPlaying: audioService.hasActivePlayback
             )
         }
