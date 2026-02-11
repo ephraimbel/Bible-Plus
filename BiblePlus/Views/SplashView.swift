@@ -1,27 +1,25 @@
 import SwiftUI
 
 struct SplashView: View {
-    @State private var logoScale: CGFloat = 0.7
+    @State private var logoScale: CGFloat = 0.85
     @State private var logoOpacity: Double = 0
 
     var body: some View {
         ZStack {
-            Color(red: 26/255, green: 25/255, blue: 21/255)
+            Color(hex: "FAF8F4")
                 .ignoresSafeArea()
 
-            VStack(spacing: 20) {
-                Image("AppLogo")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 140, height: 140)
-                    .clipShape(RoundedRectangle(cornerRadius: 30))
-                    .shadow(color: .black.opacity(0.5), radius: 20, y: 8)
-                    .scaleEffect(logoScale)
-                    .opacity(logoOpacity)
-            }
+            Image("AppLogo")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 120, height: 120)
+                .clipShape(RoundedRectangle(cornerRadius: 28))
+                .shadow(color: .black.opacity(0.25), radius: 16, y: 6)
+                .scaleEffect(logoScale)
+                .opacity(logoOpacity)
         }
         .onAppear {
-            withAnimation(.easeOut(duration: 0.6)) {
+            withAnimation(.easeOut(duration: 0.5)) {
                 logoScale = 1.0
                 logoOpacity = 1.0
             }
