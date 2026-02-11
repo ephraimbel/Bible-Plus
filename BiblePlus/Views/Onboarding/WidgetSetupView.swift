@@ -2,6 +2,7 @@ import SwiftUI
 
 struct WidgetSetupView: View {
     let viewModel: OnboardingViewModel
+    @Environment(\.bpPalette) private var palette
     @State private var showContent = false
     @State private var currentSetupStep = 0
 
@@ -19,12 +20,12 @@ struct WidgetSetupView: View {
             VStack(spacing: 10) {
                 Text("Add Bible Plus\nto your Home Screen")
                     .font(BPFont.headingMedium)
-                    .foregroundStyle(BPColorPalette.light.textPrimary)
+                    .foregroundStyle(palette.textPrimary)
                     .multilineTextAlignment(.center)
 
                 Text("See personalized prayers and verses\nevery time you unlock your phone.")
                     .font(BPFont.reference)
-                    .foregroundStyle(BPColorPalette.light.textMuted)
+                    .foregroundStyle(palette.textMuted)
                     .multilineTextAlignment(.center)
                     .lineSpacing(3)
             }
@@ -39,27 +40,27 @@ struct WidgetSetupView: View {
                         // Step icon
                         ZStack {
                             Circle()
-                                .fill(BPColorPalette.light.accentSoft)
+                                .fill(palette.accentSoft)
                                 .frame(width: 100, height: 100)
 
                             Image(systemName: step.icon)
                                 .font(.system(size: 40, weight: .light))
-                                .foregroundStyle(BPColorPalette.light.accent)
+                                .foregroundStyle(palette.accent)
                         }
 
                         VStack(spacing: 10) {
                             Text("Step \(index + 1)")
                                 .font(BPFont.reference)
-                                .foregroundStyle(BPColorPalette.light.accent)
+                                .foregroundStyle(palette.accent)
 
                             Text(step.title)
                                 .font(BPFont.headingSmall)
-                                .foregroundStyle(BPColorPalette.light.textPrimary)
+                                .foregroundStyle(palette.textPrimary)
                                 .multilineTextAlignment(.center)
 
                             Text(step.description)
                                 .font(BPFont.body)
-                                .foregroundStyle(BPColorPalette.light.textSecondary)
+                                .foregroundStyle(palette.textSecondary)
                                 .multilineTextAlignment(.center)
                                 .lineSpacing(3)
                         }
@@ -75,7 +76,7 @@ struct WidgetSetupView: View {
 
             VStack(spacing: 12) {
                 GoldButton(
-                    title: "Get Started",
+                    title: "I'm Ready",
                     showGlow: true,
                     action: {
                         viewModel.completeOnboarding()
@@ -87,7 +88,7 @@ struct WidgetSetupView: View {
                 } label: {
                     Text("Skip for now")
                         .font(BPFont.button)
-                        .foregroundStyle(BPColorPalette.light.textMuted)
+                        .foregroundStyle(palette.textMuted)
                 }
             }
             .padding(.horizontal, 32)

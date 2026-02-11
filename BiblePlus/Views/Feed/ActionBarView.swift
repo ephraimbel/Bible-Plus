@@ -2,12 +2,15 @@ import SwiftUI
 
 struct ActionBarView: View {
     let isSaved: Bool
+    var isAudioPlaying: Bool = false
     var onSave: () -> Void = {}
     var onShare: () -> Void = {}
     var onPin: () -> Void = {}
     var onAskAI: () -> Void = {}
     var onToggleSound: () -> Void = {}
+    var onOpenSanctuary: () -> Void = {}
 
+    @Environment(\.bpPalette) private var palette
     @State private var heartScale: CGFloat = 1.0
 
     var body: some View {
@@ -17,7 +20,7 @@ struct ActionBarView: View {
             // Heart — Save / Favorite
             actionButton(
                 icon: isSaved ? "heart.fill" : "heart",
-                color: isSaved ? BPColorPalette.light.accent : .white,
+                color: isSaved ? palette.accent : .white,
                 scale: heartScale
             ) {
                 withAnimation(BPAnimation.spring) {
@@ -31,28 +34,39 @@ struct ActionBarView: View {
                 onSave()
             }
 
-            // Share as Image (stub for Phase 4)
+            // Share as Image
             actionButton(icon: "square.and.arrow.up", color: .white) {
                 HapticService.impact(.medium)
                 onShare()
             }
 
-            // Add to Collection (stub)
+            // Add to Collection
             actionButton(icon: "pin", color: .white) {
                 HapticService.selection()
                 onPin()
             }
 
-            // Ask the AI (stub)
+            // Ask the AI
             actionButton(icon: "bubble.left.and.bubble.right", color: .white) {
                 HapticService.selection()
                 onAskAI()
             }
 
-            // Sound toggle
-            actionButton(icon: "speaker.wave.2", color: .white) {
+            // Sound toggle — tap to toggle, long-press to open Sanctuary
+            actionButton(
+                icon: isAudioPlaying ? "speaker.wave.2.fill" : "speaker.slash",
+                color: isAudioPlaying ? palette.accent : .white
+            ) {
+                HapticService.selection()
                 onToggleSound()
             }
+            .simultaneousGesture(
+                LongPressGesture(minimumDuration: 0.5)
+                    .onEnded { _ in
+                        HapticService.impact(.medium)
+                        onOpenSanctuary()
+                    }
+            )
 
             Spacer()
                 .frame(height: 120)

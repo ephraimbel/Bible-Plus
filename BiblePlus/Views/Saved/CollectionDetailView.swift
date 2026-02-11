@@ -3,6 +3,7 @@ import SwiftUI
 struct CollectionDetailView: View {
     let collection: ContentCollection
     let viewModel: SavedViewModel
+    @Environment(\.bpPalette) private var palette
 
     var body: some View {
         Group {
@@ -14,7 +15,7 @@ struct CollectionDetailView: View {
                     ForEach(items) { content in
                         SavedContentRow(
                             content: content,
-                            displayText: content.templateText
+                            displayText: viewModel.personalizedText(for: content)
                         )
                     }
                     .onDelete { offsets in
@@ -34,15 +35,15 @@ struct CollectionDetailView: View {
 
             Image(systemName: "tray")
                 .font(.system(size: 48, weight: .thin))
-                .foregroundStyle(BPColorPalette.light.accent)
+                .foregroundStyle(palette.accent)
 
             Text("Empty Collection")
                 .font(BPFont.headingSmall)
-                .foregroundStyle(BPColorPalette.light.textPrimary)
+                .foregroundStyle(palette.textPrimary)
 
             Text("Pin content from the feed\nto add it here.")
                 .font(BPFont.body)
-                .foregroundStyle(BPColorPalette.light.textMuted)
+                .foregroundStyle(palette.textMuted)
                 .multilineTextAlignment(.center)
 
             Spacer()

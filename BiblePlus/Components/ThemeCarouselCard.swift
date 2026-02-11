@@ -5,6 +5,7 @@ struct ThemeCarouselCard: View {
     let isSelected: Bool
     let userName: String
     let action: () -> Void
+    @Environment(\.bpPalette) private var palette
 
     var body: some View {
         Button(action: {
@@ -25,13 +26,13 @@ struct ThemeCarouselCard: View {
                         Text("\(userName),")
                             .font(BPFont.prayerNameMedium)
                             .foregroundStyle(
-                                isDarkTheme ? .white : BPColorPalette.light.textPrimary
+                                isDarkTheme ? .white : palette.textPrimary
                             )
 
                         Text("God is with you\nright now.")
                             .font(BPFont.prayerMedium)
                             .foregroundStyle(
-                                isDarkTheme ? .white.opacity(0.9) : BPColorPalette.light.textPrimary
+                                isDarkTheme ? .white.opacity(0.9) : palette.textPrimary
                             )
                             .multilineTextAlignment(.center)
                     }
@@ -51,21 +52,21 @@ struct ThemeCarouselCard: View {
                 HStack {
                     Text(theme.name)
                         .font(BPFont.button)
-                        .foregroundStyle(BPColorPalette.light.textPrimary)
+                        .foregroundStyle(palette.textPrimary)
 
                     Spacer()
 
                     if isSelected {
                         Image(systemName: "checkmark.circle.fill")
-                            .foregroundStyle(BPColorPalette.light.accent)
+                            .foregroundStyle(palette.accent)
                     } else {
                         Circle()
-                            .stroke(BPColorPalette.light.border, lineWidth: 2)
+                            .stroke(palette.border, lineWidth: 2)
                             .frame(width: 22, height: 22)
                     }
                 }
                 .padding(16)
-                .background(BPColorPalette.light.surfaceElevated)
+                .background(palette.surfaceElevated)
                 .clipShape(
                     UnevenRoundedRectangle(
                         topLeadingRadius: 0,
@@ -78,12 +79,12 @@ struct ThemeCarouselCard: View {
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
                     .stroke(
-                        isSelected ? BPColorPalette.light.accent : BPColorPalette.light.border,
+                        isSelected ? palette.accent : palette.border,
                         lineWidth: isSelected ? 2 : 1
                     )
             )
             .shadow(
-                color: isSelected ? BPColorPalette.light.accent.opacity(0.2) : Color.black.opacity(0.05),
+                color: isSelected ? palette.accent.opacity(0.2) : Color.black.opacity(0.05),
                 radius: isSelected ? 12 : 4,
                 y: 2
             )

@@ -3,6 +3,7 @@ import SwiftUI
 struct ChatBubbleView: View {
     let message: ChatMessage
     let isStreaming: Bool
+    @Environment(\.bpPalette) private var palette
 
     var body: some View {
         HStack(alignment: .top, spacing: 10) {
@@ -12,11 +13,11 @@ struct ChatBubbleView: View {
                 // AI avatar
                 Image(systemName: "flame.fill")
                     .font(.system(size: 14))
-                    .foregroundStyle(BPColorPalette.light.accent)
+                    .foregroundStyle(palette.accent)
                     .frame(width: 28, height: 28)
                     .background(
                         Circle()
-                            .fill(BPColorPalette.light.accentSoft)
+                            .fill(palette.accentSoft)
                     )
                     .padding(.top, 2)
             }
@@ -24,7 +25,7 @@ struct ChatBubbleView: View {
             VStack(alignment: message.role == .user ? .trailing : .leading, spacing: 4) {
                 Text(message.content.isEmpty && isStreaming ? "..." : message.content)
                     .font(BPFont.chat)
-                    .foregroundStyle(message.role == .user ? .white : BPColorPalette.light.textPrimary)
+                    .foregroundStyle(message.role == .user ? .white : palette.textPrimary)
                     .padding(.horizontal, 14)
                     .padding(.vertical, 10)
                     .background(
@@ -39,7 +40,7 @@ struct ChatBubbleView: View {
                             .scaleEffect(0.6)
                         Text("Thinking...")
                             .font(BPFont.caption)
-                            .foregroundStyle(BPColorPalette.light.textMuted)
+                            .foregroundStyle(palette.textMuted)
                     }
                 }
             }
@@ -54,7 +55,7 @@ struct ChatBubbleView: View {
 
     private var bubbleColor: Color {
         message.role == .user
-            ? BPColorPalette.light.accent
-            : BPColorPalette.light.surface
+            ? palette.accent
+            : palette.surface
     }
 }

@@ -84,6 +84,20 @@ final class PersonalizationService {
         save()
     }
 
+    func updateSoundscape(_ soundscapeID: String) {
+        let profile = getOrCreateProfile()
+        profile.selectedSoundscapeID = soundscapeID
+        profile.updatedAt = Date()
+        save()
+    }
+
+    func updateSanctuaryBackground(_ backgroundID: String) {
+        let profile = getOrCreateProfile()
+        profile.selectedBackgroundID = backgroundID
+        profile.updatedAt = Date()
+        save()
+    }
+
     func completeOnboarding() {
         let profile = getOrCreateProfile()
         profile.hasCompletedOnboarding = true

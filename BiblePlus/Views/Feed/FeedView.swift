@@ -3,24 +3,21 @@ import SwiftData
 
 struct FeedView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(SoundscapeService.self) private var soundscapeService
     @State private var viewModel: FeedViewModel?
-    @State private var audioService = AudioService()
 
     var body: some View {
         Group {
             if let vm = viewModel {
-                FeedContentView(vm: vm, audioService: audioService)
+                FeedContentView(vm: vm, soundscapeService: soundscapeService)
             } else {
-                Color.clear.onAppear { initializeViewModel() }
+                BPLoadingView().onAppear { initializeViewModel() }
             }
         }
     }
 
     private func initializeViewModel() {
-        viewModel = FeedViewModel(
-            modelContext: modelContext,
-            audioService: audioService
-        )
+        viewModel = FeedViewModel(modelContext: modelContext)
     }
 }
 
@@ -28,8 +25,9 @@ struct FeedView: View {
 
 private struct FeedContentView: View {
     @Bindable var vm: FeedViewModel
-    let audioService: AudioService
+    let soundscapeService: SoundscapeService
     @State private var scrollPosition: Int? = 0
+    @State private var showSanctuary = false
 
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
@@ -50,11 +48,13 @@ private struct FeedContentView: View {
                         theme: vm.currentTheme,
                         isSaved: vm.isSaved(content),
                         showDoubleTapHeart: vm.doubleTapHeartID == content.id,
+                        isAudioPlaying: soundscapeService.isPlaying,
                         onSave: { vm.toggleSave(for: content) },
                         onShare: { vm.shareCard(content) },
                         onPin: { vm.pinToCollection(content) },
                         onAskAI: { vm.askAI(about: content) },
-                        onToggleSound: { audioService.togglePlayback() },
+                        onToggleSound: { soundscapeService.togglePlayback() },
+                        onOpenSanctuary: { showSanctuary = true },
                         onDoubleTap: { vm.doubleTapSave(for: content) }
                     )
                     .containerRelativeFrame(.vertical)
@@ -86,6 +86,9 @@ private struct FeedContentView: View {
         }
         .sheet(item: $vm.askAIContent) { content in
             ChatView(initialContext: vm.askAIPrompt(for: content))
+        }
+        .fullScreenCover(isPresented: $showSanctuary) {
+            SanctuaryView(soundscapeService: soundscapeService)
         }
     }
 }

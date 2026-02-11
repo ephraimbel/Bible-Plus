@@ -3,6 +3,7 @@ import SwiftUI
 struct ProgressDots: View {
     let totalSteps: Int
     let currentStep: Int
+    @Environment(\.bpPalette) private var palette
 
     var body: some View {
         HStack(spacing: 8) {
@@ -10,8 +11,8 @@ struct ProgressDots: View {
                 Circle()
                     .fill(
                         index == currentStep
-                            ? BPColorPalette.light.accent
-                            : BPColorPalette.light.border
+                            ? palette.accent
+                            : palette.border
                     )
                     .frame(
                         width: index == currentStep ? 10 : 6,

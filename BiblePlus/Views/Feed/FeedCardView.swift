@@ -6,6 +6,7 @@ struct FeedCardView: View {
     let theme: ThemeDefinition
     let isSaved: Bool
     let showDoubleTapHeart: Bool
+    var isAudioPlaying: Bool = false
 
     // Action callbacks
     var onSave: () -> Void = {}
@@ -13,9 +14,12 @@ struct FeedCardView: View {
     var onPin: () -> Void = {}
     var onAskAI: () -> Void = {}
     var onToggleSound: () -> Void = {}
+    var onOpenSanctuary: () -> Void = {}
     var onDoubleTap: () -> Void = {}
 
+    @Environment(\.bpPalette) private var palette
     @State private var heartVisible = false
+    @State private var showComingSoon = false
 
     var body: some View {
         ZStack {
@@ -134,10 +138,23 @@ struct FeedCardView: View {
             // Guided prayer "Pray Along" button
             if content.type == .guidedPrayer {
                 GoldButton(title: "Pray Along", showGlow: true) {
-                    // Phase 4+ implementation
+                    showComingSoon = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        withAnimation(.easeOut(duration: 0.3)) {
+                            showComingSoon = false
+                        }
+                    }
                 }
                 .padding(.horizontal, 60)
                 .padding(.top, 24)
+            }
+
+            if showComingSoon {
+                Text("Coming soon")
+                    .font(BPFont.caption)
+                    .foregroundStyle(.white.opacity(0.7))
+                    .padding(.top, 8)
+                    .transition(.opacity)
             }
 
             // Reflection "Ask the AI" button
@@ -171,11 +188,13 @@ struct FeedCardView: View {
             Spacer()
             ActionBarView(
                 isSaved: isSaved,
+                isAudioPlaying: isAudioPlaying,
                 onSave: onSave,
                 onShare: onShare,
                 onPin: onPin,
                 onAskAI: onAskAI,
-                onToggleSound: onToggleSound
+                onToggleSound: onToggleSound,
+                onOpenSanctuary: onOpenSanctuary
             )
             .padding(.trailing, 12)
         }
@@ -186,7 +205,7 @@ struct FeedCardView: View {
     private var heartOverlay: some View {
         Image(systemName: "heart.fill")
             .font(.system(size: 80))
-            .foregroundStyle(BPColorPalette.light.accent)
+            .foregroundStyle(palette.accent)
             .shadow(color: .black.opacity(0.3), radius: 8, y: 4)
             .scaleEffect(heartVisible ? 1.0 : 0.3)
             .opacity(heartVisible ? 1.0 : 0)

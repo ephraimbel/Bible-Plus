@@ -2,7 +2,9 @@ import SwiftUI
 
 struct ContentView: View {
     @Binding var deepLinkedContentID: UUID?
+    @Environment(\.bpPalette) private var palette
     @State private var selectedTab: Tab = .feed
+    @State private var soundscapeService = SoundscapeService()
 
     enum Tab: String, CaseIterable {
         case feed, bible, ask, saved, settings
@@ -22,7 +24,7 @@ struct ContentView: View {
             case .feed: "flame"
             case .bible: "book"
             case .ask: "bubble.left.and.bubble.right"
-            case .saved: "heart"
+            case .saved: "bookmark"
             case .settings: "gearshape"
             }
         }
@@ -50,8 +52,9 @@ struct ContentView: View {
                 .tabItem { Label(Tab.settings.title, systemImage: Tab.settings.icon) }
                 .tag(Tab.settings)
         }
-        .tint(BPColorPalette.light.accent)
-        .toolbarBackground(.ultraThinMaterial, for: .tabBar)
+        .environment(soundscapeService)
+        .tint(palette.accent)
+        .toolbarBackground(.regularMaterial, for: .tabBar)
         .toolbarBackground(.visible, for: .tabBar)
         .onChange(of: deepLinkedContentID) { _, newValue in
             if newValue != nil {

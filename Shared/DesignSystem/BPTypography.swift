@@ -29,8 +29,8 @@ enum BPFont {
     // Buttons & Labels — SF Pro Text, Medium, 15pt
     static let button = Font.system(size: 15, weight: .medium, design: .default)
 
-    // Verse References — SF Pro Display, Light, 13pt
-    static let reference = Font.system(size: 13, weight: .light, design: .default)
+    // Verse References — New York serif, Light, 13pt
+    static let reference = Font.system(size: 13, weight: .light, design: .serif)
 
     // Small caption — SF Pro Text, Regular, 12pt
     static let caption = Font.system(size: 12, weight: .regular, design: .default)

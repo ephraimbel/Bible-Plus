@@ -2,6 +2,7 @@ import SwiftUI
 
 struct WelcomeView: View {
     let viewModel: OnboardingViewModel
+    @Environment(\.bpPalette) private var palette
     @State private var showContent = false
     @State private var showButton = false
 
@@ -15,7 +16,7 @@ struct WelcomeView: View {
                 // App icon / cross symbol
                 Image(systemName: "book.pages")
                     .font(.system(size: 72, weight: .thin))
-                    .foregroundStyle(BPColorPalette.light.accent)
+                    .foregroundStyle(palette.accent)
                     .scaleEffect(showContent ? 1 : 0.6)
                     .opacity(showContent ? 1 : 0)
 
@@ -25,11 +26,11 @@ struct WelcomeView: View {
                 VStack(spacing: 14) {
                     Text("Bible Plus")
                         .font(BPFont.headingLarge)
-                        .foregroundStyle(BPColorPalette.light.textPrimary)
+                        .foregroundStyle(palette.textPrimary)
 
                     Text("Your personal companion for\nprayer, scripture, and peace.")
                         .font(BPFont.onboardingSubtitle)
-                        .foregroundStyle(BPColorPalette.light.textSecondary)
+                        .foregroundStyle(palette.textSecondary)
                         .multilineTextAlignment(.center)
                         .lineSpacing(4)
                 }
@@ -48,7 +49,7 @@ struct WelcomeView: View {
 
                     Text("This takes about 2 minutes and helps us\npersonalize everything for you.")
                         .font(BPFont.reference)
-                        .foregroundStyle(BPColorPalette.light.textMuted)
+                        .foregroundStyle(palette.textMuted)
                         .multilineTextAlignment(.center)
                 }
                 .padding(.horizontal, 32)
@@ -60,7 +61,7 @@ struct WelcomeView: View {
         }
         .onAppear {
             // Start ambient music
-            viewModel.audioService.startAmbientMusic()
+            viewModel.audioService.playResource("ambient-piano")
 
             // Staggered entrance animations
             withAnimation(BPAnimation.spring.delay(0.3)) {

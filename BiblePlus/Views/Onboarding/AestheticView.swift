@@ -2,6 +2,7 @@ import SwiftUI
 
 struct AestheticView: View {
     @Bindable var viewModel: OnboardingViewModel
+    @Environment(\.bpPalette) private var palette
     @State private var showContent = false
 
     private let columns = [
@@ -14,14 +15,16 @@ struct AestheticView: View {
             Spacer().frame(height: 24)
 
             VStack(spacing: 10) {
-                Text("Make Bible Plus\nfeel like yours, \(viewModel.firstName).")
+                Text(viewModel.firstName.isEmpty
+                    ? "Make Bible Plus\nfeel like yours."
+                    : "Make Bible Plus\nfeel like yours, \(viewModel.firstName).")
                     .font(BPFont.headingMedium)
-                    .foregroundStyle(BPColorPalette.light.textPrimary)
+                    .foregroundStyle(palette.textPrimary)
                     .multilineTextAlignment(.center)
 
                 Text("50+ more backgrounds available inside.")
                     .font(BPFont.reference)
-                    .foregroundStyle(BPColorPalette.light.textMuted)
+                    .foregroundStyle(palette.textMuted)
             }
             .opacity(showContent ? 1 : 0)
 
@@ -55,7 +58,7 @@ struct AestheticView: View {
             Spacer().frame(height: 40)
         }
         .onAppear {
-            withAnimation {
+            withAnimation(BPAnimation.spring.delay(0.2)) {
                 showContent = true
             }
         }

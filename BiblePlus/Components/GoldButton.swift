@@ -6,6 +6,7 @@ struct GoldButton: View {
     var showGlow: Bool = false
     let action: () -> Void
 
+    @Environment(\.bpPalette) private var palette
     @State private var glowOpacity: Double = 0.3
 
     var body: some View {
@@ -20,16 +21,16 @@ struct GoldButton: View {
                 .padding(.vertical, 18)
                 .background(
                     RoundedRectangle(cornerRadius: 16)
-                        .fill(isEnabled ? BPColorPalette.light.accent : Color.gray.opacity(0.3))
+                        .fill(isEnabled ? palette.accent : Color.gray.opacity(0.3))
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: 16)
-                        .stroke(BPColorPalette.light.accent.opacity(0.6), lineWidth: 2)
+                        .stroke(palette.accent.opacity(0.6), lineWidth: 2)
                         .blur(radius: showGlow ? 8 : 0)
                         .opacity(showGlow ? glowOpacity : 0)
                 )
                 .shadow(
-                    color: isEnabled ? BPColorPalette.light.accent.opacity(0.3) : .clear,
+                    color: isEnabled ? palette.accent.opacity(0.3) : .clear,
                     radius: 12,
                     y: 4
                 )

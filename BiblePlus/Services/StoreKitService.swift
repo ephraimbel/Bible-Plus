@@ -27,7 +27,10 @@ final class StoreKitService {
 
     init() {
         transactionListener = listenForTransactions()
-        Task { await loadProducts() }
+        Task {
+            await loadProducts()
+            await updatePurchasedProducts()
+        }
     }
 
     deinit {

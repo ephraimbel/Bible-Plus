@@ -3,6 +3,7 @@ import SwiftUI
 struct GreetingCardView: View {
     let greeting: String
     let theme: ThemeDefinition
+    @Environment(\.bpPalette) private var palette
     @State private var showContent = false
     @State private var pulseChevron = false
 
@@ -31,7 +32,7 @@ struct GreetingCardView: View {
                 // Flame icon
                 Image(systemName: "flame")
                     .font(.system(size: 52, weight: .thin))
-                    .foregroundStyle(BPColorPalette.light.accent)
+                    .foregroundStyle(palette.accent)
                     .opacity(showContent ? 1 : 0)
                     .scaleEffect(showContent ? 1 : 0.6)
 

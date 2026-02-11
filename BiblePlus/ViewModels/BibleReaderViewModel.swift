@@ -2,6 +2,7 @@ import Foundation
 import SwiftData
 import UIKit
 
+@MainActor
 @Observable
 final class BibleReaderViewModel {
     // MARK: - Navigation State
@@ -99,6 +100,10 @@ final class BibleReaderViewModel {
 
     func verseReference(for verse: VerseItem) -> String {
         "\(selectedBook.name) \(selectedChapter):\(verse.number)"
+    }
+
+    func shareText(for verse: VerseItem) -> String {
+        "\(verse.text)\n— \(selectedBook.name) \(selectedChapter):\(verse.number) (\(translationName))"
     }
 
     func explainVersePrompt(for verse: VerseItem) -> String {

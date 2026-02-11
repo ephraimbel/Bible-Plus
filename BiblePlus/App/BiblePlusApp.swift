@@ -39,8 +39,13 @@ struct RootView: View {
         Group {
             if hasCompletedOnboarding {
                 ContentView(deepLinkedContentID: $deepLinkedContentID)
+                    .transition(.asymmetric(
+                        insertion: .opacity.combined(with: .scale(scale: 0.96)),
+                        removal: .opacity
+                    ))
             } else {
                 OnboardingContainerView()
+                    .transition(.opacity)
             }
         }
         .preferredColorScheme(resolvedColorScheme)

@@ -11,7 +11,7 @@ struct SavedView: View {
                 if let vm = viewModel {
                     SavedContentView(viewModel: vm)
                 } else {
-                    Color.clear.onAppear {
+                    BPLoadingView().onAppear {
                         viewModel = SavedViewModel(modelContext: modelContext)
                     }
                 }
@@ -25,6 +25,7 @@ struct SavedView: View {
 
 private struct SavedContentView: View {
     @Bindable var viewModel: SavedViewModel
+    @Environment(\.bpPalette) private var palette
 
     var body: some View {
         VStack(spacing: 0) {
@@ -57,7 +58,7 @@ private struct SavedContentView: View {
                 ForEach(items) { content in
                     SavedContentRow(
                         content: content,
-                        displayText: content.templateText
+                        displayText: viewModel.personalizedText(for: content)
                     )
                 }
                 .onDelete { offsets in
@@ -76,15 +77,15 @@ private struct SavedContentView: View {
 
             Image(systemName: "heart")
                 .font(.system(size: 48, weight: .thin))
-                .foregroundStyle(BPColorPalette.light.accent)
+                .foregroundStyle(palette.accent)
 
             Text("No Favorites Yet")
                 .font(BPFont.headingSmall)
-                .foregroundStyle(BPColorPalette.light.textPrimary)
+                .foregroundStyle(palette.textPrimary)
 
             Text("Double-tap or heart any card\nin the feed to save it here.")
                 .font(BPFont.body)
-                .foregroundStyle(BPColorPalette.light.textMuted)
+                .foregroundStyle(palette.textMuted)
                 .multilineTextAlignment(.center)
 
             Spacer()
@@ -127,15 +128,15 @@ private struct SavedContentView: View {
 
             Image(systemName: "folder")
                 .font(.system(size: 48, weight: .thin))
-                .foregroundStyle(BPColorPalette.light.accent)
+                .foregroundStyle(palette.accent)
 
             Text("No Collections Yet")
                 .font(BPFont.headingSmall)
-                .foregroundStyle(BPColorPalette.light.textPrimary)
+                .foregroundStyle(palette.textPrimary)
 
             Text("Pin content from the feed\nto organize it into collections.")
                 .font(BPFont.body)
-                .foregroundStyle(BPColorPalette.light.textMuted)
+                .foregroundStyle(palette.textMuted)
                 .multilineTextAlignment(.center)
 
             Spacer()

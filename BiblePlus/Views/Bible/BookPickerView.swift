@@ -5,6 +5,7 @@ struct BookPickerView: View {
     let onSelectChapter: (BibleBook, Int) -> Void
 
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.bpPalette) private var palette
     @State private var expandedBook: BibleBook? = nil
 
     var body: some View {
@@ -17,13 +18,13 @@ struct BookPickerView: View {
                 .padding(.horizontal, 16)
                 .padding(.vertical, 12)
             }
-            .background(BPColorPalette.light.background)
+            .background(palette.background)
             .navigationTitle("Books")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Done") { dismiss() }
-                        .foregroundStyle(BPColorPalette.light.accent)
+                        .foregroundStyle(palette.accent)
                 }
             }
         }
@@ -34,7 +35,7 @@ struct BookPickerView: View {
         VStack(alignment: .leading, spacing: 8) {
             Text(title)
                 .font(BPFont.button)
-                .foregroundStyle(BPColorPalette.light.textMuted)
+                .foregroundStyle(palette.textMuted)
                 .textCase(.uppercase)
                 .tracking(1)
                 .padding(.leading, 4)
@@ -67,7 +68,7 @@ struct BookPickerView: View {
                 .foregroundStyle(
                     expandedBook == book
                         ? .white
-                        : BPColorPalette.light.textPrimary
+                        : palette.textPrimary
                 )
                 .lineLimit(1)
                 .minimumScaleFactor(0.8)
@@ -77,8 +78,8 @@ struct BookPickerView: View {
                     RoundedRectangle(cornerRadius: 8)
                         .fill(
                             expandedBook == book
-                                ? BPColorPalette.light.accent
-                                : BPColorPalette.light.surface
+                                ? palette.accent
+                                : palette.surface
                         )
                 )
         }
@@ -96,7 +97,7 @@ struct BookPickerView: View {
             VStack(alignment: .leading, spacing: 8) {
                 Text(book.name)
                     .font(BPFont.button)
-                    .foregroundStyle(BPColorPalette.light.textPrimary)
+                    .foregroundStyle(palette.textPrimary)
                     .padding(.horizontal, 12)
                     .padding(.top, 12)
 
@@ -111,11 +112,11 @@ struct BookPickerView: View {
                         } label: {
                             Text("\(chapter)")
                                 .font(BPFont.body)
-                                .foregroundStyle(BPColorPalette.light.textPrimary)
+                                .foregroundStyle(palette.textPrimary)
                                 .frame(width: 44, height: 44)
                                 .background(
                                     RoundedRectangle(cornerRadius: 8)
-                                        .fill(BPColorPalette.light.surface)
+                                        .fill(palette.surface)
                                 )
                         }
                     }

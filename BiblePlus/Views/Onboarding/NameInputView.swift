@@ -2,6 +2,7 @@ import SwiftUI
 
 struct NameInputView: View {
     @Bindable var viewModel: OnboardingViewModel
+    @Environment(\.bpPalette) private var palette
     @FocusState private var isNameFocused: Bool
     @State private var showContent = false
 
@@ -13,12 +14,12 @@ struct NameInputView: View {
             VStack(spacing: 12) {
                 Text("What should we\ncall you?")
                     .font(BPFont.headingMedium)
-                    .foregroundStyle(BPColorPalette.light.textPrimary)
+                    .foregroundStyle(palette.textPrimary)
                     .multilineTextAlignment(.center)
 
                 Text("We'll use your name to make every prayer,\nevery verse, and every conversation feel personal.")
                     .font(BPFont.reference)
-                    .foregroundStyle(BPColorPalette.light.textMuted)
+                    .foregroundStyle(palette.textMuted)
                     .multilineTextAlignment(.center)
                     .lineSpacing(3)
             }
@@ -31,14 +32,14 @@ struct NameInputView: View {
                 if viewModel.firstName.trimmingCharacters(in: .whitespaces).isEmpty {
                     Text("Good morning...")
                         .font(BPFont.prayerMedium)
-                        .foregroundStyle(BPColorPalette.light.textMuted)
+                        .foregroundStyle(palette.textMuted)
                 } else {
                     Text("Good morning, \(viewModel.firstName.trimmingCharacters(in: .whitespaces)).")
                         .font(BPFont.prayerMedium)
-                        .foregroundStyle(BPColorPalette.light.accent)
+                        .foregroundStyle(palette.accent)
                     + Text("\nLet's seek God together.")
                         .font(BPFont.prayerSmall)
-                        .foregroundStyle(BPColorPalette.light.textSecondary)
+                        .foregroundStyle(palette.textSecondary)
                 }
             }
             .multilineTextAlignment(.center)
@@ -56,14 +57,14 @@ struct NameInputView: View {
                 .padding(.horizontal, 24)
                 .background(
                     RoundedRectangle(cornerRadius: 16)
-                        .fill(BPColorPalette.light.surfaceElevated)
+                        .fill(palette.surfaceElevated)
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: 16)
                         .stroke(
                             isNameFocused
-                                ? BPColorPalette.light.accent
-                                : BPColorPalette.light.border,
+                                ? palette.accent
+                                : palette.border,
                             lineWidth: isNameFocused ? 2 : 1
                         )
                 )
@@ -89,6 +90,10 @@ struct NameInputView: View {
             .padding(.horizontal, 32)
 
             Spacer().frame(height: 40)
+        }
+        .contentShape(Rectangle())
+        .onTapGesture {
+            isNameFocused = false
         }
         .onAppear {
             withAnimation(BPAnimation.spring.delay(0.2)) {

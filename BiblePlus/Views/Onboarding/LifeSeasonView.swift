@@ -2,6 +2,7 @@ import SwiftUI
 
 struct LifeSeasonView: View {
     @Bindable var viewModel: OnboardingViewModel
+    @Environment(\.bpPalette) private var palette
     @State private var showContent = false
 
     private let columns = [
@@ -14,14 +15,16 @@ struct LifeSeasonView: View {
             Spacer().frame(height: 24)
 
             VStack(spacing: 10) {
-                Text("What season are you\nin right now, \(viewModel.firstName)?")
+                Text(viewModel.firstName.isEmpty
+                    ? "What season are you\nin right now?"
+                    : "What season are you\nin right now, \(viewModel.firstName)?")
                     .font(BPFont.headingMedium)
-                    .foregroundStyle(BPColorPalette.light.textPrimary)
+                    .foregroundStyle(palette.textPrimary)
                     .multilineTextAlignment(.center)
 
                 Text("Select up to 3")
                     .font(BPFont.reference)
-                    .foregroundStyle(BPColorPalette.light.textMuted)
+                    .foregroundStyle(palette.textMuted)
             }
             .opacity(showContent ? 1 : 0)
 
@@ -55,7 +58,7 @@ struct LifeSeasonView: View {
             Spacer().frame(height: 40)
         }
         .onAppear {
-            withAnimation {
+            withAnimation(BPAnimation.spring.delay(0.2)) {
                 showContent = true
             }
         }

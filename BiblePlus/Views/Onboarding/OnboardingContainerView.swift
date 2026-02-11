@@ -3,6 +3,7 @@ import SwiftData
 
 struct OnboardingContainerView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.bpPalette) private var palette
     @State private var viewModel: OnboardingViewModel?
 
     var body: some View {
@@ -20,7 +21,7 @@ struct OnboardingContainerView: View {
                                 } label: {
                                     Image(systemName: "chevron.left")
                                         .font(.title3)
-                                        .foregroundStyle(BPColorPalette.light.textSecondary)
+                                        .foregroundStyle(palette.textSecondary)
                                         .padding(8)
                                 }
 

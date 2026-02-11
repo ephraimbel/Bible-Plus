@@ -1,6 +1,7 @@
 import Foundation
 import SwiftData
 
+@MainActor
 @Observable
 final class ChatViewModel {
     // MARK: - State
@@ -15,6 +16,7 @@ final class ChatViewModel {
 
     private let modelContext: ModelContext
     private let personalizationService: PersonalizationService
+    private var streamingTask: Task<Void, Never>?
 
     // MARK: - Computed
 
@@ -101,9 +103,17 @@ final class ChatViewModel {
         messages.append(assistantMessage)
         isStreaming = true
 
-        Task { @MainActor in
+        streamingTask?.cancel()
+        streamingTask = Task {
             await streamResponse(for: assistantMessage)
         }
+    }
+
+    func stopStreaming() {
+        streamingTask?.cancel()
+        streamingTask = nil
+        isStreaming = false
+        try? modelContext.save()
     }
 
     func sendQuickPrompt(_ prompt: String) {
@@ -131,7 +141,6 @@ final class ChatViewModel {
 
     // MARK: - Streaming
 
-    @MainActor
     private func streamResponse(for assistantMessage: ChatMessage) async {
         let systemPrompt = AIService.buildSystemPrompt(for: profile)
 

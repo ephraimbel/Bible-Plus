@@ -12,6 +12,7 @@ final class UserProfile {
     var prayerTimes: [PrayerTimeSlot]
     var selectedThemeID: String
     var selectedSoundscapeID: String
+    var selectedBackgroundID: String
     var colorMode: ColorMode
     var streakCount: Int
     var isPro: Bool
@@ -29,7 +30,8 @@ final class UserProfile {
         preferredTranslation: BibleTranslation = .niv,
         prayerTimes: [PrayerTimeSlot] = [],
         selectedThemeID: String = "sunrise-mountains",
-        selectedSoundscapeID: String = "silence",
+        selectedSoundscapeID: String = "pureSilence",
+        selectedBackgroundID: String = "warm-gold",
         colorMode: ColorMode = .auto,
         streakCount: Int = 0,
         isPro: Bool = false,
@@ -45,6 +47,7 @@ final class UserProfile {
         self.prayerTimes = prayerTimes
         self.selectedThemeID = selectedThemeID
         self.selectedSoundscapeID = selectedSoundscapeID
+        self.selectedBackgroundID = selectedBackgroundID
         self.colorMode = colorMode
         self.streakCount = streakCount
         self.isPro = isPro

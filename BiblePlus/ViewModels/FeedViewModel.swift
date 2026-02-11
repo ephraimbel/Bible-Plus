@@ -1,6 +1,7 @@
 import Foundation
 import SwiftData
 
+@MainActor
 @Observable
 final class FeedViewModel {
     // MARK: - State
@@ -24,7 +25,6 @@ final class FeedViewModel {
 
     private let feedEngine: FeedEngine
     private let personalizationService: PersonalizationService
-    let audioService: AudioService
     private let modelContext: ModelContext
 
     // MARK: - Computed
@@ -59,11 +59,10 @@ final class FeedViewModel {
 
     // MARK: - Init
 
-    init(modelContext: ModelContext, audioService: AudioService) {
+    init(modelContext: ModelContext) {
         self.modelContext = modelContext
         self.feedEngine = FeedEngine(modelContext: modelContext)
         self.personalizationService = PersonalizationService(modelContext: modelContext)
-        self.audioService = audioService
         loadSavedState()
         loadInitialFeed()
     }

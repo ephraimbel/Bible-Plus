@@ -5,6 +5,7 @@ struct ChatView: View {
     var initialContext: String? = nil
 
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.bpPalette) private var palette
     @State private var viewModel: ChatViewModel?
 
     var body: some View {
@@ -13,7 +14,7 @@ struct ChatView: View {
                 if let vm = viewModel {
                     ChatContentView(viewModel: vm)
                 } else {
-                    Color.clear.onAppear {
+                    BPLoadingView().onAppear {
                         viewModel = ChatViewModel(
                             modelContext: modelContext,
                             initialContext: initialContext
@@ -31,7 +32,7 @@ struct ChatView: View {
                         } label: {
                             Image(systemName: "trash")
                                 .font(.system(size: 14))
-                                .foregroundStyle(BPColorPalette.light.textMuted)
+                                .foregroundStyle(palette.textMuted)
                         }
                     }
                 }
@@ -44,6 +45,7 @@ struct ChatView: View {
 
 private struct ChatContentView: View {
     @Bindable var viewModel: ChatViewModel
+    @Environment(\.bpPalette) private var palette
 
     var body: some View {
         VStack(spacing: 0) {
@@ -71,7 +73,7 @@ private struct ChatContentView: View {
             // Input bar
             inputBar
         }
-        .background(BPColorPalette.light.background)
+        .background(palette.background)
         .onAppear {
             viewModel.applyInitialContext()
         }
@@ -97,6 +99,7 @@ private struct ChatContentView: View {
                 }
                 .padding(.vertical, 12)
             }
+            .scrollDismissesKeyboard(.interactively)
             .onChange(of: viewModel.messages.count) { _, _ in
                 scrollToBottom(proxy: proxy)
             }
@@ -119,11 +122,11 @@ private struct ChatContentView: View {
     private func errorBanner(_ message: String) -> some View {
         Text(message)
             .font(BPFont.caption)
-            .foregroundStyle(BPColorPalette.light.error)
+            .foregroundStyle(palette.error)
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
-            .background(BPColorPalette.light.error.opacity(0.1))
+            .background(palette.error.opacity(0.1))
             .onTapGesture {
                 viewModel.errorMessage = nil
             }
@@ -134,7 +137,7 @@ private struct ChatContentView: View {
     private var rateLimitBanner: some View {
         Text("\(viewModel.remainingMessages) messages remaining today")
             .font(BPFont.caption)
-            .foregroundStyle(BPColorPalette.light.textMuted)
+            .foregroundStyle(palette.textMuted)
             .padding(.vertical, 6)
     }
 
@@ -149,23 +152,27 @@ private struct ChatContentView: View {
                 .padding(.vertical, 10)
                 .background(
                     RoundedRectangle(cornerRadius: 20)
-                        .fill(BPColorPalette.light.surface)
+                        .fill(palette.surface)
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)
-                        .stroke(BPColorPalette.light.border, lineWidth: 1)
+                        .stroke(palette.border, lineWidth: 1)
                 )
 
             Button {
-                viewModel.send()
+                if viewModel.isStreaming {
+                    viewModel.stopStreaming()
+                } else {
+                    viewModel.send()
+                }
                 HapticService.lightImpact()
             } label: {
                 Image(systemName: viewModel.isStreaming ? "stop.circle.fill" : "arrow.up.circle.fill")
                     .font(.system(size: 32))
                     .foregroundStyle(
                         viewModel.canSend || viewModel.isStreaming
-                            ? BPColorPalette.light.accent
-                            : BPColorPalette.light.textMuted
+                            ? palette.accent
+                            : palette.textMuted
                     )
             }
             .disabled(!viewModel.canSend && !viewModel.isStreaming)
@@ -173,7 +180,7 @@ private struct ChatContentView: View {
         .padding(.horizontal, 16)
         .padding(.vertical, 10)
         .background(
-            BPColorPalette.light.background
+            palette.background
                 .shadow(color: .black.opacity(0.05), radius: 8, y: -4)
         )
     }

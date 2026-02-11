@@ -3,9 +3,11 @@ import StoreKit
 
 struct SummaryPaywallView: View {
     @Bindable var viewModel: OnboardingViewModel
+    @Environment(\.bpPalette) private var palette
     @State private var showContent = false
     @State private var isPurchasing = false
     @State private var selectedProductID: String? = nil
+    @State private var purchaseError: String? = nil
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -14,9 +16,11 @@ struct SummaryPaywallView: View {
 
                 // Personalized summary header
                 VStack(spacing: 16) {
-                    Text("\(viewModel.firstName),\nyour Bible Plus is ready.")
+                    Text(viewModel.firstName.isEmpty
+                        ? "Your Bible Plus is ready."
+                        : "\(viewModel.firstName),\nyour Bible Plus is ready.")
                         .font(BPFont.headingMedium)
-                        .foregroundStyle(BPColorPalette.light.textPrimary)
+                        .foregroundStyle(palette.textPrimary)
                         .multilineTextAlignment(.center)
 
                     // Summary items
@@ -24,16 +28,16 @@ struct SummaryPaywallView: View {
                         ForEach(viewModel.summaryItems, id: \.label) { item in
                             HStack(alignment: .top) {
                                 Image(systemName: "checkmark.circle.fill")
-                                    .foregroundStyle(BPColorPalette.light.accent)
+                                    .foregroundStyle(palette.accent)
                                     .font(.body)
 
                                 VStack(alignment: .leading, spacing: 2) {
                                     Text(item.label)
                                         .font(BPFont.reference)
-                                        .foregroundStyle(BPColorPalette.light.textMuted)
+                                        .foregroundStyle(palette.textMuted)
                                     Text(item.value)
                                         .font(BPFont.button)
-                                        .foregroundStyle(BPColorPalette.light.textPrimary)
+                                        .foregroundStyle(palette.textPrimary)
                                 }
                                 Spacer()
                             }
@@ -42,11 +46,11 @@ struct SummaryPaywallView: View {
                     .padding(20)
                     .background(
                         RoundedRectangle(cornerRadius: 20)
-                            .fill(BPColorPalette.light.surfaceElevated)
+                            .fill(palette.surfaceElevated)
                     )
                     .overlay(
                         RoundedRectangle(cornerRadius: 20)
-                            .stroke(BPColorPalette.light.border, lineWidth: 1)
+                            .stroke(palette.border, lineWidth: 1)
                     )
                 }
                 .padding(.horizontal, 24)
@@ -58,13 +62,14 @@ struct SummaryPaywallView: View {
                 VStack(spacing: 16) {
                     Text("Unlock Your Full Journey")
                         .font(BPFont.headingSmall)
-                        .foregroundStyle(BPColorPalette.light.textPrimary)
+                        .foregroundStyle(palette.textPrimary)
 
-                    Text(
-                        "\(viewModel.firstName), thank you for sharing your heart with us. Bible Plus was built to walk with you every day — through prayers that call you by name, an AI that knows Scripture deeply, and a space designed for your peace."
+                    Text(viewModel.firstName.isEmpty
+                        ? "Thank you for sharing your heart with us. Bible Plus was built to walk with you every day — through prayers that call you by name, an AI that knows Scripture deeply, and a space designed for your peace."
+                        : "\(viewModel.firstName), thank you for sharing your heart with us. Bible Plus was built to walk with you every day — through prayers that call you by name, an AI that knows Scripture deeply, and a space designed for your peace."
                     )
                     .font(BPFont.body)
-                    .foregroundStyle(BPColorPalette.light.textSecondary)
+                    .foregroundStyle(palette.textSecondary)
                     .multilineTextAlignment(.center)
                     .lineSpacing(4)
                 }
@@ -129,7 +134,7 @@ struct SummaryPaywallView: View {
                 } label: {
                     Text("Continue with free plan")
                         .font(BPFont.button)
-                        .foregroundStyle(BPColorPalette.light.textMuted)
+                        .foregroundStyle(palette.textMuted)
                         .underline()
                 }
 
@@ -141,7 +146,7 @@ struct SummaryPaywallView: View {
                 } label: {
                     Text("Restore Purchases")
                         .font(BPFont.reference)
-                        .foregroundStyle(BPColorPalette.light.textMuted)
+                        .foregroundStyle(palette.textMuted)
                 }
 
                 Spacer().frame(height: 40)
@@ -154,6 +159,14 @@ struct SummaryPaywallView: View {
             // Default to yearly
             selectedProductID = StoreKitService.yearlyID
         }
+        .alert("Purchase Failed", isPresented: Binding(
+            get: { purchaseError != nil },
+            set: { if !$0 { purchaseError = nil } }
+        )) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(purchaseError ?? "")
+        }
     }
 
     // MARK: - Components
@@ -162,11 +175,11 @@ struct SummaryPaywallView: View {
     private func proFeatureRow(_ text: String) -> some View {
         HStack(spacing: 12) {
             Image(systemName: "checkmark.circle.fill")
-                .foregroundStyle(BPColorPalette.light.accent)
+                .foregroundStyle(palette.accent)
                 .font(.body)
             Text(text)
                 .font(BPFont.body)
-                .foregroundStyle(BPColorPalette.light.textPrimary)
+                .foregroundStyle(palette.textPrimary)
         }
     }
 
@@ -184,7 +197,7 @@ struct SummaryPaywallView: View {
                         Text(product.displayName)
                             .font(BPFont.button)
                             .foregroundStyle(
-                                isSelected ? .white : BPColorPalette.light.textPrimary
+                                isSelected ? .white : palette.textPrimary
                             )
 
                         if let badge {
@@ -198,7 +211,7 @@ struct SummaryPaywallView: View {
                                         .fill(
                                             isSelected
                                                 ? Color.white.opacity(0.3)
-                                                : BPColorPalette.light.accent
+                                                : palette.accent
                                         )
                                 )
                         }
@@ -207,7 +220,7 @@ struct SummaryPaywallView: View {
                     Text(subtitle)
                         .font(BPFont.reference)
                         .foregroundStyle(
-                            isSelected ? .white.opacity(0.7) : BPColorPalette.light.textMuted
+                            isSelected ? .white.opacity(0.7) : palette.textMuted
                         )
                 }
 
@@ -216,7 +229,7 @@ struct SummaryPaywallView: View {
                 Text(product.displayPrice)
                     .font(BPFont.headingSmall)
                     .foregroundStyle(
-                        isSelected ? .white : BPColorPalette.light.textPrimary
+                        isSelected ? .white : palette.textPrimary
                     )
             }
             .padding(20)
@@ -224,13 +237,13 @@ struct SummaryPaywallView: View {
                 RoundedRectangle(cornerRadius: 16)
                     .fill(
                         isSelected
-                            ? BPColorPalette.light.accent : BPColorPalette.light.surfaceElevated
+                            ? palette.accent : palette.surfaceElevated
                     )
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
                     .stroke(
-                        isSelected ? Color.clear : BPColorPalette.light.border,
+                        isSelected ? Color.clear : palette.border,
                         lineWidth: 1
                     )
             )
@@ -252,8 +265,12 @@ struct SummaryPaywallView: View {
             if viewModel.storeKitService.isPro {
                 viewModel.goNext()
             }
+        } catch is CancellationError {
+            // User cancelled — no alert needed
+        } catch StoreKitService.StoreError.failedVerification {
+            purchaseError = "Purchase could not be verified. Please try again."
         } catch {
-            // Purchase failed or cancelled
+            purchaseError = "Something went wrong. Please try again."
         }
         isPurchasing = false
     }

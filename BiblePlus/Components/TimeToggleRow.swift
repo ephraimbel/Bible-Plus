@@ -5,6 +5,7 @@ struct TimeToggleRow: View {
     let isSelected: Bool
     let userName: String
     let action: () -> Void
+    @Environment(\.bpPalette) private var palette
 
     var body: some View {
         Button(action: {
@@ -17,7 +18,7 @@ struct TimeToggleRow: View {
                     Image(systemName: slot.icon)
                         .font(.title2)
                         .foregroundStyle(
-                            isSelected ? BPColorPalette.light.accent : BPColorPalette.light.textMuted
+                            isSelected ? palette.accent : palette.textMuted
                         )
                         .frame(width: 36)
 
@@ -25,11 +26,11 @@ struct TimeToggleRow: View {
                     VStack(alignment: .leading, spacing: 3) {
                         Text(slot.displayName)
                             .font(BPFont.button)
-                            .foregroundStyle(BPColorPalette.light.textPrimary)
+                            .foregroundStyle(palette.textPrimary)
 
                         Text(slot.timeRange)
                             .font(BPFont.reference)
-                            .foregroundStyle(BPColorPalette.light.textMuted)
+                            .foregroundStyle(palette.textMuted)
                     }
 
                     Spacer()
@@ -38,14 +39,14 @@ struct TimeToggleRow: View {
                     ZStack {
                         Circle()
                             .stroke(
-                                isSelected ? BPColorPalette.light.accent : BPColorPalette.light.border,
+                                isSelected ? palette.accent : palette.border,
                                 lineWidth: 2
                             )
                             .frame(width: 28, height: 28)
 
                         if isSelected {
                             Circle()
-                                .fill(BPColorPalette.light.accent)
+                                .fill(palette.accent)
                                 .frame(width: 28, height: 28)
 
                             Image(systemName: "checkmark")
@@ -61,11 +62,11 @@ struct TimeToggleRow: View {
                     HStack(spacing: 8) {
                         Image(systemName: "bell.fill")
                             .font(.caption)
-                            .foregroundStyle(BPColorPalette.light.accent)
+                            .foregroundStyle(palette.accent)
 
                         Text(slot.notificationPreview(name: userName))
                             .font(BPFont.reference)
-                            .foregroundStyle(BPColorPalette.light.textSecondary)
+                            .foregroundStyle(palette.textSecondary)
                             .italic()
                     }
                     .padding(.horizontal, 16)
@@ -76,12 +77,12 @@ struct TimeToggleRow: View {
             }
             .background(
                 RoundedRectangle(cornerRadius: 16)
-                    .fill(BPColorPalette.light.surfaceElevated)
+                    .fill(palette.surfaceElevated)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
                     .stroke(
-                        isSelected ? BPColorPalette.light.accent.opacity(0.5) : BPColorPalette.light.border,
+                        isSelected ? palette.accent.opacity(0.5) : palette.border,
                         lineWidth: 1
                     )
             )

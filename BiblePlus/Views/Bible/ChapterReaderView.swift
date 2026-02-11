@@ -5,6 +5,7 @@ struct ChapterReaderView: View {
     let chapterTitle: String
     let selectedVerseNumber: Int?
     let onVerseTap: (VerseItem) -> Void
+    @Environment(\.bpPalette) private var palette
 
     var body: some View {
         if verses.isEmpty {
@@ -15,7 +16,7 @@ struct ChapterReaderView: View {
                     // Chapter heading
                     Text(chapterTitle)
                         .font(BPFont.headingSmall)
-                        .foregroundStyle(BPColorPalette.light.textPrimary)
+                        .foregroundStyle(palette.textPrimary)
                         .frame(maxWidth: .infinity, alignment: .center)
                         .padding(.vertical, 24)
 
@@ -39,12 +40,12 @@ struct ChapterReaderView: View {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
                 Text("\(number)")
                     .font(BPFont.reference)
-                    .foregroundStyle(BPColorPalette.light.accent)
+                    .foregroundStyle(palette.accent)
                     .frame(width: 24, alignment: .trailing)
 
                 Text(text)
                     .font(BPFont.bibleMedium)
-                    .foregroundStyle(BPColorPalette.light.textPrimary)
+                    .foregroundStyle(palette.textPrimary)
                     .multilineTextAlignment(.leading)
                     .lineSpacing(6)
             }
@@ -52,7 +53,7 @@ struct ChapterReaderView: View {
             .padding(.horizontal, 8)
             .background(
                 RoundedRectangle(cornerRadius: 8)
-                    .fill(isSelected ? BPColorPalette.light.accentSoft : .clear)
+                    .fill(isSelected ? palette.accentSoft : .clear)
             )
         }
         .buttonStyle(.plain)
@@ -64,15 +65,15 @@ struct ChapterReaderView: View {
 
             Image(systemName: "book.closed")
                 .font(.system(size: 48, weight: .thin))
-                .foregroundStyle(BPColorPalette.light.accent)
+                .foregroundStyle(palette.accent)
 
             Text("Chapter Not Yet Available")
                 .font(BPFont.headingSmall)
-                .foregroundStyle(BPColorPalette.light.textPrimary)
+                .foregroundStyle(palette.textPrimary)
 
             Text("This chapter's text will be\navailable in a future update.")
                 .font(BPFont.body)
-                .foregroundStyle(BPColorPalette.light.textMuted)
+                .foregroundStyle(palette.textMuted)
                 .multilineTextAlignment(.center)
 
             Spacer()

@@ -6,6 +6,7 @@ struct SharePreviewSheet: View {
     let theme: ThemeDefinition
 
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.bpPalette) private var palette
     @State private var selectedRatio: ShareAspectRatio = .story
     @State private var showActivitySheet = false
     @State private var renderedImage: UIImage?
@@ -44,13 +45,13 @@ struct SharePreviewSheet: View {
                 .padding(.bottom, 16)
             }
             .padding(.top, 16)
-            .background(BPColorPalette.light.background.ignoresSafeArea())
+            .background(palette.background.ignoresSafeArea())
             .navigationTitle("Share")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") { dismiss() }
-                        .foregroundStyle(BPColorPalette.light.accent)
+                        .foregroundStyle(palette.accent)
                 }
             }
             .sheet(isPresented: $showActivitySheet) {

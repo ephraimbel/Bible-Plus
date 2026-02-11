@@ -2,6 +2,7 @@ import SwiftUI
 
 struct DailyRhythmView: View {
     @Bindable var viewModel: OnboardingViewModel
+    @Environment(\.bpPalette) private var palette
     @State private var showContent = false
 
     var body: some View {
@@ -9,14 +10,16 @@ struct DailyRhythmView: View {
             Spacer().frame(height: 24)
 
             VStack(spacing: 10) {
-                Text("When would you like\nto hear from God, \(viewModel.firstName)?")
+                Text(viewModel.firstName.isEmpty
+                    ? "When would you like\nto hear from God?"
+                    : "When would you like\nto hear from God, \(viewModel.firstName)?")
                     .font(BPFont.headingMedium)
-                    .foregroundStyle(BPColorPalette.light.textPrimary)
+                    .foregroundStyle(palette.textPrimary)
                     .multilineTextAlignment(.center)
 
                 Text("We'll send you a gentle reminder\nwith a personalized prayer or verse.")
                     .font(BPFont.reference)
-                    .foregroundStyle(BPColorPalette.light.textMuted)
+                    .foregroundStyle(palette.textMuted)
                     .multilineTextAlignment(.center)
                     .lineSpacing(3)
             }
@@ -45,7 +48,7 @@ struct DailyRhythmView: View {
             VStack(spacing: 8) {
                 Text("You can skip this and set it up later.")
                     .font(BPFont.reference)
-                    .foregroundStyle(BPColorPalette.light.textMuted)
+                    .foregroundStyle(palette.textMuted)
 
                 GoldButton(
                     title: "Continue",
@@ -57,7 +60,7 @@ struct DailyRhythmView: View {
             Spacer().frame(height: 40)
         }
         .onAppear {
-            withAnimation {
+            withAnimation(BPAnimation.spring.delay(0.2)) {
                 showContent = true
             }
         }

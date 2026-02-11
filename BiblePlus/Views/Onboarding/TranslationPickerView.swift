@@ -2,6 +2,7 @@ import SwiftUI
 
 struct TranslationPickerView: View {
     @Bindable var viewModel: OnboardingViewModel
+    @Environment(\.bpPalette) private var palette
     @State private var showContent = false
 
     var body: some View {
@@ -9,14 +10,16 @@ struct TranslationPickerView: View {
             Spacer().frame(height: 24)
 
             VStack(spacing: 10) {
-                Text("Which translation speaks\nto your heart, \(viewModel.firstName)?")
+                Text(viewModel.firstName.isEmpty
+                    ? "Which translation speaks\nto your heart?"
+                    : "Which translation speaks\nto your heart, \(viewModel.firstName)?")
                     .font(BPFont.headingMedium)
-                    .foregroundStyle(BPColorPalette.light.textPrimary)
+                    .foregroundStyle(palette.textPrimary)
                     .multilineTextAlignment(.center)
 
                 Text("Each card shows John 3:16 so you can\ncompare tone and feel.")
                     .font(BPFont.reference)
-                    .foregroundStyle(BPColorPalette.light.textMuted)
+                    .foregroundStyle(palette.textMuted)
                     .multilineTextAlignment(.center)
                     .lineSpacing(3)
             }
@@ -45,7 +48,7 @@ struct TranslationPickerView: View {
             VStack(spacing: 8) {
                 Text("You can always change this later.")
                     .font(BPFont.reference)
-                    .foregroundStyle(BPColorPalette.light.textMuted)
+                    .foregroundStyle(palette.textMuted)
 
                 GoldButton(
                     title: "Continue",

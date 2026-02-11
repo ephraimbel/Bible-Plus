@@ -2,6 +2,7 @@ import SwiftUI
 
 struct FaithLevelView: View {
     @Bindable var viewModel: OnboardingViewModel
+    @Environment(\.bpPalette) private var palette
     @State private var showContent = false
 
     private var greeting: String {
@@ -16,7 +17,7 @@ struct FaithLevelView: View {
 
             Text(greeting)
                 .font(BPFont.headingMedium)
-                .foregroundStyle(BPColorPalette.light.textPrimary)
+                .foregroundStyle(palette.textPrimary)
                 .multilineTextAlignment(.center)
                 .opacity(showContent ? 1 : 0)
 
@@ -50,7 +51,7 @@ struct FaithLevelView: View {
             Spacer().frame(height: 40)
         }
         .onAppear {
-            withAnimation {
+            withAnimation(BPAnimation.spring.delay(0.2)) {
                 showContent = true
             }
         }

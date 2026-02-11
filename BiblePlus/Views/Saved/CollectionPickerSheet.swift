@@ -7,6 +7,7 @@ struct CollectionPickerSheet: View {
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.bpPalette) private var palette
     @Query(sort: \ContentCollection.updatedAt, order: .reverse)
     private var collections: [ContentCollection]
 
@@ -28,14 +29,14 @@ struct CollectionPickerSheet: View {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Done") { dismiss() }
-                        .foregroundStyle(BPColorPalette.light.accent)
+                        .foregroundStyle(palette.accent)
                 }
                 ToolbarItem(placement: .bottomBar) {
                     Button {
                         handleNewCollection()
                     } label: {
                         Label("New Collection", systemImage: "plus.circle.fill")
-                            .foregroundStyle(BPColorPalette.light.accent)
+                            .foregroundStyle(palette.accent)
                     }
                 }
             }
@@ -66,15 +67,15 @@ struct CollectionPickerSheet: View {
 
             Image(systemName: "folder")
                 .font(.system(size: 48, weight: .thin))
-                .foregroundStyle(BPColorPalette.light.accent)
+                .foregroundStyle(palette.accent)
 
             Text("No Collections Yet")
                 .font(BPFont.headingSmall)
-                .foregroundStyle(BPColorPalette.light.textPrimary)
+                .foregroundStyle(palette.textPrimary)
 
             Text("Create a collection to organize\nyour favorite content.")
                 .font(BPFont.body)
-                .foregroundStyle(BPColorPalette.light.textMuted)
+                .foregroundStyle(palette.textMuted)
                 .multilineTextAlignment(.center)
 
             Button {
@@ -82,7 +83,7 @@ struct CollectionPickerSheet: View {
             } label: {
                 Label("Create Collection", systemImage: "plus.circle.fill")
                     .font(BPFont.button)
-                    .foregroundStyle(BPColorPalette.light.accent)
+                    .foregroundStyle(palette.accent)
             }
             .padding(.top, 8)
 
@@ -111,23 +112,23 @@ struct CollectionPickerSheet: View {
         } label: {
             HStack {
                 Image(systemName: "folder.fill")
-                    .foregroundStyle(BPColorPalette.light.accent)
+                    .foregroundStyle(palette.accent)
                     .frame(width: 28)
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(collection.name)
                         .font(BPFont.body)
-                        .foregroundStyle(BPColorPalette.light.textPrimary)
+                        .foregroundStyle(palette.textPrimary)
                     Text("\(collection.contentIDs.count) items")
                         .font(BPFont.caption)
-                        .foregroundStyle(BPColorPalette.light.textMuted)
+                        .foregroundStyle(palette.textMuted)
                 }
 
                 Spacer()
 
                 if isInCollection {
                     Image(systemName: "checkmark.circle.fill")
-                        .foregroundStyle(BPColorPalette.light.accent)
+                        .foregroundStyle(palette.accent)
                 }
             }
         }

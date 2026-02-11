@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import UIKit
 
 struct BibleView: View {
     @Environment(\.modelContext) private var modelContext
@@ -11,7 +12,7 @@ struct BibleView: View {
                 if let vm = viewModel {
                     BibleContentView(viewModel: vm)
                 } else {
-                    Color.clear.onAppear {
+                    BPLoadingView().onAppear {
                         viewModel = BibleReaderViewModel(modelContext: modelContext)
                     }
                 }
@@ -24,8 +25,10 @@ struct BibleView: View {
 
 private struct BibleContentView: View {
     @Bindable var viewModel: BibleReaderViewModel
+    @Environment(\.bpPalette) private var palette
     @State private var showExplainChat = false
     @State private var explainPrompt = ""
+    @State private var shareText: String?
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -36,10 +39,11 @@ private struct BibleContentView: View {
                 selectedVerseNumber: viewModel.selectedVerse?.number,
                 onVerseTap: { viewModel.selectVerse($0) }
             )
-            .background(BPColorPalette.light.background)
-            .gesture(
+            .background(palette.background)
+            .simultaneousGesture(
                 DragGesture(minimumDistance: 50)
                     .onEnded { value in
+                        guard abs(value.translation.width) > abs(value.translation.height) * 2 else { return }
                         if value.translation.width < -50 {
                             viewModel.goToNextChapter()
                         } else if value.translation.width > 50 {
@@ -67,7 +71,7 @@ private struct BibleContentView: View {
                         viewModel.selectedVerse = nil
                     },
                     onShare: {
-                        viewModel.copyVerse(verse)
+                        shareText = viewModel.shareText(for: verse)
                         viewModel.selectedVerse = nil
                     },
                     onDismiss: {
@@ -93,7 +97,7 @@ private struct BibleContentView: View {
                         Image(systemName: "chevron.down")
                             .font(.system(size: 10, weight: .semibold))
                     }
-                    .foregroundStyle(BPColorPalette.light.accent)
+                    .foregroundStyle(palette.accent)
                 }
             }
 
@@ -106,8 +110,8 @@ private struct BibleContentView: View {
                             .font(.system(size: 14, weight: .medium))
                             .foregroundStyle(
                                 viewModel.canGoBack
-                                    ? BPColorPalette.light.accent
-                                    : BPColorPalette.light.textMuted
+                                    ? palette.accent
+                                    : palette.textMuted
                             )
                     }
                     .disabled(!viewModel.canGoBack)
@@ -119,8 +123,8 @@ private struct BibleContentView: View {
                             .font(.system(size: 14, weight: .medium))
                             .foregroundStyle(
                                 viewModel.canGoForward
-                                    ? BPColorPalette.light.accent
-                                    : BPColorPalette.light.textMuted
+                                    ? palette.accent
+                                    : palette.textMuted
                             )
                     }
                     .disabled(!viewModel.canGoForward)
@@ -141,5 +145,25 @@ private struct BibleContentView: View {
         .sheet(isPresented: $showExplainChat) {
             ChatView(initialContext: explainPrompt)
         }
+        .sheet(isPresented: Binding(
+            get: { shareText != nil },
+            set: { if !$0 { shareText = nil } }
+        )) {
+            if let text = shareText {
+                ShareSheetView(items: [text])
+            }
+        }
     }
+}
+
+// MARK: - Share Sheet
+
+private struct ShareSheetView: UIViewControllerRepresentable {
+    let items: [Any]
+
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        UIActivityViewController(activityItems: items, applicationActivities: nil)
+    }
+
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
 }

@@ -6,14 +6,26 @@ enum SavedTab: String, CaseIterable {
     case collections
 }
 
+@MainActor
 @Observable
 final class SavedViewModel {
     var selectedTab: SavedTab = .favorites
 
     private let modelContext: ModelContext
+    private let personalizationService: PersonalizationService
 
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
+        self.personalizationService = PersonalizationService(modelContext: modelContext)
+    }
+
+    var userName: String {
+        let name = personalizationService.getOrCreateProfile().firstName
+        return name.isEmpty ? "Friend" : name
+    }
+
+    func personalizedText(for content: PrayerContent) -> String {
+        content.templateText.replacingOccurrences(of: "{name}", with: userName)
     }
 
     // MARK: - Favorites

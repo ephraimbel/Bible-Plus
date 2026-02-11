@@ -284,14 +284,14 @@ enum WidgetContentProvider {
         // Add remaining windows today
         for (window, startHour) in windowsWithHours {
             if startHour > hour {
-                let date = cal.date(byAdding: .hour, value: startHour, to: startOfDay) ?? today
+                let date = cal.date(bySettingHour: startHour, minute: 0, second: 0, of: today) ?? today
                 result.append((window, date))
             }
         }
 
         // Add first window tomorrow (gratitude at 6 AM)
         if let tomorrow = cal.date(byAdding: .day, value: 1, to: startOfDay) {
-            let morningDate = cal.date(byAdding: .hour, value: 6, to: tomorrow) ?? tomorrow
+            let morningDate = cal.date(bySettingHour: 6, minute: 0, second: 0, of: tomorrow) ?? tomorrow
             result.append((.gratitude, morningDate))
         }
 

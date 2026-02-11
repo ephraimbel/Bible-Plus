@@ -7,12 +7,13 @@ struct VerseActionSheet: View {
     let onCopy: () -> Void
     let onShare: () -> Void
     let onDismiss: () -> Void
+    @Environment(\.bpPalette) private var palette
 
     var body: some View {
         VStack(spacing: 0) {
             // Handle
             Capsule()
-                .fill(BPColorPalette.light.textMuted.opacity(0.3))
+                .fill(palette.textMuted.opacity(0.3))
                 .frame(width: 36, height: 4)
                 .padding(.top, 8)
 
@@ -20,11 +21,11 @@ struct VerseActionSheet: View {
             VStack(spacing: 8) {
                 Text(reference)
                     .font(BPFont.reference)
-                    .foregroundStyle(BPColorPalette.light.accent)
+                    .foregroundStyle(palette.accent)
 
                 Text(verse.text)
                     .font(BPFont.bibleMedium)
-                    .foregroundStyle(BPColorPalette.light.textPrimary)
+                    .foregroundStyle(palette.textPrimary)
                     .multilineTextAlignment(.center)
                     .lineSpacing(4)
                     .lineLimit(4)
@@ -33,7 +34,7 @@ struct VerseActionSheet: View {
             .padding(.vertical, 16)
 
             Divider()
-                .foregroundStyle(BPColorPalette.light.border)
+                .overlay(palette.border)
 
             // Action buttons
             VStack(spacing: 0) {
@@ -49,13 +50,13 @@ struct VerseActionSheet: View {
             } label: {
                 Text("Cancel")
                     .font(BPFont.button)
-                    .foregroundStyle(BPColorPalette.light.textMuted)
+                    .foregroundStyle(palette.textMuted)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 14)
             }
             .padding(.bottom, 8)
         }
-        .background(BPColorPalette.light.surfaceElevated)
+        .background(palette.surfaceElevated)
         .clipShape(RoundedRectangle(cornerRadius: 16))
     }
 
@@ -64,12 +65,12 @@ struct VerseActionSheet: View {
             HStack(spacing: 14) {
                 Image(systemName: icon)
                     .font(.system(size: 18))
-                    .foregroundStyle(BPColorPalette.light.accent)
+                    .foregroundStyle(palette.accent)
                     .frame(width: 28)
 
                 Text(title)
                     .font(BPFont.body)
-                    .foregroundStyle(BPColorPalette.light.textPrimary)
+                    .foregroundStyle(palette.textPrimary)
 
                 Spacer()
             }

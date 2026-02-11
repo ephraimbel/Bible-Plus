@@ -57,8 +57,6 @@ struct HomeWidgetProvider: TimelineProvider {
         }
 
         let widgetEntries = WidgetContentProvider.timelineEntries(profile: profile, modelContext: modelContext)
-        let theme = ThemeDefinition.allThemes.first(where: { $0.id == profile.selectedThemeID })
-            ?? ThemeDefinition.allThemes[0]
 
         let entries: [HomeWidgetEntry] = widgetEntries.map { entry in
             HomeWidgetEntry(
@@ -68,7 +66,7 @@ struct HomeWidgetProvider: TimelineProvider {
                 verseReference: entry.verseReference,
                 contentType: entry.contentType,
                 contentID: entry.contentID,
-                themeGradient: theme.previewGradient,
+                themeGradient: entry.themeGradient,
                 firstName: entry.firstName
             )
         }

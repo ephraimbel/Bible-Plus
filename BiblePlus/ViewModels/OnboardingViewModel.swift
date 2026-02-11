@@ -23,7 +23,7 @@ final class OnboardingViewModel {
 
     // MARK: - Services
     private let personalizationService: PersonalizationService
-    let audioService: AudioService
+    let audioService: SoundscapeService
     let storeKitService: StoreKitService
 
     // MARK: - Validation
@@ -48,7 +48,7 @@ final class OnboardingViewModel {
 
     init(modelContext: ModelContext) {
         self.personalizationService = PersonalizationService(modelContext: modelContext)
-        self.audioService = AudioService()
+        self.audioService = SoundscapeService()
         self.storeKitService = StoreKitService()
     }
 
@@ -75,7 +75,7 @@ final class OnboardingViewModel {
     func completeOnboarding() {
         saveCurrentStep()
         personalizationService.completeOnboarding()
-        audioService.stopAmbientMusic()
+        audioService.stop()
         HapticService.notification(.success)
     }
 

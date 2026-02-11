@@ -3,6 +3,7 @@ import SwiftUI
 struct SavedContentRow: View {
     let content: PrayerContent
     let displayText: String
+    @Environment(\.bpPalette) private var palette
 
     var body: some View {
         HStack(spacing: 12) {
@@ -13,26 +14,26 @@ struct SavedContentRow: View {
                 .frame(width: 32, height: 32)
                 .background(
                     RoundedRectangle(cornerRadius: 8)
-                        .fill(BPColorPalette.light.accent)
+                        .fill(palette.accent)
                 )
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(displayText)
                     .font(BPFont.body)
-                    .foregroundStyle(BPColorPalette.light.textPrimary)
+                    .foregroundStyle(palette.textPrimary)
                     .lineLimit(2)
 
                 HStack(spacing: 6) {
                     Text(content.type.displayName)
                         .font(BPFont.caption)
-                        .foregroundStyle(BPColorPalette.light.textMuted)
+                        .foregroundStyle(palette.textMuted)
 
                     if let ref = content.verseReference, !ref.isEmpty {
                         Text("·")
-                            .foregroundStyle(BPColorPalette.light.textMuted)
+                            .foregroundStyle(palette.textMuted)
                         Text(ref)
                             .font(BPFont.caption)
-                            .foregroundStyle(BPColorPalette.light.textMuted)
+                            .foregroundStyle(palette.textMuted)
                     }
                 }
             }

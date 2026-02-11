@@ -4,6 +4,7 @@ struct TranslationPreviewCard: View {
     let translation: BibleTranslation
     let isSelected: Bool
     let action: () -> Void
+    @Environment(\.bpPalette) private var palette
 
     var body: some View {
         Button(action: {
@@ -15,7 +16,7 @@ struct TranslationPreviewCard: View {
                     Text(translation.displayName)
                         .font(BPFont.headingSmall)
                         .foregroundStyle(
-                            isSelected ? .white : BPColorPalette.light.textPrimary
+                            isSelected ? .white : palette.textPrimary
                         )
 
                     Spacer()
@@ -30,19 +31,19 @@ struct TranslationPreviewCard: View {
                 Text(translation.subtitle)
                     .font(BPFont.reference)
                     .foregroundStyle(
-                        isSelected ? .white.opacity(0.7) : BPColorPalette.light.textMuted
+                        isSelected ? .white.opacity(0.7) : palette.textMuted
                     )
 
                 Divider()
                     .overlay(
                         isSelected
-                            ? Color.white.opacity(0.2) : BPColorPalette.light.border
+                            ? Color.white.opacity(0.2) : palette.border
                     )
 
                 Text(translation.john316)
                     .font(BPFont.bibleSmall)
                     .foregroundStyle(
-                        isSelected ? .white.opacity(0.9) : BPColorPalette.light.textSecondary
+                        isSelected ? .white.opacity(0.9) : palette.textSecondary
                     )
                     .lineLimit(5)
                     .fixedSize(horizontal: false, vertical: true)
@@ -50,7 +51,7 @@ struct TranslationPreviewCard: View {
                 Text("John 3:16")
                     .font(BPFont.reference)
                     .foregroundStyle(
-                        isSelected ? .white.opacity(0.6) : BPColorPalette.light.textMuted
+                        isSelected ? .white.opacity(0.6) : palette.textMuted
                     )
             }
             .padding(20)
@@ -59,18 +60,18 @@ struct TranslationPreviewCard: View {
                 RoundedRectangle(cornerRadius: 20)
                     .fill(
                         isSelected
-                            ? BPColorPalette.light.accent : BPColorPalette.light.surfaceElevated
+                            ? palette.accent : palette.surfaceElevated
                     )
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
                     .stroke(
-                        isSelected ? Color.clear : BPColorPalette.light.border,
+                        isSelected ? Color.clear : palette.border,
                         lineWidth: 1
                     )
             )
             .shadow(
-                color: isSelected ? BPColorPalette.light.accent.opacity(0.3) : Color.black.opacity(0.05),
+                color: isSelected ? palette.accent.opacity(0.3) : Color.black.opacity(0.05),
                 radius: isSelected ? 12 : 4,
                 y: isSelected ? 4 : 2
             )

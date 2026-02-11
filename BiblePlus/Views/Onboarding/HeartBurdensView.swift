@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HeartBurdensView: View {
     @Bindable var viewModel: OnboardingViewModel
+    @Environment(\.bpPalette) private var palette
     @State private var showContent = false
 
     private let columns = [
@@ -14,14 +15,16 @@ struct HeartBurdensView: View {
             Spacer().frame(height: 24)
 
             VStack(spacing: 10) {
-                Text("\(viewModel.firstName), what's weighing\non your heart right now?")
+                Text(viewModel.firstName.isEmpty
+                    ? "What's weighing\non your heart right now?"
+                    : "\(viewModel.firstName), what's weighing\non your heart right now?")
                     .font(BPFont.headingMedium)
-                    .foregroundStyle(BPColorPalette.light.textPrimary)
+                    .foregroundStyle(palette.textPrimary)
                     .multilineTextAlignment(.center)
 
                 Text("We'll prioritize prayers and verses that\nspeak to these areas. Select up to 3.")
                     .font(BPFont.reference)
-                    .foregroundStyle(BPColorPalette.light.textMuted)
+                    .foregroundStyle(palette.textMuted)
                     .multilineTextAlignment(.center)
                     .lineSpacing(3)
             }
@@ -57,7 +60,7 @@ struct HeartBurdensView: View {
             Spacer().frame(height: 40)
         }
         .onAppear {
-            withAnimation {
+            withAnimation(BPAnimation.spring.delay(0.2)) {
                 showContent = true
             }
         }
