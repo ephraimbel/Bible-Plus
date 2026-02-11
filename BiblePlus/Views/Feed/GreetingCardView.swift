@@ -2,6 +2,7 @@ import SwiftUI
 
 struct GreetingCardView: View {
     let greeting: String
+    var streakText: String? = nil
     let theme: ThemeDefinition
     @Environment(\.bpPalette) private var palette
     @State private var showContent = false
@@ -36,7 +37,29 @@ struct GreetingCardView: View {
                     .opacity(showContent ? 1 : 0)
                     .scaleEffect(showContent ? 1 : 0.6)
 
-                Spacer().frame(height: 28)
+                // Streak badge
+                if let streakText {
+                    HStack(spacing: 6) {
+                        Image(systemName: "flame.fill")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundStyle(palette.accent)
+                        Text(streakText)
+                            .font(BPFont.caption)
+                            .foregroundStyle(.white.opacity(0.9))
+                    }
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 6)
+                    .background(
+                        Capsule()
+                            .fill(.ultraThinMaterial)
+                            .environment(\.colorScheme, .dark)
+                    )
+                    .opacity(showContent ? 1 : 0)
+                    .scaleEffect(showContent ? 1 : 0.6)
+                    .padding(.top, 12)
+                }
+
+                Spacer().frame(height: streakText != nil ? 16 : 28)
 
                 // Greeting text
                 Text(greeting)

@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import Combine
 
 struct FeedView: View {
     @Environment(\.modelContext) private var modelContext
@@ -30,11 +31,13 @@ private struct FeedContentView: View {
     @State private var showSanctuary = false
 
     var body: some View {
+        ZStack {
         ScrollView(.vertical, showsIndicators: false) {
             LazyVStack(spacing: 0) {
                 // Index 0: Greeting card
                 GreetingCardView(
                     greeting: vm.greeting,
+                    streakText: vm.streakText,
                     theme: vm.currentTheme
                 )
                 .containerRelativeFrame(.vertical)
@@ -85,10 +88,31 @@ private struct FeedContentView: View {
             )
         }
         .sheet(item: $vm.askAIContent) { content in
-            ChatView(initialContext: vm.askAIPrompt(for: content))
+            NavigationStack {
+                ChatView(
+                    conversationId: vm.askAIConversationId,
+                    initialContext: vm.askAIPrompt(for: content)
+                )
+            }
         }
         .fullScreenCover(isPresented: $showSanctuary) {
             SanctuaryView(soundscapeService: soundscapeService)
         }
+        .onReceive(NotificationCenter.default.publisher(for: SettingsViewModel.personalizationDidChange)) { _ in
+            scrollPosition = 0
+            vm.refreshFeed()
+        }
+
+        // Streak celebration overlay
+        if vm.showStreakCelebration {
+            StreakCelebrationView(
+                streakCount: vm.streakCount,
+                milestone: vm.streakMilestone,
+                onDismiss: { vm.dismissStreakCelebration() }
+            )
+            .transition(.opacity)
+            .zIndex(100)
+        }
+        } // ZStack
     }
 }

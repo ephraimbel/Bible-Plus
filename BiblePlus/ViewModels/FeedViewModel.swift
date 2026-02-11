@@ -15,6 +15,12 @@ final class FeedViewModel {
     var shareContent: PrayerContent? = nil
     var collectionContent: PrayerContent? = nil
     var askAIContent: PrayerContent? = nil
+    var askAIConversationId: UUID = UUID()
+
+    // Streak state
+    var streakCount: Int = 0
+    var showStreakCelebration: Bool = false
+    var streakMilestone: StreakService.MilestoneType? = nil
 
     // MARK: - Private
 
@@ -25,6 +31,7 @@ final class FeedViewModel {
 
     private let feedEngine: FeedEngine
     private let personalizationService: PersonalizationService
+    private let streakService: StreakService
     private let modelContext: ModelContext
 
     // MARK: - Computed
@@ -52,6 +59,11 @@ final class FeedViewModel {
         }
     }
 
+    var streakText: String? {
+        guard streakCount >= 2 else { return nil }
+        return "\(streakCount)-day streak"
+    }
+
     var currentTheme: ThemeDefinition {
         ThemeDefinition.allThemes.first { $0.id == profile.selectedThemeID }
             ?? ThemeDefinition.allThemes[0]
@@ -63,8 +75,10 @@ final class FeedViewModel {
         self.modelContext = modelContext
         self.feedEngine = FeedEngine(modelContext: modelContext)
         self.personalizationService = PersonalizationService(modelContext: modelContext)
+        self.streakService = StreakService(modelContext: modelContext)
         loadSavedState()
         loadInitialFeed()
+        checkStreak()
     }
 
     // MARK: - Feed Loading
@@ -154,6 +168,7 @@ final class FeedViewModel {
     }
 
     func askAI(about content: PrayerContent) {
+        askAIConversationId = createConversationForAI(content)
         askAIContent = content
         HapticService.selection()
     }
@@ -166,6 +181,14 @@ final class FeedViewModel {
         return "This really spoke to me. Can you help me go deeper? \"\(text)\""
     }
 
+    func createConversationForAI(_ content: PrayerContent) -> UUID {
+        let title = String(personalizedText(for: content).prefix(40))
+        let conversation = Conversation(title: title)
+        modelContext.insert(conversation)
+        try? modelContext.save()
+        return conversation.id
+    }
+
     func pinToCollection(_ content: PrayerContent) {
         if !content.isSaved {
             content.isSaved = true
@@ -174,6 +197,33 @@ final class FeedViewModel {
         }
         collectionContent = content
         HapticService.selection()
+    }
+
+    // MARK: - Streak
+
+    func dismissStreakCelebration() {
+        showStreakCelebration = false
+    }
+
+    private func checkStreak() {
+        let result = streakService.checkAndUpdateStreak()
+        streakCount = result.currentStreak
+        streakMilestone = result.milestoneType
+        if result.isNewDay {
+            showStreakCelebration = true
+        }
+    }
+
+    // MARK: - Feed Refresh
+
+    func refreshFeed() {
+        cards = []
+        shownIDs = []
+        shownIDTimestamps = [:]
+        currentIndex = 0
+        showGreeting = true
+        isLoadingMore = false
+        loadInitialFeed()
     }
 
     // MARK: - Private

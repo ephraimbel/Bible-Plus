@@ -2,58 +2,264 @@ import SwiftUI
 import SwiftData
 
 struct SettingsView: View {
-    @Query private var profiles: [UserProfile]
+    @Environment(\.modelContext) private var modelContext
     @Environment(SoundscapeService.self) private var soundscapeService
-    @State private var showSanctuary = false
+    @State private var viewModel: SettingsViewModel?
 
-    private var profile: UserProfile? { profiles.first }
+    var body: some View {
+        Group {
+            if let vm = viewModel {
+                SettingsContentView(vm: vm, soundscapeService: soundscapeService)
+            } else {
+                BPLoadingView().onAppear { initializeViewModel() }
+            }
+        }
+    }
+
+    private func initializeViewModel() {
+        viewModel = SettingsViewModel(
+            modelContext: modelContext,
+            soundscapeService: soundscapeService
+        )
+    }
+}
+
+// MARK: - Inner Content View
+
+private struct SettingsContentView: View {
+    @Bindable var vm: SettingsViewModel
+    let soundscapeService: SoundscapeService
+    @Environment(\.bpPalette) private var palette
 
     var body: some View {
         NavigationStack {
             List {
-                // Profile section
-                if let profile {
-                    Section("Profile") {
-                        LabeledContent("Name", value: profile.firstName)
-                        LabeledContent("Faith Level", value: profile.faithLevel.displayName)
-                        LabeledContent("Translation", value: profile.preferredTranslation.displayName)
-                    }
-                }
-
-                // Sanctuary
-                Section("Sanctuary") {
-                    Button {
-                        showSanctuary = true
-                    } label: {
-                        HStack {
-                            Image(systemName: "moon.stars")
-                                .foregroundStyle(Color(hex: "C9A96E"))
-                            Text("Open Sanctuary")
-                                .foregroundStyle(.primary)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: 13, weight: .semibold))
-                                .foregroundStyle(.secondary)
-                        }
-                    }
-                }
-
-                // Subscription
-                Section("Subscription") {
-                    if let profile {
-                        LabeledContent("Status", value: profile.isPro ? "Pro" : "Free")
-                    }
-                }
-
-                // About
-                Section("About") {
-                    LabeledContent("Version", value: "1.0.0")
-                    LabeledContent("Build", value: "1")
-                }
+                profileSection
+                bibleSection
+                sanctuarySection
+                appearanceSection
+                subscriptionSection
+                aboutSection
             }
             .navigationTitle("Settings")
-            .fullScreenCover(isPresented: $showSanctuary) {
+            .sheet(isPresented: $vm.showEditName) {
+                EditNameSheet(vm: vm)
+                    .presentationDetents([.medium])
+            }
+            .sheet(isPresented: $vm.showEditFaithLevel) {
+                EditFaithLevelSheet(vm: vm)
+                    .presentationDetents([.medium])
+            }
+            .sheet(isPresented: $vm.showEditLifeSeasons) {
+                EditLifeSeasonsSheet(vm: vm)
+                    .presentationDetents([.large])
+            }
+            .sheet(isPresented: $vm.showEditBurdens) {
+                EditBurdensSheet(vm: vm)
+                    .presentationDetents([.large])
+            }
+            .sheet(isPresented: $vm.showEditTranslation) {
+                EditTranslationSheet(vm: vm)
+                    .presentationDetents([.large])
+            }
+            .sheet(isPresented: $vm.showEditPrayerTimes) {
+                EditPrayerTimesSheet(vm: vm)
+                    .presentationDetents([.medium])
+            }
+            .sheet(isPresented: $vm.showSoundscapePicker) {
+                SoundscapePickerView(vm: vm.sanctuaryViewModel)
+                    .presentationDetents([.medium, .large])
+            }
+            .sheet(isPresented: $vm.showBackgroundPicker) {
+                BackgroundPickerView(vm: vm.sanctuaryViewModel)
+                    .presentationDetents([.large])
+            }
+            .fullScreenCover(isPresented: $vm.showSanctuary) {
                 SanctuaryView(soundscapeService: soundscapeService)
+            }
+        }
+    }
+
+    // MARK: - Profile Section
+
+    private var profileSection: some View {
+        Section {
+            settingsRow(
+                icon: "person",
+                label: "Name",
+                value: vm.profile.firstName.isEmpty ? "Not set" : vm.profile.firstName
+            ) {
+                vm.beginEditingName()
+            }
+
+            settingsRow(
+                icon: "sparkles",
+                label: "Faith Level",
+                value: vm.profile.faithLevel.displayName
+            ) {
+                vm.beginEditingFaithLevel()
+            }
+
+            settingsRow(
+                icon: "leaf",
+                label: "Life Seasons",
+                value: vm.lifeSeasonsDisplay
+            ) {
+                vm.beginEditingLifeSeasons()
+            }
+
+            settingsRow(
+                icon: "heart",
+                label: "Heart Burdens",
+                value: vm.burdensDisplay
+            ) {
+                vm.beginEditingBurdens()
+            }
+            HStack {
+                Image(systemName: "flame.fill")
+                    .foregroundStyle(palette.accent)
+                    .frame(width: 24)
+                Text("Daily Streak")
+                Spacer()
+                Text(vm.streakDisplay)
+                    .foregroundStyle(.secondary)
+            }
+        } header: {
+            Text("Profile")
+        } footer: {
+            Text("Changes to your profile will refresh your feed.")
+        }
+    }
+
+    // MARK: - Bible Section
+
+    private var bibleSection: some View {
+        Section("Bible") {
+            settingsRow(
+                icon: "book",
+                label: "Translation",
+                value: vm.profile.preferredTranslation.displayName
+            ) {
+                vm.beginEditingTranslation()
+            }
+        }
+    }
+
+    // MARK: - Sanctuary Section
+
+    private var sanctuarySection: some View {
+        Section("Sanctuary") {
+            settingsRow(
+                icon: "music.note",
+                label: "Soundscapes",
+                value: vm.currentSoundscapeDisplay
+            ) {
+                vm.showSoundscapePicker = true
+            }
+
+            settingsRow(
+                icon: "photo.on.rectangle",
+                label: "Backgrounds",
+                value: vm.currentBackgroundDisplay
+            ) {
+                vm.showBackgroundPicker = true
+            }
+
+            settingsRow(
+                icon: "moon.stars",
+                label: "Open Sanctuary",
+                value: nil
+            ) {
+                vm.showSanctuary = true
+            }
+        }
+    }
+
+    // MARK: - Appearance Section
+
+    private var appearanceSection: some View {
+        Section("Appearance") {
+            HStack {
+                Image(systemName: "paintbrush")
+                    .foregroundStyle(palette.accent)
+                    .frame(width: 24)
+                Text("Color Mode")
+                Spacer()
+                Picker("", selection: Binding(
+                    get: { vm.profile.colorMode },
+                    set: { vm.updateColorMode($0) }
+                )) {
+                    ForEach(ColorMode.allCases) { mode in
+                        Text(mode.displayName).tag(mode)
+                    }
+                }
+                .pickerStyle(.menu)
+                .tint(palette.accent)
+            }
+        }
+    }
+
+    // MARK: - Subscription Section
+
+    private var subscriptionSection: some View {
+        Section("Subscription") {
+            HStack {
+                Image(systemName: vm.profile.isPro ? "crown.fill" : "crown")
+                    .foregroundStyle(palette.accent)
+                    .frame(width: 24)
+                Text("Status")
+                Spacer()
+                Text(vm.profile.isPro ? "Bible+ Pro" : "Free")
+                    .foregroundStyle(.secondary)
+            }
+        }
+    }
+
+    // MARK: - About Section
+
+    private var aboutSection: some View {
+        Section("About") {
+            HStack {
+                Image(systemName: "info.circle")
+                    .foregroundStyle(palette.accent)
+                    .frame(width: 24)
+                Text("Version")
+                Spacer()
+                Text("1.0.0")
+                    .foregroundStyle(.secondary)
+            }
+            HStack {
+                Image(systemName: "hammer")
+                    .foregroundStyle(palette.accent)
+                    .frame(width: 24)
+                Text("Build")
+                Spacer()
+                Text("1")
+                    .foregroundStyle(.secondary)
+            }
+        }
+    }
+
+    // MARK: - Row Helper
+
+    @ViewBuilder
+    private func settingsRow(icon: String, label: String, value: String?, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            HStack {
+                Image(systemName: icon)
+                    .foregroundStyle(palette.accent)
+                    .frame(width: 24)
+                Text(label)
+                    .foregroundStyle(.primary)
+                Spacer()
+                if let value {
+                    Text(value)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                }
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundStyle(.tertiary)
             }
         }
     }

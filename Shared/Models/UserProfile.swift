@@ -15,6 +15,8 @@ final class UserProfile {
     var selectedBackgroundID: String
     var colorMode: ColorMode
     var streakCount: Int
+    var lastActiveDate: Date?
+    var longestStreak: Int
     var isPro: Bool
     var aiConversationCount: Int
     var hasCompletedOnboarding: Bool
@@ -34,6 +36,8 @@ final class UserProfile {
         selectedBackgroundID: String = "warm-gold",
         colorMode: ColorMode = .auto,
         streakCount: Int = 0,
+        lastActiveDate: Date? = nil,
+        longestStreak: Int = 0,
         isPro: Bool = false,
         aiConversationCount: Int = 0,
         hasCompletedOnboarding: Bool = false
@@ -50,6 +54,8 @@ final class UserProfile {
         self.selectedBackgroundID = selectedBackgroundID
         self.colorMode = colorMode
         self.streakCount = streakCount
+        self.lastActiveDate = lastActiveDate
+        self.longestStreak = longestStreak
         self.isPro = isPro
         self.aiConversationCount = aiConversationCount
         self.hasCompletedOnboarding = hasCompletedOnboarding
