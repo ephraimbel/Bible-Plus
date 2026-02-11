@@ -27,11 +27,28 @@ private struct BibleContentView: View {
     @Bindable var viewModel: BibleReaderViewModel
     @Environment(\.modelContext) private var modelContext
     @Environment(\.bpPalette) private var palette
+    @Environment(\.colorScheme) private var colorScheme
     @State private var showExplainChat = false
     @State private var explainPrompt = ""
     @State private var explainConversationId = UUID()
     @State private var shareText: String?
     @State private var searchViewModel: BibleSearchViewModel?
+
+    // MARK: - Page Flip State
+
+    @State private var isPageFlipping = false
+    @State private var flipAngle: Double = 0
+    @State private var flipAnchor: UnitPoint = .leading
+    @State private var cachedVerses: [(number: Int, text: String)] = []
+    @State private var cachedChapterTitle: String = ""
+    @State private var cachedSavedVerseNumbers: Set<Int> = []
+    @State private var cachedHighlightColors: [Int: VerseHighlightColor] = [:]
+
+    private var paperColor: Color {
+        colorScheme == .dark
+            ? Color(red: 26/255, green: 26/255, blue: 26/255)
+            : Color(red: 250/255, green: 248/255, blue: 244/255)
+    }
 
     private func createExplainConversation() {
         let title = String(explainPrompt.prefix(40))
@@ -41,33 +58,44 @@ private struct BibleContentView: View {
         explainConversationId = conversation.id
     }
 
-    private var chapterKey: String {
-        "\(viewModel.selectedBook.id)-\(viewModel.selectedChapter)"
-    }
+    // MARK: - Page Flip
 
-    private var pageTransition: AnyTransition {
-        switch viewModel.navigationDirection {
-        case .forward:
-            .asymmetric(
-                insertion: .move(edge: .trailing),
-                removal: .move(edge: .leading)
-            )
-        case .backward:
-            .asymmetric(
-                insertion: .move(edge: .leading),
-                removal: .move(edge: .trailing)
-            )
+    private func performPageFlip(forward: Bool) {
+        guard !isPageFlipping else { return }
+
+        // Snapshot the current page content into local state
+        cachedVerses = viewModel.verses
+        cachedChapterTitle = viewModel.chapterTitle
+        cachedSavedVerseNumbers = viewModel.savedVerseNumbers
+        cachedHighlightColors = viewModel.highlightColors
+        flipAnchor = forward ? .leading : .trailing
+        flipAngle = 0
+        isPageFlipping = true
+
+        // Navigate (this clears verses and starts async load)
+        if forward {
+            viewModel.goToNextChapter()
+        } else {
+            viewModel.goToPreviousChapter()
         }
-    }
 
-    private var pageFlipAnimation: Animation {
-        .spring(response: 0.35, dampingFraction: 0.88)
+        // Animate the cached page flipping away
+        withAnimation(.easeInOut(duration: 0.5)) {
+            flipAngle = forward ? -90 : 90
+        }
+
+        // Clean up after animation completes
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) {
+            isPageFlipping = false
+            flipAngle = 0
+        }
     }
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            // Stable container — clips the page-flip slide animation
+            // Page container
             ZStack {
+                // Current / new page (underneath)
                 ChapterReaderView(
                     verses: viewModel.verses,
                     chapterTitle: viewModel.chapterTitle,
@@ -84,8 +112,61 @@ private struct BibleContentView: View {
                     onVerseTap: { viewModel.selectVerse($0) },
                     onRetry: { viewModel.retryLoading() }
                 )
-                .id(chapterKey)
-                .transition(pageTransition)
+
+                // Shadow cast onto the revealed page by the turning page above
+                if isPageFlipping {
+                    Color.black
+                        .opacity(0.2 * (1 - abs(flipAngle) / 90))
+                        .allowsHitTesting(false)
+                }
+
+                // Cached previous page (on top — this is the page being flipped)
+                if isPageFlipping {
+                    ChapterReaderView(
+                        verses: cachedVerses,
+                        chapterTitle: cachedChapterTitle,
+                        selectedVerseNumber: nil,
+                        isLoading: false,
+                        errorMessage: nil,
+                        isShowingOfflineFallback: false,
+                        offlineTranslationName: "",
+                        savedVerseNumbers: cachedSavedVerseNumbers,
+                        highlightColors: cachedHighlightColors,
+                        readerFontSize: viewModel.readerFontSize,
+                        readerFontDesign: viewModel.readerFontDesign,
+                        readerLineSpacing: viewModel.readerLineSpacing,
+                        onVerseTap: { _ in },
+                        onRetry: { }
+                    )
+                    .background(paperColor)
+                    .overlay(
+                        // Lighting: darkens toward the lifting edge
+                        LinearGradient(
+                            colors: [
+                                .clear,
+                                .black.opacity(abs(flipAngle) / 200)
+                            ],
+                            startPoint: flipAnchor == .leading ? .leading : .trailing,
+                            endPoint: flipAnchor == .leading ? .trailing : .leading
+                        )
+                        .allowsHitTesting(false)
+                    )
+                    .rotation3DEffect(
+                        .degrees(flipAngle),
+                        axis: (x: 0, y: 1, z: 0),
+                        anchor: flipAnchor,
+                        anchorZ: 0,
+                        perspective: 0.25
+                    )
+                    .shadow(
+                        color: .black.opacity(min(abs(flipAngle) / 100, 0.45)),
+                        radius: abs(flipAngle) / 4,
+                        x: flipAnchor == .leading
+                            ? -(abs(flipAngle) / 5)
+                            : abs(flipAngle) / 5
+                    )
+                    .allowsHitTesting(false)
+                }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(palette.background)
@@ -94,12 +175,10 @@ private struct BibleContentView: View {
                 DragGesture(minimumDistance: 50)
                     .onEnded { value in
                         guard abs(value.translation.width) > abs(value.translation.height) * 2 else { return }
-                        withAnimation(pageFlipAnimation) {
-                            if value.translation.width < -50 {
-                                viewModel.goToNextChapter()
-                            } else if value.translation.width > 50 {
-                                viewModel.goToPreviousChapter()
-                            }
+                        if value.translation.width < -50 {
+                            performPageFlip(forward: true)
+                        } else if value.translation.width > 50 {
+                            performPageFlip(forward: false)
                         }
                     }
             )
@@ -153,20 +232,19 @@ private struct BibleContentView: View {
             }
         }
         .animation(BPAnimation.spring, value: viewModel.selectedVerse)
-        .navigationTitle(viewModel.selectedBook.name)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
+            ToolbarItem(placement: .principal) {
                 Button {
                     viewModel.showBookPicker = true
                 } label: {
                     HStack(spacing: 4) {
                         Text(viewModel.chapterTitle)
-                            .font(BPFont.button)
+                            .font(.system(size: 17, weight: .semibold, design: .serif))
                         Image(systemName: "chevron.down")
                             .font(.system(size: 10, weight: .semibold))
                     }
-                    .foregroundStyle(palette.accent)
+                    .foregroundStyle(palette.textPrimary)
                 }
             }
 
@@ -209,9 +287,7 @@ private struct BibleContentView: View {
                     }
 
                     Button {
-                        withAnimation(pageFlipAnimation) {
-                            viewModel.goToPreviousChapter()
-                        }
+                        performPageFlip(forward: false)
                     } label: {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 14, weight: .medium))
@@ -224,9 +300,7 @@ private struct BibleContentView: View {
                     .disabled(!viewModel.canGoBack)
 
                     Button {
-                        withAnimation(pageFlipAnimation) {
-                            viewModel.goToNextChapter()
-                        }
+                        performPageFlip(forward: true)
                     } label: {
                         Image(systemName: "chevron.right")
                             .font(.system(size: 14, weight: .medium))

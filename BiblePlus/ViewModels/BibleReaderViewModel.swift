@@ -16,14 +16,6 @@ final class BibleReaderViewModel {
     var showReaderSettings: Bool = false
     var selectedVerse: VerseItem? = nil
 
-    // MARK: - Page Flip Direction
-
-    enum NavigationDirection {
-        case forward, backward
-    }
-
-    var navigationDirection: NavigationDirection = .forward
-
     // MARK: - Loading State
 
     var isLoading: Bool = false
@@ -104,7 +96,7 @@ final class BibleReaderViewModel {
     // MARK: - Navigation
 
     func selectBook(_ book: BibleBook) {
-        navigationDirection = .forward
+
         selectedBook = book
         selectedChapter = 1
         showBookPicker = false
@@ -112,14 +104,14 @@ final class BibleReaderViewModel {
     }
 
     func selectChapter(_ chapter: Int) {
-        navigationDirection = chapter > selectedChapter ? .forward : .backward
+
         selectedChapter = chapter
         showBookPicker = false
         loadChapter()
     }
 
     func goToNextChapter() {
-        navigationDirection = .forward
+
         if selectedChapter < selectedBook.chapterCount {
             selectedChapter += 1
         } else {
@@ -133,7 +125,7 @@ final class BibleReaderViewModel {
     }
 
     func goToPreviousChapter() {
-        navigationDirection = .backward
+
         if selectedChapter > 1 {
             selectedChapter -= 1
         } else {
@@ -212,7 +204,7 @@ final class BibleReaderViewModel {
     // MARK: - Search Navigation
 
     func navigateToVerse(book: BibleBook, chapter: Int, verseNumber: Int) {
-        navigationDirection = .forward
+
         selectedBook = book
         selectedChapter = chapter
         showSearch = false
