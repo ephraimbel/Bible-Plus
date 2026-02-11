@@ -36,11 +36,8 @@ private struct SanctuaryContentView: View {
 
     var body: some View {
         ZStack {
-            // Background gradient
+            // Background
             backgroundLayer
-
-            // Dark overlay for readability
-            Color.black.opacity(0.3)
 
             // Content
             VStack(spacing: 0) {
