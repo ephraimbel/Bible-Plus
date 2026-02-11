@@ -108,6 +108,7 @@ struct RootView: View {
     @Query private var profiles: [UserProfile]
     @Environment(\.colorScheme) private var systemScheme
     @State private var deepLinkedContentID: UUID?
+    @State private var showSplash = true
 
     private var currentProfile: UserProfile? { profiles.first }
     private var hasCompletedOnboarding: Bool {
@@ -115,33 +116,48 @@ struct RootView: View {
     }
 
     var body: some View {
-        Group {
-            if hasCompletedOnboarding {
-                ContentView(deepLinkedContentID: $deepLinkedContentID)
-                    .transition(.asymmetric(
-                        insertion: .opacity.combined(with: .scale(scale: 0.96)),
-                        removal: .opacity
-                    ))
-            } else {
-                OnboardingContainerView()
+        ZStack {
+            Group {
+                if hasCompletedOnboarding {
+                    ContentView(deepLinkedContentID: $deepLinkedContentID)
+                        .transition(.asymmetric(
+                            insertion: .opacity.combined(with: .scale(scale: 0.96)),
+                            removal: .opacity
+                        ))
+                } else {
+                    OnboardingContainerView()
+                        .transition(.opacity)
+                }
+            }
+            .preferredColorScheme(resolvedColorScheme)
+            .environment(
+                \.bpPalette,
+                BPColorPalette.resolve(
+                    mode: currentProfile?.colorMode ?? .auto,
+                    systemScheme: systemScheme
+                )
+            )
+            .animation(BPAnimation.pageTransition, value: hasCompletedOnboarding)
+            .onOpenURL { url in
+                handleDeepLink(url)
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .notificationDeepLink)) { notification in
+                if let uuid = notification.userInfo?["contentID"] as? UUID {
+                    deepLinkedContentID = uuid
+                }
+            }
+
+            if showSplash {
+                SplashView()
                     .transition(.opacity)
+                    .zIndex(1)
             }
         }
-        .preferredColorScheme(resolvedColorScheme)
-        .environment(
-            \.bpPalette,
-            BPColorPalette.resolve(
-                mode: currentProfile?.colorMode ?? .auto,
-                systemScheme: systemScheme
-            )
-        )
-        .animation(BPAnimation.pageTransition, value: hasCompletedOnboarding)
-        .onOpenURL { url in
-            handleDeepLink(url)
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .notificationDeepLink)) { notification in
-            if let uuid = notification.userInfo?["contentID"] as? UUID {
-                deepLinkedContentID = uuid
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                withAnimation(.easeInOut(duration: 0.5)) {
+                    showSplash = false
+                }
             }
         }
     }
