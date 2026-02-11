@@ -39,7 +39,7 @@ struct ShareCardView: View {
             VStack(spacing: 0) {
                 LinearGradient(
                     colors: [
-                        Color.black.opacity(0.25),
+                        Color.black.opacity(0.15),
                         Color.black.opacity(0),
                     ],
                     startPoint: .top,
@@ -52,8 +52,8 @@ struct ShareCardView: View {
                 LinearGradient(
                     colors: [
                         Color.black.opacity(0),
-                        Color.black.opacity(0.15),
-                        Color.black.opacity(0.40),
+                        Color.black.opacity(0.1),
+                        Color.black.opacity(0.25),
                     ],
                     startPoint: .top,
                     endPoint: .bottom
