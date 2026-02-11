@@ -21,6 +21,11 @@ struct BiblePlusApp: App {
             if let profile = try? seedContext.fetch(profileFetch).first {
                 profile.isPro = true
                 try? seedContext.save()
+
+                // Ensure widget has the current background frame
+                if let bg = SanctuaryBackground.background(for: profile.selectedBackgroundID) {
+                    WidgetBackgroundService.updateWidgetBackground(for: bg)
+                }
             }
 
             // Refresh notification content on each launch

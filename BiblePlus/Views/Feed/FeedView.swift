@@ -29,6 +29,7 @@ private struct FeedContentView: View {
     let soundscapeService: SoundscapeService
     @State private var scrollPosition: Int? = 0
     @State private var showSanctuary = false
+    @State private var prayAlongContent: PrayerContent? = nil
 
     var body: some View {
         ZStack {
@@ -62,6 +63,7 @@ private struct FeedContentView: View {
                         onToggleSound: { soundscapeService.togglePlayback() },
                         onVolumeChange: { soundscapeService.setVolume($0) },
                         onOpenSanctuary: { showSanctuary = true },
+                        onPrayAlong: { prayAlongContent = content },
                         onDoubleTap: { vm.doubleTapSave(for: content) }
                     )
                     .containerRelativeFrame(.vertical)
@@ -101,6 +103,12 @@ private struct FeedContentView: View {
         }
         .fullScreenCover(isPresented: $showSanctuary) {
             SanctuaryView(soundscapeService: soundscapeService)
+        }
+        .fullScreenCover(item: $prayAlongContent) { content in
+            PrayAlongView(
+                displayText: vm.personalizedText(for: content),
+                background: vm.currentBackground
+            )
         }
         .onReceive(NotificationCenter.default.publisher(for: SettingsViewModel.personalizationDidChange)) { _ in
             scrollPosition = 0

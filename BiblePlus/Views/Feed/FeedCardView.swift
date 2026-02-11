@@ -18,11 +18,11 @@ struct FeedCardView: View {
     var onToggleSound: () -> Void = {}
     var onVolumeChange: (Float) -> Void = { _ in }
     var onOpenSanctuary: () -> Void = {}
+    var onPrayAlong: () -> Void = {}
     var onDoubleTap: () -> Void = {}
 
     @Environment(\.bpPalette) private var palette
     @State private var heartVisible = false
-    @State private var showComingSoon = false
 
     var body: some View {
         ZStack {
@@ -148,23 +148,10 @@ struct FeedCardView: View {
             // Guided prayer "Pray Along" button
             if content.type == .guidedPrayer {
                 GoldButton(title: "Pray Along", showGlow: true) {
-                    showComingSoon = true
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                        withAnimation(.easeOut(duration: 0.3)) {
-                            showComingSoon = false
-                        }
-                    }
+                    onPrayAlong()
                 }
                 .padding(.horizontal, 60)
                 .padding(.top, 24)
-            }
-
-            if showComingSoon {
-                Text("Coming soon")
-                    .font(BPFont.caption)
-                    .foregroundStyle(.white.opacity(0.7))
-                    .padding(.top, 8)
-                    .transition(.opacity)
             }
 
             // Reflection "Ask the AI" button

@@ -12,6 +12,7 @@ struct VerseActionSheet: View {
     let onUnsave: () -> Void
     let onHighlight: (VerseHighlightColor) -> Void
     let onRemoveHighlight: () -> Void
+    let onPlayFromHere: (() -> Void)?
     let onDismiss: () -> Void
     @Environment(\.bpPalette) private var palette
 
@@ -49,6 +50,11 @@ struct VerseActionSheet: View {
 
             // Action buttons
             VStack(spacing: 0) {
+                // Play from here
+                if let onPlayFromHere {
+                    actionRow(icon: "headphones", title: "Play from Here", action: onPlayFromHere)
+                }
+
                 // Save / Unsave
                 if isSaved {
                     actionRow(icon: "bookmark.fill", title: "Unsave Verse", action: onUnsave)

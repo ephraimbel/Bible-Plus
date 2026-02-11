@@ -370,17 +370,29 @@ enum ShareAspectRatio: String, CaseIterable, Identifiable {
 // MARK: - Soundscape
 
 enum Soundscape: String, Codable, CaseIterable, Identifiable {
+    // Free
     case stillWaters
     case morningLight
     case eveningRest
     case pureSilence
-    case sacredSpace
+    // Pro — Original
+    case singingBowls
     case gardenPrayer
     case mountainTop
     case nightWatch
     case oceanOfGrace
     case heavenlyWorship
     case rainOfBlessing
+    // Pro — New
+    case peacefulPiano
+    case worshipPads
+    case fireplace
+    case forestBirds
+    case babblingBrook
+    case windChimes
+    case thunderstorm
+    case gregorianChant
+    case heavenlyHarp
 
     var id: String { rawValue }
 
@@ -390,13 +402,22 @@ enum Soundscape: String, Codable, CaseIterable, Identifiable {
         case .morningLight: "Morning Light"
         case .eveningRest: "Evening Rest"
         case .pureSilence: "Pure Silence"
-        case .sacredSpace: "Sacred Space"
+        case .singingBowls: "Singing Bowls"
         case .gardenPrayer: "Garden Prayer"
         case .mountainTop: "Mountain Top"
         case .nightWatch: "Night Watch"
         case .oceanOfGrace: "Ocean of Grace"
         case .heavenlyWorship: "Heavenly Worship"
         case .rainOfBlessing: "Rain of Blessing"
+        case .peacefulPiano: "Peaceful Piano"
+        case .worshipPads: "Worship Pads"
+        case .fireplace: "Fireplace"
+        case .forestBirds: "Forest Birds"
+        case .babblingBrook: "Babbling Brook"
+        case .windChimes: "Wind Chimes"
+        case .thunderstorm: "Thunderstorm"
+        case .gregorianChant: "Gregorian Chant"
+        case .heavenlyHarp: "Heavenly Harp"
         }
     }
 
@@ -406,13 +427,22 @@ enum Soundscape: String, Codable, CaseIterable, Identifiable {
         case .morningLight: "Soft piano and birds to start your day"
         case .eveningRest: "Warm ambient tones for winding down"
         case .pureSilence: "No sound — just you and God"
-        case .sacredSpace: "Cathedral reverb and soft chimes"
+        case .singingBowls: "Resonant singing bowls for deep meditation"
         case .gardenPrayer: "Nature sounds with gentle wind"
         case .mountainTop: "Sweeping atmosphere for deep worship"
         case .nightWatch: "Deep midnight ambience for late prayers"
         case .oceanOfGrace: "Rolling waves and distant shore"
         case .heavenlyWorship: "Ethereal pads and soft vocals"
         case .rainOfBlessing: "Gentle rainfall with distant thunder"
+        case .peacefulPiano: "Soft solo piano for quiet reflection"
+        case .worshipPads: "Ambient atmosphere for prayerful moments"
+        case .fireplace: "Warm crackling fire for cozy devotions"
+        case .forestBirds: "Birdsong in a peaceful forest canopy"
+        case .babblingBrook: "Flowing stream through a quiet woodland"
+        case .windChimes: "Gentle bamboo chimes in a soft breeze"
+        case .thunderstorm: "Distant thunder and steady rain"
+        case .gregorianChant: "Ancient monastic chanting for contemplation"
+        case .heavenlyHarp: "Soothing harp melodies for worship"
         }
     }
 
@@ -422,13 +452,22 @@ enum Soundscape: String, Codable, CaseIterable, Identifiable {
         case .morningLight: "sunrise"
         case .eveningRest: "moon.haze"
         case .pureSilence: "speaker.slash"
-        case .sacredSpace: "building.columns"
+        case .singingBowls: "bell"
         case .gardenPrayer: "leaf"
         case .mountainTop: "mountain.2"
         case .nightWatch: "moon.stars"
         case .oceanOfGrace: "water.waves"
         case .heavenlyWorship: "sparkles"
         case .rainOfBlessing: "cloud.rain"
+        case .peacefulPiano: "pianokeys"
+        case .worshipPads: "waveform"
+        case .fireplace: "flame"
+        case .forestBirds: "bird"
+        case .babblingBrook: "humidity"
+        case .windChimes: "wind"
+        case .thunderstorm: "cloud.bolt.rain"
+        case .gregorianChant: "building.columns"
+        case .heavenlyHarp: "guitars"
         }
     }
 
@@ -443,8 +482,7 @@ enum Soundscape: String, Codable, CaseIterable, Identifiable {
         switch self {
         case .stillWaters, .morningLight, .eveningRest, .pureSilence:
             false
-        case .sacredSpace, .gardenPrayer, .mountainTop, .nightWatch,
-             .oceanOfGrace, .heavenlyWorship, .rainOfBlessing:
+        default:
             true
         }
     }

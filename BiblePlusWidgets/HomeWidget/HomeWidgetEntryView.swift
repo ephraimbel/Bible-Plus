@@ -31,11 +31,14 @@ struct HomeWidgetEntryView: View {
                 .foregroundStyle(.white)
                 .lineLimit(4)
                 .minimumScaleFactor(0.8)
+                .shadow(color: .black.opacity(0.7), radius: 1, y: 1)
+                .shadow(color: .black.opacity(0.4), radius: 4, y: 0)
 
             if let ref = entry.verseReference {
                 Text(ref)
                     .font(.caption2)
-                    .foregroundStyle(.white.opacity(0.7))
+                    .foregroundStyle(.white.opacity(0.8))
+                    .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
             }
         }
         .padding(12)
@@ -56,11 +59,14 @@ struct HomeWidgetEntryView: View {
                     .foregroundStyle(.white)
                     .lineLimit(4)
                     .minimumScaleFactor(0.8)
+                    .shadow(color: .black.opacity(0.7), radius: 1, y: 1)
+                    .shadow(color: .black.opacity(0.4), radius: 4, y: 0)
 
                 if let ref = entry.verseReference {
                     Text(ref)
                         .font(.caption2)
-                        .foregroundStyle(.white.opacity(0.7))
+                        .foregroundStyle(.white.opacity(0.8))
+                        .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
                 }
             }
 
@@ -69,6 +75,7 @@ struct HomeWidgetEntryView: View {
             Image(systemName: "cross")
                 .font(.system(size: 36, weight: .ultraLight))
                 .foregroundStyle(.white.opacity(0.2))
+                .shadow(color: .black.opacity(0.3), radius: 4, y: 0)
                 .padding(.trailing, 8)
         }
         .padding(14)
@@ -85,6 +92,7 @@ struct HomeWidgetEntryView: View {
                 Image(systemName: entry.window.icon)
                     .font(.caption)
                     .foregroundStyle(.white.opacity(0.6))
+                    .shadow(color: .black.opacity(0.5), radius: 2, y: 1)
             }
 
             Spacer()
@@ -94,11 +102,14 @@ struct HomeWidgetEntryView: View {
                 .foregroundStyle(.white)
                 .lineLimit(8)
                 .minimumScaleFactor(0.8)
+                .shadow(color: .black.opacity(0.7), radius: 1, y: 1)
+                .shadow(color: .black.opacity(0.4), radius: 4, y: 0)
 
             if let ref = entry.verseReference {
                 Text(ref)
                     .font(.caption)
-                    .foregroundStyle(.white.opacity(0.7))
+                    .foregroundStyle(.white.opacity(0.8))
+                    .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
                     .padding(.top, 2)
             }
 
@@ -113,6 +124,7 @@ struct HomeWidgetEntryView: View {
                         .font(.system(size: 10, weight: .medium))
                 }
                 .foregroundStyle(.white.opacity(0.4))
+                .shadow(color: .black.opacity(0.3), radius: 2, y: 1)
             }
         }
         .padding(16)
@@ -125,10 +137,11 @@ struct HomeWidgetEntryView: View {
         Text(entry.contentType.displayName.uppercased())
             .font(.system(size: 9, weight: .bold))
             .tracking(1.2)
-            .foregroundStyle(.white.opacity(0.8))
+            .foregroundStyle(.white.opacity(0.9))
+            .shadow(color: .black.opacity(0.5), radius: 1, y: 1)
             .padding(.horizontal, 8)
             .padding(.vertical, 3)
-            .background(.white.opacity(0.15))
+            .background(.ultraThinMaterial.opacity(0.6))
             .clipShape(Capsule())
     }
 

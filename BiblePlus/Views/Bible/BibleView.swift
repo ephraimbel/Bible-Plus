@@ -291,6 +291,48 @@ private struct BibleContentView: View {
                     onRemoveHighlight: {
                         viewModel.removeHighlight(verse)
                     },
+                    onPlayFromHere: {
+                        let verseIndex = viewModel.verses.firstIndex(where: { $0.number == verse.number }) ?? 0
+                        viewModel.selectedVerse = nil
+
+                        if audioService.hasActivePlayback {
+                            // Already playing — just seek
+                            audioService.seekToVerse(index: verseIndex)
+                        } else {
+                            // Start fresh from this verse
+                            let descriptor = FetchDescriptor<UserProfile>()
+                            let isPro = (try? modelContext.fetch(descriptor).first?.isPro) ?? false
+
+                            guard AudioBibleService.canPlayChapter(isPro: isPro) else {
+                                showAudioProGate = true
+                                return
+                            }
+
+                            audioService.setOnChapterComplete {
+                                if viewModel.canGoForward {
+                                    viewModel.goToNextChapter()
+                                    Task {
+                                        try? await Task.sleep(nanoseconds: 500_000_000)
+                                        guard !viewModel.verses.isEmpty else { return }
+                                        audioService.play(
+                                            verses: viewModel.verses,
+                                            book: viewModel.selectedBook,
+                                            chapter: viewModel.selectedChapter,
+                                            translation: viewModel.currentTranslation
+                                        )
+                                    }
+                                }
+                            }
+
+                            audioService.play(
+                                verses: viewModel.verses,
+                                book: viewModel.selectedBook,
+                                chapter: viewModel.selectedChapter,
+                                translation: viewModel.currentTranslation,
+                                startingFromVerseIndex: verseIndex
+                            )
+                        }
+                    },
                     onDismiss: {
                         viewModel.selectedVerse = nil
                     }

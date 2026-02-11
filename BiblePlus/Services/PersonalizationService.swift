@@ -96,6 +96,11 @@ final class PersonalizationService {
         profile.selectedBackgroundID = backgroundID
         profile.updatedAt = Date()
         save()
+
+        // Extract a static frame for the widget
+        if let background = SanctuaryBackground.background(for: backgroundID) {
+            WidgetBackgroundService.updateWidgetBackground(for: background)
+        }
     }
 
     func completeOnboarding() {

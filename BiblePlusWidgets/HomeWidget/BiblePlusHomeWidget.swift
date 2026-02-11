@@ -115,11 +115,29 @@ struct BiblePlusHomeWidget: Widget {
         StaticConfiguration(kind: kind, provider: HomeWidgetProvider()) { entry in
             HomeWidgetEntryView(entry: entry)
                 .containerBackground(for: .widget) {
-                    LinearGradient(
-                        colors: entry.backgroundGradient.map { Color(hex: $0) },
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
+                    ZStack {
+                        // Gradient base (always present as fallback)
+                        LinearGradient(
+                            colors: entry.backgroundGradient.map { Color(hex: $0) },
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+
+                        // Background image from shared container (video frame or static image)
+                        if let uiImage = WidgetBackgroundService.loadWidgetBackgroundImage() {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                        }
+
+                        // Subtle vignette for text readability
+                        RadialGradient(
+                            colors: [Color.clear, Color.black.opacity(0.25)],
+                            center: .center,
+                            startRadius: 80,
+                            endRadius: 250
+                        )
+                    }
                 }
         }
         .configurationDisplayName("Daily Inspiration")

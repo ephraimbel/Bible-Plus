@@ -52,7 +52,8 @@ final class AudioBibleService {
         verses: [(number: Int, text: String)],
         book: BibleBook,
         chapter: Int,
-        translation: BibleTranslation
+        translation: BibleTranslation,
+        startingFromVerseIndex: Int = 0
     ) {
         stop()
 
@@ -60,7 +61,7 @@ final class AudioBibleService {
 
         isLoading = true
         errorMessage = nil
-        currentVerseIndex = 0
+        currentVerseIndex = startingFromVerseIndex
 
         generateTask = Task {
             do {
@@ -83,6 +84,12 @@ final class AudioBibleService {
                 )
                 self.player = audioPlayer
 
+                // Seek to the requested verse
+                if startingFromVerseIndex > 0,
+                   startingFromVerseIndex < self.verseTimings.count {
+                    audioPlayer.currentTime = self.verseTimings[startingFromVerseIndex].startTime
+                }
+
                 configureAudioSession()
                 duckSoundscape()
 
@@ -98,6 +105,22 @@ final class AudioBibleService {
                 isLoading = false
                 errorMessage = error.localizedDescription
             }
+        }
+    }
+
+    // MARK: - Seek to Verse
+
+    func seekToVerse(index: Int) {
+        guard let player,
+              index >= 0,
+              index < verseTimings.count
+        else { return }
+
+        player.currentTime = verseTimings[index].startTime
+        currentVerseIndex = index
+
+        if isPaused {
+            resume()
         }
     }
 
