@@ -21,20 +21,12 @@ struct ImmersiveListeningView: View {
             // Layer 1: Background
             backgroundLayer
 
-            // Layer 2: Vignette (tap target for show/hide controls)
-            RadialGradient(
-                colors: [
-                    Color.black.opacity(0.2),
-                    Color.black.opacity(0.65),
-                ],
-                center: .center,
-                startRadius: 100,
-                endRadius: 500
-            )
-            .contentShape(Rectangle())
-            .onTapGesture {
-                toggleControls()
-            }
+            // Layer 2: Tap target for show/hide controls
+            Color.clear
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    toggleControls()
+                }
 
             // Layer 3: Content
             VStack(spacing: 0) {
