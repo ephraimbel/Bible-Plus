@@ -399,7 +399,7 @@ private struct BibleContentView: View {
         .animation(BPAnimation.spring, value: audioService.hasActivePlayback)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .principal) {
+            ToolbarItem(placement: .topBarLeading) {
                 Button {
                     viewModel.showBookPicker = true
                 } label: {

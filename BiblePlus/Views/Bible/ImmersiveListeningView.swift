@@ -149,7 +149,7 @@ struct ImmersiveListeningView: View {
                         .font(.system(size: 16, weight: .bold))
                         .foregroundStyle(.white)
                         .frame(width: 40, height: 40)
-                        .background(.black.opacity(0.35))
+                        .background(.black.opacity(0.15))
                         .clipShape(Circle())
                 }
                 Spacer()
@@ -174,14 +174,14 @@ struct ImmersiveListeningView: View {
                     .multilineTextAlignment(.center)
                     .lineSpacing(10)
                     .padding(.horizontal, 32)
-                    .shadow(color: .black.opacity(0.35), radius: 4, y: 1)
+                    .shadow(color: .black.opacity(0.15), radius: 4, y: 1)
                     .id(verseIdentity)
                     .transition(.opacity)
 
                 Text(verseReference)
                     .font(BPFont.reference)
                     .foregroundStyle(.white.opacity(0.6))
-                    .shadow(color: .black.opacity(0.3), radius: 3, y: 1)
+                    .shadow(color: .black.opacity(0.12), radius: 3, y: 1)
                     .id("ref-\(verseIdentity)")
                     .transition(.opacity)
             }
@@ -228,7 +228,7 @@ struct ImmersiveListeningView: View {
                         .frame(width: 44, height: 32)
                         .background(
                             Capsule()
-                                .fill(.black.opacity(0.35))
+                                .fill(.black.opacity(0.15))
                         )
                 }
 
@@ -240,7 +240,7 @@ struct ImmersiveListeningView: View {
                         .font(.system(size: 18, weight: .medium))
                         .foregroundStyle(.white.opacity(displayedVerseIndex > 0 ? 1.0 : 0.3))
                         .frame(width: 44, height: 44)
-                        .background(.black.opacity(0.35))
+                        .background(.black.opacity(0.15))
                         .clipShape(Circle())
                 }
                 .disabled(displayedVerseIndex <= 0)
@@ -255,7 +255,7 @@ struct ImmersiveListeningView: View {
                 } label: {
                     ZStack {
                         Circle()
-                            .fill(.black.opacity(0.35))
+                            .fill(.black.opacity(0.15))
                             .frame(width: 64, height: 64)
 
                         Circle()
@@ -284,7 +284,7 @@ struct ImmersiveListeningView: View {
                             displayedVerseIndex < viewModel.verses.count - 1 ? 1.0 : 0.3
                         ))
                         .frame(width: 44, height: 44)
-                        .background(.black.opacity(0.35))
+                        .background(.black.opacity(0.15))
                         .clipShape(Circle())
                 }
                 .disabled(displayedVerseIndex >= viewModel.verses.count - 1)
@@ -299,7 +299,7 @@ struct ImmersiveListeningView: View {
                         .frame(width: 44, height: 32)
                         .background(
                             Capsule()
-                                .fill(.black.opacity(0.35))
+                                .fill(.black.opacity(0.15))
                         )
                 }
             }
@@ -629,7 +629,7 @@ private struct ListeningBackgroundPickerView: View {
 
                 // Dark scrim
                 RoundedRectangle(cornerRadius: 12)
-                    .fill(.black.opacity(0.2))
+                    .fill(.black.opacity(0.08))
 
                 // Content overlay
                 VStack(spacing: 4) {
