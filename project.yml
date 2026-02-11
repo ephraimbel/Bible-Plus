@@ -26,10 +26,14 @@ targets:
       - path: Shared
         excludes:
           - "**/.DS_Store"
+      - path: Resources/Sounds
+        buildPhase: resources
+      - path: Resources/Backgrounds
+        buildPhase: resources
     resources:
-      - path: Resources
-        excludes:
-          - "**/.DS_Store"
+      - path: Resources/Assets.xcassets
+      - path: Resources/Bible
+        buildPhase: resources
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.bibleplus.app
@@ -58,10 +62,9 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.bibleplus.app.widgets
+        INFOPLIST_FILE: BiblePlusWidgets/Info.plist
         CODE_SIGN_ENTITLEMENTS: BiblePlusWidgets/BiblePlusWidgets.entitlements
         SKIP_INSTALL: YES
-        INFOPLIST_KEY_NSExtensionPointIdentifier: com.apple.widgetkit-extension
-        GENERATE_INFOPLIST_FILE: true
         PRODUCT_NAME: BiblePlusWidgets
     entitlements:
       path: BiblePlusWidgets/BiblePlusWidgets.entitlements
