@@ -36,6 +36,108 @@ private enum BackgroundFilter: CaseIterable, Identifiable {
     }
 }
 
+// MARK: - Async Thumbnail Manager
+
+private actor ThumbnailManager {
+    static let shared = ThumbnailManager()
+
+    private var videoCache: [String: UIImage] = [:]
+    private var imageCache: [String: UIImage] = [:]
+
+    func videoThumbnail(for videoName: String) async -> UIImage? {
+        if let cached = videoCache[videoName] { return cached }
+
+        guard let url = Bundle.main.url(forResource: videoName, withExtension: "mp4") else {
+            return nil
+        }
+
+        let asset = AVAsset(url: url)
+        let generator = AVAssetImageGenerator(asset: asset)
+        generator.appliesPreferredTrackTransform = true
+        generator.maximumSize = CGSize(width: 300, height: 540)
+
+        let times: [CMTime] = [
+            CMTime(seconds: 2, preferredTimescale: 600),
+            CMTime(seconds: 1, preferredTimescale: 600),
+            CMTime(seconds: 0.5, preferredTimescale: 600),
+        ]
+        for time in times {
+            if let cgImage = try? generator.copyCGImage(at: time, actualTime: nil) {
+                let image = UIImage(cgImage: cgImage)
+                videoCache[videoName] = image
+                return image
+            }
+        }
+        return nil
+    }
+
+    func imagePreview(named imageName: String) async -> UIImage? {
+        if let cached = imageCache[imageName] { return cached }
+
+        guard let uiImage = SanctuaryBackground.loadImage(named: imageName) else {
+            return nil
+        }
+
+        let maxSize: CGFloat = 300
+        let scale = min(maxSize / uiImage.size.width, maxSize / uiImage.size.height, 1.0)
+        let newSize = CGSize(width: uiImage.size.width * scale, height: uiImage.size.height * scale)
+        let renderer = UIGraphicsImageRenderer(size: newSize)
+        let thumbnail = renderer.image { _ in
+            uiImage.draw(in: CGRect(origin: .zero, size: newSize))
+        }
+
+        imageCache[imageName] = thumbnail
+        return thumbnail
+    }
+}
+
+// MARK: - Async Thumbnail View
+
+private struct AsyncThumbnailView: View {
+    let bg: SanctuaryBackground
+    @State private var thumbnail: UIImage?
+
+    var body: some View {
+        ZStack {
+            // Gradient fallback (always visible initially)
+            RoundedRectangle(cornerRadius: 12)
+                .fill(
+                    LinearGradient(
+                        colors: bg.gradientColors.map { Color(hex: $0) },
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .aspectRatio(1.2, contentMode: .fit)
+
+            // Thumbnail once loaded
+            if let thumbnail {
+                Image(uiImage: thumbnail)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .aspectRatio(1.2, contentMode: .fit)
+                    .clipped()
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .transition(.opacity)
+            }
+        }
+        .task {
+            if bg.hasVideo, let videoName = bg.videoFileName {
+                let img = await ThumbnailManager.shared.videoThumbnail(for: videoName)
+                withAnimation(.easeIn(duration: 0.2)) {
+                    thumbnail = img
+                }
+            } else if bg.hasImage, let imageName = bg.imageName {
+                let img = await ThumbnailManager.shared.imagePreview(named: imageName)
+                withAnimation(.easeIn(duration: 0.2)) {
+                    thumbnail = img
+                }
+            }
+        }
+    }
+}
+
 // MARK: - Background Picker
 
 struct BackgroundPickerView: View {
@@ -182,34 +284,8 @@ struct BackgroundPickerView: View {
             }
         } label: {
             ZStack {
-                // Background preview (video thumbnail, image, or gradient)
-                if bg.hasVideo, let videoName = bg.videoFileName, let thumbnail = Self.videoThumbnail(for: videoName) {
-                    Image(uiImage: thumbnail)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                        .aspectRatio(1.2, contentMode: .fit)
-                        .clipped()
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
-                } else if bg.hasImage, let imageName = bg.imageName, let preview = Self.imagePreview(named: imageName) {
-                    Image(uiImage: preview)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                        .aspectRatio(1.2, contentMode: .fit)
-                        .clipped()
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
-                } else {
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(
-                            LinearGradient(
-                                colors: bg.gradientColors.map { Color(hex: $0) },
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                        )
-                        .aspectRatio(1.2, contentMode: .fit)
-                }
+                // Async thumbnail (gradient → image/video thumbnail)
+                AsyncThumbnailView(bg: bg)
 
                 // Dark scrim for text
                 RoundedRectangle(cornerRadius: 12)
@@ -255,66 +331,5 @@ struct BackgroundPickerView: View {
         }
         .buttonStyle(.plain)
         .disabled(locked)
-    }
-
-    // MARK: - Video Thumbnail
-
-    private static var thumbnailCache: [String: UIImage] = [:]
-
-    private static func videoThumbnail(for videoName: String) -> UIImage? {
-        if let cached = thumbnailCache[videoName] {
-            return cached
-        }
-
-        guard let url = Bundle.main.url(forResource: videoName, withExtension: "mp4") else {
-            return nil
-        }
-
-        let asset = AVAsset(url: url)
-        let generator = AVAssetImageGenerator(asset: asset)
-        generator.appliesPreferredTrackTransform = true
-        generator.maximumSize = CGSize(width: 400, height: 720)
-
-        // Try multiple times to get a non-black frame
-        let times: [CMTime] = [
-            CMTime(seconds: 2, preferredTimescale: 600),
-            CMTime(seconds: 1, preferredTimescale: 600),
-            CMTime(seconds: 0.5, preferredTimescale: 600),
-        ]
-        for time in times {
-            if let cgImage = try? generator.copyCGImage(at: time, actualTime: nil) {
-                let image = UIImage(cgImage: cgImage)
-                thumbnailCache[videoName] = image
-                return image
-            }
-        }
-
-        return nil
-    }
-
-    // MARK: - Image Preview
-
-    private static var imageCache: [String: UIImage] = [:]
-
-    private static func imagePreview(named imageName: String) -> UIImage? {
-        if let cached = imageCache[imageName] {
-            return cached
-        }
-
-        guard let uiImage = SanctuaryBackground.loadImage(named: imageName) else {
-            return nil
-        }
-
-        // Downsample for picker preview
-        let maxSize: CGFloat = 300
-        let scale = min(maxSize / uiImage.size.width, maxSize / uiImage.size.height, 1.0)
-        let newSize = CGSize(width: uiImage.size.width * scale, height: uiImage.size.height * scale)
-        let renderer = UIGraphicsImageRenderer(size: newSize)
-        let thumbnail = renderer.image { _ in
-            uiImage.draw(in: CGRect(origin: .zero, size: newSize))
-        }
-
-        imageCache[imageName] = thumbnail
-        return thumbnail
     }
 }
