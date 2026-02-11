@@ -8,6 +8,8 @@ enum SharedModelContainer {
             PrayerContent.self,
             ContentCollection.self,
             ChatMessage.self,
+            Conversation.self,
+            SavedBibleVerse.self,
         ])
         let config = ModelConfiguration(
             "BiblePlus",

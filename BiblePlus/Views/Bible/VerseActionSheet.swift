@@ -3,9 +3,15 @@ import SwiftUI
 struct VerseActionSheet: View {
     let verse: VerseItem
     let reference: String
+    let isSaved: Bool
+    let currentHighlight: VerseHighlightColor?
     let onExplain: () -> Void
     let onCopy: () -> Void
     let onShare: () -> Void
+    let onSave: () -> Void
+    let onUnsave: () -> Void
+    let onHighlight: (VerseHighlightColor) -> Void
+    let onRemoveHighlight: () -> Void
     let onDismiss: () -> Void
     @Environment(\.bpPalette) private var palette
 
@@ -33,11 +39,23 @@ struct VerseActionSheet: View {
             .padding(.horizontal, 24)
             .padding(.vertical, 16)
 
+            // Highlight color dots
+            highlightColorRow
+                .padding(.horizontal, 24)
+                .padding(.bottom, 12)
+
             Divider()
                 .overlay(palette.border)
 
             // Action buttons
             VStack(spacing: 0) {
+                // Save / Unsave
+                if isSaved {
+                    actionRow(icon: "bookmark.fill", title: "Unsave Verse", action: onUnsave)
+                } else {
+                    actionRow(icon: "bookmark", title: "Save Verse", action: onSave)
+                }
+
                 actionRow(icon: "bubble.left.and.bubble.right", title: "Explain This Verse", action: onExplain)
                 actionRow(icon: "doc.on.doc", title: "Copy", action: onCopy)
                 actionRow(icon: "square.and.arrow.up", title: "Share", action: onShare)
@@ -58,6 +76,34 @@ struct VerseActionSheet: View {
         }
         .background(palette.surfaceElevated)
         .clipShape(RoundedRectangle(cornerRadius: 16))
+    }
+
+    // MARK: - Highlight Color Row
+
+    private var highlightColorRow: some View {
+        HStack(spacing: 16) {
+            ForEach(VerseHighlightColor.allCases) { color in
+                Button {
+                    if currentHighlight == color {
+                        onRemoveHighlight()
+                    } else {
+                        onHighlight(color)
+                    }
+                } label: {
+                    ZStack {
+                        Circle()
+                            .fill(Color(hex: color.dotColor))
+                            .frame(width: 32, height: 32)
+
+                        if currentHighlight == color {
+                            Image(systemName: "checkmark")
+                                .font(.system(size: 12, weight: .bold))
+                                .foregroundStyle(.white)
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private func actionRow(icon: String, title: String, action: @escaping () -> Void) -> some View {

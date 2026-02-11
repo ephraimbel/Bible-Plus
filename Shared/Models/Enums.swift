@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 // MARK: - Faith Level
 
@@ -501,6 +502,8 @@ enum BackgroundCollection: String, CaseIterable, Identifiable {
     case abstractGradient
     case sacredArt
     case seasonal
+    case nightSky
+    case serene
     case animated
 
     var id: String { rawValue }
@@ -511,6 +514,8 @@ enum BackgroundCollection: String, CaseIterable, Identifiable {
         case .abstractGradient: "Abstract Gradients"
         case .sacredArt: "Sacred Art"
         case .seasonal: "Seasonal"
+        case .nightSky: "Night Sky"
+        case .serene: "Serene"
         case .animated: "Animated"
         }
     }
@@ -518,7 +523,7 @@ enum BackgroundCollection: String, CaseIterable, Identifiable {
     var isProOnly: Bool {
         switch self {
         case .nature, .abstractGradient: false
-        case .sacredArt, .seasonal, .animated: true
+        case .sacredArt, .seasonal, .nightSky, .serene, .animated: true
         }
     }
 }
@@ -535,6 +540,12 @@ struct SanctuaryBackground: Identifiable, Hashable {
     let isProOnly: Bool
 
     var hasVideo: Bool { videoFileName != nil }
+    var hasImage: Bool { imageName != nil }
+
+    static func loadImage(named name: String) -> UIImage? {
+        guard let url = Bundle.main.url(forResource: name, withExtension: "jpg") else { return nil }
+        return UIImage(contentsOfFile: url.path)
+    }
 
     init(id: String, name: String, collection: BackgroundCollection, gradientColors: [String], imageName: String? = nil, videoFileName: String? = nil, isProOnly: Bool = false) {
         self.id = id
@@ -623,6 +634,38 @@ struct SanctuaryBackground: Identifiable, Hashable {
             SanctuaryBackground(id: "ocean-waves", name: "Ocean Waves", collection: .animated, gradientColors: ["0D4F6B", "1A7A9E", "3AACCC"], videoFileName: "ocean-waves", isProOnly: true),
             SanctuaryBackground(id: "sunset-clouds", name: "Sunset Clouds", collection: .animated, gradientColors: ["8B3A1A", "C96B3A", "E8A060"], videoFileName: "sunset-clouds", isProOnly: true),
             SanctuaryBackground(id: "mountain-clouds", name: "Mountain Clouds", collection: .animated, gradientColors: ["3A4A5A", "5A6A7A", "8A9AAA"], videoFileName: "mountain-clouds", isProOnly: true),
+            // New animated videos
+            SanctuaryBackground(id: "forest-sunlight", name: "Forest Sunlight", collection: .animated, gradientColors: ["1A3D0A", "2D6B1A", "5C9A3A"], videoFileName: "forest-sunlight", isProOnly: true),
+            SanctuaryBackground(id: "gentle-waterfall", name: "Gentle Waterfall", collection: .animated, gradientColors: ["1A4A5C", "2D7A9A", "5AACCC"], videoFileName: "gentle-waterfall", isProOnly: true),
+            SanctuaryBackground(id: "misty-mountains", name: "Misty Mountains", collection: .animated, gradientColors: ["4A5A6A", "6A7A8A", "9AACBC"], videoFileName: "misty-mountains", isProOnly: true),
+            SanctuaryBackground(id: "cherry-blossoms", name: "Cherry Blossoms", collection: .animated, gradientColors: ["8B3060", "C06090", "E8A0BF"], videoFileName: "cherry-blossoms", isProOnly: true),
+            SanctuaryBackground(id: "autumn-leaves", name: "Autumn Leaves", collection: .animated, gradientColors: ["6B2D10", "A05020", "D48040"], videoFileName: "autumn-leaves", isProOnly: true),
+            SanctuaryBackground(id: "wheat-field-wind", name: "Wheat Field", collection: .animated, gradientColors: ["6B5A1A", "9A8430", "C8B060"], videoFileName: "wheat-field-wind", isProOnly: true),
+            SanctuaryBackground(id: "morning-fog-lake", name: "Morning Fog Lake", collection: .animated, gradientColors: ["3A4A5A", "5A7A8A", "8AACBC"], videoFileName: "morning-fog-lake", isProOnly: true),
+            SanctuaryBackground(id: "desert-dunes", name: "Desert Dunes", collection: .animated, gradientColors: ["8B6A3A", "B89060", "D8B888"], videoFileName: "desert-dunes", isProOnly: true),
+        ])
+
+        // MARK: Night Sky (4 — all Pro)
+        bgs.append(contentsOf: [
+            SanctuaryBackground(id: "northern-aurora", name: "Northern Aurora", collection: .nightSky, gradientColors: ["0B1D0B", "0D3B2E", "38C98B"], videoFileName: "northern-aurora", isProOnly: true),
+            SanctuaryBackground(id: "starry-timelapse", name: "Starry Timelapse", collection: .nightSky, gradientColors: ["0A0A1A", "0D1B3D", "1A2D5E"], videoFileName: "starry-timelapse", isProOnly: true),
+            SanctuaryBackground(id: "moonlit-clouds", name: "Moonlit Clouds", collection: .nightSky, gradientColors: ["0A1628", "1A2D50", "3A4D70"], videoFileName: "moonlit-clouds", isProOnly: true),
+            SanctuaryBackground(id: "starry-mountains-img", name: "Starry Mountains", collection: .nightSky, gradientColors: ["0A0A1A", "14142D", "1E1E40"], imageName: "starry-mountains", isProOnly: true),
+        ])
+
+        // MARK: Serene (11 — all Pro)
+        bgs.append(contentsOf: [
+            SanctuaryBackground(id: "snow-falling", name: "Gentle Snow", collection: .serene, gradientColors: ["B0BEC5", "CFD8DC", "ECEFF1"], videoFileName: "snow-falling", isProOnly: true),
+            SanctuaryBackground(id: "rain-on-leaves", name: "Rain on Leaves", collection: .serene, gradientColors: ["1A3D1A", "2D5A2D", "4A7A4A"], videoFileName: "rain-on-leaves", isProOnly: true),
+            SanctuaryBackground(id: "underwater-light", name: "Underwater Light", collection: .serene, gradientColors: ["0A2D5C", "1A5A8A", "2A8AB8"], videoFileName: "underwater-light", isProOnly: true),
+            SanctuaryBackground(id: "fireplace", name: "Warm Fireplace", collection: .serene, gradientColors: ["3D1A08", "6B3010", "9A5020"], videoFileName: "fireplace", isProOnly: true),
+            SanctuaryBackground(id: "mountain-sunrise-img", name: "Mountain Sunrise", collection: .serene, gradientColors: ["C2842F", "D4A054", "F0D8A0"], imageName: "mountain-sunrise", isProOnly: true),
+            SanctuaryBackground(id: "forest-path-img", name: "Forest Path", collection: .serene, gradientColors: ["1A3D0A", "3A6B2A", "6A9A5A"], imageName: "forest-path", isProOnly: true),
+            SanctuaryBackground(id: "calm-lake-img", name: "Calm Lake", collection: .serene, gradientColors: ["2A4A6A", "4A7A9A", "7AACCC"], imageName: "calm-lake", isProOnly: true),
+            SanctuaryBackground(id: "ocean-sunset-img", name: "Ocean Sunset", collection: .serene, gradientColors: ["8B3A1A", "C96B3A", "E8A060"], imageName: "ocean-sunset", isProOnly: true),
+            SanctuaryBackground(id: "misty-forest-img", name: "Misty Forest", collection: .serene, gradientColors: ["2D4A2D", "4A6A4A", "7A9A7A"], imageName: "misty-forest", isProOnly: true),
+            SanctuaryBackground(id: "green-meadow-img", name: "Green Meadow", collection: .serene, gradientColors: ["3A6B35", "5C9454", "A8D5A0"], imageName: "green-meadow", isProOnly: true),
+            SanctuaryBackground(id: "tropical-waterfall-img", name: "Tropical Falls", collection: .serene, gradientColors: ["1A4A3A", "2D7A5A", "4AAA7A"], imageName: "tropical-waterfall", isProOnly: true),
         ])
 
         return bgs
@@ -637,6 +680,58 @@ struct SanctuaryBackground: Identifiable, Hashable {
     }
 }
 
+// MARK: - Verse Highlight Color
+
+enum VerseHighlightColor: String, Codable, CaseIterable, Identifiable {
+    case gold
+    case blue
+    case green
+    case pink
+    case purple
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .gold: "Gold"
+        case .blue: "Blue"
+        case .green: "Green"
+        case .pink: "Pink"
+        case .purple: "Purple"
+        }
+    }
+
+    var lightTint: String {
+        switch self {
+        case .gold: "FFF3D0"
+        case .blue: "D6EEFF"
+        case .green: "D4F5D4"
+        case .pink: "FFD6E8"
+        case .purple: "E8D6FF"
+        }
+    }
+
+    var darkTint: String {
+        switch self {
+        case .gold: "4A3F1F"
+        case .blue: "1E3448"
+        case .green: "1E3D1E"
+        case .pink: "3D1E2E"
+        case .purple: "2E1E3D"
+        }
+    }
+
+    var dotColor: String {
+        switch self {
+        case .gold: "C9A96E"
+        case .blue: "5B9BD5"
+        case .green: "6BBF6B"
+        case .pink: "E88AAF"
+        case .purple: "9B7BD5"
+        }
+    }
+}
+
 // MARK: - Theme Definition
 
 struct ThemeDefinition: Identifiable, Hashable {
@@ -644,6 +739,19 @@ struct ThemeDefinition: Identifiable, Hashable {
     let name: String
     let previewGradient: [String] // hex color strings
     let isProOnly: Bool
+
+    /// Maps each theme to a default SanctuaryBackground for unified background system
+    var defaultBackgroundID: String {
+        switch id {
+        case "sunrise-mountains": return "warm-gold"
+        case "midnight-gold": return "midnight-blue"
+        case "ocean-peace": return "ocean-deep"
+        case "minimal-cream": return "soft-cream"
+        case "forest-mist": return "forest-dawn"
+        case "starry-night": return "starfield"
+        default: return "warm-gold"
+        }
+    }
 
     static let allThemes: [ThemeDefinition] = [
         ThemeDefinition(

@@ -75,6 +75,8 @@ private struct BibleContentView: View {
                     errorMessage: viewModel.errorMessage,
                     isShowingOfflineFallback: viewModel.isShowingOfflineFallback,
                     offlineTranslationName: viewModel.translationName,
+                    savedVerseNumbers: viewModel.savedVerseNumbers,
+                    highlightColors: viewModel.highlightColors,
                     onVerseTap: { viewModel.selectVerse($0) },
                     onRetry: { viewModel.retryLoading() }
                 )
@@ -107,6 +109,8 @@ private struct BibleContentView: View {
                 VerseActionSheet(
                     verse: verse,
                     reference: viewModel.verseReference(for: verse),
+                    isSaved: viewModel.isVerseSaved(verse.number),
+                    currentHighlight: viewModel.highlightColor(for: verse.number),
                     onExplain: {
                         explainPrompt = viewModel.explainVersePrompt(for: verse)
                         createExplainConversation()
@@ -120,6 +124,20 @@ private struct BibleContentView: View {
                     onShare: {
                         shareText = viewModel.shareText(for: verse)
                         viewModel.selectedVerse = nil
+                    },
+                    onSave: {
+                        viewModel.saveVerse(verse)
+                        viewModel.selectedVerse = nil
+                    },
+                    onUnsave: {
+                        viewModel.unsaveVerse(verse)
+                        viewModel.selectedVerse = nil
+                    },
+                    onHighlight: { color in
+                        viewModel.highlightVerse(verse, color: color)
+                    },
+                    onRemoveHighlight: {
+                        viewModel.removeHighlight(verse)
                     },
                     onDismiss: {
                         viewModel.selectedVerse = nil

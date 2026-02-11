@@ -8,9 +8,12 @@ struct ChapterReaderView: View {
     let errorMessage: String?
     let isShowingOfflineFallback: Bool
     let offlineTranslationName: String
+    let savedVerseNumbers: Set<Int>
+    let highlightColors: [Int: VerseHighlightColor]
     let onVerseTap: (VerseItem) -> Void
     let onRetry: () -> Void
     @Environment(\.bpPalette) private var palette
+    @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
         if isLoading && verses.isEmpty {
@@ -47,15 +50,31 @@ struct ChapterReaderView: View {
 
     private func verseRow(number: Int, text: String) -> some View {
         let isSelected = selectedVerseNumber == number
+        let highlight = highlightColors[number]
+        let isSaved = savedVerseNumbers.contains(number)
 
         return Button {
             onVerseTap(VerseItem(number: number, text: text))
         } label: {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
-                Text("\(number)")
-                    .font(BPFont.reference)
-                    .foregroundStyle(palette.accent)
-                    .frame(width: 24, alignment: .trailing)
+                // Verse number with optional bookmark indicator
+                ZStack(alignment: .topTrailing) {
+                    Text("\(number)")
+                        .font(BPFont.reference)
+                        .foregroundStyle(palette.accent)
+                        .frame(width: 24, alignment: .trailing)
+
+                    if isSaved {
+                        Image(systemName: "bookmark.fill")
+                            .font(.system(size: 6))
+                            .foregroundStyle(
+                                highlight != nil
+                                    ? Color(hex: highlight!.dotColor)
+                                    : palette.accent
+                            )
+                            .offset(x: 6, y: -2)
+                    }
+                }
 
                 Text(text)
                     .font(BPFont.bibleMedium)
@@ -67,10 +86,21 @@ struct ChapterReaderView: View {
             .padding(.horizontal, 8)
             .background(
                 RoundedRectangle(cornerRadius: 8)
-                    .fill(isSelected ? palette.accentSoft : .clear)
+                    .fill(verseBackground(isSelected: isSelected, highlight: highlight))
             )
         }
         .buttonStyle(.plain)
+    }
+
+    private func verseBackground(isSelected: Bool, highlight: VerseHighlightColor?) -> Color {
+        if isSelected {
+            return palette.accentSoft
+        }
+        if let highlight {
+            let hex = colorScheme == .dark ? highlight.darkTint : highlight.lightTint
+            return Color(hex: hex)
+        }
+        return .clear
     }
 
     // MARK: - Loading State

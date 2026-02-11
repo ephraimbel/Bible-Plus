@@ -32,6 +32,24 @@ final class BibleReaderViewModel {
     var verses: [(number: Int, text: String)] = []
     var currentTranslation: BibleTranslation = .kjv
 
+    // MARK: - Saved Verses
+
+    var savedVerseMap: [Int: SavedBibleVerse] = [:]
+
+    var savedVerseNumbers: Set<Int> {
+        Set(savedVerseMap.keys)
+    }
+
+    var highlightColors: [Int: VerseHighlightColor] {
+        var map: [Int: VerseHighlightColor] = [:]
+        for (number, saved) in savedVerseMap {
+            if let color = saved.highlightColor {
+                map[number] = color
+            }
+        }
+        return map
+    }
+
     private let repository = BibleRepository.shared
     private let modelContext: ModelContext
     private var loadTask: Task<Void, Never>?
@@ -162,6 +180,82 @@ final class BibleReaderViewModel {
         return "Help me understand what God is saying in \(ref): \"\(verse.text)\" — what did this mean in its original context, and what does it mean for my life today?"
     }
 
+    // MARK: - Save & Highlight
+
+    func isVerseSaved(_ number: Int) -> Bool {
+        savedVerseMap[number] != nil
+    }
+
+    func highlightColor(for number: Int) -> VerseHighlightColor? {
+        savedVerseMap[number]?.highlightColor
+    }
+
+    func saveVerse(_ verse: VerseItem) {
+        guard savedVerseMap[verse.number] == nil else { return }
+        let saved = SavedBibleVerse(
+            bookID: selectedBook.id,
+            bookName: selectedBook.name,
+            chapter: selectedChapter,
+            verseNumber: verse.number,
+            text: verse.text,
+            translation: currentTranslation.displayName
+        )
+        modelContext.insert(saved)
+        try? modelContext.save()
+        savedVerseMap[verse.number] = saved
+        HapticService.success()
+    }
+
+    func unsaveVerse(_ verse: VerseItem) {
+        guard let saved = savedVerseMap[verse.number] else { return }
+        modelContext.delete(saved)
+        try? modelContext.save()
+        savedVerseMap.removeValue(forKey: verse.number)
+        HapticService.lightImpact()
+    }
+
+    func highlightVerse(_ verse: VerseItem, color: VerseHighlightColor) {
+        if let saved = savedVerseMap[verse.number] {
+            saved.highlightColor = color
+            saved.updatedAt = Date()
+        } else {
+            let saved = SavedBibleVerse(
+                bookID: selectedBook.id,
+                bookName: selectedBook.name,
+                chapter: selectedChapter,
+                verseNumber: verse.number,
+                text: verse.text,
+                translation: currentTranslation.displayName,
+                highlightColor: color
+            )
+            modelContext.insert(saved)
+            savedVerseMap[verse.number] = saved
+        }
+        try? modelContext.save()
+        HapticService.lightImpact()
+    }
+
+    func removeHighlight(_ verse: VerseItem) {
+        guard let saved = savedVerseMap[verse.number] else { return }
+        saved.highlightColor = nil
+        saved.updatedAt = Date()
+        try? modelContext.save()
+    }
+
+    private func loadSavedVerses() {
+        let bookID = selectedBook.id
+        let chapter = selectedChapter
+        let descriptor = FetchDescriptor<SavedBibleVerse>(
+            predicate: #Predicate { $0.bookID == bookID && $0.chapter == chapter }
+        )
+        let results = (try? modelContext.fetch(descriptor)) ?? []
+        var map: [Int: SavedBibleVerse] = [:]
+        for saved in results {
+            map[saved.verseNumber] = saved
+        }
+        savedVerseMap = map
+    }
+
     // MARK: - Private
 
     private func loadChapter() {
@@ -181,6 +275,7 @@ final class BibleReaderViewModel {
                 guard !Task.isCancelled else { return }
                 verses = fetched
                 isLoading = false
+                loadSavedVerses()
             } catch {
                 guard !Task.isCancelled else { return }
 
@@ -194,6 +289,7 @@ final class BibleReaderViewModel {
                     verses = fallback
                     isShowingOfflineFallback = currentTranslation != .kjv
                     isLoading = false
+                    loadSavedVerses()
                 } else {
                     verses = []
                     errorMessage = error.localizedDescription

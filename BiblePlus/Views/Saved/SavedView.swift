@@ -31,6 +31,7 @@ private struct SavedContentView: View {
         VStack(spacing: 0) {
             Picker("Tab", selection: $viewModel.selectedTab) {
                 Text("Favorites").tag(SavedTab.favorites)
+                Text("Verses").tag(SavedTab.verses)
                 Text("Collections").tag(SavedTab.collections)
             }
             .pickerStyle(.segmented)
@@ -40,6 +41,8 @@ private struct SavedContentView: View {
             switch viewModel.selectedTab {
             case .favorites:
                 favoritesTab
+            case .verses:
+                versesTab
             case .collections:
                 collectionsTab
             }
@@ -84,6 +87,89 @@ private struct SavedContentView: View {
                 .foregroundStyle(palette.textPrimary)
 
             Text("Double-tap or heart any card\nin the feed to save it here.")
+                .font(BPFont.body)
+                .foregroundStyle(palette.textMuted)
+                .multilineTextAlignment(.center)
+
+            Spacer()
+        }
+        .padding(.horizontal, 32)
+    }
+
+    // MARK: - Verses Tab
+
+    @ViewBuilder
+    private var versesTab: some View {
+        let items = viewModel.savedVerses
+        if items.isEmpty {
+            emptyVerses
+        } else {
+            List {
+                ForEach(items) { verse in
+                    savedVerseRow(verse)
+                }
+                .onDelete { offsets in
+                    for index in offsets {
+                        viewModel.deleteSavedVerse(items[index])
+                    }
+                }
+            }
+            .listStyle(.insetGrouped)
+        }
+    }
+
+    private func savedVerseRow(_ verse: SavedBibleVerse) -> some View {
+        HStack(spacing: 12) {
+            Image(systemName: "bookmark.fill")
+                .font(.system(size: 14))
+                .foregroundStyle(
+                    verse.highlightColor != nil
+                        ? Color(hex: verse.highlightColor!.dotColor)
+                        : palette.accent
+                )
+                .frame(width: 20)
+
+            VStack(alignment: .leading, spacing: 4) {
+                HStack {
+                    Text("\(verse.bookName) \(verse.chapter):\(verse.verseNumber)")
+                        .font(BPFont.button)
+                        .foregroundStyle(palette.textPrimary)
+
+                    Spacer()
+
+                    Text(verse.translation)
+                        .font(BPFont.caption)
+                        .foregroundStyle(palette.textMuted)
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 2)
+                        .background(
+                            Capsule()
+                                .fill(palette.surface)
+                        )
+                }
+
+                Text(verse.text)
+                    .font(BPFont.body)
+                    .foregroundStyle(palette.textMuted)
+                    .lineLimit(2)
+            }
+        }
+        .padding(.vertical, 4)
+    }
+
+    private var emptyVerses: some View {
+        VStack(spacing: 16) {
+            Spacer()
+
+            Image(systemName: "book.closed")
+                .font(.system(size: 48, weight: .thin))
+                .foregroundStyle(palette.accent)
+
+            Text("No Saved Verses Yet")
+                .font(BPFont.headingSmall)
+                .foregroundStyle(palette.textPrimary)
+
+            Text("Tap any verse in the Bible reader\nand save it to find it here.")
                 .font(BPFont.body)
                 .foregroundStyle(palette.textMuted)
                 .multilineTextAlignment(.center)

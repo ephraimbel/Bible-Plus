@@ -3,6 +3,7 @@ import SwiftData
 
 enum SavedTab: String, CaseIterable {
     case favorites
+    case verses
     case collections
 }
 
@@ -36,6 +37,20 @@ final class SavedViewModel {
             sortBy: [SortDescriptor(\.createdAt, order: .reverse)]
         )
         return (try? modelContext.fetch(descriptor)) ?? []
+    }
+
+    // MARK: - Saved Verses
+
+    var savedVerses: [SavedBibleVerse] {
+        let descriptor = FetchDescriptor<SavedBibleVerse>(
+            sortBy: [SortDescriptor(\.createdAt, order: .reverse)]
+        )
+        return (try? modelContext.fetch(descriptor)) ?? []
+    }
+
+    func deleteSavedVerse(_ verse: SavedBibleVerse) {
+        modelContext.delete(verse)
+        try? modelContext.save()
     }
 
     // MARK: - Collections
