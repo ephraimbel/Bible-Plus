@@ -117,11 +117,21 @@ private struct BibleContentView: View {
             }
         }
 
+        // Resume from last-read verse if available
+        let startIndex: Int
+        if let lastVerse = viewModel.lastReadVerseNumber,
+           let idx = viewModel.verses.firstIndex(where: { $0.number == lastVerse }) {
+            startIndex = idx
+        } else {
+            startIndex = 0
+        }
+
         audioService.play(
             verses: viewModel.verses,
             book: viewModel.selectedBook,
             chapter: viewModel.selectedChapter,
             translation: viewModel.currentTranslation,
+            startingFromVerseIndex: startIndex,
             versesProvider: versesProvider
         )
     }
@@ -202,6 +212,7 @@ private struct BibleContentView: View {
                     savedVerseNumbers: viewModel.savedVerseNumbers,
                     highlightColors: viewModel.highlightColors,
                     audioVerseIndex: audioService.isPlaying ? audioService.currentVerseIndex : nil,
+                    lastReadVerseNumber: viewModel.lastReadVerseNumber,
                     readerFontSize: viewModel.readerFontSize,
                     readerFontDesign: viewModel.readerFontDesign,
                     readerLineSpacing: viewModel.readerLineSpacing,
@@ -229,6 +240,7 @@ private struct BibleContentView: View {
                         savedVerseNumbers: cachedSavedVerseNumbers,
                         highlightColors: cachedHighlightColors,
                         audioVerseIndex: nil,
+                        lastReadVerseNumber: nil,
                         readerFontSize: viewModel.readerFontSize,
                         readerFontDesign: viewModel.readerFontDesign,
                         readerLineSpacing: viewModel.readerLineSpacing,
@@ -602,6 +614,19 @@ private struct BibleContentView: View {
                 chapter: viewModel.selectedChapter,
                 translation: viewModel.currentTranslation
             )
+        }
+        .onChange(of: audioService.currentVerseIndex) { _, newIndex in
+            guard audioService.isPlaying, newIndex < viewModel.verses.count else { return }
+            let verseNumber = viewModel.verses[newIndex].number
+            viewModel.updateLastReadVerse(verseNumber)
+        }
+        .onChange(of: audioService.isPaused) { _, paused in
+            if paused {
+                let idx = audioService.currentVerseIndex
+                guard idx < viewModel.verses.count else { return }
+                let verseNumber = viewModel.verses[idx].number
+                viewModel.updateLastReadVerse(verseNumber)
+            }
         }
     }
 }

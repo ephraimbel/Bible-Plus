@@ -51,6 +51,10 @@ final class BibleReaderViewModel {
     var readerFontStyle: ReaderFontStyle = .serif
     var readerLineSpacing: Double = 6
 
+    // MARK: - Last Read Position
+
+    var lastReadVerseNumber: Int? = nil
+
     var readerFontDesign: Font.Design {
         readerFontStyle == .serif ? .serif : .rounded
     }
@@ -88,6 +92,13 @@ final class BibleReaderViewModel {
             readerFontSize = profile.readerFontSize
             readerFontStyle = profile.readerFontStyle
             readerLineSpacing = profile.readerLineSpacing
+
+            // Restore last read position
+            if let book = BibleData.allBooks.first(where: { $0.id == profile.lastReadBookID }) {
+                selectedBook = book
+                selectedChapter = min(profile.lastReadChapter, book.chapterCount)
+                lastReadVerseNumber = profile.lastReadVerseNumber
+            }
         }
         repository.setTranslation(currentTranslation)
         loadChapter()
@@ -99,6 +110,7 @@ final class BibleReaderViewModel {
 
         selectedBook = book
         selectedChapter = 1
+        lastReadVerseNumber = nil
         showBookPicker = false
         loadChapter()
     }
@@ -106,12 +118,14 @@ final class BibleReaderViewModel {
     func selectChapter(_ chapter: Int) {
 
         selectedChapter = chapter
+        lastReadVerseNumber = nil
         showBookPicker = false
         loadChapter()
     }
 
     func goToNextChapter() {
 
+        lastReadVerseNumber = nil
         if selectedChapter < selectedBook.chapterCount {
             selectedChapter += 1
         } else {
@@ -126,6 +140,7 @@ final class BibleReaderViewModel {
 
     func goToPreviousChapter() {
 
+        lastReadVerseNumber = nil
         if selectedChapter > 1 {
             selectedChapter -= 1
         } else {
@@ -196,6 +211,30 @@ final class BibleReaderViewModel {
             profile.readerFontSize = readerFontSize
             profile.readerFontStyle = readerFontStyle
             profile.readerLineSpacing = readerLineSpacing
+            profile.updatedAt = Date()
+            try? modelContext.save()
+        }
+    }
+
+    // MARK: - Read Position Persistence
+
+    func persistReadPosition() {
+        let descriptor = FetchDescriptor<UserProfile>()
+        if let profile = try? modelContext.fetch(descriptor).first {
+            profile.lastReadBookID = selectedBook.id
+            profile.lastReadChapter = selectedChapter
+            profile.updatedAt = Date()
+            try? modelContext.save()
+        }
+    }
+
+    func updateLastReadVerse(_ verseNumber: Int) {
+        lastReadVerseNumber = verseNumber
+        let descriptor = FetchDescriptor<UserProfile>()
+        if let profile = try? modelContext.fetch(descriptor).first {
+            profile.lastReadBookID = selectedBook.id
+            profile.lastReadChapter = selectedChapter
+            profile.lastReadVerseNumber = verseNumber
             profile.updatedAt = Date()
             try? modelContext.save()
         }
@@ -347,6 +386,7 @@ final class BibleReaderViewModel {
                 verses = fetched
                 isLoading = false
                 loadSavedVerses()
+                persistReadPosition()
             } catch {
                 guard !Task.isCancelled else { return }
 
@@ -361,6 +401,7 @@ final class BibleReaderViewModel {
                     isShowingOfflineFallback = currentTranslation != .kjv
                     isLoading = false
                     loadSavedVerses()
+                    persistReadPosition()
                 } else {
                     verses = []
                     errorMessage = error.localizedDescription

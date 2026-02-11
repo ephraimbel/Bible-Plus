@@ -24,6 +24,9 @@ final class UserProfile {
     var readerFontSize: Double
     var readerFontStyleRaw: String
     var readerLineSpacing: Double
+    var lastReadBookID: String
+    var lastReadChapter: Int
+    var lastReadVerseNumber: Int
     var createdAt: Date
     var updatedAt: Date
 
@@ -53,7 +56,10 @@ final class UserProfile {
         selectedBibleVoiceID: String = BibleVoice.onyx.rawValue,
         readerFontSize: Double = 20,
         readerFontStyle: ReaderFontStyle = .serif,
-        readerLineSpacing: Double = 6
+        readerLineSpacing: Double = 6,
+        lastReadBookID: String = "genesis",
+        lastReadChapter: Int = 1,
+        lastReadVerseNumber: Int = 1
     ) {
         self.id = id
         self.firstName = firstName
@@ -76,6 +82,9 @@ final class UserProfile {
         self.readerFontSize = readerFontSize
         self.readerFontStyleRaw = readerFontStyle.rawValue
         self.readerLineSpacing = readerLineSpacing
+        self.lastReadBookID = lastReadBookID
+        self.lastReadChapter = lastReadChapter
+        self.lastReadVerseNumber = lastReadVerseNumber
         self.createdAt = Date()
         self.updatedAt = Date()
     }

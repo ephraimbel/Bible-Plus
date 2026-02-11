@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import AVFoundation
 
 struct ImmersiveListeningView: View {
     @Bindable var viewModel: BibleReaderViewModel
@@ -144,24 +145,14 @@ struct ImmersiveListeningView: View {
                 Button {
                     dismiss()
                 } label: {
-                    Image(systemName: "xmark")
-                        .font(.system(size: 15, weight: .medium))
-                        .foregroundStyle(.white.opacity(0.7))
-                        .frame(width: 34, height: 34)
+                    Image(systemName: "chevron.left")
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundStyle(.white.opacity(0.85))
+                        .frame(width: 38, height: 38)
                         .background(.ultraThinMaterial.opacity(0.5))
                         .clipShape(Circle())
                 }
                 Spacer()
-                Button {
-                    showBackgroundPicker = true
-                } label: {
-                    Image(systemName: "photo.on.rectangle")
-                        .font(.system(size: 15, weight: .medium))
-                        .foregroundStyle(.white.opacity(0.7))
-                        .frame(width: 34, height: 34)
-                        .background(.ultraThinMaterial.opacity(0.5))
-                        .clipShape(Circle())
-                }
             }
         }
         .padding(.horizontal, 20)
@@ -291,9 +282,20 @@ struct ImmersiveListeningView: View {
                 }
                 .disabled(displayedVerseIndex >= viewModel.verses.count - 1)
 
-                // Spacer to balance layout
-                Color.clear
-                    .frame(width: 44, height: 32)
+                // Background picker
+                Button {
+                    showBackgroundPicker = true
+                } label: {
+                    Image(systemName: "photo.on.rectangle")
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundStyle(.white.opacity(0.8))
+                        .frame(width: 44, height: 32)
+                        .background(
+                            Capsule()
+                                .fill(.ultraThinMaterial)
+                                .environment(\.colorScheme, .dark)
+                        )
+                }
             }
 
             // Verse counter
@@ -401,6 +403,41 @@ struct ImmersiveListeningView: View {
     }
 }
 
+// MARK: - Filter Type
+
+private enum ListeningBackgroundFilter: CaseIterable, Identifiable {
+    case all, animated, images, gradients
+
+    var id: String { displayName }
+
+    var displayName: String {
+        switch self {
+        case .all: "All"
+        case .animated: "Animated"
+        case .images: "Images"
+        case .gradients: "Gradients"
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .all: "square.grid.2x2"
+        case .animated: "play.circle"
+        case .images: "photo"
+        case .gradients: "paintpalette"
+        }
+    }
+
+    func matches(_ bg: SanctuaryBackground) -> Bool {
+        switch self {
+        case .all: true
+        case .animated: bg.hasVideo
+        case .images: bg.hasImage
+        case .gradients: !bg.hasVideo && !bg.hasImage
+        }
+    }
+}
+
 // MARK: - Background Picker
 
 private struct ListeningBackgroundPickerView: View {
@@ -411,6 +448,9 @@ private struct ListeningBackgroundPickerView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.bpPalette) private var palette
 
+    @State private var selectedFilter: ListeningBackgroundFilter = .all
+    @Namespace private var chipAnimation
+
     private let columns = [
         GridItem(.flexible(), spacing: 12),
         GridItem(.flexible(), spacing: 12),
@@ -418,11 +458,17 @@ private struct ListeningBackgroundPickerView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 28) {
-                    ForEach(BackgroundCollection.allCases) { collection in
-                        let backgrounds = SanctuaryBackground.backgrounds(in: collection)
-                        if !backgrounds.isEmpty {
+            VStack(spacing: 0) {
+                // Filter chips
+                filterChips
+
+                // Background grid
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 28) {
+                        ForEach(filteredCollections()) { collection in
+                            let backgrounds = filteredBackgrounds(
+                                in: SanctuaryBackground.backgrounds(in: collection)
+                            )
                             Section {
                                 LazyVGrid(columns: columns, spacing: 12) {
                                     ForEach(backgrounds) { bg in
@@ -444,8 +490,9 @@ private struct ListeningBackgroundPickerView: View {
                             }
                         }
                     }
+                    .padding(20)
+                    .animation(.easeInOut(duration: 0.25), value: selectedFilter)
                 }
-                .padding(20)
             }
             .background(palette.background)
             .navigationTitle("Backgrounds")
@@ -462,6 +509,78 @@ private struct ListeningBackgroundPickerView: View {
         .presentationBackground(palette.background)
     }
 
+    // MARK: - Filter Chips
+
+    @ViewBuilder
+    private var filterChips: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 10) {
+                ForEach(ListeningBackgroundFilter.allCases) { filter in
+                    filterChip(for: filter)
+                }
+            }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 12)
+        }
+    }
+
+    @ViewBuilder
+    private func filterChip(for filter: ListeningBackgroundFilter) -> some View {
+        let isSelected = selectedFilter == filter
+
+        Button {
+            HapticService.selection()
+            withAnimation(BPAnimation.selection) {
+                selectedFilter = filter
+            }
+        } label: {
+            HStack(spacing: 6) {
+                Image(systemName: filter.icon)
+                    .font(.system(size: 13))
+
+                Text(filter.displayName)
+                    .font(BPFont.button)
+
+                Text("\(backgroundCount(for: filter))")
+                    .font(.system(size: 12, weight: .medium, design: .rounded))
+                    .foregroundStyle(isSelected ? .white.opacity(0.7) : .secondary)
+            }
+            .foregroundStyle(isSelected ? .white : .primary)
+            .padding(.horizontal, 14)
+            .padding(.vertical, 8)
+            .background {
+                if isSelected {
+                    Capsule()
+                        .fill(palette.accent)
+                        .matchedGeometryEffect(id: "listeningActiveChip", in: chipAnimation)
+                } else {
+                    Capsule()
+                        .fill(palette.surface)
+                }
+            }
+        }
+        .buttonStyle(.plain)
+    }
+
+    // MARK: - Filtering
+
+    private func filteredCollections() -> [BackgroundCollection] {
+        BackgroundCollection.allCases.filter { collection in
+            let backgrounds = SanctuaryBackground.backgrounds(in: collection)
+            return backgrounds.contains(where: { selectedFilter.matches($0) })
+        }
+    }
+
+    private func filteredBackgrounds(in backgrounds: [SanctuaryBackground]) -> [SanctuaryBackground] {
+        backgrounds.filter { selectedFilter.matches($0) }
+    }
+
+    private func backgroundCount(for filter: ListeningBackgroundFilter) -> Int {
+        SanctuaryBackground.allBackgrounds.filter { filter.matches($0) }.count
+    }
+
+    // MARK: - Background Card
+
     @ViewBuilder
     private func backgroundCard(_ bg: SanctuaryBackground, locked: Bool) -> some View {
         Button {
@@ -471,9 +590,19 @@ private struct ListeningBackgroundPickerView: View {
             }
         } label: {
             ZStack {
-                if let imageName = bg.imageName,
-                   let uiImage = SanctuaryBackground.loadImage(named: imageName) {
-                    Image(uiImage: uiImage)
+                // Background preview (video thumbnail, image, or gradient)
+                if bg.hasVideo, let videoName = bg.videoFileName,
+                   let thumbnail = Self.videoThumbnail(for: videoName) {
+                    Image(uiImage: thumbnail)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .aspectRatio(1.2, contentMode: .fit)
+                        .clipped()
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                } else if bg.hasImage, let imageName = bg.imageName,
+                          let preview = Self.imagePreview(named: imageName) {
+                    Image(uiImage: preview)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(minWidth: 0, maxWidth: .infinity)
@@ -492,9 +621,11 @@ private struct ListeningBackgroundPickerView: View {
                         .aspectRatio(1.2, contentMode: .fit)
                 }
 
+                // Dark scrim
                 RoundedRectangle(cornerRadius: 12)
                     .fill(.black.opacity(0.2))
 
+                // Content overlay
                 VStack(spacing: 4) {
                     if locked {
                         Image(systemName: "lock.fill")
@@ -512,6 +643,7 @@ private struct ListeningBackgroundPickerView: View {
                         .lineLimit(1)
                 }
 
+                // Type badge
                 if bg.hasVideo || bg.hasImage {
                     VStack {
                         HStack {
@@ -533,5 +665,64 @@ private struct ListeningBackgroundPickerView: View {
         }
         .buttonStyle(.plain)
         .disabled(locked)
+    }
+
+    // MARK: - Video Thumbnail
+
+    private static var thumbnailCache: [String: UIImage] = [:]
+
+    private static func videoThumbnail(for videoName: String) -> UIImage? {
+        if let cached = thumbnailCache[videoName] {
+            return cached
+        }
+
+        guard let url = Bundle.main.url(forResource: videoName, withExtension: "mp4") else {
+            return nil
+        }
+
+        let asset = AVAsset(url: url)
+        let generator = AVAssetImageGenerator(asset: asset)
+        generator.appliesPreferredTrackTransform = true
+        generator.maximumSize = CGSize(width: 400, height: 720)
+
+        let times: [CMTime] = [
+            CMTime(seconds: 2, preferredTimescale: 600),
+            CMTime(seconds: 1, preferredTimescale: 600),
+            CMTime(seconds: 0.5, preferredTimescale: 600),
+        ]
+        for time in times {
+            if let cgImage = try? generator.copyCGImage(at: time, actualTime: nil) {
+                let image = UIImage(cgImage: cgImage)
+                thumbnailCache[videoName] = image
+                return image
+            }
+        }
+
+        return nil
+    }
+
+    // MARK: - Image Preview
+
+    private static var imageCache: [String: UIImage] = [:]
+
+    private static func imagePreview(named imageName: String) -> UIImage? {
+        if let cached = imageCache[imageName] {
+            return cached
+        }
+
+        guard let uiImage = SanctuaryBackground.loadImage(named: imageName) else {
+            return nil
+        }
+
+        let maxSize: CGFloat = 300
+        let scale = min(maxSize / uiImage.size.width, maxSize / uiImage.size.height, 1.0)
+        let newSize = CGSize(width: uiImage.size.width * scale, height: uiImage.size.height * scale)
+        let renderer = UIGraphicsImageRenderer(size: newSize)
+        let thumbnail = renderer.image { _ in
+            uiImage.draw(in: CGRect(origin: .zero, size: newSize))
+        }
+
+        imageCache[imageName] = thumbnail
+        return thumbnail
     }
 }

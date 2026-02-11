@@ -11,6 +11,7 @@ struct ChapterReaderView: View {
     let savedVerseNumbers: Set<Int>
     let highlightColors: [Int: VerseHighlightColor]
     let audioVerseIndex: Int?
+    let lastReadVerseNumber: Int?
     let readerFontSize: Double
     let readerFontDesign: Font.Design
     let readerLineSpacing: Double
@@ -51,6 +52,15 @@ struct ChapterReaderView: View {
                     .padding(.horizontal, 24)
                     .padding(.bottom, audioVerseIndex != nil ? 140 : 80)
                 }
+                .onAppear {
+                    if let lastRead = lastReadVerseNumber, audioVerseIndex == nil {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            withAnimation(.easeInOut(duration: 0.4)) {
+                                proxy.scrollTo(lastRead, anchor: .center)
+                            }
+                        }
+                    }
+                }
                 .onChange(of: audioVerseIndex) { _, newIndex in
                     guard let newIndex, newIndex < verses.count else { return }
                     let verseNumber = verses[newIndex].number
@@ -68,6 +78,7 @@ struct ChapterReaderView: View {
         let isSaved = savedVerseNumbers.contains(number)
         let isAudioActive = audioVerseIndex != nil
             && (verses.firstIndex(where: { $0.number == number }).map { $0 == audioVerseIndex } ?? false)
+        let isLastRead = lastReadVerseNumber == number && !isAudioActive
 
         return Button {
             onVerseTap(VerseItem(number: number, text: text))
@@ -102,12 +113,17 @@ struct ChapterReaderView: View {
             .padding(.horizontal, 8)
             .background(
                 RoundedRectangle(cornerRadius: 8)
-                    .fill(verseBackground(isSelected: isSelected, highlight: highlight, isAudioHighlight: isAudioActive))
+                    .fill(verseBackground(isSelected: isSelected, highlight: highlight, isAudioHighlight: isAudioActive, isLastRead: isLastRead))
             )
             .overlay(alignment: .leading) {
                 if isAudioActive {
                     RoundedRectangle(cornerRadius: 2)
                         .fill(palette.accent)
+                        .frame(width: 3)
+                        .padding(.vertical, 4)
+                } else if isLastRead {
+                    RoundedRectangle(cornerRadius: 2)
+                        .fill(palette.accent.opacity(0.5))
                         .frame(width: 3)
                         .padding(.vertical, 4)
                 }
@@ -116,7 +132,7 @@ struct ChapterReaderView: View {
         .buttonStyle(.plain)
     }
 
-    private func verseBackground(isSelected: Bool, highlight: VerseHighlightColor?, isAudioHighlight: Bool) -> Color {
+    private func verseBackground(isSelected: Bool, highlight: VerseHighlightColor?, isAudioHighlight: Bool, isLastRead: Bool = false) -> Color {
         if isAudioHighlight {
             return palette.accent.opacity(0.15)
         }
@@ -126,6 +142,9 @@ struct ChapterReaderView: View {
         if let highlight {
             let hex = colorScheme == .dark ? highlight.darkTint : highlight.lightTint
             return Color(hex: hex)
+        }
+        if isLastRead {
+            return palette.accent.opacity(0.08)
         }
         return .clear
     }
