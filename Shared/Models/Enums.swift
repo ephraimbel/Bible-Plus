@@ -913,6 +913,9 @@ enum BibleVoice: String, CaseIterable, Identifiable, Codable {
     case echo
     case ash
     case verse
+    case fable
+    case ballad
+    case alloy
 
     // Pro — Female
     case nova
@@ -931,6 +934,9 @@ enum BibleVoice: String, CaseIterable, Identifiable, Codable {
         case .echo:    "The Shepherd"
         case .ash:     "The Narrator"
         case .verse:   "The Prophet"
+        case .fable:   "The Elder"
+        case .ballad:  "The Patriarch"
+        case .alloy:   "The Deacon"
         case .nova:    "The Comforter"
         case .shimmer: "The Psalmist"
         case .coral:   "The Guide"
@@ -944,6 +950,9 @@ enum BibleVoice: String, CaseIterable, Identifiable, Codable {
         case .echo:    "Warm & smooth"
         case .ash:     "Clear & grounded"
         case .verse:   "Dramatic & poetic"
+        case .fable:   "Weathered & wise old soul"
+        case .ballad:  "Warm & down-home country"
+        case .alloy:   "Steady & balanced"
         case .nova:    "Warm & expressive"
         case .shimmer: "Bright & melodic"
         case .coral:   "Calm & clear"
@@ -953,7 +962,7 @@ enum BibleVoice: String, CaseIterable, Identifiable, Codable {
 
     var gender: String {
         switch self {
-        case .onyx, .echo, .ash, .verse: "Male"
+        case .onyx, .echo, .ash, .verse, .fable, .ballad, .alloy: "Male"
         case .nova, .shimmer, .coral, .sage: "Female"
         }
     }
@@ -964,6 +973,9 @@ enum BibleVoice: String, CaseIterable, Identifiable, Codable {
         case .echo:    "waveform.path"
         case .ash:     "waveform.badge.mic"
         case .verse:   "theatermasks"
+        case .fable:   "book.closed"
+        case .ballad:  "mountain.2"
+        case .alloy:   "person"
         case .nova:    "sparkles"
         case .shimmer: "music.note"
         case .coral:   "leaf"
@@ -976,7 +988,7 @@ enum BibleVoice: String, CaseIterable, Identifiable, Codable {
     }
 
     static let freeVoices: [BibleVoice] = [.onyx]
-    static let proMaleVoices: [BibleVoice] = [.echo, .ash, .verse]
+    static let proMaleVoices: [BibleVoice] = [.echo, .ash, .verse, .fable, .ballad, .alloy]
     static let proFemaleVoices: [BibleVoice] = [.nova, .shimmer, .coral, .sage]
 
     static func voice(for id: String) -> BibleVoice? {

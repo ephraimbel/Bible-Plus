@@ -28,10 +28,13 @@ struct GreetingCardView: View {
             VStack(spacing: 0) {
                 Spacer()
 
-                // Flame icon
-                Image(systemName: "flame")
-                    .font(.system(size: 52, weight: .thin))
-                    .foregroundStyle(palette.accent)
+                // App logo
+                Image("AppLogo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 64, height: 64)
+                    .clipShape(RoundedRectangle(cornerRadius: 14))
+                    .shadow(color: .black.opacity(0.4), radius: 8, y: 4)
                     .opacity(showContent ? 1 : 0)
                     .scaleEffect(showContent ? 1 : 0.6)
 
