@@ -27,8 +27,12 @@ struct FeedView: View {
 private struct FeedContentView: View {
     @Bindable var vm: FeedViewModel
     let soundscapeService: SoundscapeService
+    @Environment(\.modelContext) private var modelContext
     @State private var scrollPosition: Int? = 0
     @State private var showSanctuary = false
+    @State private var showSoundscapePicker = false
+    @State private var showBackgroundPicker = false
+    @State private var sanctuaryVM: SanctuaryViewModel?
     @State private var prayAlongContent: PrayerContent? = nil
 
     var body: some View {
@@ -63,6 +67,8 @@ private struct FeedContentView: View {
                         onToggleSound: { soundscapeService.togglePlayback() },
                         onVolumeChange: { soundscapeService.setVolume($0) },
                         onOpenSanctuary: { showSanctuary = true },
+                        onOpenSoundscapes: { openSoundscapePicker() },
+                        onOpenBackgrounds: { openBackgroundPicker() },
                         onPrayAlong: { prayAlongContent = content },
                         onDoubleTap: { vm.doubleTapSave(for: content) }
                     )
@@ -112,6 +118,16 @@ private struct FeedContentView: View {
                 soundscapeService: soundscapeService
             )
         }
+        .sheet(isPresented: $showSoundscapePicker) {
+            if let sanctuaryVM {
+                SoundscapePickerView(vm: sanctuaryVM)
+            }
+        }
+        .sheet(isPresented: $showBackgroundPicker) {
+            if let sanctuaryVM {
+                BackgroundPickerView(vm: sanctuaryVM)
+            }
+        }
         .onReceive(NotificationCenter.default.publisher(for: SettingsViewModel.personalizationDidChange)) { _ in
             scrollPosition = 0
             vm.refreshFeed()
@@ -128,5 +144,23 @@ private struct FeedContentView: View {
             .zIndex(100)
         }
         } // ZStack
+    }
+
+    private func getOrCreateSanctuaryVM() -> SanctuaryViewModel {
+        if let existing = sanctuaryVM { return existing }
+        let personalization = PersonalizationService(modelContext: modelContext)
+        let newVM = SanctuaryViewModel(soundscapeService: soundscapeService, personalizationService: personalization)
+        sanctuaryVM = newVM
+        return newVM
+    }
+
+    private func openSoundscapePicker() {
+        _ = getOrCreateSanctuaryVM()
+        showSoundscapePicker = true
+    }
+
+    private func openBackgroundPicker() {
+        _ = getOrCreateSanctuaryVM()
+        showBackgroundPicker = true
     }
 }

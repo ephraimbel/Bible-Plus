@@ -18,6 +18,8 @@ struct FeedCardView: View {
     var onToggleSound: () -> Void = {}
     var onVolumeChange: (Float) -> Void = { _ in }
     var onOpenSanctuary: () -> Void = {}
+    var onOpenSoundscapes: () -> Void = {}
+    var onOpenBackgrounds: () -> Void = {}
     var onPrayAlong: () -> Void = {}
     var onDoubleTap: () -> Void = {}
 
@@ -208,7 +210,9 @@ struct FeedCardView: View {
                 onAskAI: onAskAI,
                 onToggleSound: onToggleSound,
                 onVolumeChange: onVolumeChange,
-                onOpenSanctuary: onOpenSanctuary
+                onOpenSanctuary: onOpenSanctuary,
+                onOpenSoundscapes: onOpenSoundscapes,
+                onOpenBackgrounds: onOpenBackgrounds
             )
             .padding(.trailing, 12)
         }
