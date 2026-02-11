@@ -28,15 +28,21 @@ struct GreetingCardView: View {
             VStack(spacing: 0) {
                 Spacer()
 
-                // App logo
-                Image("AppLogo")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 64, height: 64)
-                    .clipShape(RoundedRectangle(cornerRadius: 14))
-                    .shadow(color: .black.opacity(0.4), radius: 8, y: 4)
-                    .opacity(showContent ? 1 : 0)
-                    .scaleEffect(showContent ? 1 : 0.6)
+                // App title
+                HStack(spacing: 0) {
+                    Text("Bible")
+                        .foregroundStyle(.white)
+                    Text("+")
+                        .foregroundStyle(Color(red: 1.0, green: 0.84, blue: 0.3))
+                        .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 4)
+                        .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 10)
+                        .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(0.9), radius: 20)
+                        .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(0.6), radius: 40)
+                        .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(0.3), radius: 60)
+                }
+                .font(.system(size: 32, weight: .bold, design: .serif))
+                .opacity(showContent ? 1 : 0)
+                .scaleEffect(showContent ? 1 : 0.6)
 
                 // Streak badge
                 if let streakText {
