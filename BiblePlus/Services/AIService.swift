@@ -107,17 +107,18 @@ enum AIService {
 
     // MARK: - Rate Limiting
 
-    static let freeMessageLimit = 10
+    static let freeMessageLimit = 3
 
-    static func messagesUsedToday(messages: [ChatMessage]) -> Int {
+    static func messagesUsedThisWeek(messages: [ChatMessage]) -> Int {
         let calendar = Calendar.current
-        let startOfDay = calendar.startOfDay(for: Date())
-        return messages.filter { $0.role == .user && $0.createdAt >= startOfDay }.count
+        let now = Date()
+        let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: now)) ?? now
+        return messages.filter { $0.role == .user && $0.createdAt >= startOfWeek }.count
     }
 
     static func canSendMessage(messages: [ChatMessage], isPro: Bool) -> Bool {
         if isPro { return true }
-        return messagesUsedToday(messages: messages) < freeMessageLimit
+        return messagesUsedThisWeek(messages: messages) < freeMessageLimit
     }
 
     // MARK: - Streaming
@@ -189,7 +190,7 @@ enum AIError: LocalizedError {
         case .apiError(let code, _):
             "API error (\(code)). Please try again."
         case .rateLimited:
-            "You've reached your daily AI message limit. Upgrade to Pro for unlimited access."
+            "You've used your 3 free messages this week. Upgrade to Pro for unlimited access."
         }
     }
 }

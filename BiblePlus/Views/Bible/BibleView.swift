@@ -531,7 +531,7 @@ private struct BibleContentView: View {
         .alert("Audio Bible Limit", isPresented: $showAudioProGate) {
             Button("OK", role: .cancel) {}
         } message: {
-            Text("You've used your \(AudioBibleService.freeChapterLimit) free chapters today. Upgrade to Pro for unlimited Audio Bible.")
+            Text("You've listened to your free chapter. Upgrade to Bible+ Pro for unlimited Audio Bible.")
         }
         .onAppear {
             // Load saved voice preference

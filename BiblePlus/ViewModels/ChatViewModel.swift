@@ -35,13 +35,13 @@ final class ChatViewModel {
             && !isStreaming
     }
 
-    var messagesUsedToday: Int {
+    var messagesUsedThisWeek: Int {
         // Count across ALL conversations
         let allDescriptor = FetchDescriptor<ChatMessage>(
             sortBy: [SortDescriptor(\.createdAt)]
         )
         let allMessages = (try? modelContext.fetch(allDescriptor)) ?? []
-        return AIService.messagesUsedToday(messages: allMessages)
+        return AIService.messagesUsedThisWeek(messages: allMessages)
     }
 
     var isRateLimited: Bool {
@@ -53,7 +53,7 @@ final class ChatViewModel {
     }
 
     var remainingMessages: Int {
-        max(0, AIService.freeMessageLimit - messagesUsedToday)
+        max(0, AIService.freeMessageLimit - messagesUsedThisWeek)
     }
 
     var quickPrompts: [String] {

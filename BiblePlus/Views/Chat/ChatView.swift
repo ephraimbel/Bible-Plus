@@ -137,7 +137,7 @@ private struct ChatContentView: View {
     // MARK: - Rate Limit Banner
 
     private var rateLimitBanner: some View {
-        Text("\(viewModel.remainingMessages) messages remaining today")
+        Text("\(viewModel.remainingMessages) messages remaining this week")
             .font(BPFont.caption)
             .foregroundStyle(palette.textMuted)
             .padding(.vertical, 6)

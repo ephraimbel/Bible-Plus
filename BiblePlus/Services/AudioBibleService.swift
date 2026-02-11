@@ -32,7 +32,7 @@ final class AudioBibleService {
 
     // MARK: - Rate Limiting
 
-    static let freeChapterLimit = 3
+    static let freeChapterLimit = 1
     private static let usageKey = "audioBibleDailyUsage"
     private static let usageDateKey = "audioBibleUsageDate"
 

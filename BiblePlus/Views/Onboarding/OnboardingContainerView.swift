@@ -10,11 +10,15 @@ struct OnboardingContainerView: View {
         Group {
             if let vm = viewModel {
                 ZStack {
-                    OnboardingBackground()
+                    // Hide container background for full-screen views
+                    if vm.currentStep != 0 && vm.currentStep != 8 {
+                        OnboardingBackground()
+                    }
 
                     VStack(spacing: 0) {
                         // Top bar: back button + progress dots
-                        if vm.currentStep > 0 {
+                        // Hidden on welcome (0) and paywall (8) for clean full-screen
+                        if vm.currentStep > 0 && vm.currentStep != 8 {
                             HStack {
                                 Button {
                                     vm.goBack()

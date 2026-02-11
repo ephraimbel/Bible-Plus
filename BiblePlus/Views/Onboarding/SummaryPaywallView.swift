@@ -18,7 +18,7 @@ struct SummaryPaywallView: View {
     // MARK: - Price Helpers
 
     private var yearlyPriceLabel: String {
-        viewModel.storeKitService.yearlyProduct?.displayPrice ?? "$39.99"
+        viewModel.storeKitService.yearlyProduct?.displayPrice ?? "$49.99"
     }
 
     private var weeklyPriceLabel: String {
@@ -33,41 +33,22 @@ struct SummaryPaywallView: View {
             formatter.locale = product.priceFormatStyle.locale
             return formatter.string(from: weekly as NSDecimalNumber) ?? "$0.77"
         }
-        return "$0.77"
+        return "$0.96"
     }
 
     // MARK: - Body
 
     var body: some View {
         ZStack {
-            // Layer 1: Video background
-            LoopingVideoPlayer(videoName: "water-ripples")
-                .ignoresSafeArea()
-
-            // Layer 2: Dark gradient overlay
+            // Smooth dark gradient background
             LinearGradient(
-                stops: [
-                    .init(color: .black.opacity(0.15), location: 0.0),
-                    .init(color: .black.opacity(0.5), location: 0.3),
-                    .init(color: .black.opacity(0.8), location: 0.6),
-                    .init(color: .black.opacity(0.92), location: 1.0),
+                colors: [
+                    Color(red: 0.11, green: 0.1, blue: 0.09),
+                    Color(red: 0.07, green: 0.07, blue: 0.06),
                 ],
                 startPoint: .top,
                 endPoint: .bottom
             )
-            .ignoresSafeArea()
-
-            // Layer 3: Radial gold glow behind logo
-            RadialGradient(
-                colors: [
-                    Color(red: 0.79, green: 0.66, blue: 0.43).opacity(0.15),
-                    .clear,
-                ],
-                center: .top,
-                startRadius: 20,
-                endRadius: 250
-            )
-            .offset(y: 60)
             .ignoresSafeArea()
 
             // Layer 4: Content
@@ -92,7 +73,7 @@ struct SummaryPaywallView: View {
                     }
 
                     heroSection
-                    featureCarousel
+                    featureList
                     trustStrip
                     planCards
                     ctaSection
@@ -155,7 +136,6 @@ struct SummaryPaywallView: View {
                     .foregroundStyle(.white)
             }
             .font(.system(size: 34, weight: .bold, design: .serif))
-            .goldShimmer()
 
             // Personalized subtitle
             Text(personalizedSubtitle)
@@ -177,108 +157,30 @@ struct SummaryPaywallView: View {
         return "\(name), unlock your complete\nspiritual companion"
     }
 
-    // MARK: - Section 2: Feature Carousel
+    // MARK: - Section 2: Feature List
 
-    private var featureCarousel: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 12) {
-                featureCard(
-                    icon: "bubble.left.and.text.bubble.right.fill",
-                    title: "AI Companion",
-                    freeLabel: "10/day",
-                    proLabel: "Unlimited",
-                    gradient: [Color(red: 0.1, green: 0.15, blue: 0.35), Color(red: 0.15, green: 0.22, blue: 0.5)]
-                )
-                featureCard(
-                    icon: "speaker.wave.2.fill",
-                    title: "Audio Bible",
-                    freeLabel: "3 ch/day",
-                    proLabel: "Every chapter",
-                    gradient: [Color(red: 0.25, green: 0.18, blue: 0.1), Color(red: 0.4, green: 0.28, blue: 0.15)]
-                )
-                featureCard(
-                    icon: "waveform.circle.fill",
-                    title: "Soundscapes",
-                    freeLabel: "4 of 11",
-                    proLabel: "All 11",
-                    gradient: [Color(red: 0.08, green: 0.22, blue: 0.12), Color(red: 0.12, green: 0.35, blue: 0.18)]
-                )
-                featureCard(
-                    icon: "photo.on.rectangle.fill",
-                    title: "Backgrounds",
-                    freeLabel: "Limited set",
-                    proLabel: "All 52",
-                    gradient: [Color(red: 0.2, green: 0.1, blue: 0.3), Color(red: 0.35, green: 0.15, blue: 0.5)]
-                )
-                featureCard(
-                    icon: "folder.fill",
-                    title: "Collections",
-                    freeLabel: "1 collection",
-                    proLabel: "Unlimited",
-                    gradient: [Color(red: 0.22, green: 0.16, blue: 0.1), Color(red: 0.38, green: 0.25, blue: 0.12)]
-                )
-            }
-            .padding(.horizontal, 24)
-            .scrollTargetLayout()
+    private var featureList: some View {
+        VStack(spacing: 14) {
+            featureRow(icon: "bubble.left.and.text.bubble.right.fill", title: "Unlimited AI Companion")
+            featureRow(icon: "speaker.wave.2.fill", title: "Full Audio Bible")
+            featureRow(icon: "waveform.circle.fill", title: "All 11 Soundscapes")
+            featureRow(icon: "photo.on.rectangle.fill", title: "All 52 Backgrounds")
+            featureRow(icon: "folder.fill", title: "Unlimited Collections")
         }
-        .scrollTargetBehavior(.viewAligned)
-        .padding(.top, 32)
+        .padding(.top, 28)
         .opacity(showFeatures ? 1 : 0)
         .offset(y: showFeatures ? 0 : 20)
     }
 
-    @ViewBuilder
-    private func featureCard(
-        icon: String,
-        title: String,
-        freeLabel: String,
-        proLabel: String,
-        gradient: [Color]
-    ) -> some View {
-        VStack(spacing: 0) {
-            // Icon circle
-            ZStack {
-                Circle()
-                    .fill(.ultraThinMaterial)
-                    .frame(width: 48, height: 48)
-                Image(systemName: icon)
-                    .font(.system(size: 20))
-                    .foregroundStyle(.white)
-            }
-            .padding(.top, 20)
-
-            // Title
+    private func featureRow(icon: String, title: String) -> some View {
+        HStack(spacing: 10) {
+            Image(systemName: "checkmark")
+                .font(.system(size: 13, weight: .bold))
+                .foregroundStyle(Color(red: 0.79, green: 0.66, blue: 0.43))
             Text(title)
-                .font(.system(size: 14, weight: .semibold, design: .rounded))
-                .foregroundStyle(.white)
-                .padding(.top, 10)
-
-            Spacer()
-
-            // Free → Pro comparison
-            VStack(spacing: 4) {
-                Text(freeLabel)
-                    .font(.system(size: 12, weight: .regular, design: .rounded))
-                    .foregroundStyle(.white.opacity(0.4))
-                    .strikethrough(color: .white.opacity(0.3))
-
-                Text(proLabel)
-                    .font(.system(size: 13, weight: .semibold, design: .rounded))
-                    .foregroundStyle(Color(red: 0.79, green: 0.66, blue: 0.43))
-            }
-            .padding(.bottom, 18)
+                .font(.system(size: 15, weight: .medium, design: .rounded))
+                .foregroundStyle(.white.opacity(0.85))
         }
-        .frame(width: 140, height: 180)
-        .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(
-                    LinearGradient(colors: gradient, startPoint: .topLeading, endPoint: .bottomTrailing)
-                )
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(.white.opacity(0.1), lineWidth: 1)
-        )
     }
 
     // MARK: - Section 3: Trust Strip
@@ -387,7 +289,7 @@ struct SummaryPaywallView: View {
                             }
                         }
 
-                        Text("Save 84%")
+                        Text("Save 81%")
                             .font(.system(size: 12, weight: .bold, design: .rounded))
                             .foregroundStyle(Color(red: 0.4, green: 0.8, blue: 0.4))
                     }

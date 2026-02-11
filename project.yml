@@ -44,6 +44,9 @@ targets:
         PRODUCT_NAME: "Bible Plus"
     entitlements:
       path: BiblePlus/BiblePlus.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.bibleplus.shared
     dependencies:
       - target: BiblePlusWidgets
         embed: true
@@ -68,3 +71,6 @@ targets:
         PRODUCT_NAME: BiblePlusWidgets
     entitlements:
       path: BiblePlusWidgets/BiblePlusWidgets.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.bibleplus.shared
