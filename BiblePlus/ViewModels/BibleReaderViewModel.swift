@@ -115,6 +115,7 @@ final class BibleReaderViewModel {
         if let profile = try? modelContext.fetch(descriptor).first {
             profile.preferredTranslation = translation
             profile.updatedAt = Date()
+            try? modelContext.save()
         }
 
         showTranslationPicker = false

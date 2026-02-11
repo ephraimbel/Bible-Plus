@@ -3,7 +3,14 @@ import Foundation
 final class BibleRepository: @unchecked Sendable {
     static let shared = BibleRepository()
 
-    private(set) var currentTranslation: BibleTranslation = .kjv
+    private let lock = NSLock()
+    private var _currentTranslation: BibleTranslation = .kjv
+
+    var currentTranslation: BibleTranslation {
+        lock.lock()
+        defer { lock.unlock() }
+        return _currentTranslation
+    }
 
     // MARK: - In-Memory Cache
 
@@ -18,7 +25,9 @@ final class BibleRepository: @unchecked Sendable {
     // MARK: - Translation
 
     func setTranslation(_ translation: BibleTranslation) {
-        currentTranslation = translation
+        lock.lock()
+        _currentTranslation = translation
+        lock.unlock()
     }
 
     // MARK: - Async Access (Network-backed)

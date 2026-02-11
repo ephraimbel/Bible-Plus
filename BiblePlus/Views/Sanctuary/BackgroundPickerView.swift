@@ -59,7 +59,7 @@ struct BackgroundPickerView: View {
         } label: {
             ZStack {
                 // Background preview (video thumbnail or gradient)
-                if bg.hasVideo, let thumbnail = Self.videoThumbnail(for: bg.videoFileName!) {
+                if bg.hasVideo, let videoName = bg.videoFileName, let thumbnail = Self.videoThumbnail(for: videoName) {
                     Image(uiImage: thumbnail)
                         .resizable()
                         .aspectRatio(contentMode: .fill)

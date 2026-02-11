@@ -15,26 +15,26 @@ enum BPFont {
     static let bibleMedium = Font.system(size: 20, weight: .regular, design: .serif)
     static let bibleSmall = Font.system(size: 18, weight: .regular, design: .serif)
 
-    // AI Chat messages — SF Pro Text, Regular, 16pt
-    static let chat = Font.system(size: 16, weight: .regular, design: .default)
+    // AI Chat messages — SF Pro Rounded, Regular, 16pt
+    static let chat = Font.system(size: 16, weight: .regular, design: .rounded)
 
-    // App Headings — SF Pro Display, Semibold, 28–34pt
-    static let headingLarge = Font.system(size: 34, weight: .semibold, design: .default)
-    static let headingMedium = Font.system(size: 30, weight: .semibold, design: .default)
-    static let headingSmall = Font.system(size: 28, weight: .semibold, design: .default)
+    // App Headings — SF Pro Rounded, Semibold, 28–34pt
+    static let headingLarge = Font.system(size: 34, weight: .bold, design: .rounded)
+    static let headingMedium = Font.system(size: 30, weight: .bold, design: .rounded)
+    static let headingSmall = Font.system(size: 28, weight: .semibold, design: .rounded)
 
-    // Body/UI Text — SF Pro Text, Regular, 16pt
-    static let body = Font.system(size: 16, weight: .regular, design: .default)
+    // Body/UI Text — SF Pro Rounded, Regular, 16pt
+    static let body = Font.system(size: 16, weight: .regular, design: .rounded)
 
-    // Buttons & Labels — SF Pro Text, Medium, 15pt
-    static let button = Font.system(size: 15, weight: .medium, design: .default)
+    // Buttons & Labels — SF Pro Rounded, Medium, 15pt
+    static let button = Font.system(size: 15, weight: .medium, design: .rounded)
 
     // Verse References — New York serif, Light, 13pt
     static let reference = Font.system(size: 13, weight: .light, design: .serif)
 
-    // Small caption — SF Pro Text, Regular, 12pt
-    static let caption = Font.system(size: 12, weight: .regular, design: .default)
+    // Small caption — SF Pro Rounded, Regular, 12pt
+    static let caption = Font.system(size: 12, weight: .regular, design: .rounded)
 
-    // Onboarding subtitle — SF Pro Text, Regular, 17pt
-    static let onboardingSubtitle = Font.system(size: 17, weight: .regular, design: .default)
+    // Onboarding subtitle — SF Pro Rounded, Regular, 17pt
+    static let onboardingSubtitle = Font.system(size: 17, weight: .regular, design: .rounded)
 }

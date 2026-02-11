@@ -89,7 +89,6 @@ enum WidgetTimeWindow: String, CaseIterable {
 
         var components = cal.dateComponents([.year, .month, .day], from: now)
         if nextHour >= 24 {
-            components.hour = nextHour - 24
             guard let tomorrow = cal.date(byAdding: .day, value: 1, to: now) else { return now }
             components = cal.dateComponents([.year, .month, .day], from: tomorrow)
             components.hour = nextHour - 24

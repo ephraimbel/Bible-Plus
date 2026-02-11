@@ -161,9 +161,9 @@ final class FeedViewModel {
     func askAIPrompt(for content: PrayerContent) -> String {
         let text = personalizedText(for: content)
         if let ref = content.verseReference, !ref.isEmpty {
-            return "Help me understand this: \"\(text)\" — \(ref)"
+            return "Walk me through this verse and help me understand what God is saying to me: \"\(text)\" — \(ref)"
         }
-        return "Help me reflect on this: \"\(text)\""
+        return "This really spoke to me. Can you help me go deeper? \"\(text)\""
     }
 
     func pinToCollection(_ content: PrayerContent) {

@@ -7,22 +7,17 @@ final class StoreKitService {
     private(set) var purchasedProductIDs: Set<String> = []
     private var transactionListener: Task<Void, Error>?
 
-    static let monthlyID = "com.bibleplus.pro.monthly"
+    static let weeklyID = "com.bibleplus.pro.weekly"
     static let yearlyID = "com.bibleplus.pro.yearly"
-    static let lifetimeID = "com.bibleplus.pro.lifetime"
 
     var isPro: Bool { !purchasedProductIDs.isEmpty }
 
-    var monthlyProduct: Product? {
-        subscriptions.first { $0.id == Self.monthlyID }
+    var weeklyProduct: Product? {
+        subscriptions.first { $0.id == Self.weeklyID }
     }
 
     var yearlyProduct: Product? {
         subscriptions.first { $0.id == Self.yearlyID }
-    }
-
-    var lifetimeProduct: Product? {
-        subscriptions.first { $0.id == Self.lifetimeID }
     }
 
     init() {
@@ -40,9 +35,8 @@ final class StoreKitService {
     func loadProducts() async {
         do {
             subscriptions = try await Product.products(for: [
-                Self.monthlyID,
+                Self.weeklyID,
                 Self.yearlyID,
-                Self.lifetimeID,
             ]).sorted { $0.price < $1.price }
         } catch {
             // Products may not be configured yet

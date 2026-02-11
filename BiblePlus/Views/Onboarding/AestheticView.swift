@@ -16,8 +16,8 @@ struct AestheticView: View {
 
             VStack(spacing: 10) {
                 Text(viewModel.firstName.isEmpty
-                    ? "Make Bible Plus\nfeel like yours."
-                    : "Make Bible Plus\nfeel like yours, \(viewModel.firstName).")
+                    ? "Make Bible+\nfeel like yours."
+                    : "Make Bible+\nfeel like yours, \(viewModel.firstName).")
                     .font(BPFont.headingMedium)
                     .foregroundStyle(palette.textPrimary)
                     .multilineTextAlignment(.center)

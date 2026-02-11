@@ -86,7 +86,7 @@ struct ShareCardView: View {
                     .foregroundStyle(.white.opacity(0.4))
                     .padding(.top, 6)
 
-                Spacer().frame(height: renderSize.height * 0.1)
+                Spacer()
             }
 
             // LAYER 4: Watermark
@@ -97,7 +97,7 @@ struct ShareCardView: View {
                     HStack(spacing: 4) {
                         Image(systemName: "flame.fill")
                             .font(.system(size: 10))
-                        Text("Bible Plus")
+                        Text("Bible+")
                             .font(.system(size: 11, weight: .medium))
                     }
                     .foregroundStyle(.white.opacity(0.35))

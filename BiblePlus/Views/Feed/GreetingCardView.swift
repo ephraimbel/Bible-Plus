@@ -19,8 +19,8 @@ struct GreetingCardView: View {
             // Subtle overlay for readability
             LinearGradient(
                 colors: [
-                    Color.black.opacity(0),
-                    Color.black.opacity(0.2),
+                    Color.black.opacity(0.1),
+                    Color.black.opacity(0.35),
                 ],
                 startPoint: .top,
                 endPoint: .bottom
@@ -44,7 +44,8 @@ struct GreetingCardView: View {
                     .foregroundStyle(.white)
                     .multilineTextAlignment(.center)
                     .lineSpacing(6)
-                    .shadow(color: .black.opacity(0.3), radius: 4, y: 2)
+                    .shadow(color: .black.opacity(0.6), radius: 4, y: 2)
+                    .shadow(color: .black.opacity(0.3), radius: 8, y: 0)
                     .opacity(showContent ? 1 : 0)
                     .offset(y: showContent ? 0 : 20)
 
@@ -59,7 +60,7 @@ struct GreetingCardView: View {
                     Text("Swipe up to begin")
                         .font(BPFont.caption)
                 }
-                .foregroundStyle(.white.opacity(0.5))
+                .foregroundStyle(.white.opacity(0.7))
                 .opacity(showContent ? 1 : 0)
 
                 Spacer().frame(height: 120)

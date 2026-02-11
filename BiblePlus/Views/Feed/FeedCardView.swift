@@ -75,27 +75,28 @@ struct FeedCardView: View {
             // Top fade
             LinearGradient(
                 colors: [
-                    Color.black.opacity(0.25),
+                    Color.black.opacity(0.35),
                     Color.black.opacity(0),
                 ],
                 startPoint: .top,
                 endPoint: .bottom
             )
-            .frame(height: 120)
+            .frame(height: 140)
 
             Spacer()
 
-            // Bottom fade for text readability
+            // Bottom fade for text readability — tall and strong
             LinearGradient(
                 colors: [
                     Color.black.opacity(0),
-                    Color.black.opacity(0.15),
-                    Color.black.opacity(0.40),
+                    Color.black.opacity(0.25),
+                    Color.black.opacity(0.50),
+                    Color.black.opacity(0.65),
                 ],
                 startPoint: .top,
                 endPoint: .bottom
             )
-            .frame(height: 400)
+            .frame(height: 500)
         }
     }
 
@@ -109,7 +110,8 @@ struct FeedCardView: View {
             Text(content.type.displayName.uppercased())
                 .font(BPFont.caption)
                 .tracking(1.5)
-                .foregroundStyle(.white.opacity(0.5))
+                .foregroundStyle(.white.opacity(0.7))
+                .shadow(color: .black.opacity(0.5), radius: 3, y: 1)
                 .padding(.bottom, 16)
 
             // Main text
@@ -119,20 +121,23 @@ struct FeedCardView: View {
                 .multilineTextAlignment(.center)
                 .lineSpacing(6)
                 .padding(.horizontal, 48)
-                .shadow(color: .black.opacity(0.3), radius: 4, y: 2)
+                .shadow(color: .black.opacity(0.6), radius: 4, y: 2)
+                .shadow(color: .black.opacity(0.3), radius: 8, y: 0)
 
             // Verse reference
             if let reference = content.verseReference, !reference.isEmpty {
                 Text("— \(reference)")
                     .font(BPFont.reference)
-                    .foregroundStyle(.white.opacity(0.65))
+                    .foregroundStyle(.white.opacity(0.85))
+                    .shadow(color: .black.opacity(0.5), radius: 3, y: 1)
                     .padding(.top, 16)
             }
 
             // Category label
             Text(content.category)
                 .font(BPFont.caption)
-                .foregroundStyle(.white.opacity(0.4))
+                .foregroundStyle(.white.opacity(0.6))
+                .shadow(color: .black.opacity(0.4), radius: 3, y: 1)
                 .padding(.top, 8)
 
             // Guided prayer "Pray Along" button
@@ -166,8 +171,10 @@ struct FeedCardView: View {
                 .padding(.top, 24)
             }
 
-            Spacer().frame(height: 120)
+            Spacer()
         }
+        // Offset down to account for tab bar covering the bottom
+        .padding(.top, 49)
     }
 
     /// Adapt font size based on text length

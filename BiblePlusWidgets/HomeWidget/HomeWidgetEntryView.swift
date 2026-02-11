@@ -109,7 +109,7 @@ struct HomeWidgetEntryView: View {
                 HStack(spacing: 4) {
                     Image(systemName: "flame.fill")
                         .font(.system(size: 10))
-                    Text("Bible Plus")
+                    Text("Bible+")
                         .font(.system(size: 10, weight: .medium))
                 }
                 .foregroundStyle(.white.opacity(0.4))

@@ -16,12 +16,13 @@ struct QuickPromptsView: View {
                     .font(.system(size: 36))
                     .foregroundStyle(palette.accent)
 
-                Text("\(userName), I'm here whenever you\nhave questions about Scripture\nor need a prayer.")
+                Text("Hey \(userName). I'm here — whether you\nneed to talk through a verse, sit with a\nhard question, or just need someone to\npray with you.")
                     .font(BPFont.body)
                     .foregroundStyle(palette.textSecondary)
                     .multilineTextAlignment(.center)
+                    .lineSpacing(3)
 
-                Text("What's on your mind?")
+                Text("What's on your heart?")
                     .font(BPFont.prayerSmall)
                     .foregroundStyle(palette.textPrimary)
                     .padding(.top, 4)

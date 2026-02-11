@@ -70,6 +70,8 @@ struct OnboardingContainerView: View {
                     }
                 }
                 .animation(BPAnimation.pageTransition, value: vm.currentStep)
+            } else {
+                OnboardingBackground()
             }
         }
         .onAppear {

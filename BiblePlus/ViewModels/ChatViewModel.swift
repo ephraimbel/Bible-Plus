@@ -49,13 +49,13 @@ final class ChatViewModel {
     var quickPrompts: [String] {
         var prompts: [String] = []
         if let burden = profile.currentBurdens.first, burden != .none {
-            prompts.append("What does the Bible say about \(burden.displayName.lowercased())?")
+            prompts.append("I'm struggling with \(burden.displayName.lowercased()). What does God say about this?")
         }
         if let season = profile.lifeSeasons.first {
-            prompts.append("Give me a prayer for a \(season.displayName.lowercased()).")
+            prompts.append("Pray with me for this season of \(season.displayName.lowercased()).")
         }
-        prompts.append("What should I read in the Bible today?")
-        prompts.append("Help me understand God's love for me.")
+        prompts.append("Where should I start reading the Bible today?")
+        prompts.append("I need to hear that God loves me right now.")
         return Array(prompts.prefix(4))
     }
 

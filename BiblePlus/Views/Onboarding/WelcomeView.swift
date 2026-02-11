@@ -24,7 +24,7 @@ struct WelcomeView: View {
 
                 // Title
                 VStack(spacing: 14) {
-                    Text("Bible Plus")
+                    Text("Bible+")
                         .font(BPFont.headingLarge)
                         .foregroundStyle(palette.textPrimary)
 

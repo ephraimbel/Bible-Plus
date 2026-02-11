@@ -239,17 +239,16 @@ final class SoundscapeService {
                 try? await Task.sleep(nanoseconds: 1_000_000_000)
                 guard !Task.isCancelled, let self else { return }
 
-                if let remaining = self.sleepTimerRemaining {
-                    let newRemaining = remaining - 1
-                    if newRemaining <= 0 {
-                        self.sleepTimerRemaining = 0
-                        self.stop()
-                        self.sleepTimer = nil
-                        self.sleepTimerRemaining = nil
-                        return
-                    }
-                    self.sleepTimerRemaining = newRemaining
+                guard let remaining = self.sleepTimerRemaining else { return }
+                let newRemaining = remaining - 1
+                if newRemaining <= 0 {
+                    self.sleepTimerRemaining = 0
+                    self.stop()
+                    self.sleepTimer = nil
+                    self.sleepTimerRemaining = nil
+                    return
                 }
+                self.sleepTimerRemaining = newRemaining
             }
         }
     }

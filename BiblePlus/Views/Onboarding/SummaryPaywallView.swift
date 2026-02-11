@@ -9,126 +9,107 @@ struct SummaryPaywallView: View {
     @State private var selectedProductID: String? = nil
     @State private var purchaseError: String? = nil
 
+    private let features: [(icon: String, label: String)] = [
+        ("bubble.left.and.text.bubble.right.fill", "Unlimited AI Chat"),
+        ("waveform.circle.fill", "All Soundscapes"),
+        ("photo.on.rectangle.fill", "Premium Backgrounds"),
+        ("folder.fill", "Unlimited Collections"),
+        ("speaker.wave.2.fill", "Background Audio"),
+    ]
+
+    private var yearlyPriceLabel: String {
+        if let price = viewModel.storeKitService.yearlyProduct?.displayPrice {
+            return "\(price)/year"
+        }
+        return "$39.99/year"
+    }
+
+    private var weeklyPriceLabel: String {
+        if let price = viewModel.storeKitService.weeklyProduct?.displayPrice {
+            return "\(price)/week"
+        }
+        return "$4.99/week"
+    }
+
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            VStack(spacing: 0) {
-                Spacer().frame(height: 24)
+        VStack(spacing: 0) {
+            Spacer()
 
-                // Personalized summary header
-                VStack(spacing: 16) {
-                    Text(viewModel.firstName.isEmpty
-                        ? "Your Bible Plus is ready."
-                        : "\(viewModel.firstName),\nyour Bible Plus is ready.")
-                        .font(BPFont.headingMedium)
-                        .foregroundStyle(palette.textPrimary)
-                        .multilineTextAlignment(.center)
+            // MARK: - Hero
+            VStack(spacing: 8) {
+                Image(systemName: "crown.fill")
+                    .font(.system(size: 56))
+                    .foregroundStyle(palette.accent)
+                    .padding(.bottom, 4)
 
-                    // Summary items
-                    VStack(spacing: 12) {
-                        ForEach(viewModel.summaryItems, id: \.label) { item in
-                            HStack(alignment: .top) {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .foregroundStyle(palette.accent)
-                                    .font(.body)
+                Text("Bible+ Pro")
+                    .font(BPFont.headingMedium)
+                    .foregroundStyle(palette.textPrimary)
 
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text(item.label)
-                                        .font(BPFont.reference)
-                                        .foregroundStyle(palette.textMuted)
-                                    Text(item.value)
-                                        .font(BPFont.button)
-                                        .foregroundStyle(palette.textPrimary)
-                                }
-                                Spacer()
-                            }
-                        }
-                    }
-                    .padding(20)
-                    .background(
-                        RoundedRectangle(cornerRadius: 20)
-                            .fill(palette.surfaceElevated)
-                    )
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(palette.border, lineWidth: 1)
-                    )
-                }
-                .padding(.horizontal, 24)
-                .opacity(showContent ? 1 : 0)
-
-                Spacer().frame(height: 32)
-
-                // Personal letter
-                VStack(spacing: 16) {
-                    Text("Unlock Your Full Journey")
-                        .font(BPFont.headingSmall)
-                        .foregroundStyle(palette.textPrimary)
-
-                    Text(viewModel.firstName.isEmpty
-                        ? "Thank you for sharing your heart with us. Bible Plus was built to walk with you every day — through prayers that call you by name, an AI that knows Scripture deeply, and a space designed for your peace."
-                        : "\(viewModel.firstName), thank you for sharing your heart with us. Bible Plus was built to walk with you every day — through prayers that call you by name, an AI that knows Scripture deeply, and a space designed for your peace."
-                    )
+                Text("Your full spiritual companion")
                     .font(BPFont.body)
                     .foregroundStyle(palette.textSecondary)
-                    .multilineTextAlignment(.center)
-                    .lineSpacing(4)
-                }
-                .padding(.horizontal, 24)
-                .opacity(showContent ? 1 : 0)
+            }
+            .opacity(showContent ? 1 : 0)
 
-                Spacer().frame(height: 24)
+            Spacer().frame(height: 28)
 
-                // Pro features list
-                VStack(alignment: .leading, spacing: 10) {
-                    proFeatureRow("Unlimited AI Bible conversations")
-                    proFeatureRow("All 11 ambient soundscapes")
-                    proFeatureRow("50+ premium backgrounds")
-                    proFeatureRow("Custom app icons")
-                    proFeatureRow("Unlimited collections & highlights")
-                    proFeatureRow("Background audio playback")
-                }
-                .padding(.horizontal, 32)
-                .opacity(showContent ? 1 : 0)
-
-                Spacer().frame(height: 24)
-
-                // Subscription options
-                VStack(spacing: 12) {
-                    if let yearly = viewModel.storeKitService.yearlyProduct {
-                        subscriptionCard(
-                            product: yearly,
-                            badge: "Best Value",
-                            subtitle: "Save 52%"
-                        )
-                    }
-
-                    if let monthly = viewModel.storeKitService.monthlyProduct {
-                        subscriptionCard(
-                            product: monthly,
-                            badge: nil,
-                            subtitle: "Cancel anytime"
-                        )
+            // MARK: - Feature Pills
+            VStack(spacing: 10) {
+                ForEach(features, id: \.label) { feature in
+                    HStack(spacing: 12) {
+                        Image(systemName: feature.icon)
+                            .font(.system(size: 16))
+                            .foregroundStyle(palette.accent)
+                            .frame(width: 24, alignment: .center)
+                        Text(feature.label)
+                            .font(BPFont.body)
+                            .foregroundStyle(palette.textPrimary)
+                        Spacer()
                     }
                 }
-                .padding(.horizontal, 24)
+            }
+            .padding(.horizontal, 40)
+            .opacity(showContent ? 1 : 0)
 
-                Spacer().frame(height: 20)
+            Spacer().frame(height: 28)
 
-                // Purchase button
-                if selectedProductID != nil {
-                    GoldButton(
-                        title: isPurchasing ? "Processing..." : "Start Your Journey",
-                        isEnabled: !isPurchasing,
-                        showGlow: true
-                    ) {
-                        Task { await purchaseSelected() }
-                    }
-                    .padding(.horizontal, 32)
-                }
+            // MARK: - Plan Cards
+            VStack(spacing: 12) {
+                planCard(
+                    id: StoreKitService.yearlyID,
+                    title: yearlyPriceLabel,
+                    subtitle: "$0.77/week",
+                    badge: "Best Value"
+                )
 
-                Spacer().frame(height: 16)
+                planCard(
+                    id: StoreKitService.weeklyID,
+                    title: weeklyPriceLabel,
+                    subtitle: nil,
+                    badge: nil
+                )
+            }
+            .padding(.horizontal, 24)
+            .opacity(showContent ? 1 : 0)
 
-                // Free plan option
+            Spacer().frame(height: 24)
+
+            // MARK: - CTA
+            GoldButton(
+                title: isPurchasing ? "Processing..." : "Start Free Trial",
+                isEnabled: !isPurchasing,
+                showGlow: true
+            ) {
+                Task { await purchaseSelected() }
+            }
+            .padding(.horizontal, 32)
+            .opacity(showContent ? 1 : 0)
+
+            Spacer().frame(height: 16)
+
+            // MARK: - Footer Links
+            VStack(spacing: 8) {
                 Button {
                     viewModel.goNext()
                 } label: {
@@ -138,9 +119,6 @@ struct SummaryPaywallView: View {
                         .underline()
                 }
 
-                Spacer().frame(height: 12)
-
-                // Restore purchases
                 Button {
                     Task { await viewModel.storeKitService.restorePurchases() }
                 } label: {
@@ -149,14 +127,18 @@ struct SummaryPaywallView: View {
                         .foregroundStyle(palette.textMuted)
                 }
 
-                Spacer().frame(height: 40)
+                Text("Cancel anytime")
+                    .font(BPFont.caption)
+                    .foregroundStyle(palette.textMuted.opacity(0.7))
             }
+            .opacity(showContent ? 1 : 0)
+
+            Spacer()
         }
         .onAppear {
             withAnimation(BPAnimation.spring.delay(0.2)) {
                 showContent = true
             }
-            // Default to yearly
             selectedProductID = StoreKitService.yearlyID
         }
         .alert("Purchase Failed", isPresented: Binding(
@@ -169,87 +151,61 @@ struct SummaryPaywallView: View {
         }
     }
 
-    // MARK: - Components
+    // MARK: - Plan Card
 
     @ViewBuilder
-    private func proFeatureRow(_ text: String) -> some View {
-        HStack(spacing: 12) {
-            Image(systemName: "checkmark.circle.fill")
-                .foregroundStyle(palette.accent)
-                .font(.body)
-            Text(text)
-                .font(BPFont.body)
-                .foregroundStyle(palette.textPrimary)
-        }
-    }
-
-    @ViewBuilder
-    private func subscriptionCard(product: Product, badge: String?, subtitle: String) -> some View {
-        let isSelected = selectedProductID == product.id
+    private func planCard(id: String, title: String, subtitle: String?, badge: String?) -> some View {
+        let isSelected = selectedProductID == id
 
         Button {
-            selectedProductID = product.id
+            withAnimation(BPAnimation.selection) {
+                selectedProductID = id
+            }
             HapticService.selection()
         } label: {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
-                    HStack(spacing: 8) {
-                        Text(product.displayName)
-                            .font(BPFont.button)
-                            .foregroundStyle(
-                                isSelected ? .white : palette.textPrimary
-                            )
+                    Text(title)
+                        .font(BPFont.headingSmall)
+                        .foregroundStyle(isSelected ? .white : palette.textPrimary)
 
-                        if let badge {
-                            Text(badge)
-                                .font(BPFont.caption)
-                                .foregroundStyle(.white)
-                                .padding(.horizontal, 8)
-                                .padding(.vertical, 3)
-                                .background(
-                                    Capsule()
-                                        .fill(
-                                            isSelected
-                                                ? Color.white.opacity(0.3)
-                                                : palette.accent
-                                        )
-                                )
-                        }
+                    if let subtitle {
+                        Text(subtitle)
+                            .font(BPFont.reference)
+                            .foregroundStyle(isSelected ? .white.opacity(0.7) : palette.textMuted)
                     }
-
-                    Text(subtitle)
-                        .font(BPFont.reference)
-                        .foregroundStyle(
-                            isSelected ? .white.opacity(0.7) : palette.textMuted
-                        )
                 }
 
                 Spacer()
 
-                Text(product.displayPrice)
-                    .font(BPFont.headingSmall)
-                    .foregroundStyle(
-                        isSelected ? .white : palette.textPrimary
-                    )
+                if let badge {
+                    Text(badge)
+                        .font(BPFont.caption)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 5)
+                        .background(
+                            Capsule().fill(
+                                isSelected ? Color.white.opacity(0.25) : palette.accent
+                            )
+                        )
+                }
             }
             .padding(20)
             .background(
                 RoundedRectangle(cornerRadius: 16)
-                    .fill(
-                        isSelected
-                            ? palette.accent : palette.surfaceElevated
-                    )
+                    .fill(isSelected ? palette.accent : palette.surfaceElevated)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
                     .stroke(
-                        isSelected ? Color.clear : palette.border,
-                        lineWidth: 1
+                        isSelected ? palette.accent : palette.border,
+                        lineWidth: isSelected ? 2 : 1
                     )
             )
         }
         .buttonStyle(.plain)
-        .animation(BPAnimation.selection, value: isSelected)
     }
 
     // MARK: - Purchase
@@ -266,7 +222,7 @@ struct SummaryPaywallView: View {
                 viewModel.goNext()
             }
         } catch is CancellationError {
-            // User cancelled — no alert needed
+            // User cancelled
         } catch StoreKitService.StoreError.failedVerification {
             purchaseError = "Purchase could not be verified. Please try again."
         } catch {

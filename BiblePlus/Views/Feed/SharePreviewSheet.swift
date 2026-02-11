@@ -13,7 +13,7 @@ struct SharePreviewSheet: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 20) {
+            VStack(spacing: 16) {
                 // Aspect ratio picker
                 Picker("Format", selection: $selectedRatio) {
                     ForEach(ShareAspectRatio.allCases) { ratio in
@@ -24,18 +24,26 @@ struct SharePreviewSheet: View {
                 .pickerStyle(.segmented)
                 .padding(.horizontal, 24)
 
-                // Live preview
-                ShareCardView(
-                    content: content,
-                    displayText: displayText,
-                    theme: theme,
-                    aspectRatio: selectedRatio
-                )
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
-                .padding(.horizontal, 24)
+                // Scaled card preview
+                GeometryReader { geo in
+                    let cardWidth = selectedRatio.size.width / 3.0
+                    let cardHeight = selectedRatio.size.height / 3.0
+                    let scaleX = (geo.size.width - 48) / cardWidth
+                    let scaleY = geo.size.height / cardHeight
+                    let scale = min(scaleX, scaleY, 1.0)
 
-                Spacer()
+                    ShareCardView(
+                        content: content,
+                        displayText: displayText,
+                        theme: theme,
+                        aspectRatio: selectedRatio
+                    )
+                    .clipShape(RoundedRectangle(cornerRadius: 12 / scale))
+                    .scaleEffect(scale)
+                    .frame(width: cardWidth * scale, height: cardHeight * scale)
+                    .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
 
                 // Share button
                 GoldButton(title: "Share") {

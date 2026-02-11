@@ -9,7 +9,7 @@ struct WidgetSetupView: View {
     private let steps: [(icon: String, title: String, description: String)] = [
         ("hand.tap", "Long press your Home Screen", "Press and hold on an empty area until the apps start wiggling."),
         ("plus.circle", "Tap the + button", "Look for the + button in the top left corner of your screen."),
-        ("magnifyingglass", "Search for Bible Plus", "Type \"Bible Plus\" in the search bar to find our widgets."),
+        ("magnifyingglass", "Search for Bible+", "Type \"Bible+\" in the search bar to find our widgets."),
         ("square.grid.2x2", "Choose a widget", "Pick your favorite size and tap \"Add Widget\" to place it."),
     ]
 
@@ -18,7 +18,7 @@ struct WidgetSetupView: View {
             Spacer().frame(height: 24)
 
             VStack(spacing: 10) {
-                Text("Add Bible Plus\nto your Home Screen")
+                Text("Add Bible+\nto your Home Screen")
                     .font(BPFont.headingMedium)
                     .foregroundStyle(palette.textPrimary)
                     .multilineTextAlignment(.center)
