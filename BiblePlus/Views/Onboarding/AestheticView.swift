@@ -1,0 +1,63 @@
+import SwiftUI
+
+struct AestheticView: View {
+    @Bindable var viewModel: OnboardingViewModel
+    @State private var showContent = false
+
+    private let columns = [
+        GridItem(.flexible(), spacing: 16),
+        GridItem(.flexible(), spacing: 16),
+    ]
+
+    var body: some View {
+        VStack(spacing: 0) {
+            Spacer().frame(height: 24)
+
+            VStack(spacing: 10) {
+                Text("Make Bible Plus\nfeel like yours, \(viewModel.firstName).")
+                    .font(BPFont.headingMedium)
+                    .foregroundStyle(BPColorPalette.light.textPrimary)
+                    .multilineTextAlignment(.center)
+
+                Text("50+ more backgrounds available inside.")
+                    .font(BPFont.reference)
+                    .foregroundStyle(BPColorPalette.light.textMuted)
+            }
+            .opacity(showContent ? 1 : 0)
+
+            Spacer().frame(height: 20)
+
+            ScrollView(showsIndicators: false) {
+                LazyVGrid(columns: columns, spacing: 16) {
+                    ForEach(Array(ThemeDefinition.allThemes.enumerated()), id: \.element.id) {
+                        index, theme in
+                        ThemeCarouselCard(
+                            theme: theme,
+                            isSelected: viewModel.selectedThemeID == theme.id,
+                            userName: viewModel.firstName,
+                            action: { viewModel.selectedThemeID = theme.id }
+                        )
+                        .opacity(showContent ? 1 : 0)
+                        .animation(BPAnimation.staggered(index: index), value: showContent)
+                    }
+                }
+                .padding(.horizontal, 24)
+            }
+
+            Spacer().frame(height: 16)
+
+            GoldButton(
+                title: "Continue",
+                action: { viewModel.goNext() }
+            )
+            .padding(.horizontal, 32)
+
+            Spacer().frame(height: 40)
+        }
+        .onAppear {
+            withAnimation {
+                showContent = true
+            }
+        }
+    }
+}
