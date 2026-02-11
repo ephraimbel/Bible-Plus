@@ -15,6 +15,7 @@ final class PrayerContent {
     var faithLevelMin: FaithLevel
     var isProOnly: Bool
     var isSaved: Bool
+    var seedVersion: Int
     var createdAt: Date
 
     init(
@@ -29,7 +30,8 @@ final class PrayerContent {
         applicableBurdens: [Burden] = [],
         faithLevelMin: FaithLevel = .justCurious,
         isProOnly: Bool = false,
-        isSaved: Bool = false
+        isSaved: Bool = false,
+        seedVersion: Int = 1
     ) {
         self.id = id
         self.type = type
@@ -43,6 +45,7 @@ final class PrayerContent {
         self.faithLevelMin = faithLevelMin
         self.isProOnly = isProOnly
         self.isSaved = isSaved
+        self.seedVersion = seedVersion
         self.createdAt = Date()
     }
 }
