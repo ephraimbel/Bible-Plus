@@ -119,14 +119,10 @@ private struct FeedContentView: View {
             )
         }
         .sheet(isPresented: $showSoundscapePicker) {
-            if let sanctuaryVM {
-                SoundscapePickerView(vm: sanctuaryVM)
-            }
+            SoundscapePickerView(vm: getOrCreateSanctuaryVM())
         }
         .sheet(isPresented: $showBackgroundPicker) {
-            if let sanctuaryVM {
-                BackgroundPickerView(vm: sanctuaryVM)
-            }
+            BackgroundPickerView(vm: getOrCreateSanctuaryVM())
         }
         .onReceive(NotificationCenter.default.publisher(for: SettingsViewModel.personalizationDidChange)) { _ in
             scrollPosition = 0
