@@ -41,6 +41,7 @@ private struct BibleContentView: View {
     @State private var searchViewModel: BibleSearchViewModel?
     @State private var showAudioProGate = false
     @State private var showVoicePicker = false
+    @State private var showImmersiveListening = false
 
     // MARK: - Page Flip State
 
@@ -51,6 +52,13 @@ private struct BibleContentView: View {
     @State private var cachedChapterTitle: String = ""
     @State private var cachedSavedVerseNumbers: Set<Int> = []
     @State private var cachedHighlightColors: [Int: VerseHighlightColor] = [:]
+
+    private var resolvedBackground: SanctuaryBackground {
+        let descriptor = FetchDescriptor<UserProfile>()
+        let bgID = (try? modelContext.fetch(descriptor).first?.selectedBackgroundID) ?? "warm-gold"
+        return SanctuaryBackground.background(for: bgID)
+            ?? SanctuaryBackground.allBackgrounds[0]
+    }
 
     private var paperColor: Color {
         colorScheme == .dark
@@ -116,6 +124,28 @@ private struct BibleContentView: View {
             translation: viewModel.currentTranslation,
             versesProvider: versesProvider
         )
+    }
+
+    // MARK: - Immersive Listening
+
+    private func handleImmersiveListeningTap() {
+        if audioService.hasActivePlayback {
+            showImmersiveListening = true
+            return
+        }
+
+        // Rate limit check for fresh playback
+        let descriptor = FetchDescriptor<UserProfile>()
+        let isPro = (try? modelContext.fetch(descriptor).first?.isPro) ?? false
+
+        guard AudioBibleService.canPlayChapter(isPro: isPro) else {
+            showAudioProGate = true
+            return
+        }
+
+        guard !viewModel.verses.isEmpty else { return }
+
+        showImmersiveListening = true
     }
 
     // MARK: - Page Flip
@@ -373,6 +403,19 @@ private struct BibleContentView: View {
 
             ToolbarItem(placement: .topBarTrailing) {
                 HStack(spacing: 12) {
+                    // Immersive listening
+                    Button {
+                        handleImmersiveListeningTap()
+                    } label: {
+                        Image(systemName: "tv.and.mediabox")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundStyle(
+                                audioService.hasActivePlayback
+                                    ? palette.accent
+                                    : palette.textSecondary
+                            )
+                    }
+
                     // Voice picker
                     Button {
                         showVoicePicker = true
@@ -532,6 +575,14 @@ private struct BibleContentView: View {
             Button("OK", role: .cancel) {}
         } message: {
             Text("You've listened to your free chapter. Upgrade to Bible+ Pro for unlimited Audio Bible.")
+        }
+        .fullScreenCover(isPresented: $showImmersiveListening) {
+            ImmersiveListeningView(
+                viewModel: viewModel,
+                audioService: audioService,
+                background: resolvedBackground,
+                wasAlreadyPlaying: audioService.hasActivePlayback
+            )
         }
         .onAppear {
             // Load saved voice preference
