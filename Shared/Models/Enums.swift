@@ -531,14 +531,18 @@ struct SanctuaryBackground: Identifiable, Hashable {
     let collection: BackgroundCollection
     let gradientColors: [String]
     let imageName: String?
+    let videoFileName: String?
     let isProOnly: Bool
 
-    init(id: String, name: String, collection: BackgroundCollection, gradientColors: [String], imageName: String? = nil, isProOnly: Bool = false) {
+    var hasVideo: Bool { videoFileName != nil }
+
+    init(id: String, name: String, collection: BackgroundCollection, gradientColors: [String], imageName: String? = nil, videoFileName: String? = nil, isProOnly: Bool = false) {
         self.id = id
         self.name = name
         self.collection = collection
         self.gradientColors = gradientColors
         self.imageName = imageName
+        self.videoFileName = videoFileName
         self.isProOnly = isProOnly
     }
 
@@ -605,16 +609,20 @@ struct SanctuaryBackground: Identifiable, Hashable {
             SanctuaryBackground(id: "palm-sunday", name: "Palm Sunday", collection: .seasonal, gradientColors: ["33691E", "558B2F", "7CB342"], isProOnly: true),
         ])
 
-        // MARK: Animated (8 — all Pro)
+        // MARK: Animated (12 — all Pro, video backgrounds)
         bgs.append(contentsOf: [
-            SanctuaryBackground(id: "flowing-water", name: "Flowing Water", collection: .animated, gradientColors: ["1A5276", "2980B9", "5DADE2"], isProOnly: true),
-            SanctuaryBackground(id: "candle-flicker", name: "Candle Flicker", collection: .animated, gradientColors: ["4A2800", "8B5E14", "C9A96E"], isProOnly: true),
-            SanctuaryBackground(id: "starfield", name: "Starfield", collection: .animated, gradientColors: ["0A0A1A", "14142D", "1E1E40"], isProOnly: true),
-            SanctuaryBackground(id: "gentle-rain", name: "Gentle Rain", collection: .animated, gradientColors: ["37474F", "546E7A", "78909C"], isProOnly: true),
-            SanctuaryBackground(id: "cloud-drift", name: "Cloud Drift", collection: .animated, gradientColors: ["4A6FA5", "6B8FC4", "A8C8E8"], isProOnly: true),
-            SanctuaryBackground(id: "ember-particles", name: "Ember Particles", collection: .animated, gradientColors: ["1A0A00", "4A1A08", "8B3A10"], isProOnly: true),
-            SanctuaryBackground(id: "aurora-wave", name: "Aurora Wave", collection: .animated, gradientColors: ["0D2137", "1A4A4A", "2D8A6A"], isProOnly: true),
-            SanctuaryBackground(id: "golden-dust", name: "Golden Dust", collection: .animated, gradientColors: ["1A1408", "3D3014", "6B5424"], isProOnly: true),
+            SanctuaryBackground(id: "flowing-water", name: "Flowing Water", collection: .animated, gradientColors: ["1A5276", "2980B9", "5DADE2"], videoFileName: "water-ripples", isProOnly: true),
+            SanctuaryBackground(id: "candle-flicker", name: "Candle Flicker", collection: .animated, gradientColors: ["4A2800", "8B5E14", "C9A96E"], videoFileName: "candlelight", isProOnly: true),
+            SanctuaryBackground(id: "starfield", name: "Starfield", collection: .animated, gradientColors: ["0A0A1A", "14142D", "1E1E40"], videoFileName: "starry-night", isProOnly: true),
+            SanctuaryBackground(id: "gentle-rain", name: "Gentle Rain", collection: .animated, gradientColors: ["37474F", "546E7A", "78909C"], videoFileName: "rain-window", isProOnly: true),
+            SanctuaryBackground(id: "cloud-drift", name: "Cloud Drift", collection: .animated, gradientColors: ["4A6FA5", "6B8FC4", "A8C8E8"], videoFileName: "clouds-moving", isProOnly: true),
+            SanctuaryBackground(id: "aurora-wave", name: "Aurora Wave", collection: .animated, gradientColors: ["0D2137", "1A4A4A", "2D8A6A"], videoFileName: "milky-way", isProOnly: true),
+            SanctuaryBackground(id: "golden-dust", name: "Golden Dust", collection: .animated, gradientColors: ["1A1408", "3D3014", "6B5424"], videoFileName: "golden-lake", isProOnly: true),
+            SanctuaryBackground(id: "ember-particles", name: "Shimmering Sea", collection: .animated, gradientColors: ["1A0A00", "4A1A08", "8B3A10"], videoFileName: "water-glistening", isProOnly: true),
+            SanctuaryBackground(id: "ocean-aerial", name: "Ocean Aerial", collection: .animated, gradientColors: ["0A3D5C", "1A6B8A", "2E9AB8"], videoFileName: "ocean-aerial", isProOnly: true),
+            SanctuaryBackground(id: "ocean-waves", name: "Ocean Waves", collection: .animated, gradientColors: ["0D4F6B", "1A7A9E", "3AACCC"], videoFileName: "ocean-waves", isProOnly: true),
+            SanctuaryBackground(id: "sunset-clouds", name: "Sunset Clouds", collection: .animated, gradientColors: ["8B3A1A", "C96B3A", "E8A060"], videoFileName: "sunset-clouds", isProOnly: true),
+            SanctuaryBackground(id: "mountain-clouds", name: "Mountain Clouds", collection: .animated, gradientColors: ["3A4A5A", "5A6A7A", "8A9AAA"], videoFileName: "mountain-clouds", isProOnly: true),
         ])
 
         return bgs

@@ -71,12 +71,17 @@ private struct SanctuaryContentView: View {
 
     // MARK: - Background
 
+    @ViewBuilder
     private var backgroundLayer: some View {
-        LinearGradient(
-            colors: vm.selectedBackground.gradientColors.map { Color(hex: $0) },
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-        )
+        if let videoName = vm.selectedBackground.videoFileName {
+            LoopingVideoPlayer(videoName: videoName)
+        } else {
+            LinearGradient(
+                colors: vm.selectedBackground.gradientColors.map { Color(hex: $0) },
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        }
     }
 
     // MARK: - Top Bar
