@@ -3,18 +3,9 @@ import Foundation
 enum AIService {
     private static let endpoint = URL(string: "https://api.openai.com/v1/chat/completions")!
     private static let model = "gpt-4o-mini"
-    private static let apiKeyKey = "openai_api_key"
-
     // MARK: - API Key
 
-    static var apiKey: String {
-        get { UserDefaults.standard.string(forKey: apiKeyKey) ?? "" }
-        set { UserDefaults.standard.set(newValue, forKey: apiKeyKey) }
-    }
-
-    static var hasAPIKey: Bool {
-        !apiKey.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-    }
+    static var apiKey: String { Secrets.openAIAPIKey }
 
     // MARK: - System Prompt
 
@@ -64,10 +55,6 @@ enum AIService {
         messages: [(role: String, content: String)],
         onToken: @escaping (String) -> Void
     ) async throws {
-        guard hasAPIKey else {
-            throw AIError.noAPIKey
-        }
-
         let body: [String: Any] = [
             "model": model,
             "messages": messages.map { ["role": $0.role, "content": $0.content] },
@@ -120,15 +107,12 @@ enum AIService {
 // MARK: - Errors
 
 enum AIError: LocalizedError {
-    case noAPIKey
     case invalidResponse
     case apiError(statusCode: Int, message: String)
     case rateLimited
 
     var errorDescription: String? {
         switch self {
-        case .noAPIKey:
-            "Please add your OpenAI API key in Settings to use the AI companion."
         case .invalidResponse:
             "Received an invalid response. Please try again."
         case .apiError(let code, _):

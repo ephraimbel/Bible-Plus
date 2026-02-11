@@ -1,0 +1,152 @@
+{
+  "translation": "KJV",
+  "books": {
+    "GEN": {
+      "1": {
+        "1": "In the beginning God created the heaven and the earth.",
+        "2": "And the earth was without form, and void; and darkness was upon the face of the deep. And the Spirit of God moved upon the face of the waters.",
+        "3": "And God said, Let there be light: and there was light.",
+        "4": "And God saw the light, that it was good: and God divided the light from the darkness.",
+        "5": "And God called the light Day, and the darkness he called Night. And the evening and the morning were the first day.",
+        "6": "And God said, Let there be a firmament in the midst of the waters, and let it divide the waters from the waters.",
+        "7": "And God made the firmament, and divided the waters which were under the firmament from the waters which were above the firmament: and it was so.",
+        "8": "And God called the firmament Heaven. And the evening and the morning were the second day.",
+        "9": "And God said, Let the waters under the heaven be gathered together unto one place, and let the dry land appear: and it was so.",
+        "10": "And God called the dry land Earth; and the gathering together of the waters called he Seas: and God saw that it was good.",
+        "11": "And God said, Let the earth bring forth grass, the herb yielding seed, and the fruit tree yielding fruit after his kind, whose seed is in itself, upon the earth: and it was so.",
+        "12": "And the earth brought forth grass, and herb yielding seed after his kind, and the tree yielding fruit, whose seed was in itself, after his kind: and God saw that it was good.",
+        "13": "And the evening and the morning were the third day.",
+        "14": "And God said, Let there be lights in the firmament of the heaven to divide the day from the night; and let them be for signs, and for seasons, and for days, and years:",
+        "15": "And let them be for lights in the firmament of the heaven to give light upon the earth: and it was so.",
+        "16": "And God made two great lights; the greater light to rule the day, and the lesser light to rule the night: he made the stars also.",
+        "17": "And God set them in the firmament of the heaven to give light upon the earth,",
+        "18": "And to rule over the day and over the night, and to divide the light from the darkness: and God saw that it was good.",
+        "19": "And the evening and the morning were the fourth day.",
+        "20": "And God said, Let the waters bring forth abundantly the moving creature that hath life, and fowl that may fly above the earth in the open firmament of heaven.",
+        "21": "And God created great whales, and every living creature that moveth, which the waters brought forth abundantly, after their kind, and every winged fowl after his kind: and God saw that it was good.",
+        "22": "And God blessed them, saying, Be fruitful, and multiply, and fill the waters in the seas, and let fowl multiply in the earth.",
+        "23": "And the evening and the morning were the fifth day.",
+        "24": "And God said, Let the earth bring forth the living creature after his kind, cattle, and creeping thing, and beast of the earth after his kind: and it was so.",
+        "25": "And God made the beast of the earth after his kind, and cattle after their kind, and every thing that creepeth upon the earth after his kind: and God saw that it was good.",
+        "26": "And God said, Let us make man in our image, after our likeness: and let them have dominion over the fish of the sea, and over the fowl of the air, and over the cattle, and over all the earth, and over every creeping thing that creepeth upon the earth.",
+        "27": "So God created man in his own image, in the image of God created he him; male and female created he them.",
+        "28": "And God blessed them, and God said unto them, Be fruitful, and multiply, and replenish the earth, and subdue it: and have dominion over the fish of the sea, and over the fowl of the air, and over every living thing that moveth upon the earth.",
+        "29": "And God said, Behold, I have given you every herb bearing seed, which is upon the face of all the earth, and every tree, in the which is the fruit of a tree yielding seed; to you it shall be for meat.",
+        "30": "And to every beast of the earth, and to every fowl of the air, and to every thing that creepeth upon the earth, wherein there is life, I have given every green herb for meat: and it was so.",
+        "31": "And God saw every thing that he had made, and, behold, it was very good. And the evening and the morning were the sixth day."
+      }
+    },
+    "PSA": {
+      "23": {
+        "1": "The LORD is my shepherd; I shall not want.",
+        "2": "He maketh me to lie down in green pastures: he leadeth me beside the still waters.",
+        "3": "He restoreth my soul: he leadeth me in the paths of righteousness for his name's sake.",
+        "4": "Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me.",
+        "5": "Thou preparest a table before me in the presence of mine enemies: thou anointest my head with oil; my cup runneth over.",
+        "6": "Surely goodness and mercy shall follow me all the days of my life: and I will dwell in the house of the LORD for ever."
+      }
+    },
+    "JHN": {
+      "3": {
+        "1": "There was a man of the Pharisees, named Nicodemus, a ruler of the Jews:",
+        "2": "The same came to Jesus by night, and said unto him, Rabbi, we know that thou art a teacher come from God: for no man can do these miracles that thou doest, except God be with him.",
+        "3": "Jesus answered and said unto him, Verily, verily, I say unto thee, Except a man be born again, he cannot see the kingdom of God.",
+        "4": "Nicodemus saith unto him, How can a man be born when he is old? can he enter the second time into his mother's womb, and be born?",
+        "5": "Jesus answered, Verily, verily, I say unto thee, Except a man be born of water and of the Spirit, he cannot enter into the kingdom of God.",
+        "6": "That which is born of the flesh is flesh; and that which is born of the Spirit is spirit.",
+        "7": "Marvel not that I said unto thee, Ye must be born again.",
+        "8": "The wind bloweth where it listeth, and thou hearest the sound thereof, but canst not tell whence it cometh, and whither it goeth: so is every one that is born of the Spirit.",
+        "9": "Nicodemus answered and said unto him, How can these things be?",
+        "10": "Jesus answered and said unto him, Art thou a master of Israel, and knowest not these things?",
+        "11": "Verily, verily, I say unto thee, We speak that we do know, and testify that we have seen; and ye receive not our witness.",
+        "12": "If I have told you earthly things, and ye believe not, how shall ye believe, if I tell you of heavenly things?",
+        "13": "And no man hath ascended up to heaven, but he that came down from heaven, even the Son of man which is in heaven.",
+        "14": "And as Moses lifted up the serpent in the wilderness, even so must the Son of man be lifted up:",
+        "15": "That whosoever believeth in him should not perish, but have eternal life.",
+        "16": "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.",
+        "17": "For God sent not his Son into the world to condemn the world; but that the world through him might be saved.",
+        "18": "He that believeth on him is not condemned: but he that believeth not is condemned already, because he hath not believed in the name of the only begotten Son of God.",
+        "19": "And this is the condemnation, that light is come into the world, and men loved darkness rather than light, because their deeds were evil.",
+        "20": "For every one that doeth evil hateth the light, neither cometh to the light, lest his deeds should be reproved.",
+        "21": "But he that doeth truth cometh to the light, that his deeds may be made manifest, that they are wrought in God."
+      }
+    },
+    "ROM": {
+      "8": {
+        "1": "There is therefore now no condemnation to them which are in Christ Jesus, who walk not after the flesh, but after the Spirit.",
+        "2": "For the law of the Spirit of life in Christ Jesus hath made me free from the law of sin and death.",
+        "3": "For what the law could not do, in that it was weak through the flesh, God sending his own Son in the likeness of sinful flesh, and for sin, condemned sin in the flesh:",
+        "4": "That the righteousness of the law might be fulfilled in us, who walk not after the flesh, but after the Spirit.",
+        "5": "For they that are after the flesh do mind the things of the flesh; but they that are after the Spirit the things of the Spirit.",
+        "6": "For to be carnally minded is death; but to be spiritually minded is life and peace.",
+        "7": "Because the carnal mind is enmity against God: for it is not subject to the law of God, neither indeed can be.",
+        "8": "So then they that are in the flesh cannot please God.",
+        "9": "But ye are not in the flesh, but in the Spirit, if so be that the Spirit of God dwell in you. Now if any man have not the Spirit of Christ, he is none of his.",
+        "10": "And if Christ be in you, the body is dead because of sin; but the Spirit is life because of righteousness.",
+        "11": "But if the Spirit of him that raised up Jesus from the dead dwell in you, he that raised up Christ from the dead shall also quicken your mortal bodies by his Spirit that dwelleth in you.",
+        "12": "Therefore, brethren, we are debtors, not to the flesh, to live after the flesh.",
+        "13": "For if ye live after the flesh, ye shall die: but if ye through the Spirit do mortify the deeds of the body, ye shall live.",
+        "14": "For as many as are led by the Spirit of God, they are the sons of God.",
+        "15": "For ye have not received the spirit of bondage again to fear; but ye have received the Spirit of adoption, whereby we cry, Abba, Father.",
+        "16": "The Spirit itself beareth witness with our spirit, that we are the children of God:",
+        "17": "And if children, then heirs; heirs of God, and joint-heirs with Christ; if so be that we suffer with him, that we may be also glorified together.",
+        "18": "For I reckon that the sufferings of this present time are not worthy to be compared with the glory which shall be revealed in us.",
+        "19": "For the earnest expectation of the creature waiteth for the manifestation of the sons of God.",
+        "20": "For the creature was made subject to vanity, not willingly, but by reason of him who hath subjected the same in hope,",
+        "21": "Because the creature itself also shall be delivered from the bondage of corruption into the glorious liberty of the children of God.",
+        "22": "For we know that the whole creation groaneth and travaileth in pain together until now.",
+        "23": "And not only they, but ourselves also, which have the firstfruits of the Spirit, even we ourselves groan within ourselves, waiting for the adoption, to wit, the redemption of our body.",
+        "24": "For we are saved by hope: but hope that is seen is not hope: for what a man seeth, why doth he yet hope for?",
+        "25": "But if we hope for that we see not, then do we with patience wait for it.",
+        "26": "Likewise the Spirit also helpeth our infirmities: for we know not what we should pray for as we ought: but the Spirit itself maketh intercession for us with groanings which cannot be uttered.",
+        "27": "And he that searcheth the hearts knoweth what is the mind of the Spirit, because he maketh intercession for the saints according to the will of God.",
+        "28": "And we know that all things work together for good to them that love God, to them who are the called according to his purpose.",
+        "29": "For whom he did foreknow, he also did predestinate to be conformed to the image of his Son, that he might be the firstborn among many brethren.",
+        "30": "Moreover whom he did predestinate, them he also called: and whom he called, them he also justified: and whom he justified, them he also glorified.",
+        "31": "What shall we then say to these things? If God be for us, who can be against us?",
+        "32": "He that spared not his own Son, but delivered him up for us all, how shall he not with him also freely give us all things?",
+        "33": "Who shall lay any thing to the charge of God's elect? It is God that justifieth.",
+        "34": "Who is he that condemneth? It is Christ that died, yea rather, that is risen again, who is even at the right hand of God, who also maketh intercession for us.",
+        "35": "Who shall separate us from the love of Christ? shall tribulation, or distress, or persecution, or famine, or nakedness, or peril, or sword?",
+        "36": "As it is written, For thy sake we are killed all the day long; we are accounted as sheep for the slaughter.",
+        "37": "Nay, in all these things we are more than conquerors through him that loved us.",
+        "38": "For I am persuaded, that neither death, nor life, nor angels, nor principalities, nor powers, nor things present, nor things to come,",
+        "39": "Nor height, nor depth, nor any other creature, shall be able to separate us from the love of God, which is in Christ Jesus our Lord."
+      }
+    },
+    "1CO": {
+      "13": {
+        "1": "Though I speak with the tongues of men and of angels, and have not charity, I am become as sounding brass, or a tinkling cymbal.",
+        "2": "And though I have the gift of prophecy, and understand all mysteries, and all knowledge; and though I have all faith, so that I could remove mountains, and have not charity, I am nothing.",
+        "3": "And though I bestow all my goods to feed the poor, and though I give my body to be burned, and have not charity, it profiteth me nothing.",
+        "4": "Charity suffereth long, and is kind; charity envieth not; charity vaunteth not itself, is not puffed up,",
+        "5": "Doth not behave itself unseemly, seeketh not her own, is not easily provoked, thinketh no evil;",
+        "6": "Rejoiceth not in iniquity, but rejoiceth in the truth;",
+        "7": "Beareth all things, believeth all things, hopeth all things, endureth all things.",
+        "8": "Charity never faileth: but whether there be prophecies, they shall fail; whether there be tongues, they shall cease; whether there be knowledge, it shall vanish away.",
+        "9": "For we know in part, and we prophesy in part.",
+        "10": "But when that which is perfect is come, then that which is in part shall be done away.",
+        "11": "When I was a child, I spake as a child, I understood as a child, I thought as a child: but when I became a man, I put away childish things.",
+        "12": "For now we see through a glass, darkly; but then face to face: now I know in part; but then shall I know even as also I am known.",
+        "13": "And now abideth faith, hope, charity, these three; but the greatest of these is charity."
+      }
+    },
+    "PHP": {
+      "4": {
+        "1": "Therefore, my brethren dearly beloved and longed for, my joy and crown, so stand fast in the Lord, my dearly beloved.",
+        "2": "I beseech Euodias, and beseech Syntyche, that they be of the same mind in the Lord.",
+        "3": "And I intreat thee also, true yokefellow, help those women which laboured with me in the gospel, with Clement also, and with other my fellowlabourers, whose names are in the book of life.",
+        "4": "Rejoice in the Lord alway: and again I say, Rejoice.",
+        "5": "Let your moderation be known unto all men. The Lord is at hand.",
+        "6": "Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God.",
+        "7": "And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.",
+        "8": "Finally, brethren, whatsoever things are true, whatsoever things are honest, whatsoever things are just, whatsoever things are pure, whatsoever things are lovely, whatsoever things are of good report; if there be any virtue, and if there be any praise, think on these things.",
+        "9": "Those things, which ye have both learned, and received, and heard, and seen in me, do: and the God of peace shall be with you.",
+        "10": "But I rejoiced in the Lord greatly, that now at the last your care of me hath flourished again; wherein ye were also careful, but ye lacked opportunity.",
+        "11": "Not that I speak in respect of want: for I have learned, in whatsoever state I am, therewith to be content.",
+        "12": "I know both how to be abased, and I know how to abound: every where and in all things I am instructed both to be full and to be hungry, both to abound and to suffer need.",
+        "13": "I can do all things through Christ which strengtheneth me."
+      }
+    }
+  }
+}

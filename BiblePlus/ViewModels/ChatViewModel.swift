@@ -32,10 +32,6 @@ final class ChatViewModel {
             && !isStreaming
     }
 
-    var hasAPIKey: Bool {
-        AIService.hasAPIKey
-    }
-
     var messagesUsedToday: Int {
         AIService.messagesUsedToday(messages: messages)
     }
@@ -87,11 +83,6 @@ final class ChatViewModel {
 
         if isRateLimited {
             errorMessage = AIError.rateLimited.errorDescription
-            return
-        }
-
-        guard hasAPIKey else {
-            errorMessage = AIError.noAPIKey.errorDescription
             return
         }
 
