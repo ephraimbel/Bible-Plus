@@ -90,39 +90,12 @@ struct VoicePickerView: View {
             HapticService.selection()
             onSelect(voice)
         } label: {
-            HStack(spacing: 14) {
-                // Icon
-                ZStack {
-                    Circle()
-                        .fill(audioService.selectedVoice == voice
-                            ? palette.accent
-                            : palette.background)
-                        .frame(width: 40, height: 40)
-
-                    Image(systemName: voice.icon)
-                        .font(.system(size: 16))
-                        .foregroundStyle(audioService.selectedVoice == voice
-                            ? palette.background
-                            : palette.textSecondary)
-                }
-
-                // Text
+            HStack(spacing: 12) {
+                // Name and description
                 VStack(alignment: .leading, spacing: 3) {
-                    HStack(spacing: 6) {
-                        Text(voice.displayName)
-                            .font(BPFont.button)
-                            .foregroundStyle(palette.textPrimary)
-
-                        Text(voice.gender)
-                            .font(.system(size: 10, weight: .medium))
-                            .foregroundStyle(palette.textMuted)
-                            .padding(.horizontal, 6)
-                            .padding(.vertical, 2)
-                            .background(
-                                Capsule()
-                                    .fill(palette.background)
-                            )
-                    }
+                    Text(voice.displayName)
+                        .font(BPFont.button)
+                        .foregroundStyle(palette.textPrimary)
 
                     Text(voice.subtitle)
                         .font(BPFont.caption)

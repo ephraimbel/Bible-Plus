@@ -912,9 +912,7 @@ enum BibleVoice: String, CaseIterable, Identifiable, Codable {
     // Pro — Male
     case echo
     case ash
-    case verse
     case fable
-    case ballad
     case alloy
 
     // Pro — Female
@@ -930,56 +928,36 @@ enum BibleVoice: String, CaseIterable, Identifiable, Codable {
 
     var displayName: String {
         switch self {
-        case .onyx:    "The Preacher"
-        case .echo:    "The Shepherd"
-        case .ash:     "The Narrator"
-        case .verse:   "The Prophet"
-        case .fable:   "The Elder"
-        case .ballad:  "The Patriarch"
-        case .alloy:   "The Deacon"
-        case .nova:    "The Comforter"
-        case .shimmer: "The Psalmist"
-        case .coral:   "The Guide"
-        case .sage:    "The Sage"
+        case .onyx:    "Solomon"
+        case .echo:    "Elijah"
+        case .ash:     "Daniel"
+        case .fable:   "Arthur"
+        case .alloy:   "James"
+        case .nova:    "Grace"
+        case .shimmer: "Sarah"
+        case .coral:   "Hannah"
+        case .sage:    "Naomi"
         }
     }
 
     var subtitle: String {
         switch self {
-        case .onyx:    "Deep & authoritative"
+        case .onyx:    "Deep & commanding"
         case .echo:    "Warm & smooth"
-        case .ash:     "Clear & grounded"
-        case .verse:   "Dramatic & poetic"
-        case .fable:   "Weathered & wise old soul"
-        case .ballad:  "Warm & down-home country"
-        case .alloy:   "Steady & balanced"
-        case .nova:    "Warm & expressive"
-        case .shimmer: "Bright & melodic"
-        case .coral:   "Calm & clear"
-        case .sage:    "Gentle & wise"
+        case .ash:     "Clear & steady"
+        case .fable:   "Rich & expressive"
+        case .alloy:   "Calm & balanced"
+        case .nova:    "Warm & heartfelt"
+        case .shimmer: "Bright & gentle"
+        case .coral:   "Soft & clear"
+        case .sage:    "Tender & wise"
         }
     }
 
     var gender: String {
         switch self {
-        case .onyx, .echo, .ash, .verse, .fable, .ballad, .alloy: "Male"
+        case .onyx, .echo, .ash, .fable, .alloy: "Male"
         case .nova, .shimmer, .coral, .sage: "Female"
-        }
-    }
-
-    var icon: String {
-        switch self {
-        case .onyx:    "waveform"
-        case .echo:    "waveform.path"
-        case .ash:     "waveform.badge.mic"
-        case .verse:   "theatermasks"
-        case .fable:   "book.closed"
-        case .ballad:  "mountain.2"
-        case .alloy:   "person"
-        case .nova:    "sparkles"
-        case .shimmer: "music.note"
-        case .coral:   "leaf"
-        case .sage:    "moon.stars"
         }
     }
 
@@ -988,7 +966,7 @@ enum BibleVoice: String, CaseIterable, Identifiable, Codable {
     }
 
     static let freeVoices: [BibleVoice] = [.onyx]
-    static let proMaleVoices: [BibleVoice] = [.echo, .ash, .verse, .fable, .ballad, .alloy]
+    static let proMaleVoices: [BibleVoice] = [.echo, .ash, .fable, .alloy]
     static let proFemaleVoices: [BibleVoice] = [.nova, .shimmer, .coral, .sage]
 
     static func voice(for id: String) -> BibleVoice? {
