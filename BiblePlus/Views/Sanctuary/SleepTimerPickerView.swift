@@ -60,7 +60,11 @@ struct SleepTimerPickerView: View {
                     }
                 }
                 .listStyle(.insetGrouped)
+                .scrollContentBackground(.hidden)
+                .background(Color(hex: "2B2A27"))
+                .listRowBackground(Color(hex: "343330"))
             }
+            .background(Color(hex: "2B2A27"))
             .preferredColorScheme(.dark)
             .navigationTitle("Sleep Timer")
             .navigationBarTitleDisplayMode(.inline)

@@ -4,6 +4,7 @@ import AVFoundation
 struct BackgroundPickerView: View {
     @Bindable var vm: SanctuaryViewModel
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.bpPalette) private var palette
 
     private let columns = [
         GridItem(.flexible(), spacing: 12),
@@ -38,15 +39,18 @@ struct BackgroundPickerView: View {
                 }
                 .padding(20)
             }
+            .background(palette.background)
             .navigationTitle("Backgrounds")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(palette.background, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Done") { dismiss() }
-                        .foregroundStyle(Color(hex: "C9A96E"))
+                        .foregroundStyle(palette.accent)
                 }
             }
         }
+        .presentationBackground(palette.background)
     }
 
     @ViewBuilder
@@ -148,16 +152,23 @@ struct BackgroundPickerView: View {
         let asset = AVAsset(url: url)
         let generator = AVAssetImageGenerator(asset: asset)
         generator.appliesPreferredTrackTransform = true
-        generator.maximumSize = CGSize(width: 300, height: 300)
+        generator.maximumSize = CGSize(width: 400, height: 720)
 
-        let time = CMTime(seconds: 1, preferredTimescale: 600)
-        guard let cgImage = try? generator.copyCGImage(at: time, actualTime: nil) else {
-            return nil
+        // Try multiple times to get a non-black frame
+        let times: [CMTime] = [
+            CMTime(seconds: 2, preferredTimescale: 600),
+            CMTime(seconds: 1, preferredTimescale: 600),
+            CMTime(seconds: 0.5, preferredTimescale: 600),
+        ]
+        for time in times {
+            if let cgImage = try? generator.copyCGImage(at: time, actualTime: nil) {
+                let image = UIImage(cgImage: cgImage)
+                thumbnailCache[videoName] = image
+                return image
+            }
         }
 
-        let image = UIImage(cgImage: cgImage)
-        thumbnailCache[videoName] = image
-        return image
+        return nil
     }
 
     // MARK: - Image Preview

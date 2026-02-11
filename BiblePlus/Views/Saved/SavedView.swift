@@ -3,6 +3,7 @@ import SwiftData
 
 struct SavedView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.bpPalette) private var palette
     @State private var viewModel: SavedViewModel?
 
     var body: some View {
@@ -17,6 +18,7 @@ struct SavedView: View {
                 }
             }
             .navigationTitle("Saved")
+            .toolbarBackground(palette.background, for: .navigationBar)
         }
     }
 }
@@ -47,6 +49,7 @@ private struct SavedContentView: View {
                 collectionsTab
             }
         }
+        .background(palette.background)
     }
 
     // MARK: - Favorites Tab
@@ -71,6 +74,9 @@ private struct SavedContentView: View {
                 }
             }
             .listStyle(.insetGrouped)
+            .scrollContentBackground(.hidden)
+            .background(palette.background)
+            .listRowBackground(palette.surface)
         }
     }
 
@@ -94,6 +100,8 @@ private struct SavedContentView: View {
             Spacer()
         }
         .padding(.horizontal, 32)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(palette.background)
     }
 
     // MARK: - Verses Tab
@@ -115,6 +123,9 @@ private struct SavedContentView: View {
                 }
             }
             .listStyle(.insetGrouped)
+            .scrollContentBackground(.hidden)
+            .background(palette.background)
+            .listRowBackground(palette.surface)
         }
     }
 
@@ -177,6 +188,8 @@ private struct SavedContentView: View {
             Spacer()
         }
         .padding(.horizontal, 32)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(palette.background)
     }
 
     // MARK: - Collections Tab
@@ -205,6 +218,9 @@ private struct SavedContentView: View {
                 }
             }
             .listStyle(.insetGrouped)
+            .scrollContentBackground(.hidden)
+            .background(palette.background)
+            .listRowBackground(palette.surface)
         }
     }
 
@@ -228,5 +244,7 @@ private struct SavedContentView: View {
             Spacer()
         }
         .padding(.horizontal, 32)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(palette.background)
     }
 }

@@ -90,6 +90,8 @@ struct CollectionPickerSheet: View {
             Spacer()
         }
         .padding(.horizontal, 32)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(palette.background)
     }
 
     // MARK: - Collection List
@@ -102,6 +104,9 @@ struct CollectionPickerSheet: View {
             .onDelete(perform: deleteCollections)
         }
         .listStyle(.insetGrouped)
+        .scrollContentBackground(.hidden)
+        .background(palette.background)
+        .listRowBackground(palette.surface)
     }
 
     private func collectionRow(for collection: ContentCollection) -> some View {

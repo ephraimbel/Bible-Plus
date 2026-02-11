@@ -41,7 +41,11 @@ private struct SettingsContentView: View {
                 subscriptionSection
                 aboutSection
             }
+            .scrollContentBackground(.hidden)
+            .background(palette.background)
+            .listRowBackground(palette.surface)
             .navigationTitle("Settings")
+            .toolbarBackground(palette.background, for: .navigationBar)
             .sheet(isPresented: $vm.showEditName) {
                 EditNameSheet(vm: vm)
                     .presentationDetents([.medium])

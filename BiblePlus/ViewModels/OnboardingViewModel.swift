@@ -23,6 +23,7 @@ final class OnboardingViewModel {
 
     // MARK: - Services
     private let personalizationService: PersonalizationService
+    private let modelContext: ModelContext
     let audioService: SoundscapeService
     let storeKitService: StoreKitService
 
@@ -47,6 +48,7 @@ final class OnboardingViewModel {
     // MARK: - Init
 
     init(modelContext: ModelContext) {
+        self.modelContext = modelContext
         self.personalizationService = PersonalizationService(modelContext: modelContext)
         self.audioService = SoundscapeService()
         self.storeKitService = StoreKitService()
@@ -148,6 +150,7 @@ final class OnboardingViewModel {
             personalizationService.updateTranslation(selectedTranslation)
         case 6:
             personalizationService.updatePrayerTimes(Array(selectedPrayerTimes))
+            scheduleNotificationsIfNeeded()
         case 7:
             personalizationService.updateTheme(selectedThemeID)
             // Also set the matching background for the unified background system
@@ -158,5 +161,22 @@ final class OnboardingViewModel {
             break
         }
         personalizationService.save()
+    }
+
+    private func scheduleNotificationsIfNeeded() {
+        guard !selectedPrayerTimes.isEmpty else { return }
+        let profile = personalizationService.getOrCreateProfile()
+        let contentDescriptor = FetchDescriptor<PrayerContent>()
+        let allContent = (try? modelContext.fetch(contentDescriptor)) ?? []
+
+        Task { @MainActor in
+            let granted = await NotificationService.shared.requestAuthorization()
+            if granted {
+                NotificationService.shared.reschedule(
+                    profile: profile,
+                    content: allContent
+                )
+            }
+        }
     }
 }

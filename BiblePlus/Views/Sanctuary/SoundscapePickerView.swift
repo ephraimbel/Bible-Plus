@@ -3,6 +3,7 @@ import SwiftUI
 struct SoundscapePickerView: View {
     @Bindable var vm: SanctuaryViewModel
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.bpPalette) private var palette
 
     var body: some View {
         NavigationStack {
@@ -39,15 +40,18 @@ struct SoundscapePickerView: View {
                 }
                 .padding(.vertical, 16)
             }
+            .background(palette.background)
             .navigationTitle("Soundscapes")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(palette.background, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Done") { dismiss() }
-                        .foregroundStyle(Color(hex: "C9A96E"))
+                        .foregroundStyle(palette.accent)
                 }
             }
         }
+        .presentationBackground(palette.background)
     }
 
     @ViewBuilder

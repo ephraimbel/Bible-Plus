@@ -23,10 +23,15 @@ struct CollectionDetailView: View {
                     }
                 }
                 .listStyle(.insetGrouped)
+                .scrollContentBackground(.hidden)
+                .background(palette.background)
+                .listRowBackground(palette.surface)
             }
         }
+        .background(palette.background)
         .navigationTitle(collection.name)
         .navigationBarTitleDisplayMode(.large)
+        .toolbarBackground(palette.background, for: .navigationBar)
     }
 
     private var emptyState: some View {
@@ -49,6 +54,8 @@ struct CollectionDetailView: View {
             Spacer()
         }
         .padding(.horizontal, 32)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(palette.background)
     }
 
     private func deleteItems(at offsets: IndexSet, from items: [PrayerContent]) {

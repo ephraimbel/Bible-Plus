@@ -28,6 +28,7 @@ struct BibleSearchView: View {
             .background(palette.background)
             .navigationTitle("Search Bible")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(palette.background, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Done") { dismiss() }
@@ -35,6 +36,7 @@ struct BibleSearchView: View {
                 }
             }
         }
+        .presentationBackground(palette.background)
     }
 
     // MARK: - Search Field

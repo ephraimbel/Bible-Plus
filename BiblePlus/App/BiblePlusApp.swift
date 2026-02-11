@@ -1,9 +1,11 @@
 import SwiftUI
 import SwiftData
+import UserNotifications
 
 @main
 struct BiblePlusApp: App {
     let modelContainer: ModelContainer
+    @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
 
     init() {
         do {
@@ -13,6 +15,39 @@ struct BiblePlusApp: App {
             let seedContext = ModelContext(modelContainer)
             ContentSeeder.seedIfNeeded(modelContext: seedContext)
             ContentSeeder.migrateOrphanedMessages(modelContext: seedContext)
+
+            // DEBUG: Unlock Pro for testing — remove before release
+            let profileFetch = FetchDescriptor<UserProfile>()
+            if let profile = try? seedContext.fetch(profileFetch).first {
+                profile.isPro = true
+                try? seedContext.save()
+            }
+
+            // Refresh notification content on each launch
+            if let profile = try? seedContext.fetch(profileFetch).first,
+               profile.hasCompletedOnboarding,
+               !profile.prayerTimes.isEmpty {
+                let contentFetch = FetchDescriptor<PrayerContent>()
+                let allContent = (try? seedContext.fetch(contentFetch)) ?? []
+                let prayerTimes = profile.prayerTimes
+                let firstName = profile.firstName
+                let burdens = profile.currentBurdens
+                let seasons = profile.lifeSeasons
+                let faithLevel = profile.faithLevel
+                let isPro = profile.isPro
+                Task { @MainActor in
+                    // Build a lightweight profile snapshot for scheduling
+                    await NotificationService.shared.rescheduleFromSnapshot(
+                        prayerTimes: prayerTimes,
+                        firstName: firstName,
+                        burdens: burdens,
+                        seasons: seasons,
+                        faithLevel: faithLevel,
+                        isPro: isPro,
+                        content: allContent
+                    )
+                }
+            }
         } catch {
             fatalError("Failed to create ModelContainer: \(error)")
         }
@@ -23,6 +58,44 @@ struct BiblePlusApp: App {
             RootView()
         }
         .modelContainer(modelContainer)
+    }
+}
+
+// MARK: - App Delegate (Notification Handling)
+
+class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
+    ) -> Bool {
+        UNUserNotificationCenter.current().delegate = self
+        return true
+    }
+
+    // Show notification banner even when app is in foreground
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification
+    ) async -> UNNotificationPresentationOptions {
+        [.banner, .sound]
+    }
+
+    // Handle notification tap — deep link to content
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse
+    ) async {
+        let userInfo = response.notification.request.content.userInfo
+        if let idString = userInfo["contentID"] as? String,
+           let uuid = UUID(uuidString: idString) {
+            await MainActor.run {
+                NotificationCenter.default.post(
+                    name: .notificationDeepLink,
+                    object: nil,
+                    userInfo: ["contentID": uuid]
+                )
+            }
+        }
     }
 }
 

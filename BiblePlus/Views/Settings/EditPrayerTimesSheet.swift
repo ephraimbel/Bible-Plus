@@ -41,6 +41,9 @@ struct EditPrayerTimesSheet: View {
                     .foregroundStyle(palette.accent)
                 }
             }
+            .background(palette.background)
+            .toolbarBackground(palette.background, for: .navigationBar)
         }
+        .presentationBackground(palette.background)
     }
 }

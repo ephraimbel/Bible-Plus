@@ -24,6 +24,7 @@ struct ConversationListView: View {
             }
             .navigationTitle("Ask")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(palette.background, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {

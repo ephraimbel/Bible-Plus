@@ -64,6 +64,9 @@ struct EditNameSheet: View {
                 }
             }
             .onAppear { isFocused = true }
+            .background(palette.background)
+            .toolbarBackground(palette.background, for: .navigationBar)
         }
+        .presentationBackground(palette.background)
     }
 }

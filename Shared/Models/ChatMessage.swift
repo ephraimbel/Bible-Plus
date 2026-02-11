@@ -4,13 +4,18 @@ import SwiftData
 @Model
 final class ChatMessage {
     var id: UUID
-    var conversationId: UUID
+    var conversationId: UUID?
     var role: MessageRole
     var content: String
     var createdAt: Date
 
     /// Sentinel UUID used for legacy messages that predate conversation threading.
     static let legacyConversationId = UUID(uuidString: "00000000-0000-0000-0000-000000000000")!
+
+    /// Resolved conversation ID — returns legacyConversationId for migrated messages with nil.
+    var resolvedConversationId: UUID {
+        conversationId ?? Self.legacyConversationId
+    }
 
     init(
         id: UUID = UUID(),

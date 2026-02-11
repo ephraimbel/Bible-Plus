@@ -53,7 +53,20 @@ enum ContentSeeder {
         let convDescriptor = FetchDescriptor<Conversation>(
             predicate: #Predicate { $0.id == legacyId }
         )
-        guard (try? modelContext.fetch(convDescriptor))?.isEmpty == true else { return }
+        let legacyExists = !((try? modelContext.fetch(convDescriptor))?.isEmpty ?? true)
+
+        // Find messages with nil conversationId (from schema migration) and assign legacy ID
+        let nilDescriptor = FetchDescriptor<ChatMessage>(
+            predicate: #Predicate { $0.conversationId == nil }
+        )
+        if let nilMessages = try? modelContext.fetch(nilDescriptor), !nilMessages.isEmpty {
+            for msg in nilMessages {
+                msg.conversationId = legacyId
+            }
+            try? modelContext.save()
+        }
+
+        guard !legacyExists else { return }
 
         // Check if there are any orphaned messages with the sentinel ID
         let msgDescriptor = FetchDescriptor<ChatMessage>(

@@ -147,6 +147,20 @@ final class SettingsViewModel {
 
     func savePrayerTimes() {
         personalizationService.updatePrayerTimes(editingPrayerTimes)
+        rescheduleNotifications()
+    }
+
+    private func rescheduleNotifications() {
+        let contentDescriptor = FetchDescriptor<PrayerContent>()
+        let allContent = (try? modelContext.fetch(contentDescriptor)) ?? []
+        if profile.prayerTimes.isEmpty {
+            NotificationService.shared.cancelAll()
+        } else {
+            NotificationService.shared.reschedule(
+                profile: profile,
+                content: allContent
+            )
+        }
     }
 
     func updateColorMode(_ mode: ColorMode) {

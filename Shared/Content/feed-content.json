@@ -17880,5 +17880,4704 @@
     "faithLevelMin": "growing",
     "isProOnly": true,
     "seedVersion": 2
+  },
+  {
+    "type": "prayer",
+    "templateText": "Yahweh Sabaoth, {name} stands in the gap as an intercessor this morning. As Abraham pleaded for Sodom, give {name} boldness to contend for the lost. Let Your chesed — Your covenant lovingkindness — move through {name}'s prayers to shake the heavens.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Intercession",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "married"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, as Paul wrote to the Ephesians, {name} puts on the full armor of God today. Gird {name} with truth, the breastplate of righteousness, the shield of faith. Our struggle is not against flesh and blood. Strengthen {name} for the spiritual battle ahead.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Spiritual Warfare",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "temptation",
+      "doubt"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Holy Spirit, sanctify {name} — hagiasmos, set apart for Your purposes. Not through effort but through surrender. As the refiner's fire purges dross, burn away in {name} what does not reflect Christ. Make holiness not a burden but a delight.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Sanctification",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "single",
+      "student"
+    ],
+    "applicableBurdens": [
+      "temptation",
+      "purpose"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "El Shaddai, You who are God Almighty and All-Sufficient, {name} rests in Your covenant faithfulness tonight. What You promised to Abraham, confirmed through Isaac, and fulfilled in Christ — You will complete in {name}'s life. Your hesed endures forever.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Covenant Faithfulness",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "married",
+      "parent"
+    ],
+    "applicableBurdens": [
+      "doubt",
+      "anxiety"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord of the harvest, {name} prays for the advancement of Your kingdom. As Isaiah beheld Your throne and cried 'Here am I, send me,' stir that same holy willingness in {name}. Let the missio Dei flow through {name}'s ordinary days.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Kingdom Work",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "retired"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Abba Father, {name} enters Your throne room with parresia — bold confidence — through the blood of Jesus. As Hebrews 4:16 declares, {name} draws near to receive mercy and find grace for this present trial. You are our great High Priest who sympathizes with our weakness.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Intercession",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Jesus, You who trampled death by death, {name} declares victory over the principalities and powers arrayed against Your people. As Colossians 2:15 proclaims, You disarmed them at the cross. Let {name} stand firm in that finished work tonight.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Spiritual Warfare",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "single",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "temptation",
+      "loneliness"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God of all comfort, as {name} intercedes for the brokenhearted, let the paraklesis of 2 Corinthians 1:3-4 flow through these prayers. The comfort {name} has received in suffering, let it overflow to those who mourn. Multiply this intercession, Lord.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Intercession",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "parent",
+      "married"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "relationship"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, work Your theosis in {name} — not that we become gods, but that we become partakers of the divine nature as 2 Peter 1:4 promises. Transform {name} from glory to glory. Let the old nature die daily and the new creation emerge.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Sanctification",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "student",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "doubt"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Faithful God, Your berith — Your covenant — cannot be broken. As Jeremiah 31:33 declares, You write Your law on hearts, not tablets. {name} trusts that this new covenant, sealed in Christ's blood, holds {name} secure. Nothing can separate us from Your love.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Covenant Faithfulness",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "retired",
+      "single"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "doubt"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "King Jesus, advance Your kingdom through {name} today. As Daniel saw the stone not cut by human hands that filled the whole earth, let {name} labor with eschatological hope — knowing that every faithful act hastens the day of Your return.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Kingdom Work",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "financial"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Spirit of the living God, {name} asks for discernment — diakrisis — to distinguish truth from deception in this hour. Guard {name}'s mind as Philippians 4:7 promises, with a peace that surpasses all understanding. Keep {name} rooted in sound doctrine.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Spiritual Warfare",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "student",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "doubt",
+      "anxiety"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, {name} lifts the nations before You tonight. As Psalm 2 declares, You laugh at those who conspire against You. Your anointed King reigns. Give {name} a heart for the unreached — the ethne — and a boldness to pray for the Great Commission.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Kingdom Work",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "retired",
+      "married"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "none"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord Jesus, the author and perfecter of faith, continue Your sanctifying work in {name}. As the Potter shapes clay on the wheel, {name} yields to the pressure of Your hands. What feels like breaking is really forming. Complete what You have begun.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Sanctification",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "parent"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "health"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Jehovah Jireh, You who provided the ram for Abraham on Moriah, {name} trusts Your provision. The Aqedah foreshadowed Calvary — the Father offering His only Son. {name} rests in the finished provision of the cross for every need tonight.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Covenant Faithfulness",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "parent",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "financial",
+      "anxiety"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God of the shema, {name} declares: Hear, O Israel, the Lord our God, the Lord is one. With all heart, soul, and strength, {name} loves You. Let this ancient confession be not mere recitation but the burning center of {name}'s existence today.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Covenant Faithfulness",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "married",
+      "single"
+    ],
+    "applicableBurdens": [
+      "doubt",
+      "purpose"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Mighty God, as {name} contends against the accuser, remind {name} of Zechariah 3 — where Satan accused Joshua the high priest but You said 'The Lord rebuke you.' {name} stands clothed in Christ's righteousness, not our own. Silence every accusation.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Spiritual Warfare",
+    "timeOfDay": [
+      "midday",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "temptation",
+      "anger"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord of hosts, mobilize {name} for the kingdom work set before us. As Nehemiah rebuilt walls amid opposition, give {name} a trowel in one hand and a sword in the other. Build and battle simultaneously, for the work is great and the laborers are few.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Kingdom Work",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "anger"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, {name} sits in the tension of the 'already and not yet.' Your kingdom has come in Christ, yet we await its consummation. Teach {name} to live with holy dissatisfaction — longing for shalom while faithfully serving in the brokenness. Maranatha.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Kingdom Work",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "retired",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "purpose"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Though the fig tree should not blossom, nor fruit be on the vines, the produce of the olive fail and the fields yield no food, the flock be cut off from the fold and there be no herd in the stalls, yet I will rejoice in the Lord; I will take joy in the God of my salvation.",
+    "verseReference": "Habakkuk 3:17-18",
+    "verseText": null,
+    "category": "Trust in Suffering",
+    "timeOfDay": [
+      "morning",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "financial",
+      "doubt"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "The steadfast love of the Lord never ceases; his mercies never come to an end; they are new every morning; great is your faithfulness.",
+    "verseReference": "Lamentations 3:22-23",
+    "verseText": null,
+    "category": "God's Faithfulness",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "single"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "loneliness"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "The Lord your God is in your midst, a mighty one who will save; he will rejoice over you with gladness; he will quiet you by his love; he will exult over you with loud singing.",
+    "verseReference": "Zephaniah 3:17",
+    "verseText": null,
+    "category": "God's Love",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "single",
+      "parent"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "anxiety"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "He has told you, O man, what is good; and what does the Lord require of you but to do justice, and to love kindness, and to walk humbly with your God?",
+    "verseReference": "Micah 6:8",
+    "verseText": null,
+    "category": "Righteous Living",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "married"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "anger"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "He has made everything beautiful in its time. Also, he has put eternity into man's heart, yet so that he cannot find out what God has done from the beginning to the end.",
+    "verseReference": "Ecclesiastes 3:11",
+    "verseText": null,
+    "category": "God's Sovereignty",
+    "timeOfDay": [
+      "midday",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "retired",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "doubt"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Set me as a seal upon your heart, as a seal upon your arm, for love is strong as death, jealousy is fierce as the grave. Its flashes are flashes of fire, the very flame of the Lord.",
+    "verseReference": "Song of Solomon 8:6",
+    "verseText": null,
+    "category": "Divine Love",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "married",
+      "single"
+    ],
+    "applicableBurdens": [
+      "relationship",
+      "loneliness"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "For the word of God is living and active, sharper than any two-edged sword, piercing to the division of soul and of spirit, of joints and of marrow, and discerning the thoughts and intentions of the heart.",
+    "verseReference": "Hebrews 4:12",
+    "verseText": null,
+    "category": "Scripture's Power",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "student",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "doubt",
+      "temptation"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Count it all joy, my brothers, when you meet trials of various kinds, for you know that the testing of your faith produces steadfastness. And let steadfastness have its full effect, that you may be perfect and complete, lacking in nothing.",
+    "verseReference": "James 1:2-4",
+    "verseText": null,
+    "category": "Endurance",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "health",
+      "financial"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "But you are a chosen race, a royal priesthood, a holy nation, a people for his own possession, that you may proclaim the excellencies of him who called you out of darkness into his marvelous light.",
+    "verseReference": "1 Peter 2:9",
+    "verseText": null,
+    "category": "Identity in Christ",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "student",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "loneliness"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Beloved, do not be surprised at the fiery trial when it comes upon you to test you, as though something strange were happening to you. But rejoice insofar as you share Christ's sufferings, that you may also rejoice and be glad when his glory is revealed.",
+    "verseReference": "1 Peter 4:12-13",
+    "verseText": null,
+    "category": "Suffering & Glory",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "parent"
+    ],
+    "applicableBurdens": [
+      "health",
+      "grief"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Who is a God like you, pardoning iniquity and passing over transgression for the remnant of his inheritance? He does not retain his anger forever, because he delights in steadfast love.",
+    "verseReference": "Micah 7:18",
+    "verseText": null,
+    "category": "God's Mercy",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "startingOver",
+      "married"
+    ],
+    "applicableBurdens": [
+      "anger",
+      "relationship"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Remember not the former things, nor consider the things of old. Behold, I am doing a new thing; now it springs forth, do you not perceive it? I will make a way in the wilderness and rivers in the desert.",
+    "verseReference": "Isaiah 43:18-19",
+    "verseText": null,
+    "category": "New Beginnings",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "startingOver",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "purpose"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "I will give you the treasures of darkness and the hoards in secret places, that you may know that it is I, the Lord, the God of Israel, who call you by your name.",
+    "verseReference": "Isaiah 45:3",
+    "verseText": null,
+    "category": "God's Provision",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "single"
+    ],
+    "applicableBurdens": [
+      "doubt",
+      "financial"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "For we do not have a high priest who is unable to sympathize with our weaknesses, but one who in every respect has been tempted as we are, yet without sin. Let us then with confidence draw near to the throne of grace.",
+    "verseReference": "Hebrews 4:15-16",
+    "verseText": null,
+    "category": "Christ's Compassion",
+    "timeOfDay": [
+      "midday",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "temptation",
+      "health"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "devotional",
+    "templateText": "{name}, the Hebrew word 'kapar' (atonement) means 'to cover.' On Yom Kippur, the mercy seat was sprinkled with blood — a shadow of Christ, our true kapporeth (Romans 3:25). The OT covering was temporary; the NT fulfillment is eternal. {name}, you are not merely covered — you are cleansed.",
+    "verseReference": "Romans 3:25",
+    "verseText": null,
+    "category": "Covenant Theology",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "student",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "doubt",
+      "temptation"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "devotional",
+    "templateText": "{name}, Psalm 22 is a chiastic masterpiece. It opens with 'My God, my God, why have you forsaken me?' and closes with 'He has done it' — the Hebrew equivalent of tetelestai, 'It is finished.' Jesus quoted both bookends from the cross. The psalm's center? 'You are holy.' {name}, suffering and sovereignty meet at the cross.",
+    "verseReference": "Psalm 22:1-31",
+    "verseText": null,
+    "category": "Chiastic Structure",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "retired"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "doubt"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "devotional",
+    "templateText": "{name}, when Moses struck the rock at Meribah, water gushed forth for Israel. Paul reveals the typology: 'that Rock was Christ' (1 Cor 10:4). Christ was struck once at Calvary; living water now flows freely. {name}, you drink from a Rock that was broken for you.",
+    "verseReference": "1 Corinthians 10:4",
+    "verseText": null,
+    "category": "OT Types & Shadows",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "parent",
+      "married"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "health"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "devotional",
+    "templateText": "The Greek word 'metamorphoo' in Romans 12:2 is the same word used for Christ's transfiguration. {name}, the transformation Paul calls for is not cosmetic — it is transfiguration. The glory that shone from Jesus on the mountain is the same glory being formed in {name} through the renewing of your mind.",
+    "verseReference": "Romans 12:2",
+    "verseText": null,
+    "category": "Word Study",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "student",
+      "single"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "temptation"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "devotional",
+    "templateText": "{name}, Melchizedek appears without genealogy in Genesis 14 — no father, no mother, no beginning or end. Hebrews 7 reveals why: he was a type of Christ, whose priesthood is eternal, not Levitical. {name}, your mediator serves in an indestructible order that predates and surpasses the law.",
+    "verseReference": "Hebrews 7:3",
+    "verseText": null,
+    "category": "OT Types & Shadows",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "retired"
+    ],
+    "applicableBurdens": [
+      "doubt",
+      "purpose"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "devotional",
+    "templateText": "{name}, the tabernacle's veil was woven with cherubim — the same guardians posted at Eden's gate after the fall. When Christ died, that veil tore from top to bottom. The way back to God's presence, barred since Genesis 3, was flung open. {name}, you now enter Eden's garden restored.",
+    "verseReference": "Hebrews 10:19-20",
+    "verseText": null,
+    "category": "OT Types & Shadows",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "doubt"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "devotional",
+    "templateText": "The Hebrew word 'shalom' means far more than peace, {name}. It carries wholeness, completeness, nothing broken and nothing missing. When Jesus said 'My peace I give to you' (John 14:27), He offered the fullness of shalom — the restoration of all that sin fractured. {name}, this shalom is your inheritance.",
+    "verseReference": "John 14:27",
+    "verseText": null,
+    "category": "Word Study",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "married",
+      "parent"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "relationship"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "devotional",
+    "templateText": "{name}, in Exodus 12, the Passover lamb's blood on the doorposts formed the shape of a cross — top lintel, two side posts. Israel was saved through a cruciform doorway centuries before Calvary. Every Seder pointed forward to the Lamb of God. {name}, the whole story bends toward the cross.",
+    "verseReference": "1 Corinthians 5:7",
+    "verseText": null,
+    "category": "OT Types & Shadows",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "student",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "none"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "devotional",
+    "templateText": "{name}, the Greek 'anakainosis' (renewal) in Titus 3:5 shares its root with 'kainos' — not merely repaired but made qualitatively new. Regeneration is not God fixing the old {name}; it is God creating a new {name}. This is not renovation. This is resurrection.",
+    "verseReference": "Titus 3:5",
+    "verseText": null,
+    "category": "Word Study",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "startingOver",
+      "single"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "doubt"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "devotional",
+    "templateText": "Psalm 51 follows a chiastic structure, {name}: sin-confession at the edges, and at the center (v.10) — 'Create in me a clean heart.' The Hebrew 'bara' is used only of God's creative acts (Genesis 1:1). David asks not for improvement but for divine creation. {name}, only God can create cleanness ex nihilo.",
+    "verseReference": "Psalm 51:10",
+    "verseText": null,
+    "category": "Chiastic Structure",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "married"
+    ],
+    "applicableBurdens": [
+      "temptation",
+      "relationship"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, {name} is angry and struggling to hold it rightly. You overturned tables in the temple — You know the fire of righteous anger. But help {name} discern the line between holy indignation and sinful wrath. Do not let the sun go down on {name}'s anger tonight.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Anger & Patience",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "married",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "anger"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, {name} confesses the bitterness that has taken root. Someone has wounded {name} deeply and forgiveness feels impossible. But You forgave us while we were still sinners. Pour out Your grace so that {name} can release this person to You. Break the chain of resentment.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Forgiveness",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "parent",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "anger",
+      "relationship"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Jesus, {name} is carrying frustration that keeps boiling over — at work, at home, in every direction. Teach {name} to be quick to listen, slow to speak, and slow to become angry, just as James instructs. Replace this short fuse with Your long-suffering patience.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Anger & Patience",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "parent"
+    ],
+    "applicableBurdens": [
+      "anger",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, {name} has been wronged and the desire for revenge burns hot. But You said 'Vengeance is mine, I will repay.' Help {name} trust Your justice and lay down the need to even the score. {name} chooses to entrust this to You, the righteous judge.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Forgiveness",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "anger",
+      "relationship"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, the anger {name} feels toward this situation is heavy and exhausting. It steals {name}'s sleep and poisons {name}'s thoughts. Give rest to this weary heart. Teach that holding onto rage is like drinking poison. Heal the wound beneath the anger.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Anger & Patience",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "married",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "anger",
+      "health"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, {name} asks for the patience that only Your Spirit produces. Where anger has damaged relationships, bring healing. Where harsh words have been spoken, bring repentance. Give {name} a gentle answer that turns away wrath, as Proverbs teaches.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Anger & Patience",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "married",
+      "parent"
+    ],
+    "applicableBurdens": [
+      "anger",
+      "relationship"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Holy Spirit, search {name}'s heart and reveal the root of this anger. Is it unmet expectations? Pride? Fear? Injustice? Whatever the source, bring it into the light. {name} does not want to be mastered by wrath. Set {name} free from the cycle of rage and regret.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Anger & Patience",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "single",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "anger",
+      "temptation"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Jesus, Prince of Peace, {name} is tired of the outbursts and the shame that follows. Create in {name} a clean heart and a calm spirit. When provocation comes, let {name} pause before reacting. Replace the impulse to explode with the discipline to pray first.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Anger & Patience",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "student"
+    ],
+    "applicableBurdens": [
+      "anger"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, {name} chooses forgiveness today — not because the offense was small, but because Your forgiveness toward {name} was immeasurably great. Soften this hardened heart. Let {name} walk free from bitterness even while the wound still aches. Your grace is sufficient.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Forgiveness",
+    "timeOfDay": [
+      "midday",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "married"
+    ],
+    "applicableBurdens": [
+      "anger",
+      "grief"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, {name} is angry at circumstances that feel unjust. The world is broken and {name} aches for things to be made right. Channel this anger into holy purpose — not destruction. Let righteous frustration fuel prayer, service, and hope in {name}'s life.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Righteous Anger",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "parent"
+    ],
+    "applicableBurdens": [
+      "anger",
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Be angry and do not sin; do not let the sun go down on your anger, and give no opportunity to the devil.",
+    "verseReference": "Ephesians 4:26-27",
+    "verseText": null,
+    "category": "Anger",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "married",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "anger"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "A soft answer turns away wrath, but a harsh word stirs up anger.",
+    "verseReference": "Proverbs 15:1",
+    "verseText": null,
+    "category": "Patience",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "parent",
+      "married"
+    ],
+    "applicableBurdens": [
+      "anger",
+      "relationship"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Know this, my beloved brothers: let every person be quick to hear, slow to speak, slow to anger; for the anger of man does not produce the righteousness of God.",
+    "verseReference": "James 1:19-20",
+    "verseText": null,
+    "category": "Self-Control",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "student"
+    ],
+    "applicableBurdens": [
+      "anger"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Refrain from anger, and forsake wrath! Fret not yourself; it tends only to evil.",
+    "verseReference": "Psalm 37:8",
+    "verseText": null,
+    "category": "Anger",
+    "timeOfDay": [
+      "midday",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "anger",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Whoever is slow to anger has great understanding, but he who has a hasty temper exalts folly.",
+    "verseReference": "Proverbs 14:29",
+    "verseText": null,
+    "category": "Wisdom",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "parent",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "anger"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Jehovah Rapha, God who heals, {name} brings this broken body before You. The diagnosis is heavy and the road ahead uncertain. But You who formed every cell know how to restore. {name} trusts Your hands — the same hands that touched lepers and opened blind eyes.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Healing & Health",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "retired"
+    ],
+    "applicableBurdens": [
+      "health",
+      "anxiety"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, {name} is waiting for answers — test results, doctor's calls, the next scan. The waiting is its own kind of suffering. Hold {name} steady in this in-between space. Whether the news is hard or hopeful, {name} chooses to trust that You are sovereign over every cell.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Healing & Health",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "parent"
+    ],
+    "applicableBurdens": [
+      "health",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, {name} is weary from chronic pain that never fully relents. Some days the body feels like a prison. Yet even Paul had a thorn in the flesh and heard 'My grace is sufficient.' Let {name} find that sufficiency today — strength made perfect in weakness.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Chronic Illness",
+    "timeOfDay": [
+      "morning",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "married"
+    ],
+    "applicableBurdens": [
+      "health"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, {name} lifts up a loved one who is sick. It is agonizing to watch someone you cherish suffer. Give wisdom to the doctors, skill to the nurses, and supernatural peace to the family. Surround {name}'s loved one with Your healing presence tonight.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Healing & Health",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "parent",
+      "married"
+    ],
+    "applicableBurdens": [
+      "health",
+      "grief"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord Jesus, {name} struggles with mental health — the fog of depression, the weight of anxiety, the battles no one sees. You care about minds as much as souls. Lead {name} to the help that is needed and remove any shame. Healing the mind is holy work.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Mental Health",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "student",
+      "single"
+    ],
+    "applicableBurdens": [
+      "health",
+      "loneliness"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Heavenly Father, {name}'s body is fearfully and wonderfully made, even when it does not feel that way. In seasons of illness, remind {name} that identity is not found in health but in You. The outer self is wasting away, but the inner self is being renewed day by day.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Healing & Health",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "retired",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "health",
+      "doubt"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, {name} is exhausted — physically, emotionally, spiritually. The body aches and the spirit is flagging. As Elijah collapsed under the broom tree and You sent angels with bread and water, tend to {name} now. Give rest, nourishment, and the strength to take the next step.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Healing & Health",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "parent"
+    ],
+    "applicableBurdens": [
+      "health",
+      "anxiety"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, {name} asks for the courage to steward this body well — to rest when rest is needed, to seek help without shame, to accept limitations without losing hope. You dwell in {name} as a temple. Help {name} honor this body, broken though it may be, as sacred ground.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Healing & Health",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "single",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "health",
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, the treatment is hard and the side effects are relentless. {name} feels like giving up. But You sustain the weary and strengthen the feeble. Carry {name} through this valley. On the other side, let there be testimony of Your faithfulness. {name} holds on to You.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Chronic Illness",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "married"
+    ],
+    "applicableBurdens": [
+      "health",
+      "grief"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "He heals the brokenhearted and binds up their wounds.",
+    "verseReference": "Psalm 147:3",
+    "verseText": null,
+    "category": "Healing",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "single"
+    ],
+    "applicableBurdens": [
+      "health",
+      "grief"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "But he was pierced for our transgressions; he was crushed for our iniquities; upon him was the chastisement that brought us peace, and with his wounds we are healed.",
+    "verseReference": "Isaiah 53:5",
+    "verseText": null,
+    "category": "Healing",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "health"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "But he said to me, 'My grace is sufficient for you, for my power is made perfect in weakness.' Therefore I will boast all the more gladly of my weaknesses, so that the power of Christ may rest upon me.",
+    "verseReference": "2 Corinthians 12:9",
+    "verseText": null,
+    "category": "Strength in Weakness",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "parent"
+    ],
+    "applicableBurdens": [
+      "health",
+      "doubt"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Have you not known? Have you not heard? The Lord is the everlasting God, the Creator of the ends of the earth. He does not faint or grow weary; his understanding is unsearchable. He gives power to the faint, and to him who has no might he increases strength.",
+    "verseReference": "Isaiah 40:28-29",
+    "verseText": null,
+    "category": "God's Strength",
+    "timeOfDay": [
+      "morning",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "retired",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "health",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Is anyone among you sick? Let him call for the elders of the church, and let them pray over him, anointing him with oil in the name of the Lord. And the prayer of faith will save the one who is sick, and the Lord will raise him up.",
+    "verseReference": "James 5:14-15",
+    "verseText": null,
+    "category": "Healing Prayer",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "married",
+      "parent"
+    ],
+    "applicableBurdens": [
+      "health"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Adonai, {name} prays as the Levitical priests once did — standing in the gap between the living and the dead. As Aaron ran with the censer into the plague, let {name} intercede with urgency. The prayers of the righteous avail much. Move heaven on behalf of the broken.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Intercession",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "parent",
+      "retired"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "health"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Though he slay me, I will hope in him; yet I will argue my ways to his face.",
+    "verseReference": "Job 13:15",
+    "verseText": null,
+    "category": "Radical Trust",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "retired"
+    ],
+    "applicableBurdens": [
+      "health",
+      "grief"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, {name} confesses that anger toward You has been hidden beneath the surface. {name} is angry about what You have allowed. But like Job, bring this honestly before You rather than turning away. Meet {name} in the whirlwind and restore what questioning cannot.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Honest Anger",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "single"
+    ],
+    "applicableBurdens": [
+      "anger",
+      "doubt"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "quote",
+    "templateText": "So often we try to alter circumstances to suit ourselves, instead of letting them alter us, which is what they are meant to do. — Elisabeth Elliot",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Surrender",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "quote",
+    "templateText": "Worry does not empty tomorrow of its sorrow. It empties today of its strength. — Corrie ten Boom",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Peace & Anxiety",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "parent"
+    ],
+    "applicableBurdens": [
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "quote",
+    "templateText": "When we pray, God hears more than we say, answers more than we ask, gives more than we imagine, in His own time and in His own way. — Beth Moore",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Prayer",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "married",
+      "parent"
+    ],
+    "applicableBurdens": [
+      "doubt",
+      "relationship"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "quote",
+    "templateText": "When life is heavy and hard to take, go off by yourself. Enter the silence. Bow in prayer. Don't ask questions: Wait for hope to appear. — Joni Eareckson Tada",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Suffering & Hope",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "health",
+      "grief"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "quote",
+    "templateText": "God is not merely somewhere. He is everywhere. And He is not merely present everywhere; He is lovingly, purposefully present. — Jackie Hill Perry",
+    "verseReference": null,
+    "verseText": null,
+    "category": "God's Presence",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "single",
+      "student"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "doubt"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "quote",
+    "templateText": "The essence of optimism is that it takes no account of the present, but it is a source of inspiration, of vitality and hope where others have resigned; it enables a man to hold his head high, to claim the future for himself and not to abandon it to his enemy. — Dietrich Bonhoeffer",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Hope & Endurance",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "quote",
+    "templateText": "The Lord may not come when you want Him, but He is always right on time. — Watchman Nee",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Trust & Patience",
+    "timeOfDay": [
+      "midday",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "student"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "doubt"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "quote",
+    "templateText": "You have made us for Yourself, O Lord, and our hearts are restless until they rest in You. — Augustine",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Longing for God",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "single",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "quote",
+    "templateText": "The secret of happiness is not found in seeking more, but in developing the capacity to enjoy less. — Brother Andrew",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Contentment",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "retired",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "financial",
+      "none"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "quote",
+    "templateText": "Do your little bit of good where you are; it's those little bits of good put together that overwhelm the world. — Desmond Tutu",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Purpose & Service",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "parent",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "quote",
+    "templateText": "There are far, far better things ahead than any we leave behind. — C.S. Lewis",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Hope & Future",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "startingOver",
+      "student"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "quote",
+    "templateText": "What comes into our minds when we think about God is the most important thing about us. — A.W. Tozer",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Knowing God",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "student",
+      "retired"
+    ],
+    "applicableBurdens": [
+      "doubt"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "quote",
+    "templateText": "God is too good to be unkind and He is too wise to be mistaken. And when we cannot trace His hand, we must trust His heart. — Charles Spurgeon",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Trust & Sovereignty",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "health"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "quote",
+    "templateText": "The Bible is not the end of God speaking; it is the foundation for the ongoing conversation. — Oswald Chambers",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Scripture",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "student",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "doubt",
+      "purpose"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "quote",
+    "templateText": "The love of our neighbor is the only door out of the dungeon of self. — George MacDonald",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Love & Community",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "retired",
+      "parent"
+    ],
+    "applicableBurdens": [
+      "relationship",
+      "loneliness"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "quote",
+    "templateText": "The gospel is this: We are more sinful and flawed in ourselves than we ever dared believe, yet at the very same time we are more loved and accepted in Jesus Christ than we ever dared hope. — Tim Keller",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Grace",
+    "timeOfDay": [
+      "midday",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "single",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "doubt",
+      "temptation"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "quote",
+    "templateText": "The resurrection is the revelation that God is not defeated by the forces of destruction. Love is stronger than death. — N.T. Wright",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Resurrection Hope",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "grief"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "quote",
+    "templateText": "God never said that the journey would be easy, but He did say that the arrival would be worthwhile. — Max Lucado",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Perseverance",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "married"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "financial"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "quote",
+    "templateText": "God is most glorified in us when we are most satisfied in Him. — John Piper",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Joy & Worship",
+    "timeOfDay": [
+      "morning",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "student",
+      "single"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "loneliness"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "quote",
+    "templateText": "When you know who God is, you will know who you are. And when you know who you are, you will not settle for less than what He has called you to. — Priscilla Shirer",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Identity & Calling",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, the day is ending and {name} is ready to rest. Take every worry, every unfinished task, every anxious thought, and hold them through the night. {name} doesn't need to solve anything in sleep. Let {name} simply be held by You.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Bedtime Surrender",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "student"
+    ],
+    "applicableBurdens": [
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, {name} lays down tonight with a grateful heart. Thank You for every breath today, every small mercy, every moment of grace. As {name} sleeps, replenish what the day took. Let {name} wake refreshed and ready for Your purposes.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Gratitude & Rest",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "parent",
+      "married"
+    ],
+    "applicableBurdens": [
+      "none"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Jesus, the silence of night can be so loud when grief is present. Be near to {name} tonight. Let the tears that come in the dark be gathered by You. Guard {name}'s mind from replaying painful memories. Grant {name} the gift of peaceful rest.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Grief & Rest",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "grief"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, {name}'s body is tired and aching tonight. You are the Great Physician. While {name} sleeps, do the healing work that only You can do. Ease the pain, restore the cells, and let {name} wake with renewed strength. Guard {name}'s rest.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Healing & Sleep",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "retired",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "health"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, another night alone. {name} feels the emptiness of this quiet house. But You promise to be a friend who sticks closer than a brother. Fill this room with Your presence tonight. Remind {name} that solitude is not abandonment. Be {name}'s company in the stillness.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Loneliness & Night",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "single",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "loneliness"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, {name} releases the mistakes of today. The harsh words spoken, the patience lost, the moments missed. Your mercies are new every morning. As {name} closes these eyes, wipe the slate clean. Let {name} sleep forgiven and wake free.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Forgiveness & Rest",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "parent",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "anger",
+      "relationship"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Jesus, tonight {name} hands You every fear about tomorrow. The bills, the unknowns, the what-ifs. None of them are too big for You. {name} chooses to trust Your provision as sleep comes. Cover {name} with Your peace like a blanket.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Provision & Peace",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "married"
+    ],
+    "applicableBurdens": [
+      "financial",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, protect {name}'s family through the night. Station angels at every door and window. Guard their dreams, calm their hearts, and let every person under this roof sleep securely in Your arms. {name} trusts You as their protector.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Night Protection",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "parent",
+      "married"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "relationship"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, {name}'s mind won't stop racing tonight. Every thought leads to another worry. Quiet the noise, Father. Like You calmed the storm with a word, speak peace over {name}'s mind now. Replace every restless thought with the truth of Your faithfulness.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Anxious Thoughts",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "student",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, today was hard and {name} barely made it through. But here at the end of it, {name} is still standing — and that is Your grace. Thank You for carrying {name} through every hour. Now grant deep, restoring sleep that heals what today broke.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Hard Day Recovery",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "health"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Jesus, as {name} turns off the light, turn on Your presence. Be the last thought before sleep and the first thought at dawn. Let {name}'s unconscious hours be saturated with Your nearness. Guard this night with Your unfailing love.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "God's Presence",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "single",
+      "retired"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "none"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, the temptation {name} faced today was strong, but Your grace was stronger. As night falls, cleanse {name}'s heart and renew a right spirit. Let sleep be a reset. Tomorrow is a fresh start in Your mercy. {name} rests in that promise.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Temptation & Renewal",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "student",
+      "single"
+    ],
+    "applicableBurdens": [
+      "temptation"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, {name} doesn't fully understand who You are, and that's okay. Tonight, simply be present. Let {name} feel something — a warmth, a stillness, a peace that doesn't need explanation. Just meet {name} here in the quiet dark.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Seeking & Doubt",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "student",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "doubt"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, {name} surrenders this day — the wins and the losses, the laughter and the tears. All of it belongs to You. As {name} sleeps tonight, continue Your work in the unseen places. {name} trusts that You are always at work, even in rest.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Daily Surrender",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "parent",
+      "retired"
+    ],
+    "applicableBurdens": [
+      "none",
+      "anxiety"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "In peace I will lie down and sleep, for you alone, Lord, make me dwell in safety.",
+    "verseReference": "Psalm 4:8",
+    "verseText": null,
+    "category": "Peace & Sleep",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "single",
+      "married"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "loneliness"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "He who watches over Israel will neither slumber nor sleep. The Lord watches over you — the Lord is your shade at your right hand.",
+    "verseReference": "Psalm 121:3-5",
+    "verseText": null,
+    "category": "God's Protection",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "parent",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "health"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "When you lie down, you will not be afraid; when you lie down, your sleep will be sweet.",
+    "verseReference": "Proverbs 3:24",
+    "verseText": null,
+    "category": "Sweet Sleep",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "student",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "doubt"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "It is in vain that you rise up early and go late to rest, eating the bread of anxious toil; for he gives to his beloved sleep.",
+    "verseReference": "Psalm 127:2",
+    "verseText": null,
+    "category": "Rest & Trust",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "parent"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "financial"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "He gives strength to the weary and increases the power of the weak. Even youths grow tired and weary, and young men stumble and fall; but those who hope in the Lord will renew their strength.",
+    "verseReference": "Isaiah 40:29-31",
+    "verseText": null,
+    "category": "Renewed Strength",
+    "timeOfDay": [
+      "bedtime",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "health",
+      "grief"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "The Lord your God is in your midst, a mighty one who will save; he will rejoice over you with gladness; he will quiet you by his love; he will exult over you with loud singing.",
+    "verseReference": "Zephaniah 3:17",
+    "verseText": null,
+    "category": "God's Love",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "parent",
+      "single"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "doubt"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "I lay down and slept; I woke again, for the Lord sustained me.",
+    "verseReference": "Psalm 3:5",
+    "verseText": null,
+    "category": "Sustained by God",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "retired"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "health"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "My presence will go with you, and I will give you rest.",
+    "verseReference": "Exodus 33:14",
+    "verseText": null,
+    "category": "God's Presence",
+    "timeOfDay": [
+      "bedtime",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "startingOver",
+      "married"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "none"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "By day the Lord directs his love, at night his song is with me — a prayer to the God of my life.",
+    "verseReference": "Psalm 42:8",
+    "verseText": null,
+    "category": "Night Worship",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "student",
+      "single"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "doubt"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "On my bed I remember you; I think of you through the watches of the night. Because you are my help, I sing in the shadow of your wings.",
+    "verseReference": "Psalm 63:6-7",
+    "verseText": null,
+    "category": "Nighttime Devotion",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "single",
+      "retired"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "none"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, {name}'s heart is heavy with relationship pain. The distance between {name} and a once-close friend feels unbearable. Give {name} the courage to reach out or the peace to let go — whichever brings healing. Mend what can be mended.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Broken Friendships",
+    "timeOfDay": [
+      "evening",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "single",
+      "student"
+    ],
+    "applicableBurdens": [
+      "relationship",
+      "loneliness"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, the conflict in {name}'s family is tearing everyone apart. Accusations, silence, slammed doors. Step into this fractured home and do what only You can do. Give {name} words that heal instead of wound. Start the restoration with {name}'s own heart.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Family Conflict",
+    "timeOfDay": [
+      "morning",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "parent",
+      "married"
+    ],
+    "applicableBurdens": [
+      "relationship",
+      "anger"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Jesus, {name}'s marriage is struggling. The love that once came easily now feels like hard labor. Rekindle what has grown cold. Help {name} to choose grace over scorekeeping, listening over defending. Teach {name} to love the way You love — sacrificially.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Marriage Struggles",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "married"
+    ],
+    "applicableBurdens": [
+      "relationship"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, {name} has been hurt by the church — the one place that was supposed to be safe. The betrayal cuts deep. Heal {name}'s wounds without making {name} cynical. Protect {name}'s faith from the failures of people. You are not like them.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Church Hurt",
+    "timeOfDay": [
+      "midday",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "relationship",
+      "doubt"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, {name} is trying to forgive someone who hasn't asked for forgiveness. It feels impossible and unfair. But You forgave {name} when {name} didn't deserve it either. Loosen the grip of bitterness. Set {name} free through the act of letting go.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Forgiveness",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "married"
+    ],
+    "applicableBurdens": [
+      "relationship",
+      "anger"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, {name} needs wisdom about boundaries. Loving someone doesn't mean accepting mistreatment. Show {name} how to protect what's precious without building walls of resentment. Help {name} to be both kind and firm, the way Jesus was.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Healthy Boundaries",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "parent",
+      "single"
+    ],
+    "applicableBurdens": [
+      "relationship"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Jesus, {name}'s relationship with a parent is strained. Years of unspoken hurt sit between them like a wall. Give {name} the grace to honor them without pretending the pain doesn't exist. Begin to rebuild, one honest conversation at a time.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Parent Relationships",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "student",
+      "single"
+    ],
+    "applicableBurdens": [
+      "relationship",
+      "grief"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, {name}'s children are pulling away and every attempt to connect pushes them further. Give {name} patience that doesn't feel like surrender and love that doesn't come with conditions. Keep the door open even when they try to close it.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Parent-Child Distance",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "parent"
+    ],
+    "applicableBurdens": [
+      "relationship",
+      "loneliness"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, reconciliation feels impossible when the other person won't meet {name} halfway. Remind {name} that peace isn't always about restoring what was — sometimes it's about trusting You with what cannot be fixed. Give {name} peace in the unresolved.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Unresolved Conflict",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "relationship"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, {name} has been the one causing pain in a relationship, and the guilt is heavy. Give {name} the humility to apologize without excuses and the patience to earn back trust slowly. Let {name}'s changed behavior speak louder than words.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Making Amends",
+    "timeOfDay": [
+      "morning",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "married",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "relationship",
+      "temptation"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Be completely humble and gentle; be patient, bearing with one another in love. Make every effort to keep the unity of the Spirit through the bond of peace.",
+    "verseReference": "Ephesians 4:2-3",
+    "verseText": null,
+    "category": "Unity & Love",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "married",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "relationship"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Above all, love each other deeply, because love covers over a multitude of sins.",
+    "verseReference": "1 Peter 4:8",
+    "verseText": null,
+    "category": "Deep Love",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "married",
+      "parent"
+    ],
+    "applicableBurdens": [
+      "relationship"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "If it is possible, as far as it depends on you, live at peace with everyone.",
+    "verseReference": "Romans 12:18",
+    "verseText": null,
+    "category": "Peacemaking",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "relationship",
+      "anger"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Bear with each other and forgive one another if any of you has a grievance against someone. Forgive as the Lord forgave you.",
+    "verseReference": "Colossians 3:13",
+    "verseText": null,
+    "category": "Forgiveness",
+    "timeOfDay": [
+      "midday",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "parent",
+      "married"
+    ],
+    "applicableBurdens": [
+      "relationship",
+      "anger"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Love is patient, love is kind. It does not envy, it does not boast, it is not proud. It does not dishonor others, it is not self-seeking, it is not easily angered, it keeps no record of wrongs.",
+    "verseReference": "1 Corinthians 13:4-5",
+    "verseText": null,
+    "category": "Love Defined",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "single",
+      "married"
+    ],
+    "applicableBurdens": [
+      "relationship"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "reflection",
+    "templateText": "{name}, Psalm 103:2 says, 'Praise the Lord, my soul, and forget not all his benefits.' What are three specific things from today — not general blessings, but today — that {name} might have overlooked? Name them now.",
+    "verseReference": "Psalm 103:2",
+    "verseText": null,
+    "category": "Daily Gratitude",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "parent"
+    ],
+    "applicableBurdens": [
+      "none"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "reflection",
+    "templateText": "{name}, 1 Thessalonians 5:18 says, 'Give thanks in all circumstances.' Not for all circumstances, but in them. What is one hard circumstance right now where {name} might discover a hidden reason for gratitude?",
+    "verseReference": "1 Thessalonians 5:18",
+    "verseText": null,
+    "category": "Gratitude in Hardship",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "none"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "reflection",
+    "templateText": "{name}, James 1:17 says every good gift comes from above. When did {name} last pause long enough to trace a blessing back to its source? What good thing have you been enjoying without thanking the Giver?",
+    "verseReference": "James 1:17",
+    "verseText": null,
+    "category": "Recognizing the Giver",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "retired",
+      "married"
+    ],
+    "applicableBurdens": [
+      "none"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "reflection",
+    "templateText": "{name}, Mark 9:24 records a father crying, 'I believe; help my unbelief!' Where is {name} right now on that spectrum? What specific area of life does {name} believe God can handle in theory but struggle to trust Him with in practice?",
+    "verseReference": "Mark 9:24",
+    "verseText": null,
+    "category": "Honest Doubt",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "student",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "doubt"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "reflection",
+    "templateText": "{name}, Hebrews 11:1 defines faith as 'the substance of things hoped for, the evidence of things not seen.' When has {name} stepped forward without seeing the full picture and found God there? What is He asking you to step toward now?",
+    "verseReference": "Hebrews 11:1",
+    "verseText": null,
+    "category": "Stepping in Faith",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "doubt",
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "reflection",
+    "templateText": "{name}, Habakkuk 1:2 cries, 'How long, Lord, must I call for help?' Have you ever felt God was silent? What if His silence isn't absence but an invitation for {name} to draw closer? What might He be doing in the waiting?",
+    "verseReference": "Habakkuk 1:2",
+    "verseText": null,
+    "category": "God's Silence",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "single"
+    ],
+    "applicableBurdens": [
+      "doubt",
+      "loneliness"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "reflection",
+    "templateText": "{name}, Ephesians 4:32 says, 'Be kind and compassionate to one another, forgiving each other, just as in Christ God forgave you.' Who comes to mind that {name} hasn't fully forgiven? What would it cost you to release that debt tonight?",
+    "verseReference": "Ephesians 4:32",
+    "verseText": null,
+    "category": "Releasing Bitterness",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "married",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "anger",
+      "relationship"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "reflection",
+    "templateText": "{name}, Matthew 18:21-22 records Peter asking how many times to forgive. Jesus answered seventy times seven. Is there someone {name} keeps forgiving but the resentment keeps returning? What would it look like to forgive from the heart, not just the lips?",
+    "verseReference": "Matthew 18:21-22",
+    "verseText": null,
+    "category": "Repeated Forgiveness",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "parent",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "anger",
+      "relationship"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "reflection",
+    "templateText": "{name}, Matthew 5:44 commands, 'Love your enemies and pray for those who persecute you.' Is there someone {name} struggles even to pray for? What would happen if you prayed for their flourishing tonight — not their punishment, but their healing?",
+    "verseReference": "Matthew 5:44",
+    "verseText": null,
+    "category": "Radical Forgiveness",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "single",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "anger",
+      "relationship"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "reflection",
+    "templateText": "{name}, Jeremiah 1:5 says, 'Before I formed you in the womb I knew you; before you were born I set you apart.' If God designed {name} with specific purpose, what unique gift or passion might be a clue to your calling that you've been ignoring?",
+    "verseReference": "Jeremiah 1:5",
+    "verseText": null,
+    "category": "Discovering Calling",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "student",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "reflection",
+    "templateText": "{name}, Ephesians 2:10 says you are 'God's handiwork, created in Christ Jesus to do good works, which God prepared in advance.' What good work might be sitting right in front of {name} — not some grand mission, but a quiet, daily purpose you've been overlooking?",
+    "verseReference": "Ephesians 2:10",
+    "verseText": null,
+    "category": "Everyday Purpose",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "retired"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "reflection",
+    "templateText": "{name}, 2 Corinthians 5:17 says, 'If anyone is in Christ, the new creation has come.' What old label or identity is {name} still wearing that God has already replaced? What would change if you truly believed you are new?",
+    "verseReference": "2 Corinthians 5:17",
+    "verseText": null,
+    "category": "New Identity",
+    "timeOfDay": [
+      "morning",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "startingOver",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "reflection",
+    "templateText": "{name}, Romans 5:3-4 says suffering produces perseverance, character, and hope. Looking back, what hard season shaped {name} in ways comfort never could? What is this current trial building in you that ease cannot?",
+    "verseReference": "Romans 5:3-4",
+    "verseText": null,
+    "category": "Suffering's Purpose",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "health",
+      "grief"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "reflection",
+    "templateText": "{name}, 2 Corinthians 12:9 says, 'My grace is sufficient for you, for my power is made perfect in weakness.' Where does {name} feel weakest right now? What if that weakness isn't a flaw but the exact place God wants to display His strength?",
+    "verseReference": "2 Corinthians 12:9",
+    "verseText": null,
+    "category": "Strength in Weakness",
+    "timeOfDay": [
+      "midday",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "health"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "reflection",
+    "templateText": "{name}, James 1:2-3 says, 'Consider it pure joy whenever you face trials, because the testing of your faith produces perseverance.' Is there a trial {name} has been resenting that might actually be producing something valuable in you? What fruit is forming that you cannot yet see?",
+    "verseReference": "James 1:2-3",
+    "verseText": null,
+    "category": "Joy in Trials",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "health",
+      "grief"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, {name} has entered a new chapter. The career has ended, but the calling has not. Show {name} that purpose does not retire. Open doors to serve, to mentor, and to pour out the wisdom only years with You can produce.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Legacy & Purpose",
+    "timeOfDay": [
+      "midday",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, {name}'s body is not what it used to be. Aches have replaced energy and doctor visits have replaced hobbies. But You are the same yesterday, today, and forever. Sustain {name} and bring healing where medicine cannot reach.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Health & Aging",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "health"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, the house is quiet now. {name} misses the sound of a familiar voice, the warmth of a hand to hold. Loneliness after losing a spouse cuts deep. Be the companion {name} needs. Fill the silence with Your presence.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Loneliness & Loss",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "grief"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, {name} watches the grandchildren grow and sees Your fingerprints on every little face. Thank You for the gift of generational blessing. Help {name} to plant seeds of faith that will bear fruit for decades to come.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Generational Blessing",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "none"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, {name} wants to finish well. Not with applause, but with faithfulness. Guard {name}'s heart from bitterness and regret. Let these later years be the richest in intimacy with You, not the emptiest.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Finishing Well",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, grief still visits {name} without warning. A song, a scent, an anniversary — and the tears return. You promise to be near the brokenhearted. Be near now. Remind {name} that love never truly ends.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Grief & Remembrance",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "grief"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, {name} has years of wisdom and a willing heart. Show {name} how to serve Your church in this season — not from obligation, but from the overflow of a life that has walked with You through every storm.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Serving the Church",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "none"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, {name} looks back over decades and sees both faithfulness and failure. Thank You for the grace that covered every stumble. Help {name} to release regret and hold tightly to the truth that Your mercies are new every morning.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Grace & Regret",
+    "timeOfDay": [
+      "morning",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "none"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, {name} worries about being a burden. But You say the older generation is a crown, not a weight. Give {name} confidence that presence matters more than productivity, and that simply being faithful is enough.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Worth & Dignity",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "health"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, {name}'s children are grown and walking their own paths. Some bring joy, others bring worry. Guard them. Guide them. Give {name} the peace to release them into Your hands, trusting that the prayers of decades still echo in heaven.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Adult Children",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "relationship",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, the world moves fast and {name} sometimes feels left behind. But Your pace is not the world's pace. Help {name} to find rhythm in the slower season and to see it not as decline but as an invitation to depth.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Pace & Contentment",
+    "timeOfDay": [
+      "midday",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, {name} has walked with You for years and still finds new depths in Your love. Thank You for a faith that does not grow stale but only richer. Let {name}'s testimony be a light to the next generation.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Lifelong Faith",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "none"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Gray hair is a crown of splendor; it is attained in the way of righteousness.",
+    "verseReference": "Proverbs 16:31",
+    "verseText": null,
+    "category": "Wisdom of Elders",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "none"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Even to your old age and gray hairs I am he, I am he who will sustain you. I have made you and I will carry you; I will sustain you and I will rescue you.",
+    "verseReference": "Isaiah 46:4",
+    "verseText": null,
+    "category": "God's Faithfulness",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "retired",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "health",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "The righteous will flourish like a palm tree, they will grow like a cedar of Lebanon; planted in the house of the Lord, they will flourish in the courts of our God. They will still bear fruit in old age, they will stay fresh and green.",
+    "verseReference": "Psalm 92:12-14",
+    "verseText": null,
+    "category": "Fruitful in Old Age",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "none"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "I have fought the good fight, I have finished the race, I have kept the faith. Now there is in store for me the crown of righteousness, which the Lord, the righteous Judge, will award to me on that day.",
+    "verseReference": "2 Timothy 4:7-8",
+    "verseText": null,
+    "category": "Finishing Well",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "none"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Moses was a hundred and twenty years old when he died, yet his eyes were not weak nor his strength gone.",
+    "verseReference": "Deuteronomy 34:7",
+    "verseText": null,
+    "category": "Strength in Age",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "health",
+      "none"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Teach us to number our days, that we may gain a heart of wisdom.",
+    "verseReference": "Psalm 90:12",
+    "verseText": null,
+    "category": "Wisdom & Time",
+    "timeOfDay": [
+      "midday",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "retired",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "The glory of young men is their strength, gray hair the splendor of the old.",
+    "verseReference": "Proverbs 20:29",
+    "verseText": null,
+    "category": "Honor in Age",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "none"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "For I am convinced that neither death nor life, neither angels nor demons, neither the present nor the future, nor any powers, neither height nor depth, nor anything else in all creation, will be able to separate us from the love of God that is in Christ Jesus our Lord.",
+    "verseReference": "Romans 8:38-39",
+    "verseText": null,
+    "category": "Eternal Security",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "retired",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "loneliness"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "devotional",
+    "templateText": "{name}, when Simeon held the baby Jesus in the temple, he had waited decades for that moment. Luke 2:25 says the Holy Spirit had promised he would not die before seeing the Messiah. God kept that promise. What has {name} been waiting for? He has not forgotten.",
+    "verseReference": "Luke 2:25-32",
+    "verseText": null,
+    "category": "Patient Faithfulness",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "doubt"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "devotional",
+    "templateText": "{name}, Anna was 84 years old and had been a widow for decades. Yet she never left the temple, worshipping night and day. She did not let grief define her. She let devotion define her. What if the deepest season of {name}'s worship is still ahead?",
+    "verseReference": "Luke 2:36-38",
+    "verseText": null,
+    "category": "Worship in Later Years",
+    "timeOfDay": [
+      "midday",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "loneliness"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "devotional",
+    "templateText": "{name}, Caleb was 85 years old when he said, 'Give me this mountain.' He did not ask for a rocking chair. He asked for a challenge. The same fire that burned at 40 still burned at 85. Age did not diminish his courage. What mountain is {name} still called to climb?",
+    "verseReference": "Joshua 14:10-12",
+    "verseText": null,
+    "category": "Courage in Age",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "devotional",
+    "templateText": "{name}, Abraham was 75 when God called him to leave everything familiar and walk into the unknown. Sarah was 90 when she held the promise in her arms. God's timeline is not limited by age. What impossible promise might God still be preparing to fulfill in {name}'s life?",
+    "verseReference": "Genesis 12:1-4",
+    "verseText": null,
+    "category": "God's Timing",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "retired",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "doubt"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "devotional",
+    "templateText": "{name}, Sarah laughed when God told her she would have a son in old age. But God asked, 'Is anything too hard for the Lord?' Genesis 18:14 is not just about babies. It is about every dream {name} has dismissed as too late. Nothing expires in God's hands.",
+    "verseReference": "Genesis 18:14",
+    "verseText": null,
+    "category": "Nothing Too Late",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "doubt",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "devotional",
+    "templateText": "{name}, Moses spent 40 years in the palace, 40 years in the wilderness, and 40 years leading Israel. His greatest work did not begin until age 80. The decades of waiting were not wasted. They were preparation. What has {name}'s long road been preparing?",
+    "verseReference": "Exodus 3:10",
+    "verseText": null,
+    "category": "Late-Life Calling",
+    "timeOfDay": [
+      "midday",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "devotional",
+    "templateText": "{name}, Elizabeth was advanced in years and thought motherhood had passed her by. But God had saved something extraordinary for the later season: the forerunner of the Messiah. What if the most significant thing {name} will ever do is not behind but still ahead?",
+    "verseReference": "Luke 1:36-37",
+    "verseText": null,
+    "category": "Surprise Blessings",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "none"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "devotional",
+    "templateText": "{name}, the apostle John was an old man on the island of Patmos when God gave him the Revelation. Exile and age did not disqualify him. They positioned him. Sometimes God speaks loudest when the world grows quietest. What might {name} hear in the stillness of this season?",
+    "verseReference": "Revelation 1:9-11",
+    "verseText": null,
+    "category": "Hearing God",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "purpose"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "reflection",
+    "templateText": "{name}, Psalm 71:18 says, 'Even when I am old and gray, do not forsake me, my God, till I declare your power to the next generation.' What story of God's faithfulness in your life have you not yet told? Who is waiting to hear it from {name}?",
+    "verseReference": "Psalm 71:18",
+    "verseText": null,
+    "category": "Legacy & Testimony",
+    "timeOfDay": [
+      "midday",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "reflection",
+    "templateText": "{name}, Deuteronomy 6:6-7 calls us to pass God's words to the next generation. What is the one truth about God that your life has proven true? If {name} could write a single sentence for your grandchildren to carry forever, what would it be?",
+    "verseReference": "Deuteronomy 6:6-7",
+    "verseText": null,
+    "category": "Passing Down Faith",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "none"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "reflection",
+    "templateText": "{name}, Lamentations 3:22-23 says God's mercies are new every morning. Looking back over all the mornings of your life, where has God's mercy surprised you most? What would {name} thank Him for that you could not have seen coming?",
+    "verseReference": "Lamentations 3:22-23",
+    "verseText": null,
+    "category": "Gratitude for the Journey",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "none"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "reflection",
+    "templateText": "{name}, Proverbs 13:22 says, 'A good person leaves an inheritance for their children's children.' Inheritance is more than money. What non-material thing has {name} inherited from those who came before? What non-material thing are you leaving behind?",
+    "verseReference": "Proverbs 13:22",
+    "verseText": null,
+    "category": "Spiritual Inheritance",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "reflection",
+    "templateText": "{name}, Ecclesiastes 3:11 says God has made everything beautiful in its time. As you look back over the chapters of your life, which season that felt painful at the time can {name} now see was shaping something beautiful? What does that teach you about the season you are in now?",
+    "verseReference": "Ecclesiastes 3:11",
+    "verseText": null,
+    "category": "Redemptive Perspective",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "retired"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "purpose"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "guidedPrayer",
+    "templateText": "{name}, let's begin this morning by bringing your anxiety to God. Take a slow breath.\n\nFather, I praise You because You never sleep and You never panic. You are sovereign over every detail of this day.\n\nI confess that I have been gripping control instead of trusting You. I have rehearsed worst-case scenarios when I should have been rehearsing Your promises.\n\nThank You for carrying me through every anxious season before this one. Not one of my fears has defeated Your faithfulness.\n\nI ask You to quiet the storm inside me. Replace the racing thoughts with Your peace. Help {name} to take the next step without needing to see the whole staircase.\n\nI surrender this anxiety to You. I open my hands and release what I cannot control. You are God and I am not.\n\nLead {name} through this day in Your peace. In Jesus' name, amen.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Morning Anxiety Relief",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "parent",
+      "retired"
+    ],
+    "applicableBurdens": [
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "guidedPrayer",
+    "templateText": "{name}, before you close your eyes tonight, let's lay your worries at the foot of the cross. Breathe deeply.\n\nLord, I praise You for being the God who watches over my sleep. You do not grow tired or weary. While I rest, You are working.\n\nI confess that I have let anxiety follow me into bed too many nights. I have scrolled instead of prayed, worried instead of worshipped.\n\nThank You for this day — the parts I handled well and the parts I didn't. Your grace covered all of it.\n\nI ask You to guard {name}'s mind through the night. Push back the anxious thoughts that circle in the darkness. Replace them with the simple truth that You are near.\n\nI surrender tomorrow. It is not mine to carry tonight. I release every what-if into Your capable hands.\n\nGive {name} restful sleep and a heart that wakes grateful. In Jesus' name, amen.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Bedtime Anxiety Relief",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "hardSeason",
+      "single"
+    ],
+    "applicableBurdens": [
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "guidedPrayer",
+    "templateText": "{name}, let's walk through this grief together. There is no timeline for sorrow. Settle in and be honest with God.\n\nFather, I praise You for being close to the brokenhearted. You do not stand at a distance. You draw near.\n\nI confess that some days I am angry at You. Some days I do not understand why this loss was part of Your plan. I bring that honestly to You because You can handle it.\n\nThank You for the gift of what I had. Thank You for every memory that still makes me smile through tears. The depth of my grief is the measure of how deeply I was blessed.\n\nI ask You to hold {name} together when the waves hit. Give me the strength to take the next breath, the next step, the next day.\n\nI surrender my demand for answers. I trust Your heart even when I cannot trace Your hand. In Jesus' name, amen.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Evening Grief Prayer",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "retired"
+    ],
+    "applicableBurdens": [
+      "grief"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "guidedPrayer",
+    "templateText": "{name}, the night can feel long when you are grieving. Let's bring this ache to the One who never leaves. Settle your heart.\n\nLord, I praise You because You are the God who collects tears in a bottle. Not one drop falls unseen by You.\n\nI confess that I sometimes wonder if the pain will ever ease. I confess that I have questioned Your goodness in the darkness.\n\nThank You that grief is not the opposite of faith. Thank You that Jesus wept, and that my tears are allowed.\n\nI ask You to be especially close to {name} tonight. When the memories flood in and the empty space beside me aches, let me feel the weight of Your presence filling the room.\n\nI surrender the need to be strong. I surrender the need to be okay. I will simply be Yours, and that is enough.\n\nCarry {name} through the night. In Jesus' name, amen.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Bedtime Grief Prayer",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "retired"
+    ],
+    "applicableBurdens": [
+      "grief"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "guidedPrayer",
+    "templateText": "{name}, let's bring financial stress to God this morning. Take a breath and be still.\n\nFather, I praise You because You own the cattle on a thousand hills. There is no shortage in Your economy. You provided manna in the desert and multiplied loaves by the sea.\n\nI confess that I have let money become the measure of my security instead of You. I have worried about numbers when I should have been counting blessings.\n\nThank You for every bill that has been paid until now. Thank You for the roof, the meal, the breath. All of it is grace.\n\nI ask You to open doors of provision for {name} that no one can shut. Give wisdom in every financial decision. Replace scarcity with the truth of Your abundance.\n\nI surrender my bank account to You. It is Yours. I am Yours. Lead {name} in faithfulness. In Jesus' name, amen.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Morning Financial Prayer",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "parent",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "financial"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "guidedPrayer",
+    "templateText": "{name}, it is the middle of the day and the financial pressure is real. Let's pause and pray right here.\n\nLord, I praise You for being Jehovah Jireh — the God who provides. You have never failed to meet a genuine need.\n\nI confess that I have been anxious about money when You have asked me to seek first Your kingdom. I have let fear crowd out faith.\n\nThank You for this job, this moment, this breath. Thank You that {name}'s worth is not determined by a paycheck.\n\nI ask for wisdom with every dollar. Show me where to be generous and where to be disciplined. Close the gaps that worry has created and fill them with trust.\n\nI surrender the outcome. I will be faithful with what I have, and I will trust You with what I lack. Guide {name} this afternoon. In Jesus' name, amen.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Midday Financial Prayer",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "startingOver",
+      "retired"
+    ],
+    "applicableBurdens": [
+      "financial"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "guidedPrayer",
+    "templateText": "{name}, let's begin this morning with honesty before God about the temptations you are facing. Breathe deeply and settle in.\n\nFather, I praise You for being holy and for calling me to holiness — not out of cruelty but out of love. You know what freedom feels like, and You want it for me.\n\nI confess the pull I feel toward things that do not honor You. I confess that I have sometimes chosen comfort over obedience, and the temporary over the eternal.\n\nThank You for 1 Corinthians 10:13 — that no temptation has seized me except what is common to humanity, and You always provide a way out.\n\nI ask You to strengthen {name}'s resolve today. When the moment comes, make the escape route obvious. Give me the courage to take it.\n\nI surrender my cravings and my weakness. I cannot fight this alone, and I was never meant to. Fight for {name}, Lord. In Jesus' name, amen.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Morning Temptation Prayer",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "single",
+      "student",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "temptation"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "guidedPrayer",
+    "templateText": "{name}, the evening can be when temptation whispers loudest. Let's bring it to God before it takes root. Settle your heart.\n\nLord, I praise You for Your patience with me. You do not condemn me for the struggle. You walk with me through it.\n\nI confess the battles I have lost and the ones I am still fighting. I confess that my own willpower is not enough and never has been.\n\nThank You for the forgiveness that is always available. Thank You that {name}'s identity is not defined by failure but by Your grace.\n\nI ask for supernatural strength this evening. Guard my eyes, my thoughts, and my choices. When the enemy prowls, let me hear Your voice louder.\n\nI surrender the parts of me I am ashamed of. You already know them. You love me anyway. Sanctify {name} from the inside out. In Jesus' name, amen.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Evening Temptation Prayer",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "single",
+      "married",
+      "student"
+    ],
+    "applicableBurdens": [
+      "temptation"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "guidedPrayer",
+    "templateText": "{name}, loneliness can be heaviest in the evening. Let's sit with God in it instead of running from it. Take a deep breath.\n\nFather, I praise You for being the God who sees. Hagar called You El Roi because You saw her when no one else did. You see me now.\n\nI confess that I have sometimes blamed You for this loneliness. I have questioned why the phone does not ring and why the evenings feel so long.\n\nThank You that being alone is not the same as being abandoned. Thank You for the promise in Deuteronomy 31:6 that You will never leave or forsake me.\n\nI ask You to send unexpected connection into {name}'s life. Open doors to community, to friendship, to belonging. But even before that, let Your presence be enough tonight.\n\nI surrender my need to be needed. I am Yours, and You are mine. That is sufficient. Hold {name} close. In Jesus' name, amen.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Evening Loneliness Prayer",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "single",
+      "retired",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "loneliness"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "guidedPrayer",
+    "templateText": "{name}, before sleep, let's bring the ache of loneliness to the One who promises never to leave. Settle into His presence.\n\nLord, I praise You for being Emmanuel — God with us. Not God above us or God nearby, but God with us. Right here. Right now.\n\nI confess that the silence of this house sometimes feels louder than any noise. I confess that I have questioned whether I am forgotten.\n\nThank You for every person who has loved me. Thank You for every moment of connection, however brief. Thank You that {name} is known fully by You.\n\nI ask You to fill the empty spaces tonight. Not with distraction, but with awareness of Your closeness. Let me feel accompanied, even in a room alone.\n\nI surrender the longing for what I do not have. I receive what I do: a God who chose me, calls me by name, and will never let {name} go.\n\nIn Jesus' name, amen.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Bedtime Loneliness Prayer",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "single",
+      "retired",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "loneliness"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "guidedPrayer",
+    "templateText": "{name}, let's start this morning with gratitude. Not because everything is perfect, but because God is good. Settle your heart.\n\nFather, I praise You simply for who You are. Before I ask for anything, I acknowledge Your majesty, Your kindness, and Your relentless love.\n\nI confess that I often rush past gratitude to get to my requests. I treat prayer like a drive-through when You have set a banquet table.\n\nThank You for this morning. Thank You for breath in my lungs. Thank You for the people in {name}'s life who reflect Your grace.\n\nI ask for eyes to see blessings I have been overlooking. Train me to notice the ordinary miracles: sunrise, laughter, provision.\n\nI surrender my complaints and comparisons. Today I choose thankfulness. Let gratitude be the lens through which {name} sees everything. In Jesus' name, amen.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Morning Gratitude Prayer",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "parent",
+      "married"
+    ],
+    "applicableBurdens": [
+      "none"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "guidedPrayer",
+    "templateText": "{name}, as this day draws to a close, let's end it the way it should have started: with thanksgiving. Take a slow breath.\n\nLord, I praise You for sustaining me through another day. Every heartbeat was a gift I did not earn.\n\nI confess that I have taken good things for granted today. I have complained about inconveniences while overlooking miracles.\n\nThank You for the meal I ate, the conversation I had, the moment of beauty I almost missed. Thank You for protecting {name} in ways I will never fully know.\n\nI ask You to grow a spirit of gratitude in me that is deeper than my circumstances. Let thankfulness become my first language, not my last resort.\n\nI surrender the day to You — the wins and the losses, the highlights and the hard parts. All of it is Yours. Let {name} rest tonight in the arms of a generous God. In Jesus' name, amen.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Evening Gratitude Prayer",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "retired",
+      "parent",
+      "married"
+    ],
+    "applicableBurdens": [
+      "none"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, {name} is in the middle of the day and the energy is fading. Renew strength for the hours ahead. Remind {name} that You are the God of the afternoon, not just the morning.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Midday Renewal",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "parent"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "none"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, {name} pauses in the middle of this busy day to remember that You are present. The deadlines are real, but so is Your peace. Let {name} carry both without being crushed by either.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Midday Peace",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "student"
+    ],
+    "applicableBurdens": [
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, this lunch break is sacred ground. {name} sets down the to-do list for a moment and picks up Your presence instead. Nourish more than the body. Feed {name}'s soul with a word from You right now.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Lunch Break Prayer",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "student"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "none"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, the afternoon slump is real and {name} needs a second wind — not from caffeine but from Your Spirit. Breathe fresh energy into these remaining hours. Help {name} finish strong today.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Afternoon Strength",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "parent",
+      "student"
+    ],
+    "applicableBurdens": [
+      "none"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, {name} is tempted to lose patience this afternoon. Words are sharper when fatigue sets in. Guard {name}'s tongue and soften the edges. Let kindness lead the rest of this day.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Midday Patience",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "parent",
+      "married"
+    ],
+    "applicableBurdens": [
+      "anger"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, the financial worry hit again at lunchtime. The numbers do not add up. But {name} chooses to trust that You are a provider. Right here, in the middle of the day, {name} hands the budget back to You.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Midday Financial Trust",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "financial"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, {name} is halfway through the day and doubt has crept in. Am I enough? Am I on the right path? Silence the lies and speak Your truth over {name}'s heart this afternoon.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Midday Doubt",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "student",
+      "startingOver",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "doubt"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, in the middle of {name}'s day, loneliness surfaced. The crowd is around but connection is missing. Be the friend who sticks closer than a brother. Remind {name} that being seen by You is enough.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Midday Loneliness",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "single",
+      "workingProfessional",
+      "retired"
+    ],
+    "applicableBurdens": [
+      "loneliness"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, this midday moment is a reset. {name} exhales the stress of the morning and inhales Your grace for the afternoon. Whatever happened before lunch, Your mercy makes the next hour brand new for {name}.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Midday Reset",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "parent",
+      "student"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "none"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, {name} is carrying the weight of a difficult relationship today. Right now, in the middle of the day, soften what has hardened. Give {name} the words that heal instead of the words that wound.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Midday Relationship Healing",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "married",
+      "parent",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "relationship"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, {name} pauses at midday to pray for health. The body is weary and the diagnosis is heavy. But You are the healer. Touch what medicine cannot and give {name} peace that outlasts the pain.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Midday Health Prayer",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "retired",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "health"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, it is the middle of the day and {name} needs direction. The crossroads is here and both paths look uncertain. Speak clearly. Guide {name}'s steps this afternoon toward the purpose You have written.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Midday Direction",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "student",
+      "startingOver",
+      "retired"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, this afternoon {name} is tempted to coast through the rest of the day. But You did not design {name} for autopilot. Reignite the passion, the focus, and the joy that the morning has drained.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Midday Refocus",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "student"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "none"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, {name} sits quietly for one midday moment and simply says: thank You. Thank You for this day, this breath, this chance to be alive. {name} does not need anything right now except awareness of Your goodness.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Midday Gratitude",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "parent",
+      "retired",
+      "married"
+    ],
+    "applicableBurdens": [
+      "none"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, {name} stopped in the middle of the day to pray for a friend who is hurting. You know exactly who comes to mind. Be near them right now. Use {name} as an instrument of comfort and encouragement this afternoon.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Midday Intercession",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "retired",
+      "parent"
+    ],
+    "applicableBurdens": [
+      "none"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "But those who hope in the Lord will renew their strength. They will soar on wings like eagles; they will run and not grow weary, they will walk and not be faint.",
+    "verseReference": "Isaiah 40:31",
+    "verseText": null,
+    "category": "Renewed Strength",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "parent",
+      "student"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "none"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Come to me, all you who are weary and burdened, and I will give you rest.",
+    "verseReference": "Matthew 11:28",
+    "verseText": null,
+    "category": "Rest for the Weary",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "parent",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "health"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "The Lord is my strength and my shield; my heart trusts in him, and he helps me. My heart leaps for joy, and with my song I praise him.",
+    "verseReference": "Psalm 28:7",
+    "verseText": null,
+    "category": "Strength & Joy",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "student",
+      "married"
+    ],
+    "applicableBurdens": [
+      "doubt",
+      "none"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Whatever you do, work at it with all your heart, as working for the Lord, not for human masters.",
+    "verseReference": "Colossians 3:23",
+    "verseText": null,
+    "category": "Working for God",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "student"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "none"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "And let us not grow weary of doing good, for in due season we will reap, if we do not give up.",
+    "verseReference": "Galatians 6:9",
+    "verseText": null,
+    "category": "Perseverance",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "parent",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "doubt"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Be still, and know that I am God; I will be exalted among the nations, I will be exalted in the earth.",
+    "verseReference": "Psalm 46:10",
+    "verseText": null,
+    "category": "Stillness & Trust",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "parent",
+      "retired"
+    ],
+    "applicableBurdens": [
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "I can do all this through him who gives me strength.",
+    "verseReference": "Philippians 4:13",
+    "verseText": null,
+    "category": "Strength in Christ",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "student",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "doubt",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "The Lord your God is with you, the Mighty Warrior who saves. He will take great delight in you; in his love he will no longer rebuke you, but will rejoice over you with singing.",
+    "verseReference": "Zephaniah 3:17",
+    "verseText": null,
+    "category": "God's Delight",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "single",
+      "startingOver",
+      "retired"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Cast all your anxiety on him because he cares for you.",
+    "verseReference": "1 Peter 5:7",
+    "verseText": null,
+    "category": "Casting Anxiety",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "parent",
+      "student"
+    ],
+    "applicableBurdens": [
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to him, and he will make your paths straight.",
+    "verseReference": "Proverbs 3:5-6",
+    "verseText": null,
+    "category": "Trust & Direction",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "student",
+      "startingOver",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "doubt",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.",
+    "verseReference": "Philippians 4:6-7",
+    "verseText": null,
+    "category": "Peace Beyond Understanding",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "parent",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "financial"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "The Lord is my shepherd, I lack nothing. He makes me lie down in green pastures, he leads me beside quiet waters, he refreshes my soul.",
+    "verseReference": "Psalm 23:1-3",
+    "verseText": null,
+    "category": "The Good Shepherd",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "retired",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "none"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future.",
+    "verseReference": "Jeremiah 29:11",
+    "verseText": null,
+    "category": "Hope & Future",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "student",
+      "startingOver",
+      "single"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "doubt"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "And we know that in all things God works for the good of those who love him, who have been called according to his purpose.",
+    "verseReference": "Romans 8:28",
+    "verseText": null,
+    "category": "God's Sovereign Good",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "doubt",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "He gives strength to the weary and increases the power of the weak.",
+    "verseReference": "Isaiah 40:29",
+    "verseText": null,
+    "category": "Strength for the Weak",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "parent",
+      "hardSeason",
+      "retired"
+    ],
+    "applicableBurdens": [
+      "health",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
   }
 ]
