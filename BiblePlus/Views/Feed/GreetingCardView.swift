@@ -68,9 +68,7 @@ struct GreetingCardView: View {
                     .foregroundStyle(.white)
                     .multilineTextAlignment(.center)
                     .lineSpacing(6)
-                    .shadow(color: .black.opacity(0.8), radius: 1, y: 1)
-                    .shadow(color: .black.opacity(0.5), radius: 6, y: 2)
-                    .shadow(color: .black.opacity(0.3), radius: 14, y: 0)
+                    .shadow(color: .black.opacity(0.35), radius: 4, y: 1)
                     .opacity(showContent ? 1 : 0)
                     .offset(y: showContent ? 0 : 20)
 
