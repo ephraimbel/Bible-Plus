@@ -3,6 +3,7 @@ import SwiftUI
 struct SleepTimerPickerView: View {
     @Bindable var vm: SanctuaryViewModel
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.bpPalette) private var palette
 
     var body: some View {
         NavigationStack {
@@ -15,7 +16,7 @@ struct SleepTimerPickerView: View {
                             .foregroundStyle(.secondary)
                         Text(formatted)
                             .font(BPFont.headingSmall)
-                            .foregroundStyle(Color(hex: "C9A96E"))
+                            .foregroundStyle(palette.accent)
                             .monospacedDigit()
                     }
                     .padding(.vertical, 20)
@@ -32,17 +33,18 @@ struct SleepTimerPickerView: View {
                             HStack {
                                 Text(duration.displayName)
                                     .font(BPFont.body)
+                                    .foregroundStyle(.primary)
 
                                 Spacer()
 
                                 if vm.sleepTimer == duration {
                                     Image(systemName: "checkmark")
                                         .font(.system(size: 14, weight: .semibold))
-                                        .foregroundStyle(Color(hex: "C9A96E"))
+                                        .foregroundStyle(palette.accent)
                                 }
                             }
                         }
-                        .tint(Color(hex: "E8E4DE"))
+                        .buttonStyle(.plain)
                     }
 
                     // Cancel timer
@@ -61,19 +63,20 @@ struct SleepTimerPickerView: View {
                 }
                 .listStyle(.insetGrouped)
                 .scrollContentBackground(.hidden)
-                .background(Color(hex: "2B2A27"))
-                .listRowBackground(Color(hex: "343330"))
+                .background(palette.background)
+                .listRowBackground(palette.surface)
             }
-            .background(Color(hex: "2B2A27"))
-            .preferredColorScheme(.dark)
+            .background(palette.background)
             .navigationTitle("Sleep Timer")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(palette.background, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Done") { dismiss() }
-                        .foregroundStyle(Color(hex: "C9A96E"))
+                        .foregroundStyle(palette.accent)
                 }
             }
         }
+        .presentationBackground(palette.background)
     }
 }

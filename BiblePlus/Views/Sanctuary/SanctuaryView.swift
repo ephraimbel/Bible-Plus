@@ -7,7 +7,6 @@ struct SanctuaryView: View {
     let soundscapeService: SoundscapeService
 
     @State private var viewModel: SanctuaryViewModel?
-    @State private var iconScale: CGFloat = 1.0
 
     var body: some View {
         Group {

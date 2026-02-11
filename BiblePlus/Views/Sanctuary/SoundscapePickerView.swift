@@ -151,6 +151,7 @@ struct SoundscapePickerView: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+        .disabled(locked && soundscape.isAvailable)
         .opacity(locked ? 0.6 : 1.0)
     }
 }

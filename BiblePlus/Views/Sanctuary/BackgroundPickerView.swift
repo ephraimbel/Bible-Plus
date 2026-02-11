@@ -254,6 +254,7 @@ struct BackgroundPickerView: View {
             .opacity(locked ? 0.6 : 1.0)
         }
         .buttonStyle(.plain)
+        .disabled(locked)
     }
 
     // MARK: - Video Thumbnail

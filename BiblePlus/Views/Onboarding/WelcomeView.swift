@@ -13,10 +13,13 @@ struct WelcomeView: View {
             VStack(spacing: 0) {
                 Spacer()
 
-                // App icon / cross symbol
-                Image(systemName: "book.pages")
-                    .font(.system(size: 72, weight: .thin))
-                    .foregroundStyle(palette.accent)
+                // App logo
+                Image("AppLogo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 120, height: 120)
+                    .clipShape(RoundedRectangle(cornerRadius: 26))
+                    .shadow(color: .black.opacity(0.3), radius: 12, y: 6)
                     .scaleEffect(showContent ? 1 : 0.6)
                     .opacity(showContent ? 1 : 0)
 

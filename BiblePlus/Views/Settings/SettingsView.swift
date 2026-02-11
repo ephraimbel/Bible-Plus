@@ -43,7 +43,6 @@ private struct SettingsContentView: View {
             }
             .scrollContentBackground(.hidden)
             .background(palette.background)
-            .listRowBackground(palette.surface)
             .navigationTitle("Settings")
             .toolbarBackground(palette.background, for: .navigationBar)
             .sheet(isPresented: $vm.showEditName) {
@@ -119,6 +118,15 @@ private struct SettingsContentView: View {
             ) {
                 vm.beginEditingBurdens()
             }
+
+            settingsRow(
+                icon: "bell",
+                label: "Prayer Times",
+                value: vm.prayerTimesDisplay
+            ) {
+                vm.beginEditingPrayerTimes()
+            }
+
             HStack {
                 Image(systemName: "flame.fill")
                     .foregroundStyle(palette.accent)
@@ -134,6 +142,7 @@ private struct SettingsContentView: View {
         } footer: {
             Text("Changes to your profile will refresh your feed.")
         }
+        .listRowBackground(palette.surface)
     }
 
     // MARK: - Bible Section
@@ -148,6 +157,7 @@ private struct SettingsContentView: View {
                 vm.beginEditingTranslation()
             }
         }
+        .listRowBackground(palette.surface)
     }
 
     // MARK: - Sanctuary Section
@@ -178,6 +188,7 @@ private struct SettingsContentView: View {
                 vm.showSanctuary = true
             }
         }
+        .listRowBackground(palette.surface)
     }
 
     // MARK: - Appearance Section
@@ -203,6 +214,7 @@ private struct SettingsContentView: View {
                 .tint(palette.accent)
             }
         }
+        .listRowBackground(palette.surface)
     }
 
     // MARK: - Subscription Section
@@ -220,6 +232,7 @@ private struct SettingsContentView: View {
                     .foregroundStyle(palette.accent)
             }
         }
+        .listRowBackground(palette.surface)
     }
 
     // MARK: - About Section
@@ -247,6 +260,7 @@ private struct SettingsContentView: View {
                     .foregroundStyle(palette.accent)
             }
         }
+        .listRowBackground(palette.surface)
     }
 
     // MARK: - Row Helper

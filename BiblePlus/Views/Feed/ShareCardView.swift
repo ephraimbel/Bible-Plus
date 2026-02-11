@@ -103,13 +103,16 @@ struct ShareCardView: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    HStack(spacing: 4) {
-                        Image(systemName: "flame.fill")
-                            .font(.system(size: 10))
+                    HStack(spacing: 6) {
+                        Image("AppLogo")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 16, height: 16)
+                            .clipShape(RoundedRectangle(cornerRadius: 4))
                         Text("Bible+")
                             .font(.system(size: 11, weight: .medium))
                     }
-                    .foregroundStyle(.white.opacity(0.35))
+                    .foregroundStyle(.white.opacity(0.5))
                     .padding(12)
                 }
             }

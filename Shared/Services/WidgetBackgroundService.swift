@@ -1,5 +1,6 @@
 import AVFoundation
 import UIKit
+import WidgetKit
 
 /// Extracts a static frame from the user's selected background (video or image)
 /// and writes it to the shared App Group container so the widget can use it.
@@ -14,14 +15,17 @@ enum WidgetBackgroundService {
 
     /// Call when the user changes their background. Extracts a frame from video,
     /// copies a static image, or clears the file for gradient-only backgrounds.
+    /// Automatically reloads widget timelines after the image is ready.
     static func updateWidgetBackground(for background: SanctuaryBackground) {
         if let videoName = background.videoFileName {
             extractVideoFrame(named: videoName)
         } else if let imageName = background.imageName {
             copyImage(named: imageName)
+            reloadWidgets()
         } else {
             // Gradient-only — remove any stale image so widget falls back to gradient
             removeImage()
+            reloadWidgets()
         }
     }
 
@@ -37,6 +41,7 @@ enum WidgetBackgroundService {
     private static func extractVideoFrame(named videoName: String) {
         guard let videoURL = Bundle.main.url(forResource: videoName, withExtension: "mp4") else {
             removeImage()
+            reloadWidgets()
             return
         }
 
@@ -63,6 +68,10 @@ enum WidgetBackgroundService {
                     removeImage()
                 }
             }
+            // Reload after image is saved (or removed on failure)
+            await MainActor.run {
+                reloadWidgets()
+            }
         }
     }
 
@@ -84,5 +93,9 @@ enum WidgetBackgroundService {
     private static func removeImage() {
         guard let url = sharedImageURL else { return }
         try? FileManager.default.removeItem(at: url)
+    }
+
+    private static func reloadWidgets() {
+        WidgetCenter.shared.reloadAllTimelines()
     }
 }

@@ -72,9 +72,12 @@ struct HomeWidgetEntryView: View {
 
             Spacer()
 
-            Image(systemName: "cross")
-                .font(.system(size: 36, weight: .ultraLight))
-                .foregroundStyle(.white.opacity(0.2))
+            Image("AppLogo")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 40, height: 40)
+                .clipShape(RoundedRectangle(cornerRadius: 9))
+                .opacity(0.6)
                 .shadow(color: .black.opacity(0.3), radius: 4, y: 0)
                 .padding(.trailing, 8)
         }
@@ -117,13 +120,16 @@ struct HomeWidgetEntryView: View {
 
             HStack {
                 Spacer()
-                HStack(spacing: 4) {
-                    Image(systemName: "flame.fill")
-                        .font(.system(size: 10))
+                HStack(spacing: 5) {
+                    Image("AppLogo")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 14, height: 14)
+                        .clipShape(RoundedRectangle(cornerRadius: 3))
                     Text("Bible+")
                         .font(.system(size: 10, weight: .medium))
                 }
-                .foregroundStyle(.white.opacity(0.4))
+                .foregroundStyle(.white.opacity(0.5))
                 .shadow(color: .black.opacity(0.3), radius: 2, y: 1)
             }
         }

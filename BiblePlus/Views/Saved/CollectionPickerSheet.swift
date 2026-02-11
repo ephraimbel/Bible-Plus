@@ -137,6 +137,7 @@ struct CollectionPickerSheet: View {
                 }
             }
         }
+        .buttonStyle(.plain)
     }
 
     // MARK: - Actions

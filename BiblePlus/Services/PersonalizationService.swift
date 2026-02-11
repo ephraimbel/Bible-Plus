@@ -1,5 +1,6 @@
 import Foundation
 import SwiftData
+import WidgetKit
 
 @Observable
 final class PersonalizationService {
@@ -97,9 +98,10 @@ final class PersonalizationService {
         profile.updatedAt = Date()
         save()
 
-        // Extract a static frame for the widget
+        // Extract a static frame for the widget and reload timelines
         if let background = SanctuaryBackground.background(for: backgroundID) {
             WidgetBackgroundService.updateWidgetBackground(for: background)
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
 

@@ -139,6 +139,11 @@ struct RootView: View {
         .onOpenURL { url in
             handleDeepLink(url)
         }
+        .onReceive(NotificationCenter.default.publisher(for: .notificationDeepLink)) { notification in
+            if let uuid = notification.userInfo?["contentID"] as? UUID {
+                deepLinkedContentID = uuid
+            }
+        }
     }
 
     private var resolvedColorScheme: ColorScheme? {

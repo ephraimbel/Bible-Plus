@@ -134,9 +134,8 @@ private struct SavedContentView: View {
             Image(systemName: "bookmark.fill")
                 .font(.system(size: 14))
                 .foregroundStyle(
-                    verse.highlightColor != nil
-                        ? Color(hex: verse.highlightColor!.dotColor)
-                        : palette.accent
+                    verse.highlightColor.map { Color(hex: $0.dotColor) }
+                        ?? palette.accent
                 )
                 .frame(width: 20)
 
