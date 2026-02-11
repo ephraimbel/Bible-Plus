@@ -88,30 +88,36 @@ private struct SanctuaryContentView: View {
                 dismiss()
             } label: {
                 Image(systemName: "xmark")
-                    .font(.system(size: 20, weight: .medium))
+                    .font(.system(size: 15, weight: .bold))
                     .foregroundStyle(.white)
-                    .frame(width: 44, height: 44)
+                    .frame(width: 40, height: 40)
+                    .background(.black.opacity(0.35))
+                    .clipShape(Circle())
             }
 
             Spacer()
 
-            HStack(spacing: 16) {
+            HStack(spacing: 12) {
                 Button {
                     vm.showBackgroundPicker = true
                 } label: {
                     Image(systemName: "photo.on.rectangle")
-                        .font(.system(size: 18))
+                        .font(.system(size: 14, weight: .medium))
                         .foregroundStyle(.white)
-                        .frame(width: 44, height: 44)
+                        .frame(width: 40, height: 40)
+                        .background(.black.opacity(0.35))
+                        .clipShape(Circle())
                 }
 
                 Button {
                     vm.showSoundscapePicker = true
                 } label: {
                     Image(systemName: "music.note.list")
-                        .font(.system(size: 18))
+                        .font(.system(size: 14, weight: .medium))
                         .foregroundStyle(.white)
-                        .frame(width: 44, height: 44)
+                        .frame(width: 40, height: 40)
+                        .background(.black.opacity(0.35))
+                        .clipShape(Circle())
                 }
             }
         }
@@ -185,9 +191,11 @@ private struct SanctuaryContentView: View {
                     vm.showSleepTimerPicker = true
                 } label: {
                     Image(systemName: vm.sleepTimer != nil ? "moon.zzz.fill" : "moon.zzz")
-                        .font(.system(size: 22))
-                        .foregroundStyle(vm.sleepTimer != nil ? Color(hex: "C9A96E") : .white.opacity(0.7))
+                        .font(.system(size: 18, weight: .medium))
+                        .foregroundStyle(vm.sleepTimer != nil ? Color(hex: "C9A96E") : .white)
                         .frame(width: 44, height: 44)
+                        .background(.black.opacity(0.35))
+                        .clipShape(Circle())
                 }
 
                 // Play/Pause button
@@ -197,7 +205,7 @@ private struct SanctuaryContentView: View {
                 } label: {
                     ZStack {
                         Circle()
-                            .fill(.white.opacity(0.15))
+                            .fill(.black.opacity(0.35))
                             .frame(width: 72, height: 72)
 
                         Circle()
@@ -215,9 +223,11 @@ private struct SanctuaryContentView: View {
                     vm.showSoundscapePicker = true
                 } label: {
                     Image(systemName: "list.bullet")
-                        .font(.system(size: 22))
-                        .foregroundStyle(.white.opacity(0.7))
+                        .font(.system(size: 18, weight: .medium))
+                        .foregroundStyle(.white)
                         .frame(width: 44, height: 44)
+                        .background(.black.opacity(0.35))
+                        .clipShape(Circle())
                 }
             }
         }

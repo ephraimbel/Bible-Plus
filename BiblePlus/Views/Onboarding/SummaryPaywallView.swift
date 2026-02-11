@@ -120,8 +120,8 @@ struct SummaryPaywallView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 88, height: 88)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
-                .shadow(color: Color(red: 0.79, green: 0.66, blue: 0.43).opacity(0.4), radius: 20, y: 4)
-                .shadow(color: .black.opacity(0.5), radius: 10, y: 6)
+                .shadow(color: Color(red: 0.79, green: 0.66, blue: 0.43).opacity(0.3), radius: 12, y: 2)
+                .shadow(color: .black.opacity(0.2), radius: 6, y: 3)
 
             // "Bible+ Pro" title
             HStack(spacing: 0) {
