@@ -375,24 +375,35 @@ enum Soundscape: String, Codable, CaseIterable, Identifiable {
     case morningLight
     case eveningRest
     case pureSilence
-    // Pro — Original
+    // Pro — Nature
+    case forestBirds
+    case babblingBrook
+    case gentleBreeze
+    case nightCrickets
+    case gentleWaves
+    case gentleWaterfall
+    case thunderstorm
+    case morningDew
+    case whaleSong
+    // Pro — Ambient & Music
+    case peacefulPiano
+    case softFlute
+    case softGuitar
+    case heavenlyHarp
     case singingBowls
+    case tibetanBells
+    case gregorianChant
+    case celestialVoices
+    case worshipPads
+    case deepSpace
+    // Pro — Classic
     case gardenPrayer
     case mountainTop
     case nightWatch
     case oceanOfGrace
     case heavenlyWorship
     case rainOfBlessing
-    // Pro — New
-    case peacefulPiano
-    case worshipPads
     case fireplace
-    case forestBirds
-    case babblingBrook
-    case windChimes
-    case thunderstorm
-    case gregorianChant
-    case heavenlyHarp
 
     var id: String { rawValue }
 
@@ -402,22 +413,32 @@ enum Soundscape: String, Codable, CaseIterable, Identifiable {
         case .morningLight: "Morning Light"
         case .eveningRest: "Evening Rest"
         case .pureSilence: "Pure Silence"
+        case .forestBirds: "Forest Birds"
+        case .babblingBrook: "Babbling Brook"
+        case .gentleBreeze: "Gentle Breeze"
+        case .nightCrickets: "Night Crickets"
+        case .gentleWaves: "Gentle Waves"
+        case .gentleWaterfall: "Gentle Waterfall"
+        case .thunderstorm: "Thunderstorm"
+        case .morningDew: "Morning Dew"
+        case .whaleSong: "Whale Song"
+        case .peacefulPiano: "Peaceful Piano"
+        case .softFlute: "Soft Flute"
+        case .softGuitar: "Soft Guitar"
+        case .heavenlyHarp: "Heavenly Harp"
         case .singingBowls: "Singing Bowls"
+        case .tibetanBells: "Tibetan Bells"
+        case .gregorianChant: "Gregorian Chant"
+        case .celestialVoices: "Celestial Voices"
+        case .worshipPads: "Worship Pads"
+        case .deepSpace: "Deep Space"
         case .gardenPrayer: "Garden Prayer"
         case .mountainTop: "Mountain Top"
         case .nightWatch: "Night Watch"
         case .oceanOfGrace: "Ocean of Grace"
         case .heavenlyWorship: "Heavenly Worship"
         case .rainOfBlessing: "Rain of Blessing"
-        case .peacefulPiano: "Peaceful Piano"
-        case .worshipPads: "Worship Pads"
         case .fireplace: "Fireplace"
-        case .forestBirds: "Forest Birds"
-        case .babblingBrook: "Babbling Brook"
-        case .windChimes: "Wind Chimes"
-        case .thunderstorm: "Thunderstorm"
-        case .gregorianChant: "Gregorian Chant"
-        case .heavenlyHarp: "Heavenly Harp"
         }
     }
 
@@ -427,22 +448,32 @@ enum Soundscape: String, Codable, CaseIterable, Identifiable {
         case .morningLight: "Soft piano and birds to start your day"
         case .eveningRest: "Warm ambient tones for winding down"
         case .pureSilence: "No sound — just you and God"
+        case .forestBirds: "Birdsong in a peaceful forest canopy"
+        case .babblingBrook: "Flowing stream through a quiet woodland"
+        case .gentleBreeze: "Soft wind whispering through the trees"
+        case .nightCrickets: "Crickets chirping under a starlit sky"
+        case .gentleWaves: "Calm ocean waves lapping at the shore"
+        case .gentleWaterfall: "Soothing cascade of falling water"
+        case .thunderstorm: "Distant thunder and steady rain"
+        case .morningDew: "Peaceful dawn with soft nature sounds"
+        case .whaleSong: "Majestic whale calls in the deep ocean"
+        case .peacefulPiano: "Soft solo piano for quiet reflection"
+        case .softFlute: "Delicate flute melodies for meditation"
+        case .softGuitar: "Gentle acoustic guitar for devotion"
+        case .heavenlyHarp: "Soothing harp melodies for worship"
         case .singingBowls: "Resonant singing bowls for deep meditation"
+        case .tibetanBells: "Harmonic bell tones for contemplation"
+        case .gregorianChant: "Ancient monastic chanting for contemplation"
+        case .celestialVoices: "Ethereal vocal harmonies for prayer"
+        case .worshipPads: "Ambient atmosphere for prayerful moments"
+        case .deepSpace: "Cosmic ambient tones for wonder and awe"
         case .gardenPrayer: "Nature sounds with gentle wind"
         case .mountainTop: "Sweeping atmosphere for deep worship"
         case .nightWatch: "Deep midnight ambience for late prayers"
         case .oceanOfGrace: "Rolling waves and distant shore"
         case .heavenlyWorship: "Ethereal pads and soft vocals"
         case .rainOfBlessing: "Gentle rainfall with distant thunder"
-        case .peacefulPiano: "Soft solo piano for quiet reflection"
-        case .worshipPads: "Ambient atmosphere for prayerful moments"
         case .fireplace: "Warm crackling fire for cozy devotions"
-        case .forestBirds: "Birdsong in a peaceful forest canopy"
-        case .babblingBrook: "Flowing stream through a quiet woodland"
-        case .windChimes: "Gentle bamboo chimes in a soft breeze"
-        case .thunderstorm: "Distant thunder and steady rain"
-        case .gregorianChant: "Ancient monastic chanting for contemplation"
-        case .heavenlyHarp: "Soothing harp melodies for worship"
         }
     }
 
@@ -452,22 +483,32 @@ enum Soundscape: String, Codable, CaseIterable, Identifiable {
         case .morningLight: "sunrise"
         case .eveningRest: "moon.haze"
         case .pureSilence: "speaker.slash"
+        case .forestBirds: "bird"
+        case .babblingBrook: "humidity"
+        case .gentleBreeze: "wind"
+        case .nightCrickets: "moon.stars.fill"
+        case .gentleWaves: "water.waves"
+        case .gentleWaterfall: "drop.triangle"
+        case .thunderstorm: "cloud.bolt.rain"
+        case .morningDew: "sun.and.horizon"
+        case .whaleSong: "fish"
+        case .peacefulPiano: "pianokeys"
+        case .softFlute: "music.note"
+        case .softGuitar: "guitars"
+        case .heavenlyHarp: "guitars.fill"
         case .singingBowls: "bell"
+        case .tibetanBells: "bell.and.waves.left.and.right"
+        case .gregorianChant: "building.columns"
+        case .celestialVoices: "person.and.background.dotted"
+        case .worshipPads: "waveform"
+        case .deepSpace: "sparkle"
         case .gardenPrayer: "leaf"
         case .mountainTop: "mountain.2"
         case .nightWatch: "moon.stars"
         case .oceanOfGrace: "water.waves"
         case .heavenlyWorship: "sparkles"
         case .rainOfBlessing: "cloud.rain"
-        case .peacefulPiano: "pianokeys"
-        case .worshipPads: "waveform"
         case .fireplace: "flame"
-        case .forestBirds: "bird"
-        case .babblingBrook: "humidity"
-        case .windChimes: "wind"
-        case .thunderstorm: "cloud.bolt.rain"
-        case .gregorianChant: "building.columns"
-        case .heavenlyHarp: "guitars"
         }
     }
 
@@ -498,6 +539,21 @@ enum Soundscape: String, Codable, CaseIterable, Identifiable {
 
     static var proSoundscapes: [Soundscape] {
         allCases.filter { $0.isProOnly }
+    }
+
+    static var natureSoundscapes: [Soundscape] {
+        [.forestBirds, .babblingBrook, .gentleBreeze, .nightCrickets, .gentleWaves,
+         .gentleWaterfall, .thunderstorm, .morningDew, .whaleSong]
+    }
+
+    static var ambientSoundscapes: [Soundscape] {
+        [.peacefulPiano, .softFlute, .softGuitar, .heavenlyHarp, .singingBowls,
+         .tibetanBells, .gregorianChant, .celestialVoices, .worshipPads, .deepSpace]
+    }
+
+    static var classicSoundscapes: [Soundscape] {
+        [.gardenPrayer, .mountainTop, .nightWatch, .oceanOfGrace,
+         .heavenlyWorship, .rainOfBlessing, .fireplace]
     }
 }
 

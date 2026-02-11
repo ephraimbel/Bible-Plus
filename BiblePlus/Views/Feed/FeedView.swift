@@ -107,7 +107,9 @@ private struct FeedContentView: View {
         .fullScreenCover(item: $prayAlongContent) { content in
             PrayAlongView(
                 displayText: vm.personalizedText(for: content),
-                background: vm.currentBackground
+                verseReference: content.verseReference,
+                background: vm.currentBackground,
+                soundscapeService: soundscapeService
             )
         }
         .onReceive(NotificationCenter.default.publisher(for: SettingsViewModel.personalizationDidChange)) { _ in

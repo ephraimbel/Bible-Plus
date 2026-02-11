@@ -1,10 +1,50 @@
 import SwiftUI
 import AVFoundation
 
+// MARK: - Filter Type
+
+private enum BackgroundFilter: CaseIterable, Identifiable {
+    case all, animated, images, gradients
+
+    var id: String { displayName }
+
+    var displayName: String {
+        switch self {
+        case .all: "All"
+        case .animated: "Animated"
+        case .images: "Images"
+        case .gradients: "Gradients"
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .all: "square.grid.2x2"
+        case .animated: "play.circle"
+        case .images: "photo"
+        case .gradients: "paintpalette"
+        }
+    }
+
+    func matches(_ bg: SanctuaryBackground) -> Bool {
+        switch self {
+        case .all: true
+        case .animated: bg.hasVideo
+        case .images: bg.hasImage
+        case .gradients: !bg.hasVideo && !bg.hasImage
+        }
+    }
+}
+
+// MARK: - Background Picker
+
 struct BackgroundPickerView: View {
     @Bindable var vm: SanctuaryViewModel
     @Environment(\.dismiss) private var dismiss
     @Environment(\.bpPalette) private var palette
+
+    @State private var selectedFilter: BackgroundFilter = .all
+    @Namespace private var chipAnimation
 
     private let columns = [
         GridItem(.flexible(), spacing: 12),
@@ -13,31 +53,39 @@ struct BackgroundPickerView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 28) {
-                    ForEach(BackgroundCollection.allCases) { collection in
-                        Section {
-                            LazyVGrid(columns: columns, spacing: 12) {
-                                ForEach(vm.backgroundsByCollection(collection)) { bg in
-                                    backgroundCard(bg, locked: bg.isProOnly && !vm.profile.isPro)
-                                }
-                            }
-                        } header: {
-                            HStack(spacing: 6) {
-                                Text(collection.displayName)
-                                    .font(BPFont.button)
-                                    .foregroundStyle(.secondary)
+            VStack(spacing: 0) {
+                // Filter chips
+                filterChips
 
-                                if collection.isProOnly {
-                                    Image(systemName: "crown.fill")
-                                        .font(.system(size: 11))
-                                        .foregroundStyle(Color(hex: "C9A96E"))
+                // Background grid
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 28) {
+                        ForEach(filteredCollections()) { collection in
+                            let backgrounds = filteredBackgrounds(in: vm.backgroundsByCollection(collection))
+                            Section {
+                                LazyVGrid(columns: columns, spacing: 12) {
+                                    ForEach(backgrounds) { bg in
+                                        backgroundCard(bg, locked: bg.isProOnly && !vm.profile.isPro)
+                                    }
+                                }
+                            } header: {
+                                HStack(spacing: 6) {
+                                    Text(collection.displayName)
+                                        .font(BPFont.button)
+                                        .foregroundStyle(.secondary)
+
+                                    if collection.isProOnly {
+                                        Image(systemName: "crown.fill")
+                                            .font(.system(size: 11))
+                                            .foregroundStyle(Color(hex: "C9A96E"))
+                                    }
                                 }
                             }
                         }
                     }
+                    .padding(20)
+                    .animation(.easeInOut(duration: 0.25), value: selectedFilter)
                 }
-                .padding(20)
             }
             .background(palette.background)
             .navigationTitle("Backgrounds")
@@ -52,6 +100,78 @@ struct BackgroundPickerView: View {
         }
         .presentationBackground(palette.background)
     }
+
+    // MARK: - Filter Chips
+
+    @ViewBuilder
+    private var filterChips: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 10) {
+                ForEach(BackgroundFilter.allCases) { filter in
+                    filterChip(for: filter)
+                }
+            }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 12)
+        }
+    }
+
+    @ViewBuilder
+    private func filterChip(for filter: BackgroundFilter) -> some View {
+        let isSelected = selectedFilter == filter
+
+        Button {
+            HapticService.selection()
+            withAnimation(BPAnimation.selection) {
+                selectedFilter = filter
+            }
+        } label: {
+            HStack(spacing: 6) {
+                Image(systemName: filter.icon)
+                    .font(.system(size: 13))
+
+                Text(filter.displayName)
+                    .font(BPFont.button)
+
+                Text("\(backgroundCount(for: filter))")
+                    .font(.system(size: 12, weight: .medium, design: .rounded))
+                    .foregroundStyle(isSelected ? .white.opacity(0.7) : .secondary)
+            }
+            .foregroundStyle(isSelected ? .white : .primary)
+            .padding(.horizontal, 14)
+            .padding(.vertical, 8)
+            .background {
+                if isSelected {
+                    Capsule()
+                        .fill(palette.accent)
+                        .matchedGeometryEffect(id: "activeChip", in: chipAnimation)
+                } else {
+                    Capsule()
+                        .fill(palette.surface)
+                }
+            }
+        }
+        .buttonStyle(.plain)
+    }
+
+    // MARK: - Filtering
+
+    private func filteredCollections() -> [BackgroundCollection] {
+        BackgroundCollection.allCases.filter { collection in
+            let backgrounds = vm.backgroundsByCollection(collection)
+            return backgrounds.contains(where: { selectedFilter.matches($0) })
+        }
+    }
+
+    private func filteredBackgrounds(in backgrounds: [SanctuaryBackground]) -> [SanctuaryBackground] {
+        backgrounds.filter { selectedFilter.matches($0) }
+    }
+
+    private func backgroundCount(for filter: BackgroundFilter) -> Int {
+        SanctuaryBackground.allBackgrounds.filter { filter.matches($0) }.count
+    }
+
+    // MARK: - Background Card
 
     @ViewBuilder
     private func backgroundCard(_ bg: SanctuaryBackground, locked: Bool) -> some View {

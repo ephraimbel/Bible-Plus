@@ -9,34 +9,21 @@ struct SoundscapePickerView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
-                    // Free soundscapes
-                    Section {
-                        ForEach(Soundscape.freeSoundscapes) { soundscape in
-                            soundscapeRow(soundscape, locked: false)
-                        }
-                    } header: {
-                        Text("Free")
-                            .font(BPFont.button)
-                            .foregroundStyle(.secondary)
-                            .padding(.horizontal, 20)
-                    }
-
-                    // Pro soundscapes
-                    Section {
-                        ForEach(Soundscape.proSoundscapes) { soundscape in
-                            soundscapeRow(soundscape, locked: !vm.profile.isPro)
-                        }
-                    } header: {
-                        HStack {
-                            Text("Pro")
-                                .font(BPFont.button)
-                                .foregroundStyle(.secondary)
-                            Image(systemName: "crown.fill")
-                                .font(.system(size: 12))
-                                .foregroundStyle(Color(hex: "C9A96E"))
-                        }
+                    // Volume control
+                    volumeControl
                         .padding(.horizontal, 20)
-                    }
+
+                    // Free soundscapes
+                    soundscapeSection(title: "Free", icon: nil, sounds: Soundscape.freeSoundscapes, locked: false)
+
+                    // Nature sounds
+                    soundscapeSection(title: "Nature", icon: "leaf.fill", sounds: Soundscape.natureSoundscapes, locked: !vm.profile.isPro)
+
+                    // Ambient & Music
+                    soundscapeSection(title: "Ambient & Music", icon: "music.note", sounds: Soundscape.ambientSoundscapes, locked: !vm.profile.isPro)
+
+                    // Classic
+                    soundscapeSection(title: "Classic", icon: "crown.fill", sounds: Soundscape.classicSoundscapes, locked: !vm.profile.isPro)
                 }
                 .padding(.vertical, 16)
             }
@@ -53,6 +40,60 @@ struct SoundscapePickerView: View {
         }
         .presentationBackground(palette.background)
     }
+
+    // MARK: - Volume Control
+
+    @ViewBuilder
+    private var volumeControl: some View {
+        VStack(spacing: 10) {
+            HStack {
+                Image(systemName: "speaker.fill")
+                    .font(.system(size: 13))
+                    .foregroundStyle(.secondary)
+
+                Slider(value: Binding(
+                    get: { vm.volume },
+                    set: { vm.volume = $0 }
+                ), in: 0...1)
+                .tint(palette.accent)
+
+                Image(systemName: "speaker.wave.3.fill")
+                    .font(.system(size: 13))
+                    .foregroundStyle(.secondary)
+            }
+
+            Text("Volume: \(Int(vm.volume * 100))%")
+                .font(BPFont.caption)
+                .foregroundStyle(.secondary)
+        }
+        .padding(16)
+        .background(palette.surface, in: RoundedRectangle(cornerRadius: 12))
+    }
+
+    // MARK: - Soundscape Section
+
+    @ViewBuilder
+    private func soundscapeSection(title: String, icon: String?, sounds: [Soundscape], locked: Bool) -> some View {
+        Section {
+            ForEach(sounds) { soundscape in
+                soundscapeRow(soundscape, locked: locked)
+            }
+        } header: {
+            HStack(spacing: 5) {
+                Text(title)
+                    .font(BPFont.button)
+                    .foregroundStyle(.secondary)
+                if let icon {
+                    Image(systemName: icon)
+                        .font(.system(size: 12))
+                        .foregroundStyle(Color(hex: "C9A96E"))
+                }
+            }
+            .padding(.horizontal, 20)
+        }
+    }
+
+    // MARK: - Soundscape Row
 
     @ViewBuilder
     private func soundscapeRow(_ soundscape: Soundscape, locked: Bool) -> some View {
