@@ -5,13 +5,13 @@ enum ShareService {
     static func renderShareImage(
         content: PrayerContent,
         displayText: String,
-        theme: ThemeDefinition,
+        background: SanctuaryBackground,
         aspectRatio: ShareAspectRatio
     ) -> UIImage? {
         let view = ShareCardView(
             content: content,
             displayText: displayText,
-            theme: theme,
+            background: background,
             aspectRatio: aspectRatio
         )
         let renderer = ImageRenderer(content: view)

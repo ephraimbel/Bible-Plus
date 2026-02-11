@@ -58,9 +58,17 @@ struct BackgroundPickerView: View {
             }
         } label: {
             ZStack {
-                // Background preview (video thumbnail or gradient)
+                // Background preview (video thumbnail, image, or gradient)
                 if bg.hasVideo, let videoName = bg.videoFileName, let thumbnail = Self.videoThumbnail(for: videoName) {
                     Image(uiImage: thumbnail)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .aspectRatio(1.2, contentMode: .fit)
+                        .clipped()
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                } else if bg.hasImage, let imageName = bg.imageName, let preview = Self.imagePreview(named: imageName) {
+                    Image(uiImage: preview)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(minWidth: 0, maxWidth: .infinity)
@@ -101,12 +109,12 @@ struct BackgroundPickerView: View {
                         .lineLimit(1)
                 }
 
-                // Animated badge for video backgrounds
-                if bg.hasVideo {
+                // Type badge for video/image backgrounds
+                if bg.hasVideo || bg.hasImage {
                     VStack {
                         HStack {
                             Spacer()
-                            Text("ANIMATED")
+                            Text(bg.hasVideo ? "ANIMATED" : "IMAGE")
                                 .font(.system(size: 8, weight: .bold))
                                 .foregroundStyle(.white)
                                 .padding(.horizontal, 6)
@@ -150,5 +158,31 @@ struct BackgroundPickerView: View {
         let image = UIImage(cgImage: cgImage)
         thumbnailCache[videoName] = image
         return image
+    }
+
+    // MARK: - Image Preview
+
+    private static var imageCache: [String: UIImage] = [:]
+
+    private static func imagePreview(named imageName: String) -> UIImage? {
+        if let cached = imageCache[imageName] {
+            return cached
+        }
+
+        guard let uiImage = SanctuaryBackground.loadImage(named: imageName) else {
+            return nil
+        }
+
+        // Downsample for picker preview
+        let maxSize: CGFloat = 300
+        let scale = min(maxSize / uiImage.size.width, maxSize / uiImage.size.height, 1.0)
+        let newSize = CGSize(width: uiImage.size.width * scale, height: uiImage.size.height * scale)
+        let renderer = UIGraphicsImageRenderer(size: newSize)
+        let thumbnail = renderer.image { _ in
+            uiImage.draw(in: CGRect(origin: .zero, size: newSize))
+        }
+
+        imageCache[imageName] = thumbnail
+        return thumbnail
     }
 }

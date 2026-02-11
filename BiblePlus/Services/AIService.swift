@@ -72,6 +72,39 @@ enum AIService {
         """
     }
 
+    // MARK: - Prayer Intent Detection
+
+    static func detectsPrayerIntent(_ text: String) -> Bool {
+        let lowered = text.lowercased()
+        let prayerPatterns = [
+            "pray with me", "pray for me", "pray for my", "pray for us",
+            "i need prayer", "please pray", "can you pray",
+            "write a prayer", "write me a prayer",
+            "let's pray", "help me pray",
+            "pray about", "prayer for",
+        ]
+        return prayerPatterns.contains { lowered.contains($0) }
+    }
+
+    static func buildPrayerSystemPrompt(for profile: UserProfile) -> String {
+        let name = profile.firstName.isEmpty ? "Friend" : profile.firstName
+        return """
+        PRAYER MODE ACTIVATED \u{2014} \(name) has asked you to pray.
+
+        RIGHT NOW, write an actual prayer addressed to God. Not a lesson about prayer. \
+        Not an explanation. An intimate, heartfelt prayer that speaks directly to the Father \
+        about what \(name) shared.
+
+        FORMAT:
+        - Begin with a warm address to God (e.g., "Father," "Lord," "Heavenly Father,")
+        - Pray through \(name)'s specific situation \u{2014} use their words back to God
+        - Include 1 Scripture woven naturally into the prayer (not as a separate reference)
+        - Close with "In Jesus' name, Amen."
+        - The entire response should BE the prayer \u{2014} nothing before it, nothing after it
+        - Keep it 2-3 paragraphs. Intimate, not performative.
+        """
+    }
+
     // MARK: - Rate Limiting
 
     static let freeMessageLimit = 10

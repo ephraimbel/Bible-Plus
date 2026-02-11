@@ -3,7 +3,8 @@ import SwiftUI
 struct FeedCardView: View {
     let content: PrayerContent
     let displayText: String
-    let theme: ThemeDefinition
+    let background: SanctuaryBackground
+    let isCurrentCard: Bool
     let isSaved: Bool
     let showDoubleTapHeart: Bool
     var isAudioPlaying: Bool = false
@@ -60,44 +61,37 @@ struct FeedCardView: View {
 
     // MARK: - Layer 1: Background
 
+    @ViewBuilder
     private var backgroundLayer: some View {
-        LinearGradient(
-            colors: theme.previewGradient.map { Color(hex: $0) },
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-        )
+        if isCurrentCard, let videoName = background.videoFileName {
+            LoopingVideoPlayer(videoName: videoName)
+        } else if let imageName = background.imageName,
+                  let uiImage = SanctuaryBackground.loadImage(named: imageName) {
+            Image(uiImage: uiImage)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+        } else {
+            LinearGradient(
+                colors: background.gradientColors.map { Color(hex: $0) },
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        }
     }
 
-    // MARK: - Layer 2: Readability Overlay
+    // MARK: - Layer 2: Subtle Vignette
 
     private var overlayLayer: some View {
-        VStack(spacing: 0) {
-            // Top fade
-            LinearGradient(
-                colors: [
-                    Color.black.opacity(0.35),
-                    Color.black.opacity(0),
-                ],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .frame(height: 140)
-
-            Spacer()
-
-            // Bottom fade for text readability — tall and strong
-            LinearGradient(
-                colors: [
-                    Color.black.opacity(0),
-                    Color.black.opacity(0.25),
-                    Color.black.opacity(0.50),
-                    Color.black.opacity(0.65),
-                ],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .frame(height: 500)
-        }
+        // Gentle vignette — keeps the background vibrant, just softens the edges
+        RadialGradient(
+            colors: [
+                Color.clear,
+                Color.black.opacity(0.15),
+            ],
+            center: .center,
+            startRadius: 200,
+            endRadius: 500
+        )
     }
 
     // MARK: - Layer 3 + 4: Content + Reference
@@ -110,34 +104,38 @@ struct FeedCardView: View {
             Text(content.type.displayName.uppercased())
                 .font(BPFont.caption)
                 .tracking(1.5)
-                .foregroundStyle(.white.opacity(0.7))
-                .shadow(color: .black.opacity(0.5), radius: 3, y: 1)
+                .foregroundStyle(.white.opacity(0.85))
+                .shadow(color: .black.opacity(0.7), radius: 2, y: 1)
+                .shadow(color: .black.opacity(0.4), radius: 6, y: 0)
                 .padding(.bottom, 16)
 
-            // Main text
+            // Main text — triple shadow for readability on any background
             Text(displayText)
                 .font(contentFont)
                 .foregroundStyle(.white)
                 .multilineTextAlignment(.center)
                 .lineSpacing(6)
                 .padding(.horizontal, 48)
-                .shadow(color: .black.opacity(0.6), radius: 4, y: 2)
-                .shadow(color: .black.opacity(0.3), radius: 8, y: 0)
+                .shadow(color: .black.opacity(0.8), radius: 1, y: 1)
+                .shadow(color: .black.opacity(0.5), radius: 6, y: 2)
+                .shadow(color: .black.opacity(0.3), radius: 14, y: 0)
 
             // Verse reference
             if let reference = content.verseReference, !reference.isEmpty {
                 Text("— \(reference)")
                     .font(BPFont.reference)
-                    .foregroundStyle(.white.opacity(0.85))
-                    .shadow(color: .black.opacity(0.5), radius: 3, y: 1)
+                    .foregroundStyle(.white.opacity(0.9))
+                    .shadow(color: .black.opacity(0.7), radius: 2, y: 1)
+                    .shadow(color: .black.opacity(0.4), radius: 8, y: 0)
                     .padding(.top, 16)
             }
 
             // Category label
             Text(content.category)
                 .font(BPFont.caption)
-                .foregroundStyle(.white.opacity(0.6))
-                .shadow(color: .black.opacity(0.4), radius: 3, y: 1)
+                .foregroundStyle(.white.opacity(0.7))
+                .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
+                .shadow(color: .black.opacity(0.3), radius: 6, y: 0)
                 .padding(.top, 8)
 
             // Guided prayer "Pray Along" button

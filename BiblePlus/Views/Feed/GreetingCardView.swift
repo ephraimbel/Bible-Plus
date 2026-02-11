@@ -3,28 +3,26 @@ import SwiftUI
 struct GreetingCardView: View {
     let greeting: String
     var streakText: String? = nil
-    let theme: ThemeDefinition
+    let background: SanctuaryBackground
+    let isCurrentCard: Bool
     @Environment(\.bpPalette) private var palette
     @State private var showContent = false
     @State private var pulseChevron = false
 
     var body: some View {
         ZStack {
-            // Background from theme
-            LinearGradient(
-                colors: theme.previewGradient.map { Color(hex: $0) },
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
+            // Background (video/image/gradient)
+            greetingBackground
 
-            // Subtle overlay for readability
-            LinearGradient(
+            // Gentle vignette
+            RadialGradient(
                 colors: [
-                    Color.black.opacity(0.1),
-                    Color.black.opacity(0.35),
+                    Color.clear,
+                    Color.black.opacity(0.15),
                 ],
-                startPoint: .top,
-                endPoint: .bottom
+                center: .center,
+                startRadius: 200,
+                endRadius: 500
             )
 
             VStack(spacing: 0) {
@@ -67,8 +65,9 @@ struct GreetingCardView: View {
                     .foregroundStyle(.white)
                     .multilineTextAlignment(.center)
                     .lineSpacing(6)
-                    .shadow(color: .black.opacity(0.6), radius: 4, y: 2)
-                    .shadow(color: .black.opacity(0.3), radius: 8, y: 0)
+                    .shadow(color: .black.opacity(0.8), radius: 1, y: 1)
+                    .shadow(color: .black.opacity(0.5), radius: 6, y: 2)
+                    .shadow(color: .black.opacity(0.3), radius: 14, y: 0)
                     .opacity(showContent ? 1 : 0)
                     .offset(y: showContent ? 0 : 20)
 
@@ -99,6 +98,26 @@ struct GreetingCardView: View {
             ) {
                 pulseChevron = true
             }
+        }
+    }
+
+    // MARK: - Background
+
+    @ViewBuilder
+    private var greetingBackground: some View {
+        if isCurrentCard, let videoName = background.videoFileName {
+            LoopingVideoPlayer(videoName: videoName)
+        } else if let imageName = background.imageName,
+                  let uiImage = SanctuaryBackground.loadImage(named: imageName) {
+            Image(uiImage: uiImage)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+        } else {
+            LinearGradient(
+                colors: background.gradientColors.map { Color(hex: $0) },
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
         }
     }
 }

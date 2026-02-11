@@ -3,7 +3,7 @@ import SwiftUI
 struct SharePreviewSheet: View {
     let content: PrayerContent
     let displayText: String
-    let theme: ThemeDefinition
+    let background: SanctuaryBackground
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.bpPalette) private var palette
@@ -35,7 +35,7 @@ struct SharePreviewSheet: View {
                     ShareCardView(
                         content: content,
                         displayText: displayText,
-                        theme: theme,
+                        background: background,
                         aspectRatio: selectedRatio
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 12 / scale))
@@ -77,7 +77,7 @@ struct SharePreviewSheet: View {
         renderedImage = ShareService.renderShareImage(
             content: content,
             displayText: displayText,
-            theme: theme,
+            background: background,
             aspectRatio: selectedRatio
         )
         if renderedImage != nil {

@@ -31,6 +31,7 @@ private struct BibleContentView: View {
     @State private var explainPrompt = ""
     @State private var explainConversationId = UUID()
     @State private var shareText: String?
+    @State private var searchViewModel: BibleSearchViewModel?
 
     private func createExplainConversation() {
         let title = String(explainPrompt.prefix(40))
@@ -77,6 +78,9 @@ private struct BibleContentView: View {
                     offlineTranslationName: viewModel.translationName,
                     savedVerseNumbers: viewModel.savedVerseNumbers,
                     highlightColors: viewModel.highlightColors,
+                    readerFontSize: viewModel.readerFontSize,
+                    readerFontDesign: viewModel.readerFontDesign,
+                    readerLineSpacing: viewModel.readerLineSpacing,
                     onVerseTap: { viewModel.selectVerse($0) },
                     onRetry: { viewModel.retryLoading() }
                 )
@@ -168,6 +172,27 @@ private struct BibleContentView: View {
 
             ToolbarItem(placement: .topBarTrailing) {
                 HStack(spacing: 12) {
+                    // Search
+                    Button {
+                        if searchViewModel == nil {
+                            searchViewModel = BibleSearchViewModel(translation: viewModel.currentTranslation)
+                        }
+                        viewModel.showSearch = true
+                    } label: {
+                        Image(systemName: "magnifyingglass")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundStyle(palette.accent)
+                    }
+
+                    // Reader settings
+                    Button {
+                        viewModel.showReaderSettings = true
+                    } label: {
+                        Image(systemName: "textformat.size")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundStyle(palette.accent)
+                    }
+
                     // Translation picker capsule
                     Button {
                         viewModel.showTranslationPicker = true
@@ -232,6 +257,20 @@ private struct BibleContentView: View {
                 onSelect: { viewModel.changeTranslation($0) }
             )
             .presentationDetents([.medium])
+        }
+        .sheet(isPresented: $viewModel.showSearch) {
+            if let searchVM = searchViewModel {
+                BibleSearchView(
+                    viewModel: searchVM,
+                    onSelectResult: { book, chapter, verseNumber in
+                        viewModel.navigateToVerse(book: book, chapter: chapter, verseNumber: verseNumber)
+                    }
+                )
+            }
+        }
+        .sheet(isPresented: $viewModel.showReaderSettings) {
+            ReaderSettingsView(viewModel: viewModel)
+                .presentationDetents([.medium])
         }
         .sheet(isPresented: $showExplainChat) {
             NavigationStack {

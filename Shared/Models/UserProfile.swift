@@ -20,8 +20,16 @@ final class UserProfile {
     var isPro: Bool
     var aiConversationCount: Int
     var hasCompletedOnboarding: Bool
+    var readerFontSize: Double
+    var readerFontStyleRaw: String
+    var readerLineSpacing: Double
     var createdAt: Date
     var updatedAt: Date
+
+    var readerFontStyle: ReaderFontStyle {
+        get { ReaderFontStyle(rawValue: readerFontStyleRaw) ?? .serif }
+        set { readerFontStyleRaw = newValue.rawValue }
+    }
 
     init(
         id: UUID = UUID(),
@@ -40,7 +48,10 @@ final class UserProfile {
         longestStreak: Int = 0,
         isPro: Bool = false,
         aiConversationCount: Int = 0,
-        hasCompletedOnboarding: Bool = false
+        hasCompletedOnboarding: Bool = false,
+        readerFontSize: Double = 20,
+        readerFontStyle: ReaderFontStyle = .serif,
+        readerLineSpacing: Double = 6
     ) {
         self.id = id
         self.firstName = firstName
@@ -59,6 +70,9 @@ final class UserProfile {
         self.isPro = isPro
         self.aiConversationCount = aiConversationCount
         self.hasCompletedOnboarding = hasCompletedOnboarding
+        self.readerFontSize = readerFontSize
+        self.readerFontStyleRaw = readerFontStyle.rawValue
+        self.readerLineSpacing = readerLineSpacing
         self.createdAt = Date()
         self.updatedAt = Date()
     }

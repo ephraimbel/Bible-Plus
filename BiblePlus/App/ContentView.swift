@@ -40,7 +40,7 @@ struct ContentView: View {
                 .tabItem { Label(Tab.bible.title, systemImage: Tab.bible.icon) }
                 .tag(Tab.bible)
 
-            ChatView()
+            ConversationListView()
                 .tabItem { Label(Tab.ask.title, systemImage: Tab.ask.icon) }
                 .tag(Tab.ask)
 

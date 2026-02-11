@@ -150,6 +150,10 @@ final class OnboardingViewModel {
             personalizationService.updatePrayerTimes(Array(selectedPrayerTimes))
         case 7:
             personalizationService.updateTheme(selectedThemeID)
+            // Also set the matching background for the unified background system
+            if let theme = ThemeDefinition.allThemes.first(where: { $0.id == selectedThemeID }) {
+                personalizationService.updateSanctuaryBackground(theme.defaultBackgroundID)
+            }
         default:
             break
         }

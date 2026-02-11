@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 import SwiftData
 import UIKit
 
@@ -11,6 +12,8 @@ final class BibleReaderViewModel {
     var selectedChapter: Int = 1
     var showBookPicker: Bool = false
     var showTranslationPicker: Bool = false
+    var showSearch: Bool = false
+    var showReaderSettings: Bool = false
     var selectedVerse: VerseItem? = nil
 
     // MARK: - Page Flip Direction
@@ -50,6 +53,16 @@ final class BibleReaderViewModel {
         return map
     }
 
+    // MARK: - Reader Settings
+
+    var readerFontSize: Double = 20
+    var readerFontStyle: ReaderFontStyle = .serif
+    var readerLineSpacing: Double = 6
+
+    var readerFontDesign: Font.Design {
+        readerFontStyle == .serif ? .serif : .rounded
+    }
+
     private let repository = BibleRepository.shared
     private let modelContext: ModelContext
     private var loadTask: Task<Void, Never>?
@@ -76,10 +89,13 @@ final class BibleReaderViewModel {
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
 
-        // Read user's preferred translation
+        // Read user preferences
         let descriptor = FetchDescriptor<UserProfile>()
         if let profile = try? modelContext.fetch(descriptor).first {
             currentTranslation = profile.preferredTranslation
+            readerFontSize = profile.readerFontSize
+            readerFontStyle = profile.readerFontStyle
+            readerLineSpacing = profile.readerLineSpacing
         }
         repository.setTranslation(currentTranslation)
         loadChapter()
@@ -178,6 +194,69 @@ final class BibleReaderViewModel {
     func explainVersePrompt(for verse: VerseItem) -> String {
         let ref = verseReference(for: verse)
         return "Help me understand what God is saying in \(ref): \"\(verse.text)\" — what did this mean in its original context, and what does it mean for my life today?"
+    }
+
+    // MARK: - Reader Settings Persistence
+
+    func persistReaderSettings() {
+        let descriptor = FetchDescriptor<UserProfile>()
+        if let profile = try? modelContext.fetch(descriptor).first {
+            profile.readerFontSize = readerFontSize
+            profile.readerFontStyle = readerFontStyle
+            profile.readerLineSpacing = readerLineSpacing
+            profile.updatedAt = Date()
+            try? modelContext.save()
+        }
+    }
+
+    // MARK: - Search Navigation
+
+    func navigateToVerse(book: BibleBook, chapter: Int, verseNumber: Int) {
+        navigationDirection = .forward
+        selectedBook = book
+        selectedChapter = chapter
+        showSearch = false
+
+        loadTask?.cancel()
+        selectedVerse = nil
+        verses = []
+        isShowingOfflineFallback = false
+        errorMessage = nil
+        isLoading = true
+
+        loadTask = Task {
+            do {
+                let fetched = try await repository.verses(
+                    book: selectedBook.id,
+                    chapter: selectedChapter
+                )
+                guard !Task.isCancelled else { return }
+                verses = fetched
+                isLoading = false
+                loadSavedVerses()
+
+                // Auto-select the target verse
+                if let verseText = fetched.first(where: { $0.number == verseNumber }) {
+                    selectedVerse = VerseItem(number: verseText.number, text: verseText.text)
+                }
+            } catch {
+                guard !Task.isCancelled else { return }
+                let fallback = repository.versesSync(
+                    book: selectedBook.id,
+                    chapter: selectedChapter
+                )
+                if !fallback.isEmpty {
+                    verses = fallback
+                    isShowingOfflineFallback = currentTranslation != .kjv
+                    isLoading = false
+                    loadSavedVerses()
+                } else {
+                    verses = []
+                    errorMessage = error.localizedDescription
+                    isLoading = false
+                }
+            }
+        }
     }
 
     // MARK: - Save & Highlight

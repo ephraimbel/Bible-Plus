@@ -732,6 +732,22 @@ enum VerseHighlightColor: String, Codable, CaseIterable, Identifiable {
     }
 }
 
+// MARK: - Reader Font Style
+
+enum ReaderFontStyle: String, Codable, CaseIterable, Identifiable {
+    case serif
+    case sansSerif
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .serif: "Serif"
+        case .sansSerif: "Sans Serif"
+        }
+    }
+}
+
 // MARK: - Theme Definition
 
 struct ThemeDefinition: Identifiable, Hashable {

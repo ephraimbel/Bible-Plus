@@ -3,7 +3,7 @@ import SwiftUI
 struct ShareCardView: View {
     let content: PrayerContent
     let displayText: String
-    let theme: ThemeDefinition
+    let background: SanctuaryBackground
     let aspectRatio: ShareAspectRatio
 
     private var renderSize: CGSize {
@@ -19,12 +19,21 @@ struct ShareCardView: View {
 
     var body: some View {
         ZStack {
-            // LAYER 1: Theme gradient background
-            LinearGradient(
-                colors: theme.previewGradient.map { Color(hex: $0) },
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
+            // LAYER 1: Background (gradient or image for share)
+            if let imageName = background.imageName,
+               let uiImage = SanctuaryBackground.loadImage(named: imageName) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: renderSize.width, height: renderSize.height)
+                    .clipped()
+            } else {
+                LinearGradient(
+                    colors: background.gradientColors.map { Color(hex: $0) },
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            }
 
             // LAYER 2: Readability overlay
             VStack(spacing: 0) {

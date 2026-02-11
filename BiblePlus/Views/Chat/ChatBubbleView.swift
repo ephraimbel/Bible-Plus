@@ -5,6 +5,10 @@ struct ChatBubbleView: View {
     let isStreaming: Bool
     @Environment(\.bpPalette) private var palette
 
+    private var isTypingPlaceholder: Bool {
+        isStreaming && message.role == .assistant && message.content.isEmpty
+    }
+
     var body: some View {
         HStack(alignment: .top, spacing: 10) {
             if message.role == .user {
@@ -23,27 +27,27 @@ struct ChatBubbleView: View {
             }
 
             VStack(alignment: message.role == .user ? .trailing : .leading, spacing: 4) {
-                Text(message.content.isEmpty && isStreaming ? "..." : message.content)
-                    .font(BPFont.chat)
-                    .foregroundStyle(message.role == .user ? .white : palette.textPrimary)
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 10)
-                    .background(
-                        RoundedRectangle(cornerRadius: 16)
-                            .fill(bubbleColor)
-                    )
-                    .textSelection(.enabled)
-
-                if isStreaming && message.role == .assistant {
-                    HStack(spacing: 4) {
-                        ProgressView()
-                            .scaleEffect(0.6)
-                        Text("Thinking...")
-                            .font(BPFont.caption)
-                            .foregroundStyle(palette.textMuted)
-                    }
+                if isTypingPlaceholder {
+                    TypingDotsView()
+                        .background(
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(bubbleColor)
+                        )
+                        .transition(.scale(scale: 0.8).combined(with: .opacity))
+                } else {
+                    Text(message.content)
+                        .font(BPFont.chat)
+                        .foregroundStyle(message.role == .user ? .white : palette.textPrimary)
+                        .padding(.horizontal, 14)
+                        .padding(.vertical, 10)
+                        .background(
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(bubbleColor)
+                        )
+                        .textSelection(.enabled)
                 }
             }
+            .animation(BPAnimation.spring, value: isTypingPlaceholder)
 
             if message.role == .assistant {
                 Spacer(minLength: 60)

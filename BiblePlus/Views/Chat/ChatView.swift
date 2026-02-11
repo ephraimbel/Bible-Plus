@@ -2,38 +2,40 @@ import SwiftUI
 import SwiftData
 
 struct ChatView: View {
+    let conversationId: UUID
     var initialContext: String? = nil
 
     @Environment(\.modelContext) private var modelContext
     @Environment(\.bpPalette) private var palette
+    @Environment(\.dismiss) private var dismiss
     @State private var viewModel: ChatViewModel?
 
     var body: some View {
-        NavigationStack {
-            Group {
-                if let vm = viewModel {
-                    ChatContentView(viewModel: vm)
-                } else {
-                    BPLoadingView().onAppear {
-                        viewModel = ChatViewModel(
-                            modelContext: modelContext,
-                            initialContext: initialContext
-                        )
-                    }
+        Group {
+            if let vm = viewModel {
+                ChatContentView(viewModel: vm)
+            } else {
+                BPLoadingView().onAppear {
+                    viewModel = ChatViewModel(
+                        modelContext: modelContext,
+                        conversationId: conversationId,
+                        initialContext: initialContext
+                    )
                 }
             }
-            .navigationTitle("Ask")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    if let vm = viewModel, !vm.messages.isEmpty {
-                        Button {
-                            vm.clearConversation()
-                        } label: {
-                            Image(systemName: "trash")
-                                .font(.system(size: 14))
-                                .foregroundStyle(palette.textMuted)
-                        }
+        }
+        .navigationTitle("Ask")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                if let vm = viewModel, !vm.messages.isEmpty {
+                    Button {
+                        vm.clearConversation()
+                        dismiss()
+                    } label: {
+                        Image(systemName: "trash")
+                            .font(.system(size: 14))
+                            .foregroundStyle(palette.textMuted)
                     }
                 }
             }

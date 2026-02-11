@@ -10,6 +10,9 @@ struct ChapterReaderView: View {
     let offlineTranslationName: String
     let savedVerseNumbers: Set<Int>
     let highlightColors: [Int: VerseHighlightColor]
+    let readerFontSize: Double
+    let readerFontDesign: Font.Design
+    let readerLineSpacing: Double
     let onVerseTap: (VerseItem) -> Void
     let onRetry: () -> Void
     @Environment(\.bpPalette) private var palette
@@ -60,7 +63,7 @@ struct ChapterReaderView: View {
                 // Verse number with optional bookmark indicator
                 ZStack(alignment: .topTrailing) {
                     Text("\(number)")
-                        .font(BPFont.reference)
+                        .font(.system(size: max(11, readerFontSize * 0.65), weight: .light, design: .serif))
                         .foregroundStyle(palette.accent)
                         .frame(width: 24, alignment: .trailing)
 
@@ -77,10 +80,10 @@ struct ChapterReaderView: View {
                 }
 
                 Text(text)
-                    .font(BPFont.bibleMedium)
+                    .font(.system(size: readerFontSize, weight: .regular, design: readerFontDesign))
                     .foregroundStyle(palette.textPrimary)
                     .multilineTextAlignment(.leading)
-                    .lineSpacing(6)
+                    .lineSpacing(readerLineSpacing)
             }
             .padding(.vertical, 6)
             .padding(.horizontal, 8)

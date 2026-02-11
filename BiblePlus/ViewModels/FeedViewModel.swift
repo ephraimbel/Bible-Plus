@@ -69,6 +69,11 @@ final class FeedViewModel {
             ?? ThemeDefinition.allThemes[0]
     }
 
+    var currentBackground: SanctuaryBackground {
+        SanctuaryBackground.background(for: profile.selectedBackgroundID)
+            ?? SanctuaryBackground.allBackgrounds[0]
+    }
+
     // MARK: - Init
 
     init(modelContext: ModelContext) {

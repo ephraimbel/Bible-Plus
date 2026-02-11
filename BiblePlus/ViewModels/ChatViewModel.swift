@@ -11,6 +11,7 @@ final class ChatViewModel {
     var isStreaming: Bool = false
     var errorMessage: String? = nil
     var initialContext: String? = nil
+    let conversationId: UUID
 
     // MARK: - Private
 
@@ -35,11 +36,20 @@ final class ChatViewModel {
     }
 
     var messagesUsedToday: Int {
-        AIService.messagesUsedToday(messages: messages)
+        // Count across ALL conversations
+        let allDescriptor = FetchDescriptor<ChatMessage>(
+            sortBy: [SortDescriptor(\.createdAt)]
+        )
+        let allMessages = (try? modelContext.fetch(allDescriptor)) ?? []
+        return AIService.messagesUsedToday(messages: allMessages)
     }
 
     var isRateLimited: Bool {
-        !AIService.canSendMessage(messages: messages, isPro: profile.isPro)
+        let allDescriptor = FetchDescriptor<ChatMessage>(
+            sortBy: [SortDescriptor(\.createdAt)]
+        )
+        let allMessages = (try? modelContext.fetch(allDescriptor)) ?? []
+        return !AIService.canSendMessage(messages: allMessages, isPro: profile.isPro)
     }
 
     var remainingMessages: Int {
@@ -54,15 +64,16 @@ final class ChatViewModel {
         if let season = profile.lifeSeasons.first {
             prompts.append("Pray with me for this season of \(season.displayName.lowercased()).")
         }
+        prompts.append("Pray with me \u{2014} I just need to talk to God right now.")
         prompts.append("Where should I start reading the Bible today?")
-        prompts.append("I need to hear that God loves me right now.")
         return Array(prompts.prefix(4))
     }
 
     // MARK: - Init
 
-    init(modelContext: ModelContext, initialContext: String? = nil) {
+    init(modelContext: ModelContext, conversationId: UUID, initialContext: String? = nil) {
         self.modelContext = modelContext
+        self.conversationId = conversationId
         self.personalizationService = PersonalizationService(modelContext: modelContext)
         self.initialContext = initialContext
         loadMessages()
@@ -71,7 +82,9 @@ final class ChatViewModel {
     // MARK: - Message Loading
 
     func loadMessages() {
+        let convId = conversationId
         let descriptor = FetchDescriptor<ChatMessage>(
+            predicate: #Predicate { $0.conversationId == convId },
             sortBy: [SortDescriptor(\.createdAt, order: .forward)]
         )
         messages = (try? modelContext.fetch(descriptor)) ?? []
@@ -91,14 +104,26 @@ final class ChatViewModel {
         errorMessage = nil
 
         // Add user message
-        let userMessage = ChatMessage(role: .user, content: text)
+        let userMessage = ChatMessage(
+            conversationId: conversationId,
+            role: .user,
+            content: text
+        )
         modelContext.insert(userMessage)
         messages.append(userMessage)
         inputText = ""
+
+        // Update conversation title from first user message
+        updateConversationMeta(from: text)
+
         try? modelContext.save()
 
         // Start streaming
-        let assistantMessage = ChatMessage(role: .assistant, content: "")
+        let assistantMessage = ChatMessage(
+            conversationId: conversationId,
+            role: .assistant,
+            content: ""
+        )
         modelContext.insert(assistantMessage)
         messages.append(assistantMessage)
         isStreaming = true
@@ -121,7 +146,7 @@ final class ChatViewModel {
         send()
     }
 
-    // MARK: - Context from Feed
+    // MARK: - Context from Feed/Bible
 
     func applyInitialContext() {
         guard let context = initialContext, !context.isEmpty else { return }
@@ -136,6 +161,15 @@ final class ChatViewModel {
             modelContext.delete(message)
         }
         messages.removeAll()
+
+        // Also delete the Conversation object
+        let convId = conversationId
+        let descriptor = FetchDescriptor<Conversation>(
+            predicate: #Predicate { $0.id == convId }
+        )
+        if let conv = (try? modelContext.fetch(descriptor))?.first {
+            modelContext.delete(conv)
+        }
         try? modelContext.save()
     }
 
@@ -154,6 +188,13 @@ final class ChatViewModel {
             apiMessages.append((role: msg.role.rawValue, content: msg.content))
         }
 
+        // Prayer intent detection: inject prayer-mode system message
+        if let lastUserMsg = recentMessages.last(where: { $0.role == .user }),
+           AIService.detectsPrayerIntent(lastUserMsg.content) {
+            let prayerPrompt = AIService.buildPrayerSystemPrompt(for: profile)
+            apiMessages.append((role: "system", content: prayerPrompt))
+        }
+
         do {
             try await AIService.streamCompletion(messages: apiMessages) { token in
                 assistantMessage.content += token
@@ -167,5 +208,20 @@ final class ChatViewModel {
 
         isStreaming = false
         try? modelContext.save()
+    }
+
+    // MARK: - Private
+
+    private func updateConversationMeta(from text: String) {
+        let convId = conversationId
+        let descriptor = FetchDescriptor<Conversation>(
+            predicate: #Predicate { $0.id == convId }
+        )
+        guard let conversation = (try? modelContext.fetch(descriptor))?.first else { return }
+
+        if conversation.title == "New Conversation" {
+            conversation.title = String(text.prefix(40))
+        }
+        conversation.updatedAt = Date()
     }
 }

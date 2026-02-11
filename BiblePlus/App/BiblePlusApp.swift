@@ -9,9 +9,10 @@ struct BiblePlusApp: App {
         do {
             modelContainer = try SharedModelContainer.create()
 
-            // Seed content on first launch
+            // Seed content on first launch and migrate legacy messages
             let seedContext = ModelContext(modelContainer)
             ContentSeeder.seedIfNeeded(modelContext: seedContext)
+            ContentSeeder.migrateOrphanedMessages(modelContext: seedContext)
         } catch {
             fatalError("Failed to create ModelContainer: \(error)")
         }

@@ -38,7 +38,8 @@ private struct FeedContentView: View {
                 GreetingCardView(
                     greeting: vm.greeting,
                     streakText: vm.streakText,
-                    theme: vm.currentTheme
+                    background: vm.currentBackground,
+                    isCurrentCard: scrollPosition == 0
                 )
                 .containerRelativeFrame(.vertical)
                 .id(0)
@@ -48,7 +49,8 @@ private struct FeedContentView: View {
                     FeedCardView(
                         content: content,
                         displayText: vm.personalizedText(for: content),
-                        theme: vm.currentTheme,
+                        background: vm.currentBackground,
+                        isCurrentCard: scrollPosition == index + 1,
                         isSaved: vm.isSaved(content),
                         showDoubleTapHeart: vm.doubleTapHeartID == content.id,
                         isAudioPlaying: soundscapeService.isPlaying,
@@ -78,7 +80,7 @@ private struct FeedContentView: View {
             SharePreviewSheet(
                 content: content,
                 displayText: vm.personalizedText(for: content),
-                theme: vm.currentTheme
+                background: vm.currentBackground
             )
         }
         .sheet(item: $vm.collectionContent) { content in
