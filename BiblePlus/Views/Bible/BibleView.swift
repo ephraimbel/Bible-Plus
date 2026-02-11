@@ -25,34 +25,75 @@ struct BibleView: View {
 
 private struct BibleContentView: View {
     @Bindable var viewModel: BibleReaderViewModel
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.bpPalette) private var palette
     @State private var showExplainChat = false
     @State private var explainPrompt = ""
+    @State private var explainConversationId = UUID()
     @State private var shareText: String?
+
+    private func createExplainConversation() {
+        let title = String(explainPrompt.prefix(40))
+        let conversation = Conversation(title: title)
+        modelContext.insert(conversation)
+        try? modelContext.save()
+        explainConversationId = conversation.id
+    }
+
+    private var chapterKey: String {
+        "\(viewModel.selectedBook.id)-\(viewModel.selectedChapter)"
+    }
+
+    private var pageTransition: AnyTransition {
+        switch viewModel.navigationDirection {
+        case .forward:
+            .asymmetric(
+                insertion: .move(edge: .trailing),
+                removal: .move(edge: .leading)
+            )
+        case .backward:
+            .asymmetric(
+                insertion: .move(edge: .leading),
+                removal: .move(edge: .trailing)
+            )
+        }
+    }
+
+    private var pageFlipAnimation: Animation {
+        .spring(response: 0.35, dampingFraction: 0.88)
+    }
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            // Main reader
-            ChapterReaderView(
-                verses: viewModel.verses,
-                chapterTitle: viewModel.chapterTitle,
-                selectedVerseNumber: viewModel.selectedVerse?.number,
-                isLoading: viewModel.isLoading,
-                errorMessage: viewModel.errorMessage,
-                isShowingOfflineFallback: viewModel.isShowingOfflineFallback,
-                offlineTranslationName: viewModel.translationName,
-                onVerseTap: { viewModel.selectVerse($0) },
-                onRetry: { viewModel.retryLoading() }
-            )
+            // Stable container — clips the page-flip slide animation
+            ZStack {
+                ChapterReaderView(
+                    verses: viewModel.verses,
+                    chapterTitle: viewModel.chapterTitle,
+                    selectedVerseNumber: viewModel.selectedVerse?.number,
+                    isLoading: viewModel.isLoading,
+                    errorMessage: viewModel.errorMessage,
+                    isShowingOfflineFallback: viewModel.isShowingOfflineFallback,
+                    offlineTranslationName: viewModel.translationName,
+                    onVerseTap: { viewModel.selectVerse($0) },
+                    onRetry: { viewModel.retryLoading() }
+                )
+                .id(chapterKey)
+                .transition(pageTransition)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(palette.background)
+            .clipped()
             .simultaneousGesture(
                 DragGesture(minimumDistance: 50)
                     .onEnded { value in
                         guard abs(value.translation.width) > abs(value.translation.height) * 2 else { return }
-                        if value.translation.width < -50 {
-                            viewModel.goToNextChapter()
-                        } else if value.translation.width > 50 {
-                            viewModel.goToPreviousChapter()
+                        withAnimation(pageFlipAnimation) {
+                            if value.translation.width < -50 {
+                                viewModel.goToNextChapter()
+                            } else if value.translation.width > 50 {
+                                viewModel.goToPreviousChapter()
+                            }
                         }
                     }
             )
@@ -68,6 +109,7 @@ private struct BibleContentView: View {
                     reference: viewModel.verseReference(for: verse),
                     onExplain: {
                         explainPrompt = viewModel.explainVersePrompt(for: verse)
+                        createExplainConversation()
                         viewModel.selectedVerse = nil
                         showExplainChat = true
                     },
@@ -124,7 +166,9 @@ private struct BibleContentView: View {
                     }
 
                     Button {
-                        viewModel.goToPreviousChapter()
+                        withAnimation(pageFlipAnimation) {
+                            viewModel.goToPreviousChapter()
+                        }
                     } label: {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 14, weight: .medium))
@@ -137,7 +181,9 @@ private struct BibleContentView: View {
                     .disabled(!viewModel.canGoBack)
 
                     Button {
-                        viewModel.goToNextChapter()
+                        withAnimation(pageFlipAnimation) {
+                            viewModel.goToNextChapter()
+                        }
                     } label: {
                         Image(systemName: "chevron.right")
                             .font(.system(size: 14, weight: .medium))
@@ -170,7 +216,12 @@ private struct BibleContentView: View {
             .presentationDetents([.medium])
         }
         .sheet(isPresented: $showExplainChat) {
-            ChatView(initialContext: explainPrompt)
+            NavigationStack {
+                ChatView(
+                    conversationId: explainConversationId,
+                    initialContext: explainPrompt
+                )
+            }
         }
         .sheet(isPresented: Binding(
             get: { shareText != nil },

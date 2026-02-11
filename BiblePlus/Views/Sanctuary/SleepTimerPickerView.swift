@@ -32,7 +32,6 @@ struct SleepTimerPickerView: View {
                             HStack {
                                 Text(duration.displayName)
                                     .font(BPFont.body)
-                                    .foregroundStyle(.primary)
 
                                 Spacer()
 
@@ -43,6 +42,7 @@ struct SleepTimerPickerView: View {
                                 }
                             }
                         }
+                        .tint(Color(hex: "E8E4DE"))
                     }
 
                     // Cancel timer
@@ -61,6 +61,7 @@ struct SleepTimerPickerView: View {
                 }
                 .listStyle(.insetGrouped)
             }
+            .preferredColorScheme(.dark)
             .navigationTitle("Sleep Timer")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
