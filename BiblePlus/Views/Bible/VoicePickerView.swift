@@ -192,7 +192,7 @@ struct VoicePickerView: View {
             "input": text,
             "voice": voice.apiVoice,
             "response_format": "mp3",
-            "speed": 1.0
+            "speed": voice.ttsSpeed
         ]
 
         var request = URLRequest(url: endpoint)

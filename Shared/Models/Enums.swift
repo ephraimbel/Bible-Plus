@@ -924,7 +924,12 @@ enum BibleVoice: String, CaseIterable, Identifiable, Codable {
     var id: String { rawValue }
 
     /// The OpenAI TTS voice name sent to the API.
-    var apiVoice: String { rawValue }
+    var apiVoice: String {
+        switch self {
+        case .alloy: "echo" // Uses echo at slower speed for a distinct male sound
+        default: rawValue
+        }
+    }
 
     var displayName: String {
         switch self {
@@ -946,7 +951,7 @@ enum BibleVoice: String, CaseIterable, Identifiable, Codable {
         case .echo:    "Warm & smooth"
         case .ash:     "Clear & steady"
         case .fable:   "Rich & expressive"
-        case .alloy:   "Calm & balanced"
+        case .alloy:   "Steady & unhurried"
         case .nova:    "Warm & heartfelt"
         case .shimmer: "Bright & gentle"
         case .coral:   "Soft & clear"
@@ -958,6 +963,14 @@ enum BibleVoice: String, CaseIterable, Identifiable, Codable {
         switch self {
         case .onyx, .echo, .ash, .fable, .alloy: "Male"
         case .nova, .shimmer, .coral, .sage: "Female"
+        }
+    }
+
+    /// Per-voice TTS speed. Lower = slower, more deliberate.
+    var ttsSpeed: Double {
+        switch self {
+        case .alloy: 0.85
+        default: 1.0
         }
     }
 

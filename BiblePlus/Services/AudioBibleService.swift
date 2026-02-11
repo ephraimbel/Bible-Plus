@@ -398,11 +398,11 @@ final class AudioBibleService {
     private func callTTSAPI(text: String, voice: BibleVoice = .onyx) async throws -> Data {
         let endpoint = URL(string: "https://api.openai.com/v1/audio/speech")!
         let body: [String: Any] = [
-            "model": "tts-1",
+            "model": "tts-1-hd",
             "input": text,
             "voice": voice.apiVoice,
             "response_format": "mp3",
-            "speed": 1.0
+            "speed": voice.ttsSpeed
         ]
 
         var request = URLRequest(url: endpoint)
