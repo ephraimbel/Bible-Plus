@@ -716,13 +716,13 @@ struct SanctuaryBackground: Identifiable, Hashable {
             // Images
             SanctuaryBackground(id: "ocean-sunset-img", name: "Ocean Sunset", collection: .oceanAndWater, gradientColors: ["8B3A1A", "C96B3A", "E8A060"], imageName: "ocean-sunset", isProOnly: true),
             // Gradients
-            SanctuaryBackground(id: "ocean-deep", name: "Ocean Deep", collection: .oceanAndWater, gradientColors: ["0A2342", "1A4570", "2E6D9E"], isProOnly: true),
+            SanctuaryBackground(id: "ocean-deep", name: "Ocean Deep", collection: .oceanAndWater, gradientColors: ["0A2342", "1A4570", "2E6D9E"]),
         ])
 
         // MARK: Night Sky (6 — all Pro, videos → images)
         bgs.append(contentsOf: [
             // Videos
-            SanctuaryBackground(id: "starfield", name: "Starfield", collection: .nightSky, gradientColors: ["0A0A1A", "14142D", "1E1E40"], videoFileName: "starry-night", isProOnly: true),
+            SanctuaryBackground(id: "starfield", name: "Starfield", collection: .nightSky, gradientColors: ["0A0A1A", "14142D", "1E1E40"], videoFileName: "starry-night"),
             SanctuaryBackground(id: "aurora-wave", name: "Aurora Wave", collection: .nightSky, gradientColors: ["0D2137", "1A4A4A", "2D8A6A"], videoFileName: "milky-way", isProOnly: true),
             SanctuaryBackground(id: "northern-aurora", name: "Northern Aurora", collection: .nightSky, gradientColors: ["0B1D0B", "0D3B2E", "38C98B"], videoFileName: "northern-aurora", isProOnly: true),
             SanctuaryBackground(id: "starry-timelapse", name: "Starry Timelapse", collection: .nightSky, gradientColors: ["0A0A1A", "0D1B3D", "1A2D5E"], videoFileName: "starry-timelapse", isProOnly: true),
@@ -999,37 +999,37 @@ struct ThemeDefinition: Identifiable, Hashable {
         ThemeDefinition(
             id: "sunrise-mountains",
             name: "Sunrise Mountains",
-            previewGradient: ["FFF1E0", "FFDBB5", "F5EFE0"],
+            previewGradient: ["C9A96E", "D4B483", "F0E8D8"],
             isProOnly: false
         ),
         ThemeDefinition(
             id: "midnight-gold",
             name: "Midnight Gold",
-            previewGradient: ["2B2A27", "343330", "3D3428"],
+            previewGradient: ["0A1628", "1A2D50", "2A4478"],
             isProOnly: false
         ),
         ThemeDefinition(
             id: "ocean-peace",
             name: "Ocean Peace",
-            previewGradient: ["E8F4F8", "B8D4E3", "89B4C8"],
+            previewGradient: ["0A2342", "1A4570", "2E6D9E"],
             isProOnly: false
         ),
         ThemeDefinition(
             id: "minimal-cream",
             name: "Minimal Cream",
-            previewGradient: ["FAF8F4", "F0E8D8", "E8E0D0"],
+            previewGradient: ["FAF8F4", "F0E8D8", "E8DCC8"],
             isProOnly: false
         ),
         ThemeDefinition(
             id: "forest-mist",
             name: "Forest Mist",
-            previewGradient: ["E8F0E8", "C8D8C0", "A0B898"],
+            previewGradient: ["2D5016", "4A7A2E", "8FB174"],
             isProOnly: false
         ),
         ThemeDefinition(
             id: "starry-night",
             name: "Starry Night",
-            previewGradient: ["1A1A3E", "2D2D5E", "C9A96E"],
+            previewGradient: ["0A0A1A", "14142D", "1E1E40"],
             isProOnly: false
         ),
     ]

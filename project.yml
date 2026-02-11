@@ -30,8 +30,8 @@ targets:
         buildPhase: resources
       - path: Resources/Backgrounds
         buildPhase: resources
-    resources:
       - path: Resources/Assets.xcassets
+        buildPhase: resources
       - path: Resources/Bible
         buildPhase: resources
     settings:
