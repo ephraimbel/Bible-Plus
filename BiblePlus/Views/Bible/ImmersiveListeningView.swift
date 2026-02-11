@@ -21,7 +21,7 @@ struct ImmersiveListeningView: View {
             // Layer 1: Background
             backgroundLayer
 
-            // Layer 2: Vignette
+            // Layer 2: Vignette (tap target for show/hide controls)
             RadialGradient(
                 colors: [
                     Color.black.opacity(0.2),
@@ -31,6 +31,10 @@ struct ImmersiveListeningView: View {
                 startRadius: 100,
                 endRadius: 500
             )
+            .contentShape(Rectangle())
+            .onTapGesture {
+                toggleControls()
+            }
 
             // Layer 3: Content
             VStack(spacing: 0) {
@@ -51,10 +55,6 @@ struct ImmersiveListeningView: View {
         }
         .ignoresSafeArea()
         .statusBarHidden()
-        .contentShape(Rectangle())
-        .onTapGesture {
-            toggleControls()
-        }
         .onAppear {
             if wasAlreadyPlaying {
                 displayedVerseIndex = audioService.currentVerseIndex

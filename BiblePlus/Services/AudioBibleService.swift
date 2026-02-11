@@ -370,23 +370,35 @@ final class AudioBibleService {
         }
         if !current.isEmpty { segments.append(current) }
 
-        var allData = Data()
-        for (i, segment) in segments.enumerated() {
-            guard !Task.isCancelled else { throw CancellationError() }
+        // Generate all segments concurrently for much faster loading
+        let results: [(Int, Data)] = try await withThrowingTaskGroup(of: (Int, Data).self) { group in
+            for (i, segment) in segments.enumerated() {
+                group.addTask {
+                    try Task.checkCancellation()
+                    let prefix = i == 0 ? "\(bookName), chapter \(chapter). " : ""
+                    let text = prefix + segment.map(\.text).joined(separator: " ")
+                    return (i, try await self.callTTSAPI(text: text, voice: voice))
+                }
+            }
 
-            let prefix = i == 0 ? "\(bookName), chapter \(chapter). " : ""
-            let text = prefix + segment.map(\.text).joined(separator: " ")
-            let segmentData = try await callTTSAPI(text: text, voice: voice)
-            allData.append(segmentData)
+            var collected: [(Int, Data)] = []
+            for try await result in group {
+                collected.append(result)
+            }
+            return collected.sorted { $0.0 < $1.0 }
         }
 
+        var allData = Data()
+        for (_, data) in results {
+            allData.append(data)
+        }
         return allData
     }
 
     private func callTTSAPI(text: String, voice: BibleVoice = .onyx) async throws -> Data {
         let endpoint = URL(string: "https://api.openai.com/v1/audio/speech")!
         let body: [String: Any] = [
-            "model": "tts-1-hd",
+            "model": "tts-1",
             "input": text,
             "voice": voice.apiVoice,
             "response_format": "mp3",
