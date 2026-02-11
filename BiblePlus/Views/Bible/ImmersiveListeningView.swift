@@ -224,12 +224,11 @@ struct ImmersiveListeningView: View {
                 } label: {
                     Text(audioService.playbackSpeed.displayName)
                         .font(.system(size: 13, weight: .semibold, design: .rounded))
-                        .foregroundStyle(.white.opacity(0.8))
+                        .foregroundStyle(.white)
                         .frame(width: 44, height: 32)
                         .background(
                             Capsule()
-                                .fill(.ultraThinMaterial)
-                                .environment(\.colorScheme, .dark)
+                                .fill(.black.opacity(0.35))
                         )
                 }
 
@@ -238,8 +237,11 @@ struct ImmersiveListeningView: View {
                     seekToPreviousVerse()
                 } label: {
                     Image(systemName: "backward.fill")
-                        .font(.system(size: 20))
-                        .foregroundStyle(.white.opacity(displayedVerseIndex > 0 ? 0.9 : 0.3))
+                        .font(.system(size: 18, weight: .medium))
+                        .foregroundStyle(.white.opacity(displayedVerseIndex > 0 ? 1.0 : 0.3))
+                        .frame(width: 44, height: 44)
+                        .background(.black.opacity(0.35))
+                        .clipShape(Circle())
                 }
                 .disabled(displayedVerseIndex <= 0)
 
@@ -253,16 +255,20 @@ struct ImmersiveListeningView: View {
                 } label: {
                     ZStack {
                         Circle()
-                            .fill(.white)
+                            .fill(.black.opacity(0.35))
+                            .frame(width: 64, height: 64)
+
+                        Circle()
+                            .stroke(.white.opacity(0.3), lineWidth: 2)
                             .frame(width: 64, height: 64)
 
                         if audioService.isLoading {
                             ProgressView()
-                                .tint(.black)
+                                .tint(.white)
                         } else {
                             Image(systemName: audioService.isPlaying ? "pause.fill" : "play.fill")
                                 .font(.system(size: 24))
-                                .foregroundStyle(.black)
+                                .foregroundStyle(.white)
                                 .offset(x: audioService.isPlaying ? 0 : 2)
                         }
                     }
@@ -273,10 +279,13 @@ struct ImmersiveListeningView: View {
                     seekToNextVerse()
                 } label: {
                     Image(systemName: "forward.fill")
-                        .font(.system(size: 20))
+                        .font(.system(size: 18, weight: .medium))
                         .foregroundStyle(.white.opacity(
-                            displayedVerseIndex < viewModel.verses.count - 1 ? 0.9 : 0.3
+                            displayedVerseIndex < viewModel.verses.count - 1 ? 1.0 : 0.3
                         ))
+                        .frame(width: 44, height: 44)
+                        .background(.black.opacity(0.35))
+                        .clipShape(Circle())
                 }
                 .disabled(displayedVerseIndex >= viewModel.verses.count - 1)
 
@@ -286,12 +295,11 @@ struct ImmersiveListeningView: View {
                 } label: {
                     Image(systemName: "photo.on.rectangle")
                         .font(.system(size: 13, weight: .medium))
-                        .foregroundStyle(.white.opacity(0.8))
+                        .foregroundStyle(.white)
                         .frame(width: 44, height: 32)
                         .background(
                             Capsule()
-                                .fill(.ultraThinMaterial)
-                                .environment(\.colorScheme, .dark)
+                                .fill(.black.opacity(0.35))
                         )
                 }
             }
