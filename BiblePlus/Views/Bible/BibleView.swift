@@ -612,7 +612,8 @@ private struct BibleContentView: View {
                 verses: viewModel.verses,
                 book: viewModel.selectedBook,
                 chapter: viewModel.selectedChapter,
-                translation: viewModel.currentTranslation
+                translation: viewModel.currentTranslation,
+                versesProvider: versesProvider
             )
         }
         .onChange(of: audioService.currentVerseIndex) { _, newIndex in

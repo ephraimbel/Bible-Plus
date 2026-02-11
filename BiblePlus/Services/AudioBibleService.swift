@@ -62,7 +62,8 @@ final class AudioBibleService {
         verses: [(number: Int, text: String)],
         book: BibleBook,
         chapter: Int,
-        translation: BibleTranslation
+        translation: BibleTranslation,
+        versesProvider: ((BibleBook, Int) async -> [(number: Int, text: String)])? = nil
     ) {
         prefetchTask?.cancel()
         guard !verses.isEmpty else { return }
@@ -71,9 +72,20 @@ final class AudioBibleService {
         let voice = selectedVoice
         let cacheKey = Self.makeCacheKey(book: book, chapter: chapter, translation: translation, voice: voice)
         let cacheURL = Self.cacheFileURL(for: cacheKey)
-        if FileManager.default.fileExists(atPath: cacheURL.path) { return }
+        if FileManager.default.fileExists(atPath: cacheURL.path) {
+            // Current chapter cached — still prefetch next chapter eagerly
+            if let provider = versesProvider {
+                prefetchNextChapter(
+                    currentBook: book,
+                    currentChapter: chapter,
+                    translation: translation,
+                    versesProvider: provider
+                )
+            }
+            return
+        }
 
-        prefetchTask = Task.detached(priority: .utility) { [weak self] in
+        prefetchTask = Task.detached(priority: .userInitiated) { [weak self] in
             guard let self else { return }
             _ = try? await self.fetchOrGenerateAudio(
                 verses: verses,
@@ -82,6 +94,16 @@ final class AudioBibleService {
                 translation: translation,
                 voice: voice
             )
+
+            // After current chapter is generated, start prefetching next chapter
+            if let provider = versesProvider {
+                await self.prefetchNextChapter(
+                    currentBook: book,
+                    currentChapter: chapter,
+                    translation: translation,
+                    versesProvider: provider
+                )
+            }
         }
     }
 
@@ -113,7 +135,7 @@ final class AudioBibleService {
         let cacheURL = Self.cacheFileURL(for: cacheKey)
         if FileManager.default.fileExists(atPath: cacheURL.path) { return }
 
-        Task.detached(priority: .utility) { [weak self] in
+        Task.detached(priority: .userInitiated) { [weak self] in
             guard let self else { return }
             let verses = await versesProvider(nextBook, nextChapter)
             guard !verses.isEmpty else { return }
@@ -313,7 +335,7 @@ final class AudioBibleService {
 
         // OpenAI TTS has 4096 char limit — split long chapters
         let audioData: Data
-        if chapterText.count <= 4000 {
+        if chapterText.count <= 1500 {
             audioData = try await callTTSAPI(text: chapterText, voice: voice)
         } else {
             audioData = try await generateLongChapter(
@@ -360,7 +382,7 @@ final class AudioBibleService {
 
         for verse in verses {
             let verseLen = verse.text.count + 1
-            if currentLen + verseLen > 3800 && !current.isEmpty {
+            if currentLen + verseLen > 1500 && !current.isEmpty {
                 segments.append(current)
                 current = []
                 currentLen = 0
@@ -398,7 +420,7 @@ final class AudioBibleService {
     private func callTTSAPI(text: String, voice: BibleVoice = .onyx) async throws -> Data {
         let endpoint = URL(string: "https://api.openai.com/v1/audio/speech")!
         let body: [String: Any] = [
-            "model": "tts-1-hd",
+            "model": "tts-1",
             "input": text,
             "voice": voice.apiVoice,
             "response_format": "mp3",
@@ -575,7 +597,7 @@ final class AudioBibleService {
     // MARK: - Cache
 
     private static func makeCacheKey(book: BibleBook, chapter: Int, translation: BibleTranslation, voice: BibleVoice) -> String {
-        "\(book.id)-\(chapter)-\(translation.apiCode)-\(voice.rawValue)"
+        "\(book.id)-\(chapter)-\(translation.apiCode)-\(voice.rawValue)-v2"
     }
 
     private static func cacheFileURL(for key: String) -> URL {
