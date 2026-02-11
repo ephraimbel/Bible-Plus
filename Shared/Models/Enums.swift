@@ -701,6 +701,14 @@ struct SanctuaryBackground: Identifiable, Hashable {
             SanctuaryBackground(id: "northern-lights", name: "Northern Lights", collection: .nature, gradientColors: ["0B3D2E", "1A6B4A", "38C98B"], isProOnly: true),
             SanctuaryBackground(id: "stormy-sky", name: "Stormy Sky", collection: .nature, gradientColors: ["2C3E50", "4A6274", "7A9BB0"], isProOnly: true),
             SanctuaryBackground(id: "canyon-rock", name: "Canyon Rock", collection: .nature, gradientColors: ["8B4513", "A0522D", "CD853F"], isProOnly: true),
+            // Pexels videos
+            SanctuaryBackground(id: "golden-flower-field", name: "Golden Flowers", collection: .nature, gradientColors: ["6B5A1A", "9A8430", "C8B060"], videoFileName: "golden-flower-field", isProOnly: true),
+            // Pexels images
+            SanctuaryBackground(id: "dramatic-mountains-img", name: "Dramatic Mountains", collection: .nature, gradientColors: ["3A4A5A", "5A7080", "8A9AAA"], imageName: "dramatic-mountains", isProOnly: true),
+            SanctuaryBackground(id: "moonlit-mountains-img", name: "Moonlit Mountains", collection: .nature, gradientColors: ["0A1628", "1A2D50", "3A4D70"], imageName: "moonlit-mountains", isProOnly: true),
+            SanctuaryBackground(id: "mountain-sunrise-mist-img", name: "Mountain Sunrise Mist", collection: .nature, gradientColors: ["C2842F", "D4A054", "F0D8A0"], imageName: "mountain-sunrise-mist", isProOnly: true),
+            SanctuaryBackground(id: "autumn-forest-sun-img", name: "Autumn Forest Sun", collection: .nature, gradientColors: ["8B5A2F", "B87A40", "D4956A"], imageName: "autumn-forest-sun", isProOnly: true),
+            SanctuaryBackground(id: "forest-sunset-golden-img", name: "Forest Sunset", collection: .nature, gradientColors: ["6B3A10", "9A5A20", "C88040"], imageName: "forest-sunset-golden", isProOnly: true),
         ])
 
         // MARK: Ocean & Water (9 — all Pro, videos → images → gradients)
@@ -717,6 +725,11 @@ struct SanctuaryBackground: Identifiable, Hashable {
             SanctuaryBackground(id: "ocean-sunset-img", name: "Ocean Sunset", collection: .oceanAndWater, gradientColors: ["8B3A1A", "C96B3A", "E8A060"], imageName: "ocean-sunset", isProOnly: true),
             // Gradients
             SanctuaryBackground(id: "ocean-deep", name: "Ocean Deep", collection: .oceanAndWater, gradientColors: ["0A2342", "1A4570", "2E6D9E"]),
+            // Pexels videos
+            SanctuaryBackground(id: "aerial-sea-waves", name: "Aerial Sea Waves", collection: .oceanAndWater, gradientColors: ["0A5276", "1A80B9", "3DADE2"], videoFileName: "aerial-sea-waves", isProOnly: true),
+            SanctuaryBackground(id: "calm-beach-waves", name: "Calm Beach", collection: .oceanAndWater, gradientColors: ["1A5A6A", "2D8A9A", "5ABACC"], videoFileName: "calm-beach-waves", isProOnly: true),
+            SanctuaryBackground(id: "slowmo-waves", name: "Slow Motion Waves", collection: .oceanAndWater, gradientColors: ["0D4F6B", "1A7A9E", "3AACCC"], videoFileName: "slowmo-waves", isProOnly: true),
+            SanctuaryBackground(id: "rain-on-glass", name: "Rain on Glass", collection: .oceanAndWater, gradientColors: ["2A3A4A", "4A5A6A", "6A7A8A"], videoFileName: "rain-on-glass", isProOnly: true),
         ])
 
         // MARK: Night Sky (6 — all Pro, videos → images)
@@ -729,6 +742,13 @@ struct SanctuaryBackground: Identifiable, Hashable {
             SanctuaryBackground(id: "moonlit-clouds", name: "Moonlit Clouds", collection: .nightSky, gradientColors: ["0A1628", "1A2D50", "3A4D70"], videoFileName: "moonlit-clouds", isProOnly: true),
             // Images
             SanctuaryBackground(id: "starry-mountains-img", name: "Starry Mountains", collection: .nightSky, gradientColors: ["0A0A1A", "14142D", "1E1E40"], imageName: "starry-mountains", isProOnly: true),
+            // Pexels videos
+            SanctuaryBackground(id: "aurora-borealis", name: "Aurora Borealis", collection: .nightSky, gradientColors: ["0B1D0B", "0D3B2E", "1A6B4A"], videoFileName: "aurora-borealis", isProOnly: true),
+            SanctuaryBackground(id: "night-sky-timelapse", name: "Night Sky Timelapse", collection: .nightSky, gradientColors: ["0A0A14", "0D1428", "1A1E3D"], videoFileName: "night-sky-timelapse", isProOnly: true),
+            SanctuaryBackground(id: "stars-mountains-pexels", name: "Stars Over Mountains", collection: .nightSky, gradientColors: ["0A0A1A", "0D1B3D", "1A2D5E"], videoFileName: "stars-mountains", isProOnly: true),
+            // Pexels images
+            SanctuaryBackground(id: "aurora-wallpaper-img", name: "Aurora Wallpaper", collection: .nightSky, gradientColors: ["0B2D1E", "1A5A3A", "38A06B"], imageName: "aurora-wallpaper", isProOnly: true),
+            SanctuaryBackground(id: "northern-lights-snow-img", name: "Northern Lights Snow", collection: .nightSky, gradientColors: ["0B1D2B", "1A3D4A", "2D6B6A"], imageName: "northern-lights-snow", isProOnly: true),
         ])
 
         // MARK: Warmth & Glow (8 — all Pro, videos → images → gradients)
@@ -744,6 +764,15 @@ struct SanctuaryBackground: Identifiable, Hashable {
             SanctuaryBackground(id: "coral-sunset", name: "Coral Sunset", collection: .warmthAndGlow, gradientColors: ["FF6B6B", "EE5A6F", "C44569"], isProOnly: true),
             SanctuaryBackground(id: "bronze-age", name: "Bronze Age", collection: .warmthAndGlow, gradientColors: ["5C3D1E", "8B6040", "B08860"], isProOnly: true),
             SanctuaryBackground(id: "charcoal-flame", name: "Charcoal Flame", collection: .warmthAndGlow, gradientColors: ["1A1A1A", "3D1C1C", "6B2D2D"], isProOnly: true),
+            // Pexels videos
+            SanctuaryBackground(id: "flickering-candle", name: "Flickering Candle", collection: .warmthAndGlow, gradientColors: ["3A2000", "6B4014", "9A6A28"], videoFileName: "flickering-candle", isProOnly: true),
+            SanctuaryBackground(id: "candle-darkness", name: "Candle in Darkness", collection: .warmthAndGlow, gradientColors: ["1A1008", "3D2810", "6B4A20"], videoFileName: "candle-darkness", isProOnly: true),
+            SanctuaryBackground(id: "sunset-clouds-timelapse", name: "Sunset Timelapse", collection: .warmthAndGlow, gradientColors: ["8B4A1A", "C97040", "E8A060"], videoFileName: "sunset-clouds-timelapse", isProOnly: true),
+            SanctuaryBackground(id: "vertical-sunset-pexels", name: "Golden Sunset", collection: .warmthAndGlow, gradientColors: ["8B3A1A", "C96B3A", "E8A060"], videoFileName: "vertical-sunset", isProOnly: true),
+            SanctuaryBackground(id: "golden-lake-sunset-pexels", name: "Golden Lake Sunset", collection: .warmthAndGlow, gradientColors: ["6B4A1A", "9A7030", "C89A50"], videoFileName: "golden-lake-sunset", isProOnly: true),
+            // Pexels images
+            SanctuaryBackground(id: "desert-landscape-img", name: "Desert Landscape", collection: .warmthAndGlow, gradientColors: ["8B6A3A", "B89060", "D8B888"], imageName: "desert-landscape", isProOnly: true),
+            SanctuaryBackground(id: "grand-canyon-img", name: "Grand Canyon", collection: .warmthAndGlow, gradientColors: ["8B4513", "A0622D", "CD8540"], imageName: "grand-canyon", isProOnly: true),
         ])
 
         // MARK: Calm & Serene (7 — all Pro, videos → images → gradients)
@@ -758,6 +787,8 @@ struct SanctuaryBackground: Identifiable, Hashable {
             SanctuaryBackground(id: "teal-dream", name: "Teal Dream", collection: .calmAndSerene, gradientColors: ["0E4D40", "1A7A6A", "2AB09C"], isProOnly: true),
             SanctuaryBackground(id: "lavender-haze", name: "Lavender Haze", collection: .calmAndSerene, gradientColors: ["6B5B95", "8B7BB5", "B8A9D0"], isProOnly: true),
             SanctuaryBackground(id: "ice-crystal", name: "Ice Crystal", collection: .calmAndSerene, gradientColors: ["D6EAF8", "AED6F1", "85C1E9"], isProOnly: true),
+            // Pexels videos
+            SanctuaryBackground(id: "cloudy-sky-timelapse", name: "Cloudy Sky", collection: .calmAndSerene, gradientColors: ["6A8FA5", "8BAFC4", "B8D8E8"], videoFileName: "cloudy-sky-timelapse", isProOnly: true),
         ])
 
         // MARK: Sacred (10 — all Pro)
