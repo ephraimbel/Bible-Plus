@@ -114,7 +114,7 @@ enum WidgetContentProvider {
         let verseReference: String?
         let contentType: ContentType
         let contentID: UUID
-        let themeGradient: [String]
+        let backgroundGradient: [String]
         let firstName: String
     }
 
@@ -150,8 +150,8 @@ enum WidgetContentProvider {
         let now = Date()
         let hour = cal.component(.hour, from: now)
 
-        let theme = ThemeDefinition.allThemes.first(where: { $0.id == profile.selectedThemeID })
-            ?? ThemeDefinition.allThemes[0]
+        let background = SanctuaryBackground.background(for: profile.selectedBackgroundID)
+            ?? SanctuaryBackground.allBackgrounds[0]
 
         var entries: [WidgetEntry] = []
         var usedIDs: Set<UUID> = []
@@ -176,7 +176,7 @@ enum WidgetContentProvider {
                     verseReference: content.verseReference,
                     contentType: content.type,
                     contentID: content.id,
-                    themeGradient: theme.previewGradient,
+                    backgroundGradient: background.gradientColors,
                     firstName: profile.firstName
                 ))
             }

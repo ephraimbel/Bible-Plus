@@ -4,20 +4,25 @@ import UIKit
 
 struct BibleView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(AudioBibleService.self) private var audioBibleService
+    @Environment(\.bpPalette) private var palette
     @State private var viewModel: BibleReaderViewModel?
 
     var body: some View {
         NavigationStack {
             Group {
                 if let vm = viewModel {
-                    BibleContentView(viewModel: vm)
+                    BibleContentView(viewModel: vm, audioService: audioBibleService)
                 } else {
                     BPLoadingView().onAppear {
                         viewModel = BibleReaderViewModel(modelContext: modelContext)
                     }
                 }
             }
+            .background(palette.background)
         }
+        .toolbarBackground(palette.background, for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
     }
 }
 
@@ -25,6 +30,7 @@ struct BibleView: View {
 
 private struct BibleContentView: View {
     @Bindable var viewModel: BibleReaderViewModel
+    let audioService: AudioBibleService
     @Environment(\.modelContext) private var modelContext
     @Environment(\.bpPalette) private var palette
     @Environment(\.colorScheme) private var colorScheme
@@ -33,6 +39,7 @@ private struct BibleContentView: View {
     @State private var explainConversationId = UUID()
     @State private var shareText: String?
     @State private var searchViewModel: BibleSearchViewModel?
+    @State private var showAudioProGate = false
 
     // MARK: - Page Flip State
 
@@ -58,10 +65,59 @@ private struct BibleContentView: View {
         explainConversationId = conversation.id
     }
 
+    // MARK: - Audio Bible
+
+    private func handleAudioTap() {
+        if audioService.isPlaying || audioService.isPaused {
+            audioService.togglePlayback()
+            return
+        }
+
+        // Rate limit check
+        let descriptor = FetchDescriptor<UserProfile>()
+        let isPro = (try? modelContext.fetch(descriptor).first?.isPro) ?? false
+
+        guard AudioBibleService.canPlayChapter(isPro: isPro) else {
+            showAudioProGate = true
+            return
+        }
+
+        guard !viewModel.verses.isEmpty else { return }
+
+        // Set up auto-advance
+        audioService.setOnChapterComplete {
+            if viewModel.canGoForward {
+                viewModel.goToNextChapter()
+                Task {
+                    try? await Task.sleep(nanoseconds: 500_000_000)
+                    guard !viewModel.verses.isEmpty else { return }
+                    audioService.play(
+                        verses: viewModel.verses,
+                        book: viewModel.selectedBook,
+                        chapter: viewModel.selectedChapter,
+                        translation: viewModel.currentTranslation
+                    )
+                }
+            }
+        }
+
+        audioService.play(
+            verses: viewModel.verses,
+            book: viewModel.selectedBook,
+            chapter: viewModel.selectedChapter,
+            translation: viewModel.currentTranslation
+        )
+    }
+
     // MARK: - Page Flip
 
     private func performPageFlip(forward: Bool) {
         guard !isPageFlipping else { return }
+
+        // Stop audio when manually changing chapter
+        if audioService.hasActivePlayback {
+            audioService.stop()
+        }
 
         // Snapshot the current page content into local state
         cachedVerses = viewModel.verses
@@ -106,6 +162,7 @@ private struct BibleContentView: View {
                     offlineTranslationName: viewModel.translationName,
                     savedVerseNumbers: viewModel.savedVerseNumbers,
                     highlightColors: viewModel.highlightColors,
+                    audioVerseIndex: audioService.isPlaying ? audioService.currentVerseIndex : nil,
                     readerFontSize: viewModel.readerFontSize,
                     readerFontDesign: viewModel.readerFontDesign,
                     readerLineSpacing: viewModel.readerLineSpacing,
@@ -132,6 +189,7 @@ private struct BibleContentView: View {
                         offlineTranslationName: "",
                         savedVerseNumbers: cachedSavedVerseNumbers,
                         highlightColors: cachedHighlightColors,
+                        audioVerseIndex: nil,
                         readerFontSize: viewModel.readerFontSize,
                         readerFontDesign: viewModel.readerFontDesign,
                         readerLineSpacing: viewModel.readerLineSpacing,
@@ -183,6 +241,17 @@ private struct BibleContentView: View {
                     }
             )
 
+            // Audio mini player
+            if audioService.hasActivePlayback {
+                AudioMiniPlayerView(
+                    audioService: audioService,
+                    chapterTitle: viewModel.chapterTitle,
+                    totalVerses: viewModel.verses.count,
+                    onClose: { audioService.stop() }
+                )
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
+
             // Verse action sheet overlay
             if let verse = viewModel.selectedVerse {
                 Color.black.opacity(0.3)
@@ -232,6 +301,7 @@ private struct BibleContentView: View {
             }
         }
         .animation(BPAnimation.spring, value: viewModel.selectedVerse)
+        .animation(BPAnimation.spring, value: audioService.hasActivePlayback)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
@@ -250,6 +320,22 @@ private struct BibleContentView: View {
 
             ToolbarItem(placement: .topBarTrailing) {
                 HStack(spacing: 12) {
+                    // Audio Bible
+                    Button {
+                        handleAudioTap()
+                    } label: {
+                        Image(systemName: audioService.hasActivePlayback
+                            ? "headphones.circle.fill"
+                            : "headphones"
+                        )
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundStyle(
+                            audioService.hasActivePlayback
+                                ? palette.accent
+                                : palette.textSecondary
+                        )
+                    }
+
                     // Search
                     Button {
                         if searchViewModel == nil {
@@ -361,6 +447,11 @@ private struct BibleContentView: View {
             if let text = shareText {
                 ShareSheetView(items: [text])
             }
+        }
+        .alert("Audio Bible Limit", isPresented: $showAudioProGate) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text("You've used your \(AudioBibleService.freeChapterLimit) free chapters today. Upgrade to Pro for unlimited Audio Bible.")
         }
     }
 }

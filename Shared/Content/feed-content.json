@@ -886,7 +886,7 @@
     "type": "verse",
     "templateText": "For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future.",
     "verseReference": "Jeremiah 29:11",
-    "verseText": null,
+    "verseText": "For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future.",
     "category": "Hope & Future",
     "timeOfDay": [
       "morning"
@@ -907,7 +907,7 @@
     "type": "verse",
     "templateText": "The Lord is my shepherd; I shall not want. He makes me lie down in green pastures. He leads me beside still waters. He restores my soul.",
     "verseReference": "Psalm 23:1-3",
-    "verseText": null,
+    "verseText": "The Lord is my shepherd; I shall not want. He makes me lie down in green pastures. He leads me beside still waters. He restores my soul.",
     "category": "Peace & Provision",
     "timeOfDay": [
       "morning",
@@ -926,7 +926,7 @@
     "type": "verse",
     "templateText": "Come to me, all who labor and are heavy laden, and I will give you rest. Take my yoke upon you, and learn from me, for I am gentle and lowly in heart, and you will find rest for your souls.",
     "verseReference": "Matthew 11:28-29",
-    "verseText": null,
+    "verseText": "Come to me, all who labor and are heavy laden, and I will give you rest. Take my yoke upon you, and learn from me, for I am gentle and lowly in heart, and you will find rest for your souls.",
     "category": "Rest",
     "timeOfDay": [
       "evening",
@@ -945,7 +945,7 @@
     "type": "verse",
     "templateText": "Trust in the Lord with all your heart, and do not lean on your own understanding. In all your ways acknowledge him, and he will make straight your paths.",
     "verseReference": "Proverbs 3:5-6",
-    "verseText": null,
+    "verseText": "Trust in the Lord with all your heart, and do not lean on your own understanding. In all your ways acknowledge him, and he will make straight your paths.",
     "category": "Trust & Guidance",
     "timeOfDay": [
       "morning"
@@ -963,7 +963,7 @@
     "type": "verse",
     "templateText": "And we know that in all things God works for the good of those who love him, who have been called according to his purpose.",
     "verseReference": "Romans 8:28",
-    "verseText": null,
+    "verseText": "And we know that in all things God works for the good of those who love him, who have been called according to his purpose.",
     "category": "Sovereignty",
     "timeOfDay": [
       "morning",
@@ -982,7 +982,7 @@
     "type": "verse",
     "templateText": "I can do all things through him who strengthens me.",
     "verseReference": "Philippians 4:13",
-    "verseText": null,
+    "verseText": "I can do all things through him who strengthens me.",
     "category": "Strength",
     "timeOfDay": [
       "morning",
@@ -1001,7 +1001,7 @@
     "type": "verse",
     "templateText": "The Lord is close to the brokenhearted and saves those who are crushed in spirit.",
     "verseReference": "Psalm 34:18",
-    "verseText": null,
+    "verseText": "The Lord is close to the brokenhearted and saves those who are crushed in spirit.",
     "category": "Comfort",
     "timeOfDay": [
       "evening",
@@ -1020,7 +1020,7 @@
     "type": "verse",
     "templateText": "Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.",
     "verseReference": "Joshua 1:9",
-    "verseText": null,
+    "verseText": "Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.",
     "category": "Courage",
     "timeOfDay": [
       "morning"
@@ -1038,7 +1038,7 @@
     "type": "verse",
     "templateText": "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.",
     "verseReference": "Philippians 4:6-7",
-    "verseText": null,
+    "verseText": "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.",
     "category": "Anxiety & Prayer",
     "timeOfDay": [
       "morning",
@@ -1056,7 +1056,7 @@
     "type": "verse",
     "templateText": "But those who hope in the Lord will renew their strength. They will soar on wings like eagles; they will run and not grow weary, they will walk and not be faint.",
     "verseReference": "Isaiah 40:31",
-    "verseText": null,
+    "verseText": "But those who hope in the Lord will renew their strength. They will soar on wings like eagles; they will run and not grow weary, they will walk and not be faint.",
     "category": "Endurance",
     "timeOfDay": [
       "morning",
@@ -1075,7 +1075,7 @@
     "type": "verse",
     "templateText": "For God has not given us a spirit of fear, but of power and of love and of a sound mind.",
     "verseReference": "2 Timothy 1:7",
-    "verseText": null,
+    "verseText": "For God has not given us a spirit of fear, but of power and of love and of a sound mind.",
     "category": "Fear & Power",
     "timeOfDay": [
       "morning"
@@ -1093,7 +1093,7 @@
     "type": "verse",
     "templateText": "He heals the brokenhearted and binds up their wounds.",
     "verseReference": "Psalm 147:3",
-    "verseText": null,
+    "verseText": "He heals the brokenhearted and binds up their wounds.",
     "category": "Healing",
     "timeOfDay": [
       "evening",
@@ -1112,7 +1112,7 @@
     "type": "verse",
     "templateText": "No temptation has overtaken you except what is common to mankind. And God is faithful; he will not let you be tempted beyond what you can bear. But when you are tempted, he will also provide a way out so that you can endure it.",
     "verseReference": "1 Corinthians 10:13",
-    "verseText": null,
+    "verseText": "No temptation has overtaken you except what is common to mankind. And God is faithful; he will not let you be tempted beyond what you can bear. But when you are tempted, he will also provide a way out so that you can endure it.",
     "category": "Temptation",
     "timeOfDay": [
       "morning",
@@ -1130,7 +1130,7 @@
     "type": "verse",
     "templateText": "And my God will meet all your needs according to the riches of his glory in Christ Jesus.",
     "verseReference": "Philippians 4:19",
-    "verseText": null,
+    "verseText": "And my God will meet all your needs according to the riches of his glory in Christ Jesus.",
     "category": "Provision",
     "timeOfDay": [
       "morning"
@@ -1147,7 +1147,7 @@
     "type": "verse",
     "templateText": "Be kind and compassionate to one another, forgiving each other, just as in Christ God forgave you.",
     "verseReference": "Ephesians 4:32",
-    "verseText": null,
+    "verseText": "Be kind and compassionate to one another, forgiving each other, just as in Christ God forgave you.",
     "category": "Forgiveness",
     "timeOfDay": [
       "midday",
@@ -1166,7 +1166,7 @@
     "type": "verse",
     "templateText": "The Lord is my light and my salvation; whom shall I fear? The Lord is the stronghold of my life; of whom shall I be afraid?",
     "verseReference": "Psalm 27:1",
-    "verseText": null,
+    "verseText": "The Lord is my light and my salvation; whom shall I fear? The Lord is the stronghold of my life; of whom shall I be afraid?",
     "category": "Courage & Faith",
     "timeOfDay": [
       "morning"
@@ -1184,7 +1184,7 @@
     "type": "verse",
     "templateText": "Cast all your anxiety on him because he cares for you.",
     "verseReference": "1 Peter 5:7",
-    "verseText": null,
+    "verseText": "Cast all your anxiety on him because he cares for you.",
     "category": "Anxiety",
     "timeOfDay": [
       "morning",
@@ -1202,7 +1202,7 @@
     "type": "verse",
     "templateText": "Blessed are those who mourn, for they will be comforted.",
     "verseReference": "Matthew 5:4",
-    "verseText": null,
+    "verseText": "Blessed are those who mourn, for they will be comforted.",
     "category": "Grief",
     "timeOfDay": [
       "evening"
@@ -1219,7 +1219,7 @@
     "type": "verse",
     "templateText": "For where two or three gather in my name, there am I with them.",
     "verseReference": "Matthew 18:20",
-    "verseText": null,
+    "verseText": "For where two or three gather in my name, there am I with them.",
     "category": "Community",
     "timeOfDay": [
       "midday"
@@ -1236,7 +1236,7 @@
     "type": "verse",
     "templateText": "A gentle answer turns away wrath, but a harsh word stirs up anger.",
     "verseReference": "Proverbs 15:1",
-    "verseText": null,
+    "verseText": "A gentle answer turns away wrath, but a harsh word stirs up anger.",
     "category": "Anger & Words",
     "timeOfDay": [
       "midday"
@@ -1254,7 +1254,7 @@
     "type": "verse",
     "templateText": "Delight yourself in the Lord, and he will give you the desires of your heart.",
     "verseReference": "Psalm 37:4",
-    "verseText": null,
+    "verseText": "Delight yourself in the Lord, and he will give you the desires of your heart.",
     "category": "Desire & Trust",
     "timeOfDay": [
       "morning"
@@ -1272,7 +1272,7 @@
     "type": "verse",
     "templateText": "If we confess our sins, he is faithful and just and will forgive us our sins and purify us from all unrighteousness.",
     "verseReference": "1 John 1:9",
-    "verseText": null,
+    "verseText": "If we confess our sins, he is faithful and just and will forgive us our sins and purify us from all unrighteousness.",
     "category": "Confession & Grace",
     "timeOfDay": [
       "evening",
@@ -1291,7 +1291,7 @@
     "type": "verse",
     "templateText": "Therefore, if anyone is in Christ, the new creation has come: The old has gone, the new is here!",
     "verseReference": "2 Corinthians 5:17",
-    "verseText": null,
+    "verseText": "Therefore, if anyone is in Christ, the new creation has come: The old has gone, the new is here!",
     "category": "New Identity",
     "timeOfDay": [
       "morning"
@@ -1309,7 +1309,7 @@
     "type": "verse",
     "templateText": "The Lord gives strength to his people; the Lord blesses his people with peace.",
     "verseReference": "Psalm 29:11",
-    "verseText": null,
+    "verseText": "The Lord gives strength to his people; the Lord blesses his people with peace.",
     "category": "Strength & Peace",
     "timeOfDay": [
       "morning",
@@ -1328,7 +1328,7 @@
     "type": "verse",
     "templateText": "Have I not commanded you? Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.",
     "verseReference": "Joshua 1:9",
-    "verseText": null,
+    "verseText": "Have I not commanded you? Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.",
     "category": "Courage",
     "timeOfDay": [
       "morning"
@@ -1346,7 +1346,7 @@
     "type": "verse",
     "templateText": "The name of the Lord is a fortified tower; the righteous run to it and are safe.",
     "verseReference": "Proverbs 18:10",
-    "verseText": null,
+    "verseText": "The name of the Lord is a fortified tower; the righteous run to it and are safe.",
     "category": "Protection",
     "timeOfDay": [
       "midday",
@@ -1365,7 +1365,7 @@
     "type": "verse",
     "templateText": "Love is patient, love is kind. It does not envy, it does not boast, it is not proud. It does not dishonor others, it is not self-seeking, it is not easily angered, it keeps no record of wrongs.",
     "verseReference": "1 Corinthians 13:4-5",
-    "verseText": null,
+    "verseText": "Love is patient, love is kind. It does not envy, it does not boast, it is not proud. It does not dishonor others, it is not self-seeking, it is not easily angered, it keeps no record of wrongs.",
     "category": "Love",
     "timeOfDay": [
       "morning",
@@ -1384,7 +1384,7 @@
     "type": "verse",
     "templateText": "For I am convinced that neither death nor life, neither angels nor demons, neither the present nor the future, nor any powers, neither height nor depth, nor anything else in all creation, will be able to separate us from the love of God that is in Christ Jesus our Lord.",
     "verseReference": "Romans 8:38-39",
-    "verseText": null,
+    "verseText": "For I am convinced that neither death nor life, neither angels nor demons, neither the present nor the future, nor any powers, neither height nor depth, nor anything else in all creation, will be able to separate us from the love of God that is in Christ Jesus our Lord.",
     "category": "Unshakeable Love",
     "timeOfDay": [
       "bedtime"
@@ -1403,7 +1403,7 @@
     "type": "verse",
     "templateText": "Seek the Lord while he may be found; call on him while he is near.",
     "verseReference": "Isaiah 55:6",
-    "verseText": null,
+    "verseText": "Seek the Lord while he may be found; call on him while he is near.",
     "category": "Seeking God",
     "timeOfDay": [
       "morning"
@@ -1421,7 +1421,7 @@
     "type": "verse",
     "templateText": "Consider it pure joy, my brothers and sisters, whenever you face trials of many kinds, because you know that the testing of your faith produces perseverance.",
     "verseReference": "James 1:2-3",
-    "verseText": null,
+    "verseText": "Consider it pure joy, my brothers and sisters, whenever you face trials of many kinds, because you know that the testing of your faith produces perseverance.",
     "category": "Trials & Growth",
     "timeOfDay": [
       "morning",
@@ -1441,7 +1441,7 @@
     "type": "verse",
     "templateText": "Two are better than one, because they have a good return for their labor: If either of them falls down, one can help the other up.",
     "verseReference": "Ecclesiastes 4:9-10",
-    "verseText": null,
+    "verseText": "Two are better than one, because they have a good return for their labor: If either of them falls down, one can help the other up.",
     "category": "Friendship",
     "timeOfDay": [
       "midday"
@@ -1459,7 +1459,7 @@
     "type": "verse",
     "templateText": "Be still, and know that I am God.",
     "verseReference": "Psalm 46:10",
-    "verseText": null,
+    "verseText": "Be still, and know that I am God.",
     "category": "Stillness",
     "timeOfDay": [
       "evening",
@@ -1477,7 +1477,7 @@
     "type": "verse",
     "templateText": "Give, and it will be given to you. A good measure, pressed down, shaken together and running over, will be poured into your lap.",
     "verseReference": "Luke 6:38",
-    "verseText": null,
+    "verseText": "Give, and it will be given to you. A good measure, pressed down, shaken together and running over, will be poured into your lap.",
     "category": "Generosity",
     "timeOfDay": [
       "morning"
@@ -2275,7 +2275,7 @@
     "type": "verse",
     "templateText": "For we are God's handiwork, created in Christ Jesus to do good works, which God prepared in advance for us to do.",
     "verseReference": "Ephesians 2:10",
-    "verseText": null,
+    "verseText": "For we are God's handiwork, created in Christ Jesus to do good works, which God prepared in advance for us to do.",
     "category": "Purpose & Identity",
     "timeOfDay": [
       "morning",
@@ -2293,7 +2293,7 @@
     "type": "verse",
     "templateText": "The steadfast love of the Lord never ceases; his mercies never come to an end; they are new every morning; great is your faithfulness.",
     "verseReference": "Lamentations 3:22-23",
-    "verseText": null,
+    "verseText": "The steadfast love of the Lord never ceases; his mercies never come to an end; they are new every morning; great is your faithfulness.",
     "category": "Faithfulness",
     "timeOfDay": [
       "morning"
@@ -2311,7 +2311,7 @@
     "type": "verse",
     "templateText": "When I am afraid, I put my trust in you. In God, whose word I praise, in God I trust; I shall not be afraid. What can flesh do to me?",
     "verseReference": "Psalm 56:3-4",
-    "verseText": null,
+    "verseText": "When I am afraid, I put my trust in you. In God, whose word I praise, in God I trust; I shall not be afraid. What can flesh do to me?",
     "category": "Fear & Trust",
     "timeOfDay": [
       "evening",
@@ -18285,7 +18285,7 @@
     "type": "verse",
     "templateText": "Though the fig tree should not blossom, nor fruit be on the vines, the produce of the olive fail and the fields yield no food, the flock be cut off from the fold and there be no herd in the stalls, yet I will rejoice in the Lord; I will take joy in the God of my salvation.",
     "verseReference": "Habakkuk 3:17-18",
-    "verseText": null,
+    "verseText": "Though the fig tree should not blossom, nor fruit be on the vines, the produce of the olive fail and the fields yield no food, the flock be cut off from the fold and there be no herd in the stalls, yet I will rejoice in the Lord; I will take joy in the God of my salvation.",
     "category": "Trust in Suffering",
     "timeOfDay": [
       "morning",
@@ -18307,7 +18307,7 @@
     "type": "verse",
     "templateText": "The steadfast love of the Lord never ceases; his mercies never come to an end; they are new every morning; great is your faithfulness.",
     "verseReference": "Lamentations 3:22-23",
-    "verseText": null,
+    "verseText": "The steadfast love of the Lord never ceases; his mercies never come to an end; they are new every morning; great is your faithfulness.",
     "category": "God's Faithfulness",
     "timeOfDay": [
       "morning"
@@ -18328,7 +18328,7 @@
     "type": "verse",
     "templateText": "The Lord your God is in your midst, a mighty one who will save; he will rejoice over you with gladness; he will quiet you by his love; he will exult over you with loud singing.",
     "verseReference": "Zephaniah 3:17",
-    "verseText": null,
+    "verseText": "The Lord your God is in your midst, a mighty one who will save; he will rejoice over you with gladness; he will quiet you by his love; he will exult over you with loud singing.",
     "category": "God's Love",
     "timeOfDay": [
       "bedtime"
@@ -18349,7 +18349,7 @@
     "type": "verse",
     "templateText": "He has told you, O man, what is good; and what does the Lord require of you but to do justice, and to love kindness, and to walk humbly with your God?",
     "verseReference": "Micah 6:8",
-    "verseText": null,
+    "verseText": "He has told you, O man, what is good; and what does the Lord require of you but to do justice, and to love kindness, and to walk humbly with your God?",
     "category": "Righteous Living",
     "timeOfDay": [
       "morning",
@@ -18371,7 +18371,7 @@
     "type": "verse",
     "templateText": "He has made everything beautiful in its time. Also, he has put eternity into man's heart, yet so that he cannot find out what God has done from the beginning to the end.",
     "verseReference": "Ecclesiastes 3:11",
-    "verseText": null,
+    "verseText": "He has made everything beautiful in its time. Also, he has put eternity into man's heart, yet so that he cannot find out what God has done from the beginning to the end.",
     "category": "God's Sovereignty",
     "timeOfDay": [
       "midday",
@@ -18393,7 +18393,7 @@
     "type": "verse",
     "templateText": "Set me as a seal upon your heart, as a seal upon your arm, for love is strong as death, jealousy is fierce as the grave. Its flashes are flashes of fire, the very flame of the Lord.",
     "verseReference": "Song of Solomon 8:6",
-    "verseText": null,
+    "verseText": "Set me as a seal upon your heart, as a seal upon your arm, for love is strong as death, jealousy is fierce as the grave. Its flashes are flashes of fire, the very flame of the Lord.",
     "category": "Divine Love",
     "timeOfDay": [
       "evening",
@@ -18415,7 +18415,7 @@
     "type": "verse",
     "templateText": "For the word of God is living and active, sharper than any two-edged sword, piercing to the division of soul and of spirit, of joints and of marrow, and discerning the thoughts and intentions of the heart.",
     "verseReference": "Hebrews 4:12",
-    "verseText": null,
+    "verseText": "For the word of God is living and active, sharper than any two-edged sword, piercing to the division of soul and of spirit, of joints and of marrow, and discerning the thoughts and intentions of the heart.",
     "category": "Scripture's Power",
     "timeOfDay": [
       "morning"
@@ -18436,7 +18436,7 @@
     "type": "verse",
     "templateText": "Count it all joy, my brothers, when you meet trials of various kinds, for you know that the testing of your faith produces steadfastness. And let steadfastness have its full effect, that you may be perfect and complete, lacking in nothing.",
     "verseReference": "James 1:2-4",
-    "verseText": null,
+    "verseText": "Count it all joy, my brothers, when you meet trials of various kinds, for you know that the testing of your faith produces steadfastness. And let steadfastness have its full effect, that you may be perfect and complete, lacking in nothing.",
     "category": "Endurance",
     "timeOfDay": [
       "morning",
@@ -18458,7 +18458,7 @@
     "type": "verse",
     "templateText": "But you are a chosen race, a royal priesthood, a holy nation, a people for his own possession, that you may proclaim the excellencies of him who called you out of darkness into his marvelous light.",
     "verseReference": "1 Peter 2:9",
-    "verseText": null,
+    "verseText": "But you are a chosen race, a royal priesthood, a holy nation, a people for his own possession, that you may proclaim the excellencies of him who called you out of darkness into his marvelous light.",
     "category": "Identity in Christ",
     "timeOfDay": [
       "morning"
@@ -18479,7 +18479,7 @@
     "type": "verse",
     "templateText": "Beloved, do not be surprised at the fiery trial when it comes upon you to test you, as though something strange were happening to you. But rejoice insofar as you share Christ's sufferings, that you may also rejoice and be glad when his glory is revealed.",
     "verseReference": "1 Peter 4:12-13",
-    "verseText": null,
+    "verseText": "Beloved, do not be surprised at the fiery trial when it comes upon you to test you, as though something strange were happening to you. But rejoice insofar as you share Christ's sufferings, that you may also rejoice and be glad when his glory is revealed.",
     "category": "Suffering & Glory",
     "timeOfDay": [
       "evening"
@@ -18500,7 +18500,7 @@
     "type": "verse",
     "templateText": "Who is a God like you, pardoning iniquity and passing over transgression for the remnant of his inheritance? He does not retain his anger forever, because he delights in steadfast love.",
     "verseReference": "Micah 7:18",
-    "verseText": null,
+    "verseText": "Who is a God like you, pardoning iniquity and passing over transgression for the remnant of his inheritance? He does not retain his anger forever, because he delights in steadfast love.",
     "category": "God's Mercy",
     "timeOfDay": [
       "evening",
@@ -18522,7 +18522,7 @@
     "type": "verse",
     "templateText": "Remember not the former things, nor consider the things of old. Behold, I am doing a new thing; now it springs forth, do you not perceive it? I will make a way in the wilderness and rivers in the desert.",
     "verseReference": "Isaiah 43:18-19",
-    "verseText": null,
+    "verseText": "Remember not the former things, nor consider the things of old. Behold, I am doing a new thing; now it springs forth, do you not perceive it? I will make a way in the wilderness and rivers in the desert.",
     "category": "New Beginnings",
     "timeOfDay": [
       "morning"
@@ -18543,7 +18543,7 @@
     "type": "verse",
     "templateText": "I will give you the treasures of darkness and the hoards in secret places, that you may know that it is I, the Lord, the God of Israel, who call you by your name.",
     "verseReference": "Isaiah 45:3",
-    "verseText": null,
+    "verseText": "I will give you the treasures of darkness and the hoards in secret places, that you may know that it is I, the Lord, the God of Israel, who call you by your name.",
     "category": "God's Provision",
     "timeOfDay": [
       "bedtime"
@@ -18564,7 +18564,7 @@
     "type": "verse",
     "templateText": "For we do not have a high priest who is unable to sympathize with our weaknesses, but one who in every respect has been tempted as we are, yet without sin. Let us then with confidence draw near to the throne of grace.",
     "verseReference": "Hebrews 4:15-16",
-    "verseText": null,
+    "verseText": "For we do not have a high priest who is unable to sympathize with our weaknesses, but one who in every respect has been tempted as we are, yet without sin. Let us then with confidence draw near to the throne of grace.",
     "category": "Christ's Compassion",
     "timeOfDay": [
       "midday",
@@ -19008,7 +19008,7 @@
     "type": "verse",
     "templateText": "Be angry and do not sin; do not let the sun go down on your anger, and give no opportunity to the devil.",
     "verseReference": "Ephesians 4:26-27",
-    "verseText": null,
+    "verseText": "Be angry and do not sin; do not let the sun go down on your anger, and give no opportunity to the devil.",
     "category": "Anger",
     "timeOfDay": [
       "evening",
@@ -19029,7 +19029,7 @@
     "type": "verse",
     "templateText": "A soft answer turns away wrath, but a harsh word stirs up anger.",
     "verseReference": "Proverbs 15:1",
-    "verseText": null,
+    "verseText": "A soft answer turns away wrath, but a harsh word stirs up anger.",
     "category": "Patience",
     "timeOfDay": [
       "morning",
@@ -19051,7 +19051,7 @@
     "type": "verse",
     "templateText": "Know this, my beloved brothers: let every person be quick to hear, slow to speak, slow to anger; for the anger of man does not produce the righteousness of God.",
     "verseReference": "James 1:19-20",
-    "verseText": null,
+    "verseText": "Know this, my beloved brothers: let every person be quick to hear, slow to speak, slow to anger; for the anger of man does not produce the righteousness of God.",
     "category": "Self-Control",
     "timeOfDay": [
       "morning"
@@ -19071,7 +19071,7 @@
     "type": "verse",
     "templateText": "Refrain from anger, and forsake wrath! Fret not yourself; it tends only to evil.",
     "verseReference": "Psalm 37:8",
-    "verseText": null,
+    "verseText": "Refrain from anger, and forsake wrath! Fret not yourself; it tends only to evil.",
     "category": "Anger",
     "timeOfDay": [
       "midday",
@@ -19093,7 +19093,7 @@
     "type": "verse",
     "templateText": "Whoever is slow to anger has great understanding, but he who has a hasty temper exalts folly.",
     "verseReference": "Proverbs 14:29",
-    "verseText": null,
+    "verseText": "Whoever is slow to anger has great understanding, but he who has a hasty temper exalts folly.",
     "category": "Wisdom",
     "timeOfDay": [
       "morning",
@@ -19304,7 +19304,7 @@
     "type": "verse",
     "templateText": "He heals the brokenhearted and binds up their wounds.",
     "verseReference": "Psalm 147:3",
-    "verseText": null,
+    "verseText": "He heals the brokenhearted and binds up their wounds.",
     "category": "Healing",
     "timeOfDay": [
       "evening",
@@ -19326,7 +19326,7 @@
     "type": "verse",
     "templateText": "But he was pierced for our transgressions; he was crushed for our iniquities; upon him was the chastisement that brought us peace, and with his wounds we are healed.",
     "verseReference": "Isaiah 53:5",
-    "verseText": null,
+    "verseText": "But he was pierced for our transgressions; he was crushed for our iniquities; upon him was the chastisement that brought us peace, and with his wounds we are healed.",
     "category": "Healing",
     "timeOfDay": [
       "morning"
@@ -19346,7 +19346,7 @@
     "type": "verse",
     "templateText": "But he said to me, 'My grace is sufficient for you, for my power is made perfect in weakness.' Therefore I will boast all the more gladly of my weaknesses, so that the power of Christ may rest upon me.",
     "verseReference": "2 Corinthians 12:9",
-    "verseText": null,
+    "verseText": "But he said to me, 'My grace is sufficient for you, for my power is made perfect in weakness.' Therefore I will boast all the more gladly of my weaknesses, so that the power of Christ may rest upon me.",
     "category": "Strength in Weakness",
     "timeOfDay": [
       "morning",
@@ -19368,7 +19368,7 @@
     "type": "verse",
     "templateText": "Have you not known? Have you not heard? The Lord is the everlasting God, the Creator of the ends of the earth. He does not faint or grow weary; his understanding is unsearchable. He gives power to the faint, and to him who has no might he increases strength.",
     "verseReference": "Isaiah 40:28-29",
-    "verseText": null,
+    "verseText": "Have you not known? Have you not heard? The Lord is the everlasting God, the Creator of the ends of the earth. He does not faint or grow weary; his understanding is unsearchable. He gives power to the faint, and to him who has no might he increases strength.",
     "category": "God's Strength",
     "timeOfDay": [
       "morning",
@@ -19390,7 +19390,7 @@
     "type": "verse",
     "templateText": "Is anyone among you sick? Let him call for the elders of the church, and let them pray over him, anointing him with oil in the name of the Lord. And the prayer of faith will save the one who is sick, and the Lord will raise him up.",
     "verseReference": "James 5:14-15",
-    "verseText": null,
+    "verseText": "Is anyone among you sick? Let him call for the elders of the church, and let them pray over him, anointing him with oil in the name of the Lord. And the prayer of faith will save the one who is sick, and the Lord will raise him up.",
     "category": "Healing Prayer",
     "timeOfDay": [
       "evening",
@@ -19433,7 +19433,7 @@
     "type": "verse",
     "templateText": "Though he slay me, I will hope in him; yet I will argue my ways to his face.",
     "verseReference": "Job 13:15",
-    "verseText": null,
+    "verseText": "Though he slay me, I will hope in him; yet I will argue my ways to his face.",
     "category": "Radical Trust",
     "timeOfDay": [
       "evening",
@@ -20184,7 +20184,7 @@
     "type": "verse",
     "templateText": "In peace I will lie down and sleep, for you alone, Lord, make me dwell in safety.",
     "verseReference": "Psalm 4:8",
-    "verseText": null,
+    "verseText": "In peace I will lie down and sleep, for you alone, Lord, make me dwell in safety.",
     "category": "Peace & Sleep",
     "timeOfDay": [
       "bedtime"
@@ -20205,7 +20205,7 @@
     "type": "verse",
     "templateText": "He who watches over Israel will neither slumber nor sleep. The Lord watches over you — the Lord is your shade at your right hand.",
     "verseReference": "Psalm 121:3-5",
-    "verseText": null,
+    "verseText": "He who watches over Israel will neither slumber nor sleep. The Lord watches over you — the Lord is your shade at your right hand.",
     "category": "God's Protection",
     "timeOfDay": [
       "bedtime"
@@ -20226,7 +20226,7 @@
     "type": "verse",
     "templateText": "When you lie down, you will not be afraid; when you lie down, your sleep will be sweet.",
     "verseReference": "Proverbs 3:24",
-    "verseText": null,
+    "verseText": "When you lie down, you will not be afraid; when you lie down, your sleep will be sweet.",
     "category": "Sweet Sleep",
     "timeOfDay": [
       "bedtime"
@@ -20247,7 +20247,7 @@
     "type": "verse",
     "templateText": "It is in vain that you rise up early and go late to rest, eating the bread of anxious toil; for he gives to his beloved sleep.",
     "verseReference": "Psalm 127:2",
-    "verseText": null,
+    "verseText": "It is in vain that you rise up early and go late to rest, eating the bread of anxious toil; for he gives to his beloved sleep.",
     "category": "Rest & Trust",
     "timeOfDay": [
       "bedtime"
@@ -20268,7 +20268,7 @@
     "type": "verse",
     "templateText": "He gives strength to the weary and increases the power of the weak. Even youths grow tired and weary, and young men stumble and fall; but those who hope in the Lord will renew their strength.",
     "verseReference": "Isaiah 40:29-31",
-    "verseText": null,
+    "verseText": "He gives strength to the weary and increases the power of the weak. Even youths grow tired and weary, and young men stumble and fall; but those who hope in the Lord will renew their strength.",
     "category": "Renewed Strength",
     "timeOfDay": [
       "bedtime",
@@ -20290,7 +20290,7 @@
     "type": "verse",
     "templateText": "The Lord your God is in your midst, a mighty one who will save; he will rejoice over you with gladness; he will quiet you by his love; he will exult over you with loud singing.",
     "verseReference": "Zephaniah 3:17",
-    "verseText": null,
+    "verseText": "The Lord your God is in your midst, a mighty one who will save; he will rejoice over you with gladness; he will quiet you by his love; he will exult over you with loud singing.",
     "category": "God's Love",
     "timeOfDay": [
       "bedtime"
@@ -20311,7 +20311,7 @@
     "type": "verse",
     "templateText": "I lay down and slept; I woke again, for the Lord sustained me.",
     "verseReference": "Psalm 3:5",
-    "verseText": null,
+    "verseText": "I lay down and slept; I woke again, for the Lord sustained me.",
     "category": "Sustained by God",
     "timeOfDay": [
       "bedtime"
@@ -20332,7 +20332,7 @@
     "type": "verse",
     "templateText": "My presence will go with you, and I will give you rest.",
     "verseReference": "Exodus 33:14",
-    "verseText": null,
+    "verseText": "My presence will go with you, and I will give you rest.",
     "category": "God's Presence",
     "timeOfDay": [
       "bedtime",
@@ -20354,7 +20354,7 @@
     "type": "verse",
     "templateText": "By day the Lord directs his love, at night his song is with me — a prayer to the God of my life.",
     "verseReference": "Psalm 42:8",
-    "verseText": null,
+    "verseText": "By day the Lord directs his love, at night his song is with me — a prayer to the God of my life.",
     "category": "Night Worship",
     "timeOfDay": [
       "bedtime"
@@ -20375,7 +20375,7 @@
     "type": "verse",
     "templateText": "On my bed I remember you; I think of you through the watches of the night. Because you are my help, I sing in the shadow of your wings.",
     "verseReference": "Psalm 63:6-7",
-    "verseText": null,
+    "verseText": "On my bed I remember you; I think of you through the watches of the night. Because you are my help, I sing in the shadow of your wings.",
     "category": "Nighttime Devotion",
     "timeOfDay": [
       "bedtime"
@@ -20606,7 +20606,7 @@
     "type": "verse",
     "templateText": "Be completely humble and gentle; be patient, bearing with one another in love. Make every effort to keep the unity of the Spirit through the bond of peace.",
     "verseReference": "Ephesians 4:2-3",
-    "verseText": null,
+    "verseText": "Be completely humble and gentle; be patient, bearing with one another in love. Make every effort to keep the unity of the Spirit through the bond of peace.",
     "category": "Unity & Love",
     "timeOfDay": [
       "morning",
@@ -20627,7 +20627,7 @@
     "type": "verse",
     "templateText": "Above all, love each other deeply, because love covers over a multitude of sins.",
     "verseReference": "1 Peter 4:8",
-    "verseText": null,
+    "verseText": "Above all, love each other deeply, because love covers over a multitude of sins.",
     "category": "Deep Love",
     "timeOfDay": [
       "evening"
@@ -20647,7 +20647,7 @@
     "type": "verse",
     "templateText": "If it is possible, as far as it depends on you, live at peace with everyone.",
     "verseReference": "Romans 12:18",
-    "verseText": null,
+    "verseText": "If it is possible, as far as it depends on you, live at peace with everyone.",
     "category": "Peacemaking",
     "timeOfDay": [
       "morning",
@@ -20669,7 +20669,7 @@
     "type": "verse",
     "templateText": "Bear with each other and forgive one another if any of you has a grievance against someone. Forgive as the Lord forgave you.",
     "verseReference": "Colossians 3:13",
-    "verseText": null,
+    "verseText": "Bear with each other and forgive one another if any of you has a grievance against someone. Forgive as the Lord forgave you.",
     "category": "Forgiveness",
     "timeOfDay": [
       "midday",
@@ -20691,7 +20691,7 @@
     "type": "verse",
     "templateText": "Love is patient, love is kind. It does not envy, it does not boast, it is not proud. It does not dishonor others, it is not self-seeking, it is not easily angered, it keeps no record of wrongs.",
     "verseReference": "1 Corinthians 13:4-5",
-    "verseText": null,
+    "verseText": "Love is patient, love is kind. It does not envy, it does not boast, it is not proud. It does not dishonor others, it is not self-seeking, it is not easily angered, it keeps no record of wrongs.",
     "category": "Love Defined",
     "timeOfDay": [
       "morning"
@@ -21262,7 +21262,7 @@
     "type": "verse",
     "templateText": "Gray hair is a crown of splendor; it is attained in the way of righteousness.",
     "verseReference": "Proverbs 16:31",
-    "verseText": null,
+    "verseText": "Gray hair is a crown of splendor; it is attained in the way of righteousness.",
     "category": "Wisdom of Elders",
     "timeOfDay": [
       "morning",
@@ -21283,7 +21283,7 @@
     "type": "verse",
     "templateText": "Even to your old age and gray hairs I am he, I am he who will sustain you. I have made you and I will carry you; I will sustain you and I will rescue you.",
     "verseReference": "Isaiah 46:4",
-    "verseText": null,
+    "verseText": "Even to your old age and gray hairs I am he, I am he who will sustain you. I have made you and I will carry you; I will sustain you and I will rescue you.",
     "category": "God's Faithfulness",
     "timeOfDay": [
       "morning",
@@ -21305,7 +21305,7 @@
     "type": "verse",
     "templateText": "The righteous will flourish like a palm tree, they will grow like a cedar of Lebanon; planted in the house of the Lord, they will flourish in the courts of our God. They will still bear fruit in old age, they will stay fresh and green.",
     "verseReference": "Psalm 92:12-14",
-    "verseText": null,
+    "verseText": "The righteous will flourish like a palm tree, they will grow like a cedar of Lebanon; planted in the house of the Lord, they will flourish in the courts of our God. They will still bear fruit in old age, they will stay fresh and green.",
     "category": "Fruitful in Old Age",
     "timeOfDay": [
       "morning",
@@ -21326,7 +21326,7 @@
     "type": "verse",
     "templateText": "I have fought the good fight, I have finished the race, I have kept the faith. Now there is in store for me the crown of righteousness, which the Lord, the righteous Judge, will award to me on that day.",
     "verseReference": "2 Timothy 4:7-8",
-    "verseText": null,
+    "verseText": "I have fought the good fight, I have finished the race, I have kept the faith. Now there is in store for me the crown of righteousness, which the Lord, the righteous Judge, will award to me on that day.",
     "category": "Finishing Well",
     "timeOfDay": [
       "evening"
@@ -21346,7 +21346,7 @@
     "type": "verse",
     "templateText": "Moses was a hundred and twenty years old when he died, yet his eyes were not weak nor his strength gone.",
     "verseReference": "Deuteronomy 34:7",
-    "verseText": null,
+    "verseText": "Moses was a hundred and twenty years old when he died, yet his eyes were not weak nor his strength gone.",
     "category": "Strength in Age",
     "timeOfDay": [
       "morning"
@@ -21366,7 +21366,7 @@
     "type": "verse",
     "templateText": "Teach us to number our days, that we may gain a heart of wisdom.",
     "verseReference": "Psalm 90:12",
-    "verseText": null,
+    "verseText": "Teach us to number our days, that we may gain a heart of wisdom.",
     "category": "Wisdom & Time",
     "timeOfDay": [
       "midday",
@@ -21387,7 +21387,7 @@
     "type": "verse",
     "templateText": "The glory of young men is their strength, gray hair the splendor of the old.",
     "verseReference": "Proverbs 20:29",
-    "verseText": null,
+    "verseText": "The glory of young men is their strength, gray hair the splendor of the old.",
     "category": "Honor in Age",
     "timeOfDay": [
       "midday"
@@ -21407,7 +21407,7 @@
     "type": "verse",
     "templateText": "For I am convinced that neither death nor life, neither angels nor demons, neither the present nor the future, nor any powers, neither height nor depth, nor anything else in all creation, will be able to separate us from the love of God that is in Christ Jesus our Lord.",
     "verseReference": "Romans 8:38-39",
-    "verseText": null,
+    "verseText": "For I am convinced that neither death nor life, neither angels nor demons, neither the present nor the future, nor any powers, neither height nor depth, nor anything else in all creation, will be able to separate us from the love of God that is in Christ Jesus our Lord.",
     "category": "Eternal Security",
     "timeOfDay": [
       "evening",
@@ -22257,7 +22257,7 @@
     "type": "verse",
     "templateText": "But those who hope in the Lord will renew their strength. They will soar on wings like eagles; they will run and not grow weary, they will walk and not be faint.",
     "verseReference": "Isaiah 40:31",
-    "verseText": null,
+    "verseText": "But those who hope in the Lord will renew their strength. They will soar on wings like eagles; they will run and not grow weary, they will walk and not be faint.",
     "category": "Renewed Strength",
     "timeOfDay": [
       "midday"
@@ -22279,7 +22279,7 @@
     "type": "verse",
     "templateText": "Come to me, all you who are weary and burdened, and I will give you rest.",
     "verseReference": "Matthew 11:28",
-    "verseText": null,
+    "verseText": "Come to me, all you who are weary and burdened, and I will give you rest.",
     "category": "Rest for the Weary",
     "timeOfDay": [
       "midday"
@@ -22301,7 +22301,7 @@
     "type": "verse",
     "templateText": "The Lord is my strength and my shield; my heart trusts in him, and he helps me. My heart leaps for joy, and with my song I praise him.",
     "verseReference": "Psalm 28:7",
-    "verseText": null,
+    "verseText": "The Lord is my strength and my shield; my heart trusts in him, and he helps me. My heart leaps for joy, and with my song I praise him.",
     "category": "Strength & Joy",
     "timeOfDay": [
       "midday"
@@ -22323,7 +22323,7 @@
     "type": "verse",
     "templateText": "Whatever you do, work at it with all your heart, as working for the Lord, not for human masters.",
     "verseReference": "Colossians 3:23",
-    "verseText": null,
+    "verseText": "Whatever you do, work at it with all your heart, as working for the Lord, not for human masters.",
     "category": "Working for God",
     "timeOfDay": [
       "midday"
@@ -22344,7 +22344,7 @@
     "type": "verse",
     "templateText": "And let us not grow weary of doing good, for in due season we will reap, if we do not give up.",
     "verseReference": "Galatians 6:9",
-    "verseText": null,
+    "verseText": "And let us not grow weary of doing good, for in due season we will reap, if we do not give up.",
     "category": "Perseverance",
     "timeOfDay": [
       "midday"
@@ -22366,7 +22366,7 @@
     "type": "verse",
     "templateText": "Be still, and know that I am God; I will be exalted among the nations, I will be exalted in the earth.",
     "verseReference": "Psalm 46:10",
-    "verseText": null,
+    "verseText": "Be still, and know that I am God; I will be exalted among the nations, I will be exalted in the earth.",
     "category": "Stillness & Trust",
     "timeOfDay": [
       "midday"
@@ -22387,7 +22387,7 @@
     "type": "verse",
     "templateText": "I can do all this through him who gives me strength.",
     "verseReference": "Philippians 4:13",
-    "verseText": null,
+    "verseText": "I can do all this through him who gives me strength.",
     "category": "Strength in Christ",
     "timeOfDay": [
       "midday"
@@ -22409,7 +22409,7 @@
     "type": "verse",
     "templateText": "The Lord your God is with you, the Mighty Warrior who saves. He will take great delight in you; in his love he will no longer rebuke you, but will rejoice over you with singing.",
     "verseReference": "Zephaniah 3:17",
-    "verseText": null,
+    "verseText": "The Lord your God is with you, the Mighty Warrior who saves. He will take great delight in you; in his love he will no longer rebuke you, but will rejoice over you with singing.",
     "category": "God's Delight",
     "timeOfDay": [
       "midday"
@@ -22431,7 +22431,7 @@
     "type": "verse",
     "templateText": "Cast all your anxiety on him because he cares for you.",
     "verseReference": "1 Peter 5:7",
-    "verseText": null,
+    "verseText": "Cast all your anxiety on him because he cares for you.",
     "category": "Casting Anxiety",
     "timeOfDay": [
       "midday"
@@ -22452,7 +22452,7 @@
     "type": "verse",
     "templateText": "Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to him, and he will make your paths straight.",
     "verseReference": "Proverbs 3:5-6",
-    "verseText": null,
+    "verseText": "Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to him, and he will make your paths straight.",
     "category": "Trust & Direction",
     "timeOfDay": [
       "midday"
@@ -22474,7 +22474,7 @@
     "type": "verse",
     "templateText": "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.",
     "verseReference": "Philippians 4:6-7",
-    "verseText": null,
+    "verseText": "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.",
     "category": "Peace Beyond Understanding",
     "timeOfDay": [
       "midday"
@@ -22496,7 +22496,7 @@
     "type": "verse",
     "templateText": "The Lord is my shepherd, I lack nothing. He makes me lie down in green pastures, he leads me beside quiet waters, he refreshes my soul.",
     "verseReference": "Psalm 23:1-3",
-    "verseText": null,
+    "verseText": "The Lord is my shepherd, I lack nothing. He makes me lie down in green pastures, he leads me beside quiet waters, he refreshes my soul.",
     "category": "The Good Shepherd",
     "timeOfDay": [
       "midday"
@@ -22518,7 +22518,7 @@
     "type": "verse",
     "templateText": "For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future.",
     "verseReference": "Jeremiah 29:11",
-    "verseText": null,
+    "verseText": "For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future.",
     "category": "Hope & Future",
     "timeOfDay": [
       "midday"
@@ -22540,7 +22540,7 @@
     "type": "verse",
     "templateText": "And we know that in all things God works for the good of those who love him, who have been called according to his purpose.",
     "verseReference": "Romans 8:28",
-    "verseText": null,
+    "verseText": "And we know that in all things God works for the good of those who love him, who have been called according to his purpose.",
     "category": "God's Sovereign Good",
     "timeOfDay": [
       "midday"
@@ -22562,7 +22562,7 @@
     "type": "verse",
     "templateText": "He gives strength to the weary and increases the power of the weak.",
     "verseReference": "Isaiah 40:29",
-    "verseText": null,
+    "verseText": "He gives strength to the weary and increases the power of the weak.",
     "category": "Strength for the Weak",
     "timeOfDay": [
       "midday"
@@ -22575,6 +22575,1638 @@
     "applicableBurdens": [
       "health",
       "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, {name} is drowning in bills and the numbers don't add up. You own the cattle on a thousand hills — nothing is beyond Your provision. Give {name} wisdom to steward what's here and faith to trust You for what's not. Calm the panic in {name}'s chest tonight.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Financial Provision",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "parent",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "financial",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, {name} opened the bank app again and fear crept in. But You said not to worry about tomorrow. Teach {name} to hold money loosely and hold You tightly. Provide for every need according to Your riches in glory.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Financial Peace",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "student"
+    ],
+    "applicableBurdens": [
+      "financial",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, debt has become a chain around {name}'s ankles. You came to set captives free — that includes financial bondage. Show {name} the next right step: what to cut, what to prioritize, where to trust. Walk {name} out of this pit one day at a time.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Debt Freedom",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "startingOver",
+      "single"
+    ],
+    "applicableBurdens": [
+      "financial"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Heavenly Father, {name} wants to be generous but the account says otherwise. Shift {name}'s heart from scarcity to abundance — not reckless spending, but kingdom-minded giving. You are Jehovah Jireh, the God who provides. Prove it again in {name}'s life.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Generosity",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "married",
+      "parent"
+    ],
+    "applicableBurdens": [
+      "financial",
+      "doubt"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, {name} is tired of living paycheck to paycheck. The world says hustle harder, but You say come to Me. Give {name} divine strategies for increase and the discipline to follow through. Let {name}'s labor be blessed because it is done unto You.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Financial Provision",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "single",
+      "parent"
+    ],
+    "applicableBurdens": [
+      "financial",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, {name} has been comparing bank accounts with friends and the envy is real. Forgive that. Contentment is not about the number — it's about the Provider. Root {name}'s identity in You, not in net worth. What {name} has is enough because You are enough.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Contentment",
+    "timeOfDay": [
+      "midday",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "student",
+      "single",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "financial",
+      "loneliness"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Jesus, {name} lost a job and the ground feels unstable. But You are the solid rock. While {name} searches and applies, guard against despair. Open the right door at the right time. {name} trusts that unemployment is not the end of Your story.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Provision in Loss",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "startingOver",
+      "workingProfessional",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "financial",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, teach {name} the difference between needs and wants. In a culture screaming 'more,' let {name} hear Your whisper of 'enough.' Grant {name} the rare gift of contentment — not laziness, but a settled trust that You know exactly what is needed and when.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Stewardship",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "student",
+      "workingProfessional",
+      "married"
+    ],
+    "applicableBurdens": [
+      "financial"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, {name} is afraid to tithe because the math doesn't work. But You said to test You in this. Give {name} the courage to put You first financially and watch the windows of heaven open. Faith is not reckless — it's radical trust in a faithful God.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Tithing & Trust",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "married",
+      "single"
+    ],
+    "applicableBurdens": [
+      "financial",
+      "doubt"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, as {name} lies awake worrying about money, replace every anxious thought with a memory of Your faithfulness. You fed Israel in the desert. You multiplied loaves and fish. You have never failed. Quiet {name}'s mind and let sleep come.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Financial Peace",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "parent",
+      "workingProfessional",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "financial",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, {name}'s family is struggling financially and the pressure is crushing. You see every overdue notice and every skipped meal. Be the provider this family needs. Show {name} where to find help and humble {name} enough to receive it.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Family Provision",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "parent",
+      "married",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "financial",
+      "relationship"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, {name} has made financial mistakes — bad decisions, impulsive spending, avoidable debt. Forgive what needs forgiving. But more than forgiveness, give {name} a fresh strategy. Redeem the years the locusts have eaten. It's not too late for {name} to start again.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Financial Redemption",
+    "timeOfDay": [
+      "morning",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "startingOver",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "financial"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, {name} is a student watching the loan balance grow and it's terrifying. You said You would supply every need. Give {name} wisdom about borrowing, working, and spending. Let {name}'s education be an investment You bless, not a burden that breaks.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Student Finances",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "student"
+    ],
+    "applicableBurdens": [
+      "financial",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Jesus, {name} has been hoarding out of fear instead of giving out of faith. Break the grip of greed. Remind {name} that everything belongs to You — the paycheck, the savings, the future. Loosen clenched fists and open {name}'s heart to radical generosity.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Generosity",
+    "timeOfDay": [
+      "midday",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "retired",
+      "married"
+    ],
+    "applicableBurdens": [
+      "financial",
+      "temptation"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, retirement feels impossible and {name} wonders if the future is secure. But You hold tomorrow. Give {name} the patience to save, the wisdom to plan, and the peace that comes from knowing You are already in the future, preparing the way.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Financial Future",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "retired",
+      "married"
+    ],
+    "applicableBurdens": [
+      "financial",
+      "anxiety"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "And my God will meet all your needs according to the riches of his glory in Christ Jesus.",
+    "verseReference": "Philippians 4:19",
+    "verseText": "And my God will meet all your needs according to the riches of his glory in Christ Jesus.",
+    "category": "Provision",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "parent",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "financial",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Bring the whole tithe into the storehouse, that there may be food in my house. Test me in this, says the Lord Almighty, and see if I will not throw open the floodgates of heaven and pour out so much blessing that there will not be room enough to store it.",
+    "verseReference": "Malachi 3:10",
+    "verseText": "Bring the whole tithe into the storehouse, that there may be food in my house. Test me in this, says the Lord Almighty, and see if I will not throw open the floodgates of heaven and pour out so much blessing that there will not be room enough to store it.",
+    "category": "Tithing & Trust",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "married"
+    ],
+    "applicableBurdens": [
+      "financial",
+      "doubt"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Therefore I tell you, do not worry about your life, what you will eat or drink; or about your body, what you will wear. Is not life more than food, and the body more than clothes? Look at the birds of the air; they do not sow or reap or store away in barns, and yet your heavenly Father feeds them. Are you not much more valuable than they?",
+    "verseReference": "Matthew 6:25-26",
+    "verseText": "Therefore I tell you, do not worry about your life, what you will eat or drink; or about your body, what you will wear. Is not life more than food, and the body more than clothes? Look at the birds of the air; they do not sow or reap or store away in barns, and yet your heavenly Father feeds them. Are you not much more valuable than they?",
+    "category": "Financial Peace",
+    "timeOfDay": [
+      "morning",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "student",
+      "workingProfessional",
+      "parent"
+    ],
+    "applicableBurdens": [
+      "financial",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Keep your lives free from the love of money and be content with what you have, because God has said, Never will I leave you; never will I forsake you.",
+    "verseReference": "Hebrews 13:5",
+    "verseText": "Keep your lives free from the love of money and be content with what you have, because God has said, Never will I leave you; never will I forsake you.",
+    "category": "Contentment",
+    "timeOfDay": [
+      "midday",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "single",
+      "married"
+    ],
+    "applicableBurdens": [
+      "financial",
+      "temptation"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "The rich rule over the poor, and the borrower is slave to the lender.",
+    "verseReference": "Proverbs 22:7",
+    "verseText": "The rich rule over the poor, and the borrower is slave to the lender.",
+    "category": "Debt Freedom",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "student",
+      "workingProfessional",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "financial"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Honor the Lord with your wealth, with the firstfruits of all your crops; then your barns will be filled to overflowing, and your vats will brim over with new wine.",
+    "verseReference": "Proverbs 3:9-10",
+    "verseText": "Honor the Lord with your wealth, with the firstfruits of all your crops; then your barns will be filled to overflowing, and your vats will brim over with new wine.",
+    "category": "Stewardship",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "married",
+      "retired"
+    ],
+    "applicableBurdens": [
+      "financial",
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Watch out! Be on your guard against all kinds of greed; life does not consist in an abundance of possessions.",
+    "verseReference": "Luke 12:15",
+    "verseText": "Watch out! Be on your guard against all kinds of greed; life does not consist in an abundance of possessions.",
+    "category": "Contentment",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "single",
+      "student"
+    ],
+    "applicableBurdens": [
+      "financial",
+      "temptation"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "No one can serve two masters. Either you will hate the one and love the other, or you will be devoted to the one and despise the other. You cannot serve both God and money.",
+    "verseReference": "Matthew 6:24",
+    "verseText": "No one can serve two masters. Either you will hate the one and love the other, or you will be devoted to the one and despise the other. You cannot serve both God and money.",
+    "category": "Stewardship",
+    "timeOfDay": [
+      "morning",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "married"
+    ],
+    "applicableBurdens": [
+      "financial",
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "But seek first his kingdom and his righteousness, and all these things will be given to you as well.",
+    "verseReference": "Matthew 6:33",
+    "verseText": "But seek first his kingdom and his righteousness, and all these things will be given to you as well.",
+    "category": "Provision",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "student",
+      "workingProfessional",
+      "single"
+    ],
+    "applicableBurdens": [
+      "financial",
+      "anxiety",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "The blessing of the Lord brings wealth, without painful toil for it.",
+    "verseReference": "Proverbs 10:22",
+    "verseText": "The blessing of the Lord brings wealth, without painful toil for it.",
+    "category": "Financial Peace",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "financial"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, {name} is face to face with temptation right now. The pull is strong and the justifications are loud. Silence every lie. Provide the way of escape You promised in Your Word. Give {name} the strength to take it, even when everything screams to give in.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Overcoming Temptation",
+    "timeOfDay": [
+      "midday",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "single",
+      "student",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "temptation"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, the same sin keeps circling back and {name} is exhausted from fighting it. But You are not tired of forgiving. Renew {name}'s resolve. Break the cycle that feels unbreakable. What is impossible for {name} is possible for You.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Recurring Sin",
+    "timeOfDay": [
+      "bedtime",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "single",
+      "married",
+      "student"
+    ],
+    "applicableBurdens": [
+      "temptation",
+      "doubt"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Jesus, {name} is being tempted to compromise integrity for convenience. The shortcut looks easier, but the cost is {name}'s character. Strengthen {name}'s backbone. Help choose the harder right over the easier wrong, knowing You honor faithfulness.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Integrity",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "student"
+    ],
+    "applicableBurdens": [
+      "temptation",
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, {name}'s thoughts have been wandering to dark places. Before the thought becomes an action, intervene. Set a guard over {name}'s mind. Fill the empty spaces where temptation breeds with Your Word, Your presence, Your truth.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Purity of Mind",
+    "timeOfDay": [
+      "bedtime",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "single",
+      "student",
+      "married"
+    ],
+    "applicableBurdens": [
+      "temptation"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, {name} doesn't want to be mastered by anything other than You. The craving is real but it is a liar. It promises satisfaction and delivers shame. Give {name} the courage to say no and the faith to believe that freedom tastes better.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Self-Control",
+    "timeOfDay": [
+      "morning",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "single",
+      "workingProfessional",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "temptation",
+      "health"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, {name} feels alone in this battle against temptation. Send {name} a trustworthy friend who can handle the truth. Break the power of secrecy. What hides in the dark loses its grip in the light. Give {name} the humility to be honest with someone today.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Accountability",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "single",
+      "student",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "temptation",
+      "loneliness"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Jesus, {name} fell again. The guilt is heavy and the enemy is whispering that it's too far gone. But that is a lie. Your blood covers this. Pick {name} up and set {name} back on the path. Failure is not final when You are the Redeemer.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Grace After Failure",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "single",
+      "student",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "temptation",
+      "doubt"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, {name} knows the armor of God is available but keeps forgetting to put it on. This morning, fasten the belt of truth, strap on the breastplate of righteousness, and hand {name} the shield of faith. Dress {name} for the battle before the battle starts.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Spiritual Warfare",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "student",
+      "single"
+    ],
+    "applicableBurdens": [
+      "temptation",
+      "anxiety"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, the temptation to numb the pain with something unhealthy is strong tonight. But {name} chooses You instead. Be the comfort that no substance, screen, or distraction can be. Hold {name} through this craving until it passes.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Overcoming Temptation",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "single",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "temptation",
+      "health"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, {name}'s eyes keep drifting toward what is not meant for this season. Guard {name}'s gaze. Redirect desire toward what is holy, pure, and life-giving. You are not withholding good things — You are protecting {name} from counterfeit ones.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Purity",
+    "timeOfDay": [
+      "midday",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "single",
+      "married",
+      "student"
+    ],
+    "applicableBurdens": [
+      "temptation"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Jesus, {name} is in a season where temptation feels relentless. Wave after wave. But You endured every temptation and did not sin. Lend {name} Your strength. The same Spirit that sustained You in the wilderness lives in {name}. Activate that power now.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Endurance",
+    "timeOfDay": [
+      "morning",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "single",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "temptation",
+      "doubt"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, the world normalizes what Your Word warns against. Help {name} not to be shaped by culture but transformed by truth. Give {name} discernment to recognize temptation dressed in acceptable packaging. Keep {name}'s conscience sharp and responsive to Your Spirit.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Discernment",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "student",
+      "single",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "temptation",
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, {name} has been rationalizing sin and calling it grace. Expose the lie gently but clearly. True grace does not give permission to sin — it gives power to overcome. Restore in {name} a holy fear that is not terror but deep reverence for who You are.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Holy Living",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "married",
+      "workingProfessional",
+      "single"
+    ],
+    "applicableBurdens": [
+      "temptation",
+      "doubt"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, anger is becoming a gateway to words and actions {name} regrets. Before the next outburst, step in. Replace the short fuse with the fruit of self-control. Teach {name} to pause, breathe, and choose gentleness — even when everything inside screams otherwise.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Self-Control",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "married",
+      "parent",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "temptation",
+      "anger"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, {name} keeps flirting with the boundary line instead of fleeing from it. Give {name} the wisdom to see that proximity to temptation is not strength — it is foolishness dressed as bravery. Move {name}'s feet in the opposite direction today.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Fleeing Temptation",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "single",
+      "student",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "temptation"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "No temptation has overtaken you except what is common to mankind. And God is faithful; he will not let you be tempted beyond what you can bear. But when you are tempted, he will also provide a way out so that you can endure it.",
+    "verseReference": "1 Corinthians 10:13",
+    "verseText": "No temptation has overtaken you except what is common to mankind. And God is faithful; he will not let you be tempted beyond what you can bear. But when you are tempted, he will also provide a way out so that you can endure it.",
+    "category": "Overcoming Temptation",
+    "timeOfDay": [
+      "morning",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "single",
+      "student",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "temptation"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Blessed is the one who perseveres under trial because, having stood the test, that person will receive the crown of life that the Lord has promised to those who love him.",
+    "verseReference": "James 1:12",
+    "verseText": "Blessed is the one who perseveres under trial because, having stood the test, that person will receive the crown of life that the Lord has promised to those who love him.",
+    "category": "Endurance",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "hardSeason",
+      "single",
+      "student"
+    ],
+    "applicableBurdens": [
+      "temptation",
+      "doubt"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Watch and pray so that you will not fall into temptation. The spirit is willing, but the flesh is weak.",
+    "verseReference": "Matthew 26:41",
+    "verseText": "Watch and pray so that you will not fall into temptation. The spirit is willing, but the flesh is weak.",
+    "category": "Vigilance",
+    "timeOfDay": [
+      "morning",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "single",
+      "married",
+      "student"
+    ],
+    "applicableBurdens": [
+      "temptation"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "So I say, walk by the Spirit, and you will not gratify the desires of the flesh.",
+    "verseReference": "Galatians 5:16",
+    "verseText": "So I say, walk by the Spirit, and you will not gratify the desires of the flesh.",
+    "category": "Spirit-Led Living",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "single",
+      "workingProfessional",
+      "student"
+    ],
+    "applicableBurdens": [
+      "temptation",
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "For we do not have a high priest who is unable to empathize with our weaknesses, but we have one who has been tempted in every way, just as we are — yet he did not sin.",
+    "verseReference": "Hebrews 4:15",
+    "verseText": "For we do not have a high priest who is unable to empathize with our weaknesses, but we have one who has been tempted in every way, just as we are — yet he did not sin.",
+    "category": "Christ's Empathy",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "single",
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "temptation",
+      "doubt"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Submit yourselves, then, to God. Resist the devil, and he will flee from you.",
+    "verseReference": "James 4:7",
+    "verseText": "Submit yourselves, then, to God. Resist the devil, and he will flee from you.",
+    "category": "Spiritual Warfare",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "single",
+      "student",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "temptation"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Put on the full armor of God, so that you can take your stand against the devil's schemes.",
+    "verseReference": "Ephesians 6:11",
+    "verseText": "Put on the full armor of God, so that you can take your stand against the devil's schemes.",
+    "category": "Spiritual Warfare",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "workingProfessional",
+      "student",
+      "single"
+    ],
+    "applicableBurdens": [
+      "temptation",
+      "anxiety"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "But the fruit of the Spirit is love, joy, peace, forbearance, kindness, goodness, faithfulness, gentleness and self-control. Against such things there is no law.",
+    "verseReference": "Galatians 5:22-23",
+    "verseText": "But the fruit of the Spirit is love, joy, peace, forbearance, kindness, goodness, faithfulness, gentleness and self-control. Against such things there is no law.",
+    "category": "Self-Control",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "single",
+      "married",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "temptation",
+      "anger"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "I have hidden your word in my heart that I might not sin against you.",
+    "verseReference": "Psalm 119:11",
+    "verseText": "I have hidden your word in my heart that I might not sin against you.",
+    "category": "Scripture & Purity",
+    "timeOfDay": [
+      "morning",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "student",
+      "single",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "temptation"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "verse",
+    "templateText": "Be alert and of sober mind. Your enemy the devil prowls around like a roaring lion looking for someone to devour.",
+    "verseReference": "1 Peter 5:8",
+    "verseText": "Be alert and of sober mind. Your enemy the devil prowls around like a roaring lion looking for someone to devour.",
+    "category": "Vigilance",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "single",
+      "student",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "temptation",
+      "anxiety"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, {name} is single and the loneliness can be deafening. But You said it is not good for man to be alone — so You are clearly aware. While {name} waits, fill the waiting with purpose. Let this season not be empty but overflowing with growth only singleness can offer.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Singleness",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "single"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, {name} scrolled past another engagement post and the sting was real. Guard {name}'s heart from comparison. Someone else's blessing is not a delay. You have a unique and beautiful plan — help {name} trust Your timeline, not the algorithm.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Contentment in Singleness",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "single"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "relationship"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Jesus, {name}'s identity has been tangled up in relationship status. Untangle it. {name} is not 'still single' but wholly loved, chosen, and complete in You. Before anyone else speaks value, let Your voice be the loudest over {name}.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Identity in Christ",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "single"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, everyone asks {name} 'why are you still single?' as if something is broken. But Paul called singleness a gift. Help {name} unwrap it instead of resenting it. Show {name} the freedom, the ministry, the growth that this season uniquely holds.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Gift of Singleness",
+    "timeOfDay": [
+      "midday",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "single"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "doubt"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, {name} desires a partner and that desire is not wrong. You placed it there. But while the answer is 'wait,' teach {name} to become the person worth finding. Shape character, deepen faith, and prepare {name}'s heart for what You are preparing.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Waiting",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "single"
+    ],
+    "applicableBurdens": [
+      "relationship",
+      "loneliness"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, {name} is single and the holidays magnify it. Every family photo and couple's trip is a reminder. But {name} is not incomplete. Pour Your love so deeply that loneliness loses its grip. Surround {name} with community that feels like home.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Singleness & Community",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "single"
+    ],
+    "applicableBurdens": [
+      "loneliness"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Jesus, {name} has been settling for attention that isn't honoring. The temptation to accept less than God's best is strong when loneliness is loud. Raise {name}'s standards, not out of pride, but out of a deep knowing of {name}'s worth in Your eyes.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Purity in Singleness",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "single"
+    ],
+    "applicableBurdens": [
+      "temptation",
+      "loneliness"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, {name} woke up alone again and the bed felt too big. Meet {name} in this morning silence. Be the first voice {name} hears today. You are not a consolation prize — You are the ultimate companion. Fill this home with Your presence.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "God's Presence",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "single"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, help {name} use this single season not as a waiting room but as a training ground. There are things {name} can do, learn, and become right now that a future relationship would make harder. Maximize this season. Let {name} look back and be grateful, not regretful.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Purpose in Singleness",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "single"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "loneliness"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, {name} sees friends getting married and building families while {name} sits in a different story. Remove the bitterness before it takes root. Replace jealousy with genuine celebration. And in the quiet after the party, whisper to {name} that their chapter is coming.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Trust in God's Timing",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "single"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "relationship"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Jesus, the church sometimes makes {name} feel invisible as a single person. Married couples have groups, families have programs — but where is the place for those without a partner? Remind {name} that the body of Christ needs every part. Give {name} belonging that does not depend on a ring.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Belonging",
+    "timeOfDay": [
+      "midday",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "single"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "God, {name} is learning that being alone and being lonely are not the same thing. Teach {name} the art of solitude — the kind where Your presence turns silence into sanctuary. May {name} discover that the deepest conversations happen in the quiet.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Solitude with God",
+    "timeOfDay": [
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "single"
+    ],
+    "applicableBurdens": [
+      "loneliness"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, {name} has been defining success by the world's milestones: married by 25, house by 30. Rewrite {name}'s definition. Success in Your kingdom is faithfulness, not timelines. Let {name} measure this season by depth of character, not by what's still missing.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Redefining Success",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "single",
+      "student"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "anxiety"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Father, strengthen {name}'s friendships in this single season. Deep, life-giving, iron-sharpens-iron friendships. Not placeholders until a partner comes, but genuine community that reflects Your love. Show {name} how to invest in others and let others invest in {name}.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Friendship & Community",
+    "timeOfDay": [
+      "midday"
+    ],
+    "applicableSeasons": [
+      "single"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "relationship"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "prayer",
+    "templateText": "Lord, {name} has so much love to give and no one to give it to. Channel that love outward — into service, into mentoring, into the lives of people who need exactly what {name} has. Use this season to make {name} the most generous version of who You created.",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Purpose in Singleness",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "single"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "devotional",
+    "templateText": "{name}, when Paul wrote to the Corinthians about singleness, he called it a gift — not a punishment. He said the unmarried person is free to be devoted to the Lord without divided attention. What if this season is not God withholding something from {name} but God offering something to {name}?",
+    "verseReference": "1 Corinthians 7:32-35",
+    "verseText": null,
+    "category": "Gift of Singleness",
+    "timeOfDay": [
+      "morning"
+    ],
+    "applicableSeasons": [
+      "single"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "devotional",
+    "templateText": "{name}, Ruth was a widow, a foreigner, and alone in a strange land. She had every reason to be bitter. Instead she clung to Naomi and trusted God's plan. She could not see Boaz on the horizon. What if the thing {name} cannot yet see is already being arranged?",
+    "verseReference": "Ruth 1:16",
+    "verseText": null,
+    "category": "Trust in God's Timing",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "single",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "doubt"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "devotional",
+    "templateText": "{name}, Jesus Himself was single. The most complete, fully human, fully divine person who ever walked the earth never married. That means singleness is not a deficiency — it is a state in which the Son of God chose to live. How does knowing that reshape how {name} views this season?",
+    "verseReference": null,
+    "verseText": null,
+    "category": "Identity in Christ",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "single"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "devotional",
+    "templateText": "{name}, David waited years between being anointed king and actually sitting on the throne. The in-between was not wasted time — it was formation time. God was building a shepherd-warrior. What is God building in {name} during this in-between season? What strength is being forged in the wait?",
+    "verseReference": "1 Samuel 16:13",
+    "verseText": null,
+    "category": "Waiting & Formation",
+    "timeOfDay": [
+      "midday",
+      "evening"
+    ],
+    "applicableSeasons": [
+      "single",
+      "student"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "doubt"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "devotional",
+    "templateText": "{name}, Psalm 37:4 says 'Delight yourself in the Lord and he will give you the desires of your heart.' This is not a vending machine promise. It means that as {name} draws closer to God, the desires themselves change. What desires has God been reshaping in {name} lately?",
+    "verseReference": "Psalm 37:4",
+    "verseText": null,
+    "category": "Desire & Delight",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "single"
+    ],
+    "applicableBurdens": [
+      "relationship",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "reflection",
+    "templateText": "{name}, Isaiah 54:5 says 'your Maker is your husband.' This is not a platitude to make singleness hurt less. It is an invitation into the deepest intimacy available. Is {name} pursuing God with the same intensity {name} would pursue a relationship? What would that look like starting today?",
+    "verseReference": "Isaiah 54:5",
+    "verseText": null,
+    "category": "Intimacy with God",
+    "timeOfDay": [
+      "morning",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "single"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "purpose"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3
+  },
+  {
+    "type": "reflection",
+    "templateText": "{name}, Psalm 27:14 says 'Wait for the Lord; be strong and take heart and wait for the Lord.' Waiting is not passive — it is active trust. Where has {name} been trying to force an outcome instead of trusting God's pace? What would surrendered waiting look like for {name} this week?",
+    "verseReference": "Psalm 27:14",
+    "verseText": null,
+    "category": "Active Waiting",
+    "timeOfDay": [
+      "evening"
+    ],
+    "applicableSeasons": [
+      "single",
+      "student"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "relationship"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "reflection",
+    "templateText": "{name}, Paul said he learned to be content in every circumstance. Contentment is not resignation — it is choosing to see God's goodness in the present tense. Honestly, is {name} treating singleness as a problem to solve or a season to steward? What would change if {name} stopped trying to rush through it?",
+    "verseReference": "Philippians 4:11-12",
+    "verseText": null,
+    "category": "Contentment",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "single"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "anxiety"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "reflection",
+    "templateText": "{name}, Ecclesiastes 4:9 says 'Two are better than one,' and that is true. But the verse before says there is also 'a time for every matter under heaven.' Has {name} been so focused on the desire for partnership that the gifts uniquely available right now are going unclaimed? What is one gift of this season {name} has not yet unwrapped?",
+    "verseReference": "Ecclesiastes 4:9",
+    "verseText": null,
+    "category": "Seasons of Life",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "applicableSeasons": [
+      "single"
+    ],
+    "applicableBurdens": [
+      "loneliness",
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": false,
+    "seedVersion": 3
+  },
+  {
+    "type": "reflection",
+    "templateText": "{name}, Jesus told Martha she was worried about many things, but only one thing was needed. In singleness, it is easy to become consumed by what is missing. But what if {name} is sitting at Jesus' feet right now and does not even realize it? What is the 'one thing needed' that {name} keeps overlooking?",
+    "verseReference": "Luke 10:41-42",
+    "verseText": null,
+    "category": "Priorities",
+    "timeOfDay": [
+      "evening",
+      "bedtime"
+    ],
+    "applicableSeasons": [
+      "single"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "purpose"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,

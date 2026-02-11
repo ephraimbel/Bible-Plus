@@ -10,6 +10,7 @@ struct ChapterReaderView: View {
     let offlineTranslationName: String
     let savedVerseNumbers: Set<Int>
     let highlightColors: [Int: VerseHighlightColor]
+    let audioVerseIndex: Int?
     let readerFontSize: Double
     let readerFontDesign: Font.Design
     let readerLineSpacing: Double
@@ -26,27 +27,37 @@ struct ChapterReaderView: View {
         } else if verses.isEmpty {
             emptyState
         } else {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 0) {
-                    // Offline fallback banner
-                    if isShowingOfflineFallback {
-                        offlineBanner
+            ScrollViewReader { proxy in
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 0) {
+                        // Offline fallback banner
+                        if isShowingOfflineFallback {
+                            offlineBanner
+                        }
+
+                        // Chapter heading
+                        Text(chapterTitle)
+                            .font(BPFont.headingSmall)
+                            .foregroundStyle(palette.textPrimary)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .padding(.vertical, 24)
+
+                        // Verses as flowing text
+                        ForEach(verses, id: \.number) { verse in
+                            verseRow(number: verse.number, text: verse.text)
+                                .id(verse.number)
+                        }
                     }
-
-                    // Chapter heading
-                    Text(chapterTitle)
-                        .font(BPFont.headingSmall)
-                        .foregroundStyle(palette.textPrimary)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .padding(.vertical, 24)
-
-                    // Verses as flowing text
-                    ForEach(verses, id: \.number) { verse in
-                        verseRow(number: verse.number, text: verse.text)
+                    .padding(.horizontal, 24)
+                    .padding(.bottom, audioVerseIndex != nil ? 140 : 80)
+                }
+                .onChange(of: audioVerseIndex) { _, newIndex in
+                    guard let newIndex, newIndex < verses.count else { return }
+                    let verseNumber = verses[newIndex].number
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        proxy.scrollTo(verseNumber, anchor: .center)
                     }
                 }
-                .padding(.horizontal, 24)
-                .padding(.bottom, 80)
             }
         }
     }
@@ -55,6 +66,8 @@ struct ChapterReaderView: View {
         let isSelected = selectedVerseNumber == number
         let highlight = highlightColors[number]
         let isSaved = savedVerseNumbers.contains(number)
+        let isAudioActive = audioVerseIndex != nil
+            && (verses.firstIndex(where: { $0.number == number }).map { $0 == audioVerseIndex } ?? false)
 
         return Button {
             onVerseTap(VerseItem(number: number, text: text))
@@ -89,13 +102,24 @@ struct ChapterReaderView: View {
             .padding(.horizontal, 8)
             .background(
                 RoundedRectangle(cornerRadius: 8)
-                    .fill(verseBackground(isSelected: isSelected, highlight: highlight))
+                    .fill(verseBackground(isSelected: isSelected, highlight: highlight, isAudioHighlight: isAudioActive))
             )
+            .overlay(alignment: .leading) {
+                if isAudioActive {
+                    RoundedRectangle(cornerRadius: 2)
+                        .fill(palette.accent)
+                        .frame(width: 3)
+                        .padding(.vertical, 4)
+                }
+            }
         }
         .buttonStyle(.plain)
     }
 
-    private func verseBackground(isSelected: Bool, highlight: VerseHighlightColor?) -> Color {
+    private func verseBackground(isSelected: Bool, highlight: VerseHighlightColor?, isAudioHighlight: Bool) -> Color {
+        if isAudioHighlight {
+            return palette.accent.opacity(0.15)
+        }
         if isSelected {
             return palette.accentSoft
         }

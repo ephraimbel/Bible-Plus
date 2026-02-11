@@ -5,6 +5,7 @@ struct ContentView: View {
     @Environment(\.bpPalette) private var palette
     @State private var selectedTab: Tab = .feed
     @State private var soundscapeService = SoundscapeService()
+    @State private var audioBibleService = AudioBibleService()
 
     enum Tab: String, CaseIterable {
         case feed, bible, ask, saved, settings
@@ -53,8 +54,12 @@ struct ContentView: View {
                 .tag(Tab.settings)
         }
         .environment(soundscapeService)
+        .environment(audioBibleService)
         .tint(palette.accent)
-        .toolbarBackground(.regularMaterial, for: .tabBar)
+        .onAppear {
+            audioBibleService.setSoundscapeService(soundscapeService)
+        }
+        .toolbarBackground(palette.background, for: .tabBar)
         .toolbarBackground(.visible, for: .tabBar)
         .onChange(of: deepLinkedContentID) { _, newValue in
             if newValue != nil {

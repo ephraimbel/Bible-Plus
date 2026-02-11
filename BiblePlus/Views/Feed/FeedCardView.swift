@@ -8,6 +8,7 @@ struct FeedCardView: View {
     let isSaved: Bool
     let showDoubleTapHeart: Bool
     var isAudioPlaying: Bool = false
+    var audioVolume: Float = 0.3
 
     // Action callbacks
     var onSave: () -> Void = {}
@@ -15,6 +16,7 @@ struct FeedCardView: View {
     var onPin: () -> Void = {}
     var onAskAI: () -> Void = {}
     var onToggleSound: () -> Void = {}
+    var onVolumeChange: (Float) -> Void = { _ in }
     var onOpenSanctuary: () -> Void = {}
     var onDoubleTap: () -> Void = {}
 
@@ -63,19 +65,24 @@ struct FeedCardView: View {
 
     @ViewBuilder
     private var backgroundLayer: some View {
-        if isCurrentCard, let videoName = background.videoFileName {
-            LoopingVideoPlayer(videoName: videoName)
-        } else if let imageName = background.imageName,
-                  let uiImage = SanctuaryBackground.loadImage(named: imageName) {
-            Image(uiImage: uiImage)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-        } else {
+        ZStack {
+            // Base gradient — always visible as fallback while video decodes
             LinearGradient(
                 colors: background.gradientColors.map { Color(hex: $0) },
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
+
+            if let videoName = background.videoFileName {
+                // Video preloads on adjacent cards (paused at first frame),
+                // plays only on the current card
+                LoopingVideoPlayer(videoName: videoName, isPlaying: isCurrentCard)
+            } else if let imageName = background.imageName,
+                      let uiImage = SanctuaryBackground.loadImage(named: imageName) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+            }
         }
     }
 
@@ -98,7 +105,7 @@ struct FeedCardView: View {
 
     private var contentLayer: some View {
         VStack(spacing: 0) {
-            Spacer()
+            Spacer(minLength: 16)
 
             // Content type badge
             Text(content.type.displayName.uppercased())
@@ -109,16 +116,16 @@ struct FeedCardView: View {
                 .shadow(color: .black.opacity(0.4), radius: 6, y: 0)
                 .padding(.bottom, 16)
 
-            // Main text — triple shadow for readability on any background
-            Text(displayText)
-                .font(contentFont)
-                .foregroundStyle(.white)
-                .multilineTextAlignment(.center)
-                .lineSpacing(6)
-                .padding(.horizontal, 48)
-                .shadow(color: .black.opacity(0.8), radius: 1, y: 1)
-                .shadow(color: .black.opacity(0.5), radius: 6, y: 2)
-                .shadow(color: .black.opacity(0.3), radius: 14, y: 0)
+            // Main text — scrollable for guided prayers that exceed card height
+            if content.type == .guidedPrayer {
+                ScrollView(.vertical, showsIndicators: false) {
+                    mainTextView
+                        .padding(.vertical, 4)
+                }
+                .scrollBounceBehavior(.basedOnSize)
+            } else {
+                mainTextView
+            }
 
             // Verse reference
             if let reference = content.verseReference, !reference.isEmpty {
@@ -169,10 +176,24 @@ struct FeedCardView: View {
                 .padding(.top, 24)
             }
 
-            Spacer()
+            Spacer(minLength: 16)
         }
-        // Offset down to account for tab bar covering the bottom
         .padding(.top, 49)
+        .padding(.bottom, 83) // account for tab bar + safe area
+    }
+
+    // MARK: - Main Text View
+
+    private var mainTextView: some View {
+        Text(displayText)
+            .font(contentFont)
+            .foregroundStyle(.white)
+            .multilineTextAlignment(.center)
+            .lineSpacing(6)
+            .padding(.horizontal, 48)
+            .shadow(color: .black.opacity(0.8), radius: 1, y: 1)
+            .shadow(color: .black.opacity(0.5), radius: 6, y: 2)
+            .shadow(color: .black.opacity(0.3), radius: 14, y: 0)
     }
 
     /// Adapt font size based on text length
@@ -194,11 +215,13 @@ struct FeedCardView: View {
             ActionBarView(
                 isSaved: isSaved,
                 isAudioPlaying: isAudioPlaying,
+                volume: audioVolume,
                 onSave: onSave,
                 onShare: onShare,
                 onPin: onPin,
                 onAskAI: onAskAI,
                 onToggleSound: onToggleSound,
+                onVolumeChange: onVolumeChange,
                 onOpenSanctuary: onOpenSanctuary
             )
             .padding(.trailing, 12)

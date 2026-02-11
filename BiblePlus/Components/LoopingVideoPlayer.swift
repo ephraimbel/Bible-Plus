@@ -3,14 +3,17 @@ import AVFoundation
 
 struct LoopingVideoPlayer: UIViewRepresentable {
     let videoName: String
+    var isPlaying: Bool = true
 
     func makeUIView(context: Context) -> LoopingPlayerUIView {
-        LoopingPlayerUIView(videoName: videoName)
+        LoopingPlayerUIView(videoName: videoName, autoPlay: isPlaying)
     }
 
     func updateUIView(_ uiView: LoopingPlayerUIView, context: Context) {
         if uiView.currentVideoName != videoName {
-            uiView.loadVideo(named: videoName)
+            uiView.loadVideo(named: videoName, autoPlay: isPlaying)
+        } else {
+            uiView.setPlaying(isPlaying)
         }
     }
 
@@ -23,8 +26,20 @@ struct LoopingVideoPlayer: UIViewRepresentable {
 /// Uses two AVPlayers with overlapping playback — when one nears its end,
 /// the other starts from the beginning and we crossfade between layers,
 /// creating a seamless infinite loop with no visible cut.
+///
+/// Supports paused preloading: when `autoPlay` is false, sets up players
+/// and seeks to frame 0 (showing the first frame as a thumbnail) without
+/// starting playback. Call `setPlaying(true)` to begin.
 final class LoopingPlayerUIView: UIView {
     private(set) var currentVideoName: String?
+    private var isCurrentlyPlaying: Bool = false
+
+    /// Tracks the desired play state so async setup applies the correct state.
+    private var desiredPlaying: Bool = false
+
+    // Shared caches — since all feed cards use the same video, avoid re-loading
+    private static var durationCache: [String: Double] = [:]
+    private static var assetCache: [String: AVAsset] = [:]
 
     // Dual players for crossfade
     private var playerA: AVPlayer?
@@ -34,17 +49,18 @@ final class LoopingPlayerUIView: UIView {
 
     private var activeIsA = true // tracks which player is currently "on top"
     private var timeObserver: Any?
+    private weak var timeObserverPlayer: AVPlayer?
     private var videoDuration: Double = 0
     private var isCrossfading = false
     private var videoURL: URL?
 
     private let crossfadeDuration: Double = 1.2
 
-    init(videoName: String) {
+    init(videoName: String, autoPlay: Bool = true) {
         super.init(frame: .zero)
         backgroundColor = .clear
         clipsToBounds = true
-        loadVideo(named: videoName)
+        loadVideo(named: videoName, autoPlay: autoPlay)
 
         NotificationCenter.default.addObserver(
             self,
@@ -71,28 +87,69 @@ final class LoopingPlayerUIView: UIView {
         layerB?.frame = bounds
     }
 
-    func loadVideo(named name: String) {
+    func loadVideo(named name: String, autoPlay: Bool = true) {
         cleanup()
         currentVideoName = name
+        desiredPlaying = autoPlay
 
         guard let url = Bundle.main.url(forResource: name, withExtension: "mp4") else { return }
         self.videoURL = url
 
-        let asset = AVAsset(url: url)
+        // Use cached asset or create new one
+        let asset: AVAsset
+        if let cached = Self.assetCache[name] {
+            asset = cached
+        } else {
+            asset = AVAsset(url: url)
+            Self.assetCache[name] = asset
+        }
 
-        // Get duration
+        // Use cached duration for instant setup (no async wait)
+        if let cachedDuration = Self.durationCache[name] {
+            self.videoDuration = cachedDuration
+            self.setupDualPlayers(asset: asset)
+            return
+        }
+
+        // First time: load duration async, then set up players
         Task { @MainActor in
             let duration = try? await asset.load(.duration)
             let seconds = duration.map { CMTimeGetSeconds($0) } ?? 0
             guard seconds > 0 else { return }
             self.videoDuration = seconds
-            self.setupDualPlayers(url: url)
+            Self.durationCache[name] = seconds
+            self.setupDualPlayers(asset: asset)
         }
     }
 
-    private func setupDualPlayers(url: URL) {
-        // Player A — starts playing immediately
-        let pA = AVPlayer(url: url)
+    /// Start or pause playback. Safe to call before players are set up —
+    /// the desired state is stored and applied when setup completes.
+    func setPlaying(_ playing: Bool) {
+        desiredPlaying = playing
+        guard playerA != nil else { return }
+        guard playing != isCurrentlyPlaying else { return }
+        applyPlayState(playing)
+    }
+
+    private func applyPlayState(_ playing: Bool) {
+        isCurrentlyPlaying = playing
+        let activePlayer = activeIsA ? playerA : playerB
+
+        if playing {
+            activePlayer?.play()
+            if let activePlayer {
+                addTimeObserver(for: activePlayer)
+            }
+        } else {
+            activePlayer?.pause()
+            removeTimeObserver()
+        }
+    }
+
+    private func setupDualPlayers(asset: AVAsset) {
+        // Player A — visible, shows first frame
+        let itemA = AVPlayerItem(asset: asset)
+        let pA = AVPlayer(playerItem: itemA)
         pA.isMuted = true
         let lA = AVPlayerLayer(player: pA)
         lA.videoGravity = .resizeAspectFill
@@ -100,8 +157,9 @@ final class LoopingPlayerUIView: UIView {
         lA.opacity = 1.0
         layer.addSublayer(lA)
 
-        // Player B — ready but hidden
-        let pB = AVPlayer(url: url)
+        // Player B — standby, hidden
+        let itemB = AVPlayerItem(asset: asset)
+        let pB = AVPlayer(playerItem: itemB)
         pB.isMuted = true
         let lB = AVPlayerLayer(player: pB)
         lB.videoGravity = .resizeAspectFill
@@ -116,30 +174,39 @@ final class LoopingPlayerUIView: UIView {
         self.activeIsA = true
         self.isCrossfading = false
 
-        // Start player A
-        pA.seek(to: .zero)
-        pA.play()
-
-        // Pause player B at start
-        pB.seek(to: .zero)
+        // Seek both to start with exact frame accuracy (shows first frame immediately)
+        pA.seek(to: .zero, toleranceBefore: .zero, toleranceAfter: .zero)
+        pB.seek(to: .zero, toleranceBefore: .zero, toleranceAfter: .zero)
         pB.pause()
 
-        // Add time observer on player A to trigger crossfade
-        addTimeObserver(for: pA)
+        // Apply the desired play state (may have changed during async load)
+        if desiredPlaying {
+            pA.play()
+            addTimeObserver(for: pA)
+            isCurrentlyPlaying = true
+        } else {
+            pA.pause()
+            isCurrentlyPlaying = false
+        }
     }
 
     private func addTimeObserver(for player: AVPlayer) {
-        // Remove old observer
-        if let observer = timeObserver, let activePlayer = activeIsA ? playerA : playerB {
-            activePlayer.removeTimeObserver(observer)
-        }
-        timeObserver = nil
+        removeTimeObserver()
 
         // Check every 0.1 seconds
         let interval = CMTime(seconds: 0.1, preferredTimescale: 600)
+        timeObserverPlayer = player
         timeObserver = player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] time in
             self?.checkForCrossfade(currentTime: CMTimeGetSeconds(time))
         }
+    }
+
+    private func removeTimeObserver() {
+        if let observer = timeObserver, let ownerPlayer = timeObserverPlayer {
+            ownerPlayer.removeTimeObserver(observer)
+        }
+        timeObserver = nil
+        timeObserverPlayer = nil
     }
 
     private func checkForCrossfade(currentTime: Double) {
@@ -200,11 +267,7 @@ final class LoopingPlayerUIView: UIView {
     }
 
     func cleanup() {
-        if let observer = timeObserver {
-            let activePlayer = activeIsA ? playerA : playerB
-            activePlayer?.removeTimeObserver(observer)
-            timeObserver = nil
-        }
+        removeTimeObserver()
 
         playerA?.pause()
         playerB?.pause()
@@ -225,6 +288,7 @@ final class LoopingPlayerUIView: UIView {
     }
 
     @objc private func appWillEnterForeground() {
+        guard isCurrentlyPlaying else { return }
         let activePlayer = activeIsA ? playerA : playerB
         activePlayer?.play()
     }

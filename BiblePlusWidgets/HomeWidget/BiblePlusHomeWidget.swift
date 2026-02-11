@@ -11,7 +11,7 @@ struct HomeWidgetEntry: TimelineEntry {
     let verseReference: String?
     let contentType: ContentType
     let contentID: UUID?
-    let themeGradient: [String]
+    let backgroundGradient: [String]
     let firstName: String
 
     static let placeholder = HomeWidgetEntry(
@@ -21,7 +21,7 @@ struct HomeWidgetEntry: TimelineEntry {
         verseReference: "Psalm 23:1",
         contentType: .verse,
         contentID: nil,
-        themeGradient: ThemeDefinition.allThemes[0].previewGradient,
+        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors,
         firstName: "Friend"
     )
 }
@@ -66,7 +66,7 @@ struct HomeWidgetProvider: TimelineProvider {
                 verseReference: entry.verseReference,
                 contentType: entry.contentType,
                 contentID: entry.contentID,
-                themeGradient: entry.themeGradient,
+                backgroundGradient: entry.backgroundGradient,
                 firstName: entry.firstName
             )
         }
@@ -89,8 +89,8 @@ struct HomeWidgetProvider: TimelineProvider {
             modelContext: modelContext
         ) else { return nil }
 
-        let theme = ThemeDefinition.allThemes.first(where: { $0.id == profile.selectedThemeID })
-            ?? ThemeDefinition.allThemes[0]
+        let background = SanctuaryBackground.background(for: profile.selectedBackgroundID)
+            ?? SanctuaryBackground.allBackgrounds[0]
         let text = WidgetContentProvider.personalizedText(template: content.templateText, firstName: profile.firstName)
 
         return HomeWidgetEntry(
@@ -100,7 +100,7 @@ struct HomeWidgetProvider: TimelineProvider {
             verseReference: content.verseReference,
             contentType: content.type,
             contentID: content.id,
-            themeGradient: theme.previewGradient,
+            backgroundGradient: background.gradientColors,
             firstName: profile.firstName
         )
     }
@@ -116,7 +116,7 @@ struct BiblePlusHomeWidget: Widget {
             HomeWidgetEntryView(entry: entry)
                 .containerBackground(for: .widget) {
                     LinearGradient(
-                        colors: entry.themeGradient.map { Color(hex: $0) },
+                        colors: entry.backgroundGradient.map { Color(hex: $0) },
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     )

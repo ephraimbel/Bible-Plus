@@ -124,9 +124,10 @@ private struct SettingsContentView: View {
                     .foregroundStyle(palette.accent)
                     .frame(width: 24)
                 Text("Daily Streak")
+                    .foregroundStyle(palette.textPrimary)
                 Spacer()
                 Text(vm.streakDisplay)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(palette.accent)
             }
         } header: {
             Text("Profile")
@@ -188,6 +189,7 @@ private struct SettingsContentView: View {
                     .foregroundStyle(palette.accent)
                     .frame(width: 24)
                 Text("Color Mode")
+                    .foregroundStyle(palette.textPrimary)
                 Spacer()
                 Picker("", selection: Binding(
                     get: { vm.profile.colorMode },
@@ -212,9 +214,10 @@ private struct SettingsContentView: View {
                     .foregroundStyle(palette.accent)
                     .frame(width: 24)
                 Text("Status")
+                    .foregroundStyle(palette.textPrimary)
                 Spacer()
                 Text(vm.profile.isPro ? "Bible+ Pro" : "Free")
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(palette.accent)
             }
         }
     }
@@ -228,18 +231,20 @@ private struct SettingsContentView: View {
                     .foregroundStyle(palette.accent)
                     .frame(width: 24)
                 Text("Version")
+                    .foregroundStyle(palette.textPrimary)
                 Spacer()
                 Text("1.0.0")
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(palette.accent)
             }
             HStack {
                 Image(systemName: "hammer")
                     .foregroundStyle(palette.accent)
                     .frame(width: 24)
                 Text("Build")
+                    .foregroundStyle(palette.textPrimary)
                 Spacer()
                 Text("1")
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(palette.accent)
             }
         }
     }
@@ -254,11 +259,11 @@ private struct SettingsContentView: View {
                     .foregroundStyle(palette.accent)
                     .frame(width: 24)
                 Text(label)
-                    .foregroundStyle(.primary)
+                    .foregroundStyle(palette.textPrimary)
                 Spacer()
                 if let value {
                     Text(value)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(palette.accent)
                         .lineLimit(1)
                 }
                 Image(systemName: "chevron.right")

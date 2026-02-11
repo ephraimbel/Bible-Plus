@@ -54,11 +54,13 @@ private struct FeedContentView: View {
                         isSaved: vm.isSaved(content),
                         showDoubleTapHeart: vm.doubleTapHeartID == content.id,
                         isAudioPlaying: soundscapeService.isPlaying,
+                        audioVolume: soundscapeService.volume,
                         onSave: { vm.toggleSave(for: content) },
                         onShare: { vm.shareCard(content) },
                         onPin: { vm.pinToCollection(content) },
                         onAskAI: { vm.askAI(about: content) },
                         onToggleSound: { soundscapeService.togglePlayback() },
+                        onVolumeChange: { soundscapeService.setVolume($0) },
                         onOpenSanctuary: { showSanctuary = true },
                         onDoubleTap: { vm.doubleTapSave(for: content) }
                     )
