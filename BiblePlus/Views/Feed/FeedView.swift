@@ -53,7 +53,7 @@ private struct FeedContentView: View {
                         onSave: { vm.toggleSave(for: content) },
                         onShare: { vm.shareCard(content) },
                         onPin: { vm.pinToCollection(content) },
-                        onAskAI: { /* Phase 5 */ },
+                        onAskAI: { vm.askAI(about: content) },
                         onToggleSound: { audioService.togglePlayback() },
                         onDoubleTap: { vm.doubleTapSave(for: content) }
                     )
@@ -83,6 +83,9 @@ private struct FeedContentView: View {
                 content: content,
                 isPro: vm.profile.isPro
             )
+        }
+        .sheet(item: $vm.askAIContent) { content in
+            ChatView(initialContext: vm.askAIPrompt(for: content))
         }
     }
 }

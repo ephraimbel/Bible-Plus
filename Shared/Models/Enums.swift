@@ -312,6 +312,14 @@ enum ContentType: String, Codable, CaseIterable, Identifiable {
     }
 }
 
+// MARK: - Message Role
+
+enum MessageRole: String, Codable {
+    case system
+    case user
+    case assistant
+}
+
 // MARK: - Share Aspect Ratio
 
 enum ShareAspectRatio: String, CaseIterable, Identifiable {

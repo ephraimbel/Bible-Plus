@@ -13,6 +13,7 @@ final class FeedViewModel {
     var doubleTapHeartID: UUID? = nil
     var shareContent: PrayerContent? = nil
     var collectionContent: PrayerContent? = nil
+    var askAIContent: PrayerContent? = nil
 
     // MARK: - Private
 
@@ -151,6 +152,19 @@ final class FeedViewModel {
     func shareCard(_ content: PrayerContent) {
         shareContent = content
         HapticService.impact(.medium)
+    }
+
+    func askAI(about content: PrayerContent) {
+        askAIContent = content
+        HapticService.selection()
+    }
+
+    func askAIPrompt(for content: PrayerContent) -> String {
+        let text = personalizedText(for: content)
+        if let ref = content.verseReference, !ref.isEmpty {
+            return "Help me understand this: \"\(text)\" — \(ref)"
+        }
+        return "Help me reflect on this: \"\(text)\""
     }
 
     func pinToCollection(_ content: PrayerContent) {

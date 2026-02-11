@@ -11,6 +11,7 @@ struct BiblePlusApp: App {
                 UserProfile.self,
                 PrayerContent.self,
                 ContentCollection.self,
+                ChatMessage.self,
             ])
             let config = ModelConfiguration(
                 "BiblePlus",
