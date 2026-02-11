@@ -63,7 +63,7 @@ struct WelcomeView: View {
         }
         .onAppear {
             // Start ambient music
-            viewModel.audioService.playResource("ambient-piano")
+            viewModel.audioService.playResource("heavenlyWorship")
 
             // Staggered entrance animations
             withAnimation(BPAnimation.spring.delay(0.3)) {
