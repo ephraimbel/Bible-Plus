@@ -90,13 +90,13 @@ struct FeedCardView: View {
     private var overlayLayer: some View {
         ZStack {
             // Thin uniform tint for text legibility
-            Color.black.opacity(0.12)
+            Color.black.opacity(0.06)
 
             // Gentle vignette — keeps the background vibrant, just softens the edges
             RadialGradient(
                 colors: [
                     Color.clear,
-                    Color.black.opacity(0.15),
+                    Color.black.opacity(0.1),
                 ],
                 center: .center,
                 startRadius: 200,

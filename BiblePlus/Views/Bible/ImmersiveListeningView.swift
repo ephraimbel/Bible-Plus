@@ -146,10 +146,10 @@ struct ImmersiveListeningView: View {
                     dismiss()
                 } label: {
                     Image(systemName: "chevron.left")
-                        .font(.system(size: 16, weight: .semibold))
-                        .foregroundStyle(.white.opacity(0.85))
-                        .frame(width: 38, height: 38)
-                        .background(.ultraThinMaterial.opacity(0.5))
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundStyle(.white)
+                        .frame(width: 40, height: 40)
+                        .background(.black.opacity(0.35))
                         .clipShape(Circle())
                 }
                 Spacer()
@@ -174,16 +174,14 @@ struct ImmersiveListeningView: View {
                     .multilineTextAlignment(.center)
                     .lineSpacing(10)
                     .padding(.horizontal, 32)
-                    .shadow(color: .black.opacity(0.8), radius: 1, y: 1)
-                    .shadow(color: .black.opacity(0.5), radius: 6, y: 2)
-                    .shadow(color: .black.opacity(0.3), radius: 14, y: 0)
+                    .shadow(color: .black.opacity(0.35), radius: 4, y: 1)
                     .id(verseIdentity)
                     .transition(.opacity)
 
                 Text(verseReference)
                     .font(BPFont.reference)
                     .foregroundStyle(.white.opacity(0.6))
-                    .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
+                    .shadow(color: .black.opacity(0.3), radius: 3, y: 1)
                     .id("ref-\(verseIdentity)")
                     .transition(.opacity)
             }
