@@ -147,6 +147,7 @@ private struct SanctuaryContentView: View {
             Text(vm.currentSoundscape.displayName)
                 .font(BPFont.prayerLarge)
                 .foregroundStyle(.white)
+                .shadow(color: .black.opacity(0.35), radius: 4, y: 1)
 
             // Status
             Text(vm.isPlaying ? "Now Playing" : "Paused")
@@ -154,6 +155,7 @@ private struct SanctuaryContentView: View {
                 .tracking(1.5)
                 .foregroundStyle(.white.opacity(0.5))
                 .textCase(.uppercase)
+                .shadow(color: .black.opacity(0.25), radius: 3, y: 1)
 
             // Sleep timer display
             if let formatted = vm.sleepTimerFormatted {
