@@ -88,16 +88,21 @@ struct FeedCardView: View {
     // MARK: - Layer 2: Subtle Vignette
 
     private var overlayLayer: some View {
-        // Gentle vignette — keeps the background vibrant, just softens the edges
-        RadialGradient(
-            colors: [
-                Color.clear,
-                Color.black.opacity(0.15),
-            ],
-            center: .center,
-            startRadius: 200,
-            endRadius: 500
-        )
+        ZStack {
+            // Thin uniform tint for text legibility
+            Color.black.opacity(0.12)
+
+            // Gentle vignette — keeps the background vibrant, just softens the edges
+            RadialGradient(
+                colors: [
+                    Color.clear,
+                    Color.black.opacity(0.15),
+                ],
+                center: .center,
+                startRadius: 200,
+                endRadius: 500
+            )
+        }
     }
 
     // MARK: - Layer 3 + 4: Content + Reference
