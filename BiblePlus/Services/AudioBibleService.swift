@@ -36,6 +36,10 @@ final class AudioBibleService {
     private static let usageKey = "audioBibleDailyUsage"
     private static let usageDateKey = "audioBibleUsageDate"
 
+    // MARK: - Prefetch
+
+    private var prefetchTask: Task<Void, Never>?
+
     // MARK: - Init
 
     init() {
@@ -46,6 +50,81 @@ final class AudioBibleService {
         self.soundscapeService = service
     }
 
+    // MARK: - Prefetch Audio (background generation before user taps play)
+
+    /// Call when a chapter is displayed. Generates audio in the background so
+    /// tapping play is instant. Safe to call multiple times — checks cache first.
+    func prefetch(
+        verses: [(number: Int, text: String)],
+        book: BibleBook,
+        chapter: Int,
+        translation: BibleTranslation
+    ) {
+        prefetchTask?.cancel()
+        guard !verses.isEmpty else { return }
+
+        // Skip if already cached
+        let cacheKey = "\(book.id)-\(chapter)-\(translation.apiCode)"
+        let cacheURL = Self.cacheFileURL(for: cacheKey)
+        if FileManager.default.fileExists(atPath: cacheURL.path) { return }
+
+        prefetchTask = Task.detached(priority: .utility) { [weak self] in
+            guard let self else { return }
+            _ = try? await self.fetchOrGenerateAudio(
+                verses: verses,
+                book: book,
+                chapter: chapter,
+                translation: translation
+            )
+        }
+    }
+
+    /// Pre-generates the next chapter's audio during playback so chapter
+    /// auto-advance feels seamless.
+    func prefetchNextChapter(
+        currentBook: BibleBook,
+        currentChapter: Int,
+        translation: BibleTranslation,
+        versesProvider: @escaping (BibleBook, Int) async -> [(number: Int, text: String)]
+    ) {
+        let nextBook: BibleBook
+        let nextChapter: Int
+
+        if currentChapter < currentBook.chapterCount {
+            nextBook = currentBook
+            nextChapter = currentChapter + 1
+        } else if let idx = BibleData.allBooks.firstIndex(of: currentBook),
+                  idx + 1 < BibleData.allBooks.count {
+            nextBook = BibleData.allBooks[idx + 1]
+            nextChapter = 1
+        } else {
+            return // Last chapter of Revelation — nothing to prefetch
+        }
+
+        // Skip if already cached
+        let cacheKey = "\(nextBook.id)-\(nextChapter)-\(translation.apiCode)"
+        let cacheURL = Self.cacheFileURL(for: cacheKey)
+        if FileManager.default.fileExists(atPath: cacheURL.path) { return }
+
+        Task.detached(priority: .utility) { [weak self] in
+            guard let self else { return }
+            let verses = await versesProvider(nextBook, nextChapter)
+            guard !verses.isEmpty else { return }
+            _ = try? await self.fetchOrGenerateAudio(
+                verses: verses,
+                book: nextBook,
+                chapter: nextChapter,
+                translation: translation
+            )
+        }
+    }
+
+    /// Check if audio for the given chapter is already cached on disk.
+    static func isCached(book: BibleBook, chapter: Int, translation: BibleTranslation) -> Bool {
+        let cacheKey = "\(book.id)-\(chapter)-\(translation.apiCode)"
+        return FileManager.default.fileExists(atPath: cacheFileURL(for: cacheKey).path)
+    }
+
     // MARK: - Play Chapter
 
     func play(
@@ -53,9 +132,11 @@ final class AudioBibleService {
         book: BibleBook,
         chapter: Int,
         translation: BibleTranslation,
-        startingFromVerseIndex: Int = 0
+        startingFromVerseIndex: Int = 0,
+        versesProvider: ((BibleBook, Int) async -> [(number: Int, text: String)])? = nil
     ) {
         stop()
+        prefetchTask?.cancel() // No longer needed — we're playing now
 
         guard !verses.isEmpty else { return }
 
@@ -100,6 +181,16 @@ final class AudioBibleService {
 
                 startProgressTracking()
                 incrementDailyUsage()
+
+                // Pre-fetch the next chapter while this one plays
+                if let provider = versesProvider {
+                    prefetchNextChapter(
+                        currentBook: book,
+                        currentChapter: chapter,
+                        translation: translation,
+                        versesProvider: provider
+                    )
+                }
             } catch {
                 guard !Task.isCancelled else { return }
                 isLoading = false

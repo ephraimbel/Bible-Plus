@@ -67,6 +67,12 @@ private struct BibleContentView: View {
 
     // MARK: - Audio Bible
 
+    /// Provides verses for a given book/chapter — used by prefetch for next-chapter lookups.
+    private func versesProvider(book: BibleBook, chapter: Int) async -> [(number: Int, text: String)] {
+        let repo = BibleRepository.shared
+        return (try? await repo.verses(book: book.id, chapter: chapter)) ?? []
+    }
+
     private func handleAudioTap() {
         if audioService.isPlaying || audioService.isPaused {
             audioService.togglePlayback()
@@ -95,7 +101,8 @@ private struct BibleContentView: View {
                         verses: viewModel.verses,
                         book: viewModel.selectedBook,
                         chapter: viewModel.selectedChapter,
-                        translation: viewModel.currentTranslation
+                        translation: viewModel.currentTranslation,
+                        versesProvider: versesProvider
                     )
                 }
             }
@@ -105,7 +112,8 @@ private struct BibleContentView: View {
             verses: viewModel.verses,
             book: viewModel.selectedBook,
             chapter: viewModel.selectedChapter,
-            translation: viewModel.currentTranslation
+            translation: viewModel.currentTranslation,
+            versesProvider: versesProvider
         )
     }
 
@@ -329,7 +337,8 @@ private struct BibleContentView: View {
                                 book: viewModel.selectedBook,
                                 chapter: viewModel.selectedChapter,
                                 translation: viewModel.currentTranslation,
-                                startingFromVerseIndex: verseIndex
+                                startingFromVerseIndex: verseIndex,
+                                versesProvider: versesProvider
                             )
                         }
                     },
@@ -494,6 +503,17 @@ private struct BibleContentView: View {
             Button("OK", role: .cancel) {}
         } message: {
             Text("You've used your \(AudioBibleService.freeChapterLimit) free chapters today. Upgrade to Pro for unlimited Audio Bible.")
+        }
+        .onChange(of: viewModel.verses.count) {
+            // Pre-fetch audio as soon as chapter text is loaded — by the time
+            // the user reads a few verses and taps play, the audio is cached.
+            guard !viewModel.verses.isEmpty else { return }
+            audioService.prefetch(
+                verses: viewModel.verses,
+                book: viewModel.selectedBook,
+                chapter: viewModel.selectedChapter,
+                translation: viewModel.currentTranslation
+            )
         }
     }
 }
