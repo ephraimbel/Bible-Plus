@@ -7,18 +7,7 @@ struct BiblePlusApp: App {
 
     init() {
         do {
-            let schema = Schema([
-                UserProfile.self,
-                PrayerContent.self,
-                ContentCollection.self,
-                ChatMessage.self,
-            ])
-            let config = ModelConfiguration(
-                "BiblePlus",
-                schema: schema,
-                groupContainer: .identifier("group.com.bibleplus.shared")
-            )
-            modelContainer = try ModelContainer(for: schema, configurations: [config])
+            modelContainer = try SharedModelContainer.create()
 
             // Seed content on first launch
             let seedContext = ModelContext(modelContainer)
@@ -39,6 +28,7 @@ struct BiblePlusApp: App {
 struct RootView: View {
     @Query private var profiles: [UserProfile]
     @Environment(\.colorScheme) private var systemScheme
+    @State private var deepLinkedContentID: UUID?
 
     private var currentProfile: UserProfile? { profiles.first }
     private var hasCompletedOnboarding: Bool {
@@ -48,7 +38,7 @@ struct RootView: View {
     var body: some View {
         Group {
             if hasCompletedOnboarding {
-                ContentView()
+                ContentView(deepLinkedContentID: $deepLinkedContentID)
             } else {
                 OnboardingContainerView()
             }
@@ -62,6 +52,9 @@ struct RootView: View {
             )
         )
         .animation(BPAnimation.pageTransition, value: hasCompletedOnboarding)
+        .onOpenURL { url in
+            handleDeepLink(url)
+        }
     }
 
     private var resolvedColorScheme: ColorScheme? {
@@ -71,5 +64,15 @@ struct RootView: View {
         case .dark, .immersive: return .dark
         case .auto: return nil
         }
+    }
+
+    private func handleDeepLink(_ url: URL) {
+        // bibleplus://content/{uuid}
+        guard url.scheme == "bibleplus",
+              url.host == "content",
+              let idString = url.pathComponents.dropFirst().first,
+              let uuid = UUID(uuidString: idString)
+        else { return }
+        deepLinkedContentID = uuid
     }
 }

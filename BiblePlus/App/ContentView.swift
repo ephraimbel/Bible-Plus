@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Binding var deepLinkedContentID: UUID?
     @State private var selectedTab: Tab = .feed
 
     enum Tab: String, CaseIterable {
@@ -52,5 +53,10 @@ struct ContentView: View {
         .tint(BPColorPalette.light.accent)
         .toolbarBackground(.ultraThinMaterial, for: .tabBar)
         .toolbarBackground(.visible, for: .tabBar)
+        .onChange(of: deepLinkedContentID) { _, newValue in
+            if newValue != nil {
+                selectedTab = .feed
+            }
+        }
     }
 }

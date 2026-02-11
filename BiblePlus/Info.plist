@@ -11,5 +11,16 @@
 		<key>UIColorName</key>
 		<string>LaunchBackground</string>
 	</dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.bibleplus.app</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>bibleplus</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

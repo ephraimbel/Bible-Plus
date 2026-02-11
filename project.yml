@@ -40,3 +40,28 @@ targets:
         PRODUCT_NAME: "Bible Plus"
     entitlements:
       path: BiblePlus/BiblePlus.entitlements
+    dependencies:
+      - target: BiblePlusWidgets
+        embed: true
+
+  BiblePlusWidgets:
+    type: app-extension
+    platform: iOS
+    product: com.apple.product-type.app-extension
+    sources:
+      - path: BiblePlusWidgets
+        excludes:
+          - "**/.DS_Store"
+      - path: Shared
+        excludes:
+          - "**/.DS_Store"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.bibleplus.app.widgets
+        CODE_SIGN_ENTITLEMENTS: BiblePlusWidgets/BiblePlusWidgets.entitlements
+        SKIP_INSTALL: YES
+        INFOPLIST_KEY_NSExtensionPointIdentifier: com.apple.widgetkit-extension
+        GENERATE_INFOPLIST_FILE: true
+        PRODUCT_NAME: BiblePlusWidgets
+    entitlements:
+      path: BiblePlusWidgets/BiblePlusWidgets.entitlements
