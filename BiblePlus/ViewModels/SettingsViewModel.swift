@@ -21,6 +21,7 @@ final class SettingsViewModel {
     var showSoundscapePicker = false
     var showBackgroundPicker = false
     var showSanctuary = false
+    var showVoicePicker = false
 
     // MARK: - Local Editing Copies
 
@@ -192,6 +193,10 @@ final class SettingsViewModel {
         let times = profile.prayerTimes
         guard !times.isEmpty else { return "Not set" }
         return times.map(\.displayName).joined(separator: ", ")
+    }
+
+    var currentVoiceDisplay: String {
+        BibleVoice.voice(for: profile.selectedBibleVoiceID)?.displayName ?? "The Preacher"
     }
 
     var currentSoundscapeDisplay: String {

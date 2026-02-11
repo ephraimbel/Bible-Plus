@@ -87,7 +87,7 @@ struct VerseActionSheet: View {
     // MARK: - Highlight Color Row
 
     private var highlightColorRow: some View {
-        HStack(spacing: 16) {
+        HStack(spacing: 10) {
             ForEach(VerseHighlightColor.allCases) { color in
                 Button {
                     if currentHighlight == color {
@@ -99,11 +99,11 @@ struct VerseActionSheet: View {
                     ZStack {
                         Circle()
                             .fill(Color(hex: color.dotColor))
-                            .frame(width: 32, height: 32)
+                            .frame(width: 28, height: 28)
 
                         if currentHighlight == color {
                             Image(systemName: "checkmark")
-                                .font(.system(size: 12, weight: .bold))
+                                .font(.system(size: 11, weight: .bold))
                                 .foregroundStyle(.white)
                         }
                     }

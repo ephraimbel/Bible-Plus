@@ -40,6 +40,7 @@ private struct BibleContentView: View {
     @State private var shareText: String?
     @State private var searchViewModel: BibleSearchViewModel?
     @State private var showAudioProGate = false
+    @State private var showVoicePicker = false
 
     // MARK: - Page Flip State
 
@@ -372,6 +373,15 @@ private struct BibleContentView: View {
 
             ToolbarItem(placement: .topBarTrailing) {
                 HStack(spacing: 12) {
+                    // Voice picker
+                    Button {
+                        showVoicePicker = true
+                    } label: {
+                        Image(systemName: "person.wave.2")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundStyle(palette.textSecondary)
+                    }
+
                     // Audio Bible
                     Button {
                         handleAudioTap()
@@ -500,10 +510,36 @@ private struct BibleContentView: View {
                 ShareSheetView(items: [text])
             }
         }
+        .sheet(isPresented: $showVoicePicker) {
+            VoicePickerView(
+                audioService: audioService,
+                isPro: {
+                    let descriptor = FetchDescriptor<UserProfile>()
+                    return (try? modelContext.fetch(descriptor).first?.isPro) ?? false
+                }()
+            ) { voice in
+                audioService.setVoice(voice)
+                // Persist to UserProfile
+                let descriptor = FetchDescriptor<UserProfile>()
+                if let profile = try? modelContext.fetch(descriptor).first {
+                    profile.selectedBibleVoiceID = voice.rawValue
+                    try? modelContext.save()
+                }
+            }
+            .presentationDetents([.medium, .large])
+        }
         .alert("Audio Bible Limit", isPresented: $showAudioProGate) {
             Button("OK", role: .cancel) {}
         } message: {
             Text("You've used your \(AudioBibleService.freeChapterLimit) free chapters today. Upgrade to Pro for unlimited Audio Bible.")
+        }
+        .onAppear {
+            // Load saved voice preference
+            let descriptor = FetchDescriptor<UserProfile>()
+            if let profile = try? modelContext.fetch(descriptor).first,
+               let voice = BibleVoice.voice(for: profile.selectedBibleVoiceID) {
+                audioService.setVoice(voice)
+            }
         }
         .onChange(of: viewModel.verses.count) {
             // Pre-fetch audio as soon as chapter text is loaded — by the time

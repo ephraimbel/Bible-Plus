@@ -15,12 +15,25 @@ struct AestheticView: View {
             Spacer().frame(height: 24)
 
             VStack(spacing: 10) {
-                Text(viewModel.firstName.isEmpty
-                    ? "Make Bible+\nfeel like yours."
-                    : "Make Bible+\nfeel like yours, \(viewModel.firstName).")
-                    .font(BPFont.headingMedium)
-                    .foregroundStyle(palette.textPrimary)
-                    .multilineTextAlignment(.center)
+                VStack(spacing: 2) {
+                    HStack(spacing: 0) {
+                        Text("Make ")
+                        Text("Bible")
+                        Text("+")
+                            .foregroundStyle(Color(red: 1.0, green: 0.84, blue: 0.3))
+                            .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 4)
+                            .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 10)
+                            .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(0.9), radius: 20)
+                            .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(0.6), radius: 40)
+                            .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(0.3), radius: 60)
+                    }
+                    Text(viewModel.firstName.isEmpty
+                        ? "feel like yours."
+                        : "feel like yours, \(viewModel.firstName).")
+                }
+                .font(BPFont.headingMedium)
+                .foregroundStyle(palette.textPrimary)
+                .multilineTextAlignment(.center)
 
                 Text("50+ more backgrounds available inside.")
                     .font(BPFont.reference)

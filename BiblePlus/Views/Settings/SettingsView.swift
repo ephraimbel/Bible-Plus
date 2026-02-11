@@ -4,12 +4,13 @@ import SwiftData
 struct SettingsView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(SoundscapeService.self) private var soundscapeService
+    @Environment(AudioBibleService.self) private var audioBibleService
     @State private var viewModel: SettingsViewModel?
 
     var body: some View {
         Group {
             if let vm = viewModel {
-                SettingsContentView(vm: vm, soundscapeService: soundscapeService)
+                SettingsContentView(vm: vm, soundscapeService: soundscapeService, audioBibleService: audioBibleService)
             } else {
                 BPLoadingView().onAppear { initializeViewModel() }
             }
@@ -29,6 +30,8 @@ struct SettingsView: View {
 private struct SettingsContentView: View {
     @Bindable var vm: SettingsViewModel
     let soundscapeService: SoundscapeService
+    let audioBibleService: AudioBibleService
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.bpPalette) private var palette
 
     var body: some View {
@@ -79,6 +82,17 @@ private struct SettingsContentView: View {
             }
             .fullScreenCover(isPresented: $vm.showSanctuary) {
                 SanctuaryView(soundscapeService: soundscapeService)
+            }
+            .sheet(isPresented: $vm.showVoicePicker) {
+                VoicePickerView(
+                    audioService: audioBibleService,
+                    isPro: vm.profile.isPro
+                ) { voice in
+                    audioBibleService.setVoice(voice)
+                    vm.profile.selectedBibleVoiceID = voice.rawValue
+                    try? modelContext.save()
+                }
+                .presentationDetents([.medium, .large])
             }
         }
     }
@@ -155,6 +169,14 @@ private struct SettingsContentView: View {
                 value: vm.profile.preferredTranslation.displayName
             ) {
                 vm.beginEditingTranslation()
+            }
+
+            settingsRow(
+                icon: "person.wave.2",
+                label: "Narrator Voice",
+                value: vm.currentVoiceDisplay
+            ) {
+                vm.showVoicePicker = true
             }
         }
         .listRowBackground(palette.surface)

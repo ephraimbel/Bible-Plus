@@ -36,6 +36,10 @@ final class AudioBibleService {
     private static let usageKey = "audioBibleDailyUsage"
     private static let usageDateKey = "audioBibleUsageDate"
 
+    // MARK: - Voice
+
+    var selectedVoice: BibleVoice = .onyx
+
     // MARK: - Prefetch
 
     private var prefetchTask: Task<Void, Never>?
@@ -64,7 +68,8 @@ final class AudioBibleService {
         guard !verses.isEmpty else { return }
 
         // Skip if already cached
-        let cacheKey = "\(book.id)-\(chapter)-\(translation.apiCode)"
+        let voice = selectedVoice
+        let cacheKey = Self.makeCacheKey(book: book, chapter: chapter, translation: translation, voice: voice)
         let cacheURL = Self.cacheFileURL(for: cacheKey)
         if FileManager.default.fileExists(atPath: cacheURL.path) { return }
 
@@ -74,7 +79,8 @@ final class AudioBibleService {
                 verses: verses,
                 book: book,
                 chapter: chapter,
-                translation: translation
+                translation: translation,
+                voice: voice
             )
         }
     }
@@ -102,7 +108,8 @@ final class AudioBibleService {
         }
 
         // Skip if already cached
-        let cacheKey = "\(nextBook.id)-\(nextChapter)-\(translation.apiCode)"
+        let voice = selectedVoice
+        let cacheKey = Self.makeCacheKey(book: nextBook, chapter: nextChapter, translation: translation, voice: voice)
         let cacheURL = Self.cacheFileURL(for: cacheKey)
         if FileManager.default.fileExists(atPath: cacheURL.path) { return }
 
@@ -114,14 +121,15 @@ final class AudioBibleService {
                 verses: verses,
                 book: nextBook,
                 chapter: nextChapter,
-                translation: translation
+                translation: translation,
+                voice: voice
             )
         }
     }
 
     /// Check if audio for the given chapter is already cached on disk.
-    static func isCached(book: BibleBook, chapter: Int, translation: BibleTranslation) -> Bool {
-        let cacheKey = "\(book.id)-\(chapter)-\(translation.apiCode)"
+    static func isCached(book: BibleBook, chapter: Int, translation: BibleTranslation, voice: BibleVoice = .onyx) -> Bool {
+        let cacheKey = makeCacheKey(book: book, chapter: chapter, translation: translation, voice: voice)
         return FileManager.default.fileExists(atPath: cacheFileURL(for: cacheKey).path)
     }
 
@@ -144,13 +152,15 @@ final class AudioBibleService {
         errorMessage = nil
         currentVerseIndex = startingFromVerseIndex
 
+        let voice = selectedVoice
         generateTask = Task {
             do {
                 let audioData = try await fetchOrGenerateAudio(
                     verses: verses,
                     book: book,
                     chapter: chapter,
-                    translation: translation
+                    translation: translation,
+                    voice: voice
                 )
                 guard !Task.isCancelled else { return }
 
@@ -283,9 +293,10 @@ final class AudioBibleService {
         verses: [(number: Int, text: String)],
         book: BibleBook,
         chapter: Int,
-        translation: BibleTranslation
+        translation: BibleTranslation,
+        voice: BibleVoice = .onyx
     ) async throws -> Data {
-        let cacheKey = "\(book.id)-\(chapter)-\(translation.apiCode)"
+        let cacheKey = Self.makeCacheKey(book: book, chapter: chapter, translation: translation, voice: voice)
         let cacheURL = Self.cacheFileURL(for: cacheKey)
 
         // Check disk cache
@@ -303,12 +314,13 @@ final class AudioBibleService {
         // OpenAI TTS has 4096 char limit — split long chapters
         let audioData: Data
         if chapterText.count <= 4000 {
-            audioData = try await callTTSAPI(text: chapterText)
+            audioData = try await callTTSAPI(text: chapterText, voice: voice)
         } else {
             audioData = try await generateLongChapter(
                 verses: verses,
                 bookName: book.name,
-                chapter: chapter
+                chapter: chapter,
+                voice: voice
             )
         }
 
@@ -339,7 +351,8 @@ final class AudioBibleService {
     private func generateLongChapter(
         verses: [(number: Int, text: String)],
         bookName: String,
-        chapter: Int
+        chapter: Int,
+        voice: BibleVoice = .onyx
     ) async throws -> Data {
         var segments: [[(number: Int, text: String)]] = []
         var current: [(number: Int, text: String)] = []
@@ -363,19 +376,19 @@ final class AudioBibleService {
 
             let prefix = i == 0 ? "\(bookName), chapter \(chapter). " : ""
             let text = prefix + segment.map(\.text).joined(separator: " ")
-            let segmentData = try await callTTSAPI(text: text)
+            let segmentData = try await callTTSAPI(text: text, voice: voice)
             allData.append(segmentData)
         }
 
         return allData
     }
 
-    private func callTTSAPI(text: String) async throws -> Data {
+    private func callTTSAPI(text: String, voice: BibleVoice = .onyx) async throws -> Data {
         let endpoint = URL(string: "https://api.openai.com/v1/audio/speech")!
         let body: [String: Any] = [
-            "model": "tts-1",
+            "model": "tts-1-hd",
             "input": text,
-            "voice": "onyx",
+            "voice": voice.apiVoice,
             "response_format": "mp3",
             "speed": 1.0
         ]
@@ -541,7 +554,17 @@ final class AudioBibleService {
         }
     }
 
+    // MARK: - Voice Selection
+
+    func setVoice(_ voice: BibleVoice) {
+        selectedVoice = voice
+    }
+
     // MARK: - Cache
+
+    private static func makeCacheKey(book: BibleBook, chapter: Int, translation: BibleTranslation, voice: BibleVoice) -> String {
+        "\(book.id)-\(chapter)-\(translation.apiCode)-\(voice.rawValue)"
+    }
 
     private static func cacheFileURL(for key: String) -> URL {
         let caches = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]

@@ -64,6 +64,8 @@ struct ContentView: View {
         .onChange(of: deepLinkedContentID) { _, newValue in
             if newValue != nil {
                 selectedTab = .feed
+                // Reset after handling so future deep links with the same ID still trigger
+                deepLinkedContentID = nil
             }
         }
     }

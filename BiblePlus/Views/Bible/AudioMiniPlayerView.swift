@@ -95,7 +95,8 @@ struct AudioMiniPlayerView: View {
         if audioService.isLoading {
             return "Generating audio..."
         }
-        return "Verse \(audioService.currentVerseIndex + 1) of \(totalVerses)"
+        let voiceName = audioService.selectedVoice.displayName
+        return "Verse \(audioService.currentVerseIndex + 1) of \(totalVerses) \u{00B7} \(voiceName)"
     }
 
     private func cycleSpeed() {

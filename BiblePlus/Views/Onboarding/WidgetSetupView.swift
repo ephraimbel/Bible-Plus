@@ -18,10 +18,23 @@ struct WidgetSetupView: View {
             Spacer().frame(height: 24)
 
             VStack(spacing: 10) {
-                Text("Add Bible+\nto your Home Screen")
-                    .font(BPFont.headingMedium)
-                    .foregroundStyle(palette.textPrimary)
-                    .multilineTextAlignment(.center)
+                VStack(spacing: 2) {
+                    HStack(spacing: 0) {
+                        Text("Add ")
+                        Text("Bible")
+                        Text("+")
+                            .foregroundStyle(Color(red: 1.0, green: 0.84, blue: 0.3))
+                            .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 4)
+                            .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 10)
+                            .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(0.9), radius: 20)
+                            .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(0.6), radius: 40)
+                            .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(0.3), radius: 60)
+                    }
+                    Text("to your Home Screen")
+                }
+                .font(BPFont.headingMedium)
+                .foregroundStyle(palette.textPrimary)
+                .multilineTextAlignment(.center)
 
                 Text("See personalized prayers and verses\nevery time you unlock your phone.")
                     .font(BPFont.reference)

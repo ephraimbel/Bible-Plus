@@ -638,9 +638,14 @@ struct SanctuaryBackground: Identifiable, Hashable {
     var hasVideo: Bool { videoFileName != nil }
     var hasImage: Bool { imageName != nil }
 
+    private static var imageCache: [String: UIImage] = [:]
+
     static func loadImage(named name: String) -> UIImage? {
-        guard let url = Bundle.main.url(forResource: name, withExtension: "jpg") else { return nil }
-        return UIImage(contentsOfFile: url.path)
+        if let cached = imageCache[name] { return cached }
+        guard let url = Bundle.main.url(forResource: name, withExtension: "jpg"),
+              let image = UIImage(contentsOfFile: url.path) else { return nil }
+        imageCache[name] = image
+        return image
     }
 
     init(id: String, name: String, collection: BackgroundCollection, gradientColors: [String], imageName: String? = nil, videoFileName: String? = nil, isProOnly: Bool = false) {
@@ -803,6 +808,10 @@ enum VerseHighlightColor: String, Codable, CaseIterable, Identifiable {
     case green
     case pink
     case purple
+    case orange
+    case red
+    case teal
+    case lavender
 
     var id: String { rawValue }
 
@@ -813,6 +822,10 @@ enum VerseHighlightColor: String, Codable, CaseIterable, Identifiable {
         case .green: "Green"
         case .pink: "Pink"
         case .purple: "Purple"
+        case .orange: "Orange"
+        case .red: "Red"
+        case .teal: "Teal"
+        case .lavender: "Lavender"
         }
     }
 
@@ -823,6 +836,10 @@ enum VerseHighlightColor: String, Codable, CaseIterable, Identifiable {
         case .green: "D4F5D4"
         case .pink: "FFD6E8"
         case .purple: "E8D6FF"
+        case .orange: "FFE4C9"
+        case .red: "FFD4D4"
+        case .teal: "CCF0EC"
+        case .lavender: "E4DAFF"
         }
     }
 
@@ -833,6 +850,10 @@ enum VerseHighlightColor: String, Codable, CaseIterable, Identifiable {
         case .green: "1E3D1E"
         case .pink: "3D1E2E"
         case .purple: "2E1E3D"
+        case .orange: "4A2E1A"
+        case .red: "4A1E1E"
+        case .teal: "1A3D3A"
+        case .lavender: "2A2040"
         }
     }
 
@@ -843,6 +864,10 @@ enum VerseHighlightColor: String, Codable, CaseIterable, Identifiable {
         case .green: "6BBF6B"
         case .pink: "E88AAF"
         case .purple: "9B7BD5"
+        case .orange: "E8944A"
+        case .red: "D96060"
+        case .teal: "4ABFB5"
+        case .lavender: "8B7BC9"
         }
     }
 }
@@ -880,6 +905,87 @@ enum PlaybackSpeed: Double, CaseIterable, Identifiable {
         case .fast: "1.25x"
         case .faster: "1.5x"
         }
+    }
+}
+
+// MARK: - Bible Voice
+
+enum BibleVoice: String, CaseIterable, Identifiable, Codable {
+    // Free
+    case onyx
+
+    // Pro — Male
+    case echo
+    case ash
+    case verse
+
+    // Pro — Female
+    case nova
+    case shimmer
+    case coral
+    case sage
+
+    var id: String { rawValue }
+
+    /// The OpenAI TTS voice name sent to the API.
+    var apiVoice: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .onyx:    "The Preacher"
+        case .echo:    "The Shepherd"
+        case .ash:     "The Narrator"
+        case .verse:   "The Prophet"
+        case .nova:    "The Comforter"
+        case .shimmer: "The Psalmist"
+        case .coral:   "The Guide"
+        case .sage:    "The Sage"
+        }
+    }
+
+    var subtitle: String {
+        switch self {
+        case .onyx:    "Deep & authoritative"
+        case .echo:    "Warm & smooth"
+        case .ash:     "Clear & grounded"
+        case .verse:   "Dramatic & poetic"
+        case .nova:    "Warm & expressive"
+        case .shimmer: "Bright & melodic"
+        case .coral:   "Calm & clear"
+        case .sage:    "Gentle & wise"
+        }
+    }
+
+    var gender: String {
+        switch self {
+        case .onyx, .echo, .ash, .verse: "Male"
+        case .nova, .shimmer, .coral, .sage: "Female"
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .onyx:    "waveform"
+        case .echo:    "waveform.path"
+        case .ash:     "waveform.badge.mic"
+        case .verse:   "theatermasks"
+        case .nova:    "sparkles"
+        case .shimmer: "music.note"
+        case .coral:   "leaf"
+        case .sage:    "moon.stars"
+        }
+    }
+
+    var isProOnly: Bool {
+        self != .onyx
+    }
+
+    static let freeVoices: [BibleVoice] = [.onyx]
+    static let proMaleVoices: [BibleVoice] = [.echo, .ash, .verse]
+    static let proFemaleVoices: [BibleVoice] = [.nova, .shimmer, .coral, .sage]
+
+    static func voice(for id: String) -> BibleVoice? {
+        allCases.first { $0.rawValue == id }
     }
 }
 

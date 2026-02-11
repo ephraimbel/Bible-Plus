@@ -24,15 +24,24 @@ struct WelcomeView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 26))
                         .shadow(color: .black.opacity(0.4), radius: 16, y: 8)
 
-                    Text("Bible+")
-                        .font(BPFont.headingLarge)
-                        .foregroundStyle(.white)
+                    HStack(spacing: 0) {
+                        Text("Bible")
+                            .foregroundStyle(.white)
+                        Text("+")
+                            .foregroundStyle(Color(red: 1.0, green: 0.84, blue: 0.3))
+                            .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 4)
+                            .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 10)
+                            .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(0.9), radius: 20)
+                            .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(0.6), radius: 40)
+                            .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(0.3), radius: 60)
+                    }
+                    .font(.system(size: 42, weight: .bold, design: .serif))
 
                     Text("Your personal companion for\nprayer, scripture, and peace.")
-                        .font(BPFont.onboardingSubtitle)
+                        .font(.system(size: 20, weight: .regular, design: .serif))
                         .foregroundStyle(.white.opacity(0.8))
                         .multilineTextAlignment(.center)
-                        .lineSpacing(4)
+                        .lineSpacing(6)
                 }
                 .shadow(color: .black.opacity(0.3), radius: 8, y: 2)
                 .scaleEffect(showContent ? 1 : 0.95)
@@ -63,7 +72,7 @@ struct WelcomeView: View {
         }
         .onAppear {
             // Start ambient music
-            viewModel.audioService.playResource("heavenlyWorship")
+            viewModel.audioService.playResource("heavenlyWorship", ext: "m4a")
 
             // Staggered entrance animations
             withAnimation(BPAnimation.spring.delay(0.3)) {

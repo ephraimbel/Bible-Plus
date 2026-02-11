@@ -42,9 +42,19 @@ struct SummaryPaywallView: View {
                     .foregroundStyle(palette.accent)
                     .padding(.bottom, 4)
 
-                Text("Bible+ Pro")
-                    .font(BPFont.headingMedium)
-                    .foregroundStyle(palette.textPrimary)
+                HStack(spacing: 0) {
+                    Text("Bible")
+                    Text("+")
+                        .foregroundStyle(Color(red: 1.0, green: 0.84, blue: 0.3))
+                        .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 4)
+                        .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 10)
+                        .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(0.9), radius: 20)
+                        .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(0.6), radius: 40)
+                        .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(0.3), radius: 60)
+                    Text(" Pro")
+                }
+                .font(BPFont.headingMedium)
+                .foregroundStyle(palette.textPrimary)
 
                 Text("Your full spiritual companion")
                     .font(BPFont.body)
