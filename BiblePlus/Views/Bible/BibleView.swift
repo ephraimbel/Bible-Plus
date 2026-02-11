@@ -46,7 +46,7 @@ private struct BibleContentView: View {
 
     private var paperColor: Color {
         colorScheme == .dark
-            ? Color(red: 26/255, green: 26/255, blue: 26/255)
+            ? Color(red: 43/255, green: 42/255, blue: 39/255)
             : Color(red: 250/255, green: 248/255, blue: 244/255)
     }
 

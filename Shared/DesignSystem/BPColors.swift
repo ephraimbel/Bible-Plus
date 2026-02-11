@@ -30,17 +30,17 @@ struct BPColorPalette {
         success: Color(hex: "8BA888")
     )
 
-    // MARK: Dark — "Midnight Study"
+    // MARK: Dark — "Midnight Study" (warm matte black)
     static let dark = BPColorPalette(
-        background: Color(hex: "1A1A1A"),
-        surface: Color(hex: "242424"),
-        surfaceElevated: Color(hex: "2A2A2A"),
+        background: Color(hex: "2B2A27"),
+        surface: Color(hex: "343330"),
+        surfaceElevated: Color(hex: "3D3C38"),
         accent: Color(hex: "C9A96E"),
         accentSoft: Color(hex: "3D3428"),
-        textPrimary: Color(hex: "E8E4DE"),
-        textSecondary: Color(hex: "8A8A8A"),
-        textMuted: Color(hex: "5A5A5A"),
-        border: Color(hex: "333333"),
+        textPrimary: Color(hex: "ECECEC"),
+        textSecondary: Color(hex: "A9A9A6"),
+        textMuted: Color(hex: "6B6B68"),
+        border: Color(hex: "4A4945"),
         error: Color(hex: "E07070"),
         success: Color(hex: "8BA888")
     )

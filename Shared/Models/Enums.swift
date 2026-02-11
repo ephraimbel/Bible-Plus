@@ -779,7 +779,7 @@ struct ThemeDefinition: Identifiable, Hashable {
         ThemeDefinition(
             id: "midnight-gold",
             name: "Midnight Gold",
-            previewGradient: ["1A1A1A", "242424", "3D3428"],
+            previewGradient: ["2B2A27", "343330", "3D3428"],
             isProOnly: false
         ),
         ThemeDefinition(
