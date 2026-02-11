@@ -15,15 +15,8 @@ struct WelcomeView: View {
             VStack(spacing: 0) {
                 Spacer()
 
-                // Logo + Title
+                // Title
                 VStack(spacing: 16) {
-                    Image("AppLogo")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 120, height: 120)
-                        .clipShape(RoundedRectangle(cornerRadius: 26))
-                        .shadow(color: .black.opacity(0.4), radius: 16, y: 8)
-
                     HStack(spacing: 0) {
                         Text("Bible")
                             .foregroundStyle(.white)
