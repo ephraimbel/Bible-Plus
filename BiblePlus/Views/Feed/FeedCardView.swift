@@ -111,8 +111,7 @@ struct FeedCardView: View {
                 .font(BPFont.caption)
                 .tracking(1.5)
                 .foregroundStyle(.white.opacity(0.85))
-                .shadow(color: .black.opacity(0.7), radius: 2, y: 1)
-                .shadow(color: .black.opacity(0.4), radius: 6, y: 0)
+                .shadow(color: .black.opacity(0.3), radius: 3, y: 1)
                 .padding(.bottom, 16)
 
             // Main text — scrollable for guided prayers that exceed card height
@@ -131,8 +130,7 @@ struct FeedCardView: View {
                 Text("— \(reference)")
                     .font(BPFont.reference)
                     .foregroundStyle(.white.opacity(0.9))
-                    .shadow(color: .black.opacity(0.7), radius: 2, y: 1)
-                    .shadow(color: .black.opacity(0.4), radius: 8, y: 0)
+                    .shadow(color: .black.opacity(0.3), radius: 3, y: 1)
                     .padding(.top, 16)
             }
 
@@ -140,8 +138,7 @@ struct FeedCardView: View {
             Text(content.category)
                 .font(BPFont.caption)
                 .foregroundStyle(.white.opacity(0.7))
-                .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
-                .shadow(color: .black.opacity(0.3), radius: 6, y: 0)
+                .shadow(color: .black.opacity(0.25), radius: 3, y: 1)
                 .padding(.top, 8)
 
             // Guided prayer "Pray Along" button
@@ -177,9 +174,7 @@ struct FeedCardView: View {
             .multilineTextAlignment(.center)
             .lineSpacing(6)
             .padding(.horizontal, 48)
-            .shadow(color: .black.opacity(0.8), radius: 1, y: 1)
-            .shadow(color: .black.opacity(0.5), radius: 6, y: 2)
-            .shadow(color: .black.opacity(0.3), radius: 14, y: 0)
+            .shadow(color: .black.opacity(0.35), radius: 4, y: 1)
     }
 
     /// Adapt font size based on text length
