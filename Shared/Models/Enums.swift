@@ -809,7 +809,6 @@ enum VerseHighlightColor: String, Codable, CaseIterable, Identifiable {
     case pink
     case purple
     case orange
-    case red
     case teal
     case lavender
 
@@ -823,7 +822,6 @@ enum VerseHighlightColor: String, Codable, CaseIterable, Identifiable {
         case .pink: "Pink"
         case .purple: "Purple"
         case .orange: "Orange"
-        case .red: "Red"
         case .teal: "Teal"
         case .lavender: "Lavender"
         }
@@ -837,7 +835,6 @@ enum VerseHighlightColor: String, Codable, CaseIterable, Identifiable {
         case .pink: "FFD6E8"
         case .purple: "E8D6FF"
         case .orange: "FFE4C9"
-        case .red: "FFD4D4"
         case .teal: "CCF0EC"
         case .lavender: "E4DAFF"
         }
@@ -851,7 +848,6 @@ enum VerseHighlightColor: String, Codable, CaseIterable, Identifiable {
         case .pink: "3D1E2E"
         case .purple: "2E1E3D"
         case .orange: "4A2E1A"
-        case .red: "4A1E1E"
         case .teal: "1A3D3A"
         case .lavender: "2A2040"
         }
@@ -865,7 +861,6 @@ enum VerseHighlightColor: String, Codable, CaseIterable, Identifiable {
         case .pink: "E88AAF"
         case .purple: "9B7BD5"
         case .orange: "E8944A"
-        case .red: "D96060"
         case .teal: "4ABFB5"
         case .lavender: "8B7BC9"
         }
