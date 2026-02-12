@@ -107,7 +107,7 @@ enum AIService {
 
     // MARK: - Rate Limiting
 
-    static let freeMessageLimit = 3
+    static let freeMessagesPerWeek = 3
 
     static func messagesUsedThisWeek(messages: [ChatMessage]) -> Int {
         let calendar = Calendar.current
@@ -118,7 +118,7 @@ enum AIService {
 
     static func canSendMessage(messages: [ChatMessage], isPro: Bool) -> Bool {
         if isPro { return true }
-        return messagesUsedThisWeek(messages: messages) < freeMessageLimit
+        return messagesUsedThisWeek(messages: messages) < freeMessagesPerWeek
     }
 
     // MARK: - Streaming

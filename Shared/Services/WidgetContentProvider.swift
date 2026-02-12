@@ -115,7 +115,6 @@ enum WidgetContentProvider {
         let contentType: ContentType
         let contentID: UUID
         let backgroundGradient: [String]
-        let firstName: String
     }
 
     /// Fetch the best content item for the given time window and user profile
@@ -176,8 +175,7 @@ enum WidgetContentProvider {
                     verseReference: content.verseReference,
                     contentType: content.type,
                     contentID: content.id,
-                    backgroundGradient: background.gradientColors,
-                    firstName: profile.firstName
+                    backgroundGradient: background.gradientColors
                 ))
             }
         }

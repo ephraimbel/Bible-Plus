@@ -35,25 +35,23 @@ final class ChatViewModel {
             && !isStreaming
     }
 
-    var messagesUsedThisWeek: Int {
-        // Count across ALL conversations
-        let allDescriptor = FetchDescriptor<ChatMessage>(
+    private var allMessages: [ChatMessage] {
+        let descriptor = FetchDescriptor<ChatMessage>(
             sortBy: [SortDescriptor(\.createdAt)]
         )
-        let allMessages = (try? modelContext.fetch(allDescriptor)) ?? []
-        return AIService.messagesUsedThisWeek(messages: allMessages)
+        return (try? modelContext.fetch(descriptor)) ?? []
+    }
+
+    var messagesUsedThisWeek: Int {
+        AIService.messagesUsedThisWeek(messages: allMessages)
     }
 
     var isRateLimited: Bool {
-        let allDescriptor = FetchDescriptor<ChatMessage>(
-            sortBy: [SortDescriptor(\.createdAt)]
-        )
-        let allMessages = (try? modelContext.fetch(allDescriptor)) ?? []
-        return !AIService.canSendMessage(messages: allMessages, isPro: profile.isPro)
+        !AIService.canSendMessage(messages: allMessages, isPro: profile.isPro)
     }
 
     var remainingMessages: Int {
-        max(0, AIService.freeMessageLimit - messagesUsedThisWeek)
+        max(0, AIService.freeMessagesPerWeek - messagesUsedThisWeek)
     }
 
     var quickPrompts: [String] {
@@ -162,12 +160,7 @@ final class ChatViewModel {
         }
         messages.removeAll()
 
-        // Also delete the Conversation object
-        let convId = conversationId
-        let descriptor = FetchDescriptor<Conversation>(
-            predicate: #Predicate { $0.id == convId }
-        )
-        if let conv = (try? modelContext.fetch(descriptor))?.first {
+        if let conv = fetchConversation() {
             modelContext.delete(conv)
         }
         try? modelContext.save()
@@ -212,12 +205,16 @@ final class ChatViewModel {
 
     // MARK: - Private
 
-    private func updateConversationMeta(from text: String) {
+    private func fetchConversation() -> Conversation? {
         let convId = conversationId
         let descriptor = FetchDescriptor<Conversation>(
             predicate: #Predicate { $0.id == convId }
         )
-        guard let conversation = (try? modelContext.fetch(descriptor))?.first else { return }
+        return (try? modelContext.fetch(descriptor))?.first
+    }
+
+    private func updateConversationMeta(from text: String) {
+        guard let conversation = fetchConversation() else { return }
 
         if conversation.title == "New Conversation" {
             conversation.title = String(text.prefix(40))

@@ -157,20 +157,23 @@ final class BibleReaderViewModel {
         HapticService.lightImpact()
     }
 
+    // MARK: - Profile Persistence Helper
+
+    private func updateProfile(_ update: (UserProfile) -> Void) {
+        let descriptor = FetchDescriptor<UserProfile>()
+        if let profile = try? modelContext.fetch(descriptor).first {
+            update(profile)
+            profile.updatedAt = Date()
+            try? modelContext.save()
+        }
+    }
+
     // MARK: - Translation
 
     func changeTranslation(_ translation: BibleTranslation) {
         currentTranslation = translation
         repository.setTranslation(translation)
-
-        // Persist to UserProfile
-        let descriptor = FetchDescriptor<UserProfile>()
-        if let profile = try? modelContext.fetch(descriptor).first {
-            profile.preferredTranslation = translation
-            profile.updatedAt = Date()
-            try? modelContext.save()
-        }
-
+        updateProfile { $0.preferredTranslation = translation }
         showTranslationPicker = false
         loadChapter()
     }
@@ -206,37 +209,28 @@ final class BibleReaderViewModel {
     // MARK: - Reader Settings Persistence
 
     func persistReaderSettings() {
-        let descriptor = FetchDescriptor<UserProfile>()
-        if let profile = try? modelContext.fetch(descriptor).first {
-            profile.readerFontSize = readerFontSize
-            profile.readerFontStyle = readerFontStyle
-            profile.readerLineSpacing = readerLineSpacing
-            profile.updatedAt = Date()
-            try? modelContext.save()
+        updateProfile {
+            $0.readerFontSize = readerFontSize
+            $0.readerFontStyle = readerFontStyle
+            $0.readerLineSpacing = readerLineSpacing
         }
     }
 
     // MARK: - Read Position Persistence
 
     func persistReadPosition() {
-        let descriptor = FetchDescriptor<UserProfile>()
-        if let profile = try? modelContext.fetch(descriptor).first {
-            profile.lastReadBookID = selectedBook.id
-            profile.lastReadChapter = selectedChapter
-            profile.updatedAt = Date()
-            try? modelContext.save()
+        updateProfile {
+            $0.lastReadBookID = selectedBook.id
+            $0.lastReadChapter = selectedChapter
         }
     }
 
     func updateLastReadVerse(_ verseNumber: Int) {
         lastReadVerseNumber = verseNumber
-        let descriptor = FetchDescriptor<UserProfile>()
-        if let profile = try? modelContext.fetch(descriptor).first {
-            profile.lastReadBookID = selectedBook.id
-            profile.lastReadChapter = selectedChapter
-            profile.lastReadVerseNumber = verseNumber
-            profile.updatedAt = Date()
-            try? modelContext.save()
+        updateProfile {
+            $0.lastReadBookID = selectedBook.id
+            $0.lastReadChapter = selectedChapter
+            $0.lastReadVerseNumber = verseNumber
         }
     }
 

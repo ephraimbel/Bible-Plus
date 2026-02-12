@@ -57,7 +57,7 @@ final class UserProfile {
         readerFontSize: Double = 20,
         readerFontStyle: ReaderFontStyle = .serif,
         readerLineSpacing: Double = 6,
-        lastReadBookID: String = "genesis",
+        lastReadBookID: String = "GEN",
         lastReadChapter: Int = 1,
         lastReadVerseNumber: Int = 1
     ) {

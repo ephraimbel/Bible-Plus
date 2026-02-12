@@ -114,8 +114,6 @@ final class StreakService {
 
     // MARK: - Milestone Detection
 
-    private static let milestoneNumbers: Set<Int> = [7, 14, 21, 30, 60, 90, 100, 365, 500, 1000]
-
     static func milestoneType(for count: Int) -> MilestoneType? {
         switch count {
         case 7, 14, 21: .weekly(count)

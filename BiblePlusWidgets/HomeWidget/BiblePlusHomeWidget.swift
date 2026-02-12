@@ -12,7 +12,6 @@ struct HomeWidgetEntry: TimelineEntry {
     let contentType: ContentType
     let contentID: UUID?
     let backgroundGradient: [String]
-    let firstName: String
 
     static let placeholder = HomeWidgetEntry(
         date: Date(),
@@ -21,8 +20,7 @@ struct HomeWidgetEntry: TimelineEntry {
         verseReference: "Psalm 23:1",
         contentType: .verse,
         contentID: nil,
-        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors,
-        firstName: "Friend"
+        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors
     )
 }
 
@@ -66,8 +64,7 @@ struct HomeWidgetProvider: TimelineProvider {
                 verseReference: entry.verseReference,
                 contentType: entry.contentType,
                 contentID: entry.contentID,
-                backgroundGradient: entry.backgroundGradient,
-                firstName: entry.firstName
+                backgroundGradient: entry.backgroundGradient
             )
         }
 
@@ -100,8 +97,7 @@ struct HomeWidgetProvider: TimelineProvider {
             verseReference: content.verseReference,
             contentType: content.type,
             contentID: content.id,
-            backgroundGradient: background.gradientColors,
-            firstName: profile.firstName
+            backgroundGradient: background.gradientColors
         )
     }
 }
