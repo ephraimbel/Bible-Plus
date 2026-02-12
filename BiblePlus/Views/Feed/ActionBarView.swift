@@ -18,7 +18,7 @@ struct ActionBarView: View {
     @State private var heartScale: CGFloat = 1.0
 
     var body: some View {
-        VStack(spacing: 24) {
+        VStack(spacing: 16) {
             Spacer()
 
             // Heart — Save / Favorite
@@ -72,7 +72,7 @@ struct ActionBarView: View {
             }
 
             Spacer()
-                .frame(height: 120)
+                .frame(height: 90)
         }
     }
 
@@ -85,11 +85,11 @@ struct ActionBarView: View {
     ) -> some View {
         Button(action: action) {
             Image(systemName: icon)
-                .font(.system(size: 24))
+                .font(.system(size: 22))
                 .foregroundStyle(color)
                 .scaleEffect(scale)
                 .shadow(color: .black.opacity(0.5), radius: 3, y: 1)
-                .frame(width: 44, height: 44)
+                .frame(width: 40, height: 40)
         }
     }
 }

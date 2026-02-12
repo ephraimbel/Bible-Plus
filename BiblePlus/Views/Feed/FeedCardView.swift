@@ -67,22 +67,26 @@ struct FeedCardView: View {
 
     @ViewBuilder
     private var backgroundLayer: some View {
-        ZStack {
-            // Base gradient — always visible as fallback
-            LinearGradient(
-                colors: background.gradientColors.map { Color(hex: $0) },
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
+        GeometryReader { geo in
+            ZStack {
+                // Base gradient — always visible as fallback
+                LinearGradient(
+                    colors: background.gradientColors.map { Color(hex: $0) },
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
 
-            if isCurrentCard, let videoName = background.videoFileName {
-                // Only the current card gets a video player to avoid memory exhaustion
-                LoopingVideoPlayer(videoName: videoName, isPlaying: true)
-            } else if let imageName = background.imageName,
-                      let uiImage = SanctuaryBackground.loadImage(named: imageName) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
+                if isCurrentCard, let videoName = background.videoFileName {
+                    // Only the current card gets a video player to avoid memory exhaustion
+                    LoopingVideoPlayer(videoName: videoName, isPlaying: true)
+                } else if let imageName = background.imageName,
+                          let uiImage = SanctuaryBackground.loadImage(named: imageName) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: geo.size.width, height: geo.size.height)
+                        .clipped()
+                }
             }
         }
     }
