@@ -172,6 +172,8 @@ final class OnboardingViewModel {
         Task { @MainActor in
             let granted = await NotificationService.shared.requestAuthorization()
             if granted {
+                profile.notificationsEnabled = true
+                personalizationService.save()
                 NotificationService.shared.reschedule(
                     profile: profile,
                     content: allContent

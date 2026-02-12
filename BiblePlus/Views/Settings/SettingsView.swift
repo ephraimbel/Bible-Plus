@@ -161,12 +161,28 @@ private struct SettingsContentView: View {
                 vm.beginEditingBurdens()
             }
 
-            settingsRow(
-                icon: "bell",
-                label: "Prayer Times",
-                value: vm.prayerTimesDisplay
-            ) {
-                vm.beginEditingPrayerTimes()
+            Toggle(isOn: Binding(
+                get: { vm.profile.notificationsEnabled },
+                set: { _ in vm.toggleNotifications() }
+            )) {
+                HStack {
+                    Image(systemName: vm.profile.notificationsEnabled ? "bell.fill" : "bell.slash")
+                        .foregroundStyle(palette.accent)
+                        .frame(width: 24)
+                    Text("Notifications")
+                        .foregroundStyle(palette.textPrimary)
+                }
+            }
+            .tint(palette.accent)
+
+            if vm.profile.notificationsEnabled {
+                settingsRow(
+                    icon: "clock",
+                    label: "Prayer Times",
+                    value: vm.prayerTimesDisplay
+                ) {
+                    vm.beginEditingPrayerTimes()
+                }
             }
 
             HStack {

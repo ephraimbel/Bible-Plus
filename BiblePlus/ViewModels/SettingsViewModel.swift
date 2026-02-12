@@ -151,7 +151,36 @@ final class SettingsViewModel {
         rescheduleNotifications()
     }
 
+    // MARK: - Notifications Toggle
+
+    func toggleNotifications() {
+        let newValue = !profile.notificationsEnabled
+        if newValue {
+            // Turning ON — request authorization first
+            Task {
+                let granted = await NotificationService.shared.requestAuthorization()
+                if granted {
+                    profile.notificationsEnabled = true
+                    profile.updatedAt = Date()
+                    personalizationService.save()
+                    rescheduleNotifications()
+                }
+                // If denied, the toggle stays off (system denied permission)
+            }
+        } else {
+            // Turning OFF — cancel all and persist
+            profile.notificationsEnabled = false
+            profile.updatedAt = Date()
+            personalizationService.save()
+            NotificationService.shared.cancelAll()
+        }
+    }
+
     private func rescheduleNotifications() {
+        guard profile.notificationsEnabled else {
+            NotificationService.shared.cancelAll()
+            return
+        }
         let contentDescriptor = FetchDescriptor<PrayerContent>()
         let allContent = (try? modelContext.fetch(contentDescriptor)) ?? []
         if profile.prayerTimes.isEmpty {

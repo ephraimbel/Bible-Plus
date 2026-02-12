@@ -20,6 +20,7 @@ final class UserProfile {
     var isPro: Bool
     var aiConversationCount: Int
     var hasCompletedOnboarding: Bool
+    var notificationsEnabled: Bool
     var selectedBibleVoiceID: String
     var readerFontSize: Double
     var readerFontStyleRaw: String
@@ -53,6 +54,7 @@ final class UserProfile {
         isPro: Bool = false,
         aiConversationCount: Int = 0,
         hasCompletedOnboarding: Bool = false,
+        notificationsEnabled: Bool = false,
         selectedBibleVoiceID: String = BibleVoice.onyx.rawValue,
         readerFontSize: Double = 20,
         readerFontStyle: ReaderFontStyle = .serif,
@@ -78,6 +80,7 @@ final class UserProfile {
         self.isPro = isPro
         self.aiConversationCount = aiConversationCount
         self.hasCompletedOnboarding = hasCompletedOnboarding
+        self.notificationsEnabled = notificationsEnabled
         self.selectedBibleVoiceID = selectedBibleVoiceID
         self.readerFontSize = readerFontSize
         self.readerFontStyleRaw = readerFontStyle.rawValue

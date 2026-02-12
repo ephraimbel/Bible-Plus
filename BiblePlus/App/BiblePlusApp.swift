@@ -51,6 +51,7 @@ struct BiblePlusApp: App {
         // Refresh notification content on each launch
         if let profile = try? seedContext.fetch(profileFetch).first,
            profile.hasCompletedOnboarding,
+           profile.notificationsEnabled,
            !profile.prayerTimes.isEmpty {
             let contentFetch = FetchDescriptor<PrayerContent>()
             let allContent = (try? seedContext.fetch(contentFetch)) ?? []
