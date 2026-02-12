@@ -15,6 +15,21 @@ settings:
     GENERATE_INFOPLIST_FILE: true
     SWIFT_EMIT_LOC_STRINGS: "YES"
 
+schemes:
+  BiblePlus:
+    build:
+      targets:
+        BiblePlus: all
+    run:
+      config: Debug
+      storeKitConfiguration: BiblePlus/Configuration.storekit
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release
+
 targets:
   BiblePlus:
     type: application

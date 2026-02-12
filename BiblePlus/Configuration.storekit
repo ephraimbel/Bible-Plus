@@ -1,0 +1,129 @@
+{
+  "identifier" : "5B2E3F1A-8C4D-4E6F-9A7B-1C2D3E4F5A6B",
+  "type" : "Configuration",
+  "version" : 3,
+  "defaultLocalization" : "en_US",
+  "subscriptionGroups" : [
+    {
+      "id" : "21514616",
+      "localizations" : [
+        {
+          "description" : "Unlock every feature in Bible Plus",
+          "displayName" : "Bible+ Pro",
+          "locale" : "en_US"
+        }
+      ],
+      "name" : "Bible+ Pro",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "49.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "A1B2C3D4",
+          "introductoryOffer" : {
+            "displayPrice" : "0",
+            "internalID" : "E5F6A7B8",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P3D"
+          },
+          "localizations" : [
+            {
+              "description" : "Full access to Bible+ Pro — billed annually",
+              "displayName" : "Bible+ Pro Yearly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.bibleplus.pro.yearly",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Bible+ Pro Yearly",
+          "subscriptionGroupID" : "21514616",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : []
+        },
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "4.99",
+          "familyShareable" : false,
+          "groupNumber" : 2,
+          "internalID" : "C3D4E5F6",
+          "introductoryOffer" : {
+            "displayPrice" : "0",
+            "internalID" : "G7H8I9J0",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P3D"
+          },
+          "localizations" : [
+            {
+              "description" : "Full access to Bible+ Pro — billed weekly",
+              "displayName" : "Bible+ Pro Weekly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.bibleplus.pro.weekly",
+          "recurringSubscriptionPeriod" : "P1W",
+          "referenceName" : "Bible+ Pro Weekly",
+          "subscriptionGroupID" : "21514616",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : []
+        }
+      ]
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "6740000001",
+    "_developerTeamID" : "XXXXXXXXXX",
+    "_failTransactionsEnabled" : false,
+    "_locale" : "en_US",
+    "_storeKitErrors" : [
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ],
+    "_timeRate" : 6
+  }
+}
