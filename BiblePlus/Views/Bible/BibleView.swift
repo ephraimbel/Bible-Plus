@@ -469,21 +469,46 @@ private struct BibleContentView: View {
         .animation(.easeInOut(duration: 0.3), value: audioService.errorMessage != nil)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
+            // MARK: Leading — Chapter Navigation
             ToolbarItem(placement: .topBarLeading) {
-                HStack(spacing: 8) {
+                HStack(spacing: 4) {
+                    Button {
+                        performPageFlip(forward: false)
+                    } label: {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundStyle(viewModel.canGoBack ? palette.accent : palette.textMuted)
+                    }
+                    .disabled(!viewModel.canGoBack)
+                    .accessibilityLabel("Previous chapter")
+
+                    Button {
+                        performPageFlip(forward: true)
+                    } label: {
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundStyle(viewModel.canGoForward ? palette.accent : palette.textMuted)
+                    }
+                    .disabled(!viewModel.canGoForward)
+                    .accessibilityLabel("Next chapter")
+                }
+            }
+
+            // MARK: Center — Book Title · Translation
+            ToolbarItem(placement: .principal) {
+                HStack(spacing: 6) {
                     Button {
                         viewModel.showBookPicker = true
                     } label: {
-                        HStack(spacing: 4) {
+                        HStack(spacing: 3) {
                             Text(viewModel.chapterTitle)
-                                .font(.system(size: 16, weight: .semibold, design: .serif))
+                                .font(.system(size: 17, weight: .semibold, design: .serif))
                                 .lineLimit(1)
                             Image(systemName: "chevron.down")
-                                .font(.system(size: 9, weight: .semibold))
+                                .font(.system(size: 8, weight: .bold))
                         }
                         .foregroundStyle(palette.textPrimary)
                     }
-                    .fixedSize()
                     .accessibilityLabel("Choose book and chapter")
 
                     Button {
@@ -499,30 +524,13 @@ private struct BibleContentView: View {
                                     .fill(palette.accent.opacity(0.12))
                             )
                     }
-                    .fixedSize()
                     .accessibilityLabel("Change translation")
                 }
             }
 
+            // MARK: Trailing — Search + Overflow
             ToolbarItem(placement: .topBarTrailing) {
                 HStack(spacing: 6) {
-                    // Audio Bible
-                    Button {
-                        handleAudioTap()
-                    } label: {
-                        Image(systemName: audioService.hasActivePlayback
-                            ? "mic.circle.fill"
-                            : "mic"
-                        )
-                        .font(.system(size: 13, weight: .medium))
-                        .foregroundStyle(
-                            audioService.hasActivePlayback
-                                ? palette.accent
-                                : palette.textSecondary
-                        )
-                    }
-                    .accessibilityLabel("Listen to chapter")
-
                     // Search
                     Button {
                         if searchViewModel == nil {
@@ -531,31 +539,23 @@ private struct BibleContentView: View {
                         viewModel.showSearch = true
                     } label: {
                         Image(systemName: "magnifyingglass")
-                            .font(.system(size: 13, weight: .medium))
+                            .font(.system(size: 14, weight: .medium))
                             .foregroundStyle(palette.accent)
                     }
                     .accessibilityLabel("Search Bible")
 
                     // More options menu
                     Menu {
-                        // Chapter navigation
                         Section {
                             Button {
-                                performPageFlip(forward: false)
+                                handleAudioTap()
                             } label: {
-                                Label("Previous Chapter", systemImage: "chevron.left")
+                                Label(
+                                    audioService.hasActivePlayback ? "Pause Audio" : "Listen to Chapter",
+                                    systemImage: audioService.hasActivePlayback ? "pause.circle" : "headphones"
+                                )
                             }
-                            .disabled(!viewModel.canGoBack)
 
-                            Button {
-                                performPageFlip(forward: true)
-                            } label: {
-                                Label("Next Chapter", systemImage: "chevron.right")
-                            }
-                            .disabled(!viewModel.canGoForward)
-                        }
-
-                        Section {
                             Button {
                                 handleImmersiveListeningTap()
                             } label: {
@@ -565,17 +565,17 @@ private struct BibleContentView: View {
                             Button {
                                 showVoicePicker = true
                             } label: {
-                                Label("Voice", systemImage: "person.wave.2")
+                                Label("Narrator Voice", systemImage: "person.wave.2")
                             }
+                        }
 
+                        Section {
                             Button {
                                 viewModel.showReaderSettings = true
                             } label: {
                                 Label("Reader Settings", systemImage: "textformat.size")
                             }
-                        }
 
-                        Section {
                             Picker(selection: Binding(
                                 get: { currentColorMode },
                                 set: { updateColorMode($0) }
@@ -592,10 +592,9 @@ private struct BibleContentView: View {
                         }
                     } label: {
                         Image(systemName: "ellipsis.circle")
-                            .font(.system(size: 13, weight: .medium))
+                            .font(.system(size: 14, weight: .medium))
                             .foregroundStyle(palette.accent)
                     }
-                    .fixedSize()
                 }
             }
         }
