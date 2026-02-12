@@ -470,40 +470,42 @@ private struct BibleContentView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
-                HStack(spacing: 10) {
+                HStack(spacing: 8) {
                     Button {
                         viewModel.showBookPicker = true
                     } label: {
                         HStack(spacing: 4) {
                             Text(viewModel.chapterTitle)
-                                .font(.system(size: 17, weight: .semibold, design: .serif))
+                                .font(.system(size: 16, weight: .semibold, design: .serif))
                                 .lineLimit(1)
                             Image(systemName: "chevron.down")
-                                .font(.system(size: 10, weight: .semibold))
+                                .font(.system(size: 9, weight: .semibold))
                         }
                         .foregroundStyle(palette.textPrimary)
                     }
+                    .fixedSize()
                     .accessibilityLabel("Choose book and chapter")
 
                     Button {
                         viewModel.showTranslationPicker = true
                     } label: {
                         Text(viewModel.currentTranslation.apiCode)
-                            .font(.system(size: 12, weight: .semibold))
+                            .font(.system(size: 11, weight: .semibold))
                             .foregroundStyle(palette.accent)
-                            .padding(.horizontal, 8)
+                            .padding(.horizontal, 7)
                             .padding(.vertical, 3)
                             .background(
                                 Capsule()
                                     .fill(palette.accent.opacity(0.12))
                             )
                     }
+                    .fixedSize()
                     .accessibilityLabel("Change translation")
                 }
             }
 
             ToolbarItem(placement: .topBarTrailing) {
-                HStack(spacing: 12) {
+                HStack(spacing: 6) {
                     // Audio Bible
                     Button {
                         handleAudioTap()
@@ -512,7 +514,7 @@ private struct BibleContentView: View {
                             ? "mic.circle.fill"
                             : "mic"
                         )
-                        .font(.system(size: 14, weight: .medium))
+                        .font(.system(size: 13, weight: .medium))
                         .foregroundStyle(
                             audioService.hasActivePlayback
                                 ? palette.accent
@@ -529,80 +531,71 @@ private struct BibleContentView: View {
                         viewModel.showSearch = true
                     } label: {
                         Image(systemName: "magnifyingglass")
-                            .font(.system(size: 14, weight: .medium))
+                            .font(.system(size: 13, weight: .medium))
                             .foregroundStyle(palette.accent)
                     }
                     .accessibilityLabel("Search Bible")
 
-                    // Chapter navigation
-                    Button {
-                        performPageFlip(forward: false)
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 14, weight: .medium))
-                            .foregroundStyle(
-                                viewModel.canGoBack
-                                    ? palette.accent
-                                    : palette.textMuted
-                            )
-                    }
-                    .disabled(!viewModel.canGoBack)
-                    .accessibilityLabel("Previous chapter")
-
-                    Button {
-                        performPageFlip(forward: true)
-                    } label: {
-                        Image(systemName: "chevron.right")
-                            .font(.system(size: 14, weight: .medium))
-                            .foregroundStyle(
-                                viewModel.canGoForward
-                                    ? palette.accent
-                                    : palette.textMuted
-                            )
-                    }
-                    .disabled(!viewModel.canGoForward)
-                    .accessibilityLabel("Next chapter")
-
                     // More options menu
                     Menu {
-                        Button {
-                            handleImmersiveListeningTap()
-                        } label: {
-                            Label("Immersive Listening", systemImage: "tv.and.mediabox")
+                        // Chapter navigation
+                        Section {
+                            Button {
+                                performPageFlip(forward: false)
+                            } label: {
+                                Label("Previous Chapter", systemImage: "chevron.left")
+                            }
+                            .disabled(!viewModel.canGoBack)
+
+                            Button {
+                                performPageFlip(forward: true)
+                            } label: {
+                                Label("Next Chapter", systemImage: "chevron.right")
+                            }
+                            .disabled(!viewModel.canGoForward)
                         }
 
-                        Button {
-                            showVoicePicker = true
-                        } label: {
-                            Label("Voice", systemImage: "person.wave.2")
+                        Section {
+                            Button {
+                                handleImmersiveListeningTap()
+                            } label: {
+                                Label("Immersive Listening", systemImage: "tv.and.mediabox")
+                            }
+
+                            Button {
+                                showVoicePicker = true
+                            } label: {
+                                Label("Voice", systemImage: "person.wave.2")
+                            }
+
+                            Button {
+                                viewModel.showReaderSettings = true
+                            } label: {
+                                Label("Reader Settings", systemImage: "textformat.size")
+                            }
                         }
 
-                        Button {
-                            viewModel.showReaderSettings = true
-                        } label: {
-                            Label("Reader Settings", systemImage: "textformat.size")
-                        }
-
-                        Divider()
-
-                        Picker(selection: Binding(
-                            get: { currentColorMode },
-                            set: { updateColorMode($0) }
-                        )) {
-                            Label("Golden Hour", systemImage: "sun.max")
-                                .tag(ColorMode.light)
-                            Label("Midnight Study", systemImage: "moon")
-                                .tag(ColorMode.dark)
-                            Label("Auto", systemImage: "circle.lefthalf.filled")
-                                .tag(ColorMode.auto)
-                        } label: {
-                            Label("Appearance", systemImage: "circle.lefthalf.filled")
+                        Section {
+                            Picker(selection: Binding(
+                                get: { currentColorMode },
+                                set: { updateColorMode($0) }
+                            )) {
+                                Label("Golden Hour", systemImage: "sun.max")
+                                    .tag(ColorMode.light)
+                                Label("Midnight Study", systemImage: "moon")
+                                    .tag(ColorMode.dark)
+                                Label("Auto", systemImage: "circle.lefthalf.filled")
+                                    .tag(ColorMode.auto)
+                            } label: {
+                                Label("Appearance", systemImage: "circle.lefthalf.filled")
+                            }
                         }
                     } label: {
                         Image(systemName: "ellipsis.circle")
-                            .font(.system(size: 14, weight: .medium))
+                            .font(.system(size: 13, weight: .medium))
                             .foregroundStyle(palette.accent)
                     }
+                    .fixedSize()
                 }
             }
         }

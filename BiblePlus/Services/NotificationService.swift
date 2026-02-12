@@ -93,6 +93,7 @@ final class NotificationService {
                 burdens: burdens,
                 seasons: seasons,
                 faithLevel: faithLevel,
+                isPro: isPro,
                 content: content
             )
 
@@ -163,11 +164,13 @@ final class NotificationService {
     ) -> SelectedContent {
         // Filter content relevant to this time slot
         let candidates = content.filter { item in
-            item.timeOfDay.contains(slot)
+            item.timeOfDay.contains(slot) && (!item.isProOnly || profile.isPro)
         }
 
-        // If no time-filtered results, fall back to all content
-        let pool = candidates.isEmpty ? content : candidates
+        // If no time-filtered results, fall back to all content (still respecting Pro gating)
+        let pool = candidates.isEmpty
+            ? content.filter { !$0.isProOnly || profile.isPro }
+            : candidates
         guard !pool.isEmpty else {
             return SelectedContent(
                 text: "Open your heart to God's word today.",
@@ -225,10 +228,13 @@ final class NotificationService {
         burdens: [Burden],
         seasons: [LifeSeason],
         faithLevel: FaithLevel?,
+        isPro: Bool,
         content: [PrayerContent]
     ) -> SelectedContent {
-        let candidates = content.filter { $0.timeOfDay.contains(slot) }
-        let pool = candidates.isEmpty ? content : candidates
+        let candidates = content.filter { $0.timeOfDay.contains(slot) && (!$0.isProOnly || isPro) }
+        let pool = candidates.isEmpty
+            ? content.filter { !$0.isProOnly || isPro }
+            : candidates
         guard !pool.isEmpty else {
             return SelectedContent(text: "Open your heart to God's word today.", contentID: nil)
         }
