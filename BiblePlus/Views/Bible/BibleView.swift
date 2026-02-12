@@ -534,25 +534,37 @@ private struct BibleContentView: View {
                     }
                     .accessibilityLabel("Search Bible")
 
+                    // Chapter navigation
+                    Button {
+                        performPageFlip(forward: false)
+                    } label: {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundStyle(
+                                viewModel.canGoBack
+                                    ? palette.accent
+                                    : palette.textMuted
+                            )
+                    }
+                    .disabled(!viewModel.canGoBack)
+                    .accessibilityLabel("Previous chapter")
+
+                    Button {
+                        performPageFlip(forward: true)
+                    } label: {
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundStyle(
+                                viewModel.canGoForward
+                                    ? palette.accent
+                                    : palette.textMuted
+                            )
+                    }
+                    .disabled(!viewModel.canGoForward)
+                    .accessibilityLabel("Next chapter")
+
                     // More options menu
                     Menu {
-                        // Chapter navigation
-                        Button {
-                            performPageFlip(forward: false)
-                        } label: {
-                            Label("Previous Chapter", systemImage: "chevron.left")
-                        }
-                        .disabled(!viewModel.canGoBack)
-
-                        Button {
-                            performPageFlip(forward: true)
-                        } label: {
-                            Label("Next Chapter", systemImage: "chevron.right")
-                        }
-                        .disabled(!viewModel.canGoForward)
-
-                        Divider()
-
                         Button {
                             handleImmersiveListeningTap()
                         } label: {
