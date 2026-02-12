@@ -50,7 +50,7 @@ final class UserProfile {
         streakCount: Int = 0,
         lastActiveDate: Date? = nil,
         longestStreak: Int = 0,
-        isPro: Bool = true,
+        isPro: Bool = false,
         aiConversationCount: Int = 0,
         hasCompletedOnboarding: Bool = false,
         selectedBibleVoiceID: String = BibleVoice.onyx.rawValue,

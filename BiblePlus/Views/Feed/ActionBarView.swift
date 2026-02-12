@@ -37,30 +37,35 @@ struct ActionBarView: View {
                 }
                 onSave()
             }
+            .accessibilityLabel(isSaved ? "Remove from favorites" : "Save to favorites")
 
             // Share as Image
             actionButton(icon: "square.and.arrow.up", color: .white) {
                 HapticService.impact(.medium)
                 onShare()
             }
+            .accessibilityLabel("Share")
 
             // Add to Collection
             actionButton(icon: "pin", color: .white) {
                 HapticService.selection()
                 onPin()
             }
+            .accessibilityLabel("Save to collection")
 
             // Ask the AI
             actionButton(icon: "bubble.left.and.bubble.right", color: .white) {
                 HapticService.selection()
                 onAskAI()
             }
+            .accessibilityLabel("Ask AI about this")
 
             // Theme / Background picker
             actionButton(icon: "paintpalette", color: .white) {
                 HapticService.selection()
                 onOpenBackgrounds()
             }
+            .accessibilityLabel("Change background")
 
             // Soundscape picker
             actionButton(
@@ -70,6 +75,7 @@ struct ActionBarView: View {
                 HapticService.selection()
                 onOpenSoundscapes()
             }
+            .accessibilityLabel(isAudioPlaying ? "Pause soundscape" : "Play soundscape")
 
             Spacer()
                 .frame(height: 90)

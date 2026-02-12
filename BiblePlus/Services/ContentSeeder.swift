@@ -45,8 +45,12 @@ enum ContentSeeder {
         UserDefaults.standard.set(maxVersion, forKey: seedVersionKey)
     }
 
+    private static let migrationCompleteKey = "com.bibleplus.migrationComplete"
+
     /// Migrate orphaned chat messages from pre-threading era into a legacy conversation.
     static func migrateOrphanedMessages(modelContext: ModelContext) {
+        guard !UserDefaults.standard.bool(forKey: migrationCompleteKey) else { return }
+
         let legacyId = ChatMessage.legacyConversationId
 
         // Check if legacy conversation already exists
@@ -72,7 +76,10 @@ enum ContentSeeder {
         let msgDescriptor = FetchDescriptor<ChatMessage>(
             predicate: #Predicate { $0.conversationId == legacyId }
         )
-        guard let orphans = try? modelContext.fetch(msgDescriptor), !orphans.isEmpty else { return }
+        guard let orphans = try? modelContext.fetch(msgDescriptor), !orphans.isEmpty else {
+            UserDefaults.standard.set(true, forKey: migrationCompleteKey)
+            return
+        }
 
         let conversation = Conversation(
             id: legacyId,
@@ -82,6 +89,7 @@ enum ContentSeeder {
         )
         modelContext.insert(conversation)
         try? modelContext.save()
+        UserDefaults.standard.set(true, forKey: migrationCompleteKey)
     }
 }
 

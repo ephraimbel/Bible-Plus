@@ -37,6 +37,7 @@ struct ChatView: View {
                             .font(.system(size: 14))
                             .foregroundStyle(palette.textMuted)
                     }
+                    .accessibilityLabel("Delete conversation")
                 }
             }
         }
@@ -48,6 +49,7 @@ struct ChatView: View {
 private struct ChatContentView: View {
     @Bindable var viewModel: ChatViewModel
     @Environment(\.bpPalette) private var palette
+    @State private var showPaywall = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -78,6 +80,9 @@ private struct ChatContentView: View {
         .background(palette.background)
         .onAppear {
             viewModel.applyInitialContext()
+        }
+        .sheet(isPresented: $showPaywall) {
+            SummaryPaywallView()
         }
     }
 
@@ -137,10 +142,36 @@ private struct ChatContentView: View {
     // MARK: - Rate Limit Banner
 
     private var rateLimitBanner: some View {
-        Text("\(viewModel.remainingMessages) messages remaining this week")
-            .font(BPFont.caption)
-            .foregroundStyle(palette.textMuted)
-            .padding(.vertical, 6)
+        HStack(spacing: 8) {
+            Text("\(viewModel.remainingMessages) messages remaining this week")
+                .font(BPFont.caption)
+                .foregroundStyle(palette.textMuted)
+
+            if viewModel.isRateLimited {
+                Button {
+                    showPaywall = true
+                } label: {
+                    Text("Go Pro")
+                        .font(.system(size: 12, weight: .semibold, design: .rounded))
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 4)
+                        .background(
+                            Capsule().fill(
+                                LinearGradient(
+                                    colors: [
+                                        Color(red: 0.79, green: 0.66, blue: 0.43),
+                                        Color(red: 0.65, green: 0.52, blue: 0.3),
+                                    ],
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                            )
+                        )
+                }
+            }
+        }
+        .padding(.vertical, 6)
     }
 
     // MARK: - Input Bar

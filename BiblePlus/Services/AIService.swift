@@ -140,6 +140,7 @@ enum AIService {
         request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try JSONSerialization.data(withJSONObject: body)
+        request.timeoutInterval = 30
 
         let (bytes, response) = try await URLSession.shared.bytes(for: request)
 

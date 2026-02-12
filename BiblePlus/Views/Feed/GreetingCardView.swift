@@ -128,5 +128,6 @@ struct GreetingCardView: View {
             }
         }
         .clipped()
+        .accessibilityHidden(true)
     }
 }

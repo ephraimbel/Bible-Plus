@@ -13,7 +13,7 @@ struct CollectionPickerSheet: View {
 
     @State private var showNewCollectionAlert = false
     @State private var newCollectionName = ""
-    @State private var showProAlert = false
+    @State private var showPaywall = false
 
     var body: some View {
         NavigationStack {
@@ -51,10 +51,8 @@ struct CollectionPickerSheet: View {
             } message: {
                 Text("Enter a name for your collection.")
             }
-            .alert("Pro Feature", isPresented: $showProAlert) {
-                Button("OK", role: .cancel) {}
-            } message: {
-                Text("Upgrade to Pro to create unlimited collections. Free accounts can have 1 collection.")
+            .sheet(isPresented: $showPaywall) {
+                SummaryPaywallView()
             }
         }
     }
@@ -144,7 +142,7 @@ struct CollectionPickerSheet: View {
 
     private func handleNewCollection() {
         if !isPro && collections.count >= 1 {
-            showProAlert = true
+            showPaywall = true
         } else {
             newCollectionName = ""
             showNewCollectionAlert = true

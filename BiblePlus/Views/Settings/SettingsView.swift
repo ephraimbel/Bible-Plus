@@ -33,6 +33,7 @@ private struct SettingsContentView: View {
     let audioBibleService: AudioBibleService
     @Environment(\.modelContext) private var modelContext
     @Environment(\.bpPalette) private var palette
+    @State private var showPaywall = false
 
     var body: some View {
         NavigationStack {
@@ -60,6 +61,7 @@ private struct SettingsContentView: View {
                             .foregroundStyle(palette.accent)
                             .contentTransition(.symbolEffect(.replace))
                     }
+                    .accessibilityLabel(vm.profile.colorMode == .dark ? "Switch to light mode" : "Switch to dark mode")
                 }
             }
             .sheet(isPresented: $vm.showEditName) {
@@ -111,6 +113,9 @@ private struct SettingsContentView: View {
                     try? modelContext.save()
                 }
                 .presentationDetents([.medium, .large])
+            }
+            .sheet(isPresented: $showPaywall) {
+                SummaryPaywallView()
             }
         }
     }
@@ -303,21 +308,67 @@ private struct SettingsContentView: View {
 
     private var subscriptionSection: some View {
         Section("Subscription") {
-            HStack {
-                Image(systemName: vm.profile.isPro ? "crown.fill" : "crown")
-                    .foregroundStyle(palette.accent)
-                    .frame(width: 24)
-                Text("Status")
-                    .foregroundStyle(palette.textPrimary)
-                Spacer()
-                Text(vm.profile.isPro ? "Bible+ Pro" : "Free")
-                    .foregroundStyle(palette.accent)
+            if vm.profile.isPro {
+                HStack {
+                    Image(systemName: "crown.fill")
+                        .foregroundStyle(palette.accent)
+                        .frame(width: 24)
+                    Text("Status")
+                        .foregroundStyle(palette.textPrimary)
+                    Spacer()
+                    Text("Bible+ Pro")
+                        .foregroundStyle(palette.accent)
+                }
+
+                Button {
+                    if let url = URL(string: "https://apps.apple.com/account/subscriptions") {
+                        UIApplication.shared.open(url)
+                    }
+                } label: {
+                    HStack {
+                        Image(systemName: "gear")
+                            .foregroundStyle(palette.accent)
+                            .frame(width: 24)
+                        Text("Manage Subscription")
+                            .foregroundStyle(palette.textPrimary)
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundStyle(.tertiary)
+                    }
+                }
+            } else {
+                Button {
+                    showPaywall = true
+                } label: {
+                    HStack {
+                        Image(systemName: "crown")
+                            .foregroundStyle(palette.accent)
+                            .frame(width: 24)
+                        Text("Status")
+                            .foregroundStyle(palette.textPrimary)
+                        Spacer()
+                        Text("Free")
+                            .foregroundStyle(palette.accent)
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundStyle(.tertiary)
+                    }
+                }
             }
         }
         .listRowBackground(palette.surface)
     }
 
     // MARK: - About Section
+
+    private var appVersion: String {
+        Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0"
+    }
+
+    private var buildNumber: String {
+        Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
+    }
 
     private var aboutSection: some View {
         Section("About") {
@@ -328,7 +379,7 @@ private struct SettingsContentView: View {
                 Text("Version")
                     .foregroundStyle(palette.textPrimary)
                 Spacer()
-                Text("1.0.0")
+                Text(appVersion)
                     .foregroundStyle(palette.accent)
             }
             HStack {
@@ -338,7 +389,7 @@ private struct SettingsContentView: View {
                 Text("Build")
                     .foregroundStyle(palette.textPrimary)
                 Spacer()
-                Text("1")
+                Text(buildNumber)
                     .foregroundStyle(palette.accent)
             }
         }

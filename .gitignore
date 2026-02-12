@@ -42,3 +42,4 @@ Thumbs.db
 # Secrets
 *.env
 Secrets.swift
+Shared/Secrets.swift

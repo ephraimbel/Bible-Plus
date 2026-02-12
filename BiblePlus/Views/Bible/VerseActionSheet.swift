@@ -108,6 +108,7 @@ struct VerseActionSheet: View {
                         }
                     }
                 }
+                .accessibilityLabel("\(color.displayName) highlight")
             }
         }
     }

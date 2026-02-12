@@ -42,6 +42,7 @@ private struct BibleContentView: View {
     @State private var showAudioProGate = false
     @State private var showVoicePicker = false
     @State private var showImmersiveListening = false
+    @State private var showPaywall = false
 
     // MARK: - Page Flip State
 
@@ -304,6 +305,49 @@ private struct BibleContentView: View {
                     }
             )
 
+            // Audio error banner
+            if let errorMsg = audioService.errorMessage {
+                VStack {
+                    HStack(spacing: 8) {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .font(.system(size: 13))
+                            .foregroundStyle(palette.accent)
+
+                        Text(errorMsg)
+                            .font(BPFont.caption)
+                            .foregroundStyle(palette.textPrimary)
+                            .lineLimit(2)
+
+                        Spacer()
+
+                        Button {
+                            audioService.errorMessage = nil
+                        } label: {
+                            Image(systemName: "xmark")
+                                .font(.system(size: 11, weight: .bold))
+                                .foregroundStyle(palette.textMuted)
+                        }
+                    }
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 10)
+                    .background(
+                        Capsule()
+                            .fill(palette.surface)
+                            .shadow(color: .black.opacity(0.1), radius: 8, y: 2)
+                    )
+                    .padding(.horizontal, 20)
+                    .padding(.top, 8)
+
+                    Spacer()
+                }
+                .transition(.move(edge: .top).combined(with: .opacity))
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                        withAnimation { audioService.errorMessage = nil }
+                    }
+                }
+            }
+
             // Audio mini player
             if audioService.hasActivePlayback {
                 AudioMiniPlayerView(
@@ -327,6 +371,19 @@ private struct BibleContentView: View {
                     isSaved: viewModel.isVerseSaved(verse.number),
                     currentHighlight: viewModel.highlightColor(for: verse.number),
                     onExplain: {
+                        // Verse explain counts toward AI rate limit
+                        let descriptor = FetchDescriptor<UserProfile>()
+                        let isPro = (try? modelContext.fetch(descriptor).first?.isPro) ?? false
+                        let allMsgDescriptor = FetchDescriptor<ChatMessage>(
+                            sortBy: [SortDescriptor(\.createdAt)]
+                        )
+                        let allMessages = (try? modelContext.fetch(allMsgDescriptor)) ?? []
+                        if !AIService.canSendMessage(messages: allMessages, isPro: isPro) {
+                            viewModel.selectedVerse = nil
+                            showPaywall = true
+                            return
+                        }
+
                         explainPrompt = viewModel.explainVersePrompt(for: verse)
                         createExplainConversation()
                         viewModel.selectedVerse = nil
@@ -409,6 +466,7 @@ private struct BibleContentView: View {
         }
         .animation(BPAnimation.spring, value: viewModel.selectedVerse)
         .animation(BPAnimation.spring, value: audioService.hasActivePlayback)
+        .animation(.easeInOut(duration: 0.3), value: audioService.errorMessage != nil)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
@@ -424,6 +482,7 @@ private struct BibleContentView: View {
                         }
                         .foregroundStyle(palette.textPrimary)
                     }
+                    .accessibilityLabel("Choose book and chapter")
 
                     Button {
                         viewModel.showTranslationPicker = true
@@ -438,6 +497,7 @@ private struct BibleContentView: View {
                                     .fill(palette.accent.opacity(0.12))
                             )
                     }
+                    .accessibilityLabel("Change translation")
                 }
             }
 
@@ -458,6 +518,7 @@ private struct BibleContentView: View {
                                 : palette.textSecondary
                         )
                     }
+                    .accessibilityLabel("Listen to chapter")
 
                     // Search
                     Button {
@@ -470,6 +531,7 @@ private struct BibleContentView: View {
                             .font(.system(size: 14, weight: .medium))
                             .foregroundStyle(palette.accent)
                     }
+                    .accessibilityLabel("Search Bible")
 
                     // Chapter navigation
                     Button {
@@ -484,6 +546,7 @@ private struct BibleContentView: View {
                             )
                     }
                     .disabled(!viewModel.canGoBack)
+                    .accessibilityLabel("Previous chapter")
 
                     Button {
                         performPageFlip(forward: true)
@@ -497,6 +560,7 @@ private struct BibleContentView: View {
                             )
                     }
                     .disabled(!viewModel.canGoForward)
+                    .accessibilityLabel("Next chapter")
 
                     // More options menu
                     Menu {
@@ -631,10 +695,14 @@ private struct BibleContentView: View {
             }
             .presentationDetents([.medium, .large])
         }
-        .alert("Audio Bible Limit", isPresented: $showAudioProGate) {
-            Button("OK", role: .cancel) {}
-        } message: {
-            Text("You've listened to your free chapter. Upgrade to Bible+ Pro for unlimited Audio Bible.")
+        .onChange(of: showAudioProGate) { _, show in
+            if show {
+                showAudioProGate = false
+                showPaywall = true
+            }
+        }
+        .sheet(isPresented: $showPaywall) {
+            SummaryPaywallView()
         }
         .fullScreenCover(isPresented: $showImmersiveListening) {
             ImmersiveListeningView(

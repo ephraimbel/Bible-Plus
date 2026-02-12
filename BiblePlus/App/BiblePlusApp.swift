@@ -101,9 +101,11 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
 
 struct RootView: View {
     @Query private var profiles: [UserProfile]
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.colorScheme) private var systemScheme
     @State private var deepLinkedContentID: UUID?
     @State private var showSplash = true
+    @State private var storeKitService = StoreKitService()
 
     private var currentProfile: UserProfile? { profiles.first }
     private var hasCompletedOnboarding: Bool {
@@ -124,6 +126,7 @@ struct RootView: View {
                         .transition(.opacity)
                 }
             }
+            .environment(storeKitService)
             .preferredColorScheme(resolvedColorScheme)
             .environment(
                 \.bpPalette,
@@ -153,6 +156,12 @@ struct RootView: View {
                 withAnimation(.easeInOut(duration: 0.5)) {
                     showSplash = false
                 }
+            }
+        }
+        .onChange(of: storeKitService.isPro) { _, isPro in
+            if let profile = currentProfile {
+                profile.isPro = isPro
+                try? modelContext.save()
             }
         }
     }

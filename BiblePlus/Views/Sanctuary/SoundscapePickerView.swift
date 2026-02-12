@@ -4,6 +4,7 @@ struct SoundscapePickerView: View {
     @Bindable var vm: SanctuaryViewModel
     @Environment(\.dismiss) private var dismiss
     @Environment(\.bpPalette) private var palette
+    @State private var showPaywall = false
 
     var body: some View {
         NavigationStack {
@@ -39,6 +40,9 @@ struct SoundscapePickerView: View {
             }
         }
         .presentationBackground(palette.background)
+        .sheet(isPresented: $showPaywall) {
+            SummaryPaywallView()
+        }
     }
 
     // MARK: - Volume Control
@@ -98,7 +102,9 @@ struct SoundscapePickerView: View {
     @ViewBuilder
     private func soundscapeRow(_ soundscape: Soundscape, locked: Bool) -> some View {
         Button {
-            if !locked {
+            if locked {
+                showPaywall = true
+            } else {
                 HapticService.selection()
                 vm.selectSoundscape(soundscape)
             }
@@ -151,7 +157,6 @@ struct SoundscapePickerView: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .disabled(locked && soundscape.isAvailable)
         .opacity(locked ? 0.6 : 1.0)
     }
 }

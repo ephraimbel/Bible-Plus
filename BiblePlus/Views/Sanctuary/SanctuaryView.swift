@@ -85,6 +85,7 @@ private struct SanctuaryContentView: View {
             }
         }
         .clipped()
+        .accessibilityHidden(true)
     }
 
     // MARK: - Top Bar
@@ -101,6 +102,7 @@ private struct SanctuaryContentView: View {
                     .background(.black.opacity(0.15))
                     .clipShape(Circle())
             }
+            .accessibilityLabel("Close sanctuary")
 
             Spacer()
 
@@ -115,6 +117,7 @@ private struct SanctuaryContentView: View {
                         .background(.black.opacity(0.15))
                         .clipShape(Circle())
                 }
+                .accessibilityLabel("Choose background")
 
                 Button {
                     vm.showSoundscapePicker = true
@@ -126,6 +129,7 @@ private struct SanctuaryContentView: View {
                         .background(.black.opacity(0.15))
                         .clipShape(Circle())
                 }
+                .accessibilityLabel("Choose soundscape")
             }
         }
         .padding(.horizontal, 16)
@@ -204,6 +208,7 @@ private struct SanctuaryContentView: View {
                         .background(.black.opacity(0.15))
                         .clipShape(Circle())
                 }
+                .accessibilityLabel("Set sleep timer")
 
                 // Play/Pause button
                 Button {
@@ -224,6 +229,7 @@ private struct SanctuaryContentView: View {
                             .foregroundStyle(.white)
                     }
                 }
+                .accessibilityLabel(vm.isPlaying ? "Pause" : "Play")
 
                 // Soundscape picker shortcut
                 Button {
@@ -236,6 +242,7 @@ private struct SanctuaryContentView: View {
                         .background(.black.opacity(0.15))
                         .clipShape(Circle())
                 }
+                .accessibilityLabel("Choose soundscape")
             }
         }
         .padding(.horizontal, 32)

@@ -47,11 +47,11 @@ final class OnboardingViewModel {
 
     // MARK: - Init
 
-    init(modelContext: ModelContext) {
+    init(modelContext: ModelContext, storeKitService: StoreKitService) {
         self.modelContext = modelContext
         self.personalizationService = PersonalizationService(modelContext: modelContext)
         self.audioService = SoundscapeService()
-        self.storeKitService = StoreKitService()
+        self.storeKitService = storeKitService
     }
 
     // MARK: - Navigation

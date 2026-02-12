@@ -30,9 +30,11 @@ struct FeedCardView: View {
         ZStack {
             // LAYER 1: Background gradient from user's theme
             backgroundLayer
+                .accessibilityHidden(true)
 
             // LAYER 2: Readability overlay
             overlayLayer
+                .accessibilityHidden(true)
 
             // LAYER 3 + 4: Content + Reference
             contentLayer

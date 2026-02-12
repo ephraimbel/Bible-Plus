@@ -4,6 +4,7 @@ import SwiftData
 struct OnboardingContainerView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.bpPalette) private var palette
+    @Environment(StoreKitService.self) private var storeKitService
     @State private var viewModel: OnboardingViewModel?
 
     var body: some View {
@@ -80,7 +81,7 @@ struct OnboardingContainerView: View {
         }
         .onAppear {
             if viewModel == nil {
-                viewModel = OnboardingViewModel(modelContext: modelContext)
+                viewModel = OnboardingViewModel(modelContext: modelContext, storeKitService: storeKitService)
             }
         }
     }

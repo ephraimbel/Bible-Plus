@@ -150,6 +150,7 @@ struct BackgroundPickerView: View {
     @Environment(\.bpPalette) private var palette
 
     @State private var selectedFilter: BackgroundFilter = .all
+    @State private var showPaywall = false
     @Namespace private var chipAnimation
 
     private let columns = [
@@ -205,6 +206,9 @@ struct BackgroundPickerView: View {
             }
         }
         .presentationBackground(palette.background)
+        .sheet(isPresented: $showPaywall) {
+            SummaryPaywallView()
+        }
     }
 
     // MARK: - Filter Chips
@@ -282,7 +286,9 @@ struct BackgroundPickerView: View {
     @ViewBuilder
     private func backgroundCard(_ bg: SanctuaryBackground, locked: Bool) -> some View {
         Button {
-            if !locked {
+            if locked {
+                showPaywall = true
+            } else {
                 HapticService.selection()
                 vm.selectBackground(bg)
             }
@@ -334,6 +340,5 @@ struct BackgroundPickerView: View {
             .opacity(locked ? 0.6 : 1.0)
         }
         .buttonStyle(.plain)
-        .disabled(locked)
     }
 }

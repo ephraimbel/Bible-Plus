@@ -10,7 +10,7 @@ final class AudioBibleService {
     private(set) var isPaused: Bool = false
     private(set) var isLoading: Bool = false
     private(set) var currentVerseIndex: Int = 0
-    private(set) var errorMessage: String? = nil
+    var errorMessage: String? = nil
     var playbackSpeed: PlaybackSpeed = .normal
 
     // MARK: - Internal

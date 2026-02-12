@@ -2,11 +2,14 @@ import SwiftUI
 import StoreKit
 
 struct SummaryPaywallView: View {
-    @Bindable var viewModel: OnboardingViewModel
+    // Onboarding mode: viewModel is non-nil
+    var viewModel: OnboardingViewModel? = nil
     var isOnboarding: Bool = true
 
+    @Environment(StoreKitService.self) private var storeKitService
     @Environment(\.bpPalette) private var palette
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.openURL) private var openURL
     @State private var showContent = false
     @State private var showFeatures = false
     @State private var showPlans = false
@@ -15,18 +18,30 @@ struct SummaryPaywallView: View {
     @State private var selectedProductID: String? = nil
     @State private var purchaseError: String? = nil
 
+    /// Standalone initializer for non-onboarding paywall presentation
+    init() {
+        self.viewModel = nil
+        self.isOnboarding = false
+    }
+
+    /// Onboarding initializer
+    init(viewModel: OnboardingViewModel) {
+        self.viewModel = viewModel
+        self.isOnboarding = true
+    }
+
     // MARK: - Price Helpers
 
     private var yearlyPriceLabel: String {
-        viewModel.storeKitService.yearlyProduct?.displayPrice ?? "$49.99"
+        storeKitService.yearlyProduct?.displayPrice ?? "$49.99"
     }
 
     private var weeklyPriceLabel: String {
-        viewModel.storeKitService.weeklyProduct?.displayPrice ?? "$4.99"
+        storeKitService.weeklyProduct?.displayPrice ?? "$4.99"
     }
 
     private var yearlyWeeklyBreakdown: String {
-        if let product = viewModel.storeKitService.yearlyProduct {
+        if let product = storeKitService.yearlyProduct {
             let weekly = product.price / 52
             let formatter = NumberFormatter()
             formatter.numberStyle = .currency
@@ -152,7 +167,7 @@ struct SummaryPaywallView: View {
     }
 
     private var personalizedSubtitle: String {
-        let name = viewModel.firstName.trimmingCharacters(in: .whitespaces)
+        let name = (viewModel?.firstName ?? "").trimmingCharacters(in: .whitespaces)
         if name.isEmpty {
             return "Unlock your complete spiritual companion"
         }
@@ -416,7 +431,7 @@ struct SummaryPaywallView: View {
             }
             .padding(.horizontal, 32)
 
-            Text("3-day free trial, then \(selectedPriceDescription). Cancel anytime.")
+            Text("Free trial auto-renews at \(selectedPriceDescription). Cancel anytime in Settings > Subscriptions.")
                 .font(.system(size: 12, weight: .regular, design: .rounded))
                 .foregroundStyle(.white.opacity(0.35))
                 .multilineTextAlignment(.center)
@@ -440,7 +455,7 @@ struct SummaryPaywallView: View {
         VStack(spacing: 14) {
             Button {
                 if isOnboarding {
-                    viewModel.goNext()
+                    viewModel?.goNext()
                 } else {
                     dismiss()
                 }
@@ -453,7 +468,7 @@ struct SummaryPaywallView: View {
 
             HStack(spacing: 16) {
                 Button {
-                    Task { await viewModel.storeKitService.restorePurchases() }
+                    Task { await storeKitService.restorePurchases() }
                 } label: {
                     Text("Restore")
                         .font(.system(size: 12, weight: .regular, design: .rounded))
@@ -464,7 +479,11 @@ struct SummaryPaywallView: View {
                     .fill(.white.opacity(0.15))
                     .frame(width: 3, height: 3)
 
-                Button {} label: {
+                Button {
+                    if let url = URL(string: "https://bibleplus.app/terms") {
+                        openURL(url)
+                    }
+                } label: {
                     Text("Terms")
                         .font(.system(size: 12, weight: .regular, design: .rounded))
                         .foregroundStyle(.white.opacity(0.3))
@@ -474,7 +493,11 @@ struct SummaryPaywallView: View {
                     .fill(.white.opacity(0.15))
                     .frame(width: 3, height: 3)
 
-                Button {} label: {
+                Button {
+                    if let url = URL(string: "https://bibleplus.app/privacy") {
+                        openURL(url)
+                    }
+                } label: {
                     Text("Privacy")
                         .font(.system(size: 12, weight: .regular, design: .rounded))
                         .foregroundStyle(.white.opacity(0.3))
@@ -489,15 +512,15 @@ struct SummaryPaywallView: View {
 
     private func purchaseSelected() async {
         guard let productID = selectedProductID,
-              let product = viewModel.storeKitService.subscriptions.first(where: { $0.id == productID })
+              let product = storeKitService.subscriptions.first(where: { $0.id == productID })
         else { return }
 
         isPurchasing = true
         do {
-            _ = try await viewModel.storeKitService.purchase(product)
-            if viewModel.storeKitService.isPro {
+            _ = try await storeKitService.purchase(product)
+            if storeKitService.isPro {
                 if isOnboarding {
-                    viewModel.goNext()
+                    viewModel?.goNext()
                 } else {
                     dismiss()
                 }

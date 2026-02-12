@@ -12,6 +12,7 @@ struct VoicePickerView: View {
     @State private var isPreviewLoading = false
     @State private var previewTask: Task<Void, Never>?
     @State private var previewPlayer: AVAudioPlayer?
+    @State private var showPaywall = false
 
     var body: some View {
         NavigationStack {
@@ -79,6 +80,9 @@ struct VoicePickerView: View {
             previewPlayer?.stop()
             previewPlayer = nil
         }
+        .sheet(isPresented: $showPaywall) {
+            SummaryPaywallView()
+        }
     }
 
     // MARK: - Voice Row
@@ -86,7 +90,10 @@ struct VoicePickerView: View {
     @ViewBuilder
     private func voiceRow(_ voice: BibleVoice, locked: Bool) -> some View {
         Button {
-            if locked { return }
+            if locked {
+                showPaywall = true
+                return
+            }
             HapticService.selection()
             onSelect(voice)
             dismiss()
@@ -141,7 +148,6 @@ struct VoicePickerView: View {
             .padding(.vertical, 4)
         }
         .buttonStyle(.plain)
-        .disabled(locked)
         .opacity(locked ? 0.5 : 1)
     }
 
