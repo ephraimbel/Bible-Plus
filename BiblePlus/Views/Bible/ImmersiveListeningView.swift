@@ -152,6 +152,7 @@ struct ImmersiveListeningView: View {
                         .background(.black.opacity(0.15))
                         .clipShape(Circle())
                 }
+                .accessibilityLabel("Close listening mode")
                 Spacer()
             }
         }
@@ -232,6 +233,7 @@ struct ImmersiveListeningView: View {
                                 .fill(.black.opacity(0.15))
                         )
                 }
+                .accessibilityLabel("Playback speed \(audioService.playbackSpeed.displayName)")
 
                 // Previous verse
                 Button {
@@ -244,6 +246,7 @@ struct ImmersiveListeningView: View {
                         .background(.black.opacity(0.15))
                         .clipShape(Circle())
                 }
+                .accessibilityLabel("Previous verse")
                 .disabled(displayedVerseIndex <= 0)
 
                 // Play / Pause
@@ -274,6 +277,7 @@ struct ImmersiveListeningView: View {
                         }
                     }
                 }
+                .accessibilityLabel(audioService.isPlaying ? "Pause" : "Play")
 
                 // Next verse
                 Button {
@@ -288,6 +292,7 @@ struct ImmersiveListeningView: View {
                         .background(.black.opacity(0.15))
                         .clipShape(Circle())
                 }
+                .accessibilityLabel("Next verse")
                 .disabled(displayedVerseIndex >= viewModel.verses.count - 1)
 
                 // Background picker
@@ -303,6 +308,7 @@ struct ImmersiveListeningView: View {
                                 .fill(.black.opacity(0.15))
                         )
                 }
+                .accessibilityLabel("Choose background")
             }
 
             // Verse counter
@@ -456,6 +462,7 @@ private struct ListeningBackgroundPickerView: View {
     @Environment(\.bpPalette) private var palette
 
     @State private var selectedFilter: ListeningBackgroundFilter = .all
+    @State private var showPaywall = false
     @Namespace private var chipAnimation
 
     private let columns = [
@@ -514,6 +521,9 @@ private struct ListeningBackgroundPickerView: View {
         }
         .presentationDetents([.large])
         .presentationBackground(palette.background)
+        .sheet(isPresented: $showPaywall) {
+            SummaryPaywallView()
+        }
     }
 
     // MARK: - Filter Chips
@@ -591,7 +601,9 @@ private struct ListeningBackgroundPickerView: View {
     @ViewBuilder
     private func backgroundCard(_ bg: SanctuaryBackground, locked: Bool) -> some View {
         Button {
-            if !locked {
+            if locked {
+                showPaywall = true
+            } else {
                 HapticService.selection()
                 onSelect(bg)
             }
@@ -671,7 +683,6 @@ private struct ListeningBackgroundPickerView: View {
             .opacity(locked ? 0.6 : 1.0)
         }
         .buttonStyle(.plain)
-        .disabled(locked)
     }
 
     // MARK: - Video Thumbnail
