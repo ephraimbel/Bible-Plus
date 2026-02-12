@@ -40,7 +40,7 @@ private struct SettingsContentView: View {
                 profileSection
                 bibleSection
                 sanctuarySection
-                appearanceSection
+                widgetsSection
                 subscriptionSection
                 aboutSection
             }
@@ -48,6 +48,20 @@ private struct SettingsContentView: View {
             .background(palette.background)
             .navigationTitle("Settings")
             .toolbarBackground(palette.background, for: .navigationBar)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        let current = vm.profile.colorMode
+                        let next: ColorMode = current == .dark ? .light : .dark
+                        vm.updateColorMode(next)
+                    } label: {
+                        Image(systemName: vm.profile.colorMode == .dark ? "moon.fill" : "sun.max.fill")
+                            .font(.system(size: 16, weight: .medium))
+                            .foregroundStyle(palette.accent)
+                            .contentTransition(.symbolEffect(.replace))
+                    }
+                }
+            }
             .sheet(isPresented: $vm.showEditName) {
                 EditNameSheet(vm: vm)
                     .presentationDetents([.medium])
@@ -88,6 +102,10 @@ private struct SettingsContentView: View {
                     audioService: audioBibleService,
                     isPro: vm.profile.isPro
                 ) { voice in
+                    // Stop any active playback so the old voice doesn't keep playing
+                    if audioBibleService.hasActivePlayback {
+                        audioBibleService.stop()
+                    }
                     audioBibleService.setVoice(voice)
                     vm.profile.selectedBibleVoiceID = voice.rawValue
                     try? modelContext.save()
@@ -213,30 +231,72 @@ private struct SettingsContentView: View {
         .listRowBackground(palette.surface)
     }
 
-    // MARK: - Appearance Section
+    // MARK: - Widgets Section
 
-    private var appearanceSection: some View {
-        Section("Appearance") {
-            HStack {
-                Image(systemName: "paintbrush")
-                    .foregroundStyle(palette.accent)
-                    .frame(width: 24)
-                Text("Color Mode")
-                    .foregroundStyle(palette.textPrimary)
-                Spacer()
-                Picker("", selection: Binding(
-                    get: { vm.profile.colorMode },
-                    set: { vm.updateColorMode($0) }
-                )) {
-                    ForEach(ColorMode.allCases) { mode in
-                        Text(mode.displayName).tag(mode)
+    private var widgetsSection: some View {
+        Section {
+            VStack(alignment: .leading, spacing: 16) {
+                // Header
+                HStack(spacing: 10) {
+                    Image(systemName: "square.grid.2x2")
+                        .font(.system(size: 24))
+                        .foregroundStyle(palette.accent)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Add Bible+ to Your Home Screen")
+                            .font(.system(size: 15, weight: .semibold))
+                            .foregroundStyle(palette.textPrimary)
+                        Text("Daily verses right where you need them")
+                            .font(BPFont.caption)
+                            .foregroundStyle(palette.textMuted)
                     }
                 }
-                .pickerStyle(.menu)
-                .tint(palette.accent)
+
+                Divider()
+
+                // Steps
+                widgetStep(number: 1, text: "Long-press on your Home Screen")
+                widgetStep(number: 2, text: "Tap the + button in the top corner")
+                widgetStep(number: 3, text: "Search for \"Bible Plus\"")
+                widgetStep(number: 4, text: "Choose a size and tap Add Widget")
+
+                Divider()
+
+                // Lock Screen
+                HStack(spacing: 10) {
+                    Image(systemName: "lock.circle")
+                        .font(.system(size: 20))
+                        .foregroundStyle(palette.accent)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Lock Screen Widget")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundStyle(palette.textPrimary)
+                        Text("Long-press your Lock Screen, tap Customize, and add Bible Plus to your lock screen widgets.")
+                            .font(BPFont.caption)
+                            .foregroundStyle(palette.textMuted)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
             }
+            .padding(.vertical, 8)
+        } header: {
+            Text("Widgets")
         }
         .listRowBackground(palette.surface)
+    }
+
+    @ViewBuilder
+    private func widgetStep(number: Int, text: String) -> some View {
+        HStack(spacing: 12) {
+            Text("\(number)")
+                .font(.system(size: 12, weight: .bold, design: .rounded))
+                .foregroundStyle(.white)
+                .frame(width: 22, height: 22)
+                .background(palette.accent)
+                .clipShape(Circle())
+            Text(text)
+                .font(.system(size: 14))
+                .foregroundStyle(palette.textPrimary)
+        }
     }
 
     // MARK: - Subscription Section

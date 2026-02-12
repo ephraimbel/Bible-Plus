@@ -569,6 +569,9 @@ private struct BibleContentView: View {
                     return (try? modelContext.fetch(descriptor).first?.isPro) ?? false
                 }()
             ) { voice in
+                let wasPlaying = audioService.isPlaying || audioService.isPaused
+                let resumeIndex = audioService.currentVerseIndex
+
                 audioService.setVoice(voice)
                 // Persist to UserProfile
                 let descriptor = FetchDescriptor<UserProfile>()
@@ -576,8 +579,19 @@ private struct BibleContentView: View {
                     profile.selectedBibleVoiceID = voice.rawValue
                     try? modelContext.save()
                 }
-                // Re-prefetch with the new voice so audio is ready
-                if !viewModel.verses.isEmpty {
+
+                if wasPlaying && !viewModel.verses.isEmpty {
+                    // Restart playback with the new voice from the same verse
+                    audioService.play(
+                        verses: viewModel.verses,
+                        book: viewModel.selectedBook,
+                        chapter: viewModel.selectedChapter,
+                        translation: viewModel.currentTranslation,
+                        startingFromVerseIndex: resumeIndex,
+                        versesProvider: versesProvider
+                    )
+                } else if !viewModel.verses.isEmpty {
+                    // Not playing — just prefetch with the new voice
                     audioService.prefetch(
                         verses: viewModel.verses,
                         book: viewModel.selectedBook,

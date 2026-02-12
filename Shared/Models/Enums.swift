@@ -822,6 +822,21 @@ struct SanctuaryBackground: Identifiable, Hashable {
             SanctuaryBackground(id: "white-dove", name: "White Dove", collection: .heavenly, gradientColors: ["1A1A2A", "2A2A3A", "4A4A5A"], imageName: "white-dove-flight", isProOnly: true),
             SanctuaryBackground(id: "christ-king", name: "Christ the King", collection: .heavenly, gradientColors: ["4A5A7A", "7A8AAA", "A0B0D0"], imageName: "christ-king-statue", isProOnly: true),
             SanctuaryBackground(id: "altar-cross", name: "Altar & Cross", collection: .heavenly, gradientColors: ["2A1A0A", "5A3A1A", "8A5A2A"], imageName: "altar-cross-candles", isProOnly: true),
+            SanctuaryBackground(id: "cross-light-video", name: "Cross in Light", collection: .heavenly, gradientColors: ["0A0A1A", "1A1A2A", "3A3A4A"], videoFileName: "black-cross-light", isProOnly: true),
+            SanctuaryBackground(id: "christ-redeemer-video", name: "Christ Redeemer", collection: .heavenly, gradientColors: ["3A5A8A", "6A8ABB", "9AB0D0"], videoFileName: "christ-redeemer-video", isProOnly: true),
+            SanctuaryBackground(id: "religious-image-video", name: "Sacred Glow", collection: .heavenly, gradientColors: ["2A1A0A", "5A3A1A", "8A6A3A"], videoFileName: "religious-image", isProOnly: true),
+            SanctuaryBackground(id: "sunrays-window-video", name: "Holy Light", collection: .heavenly, gradientColors: ["3A2A1A", "6A5A3A", "9A8A6A"], videoFileName: "sunrays-through-window", isProOnly: true),
+            SanctuaryBackground(id: "cathedral-glass-video", name: "Cathedral Glass", collection: .heavenly, gradientColors: ["1A1A3A", "3A3A6A", "5A5A9A"], videoFileName: "cathedral-stained-glass", isProOnly: true),
+            SanctuaryBackground(id: "church-windows-video", name: "Church Windows", collection: .heavenly, gradientColors: ["3A2A1A", "5A4A3A", "7A6A5A"], videoFileName: "church-sun-windows", isProOnly: true),
+            SanctuaryBackground(id: "stained-glass-video", name: "Living Glass", collection: .heavenly, gradientColors: ["1A2A4A", "3A5A7A", "5A7A9A"], videoFileName: "stained-glass-bright", isProOnly: true),
+            SanctuaryBackground(id: "sacred-candles-video", name: "Sacred Candles", collection: .heavenly, gradientColors: ["2A0A0A", "5A1A1A", "8A3A2A"], videoFileName: "burning-candles-sacred", isProOnly: true),
+            SanctuaryBackground(id: "heavenly-clouds-video", name: "Heavenly Clouds", collection: .heavenly, gradientColors: ["3A5A8A", "6A8AB0", "90B0D8"], videoFileName: "heavenly-clouds", isProOnly: true),
+            SanctuaryBackground(id: "clouds-timelapse-video", name: "Cloud Timelapse", collection: .heavenly, gradientColors: ["4A6A9A", "7A9AC0", "A0C0E0"], videoFileName: "clouds-timelapse", isProOnly: true),
+            SanctuaryBackground(id: "candle-glow-video", name: "Candle Glow", collection: .heavenly, gradientColors: ["1A0A0A", "3A1A0A", "5A2A1A"], videoFileName: "burning-red-candle", isProOnly: true),
+            SanctuaryBackground(id: "candle-closeup-video", name: "Candlelight", collection: .heavenly, gradientColors: ["0A0A0A", "2A1A0A", "4A2A1A"], videoFileName: "candle-closeup", isProOnly: true),
+            SanctuaryBackground(id: "jesus-statue-video", name: "Jesus Statue", collection: .heavenly, gradientColors: ["3A4A5A", "5A6A7A", "7A8A9A"], videoFileName: "jesus-statue-closeup", isProOnly: true),
+            SanctuaryBackground(id: "church-cross-video", name: "Church & Cross", collection: .heavenly, gradientColors: ["1A1A2A", "2A2A4A", "4A4A6A"], videoFileName: "man-church-cross", isProOnly: true),
+            SanctuaryBackground(id: "flame-darkness-video", name: "Flame in Darkness", collection: .heavenly, gradientColors: ["0A0A0A", "1A0A0A", "3A1A0A"], videoFileName: "candle-flame-darkness", isProOnly: true),
         ])
 
         // MARK: Seasonal (10 — all Pro)
