@@ -164,14 +164,6 @@ struct RootView: View {
                 try? modelContext.save()
             }
         }
-        #if DEBUG
-        .onAppear {
-            if let profile = currentProfile, !profile.isPro {
-                profile.isPro = true
-                try? modelContext.save()
-            }
-        }
-        #endif
     }
 
     private var resolvedColorScheme: ColorScheme? {
