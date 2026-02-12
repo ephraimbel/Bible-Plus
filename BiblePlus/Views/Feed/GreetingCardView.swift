@@ -112,27 +112,21 @@ struct GreetingCardView: View {
 
     @ViewBuilder
     private var greetingBackground: some View {
-        GeometryReader { geo in
-            ZStack {
-                // Base gradient — always visible as fallback
-                LinearGradient(
-                    colors: background.gradientColors.map { Color(hex: $0) },
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-
-                if isCurrentCard, let videoName = background.videoFileName {
-                    // Only the current card gets a video player
-                    LoopingVideoPlayer(videoName: videoName, isPlaying: true)
-                } else if let imageName = background.imageName,
-                          let uiImage = SanctuaryBackground.loadImage(named: imageName) {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: geo.size.width, height: geo.size.height)
-                        .clipped()
-                }
+        LinearGradient(
+            colors: background.gradientColors.map { Color(hex: $0) },
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+        .overlay {
+            if isCurrentCard, let videoName = background.videoFileName {
+                LoopingVideoPlayer(videoName: videoName, isPlaying: true)
+            } else if let imageName = background.imageName,
+                      let uiImage = SanctuaryBackground.loadImage(named: imageName) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
             }
         }
+        .clipped()
     }
 }

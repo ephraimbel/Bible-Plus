@@ -67,28 +67,24 @@ struct FeedCardView: View {
 
     @ViewBuilder
     private var backgroundLayer: some View {
-        GeometryReader { geo in
-            ZStack {
-                // Base gradient — always visible as fallback
-                LinearGradient(
-                    colors: background.gradientColors.map { Color(hex: $0) },
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-
-                if isCurrentCard, let videoName = background.videoFileName {
-                    // Only the current card gets a video player to avoid memory exhaustion
-                    LoopingVideoPlayer(videoName: videoName, isPlaying: true)
-                } else if let imageName = background.imageName,
-                          let uiImage = SanctuaryBackground.loadImage(named: imageName) {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: geo.size.width, height: geo.size.height)
-                        .clipped()
-                }
+        // Gradient fills all available space and establishes layout size;
+        // image/video is rendered as an overlay so it can't skew the layout.
+        LinearGradient(
+            colors: background.gradientColors.map { Color(hex: $0) },
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+        .overlay {
+            if isCurrentCard, let videoName = background.videoFileName {
+                LoopingVideoPlayer(videoName: videoName, isPlaying: true)
+            } else if let imageName = background.imageName,
+                      let uiImage = SanctuaryBackground.loadImage(named: imageName) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
             }
         }
+        .clipped()
     }
 
     // MARK: - Layer 2: Subtle Vignette
