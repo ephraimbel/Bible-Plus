@@ -88,4 +88,5 @@ final class SavedViewModel {
         collection.updatedAt = Date()
         try? modelContext.save()
     }
+
 }

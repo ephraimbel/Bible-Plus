@@ -12,7 +12,7 @@ struct QuickPromptsView: View {
 
             // Welcome message
             VStack(spacing: 12) {
-                Image(systemName: "flame.fill")
+                Image(systemName: "sparkles")
                     .font(.system(size: 36))
                     .foregroundStyle(palette.accent)
 

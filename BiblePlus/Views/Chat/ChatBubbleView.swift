@@ -15,7 +15,7 @@ struct ChatBubbleView: View {
                 Spacer(minLength: 60)
             } else {
                 // AI avatar
-                Image(systemName: "flame.fill")
+                Image(systemName: "sparkles")
                     .font(.system(size: 14))
                     .foregroundStyle(palette.accent)
                     .frame(width: 28, height: 28)
