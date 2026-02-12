@@ -94,7 +94,7 @@ private struct ConversationListContent: View {
         VStack(spacing: 24) {
             Spacer()
 
-            Image(systemName: "flame.fill")
+            Image(systemName: "sparkles")
                 .font(.system(size: 36))
                 .foregroundStyle(palette.accent)
 
