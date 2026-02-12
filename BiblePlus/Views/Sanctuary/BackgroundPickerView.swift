@@ -36,58 +36,18 @@ private enum BackgroundFilter: CaseIterable, Identifiable {
     }
 }
 
-// MARK: - Async Thumbnail Manager
+// MARK: - Thumbnail Cache
 
-private actor ThumbnailManager {
-    static let shared = ThumbnailManager()
+private final class ThumbnailCache: @unchecked Sendable {
+    static let shared = ThumbnailCache()
+    private let cache = NSCache<NSString, UIImage>()
 
-    private var videoCache: [String: UIImage] = [:]
-    private var imageCache: [String: UIImage] = [:]
-
-    func videoThumbnail(for videoName: String) async -> UIImage? {
-        if let cached = videoCache[videoName] { return cached }
-
-        guard let url = Bundle.main.url(forResource: videoName, withExtension: "mp4") else {
-            return nil
-        }
-
-        let asset = AVAsset(url: url)
-        let generator = AVAssetImageGenerator(asset: asset)
-        generator.appliesPreferredTrackTransform = true
-        generator.maximumSize = CGSize(width: 300, height: 540)
-
-        let times: [CMTime] = [
-            CMTime(seconds: 2, preferredTimescale: 600),
-            CMTime(seconds: 1, preferredTimescale: 600),
-            CMTime(seconds: 0.5, preferredTimescale: 600),
-        ]
-        for time in times {
-            if let cgImage = try? generator.copyCGImage(at: time, actualTime: nil) {
-                let image = UIImage(cgImage: cgImage)
-                videoCache[videoName] = image
-                return image
-            }
-        }
-        return nil
+    func get(_ key: String) -> UIImage? {
+        cache.object(forKey: key as NSString)
     }
 
-    func imagePreview(named imageName: String) async -> UIImage? {
-        if let cached = imageCache[imageName] { return cached }
-
-        guard let uiImage = SanctuaryBackground.loadImage(named: imageName) else {
-            return nil
-        }
-
-        let maxSize: CGFloat = 300
-        let scale = min(maxSize / uiImage.size.width, maxSize / uiImage.size.height, 1.0)
-        let newSize = CGSize(width: uiImage.size.width * scale, height: uiImage.size.height * scale)
-        let renderer = UIGraphicsImageRenderer(size: newSize)
-        let thumbnail = renderer.image { _ in
-            uiImage.draw(in: CGRect(origin: .zero, size: newSize))
-        }
-
-        imageCache[imageName] = thumbnail
-        return thumbnail
+    func set(_ key: String, image: UIImage) {
+        cache.setObject(image, forKey: key as NSString)
     }
 }
 
@@ -99,7 +59,7 @@ private struct AsyncThumbnailView: View {
 
     var body: some View {
         ZStack {
-            // Gradient fallback (always visible initially)
+            // Gradient fallback (always visible)
             RoundedRectangle(cornerRadius: 12)
                 .fill(
                     LinearGradient(
@@ -119,21 +79,65 @@ private struct AsyncThumbnailView: View {
                     .aspectRatio(1.2, contentMode: .fit)
                     .clipped()
                     .clipShape(RoundedRectangle(cornerRadius: 12))
-                    .transition(.opacity)
             }
         }
-        .task {
-            if bg.hasVideo, let videoName = bg.videoFileName {
-                let img = await ThumbnailManager.shared.videoThumbnail(for: videoName)
-                withAnimation(.easeIn(duration: 0.2)) {
-                    thumbnail = img
-                }
-            } else if bg.hasImage, let imageName = bg.imageName {
-                let img = await ThumbnailManager.shared.imagePreview(named: imageName)
-                withAnimation(.easeIn(duration: 0.2)) {
-                    thumbnail = img
-                }
+        .task(priority: .utility) {
+            await loadThumbnail()
+        }
+    }
+
+    private func loadThumbnail() async {
+        let cacheKey: String
+        if bg.hasVideo, let videoName = bg.videoFileName {
+            cacheKey = "video-\(videoName)"
+            if let cached = ThumbnailCache.shared.get(cacheKey) {
+                thumbnail = cached
+                return
             }
+            if let img = await generateVideoThumbnail(videoName) {
+                ThumbnailCache.shared.set(cacheKey, image: img)
+                await MainActor.run { thumbnail = img }
+            }
+        } else if bg.hasImage, let imageName = bg.imageName {
+            cacheKey = "image-\(imageName)"
+            if let cached = ThumbnailCache.shared.get(cacheKey) {
+                thumbnail = cached
+                return
+            }
+            if let img = await loadImageThumbnail(imageName) {
+                ThumbnailCache.shared.set(cacheKey, image: img)
+                await MainActor.run { thumbnail = img }
+            }
+        }
+    }
+
+    private nonisolated func generateVideoThumbnail(_ videoName: String) async -> UIImage? {
+        guard let url = Bundle.main.url(forResource: videoName, withExtension: "mp4") else {
+            return nil
+        }
+        let asset = AVAsset(url: url)
+        let generator = AVAssetImageGenerator(asset: asset)
+        generator.appliesPreferredTrackTransform = true
+        generator.maximumSize = CGSize(width: 200, height: 360)
+
+        let time = CMTime(seconds: 1, preferredTimescale: 600)
+        guard let cgImage = try? generator.copyCGImage(at: time, actualTime: nil) else {
+            return nil
+        }
+        return UIImage(cgImage: cgImage)
+    }
+
+    private nonisolated func loadImageThumbnail(_ imageName: String) async -> UIImage? {
+        guard let url = Bundle.main.url(forResource: imageName, withExtension: "jpg"),
+              let uiImage = UIImage(contentsOfFile: url.path) else {
+            return nil
+        }
+        let maxSize: CGFloat = 200
+        let scale = min(maxSize / uiImage.size.width, maxSize / uiImage.size.height, 1.0)
+        let newSize = CGSize(width: uiImage.size.width * scale, height: uiImage.size.height * scale)
+        let renderer = UIGraphicsImageRenderer(size: newSize)
+        return renderer.image { _ in
+            uiImage.draw(in: CGRect(origin: .zero, size: newSize))
         }
     }
 }

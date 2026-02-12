@@ -190,6 +190,7 @@ struct ImmersiveListeningView: View {
     }
 
     private var currentVerse: (number: Int, text: String) {
+        guard !viewModel.verses.isEmpty else { return (0, "") }
         let idx = min(displayedVerseIndex, viewModel.verses.count - 1)
         return viewModel.verses[max(idx, 0)]
     }

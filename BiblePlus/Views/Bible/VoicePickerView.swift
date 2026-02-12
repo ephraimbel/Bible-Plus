@@ -89,6 +89,7 @@ struct VoicePickerView: View {
             if locked { return }
             HapticService.selection()
             onSelect(voice)
+            dismiss()
         } label: {
             HStack(spacing: 12) {
                 // Name and description

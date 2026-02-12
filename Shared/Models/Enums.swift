@@ -729,7 +729,6 @@ struct SanctuaryBackground: Identifiable, Hashable {
             SanctuaryBackground(id: "aerial-sea-waves", name: "Aerial Sea Waves", collection: .oceanAndWater, gradientColors: ["0A5276", "1A80B9", "3DADE2"], videoFileName: "aerial-sea-waves", isProOnly: true),
             SanctuaryBackground(id: "calm-beach-waves", name: "Calm Beach", collection: .oceanAndWater, gradientColors: ["1A5A6A", "2D8A9A", "5ABACC"], videoFileName: "calm-beach-waves", isProOnly: true),
             SanctuaryBackground(id: "slowmo-waves", name: "Slow Motion Waves", collection: .oceanAndWater, gradientColors: ["0D4F6B", "1A7A9E", "3AACCC"], videoFileName: "slowmo-waves", isProOnly: true),
-            SanctuaryBackground(id: "rain-on-glass", name: "Rain on Glass", collection: .oceanAndWater, gradientColors: ["2A3A4A", "4A5A6A", "6A7A8A"], videoFileName: "rain-on-glass", isProOnly: true),
         ])
 
         // MARK: Night Sky (6 — all Pro, videos → images)
@@ -744,7 +743,6 @@ struct SanctuaryBackground: Identifiable, Hashable {
             SanctuaryBackground(id: "starry-mountains-img", name: "Starry Mountains", collection: .nightSky, gradientColors: ["0A0A1A", "14142D", "1E1E40"], imageName: "starry-mountains", isProOnly: true),
             // Pexels videos
             SanctuaryBackground(id: "aurora-borealis", name: "Aurora Borealis", collection: .nightSky, gradientColors: ["0B1D0B", "0D3B2E", "1A6B4A"], videoFileName: "aurora-borealis", isProOnly: true),
-            SanctuaryBackground(id: "night-sky-timelapse", name: "Night Sky Timelapse", collection: .nightSky, gradientColors: ["0A0A14", "0D1428", "1A1E3D"], videoFileName: "night-sky-timelapse", isProOnly: true),
             SanctuaryBackground(id: "stars-mountains-pexels", name: "Stars Over Mountains", collection: .nightSky, gradientColors: ["0A0A1A", "0D1B3D", "1A2D5E"], videoFileName: "stars-mountains", isProOnly: true),
             // Pexels images
             SanctuaryBackground(id: "aurora-wallpaper-img", name: "Aurora Wallpaper", collection: .nightSky, gradientColors: ["0B2D1E", "1A5A3A", "38A06B"], imageName: "aurora-wallpaper", isProOnly: true),

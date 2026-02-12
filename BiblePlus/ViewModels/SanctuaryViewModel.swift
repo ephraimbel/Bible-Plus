@@ -1,5 +1,4 @@
 import Foundation
-import SwiftData
 
 @Observable
 final class SanctuaryViewModel {

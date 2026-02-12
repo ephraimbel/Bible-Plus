@@ -400,50 +400,44 @@ private struct BibleContentView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    viewModel.showBookPicker = true
-                } label: {
-                    HStack(spacing: 4) {
-                        Text(viewModel.chapterTitle)
-                            .font(.system(size: 17, weight: .semibold, design: .serif))
-                        Image(systemName: "chevron.down")
-                            .font(.system(size: 10, weight: .semibold))
+                HStack(spacing: 10) {
+                    Button {
+                        viewModel.showBookPicker = true
+                    } label: {
+                        HStack(spacing: 4) {
+                            Text(viewModel.chapterTitle)
+                                .font(.system(size: 17, weight: .semibold, design: .serif))
+                            Image(systemName: "chevron.down")
+                                .font(.system(size: 10, weight: .semibold))
+                        }
+                        .foregroundStyle(palette.textPrimary)
                     }
-                    .foregroundStyle(palette.textPrimary)
+
+                    Button {
+                        viewModel.showTranslationPicker = true
+                    } label: {
+                        Text(viewModel.currentTranslation.apiCode)
+                            .font(.system(size: 12, weight: .semibold))
+                            .foregroundStyle(palette.accent)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 3)
+                            .background(
+                                Capsule()
+                                    .fill(palette.accent.opacity(0.12))
+                            )
+                    }
                 }
             }
 
             ToolbarItem(placement: .topBarTrailing) {
                 HStack(spacing: 12) {
-                    // Immersive listening
-                    Button {
-                        handleImmersiveListeningTap()
-                    } label: {
-                        Image(systemName: "tv.and.mediabox")
-                            .font(.system(size: 14, weight: .medium))
-                            .foregroundStyle(
-                                audioService.hasActivePlayback
-                                    ? palette.accent
-                                    : palette.textSecondary
-                            )
-                    }
-
-                    // Voice picker
-                    Button {
-                        showVoicePicker = true
-                    } label: {
-                        Image(systemName: "person.wave.2")
-                            .font(.system(size: 14, weight: .medium))
-                            .foregroundStyle(palette.textSecondary)
-                    }
-
                     // Audio Bible
                     Button {
                         handleAudioTap()
                     } label: {
                         Image(systemName: audioService.hasActivePlayback
-                            ? "headphones.circle.fill"
-                            : "headphones"
+                            ? "mic.circle.fill"
+                            : "mic"
                         )
                         .font(.system(size: 14, weight: .medium))
                         .foregroundStyle(
@@ -465,30 +459,7 @@ private struct BibleContentView: View {
                             .foregroundStyle(palette.accent)
                     }
 
-                    // Reader settings
-                    Button {
-                        viewModel.showReaderSettings = true
-                    } label: {
-                        Image(systemName: "textformat.size")
-                            .font(.system(size: 14, weight: .medium))
-                            .foregroundStyle(palette.accent)
-                    }
-
-                    // Translation picker capsule
-                    Button {
-                        viewModel.showTranslationPicker = true
-                    } label: {
-                        Text(viewModel.currentTranslation.apiCode)
-                            .font(BPFont.caption)
-                            .foregroundStyle(palette.accent)
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 4)
-                            .overlay(
-                                Capsule()
-                                    .stroke(palette.accent, lineWidth: 1)
-                            )
-                    }
-
+                    // Chapter navigation
                     Button {
                         performPageFlip(forward: false)
                     } label: {
@@ -514,6 +485,31 @@ private struct BibleContentView: View {
                             )
                     }
                     .disabled(!viewModel.canGoForward)
+
+                    // More options menu
+                    Menu {
+                        Button {
+                            handleImmersiveListeningTap()
+                        } label: {
+                            Label("Immersive Listening", systemImage: "tv.and.mediabox")
+                        }
+
+                        Button {
+                            showVoicePicker = true
+                        } label: {
+                            Label("Voice", systemImage: "person.wave.2")
+                        }
+
+                        Button {
+                            viewModel.showReaderSettings = true
+                        } label: {
+                            Label("Reader Settings", systemImage: "textformat.size")
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis.circle")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundStyle(palette.accent)
+                    }
                 }
             }
         }
@@ -579,6 +575,16 @@ private struct BibleContentView: View {
                 if let profile = try? modelContext.fetch(descriptor).first {
                     profile.selectedBibleVoiceID = voice.rawValue
                     try? modelContext.save()
+                }
+                // Re-prefetch with the new voice so audio is ready
+                if !viewModel.verses.isEmpty {
+                    audioService.prefetch(
+                        verses: viewModel.verses,
+                        book: viewModel.selectedBook,
+                        chapter: viewModel.selectedChapter,
+                        translation: viewModel.currentTranslation,
+                        versesProvider: versesProvider
+                    )
                 }
             }
             .presentationDetents([.medium, .large])

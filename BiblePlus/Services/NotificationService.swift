@@ -195,7 +195,7 @@ final class NotificationService {
             }
 
             // Faith level match: 1.3x
-            if item.faithLevelMin.rawValue <= profile.faithLevel.rawValue {
+            if item.faithLevelMin.numericValue <= profile.faithLevel.numericValue {
                 score *= 1.3
             }
 
@@ -240,7 +240,7 @@ final class NotificationService {
             var score = 1.0
             if !userBurdens.isEmpty && !Set(item.applicableBurdens).isDisjoint(with: userBurdens) { score *= 3.0 }
             if !userSeasons.isEmpty && !Set(item.applicableSeasons).isDisjoint(with: userSeasons) { score *= 2.0 }
-            if item.faithLevelMin.rawValue <= (faithLevel?.rawValue ?? FaithLevel.justCurious.rawValue) { score *= 1.3 }
+            if item.faithLevelMin.numericValue <= (faithLevel?.numericValue ?? FaithLevel.justCurious.numericValue) { score *= 1.3 }
             score *= Double.random(in: 0.8...1.2)
             return (item, score)
         }
