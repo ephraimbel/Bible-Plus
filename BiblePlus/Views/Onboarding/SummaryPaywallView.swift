@@ -204,11 +204,11 @@ struct SummaryPaywallView: View {
 
     private var trustStrip: some View {
         HStack(spacing: 0) {
-            trustItem(icon: "star.fill", label: "4.9 Rating")
+            trustItem(icon: "lock.shield.fill", label: "Secure")
             trustDot
-            trustItem(icon: "person.2.fill", label: "50K+ Users")
+            trustItem(icon: "hand.raised.fill", label: "Private")
             trustDot
-            trustItem(icon: "lock.shield.fill", label: "Private")
+            trustItem(icon: "xmark.circle.fill", label: "Ad-free")
         }
         .padding(.top, 28)
         .opacity(showFeatures ? 1 : 0)

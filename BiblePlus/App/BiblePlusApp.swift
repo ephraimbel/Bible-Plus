@@ -5,57 +5,78 @@ import UserNotifications
 @main
 struct BiblePlusApp: App {
     let modelContainer: ModelContainer
+    let modelContainerError: Bool
     @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
 
     init() {
+        let container: ModelContainer
+        var hadError = false
         do {
-            modelContainer = try SharedModelContainer.create()
-
-            // Seed content on first launch and migrate legacy messages
-            let seedContext = ModelContext(modelContainer)
-            ContentSeeder.seedIfNeeded(modelContext: seedContext)
-            ContentSeeder.migrateOrphanedMessages(modelContext: seedContext)
-
-            // Ensure widget has the current background frame
-            let profileFetch = FetchDescriptor<UserProfile>()
-            if let profile = try? seedContext.fetch(profileFetch).first,
-               let bg = SanctuaryBackground.background(for: profile.selectedBackgroundID) {
-                WidgetBackgroundService.updateWidgetBackground(for: bg)
-            }
-
-            // Refresh notification content on each launch
-            if let profile = try? seedContext.fetch(profileFetch).first,
-               profile.hasCompletedOnboarding,
-               !profile.prayerTimes.isEmpty {
-                let contentFetch = FetchDescriptor<PrayerContent>()
-                let allContent = (try? seedContext.fetch(contentFetch)) ?? []
-                let prayerTimes = profile.prayerTimes
-                let firstName = profile.firstName
-                let burdens = profile.currentBurdens
-                let seasons = profile.lifeSeasons
-                let faithLevel = profile.faithLevel
-                let isPro = profile.isPro
-                Task { @MainActor in
-                    // Build a lightweight profile snapshot for scheduling
-                    await NotificationService.shared.rescheduleFromSnapshot(
-                        prayerTimes: prayerTimes,
-                        firstName: firstName,
-                        burdens: burdens,
-                        seasons: seasons,
-                        faithLevel: faithLevel,
-                        isPro: isPro,
-                        content: allContent
-                    )
-                }
-            }
+            container = try SharedModelContainer.create()
         } catch {
-            fatalError("Failed to create ModelContainer: \(error)")
+            hadError = true
+            // Fall back to an in-memory container so the app can launch
+            let schema = Schema([
+                UserProfile.self,
+                PrayerContent.self,
+                ContentCollection.self,
+                ChatMessage.self,
+                Conversation.self,
+                SavedBibleVerse.self,
+            ])
+            let fallback = ModelConfiguration(
+                "BiblePlusFallback",
+                schema: schema,
+                isStoredInMemoryOnly: true
+            )
+            container = try! ModelContainer(for: schema, configurations: [fallback])
+        }
+        modelContainer = container
+        modelContainerError = hadError
+
+        guard !hadError else { return }
+
+        // Seed content on first launch and migrate legacy messages
+        let seedContext = ModelContext(modelContainer)
+        ContentSeeder.seedIfNeeded(modelContext: seedContext)
+        ContentSeeder.migrateOrphanedMessages(modelContext: seedContext)
+
+        // Ensure widget has the current background frame
+        let profileFetch = FetchDescriptor<UserProfile>()
+        if let profile = try? seedContext.fetch(profileFetch).first,
+           let bg = SanctuaryBackground.background(for: profile.selectedBackgroundID) {
+            WidgetBackgroundService.updateWidgetBackground(for: bg)
+        }
+
+        // Refresh notification content on each launch
+        if let profile = try? seedContext.fetch(profileFetch).first,
+           profile.hasCompletedOnboarding,
+           !profile.prayerTimes.isEmpty {
+            let contentFetch = FetchDescriptor<PrayerContent>()
+            let allContent = (try? seedContext.fetch(contentFetch)) ?? []
+            let prayerTimes = profile.prayerTimes
+            let firstName = profile.firstName
+            let burdens = profile.currentBurdens
+            let seasons = profile.lifeSeasons
+            let faithLevel = profile.faithLevel
+            let isPro = profile.isPro
+            Task { @MainActor in
+                await NotificationService.shared.rescheduleFromSnapshot(
+                    prayerTimes: prayerTimes,
+                    firstName: firstName,
+                    burdens: burdens,
+                    seasons: seasons,
+                    faithLevel: faithLevel,
+                    isPro: isPro,
+                    content: allContent
+                )
+            }
         }
     }
 
     var body: some Scene {
         WindowGroup {
-            RootView()
+            RootView(hasDataError: modelContainerError)
         }
         .modelContainer(modelContainer)
     }
@@ -100,6 +121,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
 }
 
 struct RootView: View {
+    let hasDataError: Bool
     @Query private var profiles: [UserProfile]
     @Environment(\.modelContext) private var modelContext
     @Environment(\.colorScheme) private var systemScheme
@@ -113,6 +135,9 @@ struct RootView: View {
     }
 
     var body: some View {
+        if hasDataError {
+            DataErrorView()
+        } else {
         ZStack {
             Group {
                 if hasCompletedOnboarding {
@@ -164,6 +189,7 @@ struct RootView: View {
                 try? modelContext.save()
             }
         }
+        } // else
     }
 
     private var resolvedColorScheme: ColorScheme? {
@@ -183,5 +209,24 @@ struct RootView: View {
               let uuid = UUID(uuidString: idString)
         else { return }
         deepLinkedContentID = uuid
+    }
+}
+
+// MARK: - Data Error View
+
+private struct DataErrorView: View {
+    var body: some View {
+        VStack(spacing: 20) {
+            Image(systemName: "exclamationmark.triangle")
+                .font(.system(size: 48))
+                .foregroundStyle(.secondary)
+            Text("Unable to Load Data")
+                .font(.title2.bold())
+            Text("Bible Plus couldn't open its database. Please try restarting the app. If the problem persists, reinstalling may help.")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 40)
+        }
     }
 }

@@ -192,8 +192,10 @@ struct VoicePickerView: View {
         }
     }
 
+    private static let ttsEndpoint = URL(string: "https://api.openai.com/v1/audio/speech")
+
     private func generatePreview(text: String, voice: BibleVoice) async throws -> Data {
-        let endpoint = URL(string: "https://api.openai.com/v1/audio/speech")!
+        guard let endpoint = Self.ttsEndpoint else { throw AudioBibleError.invalidResponse }
         let body: [String: Any] = [
             "model": "tts-1-hd",
             "input": text,

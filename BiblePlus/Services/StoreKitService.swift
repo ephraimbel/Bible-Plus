@@ -10,11 +10,7 @@ final class StoreKitService {
     static let weeklyID = "io.bibleplus.pro.weekly"
     static let yearlyID = "io.bibleplus.pro.yearly"
 
-        #if DEBUG
-    var isPro: Bool { true }
-    #else
     var isPro: Bool { !purchasedProductIDs.isEmpty }
-    #endif
 
     var weeklyProduct: Product? {
         subscriptions.first { $0.id == Self.weeklyID }

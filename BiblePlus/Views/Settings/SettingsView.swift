@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import StoreKit
 
 struct SettingsView: View {
     @Environment(\.modelContext) private var modelContext
@@ -33,7 +34,11 @@ private struct SettingsContentView: View {
     let audioBibleService: AudioBibleService
     @Environment(\.modelContext) private var modelContext
     @Environment(\.bpPalette) private var palette
+    @Environment(\.requestReview) private var requestReview
+    @Environment(\.openURL) private var openURL
+    @Environment(StoreKitService.self) private var storeKitService
     @State private var showPaywall = false
+    @State private var isRestoringPurchases = false
 
     var body: some View {
         NavigationStack {
@@ -372,6 +377,79 @@ private struct SettingsContentView: View {
 
     private var aboutSection: some View {
         Section("About") {
+            Button {
+                requestReview()
+            } label: {
+                HStack {
+                    Image(systemName: "star")
+                        .foregroundStyle(palette.accent)
+                        .frame(width: 24)
+                    Text("Rate the App")
+                        .foregroundStyle(palette.textPrimary)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundStyle(.tertiary)
+                }
+            }
+
+            Button {
+                if let url = URL(string: "https://bibleplus.app/privacy") {
+                    openURL(url)
+                }
+            } label: {
+                HStack {
+                    Image(systemName: "hand.raised")
+                        .foregroundStyle(palette.accent)
+                        .frame(width: 24)
+                    Text("Privacy Policy")
+                        .foregroundStyle(palette.textPrimary)
+                    Spacer()
+                    Image(systemName: "arrow.up.right")
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundStyle(.tertiary)
+                }
+            }
+
+            Button {
+                if let url = URL(string: "https://bibleplus.app/terms") {
+                    openURL(url)
+                }
+            } label: {
+                HStack {
+                    Image(systemName: "doc.text")
+                        .foregroundStyle(palette.accent)
+                        .frame(width: 24)
+                    Text("Terms of Service")
+                        .foregroundStyle(palette.textPrimary)
+                    Spacer()
+                    Image(systemName: "arrow.up.right")
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundStyle(.tertiary)
+                }
+            }
+
+            Button {
+                isRestoringPurchases = true
+                Task {
+                    await storeKitService.restorePurchases()
+                    isRestoringPurchases = false
+                }
+            } label: {
+                HStack {
+                    Image(systemName: "arrow.clockwise")
+                        .foregroundStyle(palette.accent)
+                        .frame(width: 24)
+                    Text("Restore Purchases")
+                        .foregroundStyle(palette.textPrimary)
+                    Spacer()
+                    if isRestoringPurchases {
+                        ProgressView()
+                    }
+                }
+            }
+            .disabled(isRestoringPurchases)
+
             HStack {
                 Image(systemName: "info.circle")
                     .foregroundStyle(palette.accent)
@@ -379,17 +457,7 @@ private struct SettingsContentView: View {
                 Text("Version")
                     .foregroundStyle(palette.textPrimary)
                 Spacer()
-                Text(appVersion)
-                    .foregroundStyle(palette.accent)
-            }
-            HStack {
-                Image(systemName: "hammer")
-                    .foregroundStyle(palette.accent)
-                    .frame(width: 24)
-                Text("Build")
-                    .foregroundStyle(palette.textPrimary)
-                Spacer()
-                Text(buildNumber)
+                Text("\(appVersion) (\(buildNumber))")
                     .foregroundStyle(palette.accent)
             }
         }

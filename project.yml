@@ -49,6 +49,8 @@ targets:
         buildPhase: resources
       - path: Resources/Bible
         buildPhase: resources
+      - path: Resources/PrivacyInfo.xcprivacy
+        buildPhase: resources
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: io.bibleplus.app

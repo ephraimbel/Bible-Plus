@@ -417,8 +417,10 @@ final class AudioBibleService {
         return allData
     }
 
+    private static let ttsEndpoint = URL(string: "https://api.openai.com/v1/audio/speech")
+
     private func callTTSAPI(text: String, voice: BibleVoice = .onyx) async throws -> Data {
-        let endpoint = URL(string: "https://api.openai.com/v1/audio/speech")!
+        guard let endpoint = Self.ttsEndpoint else { throw AudioBibleError.invalidResponse }
         let body: [String: Any] = [
             "model": "tts-1",
             "input": text,

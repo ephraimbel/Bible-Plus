@@ -1,7 +1,7 @@
 import Foundation
 
 enum AIService {
-    private static let endpoint = URL(string: "https://api.openai.com/v1/chat/completions")!
+    private static let endpoint = URL(string: "https://api.openai.com/v1/chat/completions")
     private static let model = "gpt-4o-mini"
     // MARK: - API Key
 
@@ -135,6 +135,7 @@ enum AIService {
             "temperature": 0.75,
         ]
 
+        guard let endpoint else { throw AIError.invalidResponse }
         var request = URLRequest(url: endpoint)
         request.httpMethod = "POST"
         request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
