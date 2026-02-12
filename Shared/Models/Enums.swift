@@ -599,6 +599,7 @@ enum BackgroundCollection: String, CaseIterable, Identifiable {
     case warmthAndGlow
     case calmAndSerene
     case sacred
+    case heavenly
     case seasonal
 
     var id: String { rawValue }
@@ -612,6 +613,7 @@ enum BackgroundCollection: String, CaseIterable, Identifiable {
         case .warmthAndGlow: "Warmth & Glow"
         case .calmAndSerene: "Calm & Serene"
         case .sacred: "Sacred"
+        case .heavenly: "Heavenly"
         case .seasonal: "Seasonal"
         }
     }
@@ -619,7 +621,7 @@ enum BackgroundCollection: String, CaseIterable, Identifiable {
     var isProOnly: Bool {
         switch self {
         case .essentials: false
-        case .nature, .oceanAndWater, .nightSky, .warmthAndGlow, .calmAndSerene, .sacred, .seasonal: true
+        case .nature, .oceanAndWater, .nightSky, .warmthAndGlow, .calmAndSerene, .sacred, .heavenly, .seasonal: true
         }
     }
 }
@@ -709,6 +711,8 @@ struct SanctuaryBackground: Identifiable, Hashable {
             SanctuaryBackground(id: "mountain-sunrise-mist-img", name: "Mountain Sunrise Mist", collection: .nature, gradientColors: ["C2842F", "D4A054", "F0D8A0"], imageName: "mountain-sunrise-mist", isProOnly: true),
             SanctuaryBackground(id: "autumn-forest-sun-img", name: "Autumn Forest Sun", collection: .nature, gradientColors: ["8B5A2F", "B87A40", "D4956A"], imageName: "autumn-forest-sun", isProOnly: true),
             SanctuaryBackground(id: "forest-sunset-golden-img", name: "Forest Sunset", collection: .nature, gradientColors: ["6B3A10", "9A5A20", "C88040"], imageName: "forest-sunset-golden", isProOnly: true),
+            SanctuaryBackground(id: "heavenly-forest-rays", name: "Heavenly Forest", collection: .nature, gradientColors: ["1A2A1A", "3A5A2A", "5A7A3A"], imageName: "forest-heavenly-rays", isProOnly: true),
+            SanctuaryBackground(id: "crucifix-garden", name: "Garden Crucifix", collection: .nature, gradientColors: ["2A4A2A", "4A6A3A", "6A8A5A"], imageName: "wooden-crucifix-garden", isProOnly: true),
         ])
 
         // MARK: Ocean & Water (9 — all Pro, videos → images → gradients)
@@ -801,6 +805,23 @@ struct SanctuaryBackground: Identifiable, Hashable {
             SanctuaryBackground(id: "burning-bush", name: "Burning Bush", collection: .sacred, gradientColors: ["6B1A08", "A03010", "D45A20"], isProOnly: true),
             SanctuaryBackground(id: "garden-eden", name: "Garden of Eden", collection: .sacred, gradientColors: ["1A3D1A", "2D6B2D", "4A9A4A"], isProOnly: true),
             SanctuaryBackground(id: "shepherd-field", name: "Shepherd's Field", collection: .sacred, gradientColors: ["4A5A2E", "6B7A40", "8B9A5A"], isProOnly: true),
+        ])
+
+        // MARK: Heavenly (13 — all Pro, image backgrounds)
+        bgs.append(contentsOf: [
+            SanctuaryBackground(id: "christ-redeemer", name: "Christ the Redeemer", collection: .heavenly, gradientColors: ["3A5F8A", "6B9FCE", "A8D4F0"], imageName: "christ-redeemer-rio", isProOnly: true),
+            SanctuaryBackground(id: "cross-at-sunset", name: "Cross at Sunset", collection: .heavenly, gradientColors: ["8B3A0A", "D4700A", "F0A030"], imageName: "cross-at-sunset", isProOnly: true),
+            SanctuaryBackground(id: "glowing-cross-night", name: "Glowing Cross", collection: .heavenly, gradientColors: ["0A0A1A", "1A1A3A", "2A2A5A"], imageName: "glowing-cross-night", isProOnly: true),
+            SanctuaryBackground(id: "heaven-sun-rays", name: "Heaven's Rays", collection: .heavenly, gradientColors: ["4A6080", "8AAAC0", "D0E8F8"], imageName: "heaven-sun-rays", isProOnly: true),
+            SanctuaryBackground(id: "dramatic-sky-rays", name: "Divine Sky", collection: .heavenly, gradientColors: ["2A3A5A", "5A7AAA", "90B0D0"], imageName: "dramatic-sky-rays", isProOnly: true),
+            SanctuaryBackground(id: "stained-glass-church", name: "Stained Glass", collection: .heavenly, gradientColors: ["2A1A3A", "5A3A6A", "8A5A9A"], imageName: "stained-glass-church", isProOnly: true),
+            SanctuaryBackground(id: "stained-glass-sacred", name: "Sacred Windows", collection: .heavenly, gradientColors: ["1A2A4A", "3A5A8A", "6A8ABA"], imageName: "stained-glass-religious", isProOnly: true),
+            SanctuaryBackground(id: "sunlit-church", name: "Sunlit Church", collection: .heavenly, gradientColors: ["3A2A1A", "6A5A4A", "9A8A7A"], imageName: "sunlit-church-interior", isProOnly: true),
+            SanctuaryBackground(id: "stone-angel", name: "Stone Angel", collection: .heavenly, gradientColors: ["4A5A6A", "7A8A9A", "A0B0C0"], imageName: "stone-angel", isProOnly: true),
+            SanctuaryBackground(id: "angel-trumpet", name: "Angel's Trumpet", collection: .heavenly, gradientColors: ["5A6A7A", "8A9AAA", "B0C0D0"], imageName: "angel-with-trumpet", isProOnly: true),
+            SanctuaryBackground(id: "white-dove", name: "White Dove", collection: .heavenly, gradientColors: ["1A1A2A", "2A2A3A", "4A4A5A"], imageName: "white-dove-flight", isProOnly: true),
+            SanctuaryBackground(id: "christ-king", name: "Christ the King", collection: .heavenly, gradientColors: ["4A5A7A", "7A8AAA", "A0B0D0"], imageName: "christ-king-statue", isProOnly: true),
+            SanctuaryBackground(id: "altar-cross", name: "Altar & Cross", collection: .heavenly, gradientColors: ["2A1A0A", "5A3A1A", "8A5A2A"], imageName: "altar-cross-candles", isProOnly: true),
         ])
 
         // MARK: Seasonal (10 — all Pro)

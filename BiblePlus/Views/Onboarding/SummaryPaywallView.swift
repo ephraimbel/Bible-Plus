@@ -166,7 +166,7 @@ struct SummaryPaywallView: View {
             featureRow(icon: "bubble.left.and.text.bubble.right.fill", title: "Unlimited AI Companion")
             featureRow(icon: "speaker.wave.2.fill", title: "Full Audio Bible")
             featureRow(icon: "waveform.circle.fill", title: "All 27 Soundscapes")
-            featureRow(icon: "photo.on.rectangle.fill", title: "All 102 Backgrounds")
+            featureRow(icon: "photo.on.rectangle.fill", title: "All 117 Backgrounds")
             featureRow(icon: "folder.fill", title: "Unlimited Collections")
         }
         .padding(.top, 28)
