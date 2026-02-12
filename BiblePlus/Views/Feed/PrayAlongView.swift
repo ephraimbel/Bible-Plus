@@ -120,13 +120,12 @@ struct PrayAlongView: View {
 
     @ViewBuilder
     private var backgroundLayer: some View {
-        ZStack {
-            LinearGradient(
-                colors: background.gradientColors.map { Color(hex: $0) },
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-
+        LinearGradient(
+            colors: background.gradientColors.map { Color(hex: $0) },
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+        .overlay {
             if let videoName = background.videoFileName {
                 LoopingVideoPlayer(videoName: videoName)
             } else if let imageName = background.imageName,
@@ -136,6 +135,7 @@ struct PrayAlongView: View {
                     .aspectRatio(contentMode: .fill)
             }
         }
+        .clipped()
     }
 
     // MARK: - Top Bar

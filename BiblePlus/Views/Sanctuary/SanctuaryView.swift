@@ -69,15 +69,22 @@ private struct SanctuaryContentView: View {
 
     @ViewBuilder
     private var backgroundLayer: some View {
-        if let videoName = vm.selectedBackground.videoFileName {
-            LoopingVideoPlayer(videoName: videoName)
-        } else {
-            LinearGradient(
-                colors: vm.selectedBackground.gradientColors.map { Color(hex: $0) },
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
+        LinearGradient(
+            colors: vm.selectedBackground.gradientColors.map { Color(hex: $0) },
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+        .overlay {
+            if let videoName = vm.selectedBackground.videoFileName {
+                LoopingVideoPlayer(videoName: videoName)
+            } else if let imageName = vm.selectedBackground.imageName,
+                      let uiImage = SanctuaryBackground.loadImage(named: imageName) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+            }
         }
+        .clipped()
     }
 
     // MARK: - Top Bar
