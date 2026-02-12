@@ -60,6 +60,18 @@ private struct BibleContentView: View {
             ?? SanctuaryBackground.allBackgrounds[0]
     }
 
+    private var currentColorMode: ColorMode {
+        let descriptor = FetchDescriptor<UserProfile>()
+        return (try? modelContext.fetch(descriptor).first?.colorMode) ?? .auto
+    }
+
+    private func updateColorMode(_ mode: ColorMode) {
+        let descriptor = FetchDescriptor<UserProfile>()
+        guard let profile = try? modelContext.fetch(descriptor).first else { return }
+        profile.colorMode = mode
+        try? modelContext.save()
+    }
+
     private var paperColor: Color {
         colorScheme == .dark
             ? Color(red: 43/255, green: 42/255, blue: 39/255)
@@ -504,6 +516,22 @@ private struct BibleContentView: View {
                             viewModel.showReaderSettings = true
                         } label: {
                             Label("Reader Settings", systemImage: "textformat.size")
+                        }
+
+                        Divider()
+
+                        Picker(selection: Binding(
+                            get: { currentColorMode },
+                            set: { updateColorMode($0) }
+                        )) {
+                            Label("Golden Hour", systemImage: "sun.max")
+                                .tag(ColorMode.light)
+                            Label("Midnight Study", systemImage: "moon")
+                                .tag(ColorMode.dark)
+                            Label("Auto", systemImage: "circle.lefthalf.filled")
+                                .tag(ColorMode.auto)
+                        } label: {
+                            Label("Appearance", systemImage: "circle.lefthalf.filled")
                         }
                     } label: {
                         Image(systemName: "ellipsis.circle")
