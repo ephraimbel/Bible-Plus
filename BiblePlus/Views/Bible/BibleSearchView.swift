@@ -5,6 +5,7 @@ struct BibleSearchView: View {
     let onSelectResult: (BibleBook, Int, Int) -> Void
     @Environment(\.dismiss) private var dismiss
     @Environment(\.bpPalette) private var palette
+    @FocusState private var isSearchFocused: Bool
 
     var body: some View {
         NavigationStack {
@@ -15,14 +16,14 @@ struct BibleSearchView: View {
                 Divider().overlay(palette.border)
 
                 // Content
-                if viewModel.isSearching && viewModel.results.isEmpty {
-                    searchingState
-                } else if let error = viewModel.errorMessage, viewModel.results.isEmpty {
-                    errorState(message: error)
-                } else if viewModel.results.isEmpty {
-                    emptyState
-                } else {
+                if hasAnyResults {
                     resultsList
+                } else if viewModel.isSearching {
+                    searchingState
+                } else if let error = viewModel.errorMessage {
+                    errorState(message: error)
+                } else {
+                    emptyState
                 }
             }
             .background(palette.background)
@@ -35,8 +36,15 @@ struct BibleSearchView: View {
                         .foregroundStyle(palette.accent)
                 }
             }
+            .onAppear {
+                isSearchFocused = true
+            }
         }
         .presentationBackground(palette.background)
+    }
+
+    private var hasAnyResults: Bool {
+        !viewModel.bookMatches.isEmpty || !viewModel.results.isEmpty
     }
 
     // MARK: - Search Field
@@ -47,8 +55,9 @@ struct BibleSearchView: View {
                 .font(.system(size: 16))
                 .foregroundStyle(palette.textMuted)
 
-            TextField("Search verses...", text: $viewModel.query)
+            TextField("Book, chapter, or verse...", text: $viewModel.query)
                 .font(BPFont.body)
+                .focused($isSearchFocused)
                 .autocorrectionDisabled()
                 .textInputAutocapitalization(.never)
                 .submitLabel(.search)
@@ -77,45 +86,107 @@ struct BibleSearchView: View {
     private var resultsList: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 0) {
-                // Result count
-                Text("\(viewModel.totalResults) result\(viewModel.totalResults == 1 ? "" : "s")")
-                    .font(BPFont.caption)
-                    .foregroundStyle(palette.textMuted)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 8)
+                // Book navigation matches
+                if !viewModel.bookMatches.isEmpty {
+                    ForEach(viewModel.bookMatches) { match in
+                        Button {
+                            onSelectResult(match.book, match.chapter ?? 1, match.verseNumber ?? 1)
+                            dismiss()
+                        } label: {
+                            bookMatchRow(match)
+                        }
+                    }
 
-                ForEach(viewModel.results) { result in
-                    Button {
-                        onSelectResult(result.book, result.chapter, result.verseNumber)
-                        dismiss()
-                    } label: {
-                        resultRow(result)
+                    // Divider between sections
+                    if !viewModel.results.isEmpty {
+                        Divider()
+                            .overlay(palette.border)
+                            .padding(.vertical, 4)
                     }
                 }
 
-                // Load more
-                if viewModel.hasMoreResults {
-                    Button {
-                        viewModel.loadMore()
-                    } label: {
-                        HStack {
-                            if viewModel.isSearching {
-                                ProgressView()
-                                    .tint(palette.accent)
-                                    .scaleEffect(0.8)
-                            }
-                            Text("Load More")
-                                .font(BPFont.button)
-                                .foregroundStyle(palette.accent)
+                // Verse text results
+                if !viewModel.results.isEmpty {
+                    Text("\(viewModel.totalResults) verse\(viewModel.totalResults == 1 ? "" : "s")")
+                        .font(BPFont.caption)
+                        .foregroundStyle(palette.textMuted)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 8)
+
+                    ForEach(viewModel.results) { result in
+                        Button {
+                            onSelectResult(result.book, result.chapter, result.verseNumber)
+                            dismiss()
+                        } label: {
+                            resultRow(result)
                         }
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 16)
                     }
+
+                    // Load more
+                    if viewModel.hasMoreResults {
+                        Button {
+                            viewModel.loadMore()
+                        } label: {
+                            HStack {
+                                if viewModel.isSearching {
+                                    ProgressView()
+                                        .tint(palette.accent)
+                                        .scaleEffect(0.8)
+                                }
+                                Text("Load More")
+                                    .font(BPFont.button)
+                                    .foregroundStyle(palette.accent)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 16)
+                        }
+                    }
+                }
+
+                // Searching indicator when book matches exist but verses still loading
+                if !viewModel.bookMatches.isEmpty && viewModel.results.isEmpty && viewModel.isSearching {
+                    HStack(spacing: 8) {
+                        ProgressView()
+                            .tint(palette.accent)
+                            .scaleEffect(0.7)
+                        Text("Searching verses...")
+                            .font(BPFont.caption)
+                            .foregroundStyle(palette.textMuted)
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 12)
                 }
             }
             .padding(.bottom, 20)
         }
     }
+
+    // MARK: - Book Match Row
+
+    private func bookMatchRow(_ match: BookNavigationMatch) -> some View {
+        HStack(spacing: 12) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(match.displayTitle)
+                    .font(BPFont.button)
+                    .foregroundStyle(palette.textPrimary)
+
+                Text(match.subtitle)
+                    .font(BPFont.caption)
+                    .foregroundStyle(palette.textMuted)
+            }
+
+            Spacer()
+
+            Image(systemName: "chevron.right")
+                .font(.system(size: 12, weight: .semibold))
+                .foregroundStyle(palette.accent)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
+    }
+
+    // MARK: - Verse Result Row
 
     private func resultRow(_ result: BibleSearchResult) -> some View {
         VStack(alignment: .leading, spacing: 4) {
@@ -207,7 +278,7 @@ struct BibleSearchView: View {
                 .foregroundStyle(palette.accent)
 
             if viewModel.query.trimmingCharacters(in: .whitespaces).count >= 3 {
-                Text("No Verses Found")
+                Text("No Results Found")
                     .font(BPFont.headingSmall)
                     .foregroundStyle(palette.textPrimary)
 
@@ -219,7 +290,7 @@ struct BibleSearchView: View {
                     .font(BPFont.headingSmall)
                     .foregroundStyle(palette.textPrimary)
 
-                Text("Type at least 3 characters\nto search across all books.")
+                Text("Search by book name, reference,\nor keyword.")
                     .font(BPFont.body)
                     .foregroundStyle(palette.textMuted)
                     .multilineTextAlignment(.center)
