@@ -116,7 +116,7 @@ final class BibleReaderViewModel {
     }
 
     func selectChapter(_ chapter: Int) {
-
+        guard chapter >= 1, chapter <= selectedBook.chapterCount else { return }
         selectedChapter = chapter
         lastReadVerseNumber = nil
         showBookPicker = false

@@ -102,7 +102,9 @@ struct SoundscapePickerView: View {
     @ViewBuilder
     private func soundscapeRow(_ soundscape: Soundscape, locked: Bool) -> some View {
         Button {
-            if locked {
+            if !soundscape.isAvailable {
+                // Coming soon — do nothing
+            } else if locked {
                 showPaywall = true
             } else {
                 HapticService.selection()

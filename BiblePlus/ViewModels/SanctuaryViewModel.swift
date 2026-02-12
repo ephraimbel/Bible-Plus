@@ -45,6 +45,8 @@ final class SanctuaryViewModel {
     }
 
     func selectSoundscape(_ soundscape: Soundscape) {
+        guard soundscape.isAvailable else { return }
+        guard !soundscape.isProOnly || profile.isPro else { return }
         soundscapeService.play(soundscape)
         personalizationService.updateSoundscape(soundscape.rawValue)
     }
