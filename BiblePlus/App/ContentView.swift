@@ -22,7 +22,7 @@ struct ContentView: View {
 
         var icon: String {
             switch self {
-            case .feed: "flame"
+            case .feed: "house.fill"
             case .bible: "book"
             case .ask: "bubble.left.and.bubble.right"
             case .saved: "bookmark"
