@@ -35,7 +35,7 @@
               "locale" : "en_US"
             }
           ],
-          "productID" : "com.bibleplus.pro.yearly",
+          "productID" : "io.bibleplus.pro.yearly",
           "recurringSubscriptionPeriod" : "P1Y",
           "referenceName" : "Bible+ Pro Yearly",
           "subscriptionGroupID" : "21514616",
@@ -62,7 +62,7 @@
               "locale" : "en_US"
             }
           ],
-          "productID" : "com.bibleplus.pro.weekly",
+          "productID" : "io.bibleplus.pro.weekly",
           "recurringSubscriptionPeriod" : "P1W",
           "referenceName" : "Bible+ Pro Weekly",
           "subscriptionGroupID" : "21514616",

@@ -2,7 +2,7 @@ import Foundation
 import SwiftData
 
 enum ContentSeeder {
-    private static let seedVersionKey = "com.bibleplus.lastSeedVersion"
+    private static let seedVersionKey = "io.bibleplus.lastSeedVersion"
 
     /// Seed the database with bundled content, supporting incremental updates.
     static func seedIfNeeded(modelContext: ModelContext) {
@@ -45,7 +45,7 @@ enum ContentSeeder {
         UserDefaults.standard.set(maxVersion, forKey: seedVersionKey)
     }
 
-    private static let migrationCompleteKey = "com.bibleplus.migrationComplete"
+    private static let migrationCompleteKey = "io.bibleplus.migrationComplete"
 
     /// Migrate orphaned chat messages from pre-threading era into a legacy conversation.
     static func migrateOrphanedMessages(modelContext: ModelContext) {

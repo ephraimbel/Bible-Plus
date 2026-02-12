@@ -1,6 +1,6 @@
 name: BiblePlus
 options:
-  bundleIdPrefix: com.bibleplus
+  bundleIdPrefix: io.bibleplus
   deploymentTarget:
     iOS: "17.0"
   xcodeVersion: "15.0"
@@ -51,7 +51,7 @@ targets:
         buildPhase: resources
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.bibleplus.app
+        PRODUCT_BUNDLE_IDENTIFIER: io.bibleplus.app
         INFOPLIST_FILE: BiblePlus/Info.plist
         CODE_SIGN_ENTITLEMENTS: BiblePlus/BiblePlus.entitlements
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
@@ -61,7 +61,7 @@ targets:
       path: BiblePlus/BiblePlus.entitlements
       properties:
         com.apple.security.application-groups:
-          - group.com.bibleplus.shared
+          - group.io.bibleplus.shared
     dependencies:
       - target: BiblePlusWidgets
         embed: true
@@ -79,7 +79,7 @@ targets:
           - "**/.DS_Store"
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.bibleplus.app.widgets
+        PRODUCT_BUNDLE_IDENTIFIER: io.bibleplus.app.widgets
         INFOPLIST_FILE: BiblePlusWidgets/Info.plist
         CODE_SIGN_ENTITLEMENTS: BiblePlusWidgets/BiblePlusWidgets.entitlements
         SKIP_INSTALL: YES
@@ -88,4 +88,4 @@ targets:
       path: BiblePlusWidgets/BiblePlusWidgets.entitlements
       properties:
         com.apple.security.application-groups:
-          - group.com.bibleplus.shared
+          - group.io.bibleplus.shared

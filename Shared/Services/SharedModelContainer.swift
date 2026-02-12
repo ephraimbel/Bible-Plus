@@ -14,7 +14,7 @@ enum SharedModelContainer {
         let config = ModelConfiguration(
             "BiblePlus",
             schema: schema,
-            groupContainer: .identifier("group.com.bibleplus.shared")
+            groupContainer: .identifier("group.io.bibleplus.shared")
         )
         return try ModelContainer(for: schema, configurations: [config])
     }

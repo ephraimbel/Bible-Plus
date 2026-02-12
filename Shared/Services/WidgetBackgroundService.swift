@@ -9,7 +9,7 @@ enum WidgetBackgroundService {
 
     static var sharedImageURL: URL? {
         FileManager.default
-            .containerURL(forSecurityApplicationGroupIdentifier: "group.com.bibleplus.shared")?
+            .containerURL(forSecurityApplicationGroupIdentifier: "group.io.bibleplus.shared")?
             .appendingPathComponent(fileName)
     }
 

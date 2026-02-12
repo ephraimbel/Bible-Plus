@@ -7,8 +7,8 @@ final class StoreKitService {
     private(set) var purchasedProductIDs: Set<String> = []
     private var transactionListener: Task<Void, Error>?
 
-    static let weeklyID = "com.bibleplus.pro.weekly"
-    static let yearlyID = "com.bibleplus.pro.yearly"
+    static let weeklyID = "io.bibleplus.pro.weekly"
+    static let yearlyID = "io.bibleplus.pro.yearly"
 
     var isPro: Bool { !purchasedProductIDs.isEmpty }
 
