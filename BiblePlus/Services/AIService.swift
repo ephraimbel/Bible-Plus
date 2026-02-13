@@ -66,7 +66,49 @@ enum AIService {
         - Bold Scripture references. Quote the verse text.
         - Set prayers apart from the rest of the response.
         - This is a conversation, not a lecture.
+
+        FOLLOW-UP SUGGESTIONS:
+        At the very end of every response, add exactly 3 short follow-up questions or prompts \
+        the user might want to ask next. Format them on the last line like this:
+        |||Suggestion one|||Suggestion two|||Suggestion three|||
+        Keep each suggestion under 8 words. Make them contextual to what you just discussed. \
+        Examples: "Explain the historical context", "Show me related verses", "Pray about this with me"
         """
+    }
+
+    // MARK: - Follow-Up Suggestion Parsing
+
+    /// Extracts follow-up suggestions from the AI response and returns
+    /// the cleaned content + suggestion array.
+    static func extractSuggestions(from content: String) -> (cleanedContent: String, suggestions: [String]) {
+        // Look for the |||suggestion||| pattern at the end
+        let pattern = #"\|\|\|(.+?)\|\|\|(.+?)\|\|\|(.+?)\|\|\|\s*$"#
+        guard let regex = try? NSRegularExpression(pattern: pattern),
+              let match = regex.firstMatch(in: content, range: NSRange(location: 0, length: (content as NSString).length))
+        else {
+            return (content, [])
+        }
+
+        var suggestions: [String] = []
+        for i in 1...3 {
+            if let range = Range(match.range(at: i), in: content) {
+                let suggestion = String(content[range]).trimmingCharacters(in: .whitespaces)
+                if !suggestion.isEmpty {
+                    suggestions.append(suggestion)
+                }
+            }
+        }
+
+        // Remove the suggestion line from content
+        let cleanedContent: String
+        if let matchRange = Range(match.range, in: content) {
+            cleanedContent = String(content[content.startIndex..<matchRange.lowerBound])
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+        } else {
+            cleanedContent = content
+        }
+
+        return (cleanedContent, suggestions)
     }
 
     // MARK: - Prayer Intent Detection

@@ -64,6 +64,11 @@ private struct ChatContentView: View {
                 messageList
             }
 
+            // Follow-up suggestion chips
+            if !viewModel.followUpSuggestions.isEmpty && !viewModel.isStreaming {
+                followUpChips
+            }
+
             // Error banner
             if let error = viewModel.errorMessage {
                 errorBanner(error)
@@ -84,6 +89,9 @@ private struct ChatContentView: View {
         .sheet(isPresented: $showPaywall) {
             SummaryPaywallView()
         }
+        .sheet(item: $viewModel.shareText) { text in
+            ShareSheet(text: text)
+        }
     }
 
     // MARK: - Message List
@@ -98,7 +106,16 @@ private struct ChatContentView: View {
                                 message: message,
                                 isStreaming: viewModel.isStreaming
                                     && message.id == viewModel.messages.last?.id
-                                    && message.role == .assistant
+                                    && message.role == .assistant,
+                                onSave: message.role == .assistant ? {
+                                    viewModel.saveResponse(message)
+                                } : nil,
+                                onShare: message.role == .assistant ? {
+                                    viewModel.prepareShare(message)
+                                } : nil,
+                                onScriptureTap: { bookName, chapter in
+                                    viewModel.navigateToScripture(bookName: bookName, chapter: chapter)
+                                }
                             )
                             .id(message.id)
                         }
@@ -122,6 +139,39 @@ private struct ChatContentView: View {
                 proxy.scrollTo(lastID, anchor: .bottom)
             }
         }
+    }
+
+    // MARK: - Follow-Up Chips
+
+    private var followUpChips: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(viewModel.followUpSuggestions, id: \.self) { suggestion in
+                    Button {
+                        viewModel.sendQuickPrompt(suggestion)
+                        HapticService.lightImpact()
+                    } label: {
+                        Text(suggestion)
+                            .font(.system(size: 13, weight: .medium, design: .rounded))
+                            .foregroundStyle(palette.accent)
+                            .padding(.horizontal, 14)
+                            .padding(.vertical, 8)
+                            .background(
+                                Capsule()
+                                    .fill(palette.accent.opacity(0.1))
+                            )
+                            .overlay(
+                                Capsule()
+                                    .stroke(palette.accent.opacity(0.25), lineWidth: 1)
+                            )
+                    }
+                }
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 8)
+        }
+        .transition(.move(edge: .bottom).combined(with: .opacity))
+        .animation(BPAnimation.spring, value: viewModel.followUpSuggestions)
     }
 
     // MARK: - Error Banner
@@ -217,4 +267,21 @@ private struct ChatContentView: View {
                 .shadow(color: .black.opacity(0.05), radius: 8, y: -4)
         )
     }
+}
+
+// MARK: - Share Sheet (plain text)
+
+private struct ShareSheet: UIViewControllerRepresentable {
+    let text: String
+
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        UIActivityViewController(activityItems: [text], applicationActivities: nil)
+    }
+
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
+}
+
+// Make String identifiable for sheet(item:)
+extension String: @retroactive Identifiable {
+    public var id: String { self }
 }

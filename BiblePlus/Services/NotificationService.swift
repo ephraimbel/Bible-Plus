@@ -266,4 +266,6 @@ final class NotificationService {
 
 extension Notification.Name {
     static let notificationDeepLink = Notification.Name("NotificationDeepLink")
+    static let scriptureDeepLink = Notification.Name("ScriptureDeepLink")
+    static let scriptureBibleNavigate = Notification.Name("ScriptureBibleNavigate")
 }

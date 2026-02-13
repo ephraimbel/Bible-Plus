@@ -7,6 +7,8 @@ struct BibleView: View {
     @Environment(AudioBibleService.self) private var audioBibleService
     @Environment(\.bpPalette) private var palette
     @State private var viewModel: BibleReaderViewModel?
+    @State private var pendingNavBookName: String?
+    @State private var pendingNavChapter: Int?
 
     var body: some View {
         NavigationStack {
@@ -16,13 +18,43 @@ struct BibleView: View {
                 } else {
                     BPLoadingView().onAppear {
                         viewModel = BibleReaderViewModel(modelContext: modelContext)
+                        applyPendingNavigation()
                     }
                 }
             }
             .background(palette.background)
             .toolbarBackground(palette.background, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
+            .onReceive(NotificationCenter.default.publisher(for: .scriptureBibleNavigate)) { notification in
+                guard let bookName = notification.userInfo?["bookName"] as? String,
+                      let chapter = notification.userInfo?["chapter"] as? Int
+                else { return }
+
+                if let vm = viewModel,
+                   let book = BibleData.allBooks.first(where: { $0.name == bookName }),
+                   chapter >= 1, chapter <= book.chapterCount {
+                    vm.selectBook(book)
+                    vm.selectChapter(chapter)
+                } else {
+                    // ViewModel not ready yet — store for later
+                    pendingNavBookName = bookName
+                    pendingNavChapter = chapter
+                }
+            }
         }
+    }
+
+    private func applyPendingNavigation() {
+        guard let bookName = pendingNavBookName,
+              let chapter = pendingNavChapter,
+              let vm = viewModel,
+              let book = BibleData.allBooks.first(where: { $0.name == bookName }),
+              chapter >= 1, chapter <= book.chapterCount
+        else { return }
+        pendingNavBookName = nil
+        pendingNavChapter = nil
+        vm.selectBook(book)
+        vm.selectChapter(chapter)
     }
 }
 

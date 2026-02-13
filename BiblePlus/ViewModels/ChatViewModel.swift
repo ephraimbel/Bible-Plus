@@ -11,6 +11,8 @@ final class ChatViewModel {
     var isStreaming: Bool = false
     var errorMessage: String? = nil
     var initialContext: String? = nil
+    var followUpSuggestions: [String] = []
+    var shareText: String? = nil
     let conversationId: UUID
 
     // MARK: - Private
@@ -100,6 +102,7 @@ final class ChatViewModel {
         }
 
         errorMessage = nil
+        followUpSuggestions = []
 
         // Add user message
         let userMessage = ChatMessage(
@@ -152,6 +155,35 @@ final class ChatViewModel {
         inputText = context
     }
 
+    // MARK: - Save / Share AI Response
+
+    func saveResponse(_ message: ChatMessage) {
+        let content = PrayerContent(
+            type: .devotional,
+            templateText: message.content,
+            category: "AI Companion",
+            isSaved: true
+        )
+        modelContext.insert(content)
+        try? modelContext.save()
+        HapticService.success()
+    }
+
+    func prepareShare(_ message: ChatMessage) {
+        shareText = message.content
+    }
+
+    // MARK: - Scripture Navigation
+
+    func navigateToScripture(bookName: String, chapter: Int) {
+        // Post notification for ContentView to handle tab switch + navigation
+        NotificationCenter.default.post(
+            name: .scriptureDeepLink,
+            object: nil,
+            userInfo: ["bookName": bookName, "chapter": chapter]
+        )
+    }
+
     // MARK: - Clear
 
     func clearConversation() {
@@ -191,6 +223,13 @@ final class ChatViewModel {
         do {
             try await AIService.streamCompletion(messages: apiMessages) { token in
                 assistantMessage.content += token
+            }
+
+            // Extract follow-up suggestions from the response
+            let (cleaned, suggestions) = AIService.extractSuggestions(from: assistantMessage.content)
+            if !suggestions.isEmpty {
+                assistantMessage.content = cleaned
+                followUpSuggestions = suggestions
             }
         } catch {
             if assistantMessage.content.isEmpty {

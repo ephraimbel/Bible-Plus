@@ -208,7 +208,7 @@ struct SummaryPaywallView: View {
             trustDot
             trustItem(icon: "hand.raised.fill", label: "Private")
             trustDot
-            trustItem(icon: "xmark.circle.fill", label: "Ad-free")
+            trustItem(icon: "arrow.uturn.left.circle.fill", label: "Cancel Anytime")
         }
         .padding(.top, 28)
         .opacity(showFeatures ? 1 : 0)
@@ -440,7 +440,7 @@ struct SummaryPaywallView: View {
     private var ctaSection: some View {
         VStack(spacing: 10) {
             GoldButton(
-                title: isPurchasing ? "Processing..." : "Try Free for 3 Days",
+                title: isPurchasing ? "Processing..." : ctaButtonTitle,
                 isEnabled: !isPurchasing,
                 showGlow: true
             ) {
@@ -448,7 +448,7 @@ struct SummaryPaywallView: View {
             }
             .padding(.horizontal, 32)
 
-            Text("Free trial auto-renews at \(selectedPriceDescription). Cancel anytime in Settings > Subscriptions.")
+            Text(ctaSubtitle)
                 .font(.system(size: 12, weight: .regular, design: .rounded))
                 .foregroundStyle(.white.opacity(0.35))
                 .multilineTextAlignment(.center)
@@ -459,11 +459,18 @@ struct SummaryPaywallView: View {
         .offset(y: showCTA ? 0 : 12)
     }
 
-    private var selectedPriceDescription: String {
+    private var ctaButtonTitle: String {
         if selectedProductID == StoreKitService.yearlyID {
-            return "\(yearlyPriceLabel)/year"
+            return "Try Free for 3 Days"
         }
-        return "\(weeklyPriceLabel)/week"
+        return "Subscribe Now"
+    }
+
+    private var ctaSubtitle: String {
+        if selectedProductID == StoreKitService.yearlyID {
+            return "3-day free trial, then \(yearlyPriceLabel)/year. Cancel anytime."
+        }
+        return "\(weeklyPriceLabel)/week. Cancel anytime."
     }
 
     // MARK: - Section 6: Footer

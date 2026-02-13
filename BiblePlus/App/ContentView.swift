@@ -6,6 +6,8 @@ struct ContentView: View {
     @State private var selectedTab: Tab = .feed
     @State private var soundscapeService = SoundscapeService()
     @State private var audioBibleService = AudioBibleService()
+    @State private var scriptureNavBookName: String?
+    @State private var scriptureNavChapter: Int?
 
     enum Tab: String, CaseIterable {
         case feed, bible, ask, saved, settings
@@ -64,8 +66,29 @@ struct ContentView: View {
         .onChange(of: deepLinkedContentID) { _, newValue in
             if newValue != nil {
                 selectedTab = .feed
-                // Reset after handling so future deep links with the same ID still trigger
                 deepLinkedContentID = nil
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .scriptureDeepLink)) { notification in
+            if let bookName = notification.userInfo?["bookName"] as? String,
+               let chapter = notification.userInfo?["chapter"] as? Int {
+                scriptureNavBookName = bookName
+                scriptureNavChapter = chapter
+                selectedTab = .bible
+            }
+        }
+        .onChange(of: selectedTab) { _, newTab in
+            // When Bible tab becomes active, post the navigation details
+            if newTab == .bible, let bookName = scriptureNavBookName, let chapter = scriptureNavChapter {
+                scriptureNavBookName = nil
+                scriptureNavChapter = nil
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    NotificationCenter.default.post(
+                        name: .scriptureBibleNavigate,
+                        object: nil,
+                        userInfo: ["bookName": bookName, "chapter": chapter]
+                    )
+                }
             }
         }
     }

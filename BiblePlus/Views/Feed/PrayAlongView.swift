@@ -13,10 +13,11 @@ struct PrayAlongView: View {
 
     var body: some View {
         ZStack {
-            // Layer 1: Background
+            // Layer 1: Background (edge-to-edge)
             backgroundLayer
+                .ignoresSafeArea()
 
-            // Layer 2: Vignette — deeper than feed cards for focused reading
+            // Layer 2: Vignette (edge-to-edge)
             RadialGradient(
                 colors: [
                     Color.black.opacity(0.15),
@@ -26,11 +27,11 @@ struct PrayAlongView: View {
                 startRadius: 120,
                 endRadius: 500
             )
+            .ignoresSafeArea()
 
-            // Layer 3: Content
+            // Layer 3: Content (respects safe area so buttons stay tappable)
             VStack(spacing: 0) {
                 topBar
-                    .padding(.top, 12)
 
                 // Prayer body
                 ScrollView(.vertical, showsIndicators: false) {
@@ -77,12 +78,11 @@ struct PrayAlongView: View {
 
                 // Bottom controls
                 bottomBar
-                    .padding(.bottom, 44)
+                    .padding(.bottom, 10)
                     .opacity(showControls ? 1 : 0)
                     .offset(y: showControls ? 0 : 16)
             }
         }
-        .ignoresSafeArea()
         .statusBarHidden()
         .onAppear {
             withAnimation(BPAnimation.spring.delay(0.1)) {
