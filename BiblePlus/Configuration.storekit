@@ -49,12 +49,7 @@
           "familyShareable" : false,
           "groupNumber" : 2,
           "internalID" : "C3D4E5F6",
-          "introductoryOffer" : {
-            "displayPrice" : "0",
-            "internalID" : "G7H8I9J0",
-            "paymentMode" : "free",
-            "subscriptionPeriod" : "P3D"
-          },
+          "introductoryOffer" : null,
           "localizations" : [
             {
               "description" : "Full access to Bible+ Pro — billed weekly",
