@@ -43,3 +43,6 @@ Thumbs.db
 *.env
 Secrets.swift
 Shared/Secrets.swift
+
+# Supabase
+supabase/.temp/
