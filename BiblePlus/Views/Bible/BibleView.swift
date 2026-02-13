@@ -72,6 +72,8 @@ private struct BibleContentView: View {
     @State private var showVoicePicker = false
     @State private var showImmersiveListening = false
     @State private var showPaywall = false
+    @State private var showReadingPlans = false
+    @State private var verseImageData: (text: String, reference: String, translation: String)?
 
     // MARK: - Page Flip State
 
@@ -82,6 +84,7 @@ private struct BibleContentView: View {
     @State private var cachedChapterTitle: String = ""
     @State private var cachedSavedVerseNumbers: Set<Int> = []
     @State private var cachedHighlightColors: [Int: VerseHighlightColor] = [:]
+    @State private var cachedVerseNotes: [Int: String] = [:]
 
     private var resolvedBackground: SanctuaryBackground {
         let descriptor = FetchDescriptor<UserProfile>()
@@ -142,7 +145,8 @@ private struct BibleContentView: View {
         guard !viewModel.verses.isEmpty else { return }
 
         // Set up auto-advance
-        audioService.setOnChapterComplete {
+        audioService.setOnChapterComplete { [modelContext] in
+            ActivityService.log(.audioChapterCompleted, detail: "\(viewModel.selectedBook.name) \(viewModel.selectedChapter)", in: modelContext)
             if viewModel.canGoForward {
                 viewModel.goToNextChapter()
                 Task {
@@ -215,6 +219,7 @@ private struct BibleContentView: View {
         cachedChapterTitle = viewModel.chapterTitle
         cachedSavedVerseNumbers = viewModel.savedVerseNumbers
         cachedHighlightColors = viewModel.highlightColors
+        cachedVerseNotes = viewModel.verseNotes
         flipAnchor = forward ? .leading : .trailing
         flipAngle = 0
         isPageFlipping = true
@@ -253,6 +258,7 @@ private struct BibleContentView: View {
                     offlineTranslationName: viewModel.translationName,
                     savedVerseNumbers: viewModel.savedVerseNumbers,
                     highlightColors: viewModel.highlightColors,
+                    verseNotes: viewModel.verseNotes,
                     audioVerseIndex: audioService.isPlaying ? audioService.currentVerseIndex : nil,
                     lastReadVerseNumber: viewModel.lastReadVerseNumber,
                     readerFontSize: viewModel.readerFontSize,
@@ -281,6 +287,7 @@ private struct BibleContentView: View {
                         offlineTranslationName: "",
                         savedVerseNumbers: cachedSavedVerseNumbers,
                         highlightColors: cachedHighlightColors,
+                        verseNotes: cachedVerseNotes,
                         audioVerseIndex: nil,
                         lastReadVerseNumber: nil,
                         readerFontSize: viewModel.readerFontSize,
@@ -398,7 +405,12 @@ private struct BibleContentView: View {
                     verse: verse,
                     reference: viewModel.verseReference(for: verse),
                     isSaved: viewModel.isVerseSaved(verse.number),
+                    isPro: {
+                        let descriptor = FetchDescriptor<UserProfile>()
+                        return (try? modelContext.fetch(descriptor).first?.isPro) ?? false
+                    }(),
                     currentHighlight: viewModel.highlightColor(for: verse.number),
+                    currentNote: viewModel.noteText(for: verse.number),
                     onExplain: {
                         // Verse explain counts toward AI rate limit
                         let descriptor = FetchDescriptor<UserProfile>()
@@ -440,6 +452,9 @@ private struct BibleContentView: View {
                     onRemoveHighlight: {
                         viewModel.removeHighlight(verse)
                     },
+                    onSaveNote: { note in
+                        viewModel.saveNote(for: verse, note: note)
+                    },
                     onPlayFromHere: {
                         let verseIndex = viewModel.verses.firstIndex(where: { $0.number == verse.number }) ?? 0
                         viewModel.selectedVerse = nil
@@ -457,7 +472,8 @@ private struct BibleContentView: View {
                                 return
                             }
 
-                            audioService.setOnChapterComplete {
+                            audioService.setOnChapterComplete { [modelContext] in
+                                ActivityService.log(.audioChapterCompleted, detail: "\(viewModel.selectedBook.name) \(viewModel.selectedChapter)", in: modelContext)
                                 if viewModel.canGoForward {
                                     viewModel.goToNextChapter()
                                     Task {
@@ -483,6 +499,18 @@ private struct BibleContentView: View {
                                 versesProvider: versesProvider
                             )
                         }
+                    },
+                    onCreateVerseImage: {
+                        verseImageData = (
+                            text: verse.text,
+                            reference: viewModel.verseReference(for: verse),
+                            translation: viewModel.currentTranslation.displayName
+                        )
+                        viewModel.selectedVerse = nil
+                    },
+                    onShowPaywall: {
+                        viewModel.selectedVerse = nil
+                        showPaywall = true
                     },
                     onDismiss: {
                         viewModel.selectedVerse = nil
@@ -572,6 +600,16 @@ private struct BibleContentView: View {
                             .foregroundStyle(palette.accent)
                     }
                     .accessibilityLabel("Search Bible")
+
+                    // Reading Plans
+                    Button {
+                        showReadingPlans = true
+                    } label: {
+                        Image(systemName: "book.pages")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundStyle(palette.accent)
+                    }
+                    .accessibilityLabel("Reading Plans")
 
                     // More options menu
                     Menu {
@@ -675,6 +713,18 @@ private struct BibleContentView: View {
                 ShareSheetView(items: [text])
             }
         }
+        .sheet(isPresented: Binding(
+            get: { verseImageData != nil },
+            set: { if !$0 { verseImageData = nil } }
+        )) {
+            if let data = verseImageData {
+                VerseImageSheet(
+                    verseText: data.text,
+                    reference: data.reference,
+                    translation: data.translation
+                )
+            }
+        }
         .sheet(isPresented: $showVoicePicker) {
             VoicePickerView(
                 audioService: audioService,
@@ -725,6 +775,24 @@ private struct BibleContentView: View {
         }
         .sheet(isPresented: $showPaywall) {
             SummaryPaywallView()
+        }
+        .sheet(isPresented: $showReadingPlans) {
+            ReadingPlansView(
+                isPro: {
+                    let descriptor = FetchDescriptor<UserProfile>()
+                    return (try? modelContext.fetch(descriptor).first?.isPro) ?? false
+                }(),
+                onReadChapter: { bookName, chapter in
+                    showReadingPlans = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                        NotificationCenter.default.post(
+                            name: .scriptureBibleNavigate,
+                            object: nil,
+                            userInfo: ["bookName": bookName, "chapter": chapter]
+                        )
+                    }
+                }
+            )
         }
         .fullScreenCover(isPresented: $showImmersiveListening) {
             ImmersiveListeningView(

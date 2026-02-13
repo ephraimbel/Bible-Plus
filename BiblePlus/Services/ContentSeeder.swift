@@ -45,6 +45,48 @@ enum ContentSeeder {
         UserDefaults.standard.set(maxVersion, forKey: seedVersionKey)
     }
 
+    // MARK: - Reading Plans Seeder
+
+    private static let plansSeedVersionKey = "io.bibleplus.lastPlansSeedVersion"
+
+    static func seedPlansIfNeeded(modelContext: ModelContext) {
+        let lastVersion = UserDefaults.standard.integer(forKey: plansSeedVersionKey)
+
+        guard let url = Bundle.main.url(forResource: "reading-plans", withExtension: "json"),
+              let data = try? Data(contentsOf: url)
+        else { return }
+
+        let decoder = JSONDecoder()
+        guard let items = try? decoder.decode([SeedPlanItem].self, from: data) else { return }
+
+        let newItems = items.filter { $0.seedVersion > lastVersion }
+        guard !newItems.isEmpty else { return }
+
+        var maxVersion = lastVersion
+        for item in newItems {
+            let plan = ReadingPlan(
+                id: item.id,
+                name: item.name,
+                planDescription: item.description,
+                totalDays: item.totalDays,
+                category: item.category,
+                gradientColors: item.gradientColors,
+                iconName: item.iconName,
+                days: item.days,
+                applicableSeasons: item.applicableSeasons,
+                applicableBurdens: item.applicableBurdens,
+                faithLevelMin: item.faithLevelMin,
+                isProOnly: item.isProOnly,
+                seedVersion: item.seedVersion
+            )
+            modelContext.insert(plan)
+            maxVersion = max(maxVersion, item.seedVersion)
+        }
+
+        try? modelContext.save()
+        UserDefaults.standard.set(maxVersion, forKey: plansSeedVersionKey)
+    }
+
     private static let migrationCompleteKey = "io.bibleplus.migrationComplete"
 
     /// Migrate orphaned chat messages from pre-threading era into a legacy conversation.
@@ -105,6 +147,22 @@ struct SeedContentItem: Decodable {
     let applicableSeasons: [LifeSeason]
     let applicableBurdens: [Burden]
     let faithLevelMin: FaithLevel
+    let isProOnly: Bool
+    let seedVersion: Int
+}
+
+struct SeedPlanItem: Decodable {
+    let id: String
+    let name: String
+    let description: String
+    let totalDays: Int
+    let category: String
+    let gradientColors: [String]
+    let iconName: String
+    let days: [PlanDay]
+    let applicableSeasons: [String]
+    let applicableBurdens: [String]
+    let faithLevelMin: String
     let isProOnly: Bool
     let seedVersion: Int
 }

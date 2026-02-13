@@ -292,6 +292,48 @@ final class BibleSearchViewModel {
             errorMessage = nil
         }
 
+        if currentTranslation.isBundled {
+            await fetchBundledPage(page: page, append: append)
+        } else {
+            await fetchAPIPage(page: page, append: append)
+        }
+    }
+
+    private func fetchBundledPage(page: Int, append: Bool) async {
+        let trimmed = query.trimmingCharacters(in: .whitespaces)
+        let offset = (page - 1) * pageLimit
+
+        let response = BibleRepository.shared.searchBundled(
+            query: trimmed,
+            translation: currentTranslation,
+            limit: pageLimit,
+            offset: offset
+        )
+
+        guard !Task.isCancelled else { return }
+
+        let mapped = response.results.compactMap { result -> BibleSearchResult? in
+            guard let book = BibleData.book(id: result.bookID) else { return nil }
+            return BibleSearchResult(
+                book: book,
+                chapter: result.chapter,
+                verseNumber: result.verse,
+                text: result.text
+            )
+        }
+
+        if append {
+            results.append(contentsOf: mapped)
+        } else {
+            results = mapped
+        }
+
+        totalResults = response.total
+        hasMoreResults = results.count < response.total
+        isSearching = false
+    }
+
+    private func fetchAPIPage(page: Int, append: Bool) async {
         do {
             let response = try await BibleAPIService.searchVerses(
                 translation: currentTranslation.apiCode,

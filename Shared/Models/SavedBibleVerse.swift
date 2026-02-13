@@ -11,6 +11,7 @@ final class SavedBibleVerse {
     var text: String = ""
     var translation: String = "KJV"
     var highlightColorRaw: String? = nil
+    var notes: String = ""
     var createdAt: Date = Date()
     var updatedAt: Date = Date()
 
@@ -31,7 +32,8 @@ final class SavedBibleVerse {
         verseNumber: Int,
         text: String,
         translation: String,
-        highlightColor: VerseHighlightColor? = nil
+        highlightColor: VerseHighlightColor? = nil,
+        notes: String = ""
     ) {
         self.id = UUID()
         self.bookID = bookID
@@ -41,6 +43,7 @@ final class SavedBibleVerse {
         self.text = text
         self.translation = translation
         self.highlightColorRaw = highlightColor?.rawValue
+        self.notes = notes
         self.createdAt = Date()
         self.updatedAt = Date()
     }

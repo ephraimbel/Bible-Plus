@@ -1,0 +1,1404 @@
+[
+  {
+    "id": "psalms-of-peace",
+    "name": "Psalms of Peace",
+    "description": "A 7-day journey through the psalms that speak directly to your anxious heart, guiding you toward the stillness and peace only God can give.",
+    "totalDays": 7,
+    "category": "Comfort",
+    "gradientColors": ["#4A6741", "#2D4A3E"],
+    "iconName": "leaf.fill",
+    "applicableSeasons": ["hardSeason"],
+    "applicableBurdens": ["anxiety", "grief"],
+    "faithLevelMin": "justCurious",
+    "isProOnly": false,
+    "seedVersion": 1,
+    "days": [
+      {
+        "day": 1,
+        "title": "The Shepherd's Care",
+        "readings": [
+          { "bookID": "PSA", "chapter": 23, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What does it mean for God to be your shepherd in this season of your life?"
+      },
+      {
+        "day": 2,
+        "title": "Confident in the Light",
+        "readings": [
+          { "bookID": "PSA", "chapter": 27, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "When have you experienced God as your light in a moment of darkness?"
+      },
+      {
+        "day": 3,
+        "title": "Taste and See",
+        "readings": [
+          { "bookID": "PSA", "chapter": 34, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How has God delivered you from a fear that once held you captive?"
+      },
+      {
+        "day": 4,
+        "title": "God Is Our Refuge",
+        "readings": [
+          { "bookID": "PSA", "chapter": 46, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Where do you need to 'be still and know' that He is God today?"
+      },
+      {
+        "day": 5,
+        "title": "Under His Wings",
+        "readings": [
+          { "bookID": "PSA", "chapter": 91, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What does it feel like to dwell in the shelter of the Most High?"
+      },
+      {
+        "day": 6,
+        "title": "The Keeper Who Never Sleeps",
+        "readings": [
+          { "bookID": "PSA", "chapter": 121, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does knowing God never slumbers change the way you face tonight?"
+      },
+      {
+        "day": 7,
+        "title": "Fearfully and Wonderfully Made",
+        "readings": [
+          { "bookID": "PSA", "chapter": 139, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What truth about how God knows you brings the most comfort right now?"
+      }
+    ]
+  },
+  {
+    "id": "gospel-of-john",
+    "name": "The Gospel of John",
+    "description": "Walk through the entire Gospel of John in 21 days and encounter Jesus — the Word made flesh — one chapter at a time.",
+    "totalDays": 21,
+    "category": "Gospel",
+    "gradientColors": ["#8B6914", "#5C4A1C"],
+    "iconName": "book.fill",
+    "applicableSeasons": ["hardSeason", "newlyMarried", "parenthood", "student", "workingProfessional", "retired", "startingOver", "growing"],
+    "applicableBurdens": ["anxiety", "grief", "purpose", "relationships", "health", "faith"],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 1,
+    "days": [
+      {
+        "day": 1,
+        "title": "The Word Made Flesh",
+        "readings": [
+          { "bookID": "JHN", "chapter": 1, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What does it mean to you that Jesus existed before all things and chose to dwell among us?"
+      },
+      {
+        "day": 2,
+        "title": "Water into Wine",
+        "readings": [
+          { "bookID": "JHN", "chapter": 2, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Where in your life do you need Jesus to transform the ordinary into something miraculous?"
+      },
+      {
+        "day": 3,
+        "title": "You Must Be Born Again",
+        "readings": [
+          { "bookID": "JHN", "chapter": 3, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does the idea of being 'born again' challenge or encourage your understanding of faith?"
+      },
+      {
+        "day": 4,
+        "title": "Living Water",
+        "readings": [
+          { "bookID": "JHN", "chapter": 4, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What wells are you drawing from that leave you thirsty, and what would living water look like?"
+      },
+      {
+        "day": 5,
+        "title": "Healing at the Pool",
+        "readings": [
+          { "bookID": "JHN", "chapter": 5, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Is there an area where you've been waiting for healing but haven't fully asked Jesus for it?"
+      },
+      {
+        "day": 6,
+        "title": "Bread of Life",
+        "readings": [
+          { "bookID": "JHN", "chapter": 6, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What does it look like to feed on Jesus as the bread of life each day?"
+      },
+      {
+        "day": 7,
+        "title": "Rivers of Living Water",
+        "readings": [
+          { "bookID": "JHN", "chapter": 7, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How do you respond when the world's opinions about Jesus conflict with your own experience of Him?"
+      },
+      {
+        "day": 8,
+        "title": "The Light of the World",
+        "readings": [
+          { "bookID": "JHN", "chapter": 8, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Where do you need Jesus to shine His light into a place of shame or darkness?"
+      },
+      {
+        "day": 9,
+        "title": "Sight for the Blind",
+        "readings": [
+          { "bookID": "JHN", "chapter": 9, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What is one area of spiritual blindness you'd like Jesus to open your eyes to?"
+      },
+      {
+        "day": 10,
+        "title": "The Good Shepherd",
+        "readings": [
+          { "bookID": "JHN", "chapter": 10, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does knowing that Jesus laid down His life willingly change your view of His love?"
+      },
+      {
+        "day": 11,
+        "title": "Lazarus, Come Forth",
+        "readings": [
+          { "bookID": "JHN", "chapter": 11, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What dead area in your life do you need Jesus to call back to life?"
+      },
+      {
+        "day": 12,
+        "title": "Anointed for Burial",
+        "readings": [
+          { "bookID": "JHN", "chapter": 12, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What is the most extravagant act of worship you could offer to Jesus today?"
+      },
+      {
+        "day": 13,
+        "title": "The Servant King",
+        "readings": [
+          { "bookID": "JHN", "chapter": 13, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Whose feet is Jesus asking you to wash through humble service this week?"
+      },
+      {
+        "day": 14,
+        "title": "The Way, the Truth, the Life",
+        "readings": [
+          { "bookID": "JHN", "chapter": 14, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does Jesus' promise to prepare a place for you affect the way you live today?"
+      },
+      {
+        "day": 15,
+        "title": "The True Vine",
+        "readings": [
+          { "bookID": "JHN", "chapter": 15, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What does it practically look like for you to 'abide' in Jesus this week?"
+      },
+      {
+        "day": 16,
+        "title": "The Helper Is Coming",
+        "readings": [
+          { "bookID": "JHN", "chapter": 16, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How have you experienced the Holy Spirit guiding you into truth?"
+      },
+      {
+        "day": 17,
+        "title": "Jesus Prays for You",
+        "readings": [
+          { "bookID": "JHN", "chapter": 17, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does it feel to know that Jesus personally prayed for your unity with Him and the Father?"
+      },
+      {
+        "day": 18,
+        "title": "Betrayal and Arrest",
+        "readings": [
+          { "bookID": "JHN", "chapter": 18, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "When have you, like Peter, denied knowing Jesus through your words or actions?"
+      },
+      {
+        "day": 19,
+        "title": "It Is Finished",
+        "readings": [
+          { "bookID": "JHN", "chapter": 19, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What burden are you carrying that Jesus already finished on the cross?"
+      },
+      {
+        "day": 20,
+        "title": "He Is Risen",
+        "readings": [
+          { "bookID": "JHN", "chapter": 20, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does the reality of the resurrection change the way you face your greatest fear?"
+      },
+      {
+        "day": 21,
+        "title": "Do You Love Me?",
+        "readings": [
+          { "bookID": "JHN", "chapter": 21, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "If Jesus asked you 'Do you love me?' three times today, how would your answer shape your actions?"
+      }
+    ]
+  },
+  {
+    "id": "30-days-of-wisdom",
+    "name": "30 Days of Wisdom",
+    "description": "One chapter of Proverbs for each day of the month — timeless wisdom for decisions, relationships, work, and daily life.",
+    "totalDays": 30,
+    "category": "Wisdom",
+    "gradientColors": ["#6B4C8A", "#3D2B5C"],
+    "iconName": "lightbulb.fill",
+    "applicableSeasons": ["workingProfessional", "parenthood"],
+    "applicableBurdens": ["purpose"],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 1,
+    "days": [
+      {
+        "day": 1,
+        "title": "The Beginning of Wisdom",
+        "readings": [
+          { "bookID": "PRO", "chapter": 1, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What does it mean for the fear of the Lord to be the starting point of all wisdom?"
+      },
+      {
+        "day": 2,
+        "title": "Seeking Hidden Treasure",
+        "readings": [
+          { "bookID": "PRO", "chapter": 2, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How intentionally are you searching for wisdom the way you would search for hidden treasure?"
+      },
+      {
+        "day": 3,
+        "title": "Trust with All Your Heart",
+        "readings": [
+          { "bookID": "PRO", "chapter": 3, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What decision are you facing where you need to trust God rather than lean on your own understanding?"
+      },
+      {
+        "day": 4,
+        "title": "Guard Your Heart",
+        "readings": [
+          { "bookID": "PRO", "chapter": 4, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What are you allowing into your heart that may be pulling you away from the path of wisdom?"
+      },
+      {
+        "day": 5,
+        "title": "The Danger of Foolishness",
+        "readings": [
+          { "bookID": "PRO", "chapter": 5, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Where in your life are you most tempted to take shortcuts that lead away from God's best?"
+      },
+      {
+        "day": 6,
+        "title": "Lessons from the Ant",
+        "readings": [
+          { "bookID": "PRO", "chapter": 6, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What can the diligence of the ant teach you about your current responsibilities?"
+      },
+      {
+        "day": 7,
+        "title": "The Cost of Temptation",
+        "readings": [
+          { "bookID": "PRO", "chapter": 7, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What boundaries do you need to set to protect yourself from temptation?"
+      },
+      {
+        "day": 8,
+        "title": "Wisdom Calls Out",
+        "readings": [
+          { "bookID": "PRO", "chapter": 8, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How do you recognize the voice of wisdom calling to you amid the noise of daily life?"
+      },
+      {
+        "day": 9,
+        "title": "Two Invitations",
+        "readings": [
+          { "bookID": "PRO", "chapter": 9, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Which invitation are you accepting more often — wisdom's feast or folly's shortcut?"
+      },
+      {
+        "day": 10,
+        "title": "The Wise Son",
+        "readings": [
+          { "bookID": "PRO", "chapter": 10, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does your character at home reflect the wisdom you seek in public?"
+      },
+      {
+        "day": 11,
+        "title": "Honest Scales",
+        "readings": [
+          { "bookID": "PRO", "chapter": 11, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Where in your life do you need to pursue greater honesty and integrity?"
+      },
+      {
+        "day": 12,
+        "title": "Words That Heal",
+        "readings": [
+          { "bookID": "PRO", "chapter": 12, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How can your words today bring healing instead of harm to someone around you?"
+      },
+      {
+        "day": 13,
+        "title": "Walking with the Wise",
+        "readings": [
+          { "bookID": "PRO", "chapter": 13, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Who are the wise companions in your life, and how can you learn more from them?"
+      },
+      {
+        "day": 14,
+        "title": "The Way That Seems Right",
+        "readings": [
+          { "bookID": "PRO", "chapter": 14, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "When has a path that seemed right to you turned out to lead in the wrong direction?"
+      },
+      {
+        "day": 15,
+        "title": "A Gentle Answer",
+        "readings": [
+          { "bookID": "PRO", "chapter": 15, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Who in your life needs a gentle answer from you instead of a harsh word?"
+      },
+      {
+        "day": 16,
+        "title": "Commit Your Plans",
+        "readings": [
+          { "bookID": "PRO", "chapter": 16, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What plans are you holding onto that you need to commit fully to the Lord?"
+      },
+      {
+        "day": 17,
+        "title": "A Friend at All Times",
+        "readings": [
+          { "bookID": "PRO", "chapter": 17, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How can you be a more faithful friend to someone who is walking through adversity?"
+      },
+      {
+        "day": 18,
+        "title": "A Strong Tower",
+        "readings": [
+          { "bookID": "PRO", "chapter": 18, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "When trouble comes, do you run first to the name of the Lord or to something else?"
+      },
+      {
+        "day": 19,
+        "title": "Kindness to the Poor",
+        "readings": [
+          { "bookID": "PRO", "chapter": 19, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How can you show generosity to someone in need this week as an act of worship?"
+      },
+      {
+        "day": 20,
+        "title": "The King's Heart",
+        "readings": [
+          { "bookID": "PRO", "chapter": 20, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does trusting God's sovereignty over leaders and nations change the way you pray?"
+      },
+      {
+        "day": 21,
+        "title": "Justice and Righteousness",
+        "readings": [
+          { "bookID": "PRO", "chapter": 21, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Where can you pursue justice and righteousness more faithfully in your everyday life?"
+      },
+      {
+        "day": 22,
+        "title": "A Good Name",
+        "readings": [
+          { "bookID": "PRO", "chapter": 22, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What kind of reputation are you building, and does it reflect the character of Christ?"
+      },
+      {
+        "day": 23,
+        "title": "Do Not Envy",
+        "readings": [
+          { "bookID": "PRO", "chapter": 23, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What triggers envy in your heart, and how can gratitude replace it?"
+      },
+      {
+        "day": 24,
+        "title": "Strength in Trouble",
+        "readings": [
+          { "bookID": "PRO", "chapter": 24, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How do you respond when adversity tests the strength of your faith?"
+      },
+      {
+        "day": 25,
+        "title": "Apples of Gold",
+        "readings": [
+          { "bookID": "PRO", "chapter": 25, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "When was the last time someone's well-timed words were like apples of gold to you?"
+      },
+      {
+        "day": 26,
+        "title": "The Sluggard's Mirror",
+        "readings": [
+          { "bookID": "PRO", "chapter": 26, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What area of laziness or procrastination is holding you back from God's best for you?"
+      },
+      {
+        "day": 27,
+        "title": "Iron Sharpens Iron",
+        "readings": [
+          { "bookID": "PRO", "chapter": 27, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Who in your life sharpens you, and are you intentionally investing in that relationship?"
+      },
+      {
+        "day": 28,
+        "title": "The Righteous Are Bold",
+        "readings": [
+          { "bookID": "PRO", "chapter": 28, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Where do you need more boldness to stand for what is right?"
+      },
+      {
+        "day": 29,
+        "title": "Vision and Obedience",
+        "readings": [
+          { "bookID": "PRO", "chapter": 29, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does having a vision rooted in God's Word keep you from wandering aimlessly?"
+      },
+      {
+        "day": 30,
+        "title": "Every Word of God",
+        "readings": [
+          { "bookID": "PRO", "chapter": 30, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What does Agur's prayer — 'give me neither poverty nor riches' — teach you about contentment?"
+      }
+    ]
+  },
+  {
+    "id": "romans-heart-of-the-gospel",
+    "name": "Romans: Heart of the Gospel",
+    "description": "A 16-day deep dive into Paul's letter to the Romans — the most complete presentation of the gospel ever written.",
+    "totalDays": 16,
+    "category": "Theology",
+    "gradientColors": ["#8B3A3A", "#5C2424"],
+    "iconName": "flame.fill",
+    "applicableSeasons": ["growing"],
+    "applicableBurdens": ["faith"],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 1,
+    "days": [
+      {
+        "day": 1,
+        "title": "The Gospel of God",
+        "readings": [
+          { "bookID": "ROM", "chapter": 1, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Are you ever ashamed of the gospel, and what would it look like to live unashamed?"
+      },
+      {
+        "day": 2,
+        "title": "God's Righteous Judgment",
+        "readings": [
+          { "bookID": "ROM", "chapter": 2, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does knowing that God judges impartially affect the way you judge others?"
+      },
+      {
+        "day": 3,
+        "title": "All Have Sinned",
+        "readings": [
+          { "bookID": "ROM", "chapter": 3, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does the reality that all have sinned level the ground between you and everyone else?"
+      },
+      {
+        "day": 4,
+        "title": "Faith like Abraham",
+        "readings": [
+          { "bookID": "ROM", "chapter": 4, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What impossible promise from God are you being called to believe by faith?"
+      },
+      {
+        "day": 5,
+        "title": "Peace with God",
+        "readings": [
+          { "bookID": "ROM", "chapter": 5, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does knowing that suffering produces perseverance change the way you view your trials?"
+      },
+      {
+        "day": 6,
+        "title": "Dead to Sin, Alive in Christ",
+        "readings": [
+          { "bookID": "ROM", "chapter": 6, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What sin do you need to consider yourself dead to so that you can live fully for Christ?"
+      },
+      {
+        "day": 7,
+        "title": "The Struggle Within",
+        "readings": [
+          { "bookID": "ROM", "chapter": 7, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does Paul's honest struggle with sin encourage you in your own battle?"
+      },
+      {
+        "day": 8,
+        "title": "No Condemnation",
+        "readings": [
+          { "bookID": "ROM", "chapter": 8, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What condemnation are you still carrying that Christ has already removed?"
+      },
+      {
+        "day": 9,
+        "title": "God's Sovereign Choice",
+        "readings": [
+          { "bookID": "ROM", "chapter": 9, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How do you respond to the mystery of God's sovereignty and human responsibility?"
+      },
+      {
+        "day": 10,
+        "title": "The Word Is Near You",
+        "readings": [
+          { "bookID": "ROM", "chapter": 10, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Who in your life needs to hear the good news, and what is holding you back from sharing it?"
+      },
+      {
+        "day": 11,
+        "title": "The Olive Tree",
+        "readings": [
+          { "bookID": "ROM", "chapter": 11, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does understanding your place as a 'grafted in' branch deepen your gratitude?"
+      },
+      {
+        "day": 12,
+        "title": "A Living Sacrifice",
+        "readings": [
+          { "bookID": "ROM", "chapter": 12, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What does it practically look like to offer your body as a living sacrifice today?"
+      },
+      {
+        "day": 13,
+        "title": "Submission and Love",
+        "readings": [
+          { "bookID": "ROM", "chapter": 13, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How can the command to 'owe nothing but love' reshape your relationships this week?"
+      },
+      {
+        "day": 14,
+        "title": "Do Not Judge Your Brother",
+        "readings": [
+          { "bookID": "ROM", "chapter": 14, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Where do you need to extend more grace to a fellow believer whose convictions differ from yours?"
+      },
+      {
+        "day": 15,
+        "title": "Unity for God's Glory",
+        "readings": [
+          { "bookID": "ROM", "chapter": 15, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How can you more actively pursue unity with other believers for the glory of God?"
+      },
+      {
+        "day": 16,
+        "title": "Greetings and the God of Peace",
+        "readings": [
+          { "bookID": "ROM", "chapter": 16, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Who are the people God has placed around you to strengthen your faith, and have you thanked them?"
+      }
+    ]
+  },
+  {
+    "id": "new-believers-journey",
+    "name": "New Believer's Journey",
+    "description": "A 14-day guided tour through the most essential chapters of the Bible — perfect for anyone just beginning to explore the Christian faith.",
+    "totalDays": 14,
+    "category": "Foundations",
+    "gradientColors": ["#3A6B8B", "#1C3D5C"],
+    "iconName": "sunrise.fill",
+    "applicableSeasons": ["hardSeason", "newlyMarried", "parenthood", "student", "workingProfessional", "retired", "startingOver", "growing"],
+    "applicableBurdens": ["anxiety", "grief", "purpose", "relationships", "health", "faith"],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 1,
+    "days": [
+      {
+        "day": 1,
+        "title": "Born Again",
+        "readings": [
+          { "bookID": "JHN", "chapter": 3, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What does it mean to you to start over with a completely new spiritual life?"
+      },
+      {
+        "day": 2,
+        "title": "The Shepherd",
+        "readings": [
+          { "bookID": "PSA", "chapter": 23, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does picturing God as a shepherd caring for you change the way you feel about Him?"
+      },
+      {
+        "day": 3,
+        "title": "All Have Sinned",
+        "readings": [
+          { "bookID": "ROM", "chapter": 3, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does understanding that everyone falls short help you accept God's grace without shame?"
+      },
+      {
+        "day": 4,
+        "title": "The Gift of Grace",
+        "readings": [
+          { "bookID": "ROM", "chapter": 5, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What does it mean to receive something you could never earn on your own?"
+      },
+      {
+        "day": 5,
+        "title": "No Condemnation",
+        "readings": [
+          { "bookID": "ROM", "chapter": 8, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What guilt or shame do you need to release in light of the truth that there is no condemnation in Christ?"
+      },
+      {
+        "day": 6,
+        "title": "Saved by Grace",
+        "readings": [
+          { "bookID": "EPH", "chapter": 2, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does knowing that salvation is a gift — not a reward — change the pressure you put on yourself?"
+      },
+      {
+        "day": 7,
+        "title": "The Way, the Truth, the Life",
+        "readings": [
+          { "bookID": "JHN", "chapter": 14, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What does it mean for Jesus to be the way when you feel lost or uncertain about the future?"
+      },
+      {
+        "day": 8,
+        "title": "God Is Love",
+        "readings": [
+          { "bookID": "1JN", "chapter": 4, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does the statement 'God is love' reshape your understanding of who God is?"
+      },
+      {
+        "day": 9,
+        "title": "The Peace of God",
+        "readings": [
+          { "bookID": "PHP", "chapter": 4, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What worries can you bring to God right now in exchange for His peace that passes understanding?"
+      },
+      {
+        "day": 10,
+        "title": "The Hall of Faith",
+        "readings": [
+          { "bookID": "HEB", "chapter": 11, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Which person of faith in this chapter inspires you most, and why?"
+      },
+      {
+        "day": 11,
+        "title": "Trials and Wisdom",
+        "readings": [
+          { "bookID": "JAS", "chapter": 1, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How can you begin to see your current trials as an opportunity for growth rather than punishment?"
+      },
+      {
+        "day": 12,
+        "title": "The Beatitudes",
+        "readings": [
+          { "bookID": "MAT", "chapter": 5, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Which of the Beatitudes speaks most directly to where you are in life right now?"
+      },
+      {
+        "day": 13,
+        "title": "The Lord's Prayer",
+        "readings": [
+          { "bookID": "MAT", "chapter": 6, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How can the Lord's Prayer become a framework for the way you talk to God each day?"
+      },
+      {
+        "day": 14,
+        "title": "All Things New",
+        "readings": [
+          { "bookID": "REV", "chapter": 21, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does the promise that God will make all things new give you hope for the future?"
+      }
+    ]
+  },
+  {
+    "id": "finding-purpose",
+    "name": "Finding Purpose",
+    "description": "A 10-day exploration of Scripture's most powerful passages about identity, calling, and the purpose God has woven into your life.",
+    "totalDays": 10,
+    "category": "Purpose",
+    "gradientColors": ["#8B7B3A", "#5C5124"],
+    "iconName": "star.fill",
+    "applicableSeasons": ["workingProfessional", "startingOver"],
+    "applicableBurdens": ["purpose"],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 1,
+    "days": [
+      {
+        "day": 1,
+        "title": "Plans to Prosper You",
+        "readings": [
+          { "bookID": "JER", "chapter": 29, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does knowing God has plans for your welfare and future change the way you face uncertainty?"
+      },
+      {
+        "day": 2,
+        "title": "Wonderfully Made",
+        "readings": [
+          { "bookID": "PSA", "chapter": 139, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What would change if you truly believed you were fearfully and wonderfully made?"
+      },
+      {
+        "day": 3,
+        "title": "Trust in the Lord",
+        "readings": [
+          { "bookID": "PRO", "chapter": 3, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What path are you trying to direct on your own instead of acknowledging God in it?"
+      },
+      {
+        "day": 4,
+        "title": "Created for Good Works",
+        "readings": [
+          { "bookID": "EPH", "chapter": 2, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What good works do you sense God prepared in advance for you to walk in?"
+      },
+      {
+        "day": 5,
+        "title": "A Living Sacrifice",
+        "readings": [
+          { "bookID": "ROM", "chapter": 12, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How can you use the unique gifts God gave you to serve others this week?"
+      },
+      {
+        "day": 6,
+        "title": "Called by Name",
+        "readings": [
+          { "bookID": "ISA", "chapter": 43, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does God calling you by name and claiming you as His own shape your sense of identity?"
+      },
+      {
+        "day": 7,
+        "title": "To Live Is Christ",
+        "readings": [
+          { "bookID": "PHP", "chapter": 1, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "If 'to live is Christ,' what does that mean for the way you approach your work and relationships?"
+      },
+      {
+        "day": 8,
+        "title": "Set Your Mind Above",
+        "readings": [
+          { "bookID": "COL", "chapter": 3, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What earthly thing are you clinging to that is distracting you from the things above?"
+      },
+      {
+        "day": 9,
+        "title": "A Chosen People",
+        "readings": [
+          { "bookID": "1PE", "chapter": 2, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does being called 'a royal priesthood' redefine your sense of purpose and belonging?"
+      },
+      {
+        "day": 10,
+        "title": "Delight in the Lord",
+        "readings": [
+          { "bookID": "PSA", "chapter": 37, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What happens to your desires when you commit to delighting in the Lord above all else?"
+      }
+    ]
+  },
+  {
+    "id": "comfort-in-hard-times",
+    "name": "Comfort in Hard Times",
+    "description": "A 7-day refuge in Scripture for seasons of suffering — these passages have carried believers through the darkest valleys for thousands of years.",
+    "totalDays": 7,
+    "category": "Comfort",
+    "gradientColors": ["#5C7A8B", "#3A4F5C"],
+    "iconName": "heart.fill",
+    "applicableSeasons": ["hardSeason"],
+    "applicableBurdens": ["grief", "health"],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 1,
+    "days": [
+      {
+        "day": 1,
+        "title": "The Lord Is Near the Brokenhearted",
+        "readings": [
+          { "bookID": "PSA", "chapter": 34, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does knowing that God is especially close to the brokenhearted comfort you right now?"
+      },
+      {
+        "day": 2,
+        "title": "Fear Not, I Am with You",
+        "readings": [
+          { "bookID": "ISA", "chapter": 41, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What fear are you carrying that God is asking you to release into His hands?"
+      },
+      {
+        "day": 3,
+        "title": "The God of All Comfort",
+        "readings": [
+          { "bookID": "2CO", "chapter": 1, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How might your own suffering equip you to comfort someone else who is hurting?"
+      },
+      {
+        "day": 4,
+        "title": "Nothing Can Separate Us",
+        "readings": [
+          { "bookID": "ROM", "chapter": 8, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What circumstance has made you feel separated from God's love, and how does this chapter speak to that?"
+      },
+      {
+        "day": 5,
+        "title": "Be Still and Know",
+        "readings": [
+          { "bookID": "PSA", "chapter": 46, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What noise in your life do you need to silence so you can hear God say 'Be still'?"
+      },
+      {
+        "day": 6,
+        "title": "Come to Me and Rest",
+        "readings": [
+          { "bookID": "MAT", "chapter": 11, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What heavy burden are you carrying that Jesus is inviting you to lay down today?"
+      },
+      {
+        "day": 7,
+        "title": "Every Tear Wiped Away",
+        "readings": [
+          { "bookID": "REV", "chapter": 21, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does the promise that God will wipe every tear from your eyes give you strength to endure today?"
+      }
+    ]
+  },
+  {
+    "id": "sermon-on-the-mount",
+    "name": "The Sermon on the Mount",
+    "description": "A 7-day close study of Jesus' most famous sermon — the radical teaching that turned the world's values upside down.",
+    "totalDays": 7,
+    "category": "Jesus' Teaching",
+    "gradientColors": ["#7A8B5C", "#4F5C3A"],
+    "iconName": "text.book.closed.fill",
+    "applicableSeasons": ["hardSeason", "newlyMarried", "parenthood", "student", "workingProfessional", "retired", "startingOver", "growing"],
+    "applicableBurdens": ["anxiety", "grief", "purpose", "relationships", "health", "faith"],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 1,
+    "days": [
+      {
+        "day": 1,
+        "title": "The Beatitudes and Salt of the Earth",
+        "readings": [
+          { "bookID": "MAT", "chapter": 5, "verseStart": 1, "verseEnd": 26 }
+        ],
+        "reflection": "Which beatitude challenges you the most, and what would it look like to live it out today?"
+      },
+      {
+        "day": 2,
+        "title": "A Higher Righteousness",
+        "readings": [
+          { "bookID": "MAT", "chapter": 5, "verseStart": 27, "verseEnd": 48 }
+        ],
+        "reflection": "How does Jesus' call to 'be perfect as your Father is perfect' push you beyond rule-following into heart transformation?"
+      },
+      {
+        "day": 3,
+        "title": "Giving, Praying, and Fasting in Secret",
+        "readings": [
+          { "bookID": "MAT", "chapter": 6, "verseStart": 1, "verseEnd": 18 }
+        ],
+        "reflection": "Where do you need to shift your spiritual practices from being seen by others to being seen by God alone?"
+      },
+      {
+        "day": 4,
+        "title": "Treasure in Heaven",
+        "readings": [
+          { "bookID": "MAT", "chapter": 6, "verseStart": 19, "verseEnd": 34 }
+        ],
+        "reflection": "What are you anxious about that Jesus is asking you to trust Him with completely?"
+      },
+      {
+        "day": 5,
+        "title": "Do Not Judge",
+        "readings": [
+          { "bookID": "MAT", "chapter": 7, "verseStart": 1, "verseEnd": 14 }
+        ],
+        "reflection": "What plank in your own eye do you need to address before pointing out the speck in someone else's?"
+      },
+      {
+        "day": 6,
+        "title": "Built on the Rock",
+        "readings": [
+          { "bookID": "MAT", "chapter": 7, "verseStart": 15, "verseEnd": 29 }
+        ],
+        "reflection": "Is your life built on the rock of Jesus' words, or on the sand of the world's wisdom?"
+      },
+      {
+        "day": 7,
+        "title": "The Sermon as a Whole",
+        "readings": [
+          { "bookID": "MAT", "chapter": 5, "verseStart": null, "verseEnd": null },
+          { "bookID": "MAT", "chapter": 6, "verseStart": null, "verseEnd": null },
+          { "bookID": "MAT", "chapter": 7, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "After reading the entire Sermon on the Mount, what one teaching do you most want to put into practice?"
+      }
+    ]
+  },
+  {
+    "id": "psalms-in-30-days",
+    "name": "Psalms in 30 Days",
+    "description": "Read through all 150 Psalms in 30 days — five psalms a day to immerse yourself in the Bible's richest book of worship, prayer, and praise.",
+    "totalDays": 30,
+    "category": "Worship",
+    "gradientColors": ["#3A5C8B", "#1C2D5C"],
+    "iconName": "music.note",
+    "applicableSeasons": ["hardSeason", "newlyMarried", "parenthood", "student", "workingProfessional", "retired", "startingOver", "growing"],
+    "applicableBurdens": ["anxiety", "grief", "purpose", "relationships", "health", "faith"],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 1,
+    "days": [
+      {
+        "day": 1,
+        "title": "Psalms 1–5: The Blessed and the Broken",
+        "readings": [
+          { "bookID": "PSA", "chapter": 1, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 2, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 3, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 4, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 5, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What does it mean to you to delight in the law of the Lord day and night?"
+      },
+      {
+        "day": 2,
+        "title": "Psalms 6–10: Crying Out to God",
+        "readings": [
+          { "bookID": "PSA", "chapter": 6, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 7, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 8, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 9, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 10, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does the honesty of the psalmist's cries to God give you permission to bring your raw emotions to Him?"
+      },
+      {
+        "day": 3,
+        "title": "Psalms 11–15: The Righteous and the Wicked",
+        "readings": [
+          { "bookID": "PSA", "chapter": 11, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 12, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 13, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 14, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 15, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What does Psalm 15 reveal about the kind of person who can dwell in God's presence?"
+      },
+      {
+        "day": 4,
+        "title": "Psalms 16–20: Refuge and Rescue",
+        "readings": [
+          { "bookID": "PSA", "chapter": 16, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 17, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 18, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 19, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 20, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How do the heavens declaring God's glory in Psalm 19 stir worship in your own heart?"
+      },
+      {
+        "day": 5,
+        "title": "Psalms 21–25: The Shepherd and the Seeker",
+        "readings": [
+          { "bookID": "PSA", "chapter": 21, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 22, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 23, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 24, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 25, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does Psalm 22's cry of forsakenness — echoed by Jesus on the cross — deepen your understanding of His sacrifice?"
+      },
+      {
+        "day": 6,
+        "title": "Psalms 26–30: Light in Darkness",
+        "readings": [
+          { "bookID": "PSA", "chapter": 26, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 27, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 28, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 29, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 30, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What does it mean that weeping may last for a night but joy comes in the morning?"
+      },
+      {
+        "day": 7,
+        "title": "Psalms 31–35: Trust and Deliverance",
+        "readings": [
+          { "bookID": "PSA", "chapter": 31, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 32, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 33, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 34, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 35, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does the blessing of forgiveness in Psalm 32 encourage you to confess what you've been hiding?"
+      },
+      {
+        "day": 8,
+        "title": "Psalms 36–40: Steadfast Love",
+        "readings": [
+          { "bookID": "PSA", "chapter": 36, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 37, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 38, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 39, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 40, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What does 'delight yourself in the Lord' from Psalm 37 look like in your daily routine?"
+      },
+      {
+        "day": 9,
+        "title": "Psalms 41–45: Thirst for God",
+        "readings": [
+          { "bookID": "PSA", "chapter": 41, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 42, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 43, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 44, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 45, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "When has your soul thirsted for God the way a deer pants for water?"
+      },
+      {
+        "day": 10,
+        "title": "Psalms 46–50: God Is Our Fortress",
+        "readings": [
+          { "bookID": "PSA", "chapter": 46, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 47, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 48, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 49, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 50, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does Psalm 46's reminder to 'be still' speak to the chaos in your life right now?"
+      },
+      {
+        "day": 11,
+        "title": "Psalms 51–55: A Broken Spirit",
+        "readings": [
+          { "bookID": "PSA", "chapter": 51, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 52, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 53, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 54, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 55, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does David's prayer for a clean heart in Psalm 51 give you courage to approach God with your failures?"
+      },
+      {
+        "day": 12,
+        "title": "Psalms 56–60: When I Am Afraid",
+        "readings": [
+          { "bookID": "PSA", "chapter": 56, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 57, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 58, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 59, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 60, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What does 'when I am afraid, I will trust in you' from Psalm 56 look like in your current circumstances?"
+      },
+      {
+        "day": 13,
+        "title": "Psalms 61–65: Rest in God Alone",
+        "readings": [
+          { "bookID": "PSA", "chapter": 61, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 62, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 63, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 64, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 65, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Where do you find rest — truly in God alone, or are you looking to other sources for peace?"
+      },
+      {
+        "day": 14,
+        "title": "Psalms 66–70: Shout for Joy",
+        "readings": [
+          { "bookID": "PSA", "chapter": 66, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 67, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 68, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 69, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 70, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What awesome works of God in your life would you want to tell others about?"
+      },
+      {
+        "day": 15,
+        "title": "Psalms 71–75: Everlasting Hope",
+        "readings": [
+          { "bookID": "PSA", "chapter": 71, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 72, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 73, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 74, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 75, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does the psalmist's struggle with envy in Psalm 73 mirror your own experience?"
+      },
+      {
+        "day": 16,
+        "title": "Psalms 76–80: Remember His Wonders",
+        "readings": [
+          { "bookID": "PSA", "chapter": 76, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 77, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 78, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 79, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 80, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What past acts of God can you remember and rehearse to strengthen your faith today?"
+      },
+      {
+        "day": 17,
+        "title": "Psalms 81–85: Revival and Restoration",
+        "readings": [
+          { "bookID": "PSA", "chapter": 81, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 82, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 83, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 84, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 85, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does the longing for God's courts in Psalm 84 resonate with your desire for worship?"
+      },
+      {
+        "day": 18,
+        "title": "Psalms 86–90: From Everlasting to Everlasting",
+        "readings": [
+          { "bookID": "PSA", "chapter": 86, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 87, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 88, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 89, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 90, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does Psalm 90's perspective on the brevity of life change the way you value your time?"
+      },
+      {
+        "day": 19,
+        "title": "Psalms 91–95: Shelter and Song",
+        "readings": [
+          { "bookID": "PSA", "chapter": 91, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 92, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 93, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 94, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 95, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What does it mean to dwell in the shelter of the Most High, and how can you practice that today?"
+      },
+      {
+        "day": 20,
+        "title": "Psalms 96–100: The Lord Reigns",
+        "readings": [
+          { "bookID": "PSA", "chapter": 96, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 97, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 98, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 99, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 100, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does the call to 'make a joyful noise' in Psalm 100 challenge you to worship with greater enthusiasm?"
+      },
+      {
+        "day": 21,
+        "title": "Psalms 101–105: Bless the Lord, O My Soul",
+        "readings": [
+          { "bookID": "PSA", "chapter": 101, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 102, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 103, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 104, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 105, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What benefits from the Lord listed in Psalm 103 have you forgotten to thank Him for?"
+      },
+      {
+        "day": 22,
+        "title": "Psalms 106–110: Remembering God's Faithfulness",
+        "readings": [
+          { "bookID": "PSA", "chapter": 106, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 107, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 108, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 109, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 110, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How have you experienced God's steadfast love rescuing you from your own wandering?"
+      },
+      {
+        "day": 23,
+        "title": "Psalms 111–115: Praise the Lord",
+        "readings": [
+          { "bookID": "PSA", "chapter": 111, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 112, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 113, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 114, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 115, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does the contrast between living God and lifeless idols in Psalm 115 challenge where you place your trust?"
+      },
+      {
+        "day": 24,
+        "title": "Psalms 116–120: Songs of Ascent Begin",
+        "readings": [
+          { "bookID": "PSA", "chapter": 116, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 117, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 118, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 119, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 120, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What verse from the longest psalm — Psalm 119 — speaks most powerfully to your love for God's Word?"
+      },
+      {
+        "day": 25,
+        "title": "Psalms 121–125: Ascending to the Lord",
+        "readings": [
+          { "bookID": "PSA", "chapter": 121, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 122, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 123, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 124, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 125, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Where does your help come from, and how does Psalm 121 strengthen your confidence in God's protection?"
+      },
+      {
+        "day": 26,
+        "title": "Psalms 126–130: Sowing in Tears",
+        "readings": [
+          { "bookID": "PSA", "chapter": 126, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 127, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 128, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 129, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 130, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What seeds are you sowing in tears right now, trusting that you will reap with shouts of joy?"
+      },
+      {
+        "day": 27,
+        "title": "Psalms 131–135: Humble Trust",
+        "readings": [
+          { "bookID": "PSA", "chapter": 131, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 132, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 133, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 134, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 135, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does the image of unity in Psalm 133 inspire you to pursue deeper fellowship with other believers?"
+      },
+      {
+        "day": 28,
+        "title": "Psalms 136–140: His Love Endures Forever",
+        "readings": [
+          { "bookID": "PSA", "chapter": 136, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 137, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 138, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 139, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 140, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does the refrain 'His love endures forever' in Psalm 136 anchor you when everything else feels uncertain?"
+      },
+      {
+        "day": 29,
+        "title": "Psalms 141–145: Evening Prayers",
+        "readings": [
+          { "bookID": "PSA", "chapter": 141, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 142, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 143, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 144, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 145, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does David's declaration that God is great and greatly to be praised shape your evening prayer tonight?"
+      },
+      {
+        "day": 30,
+        "title": "Psalms 146–150: Let Everything Praise the Lord",
+        "readings": [
+          { "bookID": "PSA", "chapter": 146, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 147, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 148, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 149, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 150, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "As the Psalms close with 'let everything that has breath praise the Lord,' how will you make praise a daily habit?"
+      }
+    ]
+  }
+]

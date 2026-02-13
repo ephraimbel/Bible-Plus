@@ -5,12 +5,17 @@ enum SavedTab: String, CaseIterable {
     case favorites
     case verses
     case collections
+    case journal
 }
 
 @MainActor
 @Observable
 final class SavedViewModel {
     var selectedTab: SavedTab = .favorites
+
+    // Journal filter state
+    var journalFilter: JournalFilter = .all
+    var journalCategoryFilter: PrayerCategory? = nil
 
     private let modelContext: ModelContext
     private let personalizationService: PersonalizationService
@@ -69,6 +74,89 @@ final class SavedViewModel {
         guard let allContent = try? modelContext.fetch(descriptor) else { return [] }
         // Preserve collection ordering
         return ids.compactMap { id in allContent.first { $0.id == id } }
+    }
+
+    // MARK: - Journal
+
+    private var journalVersion: Int = 0
+
+    enum JournalFilter: String, CaseIterable {
+        case all
+        case unanswered
+        case answered
+
+        var displayName: String {
+            switch self {
+            case .all: "All"
+            case .unanswered: "Unanswered"
+            case .answered: "Answered"
+            }
+        }
+    }
+
+    var journalEntries: [PrayerEntry] {
+        let _ = journalVersion
+        let descriptor = FetchDescriptor<PrayerEntry>(
+            sortBy: [SortDescriptor(\.createdAt, order: .reverse)]
+        )
+        guard let all = try? modelContext.fetch(descriptor) else { return [] }
+
+        var filtered = all
+
+        switch journalFilter {
+        case .all: break
+        case .unanswered: filtered = filtered.filter { !$0.isAnswered }
+        case .answered: filtered = filtered.filter { $0.isAnswered }
+        }
+
+        if let cat = journalCategoryFilter {
+            filtered = filtered.filter { $0.category == cat }
+        }
+
+        return filtered
+    }
+
+    func createPrayerEntry(title: String, body: String, category: PrayerCategory, verseReference: String?) {
+        let entry = PrayerEntry(title: title, body: body, category: category, verseReference: verseReference)
+        modelContext.insert(entry)
+        try? modelContext.save()
+        journalVersion += 1
+        ActivityService.log(.prayerWritten, detail: String(title.prefix(50)), in: modelContext)
+    }
+
+    func updatePrayerEntry(_ entry: PrayerEntry, title: String, body: String, category: PrayerCategory, verseReference: String?) {
+        entry.title = title
+        entry.body = body
+        entry.category = category
+        entry.verseReference = verseReference
+        entry.updatedAt = Date()
+        try? modelContext.save()
+        journalVersion += 1
+    }
+
+    func deletePrayerEntry(_ entry: PrayerEntry) {
+        modelContext.delete(entry)
+        try? modelContext.save()
+        journalVersion += 1
+    }
+
+    func markPrayerAsAnswered(_ entry: PrayerEntry, notes: String) {
+        entry.isAnswered = true
+        entry.answerNotes = notes
+        entry.answeredAt = Date()
+        entry.updatedAt = Date()
+        try? modelContext.save()
+        journalVersion += 1
+        ActivityService.log(.prayerAnswered, detail: String(entry.title.prefix(50)), in: modelContext)
+    }
+
+    func unmarkPrayerAsAnswered(_ entry: PrayerEntry) {
+        entry.isAnswered = false
+        entry.answerNotes = ""
+        entry.answeredAt = nil
+        entry.updatedAt = Date()
+        try? modelContext.save()
+        journalVersion += 1
     }
 
     // MARK: - Actions

@@ -23,6 +23,10 @@ struct BiblePlusApp: App {
                 ChatMessage.self,
                 Conversation.self,
                 SavedBibleVerse.self,
+                ReadingPlan.self,
+                UserPlanProgress.self,
+                ActivityEvent.self,
+                PrayerEntry.self,
             ])
             let fallback = ModelConfiguration(
                 "BiblePlusFallback",
@@ -49,6 +53,7 @@ struct BiblePlusApp: App {
         // Seed content on first launch and migrate legacy messages
         let seedContext = ModelContext(modelContainer)
         ContentSeeder.seedIfNeeded(modelContext: seedContext)
+        ContentSeeder.seedPlansIfNeeded(modelContext: seedContext)
         ContentSeeder.migrateOrphanedMessages(modelContext: seedContext)
 
         // Ensure widget has the current background frame
@@ -101,6 +106,9 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
         UNUserNotificationCenter.current().delegate = self
+        Task { @MainActor in
+            NotificationService.shared.registerCategories()
+        }
         return true
     }
 
@@ -112,12 +120,39 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         [.banner, .sound]
     }
 
-    // Handle notification tap — deep link to content
+    // Handle notification tap and action buttons
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         didReceive response: UNNotificationResponse
     ) async {
         let userInfo = response.notification.request.content.userInfo
+        let actionIdentifier = response.actionIdentifier
+
+        // "Copy Text" action — copy notification body to clipboard
+        if actionIdentifier == "COPY_ACTION" {
+            let body = response.notification.request.content.body
+            await MainActor.run {
+                UIPasteboard.general.string = body
+            }
+            return
+        }
+
+        // "Save" action — mark feed content as favorite
+        if actionIdentifier == "SAVE_ACTION" {
+            if let idString = userInfo["contentID"] as? String,
+               let uuid = UUID(uuidString: idString) {
+                await MainActor.run {
+                    NotificationCenter.default.post(
+                        name: .notificationSaveAction,
+                        object: nil,
+                        userInfo: ["contentID": uuid]
+                    )
+                }
+            }
+            return
+        }
+
+        // Default tap — deep link to content or Bible verse
         if let idString = userInfo["contentID"] as? String,
            let uuid = UUID(uuidString: idString) {
             await MainActor.run {
@@ -125,6 +160,15 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
                     name: .notificationDeepLink,
                     object: nil,
                     userInfo: ["contentID": uuid]
+                )
+            }
+        } else if let bookName = userInfo["bookName"] as? String,
+                  let chapter = userInfo["chapter"] as? Int {
+            await MainActor.run {
+                NotificationCenter.default.post(
+                    name: .scriptureDeepLink,
+                    object: nil,
+                    userInfo: ["bookName": bookName, "chapter": chapter]
                 )
             }
         }

@@ -1,3 +1,4 @@
+import ActivityKit
 import AVFoundation
 import Foundation
 
@@ -39,6 +40,14 @@ final class AudioBibleService {
     // MARK: - Voice
 
     var selectedVoice: BibleVoice = .onyx
+
+    // MARK: - Live Activity
+
+    private var bibleActivity: Activity<BibleSessionAttributes>?
+    private var currentBookName: String = ""
+    private var currentChapter: Int = 0
+    private var currentTranslationName: String = ""
+    private var currentTotalVerses: Int = 0
 
     // MARK: - Prefetch
 
@@ -211,6 +220,21 @@ final class AudioBibleService {
                 isPaused = false
                 isLoading = false
 
+                // Store metadata for Live Activity
+                self.currentBookName = book.name
+                self.currentChapter = chapter
+                self.currentTranslationName = translation.displayName
+                self.currentTotalVerses = verses.count
+
+                // Start Live Activity
+                self.bibleActivity = LiveActivityService.startBibleSession(
+                    bookName: book.name,
+                    chapter: chapter,
+                    translationName: translation.displayName,
+                    totalVerses: verses.count,
+                    currentVerse: startingFromVerseIndex + 1
+                )
+
                 startProgressTracking()
                 incrementDailyUsage()
 
@@ -255,6 +279,14 @@ final class AudioBibleService {
         isPaused = true
         progressTimer?.cancel()
         restoreSoundscape()
+
+        if let activity = bibleActivity {
+            LiveActivityService.updateBibleSession(
+                activity,
+                currentVerse: currentVerseIndex + 1,
+                isPlaying: false
+            )
+        }
     }
 
     func resume() {
@@ -265,6 +297,14 @@ final class AudioBibleService {
         isPlaying = true
         isPaused = false
         startProgressTracking()
+
+        if let activity = bibleActivity {
+            LiveActivityService.updateBibleSession(
+                activity,
+                currentVerse: currentVerseIndex + 1,
+                isPlaying: true
+            )
+        }
     }
 
     func stop() {
@@ -282,6 +322,11 @@ final class AudioBibleService {
         currentVerseIndex = 0
         verseTimings = []
         errorMessage = nil
+
+        if let activity = bibleActivity {
+            LiveActivityService.endBibleSession(activity)
+            bibleActivity = nil
+        }
 
         restoreSoundscape()
     }
@@ -512,6 +557,14 @@ final class AudioBibleService {
                     if currentTime >= timing.startTime && currentTime < timing.endTime {
                         if self.currentVerseIndex != timing.verseIndex {
                             self.currentVerseIndex = timing.verseIndex
+                            // Update Live Activity on verse change
+                            if let activity = self.bibleActivity {
+                                LiveActivityService.updateBibleSession(
+                                    activity,
+                                    currentVerse: timing.verseIndex + 1,
+                                    isPlaying: true
+                                )
+                            }
                         }
                         break
                     }
@@ -528,6 +581,12 @@ final class AudioBibleService {
         isPlaying = false
         isPaused = false
         progressTimer?.cancel()
+
+        if let activity = bibleActivity {
+            LiveActivityService.endBibleSession(activity)
+            bibleActivity = nil
+        }
+
         restoreSoundscape()
         onChapterComplete?()
     }

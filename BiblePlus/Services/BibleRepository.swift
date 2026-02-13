@@ -16,6 +16,10 @@ final class BibleRepository: @unchecked Sendable {
 
     private let memoryCache = NSCache<NSString, CachedChapter>()
 
+    /// Lazily loaded bundled Bible data — parsed once per translation, kept in memory.
+    private var bundledData: [String: [String: [String: [String: String]]]] = [:]
+    private var bundledLoaded: Set<String> = []
+
     // MARK: - Init
 
     private init() {
@@ -30,7 +34,7 @@ final class BibleRepository: @unchecked Sendable {
         lock.unlock()
     }
 
-    // MARK: - Async Access (Network-backed)
+    // MARK: - Async Access
 
     func verses(book: String, chapter: Int, translation: BibleTranslation? = nil) async throws -> [(number: Int, text: String)] {
         let trans = translation ?? currentTranslation
@@ -48,7 +52,17 @@ final class BibleRepository: @unchecked Sendable {
             return diskVerses
         }
 
-        // 3. Network fetch
+        // 3. Bundled data (KJV + WEB — full Bible offline, no network needed)
+        if trans.isBundled {
+            let bundled = bundledFallback(book: book, chapter: chapter, translation: trans)
+            if !bundled.isEmpty {
+                let cached = CachedChapter(verses: bundled)
+                memoryCache.setObject(cached, forKey: cacheKey as NSString)
+                return bundled
+            }
+        }
+
+        // 4. Network fetch (for non-bundled translations)
         guard let bookNumber = BibleData.apiBookNumber(for: book) else { return [] }
 
         let fetched = try await BibleAPIService.fetchChapter(
@@ -83,19 +97,35 @@ final class BibleRepository: @unchecked Sendable {
             return diskVerses
         }
 
-        // Bundled KJV fallback
-        return bundledFallback(book: book, chapter: chapter)
+        // Bundled fallback
+        let bundled = bundledFallback(book: book, chapter: chapter, translation: trans)
+        if !bundled.isEmpty {
+            let cached = CachedChapter(verses: bundled)
+            memoryCache.setObject(cached, forKey: cacheKey as NSString)
+        }
+        return bundled
     }
 
-    // MARK: - Bundled KJV Fallback
+    // MARK: - Bundled Data (Loaded Once Per Translation, Cached in Memory)
 
-    func bundledFallback(book: String, chapter: Int) -> [(number: Int, text: String)] {
-        guard let url = Bundle.main.url(forResource: "bible-kjv", withExtension: "json"),
-              let data = try? Data(contentsOf: url),
-              let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-              let books = json["books"] as? [String: [String: [String: String]]],
-              let chapterData = books[book]?["\(chapter)"]
-        else { return [] }
+    func bundledFallback(book: String, chapter: Int, translation: BibleTranslation? = nil) -> [(number: Int, text: String)] {
+        let trans = translation ?? currentTranslation
+        let resourceName = bundledResourceName(for: trans)
+
+        lock.lock()
+        if !bundledLoaded.contains(resourceName) {
+            if let url = Bundle.main.url(forResource: resourceName, withExtension: "json"),
+               let data = try? Data(contentsOf: url),
+               let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+               let books = json["books"] as? [String: [String: [String: String]]] {
+                bundledData[resourceName] = books
+            }
+            bundledLoaded.insert(resourceName)
+        }
+        let books = bundledData[resourceName]
+        lock.unlock()
+
+        guard let chapterData = books?[book]?["\(chapter)"] else { return [] }
 
         return chapterData
             .compactMap { key, value -> (number: Int, text: String)? in
@@ -103,6 +133,71 @@ final class BibleRepository: @unchecked Sendable {
                 return (number: num, text: value)
             }
             .sorted { $0.number < $1.number }
+    }
+
+    private func bundledResourceName(for translation: BibleTranslation) -> String {
+        switch translation {
+        case .kjv: "bible-kjv"
+        case .web: "bible-web"
+        default: "bible-kjv" // Fallback to KJV for non-bundled translations
+        }
+    }
+
+    // MARK: - Bundled Search
+
+    struct BundledSearchResponse {
+        let results: [(bookID: String, chapter: Int, verse: Int, text: String)]
+        let total: Int
+    }
+
+    func searchBundled(query: String, translation: BibleTranslation, limit: Int = 30, offset: Int = 0) -> BundledSearchResponse {
+        let resourceName = bundledResourceName(for: translation)
+
+        // Ensure bundled data is loaded
+        lock.lock()
+        if !bundledLoaded.contains(resourceName) {
+            if let url = Bundle.main.url(forResource: resourceName, withExtension: "json"),
+               let data = try? Data(contentsOf: url),
+               let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+               let books = json["books"] as? [String: [String: [String: String]]] {
+                bundledData[resourceName] = books
+            }
+            bundledLoaded.insert(resourceName)
+        }
+        let books = bundledData[resourceName]
+        lock.unlock()
+
+        guard let books else { return BundledSearchResponse(results: [], total: 0) }
+
+        let lowercasedQuery = query.lowercased()
+        var allMatches: [(bookID: String, chapter: Int, verse: Int, text: String)] = []
+
+        // Iterate in canonical book order
+        for book in BibleData.allBooks {
+            guard let chapters = books[book.id] else { continue }
+            for chapterNum in 1...book.chapterCount {
+                guard let verses = chapters["\(chapterNum)"] else { continue }
+                for (verseKey, verseText) in verses {
+                    guard let verseNum = Int(verseKey) else { continue }
+                    if verseText.lowercased().contains(lowercasedQuery) {
+                        allMatches.append((bookID: book.id, chapter: chapterNum, verse: verseNum, text: verseText))
+                    }
+                }
+            }
+        }
+
+        // Sort: book order (already iterated in order), then chapter, then verse
+        allMatches.sort { lhs, rhs in
+            let lhsBookIdx = BibleData.allBooks.firstIndex(where: { $0.id == lhs.bookID }) ?? 0
+            let rhsBookIdx = BibleData.allBooks.firstIndex(where: { $0.id == rhs.bookID }) ?? 0
+            if lhsBookIdx != rhsBookIdx { return lhsBookIdx < rhsBookIdx }
+            if lhs.chapter != rhs.chapter { return lhs.chapter < rhs.chapter }
+            return lhs.verse < rhs.verse
+        }
+
+        let total = allMatches.count
+        let paged = Array(allMatches.dropFirst(offset).prefix(limit))
+        return BundledSearchResponse(results: paged, total: total)
     }
 
     // MARK: - Cache Key

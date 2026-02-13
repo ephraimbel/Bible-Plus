@@ -5,6 +5,7 @@ struct GreetingCardView: View {
     var streakText: String? = nil
     let background: SanctuaryBackground
     let isCurrentCard: Bool
+    var onStreakTap: (() -> Void)? = nil
     @Environment(\.bpPalette) private var palette
     @State private var showContent = false
     @State private var pulseChevron = false
@@ -46,21 +47,30 @@ struct GreetingCardView: View {
 
                 // Streak badge
                 if let streakText {
-                    HStack(spacing: 6) {
-                        Image(systemName: "flame.fill")
-                            .font(.system(size: 14, weight: .medium))
-                            .foregroundStyle(palette.accent)
-                        Text(streakText)
-                            .font(BPFont.caption)
-                            .foregroundStyle(.white.opacity(0.9))
+                    Button {
+                        onStreakTap?()
+                        HapticService.selection()
+                    } label: {
+                        HStack(spacing: 6) {
+                            Image(systemName: "flame.fill")
+                                .font(.system(size: 14, weight: .medium))
+                                .foregroundStyle(palette.accent)
+                            Text(streakText)
+                                .font(BPFont.caption)
+                                .foregroundStyle(.white.opacity(0.9))
+                            Image(systemName: "chevron.right")
+                                .font(.system(size: 10, weight: .medium))
+                                .foregroundStyle(.white.opacity(0.5))
+                        }
+                        .padding(.horizontal, 14)
+                        .padding(.vertical, 6)
+                        .background(
+                            Capsule()
+                                .fill(.ultraThinMaterial)
+                                .environment(\.colorScheme, .dark)
+                        )
                     }
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 6)
-                    .background(
-                        Capsule()
-                            .fill(.ultraThinMaterial)
-                            .environment(\.colorScheme, .dark)
-                    )
+                    .buttonStyle(.plain)
                     .opacity(showContent ? 1 : 0)
                     .scaleEffect(showContent ? 1 : 0.6)
                     .padding(.top, 12)

@@ -60,8 +60,10 @@ final class FeedViewModel {
     }
 
     var streakText: String? {
-        guard streakCount >= 2 else { return nil }
-        return "\(streakCount)-day streak"
+        if streakCount >= 2 {
+            return "\(streakCount)-day streak"
+        }
+        return "My Progress"
     }
 
     var currentTheme: ThemeDefinition {

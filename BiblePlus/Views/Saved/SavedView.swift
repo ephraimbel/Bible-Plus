@@ -35,6 +35,7 @@ private struct SavedContentView: View {
                 Text("Favorites").tag(SavedTab.favorites)
                 Text("Verses").tag(SavedTab.verses)
                 Text("Collections").tag(SavedTab.collections)
+                Text("Journal").tag(SavedTab.journal)
             }
             .pickerStyle(.segmented)
             .padding(.horizontal, 16)
@@ -47,6 +48,8 @@ private struct SavedContentView: View {
                 versesTab
             case .collections:
                 collectionsTab
+            case .journal:
+                JournalTabView(viewModel: viewModel)
             }
         }
         .background(palette.background)
@@ -162,6 +165,19 @@ private struct SavedContentView: View {
                     .font(BPFont.body)
                     .foregroundStyle(palette.textMuted)
                     .lineLimit(2)
+
+                if !verse.notes.isEmpty {
+                    HStack(spacing: 4) {
+                        Image(systemName: "text.bubble.fill")
+                            .font(.system(size: 10))
+                            .foregroundStyle(palette.accent.opacity(0.7))
+                        Text(verse.notes)
+                            .font(BPFont.caption)
+                            .foregroundStyle(palette.textMuted)
+                            .italic()
+                            .lineLimit(1)
+                    }
+                }
             }
         }
         .padding(.vertical, 4)

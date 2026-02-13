@@ -164,9 +164,10 @@ enum Burden: String, Codable, CaseIterable, Identifiable {
 // MARK: - Bible Translation
 
 enum BibleTranslation: String, Codable, CaseIterable, Identifiable {
+    case kjv
+    case web
     case niv
     case esv
-    case kjv
     case nlt
     case nasb
     case message
@@ -176,9 +177,10 @@ enum BibleTranslation: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
+        case .kjv: "KJV"
+        case .web: "WEB"
         case .niv: "NIV"
         case .esv: "ESV"
-        case .kjv: "KJV"
         case .nlt: "NLT"
         case .nasb: "NASB"
         case .message: "The Message"
@@ -188,9 +190,10 @@ enum BibleTranslation: String, Codable, CaseIterable, Identifiable {
 
     var subtitle: String {
         switch self {
+        case .kjv: "Classic and poetic"
+        case .web: "Modern English, public domain"
         case .niv: "Clear and widely trusted"
         case .esv: "Precise and faithful to the original"
-        case .kjv: "Classic and poetic"
         case .nlt: "Simple, modern, and easy to read"
         case .nasb: "Word-for-word accuracy"
         case .message: "Conversational and fresh"
@@ -200,9 +203,10 @@ enum BibleTranslation: String, Codable, CaseIterable, Identifiable {
 
     var apiCode: String {
         switch self {
+        case .kjv: "KJV"
+        case .web: "WEB"
         case .niv: "NIV"
         case .esv: "ESV"
-        case .kjv: "KJV"
         case .nlt: "NLT"
         case .nasb: "NASB"
         case .message: "MSG"
@@ -210,14 +214,32 @@ enum BibleTranslation: String, Codable, CaseIterable, Identifiable {
         }
     }
 
+    /// Whether this translation is bundled offline (public domain).
+    var isBundled: Bool {
+        switch self {
+        case .kjv, .web: true
+        default: false
+        }
+    }
+
+    /// Whether this translation requires Pro subscription.
+    var isProOnly: Bool {
+        switch self {
+        case .kjv, .web: false
+        default: true
+        }
+    }
+
     var john316: String {
         switch self {
+        case .kjv:
+            "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life."
+        case .web:
+            "For God so loved the world, that he gave his one and only Son, that whoever believes in him should not perish, but have eternal life."
         case .niv:
             "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life."
         case .esv:
             "For God so loved the world, that he gave his only Son, that whoever believes in him should not perish but have eternal life."
-        case .kjv:
-            "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life."
         case .nlt:
             "For this is how God loved the world: He gave his one and only Son, so that everyone who believes in him will not perish but have eternal life."
         case .nasb:
@@ -267,17 +289,42 @@ enum PrayerTimeSlot: String, Codable, CaseIterable, Identifiable {
         }
     }
 
-    func notificationPreview(name: String) -> String {
+    func notificationSubtitles(name: String) -> [String] {
         switch self {
         case .morning:
-            "Good morning, \(name). Here's a word to carry with you today."
+            [
+                "Good morning, \(name). Here's a word to carry with you today.",
+                "Rise and shine, \(name). God has something for you this morning.",
+                "\(name), start your day in His presence.",
+                "A new morning, a new mercy. Good morning, \(name).",
+            ]
         case .midday:
-            "\(name), pause for a moment. God is with you right now."
+            [
+                "\(name), pause for a moment. God is with you right now.",
+                "Midday check-in, \(name). Take a breath and lean on Him.",
+                "\(name), He sees your afternoon. Rest in that.",
+                "A word for your afternoon, \(name).",
+            ]
         case .evening:
-            "\(name), what did God show you today? Take a moment to reflect."
+            [
+                "\(name), what did God show you today? Take a moment to reflect.",
+                "Good evening, \(name). Reflect on today's blessings.",
+                "\(name), unwind with a word from the Lord.",
+                "The day is fading, \(name). Let His peace settle in.",
+            ]
         case .bedtime:
-            "\(name), release your worries. He watches over you as you sleep."
+            [
+                "\(name), release your worries. He watches over you as you sleep.",
+                "Rest well, \(name). His angels guard your sleep.",
+                "\(name), lay it all down. Tomorrow is in His hands.",
+                "Goodnight, \(name). Let this truth carry you to sleep.",
+            ]
         }
+    }
+
+    func notificationPreview(name: String) -> String {
+        notificationSubtitles(name: name).randomElement()
+            ?? "Open your heart to God's word today."
     }
 }
 
@@ -1111,4 +1158,80 @@ struct ThemeDefinition: Identifiable, Hashable {
             isProOnly: false
         ),
     ]
+}
+
+// MARK: - Activity Event Type
+
+enum ActivityEventType: String, Codable, CaseIterable, Identifiable {
+    case chapterRead
+    case planDayCompleted
+    case aiChatSent
+    case verseSaved
+    case verseHighlighted
+    case audioChapterCompleted
+    case prayerWritten
+    case prayerAnswered
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .chapterRead: "Read a Chapter"
+        case .planDayCompleted: "Completed a Plan Day"
+        case .aiChatSent: "Asked AI Companion"
+        case .verseSaved: "Saved a Verse"
+        case .verseHighlighted: "Highlighted a Verse"
+        case .audioChapterCompleted: "Listened to a Chapter"
+        case .prayerWritten: "Wrote a Prayer"
+        case .prayerAnswered: "Prayer Answered"
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .chapterRead: "book.fill"
+        case .planDayCompleted: "checkmark.circle.fill"
+        case .aiChatSent: "bubble.left.fill"
+        case .verseSaved: "bookmark.fill"
+        case .verseHighlighted: "highlighter"
+        case .audioChapterCompleted: "headphones"
+        case .prayerWritten: "pencil.and.scribble"
+        case .prayerAnswered: "checkmark.seal.fill"
+        }
+    }
+}
+
+// MARK: - Prayer Category
+
+enum PrayerCategory: String, Codable, CaseIterable, Identifiable {
+    case gratitude
+    case petition
+    case confession
+    case praise
+    case lament
+    case intercession
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .gratitude: "Gratitude"
+        case .petition: "Petition"
+        case .confession: "Confession"
+        case .praise: "Praise"
+        case .lament: "Lament"
+        case .intercession: "Intercession"
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .gratitude: "heart.fill"
+        case .petition: "hands.sparkles"
+        case .confession: "person.crop.circle.badge.checkmark"
+        case .praise: "music.note"
+        case .lament: "drop"
+        case .intercession: "person.2"
+        }
+    }
 }

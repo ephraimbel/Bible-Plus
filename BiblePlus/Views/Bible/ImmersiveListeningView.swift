@@ -345,7 +345,8 @@ struct ImmersiveListeningView: View {
     // MARK: - Auto-Advance
 
     private func setupAutoAdvance() {
-        audioService.setOnChapterComplete {
+        audioService.setOnChapterComplete { [modelContext] in
+            ActivityService.log(.audioChapterCompleted, detail: "\(viewModel.selectedBook.name) \(viewModel.selectedChapter)", in: modelContext)
             if viewModel.canGoForward {
                 viewModel.goToNextChapter()
                 Task {

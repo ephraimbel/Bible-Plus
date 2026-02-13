@@ -97,5 +97,15 @@ struct ContentView: View {
                 )
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: .notificationSaveAction)) { notification in
+            guard let uuid = notification.userInfo?["contentID"] as? UUID else { return }
+            let descriptor = FetchDescriptor<PrayerContent>(
+                predicate: #Predicate { $0.id == uuid }
+            )
+            if let content = try? modelContext.fetch(descriptor).first {
+                content.isSaved = true
+                try? modelContext.save()
+            }
+        }
     }
 }

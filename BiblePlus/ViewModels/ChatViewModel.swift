@@ -118,6 +118,7 @@ final class ChatViewModel {
         updateConversationMeta(from: text)
 
         try? modelContext.save()
+        ActivityService.log(.aiChatSent, detail: String(text.prefix(50)), in: modelContext)
 
         // Start streaming
         let assistantMessage = ChatMessage(

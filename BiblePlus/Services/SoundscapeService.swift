@@ -1,3 +1,4 @@
+import ActivityKit
 import AVFoundation
 import Foundation
 
@@ -12,6 +13,10 @@ final class SoundscapeService {
     }
     private(set) var sleepTimer: SleepTimerDuration?
     private(set) var sleepTimerRemaining: TimeInterval?
+
+    // MARK: - Live Activity
+
+    private var sanctuaryActivity: Activity<SanctuarySessionAttributes>?
 
     // MARK: - Private
 
@@ -122,6 +127,11 @@ final class SoundscapeService {
         }
         isPlaying = false
         cancelSleepTimer()
+
+        if let activity = sanctuaryActivity {
+            LiveActivityService.endSanctuarySession(activity)
+            sanctuaryActivity = nil
+        }
     }
 
     func setVolume(_ newVolume: Float) {
@@ -228,10 +238,21 @@ final class SoundscapeService {
         guard let interval = duration.timeInterval else {
             // "Until I Close" — no countdown needed
             sleepTimerRemaining = nil
+            // Start Live Activity without timer
+            sanctuaryActivity = LiveActivityService.startSanctuarySession(
+                soundscapeName: currentSoundscape.displayName,
+                timerDuration: nil
+            )
             return
         }
 
         sleepTimerRemaining = interval
+
+        // Start Live Activity with timer
+        sanctuaryActivity = LiveActivityService.startSanctuarySession(
+            soundscapeName: currentSoundscape.displayName,
+            timerDuration: interval
+        )
 
         // Tick countdown every second
         timerTickTask = Task { @MainActor [weak self] in
@@ -260,6 +281,11 @@ final class SoundscapeService {
         timerTickTask = nil
         sleepTimer = nil
         sleepTimerRemaining = nil
+
+        if let activity = sanctuaryActivity {
+            LiveActivityService.endSanctuarySession(activity)
+            sanctuaryActivity = nil
+        }
     }
 
     var sleepTimerFormatted: String? {

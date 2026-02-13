@@ -34,6 +34,7 @@ private struct FeedContentView: View {
     @State private var showBackgroundPicker = false
     @State private var sanctuaryVM: SanctuaryViewModel?
     @State private var prayAlongContent: PrayerContent? = nil
+    @State private var showProgress = false
 
     var body: some View {
         ZStack {
@@ -44,7 +45,8 @@ private struct FeedContentView: View {
                     greeting: vm.greeting,
                     streakText: vm.streakText,
                     background: vm.currentBackground,
-                    isCurrentCard: scrollPosition == 0
+                    isCurrentCard: scrollPosition == 0,
+                    onStreakTap: { showProgress = true }
                 )
                 .containerRelativeFrame(.vertical)
                 .id(0)
@@ -123,6 +125,9 @@ private struct FeedContentView: View {
         }
         .sheet(isPresented: $showBackgroundPicker) {
             BackgroundPickerView(vm: getOrCreateSanctuaryVM())
+        }
+        .sheet(isPresented: $showProgress) {
+            MyProgressView()
         }
         .onReceive(NotificationCenter.default.publisher(for: SettingsViewModel.personalizationDidChange)) { _ in
             scrollPosition = 0

@@ -10,6 +10,7 @@ struct ChapterReaderView: View {
     let offlineTranslationName: String
     let savedVerseNumbers: Set<Int>
     let highlightColors: [Int: VerseHighlightColor]
+    let verseNotes: [Int: String]
     let audioVerseIndex: Int?
     let lastReadVerseNumber: Int?
     let readerFontSize: Double
@@ -76,6 +77,7 @@ struct ChapterReaderView: View {
         let isSelected = selectedVerseNumber == number
         let highlight = highlightColors[number]
         let isSaved = savedVerseNumbers.contains(number)
+        let hasNote = verseNotes[number] != nil
         let isAudioActive = audioVerseIndex != nil
             && (verses.firstIndex(where: { $0.number == number }).map { $0 == audioVerseIndex } ?? false)
         let isLastRead = lastReadVerseNumber == number && !isAudioActive
@@ -84,7 +86,7 @@ struct ChapterReaderView: View {
             onVerseTap(VerseItem(number: number, text: text))
         } label: {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
-                // Verse number with optional bookmark indicator
+                // Verse number with optional bookmark/note indicators
                 ZStack(alignment: .topTrailing) {
                     Text("\(number)")
                         .font(.system(size: max(11, readerFontSize * 0.65), weight: .light, design: .serif))
@@ -100,6 +102,13 @@ struct ChapterReaderView: View {
                                     : palette.accent
                             )
                             .offset(x: 6, y: -2)
+                    }
+
+                    if hasNote {
+                        Image(systemName: "text.bubble.fill")
+                            .font(.system(size: 5))
+                            .foregroundStyle(palette.accent)
+                            .offset(x: 6, y: isSaved ? 6 : -2)
                     }
                 }
 

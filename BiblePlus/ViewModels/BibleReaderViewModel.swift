@@ -45,6 +45,16 @@ final class BibleReaderViewModel {
         return map
     }
 
+    var verseNotes: [Int: String] {
+        var map: [Int: String] = [:]
+        for (number, saved) in savedVerseMap {
+            if !saved.notes.isEmpty {
+                map[number] = saved.notes
+            }
+        }
+        return map
+    }
+
     // MARK: - Reader Settings
 
     var readerFontSize: Double = 20
@@ -175,14 +185,14 @@ final class BibleReaderViewModel {
         repository.setTranslation(translation)
         updateProfile { $0.preferredTranslation = translation }
         showTranslationPicker = false
-        loadChapter()
+        loadChapter(logActivity: false)
     }
 
     // MARK: - Loading
 
     func retryLoading() {
         errorMessage = nil
-        loadChapter()
+        loadChapter(logActivity: false)
     }
 
     // MARK: - Actions
@@ -307,6 +317,7 @@ final class BibleReaderViewModel {
         modelContext.insert(saved)
         try? modelContext.save()
         savedVerseMap[verse.number] = saved
+        ActivityService.log(.verseSaved, detail: "\(selectedBook.name) \(selectedChapter):\(verse.number)", in: modelContext)
         HapticService.success()
     }
 
@@ -336,6 +347,7 @@ final class BibleReaderViewModel {
             savedVerseMap[verse.number] = saved
         }
         try? modelContext.save()
+        ActivityService.log(.verseHighlighted, detail: "\(selectedBook.name) \(selectedChapter):\(verse.number)", in: modelContext)
         HapticService.lightImpact()
     }
 
@@ -344,6 +356,32 @@ final class BibleReaderViewModel {
         saved.highlightColor = nil
         saved.updatedAt = Date()
         try? modelContext.save()
+    }
+
+    func noteText(for number: Int) -> String? {
+        guard let saved = savedVerseMap[number], !saved.notes.isEmpty else { return nil }
+        return saved.notes
+    }
+
+    func saveNote(for verse: VerseItem, note: String) {
+        if let saved = savedVerseMap[verse.number] {
+            saved.notes = note
+            saved.updatedAt = Date()
+        } else {
+            let saved = SavedBibleVerse(
+                bookID: selectedBook.id,
+                bookName: selectedBook.name,
+                chapter: selectedChapter,
+                verseNumber: verse.number,
+                text: verse.text,
+                translation: currentTranslation.displayName,
+                notes: note
+            )
+            modelContext.insert(saved)
+            savedVerseMap[verse.number] = saved
+        }
+        try? modelContext.save()
+        HapticService.success()
     }
 
     private func loadSavedVerses() {
@@ -362,7 +400,7 @@ final class BibleReaderViewModel {
 
     // MARK: - Private
 
-    private func loadChapter() {
+    private func loadChapter(logActivity: Bool = true) {
         loadTask?.cancel()
         selectedVerse = nil
         verses = []
@@ -381,6 +419,9 @@ final class BibleReaderViewModel {
                 isLoading = false
                 loadSavedVerses()
                 persistReadPosition()
+                if logActivity {
+                    ActivityService.log(.chapterRead, detail: "\(selectedBook.name) \(selectedChapter)", in: modelContext)
+                }
             } catch {
                 guard !Task.isCancelled else { return }
 
@@ -396,6 +437,9 @@ final class BibleReaderViewModel {
                     isLoading = false
                     loadSavedVerses()
                     persistReadPosition()
+                    if logActivity {
+                        ActivityService.log(.chapterRead, detail: "\(selectedBook.name) \(selectedChapter)", in: modelContext)
+                    }
                 } else {
                     verses = []
                     errorMessage = error.localizedDescription
