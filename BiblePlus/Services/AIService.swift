@@ -1,11 +1,8 @@
 import Foundation
 
 enum AIService {
-    private static let endpoint = URL(string: "https://api.openai.com/v1/chat/completions")
+    private static let endpoint = URL(string: "\(Secrets.supabaseURL)/functions/v1/chat")
     private static let model = "gpt-4o-mini"
-    // MARK: - API Key
-
-    static var apiKey: String { Secrets.openAIAPIKey }
 
     // MARK: - System Prompt
 
@@ -138,7 +135,8 @@ enum AIService {
         guard let endpoint else { throw AIError.invalidResponse }
         var request = URLRequest(url: endpoint)
         request.httpMethod = "POST"
-        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        request.setValue("Bearer \(Secrets.supabaseAnonKey)", forHTTPHeaderField: "Authorization")
+        request.setValue(Secrets.supabaseAnonKey, forHTTPHeaderField: "apikey")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try JSONSerialization.data(withJSONObject: body)
         request.timeoutInterval = 30

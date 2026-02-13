@@ -417,7 +417,7 @@ final class AudioBibleService {
         return allData
     }
 
-    private static let ttsEndpoint = URL(string: "https://api.openai.com/v1/audio/speech")
+    private static let ttsEndpoint = URL(string: "\(Secrets.supabaseURL)/functions/v1/tts")
 
     private func callTTSAPI(text: String, voice: BibleVoice = .onyx) async throws -> Data {
         guard let endpoint = Self.ttsEndpoint else { throw AudioBibleError.invalidResponse }
@@ -432,9 +432,10 @@ final class AudioBibleService {
         var request = URLRequest(url: endpoint)
         request.httpMethod = "POST"
         request.setValue(
-            "Bearer \(Secrets.openAIAPIKey)",
+            "Bearer \(Secrets.supabaseAnonKey)",
             forHTTPHeaderField: "Authorization"
         )
+        request.setValue(Secrets.supabaseAnonKey, forHTTPHeaderField: "apikey")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try JSONSerialization.data(withJSONObject: body)
         request.timeoutInterval = 60
@@ -613,12 +614,10 @@ final class AudioBibleService {
 
     static func chaptersUsedToday() -> Int {
         let defaults = UserDefaults.standard
-        let today = Calendar.current.startOfDay(for: Date())
         let stored = defaults.object(forKey: usageDateKey) as? Date ?? .distantPast
-        let storedDay = Calendar.current.startOfDay(for: stored)
-        if storedDay < today {
+        if !Calendar.current.isDateInToday(stored) {
             defaults.set(0, forKey: usageKey)
-            defaults.set(today, forKey: usageDateKey)
+            defaults.set(Date(), forKey: usageDateKey)
             return 0
         }
         return defaults.integer(forKey: usageKey)

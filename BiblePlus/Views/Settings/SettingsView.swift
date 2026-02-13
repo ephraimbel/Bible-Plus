@@ -410,7 +410,7 @@ private struct SettingsContentView: View {
             }
 
             Button {
-                if let url = URL(string: "https://bibleplus.app/privacy") {
+                if let url = URL(string: "https://bibleplus.io/privacy") {
                     openURL(url)
                 }
             } label: {
@@ -428,7 +428,7 @@ private struct SettingsContentView: View {
             }
 
             Button {
-                if let url = URL(string: "https://bibleplus.app/terms") {
+                if let url = URL(string: "https://bibleplus.io/terms") {
                     openURL(url)
                 }
             } label: {

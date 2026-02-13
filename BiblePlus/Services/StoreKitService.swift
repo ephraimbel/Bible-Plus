@@ -5,6 +5,8 @@ import Foundation
 final class StoreKitService {
     private(set) var subscriptions: [Product] = []
     private(set) var purchasedProductIDs: Set<String> = []
+    private(set) var productsLoaded = false
+    private(set) var productsLoadError = false
     private var transactionListener: Task<Void, Error>?
 
     static let weeklyID = "io.bibleplus.pro.weekly"
@@ -38,8 +40,10 @@ final class StoreKitService {
                 Self.weeklyID,
                 Self.yearlyID,
             ]).sorted { $0.price < $1.price }
+            productsLoaded = true
+            productsLoadError = false
         } catch {
-            // Products may not be configured yet
+            productsLoadError = true
         }
     }
 

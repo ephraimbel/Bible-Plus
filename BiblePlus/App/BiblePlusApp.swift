@@ -29,7 +29,17 @@ struct BiblePlusApp: App {
                 schema: schema,
                 isStoredInMemoryOnly: true
             )
-            container = try! ModelContainer(for: schema, configurations: [fallback])
+            // In-memory container so the app can at least launch and show DataErrorView.
+            // Falls back to empty schema which cannot fail (in-memory, no models).
+            if let mem = try? ModelContainer(for: schema, configurations: [fallback]) {
+                container = mem
+            } else {
+                // swiftlint:disable:next force_try
+                container = try! ModelContainer(
+                    for: Schema([]),
+                    configurations: [ModelConfiguration(isStoredInMemoryOnly: true)]
+                )
+            }
         }
         modelContainer = container
         modelContainerError = hadError

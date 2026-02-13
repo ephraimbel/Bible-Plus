@@ -192,7 +192,7 @@ struct VoicePickerView: View {
         }
     }
 
-    private static let ttsEndpoint = URL(string: "https://api.openai.com/v1/audio/speech")
+    private static let ttsEndpoint = URL(string: "\(Secrets.supabaseURL)/functions/v1/tts")
 
     private func generatePreview(text: String, voice: BibleVoice) async throws -> Data {
         guard let endpoint = Self.ttsEndpoint else { throw AudioBibleError.invalidResponse }
@@ -207,9 +207,10 @@ struct VoicePickerView: View {
         var request = URLRequest(url: endpoint)
         request.httpMethod = "POST"
         request.setValue(
-            "Bearer \(Secrets.openAIAPIKey)",
+            "Bearer \(Secrets.supabaseAnonKey)",
             forHTTPHeaderField: "Authorization"
         )
+        request.setValue(Secrets.supabaseAnonKey, forHTTPHeaderField: "apikey")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try JSONSerialization.data(withJSONObject: body)
         request.timeoutInterval = 30

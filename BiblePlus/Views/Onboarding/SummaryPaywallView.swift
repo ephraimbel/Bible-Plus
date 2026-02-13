@@ -236,8 +236,25 @@ struct SummaryPaywallView: View {
 
     private var planCards: some View {
         VStack(spacing: 12) {
-            yearlyCard
-            weeklyCard
+            if storeKitService.productsLoadError && storeKitService.subscriptions.isEmpty {
+                VStack(spacing: 12) {
+                    Text("Unable to load subscription options")
+                        .font(.system(size: 14, weight: .medium, design: .rounded))
+                        .foregroundStyle(.white.opacity(0.6))
+                    Button {
+                        Task { await storeKitService.loadProducts() }
+                    } label: {
+                        Text("Tap to Retry")
+                            .font(.system(size: 14, weight: .semibold, design: .rounded))
+                            .foregroundStyle(Color(red: 0.79, green: 0.66, blue: 0.43))
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 24)
+            } else {
+                yearlyCard
+                weeklyCard
+            }
         }
         .padding(.horizontal, 24)
         .padding(.top, 24)
@@ -480,7 +497,7 @@ struct SummaryPaywallView: View {
                     .frame(width: 3, height: 3)
 
                 Button {
-                    if let url = URL(string: "https://bibleplus.app/terms") {
+                    if let url = URL(string: "https://bibleplus.io/terms") {
                         openURL(url)
                     }
                 } label: {
@@ -494,7 +511,7 @@ struct SummaryPaywallView: View {
                     .frame(width: 3, height: 3)
 
                 Button {
-                    if let url = URL(string: "https://bibleplus.app/privacy") {
+                    if let url = URL(string: "https://bibleplus.io/privacy") {
                         openURL(url)
                     }
                 } label: {
