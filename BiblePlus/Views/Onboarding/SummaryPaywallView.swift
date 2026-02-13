@@ -138,21 +138,21 @@ struct SummaryPaywallView: View {
                 .shadow(color: Color(red: 0.79, green: 0.66, blue: 0.43).opacity(0.3), radius: 12, y: 2)
                 .shadow(color: .black.opacity(0.2), radius: 6, y: 3)
 
-            // "Bible+ Pro" title
-            HStack(spacing: 0) {
-                Text("Bible")
-                    .foregroundStyle(.white)
-                Text("+")
-                    .foregroundStyle(Color(red: 1.0, green: 0.84, blue: 0.3))
-                    .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 4)
-                    .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 10)
-                    .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(0.9), radius: 20)
-                    .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(0.6), radius: 40)
-                    .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(0.3), radius: 60)
-                Text(" Pro")
-                    .foregroundStyle(.white)
-            }
-            .font(.system(size: 34, weight: .bold, design: .serif))
+            // "Pro" badge with gold glow
+            Text("Pro")
+                .font(.system(size: 30, weight: .bold, design: .rounded))
+                .foregroundStyle(
+                    LinearGradient(
+                        colors: [
+                            Color(red: 1.0, green: 0.88, blue: 0.5),
+                            Color(red: 0.79, green: 0.66, blue: 0.43),
+                        ],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(0.6), radius: 8)
+                .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(0.3), radius: 20)
 
             // Personalized subtitle
             Text(personalizedSubtitle)
