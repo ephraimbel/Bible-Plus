@@ -33,10 +33,8 @@ struct BibleView: View {
                 if let vm = viewModel,
                    let book = BibleData.allBooks.first(where: { $0.name == bookName }),
                    chapter >= 1, chapter <= book.chapterCount {
-                    vm.selectBook(book)
-                    vm.selectChapter(chapter)
+                    vm.navigateToVerse(book: book, chapter: chapter, verseNumber: 0)
                 } else {
-                    // ViewModel not ready yet — store for later
                     pendingNavBookName = bookName
                     pendingNavChapter = chapter
                 }
@@ -53,8 +51,7 @@ struct BibleView: View {
         else { return }
         pendingNavBookName = nil
         pendingNavChapter = nil
-        vm.selectBook(book)
-        vm.selectChapter(chapter)
+        vm.navigateToVerse(book: book, chapter: chapter, verseNumber: 0)
     }
 }
 

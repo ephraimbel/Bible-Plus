@@ -121,6 +121,19 @@ struct ChatBubbleView: View {
     private func textBubble(_ text: String) -> some View {
         highlightedMarkdownText(text)
             .font(BPFont.chat)
+            .environment(\.openURL, OpenURLAction { url in
+                if url.scheme == "bibleplus",
+                   url.host == "bible",
+                   let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+                   let bookName = components.queryItems?.first(where: { $0.name == "book" })?.value,
+                   let chapterStr = components.queryItems?.first(where: { $0.name == "ch" })?.value,
+                   let chapter = Int(chapterStr) {
+                    onScriptureTap?(bookName, chapter)
+                    HapticService.lightImpact()
+                    return .handled
+                }
+                return .systemAction
+            })
             .padding(.horizontal, 14)
             .padding(.vertical, 10)
             .background(
@@ -207,7 +220,7 @@ struct ChatBubbleView: View {
         // Step 2: Set base foreground color
         attributed.foregroundColor = palette.textPrimary
 
-        // Step 3: Find scripture ranges in the plain text and apply gold
+        // Step 3: Find scripture ranges in the plain text and apply gold + tappable links
         let plainText = String(attributed.characters)
         let highlights = scriptureRanges(in: plainText)
 
@@ -216,7 +229,18 @@ struct ChatBubbleView: View {
             let endOffset = plainText.distance(from: plainText.startIndex, to: highlight.upperBound)
             let attrStart = attributed.characters.index(attributed.startIndex, offsetBy: startOffset)
             let attrEnd = attributed.characters.index(attributed.startIndex, offsetBy: endOffset)
-            attributed[attrStart..<attrEnd].foregroundColor = palette.accent
+
+            let segment = String(plainText[highlight])
+
+            // If it's a parseable scripture reference, make it tappable
+            if let (bookName, chapter) = ScriptureParser.parseReference(segment),
+               let encoded = bookName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+               let url = URL(string: "bibleplus://bible?book=\(encoded)&ch=\(chapter)") {
+                attributed[attrStart..<attrEnd].link = url
+                attributed[attrStart..<attrEnd].foregroundColor = palette.accent
+            } else {
+                attributed[attrStart..<attrEnd].foregroundColor = palette.accent
+            }
         }
 
         return Text(attributed)
