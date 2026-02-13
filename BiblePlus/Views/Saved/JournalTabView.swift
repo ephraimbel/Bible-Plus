@@ -144,6 +144,7 @@ struct JournalTabView: View {
                 .multilineTextAlignment(.center)
 
             Button {
+                HapticService.lightImpact()
                 showComposeSheet = true
             } label: {
                 Text("Write a Prayer")

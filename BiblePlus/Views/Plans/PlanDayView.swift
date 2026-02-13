@@ -120,6 +120,7 @@ struct PlanDayView: View {
 
     private func readingCard(_ reading: PlanReading) -> some View {
         Button {
+            HapticService.selection()
             guard let book = BibleData.book(id: reading.bookID) else { return }
             onReadChapter(book.name, reading.chapter)
         } label: {

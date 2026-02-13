@@ -196,6 +196,7 @@ struct ReadingPlansView: View {
     private func proUpsellCard(_ vm: ReadingPlansViewModel) -> some View {
         let proCount = vm.allPlans.filter { $0.isProOnly }.count
         return Button {
+            HapticService.lightImpact()
             vm.showPaywall = true
         } label: {
             HStack(spacing: 16) {

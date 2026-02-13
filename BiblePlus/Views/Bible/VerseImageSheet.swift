@@ -7,9 +7,11 @@ struct VerseImageSheet: View {
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.bpPalette) private var palette
+    @Environment(StoreKitService.self) private var storeKitService
     @State private var selectedRatio: ShareAspectRatio = .story
     @State private var selectedBackground: SanctuaryBackground = SanctuaryBackground.allBackgrounds[0]
     @State private var showActivitySheet = false
+    @State private var showPaywall = false
     @State private var renderedImage: UIImage?
 
     var body: some View {
@@ -24,6 +26,9 @@ struct VerseImageSheet: View {
                 }
                 .pickerStyle(.segmented)
                 .padding(.horizontal, 24)
+                .onChange(of: selectedRatio) { _, _ in
+                    HapticService.selection()
+                }
 
                 // Scaled card preview
                 GeometryReader { geo in
@@ -75,6 +80,9 @@ struct VerseImageSheet: View {
                     .presentationDetents([.medium, .large])
                 }
             }
+            .sheet(isPresented: $showPaywall) {
+                SummaryPaywallView()
+            }
         }
     }
 
@@ -100,8 +108,14 @@ struct VerseImageSheet: View {
 
     private func backgroundThumbnail(_ bg: SanctuaryBackground) -> some View {
         let isSelected = bg.id == selectedBackground.id
+        let isLocked = bg.isProOnly && !storeKitService.isPro
 
         return Button {
+            if isLocked {
+                showPaywall = true
+                HapticService.lightImpact()
+                return
+            }
             withAnimation(.easeInOut(duration: 0.2)) {
                 selectedBackground = bg
             }
@@ -130,7 +144,7 @@ struct VerseImageSheet: View {
                         .foregroundStyle(.white)
                 }
 
-                if bg.isProOnly {
+                if isLocked {
                     VStack {
                         HStack {
                             Spacer()
@@ -165,7 +179,9 @@ struct VerseImageSheet: View {
             aspectRatio: selectedRatio
         )
         if renderedImage != nil {
+            HapticService.success()
             showActivitySheet = true
         }
     }
 }
+

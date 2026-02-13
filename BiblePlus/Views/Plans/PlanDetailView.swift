@@ -197,6 +197,7 @@ struct PlanDetailView: View {
 
                 // Restart option
                 Button {
+                    HapticService.lightImpact()
                     viewModel.restartPlan(plan, isPro: isPro)
                 } label: {
                     Text("Start Again")
@@ -257,6 +258,7 @@ struct PlanDetailView: View {
                 .stroke(palette.accent.opacity(0.2), lineWidth: 1)
         )
         .onTapGesture {
+            HapticService.lightImpact()
             viewModel.showPaywall = true
         }
     }
@@ -349,6 +351,7 @@ struct PlanDetailView: View {
 
     private var leavePlanButton: some View {
         Button {
+            HapticService.lightImpact()
             showAbandonConfirm = true
         } label: {
             Text("Leave Plan")

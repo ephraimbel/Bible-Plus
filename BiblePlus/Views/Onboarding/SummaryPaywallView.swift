@@ -177,26 +177,55 @@ struct SummaryPaywallView: View {
     // MARK: - Section 2: Feature List
 
     private var featureList: some View {
-        VStack(spacing: 14) {
-            featureRow(icon: "bubble.left.and.text.bubble.right.fill", title: "Unlimited AI Companion")
-            featureRow(icon: "speaker.wave.2.fill", title: "Full Audio Bible")
-            featureRow(icon: "waveform.circle.fill", title: "All 27 Soundscapes")
-            featureRow(icon: "photo.on.rectangle.fill", title: "All 132 Backgrounds")
-            featureRow(icon: "folder.fill", title: "Unlimited Collections")
+        VStack(spacing: 12) {
+            featureRow(icon: "bubble.left.and.text.bubble.right.fill", title: "Unlimited AI Companion", subtitle: "Ask anything, anytime")
+            featureRow(icon: "book.closed.fill", title: "All Reading Plans", subtitle: "9 guided journeys")
+            featureRow(icon: "speaker.wave.2.fill", title: "Full Audio Bible", subtitle: "9 premium voices")
+            featureRow(icon: "waveform.circle.fill", title: "All 30 Soundscapes", subtitle: "Nature, worship & ambient")
+            featureRow(icon: "photo.on.rectangle.fill", title: "All 132 Backgrounds", subtitle: "Gradients, photos & video")
+            featureRow(icon: "photo.artframe", title: "Premium Verse Images", subtitle: "Beautiful shareable cards")
+            featureRow(icon: "folder.fill", title: "Unlimited Collections", subtitle: "Organize your favorites")
         }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 16)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(.white.opacity(0.04))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(.white.opacity(0.08), lineWidth: 1)
+        )
+        .padding(.horizontal, 24)
         .padding(.top, 28)
         .opacity(showFeatures ? 1 : 0)
         .offset(y: showFeatures ? 0 : 20)
     }
 
-    private func featureRow(icon: String, title: String) -> some View {
-        HStack(spacing: 10) {
-            Image(systemName: "checkmark")
-                .font(.system(size: 13, weight: .bold))
+    private func featureRow(icon: String, title: String, subtitle: String) -> some View {
+        HStack(spacing: 14) {
+            Image(systemName: icon)
+                .font(.system(size: 16, weight: .medium))
                 .foregroundStyle(Color(red: 0.79, green: 0.66, blue: 0.43))
-            Text(title)
-                .font(.system(size: 15, weight: .medium, design: .rounded))
-                .foregroundStyle(.white.opacity(0.85))
+                .frame(width: 36, height: 36)
+                .background(
+                    Circle().fill(Color(red: 0.79, green: 0.66, blue: 0.43).opacity(0.12))
+                )
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(.system(size: 15, weight: .semibold, design: .rounded))
+                    .foregroundStyle(.white.opacity(0.9))
+                Text(subtitle)
+                    .font(.system(size: 12, weight: .regular, design: .rounded))
+                    .foregroundStyle(.white.opacity(0.45))
+            }
+
+            Spacer()
+
+            Image(systemName: "checkmark")
+                .font(.system(size: 11, weight: .bold))
+                .foregroundStyle(Color(red: 0.79, green: 0.66, blue: 0.43))
         }
     }
 

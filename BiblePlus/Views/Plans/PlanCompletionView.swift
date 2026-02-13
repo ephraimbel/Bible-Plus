@@ -56,6 +56,9 @@ struct PlanCompletionView: View {
             withAnimation(.spring(response: 0.5, dampingFraction: 0.7).delay(0.1)) {
                 showIcon = true
             }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                HapticService.success()
+            }
             withAnimation(.easeOut(duration: 0.4).delay(0.4)) {
                 showText = true
             }
