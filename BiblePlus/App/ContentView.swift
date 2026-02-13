@@ -1,8 +1,11 @@
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
     @Binding var deepLinkedContentID: UUID?
     @Environment(\.bpPalette) private var palette
+    @Environment(\.modelContext) private var modelContext
+    @AppStorage("hasAutoPlayedSoundscape") private var hasAutoPlayedSoundscape = false
     @State private var selectedTab: Tab = .feed
     @State private var soundscapeService = SoundscapeService()
     @State private var audioBibleService = AudioBibleService()
@@ -58,6 +61,18 @@ struct ContentView: View {
         .tint(palette.accent)
         .onAppear {
             audioBibleService.setSoundscapeService(soundscapeService)
+
+            // Auto-play Evening Rest for new users entering after onboarding
+            if !hasAutoPlayedSoundscape {
+                soundscapeService.play(.eveningRest)
+                hasAutoPlayedSoundscape = true
+                // Update profile so Sanctuary/Settings reflect the selection
+                let descriptor = FetchDescriptor<UserProfile>()
+                if let profile = try? modelContext.fetch(descriptor).first {
+                    profile.selectedSoundscapeID = Soundscape.eveningRest.rawValue
+                    try? modelContext.save()
+                }
+            }
         }
         .toolbarBackground(palette.background, for: .tabBar)
         .toolbarBackground(.visible, for: .tabBar)
