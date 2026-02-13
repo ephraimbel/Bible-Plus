@@ -49,6 +49,7 @@ struct FeedCardView: View {
         }
         .contentShape(Rectangle())
         .onTapGesture(count: 2) {
+            HapticService.impact(.medium)
             onDoubleTap()
         }
         .onChange(of: showDoubleTapHeart) { _, newValue in

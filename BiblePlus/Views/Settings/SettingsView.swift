@@ -57,6 +57,7 @@ private struct SettingsContentView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
+                        HapticService.lightImpact()
                         let current = vm.profile.colorMode
                         let next: ColorMode = current == .dark ? .light : .dark
                         vm.updateColorMode(next)
@@ -502,7 +503,10 @@ private struct SettingsContentView: View {
 
     @ViewBuilder
     private func settingsRow(icon: String, label: String, value: String?, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
+        Button(action: {
+            HapticService.selection()
+            action()
+        }) {
             HStack {
                 Image(systemName: icon)
                     .foregroundStyle(palette.accent)

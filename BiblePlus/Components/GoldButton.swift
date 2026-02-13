@@ -35,6 +35,7 @@ struct GoldButton: View {
                     y: 4
                 )
         }
+        .buttonStyle(PressableButtonStyle())
         .disabled(!isEnabled)
         .onAppear {
             if showGlow {

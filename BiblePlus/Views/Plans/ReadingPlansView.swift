@@ -113,7 +113,7 @@ struct ReadingPlansView: View {
                             .opacity(showContent ? 1 : 0)
                             .animation(BPAnimation.staggered(index: index), value: showContent)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(PressableButtonStyle())
                     }
                 }
                 .padding(.horizontal, 20)
@@ -148,7 +148,7 @@ struct ReadingPlansView: View {
                             .opacity(showContent ? 1 : 0)
                             .animation(BPAnimation.staggered(index: index), value: showContent)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(PressableButtonStyle())
                     }
                 }
                 .padding(.horizontal, 20)
@@ -184,7 +184,7 @@ struct ReadingPlansView: View {
                         .opacity(showContent ? 1 : 0)
                         .animation(BPAnimation.staggered(index: index, base: 0.03), value: showContent)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(PressableButtonStyle())
                 }
             }
             .padding(.horizontal, 20)

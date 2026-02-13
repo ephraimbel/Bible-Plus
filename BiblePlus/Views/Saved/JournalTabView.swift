@@ -22,6 +22,7 @@ struct JournalTabView: View {
                         }
                     }
                     .onDelete { offsets in
+                        HapticService.notification(.warning)
                         for index in offsets {
                             viewModel.deletePrayerEntry(items[index])
                         }

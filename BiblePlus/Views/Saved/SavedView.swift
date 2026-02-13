@@ -40,6 +40,7 @@ private struct SavedContentView: View {
             .pickerStyle(.segmented)
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
+            .sensoryFeedback(.selection, trigger: viewModel.selectedTab)
 
             switch viewModel.selectedTab {
             case .favorites:
@@ -71,6 +72,7 @@ private struct SavedContentView: View {
                     )
                 }
                 .onDelete { offsets in
+                    HapticService.notification(.warning)
                     for index in offsets {
                         viewModel.unsave(items[index])
                     }
@@ -120,6 +122,7 @@ private struct SavedContentView: View {
                     savedVerseRow(verse)
                 }
                 .onDelete { offsets in
+                    HapticService.notification(.warning)
                     for index in offsets {
                         viewModel.deleteSavedVerse(items[index])
                     }
@@ -227,6 +230,7 @@ private struct SavedContentView: View {
                     }
                 }
                 .onDelete { offsets in
+                    HapticService.notification(.warning)
                     for index in offsets {
                         viewModel.deleteCollection(items[index])
                     }

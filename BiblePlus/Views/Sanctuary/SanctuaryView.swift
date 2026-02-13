@@ -93,6 +93,7 @@ private struct SanctuaryContentView: View {
     private var topBar: some View {
         HStack {
             Button {
+                HapticService.lightImpact()
                 dismiss()
             } label: {
                 Image(systemName: "xmark")
@@ -229,6 +230,7 @@ private struct SanctuaryContentView: View {
                             .foregroundStyle(.white)
                     }
                 }
+                .buttonStyle(PressableButtonStyle())
                 .accessibilityLabel(vm.isPlaying ? "Pause" : "Play")
 
                 // Soundscape picker shortcut

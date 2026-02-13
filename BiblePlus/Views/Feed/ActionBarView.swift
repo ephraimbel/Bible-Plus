@@ -27,6 +27,7 @@ struct ActionBarView: View {
                 color: isSaved ? palette.accent : .white,
                 scale: heartScale
             ) {
+                HapticService.impact(.light)
                 withAnimation(BPAnimation.spring) {
                     heartScale = 1.3
                 }
@@ -97,5 +98,6 @@ struct ActionBarView: View {
                 .shadow(color: .black.opacity(0.5), radius: 3, y: 1)
                 .frame(width: 40, height: 40)
         }
+        .buttonStyle(PressableButtonStyle())
     }
 }

@@ -83,6 +83,7 @@ struct ChapterReaderView: View {
         let isLastRead = lastReadVerseNumber == number && !isAudioActive
 
         return Button {
+            HapticService.selection()
             onVerseTap(VerseItem(number: number, text: text))
         } label: {
             HStack(alignment: .firstTextBaseline, spacing: 8) {

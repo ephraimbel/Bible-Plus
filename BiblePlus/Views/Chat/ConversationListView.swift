@@ -68,6 +68,7 @@ private struct ConversationListContent: View {
             List {
                 ForEach(viewModel.conversations) { conversation in
                     Button {
+                        HapticService.selection()
                         onSelectConversation(conversation)
                     } label: {
                         ConversationRow(
@@ -79,6 +80,7 @@ private struct ConversationListContent: View {
                     .listRowBackground(palette.background)
                 }
                 .onDelete { indexSet in
+                    HapticService.notification(.warning)
                     for index in indexSet {
                         viewModel.deleteConversation(viewModel.conversations[index])
                     }
@@ -109,6 +111,7 @@ private struct ConversationListContent: View {
                 .lineSpacing(3)
 
             Button {
+                HapticService.lightImpact()
                 onNewConversation()
             } label: {
                 Text("New Conversation")

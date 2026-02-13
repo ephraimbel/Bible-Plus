@@ -59,6 +59,7 @@ struct ContentView: View {
         .environment(soundscapeService)
         .environment(audioBibleService)
         .tint(palette.accent)
+        .sensoryFeedback(.selection, trigger: selectedTab)
         .onAppear {
             audioBibleService.setSoundscapeService(soundscapeService)
 

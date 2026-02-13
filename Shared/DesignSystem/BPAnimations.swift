@@ -19,9 +19,26 @@ enum BPAnimation {
     // Smooth fade for sound transitions
     static let soundCrossfade = Animation.easeInOut(duration: 1.5)
 
+    // Quick spring for button press feedback
+    static let buttonPress = Animation.spring(response: 0.2, dampingFraction: 0.6)
+
+    // Smooth spring for tab/segment content switches
+    static let contentSwitch = Animation.spring(response: 0.35, dampingFraction: 0.8)
+
     // Stagger delay helper for sequential card animations
     static func staggered(index: Int, base: Double = 0.05) -> Animation {
         spring.delay(Double(index) * base)
+    }
+}
+
+// MARK: - Pressable Button Style
+
+/// Premium scale-on-press button style — applies to CTAs for tactile feedback
+struct PressableButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.96 : 1.0)
+            .animation(BPAnimation.buttonPress, value: configuration.isPressed)
     }
 }
 

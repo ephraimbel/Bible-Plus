@@ -258,6 +258,7 @@ private struct ChatContentView: View {
                             : palette.textMuted
                     )
             }
+            .buttonStyle(PressableButtonStyle())
             .disabled(!viewModel.canSend && !viewModel.isStreaming)
         }
         .padding(.horizontal, 16)

@@ -53,6 +53,7 @@ struct BookPickerView: View {
 
     private func bookButton(_ book: BibleBook) -> some View {
         Button {
+            HapticService.selection()
             if book.chapterCount == 1 {
                 onSelectChapter(book, 1)
             } else if expandedBook == book {
@@ -107,6 +108,7 @@ struct BookPickerView: View {
                 ) {
                     ForEach(1...book.chapterCount, id: \.self) { chapter in
                         Button {
+                            HapticService.lightImpact()
                             expandedBook = nil
                             onSelectChapter(book, chapter)
                         } label: {
