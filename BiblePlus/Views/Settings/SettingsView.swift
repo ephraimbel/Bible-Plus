@@ -446,6 +446,24 @@ private struct SettingsContentView: View {
             }
 
             Button {
+                if let url = URL(string: "https://bibleplus.io/support") {
+                    openURL(url)
+                }
+            } label: {
+                HStack {
+                    Image(systemName: "questionmark.circle")
+                        .foregroundStyle(palette.accent)
+                        .frame(width: 24)
+                    Text("Support")
+                        .foregroundStyle(palette.textPrimary)
+                    Spacer()
+                    Image(systemName: "arrow.up.right")
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundStyle(.tertiary)
+                }
+            }
+
+            Button {
                 isRestoringPurchases = true
                 Task {
                     await storeKitService.restorePurchases()

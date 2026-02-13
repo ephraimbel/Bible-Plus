@@ -6,43 +6,98 @@
     <title>Bible Plus - Scripture That Speaks to Your Life</title>
     <meta name="description" content="A premium Bible app with personalized daily content, AI-powered guidance, audio Bible, and sanctuary mode. Available on iOS.">
     <meta name="apple-itunes-app" content="app-id=YOUR_APP_ID">
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0E0D0C;
-            --surface: #1A1918;
+            --bg: #FAF8F4;
+            --surface: #F0E8D8;
             --accent: #C9A96E;
-            --accent-dim: rgba(201, 169, 110, 0.15);
-            --text: #F5F0E8;
-            --text-muted: rgba(245, 240, 232, 0.5);
-            --border: rgba(255, 255, 255, 0.06);
+            --accent-deep: #B8943E;
+            --ink: #2A2118;
+            --ink-80: rgba(42, 33, 24, 0.8);
+            --ink-70: rgba(42, 33, 24, 0.7);
+            --ink-50: rgba(42, 33, 24, 0.5);
+            --ink-10: rgba(42, 33, 24, 0.1);
+            --ink-05: rgba(42, 33, 24, 0.05);
+            --accent-10: rgba(201, 169, 110, 0.1);
+            --accent-15: rgba(201, 169, 110, 0.15);
+            --accent-20: rgba(201, 169, 110, 0.2);
+            --accent-30: rgba(201, 169, 110, 0.3);
+            --white: #FFFFFF;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg);
-            color: var(--text);
+            color: var(--ink);
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(40px) rotate(1.5deg); }
+            to { opacity: 1; transform: translateY(0) rotate(0deg); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-16px); }
+        }
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(201,169,110,0.3); }
+            50% { box-shadow: 0 0 40px 8px rgba(201,169,110,0.15); }
+        }
+
+        .fade-up {
+            opacity: 0;
+            animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .fade-up-d1 { animation-delay: 0.12s; }
+        .fade-up-d2 { animation-delay: 0.24s; }
+        .fade-up-d3 { animation-delay: 0.4s; }
+        .fade-up-d4 { animation-delay: 0.55s; }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(48px);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* --- Nav --- */
         nav {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             z-index: 100;
-            padding: 16px 24px;
-            background: rgba(14, 13, 12, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
+            padding: 14px 32px;
+            transition: background 0.5s, border-color 0.5s, box-shadow 0.5s;
+            border-bottom: 1px solid transparent;
+        }
+        nav.scrolled {
+            background: rgba(250, 248, 244, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom-color: var(--ink-10);
+            box-shadow: 0 1px 20px rgba(42,33,24,0.04);
         }
         .nav-inner {
-            max-width: 1080px;
+            max-width: 1200px;
             margin: 0 auto;
             display: flex;
             align-items: center;
@@ -51,19 +106,23 @@
         .nav-brand {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             text-decoration: none;
         }
         .nav-logo {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            object-fit: cover;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        .nav-brand:hover .nav-logo { transform: scale(1.08) rotate(3deg); }
         .nav-name {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text);
-            letter-spacing: -0.3px;
+            font-family: 'Manrope', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--ink);
+            letter-spacing: -0.5px;
         }
         .nav-links {
             display: flex;
@@ -72,21 +131,41 @@
         }
         .nav-links a {
             font-size: 14px;
-            color: var(--text-muted);
+            font-weight: 600;
+            color: var(--ink-50);
             text-decoration: none;
-            transition: color 0.2s;
+            transition: color 0.25s;
+            position: relative;
         }
-        .nav-links a:hover { color: var(--text); }
+        .nav-links a:not(.nav-cta):hover { color: var(--ink); }
+        .nav-links a:not(.nav-cta)::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 1px;
+            transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .nav-links a:not(.nav-cta):hover::after { width: 100%; }
         .nav-cta {
             background: var(--accent) !important;
-            color: #1A1A1A !important;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 14px !important;
-            transition: opacity 0.2s;
+            color: var(--white) !important;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: 700 !important;
+            font-size: 13px !important;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s;
+            box-shadow: 0 4px 20px rgba(201, 169, 110, 0.25);
         }
-        .nav-cta:hover { opacity: 0.85; }
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(201, 169, 110, 0.35);
+        }
 
         /* --- Hero --- */
         .hero {
@@ -95,303 +174,656 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 120px 24px 80px;
+            padding: 140px 32px 80px;
             position: relative;
         }
-        .hero::before {
-            content: '';
+        .hero-blur-1 {
             position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
+            top: -100px;
+            right: -80px;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(201, 169, 110, 0.08) 0%, transparent 70%);
+            background: var(--accent-15);
+            border-radius: 50%;
+            filter: blur(130px);
             pointer-events: none;
         }
-        .hero-content { max-width: 680px; position: relative; }
+        .hero-blur-2 {
+            position: absolute;
+            bottom: -100px;
+            left: -150px;
+            width: 500px;
+            height: 500px;
+            background: var(--accent-10);
+            border-radius: 50%;
+            filter: blur(110px);
+            pointer-events: none;
+        }
+        .hero-content {
+            max-width: 840px;
+            position: relative;
+        }
         .hero-badge {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            background: var(--accent-dim);
-            border: 1px solid rgba(201, 169, 110, 0.25);
-            border-radius: 20px;
-            padding: 6px 16px;
-            font-size: 13px;
+            gap: 8px;
+            background: var(--white);
+            border: 1px solid var(--accent-20);
+            border-radius: 30px;
+            padding: 8px 20px;
+            font-size: 14px;
+            color: var(--accent-deep);
+            font-weight: 600;
+            margin-bottom: 40px;
+        }
+        .hero-badge svg {
+            width: 16px;
+            height: 16px;
             color: var(--accent);
-            font-weight: 500;
-            margin-bottom: 32px;
         }
         .hero h1 {
-            font-size: clamp(40px, 6vw, 64px);
-            font-weight: 800;
-            line-height: 1.08;
-            letter-spacing: -1.5px;
-            margin-bottom: 20px;
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(3.2rem, 8vw, 8rem);
+            font-weight: 400;
+            line-height: 1.0;
+            letter-spacing: -2px;
+            margin-bottom: 28px;
         }
         .hero h1 em {
-            font-style: normal;
-            background: linear-gradient(135deg, var(--accent), #E8D5A8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-style: italic;
+            color: var(--accent);
         }
-        .hero p {
-            font-size: 18px;
-            line-height: 1.6;
-            color: var(--text-muted);
+        .hero-sub {
+            font-size: 19px;
+            line-height: 1.7;
+            color: var(--ink-70);
             max-width: 520px;
-            margin: 0 auto 40px;
+            margin: 0 auto 48px;
+            font-weight: 400;
         }
-        .hero-cta {
+        .hero-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent);
+            color: var(--white);
+            padding: 18px 42px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+            box-shadow: 0 8px 32px rgba(201, 169, 110, 0.25);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 44px rgba(201, 169, 110, 0.35);
+        }
+        .btn-primary svg { width: 20px; height: 20px; }
+        .btn-ghost {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: linear-gradient(135deg, var(--accent), #B8943E);
-            color: #1A1A1A;
-            padding: 16px 36px;
-            border-radius: 28px;
-            font-size: 17px;
-            font-weight: 700;
+            background: transparent;
+            color: var(--ink);
+            padding: 18px 36px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
             text-decoration: none;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 24px rgba(201, 169, 110, 0.25);
+            border: 2px solid var(--ink-10);
+            transition: border-color 0.25s, background 0.25s;
         }
-        .hero-cta:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 8px 32px rgba(201, 169, 110, 0.35);
+        .btn-ghost:hover {
+            border-color: var(--accent-30);
+            background: var(--accent-10);
         }
-        .hero-cta svg { width: 20px; height: 20px; }
         .hero-note {
-            margin-top: 16px;
-            font-size: 13px;
-            color: var(--text-muted);
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--ink-50);
+            font-weight: 500;
         }
 
-        /* --- Features --- */
+        /* --- Phone Showcase --- */
+        .showcase {
+            padding: 0 32px 120px;
+            position: relative;
+        }
+        .showcase-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 24px;
+            perspective: 1200px;
+        }
+        .phone-frame {
+            width: 220px;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 24px 80px rgba(42,33,24,0.12), 0 4px 20px rgba(42,33,24,0.06);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+        .phone-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .phone-frame:nth-child(1) { animation: floatSlow 7s ease-in-out infinite; animation-delay: 0s; }
+        .phone-frame:nth-child(2) { animation: float 6s ease-in-out infinite; animation-delay: 0.5s; transform: scale(1.08); z-index: 2; }
+        .phone-frame:nth-child(3) { animation: floatSlow 8s ease-in-out infinite; animation-delay: 1s; }
+        .phone-frame:nth-child(4) { animation: floatSlow 7s ease-in-out infinite; animation-delay: 1.5s; }
+        .phone-frame:hover { transform: translateY(-8px) scale(1.04); z-index: 10; }
+        .phone-frame:nth-child(2):hover { transform: translateY(-8px) scale(1.12); }
+
+        /* --- Features Section --- */
         .features {
-            padding: 100px 24px;
-            max-width: 1080px;
+            padding: 120px 32px;
+            max-width: 1200px;
             margin: 0 auto;
         }
         .features-header {
             text-align: center;
-            margin-bottom: 64px;
+            margin-bottom: 72px;
         }
         .features-header h2 {
-            font-size: 36px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            margin-bottom: 12px;
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(2.4rem, 4vw, 3.5rem);
+            font-weight: 400;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
         }
         .features-header p {
-            color: var(--text-muted);
-            font-size: 17px;
+            color: var(--ink-70);
+            font-size: 18px;
+            line-height: 1.7;
+            max-width: 480px;
+            margin: 0 auto;
         }
-        .features-grid {
+
+        /* Feature Row */
+        .feature-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        .feature-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 32px;
-            transition: border-color 0.3s;
-        }
-        .feature-card:hover { border-color: rgba(201, 169, 110, 0.2); }
-        .feature-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background: var(--accent-dim);
-            display: flex;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
             align-items: center;
-            justify-content: center;
-            font-size: 22px;
+            margin-bottom: 120px;
+        }
+        .feature-row.reverse { direction: rtl; }
+        .feature-row.reverse > * { direction: ltr; }
+        .feature-text {}
+        .feature-label {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            background: var(--accent-10);
+            padding: 6px 14px;
+            border-radius: 20px;
             margin-bottom: 20px;
         }
-        .feature-card h3 {
-            font-size: 19px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            letter-spacing: -0.2px;
-        }
-        .feature-card p {
-            font-size: 15px;
-            line-height: 1.55;
-            color: var(--text-muted);
-        }
-
-        /* --- Testimonial / Quote --- */
-        .verse-section {
-            padding: 80px 24px;
-            text-align: center;
-        }
-        .verse-section blockquote {
-            font-family: 'New York', 'Georgia', serif;
-            font-size: clamp(22px, 3vw, 30px);
-            font-style: italic;
-            line-height: 1.5;
-            max-width: 640px;
-            margin: 0 auto 16px;
-            color: rgba(245, 240, 232, 0.85);
-        }
-        .verse-section cite {
-            font-style: normal;
-            font-size: 15px;
-            color: var(--accent);
-            font-weight: 600;
-        }
-
-        /* --- CTA --- */
-        .cta-section {
-            padding: 100px 24px;
-            text-align: center;
-        }
-        .cta-section h2 {
-            font-size: 36px;
-            font-weight: 700;
+        .feature-text h3 {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            font-weight: 400;
+            line-height: 1.15;
             letter-spacing: -0.5px;
             margin-bottom: 16px;
         }
-        .cta-section p {
-            color: var(--text-muted);
-            font-size: 17px;
-            margin-bottom: 36px;
+        .feature-text h3 em {
+            font-style: italic;
+            color: var(--accent);
+        }
+        .feature-text p {
+            font-size: 16px;
+            line-height: 1.75;
+            color: var(--ink-70);
+            max-width: 420px;
+        }
+        .feature-visual {
+            display: flex;
+            justify-content: center;
+        }
+        .feature-phone {
+            width: 260px;
+            border-radius: 36px;
+            overflow: hidden;
+            box-shadow: 0 32px 80px rgba(42,33,24,0.12), 0 4px 24px rgba(42,33,24,0.06);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .feature-phone:hover { transform: translateY(-6px) rotate(1deg); }
+        .feature-phone img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* --- Verse Section --- */
+        .verse-section {
+            padding: 100px 32px;
+            text-align: center;
+            position: relative;
+        }
+        .verse-section::before {
+            content: '\201C';
+            font-family: 'Instrument Serif', serif;
+            font-size: 220px;
+            color: var(--accent-15);
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            line-height: 1;
+            pointer-events: none;
+        }
+        .verse-section blockquote {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+            font-style: italic;
+            line-height: 1.5;
+            max-width: 640px;
+            margin: 0 auto 20px;
+            color: var(--ink);
+            position: relative;
+        }
+        .verse-section cite {
+            font-family: 'Manrope', sans-serif;
+            font-style: normal;
+            font-size: 16px;
+            color: var(--accent);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- CTA Section --- */
+        .cta-section {
+            padding: 0 32px 120px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .cta-card {
+            background: var(--accent);
+            border-radius: 48px;
+            padding: 88px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(rgba(255,255,255,0.18) 1px, transparent 1px);
+            background-size: 30px 30px;
+            pointer-events: none;
+        }
+        .cta-card h2 {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 400;
+            color: var(--white);
+            margin-bottom: 20px;
+            position: relative;
+            letter-spacing: -1px;
+        }
+        .cta-card p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .btn-cta-white {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--white);
+            color: var(--accent-deep);
+            padding: 18px 42px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        .btn-cta-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 44px rgba(0,0,0,0.15);
+        }
+        .btn-cta-white svg { width: 20px; height: 20px; }
+        .cta-trust {
+            margin-top: 28px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.55);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
         }
 
         /* --- Footer --- */
         footer {
-            border-top: 1px solid var(--border);
-            padding: 40px 24px;
-            max-width: 1080px;
-            margin: 0 auto;
+            background: var(--ink);
+            padding: 72px 32px 44px;
         }
         .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 56px;
+        }
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .footer-logo img {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+        }
+        .footer-logo-name {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--white);
+            letter-spacing: -0.5px;
+        }
+        .footer-tagline {
+            font-size: 15px;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.65;
+            max-width: 280px;
+        }
+        .footer-col h4 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+        .footer-col a {
+            display: block;
+            font-size: 14px;
+            color: rgba(255,255,255,0.45);
+            text-decoration: none;
+            margin-bottom: 14px;
+            transition: color 0.25s;
+        }
+        .footer-col a:hover { color: var(--white); }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding-top: 28px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 16px;
+            gap: 12px;
         }
-        .footer-copy {
+        .footer-bottom span {
             font-size: 13px;
-            color: var(--text-muted);
+            color: rgba(255,255,255,0.3);
         }
-        .footer-links {
+        .footer-legal {
             display: flex;
             gap: 24px;
         }
-        .footer-links a {
+        .footer-legal a {
             font-size: 13px;
-            color: var(--text-muted);
+            color: rgba(255,255,255,0.3);
             text-decoration: none;
-            transition: color 0.2s;
+            transition: color 0.25s;
         }
-        .footer-links a:hover { color: var(--text); }
+        .footer-legal a:hover { color: rgba(255,255,255,0.6); }
 
         /* --- Responsive --- */
+        @media (max-width: 900px) {
+            .showcase-inner { flex-wrap: wrap; gap: 16px; }
+            .phone-frame { width: 160px; }
+            .phone-frame:nth-child(2) { transform: scale(1); }
+            .feature-row, .feature-row.reverse { grid-template-columns: 1fr; gap: 48px; direction: ltr; text-align: center; }
+            .feature-text p { margin: 0 auto; }
+            .feature-label { margin-left: auto; margin-right: auto; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+        }
         @media (max-width: 640px) {
-            .nav-links { display: none; }
-            .features-grid { grid-template-columns: 1fr; }
+            .nav-links a:not(.nav-cta) { display: none; }
+            .hero { padding: 120px 20px 60px; }
+            .hero h1 { letter-spacing: -1px; }
+            .hero-buttons { flex-direction: column; }
+            .btn-primary, .btn-ghost, .btn-cta-white { width: 100%; justify-content: center; }
+            .showcase-inner { gap: 10px; }
+            .phone-frame { width: 140px; border-radius: 24px; }
+            .phone-frame:nth-child(4) { display: none; }
+            .features, .cta-section { padding-left: 20px; padding-right: 20px; }
+            .feature-phone { width: 220px; border-radius: 28px; }
+            .cta-card { padding: 60px 24px; border-radius: 32px; }
+            .footer-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-<nav>
+<!-- Nav -->
+<nav id="navbar">
     <div class="nav-inner">
         <a href="/" class="nav-brand">
+            <img src="/images/logo.png" alt="Bible Plus" class="nav-logo">
             <span class="nav-name">Bible+</span>
         </a>
         <div class="nav-links">
             <a href="#features">Features</a>
-            <a href="/privacy">Privacy</a>
-            <a href="/terms">Terms</a>
+            <a href="/support">Support</a>
             <a href="https://apps.apple.com/app/bible-plus/idYOUR_APP_ID" class="nav-cta">Download</a>
         </div>
     </div>
 </nav>
 
+<!-- Hero -->
 <section class="hero">
+    <div class="hero-blur-1"></div>
+    <div class="hero-blur-2"></div>
     <div class="hero-content">
-        <div class="hero-badge">Available on iOS</div>
-        <h1>Scripture that <em>speaks to your life</em></h1>
-        <p>Personalized daily verses, an AI companion rooted in God's Word, audio Bible narration, and a sanctuary for quiet time. All in one beautiful app.</p>
-        <a href="https://apps.apple.com/app/bible-plus/idYOUR_APP_ID" class="hero-cta">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            Download Free
-        </a>
-        <p class="hero-note">Free with optional Pro upgrade. 3-day free trial.</p>
+        <div class="hero-badge fade-up">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.912 5.813a2 2 0 001.272 1.272L21 12l-5.813 1.912a2 2 0 00-1.272 1.272L12 21l-1.912-5.813a2 2 0 00-1.272-1.272L3 12l5.813-1.912a2 2 0 001.272-1.272L12 3z"/></svg>
+            Available on iOS
+        </div>
+        <h1 class="fade-up fade-up-d1">Scripture that<br><em>speaks to your life</em></h1>
+        <p class="hero-sub fade-up fade-up-d2">Personalized daily verses, AI-powered pastoral guidance, audio Bible narration, and a sanctuary for your quiet time.</p>
+        <div class="hero-buttons fade-up fade-up-d3">
+            <a href="https://apps.apple.com/app/bible-plus/idYOUR_APP_ID" class="btn-primary">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                Download Free
+            </a>
+            <a href="#features" class="btn-ghost">Explore Features</a>
+        </div>
+        <p class="hero-note fade-up fade-up-d4">Free with optional Pro upgrade &middot; 3-day free trial</p>
     </div>
 </section>
 
+<!-- Phone Showcase -->
+<section class="showcase reveal">
+    <div class="showcase-inner">
+        <div class="phone-frame">
+            <img src="/images/screenshot-feed.png" alt="Bible Plus - Personalized Feed" loading="lazy">
+        </div>
+        <div class="phone-frame">
+            <img src="/images/screenshot-bible.png" alt="Bible Plus - Bible Reader" loading="lazy">
+        </div>
+        <div class="phone-frame">
+            <img src="/images/screenshot-ask.png" alt="Bible Plus - AI Companion" loading="lazy">
+        </div>
+        <div class="phone-frame">
+            <img src="/images/screenshot-saved.png" alt="Bible Plus - Saved Verses" loading="lazy">
+        </div>
+    </div>
+</section>
+
+<!-- Features -->
 <section class="features" id="features">
-    <div class="features-header">
-        <h2>Five pillars of your faith journey</h2>
-        <p>Every feature is designed to draw you closer to God's Word.</p>
+    <div class="features-header reveal">
+        <h2>Five pillars of your<br>faith journey</h2>
+        <p>Every feature is designed to draw you closer to God's Word, every single day.</p>
     </div>
-    <div class="features-grid">
-        <div class="feature-card">
-            <div class="feature-icon">&#x1F525;</div>
-            <h3>Personalized Feed</h3>
-            <p>Daily prayers, verses, and devotionals tailored to your season of life, burdens, and faith level. Swipe through content that actually speaks to you.</p>
+
+    <!-- Feature 1: Feed -->
+    <div class="feature-row reveal">
+        <div class="feature-text">
+            <span class="feature-label">Personalized Feed</span>
+            <h3>Content that <em>knows your heart</em></h3>
+            <p>Daily prayers, verses, and devotionals tailored to your season of life, burdens, and spiritual maturity. Swipe through content that actually speaks to you. No two feeds are alike.</p>
         </div>
-        <div class="feature-card">
-            <div class="feature-icon">&#x1F4AC;</div>
-            <h3>AI Companion</h3>
-            <p>Ask any question about Scripture and get warm, pastoral guidance rooted in God's Word. Every response includes real Bible verses in your preferred translation.</p>
+        <div class="feature-visual">
+            <div class="feature-phone">
+                <img src="/images/screenshot-feed.png" alt="Personalized Feed" loading="lazy">
+            </div>
         </div>
-        <div class="feature-card">
-            <div class="feature-icon">&#x1F4D6;</div>
-            <h3>Bible Reader</h3>
-            <p>Read all 66 books with a clean, distraction-free interface. Tap any verse to save, share, or get an AI explanation of its meaning.</p>
+    </div>
+
+    <!-- Feature 2: Bible Reader -->
+    <div class="feature-row reverse reveal">
+        <div class="feature-text">
+            <span class="feature-label">Bible Reader</span>
+            <h3>All 66 books, <em>beautifully presented</em></h3>
+            <p>A clean, distraction-free reading experience. Tap any verse to save, share, or get an AI-powered explanation. Listen with 9 natural narrator voices.</p>
         </div>
-        <div class="feature-card">
-            <div class="feature-icon">&#x1F3A7;</div>
-            <h3>Audio Bible</h3>
-            <p>Listen to Scripture narrated in natural AI voices. Choose from 9 distinct voices and let the Word wash over you during your commute, workout, or quiet time.</p>
+        <div class="feature-visual">
+            <div class="feature-phone">
+                <img src="/images/screenshot-bible.png" alt="Bible Reader" loading="lazy">
+            </div>
         </div>
-        <div class="feature-card">
-            <div class="feature-icon">&#x1F54A;&#xFE0F;</div>
-            <h3>Sanctuary Mode</h3>
-            <p>Full-screen immersive experience with ambient soundscapes and beautiful backgrounds. Set a sleep timer and drift off in God's peace.</p>
+    </div>
+
+    <!-- Feature 3: AI Companion -->
+    <div class="feature-row reveal">
+        <div class="feature-text">
+            <span class="feature-label">AI Companion</span>
+            <h3>Ask anything about <em>Scripture</em></h3>
+            <p>Get warm, pastoral guidance rooted in God's Word. Every response includes real Bible verses. Ask questions, request prayers, or explore a passage deeper.</p>
         </div>
-        <div class="feature-card">
-            <div class="feature-icon">&#x1F3E0;</div>
-            <h3>Home & Lock Widgets</h3>
-            <p>Keep Scripture on your home screen and lock screen. Fresh verses rotate throughout the day based on your personalization profile.</p>
+        <div class="feature-visual">
+            <div class="feature-phone">
+                <img src="/images/screenshot-ask.png" alt="AI Companion" loading="lazy">
+            </div>
+        </div>
+    </div>
+
+    <!-- Feature 4: Saved -->
+    <div class="feature-row reverse reveal">
+        <div class="feature-text">
+            <span class="feature-label">Saved & Collections</span>
+            <h3>Your verses, <em>always with you</em></h3>
+            <p>Save your favorite verses and devotionals. Organize them into collections for quick access. Build your personal library of Scripture that matters most to you.</p>
+        </div>
+        <div class="feature-visual">
+            <div class="feature-phone">
+                <img src="/images/screenshot-saved.png" alt="Saved Verses" loading="lazy">
+            </div>
         </div>
     </div>
 </section>
 
-<section class="verse-section">
+<!-- Verse Quote -->
+<section class="verse-section reveal">
     <blockquote>"Thy word is a lamp unto my feet, and a light unto my path."</blockquote>
     <cite>Psalm 119:105</cite>
 </section>
 
-<section class="cta-section">
-    <h2>Start your journey today</h2>
-    <p>Free to download. Try Pro free for 3 days.</p>
-    <a href="https://apps.apple.com/app/bible-plus/idYOUR_APP_ID" class="hero-cta">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        Download Free
-    </a>
+<!-- CTA -->
+<section class="cta-section reveal">
+    <div class="cta-card">
+        <h2>Start your journey today</h2>
+        <p>Free to download. Try Pro free for 3 days.</p>
+        <a href="https://apps.apple.com/app/bible-plus/idYOUR_APP_ID" class="btn-cta-white">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.5 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            Download Free
+        </a>
+        <div class="cta-trust">Free forever &middot; No credit card required</div>
+    </div>
 </section>
 
+<!-- Footer -->
 <footer>
     <div class="footer-inner">
-        <span class="footer-copy">&copy; 2025 Bible Plus. All rights reserved.</span>
-        <div class="footer-links">
-            <a href="/privacy">Privacy Policy</a>
-            <a href="/terms">Terms of Service</a>
-            <a href="mailto:support@bibleplus.io">Contact</a>
+        <div class="footer-grid">
+            <div>
+                <div class="footer-logo">
+                    <img src="/images/logo.png" alt="Bible Plus">
+                    <span class="footer-logo-name">Bible+</span>
+                </div>
+                <p class="footer-tagline">Scripture that speaks to your life. Personalized, beautiful, and always with you.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Product</h4>
+                <a href="#features">Features</a>
+                <a href="https://apps.apple.com/app/bible-plus/idYOUR_APP_ID">Download</a>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
+            </div>
+            <div class="footer-col">
+                <h4>Help</h4>
+                <a href="/support">Support</a>
+                <a href="mailto:support@bibleplus.io">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 Bible Plus. All rights reserved.</span>
+            <div class="footer-legal">
+                <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
+                <a href="/support">Support</a>
+            </div>
         </div>
     </div>
 </footer>
+
+<script>
+    // Nav glassmorphism on scroll
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Scroll reveal with stagger
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            e.preventDefault();
+            const target = document.querySelector(a.getAttribute('href'));
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+</script>
 
 </body>
 </html>
