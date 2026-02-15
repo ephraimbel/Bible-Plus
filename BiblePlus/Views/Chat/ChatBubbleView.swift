@@ -6,6 +6,11 @@ struct ChatBubbleView: View {
     var onSave: (() -> Void)? = nil
     var onShare: (() -> Void)? = nil
     var onScriptureTap: ((String, Int) -> Void)? = nil
+    var onSavePrayerToJournal: (() -> Void)? = nil
+    var isPrayerMessage: Bool = false
+    var isSavedToJournal: Bool = false
+    var isFailedMessage: Bool = false
+    var previousMessageRole: MessageRole? = nil
 
     @Environment(\.bpPalette) private var palette
 
@@ -17,21 +22,34 @@ struct ChatBubbleView: View {
         isStreaming && message.role == .assistant && !message.content.isEmpty
     }
 
+    private var showRoleGap: Bool {
+        guard let prev = previousMessageRole else { return false }
+        return prev != message.role
+    }
+
     var body: some View {
         HStack(alignment: .top, spacing: 10) {
             if message.role == .user {
                 Spacer(minLength: 60)
             } else {
-                // AI avatar
-                Image(systemName: "sparkles")
-                    .font(.system(size: 14))
-                    .foregroundStyle(palette.accent)
-                    .frame(width: 28, height: 28)
-                    .background(
-                        Circle()
-                            .fill(palette.accentSoft)
-                    )
-                    .padding(.top, 2)
+                // AI avatar — gold gradient circle with cross
+                ZStack {
+                    Circle()
+                        .fill(
+                            LinearGradient(
+                                colors: [palette.accent, palette.accent.opacity(0.7)],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+                        .frame(width: 32, height: 32)
+                        .shadow(color: palette.accent.opacity(0.25), radius: 4, y: 2)
+
+                    Image(systemName: "cross.fill")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundStyle(.white)
+                }
+                .padding(.top, 2)
             }
 
             VStack(alignment: message.role == .user ? .trailing : .leading, spacing: 4) {
@@ -39,7 +57,7 @@ struct ChatBubbleView: View {
                     TypingDotsView()
                         .background(
                             RoundedRectangle(cornerRadius: 16)
-                                .fill(bubbleColor)
+                                .fill(palette.surface)
                         )
                         .transition(.scale(scale: 0.8).combined(with: .opacity))
                 } else if message.role == .user {
@@ -49,13 +67,36 @@ struct ChatBubbleView: View {
                         .padding(.horizontal, 14)
                         .padding(.vertical, 10)
                         .background(
-                            RoundedRectangle(cornerRadius: 16)
-                                .fill(bubbleColor)
+                            userBubbleShape
+                                .fill(
+                                    LinearGradient(
+                                        colors: [palette.accent, palette.accent.opacity(0.85)],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                )
                         )
                         .textSelection(.enabled)
+
+                    // Failed message indicator
+                    if isFailedMessage {
+                        HStack(spacing: 4) {
+                            Image(systemName: "exclamationmark.circle.fill")
+                                .font(.system(size: 12))
+                            Text("Failed to send")
+                                .font(.system(size: 12, weight: .medium))
+                        }
+                        .foregroundStyle(palette.error)
+                        .padding(.top, 2)
+                    }
                 } else {
-                    // AI message: segmented rendering (text + verse cards)
+                    // AI message: segmented rendering
                     assistantBubble
+
+                    // Save to Journal button
+                    if isPrayerMessage {
+                        saveToJournalButton
+                    }
                 }
             }
             .animation(BPAnimation.spring, value: isTypingPlaceholder)
@@ -65,7 +106,58 @@ struct ChatBubbleView: View {
             }
         }
         .padding(.horizontal, 16)
-        .padding(.vertical, 2)
+        .padding(.top, showRoleGap ? 8 : 2)
+        .padding(.bottom, 2)
+    }
+
+    // MARK: - Bubble Shapes
+
+    private var userBubbleShape: UnevenRoundedRectangle {
+        UnevenRoundedRectangle(
+            topLeadingRadius: 16,
+            bottomLeadingRadius: 16,
+            bottomTrailingRadius: 16,
+            topTrailingRadius: 6
+        )
+    }
+
+    private var aiBubbleShape: UnevenRoundedRectangle {
+        UnevenRoundedRectangle(
+            topLeadingRadius: 6,
+            bottomLeadingRadius: 16,
+            bottomTrailingRadius: 16,
+            topTrailingRadius: 16
+        )
+    }
+
+    // MARK: - Save to Journal Button
+
+    private var saveToJournalButton: some View {
+        Button {
+            onSavePrayerToJournal?()
+        } label: {
+            HStack(spacing: 6) {
+                Image(systemName: isSavedToJournal ? "checkmark.circle.fill" : "book.closed.fill")
+                    .font(.system(size: 12, weight: .semibold))
+                Text(isSavedToJournal ? "Saved to Journal" : "Save to Journal")
+                    .font(.system(size: 12, weight: .semibold, design: .rounded))
+            }
+            .foregroundStyle(isSavedToJournal ? Color.green : palette.accent)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 6)
+            .background(
+                Capsule()
+                    .fill(isSavedToJournal ? Color.green.opacity(0.1) : palette.accent.opacity(0.1))
+            )
+            .overlay(
+                Capsule()
+                    .stroke(isSavedToJournal ? Color.green.opacity(0.2) : palette.accent.opacity(0.2), lineWidth: 1)
+            )
+        }
+        .disabled(isSavedToJournal)
+        .padding(.top, 4)
+        .transition(.scale(scale: 0.8).combined(with: .opacity))
+        .animation(BPAnimation.spring, value: isSavedToJournal)
     }
 
     // MARK: - Assistant Bubble (Segmented)
@@ -137,8 +229,12 @@ struct ChatBubbleView: View {
             .padding(.horizontal, 14)
             .padding(.vertical, 10)
             .background(
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(bubbleColor)
+                aiBubbleShape
+                    .fill(palette.surface)
+            )
+            .overlay(
+                aiBubbleShape
+                    .stroke(palette.accent.opacity(0.15), lineWidth: 1)
             )
             .textSelection(.enabled)
     }
@@ -154,7 +250,7 @@ struct ChatBubbleView: View {
                 .italic()
 
             HStack(spacing: 0) {
-                Text("— ")
+                Text("\u{2014} ")
                     .foregroundStyle(palette.textMuted)
                 referenceButton(reference)
             }
@@ -206,7 +302,6 @@ struct ChatBubbleView: View {
     // MARK: - Markdown + Scripture Highlighting
 
     private func highlightedMarkdownText(_ content: String) -> Text {
-        // Step 1: Parse markdown into AttributedString
         var attributed: AttributedString
         do {
             attributed = try AttributedString(
@@ -217,10 +312,8 @@ struct ChatBubbleView: View {
             attributed = AttributedString(content)
         }
 
-        // Step 2: Set base foreground color
         attributed.foregroundColor = palette.textPrimary
 
-        // Step 3: Find scripture ranges in the plain text and apply gold + tappable links
         let plainText = String(attributed.characters)
         let highlights = scriptureRanges(in: plainText)
 
@@ -232,7 +325,6 @@ struct ChatBubbleView: View {
 
             let segment = String(plainText[highlight])
 
-            // If it's a parseable scripture reference, make it tappable
             if let (bookName, chapter) = ScriptureParser.parseReference(segment),
                let encoded = bookName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
                let url = URL(string: "bibleplus://bible?book=\(encoded)&ch=\(chapter)") {
@@ -253,13 +345,11 @@ struct ChatBubbleView: View {
         let nsString = text as NSString
         let full = NSRange(location: 0, length: nsString.length)
 
-        // Quoted scripture (straight and curly quotes, 4+ chars inside)
         let quotePatterns = [
             #"\"[^\"]{4,}\""#,
             #"\u201C[^\u201D]{4,}\u201D"#
         ]
 
-        // Scripture references: John 3:16, 1 Corinthians 13:4-7, etc.
         let refPattern = #"(?:\d\s+)?[A-Z][a-z]{2,}(?:\s+(?:of\s+)?[A-Z][a-z]+)*\s+\d{1,3}:\d{1,3}(?:\s*[-–]\s*\d{1,3})?(?:,\s*\d{1,3}(?:\s*[-–]\s*\d{1,3})?)*"#
 
         for pattern in quotePatterns + [refPattern] {
@@ -288,12 +378,6 @@ struct ChatBubbleView: View {
         }
         merged.append(current)
         return merged
-    }
-
-    private var bubbleColor: Color {
-        message.role == .user
-            ? palette.accent
-            : palette.surface
     }
 }
 
@@ -324,10 +408,7 @@ enum MessageParser {
         case verseCard(quote: String, reference: String)
     }
 
-    /// Splits AI message content into text segments and verse card segments.
-    /// A verse card is detected when quoted text (20+ chars) is followed by a scripture reference.
     static func parse(_ content: String) -> [Segment] {
-        // Pattern: quoted text (straight or curly quotes) followed by a reference in parens, dash, or em-dash
         let pattern = #"(?:\"([^\"]{20,})\"|(?:\u201C)([^\u201D]{20,})(?:\u201D))\s*[-–—(]\s*((?:\d\s+)?[A-Z][a-z]{2,}(?:\s+(?:of\s+)?[A-Z][a-z]+)*\s+\d{1,3}:\d{1,3}(?:\s*[-–]\s*\d{1,3})?(?:,\s*\d{1,3}(?:\s*[-–]\s*\d{1,3})?)*)\)?"#
 
         guard let regex = try? NSRegularExpression(pattern: pattern) else {
@@ -348,7 +429,6 @@ enum MessageParser {
         for match in matches {
             guard let matchRange = Range(match.range, in: content) else { continue }
 
-            // Add text before this verse card
             if cursor < matchRange.lowerBound {
                 let textBefore = String(content[cursor..<matchRange.lowerBound])
                 if !textBefore.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
@@ -356,7 +436,6 @@ enum MessageParser {
                 }
             }
 
-            // Extract quote (group 1 for straight quotes, group 2 for curly)
             var quote = ""
             if match.range(at: 1).location != NSNotFound,
                let r = Range(match.range(at: 1), in: content) {
@@ -366,7 +445,6 @@ enum MessageParser {
                 quote = String(content[r])
             }
 
-            // Extract reference (group 3)
             var reference = ""
             if match.range(at: 3).location != NSNotFound,
                let r = Range(match.range(at: 3), in: content) {
@@ -382,7 +460,6 @@ enum MessageParser {
             cursor = matchRange.upperBound
         }
 
-        // Add remaining text
         if cursor < content.endIndex {
             let remaining = String(content[cursor...])
             if !remaining.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
@@ -397,8 +474,6 @@ enum MessageParser {
 // MARK: - Scripture Reference Parser (for tap-to-navigate)
 
 enum ScriptureParser {
-    /// Parses a reference like "Romans 8:28" or "1 John 4:8" into (bookName, chapter).
-    /// Returns nil if the reference can't be resolved to a known BibleBook.
     static func parseReference(_ reference: String) -> (String, Int)? {
         let pattern = #"^((?:\d\s+)?[A-Z][a-z]+(?:\s+(?:of\s+)?[A-Z][a-z]+)*)\s+(\d{1,3}):\d"#
         guard let regex = try? NSRegularExpression(pattern: pattern),
@@ -412,7 +487,6 @@ enum ScriptureParser {
 
         let bookName = String(reference[bookRange])
 
-        // Verify it's a real Bible book with a valid chapter
         guard let book = BibleData.allBooks.first(where: { $0.name == bookName }),
               chapter >= 1, chapter <= book.chapterCount
         else { return nil }

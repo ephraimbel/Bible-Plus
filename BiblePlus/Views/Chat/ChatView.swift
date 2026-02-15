@@ -50,6 +50,7 @@ private struct ChatContentView: View {
     @Bindable var viewModel: ChatViewModel
     @Environment(\.bpPalette) private var palette
     @State private var showPaywall = false
+    @State private var sendButtonScale: CGFloat = 1.0
 
     var body: some View {
         VStack(spacing: 0) {
@@ -58,6 +59,8 @@ private struct ChatContentView: View {
                 QuickPromptsView(
                     prompts: viewModel.quickPrompts,
                     userName: viewModel.userName,
+                    categories: PromptCategory.allCases,
+                    selectedCategory: $viewModel.selectedPromptCategory,
                     onTap: { viewModel.sendQuickPrompt($0) }
                 )
             } else {
@@ -74,6 +77,11 @@ private struct ChatContentView: View {
                 errorBanner(error)
             }
 
+            // Retry banner
+            if viewModel.failedMessageContent != nil {
+                retryBanner
+            }
+
             // Rate limit indicator
             if !viewModel.profile.isPro && !viewModel.messages.isEmpty {
                 rateLimitBanner
@@ -83,6 +91,15 @@ private struct ChatContentView: View {
             inputBar
         }
         .background(palette.background)
+        .overlay(alignment: .bottom) {
+            // Saved to Journal toast
+            if viewModel.showSavedToJournalToast {
+                savedToJournalToast
+                    .padding(.bottom, 80)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                    .animation(BPAnimation.spring, value: viewModel.showSavedToJournalToast)
+            }
+        }
         .onAppear {
             viewModel.applyInitialContext()
         }
@@ -99,9 +116,15 @@ private struct ChatContentView: View {
     private var messageList: some View {
         ScrollViewReader { proxy in
             ScrollView {
-                LazyVStack(spacing: 4) {
-                    ForEach(viewModel.messages) { message in
+                LazyVStack(spacing: 0) {
+                    ForEach(Array(viewModel.messages.enumerated()), id: \.element.id) { index, message in
                         if message.role != .system {
+                            let previousRole: MessageRole? = {
+                                guard index > 0 else { return nil }
+                                let prev = viewModel.messages[index - 1]
+                                return prev.role == .system ? nil : prev.role
+                            }()
+
                             ChatBubbleView(
                                 message: message,
                                 isStreaming: viewModel.isStreaming
@@ -115,7 +138,14 @@ private struct ChatContentView: View {
                                 } : nil,
                                 onScriptureTap: { bookName, chapter in
                                     viewModel.navigateToScripture(bookName: bookName, chapter: chapter)
-                                }
+                                },
+                                onSavePrayerToJournal: viewModel.messageContainsPrayer(message) || viewModel.savedToJournalMessageIDs.contains(message.id) ? {
+                                    viewModel.savePrayerToJournal(message)
+                                } : nil,
+                                isPrayerMessage: viewModel.messageContainsPrayer(message) || viewModel.savedToJournalMessageIDs.contains(message.id),
+                                isSavedToJournal: viewModel.savedToJournalMessageIDs.contains(message.id),
+                                isFailedMessage: message.role == .user && viewModel.failedMessageId == message.id,
+                                previousMessageRole: previousRole
                             )
                             .id(message.id)
                         }
@@ -146,25 +176,38 @@ private struct ChatContentView: View {
     private var followUpChips: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
-                ForEach(viewModel.followUpSuggestions, id: \.self) { suggestion in
+                ForEach(Array(viewModel.followUpSuggestions.enumerated()), id: \.element) { index, suggestion in
                     Button {
                         viewModel.sendQuickPrompt(suggestion)
                         HapticService.lightImpact()
                     } label: {
-                        Text(suggestion)
-                            .font(.system(size: 13, weight: .medium, design: .rounded))
-                            .foregroundStyle(palette.accent)
-                            .padding(.horizontal, 14)
-                            .padding(.vertical, 8)
-                            .background(
-                                Capsule()
-                                    .fill(palette.accent.opacity(0.1))
-                            )
-                            .overlay(
-                                Capsule()
-                                    .stroke(palette.accent.opacity(0.25), lineWidth: 1)
-                            )
+                        HStack(spacing: 6) {
+                            Image(systemName: suggestionIcon(for: suggestion))
+                                .font(.system(size: 11, weight: .semibold))
+                            Text(suggestion)
+                                .font(.system(size: 14, weight: .medium, design: .rounded))
+                        }
+                        .foregroundStyle(palette.accent)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 10)
+                        .background(
+                            Capsule()
+                                .fill(palette.accent.opacity(0.08))
+                        )
+                        .overlay(
+                            Capsule()
+                                .stroke(
+                                    LinearGradient(
+                                        colors: [palette.accent.opacity(0.4), palette.accent.opacity(0.15)],
+                                        startPoint: .leading,
+                                        endPoint: .trailing
+                                    ),
+                                    lineWidth: 1
+                                )
+                        )
                     }
+                    .transition(.scale(scale: 0.8).combined(with: .opacity))
+                    .animation(BPAnimation.spring.delay(Double(index) * 0.05), value: viewModel.followUpSuggestions)
                 }
             }
             .padding(.horizontal, 16)
@@ -172,6 +215,18 @@ private struct ChatContentView: View {
         }
         .transition(.move(edge: .bottom).combined(with: .opacity))
         .animation(BPAnimation.spring, value: viewModel.followUpSuggestions)
+    }
+
+    private func suggestionIcon(for text: String) -> String {
+        let lower = text.lowercased()
+        if lower.contains("verse") || lower.contains("scripture") || lower.contains("bible") || lower.contains("read") {
+            return "book.fill"
+        } else if lower.contains("pray") || lower.contains("prayer") {
+            return "hands.sparkles"
+        } else if lower.contains("explain") || lower.contains("mean") || lower.contains("understand") {
+            return "lightbulb.fill"
+        }
+        return "arrow.right.circle.fill"
     }
 
     // MARK: - Error Banner
@@ -187,6 +242,42 @@ private struct ChatContentView: View {
             .onTapGesture {
                 viewModel.errorMessage = nil
             }
+    }
+
+    // MARK: - Retry Banner
+
+    private var retryBanner: some View {
+        HStack(spacing: 10) {
+            Image(systemName: "exclamationmark.triangle.fill")
+                .font(.system(size: 14))
+                .foregroundStyle(palette.error)
+
+            Text("Message failed to send")
+                .font(.system(size: 13, weight: .medium))
+                .foregroundStyle(palette.error)
+
+            Spacer()
+
+            Button {
+                viewModel.retryLastMessage()
+                HapticService.lightImpact()
+            } label: {
+                Text("Retry")
+                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 6)
+                    .background(
+                        Capsule()
+                            .fill(palette.error)
+                    )
+            }
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 10)
+        .background(palette.error.opacity(0.08))
+        .transition(.move(edge: .bottom).combined(with: .opacity))
+        .animation(BPAnimation.spring, value: viewModel.failedMessageContent != nil)
     }
 
     // MARK: - Rate Limit Banner
@@ -227,45 +318,80 @@ private struct ChatContentView: View {
     // MARK: - Input Bar
 
     private var inputBar: some View {
-        HStack(spacing: 12) {
-            TextField("Ask anything about Scripture...", text: $viewModel.inputText, axis: .vertical)
-                .font(BPFont.body)
-                .lineLimit(1...5)
-                .padding(.horizontal, 14)
-                .padding(.vertical, 10)
-                .background(
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(palette.surface)
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(palette.border, lineWidth: 1)
-                )
+        VStack(spacing: 0) {
+            // Subtle top divider
+            Rectangle()
+                .fill(palette.border.opacity(0.5))
+                .frame(height: 0.5)
 
-            Button {
-                if viewModel.isStreaming {
-                    viewModel.stopStreaming()
-                } else {
-                    viewModel.send()
-                }
-                HapticService.lightImpact()
-            } label: {
-                Image(systemName: viewModel.isStreaming ? "stop.circle.fill" : "arrow.up.circle.fill")
-                    .font(.system(size: 32))
-                    .foregroundStyle(
-                        viewModel.canSend || viewModel.isStreaming
-                            ? palette.accent
-                            : palette.textMuted
+            HStack(spacing: 12) {
+                TextField("Ask anything about Scripture...", text: $viewModel.inputText, axis: .vertical)
+                    .font(BPFont.body)
+                    .lineLimit(1...5)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 12)
+                    .background(
+                        RoundedRectangle(cornerRadius: 24)
+                            .fill(palette.surface)
                     )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 24)
+                            .stroke(palette.border, lineWidth: 1)
+                    )
+
+                Button {
+                    if viewModel.isStreaming {
+                        viewModel.stopStreaming()
+                    } else {
+                        viewModel.send()
+                    }
+                    HapticService.lightImpact()
+                } label: {
+                    Image(systemName: viewModel.isStreaming ? "stop.circle.fill" : "arrow.up.circle.fill")
+                        .font(.system(size: 34))
+                        .foregroundStyle(
+                            viewModel.canSend || viewModel.isStreaming
+                                ? palette.accent
+                                : palette.textMuted
+                        )
+                        .scaleEffect(sendButtonScale)
+                }
+                .buttonStyle(PressableButtonStyle())
+                .disabled(!viewModel.canSend && !viewModel.isStreaming)
+                .onChange(of: viewModel.canSend) { _, canSend in
+                    withAnimation(BPAnimation.buttonPress) {
+                        sendButtonScale = canSend ? 1.1 : 1.0
+                    }
+                    // Reset after pop
+                    if canSend {
+                        withAnimation(BPAnimation.spring.delay(0.15)) {
+                            sendButtonScale = 1.0
+                        }
+                    }
+                }
             }
-            .buttonStyle(PressableButtonStyle())
-            .disabled(!viewModel.canSend && !viewModel.isStreaming)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 10)
+        .background(.ultraThinMaterial)
+    }
+
+    // MARK: - Saved to Journal Toast
+
+    private var savedToJournalToast: some View {
+        HStack(spacing: 8) {
+            Image(systemName: "checkmark.circle.fill")
+                .font(.system(size: 16, weight: .semibold))
+            Text("Saved to Journal")
+                .font(.system(size: 14, weight: .semibold, design: .rounded))
+        }
+        .foregroundStyle(.white)
+        .padding(.horizontal, 20)
+        .padding(.vertical, 12)
         .background(
-            palette.background
-                .shadow(color: .black.opacity(0.05), radius: 8, y: -4)
+            Capsule()
+                .fill(Color.green)
+                .shadow(color: Color.green.opacity(0.3), radius: 8, y: 4)
         )
     }
 }
