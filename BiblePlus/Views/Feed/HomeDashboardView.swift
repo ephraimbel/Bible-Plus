@@ -16,24 +16,57 @@ struct HomeDashboardView: View {
     @State private var showReadingPlans = false
     @State private var appeared = false
     @State private var floatingOffset: CGFloat = 0
+    @State private var dragOffset: CGFloat = 0
+    @State private var hasTriggeredHaptic = false
 
     // MARK: - Body
 
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            VStack(spacing: 20) {
+        ZStack(alignment: .bottom) {
+            VStack(spacing: 12) {
                 headerSection
                 heroVerseCard
                 streakProgressStrip
                 quickActionsGrid
-                exploreFeedCTA
+                Spacer(minLength: 0)
             }
             .padding(.horizontal, 20)
             .padding(.top, 8)
-            .padding(.bottom, 100)
+            .offset(y: dragOffset)
+
+            // Bottom gradient with swipe prompt
+            swipeUpPrompt
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(palette.background)
+        .gesture(
+            DragGesture(minimumDistance: 20)
+                .onChanged { value in
+                    let translation = value.translation.height
+                    guard translation < 0 else {
+                        dragOffset = 0
+                        return
+                    }
+                    // Rubber-band: diminishing returns past threshold
+                    let raw = -translation
+                    dragOffset = -min(raw, 80 + (raw - 80) * 0.2)
+
+                    if raw > 80 && !hasTriggeredHaptic {
+                        HapticService.notification(.success)
+                        hasTriggeredHaptic = true
+                    }
+                }
+                .onEnded { value in
+                    let translation = -value.translation.height
+                    if translation > 80 {
+                        onEnterFeed()
+                    }
+                    withAnimation(BPAnimation.spring) {
+                        dragOffset = 0
+                    }
+                    hasTriggeredHaptic = false
+                }
+        )
         .sheet(isPresented: $showReadingPlans) {
             ReadingPlansView(
                 isPro: vm.profile.isPro,
@@ -57,6 +90,43 @@ struct HomeDashboardView: View {
                 withAnimation(.easeOut(duration: 0.6)) {
                     animateStreak = true
                 }
+            }
+        }
+    }
+
+    // MARK: - Swipe Up Prompt
+
+    private var swipeUpPrompt: some View {
+        VStack(spacing: 6) {
+            Spacer()
+
+            Image(systemName: "chevron.up")
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundStyle(palette.accent.opacity(0.6))
+                .offset(y: floatingOffset)
+
+            Text("Swipe up to explore")
+                .font(.system(size: 13, weight: .medium, design: .rounded))
+                .foregroundStyle(palette.textMuted)
+        }
+        .padding(.bottom, 24)
+        .frame(maxWidth: .infinity)
+        .background(
+            LinearGradient(
+                colors: [palette.background, palette.background.opacity(0)],
+                startPoint: .bottom,
+                endPoint: .top
+            )
+            .frame(height: 120)
+            .frame(maxHeight: .infinity, alignment: .bottom)
+            .allowsHitTesting(false)
+        )
+        .allowsHitTesting(false)
+        .opacity(appeared ? 1 : 0)
+        .animation(BPAnimation.spring.delay(0.5), value: appeared)
+        .onAppear {
+            withAnimation(.easeInOut(duration: 1.8).repeatForever(autoreverses: true)) {
+                floatingOffset = -4
             }
         }
     }
@@ -161,10 +231,10 @@ struct HomeDashboardView: View {
                         .padding(.top, 4)
                     }
                     .padding(.horizontal, 24)
-                    .padding(.vertical, 28)
+                    .padding(.vertical, 18)
                 }
                 .frame(maxWidth: .infinity)
-                .frame(minHeight: 200)
+                .frame(minHeight: 160)
                 .shadow(color: .black.opacity(0.15), radius: 20, y: 10)
             }
             .buttonStyle(PressableButtonStyle())
@@ -357,9 +427,9 @@ struct HomeDashboardView: View {
                     .frame(height: 4)
                 }
             }
-            .padding(14)
+            .padding(12)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .frame(minHeight: 140)
+            .frame(minHeight: 110)
             .background(
                 RoundedRectangle(cornerRadius: 16)
                     .fill(palette.accent.opacity(0.08))
@@ -372,52 +442,4 @@ struct HomeDashboardView: View {
         .buttonStyle(PressableButtonStyle())
     }
 
-    // MARK: - Explore Feed CTA
-
-    private var exploreFeedCTA: some View {
-        Button {
-            onEnterFeed()
-            HapticService.notification(.success)
-        } label: {
-            VStack(spacing: 8) {
-                HStack(spacing: 6) {
-                    Image(systemName: "sparkle")
-                        .font(.system(size: 11, weight: .semibold))
-                    Text("Explore Today's Feed")
-                        .font(.system(size: 15, weight: .semibold, design: .rounded))
-                    Image(systemName: "sparkle")
-                        .font(.system(size: 11, weight: .semibold))
-                }
-                .foregroundStyle(palette.accent)
-
-                Text("Curated prayers & verses")
-                    .font(.system(size: 12, weight: .regular, design: .rounded))
-                    .foregroundStyle(palette.textMuted)
-
-                Image(systemName: "chevron.up")
-                    .font(.system(size: 12, weight: .semibold))
-                    .foregroundStyle(palette.accent.opacity(0.5))
-                    .offset(y: floatingOffset)
-            }
-            .padding(.vertical, 18)
-            .frame(maxWidth: .infinity)
-            .background(
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(palette.accent.opacity(0.08))
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(palette.accent.opacity(0.1), lineWidth: 1)
-            )
-        }
-        .buttonStyle(PressableButtonStyle())
-        .opacity(appeared ? 1 : 0)
-        .offset(y: appeared ? 0 : 20)
-        .animation(BPAnimation.spring.delay(0.5), value: appeared)
-        .onAppear {
-            withAnimation(.easeInOut(duration: 1.8).repeatForever(autoreverses: true)) {
-                floatingOffset = -4
-            }
-        }
-    }
 }
