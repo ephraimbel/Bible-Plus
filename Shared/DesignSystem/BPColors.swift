@@ -31,7 +31,7 @@ struct BPColorPalette {
         error: Color(hex: "C0544F"),
         success: Color(hex: "8BA888"),
         jesusWords: Color(hex: "8B342E"),
-        parchment: Color(hex: "F5EDD8")
+        parchment: Color(hex: "FAF8F4")
     )
 
     // MARK: Dark — "Midnight Study" (warm matte black)
