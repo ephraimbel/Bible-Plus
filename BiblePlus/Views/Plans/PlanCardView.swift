@@ -8,100 +8,110 @@ struct PlanCardView: View {
 
     @Environment(\.bpPalette) private var palette
 
-    private var gradientColors: [Color] {
-        plan.gradientColors.map { Color(hex: $0) }
-    }
-
     var body: some View {
-        ZStack(alignment: .bottomLeading) {
-            // Gradient background
-            LinearGradient(
-                colors: gradientColors.isEmpty ? [palette.accent, palette.accent.opacity(0.7)] : gradientColors,
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
+        VStack(alignment: .leading, spacing: 0) {
+            // Top: Icon + Pro/Complete badge
+            HStack {
+                // Icon in accent circle
+                Image(systemName: plan.iconName.isEmpty ? "book.fill" : plan.iconName)
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundStyle(palette.accent)
+                    .frame(width: 36, height: 36)
+                    .background(
+                        Circle()
+                            .fill(palette.accentSoft)
+                    )
 
-            // Large faded icon
-            Image(systemName: plan.iconName.isEmpty ? "book.fill" : plan.iconName)
-                .font(.system(size: 80, weight: .thin))
-                .foregroundStyle(.white.opacity(0.12))
-                .offset(x: 70, y: -20)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-
-            // Pro lock overlay
-            if plan.isProOnly && !isPro {
-                Color.black.opacity(0.25)
-
-                HStack(spacing: 4) {
-                    Image(systemName: "crown.fill")
-                        .font(.system(size: 10, weight: .semibold))
-                    Text("PRO")
-                        .font(.system(size: 10, weight: .bold, design: .rounded))
-                        .tracking(1)
-                }
-                .foregroundStyle(.white)
-                .padding(.horizontal, 8)
-                .padding(.vertical, 4)
-                .background(.ultraThinMaterial.opacity(0.6))
-                .clipShape(Capsule())
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-                .padding(12)
-            }
-
-            // Completed badge
-            if isCompleted {
-                Image(systemName: "checkmark.seal.fill")
-                    .font(.system(size: 20))
-                    .foregroundStyle(.white)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-                    .padding(12)
-            }
-
-            // Content
-            VStack(alignment: .leading, spacing: 6) {
                 Spacer()
 
-                Text(plan.name)
-                    .font(.system(size: 17, weight: .semibold, design: .rounded))
-                    .foregroundStyle(.white)
-                    .shadow(color: .black.opacity(0.3), radius: 3, y: 1)
-                    .lineLimit(2)
-
-                HStack(spacing: 8) {
-                    Text("\(plan.totalDays) DAYS")
-                        .font(.system(size: 10, weight: .bold, design: .rounded))
-                        .tracking(1.2)
-                        .foregroundStyle(.white.opacity(0.85))
-
-                    Text("·")
-                        .foregroundStyle(.white.opacity(0.6))
-
-                    Text(plan.category.uppercased())
-                        .font(.system(size: 10, weight: .medium, design: .rounded))
-                        .tracking(0.8)
-                        .foregroundStyle(.white.opacity(0.75))
-                }
-
-                // Progress bar if active
-                if let progress, !isCompleted {
-                    GeometryReader { geo in
-                        ZStack(alignment: .leading) {
-                            Capsule()
-                                .fill(.white.opacity(0.2))
-                                .frame(height: 4)
-
-                            Capsule()
-                                .fill(.white)
-                                .frame(width: geo.size.width * progress.completionFraction(totalDays: plan.totalDays), height: 4)
-                        }
+                if isCompleted {
+                    HStack(spacing: 3) {
+                        Image(systemName: "checkmark")
+                            .font(.system(size: 9, weight: .bold))
+                        Text("DONE")
+                            .font(.system(size: 9, weight: .bold, design: .rounded))
+                            .tracking(0.8)
                     }
-                    .frame(height: 4)
-                    .padding(.top, 2)
+                    .foregroundStyle(palette.success)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(
+                        Capsule()
+                            .fill(palette.success.opacity(0.12))
+                    )
+                } else if plan.isProOnly && !isPro {
+                    HStack(spacing: 3) {
+                        Image(systemName: "crown.fill")
+                            .font(.system(size: 9, weight: .semibold))
+                        Text("PRO")
+                            .font(.system(size: 9, weight: .bold, design: .rounded))
+                            .tracking(0.8)
+                    }
+                    .foregroundStyle(palette.accent)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(
+                        Capsule()
+                            .fill(palette.accent.opacity(0.12))
+                    )
                 }
             }
-            .padding(14)
+
+            Spacer()
+
+            // Title
+            Text(plan.name)
+                .font(.system(size: 15, weight: .semibold, design: .rounded))
+                .foregroundStyle(palette.textPrimary)
+                .lineLimit(2)
+                .multilineTextAlignment(.leading)
+
+            // Metadata
+            HStack(spacing: 6) {
+                Text("\(plan.totalDays) days")
+                    .font(.system(size: 11, weight: .medium, design: .rounded))
+                    .foregroundStyle(palette.textMuted)
+
+                if !plan.category.isEmpty {
+                    Text("\u{00B7}")
+                        .foregroundStyle(palette.textMuted.opacity(0.5))
+                    Text(plan.category)
+                        .font(.system(size: 11, weight: .medium, design: .rounded))
+                        .foregroundStyle(palette.textMuted)
+                }
+            }
+            .padding(.top, 4)
+
+            // Progress bar if active
+            if let progress, !isCompleted {
+                GeometryReader { geo in
+                    ZStack(alignment: .leading) {
+                        Capsule()
+                            .fill(palette.border.opacity(0.3))
+                            .frame(height: 3)
+
+                        Capsule()
+                            .fill(palette.accent)
+                            .frame(
+                                width: geo.size.width * progress.completionFraction(totalDays: plan.totalDays),
+                                height: 3
+                            )
+                    }
+                }
+                .frame(height: 3)
+                .padding(.top, 10)
+            }
         }
+        .padding(14)
         .frame(height: 150)
-        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(palette.surface)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(palette.border.opacity(0.15), lineWidth: 1)
+        )
     }
 }

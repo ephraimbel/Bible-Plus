@@ -206,7 +206,7 @@ struct BackgroundPickerView: View {
             }
         }
         .presentationBackground(palette.background)
-        .sheet(isPresented: $showPaywall) {
+        .fullScreenCover(isPresented: $showPaywall) {
             SummaryPaywallView()
         }
     }

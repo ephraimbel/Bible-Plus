@@ -80,7 +80,7 @@ struct VoicePickerView: View {
             previewPlayer?.stop()
             previewPlayer = nil
         }
-        .sheet(isPresented: $showPaywall) {
+        .fullScreenCover(isPresented: $showPaywall) {
             SummaryPaywallView()
         }
     }

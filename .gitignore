@@ -46,3 +46,6 @@ Shared/Secrets.swift
 
 # Supabase
 supabase/.temp/
+
+# Vercel
+.vercel/

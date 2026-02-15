@@ -86,7 +86,7 @@ private struct ChatContentView: View {
         .onAppear {
             viewModel.applyInitialContext()
         }
-        .sheet(isPresented: $showPaywall) {
+        .fullScreenCover(isPresented: $showPaywall) {
             SummaryPaywallView()
         }
         .sheet(item: $viewModel.shareText) { text in

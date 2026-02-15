@@ -48,6 +48,39 @@ struct BiblePlusApp: App {
         modelContainer = container
         modelContainerError = hadError
 
+        // Global UIKit appearance: fully transparent tab bar, no separator
+        let tabAppearance = UITabBarAppearance()
+        tabAppearance.configureWithTransparentBackground()
+        tabAppearance.backgroundColor = .clear
+        tabAppearance.backgroundEffect = nil
+        tabAppearance.shadowColor = nil
+        tabAppearance.shadowImage = nil
+        UITabBar.appearance().standardAppearance = tabAppearance
+        UITabBar.appearance().scrollEdgeAppearance = tabAppearance
+        UITabBar.appearance().backgroundColor = .clear
+
+        // Global nav bar title colors matching our palette
+        let titleColor = UIColor { traits in
+            traits.userInterfaceStyle == .dark
+                ? UIColor(red: 0.93, green: 0.93, blue: 0.93, alpha: 1)   // #ECECEC
+                : UIColor(red: 0.18, green: 0.18, blue: 0.18, alpha: 1)   // #2D2D2D
+        }
+        let bgColor = UIColor { traits in
+            traits.userInterfaceStyle == .dark
+                ? UIColor(red: 0.17, green: 0.17, blue: 0.15, alpha: 1)   // #2B2A27
+                : UIColor(red: 0.98, green: 0.97, blue: 0.96, alpha: 1)   // #FAF8F4
+        }
+        let navAppearance = UINavigationBarAppearance()
+        navAppearance.configureWithOpaqueBackground()
+        navAppearance.backgroundColor = bgColor
+        navAppearance.titleTextAttributes = [.foregroundColor: titleColor]
+        navAppearance.largeTitleTextAttributes = [.foregroundColor: titleColor]
+        navAppearance.shadowColor = .clear
+        UINavigationBar.appearance().standardAppearance = navAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navAppearance
+        UINavigationBar.appearance().compactAppearance = navAppearance
+        UINavigationBar.appearance().tintColor = UIColor(red: 0.79, green: 0.66, blue: 0.43, alpha: 1) // #C9A96E accent
+
         guard !hadError else { return }
 
         // Seed content on first launch and migrate legacy messages

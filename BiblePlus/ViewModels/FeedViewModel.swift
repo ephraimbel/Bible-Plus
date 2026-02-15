@@ -8,7 +8,7 @@ final class FeedViewModel {
 
     var cards: [PrayerContent] = []
     var currentIndex: Int = 0
-    var showGreeting: Bool = true
+    var showFeed: Bool = false
     var isLoadingMore: Bool = false
     var savedContentIDs: Set<UUID> = []
     var doubleTapHeartID: UUID? = nil
@@ -59,11 +59,36 @@ final class FeedViewModel {
         }
     }
 
+    var greetingLabel: String {
+        let hour = Calendar.current.component(.hour, from: Date())
+        switch hour {
+        case 5..<12: return "Good morning,"
+        case 12..<17: return "Good afternoon,"
+        case 17..<21: return "Good evening,"
+        default: return "Rest well,"
+        }
+    }
+
+    var formattedDate: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE, MMMM d"
+        return formatter.string(from: Date())
+    }
+
+    var userInitial: String {
+        String(userName.prefix(1)).uppercased()
+    }
+
     var streakText: String? {
         if streakCount >= 2 {
             return "\(streakCount)-day streak"
         }
         return "My Progress"
+    }
+
+    /// Returns which Calendar weekdays (1=Sun … 7=Sat) the user was active this week.
+    var activeDaysThisWeek: Set<Int> {
+        ActivityService.activeDaysThisWeek(in: modelContext)
     }
 
     var currentTheme: ThemeDefinition {
@@ -74,6 +99,78 @@ final class FeedViewModel {
     var currentBackground: SanctuaryBackground {
         SanctuaryBackground.background(for: profile.selectedBackgroundID)
             ?? SanctuaryBackground.allBackgrounds[0]
+    }
+
+    // MARK: - Dashboard Data
+
+    var dailyVerse: (text: String, reference: String)? {
+        let popularVerses: [(text: String, reference: String)] = [
+            ("For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.", "John 3:16"),
+            ("Trust in the Lord with all thine heart; and lean not unto thine own understanding.", "Proverbs 3:5"),
+            ("I can do all things through Christ which strengtheneth me.", "Philippians 4:13"),
+            ("The Lord is my shepherd; I shall not want.", "Psalm 23:1"),
+            ("Be strong and of a good courage; be not afraid, neither be thou dismayed: for the Lord thy God is with thee whithersoever thou goest.", "Joshua 1:9"),
+            ("And we know that all things work together for good to them that love God.", "Romans 8:28"),
+            ("Cast all your anxiety on him because he cares for you.", "1 Peter 5:7"),
+            ("The Lord is my light and my salvation; whom shall I fear?", "Psalm 27:1"),
+            ("But they that wait upon the Lord shall renew their strength; they shall mount up with wings as eagles.", "Isaiah 40:31"),
+            ("Come unto me, all ye that labour and are heavy laden, and I will give you rest.", "Matthew 11:28"),
+            ("For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you.", "Jeremiah 29:11"),
+            ("Be still, and know that I am God.", "Psalm 46:10"),
+            ("The Lord is close to the brokenhearted and saves those who are crushed in spirit.", "Psalm 34:18"),
+            ("Create in me a clean heart, O God; and renew a right spirit within me.", "Psalm 51:10"),
+        ]
+        // Date-seeded index so it changes daily
+        let dayOfYear = Calendar.current.ordinality(of: .day, in: .year, for: Date()) ?? 1
+        let index = dayOfYear % popularVerses.count
+        return popularVerses[index]
+    }
+
+    var activeReadingPlan: (name: String, day: Int, total: Int)? {
+        let descriptor = FetchDescriptor<UserPlanProgress>(
+            predicate: #Predicate { $0.isActive == true }
+        )
+        guard let progress = try? modelContext.fetch(descriptor).first else { return nil }
+
+        let planDescriptor = FetchDescriptor<ReadingPlan>()
+        guard let plans = try? modelContext.fetch(planDescriptor) else { return nil }
+        guard let plan = plans.first(where: { $0.id == progress.planID }) else { return nil }
+
+        let nextDay = progress.nextDay(totalDays: plan.totalDays)
+        return (name: plan.name, day: nextDay, total: plan.totalDays)
+    }
+
+    var continueReading: (bookName: String, chapter: Int, verse: Int, totalChapters: Int)? {
+        let p = profile
+        // Don't show if still at default position (Genesis 1:1)
+        if p.lastReadBookID == "GEN" && p.lastReadChapter == 1 && p.lastReadVerseNumber <= 1 {
+            return nil
+        }
+        guard let book = BibleData.allBooks.first(where: { $0.id == p.lastReadBookID }) else { return nil }
+        return (bookName: book.name, chapter: p.lastReadChapter, verse: p.lastReadVerseNumber, totalChapters: book.chapterCount)
+    }
+
+    var prayerJournalSummary: (total: Int, answered: Int, unanswered: Int)? {
+        let totalDescriptor = FetchDescriptor<PrayerEntry>()
+        let total = (try? modelContext.fetchCount(totalDescriptor)) ?? 0
+        guard total > 0 else { return nil }
+
+        let answeredDescriptor = FetchDescriptor<PrayerEntry>(
+            predicate: #Predicate { $0.isAnswered == true }
+        )
+        let answered = (try? modelContext.fetchCount(answeredDescriptor)) ?? 0
+        return (total: total, answered: answered, unanswered: total - answered)
+    }
+
+    // MARK: - Reading Plans for Dashboard
+
+    var dashboardReadingPlans: [ReadingPlan] {
+        let descriptor = FetchDescriptor<ReadingPlan>(sortBy: [SortDescriptor(\.name)])
+        let plans = (try? modelContext.fetch(descriptor)) ?? []
+        // Show up to 4 plans: free ones first, then Pro
+        let free = plans.filter { !$0.isProOnly }
+        let pro = plans.filter { $0.isProOnly }
+        return Array((free + pro).prefix(4))
     }
 
     // MARK: - Init
@@ -123,11 +220,6 @@ final class FeedViewModel {
 
     func onSwipe(to index: Int) {
         currentIndex = index
-
-        if index > 0 && showGreeting {
-            showGreeting = false
-        }
-
         loadMoreIfNeeded()
     }
 
@@ -228,7 +320,7 @@ final class FeedViewModel {
         shownIDs = []
         shownIDTimestamps = [:]
         currentIndex = 0
-        showGreeting = true
+        showFeed = false
         isLoadingMore = false
         loadInitialFeed()
     }

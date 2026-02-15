@@ -7,6 +7,7 @@ struct ReadingPlansView: View {
 
     @Environment(\.modelContext) private var modelContext
     @Environment(\.bpPalette) private var palette
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dismiss) private var dismiss
     @State private var viewModel: ReadingPlansViewModel?
     @State private var showContent = false
@@ -22,8 +23,11 @@ struct ReadingPlansView: View {
                 }
             }
             .background(palette.background)
+            .scrollContentBackground(.hidden)
             .navigationTitle("Reading Plans")
-            .navigationBarTitleDisplayMode(.large)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(palette.background, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button { dismiss() } label: {
@@ -78,7 +82,7 @@ struct ReadingPlansView: View {
             }
             .padding(.bottom, 40)
         }
-        .sheet(isPresented: Binding(
+        .fullScreenCover(isPresented: Binding(
             get: { vm.showPaywall },
             set: { vm.showPaywall = $0 }
         )) {

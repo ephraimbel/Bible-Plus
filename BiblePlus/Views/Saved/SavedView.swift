@@ -4,6 +4,7 @@ import SwiftData
 struct SavedView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.bpPalette) private var palette
+    @Environment(\.colorScheme) private var colorScheme
     @State private var viewModel: SavedViewModel?
 
     var body: some View {
@@ -19,6 +20,7 @@ struct SavedView: View {
             }
             .navigationTitle("Saved")
             .toolbarBackground(palette.background, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
         }
     }
 }
@@ -35,7 +37,6 @@ private struct SavedContentView: View {
                 Text("Favorites").tag(SavedTab.favorites)
                 Text("Verses").tag(SavedTab.verses)
                 Text("Collections").tag(SavedTab.collections)
-                Text("Journal").tag(SavedTab.journal)
             }
             .pickerStyle(.segmented)
             .padding(.horizontal, 16)
@@ -49,8 +50,6 @@ private struct SavedContentView: View {
                 versesTab
             case .collections:
                 collectionsTab
-            case .journal:
-                JournalTabView(viewModel: viewModel)
             }
         }
         .background(palette.background)

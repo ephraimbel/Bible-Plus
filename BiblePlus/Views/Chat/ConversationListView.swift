@@ -4,6 +4,7 @@ import SwiftData
 struct ConversationListView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.bpPalette) private var palette
+    @Environment(\.colorScheme) private var colorScheme
     @State private var viewModel: ConversationListViewModel?
     @State private var navigationPath = NavigationPath()
 
@@ -25,6 +26,7 @@ struct ConversationListView: View {
             .navigationTitle("Ask")
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(palette.background, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {

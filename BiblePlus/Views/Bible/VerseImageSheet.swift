@@ -80,7 +80,7 @@ struct VerseImageSheet: View {
                     .presentationDetents([.medium, .large])
                 }
             }
-            .sheet(isPresented: $showPaywall) {
+            .fullScreenCover(isPresented: $showPaywall) {
                 SummaryPaywallView()
             }
         }

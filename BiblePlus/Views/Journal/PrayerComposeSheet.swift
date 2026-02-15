@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct PrayerComposeSheet: View {
-    @Bindable var viewModel: SavedViewModel
+    @Bindable var viewModel: JournalViewModel
     let editingEntry: PrayerEntry?
     @Environment(\.bpPalette) private var palette
     @Environment(\.dismiss) private var dismiss
@@ -19,7 +19,7 @@ struct PrayerComposeSheet: View {
                 VStack(alignment: .leading, spacing: 20) {
                     // Title field
                     TextField("Prayer title...", text: $title)
-                        .font(BPFont.prayerSmall)
+                        .font(BPFont.prayerMedium)
                         .foregroundStyle(palette.textPrimary)
 
                     // Category picker
@@ -53,16 +53,26 @@ struct PrayerComposeSheet: View {
                         }
                     }
 
+                    // Inspirational text
+                    Text("Pour out your heart to Him...")
+                        .font(BPFont.body)
+                        .foregroundStyle(palette.textMuted)
+                        .italic()
+
                     // Body text editor
                     TextEditor(text: $bodyText)
                         .font(BPFont.body)
                         .foregroundStyle(palette.textPrimary)
                         .scrollContentBackground(.hidden)
-                        .frame(minHeight: 200)
+                        .frame(minHeight: 240)
                         .padding(12)
                         .background(
                             RoundedRectangle(cornerRadius: 12)
                                 .fill(palette.surface)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .strokeBorder(palette.accent.opacity(0.08), lineWidth: 1)
+                                )
                         )
 
                     // Optional verse reference

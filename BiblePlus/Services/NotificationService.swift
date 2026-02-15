@@ -568,4 +568,7 @@ extension Notification.Name {
     static let notificationSaveAction = Notification.Name("NotificationSaveAction")
     static let scriptureDeepLink = Notification.Name("ScriptureDeepLink")
     static let scriptureBibleNavigate = Notification.Name("ScriptureBibleNavigate")
+    static let switchToJournalTab = Notification.Name("SwitchToJournalTab")
+    static let enterFeedFromDashboard = Notification.Name("EnterFeedFromDashboard")
+    static let dashboardShowFeedChanged = Notification.Name("DashboardShowFeedChanged")
 }

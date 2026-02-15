@@ -2,7 +2,7 @@ import SwiftUI
 
 struct AnswerNotesSheet: View {
     let entry: PrayerEntry
-    @Bindable var viewModel: SavedViewModel
+    @Bindable var viewModel: JournalViewModel
     @Environment(\.bpPalette) private var palette
     @Environment(\.dismiss) private var dismiss
     @State private var notes: String = ""

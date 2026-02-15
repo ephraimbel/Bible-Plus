@@ -1,6 +1,5 @@
 import SwiftUI
 import SwiftData
-import Combine
 
 struct FeedView: View {
     @Environment(\.modelContext) private var modelContext
@@ -28,66 +27,62 @@ private struct FeedContentView: View {
     @Bindable var vm: FeedViewModel
     let soundscapeService: SoundscapeService
     @Environment(\.modelContext) private var modelContext
-    @State private var scrollPosition: Int? = 0
     @State private var showSanctuary = false
     @State private var showSoundscapePicker = false
     @State private var showBackgroundPicker = false
     @State private var sanctuaryVM: SanctuaryViewModel?
     @State private var prayAlongContent: PrayerContent? = nil
     @State private var showProgress = false
+    @State private var showSettings = false
 
     var body: some View {
         ZStack {
-        ScrollView(.vertical, showsIndicators: false) {
-            LazyVStack(spacing: 0) {
-                // Index 0: Greeting card
-                GreetingCardView(
-                    greeting: vm.greeting,
-                    streakText: vm.streakText,
-                    background: vm.currentBackground,
-                    isCurrentCard: scrollPosition == 0,
-                    onStreakTap: { showProgress = true }
+            if !vm.showFeed {
+                HomeDashboardView(
+                    vm: vm,
+                    soundscapeService: soundscapeService,
+                    onEnterFeed: {
+                        withAnimation(.easeInOut(duration: 0.3)) { vm.showFeed = true }
+                        HapticService.lightImpact()
+                    },
+                    onShowProgress: { showProgress = true },
+                    onShowSettings: { showSettings = true },
+                    onDailyVerseTap: { deepLinkDailyVerse() },
+                    onContinueReading: { deepLinkContinueReading() },
+                    onOpenJournal: {
+                        NotificationCenter.default.post(name: .switchToJournalTab, object: nil)
+                    },
+                    onOpenSanctuary: { showSanctuary = true }
                 )
-                .containerRelativeFrame(.vertical)
-                .id(0)
+                .transition(.opacity)
+            } else {
+                FeedPagingView(
+                    vm: vm,
+                    soundscapeService: soundscapeService,
+                    onReturnHome: {
+                        withAnimation(.easeInOut(duration: 0.3)) { vm.showFeed = false }
+                        HapticService.lightImpact()
+                    },
+                    onShowSettings: { showSettings = true },
+                    onShowSanctuary: { showSanctuary = true },
+                    onShowSoundscapePicker: { openSoundscapePicker() },
+                    onShowBackgroundPicker: { openBackgroundPicker() },
+                    onPrayAlong: { prayAlongContent = $0 }
+                )
+                .transition(.opacity)
+            }
 
-                // Index 1+: Content cards
-                ForEach(Array(vm.cards.enumerated()), id: \.element.id) { index, content in
-                    FeedCardView(
-                        content: content,
-                        displayText: vm.personalizedText(for: content),
-                        background: vm.currentBackground,
-                        isCurrentCard: scrollPosition == index + 1,
-                        isSaved: vm.isSaved(content),
-                        showDoubleTapHeart: vm.doubleTapHeartID == content.id,
-                        isAudioPlaying: soundscapeService.isPlaying,
-                        audioVolume: soundscapeService.volume,
-                        onSave: { vm.toggleSave(for: content) },
-                        onShare: { vm.shareCard(content) },
-                        onPin: { vm.pinToCollection(content) },
-                        onAskAI: { vm.askAI(about: content) },
-                        onToggleSound: { soundscapeService.togglePlayback() },
-                        onVolumeChange: { soundscapeService.setVolume($0) },
-                        onOpenSanctuary: { showSanctuary = true },
-                        onOpenSoundscapes: { openSoundscapePicker() },
-                        onOpenBackgrounds: { openBackgroundPicker() },
-                        onPrayAlong: { prayAlongContent = content },
-                        onDoubleTap: { vm.doubleTapSave(for: content) }
-                    )
-                    .containerRelativeFrame(.vertical)
-                    .id(index + 1)
-                }
-            }
-            .scrollTargetLayout()
-        }
-        .scrollTargetBehavior(.paging)
-        .scrollPosition(id: $scrollPosition)
-        .onChange(of: scrollPosition) { _, newValue in
-            if let idx = newValue {
-                vm.onSwipe(to: idx)
+            // Streak celebration overlay (above both views)
+            if vm.showStreakCelebration {
+                StreakCelebrationView(
+                    streakCount: vm.streakCount,
+                    milestone: vm.streakMilestone,
+                    onDismiss: { vm.dismissStreakCelebration() }
+                )
+                .transition(.opacity)
+                .zIndex(100)
             }
         }
-        .ignoresSafeArea()
         .sheet(item: $vm.shareContent) { content in
             SharePreviewSheet(
                 content: content,
@@ -129,23 +124,27 @@ private struct FeedContentView: View {
         .sheet(isPresented: $showProgress) {
             MyProgressView()
         }
+        .sheet(isPresented: $showSettings) {
+            SettingsView()
+        }
         .onReceive(NotificationCenter.default.publisher(for: SettingsViewModel.personalizationDidChange)) { _ in
-            scrollPosition = 0
+            vm.showFeed = false
             vm.refreshFeed()
         }
-
-        // Streak celebration overlay
-        if vm.showStreakCelebration {
-            StreakCelebrationView(
-                streakCount: vm.streakCount,
-                milestone: vm.streakMilestone,
-                onDismiss: { vm.dismissStreakCelebration() }
-            )
-            .transition(.opacity)
-            .zIndex(100)
+        .onReceive(NotificationCenter.default.publisher(for: .enterFeedFromDashboard)) { _ in
+            withAnimation(.easeInOut(duration: 0.3)) { vm.showFeed = true }
+            HapticService.lightImpact()
         }
-        } // ZStack
+        .onChange(of: vm.showFeed) { _, showFeed in
+            NotificationCenter.default.post(
+                name: .dashboardShowFeedChanged,
+                object: nil,
+                userInfo: ["showFeed": showFeed]
+            )
+        }
     }
+
+    // MARK: - Helpers
 
     private func getOrCreateSanctuaryVM() -> SanctuaryViewModel {
         if let existing = sanctuaryVM { return existing }
@@ -163,5 +162,35 @@ private struct FeedContentView: View {
     private func openBackgroundPicker() {
         _ = getOrCreateSanctuaryVM()
         showBackgroundPicker = true
+    }
+
+    private func deepLinkDailyVerse() {
+        guard let verse = vm.dailyVerse else { return }
+        let ref = verse.reference
+        if let colonIndex = ref.lastIndex(of: ":") {
+            let beforeColon = ref[ref.startIndex..<colonIndex]
+            let afterColon = String(ref[ref.index(after: colonIndex)...])
+            let verseNum = Int(afterColon.trimmingCharacters(in: .whitespaces)) ?? 0
+            if let spaceIndex = beforeColon.lastIndex(of: " ") {
+                let bookName = String(beforeColon[beforeColon.startIndex..<spaceIndex])
+                let chapterStr = String(beforeColon[beforeColon.index(after: spaceIndex)...])
+                if let chapter = Int(chapterStr) {
+                    NotificationCenter.default.post(
+                        name: .scriptureDeepLink,
+                        object: nil,
+                        userInfo: ["bookName": bookName, "chapter": chapter, "verse": verseNum]
+                    )
+                }
+            }
+        }
+    }
+
+    private func deepLinkContinueReading() {
+        guard let reading = vm.continueReading else { return }
+        NotificationCenter.default.post(
+            name: .scriptureDeepLink,
+            object: nil,
+            userInfo: ["bookName": reading.bookName, "chapter": reading.chapter]
+        )
     }
 }

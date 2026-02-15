@@ -3,7 +3,7 @@ import SwiftData
 
 struct PrayerEntryDetailView: View {
     let entry: PrayerEntry
-    @Bindable var viewModel: SavedViewModel
+    @Bindable var viewModel: JournalViewModel
     @Environment(\.bpPalette) private var palette
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
@@ -41,15 +41,21 @@ struct PrayerEntryDetailView: View {
 
                 // Title
                 Text(entry.title)
-                    .font(BPFont.prayerMedium)
+                    .font(BPFont.prayerLarge)
                     .foregroundStyle(palette.textPrimary)
 
-                // Body
+                // Body with left accent bar
                 if !entry.body.isEmpty {
-                    Text(entry.body)
-                        .font(BPFont.body)
-                        .foregroundStyle(palette.textSecondary)
-                        .lineSpacing(6)
+                    HStack(alignment: .top, spacing: 12) {
+                        RoundedRectangle(cornerRadius: 2)
+                            .fill(palette.accent.opacity(0.15))
+                            .frame(width: 4)
+
+                        Text(entry.body)
+                            .font(BPFont.prayerSmall)
+                            .foregroundStyle(palette.textSecondary)
+                            .lineSpacing(8)
+                    }
                 }
 
                 // Verse reference
@@ -159,6 +165,12 @@ struct PrayerEntryDetailView: View {
                     .foregroundStyle(palette.textMuted)
             }
         }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(palette.success.opacity(0.04))
+        )
     }
 
     // MARK: - Mark Answered Button

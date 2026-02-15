@@ -51,7 +51,7 @@ struct CollectionPickerSheet: View {
             } message: {
                 Text("Enter a name for your collection.")
             }
-            .sheet(isPresented: $showPaywall) {
+            .fullScreenCover(isPresented: $showPaywall) {
                 SummaryPaywallView()
             }
         }

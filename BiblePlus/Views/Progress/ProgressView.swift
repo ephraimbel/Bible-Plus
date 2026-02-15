@@ -4,6 +4,7 @@ import SwiftData
 struct MyProgressView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.bpPalette) private var palette
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dismiss) private var dismiss
     @State private var viewModel: ProgressViewModel?
     @State private var showContent = false
@@ -18,8 +19,11 @@ struct MyProgressView: View {
                 }
             }
             .background(palette.background)
+            .scrollContentBackground(.hidden)
             .navigationTitle("My Progress")
-            .navigationBarTitleDisplayMode(.large)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(palette.background, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button { dismiss() } label: {

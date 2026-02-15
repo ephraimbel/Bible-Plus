@@ -6,9 +6,11 @@ struct BibleView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(AudioBibleService.self) private var audioBibleService
     @Environment(\.bpPalette) private var palette
+    @Environment(\.colorScheme) private var colorScheme
     @State private var viewModel: BibleReaderViewModel?
     @State private var pendingNavBookName: String?
     @State private var pendingNavChapter: Int?
+    @State private var pendingNavVerse: Int = 0
 
     var body: some View {
         NavigationStack {
@@ -29,14 +31,16 @@ struct BibleView: View {
                 guard let bookName = notification.userInfo?["bookName"] as? String,
                       let chapter = notification.userInfo?["chapter"] as? Int
                 else { return }
+                let verse = notification.userInfo?["verse"] as? Int ?? 0
 
                 if let vm = viewModel,
-                   let book = BibleData.allBooks.first(where: { $0.name == bookName }),
+                   let book = BibleView.findBook(named: bookName),
                    chapter >= 1, chapter <= book.chapterCount {
-                    vm.navigateToVerse(book: book, chapter: chapter, verseNumber: 0)
+                    vm.navigateToVerse(book: book, chapter: chapter, verseNumber: verse)
                 } else {
                     pendingNavBookName = bookName
                     pendingNavChapter = chapter
+                    pendingNavVerse = verse
                 }
             }
         }
@@ -46,12 +50,32 @@ struct BibleView: View {
         guard let bookName = pendingNavBookName,
               let chapter = pendingNavChapter,
               let vm = viewModel,
-              let book = BibleData.allBooks.first(where: { $0.name == bookName }),
+              let book = BibleView.findBook(named: bookName),
               chapter >= 1, chapter <= book.chapterCount
         else { return }
         pendingNavBookName = nil
         pendingNavChapter = nil
-        vm.navigateToVerse(book: book, chapter: chapter, verseNumber: 0)
+        let verse = pendingNavVerse
+        pendingNavVerse = 0
+        vm.navigateToVerse(book: book, chapter: chapter, verseNumber: verse)
+    }
+
+    /// Finds a BibleBook by name, handling common variations (e.g. "Psalm" → "Psalms").
+    static func findBook(named name: String) -> BibleBook? {
+        // Exact match first
+        if let book = BibleData.allBooks.first(where: { $0.name == name }) {
+            return book
+        }
+        // Try adding "s" (Psalm → Psalms)
+        if let book = BibleData.allBooks.first(where: { $0.name == name + "s" }) {
+            return book
+        }
+        // Try case-insensitive match
+        let lowered = name.lowercased()
+        if let book = BibleData.allBooks.first(where: { $0.name.lowercased() == lowered }) {
+            return book
+        }
+        return nil
     }
 }
 
@@ -773,7 +797,7 @@ private struct BibleContentView: View {
                 showPaywall = true
             }
         }
-        .sheet(isPresented: $showPaywall) {
+        .fullScreenCover(isPresented: $showPaywall) {
             SummaryPaywallView()
         }
         .sheet(isPresented: $showReadingPlans) {

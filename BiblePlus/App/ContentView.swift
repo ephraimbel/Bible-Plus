@@ -9,27 +9,28 @@ struct ContentView: View {
     @State private var selectedTab: Tab = .feed
     @State private var soundscapeService = SoundscapeService()
     @State private var audioBibleService = AudioBibleService()
+    @State private var showFeedEntryButton = true
 
     enum Tab: String, CaseIterable {
-        case feed, bible, ask, saved, settings
+        case feed, bible, ask, journal, saved
 
         var title: String {
             switch self {
-            case .feed: "Feed"
+            case .feed: "Home"
             case .bible: "Bible"
             case .ask: "Ask"
             case .saved: "Saved"
-            case .settings: "Settings"
+            case .journal: "Journal"
             }
         }
 
         var icon: String {
             switch self {
             case .feed: "house.fill"
-            case .bible: "book"
-            case .ask: "bubble.left.and.bubble.right"
-            case .saved: "bookmark"
-            case .settings: "gearshape"
+            case .bible: "book.fill"
+            case .ask: "bubble.left.and.bubble.right.fill"
+            case .saved: "bookmark.fill"
+            case .journal: "pencil.and.scribble"
             }
         }
     }
@@ -48,13 +49,13 @@ struct ContentView: View {
                 .tabItem { Label(Tab.ask.title, systemImage: Tab.ask.icon) }
                 .tag(Tab.ask)
 
+            JournalView()
+                .tabItem { Label(Tab.journal.title, systemImage: Tab.journal.icon) }
+                .tag(Tab.journal)
+
             SavedView()
                 .tabItem { Label(Tab.saved.title, systemImage: Tab.saved.icon) }
                 .tag(Tab.saved)
-
-            SettingsView()
-                .tabItem { Label(Tab.settings.title, systemImage: Tab.settings.icon) }
-                .tag(Tab.settings)
         }
         .environment(soundscapeService)
         .environment(audioBibleService)
@@ -75,8 +76,12 @@ struct ContentView: View {
                 }
             }
         }
-        .toolbarBackground(palette.background, for: .tabBar)
-        .toolbarBackground(.visible, for: .tabBar)
+        .toolbarBackground(.hidden, for: .tabBar)
+        .onReceive(NotificationCenter.default.publisher(for: .dashboardShowFeedChanged)) { notification in
+            if let showFeed = notification.userInfo?["showFeed"] as? Bool {
+                showFeedEntryButton = !showFeed
+            }
+        }
         .onChange(of: deepLinkedContentID) { _, newValue in
             if newValue != nil {
                 selectedTab = .feed
@@ -86,16 +91,23 @@ struct ContentView: View {
         .onReceive(NotificationCenter.default.publisher(for: .scriptureDeepLink)) { notification in
             if let bookName = notification.userInfo?["bookName"] as? String,
                let chapter = notification.userInfo?["chapter"] as? Int {
-                // Smooth tab switch, then tell BibleView to navigate.
-                // BibleView stores pending nav if its viewModel isn't ready yet.
+                let verse = notification.userInfo?["verse"] as? Int ?? 0
                 withAnimation(.easeInOut(duration: 0.25)) {
                     selectedTab = .bible
                 }
-                NotificationCenter.default.post(
-                    name: .scriptureBibleNavigate,
-                    object: nil,
-                    userInfo: ["bookName": bookName, "chapter": chapter]
-                )
+                // Delay so BibleView renders and its .onReceive is active
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    NotificationCenter.default.post(
+                        name: .scriptureBibleNavigate,
+                        object: nil,
+                        userInfo: ["bookName": bookName, "chapter": chapter, "verse": verse]
+                    )
+                }
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .switchToJournalTab)) { _ in
+            withAnimation(.easeInOut(duration: 0.25)) {
+                selectedTab = .journal
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: .notificationSaveAction)) { notification in

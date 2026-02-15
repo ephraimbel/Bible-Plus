@@ -34,6 +34,7 @@ private struct SettingsContentView: View {
     let audioBibleService: AudioBibleService
     @Environment(\.modelContext) private var modelContext
     @Environment(\.bpPalette) private var palette
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.requestReview) private var requestReview
     @Environment(\.openURL) private var openURL
     @Environment(StoreKitService.self) private var storeKitService
@@ -53,7 +54,9 @@ private struct SettingsContentView: View {
             .scrollContentBackground(.hidden)
             .background(palette.background)
             .navigationTitle("Settings")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(palette.background, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -120,7 +123,7 @@ private struct SettingsContentView: View {
                 }
                 .presentationDetents([.medium, .large])
             }
-            .sheet(isPresented: $showPaywall) {
+            .fullScreenCover(isPresented: $showPaywall) {
                 SummaryPaywallView()
             }
         }
@@ -198,8 +201,10 @@ private struct SettingsContentView: View {
             }
         } header: {
             Text("Profile")
+                .foregroundStyle(palette.textMuted)
         } footer: {
             Text("Changes to your profile will refresh your feed.")
+                .foregroundStyle(palette.textMuted)
         }
         .listRowBackground(palette.surface)
     }
@@ -207,7 +212,7 @@ private struct SettingsContentView: View {
     // MARK: - Bible Section
 
     private var bibleSection: some View {
-        Section("Bible") {
+        Section {
             settingsRow(
                 icon: "book",
                 label: "Translation",
@@ -223,6 +228,9 @@ private struct SettingsContentView: View {
             ) {
                 vm.showVoicePicker = true
             }
+        } header: {
+            Text("Bible")
+                .foregroundStyle(palette.textMuted)
         }
         .listRowBackground(palette.surface)
     }
@@ -230,7 +238,7 @@ private struct SettingsContentView: View {
     // MARK: - Sanctuary Section
 
     private var sanctuarySection: some View {
-        Section("Sanctuary") {
+        Section {
             settingsRow(
                 icon: "music.note",
                 label: "Soundscapes",
@@ -254,6 +262,9 @@ private struct SettingsContentView: View {
             ) {
                 vm.showSanctuary = true
             }
+        } header: {
+            Text("Sanctuary")
+                .foregroundStyle(palette.textMuted)
         }
         .listRowBackground(palette.surface)
     }
@@ -307,6 +318,7 @@ private struct SettingsContentView: View {
             .padding(.vertical, 8)
         } header: {
             Text("Widgets")
+                .foregroundStyle(palette.textMuted)
         }
         .listRowBackground(palette.surface)
     }
@@ -329,7 +341,7 @@ private struct SettingsContentView: View {
     // MARK: - Subscription Section
 
     private var subscriptionSection: some View {
-        Section("Subscription") {
+        Section {
             if vm.profile.isPro {
                 HStack {
                     Image(systemName: "crown.fill")
@@ -378,6 +390,9 @@ private struct SettingsContentView: View {
                     }
                 }
             }
+        } header: {
+            Text("Subscription")
+                .foregroundStyle(palette.textMuted)
         }
         .listRowBackground(palette.surface)
     }
@@ -393,7 +408,7 @@ private struct SettingsContentView: View {
     }
 
     private var aboutSection: some View {
-        Section("About") {
+        Section {
             Button {
                 requestReview()
             } label: {
@@ -495,6 +510,9 @@ private struct SettingsContentView: View {
                 Text("\(appVersion) (\(buildNumber))")
                     .foregroundStyle(palette.accent)
             }
+        } header: {
+            Text("About")
+                .foregroundStyle(palette.textMuted)
         }
         .listRowBackground(palette.surface)
     }

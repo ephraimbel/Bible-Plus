@@ -195,6 +195,7 @@ final class SettingsViewModel {
 
     func updateColorMode(_ mode: ColorMode) {
         personalizationService.updateColorMode(mode)
+        postFeedRefresh()
     }
 
     // MARK: - Display Helpers

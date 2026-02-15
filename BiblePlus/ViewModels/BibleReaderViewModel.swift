@@ -270,9 +270,9 @@ final class BibleReaderViewModel {
                 isLoading = false
                 loadSavedVerses()
 
-                // Auto-select the target verse
-                if let verseText = fetched.first(where: { $0.number == verseNumber }) {
-                    selectedVerse = VerseItem(number: verseText.number, text: verseText.text)
+                // Scroll to and highlight the target verse (not selectedVerse which opens action sheet)
+                if verseNumber > 0 {
+                    lastReadVerseNumber = verseNumber
                 }
             } catch {
                 guard !Task.isCancelled else { return }
