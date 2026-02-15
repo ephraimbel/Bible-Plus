@@ -629,7 +629,7 @@ private struct BibleContentView: View {
                     Button {
                         showReadingPlans = true
                     } label: {
-                        Image(systemName: "book.pages")
+                        Image(systemName: "calendar")
                             .font(.system(size: 14, weight: .medium))
                             .foregroundStyle(palette.accent)
                     }

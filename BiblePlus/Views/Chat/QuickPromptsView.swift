@@ -43,7 +43,7 @@ struct QuickPromptsView: View {
                         .frame(width: 56, height: 56)
                         .shadow(color: palette.accent.opacity(0.3), radius: 8, y: 4)
 
-                    Image(systemName: "cross.fill")
+                    Image(systemName: "sparkle")
                         .font(.system(size: 22, weight: .semibold))
                         .foregroundStyle(.white)
                 }

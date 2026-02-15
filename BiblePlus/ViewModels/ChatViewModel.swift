@@ -369,11 +369,11 @@ final class ChatViewModel {
 
     // MARK: - Scripture Navigation
 
-    func navigateToScripture(bookName: String, chapter: Int) {
+    func navigateToScripture(bookName: String, chapter: Int, verse: Int = 0) {
         NotificationCenter.default.post(
             name: .scriptureDeepLink,
             object: nil,
-            userInfo: ["bookName": bookName, "chapter": chapter]
+            userInfo: ["bookName": bookName, "chapter": chapter, "verse": verse]
         )
     }
 

@@ -5,7 +5,7 @@ struct ChatBubbleView: View {
     let isStreaming: Bool
     var onSave: (() -> Void)? = nil
     var onShare: (() -> Void)? = nil
-    var onScriptureTap: ((String, Int) -> Void)? = nil
+    var onScriptureTap: ((String, Int, Int) -> Void)? = nil
     var onSavePrayerToJournal: (() -> Void)? = nil
     var isPrayerMessage: Bool = false
     var isSavedToJournal: Bool = false
@@ -45,7 +45,7 @@ struct ChatBubbleView: View {
                         .frame(width: 32, height: 32)
                         .shadow(color: palette.accent.opacity(0.25), radius: 4, y: 2)
 
-                    Image(systemName: "cross.fill")
+                    Image(systemName: "sparkle")
                         .font(.system(size: 14, weight: .semibold))
                         .foregroundStyle(.white)
                 }
@@ -220,7 +220,8 @@ struct ChatBubbleView: View {
                    let bookName = components.queryItems?.first(where: { $0.name == "book" })?.value,
                    let chapterStr = components.queryItems?.first(where: { $0.name == "ch" })?.value,
                    let chapter = Int(chapterStr) {
-                    onScriptureTap?(bookName, chapter)
+                    let verse = components.queryItems?.first(where: { $0.name == "v" }).flatMap { Int($0.value ?? "") } ?? 0
+                    onScriptureTap?(bookName, chapter, verse)
                     HapticService.lightImpact()
                     return .handled
                 }
@@ -283,9 +284,9 @@ struct ChatBubbleView: View {
 
     private func referenceButton(_ reference: String) -> some View {
         Group {
-            if let (bookName, chapter) = ScriptureParser.parseReference(reference) {
+            if let (bookName, chapter, verse) = ScriptureParser.parseReference(reference) {
                 Button {
-                    onScriptureTap?(bookName, chapter)
+                    onScriptureTap?(bookName, chapter, verse)
                     HapticService.lightImpact()
                 } label: {
                     Text(reference)
@@ -325,9 +326,9 @@ struct ChatBubbleView: View {
 
             let segment = String(plainText[highlight])
 
-            if let (bookName, chapter) = ScriptureParser.parseReference(segment),
+            if let (bookName, chapter, verse) = ScriptureParser.parseReference(segment),
                let encoded = bookName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-               let url = URL(string: "bibleplus://bible?book=\(encoded)&ch=\(chapter)") {
+               let url = URL(string: "bibleplus://bible?book=\(encoded)&ch=\(chapter)&v=\(verse)") {
                 attributed[attrStart..<attrEnd].link = url
                 attributed[attrStart..<attrEnd].foregroundColor = palette.accent
             } else {
@@ -474,8 +475,10 @@ enum MessageParser {
 // MARK: - Scripture Reference Parser (for tap-to-navigate)
 
 enum ScriptureParser {
-    static func parseReference(_ reference: String) -> (String, Int)? {
-        let pattern = #"^((?:\d\s+)?[A-Z][a-z]+(?:\s+(?:of\s+)?[A-Z][a-z]+)*)\s+(\d{1,3}):\d"#
+    /// Parses "Romans 8:28" → ("Romans", 8, 28) or "1 John 4:8" → ("1 John", 4, 8).
+    /// Returns (bookName, chapter, verse). Verse is 0 if not parseable.
+    static func parseReference(_ reference: String) -> (String, Int, Int)? {
+        let pattern = #"^((?:\d\s+)?[A-Z][a-z]+(?:\s+(?:of\s+)?[A-Z][a-z]+)*)\s+(\d{1,3}):(\d{1,3})"#
         guard let regex = try? NSRegularExpression(pattern: pattern),
               let match = regex.firstMatch(in: reference, range: NSRange(location: 0, length: (reference as NSString).length))
         else { return nil }
@@ -487,10 +490,18 @@ enum ScriptureParser {
 
         let bookName = String(reference[bookRange])
 
+        // Extract verse number (group 3)
+        var verse = 0
+        if match.range(at: 3).location != NSNotFound,
+           let verseRange = Range(match.range(at: 3), in: reference),
+           let v = Int(reference[verseRange]) {
+            verse = v
+        }
+
         guard let book = BibleData.allBooks.first(where: { $0.name == bookName }),
               chapter >= 1, chapter <= book.chapterCount
         else { return nil }
 
-        return (bookName, chapter)
+        return (bookName, chapter, verse)
     }
 }

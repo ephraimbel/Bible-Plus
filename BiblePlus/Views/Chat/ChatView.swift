@@ -136,8 +136,8 @@ private struct ChatContentView: View {
                                 onShare: message.role == .assistant ? {
                                     viewModel.prepareShare(message)
                                 } : nil,
-                                onScriptureTap: { bookName, chapter in
-                                    viewModel.navigateToScripture(bookName: bookName, chapter: chapter)
+                                onScriptureTap: { bookName, chapter, verse in
+                                    viewModel.navigateToScripture(bookName: bookName, chapter: chapter, verse: verse)
                                 },
                                 onSavePrayerToJournal: viewModel.messageContainsPrayer(message) || viewModel.savedToJournalMessageIDs.contains(message.id) ? {
                                     viewModel.savePrayerToJournal(message)
