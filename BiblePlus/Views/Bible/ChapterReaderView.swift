@@ -3,6 +3,8 @@ import SwiftUI
 struct ChapterReaderView: View {
     let verses: [(number: Int, text: String)]
     let chapterTitle: String
+    let bookID: String
+    let chapterNumber: Int
     let selectedVerseNumber: Int?
     let isLoading: Bool
     let errorMessage: String?
@@ -44,15 +46,38 @@ struct ChapterReaderView: View {
                             .frame(maxWidth: .infinity, alignment: .center)
                             .padding(.vertical, 24)
 
+                        // Ornamental divider below chapter heading
+                        OrnamentalDivider(color: palette.accent, opacity: 0.3)
+                            .frame(maxWidth: .infinity)
+                            .padding(.bottom, 16)
+
                         // Verses as flowing text
                         ForEach(verses, id: \.number) { verse in
-                            verseRow(number: verse.number, text: verse.text)
+                            let isRed = RedLetterData.isRedLetter(
+                                book: bookID,
+                                chapter: chapterNumber,
+                                verse: verse.number
+                            )
+                            verseRow(number: verse.number, text: verse.text, isRedLetter: isRed)
                                 .id(verse.number)
                         }
                     }
                     .padding(.horizontal, 24)
                     .padding(.bottom, audioVerseIndex != nil ? 140 : 80)
                 }
+                .background(palette.parchment)
+                .overlay(
+                    RadialGradient(
+                        colors: [
+                            Color.clear,
+                            Color.black.opacity(0.06)
+                        ],
+                        center: .center,
+                        startRadius: 300,
+                        endRadius: 600
+                    )
+                    .allowsHitTesting(false)
+                )
                 .onAppear {
                     if let lastRead = lastReadVerseNumber, audioVerseIndex == nil {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -73,7 +98,7 @@ struct ChapterReaderView: View {
         }
     }
 
-    private func verseRow(number: Int, text: String) -> some View {
+    private func verseRow(number: Int, text: String, isRedLetter: Bool = false) -> some View {
         let isSelected = selectedVerseNumber == number
         let highlight = highlightColors[number]
         let isSaved = savedVerseNumbers.contains(number)
@@ -115,7 +140,7 @@ struct ChapterReaderView: View {
 
                 Text(text)
                     .font(.system(size: readerFontSize, weight: .regular, design: readerFontDesign))
-                    .foregroundStyle(palette.textPrimary)
+                    .foregroundStyle(isRedLetter ? palette.jesusWords : palette.textPrimary)
                     .multilineTextAlignment(.leading)
                     .lineSpacing(readerLineSpacing)
             }

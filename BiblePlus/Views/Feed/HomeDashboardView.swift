@@ -235,10 +235,8 @@ struct HomeDashboardView: View {
                             .lineSpacing(2)
                             .lineLimit(3)
 
-                        // Thin decorative divider
-                        Rectangle()
-                            .fill(.white.opacity(0.15))
-                            .frame(width: 40, height: 1)
+                        // Ornamental divider
+                        OrnamentalDivider(color: .white, opacity: 0.2)
 
                         // Reference with book icon
                         HStack(spacing: 4) {

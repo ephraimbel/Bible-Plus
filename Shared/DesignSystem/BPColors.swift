@@ -14,6 +14,8 @@ struct BPColorPalette {
     let border: Color
     let error: Color
     let success: Color
+    let jesusWords: Color
+    let parchment: Color
 
     // MARK: Light — "Golden Hour"
     static let light = BPColorPalette(
@@ -27,7 +29,9 @@ struct BPColorPalette {
         textMuted: Color(hex: "B8B0A0"),
         border: Color(hex: "E0D8C8"),
         error: Color(hex: "C0544F"),
-        success: Color(hex: "8BA888")
+        success: Color(hex: "8BA888"),
+        jesusWords: Color(hex: "8B342E"),
+        parchment: Color(hex: "F5EDD8")
     )
 
     // MARK: Dark — "Midnight Study" (warm matte black)
@@ -42,7 +46,9 @@ struct BPColorPalette {
         textMuted: Color(hex: "6B6B68"),
         border: Color(hex: "4A4945"),
         error: Color(hex: "E07070"),
-        success: Color(hex: "8BA888")
+        success: Color(hex: "8BA888"),
+        jesusWords: Color(hex: "D4736F"),
+        parchment: Color(hex: "2D2B26")
     )
 
     static func resolve(mode: ColorMode, systemScheme: ColorScheme) -> BPColorPalette {

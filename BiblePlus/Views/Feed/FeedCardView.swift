@@ -137,11 +137,13 @@ struct FeedCardView: View {
 
             // Verse reference
             if let reference = content.verseReference, !reference.isEmpty {
+                OrnamentalDivider(color: .white, opacity: 0.25)
+                    .padding(.vertical, 12)
+
                 Text("— \(reference)")
                     .font(BPFont.reference)
                     .foregroundStyle(.white.opacity(0.9))
                     .shadow(color: .black.opacity(0.3), radius: 3, y: 1)
-                    .padding(.top, 16)
             }
 
             // Category label

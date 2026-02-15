@@ -83,10 +83,12 @@ struct ShareCardView: View {
 
                 // Verse reference
                 if let reference = content.verseReference, !reference.isEmpty {
+                    OrnamentalDivider(color: .white, opacity: 0.2)
+                        .padding(.vertical, 8)
+
                     Text("— \(reference)")
                         .font(.system(size: 11 * fontScale, weight: .light))
                         .foregroundStyle(.white.opacity(0.65))
-                        .padding(.top, 12)
                 }
 
                 // Category

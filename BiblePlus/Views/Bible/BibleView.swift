@@ -24,8 +24,8 @@ struct BibleView: View {
                     }
                 }
             }
-            .background(palette.background)
-            .toolbarBackground(palette.background, for: .navigationBar)
+            .background(palette.parchment)
+            .toolbarBackground(palette.parchment, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .onReceive(NotificationCenter.default.publisher(for: .scriptureBibleNavigate)) { notification in
                 guard let bookName = notification.userInfo?["bookName"] as? String,
@@ -109,6 +109,8 @@ private struct BibleContentView: View {
     @State private var cachedSavedVerseNumbers: Set<Int> = []
     @State private var cachedHighlightColors: [Int: VerseHighlightColor] = [:]
     @State private var cachedVerseNotes: [Int: String] = [:]
+    @State private var cachedBookID: String = ""
+    @State private var cachedChapterNumber: Int = 0
 
     private var resolvedBackground: SanctuaryBackground {
         let descriptor = FetchDescriptor<UserProfile>()
@@ -130,9 +132,7 @@ private struct BibleContentView: View {
     }
 
     private var paperColor: Color {
-        colorScheme == .dark
-            ? Color(red: 43/255, green: 42/255, blue: 39/255)
-            : Color(red: 250/255, green: 248/255, blue: 244/255)
+        palette.parchment
     }
 
     private func createExplainConversation() {
@@ -244,6 +244,8 @@ private struct BibleContentView: View {
         cachedSavedVerseNumbers = viewModel.savedVerseNumbers
         cachedHighlightColors = viewModel.highlightColors
         cachedVerseNotes = viewModel.verseNotes
+        cachedBookID = viewModel.selectedBook.id
+        cachedChapterNumber = viewModel.selectedChapter
         flipAnchor = forward ? .leading : .trailing
         flipAngle = 0
         isPageFlipping = true
@@ -275,6 +277,8 @@ private struct BibleContentView: View {
                 ChapterReaderView(
                     verses: viewModel.verses,
                     chapterTitle: viewModel.chapterTitle,
+                    bookID: viewModel.selectedBook.id,
+                    chapterNumber: viewModel.selectedChapter,
                     selectedVerseNumber: viewModel.selectedVerse?.number,
                     isLoading: viewModel.isLoading,
                     errorMessage: viewModel.errorMessage,
@@ -304,6 +308,8 @@ private struct BibleContentView: View {
                     ChapterReaderView(
                         verses: cachedVerses,
                         chapterTitle: cachedChapterTitle,
+                        bookID: cachedBookID,
+                        chapterNumber: cachedChapterNumber,
                         selectedVerseNumber: nil,
                         isLoading: false,
                         errorMessage: nil,
@@ -351,7 +357,7 @@ private struct BibleContentView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(palette.background)
+            .background(palette.parchment)
             .clipped()
             .simultaneousGesture(
                 DragGesture(minimumDistance: 50)
