@@ -28,7 +28,7 @@ final class ReadingPlansViewModel {
         do {
             allPlans = try modelContext.fetch(planDescriptor)
         } catch {
-            print("[ReadingPlans] fetch error: \(error)")
+            // Fetch failed — fall back to empty list
             allPlans = []
         }
 

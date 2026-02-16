@@ -598,7 +598,9 @@ final class AudioBibleService {
             let session = AVAudioSession.sharedInstance()
             try session.setCategory(.playback, options: [.duckOthers])
             try session.setActive(true)
-        } catch {}
+        } catch {
+            // Audio session setup failed — playback may not work
+        }
     }
 
     private func duckSoundscape() {
@@ -615,7 +617,9 @@ final class AudioBibleService {
         do {
             let session = AVAudioSession.sharedInstance()
             try session.setCategory(.playback, options: [.mixWithOthers])
-        } catch {}
+        } catch {
+            // Session category restore failed — non-critical
+        }
     }
 
     // MARK: - Interruption Handling
