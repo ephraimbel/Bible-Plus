@@ -726,9 +726,9 @@ struct SanctuaryBackground: Identifiable, Hashable {
             SanctuaryBackground(id: "steel-grey", name: "Steel Grey", collection: .essentials, gradientColors: ["2C2C2C", "484848", "6A6A6A"]),
         ])
 
-        // MARK: Nature (19 — all Pro, videos → images → gradients)
+        // MARK: Nature (44 — all Pro)
         bgs.append(contentsOf: [
-            // Videos
+            // Animated Videos
             SanctuaryBackground(id: "forest-sunlight", name: "Forest Sunlight", collection: .nature, gradientColors: ["1A3D0A", "2D6B1A", "5C9A3A"], videoFileName: "forest-sunlight", isProOnly: true),
             SanctuaryBackground(id: "gentle-waterfall", name: "Gentle Waterfall", collection: .nature, gradientColors: ["1A4A5C", "2D7A9A", "5AACCC"], videoFileName: "gentle-waterfall", isProOnly: true),
             SanctuaryBackground(id: "misty-mountains", name: "Misty Mountains", collection: .nature, gradientColors: ["4A5A6A", "6A7A8A", "9AACBC"], videoFileName: "misty-mountains", isProOnly: true),
@@ -737,6 +737,15 @@ struct SanctuaryBackground: Identifiable, Hashable {
             SanctuaryBackground(id: "wheat-field-wind", name: "Wheat Field", collection: .nature, gradientColors: ["6B5A1A", "9A8430", "C8B060"], videoFileName: "wheat-field-wind", isProOnly: true),
             SanctuaryBackground(id: "morning-fog-lake", name: "Morning Fog Lake", collection: .nature, gradientColors: ["3A4A5A", "5A7A8A", "8AACBC"], videoFileName: "morning-fog-lake", isProOnly: true),
             SanctuaryBackground(id: "desert-dunes", name: "Desert Dunes", collection: .nature, gradientColors: ["8B6A3A", "B89060", "D8B888"], videoFileName: "desert-dunes", isProOnly: true),
+            SanctuaryBackground(id: "golden-flower-field", name: "Golden Flowers", collection: .nature, gradientColors: ["6B5A1A", "9A8430", "C8B060"], videoFileName: "golden-flower-field", isProOnly: true),
+            // Additional nature gradients
+            SanctuaryBackground(id: "bamboo-forest-wind", name: "Bamboo Forest", collection: .nature, gradientColors: ["1A3A1A", "3A6A2A", "5A8A4A"], isProOnly: true),
+            SanctuaryBackground(id: "river-flowing", name: "Flowing River", collection: .nature, gradientColors: ["1A3A4A", "2D5A6A", "4A8A9A"], isProOnly: true),
+            SanctuaryBackground(id: "wildflower-breeze", name: "Wildflower Breeze", collection: .nature, gradientColors: ["4A6A2A", "7A9A4A", "A0C06A"], isProOnly: true),
+            SanctuaryBackground(id: "lavender-fields", name: "Lavender Fields", collection: .nature, gradientColors: ["4A3A6A", "6B5B8A", "8A7AAA"], isProOnly: true),
+            SanctuaryBackground(id: "sunflower-field", name: "Sunflower Field", collection: .nature, gradientColors: ["5A4A0A", "8A7A1A", "B0A030"], isProOnly: true),
+            SanctuaryBackground(id: "birch-forest-light", name: "Birch Forest", collection: .nature, gradientColors: ["4A5A3A", "7A8A6A", "A0B090"], isProOnly: true),
+            SanctuaryBackground(id: "fireflies-dusk", name: "Fireflies at Dusk", collection: .nature, gradientColors: ["0A1A0A", "1A3A1A", "2A4A2A"], isProOnly: true),
             // Images
             SanctuaryBackground(id: "mountain-sunrise-img", name: "Mountain Sunrise", collection: .nature, gradientColors: ["C2842F", "D4A054", "F0D8A0"], imageName: "mountain-sunrise", isProOnly: true),
             SanctuaryBackground(id: "forest-path-img", name: "Forest Path", collection: .nature, gradientColors: ["1A3D0A", "3A6B2A", "6A9A5A"], imageName: "forest-path", isProOnly: true),
@@ -744,15 +753,6 @@ struct SanctuaryBackground: Identifiable, Hashable {
             SanctuaryBackground(id: "misty-forest-img", name: "Misty Forest", collection: .nature, gradientColors: ["2D4A2D", "4A6A4A", "7A9A7A"], imageName: "misty-forest", isProOnly: true),
             SanctuaryBackground(id: "green-meadow-img", name: "Green Meadow", collection: .nature, gradientColors: ["3A6B35", "5C9454", "A8D5A0"], imageName: "green-meadow", isProOnly: true),
             SanctuaryBackground(id: "tropical-waterfall-img", name: "Tropical Falls", collection: .nature, gradientColors: ["1A4A3A", "2D7A5A", "4AAA7A"], imageName: "tropical-waterfall", isProOnly: true),
-            // Gradients
-            SanctuaryBackground(id: "autumn-ember", name: "Autumn Ember", collection: .nature, gradientColors: ["8B3A2F", "B85C3A", "D4956A"], isProOnly: true),
-            SanctuaryBackground(id: "cherry-blossom", name: "Cherry Blossom", collection: .nature, gradientColors: ["E8A0BF", "F0C8D8", "FCE4EC"], isProOnly: true),
-            SanctuaryBackground(id: "northern-lights", name: "Northern Lights", collection: .nature, gradientColors: ["0B3D2E", "1A6B4A", "38C98B"], isProOnly: true),
-            SanctuaryBackground(id: "stormy-sky", name: "Stormy Sky", collection: .nature, gradientColors: ["2C3E50", "4A6274", "7A9BB0"], isProOnly: true),
-            SanctuaryBackground(id: "canyon-rock", name: "Canyon Rock", collection: .nature, gradientColors: ["8B4513", "A0522D", "CD853F"], isProOnly: true),
-            // Pexels videos
-            SanctuaryBackground(id: "golden-flower-field", name: "Golden Flowers", collection: .nature, gradientColors: ["6B5A1A", "9A8430", "C8B060"], videoFileName: "golden-flower-field", isProOnly: true),
-            // Pexels images
             SanctuaryBackground(id: "dramatic-mountains-img", name: "Dramatic Mountains", collection: .nature, gradientColors: ["3A4A5A", "5A7080", "8A9AAA"], imageName: "dramatic-mountains", isProOnly: true),
             SanctuaryBackground(id: "moonlit-mountains-img", name: "Moonlit Mountains", collection: .nature, gradientColors: ["0A1628", "1A2D50", "3A4D70"], imageName: "moonlit-mountains", isProOnly: true),
             SanctuaryBackground(id: "mountain-sunrise-mist-img", name: "Mountain Sunrise Mist", collection: .nature, gradientColors: ["C2842F", "D4A054", "F0D8A0"], imageName: "mountain-sunrise-mist", isProOnly: true),
@@ -760,11 +760,28 @@ struct SanctuaryBackground: Identifiable, Hashable {
             SanctuaryBackground(id: "forest-sunset-golden-img", name: "Forest Sunset", collection: .nature, gradientColors: ["6B3A10", "9A5A20", "C88040"], imageName: "forest-sunset-golden", isProOnly: true),
             SanctuaryBackground(id: "heavenly-forest-rays", name: "Heavenly Forest", collection: .nature, gradientColors: ["1A2A1A", "3A5A2A", "5A7A3A"], imageName: "forest-heavenly-rays", isProOnly: true),
             SanctuaryBackground(id: "crucifix-garden", name: "Garden Crucifix", collection: .nature, gradientColors: ["2A4A2A", "4A6A3A", "6A8A5A"], imageName: "wooden-crucifix-garden", isProOnly: true),
+            // New images
+            SanctuaryBackground(id: "alpine-wildflowers-img", name: "Alpine Wildflowers", collection: .nature, gradientColors: ["3A5A2A", "5A8A4A", "8AB06A"], imageName: "alpine-wildflowers", isProOnly: true),
+            SanctuaryBackground(id: "redwood-canopy-img", name: "Redwood Canopy", collection: .nature, gradientColors: ["2A1A0A", "4A3A1A", "6A5A2A"], imageName: "redwood-canopy", isProOnly: true),
+            SanctuaryBackground(id: "japanese-garden-img", name: "Japanese Garden", collection: .nature, gradientColors: ["1A3A2A", "2D5A3A", "4A7A5A"], imageName: "japanese-garden", isProOnly: true),
+            SanctuaryBackground(id: "winding-river-valley-img", name: "River Valley", collection: .nature, gradientColors: ["2A4A3A", "4A6A5A", "6A8A7A"], imageName: "winding-river-valley", isProOnly: true),
+            SanctuaryBackground(id: "snow-capped-peaks-img", name: "Snow Capped Peaks", collection: .nature, gradientColors: ["4A5A6A", "7A8A9A", "B0C0D0"], imageName: "snow-capped-peaks", isProOnly: true),
+            SanctuaryBackground(id: "tulip-field-img", name: "Tulip Field", collection: .nature, gradientColors: ["6A2A3A", "9A4A5A", "C06A7A"], imageName: "tulip-field", isProOnly: true),
+            SanctuaryBackground(id: "mossy-stones-img", name: "Mossy Stones", collection: .nature, gradientColors: ["2A3A2A", "4A5A3A", "6A7A5A"], imageName: "mossy-stones", isProOnly: true),
+            SanctuaryBackground(id: "foggy-hillside-img", name: "Foggy Hillside", collection: .nature, gradientColors: ["5A6A5A", "7A8A7A", "A0B0A0"], imageName: "foggy-hillside", isProOnly: true),
+            SanctuaryBackground(id: "pine-forest-snow-img", name: "Snowy Pine Forest", collection: .nature, gradientColors: ["1A2A3A", "3A4A5A", "5A6A7A"], imageName: "pine-forest-snow", isProOnly: true),
+            SanctuaryBackground(id: "rolling-hills-img", name: "Rolling Hills", collection: .nature, gradientColors: ["4A6A2A", "6A8A4A", "8AAA6A"], imageName: "rolling-hills", isProOnly: true),
+            // Gradients
+            SanctuaryBackground(id: "autumn-ember", name: "Autumn Ember", collection: .nature, gradientColors: ["8B3A2F", "B85C3A", "D4956A"], isProOnly: true),
+            SanctuaryBackground(id: "cherry-blossom", name: "Cherry Blossom", collection: .nature, gradientColors: ["E8A0BF", "F0C8D8", "FCE4EC"], isProOnly: true),
+            SanctuaryBackground(id: "northern-lights", name: "Northern Lights", collection: .nature, gradientColors: ["0B3D2E", "1A6B4A", "38C98B"], isProOnly: true),
+            SanctuaryBackground(id: "stormy-sky", name: "Stormy Sky", collection: .nature, gradientColors: ["2C3E50", "4A6274", "7A9BB0"], isProOnly: true),
+            SanctuaryBackground(id: "canyon-rock", name: "Canyon Rock", collection: .nature, gradientColors: ["8B4513", "A0522D", "CD853F"], isProOnly: true),
         ])
 
-        // MARK: Ocean & Water (9 — all Pro, videos → images → gradients)
+        // MARK: Ocean & Water (20 — all Pro)
         bgs.append(contentsOf: [
-            // Videos
+            // Animated Videos
             SanctuaryBackground(id: "flowing-water", name: "Flowing Water", collection: .oceanAndWater, gradientColors: ["1A5276", "2980B9", "5DADE2"], videoFileName: "water-ripples", isProOnly: true),
             SanctuaryBackground(id: "ocean-aerial", name: "Ocean Aerial", collection: .oceanAndWater, gradientColors: ["0A3D5C", "1A6B8A", "2E9AB8"], videoFileName: "ocean-aerial", isProOnly: true),
             SanctuaryBackground(id: "ocean-waves", name: "Ocean Waves", collection: .oceanAndWater, gradientColors: ["0D4F6B", "1A7A9E", "3AACCC"], videoFileName: "ocean-waves", isProOnly: true),
@@ -772,72 +789,102 @@ struct SanctuaryBackground: Identifiable, Hashable {
             SanctuaryBackground(id: "rain-on-leaves", name: "Rain on Leaves", collection: .oceanAndWater, gradientColors: ["1A3D1A", "2D5A2D", "4A7A4A"], videoFileName: "rain-on-leaves", isProOnly: true),
             SanctuaryBackground(id: "underwater-light", name: "Underwater Light", collection: .oceanAndWater, gradientColors: ["0A2D5C", "1A5A8A", "2A8AB8"], videoFileName: "underwater-light", isProOnly: true),
             SanctuaryBackground(id: "ember-particles", name: "Shimmering Sea", collection: .oceanAndWater, gradientColors: ["1A0A00", "4A1A08", "8B3A10"], videoFileName: "water-glistening", isProOnly: true),
-            // Images
-            SanctuaryBackground(id: "ocean-sunset-img", name: "Ocean Sunset", collection: .oceanAndWater, gradientColors: ["8B3A1A", "C96B3A", "E8A060"], imageName: "ocean-sunset", isProOnly: true),
-            // Gradients
-            SanctuaryBackground(id: "ocean-deep", name: "Ocean Deep", collection: .oceanAndWater, gradientColors: ["0A2342", "1A4570", "2E6D9E"]),
-            // Pexels videos
             SanctuaryBackground(id: "aerial-sea-waves", name: "Aerial Sea Waves", collection: .oceanAndWater, gradientColors: ["0A5276", "1A80B9", "3DADE2"], videoFileName: "aerial-sea-waves", isProOnly: true),
             SanctuaryBackground(id: "calm-beach-waves", name: "Calm Beach", collection: .oceanAndWater, gradientColors: ["1A5A6A", "2D8A9A", "5ABACC"], videoFileName: "calm-beach-waves", isProOnly: true),
             SanctuaryBackground(id: "slowmo-waves", name: "Slow Motion Waves", collection: .oceanAndWater, gradientColors: ["0D4F6B", "1A7A9E", "3AACCC"], videoFileName: "slowmo-waves", isProOnly: true),
+            // Additional ocean gradients
+            SanctuaryBackground(id: "tidal-pool", name: "Tidal Pool", collection: .oceanAndWater, gradientColors: ["0A2A3A", "1A4A5A", "2A6A7A"], isProOnly: true),
+            SanctuaryBackground(id: "misty-shoreline", name: "Misty Shoreline", collection: .oceanAndWater, gradientColors: ["3A4A5A", "5A6A7A", "8A9AAA"], isProOnly: true),
+            // Images
+            SanctuaryBackground(id: "ocean-sunset-img", name: "Ocean Sunset", collection: .oceanAndWater, gradientColors: ["8B3A1A", "C96B3A", "E8A060"], imageName: "ocean-sunset", isProOnly: true),
+            // New images
+            SanctuaryBackground(id: "coral-reef-img", name: "Coral Reef", collection: .oceanAndWater, gradientColors: ["0A3A5A", "1A5A7A", "3A8AAA"], imageName: "coral-reef", isProOnly: true),
+            SanctuaryBackground(id: "turquoise-cove-img", name: "Turquoise Cove", collection: .oceanAndWater, gradientColors: ["0A5A6A", "1A8A9A", "3ABACC"], imageName: "turquoise-cove", isProOnly: true),
+            SanctuaryBackground(id: "rocky-coastline-img", name: "Rocky Coastline", collection: .oceanAndWater, gradientColors: ["3A4A5A", "5A6A7A", "7A8A9A"], imageName: "rocky-coastline", isProOnly: true),
+            SanctuaryBackground(id: "tropical-beach-img", name: "Tropical Beach", collection: .oceanAndWater, gradientColors: ["1A6A6A", "2A9A9A", "4ACACC"], imageName: "tropical-beach", isProOnly: true),
+            SanctuaryBackground(id: "frozen-lake-img", name: "Frozen Lake", collection: .oceanAndWater, gradientColors: ["5A6A7A", "8A9AAA", "B0C0D0"], imageName: "frozen-lake", isProOnly: true),
+            SanctuaryBackground(id: "misty-waterfall-img", name: "Misty Waterfall", collection: .oceanAndWater, gradientColors: ["2A4A3A", "4A6A5A", "6A8A7A"], imageName: "misty-waterfall", isProOnly: true),
+            // Gradients
+            SanctuaryBackground(id: "ocean-deep", name: "Ocean Deep", collection: .oceanAndWater, gradientColors: ["0A2342", "1A4570", "2E6D9E"]),
         ])
 
-        // MARK: Night Sky (6 — all Pro, videos → images)
+        // MARK: Night Sky (17 — all Pro)
         bgs.append(contentsOf: [
-            // Videos
+            // Animated Videos
             SanctuaryBackground(id: "starfield", name: "Starfield", collection: .nightSky, gradientColors: ["0A0A1A", "14142D", "1E1E40"], videoFileName: "starry-night"),
             SanctuaryBackground(id: "aurora-wave", name: "Aurora Wave", collection: .nightSky, gradientColors: ["0D2137", "1A4A4A", "2D8A6A"], videoFileName: "milky-way", isProOnly: true),
             SanctuaryBackground(id: "northern-aurora", name: "Northern Aurora", collection: .nightSky, gradientColors: ["0B1D0B", "0D3B2E", "38C98B"], videoFileName: "northern-aurora", isProOnly: true),
             SanctuaryBackground(id: "starry-timelapse", name: "Starry Timelapse", collection: .nightSky, gradientColors: ["0A0A1A", "0D1B3D", "1A2D5E"], videoFileName: "starry-timelapse", isProOnly: true),
             SanctuaryBackground(id: "moonlit-clouds", name: "Moonlit Clouds", collection: .nightSky, gradientColors: ["0A1628", "1A2D50", "3A4D70"], videoFileName: "moonlit-clouds", isProOnly: true),
-            // Images
-            SanctuaryBackground(id: "starry-mountains-img", name: "Starry Mountains", collection: .nightSky, gradientColors: ["0A0A1A", "14142D", "1E1E40"], imageName: "starry-mountains", isProOnly: true),
-            // Pexels videos
             SanctuaryBackground(id: "aurora-borealis", name: "Aurora Borealis", collection: .nightSky, gradientColors: ["0B1D0B", "0D3B2E", "1A6B4A"], videoFileName: "aurora-borealis", isProOnly: true),
             SanctuaryBackground(id: "stars-mountains-pexels", name: "Stars Over Mountains", collection: .nightSky, gradientColors: ["0A0A1A", "0D1B3D", "1A2D5E"], videoFileName: "stars-mountains", isProOnly: true),
-            // Pexels images
+            // Additional night sky gradients
+            SanctuaryBackground(id: "meteor-shower", name: "Meteor Shower", collection: .nightSky, gradientColors: ["0A0A14", "0D0D28", "14143C"], isProOnly: true),
+            SanctuaryBackground(id: "galaxy-rotation", name: "Galaxy Rotation", collection: .nightSky, gradientColors: ["0A0A18", "10102A", "1A1A3C"], isProOnly: true),
+            // Images
+            SanctuaryBackground(id: "starry-mountains-img", name: "Starry Mountains", collection: .nightSky, gradientColors: ["0A0A1A", "14142D", "1E1E40"], imageName: "starry-mountains", isProOnly: true),
             SanctuaryBackground(id: "aurora-wallpaper-img", name: "Aurora Wallpaper", collection: .nightSky, gradientColors: ["0B2D1E", "1A5A3A", "38A06B"], imageName: "aurora-wallpaper", isProOnly: true),
             SanctuaryBackground(id: "northern-lights-snow-img", name: "Northern Lights Snow", collection: .nightSky, gradientColors: ["0B1D2B", "1A3D4A", "2D6B6A"], imageName: "northern-lights-snow", isProOnly: true),
+            // New images
+            SanctuaryBackground(id: "milky-way-desert-img", name: "Milky Way Desert", collection: .nightSky, gradientColors: ["0A0A14", "14142D", "2A2A50"], imageName: "milky-way-desert", isProOnly: true),
+            SanctuaryBackground(id: "full-moon-clouds-img", name: "Full Moon", collection: .nightSky, gradientColors: ["0A1020", "1A2040", "2A3060"], imageName: "full-moon-clouds", isProOnly: true),
+            SanctuaryBackground(id: "starry-forest-img", name: "Starry Forest", collection: .nightSky, gradientColors: ["0A0A1A", "0D1A2A", "1A2A3A"], imageName: "starry-forest", isProOnly: true),
+            SanctuaryBackground(id: "crescent-moon-img", name: "Crescent Moon", collection: .nightSky, gradientColors: ["0A0A18", "10102A", "20203A"], imageName: "crescent-moon", isProOnly: true),
+            SanctuaryBackground(id: "night-sky-lake-img", name: "Night Sky Lake", collection: .nightSky, gradientColors: ["0A0A14", "0D1A2A", "1A2A4A"], imageName: "night-sky-lake", isProOnly: true),
         ])
 
-        // MARK: Warmth & Glow (8 — all Pro, videos → images → gradients)
+        // MARK: Warmth & Glow (22 — all Pro)
         bgs.append(contentsOf: [
-            // Videos
+            // Animated Videos
             SanctuaryBackground(id: "candle-flicker", name: "Candle Flicker", collection: .warmthAndGlow, gradientColors: ["4A2800", "8B5E14", "C9A96E"], videoFileName: "candlelight", isProOnly: true),
             SanctuaryBackground(id: "golden-dust", name: "Golden Dust", collection: .warmthAndGlow, gradientColors: ["1A1408", "3D3014", "6B5424"], videoFileName: "golden-lake", isProOnly: true),
             SanctuaryBackground(id: "fireplace", name: "Warm Fireplace", collection: .warmthAndGlow, gradientColors: ["3D1A08", "6B3010", "9A5020"], videoFileName: "fireplace", isProOnly: true),
             SanctuaryBackground(id: "sunset-clouds", name: "Sunset Clouds", collection: .warmthAndGlow, gradientColors: ["8B3A1A", "C96B3A", "E8A060"], videoFileName: "sunset-clouds", isProOnly: true),
-            // Images
-            SanctuaryBackground(id: "desert-sunset-img", name: "Desert Sunset", collection: .warmthAndGlow, gradientColors: ["8B4A1A", "B86A30", "D89050"], imageName: "desert-sunset", isProOnly: true),
-            // Gradients
-            SanctuaryBackground(id: "coral-sunset", name: "Coral Sunset", collection: .warmthAndGlow, gradientColors: ["FF6B6B", "EE5A6F", "C44569"], isProOnly: true),
-            SanctuaryBackground(id: "bronze-age", name: "Bronze Age", collection: .warmthAndGlow, gradientColors: ["5C3D1E", "8B6040", "B08860"], isProOnly: true),
-            SanctuaryBackground(id: "charcoal-flame", name: "Charcoal Flame", collection: .warmthAndGlow, gradientColors: ["1A1A1A", "3D1C1C", "6B2D2D"], isProOnly: true),
-            // Pexels videos
             SanctuaryBackground(id: "flickering-candle", name: "Flickering Candle", collection: .warmthAndGlow, gradientColors: ["3A2000", "6B4014", "9A6A28"], videoFileName: "flickering-candle", isProOnly: true),
             SanctuaryBackground(id: "candle-darkness", name: "Candle in Darkness", collection: .warmthAndGlow, gradientColors: ["1A1008", "3D2810", "6B4A20"], videoFileName: "candle-darkness", isProOnly: true),
             SanctuaryBackground(id: "sunset-clouds-timelapse", name: "Sunset Timelapse", collection: .warmthAndGlow, gradientColors: ["8B4A1A", "C97040", "E8A060"], videoFileName: "sunset-clouds-timelapse", isProOnly: true),
             SanctuaryBackground(id: "vertical-sunset-pexels", name: "Golden Sunset", collection: .warmthAndGlow, gradientColors: ["8B3A1A", "C96B3A", "E8A060"], videoFileName: "vertical-sunset", isProOnly: true),
             SanctuaryBackground(id: "golden-lake-sunset-pexels", name: "Golden Lake Sunset", collection: .warmthAndGlow, gradientColors: ["6B4A1A", "9A7030", "C89A50"], videoFileName: "golden-lake-sunset", isProOnly: true),
-            // Pexels images
+            // Additional warmth gradients
+            SanctuaryBackground(id: "campfire-embers", name: "Campfire Embers", collection: .warmthAndGlow, gradientColors: ["2A0A00", "5A1A08", "8A3A10"], isProOnly: true),
+            SanctuaryBackground(id: "floating-lanterns", name: "Floating Lanterns", collection: .warmthAndGlow, gradientColors: ["1A0A08", "3A1A10", "6A3A20"], isProOnly: true),
+            // Images
+            SanctuaryBackground(id: "desert-sunset-img", name: "Desert Sunset", collection: .warmthAndGlow, gradientColors: ["8B4A1A", "B86A30", "D89050"], imageName: "desert-sunset", isProOnly: true),
             SanctuaryBackground(id: "desert-landscape-img", name: "Desert Landscape", collection: .warmthAndGlow, gradientColors: ["8B6A3A", "B89060", "D8B888"], imageName: "desert-landscape", isProOnly: true),
             SanctuaryBackground(id: "grand-canyon-img", name: "Grand Canyon", collection: .warmthAndGlow, gradientColors: ["8B4513", "A0622D", "CD8540"], imageName: "grand-canyon", isProOnly: true),
+            // New images
+            SanctuaryBackground(id: "golden-wheat-img", name: "Golden Wheat", collection: .warmthAndGlow, gradientColors: ["7A5A1A", "A08030", "C8A050"], imageName: "golden-wheat", isProOnly: true),
+            SanctuaryBackground(id: "autumn-road-img", name: "Autumn Road", collection: .warmthAndGlow, gradientColors: ["6B3A10", "9A5A20", "C88040"], imageName: "autumn-road", isProOnly: true),
+            SanctuaryBackground(id: "sunset-silhouette-img", name: "Sunset Silhouette", collection: .warmthAndGlow, gradientColors: ["4A1A0A", "8A3A1A", "C06030"], imageName: "sunset-silhouette", isProOnly: true),
+            SanctuaryBackground(id: "amber-leaves-img", name: "Amber Leaves", collection: .warmthAndGlow, gradientColors: ["6A3A0A", "9A6A1A", "C89A30"], imageName: "amber-leaves", isProOnly: true),
+            SanctuaryBackground(id: "rustic-barn-img", name: "Rustic Barn", collection: .warmthAndGlow, gradientColors: ["4A2A1A", "6A4A2A", "8A6A4A"], imageName: "rustic-barn", isProOnly: true),
+            // Gradients
+            SanctuaryBackground(id: "coral-sunset", name: "Coral Sunset", collection: .warmthAndGlow, gradientColors: ["FF6B6B", "EE5A6F", "C44569"], isProOnly: true),
+            SanctuaryBackground(id: "bronze-age", name: "Bronze Age", collection: .warmthAndGlow, gradientColors: ["5C3D1E", "8B6040", "B08860"], isProOnly: true),
+            SanctuaryBackground(id: "charcoal-flame", name: "Charcoal Flame", collection: .warmthAndGlow, gradientColors: ["1A1A1A", "3D1C1C", "6B2D2D"], isProOnly: true),
         ])
 
-        // MARK: Calm & Serene (7 — all Pro, videos → images → gradients)
+        // MARK: Calm & Serene (14 — all Pro)
         bgs.append(contentsOf: [
-            // Videos
+            // Animated Videos
             SanctuaryBackground(id: "cloud-drift", name: "Cloud Drift", collection: .calmAndSerene, gradientColors: ["4A6FA5", "6B8FC4", "A8C8E8"], videoFileName: "clouds-moving", isProOnly: true),
             SanctuaryBackground(id: "mountain-clouds", name: "Mountain Clouds", collection: .calmAndSerene, gradientColors: ["3A4A5A", "5A6A7A", "8A9AAA"], videoFileName: "mountain-clouds", isProOnly: true),
             SanctuaryBackground(id: "snow-falling", name: "Gentle Snow", collection: .calmAndSerene, gradientColors: ["B0BEC5", "CFD8DC", "ECEFF1"], videoFileName: "snow-falling", isProOnly: true),
+            SanctuaryBackground(id: "cloudy-sky-timelapse", name: "Cloudy Sky", collection: .calmAndSerene, gradientColors: ["6A8FA5", "8BAFC4", "B8D8E8"], videoFileName: "cloudy-sky-timelapse", isProOnly: true),
+            // Additional calm gradients
+            SanctuaryBackground(id: "rolling-fog", name: "Rolling Fog", collection: .calmAndSerene, gradientColors: ["5A6A6A", "7A8A8A", "A0B0B0"], isProOnly: true),
+            SanctuaryBackground(id: "floating-petals", name: "Floating Petals", collection: .calmAndSerene, gradientColors: ["7A4A5A", "9A6A7A", "BA8A9A"], isProOnly: true),
             // Images
             SanctuaryBackground(id: "cherry-blossom-trees-img", name: "Blossom Avenue", collection: .calmAndSerene, gradientColors: ["E8A0BF", "F0C8D8", "FCE4EC"], imageName: "cherry-blossom-trees", isProOnly: true),
+            // New images
+            SanctuaryBackground(id: "morning-meadow-img", name: "Morning Meadow", collection: .calmAndSerene, gradientColors: ["4A6A3A", "6A8A5A", "8AAA7A"], imageName: "morning-meadow", isProOnly: true),
+            SanctuaryBackground(id: "lotus-pond-img", name: "Lotus Pond", collection: .calmAndSerene, gradientColors: ["3A5A4A", "5A7A6A", "7A9A8A"], imageName: "lotus-pond", isProOnly: true),
+            SanctuaryBackground(id: "bamboo-path-img", name: "Bamboo Path", collection: .calmAndSerene, gradientColors: ["2A4A2A", "4A6A4A", "6A8A6A"], imageName: "bamboo-path", isProOnly: true),
+            SanctuaryBackground(id: "peaceful-lake-img", name: "Peaceful Lake", collection: .calmAndSerene, gradientColors: ["3A5A6A", "5A7A8A", "7A9AAA"], imageName: "peaceful-lake", isProOnly: true),
             // Gradients
             SanctuaryBackground(id: "teal-dream", name: "Teal Dream", collection: .calmAndSerene, gradientColors: ["0E4D40", "1A7A6A", "2AB09C"], isProOnly: true),
             SanctuaryBackground(id: "lavender-haze", name: "Lavender Haze", collection: .calmAndSerene, gradientColors: ["6B5B95", "8B7BB5", "B8A9D0"], isProOnly: true),
             SanctuaryBackground(id: "ice-crystal", name: "Ice Crystal", collection: .calmAndSerene, gradientColors: ["D6EAF8", "AED6F1", "85C1E9"], isProOnly: true),
-            // Pexels videos
-            SanctuaryBackground(id: "cloudy-sky-timelapse", name: "Cloudy Sky", collection: .calmAndSerene, gradientColors: ["6A8FA5", "8BAFC4", "B8D8E8"], videoFileName: "cloudy-sky-timelapse", isProOnly: true),
         ])
 
         // MARK: Sacred (10 — all Pro)
@@ -854,7 +901,7 @@ struct SanctuaryBackground: Identifiable, Hashable {
             SanctuaryBackground(id: "shepherd-field", name: "Shepherd's Field", collection: .sacred, gradientColors: ["4A5A2E", "6B7A40", "8B9A5A"], isProOnly: true),
         ])
 
-        // MARK: Heavenly (13 — all Pro, image backgrounds)
+        // MARK: Heavenly (28 — all Pro)
         bgs.append(contentsOf: [
             SanctuaryBackground(id: "christ-redeemer", name: "Christ the Redeemer", collection: .heavenly, gradientColors: ["3A5F8A", "6B9FCE", "A8D4F0"], imageName: "christ-redeemer-rio", isProOnly: true),
             SanctuaryBackground(id: "cross-at-sunset", name: "Cross at Sunset", collection: .heavenly, gradientColors: ["8B3A0A", "D4700A", "F0A030"], imageName: "cross-at-sunset", isProOnly: true),
@@ -886,8 +933,9 @@ struct SanctuaryBackground: Identifiable, Hashable {
             SanctuaryBackground(id: "flame-darkness-video", name: "Flame in Darkness", collection: .heavenly, gradientColors: ["0A0A0A", "1A0A0A", "3A1A0A"], videoFileName: "candle-flame-darkness", isProOnly: true),
         ])
 
-        // MARK: Seasonal (10 — all Pro)
+        // MARK: Seasonal (17 — all Pro)
         bgs.append(contentsOf: [
+            // Gradients
             SanctuaryBackground(id: "spring-bloom", name: "Spring Bloom", collection: .seasonal, gradientColors: ["F8BBD0", "F0E8D8", "C8E6C9"], isProOnly: true),
             SanctuaryBackground(id: "summer-warmth", name: "Summer Warmth", collection: .seasonal, gradientColors: ["FFB74D", "FF8A65", "FF7043"], isProOnly: true),
             SanctuaryBackground(id: "fall-harvest", name: "Fall Harvest", collection: .seasonal, gradientColors: ["8D6E63", "A1887F", "D7CCC8"], isProOnly: true),
@@ -898,6 +946,15 @@ struct SanctuaryBackground: Identifiable, Hashable {
             SanctuaryBackground(id: "lenten-ash", name: "Lenten Ash", collection: .seasonal, gradientColors: ["424242", "616161", "9E9E9E"], isProOnly: true),
             SanctuaryBackground(id: "pentecost-fire", name: "Pentecost Fire", collection: .seasonal, gradientColors: ["BF360C", "E64A19", "FF6E40"], isProOnly: true),
             SanctuaryBackground(id: "palm-sunday", name: "Palm Sunday", collection: .seasonal, gradientColors: ["33691E", "558B2F", "7CB342"], isProOnly: true),
+            // Images
+            SanctuaryBackground(id: "spring-cherry-img", name: "Spring Cherry Tree", collection: .seasonal, gradientColors: ["E8A0BF", "F0C8D8", "FCE4EC"], imageName: "spring-cherry-tree", isProOnly: true),
+            SanctuaryBackground(id: "summer-beach-img", name: "Summer Beach", collection: .seasonal, gradientColors: ["1A7A8A", "2AAABB", "4ADAEC"], imageName: "summer-beach", isProOnly: true),
+            SanctuaryBackground(id: "winter-cabin-img", name: "Winter Cabin", collection: .seasonal, gradientColors: ["3A4A5A", "5A6A7A", "8A9AAA"], imageName: "winter-cabin", isProOnly: true),
+            SanctuaryBackground(id: "christmas-lights-img", name: "Christmas Lights", collection: .seasonal, gradientColors: ["1A0A0A", "3A1A1A", "5A2A1A"], imageName: "christmas-lights", isProOnly: true),
+            SanctuaryBackground(id: "easter-lilies-img", name: "Easter Lilies", collection: .seasonal, gradientColors: ["FAF8F4", "F0E8D8", "E8DCC8"], imageName: "easter-lilies", isProOnly: true),
+            // Additional seasonal gradients
+            SanctuaryBackground(id: "falling-leaves", name: "Falling Leaves", collection: .seasonal, gradientColors: ["6B2D10", "A05020", "D48040"], isProOnly: true),
+            SanctuaryBackground(id: "christmas-snow", name: "Christmas Snow", collection: .seasonal, gradientColors: ["0A1A2A", "1A2A3A", "3A4A5A"], isProOnly: true),
         ])
 
         return bgs
@@ -909,6 +966,25 @@ struct SanctuaryBackground: Identifiable, Hashable {
 
     static func backgrounds(in collection: BackgroundCollection) -> [SanctuaryBackground] {
         allBackgrounds.filter { $0.collection == collection }
+    }
+
+    /// Maps any background ID to the nearest ThemeDefinition ID for onboarding.
+    static func nearestThemeID(for backgroundID: String) -> String {
+        let mapping: [String: String] = [
+            "warm-gold": "sunrise-mountains",
+            "forest-dawn": "forest-mist",
+            "mountain-mist": "ocean-peace",
+            "desert-sun": "sunrise-mountains",
+            "twilight-lake": "midnight-gold",
+            "meadow-green": "forest-mist",
+            "royal-purple": "midnight-gold",
+            "ember-glow": "sunrise-mountains",
+            "midnight-blue": "midnight-gold",
+            "rose-gold": "sunrise-mountains",
+            "soft-cream": "minimal-cream",
+            "steel-grey": "midnight-gold",
+        ]
+        return mapping[backgroundID] ?? "sunrise-mountains"
     }
 }
 
@@ -1171,6 +1247,7 @@ enum ActivityEventType: String, Codable, CaseIterable, Identifiable {
     case audioChapterCompleted
     case prayerWritten
     case prayerAnswered
+    case appOpened
 
     var id: String { rawValue }
 
@@ -1184,6 +1261,7 @@ enum ActivityEventType: String, Codable, CaseIterable, Identifiable {
         case .audioChapterCompleted: "Listened to a Chapter"
         case .prayerWritten: "Wrote a Prayer"
         case .prayerAnswered: "Prayer Answered"
+        case .appOpened: "Opened the App"
         }
     }
 
@@ -1197,6 +1275,7 @@ enum ActivityEventType: String, Codable, CaseIterable, Identifiable {
         case .audioChapterCompleted: "headphones"
         case .prayerWritten: "pencil.and.scribble"
         case .prayerAnswered: "checkmark.seal.fill"
+        case .appOpened: "app.badge"
         }
     }
 }

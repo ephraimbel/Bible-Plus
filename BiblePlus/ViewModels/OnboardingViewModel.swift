@@ -20,6 +20,7 @@ final class OnboardingViewModel {
     var selectedTranslation: BibleTranslation = .niv
     var selectedPrayerTimes: Set<PrayerTimeSlot> = []
     var selectedThemeID: String = "sunrise-mountains"
+    var selectedBackgroundID: String = "warm-gold"
 
     // MARK: - Services
     private let personalizationService: PersonalizationService
@@ -120,8 +121,8 @@ final class OnboardingViewModel {
 
         items.append(("Verses in", selectedTranslation.displayName))
 
-        if let theme = ThemeDefinition.allThemes.first(where: { $0.id == selectedThemeID }) {
-            items.append(("Theme", theme.name))
+        if let bg = SanctuaryBackground.background(for: selectedBackgroundID) {
+            items.append(("Background", bg.name))
         }
 
         if !selectedPrayerTimes.isEmpty {
@@ -152,11 +153,10 @@ final class OnboardingViewModel {
         case 6:
             personalizationService.updatePrayerTimes(Array(selectedPrayerTimes))
         case 8:
-            personalizationService.updateTheme(selectedThemeID)
-            // Also set the matching background for the unified background system
-            if let theme = ThemeDefinition.allThemes.first(where: { $0.id == selectedThemeID }) {
-                personalizationService.updateSanctuaryBackground(theme.defaultBackgroundID)
-            }
+            personalizationService.updateSanctuaryBackground(selectedBackgroundID)
+            let themeID = SanctuaryBackground.nearestThemeID(for: selectedBackgroundID)
+            selectedThemeID = themeID
+            personalizationService.updateTheme(themeID)
         default:
             break
         }
