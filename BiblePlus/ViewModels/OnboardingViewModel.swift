@@ -6,7 +6,7 @@ final class OnboardingViewModel {
     // MARK: - Navigation State
     var currentStep: Int = 0
     var navigationDirection: NavigationDirection = .forward
-    let totalSteps: Int = 10
+    let totalSteps: Int = 11
 
     enum NavigationDirection {
         case forward, backward
@@ -31,16 +31,17 @@ final class OnboardingViewModel {
 
     var canProceed: Bool {
         switch currentStep {
-        case 0: true
-        case 1: !firstName.trimmingCharacters(in: .whitespaces).isEmpty
-        case 2: selectedFaithLevel != nil
-        case 3: !selectedLifeSeasons.isEmpty
-        case 4: !selectedBurdens.isEmpty
-        case 5: true
-        case 6: true
-        case 7: true
-        case 8: true
-        case 9: true
+        case 0: true                                                   // Welcome
+        case 1: !firstName.trimmingCharacters(in: .whitespaces).isEmpty // Name
+        case 2: selectedFaithLevel != nil                              // Faith
+        case 3: !selectedLifeSeasons.isEmpty                           // Seasons
+        case 4: !selectedBurdens.isEmpty                               // Burdens
+        case 5: true                                                   // Translation
+        case 6: true                                                   // DailyRhythm
+        case 7: true                                                   // NotificationPermission
+        case 8: true                                                   // Aesthetic
+        case 9: true                                                   // Paywall
+        case 10: true                                                  // WidgetSetup
         default: false
         }
     }
@@ -150,8 +151,7 @@ final class OnboardingViewModel {
             personalizationService.updateTranslation(selectedTranslation)
         case 6:
             personalizationService.updatePrayerTimes(Array(selectedPrayerTimes))
-            scheduleNotificationsIfNeeded()
-        case 7:
+        case 8:
             personalizationService.updateTheme(selectedThemeID)
             // Also set the matching background for the unified background system
             if let theme = ThemeDefinition.allThemes.first(where: { $0.id == selectedThemeID }) {
@@ -163,8 +163,9 @@ final class OnboardingViewModel {
         personalizationService.save()
     }
 
-    private func scheduleNotificationsIfNeeded() {
-        guard !selectedPrayerTimes.isEmpty else { return }
+    // MARK: - Notification Permission (Step 7)
+
+    func requestNotificationPermission() {
         let profile = personalizationService.getOrCreateProfile()
         let contentDescriptor = FetchDescriptor<PrayerContent>()
         let allContent = (try? modelContext.fetch(contentDescriptor)) ?? []
@@ -173,12 +174,25 @@ final class OnboardingViewModel {
             let granted = await NotificationService.shared.requestAuthorization()
             if granted {
                 profile.notificationsEnabled = true
+                profile.streakReminderEnabled = true
+                profile.planReminderEnabled = true
                 personalizationService.save()
-                NotificationService.shared.reschedule(
-                    profile: profile,
-                    content: allContent
+
+                // Schedule prayer notifications
+                if !profile.prayerTimes.isEmpty {
+                    NotificationService.shared.reschedule(
+                        profile: profile,
+                        content: allContent
+                    )
+                }
+
+                // Schedule streak reminders
+                NotificationService.shared.scheduleStreakReminders(
+                    streakCount: profile.streakCount,
+                    firstName: profile.firstName
                 )
             }
+            goNext()
         }
     }
 }

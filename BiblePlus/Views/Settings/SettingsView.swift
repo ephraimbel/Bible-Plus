@@ -40,24 +40,34 @@ private struct SettingsContentView: View {
     @Environment(StoreKitService.self) private var storeKitService
     @State private var showPaywall = false
     @State private var isRestoringPurchases = false
+    @State private var appeared = false
 
     var body: some View {
         NavigationStack {
-            List {
-                profileSection
-                bibleSection
-                sanctuarySection
-                widgetsSection
-                subscriptionSection
-                aboutSection
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(spacing: 24) {
+                    profileSection
+                    bibleSection
+                    sanctuarySection
+                    widgetsSection
+                    subscriptionSection
+                    aboutSection
+
+                    Spacer().frame(height: 40)
+                }
+                .padding(.horizontal, 20)
+                .padding(.top, 16)
             }
-            .scrollContentBackground(.hidden)
             .background(palette.background)
-            .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(palette.background, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Settings")
+                        .font(.system(size: 18, weight: .semibold, design: .serif))
+                        .foregroundStyle(palette.textPrimary)
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         HapticService.lightImpact()
@@ -66,8 +76,13 @@ private struct SettingsContentView: View {
                         vm.updateColorMode(next)
                     } label: {
                         Image(systemName: vm.profile.colorMode == .dark ? "moon.fill" : "sun.max.fill")
-                            .font(.system(size: 16, weight: .medium))
+                            .font(.system(size: 14, weight: .medium))
                             .foregroundStyle(palette.accent)
+                            .frame(width: 32, height: 32)
+                            .background(
+                                Circle()
+                                    .fill(palette.accent.opacity(0.1))
+                            )
                             .contentTransition(.symbolEffect(.replace))
                     }
                     .accessibilityLabel(vm.profile.colorMode == .dark ? "Switch to light mode" : "Switch to dark mode")
@@ -113,7 +128,6 @@ private struct SettingsContentView: View {
                     audioService: audioBibleService,
                     isPro: vm.profile.isPro
                 ) { voice in
-                    // Stop any active playback so the old voice doesn't keep playing
                     if audioBibleService.hasActivePlayback {
                         audioBibleService.stop()
                     }
@@ -126,214 +140,400 @@ private struct SettingsContentView: View {
             .fullScreenCover(isPresented: $showPaywall) {
                 SummaryPaywallView()
             }
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    withAnimation(BPAnimation.spring) {
+                        appeared = true
+                    }
+                }
+            }
         }
+    }
+
+    // MARK: - Section Card
+
+    private func sectionCard<Content: View>(
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        VStack(spacing: 0) {
+            content()
+        }
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(palette.surfaceElevated)
+                .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
+        )
+    }
+
+    private func sectionHeader(_ title: String, index: Int) -> some View {
+        Text(title)
+            .font(.system(size: 11, weight: .bold, design: .rounded))
+            .foregroundStyle(palette.textMuted)
+            .textCase(.uppercase)
+            .tracking(1.5)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.leading, 4)
+            .opacity(appeared ? 1 : 0)
+            .animation(BPAnimation.spring.delay(Double(index) * 0.05), value: appeared)
+    }
+
+    private func sectionFooter(_ text: String) -> some View {
+        Text(text)
+            .font(.system(size: 12, weight: .regular, design: .rounded))
+            .foregroundStyle(palette.textMuted)
+            .padding(.leading, 4)
+            .padding(.top, 4)
     }
 
     // MARK: - Profile Section
 
     private var profileSection: some View {
-        Section {
-            settingsRow(
-                icon: "person",
-                label: "Name",
-                value: vm.profile.firstName.isEmpty ? "Not set" : vm.profile.firstName
-            ) {
-                vm.beginEditingName()
-            }
+        VStack(alignment: .leading, spacing: 8) {
+            sectionHeader("Profile", index: 0)
 
-            settingsRow(
-                icon: "sparkles",
-                label: "Faith Level",
-                value: vm.profile.faithLevel.displayName
-            ) {
-                vm.beginEditingFaithLevel()
-            }
-
-            settingsRow(
-                icon: "leaf",
-                label: "Life Seasons",
-                value: vm.lifeSeasonsDisplay
-            ) {
-                vm.beginEditingLifeSeasons()
-            }
-
-            settingsRow(
-                icon: "heart",
-                label: "Heart Burdens",
-                value: vm.burdensDisplay
-            ) {
-                vm.beginEditingBurdens()
-            }
-
-            Toggle(isOn: Binding(
-                get: { vm.profile.notificationsEnabled },
-                set: { _ in vm.toggleNotifications() }
-            )) {
-                HStack {
-                    Image(systemName: vm.profile.notificationsEnabled ? "bell.fill" : "bell.slash")
-                        .foregroundStyle(palette.accent)
-                        .frame(width: 24)
-                    Text("Notifications")
-                        .foregroundStyle(palette.textPrimary)
-                }
-            }
-            .tint(palette.accent)
-
-            if vm.profile.notificationsEnabled {
+            sectionCard {
                 settingsRow(
-                    icon: "clock",
-                    label: "Prayer Times",
-                    value: vm.prayerTimesDisplay
+                    icon: "person",
+                    label: "Name",
+                    value: vm.profile.firstName.isEmpty ? "Not set" : vm.profile.firstName
                 ) {
-                    vm.beginEditingPrayerTimes()
+                    vm.beginEditingName()
                 }
-            }
 
-            HStack {
-                Image(systemName: "flame.fill")
-                    .foregroundStyle(palette.accent)
-                    .frame(width: 24)
-                Text("Daily Streak")
-                    .foregroundStyle(palette.textPrimary)
-                Spacer()
-                Text(vm.streakDisplay)
-                    .foregroundStyle(palette.accent)
+                rowDivider
+
+                settingsRow(
+                    icon: "sparkles",
+                    label: "Faith Level",
+                    value: vm.profile.faithLevel.displayName
+                ) {
+                    vm.beginEditingFaithLevel()
+                }
+
+                rowDivider
+
+                settingsRow(
+                    icon: "leaf",
+                    label: "Life Seasons",
+                    value: vm.lifeSeasonsDisplay
+                ) {
+                    vm.beginEditingLifeSeasons()
+                }
+
+                rowDivider
+
+                settingsRow(
+                    icon: "heart",
+                    label: "Heart Burdens",
+                    value: vm.burdensDisplay
+                ) {
+                    vm.beginEditingBurdens()
+                }
+
+                rowDivider
+
+                // Notifications toggle
+                HStack(spacing: 14) {
+                    Image(systemName: vm.profile.notificationsEnabled ? "bell.fill" : "bell.slash")
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundStyle(palette.accent)
+                        .frame(width: 32, height: 32)
+                        .background(
+                            Circle()
+                                .fill(palette.accent.opacity(0.08))
+                        )
+
+                    Text("Notifications")
+                        .font(.system(size: 15, weight: .medium, design: .rounded))
+                        .foregroundStyle(palette.textPrimary)
+
+                    Spacer()
+
+                    Toggle("", isOn: Binding(
+                        get: { vm.profile.notificationsEnabled },
+                        set: { _ in vm.toggleNotifications() }
+                    ))
+                    .tint(palette.accent)
+                    .labelsHidden()
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
+
+                if vm.profile.notificationsEnabled {
+                    rowDivider
+
+                    settingsRow(
+                        icon: "clock",
+                        label: "Prayer Times",
+                        value: vm.prayerTimesDisplay
+                    ) {
+                        vm.beginEditingPrayerTimes()
+                    }
+
+                    rowDivider
+
+                    // Streak Reminders toggle
+                    HStack(spacing: 14) {
+                        Image(systemName: "flame")
+                            .font(.system(size: 13, weight: .medium))
+                            .foregroundStyle(palette.accent)
+                            .frame(width: 32, height: 32)
+                            .background(
+                                Circle()
+                                    .fill(palette.accent.opacity(0.08))
+                            )
+
+                        Text("Streak Reminders")
+                            .font(.system(size: 15, weight: .medium, design: .rounded))
+                            .foregroundStyle(palette.textPrimary)
+
+                        Spacer()
+
+                        Toggle("", isOn: Binding(
+                            get: { vm.profile.streakReminderEnabled },
+                            set: { _ in vm.toggleStreakReminder() }
+                        ))
+                        .tint(palette.accent)
+                        .labelsHidden()
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 12)
+
+                    rowDivider
+
+                    // Plan Reminders toggle
+                    HStack(spacing: 14) {
+                        Image(systemName: "book.pages")
+                            .font(.system(size: 13, weight: .medium))
+                            .foregroundStyle(palette.accent)
+                            .frame(width: 32, height: 32)
+                            .background(
+                                Circle()
+                                    .fill(palette.accent.opacity(0.08))
+                            )
+
+                        Text("Plan Reminders")
+                            .font(.system(size: 15, weight: .medium, design: .rounded))
+                            .foregroundStyle(palette.textPrimary)
+
+                        Spacer()
+
+                        Toggle("", isOn: Binding(
+                            get: { vm.profile.planReminderEnabled },
+                            set: { _ in vm.togglePlanReminder() }
+                        ))
+                        .tint(palette.accent)
+                        .labelsHidden()
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 12)
+                }
+
+                rowDivider
+
+                // Daily Streak (read-only)
+                HStack(spacing: 14) {
+                    Image(systemName: "flame.fill")
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundStyle(palette.accent)
+                        .frame(width: 32, height: 32)
+                        .background(
+                            Circle()
+                                .fill(palette.accent.opacity(0.08))
+                        )
+
+                    Text("Daily Streak")
+                        .font(.system(size: 15, weight: .medium, design: .rounded))
+                        .foregroundStyle(palette.textPrimary)
+
+                    Spacer()
+
+                    Text(vm.streakDisplay)
+                        .font(.system(size: 14, weight: .semibold, design: .rounded))
+                        .foregroundStyle(palette.accent)
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
             }
-        } header: {
-            Text("Profile")
-                .foregroundStyle(palette.textMuted)
-        } footer: {
-            Text("Changes to your profile will refresh your feed.")
-                .foregroundStyle(palette.textMuted)
+            .opacity(appeared ? 1 : 0)
+            .offset(y: appeared ? 0 : 10)
+            .animation(BPAnimation.spring.delay(0.05), value: appeared)
+
+            sectionFooter("Changes to your profile will refresh your feed.")
         }
-        .listRowBackground(palette.surface)
     }
 
     // MARK: - Bible Section
 
     private var bibleSection: some View {
-        Section {
-            settingsRow(
-                icon: "book",
-                label: "Translation",
-                value: vm.profile.preferredTranslation.displayName
-            ) {
-                vm.beginEditingTranslation()
-            }
+        VStack(alignment: .leading, spacing: 8) {
+            sectionHeader("Bible", index: 1)
 
-            settingsRow(
-                icon: "person.wave.2",
-                label: "Narrator Voice",
-                value: vm.currentVoiceDisplay
-            ) {
-                vm.showVoicePicker = true
+            sectionCard {
+                settingsRow(
+                    icon: "book",
+                    label: "Translation",
+                    value: vm.profile.preferredTranslation.displayName
+                ) {
+                    vm.beginEditingTranslation()
+                }
+
+                rowDivider
+
+                settingsRow(
+                    icon: "person.wave.2",
+                    label: "Narrator Voice",
+                    value: vm.currentVoiceDisplay
+                ) {
+                    vm.showVoicePicker = true
+                }
             }
-        } header: {
-            Text("Bible")
-                .foregroundStyle(palette.textMuted)
+            .opacity(appeared ? 1 : 0)
+            .offset(y: appeared ? 0 : 10)
+            .animation(BPAnimation.spring.delay(0.1), value: appeared)
         }
-        .listRowBackground(palette.surface)
     }
 
     // MARK: - Sanctuary Section
 
     private var sanctuarySection: some View {
-        Section {
-            settingsRow(
-                icon: "music.note",
-                label: "Soundscapes",
-                value: vm.currentSoundscapeDisplay
-            ) {
-                vm.showSoundscapePicker = true
-            }
+        VStack(alignment: .leading, spacing: 8) {
+            sectionHeader("Sanctuary", index: 2)
 
-            settingsRow(
-                icon: "photo.on.rectangle",
-                label: "Backgrounds",
-                value: vm.currentBackgroundDisplay
-            ) {
-                vm.showBackgroundPicker = true
-            }
+            sectionCard {
+                settingsRow(
+                    icon: "music.note",
+                    label: "Soundscapes",
+                    value: vm.currentSoundscapeDisplay
+                ) {
+                    vm.showSoundscapePicker = true
+                }
 
-            settingsRow(
-                icon: "moon.stars",
-                label: "Open Sanctuary",
-                value: nil
-            ) {
-                vm.showSanctuary = true
+                rowDivider
+
+                settingsRow(
+                    icon: "photo.on.rectangle",
+                    label: "Backgrounds",
+                    value: vm.currentBackgroundDisplay
+                ) {
+                    vm.showBackgroundPicker = true
+                }
+
+                rowDivider
+
+                settingsRow(
+                    icon: "moon.stars",
+                    label: "Open Sanctuary",
+                    value: nil
+                ) {
+                    vm.showSanctuary = true
+                }
             }
-        } header: {
-            Text("Sanctuary")
-                .foregroundStyle(palette.textMuted)
+            .opacity(appeared ? 1 : 0)
+            .offset(y: appeared ? 0 : 10)
+            .animation(BPAnimation.spring.delay(0.15), value: appeared)
         }
-        .listRowBackground(palette.surface)
     }
 
     // MARK: - Widgets Section
 
     private var widgetsSection: some View {
-        Section {
-            VStack(alignment: .leading, spacing: 16) {
-                // Header
-                HStack(spacing: 10) {
-                    Image(systemName: "square.grid.2x2")
-                        .font(.system(size: 24))
-                        .foregroundStyle(palette.accent)
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("Add Bible+ to Your Home Screen")
-                            .font(.system(size: 15, weight: .semibold))
-                            .foregroundStyle(palette.textPrimary)
-                        Text("Daily verses right where you need them")
-                            .font(BPFont.caption)
-                            .foregroundStyle(palette.textMuted)
+        VStack(alignment: .leading, spacing: 8) {
+            sectionHeader("Widgets", index: 3)
+
+            sectionCard {
+                VStack(alignment: .leading, spacing: 16) {
+                    // Header
+                    HStack(spacing: 12) {
+                        Image(systemName: "square.grid.2x2")
+                            .font(.system(size: 16, weight: .medium))
+                            .foregroundStyle(.white)
+                            .frame(width: 36, height: 36)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(
+                                        LinearGradient(
+                                            colors: [palette.accent, palette.accent.opacity(0.8)],
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        )
+                                    )
+                            )
+
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Add Bible+ to Your Home Screen")
+                                .font(.system(size: 15, weight: .semibold, design: .rounded))
+                                .foregroundStyle(palette.textPrimary)
+                            Text("Daily verses right where you need them")
+                                .font(.system(size: 12, weight: .regular, design: .rounded))
+                                .foregroundStyle(palette.textMuted)
+                        }
                     }
-                }
 
-                Divider()
+                    Rectangle()
+                        .fill(palette.border.opacity(0.15))
+                        .frame(height: 0.5)
 
-                // Steps
-                widgetStep(number: 1, text: "Long-press on your Home Screen")
-                widgetStep(number: 2, text: "Tap the + button in the top corner")
-                widgetStep(number: 3, text: "Search for \"Bible Plus\"")
-                widgetStep(number: 4, text: "Choose a size and tap Add Widget")
+                    // Steps
+                    VStack(spacing: 10) {
+                        widgetStep(number: 1, text: "Long-press on your Home Screen")
+                        widgetStep(number: 2, text: "Tap the + button in the top corner")
+                        widgetStep(number: 3, text: "Search for \"Bible Plus\"")
+                        widgetStep(number: 4, text: "Choose a size and tap Add Widget")
+                    }
 
-                Divider()
+                    Rectangle()
+                        .fill(palette.border.opacity(0.15))
+                        .frame(height: 0.5)
 
-                // Lock Screen
-                HStack(spacing: 10) {
-                    Image(systemName: "lock.circle")
-                        .font(.system(size: 20))
-                        .foregroundStyle(palette.accent)
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("Lock Screen Widget")
+                    // Lock Screen
+                    HStack(spacing: 12) {
+                        Image(systemName: "lock.circle")
                             .font(.system(size: 14, weight: .medium))
-                            .foregroundStyle(palette.textPrimary)
-                        Text("Long-press your Lock Screen, tap Customize, and add Bible Plus to your lock screen widgets.")
-                            .font(BPFont.caption)
-                            .foregroundStyle(palette.textMuted)
-                            .fixedSize(horizontal: false, vertical: true)
+                            .foregroundStyle(palette.accent)
+                            .frame(width: 32, height: 32)
+                            .background(
+                                Circle()
+                                    .fill(palette.accent.opacity(0.08))
+                            )
+
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Lock Screen Widget")
+                                .font(.system(size: 14, weight: .semibold, design: .rounded))
+                                .foregroundStyle(palette.textPrimary)
+                            Text("Long-press your Lock Screen, tap Customize, and add Bible Plus to your lock screen widgets.")
+                                .font(.system(size: 12, weight: .regular, design: .rounded))
+                                .foregroundStyle(palette.textMuted)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .lineSpacing(2)
+                        }
                     }
                 }
+                .padding(16)
             }
-            .padding(.vertical, 8)
-        } header: {
-            Text("Widgets")
-                .foregroundStyle(palette.textMuted)
+            .opacity(appeared ? 1 : 0)
+            .offset(y: appeared ? 0 : 10)
+            .animation(BPAnimation.spring.delay(0.2), value: appeared)
         }
-        .listRowBackground(palette.surface)
     }
 
     @ViewBuilder
     private func widgetStep(number: Int, text: String) -> some View {
         HStack(spacing: 12) {
             Text("\(number)")
-                .font(.system(size: 12, weight: .bold, design: .rounded))
+                .font(.system(size: 11, weight: .bold, design: .rounded))
                 .foregroundStyle(.white)
                 .frame(width: 22, height: 22)
-                .background(palette.accent)
-                .clipShape(Circle())
+                .background(
+                    Circle()
+                        .fill(palette.accent)
+                )
             Text(text)
-                .font(.system(size: 14))
+                .font(.system(size: 14, weight: .medium, design: .rounded))
                 .foregroundStyle(palette.textPrimary)
         }
     }
@@ -341,60 +541,107 @@ private struct SettingsContentView: View {
     // MARK: - Subscription Section
 
     private var subscriptionSection: some View {
-        Section {
-            if vm.profile.isPro {
-                HStack {
-                    Image(systemName: "crown.fill")
-                        .foregroundStyle(palette.accent)
-                        .frame(width: 24)
-                    Text("Status")
-                        .foregroundStyle(palette.textPrimary)
-                    Spacer()
-                    Text("Bible+ Pro")
-                        .foregroundStyle(palette.accent)
-                }
+        VStack(alignment: .leading, spacing: 8) {
+            sectionHeader("Subscription", index: 4)
 
-                Button {
-                    if let url = URL(string: "https://apps.apple.com/account/subscriptions") {
-                        UIApplication.shared.open(url)
-                    }
-                } label: {
-                    HStack {
-                        Image(systemName: "gear")
-                            .foregroundStyle(palette.accent)
-                            .frame(width: 24)
-                        Text("Manage Subscription")
-                            .foregroundStyle(palette.textPrimary)
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .font(.system(size: 13, weight: .semibold))
-                            .foregroundStyle(.tertiary)
-                    }
-                }
-            } else {
-                Button {
-                    showPaywall = true
-                } label: {
-                    HStack {
-                        Image(systemName: "crown")
-                            .foregroundStyle(palette.accent)
-                            .frame(width: 24)
+            sectionCard {
+                if vm.profile.isPro {
+                    HStack(spacing: 14) {
+                        Image(systemName: "crown.fill")
+                            .font(.system(size: 13, weight: .medium))
+                            .foregroundStyle(.white)
+                            .frame(width: 32, height: 32)
+                            .background(
+                                Circle()
+                                    .fill(
+                                        LinearGradient(
+                                            colors: [palette.accent, palette.accent.opacity(0.8)],
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        )
+                                    )
+                            )
+
                         Text("Status")
+                            .font(.system(size: 15, weight: .medium, design: .rounded))
                             .foregroundStyle(palette.textPrimary)
+
                         Spacer()
-                        Text("Free")
+
+                        Text("Bible+ Pro")
+                            .font(.system(size: 14, weight: .semibold, design: .rounded))
                             .foregroundStyle(palette.accent)
-                        Image(systemName: "chevron.right")
-                            .font(.system(size: 13, weight: .semibold))
-                            .foregroundStyle(.tertiary)
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 12)
+
+                    rowDivider
+
+                    Button {
+                        if let url = URL(string: "https://apps.apple.com/account/subscriptions") {
+                            UIApplication.shared.open(url)
+                        }
+                    } label: {
+                        HStack(spacing: 14) {
+                            Image(systemName: "gear")
+                                .font(.system(size: 13, weight: .medium))
+                                .foregroundStyle(palette.accent)
+                                .frame(width: 32, height: 32)
+                                .background(
+                                    Circle()
+                                        .fill(palette.accent.opacity(0.08))
+                                )
+
+                            Text("Manage Subscription")
+                                .font(.system(size: 15, weight: .medium, design: .rounded))
+                                .foregroundStyle(palette.textPrimary)
+
+                            Spacer()
+
+                            Image(systemName: "arrow.up.right")
+                                .font(.system(size: 11, weight: .semibold))
+                                .foregroundStyle(palette.textMuted.opacity(0.5))
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 12)
+                    }
+                } else {
+                    Button {
+                        showPaywall = true
+                    } label: {
+                        HStack(spacing: 14) {
+                            Image(systemName: "crown")
+                                .font(.system(size: 13, weight: .medium))
+                                .foregroundStyle(palette.accent)
+                                .frame(width: 32, height: 32)
+                                .background(
+                                    Circle()
+                                        .fill(palette.accent.opacity(0.08))
+                                )
+
+                            Text("Status")
+                                .font(.system(size: 15, weight: .medium, design: .rounded))
+                                .foregroundStyle(palette.textPrimary)
+
+                            Spacer()
+
+                            Text("Free")
+                                .font(.system(size: 14, weight: .semibold, design: .rounded))
+                                .foregroundStyle(palette.accent)
+
+                            Image(systemName: "chevron.right")
+                                .font(.system(size: 11, weight: .semibold))
+                                .foregroundStyle(palette.textMuted.opacity(0.5))
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 12)
                     }
                 }
             }
-        } header: {
-            Text("Subscription")
-                .foregroundStyle(palette.textMuted)
+            .opacity(appeared ? 1 : 0)
+            .offset(y: appeared ? 0 : 10)
+            .animation(BPAnimation.spring.delay(0.25), value: appeared)
         }
-        .listRowBackground(palette.surface)
     }
 
     // MARK: - About Section
@@ -408,139 +655,186 @@ private struct SettingsContentView: View {
     }
 
     private var aboutSection: some View {
-        Section {
-            Button {
-                requestReview()
-            } label: {
-                HStack {
-                    Image(systemName: "star")
-                        .foregroundStyle(palette.accent)
-                        .frame(width: 24)
-                    Text("Rate the App")
-                        .foregroundStyle(palette.textPrimary)
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 13, weight: .semibold))
-                        .foregroundStyle(.tertiary)
-                }
-            }
+        VStack(alignment: .leading, spacing: 8) {
+            sectionHeader("About", index: 5)
 
-            Button {
-                if let url = URL(string: "https://bibleplus.io/privacy") {
-                    openURL(url)
+            sectionCard {
+                aboutRow(icon: "star", label: "Rate the App", trailing: .chevron) {
+                    requestReview()
                 }
-            } label: {
-                HStack {
-                    Image(systemName: "hand.raised")
-                        .foregroundStyle(palette.accent)
-                        .frame(width: 24)
-                    Text("Privacy Policy")
-                        .foregroundStyle(palette.textPrimary)
-                    Spacer()
-                    Image(systemName: "arrow.up.right")
-                        .font(.system(size: 13, weight: .semibold))
-                        .foregroundStyle(.tertiary)
-                }
-            }
 
-            Button {
-                if let url = URL(string: "https://bibleplus.io/terms") {
-                    openURL(url)
-                }
-            } label: {
-                HStack {
-                    Image(systemName: "doc.text")
-                        .foregroundStyle(palette.accent)
-                        .frame(width: 24)
-                    Text("Terms of Service")
-                        .foregroundStyle(palette.textPrimary)
-                    Spacer()
-                    Image(systemName: "arrow.up.right")
-                        .font(.system(size: 13, weight: .semibold))
-                        .foregroundStyle(.tertiary)
-                }
-            }
+                rowDivider
 
-            Button {
-                if let url = URL(string: "https://bibleplus.io/support") {
-                    openURL(url)
-                }
-            } label: {
-                HStack {
-                    Image(systemName: "questionmark.circle")
-                        .foregroundStyle(palette.accent)
-                        .frame(width: 24)
-                    Text("Support")
-                        .foregroundStyle(palette.textPrimary)
-                    Spacer()
-                    Image(systemName: "arrow.up.right")
-                        .font(.system(size: 13, weight: .semibold))
-                        .foregroundStyle(.tertiary)
-                }
-            }
-
-            Button {
-                isRestoringPurchases = true
-                Task {
-                    await storeKitService.restorePurchases()
-                    isRestoringPurchases = false
-                }
-            } label: {
-                HStack {
-                    Image(systemName: "arrow.clockwise")
-                        .foregroundStyle(palette.accent)
-                        .frame(width: 24)
-                    Text("Restore Purchases")
-                        .foregroundStyle(palette.textPrimary)
-                    Spacer()
-                    if isRestoringPurchases {
-                        ProgressView()
+                aboutRow(icon: "hand.raised", label: "Privacy Policy", trailing: .external) {
+                    if let url = URL(string: "https://bibleplus.io/privacy") {
+                        openURL(url)
                     }
                 }
-            }
-            .disabled(isRestoringPurchases)
 
-            HStack {
-                Image(systemName: "info.circle")
-                    .foregroundStyle(palette.accent)
-                    .frame(width: 24)
-                Text("Version")
-                    .foregroundStyle(palette.textPrimary)
-                Spacer()
-                Text("\(appVersion) (\(buildNumber))")
-                    .foregroundStyle(palette.accent)
+                rowDivider
+
+                aboutRow(icon: "doc.text", label: "Terms of Service", trailing: .external) {
+                    if let url = URL(string: "https://bibleplus.io/terms") {
+                        openURL(url)
+                    }
+                }
+
+                rowDivider
+
+                aboutRow(icon: "questionmark.circle", label: "Support", trailing: .external) {
+                    if let url = URL(string: "https://bibleplus.io/support") {
+                        openURL(url)
+                    }
+                }
+
+                rowDivider
+
+                // Restore Purchases
+                Button {
+                    isRestoringPurchases = true
+                    Task {
+                        await storeKitService.restorePurchases()
+                        isRestoringPurchases = false
+                    }
+                } label: {
+                    HStack(spacing: 14) {
+                        Image(systemName: "arrow.clockwise")
+                            .font(.system(size: 13, weight: .medium))
+                            .foregroundStyle(palette.accent)
+                            .frame(width: 32, height: 32)
+                            .background(
+                                Circle()
+                                    .fill(palette.accent.opacity(0.08))
+                            )
+
+                        Text("Restore Purchases")
+                            .font(.system(size: 15, weight: .medium, design: .rounded))
+                            .foregroundStyle(palette.textPrimary)
+
+                        Spacer()
+
+                        if isRestoringPurchases {
+                            ProgressView()
+                                .tint(palette.accent)
+                        }
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 12)
+                }
+                .disabled(isRestoringPurchases)
+
+                rowDivider
+
+                // Version (read-only)
+                HStack(spacing: 14) {
+                    Image(systemName: "info.circle")
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundStyle(palette.accent)
+                        .frame(width: 32, height: 32)
+                        .background(
+                            Circle()
+                                .fill(palette.accent.opacity(0.08))
+                        )
+
+                    Text("Version")
+                        .font(.system(size: 15, weight: .medium, design: .rounded))
+                        .foregroundStyle(palette.textPrimary)
+
+                    Spacer()
+
+                    Text("\(appVersion) (\(buildNumber))")
+                        .font(.system(size: 14, weight: .medium, design: .rounded))
+                        .foregroundStyle(palette.textMuted)
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
             }
-        } header: {
-            Text("About")
-                .foregroundStyle(palette.textMuted)
+            .opacity(appeared ? 1 : 0)
+            .offset(y: appeared ? 0 : 10)
+            .animation(BPAnimation.spring.delay(0.3), value: appeared)
         }
-        .listRowBackground(palette.surface)
     }
 
-    // MARK: - Row Helper
+    // MARK: - About Row Helper
+
+    private enum TrailingIcon {
+        case chevron, external
+    }
+
+    private func aboutRow(icon: String, label: String, trailing: TrailingIcon, action: @escaping () -> Void) -> some View {
+        Button {
+            HapticService.selection()
+            action()
+        } label: {
+            HStack(spacing: 14) {
+                Image(systemName: icon)
+                    .font(.system(size: 13, weight: .medium))
+                    .foregroundStyle(palette.accent)
+                    .frame(width: 32, height: 32)
+                    .background(
+                        Circle()
+                            .fill(palette.accent.opacity(0.08))
+                    )
+
+                Text(label)
+                    .font(.system(size: 15, weight: .medium, design: .rounded))
+                    .foregroundStyle(palette.textPrimary)
+
+                Spacer()
+
+                Image(systemName: trailing == .external ? "arrow.up.right" : "chevron.right")
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(palette.textMuted.opacity(0.5))
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
+        }
+    }
+
+    // MARK: - Row Helpers
+
+    private var rowDivider: some View {
+        Rectangle()
+            .fill(palette.border.opacity(0.12))
+            .frame(height: 0.5)
+            .padding(.leading, 62)
+    }
 
     @ViewBuilder
     private func settingsRow(icon: String, label: String, value: String?, action: @escaping () -> Void) -> some View {
-        Button(action: {
+        Button {
             HapticService.selection()
             action()
-        }) {
-            HStack {
+        } label: {
+            HStack(spacing: 14) {
                 Image(systemName: icon)
+                    .font(.system(size: 13, weight: .medium))
                     .foregroundStyle(palette.accent)
-                    .frame(width: 24)
+                    .frame(width: 32, height: 32)
+                    .background(
+                        Circle()
+                            .fill(palette.accent.opacity(0.08))
+                    )
+
                 Text(label)
+                    .font(.system(size: 15, weight: .medium, design: .rounded))
                     .foregroundStyle(palette.textPrimary)
+
                 Spacer()
+
                 if let value {
                     Text(value)
+                        .font(.system(size: 14, weight: .medium, design: .rounded))
                         .foregroundStyle(palette.accent)
                         .lineLimit(1)
                 }
+
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundStyle(.tertiary)
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(palette.textMuted.opacity(0.5))
             }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
         }
     }
 }

@@ -176,6 +176,33 @@ final class SettingsViewModel {
         }
     }
 
+    func toggleStreakReminder() {
+        let newValue = !profile.streakReminderEnabled
+        profile.streakReminderEnabled = newValue
+        profile.updatedAt = Date()
+        personalizationService.save()
+        if newValue {
+            NotificationService.shared.scheduleStreakReminders(
+                streakCount: profile.streakCount,
+                firstName: profile.firstName
+            )
+        } else {
+            NotificationService.shared.cancelStreakReminders()
+        }
+    }
+
+    func togglePlanReminder() {
+        let newValue = !profile.planReminderEnabled
+        profile.planReminderEnabled = newValue
+        profile.updatedAt = Date()
+        personalizationService.save()
+        if !newValue {
+            NotificationService.shared.cancelPlanReminders()
+        }
+        // When turning on, plan reminders will be scheduled on next app launch
+        // since we need to look up the active plan from SwiftData
+    }
+
     private func rescheduleNotifications() {
         guard profile.notificationsEnabled else {
             NotificationService.shared.cancelAll()

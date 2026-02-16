@@ -21,6 +21,8 @@ final class UserProfile {
     var aiConversationCount: Int
     var hasCompletedOnboarding: Bool
     var notificationsEnabled: Bool
+    var streakReminderEnabled: Bool
+    var planReminderEnabled: Bool
     var selectedBibleVoiceID: String
     var readerFontSize: Double
     var readerFontStyleRaw: String
@@ -55,6 +57,8 @@ final class UserProfile {
         aiConversationCount: Int = 0,
         hasCompletedOnboarding: Bool = false,
         notificationsEnabled: Bool = false,
+        streakReminderEnabled: Bool = true,
+        planReminderEnabled: Bool = true,
         selectedBibleVoiceID: String = BibleVoice.onyx.rawValue,
         readerFontSize: Double = 20,
         readerFontStyle: ReaderFontStyle = .serif,
@@ -81,6 +85,8 @@ final class UserProfile {
         self.aiConversationCount = aiConversationCount
         self.hasCompletedOnboarding = hasCompletedOnboarding
         self.notificationsEnabled = notificationsEnabled
+        self.streakReminderEnabled = streakReminderEnabled
+        self.planReminderEnabled = planReminderEnabled
         self.selectedBibleVoiceID = selectedBibleVoiceID
         self.readerFontSize = readerFontSize
         self.readerFontStyleRaw = readerFontStyle.rawValue

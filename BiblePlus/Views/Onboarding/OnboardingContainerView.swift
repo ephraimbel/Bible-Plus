@@ -12,22 +12,31 @@ struct OnboardingContainerView: View {
             if let vm = viewModel {
                 ZStack {
                     // Hide container background for full-screen views
-                    if vm.currentStep != 0 && vm.currentStep != 8 {
+                    if vm.currentStep != 0 && vm.currentStep != 9 {
                         OnboardingBackground()
                     }
 
                     VStack(spacing: 0) {
                         // Top bar: back button + progress dots
-                        // Hidden on welcome (0) and paywall (8) for clean full-screen
-                        if vm.currentStep > 0 && vm.currentStep != 8 {
+                        // Hidden on welcome (0) and paywall (9) for clean full-screen
+                        if vm.currentStep > 0 && vm.currentStep != 9 {
                             HStack {
                                 Button {
                                     vm.goBack()
                                 } label: {
                                     Image(systemName: "chevron.left")
-                                        .font(.title3)
+                                        .font(.system(size: 14, weight: .semibold))
                                         .foregroundStyle(palette.textSecondary)
-                                        .padding(8)
+                                        .frame(width: 36, height: 36)
+                                        .background(
+                                            Circle()
+                                                .fill(palette.surfaceElevated)
+                                                .shadow(color: .black.opacity(0.06), radius: 4, y: 2)
+                                        )
+                                        .overlay(
+                                            Circle()
+                                                .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
+                                        )
                                 }
 
                                 Spacer()
@@ -40,10 +49,8 @@ struct OnboardingContainerView: View {
                                 Spacer()
 
                                 // Invisible spacer for symmetry
-                                Image(systemName: "chevron.left")
-                                    .font(.title3)
-                                    .padding(8)
-                                    .opacity(0)
+                                Color.clear
+                                    .frame(width: 36, height: 36)
                             }
                             .padding(.horizontal, 16)
                             .padding(.top, 8)
@@ -60,9 +67,10 @@ struct OnboardingContainerView: View {
                             case 4: HeartBurdensView(viewModel: vm)
                             case 5: TranslationPickerView(viewModel: vm)
                             case 6: DailyRhythmView(viewModel: vm)
-                            case 7: AestheticView(viewModel: vm)
-                            case 8: SummaryPaywallView(viewModel: vm)
-                            case 9: WidgetSetupView(viewModel: vm)
+                            case 7: NotificationPermissionView(viewModel: vm)
+                            case 8: AestheticView(viewModel: vm)
+                            case 9: SummaryPaywallView(viewModel: vm)
+                            case 10: WidgetSetupView(viewModel: vm)
                             default: EmptyView()
                             }
                         }

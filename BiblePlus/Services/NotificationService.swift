@@ -126,73 +126,200 @@ final class NotificationService {
         seasons: [LifeSeason],
         faithLevel: FaithLevel?,
         isPro: Bool,
-        content: [PrayerContent]
+        content: [PrayerContent],
+        streakCount: Int = 0,
+        streakReminderEnabled: Bool = true,
+        planReminderEnabled: Bool = true,
+        activePlanName: String? = nil,
+        activePlanID: String? = nil,
+        activePlanNextDay: Int? = nil,
+        activePlanTotalDays: Int? = nil
     ) async {
         cancelAll()
-        guard !prayerTimes.isEmpty else { return }
 
         let center = UNUserNotificationCenter.current()
         let name = firstName.isEmpty ? "Friend" : firstName
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
 
-        for slot in prayerTimes {
-            let items = selectMultipleContentFromValues(
-                count: scheduleDays,
-                for: slot,
-                name: name,
-                burdens: burdens,
-                seasons: seasons,
-                faithLevel: faithLevel,
-                isPro: isPro,
-                content: content
-            )
-
-            let subtitles = slot.notificationSubtitles(name: name).shuffled()
-
-            for dayOffset in 0..<scheduleDays {
-                guard let targetDate = calendar.date(byAdding: .day, value: dayOffset, to: today) else { continue }
-                let item = items[dayOffset % items.count]
-
-                let notifContent = UNMutableNotificationContent()
-                notifContent.title = "Bible+"
-                notifContent.subtitle = subtitles[dayOffset % subtitles.count]
-                notifContent.body = item.text
-                notifContent.sound = .default
-                notifContent.categoryIdentifier = Self.devotionalCategoryIdentifier
-
-                var userInfo: [String: Any] = [:]
-                if let contentID = item.contentID {
-                    userInfo["contentID"] = contentID.uuidString
-                }
-                if let bookName = item.bibleBookName, let chapter = item.bibleChapter {
-                    userInfo["bookName"] = bookName
-                    userInfo["chapter"] = chapter
-                }
-                notifContent.userInfo = userInfo
-
-                var dateComponents = calendar.dateComponents([.year, .month, .day], from: targetDate)
-                dateComponents.hour = scheduleHour(for: slot)
-                dateComponents.minute = scheduleMinute(for: slot)
-
-                let trigger = UNCalendarNotificationTrigger(
-                    dateMatching: dateComponents,
-                    repeats: false
+        // Schedule prayer time notifications
+        if !prayerTimes.isEmpty {
+            for slot in prayerTimes {
+                let items = selectMultipleContentFromValues(
+                    count: scheduleDays,
+                    for: slot,
+                    name: name,
+                    burdens: burdens,
+                    seasons: seasons,
+                    faithLevel: faithLevel,
+                    isPro: isPro,
+                    content: content
                 )
 
-                let request = UNNotificationRequest(
-                    identifier: "prayer-\(slot.rawValue)-day\(dayOffset)",
-                    content: notifContent,
-                    trigger: trigger
-                )
+                let subtitles = slot.notificationSubtitles(name: name).shuffled()
 
-                try? await center.add(request)
+                for dayOffset in 0..<scheduleDays {
+                    guard let targetDate = calendar.date(byAdding: .day, value: dayOffset, to: today) else { continue }
+                    let item = items[dayOffset % items.count]
+
+                    let notifContent = UNMutableNotificationContent()
+                    notifContent.title = "Bible+"
+                    notifContent.subtitle = subtitles[dayOffset % subtitles.count]
+                    notifContent.body = item.text
+                    notifContent.sound = .default
+                    notifContent.categoryIdentifier = Self.devotionalCategoryIdentifier
+
+                    var userInfo: [String: Any] = [:]
+                    if let contentID = item.contentID {
+                        userInfo["contentID"] = contentID.uuidString
+                    }
+                    if let bookName = item.bibleBookName, let chapter = item.bibleChapter {
+                        userInfo["bookName"] = bookName
+                        userInfo["chapter"] = chapter
+                    }
+                    notifContent.userInfo = userInfo
+
+                    var dateComponents = calendar.dateComponents([.year, .month, .day], from: targetDate)
+                    dateComponents.hour = scheduleHour(for: slot)
+                    dateComponents.minute = scheduleMinute(for: slot)
+
+                    let trigger = UNCalendarNotificationTrigger(
+                        dateMatching: dateComponents,
+                        repeats: false
+                    )
+
+                    let request = UNNotificationRequest(
+                        identifier: "prayer-\(slot.rawValue)-day\(dayOffset)",
+                        content: notifContent,
+                        trigger: trigger
+                    )
+
+                    try? await center.add(request)
+                }
             }
+        }
+
+        // Schedule streak reminders
+        if streakReminderEnabled {
+            scheduleStreakReminders(streakCount: streakCount, firstName: firstName)
+        }
+
+        // Schedule reading plan reminders
+        if planReminderEnabled,
+           let planName = activePlanName,
+           let planID = activePlanID,
+           let nextDay = activePlanNextDay,
+           let totalDays = activePlanTotalDays {
+            scheduleReadingPlanReminder(
+                planName: planName,
+                planID: planID,
+                nextDay: nextDay,
+                totalDays: totalDays,
+                firstName: firstName
+            )
         }
     }
 
     func cancelAll() {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+    }
+
+    // MARK: - Streak Reminders
+
+    func scheduleStreakReminders(streakCount: Int, firstName: String) {
+        let center = UNUserNotificationCenter.current()
+        let name = firstName.isEmpty ? "Friend" : firstName
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+
+        for dayOffset in 0..<scheduleDays {
+            guard let targetDate = calendar.date(byAdding: .day, value: dayOffset, to: today) else { continue }
+
+            let content = UNMutableNotificationContent()
+            content.title = "Bible+"
+            let projectedStreak = streakCount + dayOffset
+            if projectedStreak == 0 {
+                content.body = "Start your journey today, \(name). Open Bible+ to begin your streak."
+            } else if projectedStreak < 7 {
+                content.body = "You're on a \(projectedStreak)-day streak, \(name)! Don't let it slip away."
+            } else {
+                content.body = "\(projectedStreak)-day streak! Keep the fire burning, \(name)."
+            }
+            content.sound = .default
+
+            var dateComponents = calendar.dateComponents([.year, .month, .day], from: targetDate)
+            dateComponents.hour = 20
+            dateComponents.minute = 0
+
+            let trigger = UNCalendarNotificationTrigger(
+                dateMatching: dateComponents,
+                repeats: false
+            )
+
+            let request = UNNotificationRequest(
+                identifier: "streak-reminder-day\(dayOffset)",
+                content: content,
+                trigger: trigger
+            )
+
+            center.add(request)
+        }
+    }
+
+    func cancelStreakReminders() {
+        let identifiers = (0..<scheduleDays).map { "streak-reminder-day\($0)" }
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+    }
+
+    // MARK: - Reading Plan Reminders
+
+    private let planScheduleDays = 3
+
+    func scheduleReadingPlanReminder(
+        planName: String,
+        planID: String,
+        nextDay: Int,
+        totalDays: Int,
+        firstName: String
+    ) {
+        let center = UNUserNotificationCenter.current()
+        let name = firstName.isEmpty ? "Friend" : firstName
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+
+        for dayOffset in 0..<planScheduleDays {
+            guard let targetDate = calendar.date(byAdding: .day, value: dayOffset, to: today) else { continue }
+            let projectedDay = min(nextDay + dayOffset, totalDays)
+
+            let content = UNMutableNotificationContent()
+            content.title = "Bible+"
+            content.body = "Day \(projectedDay) of \"\(planName)\" is waiting for you, \(name)."
+            content.sound = .default
+            content.categoryIdentifier = Self.devotionalCategoryIdentifier
+            content.userInfo = ["deepLink": "readingPlan", "planID": planID]
+
+            var dateComponents = calendar.dateComponents([.year, .month, .day], from: targetDate)
+            dateComponents.hour = 9
+            dateComponents.minute = 0
+
+            let trigger = UNCalendarNotificationTrigger(
+                dateMatching: dateComponents,
+                repeats: false
+            )
+
+            let request = UNNotificationRequest(
+                identifier: "plan-reminder-day\(dayOffset)",
+                content: content,
+                trigger: trigger
+            )
+
+            center.add(request)
+        }
+    }
+
+    func cancelPlanReminders() {
+        let identifiers = (0..<planScheduleDays).map { "plan-reminder-day\($0)" }
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
     }
 
     // MARK: - Schedule Times
@@ -571,4 +698,6 @@ extension Notification.Name {
     static let switchToJournalTab = Notification.Name("SwitchToJournalTab")
     static let enterFeedFromDashboard = Notification.Name("EnterFeedFromDashboard")
     static let dashboardShowFeedChanged = Notification.Name("DashboardShowFeedChanged")
+    static let openJournalWithReflection = Notification.Name("OpenJournalWithReflection")
+    static let readingPlanDeepLink = Notification.Name("ReadingPlanDeepLink")
 }

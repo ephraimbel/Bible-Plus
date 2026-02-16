@@ -53,11 +53,14 @@ struct BiblePlusApp: App {
         tabAppearance.configureWithTransparentBackground()
         tabAppearance.backgroundColor = .clear
         tabAppearance.backgroundEffect = nil
+        tabAppearance.backgroundImage = UIImage()
         tabAppearance.shadowColor = nil
-        tabAppearance.shadowImage = nil
+        tabAppearance.shadowImage = UIImage()
         UITabBar.appearance().standardAppearance = tabAppearance
         UITabBar.appearance().scrollEdgeAppearance = tabAppearance
         UITabBar.appearance().backgroundColor = .clear
+        UITabBar.appearance().backgroundImage = UIImage()
+        UITabBar.appearance().shadowImage = UIImage()
 
         // Global nav bar title colors matching our palette
         let titleColor = UIColor { traits in
@@ -99,8 +102,7 @@ struct BiblePlusApp: App {
         // Refresh notification content on each launch
         if let profile = try? seedContext.fetch(profileFetch).first,
            profile.hasCompletedOnboarding,
-           profile.notificationsEnabled,
-           !profile.prayerTimes.isEmpty {
+           profile.notificationsEnabled {
             let contentFetch = FetchDescriptor<PrayerContent>()
             let allContent = (try? seedContext.fetch(contentFetch)) ?? []
             let prayerTimes = profile.prayerTimes
@@ -109,6 +111,32 @@ struct BiblePlusApp: App {
             let seasons = profile.lifeSeasons
             let faithLevel = profile.faithLevel
             let isPro = profile.isPro
+            let streakCount = profile.streakCount
+            let streakReminderEnabled = profile.streakReminderEnabled
+            let planReminderEnabled = profile.planReminderEnabled
+
+            // Find active reading plan for plan reminders
+            var activePlanName: String?
+            var activePlanID: String?
+            var activePlanNextDay: Int?
+            var activePlanTotalDays: Int?
+
+            let progressFetch = FetchDescriptor<UserPlanProgress>(
+                predicate: #Predicate { $0.isActive && $0.completedDate == nil }
+            )
+            if let activeProgress = try? seedContext.fetch(progressFetch).first {
+                let targetPlanID = activeProgress.planID
+                let planFetch = FetchDescriptor<ReadingPlan>(
+                    predicate: #Predicate { $0.id == targetPlanID }
+                )
+                if let plan = try? seedContext.fetch(planFetch).first {
+                    activePlanName = plan.name
+                    activePlanID = plan.id
+                    activePlanTotalDays = plan.totalDays
+                    activePlanNextDay = activeProgress.nextDay(totalDays: plan.totalDays)
+                }
+            }
+
             Task { @MainActor in
                 await NotificationService.shared.rescheduleFromSnapshot(
                     prayerTimes: prayerTimes,
@@ -117,7 +145,14 @@ struct BiblePlusApp: App {
                     seasons: seasons,
                     faithLevel: faithLevel,
                     isPro: isPro,
-                    content: allContent
+                    content: allContent,
+                    streakCount: streakCount,
+                    streakReminderEnabled: streakReminderEnabled,
+                    planReminderEnabled: planReminderEnabled,
+                    activePlanName: activePlanName,
+                    activePlanID: activePlanID,
+                    activePlanNextDay: activePlanNextDay,
+                    activePlanTotalDays: activePlanTotalDays
                 )
             }
         }
@@ -181,6 +216,20 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
                         userInfo: ["contentID": uuid]
                     )
                 }
+            }
+            return
+        }
+
+        // Reading plan deep link
+        if let deepLink = userInfo["deepLink"] as? String,
+           deepLink == "readingPlan",
+           let planID = userInfo["planID"] as? String {
+            await MainActor.run {
+                NotificationCenter.default.post(
+                    name: .readingPlanDeepLink,
+                    object: nil,
+                    userInfo: ["planID": planID]
+                )
             }
             return
         }
