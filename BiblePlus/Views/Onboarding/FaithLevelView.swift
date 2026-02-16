@@ -21,20 +21,11 @@ struct FaithLevelView: View {
                 .multilineTextAlignment(.center)
                 .opacity(showContent ? 1 : 0)
 
-            Spacer().frame(height: 32)
+            Spacer().frame(height: 28)
 
-            VStack(spacing: 12) {
+            VStack(spacing: 14) {
                 ForEach(Array(FaithLevel.allCases.enumerated()), id: \.element) { index, level in
-                    SelectionCard(
-                        title: level.displayName,
-                        subtitle: level.description,
-                        icon: level.icon,
-                        isSelected: viewModel.selectedFaithLevel == level,
-                        action: { viewModel.selectedFaithLevel = level }
-                    )
-                    .opacity(showContent ? 1 : 0)
-                    .offset(y: showContent ? 0 : 20)
-                    .animation(BPAnimation.staggered(index: index), value: showContent)
+                    faithCard(level: level, index: index)
                 }
             }
             .padding(.horizontal, 24)
@@ -55,5 +46,94 @@ struct FaithLevelView: View {
                 showContent = true
             }
         }
+    }
+
+    // MARK: - Faith Card
+
+    @ViewBuilder
+    private func faithCard(level: FaithLevel, index: Int) -> some View {
+        let isSelected = viewModel.selectedFaithLevel == level
+
+        Button {
+            HapticService.selection()
+            viewModel.selectedFaithLevel = level
+        } label: {
+            HStack(spacing: 16) {
+                // Large icon circle
+                ZStack {
+                    Circle()
+                        .fill(
+                            isSelected
+                                ? .white.opacity(0.2)
+                                : palette.accent.opacity(0.1)
+                        )
+                        .frame(width: 52, height: 52)
+
+                    Image(systemName: level.icon)
+                        .font(.system(size: 22, weight: .medium))
+                        .foregroundStyle(isSelected ? .white : palette.accent)
+                }
+
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(level.displayName)
+                        .font(.system(size: 17, weight: .semibold, design: .rounded))
+                        .foregroundStyle(isSelected ? .white : palette.textPrimary)
+
+                    Text(level.description)
+                        .font(.system(size: 14, weight: .regular, design: .rounded))
+                        .foregroundStyle(isSelected ? .white.opacity(0.8) : palette.textSecondary)
+                }
+
+                Spacer()
+
+                if isSelected {
+                    Image(systemName: "checkmark")
+                        .font(.system(size: 13, weight: .bold))
+                        .foregroundStyle(.white)
+                        .frame(width: 28, height: 28)
+                        .background(
+                            Circle()
+                                .fill(.white.opacity(0.25))
+                        )
+                        .transition(.scale.combined(with: .opacity))
+                }
+            }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 22)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(
+                RoundedRectangle(cornerRadius: 18)
+                    .fill(
+                        isSelected
+                            ? AnyShapeStyle(
+                                LinearGradient(
+                                    colors: [palette.accent, palette.accent.opacity(0.85)],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                            )
+                            : AnyShapeStyle(palette.surfaceElevated)
+                    )
+                    .shadow(
+                        color: isSelected
+                            ? palette.accent.opacity(0.3)
+                            : .black.opacity(0.04),
+                        radius: isSelected ? 12 : 4,
+                        y: isSelected ? 6 : 2
+                    )
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 18)
+                    .stroke(
+                        isSelected ? Color.clear : palette.border.opacity(0.15),
+                        lineWidth: 0.5
+                    )
+            )
+        }
+        .buttonStyle(.plain)
+        .animation(BPAnimation.selection, value: isSelected)
+        .opacity(showContent ? 1 : 0)
+        .offset(y: showContent ? 0 : 20)
+        .animation(BPAnimation.staggered(index: index), value: showContent)
     }
 }
