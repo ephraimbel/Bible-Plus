@@ -725,7 +725,7 @@ private struct SettingsContentView: View {
 
                 rowDivider
 
-                // Version (read-only)
+                // Version — tap 5 times to toggle Pro (debug)
                 HStack(spacing: 14) {
                     Image(systemName: "info.circle")
                         .font(.system(size: 13, weight: .medium))
@@ -748,6 +748,12 @@ private struct SettingsContentView: View {
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, 12)
+                .contentShape(Rectangle())
+                .onTapGesture(count: 5) {
+                    vm.profile.isPro.toggle()
+                    try? modelContext.save()
+                    HapticService.impact(.heavy)
+                }
             }
             .opacity(appeared ? 1 : 0)
             .offset(y: appeared ? 0 : 10)
