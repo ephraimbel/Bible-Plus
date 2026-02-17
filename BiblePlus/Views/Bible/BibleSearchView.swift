@@ -89,12 +89,21 @@ struct BibleSearchView: View {
                 // Book navigation matches
                 if !viewModel.bookMatches.isEmpty {
                     ForEach(viewModel.bookMatches) { match in
-                        Button {
-                            onSelectResult(match.book, match.chapter ?? 1, match.verseNumber ?? 1)
-                            dismiss()
-                        } label: {
-                            bookMatchRow(match)
+                        bookMatchContent(match)
+                    }
+
+                    // Loading indicator for verse data
+                    if viewModel.isLoadingMatchVerses {
+                        HStack(spacing: 8) {
+                            ProgressView()
+                                .tint(palette.accent)
+                                .scaleEffect(0.7)
+                            Text("Loading verses...")
+                                .font(BPFont.caption)
+                                .foregroundStyle(palette.textMuted)
                         }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 8)
                     }
 
                     // Divider between sections
@@ -161,29 +170,151 @@ struct BibleSearchView: View {
         }
     }
 
-    // MARK: - Book Match Row
+    // MARK: - Book Match Content
+
+    @ViewBuilder
+    private func bookMatchContent(_ match: BookNavigationMatch) -> some View {
+        if let data = viewModel.verseData(for: match) {
+            if let verseText = data.singleVerseText {
+                // Specific verse: "John 3:16" → show verse text inline
+                singleVerseMatchRow(match, text: verseText)
+            } else if let verses = data.chapterVerses {
+                // Whole chapter: "Proverbs 3" → header + verse list
+                chapterVerseMatchSection(match, verses: verses)
+            } else {
+                bookMatchRow(match)
+            }
+        } else {
+            bookMatchRow(match)
+        }
+    }
+
+    // MARK: - Single Verse Match Row
+
+    private func singleVerseMatchRow(_ match: BookNavigationMatch, text: String) -> some View {
+        Button {
+            onSelectResult(match.book, match.chapter ?? 1, match.verseNumber ?? 1)
+            dismiss()
+        } label: {
+            HStack(spacing: 12) {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text(match.displayTitle)
+                        .font(BPFont.button)
+                        .foregroundStyle(palette.accent)
+
+                    Text(text)
+                        .font(.custom("New York", size: 15))
+                        .foregroundStyle(palette.textPrimary)
+                        .lineLimit(4)
+                        .multilineTextAlignment(.leading)
+
+                    Text(viewModel.currentTranslation.displayName)
+                        .font(BPFont.caption)
+                        .foregroundStyle(palette.textMuted)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 2)
+                        .background(
+                            Capsule()
+                                .fill(palette.surface)
+                        )
+                }
+
+                Spacer()
+
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(palette.accent)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
+        }
+    }
+
+    // MARK: - Chapter Verse Match Section
+
+    @ViewBuilder
+    private func chapterVerseMatchSection(_ match: BookNavigationMatch, verses: [(number: Int, text: String)]) -> some View {
+        // Chapter header
+        Button {
+            onSelectResult(match.book, match.chapter ?? 1, 1)
+            dismiss()
+        } label: {
+            HStack(spacing: 12) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(match.displayTitle)
+                        .font(BPFont.button)
+                        .foregroundStyle(palette.accent)
+
+                    Text("\(verses.count) verse\(verses.count == 1 ? "" : "s") · \(viewModel.currentTranslation.displayName)")
+                        .font(BPFont.caption)
+                        .foregroundStyle(palette.textMuted)
+                }
+
+                Spacer()
+
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(palette.accent)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
+        }
+
+        // Individual verse rows
+        ForEach(verses, id: \.number) { verse in
+            Button {
+                onSelectResult(match.book, match.chapter ?? 1, verse.number)
+                dismiss()
+            } label: {
+                HStack(alignment: .top, spacing: 8) {
+                    Text("\(verse.number)")
+                        .font(BPFont.caption)
+                        .foregroundStyle(palette.accent)
+                        .frame(width: 28, alignment: .trailing)
+
+                    Text(verse.text)
+                        .font(.custom("New York", size: 14))
+                        .foregroundStyle(palette.textPrimary)
+                        .lineLimit(3)
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 6)
+            }
+        }
+    }
+
+    // MARK: - Book Match Row (fallback)
 
     private func bookMatchRow(_ match: BookNavigationMatch) -> some View {
-        HStack(spacing: 12) {
-            VStack(alignment: .leading, spacing: 2) {
-                Text(match.displayTitle)
-                    .font(BPFont.button)
-                    .foregroundStyle(palette.textPrimary)
+        Button {
+            onSelectResult(match.book, match.chapter ?? 1, match.verseNumber ?? 1)
+            dismiss()
+        } label: {
+            HStack(spacing: 12) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(match.displayTitle)
+                        .font(BPFont.button)
+                        .foregroundStyle(palette.textPrimary)
 
-                Text(match.subtitle)
-                    .font(BPFont.caption)
-                    .foregroundStyle(palette.textMuted)
+                    Text(match.subtitle)
+                        .font(BPFont.caption)
+                        .foregroundStyle(palette.textMuted)
+                }
+
+                Spacer()
+
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(palette.accent)
             }
-
-            Spacer()
-
-            Image(systemName: "chevron.right")
-                .font(.system(size: 12, weight: .semibold))
-                .foregroundStyle(palette.accent)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, 16)
-        .padding(.vertical, 12)
     }
 
     // MARK: - Verse Result Row

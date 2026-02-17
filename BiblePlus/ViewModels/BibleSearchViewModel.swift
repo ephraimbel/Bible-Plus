@@ -35,6 +35,21 @@ struct BookNavigationMatch: Identifiable {
         }
         return "\(book.chapterCount) chapter\(book.chapterCount == 1 ? "" : "s") · \(book.testament.displayName)"
     }
+
+    var matchKey: BookMatchKey {
+        BookMatchKey(bookID: book.id, chapter: chapter, verseNumber: verseNumber)
+    }
+}
+
+struct BookMatchKey: Hashable {
+    let bookID: String
+    let chapter: Int?
+    let verseNumber: Int?
+}
+
+struct MatchVerseData {
+    let singleVerseText: String?
+    let chapterVerses: [(number: Int, text: String)]?
 }
 
 @MainActor
@@ -48,12 +63,21 @@ final class BibleSearchViewModel {
     var totalResults: Int = 0
     var hasMoreResults: Bool = false
 
+    var matchVerseData: [BookMatchKey: MatchVerseData] = [:]
+    var isLoadingMatchVerses: Bool = false
+
     let currentTranslation: BibleTranslation
 
     private var currentPage: Int = 1
     private let pageLimit = 30
     private var searchTask: Task<Void, Never>?
     private var debounceTask: Task<Void, Never>?
+    private var matchVerseTask: Task<Void, Never>?
+
+    /// True when all book matches have a chapter (user typed a reference, not a keyword)
+    var queryIsReference: Bool {
+        !bookMatches.isEmpty && bookMatches.allSatisfy { $0.chapter != nil }
+    }
 
     // Pre-computed search index: [(lowercased name, book)]
     private static let searchIndex: [(name: String, book: BibleBook)] = {
@@ -74,7 +98,20 @@ final class BibleSearchViewModel {
         // Instant local book matching (no debounce, works from 1 char)
         updateBookMatches()
 
-        // Debounced API verse text search
+        // Load verse text for reference matches
+        loadMatchVerses()
+
+        // Skip text search when query is a reference (e.g. "john 3:16", "proverbs 3")
+        if queryIsReference {
+            searchTask?.cancel()
+            debounceTask?.cancel()
+            results = []
+            totalResults = 0
+            hasMoreResults = false
+            return
+        }
+
+        // Debounced API verse text search for keyword queries
         debounceTask?.cancel()
         debounceTask = Task {
             try? await Task.sleep(for: .milliseconds(200))
@@ -92,16 +129,71 @@ final class BibleSearchViewModel {
         }
     }
 
+    func verseData(for match: BookNavigationMatch) -> MatchVerseData? {
+        matchVerseData[match.matchKey]
+    }
+
     func clear() {
         debounceTask?.cancel()
         searchTask?.cancel()
+        matchVerseTask?.cancel()
         query = ""
         results = []
         bookMatches = []
+        matchVerseData = [:]
+        isLoadingMatchVerses = false
         totalResults = 0
         hasMoreResults = false
         errorMessage = nil
         currentPage = 1
+    }
+
+    // MARK: - Match Verse Loading
+
+    private func loadMatchVerses() {
+        matchVerseTask?.cancel()
+
+        let matchesWithChapter = bookMatches.filter { $0.chapter != nil }
+        guard !matchesWithChapter.isEmpty else {
+            matchVerseData = [:]
+            isLoadingMatchVerses = false
+            return
+        }
+
+        isLoadingMatchVerses = true
+        matchVerseTask = Task {
+            var newData: [BookMatchKey: MatchVerseData] = [:]
+
+            for match in matchesWithChapter {
+                guard !Task.isCancelled else { return }
+                guard let chapter = match.chapter else { continue }
+
+                do {
+                    let verses = try await BibleRepository.shared.verses(
+                        book: match.book.id,
+                        chapter: chapter,
+                        translation: currentTranslation
+                    )
+
+                    let key = match.matchKey
+
+                    if let verseNum = match.verseNumber,
+                       let found = verses.first(where: { $0.number == verseNum }) {
+                        // Specific verse: "John 3:16"
+                        newData[key] = MatchVerseData(singleVerseText: found.text, chapterVerses: nil)
+                    } else {
+                        // Whole chapter: "Proverbs 3"
+                        newData[key] = MatchVerseData(singleVerseText: nil, chapterVerses: verses)
+                    }
+                } catch {
+                    // Failed to load — leave entry absent, view falls back to plain row
+                }
+            }
+
+            guard !Task.isCancelled else { return }
+            matchVerseData = newData
+            isLoadingMatchVerses = false
+        }
     }
 
     // MARK: - Book Matching Engine
