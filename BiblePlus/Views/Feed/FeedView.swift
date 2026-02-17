@@ -31,7 +31,6 @@ private struct FeedContentView: View {
     @State private var showSoundscapePicker = false
     @State private var showBackgroundPicker = false
     @State private var sanctuaryVM: SanctuaryViewModel?
-    @State private var prayAlongContent: PrayerContent? = nil
     @State private var showProgress = false
     @State private var showSettings = false
 
@@ -66,8 +65,7 @@ private struct FeedContentView: View {
                     onShowSettings: { showSettings = true },
                     onShowSanctuary: { showSanctuary = true },
                     onShowSoundscapePicker: { openSoundscapePicker() },
-                    onShowBackgroundPicker: { openBackgroundPicker() },
-                    onPrayAlong: { prayAlongContent = $0 }
+                    onShowBackgroundPicker: { openBackgroundPicker() }
                 )
                 .transition(.opacity)
             }
@@ -106,14 +104,6 @@ private struct FeedContentView: View {
         }
         .fullScreenCover(isPresented: $showSanctuary) {
             SanctuaryView(soundscapeService: soundscapeService)
-        }
-        .fullScreenCover(item: $prayAlongContent) { content in
-            PrayAlongView(
-                displayText: vm.personalizedText(for: content),
-                verseReference: content.verseReference,
-                background: vm.currentBackground,
-                soundscapeService: soundscapeService
-            )
         }
         .sheet(isPresented: $showSoundscapePicker) {
             SoundscapePickerView(vm: getOrCreateSanctuaryVM())

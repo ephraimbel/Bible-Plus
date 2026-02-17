@@ -355,7 +355,6 @@ enum ContentType: String, Codable, CaseIterable, Identifiable {
     case verse
     case devotional
     case quote
-    case guidedPrayer
     case reflection
 
     var id: String { rawValue }
@@ -366,9 +365,14 @@ enum ContentType: String, Codable, CaseIterable, Identifiable {
         case .verse: "Bible Verse"
         case .devotional: "Devotional"
         case .quote: "Quote"
-        case .guidedPrayer: "Guided Prayer"
         case .reflection: "Reflection"
         }
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let raw = try container.decode(String.self)
+        self = ContentType(rawValue: raw) ?? .prayer
     }
 }
 

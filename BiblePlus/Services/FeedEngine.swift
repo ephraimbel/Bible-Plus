@@ -84,9 +84,8 @@ final class FeedEngine {
         (.prayer, 0.35),
         (.verse, 0.30),
         (.devotional, 0.15),
-        (.quote, 0.10),
-        (.guidedPrayer, 0.05),
-        (.reflection, 0.05),
+        (.quote, 0.12),
+        (.reflection, 0.08),
     ]
 
     private func applyTypeRatios(from scored: [ScoredContent], count: Int) -> [PrayerContent] {

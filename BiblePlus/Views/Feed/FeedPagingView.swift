@@ -8,7 +8,6 @@ struct FeedPagingView: View {
     let onShowSanctuary: () -> Void
     let onShowSoundscapePicker: () -> Void
     let onShowBackgroundPicker: () -> Void
-    let onPrayAlong: (PrayerContent) -> Void
 
     @State private var scrollPosition: Int? = 0
 
@@ -35,7 +34,6 @@ struct FeedPagingView: View {
                             onOpenSanctuary: { onShowSanctuary() },
                             onOpenSoundscapes: { onShowSoundscapePicker() },
                             onOpenBackgrounds: { onShowBackgroundPicker() },
-                            onPrayAlong: { onPrayAlong(content) },
                             onDoubleTap: { vm.doubleTapSave(for: content) }
                         )
                         .containerRelativeFrame(.vertical)

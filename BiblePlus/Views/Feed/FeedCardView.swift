@@ -20,7 +20,6 @@ struct FeedCardView: View {
     var onOpenSanctuary: () -> Void = {}
     var onOpenSoundscapes: () -> Void = {}
     var onOpenBackgrounds: () -> Void = {}
-    var onPrayAlong: () -> Void = {}
     var onDoubleTap: () -> Void = {}
 
     @Environment(\.bpPalette) private var palette
@@ -124,16 +123,8 @@ struct FeedCardView: View {
                 .shadow(color: .black.opacity(0.3), radius: 3, y: 1)
                 .padding(.bottom, 16)
 
-            // Main text — scrollable for guided prayers that exceed card height
-            if content.type == .guidedPrayer {
-                ScrollView(.vertical, showsIndicators: false) {
-                    mainTextView
-                        .padding(.vertical, 4)
-                }
-                .scrollBounceBehavior(.basedOnSize)
-            } else {
-                mainTextView
-            }
+            // Main text
+            mainTextView
 
             // Verse reference
             if let reference = content.verseReference, !reference.isEmpty {
@@ -152,15 +143,6 @@ struct FeedCardView: View {
                 .foregroundStyle(.white.opacity(0.7))
                 .shadow(color: .black.opacity(0.25), radius: 3, y: 1)
                 .padding(.top, 8)
-
-            // Guided prayer "Pray Along" button
-            if content.type == .guidedPrayer {
-                GoldButton(title: "Pray Along", showGlow: true) {
-                    onPrayAlong()
-                }
-                .padding(.horizontal, 60)
-                .padding(.top, 24)
-            }
 
             // Reflection "Ask the AI" button
             if content.type == .reflection {

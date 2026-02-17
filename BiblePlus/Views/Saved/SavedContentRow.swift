@@ -49,7 +49,6 @@ struct SavedContentRow: View {
         case .verse: "book.closed"
         case .devotional: "text.book.closed"
         case .quote: "quote.opening"
-        case .guidedPrayer: "figure.mind.and.body"
         case .reflection: "bubble.left.and.text.bubble.right"
         }
     }

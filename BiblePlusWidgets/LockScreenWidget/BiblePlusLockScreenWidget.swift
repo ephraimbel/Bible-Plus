@@ -37,7 +37,7 @@ struct LockScreenWidgetProvider: TimelineProvider {
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<LockScreenWidgetEntry>) -> Void) {
         guard let container = try? SharedModelContainer.create() else {
-            let timeline = Timeline(entries: [LockScreenWidgetEntry.placeholder], policy: .after(WidgetTimeWindow.nextBoundary()))
+            let timeline = Timeline(entries: [LockScreenWidgetEntry.placeholder], policy: .after(WidgetTimeWindow.startOfNextDay()))
             completion(timeline)
             return
         }
@@ -45,24 +45,25 @@ struct LockScreenWidgetProvider: TimelineProvider {
         let modelContext = ModelContext(container)
         let profileDescriptor = FetchDescriptor<UserProfile>()
         guard let profile = (try? modelContext.fetch(profileDescriptor))?.first else {
-            let timeline = Timeline(entries: [LockScreenWidgetEntry.placeholder], policy: .after(WidgetTimeWindow.nextBoundary()))
+            let timeline = Timeline(entries: [LockScreenWidgetEntry.placeholder], policy: .after(WidgetTimeWindow.startOfNextDay()))
             completion(timeline)
             return
         }
 
-        let widgetEntries = WidgetContentProvider.timelineEntries(profile: profile, modelContext: modelContext)
+        // Single verse of the day — stays all day, refreshes at midnight
+        var entries: [LockScreenWidgetEntry] = []
 
-        let entries: [LockScreenWidgetEntry] = widgetEntries.map { entry in
-            LockScreenWidgetEntry(
-                date: entry.date,
-                shortText: entry.shortText,
-                displayText: entry.displayText,
-                verseReference: entry.verseReference,
-                contentID: entry.contentID
-            )
+        if let votd = WidgetContentProvider.dailyInspirationEntry(profile: profile, modelContext: modelContext) {
+            entries.append(LockScreenWidgetEntry(
+                date: Date(),
+                shortText: votd.shortText,
+                displayText: votd.displayText,
+                verseReference: votd.verseReference,
+                contentID: votd.contentID
+            ))
         }
 
-        let nextReload = WidgetTimeWindow.nextBoundary()
+        let nextReload = WidgetTimeWindow.startOfNextDay()
         let timeline = Timeline(entries: entries.isEmpty ? [.placeholder] : entries, policy: .after(nextReload))
         completion(timeline)
     }
@@ -102,8 +103,8 @@ struct BiblePlusLockScreenWidget: Widget {
             LockScreenWidgetEntryView(entry: entry)
                 .containerBackground(.clear, for: .widget)
         }
-        .configurationDisplayName("Daily Verse")
-        .description("A verse or prayer on your Lock Screen.")
+        .configurationDisplayName("Daily Inspiration")
+        .description("A personalized verse, quote, or prayer that refreshes daily.")
         .supportedFamilies([.accessoryInline, .accessoryRectangular])
     }
 }

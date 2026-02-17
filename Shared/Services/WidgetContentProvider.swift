@@ -70,7 +70,11 @@ enum WidgetTimeWindow: String, CaseIterable {
 
     /// Returns the current time window based on system time
     static func current() -> WidgetTimeWindow {
-        let hour = Calendar.current.component(.hour, from: Date())
+        windowForHour(Calendar.current.component(.hour, from: Date()))
+    }
+
+    /// Returns the time window for a given hour
+    static func windowForHour(_ hour: Int) -> WidgetTimeWindow {
         if hour < 6 { return .peace }
         for window in allCases {
             if window.hourRange.contains(hour) { return window }
@@ -78,7 +82,7 @@ enum WidgetTimeWindow: String, CaseIterable {
         return .peace
     }
 
-    /// Returns the next window boundary date (for timeline reload scheduling)
+    /// Returns the next 3-hour window boundary date
     static func nextBoundary() -> Date {
         let cal = Calendar.current
         let now = Date()
@@ -99,6 +103,34 @@ enum WidgetTimeWindow: String, CaseIterable {
         components.second = 0
 
         return cal.date(from: components) ?? now
+    }
+
+    /// Returns the next even-hour boundary (for 2-hour home screen widget cadence)
+    static func nextTwoHourBoundary() -> Date {
+        let cal = Calendar.current
+        let now = Date()
+        let hour = cal.component(.hour, from: now)
+        let nextEvenHour = hour % 2 == 0 ? hour + 2 : hour + 1
+
+        var components = cal.dateComponents([.year, .month, .day], from: now)
+        if nextEvenHour >= 24 {
+            guard let tomorrow = cal.date(byAdding: .day, value: 1, to: now) else { return now }
+            components = cal.dateComponents([.year, .month, .day], from: tomorrow)
+            components.hour = nextEvenHour - 24
+        } else {
+            components.hour = nextEvenHour
+        }
+        components.minute = 0
+        components.second = 0
+
+        return cal.date(from: components) ?? now
+    }
+
+    /// Returns the start of the next day (for lock screen verse-of-the-day reload)
+    static func startOfNextDay() -> Date {
+        let cal = Calendar.current
+        let tomorrow = cal.date(byAdding: .day, value: 1, to: cal.startOfDay(for: Date())) ?? Date()
+        return tomorrow
     }
 }
 
@@ -189,6 +221,112 @@ enum WidgetContentProvider {
         return template.replacingOccurrences(of: "{name}", with: name)
     }
 
+    // MARK: - Home Screen (2-hour rotation, mixed content)
+
+    /// Generate timeline entries every 2 hours with diverse content types
+    static func homeScreenTimelineEntries(
+        profile: UserProfile,
+        modelContext: ModelContext
+    ) -> [WidgetEntry] {
+        let cal = Calendar.current
+        let now = Date()
+
+        let background = SanctuaryBackground.background(for: profile.selectedBackgroundID)
+            ?? SanctuaryBackground.allBackgrounds[0]
+
+        var entries: [WidgetEntry] = []
+        var usedIDs: Set<UUID> = []
+        var lastContentType: ContentType?
+        var lastCategory: String?
+
+        // Generate 12 entries covering the next 24 hours at 2-hour intervals
+        for i in 0..<12 {
+            let entryDate = i == 0 ? now : cal.date(byAdding: .hour, value: i * 2, to: now) ?? now
+            let entryHour = cal.component(.hour, from: entryDate)
+            let window = WidgetTimeWindow.windowForHour(entryHour)
+
+            if let content = bestContentWithDiversity(
+                window: window,
+                profile: profile,
+                modelContext: modelContext,
+                excluding: usedIDs,
+                avoidType: lastContentType,
+                avoidCategory: lastCategory
+            ) {
+                usedIDs.insert(content.id)
+                lastContentType = content.type
+                lastCategory = content.category
+                let text = personalizedText(template: content.templateText, firstName: profile.firstName)
+                entries.append(WidgetEntry(
+                    date: entryDate,
+                    window: window,
+                    displayText: text,
+                    shortText: String(text.prefix(40)),
+                    verseReference: content.verseReference,
+                    contentType: content.type,
+                    contentID: content.id,
+                    backgroundGradient: background.gradientColors
+                ))
+            }
+        }
+
+        return entries
+    }
+
+    // MARK: - Lock Screen (Daily Inspiration, refreshes daily)
+
+    /// Returns a single daily inspiration entry (verse, quote, prayer, or reflection) that stays the entire day
+    static func dailyInspirationEntry(
+        profile: UserProfile,
+        modelContext: ModelContext
+    ) -> WidgetEntry? {
+        let descriptor = FetchDescriptor<PrayerContent>()
+        guard let allContent = try? modelContext.fetch(descriptor) else { return nil }
+
+        let lockScreenTypes: Set<ContentType> = [.verse, .quote, .reflection, .prayer]
+
+        // Filter to lock-screen-friendly types that fit the screen
+        let eligible = allContent.filter { content in
+            lockScreenTypes.contains(content.type)
+                && content.templateText.count <= 120
+                && (!content.isProOnly || profile.isPro)
+                && content.faithLevelMin.numericValue <= profile.faithLevel.numericValue
+        }
+
+        guard !eligible.isEmpty else { return nil }
+
+        // Use day-of-year as seed for deterministic daily selection
+        let cal = Calendar.current
+        let dayOfYear = cal.ordinality(of: .day, in: .year, for: Date()) ?? 1
+        let year = cal.component(.year, from: Date())
+        let seed = (year * 1000 + dayOfYear) % eligible.count
+
+        // Score with profile relevance, then pick deterministically
+        let scored = eligible.map { content in
+            (content: content, score: score(content: content, profile: profile, window: .current()))
+        }.sorted { $0.score > $1.score }
+
+        // Pick from top-scored items using the daily seed
+        let topCount = min(scored.count, max(5, scored.count / 3))
+        let index = seed % topCount
+        let chosen = scored[index].content
+
+        let background = SanctuaryBackground.background(for: profile.selectedBackgroundID)
+            ?? SanctuaryBackground.allBackgrounds[0]
+        let text = personalizedText(template: chosen.templateText, firstName: profile.firstName)
+
+        return WidgetEntry(
+            date: Date(),
+            window: .current(),
+            displayText: text,
+            shortText: String(text.prefix(40)),
+            verseReference: chosen.verseReference,
+            contentType: chosen.type,
+            contentID: chosen.id,
+            backgroundGradient: background.gradientColors
+        )
+    }
+
     // MARK: - Private
 
     private static func score(
@@ -227,8 +365,8 @@ enum WidgetContentProvider {
             score *= 1.4
         }
 
-        // Random jitter for freshness (tighter range for widgets)
-        score *= Double.random(in: 0.85...1.15)
+        // Random jitter for freshness
+        score *= Double.random(in: 0.7...1.3)
 
         return score
     }
@@ -255,6 +393,48 @@ enum WidgetContentProvider {
         }
 
         return scored.max(by: { $0.score < $1.score })?.content
+    }
+
+    /// Picks the best content while favoring content type and category diversity
+    private static func bestContentWithDiversity(
+        window: WidgetTimeWindow,
+        profile: UserProfile,
+        modelContext: ModelContext,
+        excluding usedIDs: Set<UUID>,
+        avoidType: ContentType?,
+        avoidCategory: String? = nil
+    ) -> PrayerContent? {
+        let descriptor = FetchDescriptor<PrayerContent>()
+        guard let allContent = try? modelContext.fetch(descriptor) else { return nil }
+
+        let eligible = allContent.filter { content in
+            !usedIDs.contains(content.id)
+                && (!content.isProOnly || profile.isPro)
+                && content.faithLevelMin.numericValue <= profile.faithLevel.numericValue
+        }
+
+        guard !eligible.isEmpty else { return nil }
+
+        var scored = eligible.map { content in
+            var s = score(content: content, profile: profile, window: window)
+            // Penalize same type as previous entry to encourage diversity
+            if let avoid = avoidType, content.type == avoid {
+                s *= 0.3
+            }
+            // Penalize same category as previous entry
+            if let avoidCat = avoidCategory, content.category.lowercased() == avoidCat.lowercased() {
+                s *= 0.4
+            }
+            // Bonus for widget-friendly content length (40-200 chars)
+            let len = content.templateText.count
+            if len >= 40 && len <= 200 {
+                s *= 1.2
+            }
+            return (content: content, score: s)
+        }
+
+        scored.sort { $0.score > $1.score }
+        return scored.first?.content
     }
 
     /// Returns remaining time windows today with their start dates, plus first window tomorrow
