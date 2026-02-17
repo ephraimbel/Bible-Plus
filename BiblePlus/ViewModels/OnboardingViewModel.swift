@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 
+@MainActor
 @Observable
 final class OnboardingViewModel {
     // MARK: - Navigation State
@@ -170,7 +171,7 @@ final class OnboardingViewModel {
         let contentDescriptor = FetchDescriptor<PrayerContent>()
         let allContent = (try? modelContext.fetch(contentDescriptor)) ?? []
 
-        Task { @MainActor in
+        Task {
             let granted = await NotificationService.shared.requestAuthorization()
             if granted {
                 profile.notificationsEnabled = true

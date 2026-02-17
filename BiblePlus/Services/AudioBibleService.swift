@@ -464,7 +464,40 @@ final class AudioBibleService {
 
     private static let ttsEndpoint = URL(string: "\(Secrets.supabaseURL)/functions/v1/tts")
 
+    private static let maxRetries = 1
+    private static let retryBaseDelay: UInt64 = 2_000_000_000 // 2 seconds
+
+    /// Whether a TTS error is transient and worth retrying.
+    private static func isRetryable(_ error: Error) -> Bool {
+        if let audioError = error as? AudioBibleError, case .apiError(let code, _) = audioError {
+            return code >= 500
+        }
+        return (error as NSError).code == NSURLErrorTimedOut
+            || (error as NSError).code == NSURLErrorNetworkConnectionLost
+    }
+
     private func callTTSAPI(text: String, voice: BibleVoice = .onyx) async throws -> Data {
+        var lastError: Error = AudioBibleError.invalidResponse
+
+        for attempt in 0...Self.maxRetries {
+            if attempt > 0 {
+                let delay = Self.retryBaseDelay * UInt64(attempt)
+                try await Task.sleep(nanoseconds: delay)
+                try Task.checkCancellation()
+            }
+
+            do {
+                return try await performTTSRequest(text: text, voice: voice)
+            } catch {
+                lastError = error
+                guard attempt < Self.maxRetries, Self.isRetryable(error) else { throw error }
+            }
+        }
+
+        throw lastError
+    }
+
+    private func performTTSRequest(text: String, voice: BibleVoice = .onyx) async throws -> Data {
         guard let endpoint = Self.ttsEndpoint else { throw AudioBibleError.invalidResponse }
         let body: [String: Any] = [
             "model": "tts-1",

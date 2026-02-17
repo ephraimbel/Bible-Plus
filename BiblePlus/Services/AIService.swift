@@ -162,7 +162,44 @@ enum AIService {
 
     // MARK: - Streaming
 
+    private static let maxRetries = 1
+    private static let retryBaseDelay: UInt64 = 1_000_000_000 // 1 second
+
+    /// Whether an error is transient and worth retrying (5xx, timeout, network).
+    private static func isRetryable(_ error: Error) -> Bool {
+        if let aiError = error as? AIError, case .apiError(let code, _) = aiError {
+            return code >= 500
+        }
+        return (error as NSError).code == NSURLErrorTimedOut
+            || (error as NSError).code == NSURLErrorNetworkConnectionLost
+    }
+
     static func streamCompletion(
+        messages: [(role: String, content: String)],
+        onToken: @escaping (String) -> Void
+    ) async throws {
+        var lastError: Error = AIError.invalidResponse
+
+        for attempt in 0...maxRetries {
+            if attempt > 0 {
+                let delay = retryBaseDelay * UInt64(attempt)
+                try await Task.sleep(nanoseconds: delay)
+                try Task.checkCancellation()
+            }
+
+            do {
+                try await performStream(messages: messages, onToken: onToken)
+                return
+            } catch {
+                lastError = error
+                guard attempt < maxRetries, isRetryable(error) else { throw error }
+            }
+        }
+
+        throw lastError
+    }
+
+    private static func performStream(
         messages: [(role: String, content: String)],
         onToken: @escaping (String) -> Void
     ) async throws {
