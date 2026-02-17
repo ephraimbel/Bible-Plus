@@ -20,9 +20,16 @@ struct VerseImageCardView: View {
 
     var body: some View {
         ZStack {
-            // LAYER 1: Background
+            // LAYER 1: Background (image → video thumbnail → gradient)
             if let imageName = background.imageName,
                let uiImage = SanctuaryBackground.loadImage(named: imageName) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: renderSize.width, height: renderSize.height)
+                    .clipped()
+            } else if let videoName = background.videoFileName,
+                      let uiImage = SanctuaryBackground.loadVideoThumbnail(named: videoName) {
                 Image(uiImage: uiImage)
                     .resizable()
                     .aspectRatio(contentMode: .fill)

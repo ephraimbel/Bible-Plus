@@ -14,11 +14,21 @@ final class SanctuaryViewModel {
     var showBackgroundPicker = false
     var showSleepTimerPicker = false
 
+    // MARK: - Verse Display
+
+    var verseText: String?
+    var verseReference: String?
+
+    var hasVerse: Bool { verseText != nil }
+
     // MARK: - Init
 
-    init(soundscapeService: SoundscapeService, personalizationService: PersonalizationService) {
+    init(soundscapeService: SoundscapeService, personalizationService: PersonalizationService,
+         verseText: String? = nil, verseReference: String? = nil) {
         self.soundscapeService = soundscapeService
         self.personalizationService = personalizationService
+        self.verseText = verseText
+        self.verseReference = verseReference
     }
 
     // MARK: - Profile

@@ -166,20 +166,28 @@ struct FeedCardView: View {
             .font(contentFont)
             .foregroundStyle(.white)
             .multilineTextAlignment(.center)
-            .lineSpacing(6)
-            .padding(.horizontal, 48)
+            .lineSpacing(displayText.count > 250 ? 5 : 6)
+            .minimumScaleFactor(0.85)
+            .padding(.horizontal, contentHorizontalPadding)
             .shadow(color: .black.opacity(0.35), radius: 4, y: 1)
     }
 
-    /// Adapt font size based on text length
+    /// Adapt font size based on text length (5 tiers)
     private var contentFont: Font {
-        if displayText.count > 250 {
-            return BPFont.prayerSmall
+        if displayText.count > 350 {
+            return BPFont.prayerTiny
+        } else if displayText.count > 250 {
+            return BPFont.prayerXSmall
         } else if displayText.count > 120 {
             return BPFont.prayerMedium
         } else {
             return BPFont.prayerLarge
         }
+    }
+
+    /// Tighter horizontal padding for long text so more words fit per line
+    private var contentHorizontalPadding: CGFloat {
+        displayText.count > 200 ? 36 : 48
     }
 
     // MARK: - Layer 5: Action Bar

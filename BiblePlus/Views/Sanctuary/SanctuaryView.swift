@@ -5,6 +5,8 @@ struct SanctuaryView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     let soundscapeService: SoundscapeService
+    var verseText: String? = nil
+    var verseReference: String? = nil
 
     @State private var viewModel: SanctuaryViewModel?
 
@@ -22,7 +24,9 @@ struct SanctuaryView: View {
         let personalization = PersonalizationService(modelContext: modelContext)
         viewModel = SanctuaryViewModel(
             soundscapeService: soundscapeService,
-            personalizationService: personalization
+            personalizationService: personalization,
+            verseText: verseText,
+            verseReference: verseReference
         )
     }
 }
@@ -33,21 +37,37 @@ private struct SanctuaryContentView: View {
     @Bindable var vm: SanctuaryViewModel
     let dismiss: DismissAction
     @State private var iconScale: CGFloat = 1.0
+    @State private var controlsVisible = true
 
     var body: some View {
         ZStack {
             // Background
             backgroundLayer
 
-            // Content
+            // Tap layer to toggle controls
+            Color.clear
+                .contentShape(Rectangle())
+                .onTapGesture { toggleControls() }
+
+            // Verse display (always visible, not tied to controlsVisible)
+            if vm.hasVerse {
+                verseDisplay
+            }
+
+            // Content (controls hide/show on tap)
             VStack(spacing: 0) {
                 topBar
                 Spacer()
-                centerContent
-                Spacer()
+                if !vm.hasVerse {
+                    centerContent
+                    Spacer()
+                }
                 bottomControls
             }
             .padding(.vertical, 20)
+            .opacity(controlsVisible ? 1 : 0)
+            .animation(.easeInOut(duration: 0.25), value: controlsVisible)
+            .allowsHitTesting(controlsVisible)
         }
         .ignoresSafeArea()
         .statusBarHidden()
@@ -97,11 +117,13 @@ private struct SanctuaryContentView: View {
                 dismiss()
             } label: {
                 Image(systemName: "xmark")
-                    .font(.system(size: 15, weight: .bold))
+                    .font(.system(size: 14, weight: .bold))
                     .foregroundStyle(.white)
                     .frame(width: 40, height: 40)
-                    .background(.black.opacity(0.15))
+                    .background(.ultraThinMaterial)
+                    .environment(\.colorScheme, .dark)
                     .clipShape(Circle())
+                    .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
             }
             .accessibilityLabel("Close sanctuary")
 
@@ -115,8 +137,10 @@ private struct SanctuaryContentView: View {
                         .font(.system(size: 14, weight: .medium))
                         .foregroundStyle(.white)
                         .frame(width: 40, height: 40)
-                        .background(.black.opacity(0.15))
+                        .background(.ultraThinMaterial)
+                        .environment(\.colorScheme, .dark)
                         .clipShape(Circle())
+                        .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
                 }
                 .accessibilityLabel("Choose background")
 
@@ -127,8 +151,10 @@ private struct SanctuaryContentView: View {
                         .font(.system(size: 14, weight: .medium))
                         .foregroundStyle(.white)
                         .frame(width: 40, height: 40)
-                        .background(.black.opacity(0.15))
+                        .background(.ultraThinMaterial)
+                        .environment(\.colorScheme, .dark)
                         .clipShape(Circle())
+                        .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
                 }
                 .accessibilityLabel("Choose soundscape")
             }
@@ -141,49 +167,69 @@ private struct SanctuaryContentView: View {
 
     private var centerContent: some View {
         VStack(spacing: 20) {
-            // Pulsing soundscape icon
-            Image(systemName: vm.currentSoundscape.icon)
-                .font(.system(size: 64))
-                .foregroundStyle(.white.opacity(0.9))
-                .scaleEffect(iconScale)
-                .onAppear {
-                    if vm.isPlaying {
-                        startPulse()
+            // Pulsing soundscape icon with glow ring
+            ZStack {
+                // Outer glow ring
+                Circle()
+                    .stroke(.white.opacity(0.08), lineWidth: 1)
+                    .frame(width: 140, height: 140)
+                    .scaleEffect(iconScale)
+
+                // Inner glow circle
+                Circle()
+                    .fill(.white.opacity(0.06))
+                    .frame(width: 120, height: 120)
+                    .scaleEffect(iconScale)
+
+                Image(systemName: vm.currentSoundscape.icon)
+                    .font(.system(size: 56, weight: .light))
+                    .foregroundStyle(.white.opacity(0.9))
+                    .shadow(color: .white.opacity(0.2), radius: 12)
+                    .scaleEffect(iconScale)
+            }
+            .onAppear {
+                if vm.isPlaying {
+                    startPulse()
+                }
+            }
+            .onChange(of: vm.isPlaying) { _, playing in
+                if playing {
+                    startPulse()
+                } else {
+                    withAnimation(.easeOut(duration: 0.3)) {
+                        iconScale = 1.0
                     }
                 }
-                .onChange(of: vm.isPlaying) { _, playing in
-                    if playing {
-                        startPulse()
-                    } else {
-                        withAnimation(.easeOut(duration: 0.3)) {
-                            iconScale = 1.0
-                        }
-                    }
-                }
+            }
 
             // Soundscape name
             Text(vm.currentSoundscape.displayName)
                 .font(BPFont.prayerLarge)
                 .foregroundStyle(.white)
-                .shadow(color: .black.opacity(0.15), radius: 4, y: 1)
+                .shadow(color: .black.opacity(0.2), radius: 6, y: 2)
 
             // Status
             Text(vm.isPlaying ? "Now Playing" : "Paused")
-                .font(BPFont.caption)
+                .font(.system(size: 11, weight: .bold, design: .rounded))
                 .tracking(1.5)
                 .foregroundStyle(.white.opacity(0.5))
                 .textCase(.uppercase)
-                .shadow(color: .black.opacity(0.1), radius: 3, y: 1)
 
             // Sleep timer display
             if let formatted = vm.sleepTimerFormatted {
-                HStack(spacing: 6) {
+                HStack(spacing: 8) {
                     Image(systemName: "moon.zzz")
-                        .font(.system(size: 12))
+                        .font(.system(size: 12, weight: .medium))
                     Text(formatted)
-                        .font(BPFont.reference)
+                        .font(.system(size: 14, weight: .medium, design: .rounded))
+                        .monospacedDigit()
                 }
                 .foregroundStyle(.white.opacity(0.6))
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
+                .background(.ultraThinMaterial)
+                .environment(\.colorScheme, .dark)
+                .clipShape(Capsule())
                 .padding(.top, 4)
             }
         }
@@ -205,9 +251,11 @@ private struct SanctuaryContentView: View {
                     Image(systemName: vm.sleepTimer != nil ? "moon.zzz.fill" : "moon.zzz")
                         .font(.system(size: 18, weight: .medium))
                         .foregroundStyle(vm.sleepTimer != nil ? Color(hex: "C9A96E") : .white)
-                        .frame(width: 44, height: 44)
-                        .background(.black.opacity(0.15))
+                        .frame(width: 48, height: 48)
+                        .background(.ultraThinMaterial)
+                        .environment(\.colorScheme, .dark)
                         .clipShape(Circle())
+                        .shadow(color: .black.opacity(0.15), radius: 6, y: 3)
                 }
                 .accessibilityLabel("Set sleep timer")
 
@@ -217,16 +265,27 @@ private struct SanctuaryContentView: View {
                     vm.togglePlayback()
                 } label: {
                     ZStack {
+                        // Glass circle
                         Circle()
-                            .fill(.black.opacity(0.15))
-                            .frame(width: 72, height: 72)
+                            .fill(.ultraThinMaterial)
+                            .environment(\.colorScheme, .dark)
+                            .frame(width: 76, height: 76)
+                            .shadow(color: .black.opacity(0.2), radius: 10, y: 4)
 
+                        // Accent ring
                         Circle()
-                            .stroke(.white.opacity(0.3), lineWidth: 2)
-                            .frame(width: 72, height: 72)
+                            .stroke(
+                                LinearGradient(
+                                    colors: [Color(hex: "C9A96E"), Color(hex: "C9A96E").opacity(0.5)],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                ),
+                                lineWidth: 2
+                            )
+                            .frame(width: 76, height: 76)
 
                         Image(systemName: vm.isPlaying ? "pause.fill" : "play.fill")
-                            .font(.system(size: 28))
+                            .font(.system(size: 26, weight: .medium))
                             .foregroundStyle(.white)
                     }
                 }
@@ -240,9 +299,11 @@ private struct SanctuaryContentView: View {
                     Image(systemName: "list.bullet")
                         .font(.system(size: 18, weight: .medium))
                         .foregroundStyle(.white)
-                        .frame(width: 44, height: 44)
-                        .background(.black.opacity(0.15))
+                        .frame(width: 48, height: 48)
+                        .background(.ultraThinMaterial)
+                        .environment(\.colorScheme, .dark)
                         .clipShape(Circle())
+                        .shadow(color: .black.opacity(0.15), radius: 6, y: 3)
                 }
                 .accessibilityLabel("Choose soundscape")
             }
@@ -254,25 +315,37 @@ private struct SanctuaryContentView: View {
     private var volumeSlider: some View {
         HStack(spacing: 12) {
             Image(systemName: "speaker.fill")
-                .font(.system(size: 14))
+                .font(.system(size: 13))
                 .foregroundStyle(.white.opacity(0.5))
 
             GeometryReader { geo in
                 ZStack(alignment: .leading) {
                     // Track
                     Capsule()
-                        .fill(.white.opacity(0.2))
+                        .fill(.white.opacity(0.15))
                         .frame(height: 4)
 
-                    // Filled track
+                    // Filled track with gradient
                     Capsule()
-                        .fill(Color(hex: "C9A96E"))
+                        .fill(
+                            LinearGradient(
+                                colors: [Color(hex: "C9A96E"), Color(hex: "C9A96E").opacity(0.7)],
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                        )
                         .frame(width: geo.size.width * CGFloat(vm.volume), height: 4)
 
                     // Thumb
                     Circle()
-                        .fill(Color(hex: "C9A96E"))
+                        .fill(.white)
                         .frame(width: 20, height: 20)
+                        .shadow(color: .black.opacity(0.25), radius: 4, y: 2)
+                        .overlay(
+                            Circle()
+                                .fill(Color(hex: "C9A96E"))
+                                .frame(width: 8, height: 8)
+                        )
                         .offset(x: geo.size.width * CGFloat(vm.volume) - 10)
                         .gesture(
                             DragGesture(minimumDistance: 0)
@@ -287,12 +360,46 @@ private struct SanctuaryContentView: View {
             .frame(height: 20)
 
             Image(systemName: "speaker.wave.3.fill")
-                .font(.system(size: 14))
+                .font(.system(size: 13))
                 .foregroundStyle(.white.opacity(0.5))
         }
     }
 
+    // MARK: - Verse Display
+
+    private var verseDisplay: some View {
+        VStack(spacing: 16) {
+            Text(vm.verseText ?? "")
+                .font(verseFontForLength)
+                .foregroundStyle(.white)
+                .multilineTextAlignment(.center)
+                .lineSpacing(10)
+                .padding(.horizontal, 32)
+                .shadow(color: .black.opacity(0.15), radius: 4, y: 1)
+
+            if let ref = vm.verseReference {
+                Text("— \(ref)")
+                    .font(BPFont.reference)
+                    .foregroundStyle(.white.opacity(0.6))
+                    .shadow(color: .black.opacity(0.12), radius: 3, y: 1)
+            }
+        }
+    }
+
+    private var verseFontForLength: Font {
+        let count = vm.verseText?.count ?? 0
+        if count > 300 { return BPFont.prayerXSmall }
+        if count > 150 { return BPFont.prayerMedium }
+        return BPFont.prayerLarge
+    }
+
     // MARK: - Helpers
+
+    private func toggleControls() {
+        withAnimation(.easeInOut(duration: 0.25)) {
+            controlsVisible.toggle()
+        }
+    }
 
     private func startPulse() {
         withAnimation(.easeInOut(duration: 2.0).repeatForever(autoreverses: true)) {

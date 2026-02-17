@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import AVFoundation
 
 // MARK: - Faith Level
 
@@ -708,6 +709,7 @@ struct SanctuaryBackground: Identifiable, Hashable {
     var hasImage: Bool { imageName != nil }
 
     private static var imageCache: [String: UIImage] = [:]
+    private static var videoThumbnailCache: [String: UIImage] = [:]
 
     static func loadImage(named name: String) -> UIImage? {
         if let cached = imageCache[name] { return cached }
@@ -715,6 +717,24 @@ struct SanctuaryBackground: Identifiable, Hashable {
               let image = UIImage(contentsOfFile: url.path) else { return nil }
         imageCache[name] = image
         return image
+    }
+
+    static func loadVideoThumbnail(named videoName: String) -> UIImage? {
+        if let cached = videoThumbnailCache[videoName] { return cached }
+        guard let url = Bundle.main.url(forResource: videoName, withExtension: "mp4") else { return nil }
+        let asset = AVAsset(url: url)
+        let generator = AVAssetImageGenerator(asset: asset)
+        generator.appliesPreferredTrackTransform = true
+        generator.maximumSize = CGSize(width: 800, height: 1200)
+        for seconds in [2.0, 1.0, 0.5] {
+            let time = CMTime(seconds: seconds, preferredTimescale: 600)
+            if let cgImage = try? generator.copyCGImage(at: time, actualTime: nil) {
+                let image = UIImage(cgImage: cgImage)
+                videoThumbnailCache[videoName] = image
+                return image
+            }
+        }
+        return nil
     }
 
     init(id: String, name: String, collection: BackgroundCollection, gradientColors: [String], imageName: String? = nil, videoFileName: String? = nil, isProOnly: Bool = false) {

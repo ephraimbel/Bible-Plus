@@ -1,10 +1,12 @@
 import SwiftUI
 
 enum BPFont {
-    // Prayer/Verse Text (feed) — New York serif, Medium, 20–26pt
+    // Prayer/Verse Text (feed) — New York serif, Medium, 16–26pt
     static let prayerLarge = Font.system(size: 26, weight: .medium, design: .serif)
     static let prayerMedium = Font.system(size: 22, weight: .medium, design: .serif)
     static let prayerSmall = Font.system(size: 20, weight: .medium, design: .serif)
+    static let prayerXSmall = Font.system(size: 18, weight: .medium, design: .serif)
+    static let prayerTiny = Font.system(size: 16, weight: .medium, design: .serif)
 
     // {Name} in prayers — New York serif, Semibold, 20–26pt
     static let prayerNameLarge = Font.system(size: 26, weight: .semibold, design: .serif)

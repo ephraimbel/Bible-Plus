@@ -4,10 +4,10 @@ struct VerseImageSheet: View {
     let verseText: String
     let reference: String
     let translation: String
+    let isPro: Bool
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.bpPalette) private var palette
-    @Environment(StoreKitService.self) private var storeKitService
     @State private var selectedRatio: ShareAspectRatio = .story
     @State private var selectedBackground: SanctuaryBackground = SanctuaryBackground.allBackgrounds[0]
     @State private var showActivitySheet = false
@@ -108,7 +108,7 @@ struct VerseImageSheet: View {
 
     private func backgroundThumbnail(_ bg: SanctuaryBackground) -> some View {
         let isSelected = bg.id == selectedBackground.id
-        let isLocked = bg.isProOnly && !storeKitService.isPro
+        let isLocked = bg.isProOnly && !isPro
 
         return Button {
             if isLocked {
@@ -124,6 +124,13 @@ struct VerseImageSheet: View {
             ZStack {
                 if let imageName = bg.imageName,
                    let uiImage = SanctuaryBackground.loadImage(named: imageName) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 52, height: 52)
+                        .clipped()
+                } else if let videoName = bg.videoFileName,
+                          let uiImage = SanctuaryBackground.loadVideoThumbnail(named: videoName) {
                     Image(uiImage: uiImage)
                         .resizable()
                         .aspectRatio(contentMode: .fill)

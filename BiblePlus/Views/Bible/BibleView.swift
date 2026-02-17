@@ -98,6 +98,10 @@ private struct BibleContentView: View {
     @State private var showPaywall = false
     @State private var showReadingPlans = false
     @State private var verseImageData: (text: String, reference: String, translation: String)?
+    @State private var showSanctuary = false
+    @State private var sanctuaryVerseText: String?
+    @State private var sanctuaryVerseReference: String?
+    @Environment(SoundscapeService.self) private var soundscapeService
 
     // MARK: - Page Flip State
 
@@ -374,13 +378,18 @@ private struct BibleContentView: View {
             // Audio error banner
             if let errorMsg = audioService.errorMessage {
                 VStack {
-                    HStack(spacing: 8) {
+                    HStack(spacing: 10) {
                         Image(systemName: "exclamationmark.triangle.fill")
-                            .font(.system(size: 13))
+                            .font(.system(size: 12, weight: .medium))
                             .foregroundStyle(palette.accent)
+                            .frame(width: 28, height: 28)
+                            .background(
+                                Circle()
+                                    .fill(palette.accent.opacity(0.1))
+                            )
 
                         Text(errorMsg)
-                            .font(BPFont.caption)
+                            .font(.system(size: 13, weight: .medium, design: .rounded))
                             .foregroundStyle(palette.textPrimary)
                             .lineLimit(2)
 
@@ -390,16 +399,25 @@ private struct BibleContentView: View {
                             audioService.errorMessage = nil
                         } label: {
                             Image(systemName: "xmark")
-                                .font(.system(size: 11, weight: .bold))
+                                .font(.system(size: 10, weight: .bold))
                                 .foregroundStyle(palette.textMuted)
+                                .frame(width: 24, height: 24)
+                                .background(
+                                    Circle()
+                                        .fill(palette.surface)
+                                )
                         }
                     }
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 10)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 12)
                     .background(
-                        Capsule()
-                            .fill(palette.surface)
-                            .shadow(color: .black.opacity(0.1), radius: 8, y: 2)
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(palette.surfaceElevated)
+                            .shadow(color: .black.opacity(0.08), radius: 8, y: 2)
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
                     )
                     .padding(.horizontal, 20)
                     .padding(.top, 8)
@@ -537,6 +555,12 @@ private struct BibleContentView: View {
                             translation: viewModel.currentTranslation.displayName
                         )
                         viewModel.selectedVerse = nil
+                    },
+                    onMeditateInSanctuary: {
+                        sanctuaryVerseText = verse.text
+                        sanctuaryVerseReference = viewModel.verseReference(for: verse)
+                        viewModel.selectedVerse = nil
+                        showSanctuary = true
                     },
                     onShowPaywall: {
                         viewModel.selectedVerse = nil
@@ -751,7 +775,11 @@ private struct BibleContentView: View {
                 VerseImageSheet(
                     verseText: data.text,
                     reference: data.reference,
-                    translation: data.translation
+                    translation: data.translation,
+                    isPro: {
+                        let descriptor = FetchDescriptor<UserProfile>()
+                        return (try? modelContext.fetch(descriptor).first?.isPro) ?? false
+                    }()
                 )
             }
         }
@@ -830,6 +858,13 @@ private struct BibleContentView: View {
                 audioService: audioService,
                 initialBackground: resolvedBackground,
                 wasAlreadyPlaying: audioService.hasActivePlayback
+            )
+        }
+        .fullScreenCover(isPresented: $showSanctuary) {
+            SanctuaryView(
+                soundscapeService: soundscapeService,
+                verseText: sanctuaryVerseText,
+                verseReference: sanctuaryVerseReference
             )
         }
         .onAppear {
