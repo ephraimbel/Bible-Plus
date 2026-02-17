@@ -9,6 +9,7 @@ struct FeedCardView: View {
     let showDoubleTapHeart: Bool
     var isAudioPlaying: Bool = false
     var audioVolume: Float = 0.3
+    @Binding var immersiveMode: Bool
 
     // Action callbacks
     var onSave: () -> Void = {}
@@ -50,6 +51,12 @@ struct FeedCardView: View {
         .onTapGesture(count: 2) {
             HapticService.impact(.medium)
             onDoubleTap()
+        }
+        .onTapGesture(count: 1) {
+            withAnimation(.easeInOut(duration: 0.25)) {
+                immersiveMode.toggle()
+            }
+            HapticService.lightImpact()
         }
         .onChange(of: showDoubleTapHeart) { _, newValue in
             if newValue {
@@ -115,18 +122,19 @@ struct FeedCardView: View {
         VStack(spacing: 0) {
             Spacer(minLength: 16)
 
-            // Content type badge
+            // Content type badge — hides in immersive mode
             Text(content.type.displayName.uppercased())
                 .font(BPFont.caption)
                 .tracking(1.5)
                 .foregroundStyle(.white.opacity(0.85))
                 .shadow(color: .black.opacity(0.3), radius: 3, y: 1)
                 .padding(.bottom, 16)
+                .opacity(immersiveMode ? 0 : 1)
 
-            // Main text
+            // Main text — always visible
             mainTextView
 
-            // Verse reference
+            // Verse reference — always visible
             if let reference = content.verseReference, !reference.isEmpty {
                 OrnamentalDivider(color: .white, opacity: 0.25)
                     .padding(.vertical, 12)
@@ -137,26 +145,28 @@ struct FeedCardView: View {
                     .shadow(color: .black.opacity(0.3), radius: 3, y: 1)
             }
 
-            // Category label
+            // Category label — hides in immersive mode
             Text(content.category)
                 .font(BPFont.caption)
                 .foregroundStyle(.white.opacity(0.7))
                 .shadow(color: .black.opacity(0.25), radius: 3, y: 1)
                 .padding(.top, 8)
+                .opacity(immersiveMode ? 0 : 1)
 
-            // Reflection "Ask the AI" button
+            // Reflection "Ask the AI" button — hides in immersive mode
             if content.type == .reflection {
                 GoldButton(title: "Ask the AI") {
                     onAskAI()
                 }
                 .padding(.horizontal, 60)
                 .padding(.top, 24)
+                .opacity(immersiveMode ? 0 : 1)
             }
 
             Spacer(minLength: 16)
         }
         .padding(.top, 49)
-        .padding(.bottom, 83) // account for tab bar + safe area
+        .padding(.bottom, immersiveMode ? 16 : 83)
     }
 
     // MARK: - Main Text View
@@ -211,6 +221,8 @@ struct FeedCardView: View {
             )
             .padding(.trailing, 12)
         }
+        .opacity(immersiveMode ? 0 : 1)
+        .allowsHitTesting(!immersiveMode)
     }
 
     // MARK: - Double-Tap Heart Overlay

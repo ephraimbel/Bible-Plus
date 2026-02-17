@@ -10,6 +10,7 @@ struct FeedPagingView: View {
     let onShowBackgroundPicker: () -> Void
 
     @State private var scrollPosition: Int? = 0
+    @State private var immersiveMode = false
 
     var body: some View {
         ZStack {
@@ -25,6 +26,7 @@ struct FeedPagingView: View {
                             showDoubleTapHeart: vm.doubleTapHeartID == content.id,
                             isAudioPlaying: soundscapeService.isPlaying,
                             audioVolume: soundscapeService.volume,
+                            immersiveMode: $immersiveMode,
                             onSave: { vm.toggleSave(for: content) },
                             onShare: { vm.shareCard(content) },
                             onPin: { vm.pinToCollection(content) },
@@ -57,7 +59,7 @@ struct FeedPagingView: View {
                 }
             }
 
-            // Top bar: Home (left) + Settings (right) — always visible in feed
+            // Top bar: Home (left) + Settings (right) — hides in immersive mode
             VStack {
                 HStack {
                     Button {
@@ -97,7 +99,11 @@ struct FeedPagingView: View {
                 .padding(.top, 8)
                 Spacer()
             }
+            .opacity(immersiveMode ? 0 : 1)
+            .allowsHitTesting(!immersiveMode)
             .zIndex(50)
         }
+        .toolbar(immersiveMode ? .hidden : .visible, for: .tabBar)
+        .animation(.easeInOut(duration: 0.25), value: immersiveMode)
     }
 }
