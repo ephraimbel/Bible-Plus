@@ -225,10 +225,19 @@ final class FeedViewModel {
     }
 
     func navigateToContent(id: UUID) {
+        let wasShowingFeed = showFeed
+
         // Check if content is already in cards
         if let index = cards.firstIndex(where: { $0.id == id }) {
             showFeed = true
-            deepLinkScrollIndex = index
+            if wasShowingFeed {
+                deepLinkScrollIndex = index
+            } else {
+                // Delay so FeedPagingView has time to appear
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                    self.deepLinkScrollIndex = index
+                }
+            }
             return
         }
 
@@ -239,7 +248,13 @@ final class FeedViewModel {
         if let content = try? modelContext.fetch(descriptor).first {
             cards.insert(content, at: 0)
             showFeed = true
-            deepLinkScrollIndex = 0
+            if wasShowingFeed {
+                deepLinkScrollIndex = 0
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                    self.deepLinkScrollIndex = 0
+                }
+            }
         }
     }
 

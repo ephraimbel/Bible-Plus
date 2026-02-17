@@ -105,5 +105,14 @@ struct FeedPagingView: View {
         }
         .toolbar(immersiveMode ? .hidden : .visible, for: .tabBar)
         .animation(.easeInOut(duration: 0.25), value: immersiveMode)
+        .onAppear {
+            // Handle pending deep link that was set before this view existed
+            if let targetIndex = vm.deepLinkScrollIndex {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                    scrollPosition = targetIndex
+                    vm.deepLinkScrollIndex = nil
+                }
+            }
+        }
     }
 }
