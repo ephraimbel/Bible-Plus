@@ -129,35 +129,19 @@ private struct SanctuaryContentView: View {
 
             Spacer()
 
-            HStack(spacing: 12) {
-                Button {
-                    vm.showBackgroundPicker = true
-                } label: {
-                    Image(systemName: "photo.on.rectangle")
-                        .font(.system(size: 14, weight: .medium))
-                        .foregroundStyle(.white)
-                        .frame(width: 40, height: 40)
-                        .background(.ultraThinMaterial)
-                        .environment(\.colorScheme, .dark)
-                        .clipShape(Circle())
-                        .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
-                }
-                .accessibilityLabel("Choose background")
-
-                Button {
-                    vm.showSoundscapePicker = true
-                } label: {
-                    Image(systemName: "music.note.list")
-                        .font(.system(size: 14, weight: .medium))
-                        .foregroundStyle(.white)
-                        .frame(width: 40, height: 40)
-                        .background(.ultraThinMaterial)
-                        .environment(\.colorScheme, .dark)
-                        .clipShape(Circle())
-                        .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
-                }
-                .accessibilityLabel("Choose soundscape")
+            Button {
+                vm.showBackgroundPicker = true
+            } label: {
+                Image(systemName: "photo.on.rectangle")
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundStyle(.white)
+                    .frame(width: 40, height: 40)
+                    .background(.ultraThinMaterial)
+                    .environment(\.colorScheme, .dark)
+                    .clipShape(Circle())
+                    .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
             }
+            .accessibilityLabel("Choose background")
         }
         .padding(.horizontal, 16)
         .padding(.top, 44)
