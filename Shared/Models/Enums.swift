@@ -297,6 +297,10 @@ enum PrayerTimeSlot: String, Codable, CaseIterable, Identifiable {
                 "Rise and shine, \(name). God has something for you this morning.",
                 "\(name), start your day in His presence.",
                 "A new morning, a new mercy. Good morning, \(name).",
+                "Before the rush begins, \(name) — a moment with God.",
+                "\(name), today is full of possibility. Start here.",
+                "His mercies are new this morning, \(name).",
+                "Good morning, \(name). You are seen and loved today.",
             ]
         case .midday:
             [
@@ -304,6 +308,10 @@ enum PrayerTimeSlot: String, Codable, CaseIterable, Identifiable {
                 "Midday check-in, \(name). Take a breath and lean on Him.",
                 "\(name), He sees your afternoon. Rest in that.",
                 "A word for your afternoon, \(name).",
+                "Still standing, \(name). Here's fuel for the rest of your day.",
+                "\(name), breathe. He's right here with you.",
+                "Halfway through, \(name). Let this refuel you.",
+                "A moment of peace in your busy day, \(name).",
             ]
         case .evening:
             [
@@ -311,6 +319,10 @@ enum PrayerTimeSlot: String, Codable, CaseIterable, Identifiable {
                 "Good evening, \(name). Reflect on today's blessings.",
                 "\(name), unwind with a word from the Lord.",
                 "The day is fading, \(name). Let His peace settle in.",
+                "The day is winding down, \(name). Breathe and receive.",
+                "\(name), you made it through today. Here's a gift for tonight.",
+                "Before you rest, \(name) — one more truth to hold onto.",
+                "\(name), let tonight be about gratitude.",
             ]
         case .bedtime:
             [
@@ -318,6 +330,10 @@ enum PrayerTimeSlot: String, Codable, CaseIterable, Identifiable {
                 "Rest well, \(name). His angels guard your sleep.",
                 "\(name), lay it all down. Tomorrow is in His hands.",
                 "Goodnight, \(name). Let this truth carry you to sleep.",
+                "Sleep in peace, \(name). He is your shield tonight.",
+                "\(name), close your eyes knowing you are deeply loved.",
+                "The day is done, \(name). Let this truth follow you into dreams.",
+                "One last word before sleep, \(name). You are not alone.",
             ]
         }
     }

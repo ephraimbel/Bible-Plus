@@ -232,18 +232,49 @@ final class NotificationService {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
 
+        let tier0Messages = [
+            "Start your journey today, \(name). Open Bible+ to begin your streak.",
+            "Today could be day one, \(name). God is waiting.",
+            "A fresh start is calling, \(name). Begin your streak tonight.",
+        ]
+
+        let tier1Templates: [(Int) -> String] = [
+            { "You're on a \($0)-day streak, \(name)! Don't let it slip away." },
+            { "\($0) days strong, \(name). One more day builds the habit." },
+            { "\(name), \($0) days in a row! Keep showing up." },
+            { "Day \($0) of walking with God, \(name). Keep going." },
+        ]
+
+        let tier2Templates: [(Int) -> String] = [
+            { "\($0)-day streak! Keep the fire burning, \(name)." },
+            { "\(name), \($0) days of faithfulness! You're building something beautiful." },
+            { "\($0) days and counting, \(name). This is becoming who you are." },
+        ]
+
+        let tier3Templates: [(Int) -> String] = [
+            { "\(name), \($0) days! Your consistency is inspiring." },
+            { "\($0)-day streak — \(name), you're a warrior of faith." },
+            { "\(name), \($0) days of showing up. Heaven notices." },
+        ]
+
         for dayOffset in 0..<scheduleDays {
             guard let targetDate = calendar.date(byAdding: .day, value: dayOffset, to: today) else { continue }
 
             let content = UNMutableNotificationContent()
             content.title = "Bible+"
             let projectedStreak = streakCount + dayOffset
+
             if projectedStreak == 0 {
-                content.body = "Start your journey today, \(name). Open Bible+ to begin your streak."
+                content.body = tier0Messages[dayOffset % tier0Messages.count]
             } else if projectedStreak < 7 {
-                content.body = "You're on a \(projectedStreak)-day streak, \(name)! Don't let it slip away."
+                let template = tier1Templates[dayOffset % tier1Templates.count]
+                content.body = template(projectedStreak)
+            } else if projectedStreak < 30 {
+                let template = tier2Templates[dayOffset % tier2Templates.count]
+                content.body = template(projectedStreak)
             } else {
-                content.body = "\(projectedStreak)-day streak! Keep the fire burning, \(name)."
+                let template = tier3Templates[dayOffset % tier3Templates.count]
+                content.body = template(projectedStreak)
             }
             content.sound = .default
 
@@ -518,6 +549,16 @@ final class NotificationService {
                      slots: [.morning], burdens: []),
         CuratedVerse(bookID: "MIC", bookName: "Micah", chapter: 6, verse: 8,
                      slots: [.morning], burdens: [.purpose]),
+        CuratedVerse(bookID: "PSA", bookName: "Psalms", chapter: 19, verse: 14,
+                     slots: [.morning], burdens: [.anger]),
+        CuratedVerse(bookID: "PSA", bookName: "Psalms", chapter: 57, verse: 8,
+                     slots: [.morning], burdens: []),
+        CuratedVerse(bookID: "PSA", bookName: "Psalms", chapter: 30, verse: 5,
+                     slots: [.morning], burdens: [.grief]),
+        CuratedVerse(bookID: "NUM", bookName: "Numbers", chapter: 6, verse: 24,
+                     slots: [.morning], burdens: []),
+        CuratedVerse(bookID: "PSA", bookName: "Psalms", chapter: 46, verse: 10,
+                     slots: [.morning], burdens: [.anxiety]),
 
         // MARK: Anxiety & Worry
         CuratedVerse(bookID: "PHP", bookName: "Philippians", chapter: 4, verse: 6,
@@ -532,6 +573,12 @@ final class NotificationService {
                      slots: [.midday], burdens: [.anxiety]),
         CuratedVerse(bookID: "JHN", bookName: "John", chapter: 14, verse: 27,
                      slots: [.evening], burdens: [.anxiety]),
+        CuratedVerse(bookID: "PSA", bookName: "Psalms", chapter: 94, verse: 19,
+                     slots: [.midday], burdens: [.anxiety]),
+        CuratedVerse(bookID: "MAT", bookName: "Matthew", chapter: 11, verse: 28,
+                     slots: [.evening], burdens: [.anxiety, .health]),
+        CuratedVerse(bookID: "PHP", bookName: "Philippians", chapter: 4, verse: 7,
+                     slots: [.bedtime], burdens: [.anxiety]),
 
         // MARK: Grief & Loss
         CuratedVerse(bookID: "PSA", bookName: "Psalms", chapter: 34, verse: 18,
@@ -544,6 +591,12 @@ final class NotificationService {
                      slots: [.morning, .midday], burdens: [.grief, .doubt]),
         CuratedVerse(bookID: "2CO", bookName: "2 Corinthians", chapter: 1, verse: 3,
                      slots: [.evening], burdens: [.grief]),
+        CuratedVerse(bookID: "REV", bookName: "Revelation", chapter: 21, verse: 4,
+                     slots: [.bedtime], burdens: [.grief]),
+        CuratedVerse(bookID: "PSA", bookName: "Psalms", chapter: 56, verse: 8,
+                     slots: [.evening], burdens: [.grief]),
+        CuratedVerse(bookID: "JHN", bookName: "John", chapter: 11, verse: 35,
+                     slots: [.evening], burdens: [.grief]),
 
         // MARK: Doubt & Uncertainty
         CuratedVerse(bookID: "PRO", bookName: "Proverbs", chapter: 3, verse: 5,
@@ -554,6 +607,12 @@ final class NotificationService {
                      slots: [.midday], burdens: [.doubt, .purpose]),
         CuratedVerse(bookID: "MRK", bookName: "Mark", chapter: 9, verse: 24,
                      slots: [.evening], burdens: [.doubt]),
+        CuratedVerse(bookID: "ROM", bookName: "Romans", chapter: 8, verse: 38,
+                     slots: [.bedtime], burdens: [.doubt, .loneliness]),
+        CuratedVerse(bookID: "2TI", bookName: "2 Timothy", chapter: 1, verse: 7,
+                     slots: [.morning], burdens: [.doubt, .anxiety]),
+        CuratedVerse(bookID: "HEB", bookName: "Hebrews", chapter: 13, verse: 8,
+                     slots: [.midday], burdens: [.doubt]),
 
         // MARK: Loneliness
         CuratedVerse(bookID: "DEU", bookName: "Deuteronomy", chapter: 31, verse: 8,
@@ -562,6 +621,12 @@ final class NotificationService {
                      slots: [.morning], burdens: [.loneliness]),
         CuratedVerse(bookID: "ISA", bookName: "Isaiah", chapter: 43, verse: 2,
                      slots: [.evening], burdens: [.loneliness, .grief]),
+        CuratedVerse(bookID: "MAT", bookName: "Matthew", chapter: 28, verse: 20,
+                     slots: [.bedtime], burdens: [.loneliness]),
+        CuratedVerse(bookID: "PSA", bookName: "Psalms", chapter: 27, verse: 10,
+                     slots: [.evening], burdens: [.loneliness, .grief]),
+        CuratedVerse(bookID: "JOS", bookName: "Joshua", chapter: 1, verse: 9,
+                     slots: [.morning], burdens: [.loneliness, .doubt]),
 
         // MARK: Temptation
         CuratedVerse(bookID: "1CO", bookName: "1 Corinthians", chapter: 10, verse: 13,
@@ -569,6 +634,10 @@ final class NotificationService {
         CuratedVerse(bookID: "JAS", bookName: "James", chapter: 4, verse: 7,
                      slots: [.midday], burdens: [.temptation]),
         CuratedVerse(bookID: "GAL", bookName: "Galatians", chapter: 5, verse: 16,
+                     slots: [.morning], burdens: [.temptation]),
+        CuratedVerse(bookID: "HEB", bookName: "Hebrews", chapter: 2, verse: 18,
+                     slots: [.evening], burdens: [.temptation]),
+        CuratedVerse(bookID: "PSA", bookName: "Psalms", chapter: 119, verse: 11,
                      slots: [.morning], burdens: [.temptation]),
 
         // MARK: Financial
@@ -578,6 +647,12 @@ final class NotificationService {
                      slots: [.morning], burdens: [.financial, .purpose]),
         CuratedVerse(bookID: "PSA", bookName: "Psalms", chapter: 37, verse: 25,
                      slots: [.evening], burdens: [.financial]),
+        CuratedVerse(bookID: "MAL", bookName: "Malachi", chapter: 3, verse: 10,
+                     slots: [.morning], burdens: [.financial]),
+        CuratedVerse(bookID: "PRO", bookName: "Proverbs", chapter: 10, verse: 22,
+                     slots: [.midday], burdens: [.financial]),
+        CuratedVerse(bookID: "DEU", bookName: "Deuteronomy", chapter: 8, verse: 18,
+                     slots: [.morning], burdens: [.financial, .purpose]),
 
         // MARK: Health
         CuratedVerse(bookID: "JER", bookName: "Jeremiah", chapter: 17, verse: 14,
@@ -586,6 +661,12 @@ final class NotificationService {
                      slots: [.midday], burdens: [.health]),
         CuratedVerse(bookID: "3JN", bookName: "3 John", chapter: 1, verse: 2,
                      slots: [.morning], burdens: [.health]),
+        CuratedVerse(bookID: "EXO", bookName: "Exodus", chapter: 23, verse: 25,
+                     slots: [.midday], burdens: [.health]),
+        CuratedVerse(bookID: "ISA", bookName: "Isaiah", chapter: 53, verse: 5,
+                     slots: [.evening], burdens: [.health]),
+        CuratedVerse(bookID: "PSA", bookName: "Psalms", chapter: 41, verse: 3,
+                     slots: [.bedtime], burdens: [.health]),
 
         // MARK: Relationships
         CuratedVerse(bookID: "1CO", bookName: "1 Corinthians", chapter: 13, verse: 4,
@@ -594,6 +675,12 @@ final class NotificationService {
                      slots: [.midday], burdens: [.relationship, .anger]),
         CuratedVerse(bookID: "COL", bookName: "Colossians", chapter: 3, verse: 13,
                      slots: [.evening], burdens: [.relationship, .anger]),
+        CuratedVerse(bookID: "1PE", bookName: "1 Peter", chapter: 4, verse: 8,
+                     slots: [.evening], burdens: [.relationship]),
+        CuratedVerse(bookID: "PRO", bookName: "Proverbs", chapter: 17, verse: 17,
+                     slots: [.morning], burdens: [.relationship, .loneliness]),
+        CuratedVerse(bookID: "ROM", bookName: "Romans", chapter: 12, verse: 18,
+                     slots: [.midday], burdens: [.relationship, .anger]),
 
         // MARK: Anger
         CuratedVerse(bookID: "JAS", bookName: "James", chapter: 1, verse: 19,
@@ -602,6 +689,10 @@ final class NotificationService {
                      slots: [.evening], burdens: [.anger]),
         CuratedVerse(bookID: "PRO", bookName: "Proverbs", chapter: 15, verse: 1,
                      slots: [.midday], burdens: [.anger]),
+        CuratedVerse(bookID: "PRO", bookName: "Proverbs", chapter: 14, verse: 29,
+                     slots: [.morning], burdens: [.anger]),
+        CuratedVerse(bookID: "PSA", bookName: "Psalms", chapter: 37, verse: 8,
+                     slots: [.evening], burdens: [.anger]),
 
         // MARK: Purpose
         CuratedVerse(bookID: "EPH", bookName: "Ephesians", chapter: 2, verse: 10,
@@ -610,6 +701,12 @@ final class NotificationService {
                      slots: [.morning, .midday], burdens: [.purpose, .doubt]),
         CuratedVerse(bookID: "PSA", bookName: "Psalms", chapter: 139, verse: 14,
                      slots: [.morning], burdens: [.purpose]),
+        CuratedVerse(bookID: "PRO", bookName: "Proverbs", chapter: 16, verse: 3,
+                     slots: [.morning], burdens: [.purpose]),
+        CuratedVerse(bookID: "ISA", bookName: "Isaiah", chapter: 43, verse: 7,
+                     slots: [.midday], burdens: [.purpose]),
+        CuratedVerse(bookID: "PHP", bookName: "Philippians", chapter: 1, verse: 6,
+                     slots: [.evening], burdens: [.purpose, .doubt]),
 
         // MARK: Bedtime / Peace
         CuratedVerse(bookID: "PSA", bookName: "Psalms", chapter: 4, verse: 8,
@@ -624,6 +721,14 @@ final class NotificationService {
                      slots: [.bedtime, .evening], burdens: [.anxiety, .doubt]),
         CuratedVerse(bookID: "PSA", bookName: "Psalms", chapter: 23, verse: 4,
                      slots: [.bedtime, .evening], burdens: [.grief, .loneliness]),
+        CuratedVerse(bookID: "PSA", bookName: "Psalms", chapter: 127, verse: 2,
+                     slots: [.bedtime], burdens: [.anxiety, .financial]),
+        CuratedVerse(bookID: "ZEP", bookName: "Zephaniah", chapter: 3, verse: 17,
+                     slots: [.bedtime], burdens: [.loneliness]),
+        CuratedVerse(bookID: "PSA", bookName: "Psalms", chapter: 63, verse: 6,
+                     slots: [.bedtime], burdens: []),
+        CuratedVerse(bookID: "PSA", bookName: "Psalms", chapter: 16, verse: 7,
+                     slots: [.bedtime], burdens: [.doubt]),
     ]
     // swiftlint:enable function_body_length
 
