@@ -898,7 +898,6 @@ struct SanctuaryBackground: Identifiable, Hashable {
             SanctuaryBackground(id: "moonlit-clouds", name: "Moonlit Clouds", collection: .nightSky, gradientColors: ["0A1628", "1A2D50", "3A4D70"], videoFileName: "moonlit-clouds", isProOnly: true),
             SanctuaryBackground(id: "aurora-borealis", name: "Aurora Borealis", collection: .nightSky, gradientColors: ["0B1D0B", "0D3B2E", "1A6B4A"], videoFileName: "aurora-borealis", isProOnly: true),
             SanctuaryBackground(id: "stars-mountains-pexels", name: "Stars Over Mountains", collection: .nightSky, gradientColors: ["0A0A1A", "0D1B3D", "1A2D5E"], videoFileName: "stars-mountains", isProOnly: true),
-            SanctuaryBackground(id: "milky-way-galaxy-vid", name: "Milky Way Galaxy", collection: .nightSky, gradientColors: ["060610", "0C0C24", "1A1A40"], videoFileName: "milky-way-galaxy", isProOnly: true),
             SanctuaryBackground(id: "stars-drifting-vid", name: "Stars Drifting", collection: .nightSky, gradientColors: ["060610", "0A0A22", "141438"], videoFileName: "stars-drifting", isProOnly: true),
             // Additional night sky gradients
             SanctuaryBackground(id: "meteor-shower", name: "Meteor Shower", collection: .nightSky, gradientColors: ["0A0A14", "0D0D28", "14143C"], isProOnly: true),
