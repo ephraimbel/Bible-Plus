@@ -10,6 +10,7 @@ struct ContentView: View {
     @State private var soundscapeService = SoundscapeService()
     @State private var audioBibleService = AudioBibleService()
     @State private var showFeedEntryButton = true
+    @Environment(\.scenePhase) private var scenePhase
 
     enum Tab: String, CaseIterable {
         case feed, bible, ask, journal, saved
@@ -64,6 +65,9 @@ struct ContentView: View {
         .onAppear {
             audioBibleService.setSoundscapeService(soundscapeService)
 
+            // Log app opened for streak tracking
+            ActivityService.logAppOpenedIfNeeded(in: modelContext)
+
             // Auto-play Evening Rest for new users entering after onboarding
             if !hasAutoPlayedSoundscape {
                 soundscapeService.play(.eveningRest)
@@ -77,15 +81,40 @@ struct ContentView: View {
             }
         }
         .toolbarBackground(.hidden, for: .tabBar)
+        .onAppear {
+            // Force tab bar fully transparent at runtime
+            let tabBarAppearance = UITabBarAppearance()
+            tabBarAppearance.configureWithTransparentBackground()
+            tabBarAppearance.backgroundColor = .clear
+            tabBarAppearance.backgroundEffect = nil
+            tabBarAppearance.backgroundImage = UIImage()
+            tabBarAppearance.shadowColor = .clear
+            tabBarAppearance.shadowImage = UIImage()
+            UITabBar.appearance().standardAppearance = tabBarAppearance
+            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+        }
         .onReceive(NotificationCenter.default.publisher(for: .dashboardShowFeedChanged)) { notification in
             if let showFeed = notification.userInfo?["showFeed"] as? Bool {
                 showFeedEntryButton = !showFeed
             }
         }
         .onChange(of: deepLinkedContentID) { _, newValue in
-            if newValue != nil {
+            if let contentID = newValue {
                 selectedTab = .feed
+                // Post notification so FeedView can scroll to the content
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    NotificationCenter.default.post(
+                        name: .feedContentDeepLink,
+                        object: nil,
+                        userInfo: ["contentID": contentID]
+                    )
+                }
                 deepLinkedContentID = nil
+            }
+        }
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .background {
+                soundscapeService.stop()
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: .scriptureDeepLink)) { notification in
@@ -108,6 +137,23 @@ struct ContentView: View {
         .onReceive(NotificationCenter.default.publisher(for: .switchToJournalTab)) { _ in
             withAnimation(.easeInOut(duration: 0.25)) {
                 selectedTab = .journal
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .openJournalWithReflection)) { notification in
+            // Only handle the original notification, not the forwarded one
+            guard notification.object as? String != "fromContentView" else { return }
+            withAnimation(.easeInOut(duration: 0.25)) {
+                selectedTab = .journal
+            }
+            // Forward the prompt to JournalView after tab switch
+            if let prompt = notification.userInfo?["prompt"] as? String {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    NotificationCenter.default.post(
+                        name: .openJournalWithReflection,
+                        object: "fromContentView",
+                        userInfo: ["prompt": prompt]
+                    )
+                }
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: .notificationSaveAction)) { notification in

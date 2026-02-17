@@ -135,6 +135,11 @@ private struct FeedContentView: View {
             withAnimation(.easeInOut(duration: 0.3)) { vm.showFeed = true }
             HapticService.lightImpact()
         }
+        .onReceive(NotificationCenter.default.publisher(for: .feedContentDeepLink)) { notification in
+            if let contentID = notification.userInfo?["contentID"] as? UUID {
+                vm.navigateToContent(id: contentID)
+            }
+        }
         .onChange(of: vm.showFeed) { _, showFeed in
             NotificationCenter.default.post(
                 name: .dashboardShowFeedChanged,
@@ -186,11 +191,12 @@ private struct FeedContentView: View {
     }
 
     private func deepLinkContinueReading() {
-        guard let reading = vm.continueReading else { return }
+        let bookName = vm.continueReading?.bookName ?? "Genesis"
+        let chapter = vm.continueReading?.chapter ?? 1
         NotificationCenter.default.post(
             name: .scriptureDeepLink,
             object: nil,
-            userInfo: ["bookName": reading.bookName, "chapter": reading.chapter]
+            userInfo: ["bookName": bookName, "chapter": chapter]
         )
     }
 }

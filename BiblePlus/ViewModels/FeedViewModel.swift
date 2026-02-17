@@ -16,6 +16,7 @@ final class FeedViewModel {
     var collectionContent: PrayerContent? = nil
     var askAIContent: PrayerContent? = nil
     var askAIConversationId: UUID = UUID()
+    var deepLinkScrollIndex: Int? = nil
 
     // Streak state
     var streakCount: Int = 0
@@ -221,6 +222,25 @@ final class FeedViewModel {
     func onSwipe(to index: Int) {
         currentIndex = index
         loadMoreIfNeeded()
+    }
+
+    func navigateToContent(id: UUID) {
+        // Check if content is already in cards
+        if let index = cards.firstIndex(where: { $0.id == id }) {
+            showFeed = true
+            deepLinkScrollIndex = index
+            return
+        }
+
+        // Fetch from SwiftData and insert at position 0
+        let descriptor = FetchDescriptor<PrayerContent>(
+            predicate: #Predicate { $0.id == id }
+        )
+        if let content = try? modelContext.fetch(descriptor).first {
+            cards.insert(content, at: 0)
+            showFeed = true
+            deepLinkScrollIndex = 0
+        }
     }
 
     // MARK: - Interactions

@@ -52,6 +52,12 @@ struct FeedPagingView: View {
                 }
             }
             .ignoresSafeArea()
+            .onChange(of: vm.deepLinkScrollIndex) { _, newIndex in
+                if let targetIndex = newIndex {
+                    scrollPosition = targetIndex
+                    vm.deepLinkScrollIndex = nil
+                }
+            }
 
             // Top bar: Home (left) + Settings (right) — always visible in feed
             VStack {

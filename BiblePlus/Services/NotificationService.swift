@@ -700,4 +700,5 @@ extension Notification.Name {
     static let dashboardShowFeedChanged = Notification.Name("DashboardShowFeedChanged")
     static let openJournalWithReflection = Notification.Name("OpenJournalWithReflection")
     static let readingPlanDeepLink = Notification.Name("ReadingPlanDeepLink")
+    static let feedContentDeepLink = Notification.Name("FeedContentDeepLink")
 }
