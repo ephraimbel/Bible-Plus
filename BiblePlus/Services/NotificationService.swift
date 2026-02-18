@@ -437,7 +437,7 @@ final class NotificationService {
 
                 var dateComponents = calendar.dateComponents([.year, .month, .day], from: targetDate)
                 dateComponents.hour = hour
-                dateComponents.minute = 0
+                dateComponents.minute = 30  // Offset to :30 to avoid collision with streak reminders at :00
 
                 let trigger = UNCalendarNotificationTrigger(
                     dateMatching: dateComponents,
