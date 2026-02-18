@@ -276,6 +276,42 @@ private struct SettingsContentView: View {
 
                     rowDivider
 
+                    // Faith Boosts toggle
+                    VStack(spacing: 0) {
+                        HStack(spacing: 14) {
+                            Image(systemName: "sparkles")
+                                .font(.system(size: 13, weight: .medium))
+                                .foregroundStyle(palette.accent)
+                                .frame(width: 32, height: 32)
+                                .background(
+                                    Circle()
+                                        .fill(palette.accent.opacity(0.08))
+                                )
+
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("Faith Boosts")
+                                    .font(.system(size: 15, weight: .medium, design: .rounded))
+                                    .foregroundStyle(palette.textPrimary)
+                                Text("Short verses & prayers every 2 hours")
+                                    .font(.system(size: 12, weight: .regular, design: .rounded))
+                                    .foregroundStyle(palette.textMuted)
+                            }
+
+                            Spacer()
+
+                            Toggle("", isOn: Binding(
+                                get: { vm.profile.faithBoostsEnabled },
+                                set: { _ in vm.toggleFaithBoosts() }
+                            ))
+                            .tint(palette.accent)
+                            .labelsHidden()
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 12)
+                    }
+
+                    rowDivider
+
                     // Streak Reminders toggle
                     HStack(spacing: 14) {
                         Image(systemName: "flame")

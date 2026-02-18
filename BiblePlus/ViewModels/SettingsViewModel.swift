@@ -203,6 +203,27 @@ final class SettingsViewModel {
         // since we need to look up the active plan from SwiftData
     }
 
+    func toggleFaithBoosts() {
+        let newValue = !profile.faithBoostsEnabled
+        profile.faithBoostsEnabled = newValue
+        profile.updatedAt = Date()
+        personalizationService.save()
+        if newValue {
+            let contentDescriptor = FetchDescriptor<PrayerContent>()
+            let allContent = (try? modelContext.fetch(contentDescriptor)) ?? []
+            NotificationService.shared.scheduleFaithBoosts(
+                name: profile.firstName.isEmpty ? "Friend" : profile.firstName,
+                burdens: profile.currentBurdens,
+                seasons: profile.lifeSeasons,
+                faithLevel: profile.faithLevel,
+                isPro: profile.isPro,
+                content: allContent
+            )
+        } else {
+            NotificationService.shared.cancelFaithBoosts()
+        }
+    }
+
     private func rescheduleNotifications() {
         guard profile.notificationsEnabled else {
             NotificationService.shared.cancelAll()

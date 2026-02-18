@@ -133,7 +133,8 @@ final class NotificationService {
         activePlanName: String? = nil,
         activePlanID: String? = nil,
         activePlanNextDay: Int? = nil,
-        activePlanTotalDays: Int? = nil
+        activePlanTotalDays: Int? = nil,
+        faithBoostsEnabled: Bool = false
     ) async {
         cancelAll()
 
@@ -216,6 +217,18 @@ final class NotificationService {
                 nextDay: nextDay,
                 totalDays: totalDays,
                 firstName: firstName
+            )
+        }
+
+        // Schedule faith boost notifications
+        if faithBoostsEnabled {
+            scheduleFaithBoosts(
+                name: name,
+                burdens: burdens,
+                seasons: seasons,
+                faithLevel: faithLevel,
+                isPro: isPro,
+                content: content
             )
         }
     }
@@ -351,6 +364,157 @@ final class NotificationService {
     func cancelPlanReminders() {
         let identifiers = (0..<planScheduleDays).map { "plan-reminder-day\($0)" }
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+    }
+
+    // MARK: - Faith Boosts
+
+    private let faithBoostScheduleDays = 3
+    private let faithBoostHours = [8, 10, 12, 14, 16, 18, 20, 22]
+
+    private let faithBoostSubtitles: [String] = [
+        "A word for your heart",
+        "Strength for this moment",
+        "{name}, take a breath",
+        "God sees you right now",
+        "A reminder of His love",
+        "Pause and be still",
+        "You're not alone, {name}",
+        "His grace is enough",
+        "Something for your soul",
+        "A moment with God",
+    ]
+
+    func scheduleFaithBoosts(
+        name: String,
+        burdens: [Burden],
+        seasons: [LifeSeason],
+        faithLevel: FaithLevel?,
+        isPro: Bool,
+        content: [PrayerContent]
+    ) {
+        let center = UNUserNotificationCenter.current()
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+
+        let totalNeeded = faithBoostScheduleDays * faithBoostHours.count // 24
+        let items = selectFaithBoostContent(
+            count: totalNeeded,
+            name: name,
+            burdens: burdens,
+            seasons: seasons,
+            faithLevel: faithLevel,
+            isPro: isPro,
+            content: content
+        )
+
+        let subtitles = faithBoostSubtitles.map {
+            $0.replacingOccurrences(of: "{name}", with: name)
+        }.shuffled()
+
+        var itemIndex = 0
+        for dayOffset in 0..<faithBoostScheduleDays {
+            guard let targetDate = calendar.date(byAdding: .day, value: dayOffset, to: today) else { continue }
+
+            for hour in faithBoostHours {
+                let item = items[itemIndex % items.count]
+
+                let notifContent = UNMutableNotificationContent()
+                notifContent.title = "Bible+"
+                notifContent.subtitle = subtitles[itemIndex % subtitles.count]
+                notifContent.body = item.text
+                notifContent.sound = .default
+                notifContent.categoryIdentifier = Self.devotionalCategoryIdentifier
+
+                var userInfo: [String: Any] = [:]
+                if let contentID = item.contentID {
+                    userInfo["contentID"] = contentID.uuidString
+                }
+                if let bookName = item.bibleBookName, let chapter = item.bibleChapter {
+                    userInfo["bookName"] = bookName
+                    userInfo["chapter"] = chapter
+                }
+                notifContent.userInfo = userInfo
+
+                var dateComponents = calendar.dateComponents([.year, .month, .day], from: targetDate)
+                dateComponents.hour = hour
+                dateComponents.minute = 0
+
+                let trigger = UNCalendarNotificationTrigger(
+                    dateMatching: dateComponents,
+                    repeats: false
+                )
+
+                let request = UNNotificationRequest(
+                    identifier: "faith-boost-day\(dayOffset)-hour\(hour)",
+                    content: notifContent,
+                    trigger: trigger
+                )
+
+                center.add(request)
+                itemIndex += 1
+            }
+        }
+    }
+
+    func cancelFaithBoosts() {
+        var identifiers: [String] = []
+        for dayOffset in 0..<faithBoostScheduleDays {
+            for hour in faithBoostHours {
+                identifiers.append("faith-boost-day\(dayOffset)-hour\(hour)")
+            }
+        }
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+    }
+
+    /// Select content for faith boosts — draws from ALL time slots for variety throughout the day.
+    private func selectFaithBoostContent(
+        count: Int,
+        name: String,
+        burdens: [Burden],
+        seasons: [LifeSeason],
+        faithLevel: FaithLevel?,
+        isPro: Bool,
+        content: [PrayerContent]
+    ) -> [SelectedContent] {
+        let userBurdens = Set(burdens)
+        let userSeasons = Set(seasons)
+
+        // Use all content regardless of time slot
+        let pool = content.filter { !$0.isProOnly || isPro }
+
+        let scoredFeed: [(SelectedContent, Double)] = pool.map { item in
+            var score = 1.0
+            if !userBurdens.isEmpty && !Set(item.applicableBurdens).isDisjoint(with: userBurdens) { score *= 3.0 }
+            if !userSeasons.isEmpty && !Set(item.applicableSeasons).isDisjoint(with: userSeasons) { score *= 2.0 }
+            if item.faithLevelMin.numericValue <= (faithLevel?.numericValue ?? FaithLevel.justCurious.numericValue) { score *= 1.3 }
+            return (formatContent(item, name: name), score)
+        }
+
+        // Score all curated verses across all time slots
+        let scoredVerses = scoreAllCuratedVerses(burdens: userBurdens)
+
+        return mergeAndSelect(count: count, feedItems: scoredFeed, verseItems: scoredVerses)
+    }
+
+    /// Score all curated verses regardless of time slot (for faith boosts).
+    private func scoreAllCuratedVerses(burdens: Set<Burden>) -> [(SelectedContent, Double)] {
+        Self.curatedVerses.compactMap { cv in
+            let verses = BibleRepository.shared.versesSync(book: cv.bookID, chapter: cv.chapter)
+            guard let verse = verses.first(where: { $0.number == cv.verse }) else { return nil }
+            let text = "\"\(verse.text)\" — \(cv.bookName) \(cv.chapter):\(cv.verse)"
+            let content = SelectedContent(
+                text: text,
+                contentID: nil,
+                bibleBookName: cv.bookName,
+                bibleChapter: cv.chapter
+            )
+
+            var score = 1.0
+            if !burdens.isEmpty && !Set(cv.burdens).isDisjoint(with: burdens) { score *= 3.0 }
+            score *= 1.2
+
+            return (content, score)
+        }
     }
 
     // MARK: - Schedule Times
