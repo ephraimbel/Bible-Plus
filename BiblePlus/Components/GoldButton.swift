@@ -15,22 +15,32 @@ struct GoldButton: View {
             action()
         }) {
             Text(title)
-                .font(BPFont.button)
+                .font(.system(size: 17, weight: .semibold, design: .rounded))
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 18)
                 .background(
-                    RoundedRectangle(cornerRadius: 16)
-                        .fill(isEnabled ? palette.accent : Color.gray.opacity(0.3))
+                    Capsule()
+                        .fill(
+                            isEnabled
+                                ? AnyShapeStyle(
+                                    LinearGradient(
+                                        colors: [palette.accent, palette.accent.opacity(0.85)],
+                                        startPoint: .leading,
+                                        endPoint: .trailing
+                                    )
+                                )
+                                : AnyShapeStyle(Color.gray.opacity(0.3))
+                        )
                 )
                 .overlay(
-                    RoundedRectangle(cornerRadius: 16)
-                        .stroke(palette.accent.opacity(0.6), lineWidth: 2)
+                    Capsule()
+                        .stroke(palette.accent.opacity(0.5), lineWidth: 1.5)
                         .blur(radius: showGlow ? 8 : 0)
                         .opacity(showGlow ? glowOpacity : 0)
                 )
                 .shadow(
-                    color: isEnabled ? palette.accent.opacity(0.3) : .clear,
+                    color: isEnabled ? palette.accent.opacity(0.35) : .clear,
                     radius: 12,
                     y: 4
                 )

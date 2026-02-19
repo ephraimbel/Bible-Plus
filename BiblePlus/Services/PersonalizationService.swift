@@ -98,8 +98,23 @@ final class PersonalizationService {
         profile.updatedAt = Date()
         save()
 
-        // Extract a static frame for the widget and reload timelines
-        if let background = SanctuaryBackground.background(for: backgroundID) {
+        // Only update widget image if no widget-specific background is set
+        let effectiveWidgetID = profile.widgetSelectedBackgroundID ?? backgroundID
+        if let background = SanctuaryBackground.background(for: effectiveWidgetID) {
+            WidgetBackgroundService.updateWidgetBackground(for: background)
+            WidgetCenter.shared.reloadAllTimelines()
+        }
+    }
+
+    func updateWidgetBackground(_ backgroundID: String?) {
+        let profile = getOrCreateProfile()
+        profile.widgetSelectedBackgroundID = backgroundID
+        profile.updatedAt = Date()
+        save()
+
+        // Determine which background the widget should use
+        let effectiveID = backgroundID ?? profile.selectedBackgroundID
+        if let background = SanctuaryBackground.background(for: effectiveID) {
             WidgetBackgroundService.updateWidgetBackground(for: background)
             WidgetCenter.shared.reloadAllTimelines()
         }

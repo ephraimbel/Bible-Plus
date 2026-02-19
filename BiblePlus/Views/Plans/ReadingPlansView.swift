@@ -18,22 +18,51 @@ struct ReadingPlansView: View {
                 if let vm = viewModel {
                     plansContent(vm)
                 } else {
-                    ProgressView()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    // Loading state with concentric circles
+                    VStack(spacing: 16) {
+                        ZStack {
+                            Circle()
+                                .fill(palette.accent.opacity(0.04))
+                                .frame(width: 100, height: 100)
+                            Circle()
+                                .fill(palette.accent.opacity(0.06))
+                                .frame(width: 72, height: 72)
+                            ProgressView()
+                                .tint(palette.accent)
+                        }
+                        Text("Loading plans...")
+                            .font(.system(size: 13, weight: .medium, design: .rounded))
+                            .foregroundStyle(palette.textMuted)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
             .background(palette.background)
             .scrollContentBackground(.hidden)
-            .navigationTitle("Reading Plans")
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(palette.background, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Reading Plans")
+                        .font(.system(size: 18, weight: .semibold, design: .serif))
+                        .foregroundStyle(palette.textPrimary)
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button { dismiss() } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.system(size: 20))
-                            .foregroundStyle(palette.textMuted)
+                        Image(systemName: "xmark")
+                            .font(.system(size: 13, weight: .bold))
+                            .foregroundStyle(palette.textSecondary)
+                            .frame(width: 30, height: 30)
+                            .background(
+                                Circle()
+                                    .fill(palette.surfaceElevated)
+                                    .shadow(color: .black.opacity(0.06), radius: 4, y: 2)
+                            )
+                            .overlay(
+                                Circle()
+                                    .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
+                            )
                     }
                 }
             }
@@ -94,7 +123,7 @@ struct ReadingPlansView: View {
 
     private func activePlansSection(_ vm: ReadingPlansViewModel) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            sectionHeader("Your Active Plans")
+            sectionHeader("YOUR ACTIVE PLANS")
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 14) {
@@ -129,7 +158,7 @@ struct ReadingPlansView: View {
 
     private func recommendedSection(_ vm: ReadingPlansViewModel) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            sectionHeader("For You")
+            sectionHeader("FOR YOU")
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 14) {
@@ -164,7 +193,7 @@ struct ReadingPlansView: View {
 
     private func allPlansSection(_ vm: ReadingPlansViewModel) -> some View {
         VStack(alignment: .leading, spacing: 16) {
-            sectionHeader("All Plans")
+            sectionHeader("ALL PLANS")
 
             LazyVGrid(columns: [
                 GridItem(.flexible(), spacing: 14),
@@ -204,22 +233,29 @@ struct ReadingPlansView: View {
             vm.showPaywall = true
         } label: {
             HStack(spacing: 16) {
-                VStack(spacing: 6) {
-                    Image(systemName: "crown.fill")
-                        .font(.system(size: 28))
-                        .foregroundStyle(palette.accent)
-                    Text("\(proCount)")
-                        .font(.system(size: 20, weight: .bold, design: .rounded))
-                        .foregroundStyle(palette.accent)
-                }
-                .frame(width: 60)
+                // Crown in gradient circle
+                Image(systemName: "crown.fill")
+                    .font(.system(size: 20, weight: .medium))
+                    .foregroundStyle(.white)
+                    .frame(width: 48, height: 48)
+                    .background(
+                        Circle()
+                            .fill(
+                                LinearGradient(
+                                    colors: [palette.accent, palette.accent.opacity(0.85)],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                            )
+                            .shadow(color: palette.accent.opacity(0.3), radius: 4, y: 2)
+                    )
 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Unlock All Plans")
+                    Text("Unlock All \(proCount) Plans")
                         .font(.system(size: 16, weight: .semibold, design: .rounded))
                         .foregroundStyle(palette.textPrimary)
 
-                    Text("Get \(proCount) premium guided journeys, unlimited concurrent plans, and deeper Bible study.")
+                    Text("Premium guided journeys, unlimited concurrent plans, and deeper study.")
                         .font(.system(size: 13, weight: .regular, design: .rounded))
                         .foregroundStyle(palette.textSecondary)
                         .lineSpacing(2)
@@ -228,18 +264,19 @@ struct ReadingPlansView: View {
 
                 Spacer()
 
-                Image(systemName: "arrow.right.circle.fill")
-                    .font(.system(size: 22))
-                    .foregroundStyle(palette.accent)
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundStyle(.tertiary)
             }
             .padding(16)
             .background(
                 RoundedRectangle(cornerRadius: 16)
-                    .fill(palette.surface)
+                    .fill(palette.surfaceElevated)
+                    .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
-                    .stroke(palette.accent.opacity(0.25), lineWidth: 1)
+                    .stroke(palette.accent.opacity(0.2), lineWidth: 0.5)
             )
         }
         .buttonStyle(.plain)
@@ -250,8 +287,9 @@ struct ReadingPlansView: View {
 
     private func sectionHeader(_ title: String) -> some View {
         Text(title)
-            .font(.system(size: 20, weight: .semibold, design: .rounded))
-            .foregroundStyle(palette.textPrimary)
+            .font(.system(size: 11, weight: .bold, design: .rounded))
+            .tracking(1.5)
+            .foregroundStyle(palette.textMuted)
             .padding(.horizontal, 20)
     }
 }

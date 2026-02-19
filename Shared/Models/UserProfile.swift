@@ -13,6 +13,7 @@ final class UserProfile {
     var selectedThemeID: String
     var selectedSoundscapeID: String
     var selectedBackgroundID: String
+    var widgetSelectedBackgroundID: String?
     var colorMode: ColorMode
     var streakCount: Int
     var lastActiveDate: Date?
@@ -50,6 +51,7 @@ final class UserProfile {
         selectedThemeID: String = "sunrise-mountains",
         selectedSoundscapeID: String = "pureSilence",
         selectedBackgroundID: String = "warm-gold",
+        widgetSelectedBackgroundID: String? = nil,
         colorMode: ColorMode = .auto,
         streakCount: Int = 0,
         lastActiveDate: Date? = nil,
@@ -79,6 +81,7 @@ final class UserProfile {
         self.selectedThemeID = selectedThemeID
         self.selectedSoundscapeID = selectedSoundscapeID
         self.selectedBackgroundID = selectedBackgroundID
+        self.widgetSelectedBackgroundID = widgetSelectedBackgroundID
         self.colorMode = colorMode
         self.streakCount = streakCount
         self.lastActiveDate = lastActiveDate

@@ -187,96 +187,166 @@ struct ChapterReaderView: View {
     // MARK: - Loading State
 
     private var loadingState: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 20) {
             Spacer()
-            ProgressView()
-                .tint(palette.accent)
+
+            ZStack {
+                Circle()
+                    .fill(palette.accent.opacity(0.06))
+                    .frame(width: 100, height: 100)
+
+                Circle()
+                    .fill(palette.accent.opacity(0.04))
+                    .frame(width: 72, height: 72)
+
+                ProgressView()
+                    .tint(palette.accent)
+                    .scaleEffect(1.1)
+            }
+
             Text("Loading chapter...")
-                .font(BPFont.body)
+                .font(.system(size: 15, weight: .medium, design: .rounded))
                 .foregroundStyle(palette.textMuted)
+
             Spacer()
         }
         .frame(maxWidth: .infinity)
+        .background(palette.parchment)
     }
 
     // MARK: - Error State
 
     private func errorState(message: String) -> some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 20) {
             Spacer()
 
-            Image(systemName: "wifi.slash")
-                .font(.system(size: 48, weight: .thin))
-                .foregroundStyle(palette.accent)
+            ZStack {
+                Circle()
+                    .fill(palette.accent.opacity(0.06))
+                    .frame(width: 120, height: 120)
 
-            Text("Couldn't Load Chapter")
-                .font(BPFont.headingSmall)
-                .foregroundStyle(palette.textPrimary)
+                Circle()
+                    .fill(palette.accent.opacity(0.04))
+                    .frame(width: 88, height: 88)
 
-            Text(message)
-                .font(BPFont.body)
-                .foregroundStyle(palette.textMuted)
-                .multilineTextAlignment(.center)
+                Image(systemName: "wifi.slash")
+                    .font(.system(size: 36, weight: .thin))
+                    .foregroundStyle(palette.accent)
+            }
+
+            VStack(spacing: 10) {
+                Text("Couldn't Load Chapter")
+                    .font(.system(size: 22, weight: .semibold, design: .rounded))
+                    .foregroundStyle(palette.textPrimary)
+
+                Text(message)
+                    .font(.system(size: 15, weight: .regular, design: .rounded))
+                    .foregroundStyle(palette.textMuted)
+                    .multilineTextAlignment(.center)
+                    .lineSpacing(4)
+            }
 
             Button {
                 onRetry()
             } label: {
-                Text("Try Again")
-                    .font(BPFont.button)
-                    .foregroundStyle(.white)
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 10)
-                    .background(Capsule().fill(palette.accent))
+                HStack(spacing: 6) {
+                    Image(systemName: "arrow.clockwise")
+                        .font(.system(size: 13, weight: .semibold))
+                    Text("Try Again")
+                        .font(.system(size: 15, weight: .semibold, design: .rounded))
+                }
+                .foregroundStyle(.white)
+                .padding(.horizontal, 28)
+                .padding(.vertical, 13)
+                .background(
+                    Capsule()
+                        .fill(
+                            LinearGradient(
+                                colors: [palette.accent, palette.accent.opacity(0.8)],
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                        )
+                        .shadow(color: palette.accent.opacity(0.3), radius: 8, y: 4)
+                )
             }
-            .padding(.top, 8)
+            .padding(.top, 4)
 
             Spacer()
         }
         .padding(.horizontal, 32)
+        .background(palette.parchment)
     }
 
     // MARK: - Offline Banner
 
     private var offlineBanner: some View {
-        HStack(spacing: 6) {
+        HStack(spacing: 8) {
             Image(systemName: "wifi.slash")
-                .font(.system(size: 11, weight: .medium))
+                .font(.system(size: 11, weight: .semibold))
+                .foregroundStyle(palette.accent)
+                .frame(width: 24, height: 24)
+                .background(
+                    Circle()
+                        .fill(palette.accent.opacity(0.1))
+                )
+
             Text("Showing KJV offline. Connect to load \(offlineTranslationName).")
-                .font(BPFont.caption)
+                .font(.system(size: 12, weight: .medium, design: .rounded))
+                .foregroundStyle(palette.textSecondary)
         }
-        .foregroundStyle(palette.accent)
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 8)
-        .padding(.horizontal, 12)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.vertical, 10)
+        .padding(.horizontal, 14)
         .background(
-            RoundedRectangle(cornerRadius: 8)
-                .fill(palette.accentSoft)
+            RoundedRectangle(cornerRadius: 12)
+                .fill(palette.surfaceElevated)
+                .shadow(color: .black.opacity(0.04), radius: 4, y: 2)
         )
-        .padding(.horizontal, 0)
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(palette.accent.opacity(0.15), lineWidth: 0.5)
+        )
         .padding(.top, 4)
     }
 
     // MARK: - Empty State
 
     private var emptyState: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 20) {
             Spacer()
 
-            Image(systemName: "book.closed")
-                .font(.system(size: 48, weight: .thin))
-                .foregroundStyle(palette.accent)
+            ZStack {
+                Circle()
+                    .fill(palette.accent.opacity(0.06))
+                    .frame(width: 120, height: 120)
 
-            Text("Chapter Not Yet Available")
-                .font(BPFont.headingSmall)
-                .foregroundStyle(palette.textPrimary)
+                Circle()
+                    .fill(palette.accent.opacity(0.04))
+                    .frame(width: 88, height: 88)
 
-            Text("This chapter's text will be\navailable in a future update.")
-                .font(BPFont.body)
-                .foregroundStyle(palette.textMuted)
-                .multilineTextAlignment(.center)
+                Image(systemName: "book.closed")
+                    .font(.system(size: 36, weight: .thin))
+                    .foregroundStyle(palette.accent)
+            }
 
+            VStack(spacing: 10) {
+                Text("Chapter Not Yet Available")
+                    .font(.system(size: 22, weight: .semibold, design: .rounded))
+                    .foregroundStyle(palette.textPrimary)
+
+                Text("This chapter's text will be\navailable in a future update.")
+                    .font(.system(size: 15, weight: .regular, design: .rounded))
+                    .foregroundStyle(palette.textMuted)
+                    .multilineTextAlignment(.center)
+                    .lineSpacing(4)
+            }
+
+            Spacer()
             Spacer()
         }
         .padding(.horizontal, 32)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(palette.parchment)
     }
 }

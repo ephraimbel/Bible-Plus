@@ -22,6 +22,7 @@ final class SettingsViewModel {
     var showBackgroundPicker = false
     var showSanctuary = false
     var showVoicePicker = false
+    var showWidgetBackgroundPicker = false
 
     // MARK: - Local Editing Copies
 
@@ -284,6 +285,17 @@ final class SettingsViewModel {
 
     var currentBackgroundDisplay: String {
         SanctuaryBackground.background(for: profile.selectedBackgroundID)?.name ?? "Warm Gold"
+    }
+
+    var widgetBackgroundDisplay: String {
+        guard let widgetBgID = profile.widgetSelectedBackgroundID else {
+            return "Same as app"
+        }
+        return SanctuaryBackground.background(for: widgetBgID)?.name ?? "Same as app"
+    }
+
+    func updateWidgetBackground(_ backgroundID: String?) {
+        personalizationService.updateWidgetBackground(backgroundID)
     }
 
     // MARK: - Notification

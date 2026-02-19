@@ -183,7 +183,8 @@ enum WidgetContentProvider {
         let now = Date()
         let hour = cal.component(.hour, from: now)
 
-        let background = SanctuaryBackground.background(for: profile.selectedBackgroundID)
+        let effectiveBgID = profile.widgetSelectedBackgroundID ?? profile.selectedBackgroundID
+        let background = SanctuaryBackground.background(for: effectiveBgID)
             ?? SanctuaryBackground.allBackgrounds[0]
 
         var entries: [WidgetEntry] = []
@@ -234,7 +235,8 @@ enum WidgetContentProvider {
         let cal = Calendar.current
         let now = Date()
 
-        let background = SanctuaryBackground.background(for: profile.selectedBackgroundID)
+        let effectiveBgID = profile.widgetSelectedBackgroundID ?? profile.selectedBackgroundID
+        let background = SanctuaryBackground.background(for: effectiveBgID)
             ?? SanctuaryBackground.allBackgrounds[0]
 
         var entries: [WidgetEntry] = []
@@ -316,7 +318,8 @@ enum WidgetContentProvider {
         let index = seed % topCount
         let chosen = scored[index].content
 
-        let background = SanctuaryBackground.background(for: profile.selectedBackgroundID)
+        let effectiveBgID = profile.widgetSelectedBackgroundID ?? profile.selectedBackgroundID
+        let background = SanctuaryBackground.background(for: effectiveBgID)
             ?? SanctuaryBackground.allBackgrounds[0]
         let text = personalizedText(template: chosen.templateText, firstName: profile.firstName)
 

@@ -88,7 +88,8 @@ struct HomeWidgetProvider: AppIntentTimelineProvider {
             allowedTypes: allowedTypes
         ) else { return nil }
 
-        let background = SanctuaryBackground.background(for: profile.selectedBackgroundID)
+        let effectiveBgID = profile.widgetSelectedBackgroundID ?? profile.selectedBackgroundID
+        let background = SanctuaryBackground.background(for: effectiveBgID)
             ?? SanctuaryBackground.allBackgrounds[0]
         let text = WidgetContentProvider.personalizedText(template: content.templateText, firstName: profile.firstName)
 

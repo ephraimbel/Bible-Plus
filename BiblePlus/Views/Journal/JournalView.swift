@@ -18,9 +18,16 @@ struct JournalView: View {
                     }
                 }
             }
-            .navigationTitle("Journal")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(palette.background, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Journal")
+                        .font(.system(size: 18, weight: .semibold, design: .serif))
+                        .foregroundStyle(palette.textPrimary)
+                }
+            }
         }
     }
 }
@@ -30,8 +37,10 @@ struct JournalView: View {
 private struct JournalContentView: View {
     @Bindable var viewModel: JournalViewModel
     @Environment(\.bpPalette) private var palette
+    @Environment(\.colorScheme) private var colorScheme
     @State private var showComposeSheet = false
-    @State private var appearAnimated = false
+    @State private var appeared = false
+    @State private var reflectionPrompt: String?
 
     var body: some View {
         ZStack {
@@ -42,29 +51,19 @@ private struct JournalContentView: View {
             if items.isEmpty {
                 emptyJournal
             } else {
-                ScrollView {
+                ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 0) {
-                        // Warm gradient wash behind hero
-                        Color.clear.frame(height: 0)
-                            .background(
-                                LinearGradient(
-                                    colors: [palette.accent.opacity(0.04), Color.clear],
-                                    startPoint: .top,
-                                    endPoint: .bottom
-                                )
-                                .frame(height: 280)
-                                .offset(y: -40),
-                                alignment: .top
-                            )
-
-                        // Hero: Daily Prompt + Stats
+                        // Hero section
                         heroSection
 
-                        // Filter Chips
+                        // Stats strip
+                        statsStrip
+
+                        // Filter chips
                         filterChips
 
-                        // Prayer List
-                        LazyVStack(spacing: 0) {
+                        // Prayer list
+                        LazyVStack(spacing: 12) {
                             ForEach(Array(items.enumerated()), id: \.element.id) { index, entry in
                                 NavigationLink {
                                     PrayerEntryDetailView(entry: entry, viewModel: viewModel)
@@ -72,8 +71,10 @@ private struct JournalContentView: View {
                                     JournalEntryCard(entry: entry, palette: palette)
                                 }
                                 .buttonStyle(.plain)
-                                .padding(.horizontal, 16)
-                                .padding(.bottom, 12)
+                                .padding(.horizontal, 20)
+                                .opacity(appeared ? 1 : 0)
+                                .offset(y: appeared ? 0 : 10)
+                                .animation(BPAnimation.spring.delay(0.25 + Double(min(index, 6)) * 0.04), value: appeared)
                                 .contextMenu {
                                     if !entry.isAnswered {
                                         Button {
@@ -90,13 +91,11 @@ private struct JournalContentView: View {
                                 }
                             }
                         }
-                        .padding(.top, 4)
+                        .padding(.top, 8)
 
-                        // Bottom padding for FAB clearance
-                        Spacer().frame(height: 80)
+                        Spacer().frame(height: 100)
                     }
                 }
-                .scrollIndicators(.hidden)
             }
 
             // FAB
@@ -109,29 +108,30 @@ private struct JournalContentView: View {
                         HapticService.impact(.medium)
                     } label: {
                         Image(systemName: "plus")
-                            .font(.system(size: 22, weight: .semibold))
+                            .font(.system(size: 20, weight: .semibold))
                             .foregroundStyle(.white)
                             .frame(width: 56, height: 56)
                             .background(
                                 Circle()
                                     .fill(
                                         LinearGradient(
-                                            colors: [palette.accent, palette.accent.opacity(0.8)],
+                                            colors: [palette.accent, palette.accent.opacity(0.75)],
                                             startPoint: .topLeading,
                                             endPoint: .bottomTrailing
                                         )
                                     )
+                                    .shadow(color: palette.accent.opacity(0.35), radius: 12, y: 6)
                             )
-                            .shadow(color: palette.accent.opacity(0.35), radius: 12, y: 6)
                     }
+                    .scaleEffect(appeared ? 1 : 0.5)
+                    .opacity(appeared ? 1 : 0)
+                    .animation(BPAnimation.spring.delay(0.4), value: appeared)
                     .padding(.trailing, 20)
                     .padding(.bottom, 20)
-                    .scaleEffect(appearAnimated ? 1 : 0.5)
-                    .opacity(appearAnimated ? 1 : 0)
                 }
             }
 
-            // Answered Prayer Celebration Overlay
+            // Answered celebration overlay
             if viewModel.showAnsweredCelebration {
                 AnsweredCelebrationView(
                     prayerTitle: viewModel.celebrationPrayerTitle,
@@ -141,117 +141,176 @@ private struct JournalContentView: View {
                 .zIndex(100)
             }
         }
-        .sheet(isPresented: $showComposeSheet) {
-            PrayerComposeSheet(viewModel: viewModel, editingEntry: nil)
+        .sheet(isPresented: $showComposeSheet, onDismiss: {
+            reflectionPrompt = nil
+        }) {
+            PrayerComposeSheet(viewModel: viewModel, editingEntry: nil, reflectionPrompt: reflectionPrompt)
         }
         .onAppear {
-            withAnimation(BPAnimation.spring.delay(0.2)) {
-                appearAnimated = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                withAnimation(BPAnimation.spring) {
+                    appeared = true
+                }
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .openJournalWithReflection)) { notification in
+            guard notification.object as? String == "fromContentView" else { return }
+            if let prompt = notification.userInfo?["prompt"] as? String {
+                reflectionPrompt = prompt
+                showComposeSheet = true
             }
         }
     }
 
-    // MARK: - Hero Section (Prompt + Stats)
+    // MARK: - Hero Section
 
     private var heroSection: some View {
-        VStack(spacing: 0) {
-            // Daily Prompt Card with decorative quote
-            ZStack(alignment: .topLeading) {
-                // Decorative curly quote
-                Text("\u{201C}")
-                    .font(.system(size: 80, weight: .bold, design: .serif))
-                    .foregroundStyle(palette.accent.opacity(0.08))
-                    .offset(x: 8, y: -12)
+        ZStack(alignment: .topLeading) {
+            // Decorative curly quote
+            Text("\u{201C}")
+                .font(.system(size: 72, weight: .bold, design: .serif))
+                .foregroundStyle(palette.accent.opacity(0.06))
+                .offset(x: 4, y: -10)
 
-                VStack(alignment: .leading, spacing: 14) {
-                    HStack(spacing: 8) {
-                        Image(systemName: "sparkles")
-                            .font(.system(size: 13, weight: .medium))
-                            .foregroundStyle(palette.accent)
-                        Text("Daily Prompt")
-                            .font(BPFont.caption)
-                            .foregroundStyle(palette.textMuted)
-                            .textCase(.uppercase)
-                            .tracking(0.8)
-                    }
-
-                    Text(viewModel.dailyPrompt)
-                        .font(BPFont.prayerMedium)
-                        .foregroundStyle(palette.textPrimary)
-                        .lineSpacing(5)
-                        .fixedSize(horizontal: false, vertical: true)
-
-                    Button {
-                        showComposeSheet = true
-                        HapticService.lightImpact()
-                    } label: {
-                        HStack(spacing: 6) {
-                            Image(systemName: "pencil.line")
-                                .font(.system(size: 13, weight: .medium))
-                            Text("Write a Prayer")
-                                .font(BPFont.button)
-                        }
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 10)
-                        .background(
-                            Capsule()
-                                .fill(palette.accent)
-                        )
-                    }
-                    .padding(.top, 2)
+            VStack(alignment: .leading, spacing: 14) {
+                HStack(spacing: 6) {
+                    Image(systemName: "pencil.line")
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundStyle(palette.accent)
+                    Text("DAILY REFLECTION")
+                        .font(.system(size: 11, weight: .bold, design: .rounded))
+                        .foregroundStyle(palette.textMuted)
+                        .tracking(1.0)
                 }
-                .padding(20)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(palette.surface)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 20)
-                            .strokeBorder(palette.accent.opacity(0.25), lineWidth: 1)
-                    )
-            )
-            .padding(.horizontal, 16)
-            .padding(.top, 12)
 
-            // Stats Row
-            statsRow
+                Text(viewModel.dailyReflection)
+                    .font(.system(size: 20, weight: .medium, design: .serif))
+                    .foregroundStyle(palette.textPrimary)
+                    .lineSpacing(5)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Button {
+                    showComposeSheet = true
+                    HapticService.lightImpact()
+                } label: {
+                    HStack(spacing: 6) {
+                        Image(systemName: "pencil.line")
+                            .font(.system(size: 12, weight: .medium))
+                        Text("Write a Prayer")
+                            .font(.system(size: 14, weight: .semibold, design: .rounded))
+                    }
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
+                    .background(
+                        Capsule()
+                            .fill(
+                                LinearGradient(
+                                    colors: [palette.accent, palette.accent.opacity(0.8)],
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                            )
+                            .shadow(color: palette.accent.opacity(0.25), radius: 6, y: 3)
+                    )
+                }
+                .padding(.top, 2)
+            }
+            .padding(20)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(palette.surfaceElevated)
+                .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(palette.border.opacity(0.2), lineWidth: 0.5)
+        )
+        .padding(.horizontal, 20)
+        .padding(.top, 8)
+        .opacity(appeared ? 1 : 0)
+        .offset(y: appeared ? 0 : 15)
+        .animation(BPAnimation.spring.delay(0.05), value: appeared)
     }
 
-    // MARK: - Stats Row
+    // MARK: - Stats Strip
 
-    private var statsRow: some View {
-        HStack(spacing: 16) {
-            let total = viewModel.totalPrayerCount
-            let answered = viewModel.answeredPrayerCount
+    private var statsStrip: some View {
+        let total = viewModel.totalPrayerCount
+        let answered = viewModel.answeredPrayerCount
+        let unanswered = total - answered
 
-            HStack(spacing: 6) {
-                Image(systemName: "book.pages")
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundStyle(palette.accent)
-                Text("\(total) prayer\(total == 1 ? "" : "s")")
-                    .font(BPFont.caption)
-                    .foregroundStyle(palette.textSecondary)
-            }
+        return HStack(spacing: 0) {
+            statPill(
+                icon: "book.pages",
+                value: "\(total)",
+                label: total == 1 ? "prayer" : "prayers",
+                color: palette.accent
+            )
 
             if answered > 0 {
-                HStack(spacing: 6) {
-                    Image(systemName: "checkmark.seal.fill")
-                        .font(.system(size: 12, weight: .medium))
-                        .foregroundStyle(palette.success)
-                    Text("\(answered) answered")
-                        .font(BPFont.caption)
-                        .foregroundStyle(palette.success)
-                }
+                thinDivider
+
+                statPill(
+                    icon: "checkmark.seal.fill",
+                    value: "\(answered)",
+                    label: "answered",
+                    color: palette.success
+                )
             }
 
-            Spacer()
+            if unanswered > 0 {
+                thinDivider
+
+                statPill(
+                    icon: "heart.fill",
+                    value: "\(unanswered)",
+                    label: "active",
+                    color: palette.accent
+                )
+            }
         }
+        .padding(.vertical, 14)
+        .padding(.horizontal, 12)
+        .background(
+            RoundedRectangle(cornerRadius: 14)
+                .fill(palette.surfaceElevated)
+                .shadow(color: .black.opacity(0.04), radius: 6, y: 3)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 14)
+                .stroke(palette.border.opacity(0.2), lineWidth: 0.5)
+        )
         .padding(.horizontal, 20)
-        .padding(.top, 14)
-        .padding(.bottom, 4)
+        .padding(.top, 16)
+        .opacity(appeared ? 1 : 0)
+        .offset(y: appeared ? 0 : 10)
+        .animation(BPAnimation.spring.delay(0.1), value: appeared)
+    }
+
+    private func statPill(icon: String, value: String, label: String, color: Color) -> some View {
+        HStack(spacing: 6) {
+            Image(systemName: icon)
+                .font(.system(size: 11, weight: .medium))
+                .foregroundStyle(color)
+
+            Text(value)
+                .font(.system(size: 16, weight: .bold, design: .rounded))
+                .foregroundStyle(palette.textPrimary)
+
+            Text(label)
+                .font(.system(size: 12, weight: .regular, design: .rounded))
+                .foregroundStyle(palette.textMuted)
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    private var thinDivider: some View {
+        Rectangle()
+            .fill(palette.border.opacity(0.4))
+            .frame(width: 0.5, height: 24)
     }
 
     // MARK: - Filter Chips
@@ -267,25 +326,33 @@ private struct JournalContentView: View {
                         HapticService.selection()
                     } label: {
                         Text(filter.displayName)
-                            .font(BPFont.caption)
+                            .font(.system(size: 13, weight: .medium, design: .rounded))
                             .foregroundStyle(
-                                viewModel.journalFilter == filter
-                                    ? .white
-                                    : palette.textSecondary
+                                viewModel.journalFilter == filter ? .white : palette.textSecondary
                             )
-                            .padding(.horizontal, 14)
-                            .padding(.vertical, 7)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
                             .background(
                                 Capsule().fill(
                                     viewModel.journalFilter == filter
                                         ? palette.accent
-                                        : palette.surface
+                                        : palette.surfaceElevated
+                                )
+                            )
+                            .overlay(
+                                Capsule().stroke(
+                                    viewModel.journalFilter == filter
+                                        ? Color.clear
+                                        : palette.border.opacity(0.3),
+                                    lineWidth: 0.5
                                 )
                             )
                     }
                 }
 
-                Divider().frame(height: 20)
+                Rectangle()
+                    .fill(palette.border.opacity(0.4))
+                    .frame(width: 0.5, height: 20)
 
                 ForEach(PrayerCategory.allCases) { category in
                     Button {
@@ -299,62 +366,77 @@ private struct JournalContentView: View {
                             Image(systemName: category.icon)
                                 .font(.system(size: 10))
                             Text(category.displayName)
-                                .font(BPFont.caption)
+                                .font(.system(size: 13, weight: .medium, design: .rounded))
                         }
                         .foregroundStyle(
-                            viewModel.journalCategoryFilter == category
-                                ? .white
-                                : palette.textSecondary
+                            viewModel.journalCategoryFilter == category ? .white : palette.textSecondary
                         )
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 7)
+                        .padding(.horizontal, 14)
+                        .padding(.vertical, 8)
                         .background(
                             Capsule().fill(
                                 viewModel.journalCategoryFilter == category
                                     ? palette.accent
-                                    : palette.surface
+                                    : palette.surfaceElevated
+                            )
+                        )
+                        .overlay(
+                            Capsule().stroke(
+                                viewModel.journalCategoryFilter == category
+                                    ? Color.clear
+                                    : palette.border.opacity(0.3),
+                                lineWidth: 0.5
                             )
                         )
                     }
                 }
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 10)
+            .padding(.horizontal, 20)
+            .padding(.vertical, 14)
         }
+        .opacity(appeared ? 1 : 0)
+        .offset(y: appeared ? 0 : 10)
+        .animation(BPAnimation.spring.delay(0.15), value: appeared)
     }
 
     // MARK: - Empty State
 
     private var emptyJournal: some View {
-        VStack(spacing: 24) {
+        VStack(spacing: 28) {
             Spacer()
 
-            // Pulsing glowing icon
+            // Animated icon
             ZStack {
                 Circle()
-                    .fill(palette.accent.opacity(0.08))
-                    .frame(width: 120, height: 120)
+                    .fill(palette.accent.opacity(0.06))
+                    .frame(width: 130, height: 130)
 
                 Circle()
-                    .fill(palette.accent.opacity(0.05))
-                    .frame(width: 88, height: 88)
+                    .fill(palette.accent.opacity(0.04))
+                    .frame(width: 96, height: 96)
 
                 Image(systemName: "pencil.and.scribble")
                     .font(.system(size: 40, weight: .thin))
                     .foregroundStyle(palette.accent)
             }
+            .opacity(appeared ? 1 : 0)
+            .scaleEffect(appeared ? 1 : 0.8)
+            .animation(BPAnimation.spring.delay(0.1), value: appeared)
 
             VStack(spacing: 10) {
                 Text("Your Prayer Journal")
-                    .font(BPFont.headingSmall)
+                    .font(.system(size: 24, weight: .semibold, design: .rounded))
                     .foregroundStyle(palette.textPrimary)
 
                 Text("This is your sacred space to pour out\nyour heart, lift up your prayers, and\ncelebrate when God answers.")
-                    .font(BPFont.body)
+                    .font(.system(size: 15, weight: .regular, design: .rounded))
                     .foregroundStyle(palette.textMuted)
                     .multilineTextAlignment(.center)
                     .lineSpacing(4)
             }
+            .opacity(appeared ? 1 : 0)
+            .offset(y: appeared ? 0 : 15)
+            .animation(BPAnimation.spring.delay(0.2), value: appeared)
 
             Button {
                 HapticService.impact(.medium)
@@ -364,17 +446,26 @@ private struct JournalContentView: View {
                     Image(systemName: "pencil.line")
                         .font(.system(size: 14, weight: .medium))
                     Text("Write Your First Prayer")
-                        .font(BPFont.button)
+                        .font(.system(size: 15, weight: .semibold, design: .rounded))
                 }
                 .foregroundStyle(.white)
                 .padding(.horizontal, 28)
                 .padding(.vertical, 14)
                 .background(
                     Capsule()
-                        .fill(palette.accent)
+                        .fill(
+                            LinearGradient(
+                                colors: [palette.accent, palette.accent.opacity(0.8)],
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                        )
+                        .shadow(color: palette.accent.opacity(0.3), radius: 10, y: 5)
                 )
-                .shadow(color: palette.accent.opacity(0.25), radius: 8, y: 4)
             }
+            .opacity(appeared ? 1 : 0)
+            .offset(y: appeared ? 0 : 15)
+            .animation(BPAnimation.spring.delay(0.3), value: appeared)
 
             Spacer()
             Spacer()
@@ -391,53 +482,58 @@ private struct JournalEntryCard: View {
     let palette: BPColorPalette
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 12) {
             // Top row: category + date + answered badge
             HStack(spacing: 8) {
-                Image(systemName: entry.category.icon)
-                    .font(.system(size: 11, weight: .medium))
-                    .foregroundStyle(palette.accent)
-
-                Text(entry.category.displayName)
-                    .font(BPFont.caption)
-                    .foregroundStyle(palette.textMuted)
+                // Category pill
+                HStack(spacing: 4) {
+                    Image(systemName: entry.category.icon)
+                        .font(.system(size: 10, weight: .medium))
+                    Text(entry.category.displayName)
+                        .font(.system(size: 11, weight: .medium, design: .rounded))
+                }
+                .foregroundStyle(palette.accent)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .background(
+                    Capsule().fill(palette.accent.opacity(0.1))
+                )
 
                 Spacer()
 
                 if entry.isAnswered {
                     HStack(spacing: 4) {
                         Image(systemName: "checkmark.seal.fill")
-                            .font(.system(size: 11))
+                            .font(.system(size: 10))
                         Text("Answered")
-                            .font(BPFont.caption)
+                            .font(.system(size: 11, weight: .semibold, design: .rounded))
                     }
                     .foregroundStyle(palette.success)
                     .padding(.horizontal, 8)
-                    .padding(.vertical, 3)
+                    .padding(.vertical, 4)
                     .background(
-                        Capsule()
-                            .fill(palette.success.opacity(0.12))
+                        Capsule().fill(palette.success.opacity(0.12))
                     )
                 }
 
                 Text(entry.createdAt.formatted(.relative(presentation: .named)))
-                    .font(BPFont.caption)
+                    .font(.system(size: 11, weight: .regular, design: .rounded))
                     .foregroundStyle(palette.textMuted)
             }
 
             // Title
             Text(entry.title)
-                .font(BPFont.prayerSmall)
+                .font(.system(size: 18, weight: .medium, design: .serif))
                 .foregroundStyle(palette.textPrimary)
                 .lineLimit(2)
 
             // Body preview
             if !entry.body.isEmpty {
                 Text(entry.body)
-                    .font(BPFont.body)
+                    .font(.system(size: 14, weight: .regular, design: .rounded))
                     .foregroundStyle(palette.textSecondary)
                     .lineLimit(2)
-                    .lineSpacing(2)
+                    .lineSpacing(3)
             }
 
             // Verse reference
@@ -446,24 +542,26 @@ private struct JournalEntryCard: View {
                     Image(systemName: "book.closed")
                         .font(.system(size: 10))
                     Text(ref)
-                        .font(BPFont.reference)
+                        .font(.system(size: 12, weight: .regular, design: .serif))
+                        .italic()
                 }
                 .foregroundStyle(palette.accent)
             }
         }
-        .padding(16)
+        .padding(18)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
             RoundedRectangle(cornerRadius: 16)
-                .fill(palette.surface)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 16)
-                        .strokeBorder(
-                            entry.isAnswered
-                                ? palette.success.opacity(0.2)
-                                : palette.border.opacity(0.3),
-                            lineWidth: 1
-                        )
+                .fill(palette.surfaceElevated)
+                .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(
+                    entry.isAnswered
+                        ? palette.success.opacity(0.25)
+                        : palette.border.opacity(0.2),
+                    lineWidth: 0.5
                 )
         )
         // Left accent line
@@ -474,7 +572,15 @@ private struct JournalEntryCard: View {
                 bottomTrailingRadius: 0,
                 topTrailingRadius: 0
             )
-            .fill(entry.isAnswered ? palette.success.opacity(0.5) : palette.accent.opacity(0.4))
+            .fill(
+                LinearGradient(
+                    colors: entry.isAnswered
+                        ? [palette.success, palette.success.opacity(0.5)]
+                        : [palette.accent, palette.accent.opacity(0.4)],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            )
             .frame(width: 3)
         }
     }

@@ -51,8 +51,8 @@ private struct SavedContentView: View {
                 favoritesTab
             case .verses:
                 versesTab
-            case .collections:
-                collectionsTab
+            case .notes:
+                notesTab
             }
         }
         .background(palette.background)
@@ -71,7 +71,7 @@ private struct SavedContentView: View {
         HStack(spacing: 4) {
             tabButton("Favorites", icon: "heart.fill", tab: .favorites)
             tabButton("Verses", icon: "bookmark.fill", tab: .verses)
-            tabButton("Collections", icon: "folder.fill", tab: .collections)
+            tabButton("Notes", icon: "text.bubble", tab: .notes)
         }
         .padding(4)
         .background(
@@ -128,12 +128,22 @@ private struct SavedContentView: View {
 
                 LazyVStack(spacing: 12) {
                     ForEach(Array(items.enumerated()), id: \.element.id) { index, content in
-                        SavedFavoriteCard(
-                            content: content,
-                            displayText: viewModel.personalizedText(for: content),
-                            palette: palette,
-                            onUnsave: { viewModel.unsave(content) }
-                        )
+                        Button {
+                            NotificationCenter.default.post(
+                                name: .feedContentDeepLink,
+                                object: nil,
+                                userInfo: ["contentID": content.id]
+                            )
+                            HapticService.lightImpact()
+                        } label: {
+                            SavedFavoriteCard(
+                                content: content,
+                                displayText: viewModel.personalizedText(for: content),
+                                palette: palette,
+                                onUnsave: { viewModel.unsave(content) }
+                            )
+                        }
+                        .buttonStyle(.plain)
                         .padding(.horizontal, 20)
                         .opacity(appeared ? 1 : 0)
                         .offset(y: appeared ? 0 : 10)
@@ -166,11 +176,25 @@ private struct SavedContentView: View {
 
                 LazyVStack(spacing: 12) {
                     ForEach(Array(items.enumerated()), id: \.element.id) { index, verse in
-                        SavedVerseCard(
-                            verse: verse,
-                            palette: palette,
-                            onDelete: { viewModel.deleteSavedVerse(verse) }
-                        )
+                        Button {
+                            NotificationCenter.default.post(
+                                name: .scriptureDeepLink,
+                                object: nil,
+                                userInfo: [
+                                    "bookName": verse.bookName,
+                                    "chapter": verse.chapter,
+                                    "verse": verse.verseNumber
+                                ]
+                            )
+                            HapticService.lightImpact()
+                        } label: {
+                            SavedVerseCard(
+                                verse: verse,
+                                palette: palette,
+                                onDelete: { viewModel.deleteSavedVerse(verse) }
+                            )
+                        }
+                        .buttonStyle(.plain)
                         .padding(.horizontal, 20)
                         .opacity(appeared ? 1 : 0)
                         .offset(y: appeared ? 0 : 10)
@@ -183,33 +207,43 @@ private struct SavedContentView: View {
         }
     }
 
-    // MARK: - Collections Tab
+    // MARK: - Notes Tab
 
     @ViewBuilder
-    private var collectionsTab: some View {
-        let items = viewModel.collections
+    private var notesTab: some View {
+        let items = viewModel.notedVerses
         if items.isEmpty {
             emptyState(
-                icon: "folder",
-                title: "No Collections Yet",
-                message: "Pin content from the feed to\norganize it into collections."
+                icon: "text.bubble",
+                title: "No Notes Yet",
+                message: "Add notes to any verse in the\nBible reader to see them here."
             )
         } else {
             ScrollView(.vertical, showsIndicators: false) {
                 summaryBar(
-                    icon: "folder.fill",
-                    text: "\(items.count) \(items.count == 1 ? "collection" : "collections")"
+                    icon: "text.bubble.fill",
+                    text: "\(items.count) \(items.count == 1 ? "note" : "notes")"
                 )
 
                 LazyVStack(spacing: 12) {
-                    ForEach(Array(items.enumerated()), id: \.element.id) { index, collection in
-                        NavigationLink {
-                            CollectionDetailView(
-                                collection: collection,
-                                viewModel: viewModel
+                    ForEach(Array(items.enumerated()), id: \.element.id) { index, verse in
+                        Button {
+                            NotificationCenter.default.post(
+                                name: .scriptureDeepLink,
+                                object: nil,
+                                userInfo: [
+                                    "bookName": verse.bookName,
+                                    "chapter": verse.chapter,
+                                    "verse": verse.verseNumber
+                                ]
                             )
+                            HapticService.lightImpact()
                         } label: {
-                            CollectionCard(collection: collection, palette: palette)
+                            NoteCard(
+                                verse: verse,
+                                palette: palette,
+                                onClearNote: { viewModel.clearNote(verse) }
+                            )
                         }
                         .buttonStyle(.plain)
                         .padding(.horizontal, 20)
@@ -326,6 +360,10 @@ private struct SavedFavoriteCard: View {
                     }
                     .foregroundStyle(palette.accent)
                 }
+
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(palette.textMuted)
             }
 
             // Content text
@@ -401,6 +439,10 @@ private struct SavedVerseCard: View {
                     .background(
                         Capsule().fill(palette.surface)
                     )
+
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(palette.textMuted)
             }
 
             // Verse text
@@ -462,47 +504,51 @@ private struct SavedVerseCard: View {
     }
 }
 
-// MARK: - Collection Card
+// MARK: - Note Card
 
-private struct CollectionCard: View {
-    let collection: ContentCollection
+private struct NoteCard: View {
+    let verse: SavedBibleVerse
     let palette: BPColorPalette
+    let onClearNote: () -> Void
 
     var body: some View {
-        HStack(spacing: 14) {
-            // Folder icon with accent background
-            Image(systemName: "folder.fill")
-                .font(.system(size: 16, weight: .medium))
-                .foregroundStyle(.white)
-                .frame(width: 40, height: 40)
-                .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(
-                            LinearGradient(
-                                colors: [palette.accent, palette.accent.opacity(0.7)],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                        )
-                )
+        VStack(alignment: .leading, spacing: 10) {
+            // Reference row with highlight accent
+            HStack(spacing: 8) {
+                HStack(spacing: 5) {
+                    Image(systemName: "text.bubble.fill")
+                        .font(.system(size: 10, weight: .medium))
+                        .foregroundStyle(palette.accent)
 
-            VStack(alignment: .leading, spacing: 3) {
-                Text(collection.name)
-                    .font(.system(size: 16, weight: .medium, design: .rounded))
-                    .foregroundStyle(palette.textPrimary)
+                    Text("\(verse.bookName) \(verse.chapter):\(verse.verseNumber)")
+                        .font(.system(size: 13, weight: .semibold, design: .rounded))
+                        .foregroundStyle(palette.textPrimary)
+                }
 
-                Text("\(collection.contentIDs.count) \(collection.contentIDs.count == 1 ? "item" : "items")")
-                    .font(.system(size: 12, weight: .regular, design: .rounded))
+                Spacer()
+
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 11, weight: .semibold))
                     .foregroundStyle(palette.textMuted)
             }
 
-            Spacer()
+            // Note text (primary)
+            Text(verse.notes)
+                .font(.system(size: 15, weight: .regular, design: .rounded))
+                .foregroundStyle(palette.textPrimary)
+                .lineLimit(3)
+                .lineSpacing(3)
 
-            Image(systemName: "chevron.right")
-                .font(.system(size: 12, weight: .semibold))
+            // Verse snippet (secondary)
+            Text(verse.text)
+                .font(.system(size: 13, weight: .regular, design: .serif))
                 .foregroundStyle(palette.textMuted)
+                .italic()
+                .lineLimit(2)
+                .lineSpacing(3)
         }
         .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(palette.surfaceElevated)
@@ -512,5 +558,27 @@ private struct CollectionCard: View {
             RoundedRectangle(cornerRadius: 16)
                 .stroke(palette.border.opacity(0.2), lineWidth: 0.5)
         )
+        // Left accent with highlight color
+        .overlay(alignment: .leading) {
+            UnevenRoundedRectangle(
+                topLeadingRadius: 16,
+                bottomLeadingRadius: 16,
+                bottomTrailingRadius: 0,
+                topTrailingRadius: 0
+            )
+            .fill(
+                verse.highlightColor.map { Color(hex: $0.dotColor) }
+                    ?? palette.accent.opacity(0.4)
+            )
+            .frame(width: 3)
+        }
+        .contextMenu {
+            Button(role: .destructive) {
+                onClearNote()
+                HapticService.notification(.warning)
+            } label: {
+                Label("Clear Note", systemImage: "eraser")
+            }
+        }
     }
 }

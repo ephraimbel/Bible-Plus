@@ -57,7 +57,8 @@ struct StreakWidgetProvider: TimelineProvider {
             hasActivityToday = false
         }
 
-        let background = SanctuaryBackground.background(for: profile.selectedBackgroundID)
+        let effectiveBgID = profile.widgetSelectedBackgroundID ?? profile.selectedBackgroundID
+        let background = SanctuaryBackground.background(for: effectiveBgID)
             ?? SanctuaryBackground.allBackgrounds[0]
 
         return StreakWidgetEntry(

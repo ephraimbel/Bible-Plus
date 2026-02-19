@@ -70,6 +70,7 @@ private struct ConversationListContent: View {
     let onNewConversation: () -> Void
     let onSelectConversation: (Conversation) -> Void
     @Environment(\.bpPalette) private var palette
+    @Environment(\.colorScheme) private var colorScheme
     @State private var appeared = false
 
     var body: some View {
@@ -137,20 +138,26 @@ private struct ConversationListContent: View {
     // MARK: - Top Gold Gradient
 
     private var topGoldGradient: some View {
-        ZStack(alignment: .top) {
-            palette.background
+        let tint: Color = colorScheme == .dark
+            ? palette.accent
+            : Color(red: 0.65, green: 0.48, blue: 0.25)
+        let strength: CGFloat = colorScheme == .dark ? 0.20 : 0.28
+        let bg = palette.background
 
-            LinearGradient(
-                stops: [
-                    .init(color: palette.accent.opacity(0.08), location: 0),
-                    .init(color: palette.accent.opacity(0.03), location: 0.35),
-                    .init(color: .clear, location: 0.6)
-                ],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
-        }
+        return LinearGradient(
+            stops: [
+                .init(color: bg.blend(with: tint, amount: strength), location: 0.0),
+                .init(color: bg.blend(with: tint, amount: strength * 0.9), location: 0.12),
+                .init(color: bg.blend(with: tint, amount: strength * 0.7), location: 0.25),
+                .init(color: bg.blend(with: tint, amount: strength * 0.45), location: 0.40),
+                .init(color: bg.blend(with: tint, amount: strength * 0.15), location: 0.55),
+                .init(color: bg, location: 0.65),
+                .init(color: bg, location: 1.0)
+            ],
+            startPoint: .top,
+            endPoint: .bottom
+        )
+        .ignoresSafeArea()
     }
 
     // MARK: - Empty State

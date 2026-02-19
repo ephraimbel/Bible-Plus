@@ -4,7 +4,7 @@ import SwiftData
 enum SavedTab: String, CaseIterable {
     case favorites
     case verses
-    case collections
+    case notes
 }
 
 @MainActor
@@ -53,7 +53,23 @@ final class SavedViewModel {
         try? modelContext.save()
     }
 
-    // MARK: - Collections
+    // MARK: - Notes (verses with annotations)
+
+    var notedVerses: [SavedBibleVerse] {
+        let descriptor = FetchDescriptor<SavedBibleVerse>(
+            predicate: #Predicate { $0.notes != "" },
+            sortBy: [SortDescriptor(\.updatedAt, order: .reverse)]
+        )
+        return (try? modelContext.fetch(descriptor)) ?? []
+    }
+
+    func clearNote(_ verse: SavedBibleVerse) {
+        verse.notes = ""
+        verse.updatedAt = Date()
+        try? modelContext.save()
+    }
+
+    // MARK: - Collections (used by CollectionPickerSheet)
 
     var collections: [ContentCollection] {
         let descriptor = FetchDescriptor<ContentCollection>(
@@ -67,7 +83,6 @@ final class SavedViewModel {
         let ids = collection.contentIDs
         let descriptor = FetchDescriptor<PrayerContent>()
         guard let allContent = try? modelContext.fetch(descriptor) else { return [] }
-        // Preserve collection ordering
         return ids.compactMap { id in allContent.first { $0.id == id } }
     }
 

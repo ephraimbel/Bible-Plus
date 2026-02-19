@@ -307,7 +307,7 @@
             perspective: 1200px;
         }
         .phone-frame {
-            width: 220px;
+            width: 200px;
             border-radius: 32px;
             overflow: hidden;
             box-shadow: 0 24px 80px rgba(42,33,24,0.12), 0 4px 20px rgba(42,33,24,0.06);
@@ -320,11 +320,12 @@
             display: block;
         }
         .phone-frame:nth-child(1) { animation: floatSlow 7s ease-in-out infinite; animation-delay: 0s; }
-        .phone-frame:nth-child(2) { animation: float 6s ease-in-out infinite; animation-delay: 0.5s; transform: scale(1.08); z-index: 2; }
-        .phone-frame:nth-child(3) { animation: floatSlow 8s ease-in-out infinite; animation-delay: 1s; }
-        .phone-frame:nth-child(4) { animation: floatSlow 7s ease-in-out infinite; animation-delay: 1.5s; }
+        .phone-frame:nth-child(2) { animation: floatSlow 6.5s ease-in-out infinite; animation-delay: 0.3s; }
+        .phone-frame:nth-child(3) { animation: float 6s ease-in-out infinite; animation-delay: 0.6s; transform: scale(1.08); z-index: 2; }
+        .phone-frame:nth-child(4) { animation: floatSlow 7.5s ease-in-out infinite; animation-delay: 0.9s; }
+        .phone-frame:nth-child(5) { animation: floatSlow 7s ease-in-out infinite; animation-delay: 1.2s; }
         .phone-frame:hover { transform: translateY(-8px) scale(1.04); z-index: 10; }
-        .phone-frame:nth-child(2):hover { transform: translateY(-8px) scale(1.12); }
+        .phone-frame:nth-child(3):hover { transform: translateY(-8px) scale(1.12); }
 
         /* --- Features Section --- */
         .features {
@@ -596,8 +597,9 @@
         /* --- Responsive --- */
         @media (max-width: 900px) {
             .showcase-inner { flex-wrap: wrap; gap: 16px; }
-            .phone-frame { width: 160px; }
-            .phone-frame:nth-child(2) { transform: scale(1); }
+            .phone-frame { width: 140px; }
+            .phone-frame:nth-child(3) { transform: scale(1); }
+            .phone-frame:nth-child(5) { display: none; }
             .feature-row, .feature-row.reverse { grid-template-columns: 1fr; gap: 48px; direction: ltr; text-align: center; }
             .feature-text p { margin: 0 auto; }
             .feature-label { margin-left: auto; margin-right: auto; }
@@ -611,7 +613,8 @@
             .btn-primary, .btn-ghost, .btn-cta-white { width: 100%; justify-content: center; }
             .showcase-inner { gap: 10px; }
             .phone-frame { width: 140px; border-radius: 24px; }
-            .phone-frame:nth-child(4) { display: none; }
+            .phone-frame:nth-child(4),
+            .phone-frame:nth-child(5) { display: none; }
             .features, .cta-section { padding-left: 20px; padding-right: 20px; }
             .feature-phone { width: 220px; border-radius: 28px; }
             .cta-card { padding: 60px 24px; border-radius: 32px; }
@@ -662,6 +665,9 @@
 <section class="showcase reveal">
     <div class="showcase-inner">
         <div class="phone-frame">
+            <img src="/images/screenshot-home.png" alt="Bible Plus - Home Dashboard" loading="lazy">
+        </div>
+        <div class="phone-frame">
             <img src="/images/screenshot-feed.png" alt="Bible Plus - Personalized Feed" loading="lazy">
         </div>
         <div class="phone-frame">
@@ -683,16 +689,16 @@
         <p>Every feature is designed to draw you closer to God's Word, every single day.</p>
     </div>
 
-    <!-- Feature 1: Feed -->
+    <!-- Feature 1: Home Dashboard -->
     <div class="feature-row reveal">
         <div class="feature-text">
-            <span class="feature-label">Personalized Feed</span>
-            <h3>Content that <em>knows your heart</em></h3>
-            <p>Daily prayers, verses, and devotionals tailored to your season of life, burdens, and spiritual maturity. Swipe through content that actually speaks to you. No two feeds are alike.</p>
+            <span class="feature-label">Your Daily Home</span>
+            <h3>Start each day <em>with God</em></h3>
+            <p>A daily verse, your reading streak, quick actions, and a reflection prompt — all in one beautiful dashboard. Swipe up to explore a personalized feed of prayers, verses, and devotionals.</p>
         </div>
         <div class="feature-visual">
             <div class="feature-phone">
-                <img src="/images/screenshot-feed.png" alt="Personalized Feed" loading="lazy">
+                <img src="/images/screenshot-home.png" alt="Home Dashboard" loading="lazy">
             </div>
         </div>
     </div>
@@ -730,11 +736,25 @@
         <div class="feature-text">
             <span class="feature-label">Saved & Collections</span>
             <h3>Your verses, <em>always with you</em></h3>
-            <p>Save your favorite verses and devotionals. Organize them into collections for quick access. Build your personal library of Scripture that matters most to you.</p>
+            <p>Save your favorite verses with color highlights and personal notes. Organize them into collections for quick access. Build your personal library of Scripture that matters most.</p>
         </div>
         <div class="feature-visual">
             <div class="feature-phone">
                 <img src="/images/screenshot-saved.png" alt="Saved Verses" loading="lazy">
+            </div>
+        </div>
+    </div>
+
+    <!-- Feature 5: Personalized Feed -->
+    <div class="feature-row reveal">
+        <div class="feature-text">
+            <span class="feature-label">Personalized Feed</span>
+            <h3>Content that <em>knows your heart</em></h3>
+            <p>Swipe through prayers, verses, and devotionals tailored to your season of life. Beautiful full-screen cards with ambient backgrounds. No two feeds are alike.</p>
+        </div>
+        <div class="feature-visual">
+            <div class="feature-phone">
+                <img src="/images/screenshot-feed.png" alt="Personalized Feed" loading="lazy">
             </div>
         </div>
     </div>

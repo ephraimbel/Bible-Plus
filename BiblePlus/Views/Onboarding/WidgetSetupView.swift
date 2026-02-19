@@ -50,20 +50,32 @@ struct WidgetSetupView: View {
             TabView(selection: $currentSetupStep) {
                 ForEach(Array(steps.enumerated()), id: \.offset) { index, step in
                     VStack(spacing: 24) {
-                        // Step icon
+                        // Step icon — elevated circle with outer glow
                         ZStack {
+                            // Outer glow circle
                             Circle()
-                                .fill(palette.accentSoft)
-                                .frame(width: 100, height: 100)
+                                .fill(palette.accent.opacity(0.06))
+                                .frame(width: 120, height: 120)
+
+                            // Main icon circle
+                            Circle()
+                                .fill(palette.surfaceElevated)
+                                .frame(width: 88, height: 88)
+                                .shadow(color: palette.accent.opacity(0.12), radius: 8, y: 4)
+                                .overlay(
+                                    Circle()
+                                        .stroke(palette.accent.opacity(0.15), lineWidth: 0.5)
+                                )
 
                             Image(systemName: step.icon)
-                                .font(.system(size: 40, weight: .light))
+                                .font(.system(size: 32, weight: .light))
                                 .foregroundStyle(palette.accent)
                         }
 
                         VStack(spacing: 10) {
-                            Text("Step \(index + 1)")
-                                .font(BPFont.reference)
+                            Text("STEP \(index + 1)")
+                                .font(.system(size: 11, weight: .bold, design: .rounded))
+                                .tracking(1.5)
                                 .foregroundStyle(palette.accent)
 
                             Text(step.title)
@@ -82,8 +94,19 @@ struct WidgetSetupView: View {
                     .tag(index)
                 }
             }
-            .tabViewStyle(.page(indexDisplayMode: .always))
-            .frame(height: 320)
+            .tabViewStyle(.page(indexDisplayMode: .never))
+            .frame(height: 300)
+
+            // Custom page indicator
+            HStack(spacing: 8) {
+                ForEach(0..<steps.count, id: \.self) { index in
+                    Capsule()
+                        .fill(currentSetupStep == index ? palette.accent : palette.accent.opacity(0.2))
+                        .frame(width: currentSetupStep == index ? 20 : 7, height: 7)
+                        .animation(.spring(response: 0.35, dampingFraction: 0.7), value: currentSetupStep)
+                }
+            }
+            .padding(.top, 8)
 
             Spacer()
 

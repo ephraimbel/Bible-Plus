@@ -9,32 +9,37 @@ struct SoundscapePickerView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 24) {
+                VStack(alignment: .leading, spacing: 28) {
                     // Volume control
                     volumeControl
                         .padding(.horizontal, 20)
 
                     // Free soundscapes
-                    soundscapeSection(title: "Free", icon: nil, sounds: Soundscape.freeSoundscapes, locked: false)
+                    soundscapeSection(title: "FREE", icon: nil, sounds: Soundscape.freeSoundscapes, locked: false)
 
                     // Nature sounds
-                    soundscapeSection(title: "Nature", icon: "leaf.fill", sounds: Soundscape.natureSoundscapes, locked: !vm.profile.isPro)
+                    soundscapeSection(title: "NATURE", icon: "leaf.fill", sounds: Soundscape.natureSoundscapes, locked: !vm.profile.isPro)
 
                     // Ambient & Music
-                    soundscapeSection(title: "Ambient & Music", icon: "music.note", sounds: Soundscape.ambientSoundscapes, locked: !vm.profile.isPro)
+                    soundscapeSection(title: "AMBIENT & MUSIC", icon: "music.note", sounds: Soundscape.ambientSoundscapes, locked: !vm.profile.isPro)
 
                     // Classic
-                    soundscapeSection(title: "Classic", icon: "crown.fill", sounds: Soundscape.classicSoundscapes, locked: !vm.profile.isPro)
+                    soundscapeSection(title: "CLASSIC", icon: "crown.fill", sounds: Soundscape.classicSoundscapes, locked: !vm.profile.isPro)
                 }
                 .padding(.vertical, 16)
             }
             .background(palette.background)
-            .navigationTitle("Soundscapes")
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(palette.background, for: .navigationBar)
             .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Soundscapes")
+                        .font(.system(size: 18, weight: .semibold, design: .serif))
+                        .foregroundStyle(palette.textPrimary)
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Done") { dismiss() }
+                        .font(.system(size: 15, weight: .semibold, design: .rounded))
                         .foregroundStyle(palette.accent)
                 }
             }
@@ -53,7 +58,7 @@ struct SoundscapePickerView: View {
             HStack {
                 Image(systemName: "speaker.fill")
                     .font(.system(size: 13))
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(palette.textMuted)
 
                 Slider(value: Binding(
                     get: { vm.volume },
@@ -63,36 +68,65 @@ struct SoundscapePickerView: View {
 
                 Image(systemName: "speaker.wave.3.fill")
                     .font(.system(size: 13))
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(palette.textMuted)
             }
 
             Text("Volume: \(Int(vm.volume * 100))%")
-                .font(BPFont.caption)
-                .foregroundStyle(.secondary)
+                .font(.system(size: 12, weight: .medium, design: .rounded))
+                .foregroundStyle(palette.textMuted)
         }
         .padding(16)
-        .background(palette.surface, in: RoundedRectangle(cornerRadius: 12))
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(palette.surfaceElevated)
+                .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
+        )
     }
 
     // MARK: - Soundscape Section
 
     @ViewBuilder
     private func soundscapeSection(title: String, icon: String?, sounds: [Soundscape], locked: Bool) -> some View {
-        Section {
-            ForEach(sounds) { soundscape in
-                soundscapeRow(soundscape, locked: locked)
-            }
-        } header: {
-            HStack(spacing: 5) {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 6) {
                 Text(title)
-                    .font(BPFont.button)
-                    .foregroundStyle(.secondary)
+                    .font(.system(size: 11, weight: .bold, design: .rounded))
+                    .tracking(1.5)
+                    .foregroundStyle(palette.textMuted)
                 if let icon {
                     Image(systemName: icon)
-                        .font(.system(size: 12))
-                        .foregroundStyle(Color(hex: "C9A96E"))
+                        .font(.system(size: 10))
+                        .foregroundStyle(palette.accent)
                 }
             }
+            .padding(.horizontal, 20)
+
+            VStack(spacing: 0) {
+                ForEach(Array(sounds.enumerated()), id: \.element.id) { index, soundscape in
+                    soundscapeRow(soundscape, locked: locked)
+
+                    if index < sounds.count - 1 {
+                        Rectangle()
+                            .fill(palette.border.opacity(0.12))
+                            .frame(height: 0.5)
+                            .padding(.leading, 78)
+                            .padding(.trailing, 20)
+                    }
+                }
+            }
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(palette.surfaceElevated)
+                    .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
+            )
             .padding(.horizontal, 20)
         }
     }
@@ -101,6 +135,8 @@ struct SoundscapePickerView: View {
 
     @ViewBuilder
     private func soundscapeRow(_ soundscape: Soundscape, locked: Bool) -> some View {
+        let isActive = vm.currentSoundscape == soundscape
+
         Button {
             if !soundscape.isAvailable {
                 // Coming soon — do nothing
@@ -112,53 +148,92 @@ struct SoundscapePickerView: View {
             }
         } label: {
             HStack(spacing: 14) {
-                // Icon
-                ZStack {
-                    Circle()
-                        .fill(Color(hex: "C9A96E").opacity(vm.currentSoundscape == soundscape ? 0.2 : 0.08))
-                        .frame(width: 48, height: 48)
-
-                    Image(systemName: soundscape.icon)
-                        .font(.system(size: 20))
-                        .foregroundStyle(vm.currentSoundscape == soundscape ? Color(hex: "C9A96E") : .primary)
-                }
+                // Icon in circle
+                Image(systemName: soundscape.icon)
+                    .font(.system(size: 18, weight: .medium))
+                    .foregroundStyle(isActive ? .white : palette.accent)
+                    .frame(width: 42, height: 42)
+                    .background(
+                        Circle()
+                            .fill(
+                                isActive
+                                    ? AnyShapeStyle(
+                                        LinearGradient(
+                                            colors: [palette.accent, palette.accent.opacity(0.85)],
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        )
+                                    )
+                                    : AnyShapeStyle(palette.accent.opacity(0.08))
+                            )
+                    )
+                    .shadow(
+                        color: isActive ? palette.accent.opacity(0.3) : .clear,
+                        radius: 4, y: 2
+                    )
 
                 // Name + description
                 VStack(alignment: .leading, spacing: 3) {
                     Text(soundscape.displayName)
-                        .font(BPFont.body)
-                        .foregroundStyle(.primary)
+                        .font(.system(size: 15, weight: .semibold, design: .rounded))
+                        .foregroundStyle(palette.textPrimary)
 
                     Text(soundscape.description)
-                        .font(BPFont.caption)
-                        .foregroundStyle(.secondary)
+                        .font(.system(size: 13, weight: .regular, design: .rounded))
+                        .foregroundStyle(palette.textMuted)
                 }
 
                 Spacer()
 
                 // Status badge
-                if vm.currentSoundscape == soundscape {
-                    Image(systemName: "checkmark.circle.fill")
-                        .font(.system(size: 20))
-                        .foregroundStyle(Color(hex: "C9A96E"))
+                if isActive {
+                    ZStack {
+                        Circle()
+                            .fill(
+                                LinearGradient(
+                                    colors: [palette.accent, palette.accent.opacity(0.85)],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                            )
+                            .frame(width: 26, height: 26)
+                            .shadow(color: palette.accent.opacity(0.25), radius: 3, y: 1)
+
+                        Image(systemName: "checkmark")
+                            .font(.system(size: 11, weight: .bold))
+                            .foregroundStyle(.white)
+                    }
                 } else if !soundscape.isAvailable {
-                    Text("Coming Soon")
-                        .font(BPFont.caption)
-                        .foregroundStyle(.secondary)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .background(.ultraThinMaterial, in: Capsule())
+                    Text("SOON")
+                        .font(.system(size: 10, weight: .bold, design: .rounded))
+                        .tracking(0.5)
+                        .foregroundStyle(palette.textMuted)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 5)
+                        .background(
+                            Capsule()
+                                .fill(palette.surface)
+                        )
+                        .overlay(
+                            Capsule()
+                                .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
+                        )
                 } else if locked {
                     Image(systemName: "lock.fill")
-                        .font(.system(size: 16))
-                        .foregroundStyle(.secondary)
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundStyle(palette.textMuted)
+                        .frame(width: 26, height: 26)
+                        .background(
+                            Circle()
+                                .fill(palette.surface)
+                        )
                 }
             }
-            .padding(.horizontal, 20)
-            .padding(.vertical, 8)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .opacity(locked ? 0.6 : 1.0)
+        .opacity(locked && soundscape.isAvailable ? 0.6 : 1.0)
     }
 }

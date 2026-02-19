@@ -58,14 +58,21 @@ struct NameInputView: View {
                 .background(
                     RoundedRectangle(cornerRadius: 16)
                         .fill(palette.surfaceElevated)
+                        .shadow(
+                            color: isNameFocused
+                                ? palette.accent.opacity(0.12)
+                                : .black.opacity(0.05),
+                            radius: isNameFocused ? 8 : 4,
+                            y: isNameFocused ? 4 : 2
+                        )
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: 16)
                         .stroke(
                             isNameFocused
-                                ? palette.accent
-                                : palette.border,
-                            lineWidth: isNameFocused ? 2 : 1
+                                ? palette.accent.opacity(0.6)
+                                : palette.border.opacity(0.2),
+                            lineWidth: isNameFocused ? 1.5 : 0.5
                         )
                 )
                 .padding(.horizontal, 40)

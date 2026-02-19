@@ -32,7 +32,6 @@ private struct FeedContentView: View {
     @State private var showBackgroundPicker = false
     @State private var sanctuaryVM: SanctuaryViewModel?
     @State private var showProgress = false
-    @State private var showSettings = false
 
     var body: some View {
         ZStack {
@@ -45,12 +44,8 @@ private struct FeedContentView: View {
                         HapticService.lightImpact()
                     },
                     onShowProgress: { showProgress = true },
-                    onShowSettings: { showSettings = true },
                     onDailyVerseTap: { deepLinkDailyVerse() },
                     onContinueReading: { deepLinkContinueReading() },
-                    onOpenJournal: {
-                        NotificationCenter.default.post(name: .switchToJournalTab, object: nil)
-                    },
                     onOpenSanctuary: { showSanctuary = true }
                 )
                 .transition(.opacity)
@@ -62,7 +57,6 @@ private struct FeedContentView: View {
                         withAnimation(.easeInOut(duration: 0.3)) { vm.showFeed = false }
                         HapticService.lightImpact()
                     },
-                    onShowSettings: { showSettings = true },
                     onShowSanctuary: { showSanctuary = true },
                     onShowSoundscapePicker: { openSoundscapePicker() },
                     onShowBackgroundPicker: { openBackgroundPicker() }
@@ -113,9 +107,6 @@ private struct FeedContentView: View {
         }
         .sheet(isPresented: $showProgress) {
             MyProgressView()
-        }
-        .sheet(isPresented: $showSettings) {
-            SettingsView()
         }
         .onReceive(NotificationCenter.default.publisher(for: SettingsViewModel.personalizationDidChange)) { _ in
             vm.showFeed = false

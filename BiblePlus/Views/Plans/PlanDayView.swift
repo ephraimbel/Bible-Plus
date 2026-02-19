@@ -21,7 +21,7 @@ struct PlanDayView: View {
                 // Day header
                 VStack(alignment: .leading, spacing: 8) {
                     Text("DAY \(day.day)")
-                        .font(.system(size: 12, weight: .bold, design: .rounded))
+                        .font(.system(size: 11, weight: .bold, design: .rounded))
                         .tracking(1.5)
                         .foregroundStyle(palette.accent)
 
@@ -34,9 +34,15 @@ struct PlanDayView: View {
 
                 // Reflection prompt
                 if let reflection = day.reflection, !reflection.isEmpty {
-                    HStack(alignment: .top, spacing: 12) {
+                    HStack(alignment: .top, spacing: 14) {
                         RoundedRectangle(cornerRadius: 2)
-                            .fill(palette.accent)
+                            .fill(
+                                LinearGradient(
+                                    colors: [palette.accent, palette.accent.opacity(0.5)],
+                                    startPoint: .top,
+                                    endPoint: .bottom
+                                )
+                            )
                             .frame(width: 3)
 
                         Text(reflection)
@@ -45,6 +51,16 @@ struct PlanDayView: View {
                             .lineSpacing(6)
                             .italic()
                     }
+                    .padding(16)
+                    .background(
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(palette.surfaceElevated)
+                            .shadow(color: .black.opacity(0.04), radius: 6, y: 3)
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(palette.border.opacity(0.12), lineWidth: 0.5)
+                    )
                     .padding(.horizontal, 24)
                     .fixedSize(horizontal: false, vertical: true)
                 }
@@ -57,11 +73,28 @@ struct PlanDayView: View {
                     .padding(.horizontal, 24)
 
                 // Reading cards
-                VStack(spacing: 12) {
-                    ForEach(Array(day.readings.enumerated()), id: \.offset) { _, reading in
+                VStack(spacing: 0) {
+                    ForEach(Array(day.readings.enumerated()), id: \.offset) { index, reading in
                         readingCard(reading)
+
+                        if index < day.readings.count - 1 {
+                            Rectangle()
+                                .fill(palette.border.opacity(0.12))
+                                .frame(height: 0.5)
+                                .padding(.leading, 64)
+                                .padding(.trailing, 16)
+                        }
                     }
                 }
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(palette.surfaceElevated)
+                        .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
+                )
                 .padding(.horizontal, 24)
 
                 // Mark complete / status
@@ -86,14 +119,18 @@ struct PlanDayView: View {
                 Image(systemName: "checkmark.circle.fill")
                     .foregroundStyle(palette.success)
                 Text("Day Completed")
-                    .font(BPFont.button)
+                    .font(.system(size: 15, weight: .semibold, design: .rounded))
                     .foregroundStyle(palette.success)
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, 18)
             .background(
                 RoundedRectangle(cornerRadius: 16)
-                    .fill(palette.success.opacity(0.12))
+                    .fill(palette.success.opacity(0.08))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(palette.success.opacity(0.2), lineWidth: 0.5)
             )
         } else if let progress {
             // Plan started — can mark complete
@@ -105,7 +142,7 @@ struct PlanDayView: View {
             // Plan not started yet — prompt to start
             VStack(spacing: 12) {
                 Text("Start this plan to track your progress")
-                    .font(BPFont.caption)
+                    .font(.system(size: 13, weight: .medium, design: .rounded))
                     .foregroundStyle(palette.textMuted)
                     .multilineTextAlignment(.center)
 
@@ -126,22 +163,22 @@ struct PlanDayView: View {
         } label: {
             HStack(spacing: 14) {
                 Image(systemName: "book.fill")
-                    .font(.system(size: 18))
+                    .font(.system(size: 16, weight: .medium))
                     .foregroundStyle(palette.accent)
                     .frame(width: 36, height: 36)
                     .background(
                         Circle()
-                            .fill(palette.accentSoft)
+                            .fill(palette.accent.opacity(0.08))
                     )
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(reading.displayReference)
-                        .font(BPFont.button)
+                        .font(.system(size: 15, weight: .semibold, design: .rounded))
                         .foregroundStyle(palette.textPrimary)
 
                     if let book = BibleData.book(id: reading.bookID) {
                         Text(book.testament == .old ? "Old Testament" : "New Testament")
-                            .font(BPFont.caption)
+                            .font(.system(size: 12, weight: .regular, design: .rounded))
                             .foregroundStyle(palette.textMuted)
                     }
                 }
@@ -150,23 +187,23 @@ struct PlanDayView: View {
 
                 Text("Read")
                     .font(.system(size: 12, weight: .semibold, design: .rounded))
-                    .foregroundStyle(palette.accent)
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 5)
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 6)
                     .background(
                         Capsule()
-                            .fill(palette.accent.opacity(0.12))
+                            .fill(
+                                LinearGradient(
+                                    colors: [palette.accent, palette.accent.opacity(0.85)],
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                            )
                     )
             }
-            .padding(14)
-            .background(
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(palette.surface)
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(palette.border, lineWidth: 1)
-            )
+            .padding(.horizontal, 14)
+            .padding(.vertical, 12)
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
     }

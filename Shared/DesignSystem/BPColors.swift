@@ -63,6 +63,22 @@ struct BPColorPalette {
 // MARK: - Hex Color Initializer
 
 extension Color {
+    /// Linearly blend this color with another by the given amount (0 = self, 1 = other).
+    func blend(with other: Color, amount: CGFloat) -> Color {
+        let a = UIColor(self)
+        let b = UIColor(other)
+        var r1: CGFloat = 0, g1: CGFloat = 0, b1: CGFloat = 0, a1: CGFloat = 0
+        var r2: CGFloat = 0, g2: CGFloat = 0, b2: CGFloat = 0, a2: CGFloat = 0
+        a.getRed(&r1, green: &g1, blue: &b1, alpha: &a1)
+        b.getRed(&r2, green: &g2, blue: &b2, alpha: &a2)
+        let t = min(max(amount, 0), 1)
+        return Color(
+            red: r1 + (r2 - r1) * t,
+            green: g1 + (g2 - g1) * t,
+            blue: b1 + (b2 - b1) * t
+        )
+    }
+
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int: UInt64 = 0

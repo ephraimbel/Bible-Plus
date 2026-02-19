@@ -625,15 +625,19 @@ private struct BibleContentView: View {
                     Button {
                         viewModel.showTranslationPicker = true
                     } label: {
-                        Text(viewModel.currentTranslation.apiCode)
-                            .font(.system(size: 11, weight: .semibold))
-                            .foregroundStyle(palette.accent)
-                            .padding(.horizontal, 7)
-                            .padding(.vertical, 3)
-                            .background(
-                                Capsule()
-                                    .fill(palette.accent.opacity(0.12))
-                            )
+                        HStack(spacing: 3) {
+                            Text(viewModel.currentTranslation.apiCode)
+                                .font(.system(size: 11, weight: .semibold))
+                            Image(systemName: "chevron.down")
+                                .font(.system(size: 7, weight: .bold))
+                        }
+                        .foregroundStyle(palette.accent)
+                        .frame(minWidth: 46)
+                        .padding(.vertical, 3)
+                        .background(
+                            Capsule()
+                                .fill(palette.accent.opacity(0.12))
+                        )
                     }
                     .accessibilityLabel("Change translation")
                 }
@@ -735,7 +739,7 @@ private struct BibleContentView: View {
                 currentTranslation: viewModel.currentTranslation,
                 onSelect: { viewModel.changeTranslation($0) }
             )
-            .presentationDetents([.medium])
+            .presentationDetents([.medium, .large])
         }
         .sheet(isPresented: $viewModel.showSearch) {
             if let searchVM = searchViewModel {

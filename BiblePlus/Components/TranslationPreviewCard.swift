@@ -22,9 +22,15 @@ struct TranslationPreviewCard: View {
                     Spacer()
 
                     if isSelected {
-                        Image(systemName: "checkmark.circle.fill")
-                            .font(.title3)
+                        Image(systemName: "checkmark")
+                            .font(.system(size: 11, weight: .bold))
                             .foregroundStyle(.white)
+                            .frame(width: 26, height: 26)
+                            .background(
+                                Circle()
+                                    .fill(.white.opacity(0.25))
+                            )
+                            .transition(.scale.combined(with: .opacity))
                     }
                 }
 
@@ -34,11 +40,13 @@ struct TranslationPreviewCard: View {
                         isSelected ? .white.opacity(0.7) : palette.textMuted
                     )
 
-                Divider()
-                    .overlay(
+                Rectangle()
+                    .fill(
                         isSelected
-                            ? Color.white.opacity(0.2) : palette.border
+                            ? Color.white.opacity(0.15)
+                            : palette.border.opacity(0.12)
                     )
+                    .frame(height: 0.5)
 
                 Text(translation.john316)
                     .font(BPFont.bibleSmall)
@@ -60,20 +68,29 @@ struct TranslationPreviewCard: View {
                 RoundedRectangle(cornerRadius: 20)
                     .fill(
                         isSelected
-                            ? palette.accent : palette.surfaceElevated
+                            ? AnyShapeStyle(
+                                LinearGradient(
+                                    colors: [palette.accent, palette.accent.opacity(0.85)],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                            )
+                            : AnyShapeStyle(palette.surfaceElevated)
+                    )
+                    .shadow(
+                        color: isSelected
+                            ? palette.accent.opacity(0.3)
+                            : .black.opacity(0.05),
+                        radius: isSelected ? 12 : 6,
+                        y: isSelected ? 4 : 2
                     )
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
                     .stroke(
-                        isSelected ? Color.clear : palette.border,
-                        lineWidth: 1
+                        isSelected ? Color.clear : palette.border.opacity(0.15),
+                        lineWidth: 0.5
                     )
-            )
-            .shadow(
-                color: isSelected ? palette.accent.opacity(0.3) : Color.black.opacity(0.05),
-                radius: isSelected ? 12 : 4,
-                y: isSelected ? 4 : 2
             )
         }
         .buttonStyle(.plain)

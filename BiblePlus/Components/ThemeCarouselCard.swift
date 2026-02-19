@@ -56,13 +56,30 @@ struct ThemeCarouselCard: View {
 
                     Spacer()
 
-                    if isSelected {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundStyle(palette.accent)
-                    } else {
+                    ZStack {
                         Circle()
-                            .stroke(palette.border, lineWidth: 2)
-                            .frame(width: 22, height: 22)
+                            .stroke(
+                                isSelected ? palette.accent : palette.border.opacity(0.4),
+                                lineWidth: isSelected ? 0 : 1.5
+                            )
+                            .frame(width: 26, height: 26)
+
+                        if isSelected {
+                            Circle()
+                                .fill(
+                                    LinearGradient(
+                                        colors: [palette.accent, palette.accent.opacity(0.85)],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                )
+                                .frame(width: 26, height: 26)
+                                .shadow(color: palette.accent.opacity(0.25), radius: 3, y: 1)
+
+                            Image(systemName: "checkmark")
+                                .font(.system(size: 11, weight: .bold))
+                                .foregroundStyle(.white)
+                        }
                     }
                 }
                 .padding(16)
@@ -79,14 +96,14 @@ struct ThemeCarouselCard: View {
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
                     .stroke(
-                        isSelected ? palette.accent : palette.border,
-                        lineWidth: isSelected ? 2 : 1
+                        isSelected ? palette.accent.opacity(0.4) : palette.border.opacity(0.15),
+                        lineWidth: isSelected ? 1.5 : 0.5
                     )
             )
             .shadow(
-                color: isSelected ? palette.accent.opacity(0.2) : Color.black.opacity(0.05),
-                radius: isSelected ? 12 : 4,
-                y: 2
+                color: isSelected ? palette.accent.opacity(0.2) : .black.opacity(0.05),
+                radius: isSelected ? 12 : 6,
+                y: isSelected ? 4 : 2
             )
         }
         .buttonStyle(.plain)

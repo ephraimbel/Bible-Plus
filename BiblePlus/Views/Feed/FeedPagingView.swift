@@ -4,7 +4,6 @@ struct FeedPagingView: View {
     @Bindable var vm: FeedViewModel
     let soundscapeService: SoundscapeService
     let onReturnHome: () -> Void
-    let onShowSettings: () -> Void
     let onShowSanctuary: () -> Void
     let onShowSoundscapePicker: () -> Void
     let onShowBackgroundPicker: () -> Void
@@ -59,7 +58,7 @@ struct FeedPagingView: View {
                 }
             }
 
-            // Top bar: Home (left) + Settings (right) — hides in immersive mode
+            // Top bar: Home button — hides in immersive mode
             VStack {
                 HStack {
                     Button {
@@ -78,22 +77,6 @@ struct FeedPagingView: View {
                     }
 
                     Spacer()
-
-                    Button {
-                        onShowSettings()
-                        HapticService.lightImpact()
-                    } label: {
-                        Image(systemName: "gearshape.fill")
-                            .font(.system(size: 15, weight: .medium))
-                            .foregroundStyle(.white.opacity(0.85))
-                            .frame(width: 36, height: 36)
-                            .background(
-                                Circle()
-                                    .fill(.ultraThinMaterial)
-                                    .environment(\.colorScheme, .dark)
-                            )
-                            .shadow(color: .black.opacity(0.25), radius: 6, y: 2)
-                    }
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 8)

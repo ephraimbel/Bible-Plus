@@ -24,8 +24,8 @@ struct ChatView: View {
                 }
             }
         }
-        .navigationTitle("Ask")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbarBackground(.hidden, for: .navigationBar)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 if let vm = viewModel, !vm.messages.isEmpty {
@@ -34,8 +34,13 @@ struct ChatView: View {
                         dismiss()
                     } label: {
                         Image(systemName: "trash")
-                            .font(.system(size: 14))
+                            .font(.system(size: 13, weight: .medium))
                             .foregroundStyle(palette.textMuted)
+                            .frame(width: 30, height: 30)
+                            .background(
+                                Circle()
+                                    .fill(palette.surface)
+                            )
                     }
                     .accessibilityLabel("Delete conversation")
                 }
@@ -49,6 +54,7 @@ struct ChatView: View {
 private struct ChatContentView: View {
     @Bindable var viewModel: ChatViewModel
     @Environment(\.bpPalette) private var palette
+    @Environment(\.colorScheme) private var colorScheme
     @State private var showPaywall = false
     @State private var sendButtonScale: CGFloat = 1.0
 
@@ -90,7 +96,7 @@ private struct ChatContentView: View {
             // Input bar
             inputBar
         }
-        .background(palette.background)
+        .background(topGoldGradient)
         .overlay(alignment: .bottom) {
             // Saved to Journal toast
             if viewModel.showSavedToJournalToast {
@@ -109,6 +115,31 @@ private struct ChatContentView: View {
         .sheet(item: $viewModel.shareText) { text in
             ShareSheet(text: text)
         }
+    }
+
+    // MARK: - Top Gold Gradient
+
+    private var topGoldGradient: some View {
+        let tint: Color = colorScheme == .dark
+            ? palette.accent
+            : Color(red: 0.65, green: 0.48, blue: 0.25)
+        let strength: CGFloat = colorScheme == .dark ? 0.20 : 0.28
+        let bg = palette.background
+
+        return LinearGradient(
+            stops: [
+                .init(color: bg.blend(with: tint, amount: strength), location: 0.0),
+                .init(color: bg.blend(with: tint, amount: strength * 0.9), location: 0.12),
+                .init(color: bg.blend(with: tint, amount: strength * 0.7), location: 0.25),
+                .init(color: bg.blend(with: tint, amount: strength * 0.45), location: 0.40),
+                .init(color: bg.blend(with: tint, amount: strength * 0.15), location: 0.55),
+                .init(color: bg, location: 0.65),
+                .init(color: bg, location: 1.0)
+            ],
+            startPoint: .top,
+            endPoint: .bottom
+        )
+        .ignoresSafeArea()
     }
 
     // MARK: - Message List
@@ -185,25 +216,19 @@ private struct ChatContentView: View {
                             Image(systemName: suggestionIcon(for: suggestion))
                                 .font(.system(size: 11, weight: .semibold))
                             Text(suggestion)
-                                .font(.system(size: 14, weight: .medium, design: .rounded))
+                                .font(.system(size: 13, weight: .medium, design: .rounded))
                         }
                         .foregroundStyle(palette.accent)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 10)
+                        .padding(.horizontal, 14)
+                        .padding(.vertical, 9)
                         .background(
                             Capsule()
-                                .fill(palette.accent.opacity(0.08))
+                                .fill(palette.surfaceElevated)
+                                .shadow(color: .black.opacity(0.04), radius: 4, y: 2)
                         )
                         .overlay(
                             Capsule()
-                                .stroke(
-                                    LinearGradient(
-                                        colors: [palette.accent.opacity(0.4), palette.accent.opacity(0.15)],
-                                        startPoint: .leading,
-                                        endPoint: .trailing
-                                    ),
-                                    lineWidth: 1
-                                )
+                                .stroke(palette.accent.opacity(0.2), lineWidth: 0.5)
                         )
                     }
                     .transition(.scale(scale: 0.8).combined(with: .opacity))
@@ -232,16 +257,25 @@ private struct ChatContentView: View {
     // MARK: - Error Banner
 
     private func errorBanner(_ message: String) -> some View {
-        Text(message)
-            .font(BPFont.caption)
-            .foregroundStyle(palette.error)
-            .padding(.horizontal, 16)
-            .padding(.vertical, 8)
-            .frame(maxWidth: .infinity)
-            .background(palette.error.opacity(0.1))
-            .onTapGesture {
+        HStack(spacing: 8) {
+            Image(systemName: "exclamationmark.triangle.fill")
+                .font(.system(size: 12, weight: .medium))
+                .foregroundStyle(palette.error)
+            Text(message)
+                .font(.system(size: 13, weight: .medium, design: .rounded))
+                .foregroundStyle(palette.error)
+            Spacer()
+            Button {
                 viewModel.errorMessage = nil
+            } label: {
+                Image(systemName: "xmark")
+                    .font(.system(size: 10, weight: .bold))
+                    .foregroundStyle(palette.error.opacity(0.6))
             }
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 10)
+        .background(palette.error.opacity(0.08))
     }
 
     // MARK: - Retry Banner
@@ -253,7 +287,7 @@ private struct ChatContentView: View {
                 .foregroundStyle(palette.error)
 
             Text("Message failed to send")
-                .font(.system(size: 13, weight: .medium))
+                .font(.system(size: 13, weight: .medium, design: .rounded))
                 .foregroundStyle(palette.error)
 
             Spacer()
@@ -285,7 +319,7 @@ private struct ChatContentView: View {
     private var rateLimitBanner: some View {
         HStack(spacing: 8) {
             Text("\(viewModel.remainingMessages) messages remaining this week")
-                .font(BPFont.caption)
+                .font(.system(size: 12, weight: .medium, design: .rounded))
                 .foregroundStyle(palette.textMuted)
 
             if viewModel.isRateLimited {
@@ -295,15 +329,12 @@ private struct ChatContentView: View {
                     Text("Go Pro")
                         .font(.system(size: 12, weight: .semibold, design: .rounded))
                         .foregroundStyle(.white)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 4)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 5)
                         .background(
                             Capsule().fill(
                                 LinearGradient(
-                                    colors: [
-                                        Color(red: 0.79, green: 0.66, blue: 0.43),
-                                        Color(red: 0.65, green: 0.52, blue: 0.3),
-                                    ],
+                                    colors: [palette.accent, palette.accent.opacity(0.75)],
                                     startPoint: .leading,
                                     endPoint: .trailing
                                 )
@@ -321,22 +352,23 @@ private struct ChatContentView: View {
         VStack(spacing: 0) {
             // Subtle top divider
             Rectangle()
-                .fill(palette.border.opacity(0.5))
+                .fill(palette.border.opacity(0.3))
                 .frame(height: 0.5)
 
             HStack(spacing: 12) {
                 TextField("Ask anything about Scripture...", text: $viewModel.inputText, axis: .vertical)
-                    .font(BPFont.body)
+                    .font(.system(size: 15, weight: .regular, design: .rounded))
                     .lineLimit(1...5)
                     .padding(.horizontal, 16)
                     .padding(.vertical, 12)
                     .background(
-                        RoundedRectangle(cornerRadius: 24)
-                            .fill(palette.surface)
+                        RoundedRectangle(cornerRadius: 22)
+                            .fill(palette.surfaceElevated)
+                            .shadow(color: .black.opacity(0.04), radius: 4, y: 2)
                     )
                     .overlay(
-                        RoundedRectangle(cornerRadius: 24)
-                            .stroke(palette.border, lineWidth: 1)
+                        RoundedRectangle(cornerRadius: 22)
+                            .stroke(palette.border.opacity(0.2), lineWidth: 0.5)
                     )
 
                 Button {
@@ -347,14 +379,37 @@ private struct ChatContentView: View {
                     }
                     HapticService.lightImpact()
                 } label: {
-                    Image(systemName: viewModel.isStreaming ? "stop.circle.fill" : "arrow.up.circle.fill")
-                        .font(.system(size: 34))
-                        .foregroundStyle(
-                            viewModel.canSend || viewModel.isStreaming
-                                ? palette.accent
-                                : palette.textMuted
-                        )
-                        .scaleEffect(sendButtonScale)
+                    ZStack {
+                        Circle()
+                            .fill(
+                                viewModel.canSend || viewModel.isStreaming
+                                    ? LinearGradient(
+                                        colors: [palette.accent, palette.accent.opacity(0.8)],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                    : LinearGradient(
+                                        colors: [palette.surface, palette.surface],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                            )
+                            .frame(width: 38, height: 38)
+                            .shadow(
+                                color: viewModel.canSend || viewModel.isStreaming
+                                    ? palette.accent.opacity(0.2) : .clear,
+                                radius: 4, y: 2
+                            )
+
+                        Image(systemName: viewModel.isStreaming ? "stop.fill" : "arrow.up")
+                            .font(.system(size: viewModel.isStreaming ? 12 : 15, weight: .semibold))
+                            .foregroundStyle(
+                                viewModel.canSend || viewModel.isStreaming
+                                    ? .white
+                                    : palette.textMuted
+                            )
+                    }
+                    .scaleEffect(sendButtonScale)
                 }
                 .buttonStyle(PressableButtonStyle())
                 .disabled(!viewModel.canSend && !viewModel.isStreaming)
@@ -362,7 +417,6 @@ private struct ChatContentView: View {
                     withAnimation(BPAnimation.buttonPress) {
                         sendButtonScale = canSend ? 1.1 : 1.0
                     }
-                    // Reset after pop
                     if canSend {
                         withAnimation(BPAnimation.spring.delay(0.15)) {
                             sendButtonScale = 1.0

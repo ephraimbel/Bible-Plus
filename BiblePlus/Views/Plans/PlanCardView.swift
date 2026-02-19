@@ -19,7 +19,7 @@ struct PlanCardView: View {
                     .frame(width: 36, height: 36)
                     .background(
                         Circle()
-                            .fill(palette.accentSoft)
+                            .fill(palette.accent.opacity(0.08))
                     )
 
                 Spacer()
@@ -37,7 +37,11 @@ struct PlanCardView: View {
                     .padding(.vertical, 4)
                     .background(
                         Capsule()
-                            .fill(palette.success.opacity(0.12))
+                            .fill(palette.success.opacity(0.1))
+                    )
+                    .overlay(
+                        Capsule()
+                            .stroke(palette.success.opacity(0.2), lineWidth: 0.5)
                     )
                 } else if plan.isProOnly && !isPro {
                     HStack(spacing: 3) {
@@ -52,7 +56,11 @@ struct PlanCardView: View {
                     .padding(.vertical, 4)
                     .background(
                         Capsule()
-                            .fill(palette.accent.opacity(0.12))
+                            .fill(palette.accent.opacity(0.1))
+                    )
+                    .overlay(
+                        Capsule()
+                            .stroke(palette.accent.opacity(0.2), lineWidth: 0.5)
                     )
                 }
             }
@@ -87,11 +95,17 @@ struct PlanCardView: View {
                 GeometryReader { geo in
                     ZStack(alignment: .leading) {
                         Capsule()
-                            .fill(palette.border.opacity(0.3))
+                            .fill(palette.border.opacity(0.2))
                             .frame(height: 3)
 
                         Capsule()
-                            .fill(palette.accent)
+                            .fill(
+                                LinearGradient(
+                                    colors: [palette.accent, palette.accent.opacity(0.85)],
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                            )
                             .frame(
                                 width: geo.size.width * progress.completionFraction(totalDays: plan.totalDays),
                                 height: 3
@@ -107,11 +121,12 @@ struct PlanCardView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
             RoundedRectangle(cornerRadius: 16)
-                .fill(palette.surface)
+                .fill(palette.surfaceElevated)
+                .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
         )
         .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(palette.border.opacity(0.15), lineWidth: 1)
+                .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
         )
     }
 }

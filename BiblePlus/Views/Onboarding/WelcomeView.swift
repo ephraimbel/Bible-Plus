@@ -8,9 +8,21 @@ struct WelcomeView: View {
 
     var body: some View {
         ZStack {
-            // Shimmering sea video background
-            LoopingVideoPlayer(videoName: "water-ripples")
-                .ignoresSafeArea()
+            // Flowing water animated background
+            ZStack {
+                LinearGradient(
+                    colors: [
+                        Color(red: 0.10, green: 0.32, blue: 0.46),
+                        Color(red: 0.16, green: 0.50, blue: 0.73),
+                        Color(red: 0.36, green: 0.68, blue: 0.89),
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+
+                LoopingVideoPlayer(videoName: "water-ripples", isPlaying: true)
+            }
+            .ignoresSafeArea()
 
             VStack(spacing: 0) {
                 Spacer()

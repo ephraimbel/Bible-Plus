@@ -15,18 +15,26 @@ struct SelectionCard: View {
         }) {
             HStack(spacing: 14) {
                 Image(systemName: icon)
-                    .font(.title2)
+                    .font(.system(size: 18, weight: .medium))
                     .foregroundStyle(isSelected ? .white : palette.accent)
-                    .frame(width: 32)
+                    .frame(width: 36, height: 36)
+                    .background(
+                        Circle()
+                            .fill(
+                                isSelected
+                                    ? Color.white.opacity(0.2)
+                                    : palette.accent.opacity(0.08)
+                            )
+                    )
 
                 VStack(alignment: .leading, spacing: 3) {
                     Text(title)
-                        .font(BPFont.button)
+                        .font(.system(size: 15, weight: .semibold, design: .rounded))
                         .foregroundStyle(isSelected ? .white : palette.textPrimary)
 
                     if let subtitle {
                         Text(subtitle)
-                            .font(BPFont.reference)
+                            .font(.system(size: 13, weight: .regular, design: .rounded))
                             .foregroundStyle(
                                 isSelected
                                     ? .white.opacity(0.8) : palette.textSecondary
@@ -37,9 +45,14 @@ struct SelectionCard: View {
                 Spacer()
 
                 if isSelected {
-                    Image(systemName: "checkmark.circle.fill")
-                        .font(.title3)
+                    Image(systemName: "checkmark")
+                        .font(.system(size: 12, weight: .bold))
                         .foregroundStyle(.white)
+                        .frame(width: 26, height: 26)
+                        .background(
+                            Circle()
+                                .fill(.white.opacity(0.25))
+                        )
                         .transition(.scale.combined(with: .opacity))
                 }
             }
@@ -48,14 +61,28 @@ struct SelectionCard: View {
                 RoundedRectangle(cornerRadius: 16)
                     .fill(
                         isSelected
-                            ? palette.accent : palette.surfaceElevated
+                            ? AnyShapeStyle(
+                                LinearGradient(
+                                    colors: [palette.accent, palette.accent.opacity(0.85)],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                            )
+                            : AnyShapeStyle(palette.surfaceElevated)
+                    )
+                    .shadow(
+                        color: isSelected
+                            ? palette.accent.opacity(0.3)
+                            : .black.opacity(0.04),
+                        radius: isSelected ? 8 : 4,
+                        y: isSelected ? 4 : 2
                     )
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
                     .stroke(
-                        isSelected ? Color.clear : palette.border,
-                        lineWidth: 1
+                        isSelected ? Color.clear : palette.border.opacity(0.15),
+                        lineWidth: 0.5
                     )
             )
         }
@@ -80,31 +107,54 @@ struct CompactSelectionCard: View {
         }) {
             VStack(spacing: 10) {
                 Image(systemName: icon)
-                    .font(.title2)
+                    .font(.system(size: 20, weight: .medium))
                     .foregroundStyle(isSelected ? .white : palette.accent)
+                    .frame(width: 40, height: 40)
+                    .background(
+                        Circle()
+                            .fill(
+                                isSelected
+                                    ? Color.white.opacity(0.2)
+                                    : palette.accent.opacity(0.08)
+                            )
+                    )
 
                 Text(title)
-                    .font(BPFont.caption)
+                    .font(.system(size: 13, weight: .medium, design: .rounded))
                     .foregroundStyle(isSelected ? .white : palette.textPrimary)
                     .multilineTextAlignment(.center)
                     .lineLimit(2)
                     .minimumScaleFactor(0.8)
             }
             .frame(maxWidth: .infinity)
-            .padding(.vertical, 16)
+            .padding(.vertical, 18)
             .padding(.horizontal, 8)
             .background(
                 RoundedRectangle(cornerRadius: 16)
                     .fill(
                         isSelected
-                            ? palette.accent : palette.surfaceElevated
+                            ? AnyShapeStyle(
+                                LinearGradient(
+                                    colors: [palette.accent, palette.accent.opacity(0.85)],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                            )
+                            : AnyShapeStyle(palette.surfaceElevated)
+                    )
+                    .shadow(
+                        color: isSelected
+                            ? palette.accent.opacity(0.3)
+                            : .black.opacity(0.04),
+                        radius: isSelected ? 8 : 4,
+                        y: isSelected ? 4 : 2
                     )
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
                     .stroke(
-                        isSelected ? Color.clear : palette.border,
-                        lineWidth: 1
+                        isSelected ? Color.clear : palette.border.opacity(0.15),
+                        lineWidth: 0.5
                     )
             )
         }

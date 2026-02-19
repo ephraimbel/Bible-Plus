@@ -32,18 +32,18 @@ struct ChatBubbleView: View {
             if message.role == .user {
                 Spacer(minLength: 60)
             } else {
-                // AI avatar — gold gradient circle with cross
+                // AI avatar — gold gradient circle with sparkle
                 ZStack {
                     Circle()
                         .fill(
                             LinearGradient(
-                                colors: [palette.accent, palette.accent.opacity(0.7)],
+                                colors: [palette.accent, palette.accent.opacity(0.65)],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
                         )
                         .frame(width: 32, height: 32)
-                        .shadow(color: palette.accent.opacity(0.25), radius: 4, y: 2)
+                        .shadow(color: palette.accent.opacity(0.2), radius: 6, y: 2)
 
                     Image(systemName: "sparkle")
                         .font(.system(size: 14, weight: .semibold))
@@ -56,25 +56,31 @@ struct ChatBubbleView: View {
                 if isTypingPlaceholder {
                     TypingDotsView()
                         .background(
-                            RoundedRectangle(cornerRadius: 16)
-                                .fill(palette.surface)
+                            RoundedRectangle(cornerRadius: 18)
+                                .fill(palette.surfaceElevated)
+                                .shadow(color: .black.opacity(0.04), radius: 4, y: 2)
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 18)
+                                .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
                         )
                         .transition(.scale(scale: 0.8).combined(with: .opacity))
                 } else if message.role == .user {
                     Text(message.content)
-                        .font(BPFont.chat)
+                        .font(.system(size: 15, weight: .regular, design: .rounded))
                         .foregroundColor(.white)
-                        .padding(.horizontal, 14)
-                        .padding(.vertical, 10)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 11)
                         .background(
                             userBubbleShape
                                 .fill(
                                     LinearGradient(
-                                        colors: [palette.accent, palette.accent.opacity(0.85)],
+                                        colors: [palette.accent, palette.accent.opacity(0.8)],
                                         startPoint: .topLeading,
                                         endPoint: .bottomTrailing
                                     )
                                 )
+                                .shadow(color: palette.accent.opacity(0.15), radius: 6, y: 3)
                         )
                         .textSelection(.enabled)
 
@@ -84,7 +90,7 @@ struct ChatBubbleView: View {
                             Image(systemName: "exclamationmark.circle.fill")
                                 .font(.system(size: 12))
                             Text("Failed to send")
-                                .font(.system(size: 12, weight: .medium))
+                                .font(.system(size: 12, weight: .medium, design: .rounded))
                         }
                         .foregroundStyle(palette.error)
                         .padding(.top, 2)
@@ -106,7 +112,7 @@ struct ChatBubbleView: View {
             }
         }
         .padding(.horizontal, 16)
-        .padding(.top, showRoleGap ? 8 : 2)
+        .padding(.top, showRoleGap ? 10 : 2)
         .padding(.bottom, 2)
     }
 
@@ -114,9 +120,9 @@ struct ChatBubbleView: View {
 
     private var userBubbleShape: UnevenRoundedRectangle {
         UnevenRoundedRectangle(
-            topLeadingRadius: 16,
-            bottomLeadingRadius: 16,
-            bottomTrailingRadius: 16,
+            topLeadingRadius: 18,
+            bottomLeadingRadius: 18,
+            bottomTrailingRadius: 18,
             topTrailingRadius: 6
         )
     }
@@ -124,9 +130,9 @@ struct ChatBubbleView: View {
     private var aiBubbleShape: UnevenRoundedRectangle {
         UnevenRoundedRectangle(
             topLeadingRadius: 6,
-            bottomLeadingRadius: 16,
-            bottomTrailingRadius: 16,
-            topTrailingRadius: 16
+            bottomLeadingRadius: 18,
+            bottomTrailingRadius: 18,
+            topTrailingRadius: 18
         )
     }
 
@@ -143,11 +149,11 @@ struct ChatBubbleView: View {
                     .font(.system(size: 12, weight: .semibold, design: .rounded))
             }
             .foregroundStyle(isSavedToJournal ? Color.green : palette.accent)
-            .padding(.horizontal, 12)
-            .padding(.vertical, 6)
+            .padding(.horizontal, 14)
+            .padding(.vertical, 7)
             .background(
                 Capsule()
-                    .fill(isSavedToJournal ? Color.green.opacity(0.1) : palette.accent.opacity(0.1))
+                    .fill(isSavedToJournal ? Color.green.opacity(0.1) : palette.accent.opacity(0.08))
             )
             .overlay(
                 Capsule()
@@ -212,7 +218,7 @@ struct ChatBubbleView: View {
 
     private func textBubble(_ text: String) -> some View {
         highlightedMarkdownText(text)
-            .font(BPFont.chat)
+            .font(.system(size: 15, weight: .regular, design: .rounded))
             .environment(\.openURL, OpenURLAction { url in
                 if url.scheme == "bibleplus",
                    url.host == "bible",
@@ -228,14 +234,15 @@ struct ChatBubbleView: View {
                 return .systemAction
             })
             .padding(.horizontal, 14)
-            .padding(.vertical, 10)
+            .padding(.vertical, 11)
             .background(
                 aiBubbleShape
-                    .fill(palette.surface)
+                    .fill(palette.surfaceElevated)
+                    .shadow(color: .black.opacity(0.04), radius: 4, y: 2)
             )
             .overlay(
                 aiBubbleShape
-                    .stroke(palette.accent.opacity(0.15), lineWidth: 1)
+                    .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
             )
             .textSelection(.enabled)
     }
@@ -258,17 +265,32 @@ struct ChatBubbleView: View {
             .font(.system(size: 13, weight: .regular, design: .serif))
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.leading, 14)
+        .padding(.leading, 16)
         .padding(.trailing, 14)
-        .padding(.vertical, 12)
+        .padding(.vertical, 14)
         .overlay(alignment: .leading) {
-            RoundedRectangle(cornerRadius: 1.5)
-                .fill(palette.accent)
-                .frame(width: 3)
+            UnevenRoundedRectangle(
+                topLeadingRadius: 14,
+                bottomLeadingRadius: 14,
+                bottomTrailingRadius: 0,
+                topTrailingRadius: 0
+            )
+            .fill(
+                LinearGradient(
+                    colors: [palette.accent, palette.accent.opacity(0.6)],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            )
+            .frame(width: 3)
         }
         .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(palette.accent.opacity(0.08))
+            RoundedRectangle(cornerRadius: 14)
+                .fill(palette.accent.opacity(0.06))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 14)
+                .stroke(palette.accent.opacity(0.12), lineWidth: 0.5)
         )
     }
 

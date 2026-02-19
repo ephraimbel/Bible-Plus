@@ -8,65 +8,28 @@ struct QuickPromptsView: View {
     let onTap: (String) -> Void
 
     @Environment(\.bpPalette) private var palette
-    @State private var orbScale: CGFloat = 1.0
     @State private var appeared = false
 
     var body: some View {
         ScrollView {
             VStack(spacing: 24) {
-                Spacer(minLength: 40)
+                Spacer(minLength: 48)
 
-                // Animated pulsing orb
-                ZStack {
-                    // Outer glow
-                    Circle()
-                        .fill(
-                            RadialGradient(
-                                colors: [palette.accent.opacity(0.3), palette.accent.opacity(0)],
-                                center: .center,
-                                startRadius: 20,
-                                endRadius: 50
-                            )
-                        )
-                        .frame(width: 100, height: 100)
-                        .scaleEffect(orbScale)
+                // Typography hero
+                VStack(spacing: 14) {
+                    Text("Hey \(userName)")
+                        .font(.system(size: 14, weight: .medium, design: .rounded))
+                        .foregroundStyle(palette.textMuted)
 
-                    // Inner gold circle
-                    Circle()
-                        .fill(
-                            LinearGradient(
-                                colors: [palette.accent, palette.accent.opacity(0.75)],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                        )
-                        .frame(width: 56, height: 56)
-                        .shadow(color: palette.accent.opacity(0.3), radius: 8, y: 4)
-
-                    Image(systemName: "sparkle")
-                        .font(.system(size: 22, weight: .semibold))
-                        .foregroundStyle(.white)
-                }
-                .scaleEffect(orbScale)
-                .onAppear {
-                    withAnimation(.easeInOut(duration: 2.0).repeatForever(autoreverses: true)) {
-                        orbScale = 1.15
-                    }
-                }
-
-                // Welcome text
-                VStack(spacing: 12) {
-                    Text("Hey \(userName). I\u{2019}m here \u{2014} whether you\nneed to talk through a verse, sit with a\nhard question, or just need someone to\npray with you.")
-                        .font(BPFont.body)
-                        .foregroundStyle(palette.textSecondary)
-                        .multilineTextAlignment(.center)
-                        .lineSpacing(3)
-
-                    Text("What\u{2019}s on your heart?")
-                        .font(BPFont.prayerSmall)
+                    Text("What\u{2019}s on\nyour heart?")
+                        .font(.system(size: 32, weight: .semibold, design: .serif))
                         .foregroundStyle(palette.textPrimary)
-                        .padding(.top, 4)
+                        .multilineTextAlignment(.center)
+                        .lineSpacing(4)
                 }
+                .opacity(appeared ? 1 : 0)
+                .offset(y: appeared ? 0 : 12)
+                .animation(BPAnimation.spring.delay(0.1), value: appeared)
 
                 // Category chip row
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -77,6 +40,8 @@ struct QuickPromptsView: View {
                     }
                     .padding(.horizontal, 24)
                 }
+                .opacity(appeared ? 1 : 0)
+                .animation(BPAnimation.spring.delay(0.2), value: appeared)
 
                 // Prompt cards
                 VStack(spacing: 10) {
@@ -85,16 +50,23 @@ struct QuickPromptsView: View {
                             onTap(prompt.text)
                             HapticService.lightImpact()
                         } label: {
-                            HStack(spacing: 12) {
-                                Image(systemName: prompt.icon)
-                                    .font(.system(size: 14, weight: .medium))
-                                    .foregroundStyle(palette.accent)
-                                    .frame(width: 20)
+                            HStack(spacing: 14) {
+                                // Icon circle
+                                ZStack {
+                                    Circle()
+                                        .fill(palette.accent.opacity(0.1))
+                                        .frame(width: 36, height: 36)
+
+                                    Image(systemName: prompt.icon)
+                                        .font(.system(size: 14, weight: .medium))
+                                        .foregroundStyle(palette.accent)
+                                }
 
                                 Text(prompt.text)
-                                    .font(BPFont.body)
+                                    .font(.system(size: 14, weight: .regular, design: .rounded))
                                     .foregroundStyle(palette.textPrimary)
                                     .multilineTextAlignment(.leading)
+                                    .lineSpacing(2)
 
                                 Spacer()
 
@@ -102,37 +74,42 @@ struct QuickPromptsView: View {
                                     .font(.system(size: 11, weight: .semibold))
                                     .foregroundStyle(palette.textMuted)
                             }
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 14)
+                            .padding(.horizontal, 14)
+                            .padding(.vertical, 12)
                             .background(
                                 RoundedRectangle(cornerRadius: 14)
-                                    .fill(palette.surface)
+                                    .fill(palette.surfaceElevated)
+                                    .shadow(color: .black.opacity(0.04), radius: 6, y: 3)
                             )
                             .overlay(
                                 RoundedRectangle(cornerRadius: 14)
-                                    .stroke(palette.border, lineWidth: 1)
+                                    .stroke(palette.border.opacity(0.2), lineWidth: 0.5)
                             )
                         }
                         .opacity(appeared ? 1 : 0)
                         .offset(y: appeared ? 0 : 10)
-                        .animation(BPAnimation.staggered(index: index), value: appeared)
+                        .animation(BPAnimation.spring.delay(0.25 + Double(index) * 0.04), value: appeared)
                     }
                 }
-                .padding(.horizontal, 24)
+                .padding(.horizontal, 20)
 
                 Spacer(minLength: 20)
             }
         }
         .scrollDismissesKeyboard(.interactively)
         .onAppear {
-            withAnimation {
-                appeared = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                withAnimation(BPAnimation.spring) {
+                    appeared = true
+                }
             }
         }
         .onChange(of: selectedCategory) { _, _ in
             appeared = false
-            withAnimation {
-                appeared = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                withAnimation(BPAnimation.spring) {
+                    appeared = true
+                }
             }
         }
     }
@@ -159,15 +136,16 @@ struct QuickPromptsView: View {
                     .font(.system(size: 13, weight: .semibold, design: .rounded))
             }
             .foregroundStyle(isSelected ? .white : palette.accent)
-            .padding(.horizontal, 14)
-            .padding(.vertical, 8)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 9)
             .background(
                 Capsule()
-                    .fill(isSelected ? palette.accent : palette.accent.opacity(0.1))
+                    .fill(isSelected ? palette.accent : palette.surfaceElevated)
+                    .shadow(color: .black.opacity(isSelected ? 0 : 0.04), radius: 4, y: 2)
             )
             .overlay(
                 Capsule()
-                    .stroke(isSelected ? Color.clear : palette.accent.opacity(0.25), lineWidth: 1)
+                    .stroke(isSelected ? Color.clear : palette.border.opacity(0.2), lineWidth: 0.5)
             )
         }
     }

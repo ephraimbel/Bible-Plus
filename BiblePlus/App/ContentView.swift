@@ -13,7 +13,7 @@ struct ContentView: View {
     @Environment(\.scenePhase) private var scenePhase
 
     enum Tab: String, CaseIterable {
-        case feed, bible, ask, journal, saved
+        case feed, bible, ask, saved, settings
 
         var title: String {
             switch self {
@@ -21,7 +21,7 @@ struct ContentView: View {
             case .bible: "Bible"
             case .ask: "Ask"
             case .saved: "Saved"
-            case .journal: "Journal"
+            case .settings: "Settings"
             }
         }
 
@@ -31,7 +31,7 @@ struct ContentView: View {
             case .bible: "book.fill"
             case .ask: "bubble.left.and.bubble.right.fill"
             case .saved: "bookmark.fill"
-            case .journal: "pencil.and.scribble"
+            case .settings: "gearshape.fill"
             }
         }
     }
@@ -50,13 +50,13 @@ struct ContentView: View {
                 .tabItem { Label(Tab.ask.title, systemImage: Tab.ask.icon) }
                 .tag(Tab.ask)
 
-            JournalView()
-                .tabItem { Label(Tab.journal.title, systemImage: Tab.journal.icon) }
-                .tag(Tab.journal)
-
             SavedView()
                 .tabItem { Label(Tab.saved.title, systemImage: Tab.saved.icon) }
                 .tag(Tab.saved)
+
+            SettingsView()
+                .tabItem { Label(Tab.settings.title, systemImage: Tab.settings.icon) }
+                .tag(Tab.settings)
         }
         .environment(soundscapeService)
         .environment(audioBibleService)
@@ -117,6 +117,11 @@ struct ContentView: View {
                 soundscapeService.stop()
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: .feedContentDeepLink)) { _ in
+            withAnimation(.easeInOut(duration: 0.25)) {
+                selectedTab = .feed
+            }
+        }
         .onReceive(NotificationCenter.default.publisher(for: .scriptureDeepLink)) { notification in
             if let bookName = notification.userInfo?["bookName"] as? String,
                let chapter = notification.userInfo?["chapter"] as? Int {
@@ -130,28 +135,6 @@ struct ContentView: View {
                         name: .scriptureBibleNavigate,
                         object: nil,
                         userInfo: ["bookName": bookName, "chapter": chapter, "verse": verse]
-                    )
-                }
-            }
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .switchToJournalTab)) { _ in
-            withAnimation(.easeInOut(duration: 0.25)) {
-                selectedTab = .journal
-            }
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .openJournalWithReflection)) { notification in
-            // Only handle the original notification, not the forwarded one
-            guard notification.object as? String != "fromContentView" else { return }
-            withAnimation(.easeInOut(duration: 0.25)) {
-                selectedTab = .journal
-            }
-            // Forward the prompt to JournalView after tab switch
-            if let prompt = notification.userInfo?["prompt"] as? String {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    NotificationCenter.default.post(
-                        name: .openJournalWithReflection,
-                        object: "fromContentView",
-                        userInfo: ["prompt": prompt]
                     )
                 }
             }

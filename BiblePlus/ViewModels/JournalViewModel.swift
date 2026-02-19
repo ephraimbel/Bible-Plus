@@ -68,50 +68,8 @@ final class JournalViewModel {
         return (try? modelContext.fetchCount(descriptor)) ?? 0
     }
 
-    var dailyPrompt: String {
-        let profile = personalizationService.getOrCreateProfile()
-        let hour = Calendar.current.component(.hour, from: Date())
-        let name = profile.firstName.isEmpty ? "Friend" : profile.firstName
-
-        // Burden-based prompts
-        if let burden = profile.currentBurdens.first {
-            switch burden {
-            case .anxiety:
-                return hour < 12
-                    ? "\(name), start your day by giving your worries to God."
-                    : "What's weighing on your heart tonight, \(name)?"
-            case .grief:
-                return "Pour out your heart to God, \(name). He's close to the brokenhearted."
-            case .loneliness:
-                return "\(name), tell God how you're feeling. He's right here with you."
-            case .relationship:
-                return "Pray for the people on your heart today, \(name)."
-            case .health:
-                return "\(name), bring your body and mind before the Healer."
-            case .doubt:
-                return "Be honest with God about your questions, \(name). He can handle them."
-            case .anger:
-                return "\(name), what frustration can you surrender to God right now?"
-            case .financial:
-                return "Trust God with your provision today, \(name). Write it down."
-            case .purpose:
-                return "\(name), ask God to show you the next step."
-            default:
-                break
-            }
-        }
-
-        // Time-based fallback
-        switch hour {
-        case 5..<12:
-            return "Good morning, \(name). What's on your heart today?"
-        case 12..<17:
-            return "\(name), take a moment to talk to God right now."
-        case 17..<21:
-            return "Reflect on your day with God, \(name)."
-        default:
-            return "\(name), close your day with a prayer."
-        }
+    var dailyReflection: String {
+        DailyReflectionProvider.prompt(for: personalizationService.getOrCreateProfile())
     }
 
     // MARK: - CRUD
@@ -161,4 +119,5 @@ final class JournalViewModel {
         try? modelContext.save()
         journalVersion += 1
     }
+
 }

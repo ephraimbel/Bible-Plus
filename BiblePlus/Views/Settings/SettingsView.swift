@@ -47,8 +47,8 @@ private struct SettingsContentView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 24) {
                     profileSection
-                    bibleSection
-                    sanctuarySection
+                    notificationsSection
+                    appearanceSection
                     widgetsSection
                     subscriptionSection
                     aboutSection
@@ -68,25 +68,6 @@ private struct SettingsContentView: View {
                         .font(.system(size: 18, weight: .semibold, design: .serif))
                         .foregroundStyle(palette.textPrimary)
                 }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        HapticService.lightImpact()
-                        let current = vm.profile.colorMode
-                        let next: ColorMode = current == .dark ? .light : .dark
-                        vm.updateColorMode(next)
-                    } label: {
-                        Image(systemName: vm.profile.colorMode == .dark ? "moon.fill" : "sun.max.fill")
-                            .font(.system(size: 14, weight: .medium))
-                            .foregroundStyle(palette.accent)
-                            .frame(width: 32, height: 32)
-                            .background(
-                                Circle()
-                                    .fill(palette.accent.opacity(0.1))
-                            )
-                            .contentTransition(.symbolEffect(.replace))
-                    }
-                    .accessibilityLabel(vm.profile.colorMode == .dark ? "Switch to light mode" : "Switch to dark mode")
-                }
             }
             .sheet(isPresented: $vm.showEditName) {
                 EditNameSheet(vm: vm)
@@ -104,10 +85,6 @@ private struct SettingsContentView: View {
                 EditBurdensSheet(vm: vm)
                     .presentationDetents([.large])
             }
-            .sheet(isPresented: $vm.showEditTranslation) {
-                EditTranslationSheet(vm: vm)
-                    .presentationDetents([.large])
-            }
             .sheet(isPresented: $vm.showEditPrayerTimes) {
                 EditPrayerTimesSheet(vm: vm)
                     .presentationDetents([.medium])
@@ -120,22 +97,9 @@ private struct SettingsContentView: View {
                 BackgroundPickerView(vm: vm.sanctuaryViewModel)
                     .presentationDetents([.large])
             }
-            .fullScreenCover(isPresented: $vm.showSanctuary) {
-                SanctuaryView(soundscapeService: soundscapeService)
-            }
-            .sheet(isPresented: $vm.showVoicePicker) {
-                VoicePickerView(
-                    audioService: audioBibleService,
-                    isPro: vm.profile.isPro
-                ) { voice in
-                    if audioBibleService.hasActivePlayback {
-                        audioBibleService.stop()
-                    }
-                    audioBibleService.setVoice(voice)
-                    vm.profile.selectedBibleVoiceID = voice.rawValue
-                    try? modelContext.save()
-                }
-                .presentationDetents([.medium, .large])
+            .sheet(isPresented: $vm.showWidgetBackgroundPicker) {
+                WidgetBackgroundPickerSheet(vm: vm)
+                    .presentationDetents([.large])
             }
             .fullScreenCover(isPresented: $showPaywall) {
                 SummaryPaywallView()
@@ -233,10 +197,23 @@ private struct SettingsContentView: View {
                 ) {
                     vm.beginEditingBurdens()
                 }
+            }
+            .opacity(appeared ? 1 : 0)
+            .offset(y: appeared ? 0 : 10)
+            .animation(BPAnimation.spring.delay(0.05), value: appeared)
 
-                rowDivider
+            sectionFooter("Changes to your profile will refresh your feed.")
+        }
+    }
 
-                // Notifications toggle
+    // MARK: - Notifications Section
+
+    private var notificationsSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            sectionHeader("Notifications", index: 1)
+
+            sectionCard {
+                // Master toggle
                 HStack(spacing: 14) {
                     Image(systemName: vm.profile.notificationsEnabled ? "bell.fill" : "bell.slash")
                         .font(.system(size: 13, weight: .medium))
@@ -277,38 +254,36 @@ private struct SettingsContentView: View {
                     rowDivider
 
                     // Faith Boosts toggle
-                    VStack(spacing: 0) {
-                        HStack(spacing: 14) {
-                            Image(systemName: "sparkles")
-                                .font(.system(size: 13, weight: .medium))
-                                .foregroundStyle(palette.accent)
-                                .frame(width: 32, height: 32)
-                                .background(
-                                    Circle()
-                                        .fill(palette.accent.opacity(0.08))
-                                )
+                    HStack(spacing: 14) {
+                        Image(systemName: "sparkles")
+                            .font(.system(size: 13, weight: .medium))
+                            .foregroundStyle(palette.accent)
+                            .frame(width: 32, height: 32)
+                            .background(
+                                Circle()
+                                    .fill(palette.accent.opacity(0.08))
+                            )
 
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text("Faith Boosts")
-                                    .font(.system(size: 15, weight: .medium, design: .rounded))
-                                    .foregroundStyle(palette.textPrimary)
-                                Text("Short verses & prayers every 2 hours")
-                                    .font(.system(size: 12, weight: .regular, design: .rounded))
-                                    .foregroundStyle(palette.textMuted)
-                            }
-
-                            Spacer()
-
-                            Toggle("", isOn: Binding(
-                                get: { vm.profile.faithBoostsEnabled },
-                                set: { _ in vm.toggleFaithBoosts() }
-                            ))
-                            .tint(palette.accent)
-                            .labelsHidden()
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Faith Boosts")
+                                .font(.system(size: 15, weight: .medium, design: .rounded))
+                                .foregroundStyle(palette.textPrimary)
+                            Text("Short verses & prayers every 2 hours")
+                                .font(.system(size: 12, weight: .regular, design: .rounded))
+                                .foregroundStyle(palette.textMuted)
                         }
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 12)
+
+                        Spacer()
+
+                        Toggle("", isOn: Binding(
+                            get: { vm.profile.faithBoostsEnabled },
+                            set: { _ in vm.toggleFaithBoosts() }
+                        ))
+                        .tint(palette.accent)
+                        .labelsHidden()
                     }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 12)
 
                     rowDivider
 
@@ -368,65 +343,6 @@ private struct SettingsContentView: View {
                     .padding(.horizontal, 16)
                     .padding(.vertical, 12)
                 }
-
-                rowDivider
-
-                // Daily Streak (read-only)
-                HStack(spacing: 14) {
-                    Image(systemName: "flame.fill")
-                        .font(.system(size: 13, weight: .medium))
-                        .foregroundStyle(palette.accent)
-                        .frame(width: 32, height: 32)
-                        .background(
-                            Circle()
-                                .fill(palette.accent.opacity(0.08))
-                        )
-
-                    Text("Daily Streak")
-                        .font(.system(size: 15, weight: .medium, design: .rounded))
-                        .foregroundStyle(palette.textPrimary)
-
-                    Spacer()
-
-                    Text(vm.streakDisplay)
-                        .font(.system(size: 14, weight: .semibold, design: .rounded))
-                        .foregroundStyle(palette.accent)
-                }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 12)
-            }
-            .opacity(appeared ? 1 : 0)
-            .offset(y: appeared ? 0 : 10)
-            .animation(BPAnimation.spring.delay(0.05), value: appeared)
-
-            sectionFooter("Changes to your profile will refresh your feed.")
-        }
-    }
-
-    // MARK: - Bible Section
-
-    private var bibleSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            sectionHeader("Bible", index: 1)
-
-            sectionCard {
-                settingsRow(
-                    icon: "book",
-                    label: "Translation",
-                    value: vm.profile.preferredTranslation.displayName
-                ) {
-                    vm.beginEditingTranslation()
-                }
-
-                rowDivider
-
-                settingsRow(
-                    icon: "person.wave.2",
-                    label: "Narrator Voice",
-                    value: vm.currentVoiceDisplay
-                ) {
-                    vm.showVoicePicker = true
-                }
             }
             .opacity(appeared ? 1 : 0)
             .offset(y: appeared ? 0 : 10)
@@ -434,16 +350,49 @@ private struct SettingsContentView: View {
         }
     }
 
-    // MARK: - Sanctuary Section
+    // MARK: - Appearance Section
 
-    private var sanctuarySection: some View {
+    private var appearanceSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            sectionHeader("Sanctuary", index: 2)
+            sectionHeader("Appearance", index: 2)
 
             sectionCard {
+                // Theme toggle
+                HStack(spacing: 14) {
+                    Image(systemName: vm.profile.colorMode == .dark ? "moon.fill" : "sun.max.fill")
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundStyle(palette.accent)
+                        .frame(width: 32, height: 32)
+                        .background(
+                            Circle()
+                                .fill(palette.accent.opacity(0.08))
+                        )
+                        .contentTransition(.symbolEffect(.replace))
+
+                    Text("Dark Mode")
+                        .font(.system(size: 15, weight: .medium, design: .rounded))
+                        .foregroundStyle(palette.textPrimary)
+
+                    Spacer()
+
+                    Toggle("", isOn: Binding(
+                        get: { vm.profile.colorMode == .dark },
+                        set: { isDark in
+                            HapticService.lightImpact()
+                            vm.updateColorMode(isDark ? .dark : .light)
+                        }
+                    ))
+                    .tint(palette.accent)
+                    .labelsHidden()
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
+
+                rowDivider
+
                 settingsRow(
                     icon: "music.note",
-                    label: "Soundscapes",
+                    label: "Soundscape",
                     value: vm.currentSoundscapeDisplay
                 ) {
                     vm.showSoundscapePicker = true
@@ -453,20 +402,10 @@ private struct SettingsContentView: View {
 
                 settingsRow(
                     icon: "photo.on.rectangle",
-                    label: "Backgrounds",
+                    label: "Background",
                     value: vm.currentBackgroundDisplay
                 ) {
                     vm.showBackgroundPicker = true
-                }
-
-                rowDivider
-
-                settingsRow(
-                    icon: "moon.stars",
-                    label: "Open Sanctuary",
-                    value: nil
-                ) {
-                    vm.showSanctuary = true
                 }
             }
             .opacity(appeared ? 1 : 0)
@@ -550,6 +489,20 @@ private struct SettingsContentView: View {
                     }
                 }
                 .padding(16)
+
+                Rectangle()
+                    .fill(palette.border.opacity(0.12))
+                    .frame(height: 0.5)
+                    .padding(.leading, 62)
+
+                // Widget Background picker row
+                settingsRow(
+                    icon: "photo.artframe",
+                    label: "Widget Background",
+                    value: vm.widgetBackgroundDisplay
+                ) {
+                    vm.showWidgetBackgroundPicker = true
+                }
             }
             .opacity(appeared ? 1 : 0)
             .offset(y: appeared ? 0 : 10)
@@ -761,7 +714,7 @@ private struct SettingsContentView: View {
 
                 rowDivider
 
-                // Version — tap 5 times to toggle Pro (debug)
+                // Version
                 HStack(spacing: 14) {
                     Image(systemName: "info.circle")
                         .font(.system(size: 13, weight: .medium))
@@ -784,12 +737,14 @@ private struct SettingsContentView: View {
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, 12)
+                #if DEBUG
                 .contentShape(Rectangle())
                 .onTapGesture(count: 5) {
                     vm.profile.isPro.toggle()
                     try? modelContext.save()
                     HapticService.impact(.heavy)
                 }
+                #endif
             }
             .opacity(appeared ? 1 : 0)
             .offset(y: appeared ? 0 : 10)

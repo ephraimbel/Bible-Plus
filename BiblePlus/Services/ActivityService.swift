@@ -16,6 +16,19 @@ enum ActivityService {
         try? context.save()
     }
 
+    /// Log app opened once per day so streak tracking works
+    static func logAppOpenedIfNeeded(in context: ModelContext) {
+        let startOfDay = Calendar.current.startOfDay(for: Date())
+        let raw = ActivityEventType.appOpened.rawValue
+        let descriptor = FetchDescriptor<ActivityEvent>(
+            predicate: #Predicate { $0.typeRaw == raw && $0.createdAt >= startOfDay }
+        )
+        let alreadyLogged = (try? context.fetchCount(descriptor)) ?? 0
+        if alreadyLogged == 0 {
+            log(.appOpened, in: context)
+        }
+    }
+
     // MARK: - Today
 
     static func activityCountToday(in context: ModelContext) -> Int {

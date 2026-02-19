@@ -5,10 +5,8 @@ struct HomeDashboardView: View {
     let soundscapeService: SoundscapeService
     let onEnterFeed: () -> Void
     let onShowProgress: () -> Void
-    let onShowSettings: () -> Void
     let onDailyVerseTap: () -> Void
     let onContinueReading: () -> Void
-    let onOpenJournal: () -> Void
     let onOpenSanctuary: () -> Void
 
     @Environment(\.bpPalette) private var palette
@@ -162,54 +160,37 @@ struct HomeDashboardView: View {
     // MARK: - Header
 
     private var headerSection: some View {
-        HStack(alignment: .top) {
-            VStack(alignment: .leading, spacing: 4) {
-                HStack(spacing: 0) {
-                    Text("Bible")
-                        .font(.system(size: 28, weight: .light, design: .serif))
-                        .foregroundStyle(palette.textPrimary)
+        VStack(alignment: .leading, spacing: 4) {
+            HStack(spacing: 0) {
+                Text("Bible")
+                    .font(.system(size: 28, weight: .light, design: .serif))
+                    .foregroundStyle(palette.textPrimary)
 
-                    Text("+")
-                        .font(.system(size: 30, weight: .medium, design: .serif))
-                        .foregroundStyle(Color(red: 1.0, green: 0.84, blue: 0.3))
-                        .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 4)
-                        .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 10)
-                        .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(glowPulse ? 0.9 : 0.5), radius: 20)
-                        .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(glowPulse ? 0.5 : 0.2), radius: 40)
-                }
-
-                HStack(spacing: 0) {
-                    Text("\(vm.greetingLabel) \(vm.userName)")
-                        .font(.system(size: 13, weight: .regular, design: .rounded))
-                        .foregroundStyle(palette.textSecondary)
-
-                    Text("  \u{00B7}  ")
-                        .foregroundStyle(palette.textMuted)
-
-                    Text(vm.formattedDate)
-                        .font(.system(size: 11, weight: .medium, design: .rounded))
-                        .foregroundStyle(palette.textMuted)
-                        .textCase(.uppercase)
-                        .tracking(0.8)
-                }
+                Text("+")
+                    .font(.system(size: 30, weight: .medium, design: .serif))
+                    .foregroundStyle(Color(red: 1.0, green: 0.84, blue: 0.3))
+                    .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 4)
+                    .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 10)
+                    .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(glowPulse ? 0.9 : 0.5), radius: 20)
+                    .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(glowPulse ? 0.5 : 0.2), radius: 40)
             }
 
-            Spacer()
+            HStack(spacing: 0) {
+                Text("\(vm.greetingLabel) \(vm.userName)")
+                    .font(.system(size: 13, weight: .regular, design: .rounded))
+                    .foregroundStyle(palette.textSecondary)
 
-            Image(systemName: "gearshape")
-                .font(.system(size: 13, weight: .medium))
-                .foregroundStyle(palette.textMuted)
-                .frame(width: 32, height: 32)
-                .background(
-                    Circle()
-                        .fill(palette.surfaceElevated)
-                        .shadow(color: .black.opacity(0.06), radius: 4, y: 2)
-                )
-                .onTapGesture {
-                    onShowSettings()
-                    HapticService.lightImpact()
-                }
+                Text("  \u{00B7}  ")
+                    .foregroundStyle(palette.textMuted)
+
+                Text(vm.formattedDate)
+                    .font(.system(size: 11, weight: .medium, design: .rounded))
+                    .foregroundStyle(palette.textMuted)
+                    .textCase(.uppercase)
+                    .tracking(0.8)
+            }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .opacity(appeared ? 1 : 0)
         .offset(y: appeared ? 0 : 20)
         .onAppear {
@@ -553,24 +534,5 @@ struct HomeDashboardView: View {
                 .stroke(palette.border.opacity(0.25), lineWidth: 0.5)
         )
         .onTapGesture(perform: action)
-    }
-}
-
-// MARK: - Color Blending
-
-private extension Color {
-    func blend(with other: Color, amount: CGFloat) -> Color {
-        let a = UIColor(self)
-        let b = UIColor(other)
-        var r1: CGFloat = 0, g1: CGFloat = 0, b1: CGFloat = 0, a1: CGFloat = 0
-        var r2: CGFloat = 0, g2: CGFloat = 0, b2: CGFloat = 0, a2: CGFloat = 0
-        a.getRed(&r1, green: &g1, blue: &b1, alpha: &a1)
-        b.getRed(&r2, green: &g2, blue: &b2, alpha: &a2)
-        let t = min(max(amount, 0), 1)
-        return Color(
-            red: r1 + (r2 - r1) * t,
-            green: g1 + (g2 - g1) * t,
-            blue: b1 + (b2 - b1) * t
-        )
     }
 }

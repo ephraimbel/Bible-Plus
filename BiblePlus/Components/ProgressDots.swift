@@ -6,17 +6,19 @@ struct ProgressDots: View {
     @Environment(\.bpPalette) private var palette
 
     var body: some View {
-        HStack(spacing: 8) {
+        HStack(spacing: 6) {
             ForEach(0..<totalSteps, id: \.self) { index in
-                Circle()
+                Capsule()
                     .fill(
                         index == currentStep
                             ? palette.accent
-                            : palette.border
+                            : index < currentStep
+                                ? palette.accent.opacity(0.4)
+                                : palette.border.opacity(0.4)
                     )
                     .frame(
-                        width: index == currentStep ? 10 : 6,
-                        height: index == currentStep ? 10 : 6
+                        width: index == currentStep ? 24 : 8,
+                        height: 6
                     )
             }
         }
