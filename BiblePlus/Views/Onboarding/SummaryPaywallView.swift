@@ -179,10 +179,11 @@ struct SummaryPaywallView: View {
     private var featureList: some View {
         VStack(spacing: 12) {
             featureRow(icon: "bubble.left.and.text.bubble.right.fill", title: "Unlimited AI Companion", subtitle: "Ask anything, anytime")
-            featureRow(icon: "book.closed.fill", title: "All Reading Plans", subtitle: "9 guided journeys")
-            featureRow(icon: "speaker.wave.2.fill", title: "Full Audio Bible", subtitle: "9 premium voices")
+            featureRow(icon: "book.closed.fill", title: "All Reading Plans", subtitle: "9 guided spiritual journeys")
+            featureRow(icon: "speaker.wave.2.fill", title: "Full Audio Bible", subtitle: "9 premium narration voices")
             featureRow(icon: "waveform.circle.fill", title: "All 30 Soundscapes", subtitle: "Nature, worship & ambient")
-            featureRow(icon: "photo.on.rectangle.fill", title: "All 132 Backgrounds", subtitle: "Gradients, photos & video")
+            featureRow(icon: "photo.on.rectangle.fill", title: "184 Backgrounds", subtitle: "54 animated, 69 photos & 61 gradients")
+            featureRow(icon: "text.book.closed.fill", title: "122 Daily Content Items", subtitle: "Prayers, verses & devotionals")
             featureRow(icon: "photo.artframe", title: "Premium Verse Images", subtitle: "Beautiful shareable cards")
             featureRow(icon: "folder.fill", title: "Unlimited Collections", subtitle: "Organize your favorites")
         }
@@ -499,13 +500,21 @@ struct SummaryPaywallView: View {
         if selectedProductID == StoreKitService.yearlyID {
             return "3-day free trial, then \(yearlyPriceLabel)/year. Cancel anytime."
         }
-        return "\(weeklyPriceLabel)/week. Cancel anytime."
+        return "\(weeklyPriceLabel) billed weekly. Cancel anytime."
     }
 
     // MARK: - Section 6: Footer
 
     private var footerSection: some View {
         VStack(spacing: 14) {
+            // Auto-renewal disclosure (required by App Store 3.1.2)
+            Text("Payment will be charged to your Apple ID account at confirmation of purchase. Subscription automatically renews unless cancelled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions in your App Store account settings.")
+                .font(.system(size: 10, weight: .regular, design: .rounded))
+                .foregroundStyle(.white.opacity(0.25))
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 32)
+                .padding(.top, 4)
+
             Button {
                 if isOnboarding {
                     viewModel?.goNext()
@@ -537,7 +546,7 @@ struct SummaryPaywallView: View {
                         openURL(url)
                     }
                 } label: {
-                    Text("Terms")
+                    Text("Terms of Use (EULA)")
                         .font(.system(size: 12, weight: .regular, design: .rounded))
                         .foregroundStyle(.white.opacity(0.3))
                 }
@@ -551,7 +560,7 @@ struct SummaryPaywallView: View {
                         openURL(url)
                     }
                 } label: {
-                    Text("Privacy")
+                    Text("Privacy Policy")
                         .font(.system(size: 12, weight: .regular, design: .rounded))
                         .foregroundStyle(.white.opacity(0.3))
                 }
