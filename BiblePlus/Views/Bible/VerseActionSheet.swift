@@ -1,5 +1,15 @@
 import SwiftUI
 
+// MARK: - Selected Verse Frame Preference Key
+
+struct SelectedVerseFrameKey: PreferenceKey {
+    static var defaultValue: CGRect = .zero
+    static func reduce(value: inout CGRect, nextValue: () -> CGRect) {
+        let next = nextValue()
+        if next != .zero { value = next }
+    }
+}
+
 // MARK: - Verse Toolbar Overlay
 
 struct VerseToolbarOverlay: View {
@@ -9,6 +19,7 @@ struct VerseToolbarOverlay: View {
     let isPro: Bool
     let currentHighlight: VerseHighlightColor?
     let currentNote: String?
+    let verseFrame: CGRect
     let onExplain: () -> Void
     let onCopy: () -> Void
     let onShare: () -> Void
@@ -31,80 +42,40 @@ struct VerseToolbarOverlay: View {
     @State private var noteText = ""
 
     var body: some View {
-        ZStack(alignment: .bottom) {
-            // Scrim
-            Color.black.opacity(0.15)
-                .ignoresSafeArea()
-                .onTapGesture { onDismiss() }
+        GeometryReader { geo in
+            let containerSize = geo.size
+            let cardHeight: CGFloat = showHighlightStrip ? 215 : 155
 
-            // Bottom stack: reference pill + highlight strip + toolbar
-            VStack(spacing: 8) {
-                // Reference pill
-                Text(reference)
-                    .font(.system(size: 12, weight: .semibold, design: .serif))
-                    .foregroundStyle(palette.accent)
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 6)
-                    .background(
-                        Capsule()
-                            .fill(palette.surfaceElevated)
-                            .shadow(color: .black.opacity(0.06), radius: 6, y: 2)
-                    )
-                    .overlay(
-                        Capsule()
-                            .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
-                    )
+            let showBelow = verseFrame != .zero
+                && verseFrame.maxY + cardHeight + 16 < containerSize.height
+            let showAbove = verseFrame != .zero
+                && !showBelow
+                && verseFrame.minY - cardHeight - 16 > 0
 
-                // Highlight color strip (expandable)
-                if showHighlightStrip {
-                    HighlightColorStrip(
-                        isPro: isPro,
-                        currentHighlight: currentHighlight,
-                        onHighlight: onHighlight,
-                        onRemoveHighlight: onRemoveHighlight,
-                        onShowPaywall: onShowPaywall
-                    )
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
+            let targetY: CGFloat = {
+                if verseFrame == .zero {
+                    return containerSize.height / 2
+                } else if showBelow {
+                    return verseFrame.maxY + 12 + cardHeight / 2
+                } else if showAbove {
+                    return verseFrame.minY - 12 - cardHeight / 2
+                } else {
+                    return containerSize.height / 2
                 }
+            }()
 
-                // Floating toolbar
-                VerseFloatingToolbar(
-                    isSaved: isSaved,
-                    hasHighlight: currentHighlight != nil,
-                    showingHighlightStrip: showHighlightStrip,
-                    showCopyConfirmation: showCopyConfirmation,
-                    onSave: {
-                        if isSaved {
-                            onUnsave()
-                        } else {
-                            onSave()
-                        }
-                    },
-                    onExplain: onExplain,
-                    onCopy: {
-                        onCopy()
-                        showCopyConfirmation = true
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
-                            showCopyConfirmation = false
-                        }
-                    },
-                    onShare: onShare,
-                    onHighlightToggle: {
-                        withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
-                            showHighlightStrip.toggle()
-                        }
-                    },
-                    onPlayFromHere: onPlayFromHere,
-                    onCreateVerseImage: onCreateVerseImage,
-                    onMeditateInSanctuary: onMeditateInSanctuary,
-                    onAddNote: {
-                        noteText = currentNote ?? ""
-                        showNoteEditor = true
-                    }
-                )
+            ZStack {
+                // Scrim
+                Color.black.opacity(0.15)
+                    .ignoresSafeArea()
+                    .onTapGesture { onDismiss() }
+
+                // Toolbar card
+                toolbarCard
+                    .frame(maxWidth: containerSize.width - 32)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .position(x: containerSize.width / 2, y: targetY)
             }
-            .padding(.horizontal, 20)
-            .padding(.bottom, 16)
         }
         .animation(.spring(response: 0.35, dampingFraction: 0.8), value: showHighlightStrip)
         .sheet(isPresented: $showNoteEditor) {
@@ -123,89 +94,124 @@ struct VerseToolbarOverlay: View {
             .presentationDetents([.medium])
         }
     }
-}
 
-// MARK: - Floating Toolbar
+    // MARK: - Toolbar Card
 
-private struct VerseFloatingToolbar: View {
-    let isSaved: Bool
-    let hasHighlight: Bool
-    let showingHighlightStrip: Bool
-    let showCopyConfirmation: Bool
-    let onSave: () -> Void
-    let onExplain: () -> Void
-    let onCopy: () -> Void
-    let onShare: () -> Void
-    let onHighlightToggle: () -> Void
-    let onPlayFromHere: (() -> Void)?
-    let onCreateVerseImage: () -> Void
-    let onMeditateInSanctuary: () -> Void
-    let onAddNote: () -> Void
+    private var toolbarCard: some View {
+        VStack(spacing: 0) {
+            // Reference header
+            Text(reference)
+                .font(.system(size: 13, weight: .semibold, design: .serif))
+                .foregroundStyle(palette.accent)
+                .frame(maxWidth: .infinity)
+                .padding(.top, 14)
+                .padding(.bottom, 10)
 
-    @Environment(\.bpPalette) private var palette
+            Rectangle()
+                .fill(palette.border.opacity(0.15))
+                .frame(height: 0.5)
 
-    var body: some View {
-        HStack(spacing: 0) {
-            // Save
-            toolbarButton(
-                icon: isSaved ? "bookmark.fill" : "bookmark",
-                isActive: isSaved,
-                action: onSave
-            )
+            // Action grid
+            VStack(spacing: 0) {
+                // Row 1: Save, Explain, Copy, Share, Highlight
+                HStack(spacing: 0) {
+                    actionItem(
+                        icon: isSaved ? "bookmark.fill" : "bookmark",
+                        label: isSaved ? "Unsave" : "Save",
+                        isActive: isSaved
+                    ) {
+                        if isSaved { onUnsave() } else { onSave() }
+                    }
 
-            divider
+                    actionItem(
+                        icon: "bubble.left.and.bubble.right",
+                        label: "Explain"
+                    ) { onExplain() }
 
-            // Explain
-            toolbarButton(
-                icon: "bubble.left.and.bubble.right",
-                action: onExplain
-            )
+                    actionItem(
+                        icon: showCopyConfirmation ? "checkmark" : "doc.on.doc",
+                        label: "Copy",
+                        isActive: showCopyConfirmation
+                    ) {
+                        onCopy()
+                        showCopyConfirmation = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                            showCopyConfirmation = false
+                        }
+                    }
 
-            divider
+                    actionItem(
+                        icon: "square.and.arrow.up",
+                        label: "Share"
+                    ) { onShare() }
 
-            // Copy
-            toolbarButton(
-                icon: showCopyConfirmation ? "checkmark" : "doc.on.doc",
-                isActive: showCopyConfirmation,
-                action: onCopy
-            )
+                    actionItem(
+                        icon: "highlighter",
+                        label: "Highlight",
+                        isActive: showHighlightStrip || currentHighlight != nil
+                    ) {
+                        withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
+                            showHighlightStrip.toggle()
+                        }
+                    }
+                }
 
-            divider
+                // Row 2: Play (optional), Image, Note, Meditate
+                HStack(spacing: 0) {
+                    if let playAction = onPlayFromHere {
+                        actionItem(icon: "headphones", label: "Play") {
+                            playAction()
+                        }
+                    }
 
-            // Share
-            toolbarButton(
-                icon: "square.and.arrow.up",
-                action: onShare
-            )
+                    actionItem(icon: "photo.artframe", label: "Image") {
+                        onCreateVerseImage()
+                    }
 
-            divider
+                    actionItem(icon: "note.text.badge.plus", label: "Note") {
+                        noteText = currentNote ?? ""
+                        showNoteEditor = true
+                    }
 
-            // Highlight
-            toolbarButton(
-                icon: "highlighter",
-                isActive: showingHighlightStrip || hasHighlight,
-                action: onHighlightToggle
-            )
+                    actionItem(icon: "leaf.fill", label: "Meditate") {
+                        onMeditateInSanctuary()
+                    }
+                }
+            }
+            .padding(.vertical, 6)
 
-            divider
+            // Expandable highlight color strip
+            if showHighlightStrip {
+                Rectangle()
+                    .fill(palette.border.opacity(0.15))
+                    .frame(height: 0.5)
 
-            // More (overflow menu)
-            overflowMenu
+                HighlightColorStrip(
+                    isPro: isPro,
+                    currentHighlight: currentHighlight,
+                    onHighlight: onHighlight,
+                    onRemoveHighlight: onRemoveHighlight,
+                    onShowPaywall: onShowPaywall
+                )
+                .padding(.vertical, 10)
+                .padding(.horizontal, 8)
+                .transition(.opacity.combined(with: .scale(scale: 0.95, anchor: .top)))
+            }
         }
-        .frame(height: 52)
-        .background(
-            Capsule()
-                .fill(palette.surfaceElevated)
-                .shadow(color: .black.opacity(0.10), radius: 12, y: 4)
-        )
+        .background(palette.surfaceElevated)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .shadow(color: .black.opacity(0.12), radius: 16, y: 4)
         .overlay(
-            Capsule()
+            RoundedRectangle(cornerRadius: 16)
                 .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
         )
     }
 
-    private func toolbarButton(
+    // MARK: - Action Item
+
+    private func actionItem(
         icon: String,
+        label: String,
         isActive: Bool = false,
         action: @escaping () -> Void
     ) -> some View {
@@ -213,56 +219,20 @@ private struct VerseFloatingToolbar: View {
             HapticService.selection()
             action()
         } label: {
-            Image(systemName: icon)
-                .font(.system(size: 18, weight: .medium))
-                .foregroundStyle(isActive ? palette.accent : palette.textSecondary)
-                .frame(width: 44, height: 52)
-                .contentShape(Rectangle())
-                .contentTransition(.symbolEffect(.replace))
+            VStack(spacing: 3) {
+                Image(systemName: icon)
+                    .font(.system(size: 17, weight: .medium))
+                    .foregroundStyle(isActive ? palette.accent : palette.textSecondary)
+                    .contentTransition(.symbolEffect(.replace))
+                Text(label)
+                    .font(.system(size: 10, weight: .medium, design: .rounded))
+                    .foregroundStyle(isActive ? palette.accent : palette.textMuted)
+            }
+            .frame(maxWidth: .infinity)
+            .frame(height: 50)
+            .contentShape(Rectangle())
         }
         .buttonStyle(ToolbarButtonStyle())
-    }
-
-    private var divider: some View {
-        Rectangle()
-            .fill(palette.border.opacity(0.15))
-            .frame(width: 0.5, height: 24)
-    }
-
-    private var overflowMenu: some View {
-        Menu {
-            if let onPlayFromHere {
-                Button {
-                    onPlayFromHere()
-                } label: {
-                    Label("Play From Here", systemImage: "headphones")
-                }
-            }
-
-            Button {
-                onCreateVerseImage()
-            } label: {
-                Label("Create Verse Image", systemImage: "photo.artframe")
-            }
-
-            Button {
-                onAddNote()
-            } label: {
-                Label("Add Note", systemImage: "note.text.badge.plus")
-            }
-
-            Button {
-                onMeditateInSanctuary()
-            } label: {
-                Label("Meditate in Sanctuary", systemImage: "leaf.fill")
-            }
-        } label: {
-            Image(systemName: "ellipsis")
-                .font(.system(size: 18, weight: .medium))
-                .foregroundStyle(palette.textSecondary)
-                .frame(width: 44, height: 52)
-                .contentShape(Rectangle())
-        }
     }
 }
 
@@ -338,17 +308,7 @@ private struct HighlightColorStrip: View {
                 .accessibilityLabel("\(color.displayName) highlight\(isLocked ? " (Pro)" : "")")
             }
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 10)
-        .background(
-            Capsule()
-                .fill(palette.surfaceElevated)
-                .shadow(color: .black.opacity(0.08), radius: 8, y: 2)
-        )
-        .overlay(
-            Capsule()
-                .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
-        )
+        .frame(maxWidth: .infinity)
     }
 }
 

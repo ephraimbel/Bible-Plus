@@ -101,6 +101,7 @@ private struct BibleContentView: View {
     @State private var showSanctuary = false
     @State private var sanctuaryVerseText: String?
     @State private var sanctuaryVerseReference: String?
+    @State private var selectedVerseFrame: CGRect = .zero
     @Environment(SoundscapeService.self) private var soundscapeService
 
     // MARK: - Page Flip State
@@ -461,6 +462,7 @@ private struct BibleContentView: View {
                     }(),
                     currentHighlight: viewModel.highlightColor(for: verse.number),
                     currentNote: viewModel.noteText(for: verse.number),
+                    verseFrame: selectedVerseFrame,
                     onExplain: {
                         // Verse explain counts toward AI rate limit
                         let descriptor = FetchDescriptor<UserProfile>()
@@ -574,6 +576,10 @@ private struct BibleContentView: View {
                 )
                 .transition(.move(edge: .bottom).combined(with: .opacity))
             }
+        }
+        .coordinateSpace(name: "bibleContent")
+        .onPreferenceChange(SelectedVerseFrameKey.self) { frame in
+            if frame != .zero { selectedVerseFrame = frame }
         }
         .animation(BPAnimation.spring, value: viewModel.selectedVerse)
         .animation(BPAnimation.spring, value: audioService.hasActivePlayback)

@@ -17,7 +17,10 @@ struct ChapterReaderView: View {
     let lastReadVerseNumber: Int?
     let readerFontSize: Double
     let readerFontDesign: Font.Design
+    let readerFontWeight: Font.Weight
     let readerLineSpacing: Double
+    let readerTextAlignmentJustified: Bool
+    let readerShowVerseNumbers: Bool
     let onVerseTap: (VerseItem) -> Void
     let onRetry: () -> Void
     @Environment(\.bpPalette) private var palette
@@ -129,6 +132,16 @@ struct ChapterReaderView: View {
             )
         }
         .buttonStyle(.plain)
+        .overlay {
+            if isSelected {
+                GeometryReader { geo in
+                    Color.clear.preference(
+                        key: SelectedVerseFrameKey.self,
+                        value: geo.frame(in: .named("bibleContent"))
+                    )
+                }
+            }
+        }
     }
 
     private func buildVerseText(
@@ -139,36 +152,40 @@ struct ChapterReaderView: View {
         hasNote: Bool,
         highlight: VerseHighlightColor?
     ) -> Text {
-        let superscriptSize = max(9, readerFontSize * 0.55)
+        var result = Text("")
 
-        var result = Text("\(number)")
-            .font(.system(size: superscriptSize, weight: .semibold, design: .serif))
-            .foregroundColor(palette.accent)
-            .baselineOffset(6)
+        if readerShowVerseNumbers {
+            let superscriptSize = max(9, readerFontSize * 0.55)
 
-        if isSaved {
-            result = result + Text(Image(systemName: "bookmark.fill"))
-                .font(.system(size: 7))
-                .foregroundColor(
-                    highlight != nil
-                        ? Color(hex: highlight!.dotColor)
-                        : palette.accent
-                )
-                .baselineOffset(6)
-        }
-
-        if hasNote {
-            result = result + Text(Image(systemName: "text.bubble.fill"))
-                .font(.system(size: 6))
+            result = result + Text("\(number)")
+                .font(.system(size: superscriptSize, weight: .semibold, design: .serif))
                 .foregroundColor(palette.accent)
                 .baselineOffset(6)
+
+            if isSaved {
+                result = result + Text(Image(systemName: "bookmark.fill"))
+                    .font(.system(size: 7))
+                    .foregroundColor(
+                        highlight != nil
+                            ? Color(hex: highlight!.dotColor)
+                            : palette.accent
+                    )
+                    .baselineOffset(6)
+            }
+
+            if hasNote {
+                result = result + Text(Image(systemName: "text.bubble.fill"))
+                    .font(.system(size: 6))
+                    .foregroundColor(palette.accent)
+                    .baselineOffset(6)
+            }
+
+            result = result + Text("\u{2009}")
+                .font(.system(size: readerFontSize, design: readerFontDesign))
         }
 
-        result = result + Text("\u{2009}")
-            .font(.system(size: readerFontSize, design: readerFontDesign))
-
         result = result + Text(text)
-            .font(.system(size: readerFontSize, weight: .regular, design: readerFontDesign))
+            .font(.system(size: readerFontSize, weight: readerFontWeight, design: readerFontDesign))
             .foregroundColor(isRedLetter ? palette.jesusWords : palette.textPrimary)
 
         return result
