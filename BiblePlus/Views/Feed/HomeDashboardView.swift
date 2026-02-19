@@ -251,6 +251,33 @@ struct HomeDashboardView: View {
                             .foregroundStyle(.white.opacity(0.7))
                     }
 
+                    Button {
+                        NotificationCenter.default.post(
+                            name: .openAIWithContext,
+                            object: nil,
+                            userInfo: [
+                                "context": "Walk me through this verse: \"\(verse.text)\" \u{2014} \(verse.reference)",
+                                "title": verse.reference,
+                            ]
+                        )
+                        HapticService.lightImpact()
+                    } label: {
+                        HStack(spacing: 5) {
+                            Image(systemName: "bubble.left.fill")
+                                .font(.system(size: 10, weight: .medium))
+                            Text("Discuss")
+                                .font(.system(size: 12, weight: .semibold, design: .rounded))
+                        }
+                        .foregroundStyle(.white.opacity(0.85))
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 6)
+                        .background(
+                            Capsule()
+                                .fill(.white.opacity(0.15))
+                        )
+                    }
+                    .padding(.top, 4)
+
                     Spacer(minLength: 0)
                 }
                 .padding(.horizontal, 20)

@@ -97,6 +97,41 @@ struct PlanDayView: View {
                 )
                 .padding(.horizontal, 24)
 
+                // Reflect with AI
+                Button {
+                    let readings = day.readings.map(\.displayReference).joined(separator: ", ")
+                    let reflection = day.reflection ?? ""
+                    let context = "I'm reading \(plan.name) Day \(day.day). Today's readings: \(readings). The reflection is: \(reflection). Help me go deeper."
+                    NotificationCenter.default.post(
+                        name: .openAIWithContext,
+                        object: nil,
+                        userInfo: [
+                            "context": context,
+                            "title": "\(plan.name) \u{2014} Day \(day.day)",
+                        ]
+                    )
+                    HapticService.lightImpact()
+                } label: {
+                    HStack(spacing: 8) {
+                        Image(systemName: "sparkles")
+                            .font(.system(size: 13, weight: .semibold))
+                        Text("Reflect with AI")
+                            .font(.system(size: 14, weight: .semibold, design: .rounded))
+                    }
+                    .foregroundStyle(palette.accent)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 14)
+                    .background(
+                        RoundedRectangle(cornerRadius: 14)
+                            .fill(palette.accent.opacity(0.08))
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 14)
+                            .stroke(palette.accent.opacity(0.2), lineWidth: 0.5)
+                    )
+                }
+                .padding(.horizontal, 24)
+
                 // Mark complete / status
                 completionSection
                     .padding(.horizontal, 24)

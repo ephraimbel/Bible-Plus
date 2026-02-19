@@ -973,4 +973,6 @@ extension Notification.Name {
     static let showProgressFromWidget = Notification.Name("ShowProgressFromWidget")
     static let showPlansFromWidget = Notification.Name("ShowPlansFromWidget")
     static let switchToAskTab = Notification.Name("SwitchToAskTab")
+    static let openAIWithContext = Notification.Name("OpenAIWithContext")
+    static let navigateToConversation = Notification.Name("NavigateToConversation")
 }

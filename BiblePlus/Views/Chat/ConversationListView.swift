@@ -7,6 +7,7 @@ struct ConversationListView: View {
     @Environment(\.colorScheme) private var colorScheme
     @State private var viewModel: ConversationListViewModel?
     @State private var navigationPath = NavigationPath()
+    @State private var pendingContext: String?
 
     var body: some View {
         NavigationStack(path: $navigationPath) {
@@ -47,11 +48,18 @@ struct ConversationListView: View {
                 }
             }
             .navigationDestination(for: UUID.self) { conversationId in
-                ChatView(conversationId: conversationId)
+                ChatView(conversationId: conversationId, initialContext: consumePendingContext())
                     .onDisappear {
                         viewModel?.loadConversations()
                     }
             }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .navigateToConversation)) { notification in
+            guard let idString = notification.userInfo?["conversationId"] as? String,
+                  let conversationId = UUID(uuidString: idString) else { return }
+            pendingContext = notification.userInfo?["context"] as? String
+            viewModel?.loadConversations()
+            navigationPath.append(conversationId)
         }
     }
 
@@ -60,6 +68,11 @@ struct ConversationListView: View {
         let conversation = vm.createNewConversation()
         navigationPath.append(conversation.id)
         HapticService.lightImpact()
+    }
+
+    private func consumePendingContext() -> String? {
+        defer { pendingContext = nil }
+        return pendingContext
     }
 }
 
@@ -94,30 +107,29 @@ private struct ConversationListContent: View {
                 .opacity(appeared ? 1 : 0)
                 .animation(BPAnimation.spring.delay(0.05), value: appeared)
 
-                LazyVStack(spacing: 10) {
-                    ForEach(Array(viewModel.conversations.enumerated()), id: \.element.id) { index, conversation in
-                        Button {
-                            HapticService.selection()
-                            onSelectConversation(conversation)
-                        } label: {
-                            ConversationCard(
-                                conversation: conversation,
-                                preview: viewModel.lastMessagePreview(for: conversation),
-                                palette: palette
-                            )
+                // Pinned section
+                if !viewModel.pinnedConversations.isEmpty {
+                    sectionHeader(title: "PINNED", icon: "pin.fill")
+
+                    LazyVStack(spacing: 10) {
+                        ForEach(viewModel.pinnedConversations) { conversation in
+                            conversationButton(conversation, isPinned: true)
                         }
-                        .buttonStyle(.plain)
-                        .padding(.horizontal, 20)
-                        .opacity(appeared ? 1 : 0)
-                        .offset(y: appeared ? 0 : 10)
-                        .animation(BPAnimation.spring.delay(0.1 + Double(min(index, 8)) * 0.03), value: appeared)
-                        .contextMenu {
-                            Button(role: .destructive) {
-                                viewModel.deleteConversation(conversation)
-                                HapticService.notification(.warning)
-                            } label: {
-                                Label("Delete Conversation", systemImage: "trash")
-                            }
+                    }
+                }
+
+                // Recent section
+                if !viewModel.unpinnedConversations.isEmpty {
+                    if !viewModel.pinnedConversations.isEmpty {
+                        sectionHeader(title: "RECENT", icon: nil)
+                    }
+
+                    LazyVStack(spacing: 10) {
+                        ForEach(Array(viewModel.unpinnedConversations.enumerated()), id: \.element.id) { index, conversation in
+                            conversationButton(conversation, isPinned: false)
+                                .opacity(appeared ? 1 : 0)
+                                .offset(y: appeared ? 0 : 10)
+                                .animation(BPAnimation.spring.delay(0.1 + Double(min(index, 8)) * 0.03), value: appeared)
                         }
                     }
                 }
@@ -131,6 +143,70 @@ private struct ConversationListContent: View {
                         appeared = true
                     }
                 }
+            }
+        }
+    }
+
+    // MARK: - Section Header
+
+    private func sectionHeader(title: String, icon: String?) -> some View {
+        HStack(spacing: 6) {
+            if let icon {
+                Image(systemName: icon)
+                    .font(.system(size: 10, weight: .bold))
+                    .foregroundStyle(palette.accent)
+            }
+            Text(title)
+                .font(.system(size: 11, weight: .bold, design: .rounded))
+                .tracking(1.5)
+                .foregroundStyle(palette.textMuted)
+            Spacer()
+        }
+        .padding(.horizontal, 24)
+        .padding(.top, 16)
+        .padding(.bottom, 4)
+    }
+
+    // MARK: - Conversation Button
+
+    private func conversationButton(_ conversation: Conversation, isPinned: Bool) -> some View {
+        Button {
+            HapticService.selection()
+            onSelectConversation(conversation)
+        } label: {
+            ConversationCard(
+                conversation: conversation,
+                preview: viewModel.lastMessagePreview(for: conversation),
+                palette: palette
+            )
+        }
+        .buttonStyle(.plain)
+        .padding(.horizontal, 20)
+        .swipeActions(edge: .leading) {
+            Button {
+                viewModel.togglePin(conversation)
+            } label: {
+                Label(
+                    conversation.isPinned ? "Unpin" : "Pin",
+                    systemImage: conversation.isPinned ? "pin.slash.fill" : "pin.fill"
+                )
+            }
+            .tint(palette.accent)
+        }
+        .contextMenu {
+            Button {
+                viewModel.togglePin(conversation)
+            } label: {
+                Label(
+                    conversation.isPinned ? "Unpin" : "Pin",
+                    systemImage: conversation.isPinned ? "pin.slash.fill" : "pin.fill"
+                )
+            }
+            Button(role: .destructive) {
+                viewModel.deleteConversation(conversation)
+                HapticService.notification(.warning)
+            } label: {
+                Label("Delete Conversation", systemImage: "trash")
             }
         }
     }
@@ -263,9 +339,16 @@ private struct ConversationCard: View {
     let preview: String
     let palette: BPColorPalette
 
+    private var cardIcon: String {
+        if let character = conversation.character {
+            return character.icon
+        }
+        return "sparkle"
+    }
+
     var body: some View {
         HStack(spacing: 14) {
-            // Sparkle icon
+            // Icon
             ZStack {
                 Circle()
                     .fill(
@@ -277,17 +360,35 @@ private struct ConversationCard: View {
                     )
                     .frame(width: 42, height: 42)
 
-                Image(systemName: "sparkle")
+                Image(systemName: cardIcon)
                     .font(.system(size: 16, weight: .medium))
                     .foregroundStyle(palette.accent)
             }
 
             VStack(alignment: .leading, spacing: 5) {
-                HStack {
+                HStack(spacing: 6) {
+                    if conversation.isPinned {
+                        Image(systemName: "pin.fill")
+                            .font(.system(size: 9, weight: .bold))
+                            .foregroundStyle(palette.accent)
+                    }
+
                     Text(conversation.title)
                         .font(.system(size: 15, weight: .semibold, design: .rounded))
                         .foregroundStyle(palette.textPrimary)
                         .lineLimit(1)
+
+                    if let mode = conversation.mode {
+                        Text(mode.displayName)
+                            .font(.system(size: 10, weight: .semibold, design: .rounded))
+                            .foregroundStyle(palette.accent)
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 2)
+                            .background(
+                                Capsule()
+                                    .fill(palette.accent.opacity(0.1))
+                            )
+                    }
 
                     Spacer()
 

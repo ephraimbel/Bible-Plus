@@ -27,6 +27,39 @@ struct ChatView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbarBackground(.hidden, for: .navigationBar)
         .toolbar {
+            ToolbarItem(placement: .principal) {
+                if let vm = viewModel {
+                    if let character = vm.conversationCharacter {
+                        HStack(spacing: 5) {
+                            Image(systemName: character.icon)
+                                .font(.system(size: 11, weight: .semibold))
+                            Text(character.displayName)
+                                .font(.system(size: 13, weight: .semibold, design: .rounded))
+                        }
+                        .foregroundStyle(palette.accent)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 5)
+                        .background(
+                            Capsule()
+                                .fill(palette.accent.opacity(0.1))
+                        )
+                    } else if let mode = vm.conversationMode {
+                        HStack(spacing: 5) {
+                            Image(systemName: mode.icon)
+                                .font(.system(size: 11, weight: .semibold))
+                            Text(mode.displayName)
+                                .font(.system(size: 13, weight: .semibold, design: .rounded))
+                        }
+                        .foregroundStyle(palette.accent)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 5)
+                        .background(
+                            Capsule()
+                                .fill(palette.accent.opacity(0.1))
+                        )
+                    }
+                }
+            }
             ToolbarItem(placement: .topBarTrailing) {
                 if let vm = viewModel, !vm.messages.isEmpty {
                     Button {
@@ -57,6 +90,8 @@ private struct ChatContentView: View {
     @Environment(\.colorScheme) private var colorScheme
     @State private var showPaywall = false
     @State private var sendButtonScale: CGFloat = 1.0
+    @State private var showGuidedPrayer = false
+    @State private var shareAsCardMessage: ChatMessage?
 
     var body: some View {
         VStack(spacing: 0) {
@@ -67,7 +102,12 @@ private struct ChatContentView: View {
                     userName: viewModel.userName,
                     categories: PromptCategory.allCases,
                     selectedCategory: $viewModel.selectedPromptCategory,
-                    onTap: { viewModel.sendQuickPrompt($0) }
+                    currentMode: viewModel.conversationMode,
+                    onTap: { viewModel.sendQuickPrompt($0) },
+                    onSelectMode: { viewModel.setConversationMode($0) },
+                    onSelectCharacter: { viewModel.startCharacterConversation($0) },
+                    onSelectEmotion: { viewModel.sendQuickPrompt($0.prompt) },
+                    onGuidedPrayer: { showGuidedPrayer = true }
                 )
             } else {
                 messageList
@@ -115,6 +155,17 @@ private struct ChatContentView: View {
         .sheet(item: $viewModel.shareText) { text in
             ShareSheet(text: text)
         }
+        .sheet(isPresented: $showGuidedPrayer) {
+            GuidedPrayerSheet { prompt in
+                viewModel.sendQuickPrompt(prompt)
+            }
+        }
+        .sheet(item: $shareAsCardMessage) { message in
+            ChatSharePreviewSheet(
+                messageContent: message.content,
+                background: SanctuaryBackground.background(for: viewModel.profile.selectedBackgroundID) ?? SanctuaryBackground.allBackgrounds[0]
+            )
+        }
     }
 
     // MARK: - Top Gold Gradient
@@ -150,6 +201,11 @@ private struct ChatContentView: View {
                 LazyVStack(spacing: 0) {
                     ForEach(Array(viewModel.displayMessages.enumerated()), id: \.element.id) { index, message in
                         if message.role != .system {
+                            // Date divider
+                            if let dividerLabel = viewModel.dateDividerLabel(for: message, at: index) {
+                                dateDivider(label: dividerLabel)
+                            }
+
                             let previousRole: MessageRole? = {
                                 guard index > 0 else { return nil }
                                 let prev = viewModel.displayMessages[index - 1]
@@ -168,16 +224,21 @@ private struct ChatContentView: View {
                                 && nextRole != .assistant
                                 && !viewModel.isChunkTyping
 
+                            let isStreamingMsg = viewModel.isStreaming
+                                && message.id == viewModel.displayMessages.last?.id
+                                && message.role == .assistant
+
                             ChatBubbleView(
                                 message: message,
-                                isStreaming: viewModel.isStreaming
-                                    && message.id == viewModel.displayMessages.last?.id
-                                    && message.role == .assistant,
+                                isStreaming: isStreamingMsg,
                                 onSave: message.role == .assistant ? {
                                     viewModel.saveResponse(message)
                                 } : nil,
                                 onShare: message.role == .assistant ? {
                                     viewModel.prepareShare(message)
+                                } : nil,
+                                onShareAsCard: message.role == .assistant && !isStreamingMsg ? {
+                                    shareAsCardMessage = message
                                 } : nil,
                                 onScriptureTap: { bookName, chapter, verse in
                                     viewModel.navigateToScripture(bookName: bookName, chapter: chapter, verse: verse)
@@ -189,6 +250,7 @@ private struct ChatContentView: View {
                                 isSavedPrayer: viewModel.savedPrayerMessageIDs.contains(message.id),
                                 isFailedMessage: message.role == .user && viewModel.failedMessageId == message.id,
                                 previousMessageRole: previousRole,
+                                typingContextLabel: isStreamingMsg ? viewModel.typingContextLabel : nil,
                                 isFirstInAssistantSequence: isFirst,
                                 isLastInAssistantSequence: isLast,
                                 reaction: viewModel.messageReactions[message.id],
@@ -228,7 +290,7 @@ private struct ChatContentView: View {
             Spacer()
                 .frame(width: 28)
 
-            TypingDotsView()
+            TypingDotsView(contextLabel: viewModel.typingContextLabel)
                 .background(
                     RoundedRectangle(cornerRadius: 16)
                         .fill(palette.surfaceElevated.opacity(0.5))
@@ -239,6 +301,24 @@ private struct ChatContentView: View {
         .padding(.horizontal, 16)
         .padding(.top, 4)
         .padding(.bottom, 2)
+    }
+
+    // MARK: - Date Divider
+
+    private func dateDivider(label: String) -> some View {
+        HStack(spacing: 12) {
+            Rectangle()
+                .fill(palette.border.opacity(0.2))
+                .frame(height: 0.5)
+            Text(label)
+                .font(.system(size: 12, weight: .medium, design: .rounded))
+                .foregroundStyle(palette.textMuted)
+            Rectangle()
+                .fill(palette.border.opacity(0.2))
+                .frame(height: 0.5)
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 8)
     }
 
     private func scrollToBottom(proxy: ScrollViewProxy) {

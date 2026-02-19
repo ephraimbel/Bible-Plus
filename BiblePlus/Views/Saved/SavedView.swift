@@ -790,6 +790,40 @@ private struct SavedPrayerDetailView: View {
                     }
                 }
 
+                // Continue in Chat
+                Button {
+                    NotificationCenter.default.post(
+                        name: .openAIWithContext,
+                        object: nil,
+                        userInfo: [
+                            "context": "I wrote this prayer earlier: \"\(entry.body)\". Help me continue praying about this.",
+                            "title": entry.title,
+                        ]
+                    )
+                    HapticService.lightImpact()
+                } label: {
+                    HStack(spacing: 8) {
+                        Image(systemName: "bubble.left.fill")
+                            .font(.system(size: 13, weight: .medium))
+                        Text("Continue in Chat")
+                            .font(.system(size: 14, weight: .semibold, design: .rounded))
+                    }
+                    .foregroundStyle(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 14)
+                    .background(
+                        Capsule()
+                            .fill(
+                                LinearGradient(
+                                    colors: [palette.accent, palette.accent.opacity(0.85)],
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                            )
+                    )
+                }
+                .buttonStyle(.plain)
+
                 // Delete button
                 Button(role: .destructive) {
                     showDeleteConfirm = true

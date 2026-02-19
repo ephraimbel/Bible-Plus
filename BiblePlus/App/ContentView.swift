@@ -122,6 +122,31 @@ struct ContentView: View {
                 selectedTab = .ask
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: .openAIWithContext)) { notification in
+            let title = notification.userInfo?["title"] as? String ?? "New Conversation"
+            let context = notification.userInfo?["context"] as? String
+
+            // Create conversation
+            let conversation = Conversation(title: title)
+            modelContext.insert(conversation)
+            try? modelContext.save()
+
+            // Switch to Ask tab
+            withAnimation(.easeInOut(duration: 0.25)) {
+                selectedTab = .ask
+            }
+
+            // Navigate to the conversation after a short delay
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                var userInfo: [String: Any] = ["conversationId": conversation.id.uuidString]
+                if let context { userInfo["context"] = context }
+                NotificationCenter.default.post(
+                    name: .navigateToConversation,
+                    object: nil,
+                    userInfo: userInfo
+                )
+            }
+        }
         .onReceive(NotificationCenter.default.publisher(for: .feedContentDeepLink)) { _ in
             withAnimation(.easeInOut(duration: 0.25)) {
                 selectedTab = .feed

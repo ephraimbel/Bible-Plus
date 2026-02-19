@@ -5,12 +5,14 @@ struct ChatBubbleView: View {
     let isStreaming: Bool
     var onSave: (() -> Void)? = nil
     var onShare: (() -> Void)? = nil
+    var onShareAsCard: (() -> Void)? = nil
     var onScriptureTap: ((String, Int, Int) -> Void)? = nil
     var onSavePrayer: (() -> Void)? = nil
     var isPrayerMessage: Bool = false
     var isSavedPrayer: Bool = false
     var isFailedMessage: Bool = false
     var previousMessageRole: MessageRole? = nil
+    var typingContextLabel: String? = nil
 
     // New: sequence + reaction params
     var isFirstInAssistantSequence: Bool = true
@@ -75,7 +77,7 @@ struct ChatBubbleView: View {
 
             VStack(alignment: message.role == .user ? .trailing : .leading, spacing: 4) {
                 if isTypingPlaceholder {
-                    TypingDotsView()
+                    TypingDotsView(contextLabel: typingContextLabel)
                         .transition(.scale(scale: 0.8).combined(with: .opacity))
                 } else if message.role == .user {
                     Text(message.content)
@@ -109,7 +111,11 @@ struct ChatBubbleView: View {
                     }
                 } else {
                     // AI message: no bubble, text flows on background
-                    assistantContent
+                    if isPrayerMessage && !isStreaming {
+                        prayerWrappedContent
+                    } else {
+                        assistantContent
+                    }
 
                     // Reaction badge
                     if let reaction {
@@ -250,6 +256,42 @@ struct ChatBubbleView: View {
         }
     }
 
+    // MARK: - Prayer Wrapped Content
+
+    private var prayerWrappedContent: some View {
+        HStack(spacing: 0) {
+            // 3pt left accent bar
+            RoundedRectangle(cornerRadius: 2)
+                .fill(
+                    LinearGradient(
+                        colors: [palette.accent, palette.accent.opacity(0.5)],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                )
+                .frame(width: 3)
+
+            assistantContent
+                .padding(.leading, 12)
+                .padding(.trailing, 12)
+                .padding(.vertical, 12)
+        }
+        .background(
+            RoundedRectangle(cornerRadius: 14)
+                .fill(
+                    LinearGradient(
+                        colors: [palette.accent.opacity(0.06), palette.accent.opacity(0.01)],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                )
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 14)
+                .stroke(palette.accent.opacity(0.08), lineWidth: 0.5)
+        )
+    }
+
     // MARK: - Text View (No Bubble — flows on background)
 
     private func textView(_ text: String) -> some View {
@@ -337,6 +379,13 @@ struct ChatBubbleView: View {
                     onShare()
                 } label: {
                     Label("Share Response", systemImage: "square.and.arrow.up")
+                }
+            }
+            if let onShareAsCard {
+                Button {
+                    onShareAsCard()
+                } label: {
+                    Label("Share as Card", systemImage: "photo.artframe")
                 }
             }
             Button {

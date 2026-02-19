@@ -1458,3 +1458,131 @@ enum PrayerCategory: String, Codable, CaseIterable, Identifiable {
         }
     }
 }
+
+// MARK: - Biblical Character
+
+enum BiblicalCharacter: String, CaseIterable, Identifiable {
+    case paul, david, moses, mary, solomon, ruth, peter, esther
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .paul: "Paul"
+        case .david: "David"
+        case .moses: "Moses"
+        case .mary: "Mary"
+        case .solomon: "Solomon"
+        case .ruth: "Ruth"
+        case .peter: "Peter"
+        case .esther: "Esther"
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .paul: "scroll.fill"
+        case .david: "crown.fill"
+        case .moses: "figure.walk"
+        case .mary: "heart.fill"
+        case .solomon: "scalemass.fill"
+        case .ruth: "leaf.fill"
+        case .peter: "bolt.fill"
+        case .esther: "star.fill"
+        }
+    }
+
+    var subtitle: String {
+        switch self {
+        case .paul: "Apostle & Theologian"
+        case .david: "King & Psalmist"
+        case .moses: "Deliverer & Lawgiver"
+        case .mary: "Mother of Jesus"
+        case .solomon: "Wisest King"
+        case .ruth: "Woman of Loyalty"
+        case .peter: "Rock of the Church"
+        case .esther: "Queen of Courage"
+        }
+    }
+}
+
+// MARK: - Conversation Mode
+
+enum ConversationMode: String, CaseIterable, Identifiable {
+    case comfort, challenge, teach, pray
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .comfort: "Comfort me"
+        case .challenge: "Challenge me"
+        case .teach: "Teach me"
+        case .pray: "Pray with me"
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .comfort: "heart.fill"
+        case .challenge: "flame.fill"
+        case .teach: "book.fill"
+        case .pray: "hands.sparkles.fill"
+        }
+    }
+}
+
+// MARK: - Chat Emotion
+
+enum ChatEmotion: String, CaseIterable, Identifiable {
+    case anxious, sad, grateful, lost, angry, hopeful, lonely, peaceful
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .anxious: "Anxious"
+        case .sad: "Sad"
+        case .grateful: "Grateful"
+        case .lost: "Lost"
+        case .angry: "Angry"
+        case .hopeful: "Hopeful"
+        case .lonely: "Lonely"
+        case .peaceful: "Peaceful"
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .anxious: "wind"
+        case .sad: "cloud.rain.fill"
+        case .grateful: "sun.max.fill"
+        case .lost: "questionmark.circle.fill"
+        case .angry: "bolt.heart.fill"
+        case .hopeful: "sunrise.fill"
+        case .lonely: "person.fill.questionmark"
+        case .peaceful: "leaf.fill"
+        }
+    }
+
+    var prompt: String {
+        switch self {
+        case .anxious:
+            "I'm feeling anxious right now. Can you help me find peace in Scripture and pray with me?"
+        case .sad:
+            "I'm feeling really sad today. Can you sit with me in this and share something comforting from the Bible?"
+        case .grateful:
+            "I'm feeling so grateful right now. Help me express my thanks to God with a prayer of gratitude."
+        case .lost:
+            "I feel lost and unsure about my direction. What does God's Word say about finding guidance?"
+        case .angry:
+            "I'm struggling with anger right now. Help me process this through Scripture and prayer."
+        case .hopeful:
+            "I'm feeling hopeful today. Share a verse that celebrates hope and help me praise God for it."
+        case .lonely:
+            "I'm feeling really lonely. Remind me from Scripture that God is near, and pray with me."
+        case .peaceful:
+            "I'm in a peaceful place right now. Help me dwell in God's presence with a meditation on His peace."
+        }
+    }
+}

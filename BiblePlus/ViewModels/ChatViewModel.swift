@@ -124,6 +124,55 @@ final class ChatViewModel {
         max(0, AIService.freeMessagesPerWeek - messagesUsedThisWeek)
     }
 
+    // MARK: - Typing Context Label
+
+    var typingContextLabel: String? {
+        guard let lastUserMsg = messages.last(where: { $0.role == .user }) else { return nil }
+        if AIService.detectsPrayerIntent(lastUserMsg.content) {
+            return "Composing a prayer..."
+        }
+        let lower = lastUserMsg.content.lowercased()
+        let scriptureKeywords = ["verse", "chapter", "genesis", "exodus", "psalm", "proverbs",
+                                 "matthew", "john", "romans", "corinthians", "revelation", "scripture", "bible"]
+        if scriptureKeywords.contains(where: { lower.contains($0) }) {
+            return "Reflecting on Scripture..."
+        }
+        if let conv = fetchConversation(), conv.character != nil {
+            return "Speaking as \(conv.character!.displayName)..."
+        }
+        return nil
+    }
+
+    // MARK: - Date Dividers
+
+    func dateDividerLabel(for message: ChatMessage, at index: Int) -> String? {
+        let calendar = Calendar.current
+        let messageDate = message.createdAt
+
+        if index == 0 {
+            return formattedDateLabel(messageDate)
+        }
+
+        let previousDate = displayMessages[index - 1].createdAt
+        if !calendar.isDate(messageDate, inSameDayAs: previousDate) {
+            return formattedDateLabel(messageDate)
+        }
+        return nil
+    }
+
+    private func formattedDateLabel(_ date: Date) -> String {
+        let calendar = Calendar.current
+        if calendar.isDateInToday(date) {
+            return "Today"
+        } else if calendar.isDateInYesterday(date) {
+            return "Yesterday"
+        } else {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MMM d"
+            return formatter.string(from: date)
+        }
+    }
+
     // MARK: - Quick Prompts (Category-Aware)
 
     var quickPrompts: [(icon: String, text: String)] {
@@ -394,6 +443,33 @@ final class ChatViewModel {
         return bestMatch
     }
 
+    // MARK: - Mode & Character
+
+    var conversationMode: ConversationMode? {
+        fetchConversation()?.mode
+    }
+
+    var conversationCharacter: BiblicalCharacter? {
+        fetchConversation()?.character
+    }
+
+    func setConversationMode(_ mode: ConversationMode) {
+        guard let conversation = fetchConversation() else { return }
+        conversation.mode = mode
+        conversation.updatedAt = Date()
+        try? modelContext.save()
+    }
+
+    func startCharacterConversation(_ character: BiblicalCharacter) {
+        guard let conversation = fetchConversation() else { return }
+        conversation.character = character
+        conversation.title = "Conversation with \(character.displayName)"
+        conversation.updatedAt = Date()
+        try? modelContext.save()
+
+        sendQuickPrompt("Hello \(character.displayName), I'd like to talk with you about what's on my heart.")
+    }
+
     // MARK: - Context from Feed/Bible
 
     func applyInitialContext() {
@@ -448,7 +524,18 @@ final class ChatViewModel {
     // MARK: - Streaming
 
     private func streamResponse(for assistantMessage: ChatMessage) async {
-        let systemPrompt = AIService.buildSystemPrompt(for: profile)
+        var systemPrompt = AIService.buildSystemPrompt(for: profile)
+
+        // Inject character persona (first priority)
+        if let conversation = fetchConversation(), let character = conversation.character {
+            systemPrompt += "\n\n" + AIService.characterPersona(for: character)
+        }
+
+        // Inject mode overlay (stacks with character)
+        if let conversation = fetchConversation(), let mode = conversation.mode {
+            let name = profile.firstName.isEmpty ? "Friend" : profile.firstName
+            systemPrompt += "\n\n" + AIService.modeOverlay(for: mode, name: name)
+        }
 
         var apiMessages: [(role: String, content: String)] = [
             (role: "system", content: systemPrompt)

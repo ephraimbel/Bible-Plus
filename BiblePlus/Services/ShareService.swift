@@ -20,6 +20,22 @@ enum ShareService {
     }
 
     @MainActor
+    static func renderChatImage(
+        messageContent: String,
+        background: SanctuaryBackground,
+        aspectRatio: ShareAspectRatio
+    ) -> UIImage? {
+        let view = ChatShareCardView(
+            messageContent: messageContent,
+            background: background,
+            aspectRatio: aspectRatio
+        )
+        let renderer = ImageRenderer(content: view)
+        renderer.scale = 3.0
+        return renderer.uiImage
+    }
+
+    @MainActor
     static func renderVerseImage(
         verseText: String,
         reference: String,
