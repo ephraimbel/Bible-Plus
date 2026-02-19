@@ -16,7 +16,7 @@ struct AestheticView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            Spacer().frame(height: 24)
+            Spacer().frame(height: 28)
 
             // Header
             VStack(spacing: 10) {
@@ -36,17 +36,17 @@ struct AestheticView: View {
                         ? "feel like yours."
                         : "feel like yours, \(viewModel.firstName).")
                 }
-                .font(BPFont.headingMedium)
+                .font(BPFont.onboardingHeading)
                 .foregroundStyle(palette.textPrimary)
                 .multilineTextAlignment(.center)
 
                 Text("Choose your background.")
-                    .font(BPFont.reference)
-                    .foregroundStyle(palette.textMuted)
+                    .font(BPFont.onboardingBody)
+                    .foregroundStyle(palette.textSecondary)
             }
             .opacity(showContent ? 1 : 0)
 
-            Spacer().frame(height: 20)
+            Spacer().frame(height: 28)
 
             // Background grid
             ScrollView(showsIndicators: false) {
@@ -76,7 +76,7 @@ struct AestheticView: View {
             )
             .padding(.horizontal, 32)
 
-            Spacer().frame(height: 40)
+            Spacer().frame(height: 44)
         }
         .onAppear {
             withAnimation(BPAnimation.spring.delay(0.2)) {

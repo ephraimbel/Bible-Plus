@@ -7,19 +7,19 @@ struct DailyRhythmView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            Spacer().frame(height: 24)
+            Spacer().frame(height: 28)
 
             VStack(spacing: 10) {
                 Text(viewModel.firstName.isEmpty
                     ? "When would you like\nto hear from God?"
                     : "When would you like\nto hear from God, \(viewModel.firstName)?")
-                    .font(BPFont.headingMedium)
+                    .font(BPFont.onboardingHeading)
                     .foregroundStyle(palette.textPrimary)
                     .multilineTextAlignment(.center)
 
                 Text("We'll send you a gentle reminder\nwith a personalized prayer or verse.")
-                    .font(BPFont.reference)
-                    .foregroundStyle(palette.textMuted)
+                    .font(BPFont.onboardingBody)
+                    .foregroundStyle(palette.textSecondary)
                     .multilineTextAlignment(.center)
                     .lineSpacing(3)
             }
@@ -47,8 +47,8 @@ struct DailyRhythmView: View {
 
             VStack(spacing: 8) {
                 Text("You can skip this and set it up later.")
-                    .font(BPFont.reference)
-                    .foregroundStyle(palette.textMuted)
+                    .font(BPFont.onboardingBody)
+                    .foregroundStyle(palette.textSecondary)
 
                 GoldButton(
                     title: "Continue",
@@ -57,7 +57,7 @@ struct DailyRhythmView: View {
             }
             .padding(.horizontal, 32)
 
-            Spacer().frame(height: 40)
+            Spacer().frame(height: 44)
         }
         .onAppear {
             withAnimation(BPAnimation.spring.delay(0.2)) {

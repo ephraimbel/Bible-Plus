@@ -2,15 +2,24 @@ import SwiftUI
 
 struct OnboardingBackground: View {
     var body: some View {
-        LinearGradient(
-            colors: [
-                Color(hex: "FFF8F0"),
-                Color(hex: "FAF3E8"),
-                Color(hex: "F5EFE0"),
-            ],
-            startPoint: .top,
-            endPoint: .bottom
-        )
+        ZStack {
+            LinearGradient(
+                colors: [
+                    Color(hex: "FFF8F0"),
+                    Color(hex: "FAF3E8"),
+                    Color(hex: "F5EFE0"),
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+
+            RadialGradient(
+                colors: [Color(hex: "C9A96E").opacity(0.08), Color.clear],
+                center: .init(x: 0.5, y: 0.15),
+                startRadius: 0,
+                endRadius: 300
+            )
+        }
         .ignoresSafeArea()
     }
 }

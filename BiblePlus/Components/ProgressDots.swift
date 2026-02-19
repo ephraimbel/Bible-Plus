@@ -6,7 +6,7 @@ struct ProgressDots: View {
     @Environment(\.bpPalette) private var palette
 
     var body: some View {
-        HStack(spacing: 6) {
+        HStack(spacing: 5) {
             ForEach(0..<totalSteps, id: \.self) { index in
                 Capsule()
                     .fill(
@@ -17,8 +17,8 @@ struct ProgressDots: View {
                                 : palette.border.opacity(0.4)
                     )
                     .frame(
-                        width: index == currentStep ? 24 : 8,
-                        height: 6
+                        width: index == currentStep ? 20 : 6,
+                        height: 4
                     )
             }
         }

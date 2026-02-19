@@ -12,25 +12,25 @@ struct HeartBurdensView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            Spacer().frame(height: 24)
+            Spacer().frame(height: 28)
 
             VStack(spacing: 10) {
                 Text(viewModel.firstName.isEmpty
                     ? "What's weighing\non your heart right now?"
                     : "\(viewModel.firstName), what's weighing\non your heart right now?")
-                    .font(BPFont.headingMedium)
+                    .font(BPFont.onboardingHeading)
                     .foregroundStyle(palette.textPrimary)
                     .multilineTextAlignment(.center)
 
                 Text("We'll prioritize prayers and verses that\nspeak to these areas. Select up to 3.")
-                    .font(BPFont.reference)
-                    .foregroundStyle(palette.textMuted)
+                    .font(BPFont.onboardingBody)
+                    .foregroundStyle(palette.textSecondary)
                     .multilineTextAlignment(.center)
                     .lineSpacing(3)
             }
             .opacity(showContent ? 1 : 0)
 
-            Spacer().frame(height: 20)
+            Spacer().frame(height: 28)
 
             ScrollView(showsIndicators: false) {
                 LazyVGrid(columns: columns, spacing: 12) {
@@ -57,7 +57,7 @@ struct HeartBurdensView: View {
             )
             .padding(.horizontal, 32)
 
-            Spacer().frame(height: 40)
+            Spacer().frame(height: 44)
         }
         .onAppear {
             withAnimation(BPAnimation.spring.delay(0.2)) {

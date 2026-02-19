@@ -13,17 +13,17 @@ struct FaithLevelView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            Spacer().frame(height: 24)
+            Spacer().frame(height: 28)
 
             Text(greeting)
-                .font(BPFont.headingMedium)
+                .font(BPFont.onboardingHeading)
                 .foregroundStyle(palette.textPrimary)
                 .multilineTextAlignment(.center)
                 .opacity(showContent ? 1 : 0)
 
             Spacer().frame(height: 28)
 
-            VStack(spacing: 14) {
+            VStack(spacing: 12) {
                 ForEach(Array(FaithLevel.allCases.enumerated()), id: \.element) { index, level in
                     faithCard(level: level, index: index)
                 }
@@ -39,7 +39,7 @@ struct FaithLevelView: View {
             )
             .padding(.horizontal, 32)
 
-            Spacer().frame(height: 40)
+            Spacer().frame(height: 44)
         }
         .onAppear {
             withAnimation(BPAnimation.spring.delay(0.2)) {
@@ -62,39 +62,30 @@ struct FaithLevelView: View {
                 // Large icon circle
                 ZStack {
                     Circle()
-                        .fill(
-                            isSelected
-                                ? .white.opacity(0.2)
-                                : palette.accent.opacity(0.1)
-                        )
+                        .fill(palette.accent.opacity(0.1))
                         .frame(width: 52, height: 52)
 
                     Image(systemName: level.icon)
                         .font(.system(size: 22, weight: .medium))
-                        .foregroundStyle(isSelected ? .white : palette.accent)
+                        .foregroundStyle(palette.accent)
                 }
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(level.displayName)
                         .font(.system(size: 17, weight: .semibold, design: .rounded))
-                        .foregroundStyle(isSelected ? .white : palette.textPrimary)
+                        .foregroundStyle(isSelected ? palette.accent : palette.textPrimary)
 
                     Text(level.description)
                         .font(.system(size: 14, weight: .regular, design: .rounded))
-                        .foregroundStyle(isSelected ? .white.opacity(0.8) : palette.textSecondary)
+                        .foregroundStyle(palette.textSecondary)
                 }
 
                 Spacer()
 
                 if isSelected {
-                    Image(systemName: "checkmark")
-                        .font(.system(size: 13, weight: .bold))
-                        .foregroundStyle(.white)
-                        .frame(width: 28, height: 28)
-                        .background(
-                            Circle()
-                                .fill(.white.opacity(0.25))
-                        )
+                    Image(systemName: "checkmark.circle.fill")
+                        .font(.system(size: 22, weight: .medium))
+                        .foregroundStyle(palette.accent)
                         .transition(.scale.combined(with: .opacity))
                 }
             }
@@ -105,28 +96,22 @@ struct FaithLevelView: View {
                 RoundedRectangle(cornerRadius: 18)
                     .fill(
                         isSelected
-                            ? AnyShapeStyle(
-                                LinearGradient(
-                                    colors: [palette.accent, palette.accent.opacity(0.85)],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                )
-                            )
-                            : AnyShapeStyle(palette.surfaceElevated)
+                            ? palette.accent.opacity(0.06)
+                            : palette.surfaceElevated
                     )
                     .shadow(
                         color: isSelected
-                            ? palette.accent.opacity(0.3)
+                            ? palette.accent.opacity(0.1)
                             : .black.opacity(0.04),
-                        radius: isSelected ? 12 : 4,
-                        y: isSelected ? 6 : 2
+                        radius: isSelected ? 8 : 4,
+                        y: isSelected ? 4 : 2
                     )
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 18)
                     .stroke(
-                        isSelected ? Color.clear : palette.border.opacity(0.15),
-                        lineWidth: 0.5
+                        isSelected ? palette.accent : palette.border.opacity(0.15),
+                        lineWidth: isSelected ? 1.5 : 0.5
                     )
             )
         }

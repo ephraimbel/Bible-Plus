@@ -11,15 +11,15 @@ struct NameInputView: View {
             Spacer()
 
             // Title
-            VStack(spacing: 12) {
+            VStack(spacing: 10) {
                 Text("What should we\ncall you?")
-                    .font(BPFont.headingMedium)
+                    .font(BPFont.onboardingHeading)
                     .foregroundStyle(palette.textPrimary)
                     .multilineTextAlignment(.center)
 
                 Text("We'll use your name to make every prayer,\nevery verse, and every conversation feel personal.")
-                    .font(BPFont.reference)
-                    .foregroundStyle(palette.textMuted)
+                    .font(BPFont.onboardingBody)
+                    .foregroundStyle(palette.textSecondary)
                     .multilineTextAlignment(.center)
                     .lineSpacing(3)
             }
@@ -96,7 +96,7 @@ struct NameInputView: View {
             )
             .padding(.horizontal, 32)
 
-            Spacer().frame(height: 40)
+            Spacer().frame(height: 44)
         }
         .contentShape(Rectangle())
         .onTapGesture {

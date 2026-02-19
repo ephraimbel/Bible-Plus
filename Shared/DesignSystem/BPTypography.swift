@@ -39,4 +39,10 @@ enum BPFont {
 
     // Onboarding subtitle — SF Pro Rounded, Regular, 17pt
     static let onboardingSubtitle = Font.system(size: 17, weight: .regular, design: .rounded)
+
+    // Onboarding Heading — SF Pro Rounded, Semibold, 26pt
+    static let onboardingHeading = Font.system(size: 26, weight: .semibold, design: .rounded)
+
+    // Onboarding Body — SF Pro Rounded, Regular, 15pt
+    static let onboardingBody = Font.system(size: 15, weight: .regular, design: .rounded)
 }

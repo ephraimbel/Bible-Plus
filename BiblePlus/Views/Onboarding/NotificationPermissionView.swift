@@ -13,16 +13,16 @@ struct NotificationPermissionView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            Spacer().frame(height: 40)
+            Spacer().frame(height: 28)
 
             // Bell icon with glow
             ZStack {
                 Circle()
                     .fill(palette.accent.opacity(0.12))
-                    .frame(width: 100, height: 100)
+                    .frame(width: 88, height: 88)
 
                 Image(systemName: "bell.badge.fill")
-                    .font(.system(size: 56))
+                    .font(.system(size: 44))
                     .foregroundStyle(palette.accent)
                     .symbolRenderingMode(.hierarchical)
             }
@@ -33,7 +33,7 @@ struct NotificationPermissionView: View {
 
             // Heading
             Text("Stay Connected")
-                .font(BPFont.headingMedium)
+                .font(BPFont.onboardingHeading)
                 .foregroundStyle(palette.textPrimary)
                 .multilineTextAlignment(.center)
                 .opacity(showContent ? 1 : 0)
@@ -42,13 +42,13 @@ struct NotificationPermissionView: View {
 
             // Subtitle
             Text("We'll send gentle reminders with personalized\nverses, streak encouragement, and\nreading plan nudges.")
-                .font(BPFont.reference)
-                .foregroundStyle(palette.textMuted)
+                .font(BPFont.onboardingBody)
+                .foregroundStyle(palette.textSecondary)
                 .multilineTextAlignment(.center)
                 .lineSpacing(3)
                 .opacity(showContent ? 1 : 0)
 
-            Spacer().frame(height: 36)
+            Spacer().frame(height: 28)
 
             // Benefit rows
             VStack(spacing: 16) {
@@ -80,7 +80,7 @@ struct NotificationPermissionView: View {
             }
             .padding(.horizontal, 32)
 
-            Spacer().frame(height: 40)
+            Spacer().frame(height: 44)
         }
         .onAppear {
             withAnimation(BPAnimation.spring.delay(0.2)) {

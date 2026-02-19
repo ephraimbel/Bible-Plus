@@ -43,7 +43,7 @@ struct WelcomeView: View {
                     .font(.system(size: 42, weight: .bold, design: .serif))
 
                     Text("Your personal companion for\nprayer, scripture, and peace.")
-                        .font(.system(size: 20, weight: .regular, design: .serif))
+                        .font(.system(size: 18, weight: .regular, design: .serif))
                         .foregroundStyle(.white.opacity(0.8))
                         .multilineTextAlignment(.center)
                         .lineSpacing(6)

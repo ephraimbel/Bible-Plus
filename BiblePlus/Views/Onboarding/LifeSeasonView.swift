@@ -12,23 +12,23 @@ struct LifeSeasonView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            Spacer().frame(height: 24)
+            Spacer().frame(height: 28)
 
             VStack(spacing: 10) {
                 Text(viewModel.firstName.isEmpty
                     ? "What season are you\nin right now?"
                     : "What season are you\nin right now, \(viewModel.firstName)?")
-                    .font(BPFont.headingMedium)
+                    .font(BPFont.onboardingHeading)
                     .foregroundStyle(palette.textPrimary)
                     .multilineTextAlignment(.center)
 
                 Text("Select up to 3")
-                    .font(BPFont.reference)
-                    .foregroundStyle(palette.textMuted)
+                    .font(BPFont.onboardingBody)
+                    .foregroundStyle(palette.textSecondary)
             }
             .opacity(showContent ? 1 : 0)
 
-            Spacer().frame(height: 24)
+            Spacer().frame(height: 28)
 
             ScrollView(showsIndicators: false) {
                 LazyVGrid(columns: columns, spacing: 12) {
@@ -55,7 +55,7 @@ struct LifeSeasonView: View {
             )
             .padding(.horizontal, 32)
 
-            Spacer().frame(height: 40)
+            Spacer().frame(height: 44)
         }
         .onAppear {
             withAnimation(BPAnimation.spring.delay(0.2)) {

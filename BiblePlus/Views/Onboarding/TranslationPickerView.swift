@@ -7,25 +7,25 @@ struct TranslationPickerView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            Spacer().frame(height: 24)
+            Spacer().frame(height: 28)
 
             VStack(spacing: 10) {
                 Text(viewModel.firstName.isEmpty
                     ? "Which translation speaks\nto your heart?"
                     : "Which translation speaks\nto your heart, \(viewModel.firstName)?")
-                    .font(BPFont.headingMedium)
+                    .font(BPFont.onboardingHeading)
                     .foregroundStyle(palette.textPrimary)
                     .multilineTextAlignment(.center)
 
                 Text("Each card shows John 3:16 so you can\ncompare tone and feel.")
-                    .font(BPFont.reference)
-                    .foregroundStyle(palette.textMuted)
+                    .font(BPFont.onboardingBody)
+                    .foregroundStyle(palette.textSecondary)
                     .multilineTextAlignment(.center)
                     .lineSpacing(3)
             }
             .opacity(showContent ? 1 : 0)
 
-            Spacer().frame(height: 24)
+            Spacer().frame(height: 28)
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
@@ -47,8 +47,8 @@ struct TranslationPickerView: View {
 
             VStack(spacing: 8) {
                 Text("You can always change this later.")
-                    .font(BPFont.reference)
-                    .foregroundStyle(palette.textMuted)
+                    .font(BPFont.onboardingBody)
+                    .foregroundStyle(palette.textSecondary)
 
                 GoldButton(
                     title: "Continue",
@@ -57,7 +57,7 @@ struct TranslationPickerView: View {
             }
             .padding(.horizontal, 32)
 
-            Spacer().frame(height: 40)
+            Spacer().frame(height: 44)
         }
         .onAppear {
             withAnimation(BPAnimation.spring.delay(0.2)) {
