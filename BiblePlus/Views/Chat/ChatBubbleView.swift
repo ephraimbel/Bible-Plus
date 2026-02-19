@@ -13,18 +13,12 @@ struct ChatBubbleView: View {
     var isFailedMessage: Bool = false
     var previousMessageRole: MessageRole? = nil
     var typingContextLabel: String? = nil
-
-    // New: sequence + reaction params
     var isFirstInAssistantSequence: Bool = true
     var isLastInAssistantSequence: Bool = true
-    var reaction: ChatReaction? = nil
-    var onReaction: ((ChatReaction) -> Void)? = nil
     var appearDelay: Double = 0
 
     @Environment(\.bpPalette) private var palette
     @State private var appeared: Bool = false
-    @State private var showReactionBar: Bool = false
-    @State private var reactionDismissTask: Task<Void, Never>?
 
     private var isTypingPlaceholder: Bool {
         isStreaming && message.role == .assistant && message.content.isEmpty
@@ -34,7 +28,6 @@ struct ChatBubbleView: View {
         isStreaming && message.role == .assistant && !message.content.isEmpty
     }
 
-    /// Skip fade-in for streaming messages — they should appear instantly
     private var shouldSkipFadeIn: Bool {
         isStreaming && message.role == .assistant
     }
@@ -45,33 +38,24 @@ struct ChatBubbleView: View {
     }
 
     var body: some View {
-        HStack(alignment: .top, spacing: 10) {
+        HStack(alignment: .top, spacing: 8) {
             if message.role == .user {
-                Spacer(minLength: 60)
+                Spacer(minLength: 56)
             } else {
-                // AI avatar — only on first message in sequence
+                // Minimal AI indicator — only on first in sequence
                 if isFirstInAssistantSequence {
-                    ZStack {
-                        Circle()
-                            .fill(
-                                LinearGradient(
-                                    colors: [palette.accent, palette.accent.opacity(0.65)],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                )
-                            )
-                            .frame(width: 28, height: 28)
-                            .shadow(color: palette.accent.opacity(0.2), radius: 6, y: 2)
-
-                        Image(systemName: "cross.fill")
-                            .font(.system(size: 12, weight: .semibold))
-                            .foregroundStyle(.white)
-                    }
-                    .padding(.top, 2)
+                    Circle()
+                        .fill(palette.accent.opacity(0.12))
+                        .frame(width: 26, height: 26)
+                        .overlay(
+                            Image(systemName: "cross.fill")
+                                .font(.system(size: 10, weight: .semibold))
+                                .foregroundStyle(palette.accent)
+                        )
+                        .padding(.top, 2)
                 } else {
                     Spacer()
-                        .frame(width: 28)
-                        .padding(.top, 2)
+                        .frame(width: 26)
                 }
             }
 
@@ -80,80 +64,40 @@ struct ChatBubbleView: View {
                     TypingDotsView(contextLabel: typingContextLabel)
                         .transition(.scale(scale: 0.8).combined(with: .opacity))
                 } else if message.role == .user {
-                    Text(message.content)
-                        .font(.system(size: 15, weight: .regular, design: .rounded))
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 11)
-                        .background(
-                            userBubbleShape
-                                .fill(
-                                    LinearGradient(
-                                        colors: [palette.accent, palette.accent.opacity(0.8)],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    )
-                                )
-                                .shadow(color: palette.accent.opacity(0.15), radius: 6, y: 3)
-                        )
-                        .textSelection(.enabled)
-
-                    // Failed message indicator
-                    if isFailedMessage {
-                        HStack(spacing: 4) {
-                            Image(systemName: "exclamationmark.circle.fill")
-                                .font(.system(size: 12))
-                            Text("Failed to send")
-                                .font(.system(size: 12, weight: .medium, design: .rounded))
-                        }
-                        .foregroundStyle(palette.error)
-                        .padding(.top, 2)
-                    }
+                    userContent
                 } else {
-                    // AI message: no bubble, text flows on background
+                    // AI message
                     if isPrayerMessage && !isStreaming {
-                        prayerWrappedContent
+                        prayerContent
                     } else {
                         assistantContent
                     }
 
-                    // Reaction badge
-                    if let reaction {
-                        reactionBadge(reaction)
+                    // Subtle save prayer link
+                    if isPrayerMessage && !isStreaming {
+                        savePrayerLink
                     }
 
-                    // Save to Journal button
-                    if isPrayerMessage {
-                        saveToJournalButton
-                    }
-
-                    // Timestamp + overflow menu on last in sequence
+                    // Timestamp + actions on last in sequence
                     if isLastInAssistantSequence && !isStreaming {
-                        HStack(spacing: 8) {
-                            Text(message.createdAt, style: .time)
-                                .font(.system(size: 11, weight: .regular, design: .rounded))
-                                .foregroundStyle(palette.textMuted.opacity(0.6))
-
-                            overflowMenu
-                        }
-                        .padding(.top, 2)
+                        timestampRow
                     }
                 }
             }
             .animation(BPAnimation.spring, value: isTypingPlaceholder)
 
             if message.role == .assistant {
-                Spacer(minLength: 40)
+                Spacer(minLength: 32)
             }
         }
         .padding(.horizontal, 16)
-        .padding(.top, showRoleGap ? 16 : 2)
+        .padding(.top, showRoleGap ? 14 : 2)
         .padding(.bottom, 2)
         .opacity(appeared ? 1 : 0)
         .offset(y: appeared ? 0 : 6)
+        .contextMenu(message.role == .assistant && !isStreaming ? contextMenuItems : nil)
         .onAppear {
             if shouldSkipFadeIn || appeared {
-                // Streaming messages or already-seen messages appear instantly
                 appeared = true
             } else {
                 withAnimation(.spring(response: 0.35, dampingFraction: 0.82).delay(appearDelay)) {
@@ -163,62 +107,60 @@ struct ChatBubbleView: View {
         }
     }
 
-    // MARK: - Bubble Shapes
+    // MARK: - User Message
 
-    private var userBubbleShape: UnevenRoundedRectangle {
-        UnevenRoundedRectangle(
-            topLeadingRadius: 18,
-            bottomLeadingRadius: 18,
-            bottomTrailingRadius: 18,
-            topTrailingRadius: 6
-        )
-    }
+    private var userContent: some View {
+        VStack(alignment: .trailing, spacing: 4) {
+            Text(message.content)
+                .font(.system(size: 15, weight: .regular, design: .rounded))
+                .foregroundColor(.white)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 11)
+                .background(
+                    UnevenRoundedRectangle(
+                        topLeadingRadius: 18,
+                        bottomLeadingRadius: 18,
+                        bottomTrailingRadius: 18,
+                        topTrailingRadius: 6
+                    )
+                    .fill(
+                        LinearGradient(
+                            colors: [palette.accent, palette.accent.opacity(0.8)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                )
+                .textSelection(.enabled)
 
-    // MARK: - Save Prayer Button
-
-    private var saveToJournalButton: some View {
-        Button {
-            onSavePrayer?()
-        } label: {
-            HStack(spacing: 6) {
-                Image(systemName: isSavedPrayer ? "checkmark.circle.fill" : "hands.sparkles.fill")
-                    .font(.system(size: 12, weight: .semibold))
-                Text(isSavedPrayer ? "Prayer Saved" : "Save Prayer")
-                    .font(.system(size: 12, weight: .semibold, design: .rounded))
+            if isFailedMessage {
+                HStack(spacing: 4) {
+                    Image(systemName: "exclamationmark.circle.fill")
+                        .font(.system(size: 11))
+                    Text("Failed to send")
+                        .font(.system(size: 11, weight: .medium, design: .rounded))
+                }
+                .foregroundStyle(palette.error)
+                .padding(.top, 2)
             }
-            .foregroundStyle(isSavedPrayer ? Color.green : palette.accent)
-            .padding(.horizontal, 14)
-            .padding(.vertical, 7)
-            .background(
-                Capsule()
-                    .fill(isSavedPrayer ? Color.green.opacity(0.1) : palette.accent.opacity(0.08))
-            )
-            .overlay(
-                Capsule()
-                    .stroke(isSavedPrayer ? Color.green.opacity(0.2) : palette.accent.opacity(0.2), lineWidth: 1)
-            )
         }
-        .disabled(isSavedPrayer)
-        .padding(.top, 4)
-        .transition(.scale(scale: 0.8).combined(with: .opacity))
-        .animation(BPAnimation.spring, value: isSavedPrayer)
     }
 
-    // MARK: - Assistant Content (No Bubble)
+    // MARK: - Assistant Content
 
     private var assistantContent: some View {
         VStack(alignment: .leading, spacing: 8) {
             if isActivelyStreaming {
-                // During streaming: lightweight plain text — no regex, no markdown parsing
                 Text(message.content)
                     .font(.system(size: 15.5, weight: .regular, design: .rounded))
                     .foregroundStyle(palette.textPrimary)
                     .lineSpacing(3)
                     .textSelection(.enabled)
 
-                streamingCursor
+                BlinkingCursor(color: palette.accent)
+                    .padding(.leading, 2)
+                    .transition(.opacity)
             } else {
-                // After streaming: full markdown + scripture highlighting + verse cards
                 let segments = MessageParser.parse(message.content)
                 ForEach(Array(segments.enumerated()), id: \.offset) { _, segment in
                     switch segment {
@@ -233,66 +175,101 @@ struct ChatBubbleView: View {
             }
         }
         .animation(.none, value: message.content)
-        .onLongPressGesture(minimumDuration: 0.4) {
-            guard !isStreaming, message.role == .assistant else { return }
-            HapticService.lightImpact()
-            withAnimation(BPAnimation.spring) {
-                showReactionBar = true
-            }
-            reactionDismissTask?.cancel()
-            reactionDismissTask = Task {
-                try? await Task.sleep(for: .seconds(3))
-                guard !Task.isCancelled else { return }
-                withAnimation(BPAnimation.spring) {
-                    showReactionBar = false
-                }
-            }
-        }
-        .overlay(alignment: .topTrailing) {
-            if showReactionBar {
-                reactionBar
-                    .transition(.scale(scale: 0.6).combined(with: .opacity))
-            }
-        }
     }
 
-    // MARK: - Prayer Wrapped Content
+    // MARK: - Prayer Content (subtle accent treatment)
 
-    private var prayerWrappedContent: some View {
-        HStack(spacing: 0) {
-            // 3pt left accent bar
-            RoundedRectangle(cornerRadius: 2)
-                .fill(
-                    LinearGradient(
-                        colors: [palette.accent, palette.accent.opacity(0.5)],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                )
-                .frame(width: 3)
+    private var prayerContent: some View {
+        HStack(alignment: .top, spacing: 0) {
+            RoundedRectangle(cornerRadius: 1.5)
+                .fill(palette.accent.opacity(0.5))
+                .frame(width: 2.5)
 
             assistantContent
                 .padding(.leading, 12)
-                .padding(.trailing, 12)
-                .padding(.vertical, 12)
+                .padding(.trailing, 8)
+                .padding(.vertical, 10)
         }
         .background(
-            RoundedRectangle(cornerRadius: 14)
-                .fill(
-                    LinearGradient(
-                        colors: [palette.accent.opacity(0.06), palette.accent.opacity(0.01)],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                )
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 14)
-                .stroke(palette.accent.opacity(0.08), lineWidth: 0.5)
+            RoundedRectangle(cornerRadius: 12)
+                .fill(palette.accent.opacity(0.04))
         )
     }
 
-    // MARK: - Text View (No Bubble — flows on background)
+    // MARK: - Save Prayer Link
+
+    private var savePrayerLink: some View {
+        Button {
+            onSavePrayer?()
+        } label: {
+            HStack(spacing: 5) {
+                Image(systemName: isSavedPrayer ? "checkmark" : "bookmark")
+                    .font(.system(size: 11, weight: .medium))
+                Text(isSavedPrayer ? "Saved" : "Save to Journal")
+                    .font(.system(size: 12, weight: .medium, design: .rounded))
+            }
+            .foregroundStyle(isSavedPrayer ? palette.success : palette.textMuted)
+        }
+        .disabled(isSavedPrayer)
+        .padding(.top, 4)
+        .animation(BPAnimation.spring, value: isSavedPrayer)
+    }
+
+    // MARK: - Timestamp Row
+
+    private var timestampRow: some View {
+        Text(message.createdAt, style: .time)
+            .font(.system(size: 11, weight: .regular, design: .rounded))
+            .foregroundStyle(palette.textMuted.opacity(0.5))
+            .padding(.top, 2)
+    }
+
+    // MARK: - Context Menu (replaces overflow + reaction bar)
+
+    private var contextMenuItems: ContextMenu<some View>? {
+        ContextMenu {
+            if let onSavePrayer, isPrayerMessage, !isSavedPrayer {
+                Button {
+                    onSavePrayer()
+                } label: {
+                    Label("Save Prayer", systemImage: "hands.sparkles")
+                }
+            }
+
+            if let onSave {
+                Button {
+                    onSave()
+                } label: {
+                    Label("Save Response", systemImage: "bookmark")
+                }
+            }
+
+            Button {
+                UIPasteboard.general.string = message.content
+                HapticService.success()
+            } label: {
+                Label("Copy", systemImage: "doc.on.doc")
+            }
+
+            if let onShare {
+                Button {
+                    onShare()
+                } label: {
+                    Label("Share", systemImage: "square.and.arrow.up")
+                }
+            }
+
+            if let onShareAsCard {
+                Button {
+                    onShareAsCard()
+                } label: {
+                    Label("Share as Card", systemImage: "photo.artframe")
+                }
+            }
+        }
+    }
+
+    // MARK: - Text View
 
     private func textView(_ text: String) -> some View {
         highlightedMarkdownText(text)
@@ -315,146 +292,29 @@ struct ChatBubbleView: View {
             .textSelection(.enabled)
     }
 
-    // MARK: - Reaction Bar
-
-    private var reactionBar: some View {
-        HStack(spacing: 16) {
-            ForEach(ChatReaction.allCases, id: \.rawValue) { rxn in
-                Button {
-                    onReaction?(rxn)
-                    withAnimation(BPAnimation.spring) {
-                        showReactionBar = false
-                    }
-                } label: {
-                    Image(systemName: rxn.icon)
-                        .font(.system(size: 18))
-                        .foregroundStyle(reaction == rxn ? palette.accent : palette.textMuted)
-                }
-            }
-        }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 10)
-        .background(
-            Capsule()
-                .fill(.ultraThinMaterial)
-                .shadow(color: .black.opacity(0.12), radius: 12, y: 4)
-        )
-        .offset(y: -8)
-    }
-
-    // MARK: - Reaction Badge
-
-    private func reactionBadge(_ rxn: ChatReaction) -> some View {
-        HStack(spacing: 4) {
-            Image(systemName: rxn.icon)
-                .font(.system(size: 11, weight: .medium))
-            Text(rxn.label)
-                .font(.system(size: 11, weight: .medium, design: .rounded))
-        }
-        .foregroundStyle(palette.accent)
-        .padding(.horizontal, 10)
-        .padding(.vertical, 4)
-        .background(
-            Capsule()
-                .fill(palette.accent.opacity(0.08))
-        )
-        .padding(.top, 2)
-        .transition(.scale(scale: 0.6).combined(with: .opacity))
-        .animation(BPAnimation.spring, value: reaction)
-    }
-
-    // MARK: - Overflow Menu
-
-    private var overflowMenu: some View {
-        Menu {
-            if let onSave {
-                Button {
-                    onSave()
-                } label: {
-                    Label("Save Response", systemImage: "bookmark")
-                }
-            }
-            if let onShare {
-                Button {
-                    onShare()
-                } label: {
-                    Label("Share Response", systemImage: "square.and.arrow.up")
-                }
-            }
-            if let onShareAsCard {
-                Button {
-                    onShareAsCard()
-                } label: {
-                    Label("Share as Card", systemImage: "photo.artframe")
-                }
-            }
-            Button {
-                UIPasteboard.general.string = message.content
-                HapticService.success()
-            } label: {
-                Label("Copy All", systemImage: "doc.on.doc")
-            }
-        } label: {
-            Image(systemName: "ellipsis")
-                .font(.system(size: 11, weight: .medium))
-                .foregroundStyle(palette.textMuted.opacity(0.5))
-                .frame(width: 24, height: 20)
-        }
-    }
-
-    // MARK: - Verse Card
+    // MARK: - Verse Card (clean minimal style)
 
     private func verseCardView(quote: String, reference: String) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(quote)
-                .font(.system(size: 15, weight: .medium, design: .serif))
-                .foregroundStyle(palette.accent)
-                .lineSpacing(4)
-                .italic()
+        HStack(alignment: .top, spacing: 0) {
+            RoundedRectangle(cornerRadius: 1.5)
+                .fill(palette.accent.opacity(0.4))
+                .frame(width: 2.5)
 
-            HStack(spacing: 0) {
-                Text("\u{2014} ")
-                    .foregroundStyle(palette.textMuted)
+            VStack(alignment: .leading, spacing: 6) {
+                Text(quote)
+                    .font(.system(size: 15, weight: .regular, design: .serif))
+                    .foregroundStyle(palette.textPrimary)
+                    .lineSpacing(4)
+                    .italic()
+
                 referenceButton(reference)
+                    .font(.system(size: 13, weight: .medium, design: .rounded))
             }
-            .font(.system(size: 13, weight: .regular, design: .serif))
+            .padding(.leading, 12)
+            .padding(.trailing, 8)
+            .padding(.vertical, 8)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.leading, 16)
-        .padding(.trailing, 14)
-        .padding(.vertical, 14)
-        .overlay(alignment: .leading) {
-            UnevenRoundedRectangle(
-                topLeadingRadius: 14,
-                bottomLeadingRadius: 14,
-                bottomTrailingRadius: 0,
-                topTrailingRadius: 0
-            )
-            .fill(
-                LinearGradient(
-                    colors: [palette.accent, palette.accent.opacity(0.6)],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-            )
-            .frame(width: 3)
-        }
-        .background(
-            RoundedRectangle(cornerRadius: 14)
-                .fill(palette.accent.opacity(0.06))
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 14)
-                .stroke(palette.accent.opacity(0.12), lineWidth: 0.5)
-        )
-    }
-
-    // MARK: - Streaming Cursor
-
-    private var streamingCursor: some View {
-        BlinkingCursor(color: palette.accent)
-            .padding(.leading, 2)
-            .transition(.opacity)
+        .padding(.vertical, 4)
     }
 
     // MARK: - Tappable Reference
@@ -468,7 +328,6 @@ struct ChatBubbleView: View {
                 } label: {
                     Text(reference)
                         .foregroundStyle(palette.accent)
-                        .underline(color: palette.accent.opacity(0.4))
                 }
             } else {
                 Text(reference)
@@ -652,8 +511,7 @@ enum MessageParser {
 // MARK: - Scripture Reference Parser (for tap-to-navigate)
 
 enum ScriptureParser {
-    /// Parses "Romans 8:28" → ("Romans", 8, 28) or "1 John 4:8" → ("1 John", 4, 8).
-    /// Returns (bookName, chapter, verse). Verse is 0 if not parseable.
+    /// Parses "Romans 8:28" -> ("Romans", 8, 28) or "1 John 4:8" -> ("1 John", 4, 8).
     static func parseReference(_ reference: String) -> (String, Int, Int)? {
         let pattern = #"^((?:\d\s+)?[A-Z][a-z]+(?:\s+(?:of\s+)?[A-Z][a-z]+)*)\s+(\d{1,3}):(\d{1,3})"#
         guard let regex = try? NSRegularExpression(pattern: pattern),
@@ -667,7 +525,6 @@ enum ScriptureParser {
 
         let bookName = String(reference[bookRange])
 
-        // Extract verse number (group 3)
         var verse = 0
         if match.range(at: 3).location != NSNotFound,
            let verseRange = Range(match.range(at: 3), in: reference),

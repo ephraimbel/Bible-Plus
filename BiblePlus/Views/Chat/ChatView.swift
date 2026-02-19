@@ -252,11 +252,7 @@ private struct ChatContentView: View {
                                 previousMessageRole: previousRole,
                                 typingContextLabel: isStreamingMsg ? viewModel.typingContextLabel : nil,
                                 isFirstInAssistantSequence: isFirst,
-                                isLastInAssistantSequence: isLast,
-                                reaction: viewModel.messageReactions[message.id],
-                                onReaction: message.role == .assistant ? { reaction in
-                                    viewModel.toggleReaction(reaction, for: message.id)
-                                } : nil
+                                isLastInAssistantSequence: isLast
                             )
                             .id(message.id)
                         }
@@ -286,17 +282,13 @@ private struct ChatContentView: View {
     }
 
     private var chunkTypingIndicator: some View {
-        HStack(alignment: .top, spacing: 10) {
+        HStack(alignment: .top, spacing: 8) {
             Spacer()
-                .frame(width: 28)
+                .frame(width: 26)
 
             TypingDotsView(contextLabel: viewModel.typingContextLabel)
-                .background(
-                    RoundedRectangle(cornerRadius: 16)
-                        .fill(palette.surfaceElevated.opacity(0.5))
-                )
 
-            Spacer(minLength: 40)
+            Spacer(minLength: 32)
         }
         .padding(.horizontal, 16)
         .padding(.top, 4)
@@ -337,26 +329,21 @@ private struct ChatContentView: View {
                         viewModel.sendQuickPrompt(suggestion)
                         HapticService.lightImpact()
                     } label: {
-                        HStack(spacing: 6) {
-                            Image(systemName: suggestionIcon(for: suggestion))
-                                .font(.system(size: 11, weight: .semibold))
-                            Text(suggestion)
-                                .font(.system(size: 13, weight: .medium, design: .rounded))
-                        }
-                        .foregroundStyle(palette.accent)
-                        .padding(.horizontal, 14)
-                        .padding(.vertical, 9)
-                        .background(
-                            Capsule()
-                                .fill(palette.surfaceElevated)
-                                .shadow(color: .black.opacity(0.04), radius: 4, y: 2)
-                        )
-                        .overlay(
-                            Capsule()
-                                .stroke(palette.accent.opacity(0.2), lineWidth: 0.5)
-                        )
+                        Text(suggestion)
+                            .font(.system(size: 13, weight: .medium, design: .rounded))
+                            .foregroundStyle(palette.accent)
+                            .padding(.horizontal, 14)
+                            .padding(.vertical, 9)
+                            .background(
+                                Capsule()
+                                    .fill(palette.accent.opacity(0.06))
+                            )
+                            .overlay(
+                                Capsule()
+                                    .stroke(palette.accent.opacity(0.15), lineWidth: 0.5)
+                            )
                     }
-                    .transition(.scale(scale: 0.8).combined(with: .opacity))
+                    .transition(.scale(scale: 0.9).combined(with: .opacity))
                     .animation(BPAnimation.spring.delay(Double(index) * 0.05), value: viewModel.followUpSuggestions)
                 }
             }
@@ -365,18 +352,6 @@ private struct ChatContentView: View {
         }
         .transition(.move(edge: .bottom).combined(with: .opacity))
         .animation(BPAnimation.spring, value: viewModel.followUpSuggestions)
-    }
-
-    private func suggestionIcon(for text: String) -> String {
-        let lower = text.lowercased()
-        if lower.contains("verse") || lower.contains("scripture") || lower.contains("bible") || lower.contains("read") {
-            return "book.fill"
-        } else if lower.contains("pray") || lower.contains("prayer") {
-            return "hands.sparkles"
-        } else if lower.contains("explain") || lower.contains("mean") || lower.contains("understand") {
-            return "lightbulb.fill"
-        }
-        return "arrow.right.circle.fill"
     }
 
     // MARK: - Error Banner

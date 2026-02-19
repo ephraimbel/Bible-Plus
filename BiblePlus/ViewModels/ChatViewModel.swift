@@ -30,30 +30,6 @@ enum PromptCategory: String, CaseIterable, Identifiable {
     }
 }
 
-// MARK: - Chat Reaction
-
-enum ChatReaction: String, CaseIterable {
-    case heart
-    case pray
-    case bookmark
-
-    var icon: String {
-        switch self {
-        case .heart: "heart.fill"
-        case .pray: "hands.sparkles.fill"
-        case .bookmark: "bookmark.fill"
-        }
-    }
-
-    var label: String {
-        switch self {
-        case .heart: "Love"
-        case .pray: "Pray"
-        case .bookmark: "Save"
-        }
-    }
-}
-
 @MainActor
 @Observable
 final class ChatViewModel {
@@ -69,9 +45,6 @@ final class ChatViewModel {
     var followUpSuggestions: [String] = []
     var shareText: String? = nil
     let conversationId: UUID
-
-    // Reactions (in-memory, display-only)
-    var messageReactions: [UUID: ChatReaction] = [:]
 
     // Premium enhancements
     var selectedPromptCategory: PromptCategory? = nil
@@ -252,17 +225,6 @@ final class ChatViewModel {
 
     private func rebuildDisplayMessages() {
         displayMessages = messages
-    }
-
-    // MARK: - Reactions
-
-    func toggleReaction(_ reaction: ChatReaction, for messageId: UUID) {
-        if messageReactions[messageId] == reaction {
-            messageReactions[messageId] = nil
-        } else {
-            messageReactions[messageId] = reaction
-            HapticService.lightImpact()
-        }
     }
 
     // MARK: - Sending
@@ -570,7 +532,9 @@ final class ChatViewModel {
                 .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
                 .filter { !$0.isEmpty }
 
-            let willChunk = paragraphs.count >= 3
+            // Skip chunking for prayer messages — they should appear as one cohesive response
+            let isPrayer = isPrayerContent(fullContent)
+            let willChunk = paragraphs.count >= 3 && !isPrayer
             isStreaming = false
 
             if willChunk {
@@ -663,6 +627,17 @@ final class ChatViewModel {
     }
 
     // MARK: - Private
+
+    private func isPrayerContent(_ content: String) -> Bool {
+        let lower = content.lowercased()
+        let prayerMarkers = [
+            "amen", "heavenly father", "dear god", "dear lord",
+            "in jesus' name", "in jesus\u{2019} name", "in christ's name",
+            "we pray", "i pray", "lord, we", "lord, i",
+            "gracious god", "almighty god", "holy spirit",
+        ]
+        return prayerMarkers.contains { lower.contains($0) }
+    }
 
     private func fetchConversation() -> Conversation? {
         let convId = conversationId
