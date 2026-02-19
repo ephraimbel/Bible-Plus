@@ -76,7 +76,7 @@ final class NotificationService {
                 let item = items[dayOffset % items.count]
 
                 let notifContent = UNMutableNotificationContent()
-                notifContent.title = "Bible+"
+                notifContent.title = "Bible Plus"
                 notifContent.subtitle = subtitles[dayOffset % subtitles.count]
                 notifContent.body = item.text
                 notifContent.sound = .default
@@ -165,7 +165,7 @@ final class NotificationService {
                     let item = items[dayOffset % items.count]
 
                     let notifContent = UNMutableNotificationContent()
-                    notifContent.title = "Bible+"
+                    notifContent.title = "Bible Plus"
                     notifContent.subtitle = subtitles[dayOffset % subtitles.count]
                     notifContent.body = item.text
                     notifContent.sound = .default
@@ -280,7 +280,7 @@ final class NotificationService {
             guard let targetDate = calendar.date(byAdding: .day, value: dayOffset, to: today) else { continue }
 
             let content = UNMutableNotificationContent()
-            content.title = "Bible+"
+            content.title = "Bible Plus"
             let projectedStreak = streakCount + dayOffset
 
             if projectedStreak == 0 {
@@ -342,7 +342,7 @@ final class NotificationService {
             let projectedDay = min(nextDay + dayOffset, totalDays)
 
             let content = UNMutableNotificationContent()
-            content.title = "Bible+"
+            content.title = "Bible Plus"
             content.body = "Day \(projectedDay) of \"\(planName)\" is waiting for you, \(name)."
             content.sound = .default
             content.categoryIdentifier = Self.devotionalCategoryIdentifier
@@ -425,7 +425,7 @@ final class NotificationService {
                 let item = items[itemIndex % items.count]
 
                 let notifContent = UNMutableNotificationContent()
-                notifContent.title = "Bible+"
+                notifContent.title = "Bible Plus"
                 notifContent.subtitle = subtitles[itemIndex % subtitles.count]
                 notifContent.body = item.text
                 notifContent.sound = .default
@@ -562,7 +562,7 @@ final class NotificationService {
                 let item = selected[itemIndex % selected.count]
 
                 let notifContent = UNMutableNotificationContent()
-                notifContent.title = "Bible+"
+                notifContent.title = "Bible Plus"
                 notifContent.subtitle = subtitles[itemIndex % subtitles.count]
                 notifContent.body = item.text
                 notifContent.sound = .default
@@ -641,7 +641,10 @@ final class NotificationService {
         Self.curatedVerses.compactMap { cv in
             let verses = BibleRepository.shared.versesSync(book: cv.bookID, chapter: cv.chapter)
             guard let verse = verses.first(where: { $0.number == cv.verse }) else { return nil }
-            let text = "\"\(verse.text)\" — \(cv.bookName) \(cv.chapter):\(cv.verse)"
+            let verseText = verse.text.count > 120
+                ? String(verse.text.prefix(117)) + "..."
+                : verse.text
+            let text = "\"\(verseText)\" — \(cv.bookName) \(cv.chapter):\(cv.verse)"
             let content = SelectedContent(
                 text: text,
                 contentID: nil,
@@ -836,7 +839,8 @@ final class NotificationService {
     private func formatContent(_ item: PrayerContent, name: String) -> SelectedContent {
         let text: String
         if let verse = item.verseText, let ref = item.verseReference {
-            text = "\"\(verse)\" — \(ref)"
+            let trimmed = verse.count > 120 ? String(verse.prefix(117)) + "..." : verse
+            text = "\"\(trimmed)\" — \(ref)"
         } else {
             text = item.templateText.replacingOccurrences(of: "{name}", with: name)
         }
@@ -1492,7 +1496,10 @@ final class NotificationService {
         return matching.compactMap { cv in
             let verses = BibleRepository.shared.versesSync(book: cv.bookID, chapter: cv.chapter)
             guard let verse = verses.first(where: { $0.number == cv.verse }) else { return nil }
-            let text = "\"\(verse.text)\" — \(cv.bookName) \(cv.chapter):\(cv.verse)"
+            let verseText = verse.text.count > 120
+                ? String(verse.text.prefix(117)) + "..."
+                : verse.text
+            let text = "\"\(verseText)\" — \(cv.bookName) \(cv.chapter):\(cv.verse)"
             let content = SelectedContent(
                 text: text,
                 contentID: nil,
