@@ -303,6 +303,14 @@ enum PrayerTimeSlot: String, Codable, CaseIterable, Identifiable {
                 "\(name), today is full of possibility. Start here.",
                 "His mercies are new this morning, \(name).",
                 "Good morning, \(name). You are seen and loved today.",
+                "A new mercy for a new morning, \(name).",
+                "Before the world gets loud, \(name)...",
+                "\(name), grace meets you right where you are this morning.",
+                "First things first, \(name). He comes before everything.",
+                "Good morning, \(name). Walk boldly into this day.",
+                "\(name), the One who made the sunrise is thinking of you.",
+                "Morning by morning, \(name). He is faithful.",
+                "\(name), let this truth set the tone for your whole day.",
             ]
         case .midday:
             [
@@ -314,6 +322,14 @@ enum PrayerTimeSlot: String, Codable, CaseIterable, Identifiable {
                 "\(name), breathe. He's right here with you.",
                 "Halfway through, \(name). Let this refuel you.",
                 "A moment of peace in your busy day, \(name).",
+                "Right where you are, \(name), God is.",
+                "\(name), don't forget who's carrying you today.",
+                "A gentle reminder for your afternoon, \(name).",
+                "\(name), strength for the second half of your day.",
+                "In the middle of it all, \(name) — He is still good.",
+                "\(name), this moment is a gift. Receive it.",
+                "Take thirty seconds, \(name). Just breathe and believe.",
+                "\(name), you're doing better than you think.",
             ]
         case .evening:
             [
@@ -325,6 +341,14 @@ enum PrayerTimeSlot: String, Codable, CaseIterable, Identifiable {
                 "\(name), you made it through today. Here's a gift for tonight.",
                 "Before you rest, \(name) — one more truth to hold onto.",
                 "\(name), let tonight be about gratitude.",
+                "Take this moment to be still, \(name).",
+                "\(name), exhale. You are held tonight.",
+                "As the sun sets, \(name), His faithfulness remains.",
+                "\(name), look back on today — where did you see God?",
+                "Evening peace for you, \(name). Let go and let God.",
+                "\(name), you carried a lot today. Set it down now.",
+                "The evening is yours, \(name). Rest in His goodness.",
+                "\(name), end this day the way you started — with Him.",
             ]
         case .bedtime:
             [
@@ -336,6 +360,14 @@ enum PrayerTimeSlot: String, Codable, CaseIterable, Identifiable {
                 "\(name), close your eyes knowing you are deeply loved.",
                 "The day is done, \(name). Let this truth follow you into dreams.",
                 "One last word before sleep, \(name). You are not alone.",
+                "Sleep in His peace tonight, \(name).",
+                "Tomorrow is in His hands, \(name). Rest now.",
+                "\(name), He neither slumbers nor sleeps. You can.",
+                "Goodnight, \(name). You are safe in the Father's arms.",
+                "\(name), let your last thought tonight be of His love.",
+                "The night is quiet, \(name). So is His faithfulness.",
+                "\(name), nothing can separate you from His love. Sleep well.",
+                "Pillow talk with God, \(name). He's listening.",
             ]
         }
     }

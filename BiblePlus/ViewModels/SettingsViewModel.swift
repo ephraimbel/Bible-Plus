@@ -227,6 +227,21 @@ final class SettingsViewModel {
         }
     }
 
+    func toggleGentleReminders() {
+        let newValue = !profile.gentleRemindersEnabled
+        profile.gentleRemindersEnabled = newValue
+        profile.updatedAt = Date()
+        personalizationService.save()
+        if newValue {
+            NotificationService.shared.scheduleGentleReminders(
+                name: profile.firstName.isEmpty ? "Friend" : profile.firstName,
+                burdens: profile.currentBurdens
+            )
+        } else {
+            NotificationService.shared.cancelGentleReminders()
+        }
+    }
+
     private func rescheduleNotifications() {
         guard profile.notificationsEnabled else {
             NotificationService.shared.cancelAll()

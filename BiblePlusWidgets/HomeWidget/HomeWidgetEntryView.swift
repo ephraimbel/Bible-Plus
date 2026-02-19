@@ -22,22 +22,20 @@ struct HomeWidgetEntryView: View {
 
     private var smallView: some View {
         VStack(alignment: .leading, spacing: 6) {
-            typeBadge
-
             Spacer()
 
             Text(entry.displayText)
-                .font(.custom("NewYork-Regular", size: 14, relativeTo: .body))
+                .font(.custom("NewYork-Regular", size: 13, relativeTo: .body))
                 .foregroundStyle(.white)
-                .lineLimit(4)
-                .minimumScaleFactor(0.8)
+                .lineSpacing(2)
+                .minimumScaleFactor(0.7)
                 .shadow(color: .black.opacity(0.7), radius: 1, y: 1)
                 .shadow(color: .black.opacity(0.4), radius: 4, y: 0)
 
             if let ref = entry.verseReference {
                 Text(ref)
                     .font(.caption2)
-                    .foregroundStyle(.white.opacity(0.8))
+                    .foregroundStyle(.white.opacity(0.7))
                     .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
             }
         }
@@ -48,38 +46,23 @@ struct HomeWidgetEntryView: View {
     // MARK: - Medium Widget
 
     private var mediumView: some View {
-        HStack(spacing: 12) {
-            VStack(alignment: .leading, spacing: 6) {
-                typeBadge
-
-                Spacer()
-
-                Text(entry.displayText)
-                    .font(.custom("NewYork-Regular", size: 15, relativeTo: .body))
-                    .foregroundStyle(.white)
-                    .lineLimit(4)
-                    .minimumScaleFactor(0.8)
-                    .shadow(color: .black.opacity(0.7), radius: 1, y: 1)
-                    .shadow(color: .black.opacity(0.4), radius: 4, y: 0)
-
-                if let ref = entry.verseReference {
-                    Text(ref)
-                        .font(.caption2)
-                        .foregroundStyle(.white.opacity(0.8))
-                        .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
-                }
-            }
-
+        VStack(alignment: .leading, spacing: 6) {
             Spacer()
 
-            Image("AppLogo")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 40, height: 40)
-                .clipShape(RoundedRectangle(cornerRadius: 9))
-                .opacity(0.6)
-                .shadow(color: .black.opacity(0.3), radius: 4, y: 0)
-                .padding(.trailing, 8)
+            Text(entry.displayText)
+                .font(.custom("NewYork-Regular", size: 15, relativeTo: .body))
+                .foregroundStyle(.white)
+                .lineSpacing(3)
+                .minimumScaleFactor(0.75)
+                .shadow(color: .black.opacity(0.7), radius: 1, y: 1)
+                .shadow(color: .black.opacity(0.4), radius: 4, y: 0)
+
+            if let ref = entry.verseReference {
+                Text(ref)
+                    .font(.caption2)
+                    .foregroundStyle(.white.opacity(0.7))
+                    .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
+            }
         }
         .padding(14)
         .widgetURL(deepLinkURL)
@@ -89,29 +72,20 @@ struct HomeWidgetEntryView: View {
 
     private var largeView: some View {
         VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                typeBadge
-                Spacer()
-                Image(systemName: entry.window.icon)
-                    .font(.caption)
-                    .foregroundStyle(.white.opacity(0.6))
-                    .shadow(color: .black.opacity(0.5), radius: 2, y: 1)
-            }
-
             Spacer()
 
             Text(entry.displayText)
                 .font(.custom("NewYork-Regular", size: 18, relativeTo: .title3))
                 .foregroundStyle(.white)
-                .lineLimit(8)
-                .minimumScaleFactor(0.8)
+                .lineSpacing(4)
+                .minimumScaleFactor(0.75)
                 .shadow(color: .black.opacity(0.7), radius: 1, y: 1)
                 .shadow(color: .black.opacity(0.4), radius: 4, y: 0)
 
             if let ref = entry.verseReference {
                 Text(ref)
                     .font(.caption)
-                    .foregroundStyle(.white.opacity(0.8))
+                    .foregroundStyle(.white.opacity(0.7))
                     .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
                     .padding(.top, 2)
             }
@@ -129,7 +103,7 @@ struct HomeWidgetEntryView: View {
                     Text("Bible+")
                         .font(.system(size: 10, weight: .medium))
                 }
-                .foregroundStyle(.white.opacity(0.5))
+                .foregroundStyle(.white.opacity(0.4))
                 .shadow(color: .black.opacity(0.3), radius: 2, y: 1)
             }
         }
@@ -137,19 +111,7 @@ struct HomeWidgetEntryView: View {
         .widgetURL(deepLinkURL)
     }
 
-    // MARK: - Shared Components
-
-    private var typeBadge: some View {
-        Text(entry.contentType.displayName.uppercased())
-            .font(.system(size: 9, weight: .bold))
-            .tracking(1.2)
-            .foregroundStyle(.white.opacity(0.9))
-            .shadow(color: .black.opacity(0.5), radius: 1, y: 1)
-            .padding(.horizontal, 8)
-            .padding(.vertical, 3)
-            .background(.ultraThinMaterial.opacity(0.6))
-            .clipShape(Capsule())
-    }
+    // MARK: - Helpers
 
     private var deepLinkURL: URL? {
         guard let contentID = entry.contentID else { return nil }

@@ -25,6 +25,7 @@ final class UserProfile {
     var streakReminderEnabled: Bool
     var planReminderEnabled: Bool
     var faithBoostsEnabled: Bool
+    var gentleRemindersEnabled: Bool
     var selectedBibleVoiceID: String
     var readerFontSize: Double
     var readerFontStyleRaw: String
@@ -81,6 +82,7 @@ final class UserProfile {
         streakReminderEnabled: Bool = true,
         planReminderEnabled: Bool = true,
         faithBoostsEnabled: Bool = false,
+        gentleRemindersEnabled: Bool = false,
         selectedBibleVoiceID: String = BibleVoice.onyx.rawValue,
         readerFontSize: Double = 20,
         readerFontStyle: ReaderFontStyle = .serif,
@@ -114,6 +116,7 @@ final class UserProfile {
         self.streakReminderEnabled = streakReminderEnabled
         self.planReminderEnabled = planReminderEnabled
         self.faithBoostsEnabled = faithBoostsEnabled
+        self.gentleRemindersEnabled = gentleRemindersEnabled
         self.selectedBibleVoiceID = selectedBibleVoiceID
         self.readerFontSize = readerFontSize
         self.readerFontStyleRaw = readerFontStyle.rawValue

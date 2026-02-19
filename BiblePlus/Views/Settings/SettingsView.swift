@@ -295,6 +295,52 @@ private struct SettingsContentView: View {
 
                     rowDivider
 
+                    // Gentle Reminders toggle (Pro)
+                    HStack(spacing: 14) {
+                        Image(systemName: "hand.wave")
+                            .font(.system(size: 13, weight: .medium))
+                            .foregroundStyle(palette.accent)
+                            .frame(width: 32, height: 32)
+                            .background(
+                                Circle()
+                                    .fill(palette.accent.opacity(0.08))
+                            )
+
+                        VStack(alignment: .leading, spacing: 2) {
+                            HStack(spacing: 6) {
+                                Text("Gentle Reminders")
+                                    .font(.system(size: 15, weight: .medium, design: .rounded))
+                                    .foregroundStyle(palette.textPrimary)
+
+                                if !vm.profile.isPro {
+                                    Text("PRO")
+                                        .font(.system(size: 9, weight: .bold, design: .rounded))
+                                        .foregroundStyle(.white)
+                                        .padding(.horizontal, 5)
+                                        .padding(.vertical, 2)
+                                        .background(Capsule().fill(palette.accent))
+                                }
+                            }
+                            Text("Short prayers & encouragements throughout the day")
+                                .font(.system(size: 12, weight: .regular, design: .rounded))
+                                .foregroundStyle(palette.textMuted)
+                        }
+
+                        Spacer()
+
+                        Toggle("", isOn: Binding(
+                            get: { vm.profile.gentleRemindersEnabled },
+                            set: { _ in vm.toggleGentleReminders() }
+                        ))
+                        .tint(palette.accent)
+                        .labelsHidden()
+                        .disabled(!vm.profile.isPro)
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 12)
+
+                    rowDivider
+
                     // Streak Reminders toggle
                     HStack(spacing: 14) {
                         Image(systemName: "flame")
