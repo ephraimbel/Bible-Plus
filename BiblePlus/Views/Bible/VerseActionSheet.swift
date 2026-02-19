@@ -1,6 +1,8 @@
 import SwiftUI
 
-struct VerseActionSheet: View {
+// MARK: - Verse Toolbar Overlay
+
+struct VerseToolbarOverlay: View {
     let verse: VerseItem
     let reference: String
     let isSaved: Bool
@@ -20,119 +22,283 @@ struct VerseActionSheet: View {
     let onMeditateInSanctuary: () -> Void
     let onShowPaywall: () -> Void
     let onDismiss: () -> Void
+
     @Environment(\.bpPalette) private var palette
 
-    @State private var isEditingNote = false
+    @State private var showHighlightStrip = false
+    @State private var showNoteEditor = false
+    @State private var showCopyConfirmation = false
     @State private var noteText = ""
 
     var body: some View {
-        VStack(spacing: 0) {
-            // Handle
-            Capsule()
-                .fill(palette.textMuted.opacity(0.25))
-                .frame(width: 40, height: 4)
-                .padding(.top, 10)
+        ZStack(alignment: .bottom) {
+            // Scrim
+            Color.black.opacity(0.15)
+                .ignoresSafeArea()
+                .onTapGesture { onDismiss() }
 
-            // Verse preview
-            VStack(spacing: 10) {
+            // Bottom stack: reference pill + highlight strip + toolbar
+            VStack(spacing: 8) {
+                // Reference pill
                 Text(reference)
-                    .font(.system(size: 13, weight: .semibold, design: .serif))
+                    .font(.system(size: 12, weight: .semibold, design: .serif))
                     .foregroundStyle(palette.accent)
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 6)
+                    .background(
+                        Capsule()
+                            .fill(palette.surfaceElevated)
+                            .shadow(color: .black.opacity(0.06), radius: 6, y: 2)
+                    )
+                    .overlay(
+                        Capsule()
+                            .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
+                    )
 
-                Text(verse.text)
-                    .font(.system(size: 16, weight: .regular, design: .serif))
-                    .foregroundStyle(palette.textPrimary)
-                    .multilineTextAlignment(.center)
-                    .lineSpacing(5)
-                    .lineLimit(4)
-            }
-            .padding(.horizontal, 24)
-            .padding(.top, 18)
-            .padding(.bottom, 16)
+                // Highlight color strip (expandable)
+                if showHighlightStrip {
+                    HighlightColorStrip(
+                        isPro: isPro,
+                        currentHighlight: currentHighlight,
+                        onHighlight: onHighlight,
+                        onRemoveHighlight: onRemoveHighlight,
+                        onShowPaywall: onShowPaywall
+                    )
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                }
 
-            // Highlight color dots
-            highlightColorRow
-                .padding(.horizontal, 24)
-                .padding(.bottom, 14)
-
-            // Divider
-            Rectangle()
-                .fill(palette.border.opacity(0.2))
-                .frame(height: 0.5)
-
-            if isEditingNote {
-                noteEditor
-            } else {
-                // Action buttons
-                VStack(spacing: 2) {
-                    // Play from here
-                    if let onPlayFromHere {
-                        actionRow(icon: "headphones", title: "Play from Here", action: onPlayFromHere)
-                    }
-
-                    // Save / Unsave
-                    if isSaved {
-                        actionRow(icon: "bookmark.fill", title: "Unsave Verse", action: onUnsave)
-                    } else {
-                        actionRow(icon: "bookmark", title: "Save Verse", action: onSave)
-                    }
-
-                    // Add / Edit Note
-                    let hasNote = currentNote != nil && !currentNote!.isEmpty
-                    actionRow(
-                        icon: hasNote ? "square.and.pencil" : "note.text.badge.plus",
-                        title: hasNote ? "Edit Note" : "Add Note"
-                    ) {
+                // Floating toolbar
+                VerseFloatingToolbar(
+                    isSaved: isSaved,
+                    hasHighlight: currentHighlight != nil,
+                    showingHighlightStrip: showHighlightStrip,
+                    showCopyConfirmation: showCopyConfirmation,
+                    onSave: {
+                        if isSaved {
+                            onUnsave()
+                        } else {
+                            onSave()
+                        }
+                    },
+                    onExplain: onExplain,
+                    onCopy: {
+                        onCopy()
+                        showCopyConfirmation = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                            showCopyConfirmation = false
+                        }
+                    },
+                    onShare: onShare,
+                    onHighlightToggle: {
+                        withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
+                            showHighlightStrip.toggle()
+                        }
+                    },
+                    onPlayFromHere: onPlayFromHere,
+                    onCreateVerseImage: onCreateVerseImage,
+                    onMeditateInSanctuary: onMeditateInSanctuary,
+                    onAddNote: {
                         noteText = currentNote ?? ""
-                        isEditingNote = true
+                        showNoteEditor = true
                     }
-
-                    actionRow(icon: "bubble.left.and.bubble.right", title: "Explain This Verse", action: onExplain)
-                    actionRow(icon: "doc.on.doc", title: "Copy", action: onCopy)
-                    actionRow(icon: "square.and.arrow.up", title: "Share", action: onShare)
-                    actionRow(icon: "photo.artframe", title: "Create Verse Image", action: onCreateVerseImage)
-                    actionRow(icon: "leaf.fill", title: "Meditate in Sanctuary", action: onMeditateInSanctuary)
-                }
-                .padding(.vertical, 8)
+                )
             }
-
-            // Cancel
-            Button {
-                if isEditingNote {
-                    isEditingNote = false
-                } else {
-                    onDismiss()
-                }
-            } label: {
-                Text(isEditingNote ? "Back" : "Cancel")
-                    .font(.system(size: 15, weight: .medium, design: .rounded))
-                    .foregroundStyle(palette.textMuted)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 14)
-            }
-            .padding(.bottom, 6)
+            .padding(.horizontal, 20)
+            .padding(.bottom, 16)
         }
-        .background(palette.surfaceElevated)
-        .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(color: .black.opacity(0.08), radius: 16, y: -4)
+        .animation(.spring(response: 0.35, dampingFraction: 0.8), value: showHighlightStrip)
+        .sheet(isPresented: $showNoteEditor) {
+            VerseNoteEditorSheet(
+                noteText: $noteText,
+                hasExistingNote: currentNote != nil && !(currentNote?.isEmpty ?? true),
+                onSave: { text in
+                    onSaveNote(text)
+                    showNoteEditor = false
+                },
+                onRemove: {
+                    onSaveNote("")
+                    showNoteEditor = false
+                }
+            )
+            .presentationDetents([.medium])
+        }
+    }
+}
+
+// MARK: - Floating Toolbar
+
+private struct VerseFloatingToolbar: View {
+    let isSaved: Bool
+    let hasHighlight: Bool
+    let showingHighlightStrip: Bool
+    let showCopyConfirmation: Bool
+    let onSave: () -> Void
+    let onExplain: () -> Void
+    let onCopy: () -> Void
+    let onShare: () -> Void
+    let onHighlightToggle: () -> Void
+    let onPlayFromHere: (() -> Void)?
+    let onCreateVerseImage: () -> Void
+    let onMeditateInSanctuary: () -> Void
+    let onAddNote: () -> Void
+
+    @Environment(\.bpPalette) private var palette
+
+    var body: some View {
+        HStack(spacing: 0) {
+            // Save
+            toolbarButton(
+                icon: isSaved ? "bookmark.fill" : "bookmark",
+                isActive: isSaved,
+                action: onSave
+            )
+
+            divider
+
+            // Explain
+            toolbarButton(
+                icon: "bubble.left.and.bubble.right",
+                action: onExplain
+            )
+
+            divider
+
+            // Copy
+            toolbarButton(
+                icon: showCopyConfirmation ? "checkmark" : "doc.on.doc",
+                isActive: showCopyConfirmation,
+                action: onCopy
+            )
+
+            divider
+
+            // Share
+            toolbarButton(
+                icon: "square.and.arrow.up",
+                action: onShare
+            )
+
+            divider
+
+            // Highlight
+            toolbarButton(
+                icon: "highlighter",
+                isActive: showingHighlightStrip || hasHighlight,
+                action: onHighlightToggle
+            )
+
+            divider
+
+            // More (overflow menu)
+            overflowMenu
+        }
+        .frame(height: 52)
+        .background(
+            Capsule()
+                .fill(palette.surfaceElevated)
+                .shadow(color: .black.opacity(0.10), radius: 12, y: 4)
+        )
         .overlay(
-            RoundedRectangle(cornerRadius: 20)
+            Capsule()
                 .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
         )
     }
 
-    // MARK: - Highlight Color Row (Pro-Gated)
+    private func toolbarButton(
+        icon: String,
+        isActive: Bool = false,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button {
+            HapticService.selection()
+            action()
+        } label: {
+            Image(systemName: icon)
+                .font(.system(size: 18, weight: .medium))
+                .foregroundStyle(isActive ? palette.accent : palette.textSecondary)
+                .frame(width: 44, height: 52)
+                .contentShape(Rectangle())
+                .contentTransition(.symbolEffect(.replace))
+        }
+        .buttonStyle(ToolbarButtonStyle())
+    }
 
-    private var highlightColorRow: some View {
-        HStack(spacing: 12) {
+    private var divider: some View {
+        Rectangle()
+            .fill(palette.border.opacity(0.15))
+            .frame(width: 0.5, height: 24)
+    }
+
+    private var overflowMenu: some View {
+        Menu {
+            if let onPlayFromHere {
+                Button {
+                    onPlayFromHere()
+                } label: {
+                    Label("Play From Here", systemImage: "headphones")
+                }
+            }
+
+            Button {
+                onCreateVerseImage()
+            } label: {
+                Label("Create Verse Image", systemImage: "photo.artframe")
+            }
+
+            Button {
+                onAddNote()
+            } label: {
+                Label("Add Note", systemImage: "note.text.badge.plus")
+            }
+
+            Button {
+                onMeditateInSanctuary()
+            } label: {
+                Label("Meditate in Sanctuary", systemImage: "leaf.fill")
+            }
+        } label: {
+            Image(systemName: "ellipsis")
+                .font(.system(size: 18, weight: .medium))
+                .foregroundStyle(palette.textSecondary)
+                .frame(width: 44, height: 52)
+                .contentShape(Rectangle())
+        }
+    }
+}
+
+// MARK: - Toolbar Button Style (press scale)
+
+private struct ToolbarButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.85 : 1)
+            .animation(.spring(response: 0.25, dampingFraction: 0.7), value: configuration.isPressed)
+    }
+}
+
+// MARK: - Highlight Color Strip
+
+private struct HighlightColorStrip: View {
+    let isPro: Bool
+    let currentHighlight: VerseHighlightColor?
+    let onHighlight: (VerseHighlightColor) -> Void
+    let onRemoveHighlight: () -> Void
+    let onShowPaywall: () -> Void
+
+    @Environment(\.bpPalette) private var palette
+
+    var body: some View {
+        HStack(spacing: 10) {
             ForEach(VerseHighlightColor.allCases) { color in
                 let isLocked = color != .gold && !isPro
                 let isActive = currentHighlight == color
+
                 Button {
                     if isLocked {
                         onShowPaywall()
                         return
                     }
+                    HapticService.selection()
                     if currentHighlight == color {
                         onRemoveHighlight()
                     } else {
@@ -140,157 +306,132 @@ struct VerseActionSheet: View {
                     }
                 } label: {
                     ZStack {
-                        // Outer ring for active
                         if isActive {
                             Circle()
                                 .stroke(Color(hex: color.dotColor), lineWidth: 2)
-                                .frame(width: 34, height: 34)
+                                .frame(width: 30, height: 30)
                         }
 
                         Circle()
                             .fill(Color(hex: color.dotColor))
-                            .frame(width: 26, height: 26)
+                            .frame(width: 22, height: 22)
                             .opacity(isLocked ? 0.4 : 1)
                             .shadow(
                                 color: isActive
                                     ? Color(hex: color.dotColor).opacity(0.4)
                                     : .clear,
-                                radius: 4, y: 2
+                                radius: 3, y: 1
                             )
 
                         if isActive {
                             Image(systemName: "checkmark")
-                                .font(.system(size: 10, weight: .bold))
+                                .font(.system(size: 9, weight: .bold))
                                 .foregroundStyle(.white)
                         } else if isLocked {
                             Image(systemName: "lock.fill")
-                                .font(.system(size: 8, weight: .semibold))
+                                .font(.system(size: 7, weight: .semibold))
                                 .foregroundStyle(.white.opacity(0.8))
                         }
                     }
-                    .frame(width: 36, height: 36)
+                    .frame(width: 32, height: 32)
                 }
                 .accessibilityLabel("\(color.displayName) highlight\(isLocked ? " (Pro)" : "")")
             }
         }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 10)
+        .background(
+            Capsule()
+                .fill(palette.surfaceElevated)
+                .shadow(color: .black.opacity(0.08), radius: 8, y: 2)
+        )
+        .overlay(
+            Capsule()
+                .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
+        )
     }
+}
 
-    // MARK: - Note Editor
+// MARK: - Note Editor Sheet
 
-    private var noteEditor: some View {
-        VStack(spacing: 14) {
-            HStack(spacing: 8) {
-                Image(systemName: "note.text")
-                    .font(.system(size: 13, weight: .medium))
-                    .foregroundStyle(.white)
-                    .frame(width: 28, height: 28)
+private struct VerseNoteEditorSheet: View {
+    @Binding var noteText: String
+    let hasExistingNote: Bool
+    let onSave: (String) -> Void
+    let onRemove: () -> Void
+
+    @Environment(\.bpPalette) private var palette
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        NavigationStack {
+            VStack(spacing: 16) {
+                TextEditor(text: $noteText)
+                    .font(.system(size: 16, weight: .regular, design: .rounded))
+                    .foregroundStyle(palette.textPrimary)
+                    .scrollContentBackground(.hidden)
+                    .frame(minHeight: 120)
+                    .padding(14)
                     .background(
-                        Circle()
-                            .fill(
-                                LinearGradient(
-                                    colors: [palette.accent, palette.accent.opacity(0.8)],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                )
-                            )
+                        RoundedRectangle(cornerRadius: 14)
+                            .fill(palette.background)
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 14)
+                            .stroke(palette.border.opacity(0.2), lineWidth: 0.5)
                     )
 
-                Text("Personal Note")
-                    .font(.system(size: 15, weight: .semibold, design: .rounded))
-                    .foregroundStyle(palette.textPrimary)
+                HStack(spacing: 12) {
+                    if hasExistingNote {
+                        Button {
+                            onRemove()
+                        } label: {
+                            Text("Remove Note")
+                                .font(.system(size: 14, weight: .medium, design: .rounded))
+                                .foregroundStyle(.red)
+                                .padding(.horizontal, 18)
+                                .padding(.vertical, 10)
+                                .background(
+                                    Capsule()
+                                        .stroke(.red.opacity(0.25), lineWidth: 1)
+                                )
+                        }
+                    }
 
-                Spacer()
-            }
+                    Spacer()
 
-            TextEditor(text: $noteText)
-                .font(.system(size: 15, weight: .regular, design: .rounded))
-                .foregroundStyle(palette.textPrimary)
-                .scrollContentBackground(.hidden)
-                .frame(minHeight: 80, maxHeight: 120)
-                .padding(12)
-                .background(
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(palette.background)
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 12)
-                        .stroke(palette.border.opacity(0.2), lineWidth: 0.5)
-                )
-
-            HStack(spacing: 12) {
-                if currentNote != nil && !currentNote!.isEmpty {
                     Button {
-                        noteText = ""
-                        onSaveNote("")
-                        isEditingNote = false
+                        onSave(noteText.trimmingCharacters(in: .whitespacesAndNewlines))
                     } label: {
-                        Text("Remove Note")
-                            .font(.system(size: 13, weight: .medium, design: .rounded))
-                            .foregroundStyle(.red)
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 9)
+                        Text("Save Note")
+                            .font(.system(size: 15, weight: .semibold, design: .rounded))
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, 24)
+                            .padding(.vertical, 10)
                             .background(
                                 Capsule()
-                                    .stroke(.red.opacity(0.25), lineWidth: 1)
+                                    .fill(
+                                        LinearGradient(
+                                            colors: [palette.accent, palette.accent.opacity(0.8)],
+                                            startPoint: .leading,
+                                            endPoint: .trailing
+                                        )
+                                    )
+                                    .shadow(color: palette.accent.opacity(0.25), radius: 4, y: 2)
                             )
                     }
                 }
-
-                Spacer()
-
-                Button {
-                    onSaveNote(noteText.trimmingCharacters(in: .whitespacesAndNewlines))
-                    isEditingNote = false
-                } label: {
-                    Text("Save Note")
-                        .font(.system(size: 14, weight: .semibold, design: .rounded))
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, 22)
-                        .padding(.vertical, 9)
-                        .background(
-                            Capsule()
-                                .fill(
-                                    LinearGradient(
-                                        colors: [palette.accent, palette.accent.opacity(0.8)],
-                                        startPoint: .leading,
-                                        endPoint: .trailing
-                                    )
-                                )
-                                .shadow(color: palette.accent.opacity(0.25), radius: 4, y: 2)
-                        )
+            }
+            .padding(20)
+            .background(palette.surfaceElevated)
+            .navigationTitle("Personal Note")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") { dismiss() }
+                        .foregroundStyle(palette.textMuted)
                 }
             }
-        }
-        .padding(.horizontal, 24)
-        .padding(.vertical, 18)
-    }
-
-    // MARK: - Action Row
-
-    private func actionRow(icon: String, title: String, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            HStack(spacing: 14) {
-                Image(systemName: icon)
-                    .font(.system(size: 14, weight: .medium))
-                    .foregroundStyle(palette.accent)
-                    .frame(width: 32, height: 32)
-                    .background(
-                        Circle()
-                            .fill(palette.accent.opacity(0.08))
-                    )
-
-                Text(title)
-                    .font(.system(size: 15, weight: .medium, design: .rounded))
-                    .foregroundStyle(palette.textPrimary)
-
-                Spacer()
-
-                Image(systemName: "chevron.right")
-                    .font(.system(size: 11, weight: .semibold))
-                    .foregroundStyle(palette.textMuted.opacity(0.5))
-            }
-            .padding(.horizontal, 20)
-            .padding(.vertical, 11)
         }
     }
 }

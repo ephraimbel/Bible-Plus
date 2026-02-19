@@ -295,7 +295,10 @@ private struct BibleContentView: View {
                     lastReadVerseNumber: viewModel.lastReadVerseNumber,
                     readerFontSize: viewModel.readerFontSize,
                     readerFontDesign: viewModel.readerFontDesign,
+                    readerFontWeight: viewModel.readerFontWeight.fontWeight,
                     readerLineSpacing: viewModel.readerLineSpacing,
+                    readerTextAlignmentJustified: viewModel.readerTextAlignmentJustified,
+                    readerShowVerseNumbers: viewModel.readerShowVerseNumbers,
                     onVerseTap: { viewModel.selectVerse($0) },
                     onRetry: { viewModel.retryLoading() }
                 )
@@ -326,7 +329,10 @@ private struct BibleContentView: View {
                         lastReadVerseNumber: nil,
                         readerFontSize: viewModel.readerFontSize,
                         readerFontDesign: viewModel.readerFontDesign,
+                        readerFontWeight: viewModel.readerFontWeight.fontWeight,
                         readerLineSpacing: viewModel.readerLineSpacing,
+                        readerTextAlignmentJustified: viewModel.readerTextAlignmentJustified,
+                        readerShowVerseNumbers: viewModel.readerShowVerseNumbers,
                         onVerseTap: { _ in },
                         onRetry: { }
                     )
@@ -443,13 +449,9 @@ private struct BibleContentView: View {
                 .transition(.move(edge: .bottom).combined(with: .opacity))
             }
 
-            // Verse action sheet overlay
+            // Verse floating toolbar overlay
             if let verse = viewModel.selectedVerse {
-                Color.black.opacity(0.3)
-                    .ignoresSafeArea()
-                    .onTapGesture { viewModel.selectedVerse = nil }
-
-                VerseActionSheet(
+                VerseToolbarOverlay(
                     verse: verse,
                     reference: viewModel.verseReference(for: verse),
                     isSaved: viewModel.isVerseSaved(verse.number),
@@ -480,7 +482,7 @@ private struct BibleContentView: View {
                     },
                     onCopy: {
                         viewModel.copyVerse(verse)
-                        viewModel.selectedVerse = nil
+                        // stays open (multi-action)
                     },
                     onShare: {
                         shareText = viewModel.shareText(for: verse)
@@ -488,17 +490,19 @@ private struct BibleContentView: View {
                     },
                     onSave: {
                         viewModel.saveVerse(verse)
-                        viewModel.selectedVerse = nil
+                        // stays open (multi-action)
                     },
                     onUnsave: {
                         viewModel.unsaveVerse(verse)
-                        viewModel.selectedVerse = nil
+                        // stays open (multi-action)
                     },
                     onHighlight: { color in
                         viewModel.highlightVerse(verse, color: color)
+                        // stays open (multi-action)
                     },
                     onRemoveHighlight: {
                         viewModel.removeHighlight(verse)
+                        // stays open (multi-action)
                     },
                     onSaveNote: { note in
                         viewModel.saveNote(for: verse, note: note)
@@ -508,10 +512,8 @@ private struct BibleContentView: View {
                         viewModel.selectedVerse = nil
 
                         if audioService.hasActivePlayback {
-                            // Already playing — just seek
                             audioService.seekToVerse(index: verseIndex)
                         } else {
-                            // Start fresh from this verse
                             let descriptor = FetchDescriptor<UserProfile>()
                             let isPro = (try? modelContext.fetch(descriptor).first?.isPro) ?? false
 
@@ -570,8 +572,6 @@ private struct BibleContentView: View {
                         viewModel.selectedVerse = nil
                     }
                 )
-                .padding(.horizontal, 16)
-                .padding(.bottom, 16)
                 .transition(.move(edge: .bottom).combined(with: .opacity))
             }
         }
@@ -753,7 +753,7 @@ private struct BibleContentView: View {
         }
         .sheet(isPresented: $viewModel.showReaderSettings) {
             ReaderSettingsView(viewModel: viewModel)
-                .presentationDetents([.medium])
+                .presentationDetents([.large])
         }
         .sheet(isPresented: $showExplainChat) {
             NavigationStack {
