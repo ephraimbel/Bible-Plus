@@ -1481,14 +1481,14 @@ enum BiblicalCharacter: String, CaseIterable, Identifiable {
 
     var icon: String {
         switch self {
-        case .paul: "scroll.fill"
-        case .david: "crown.fill"
-        case .moses: "figure.walk"
-        case .mary: "heart.fill"
-        case .solomon: "scalemass.fill"
-        case .ruth: "leaf.fill"
-        case .peter: "bolt.fill"
-        case .esther: "star.fill"
+        case .paul: "p.circle.fill"
+        case .david: "d.circle.fill"
+        case .moses: "m.circle.fill"
+        case .mary: "m.circle.fill"
+        case .solomon: "s.circle.fill"
+        case .ruth: "r.circle.fill"
+        case .peter: "p.circle.fill"
+        case .esther: "e.circle.fill"
         }
     }
 

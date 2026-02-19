@@ -114,7 +114,7 @@ private struct ChatContentView: View {
             }
 
             // Follow-up suggestion chips
-            if !viewModel.followUpSuggestions.isEmpty && !viewModel.isStreaming && !viewModel.isChunkTyping {
+            if !viewModel.followUpSuggestions.isEmpty && !viewModel.isStreaming {
                 followUpChips
             }
 
@@ -219,10 +219,8 @@ private struct ChatContentView: View {
                             }()
 
                             let isFirst = message.role == .assistant && previousRole != .assistant
-                            // During chunk typing, the last visible message isn't truly the "last" yet
                             let isLast = message.role == .assistant
                                 && nextRole != .assistant
-                                && !viewModel.isChunkTyping
 
                             let isStreamingMsg = viewModel.isStreaming
                                 && message.id == viewModel.displayMessages.last?.id
@@ -258,13 +256,6 @@ private struct ChatContentView: View {
                         }
                     }
 
-                    // Chunk typing indicator
-                    if viewModel.isChunkTyping {
-                        chunkTypingIndicator
-                            .id("chunk-typing")
-                            .transition(.opacity.animation(.easeInOut(duration: 0.2)))
-                    }
-
                     // Invisible anchor for scroll tracking
                     Color.clear.frame(height: 1).id("bottom-anchor")
                 }
@@ -275,24 +266,7 @@ private struct ChatContentView: View {
             .onChange(of: viewModel.displayMessages.count) { _, _ in
                 scrollToBottom(proxy: proxy)
             }
-            .onChange(of: viewModel.isChunkTyping) { _, _ in
-                scrollToBottom(proxy: proxy)
-            }
         }
-    }
-
-    private var chunkTypingIndicator: some View {
-        HStack(alignment: .top, spacing: 8) {
-            Spacer()
-                .frame(width: 26)
-
-            TypingDotsView(contextLabel: viewModel.typingContextLabel)
-
-            Spacer(minLength: 32)
-        }
-        .padding(.horizontal, 16)
-        .padding(.top, 4)
-        .padding(.bottom, 2)
     }
 
     // MARK: - Date Divider

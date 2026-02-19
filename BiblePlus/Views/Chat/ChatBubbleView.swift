@@ -73,14 +73,9 @@ struct ChatBubbleView: View {
                         assistantContent
                     }
 
-                    // Subtle save prayer link
-                    if isPrayerMessage && !isStreaming {
-                        savePrayerLink
-                    }
-
-                    // Timestamp + actions on last in sequence
+                    // Actions on last in sequence
                     if isLastInAssistantSequence && !isStreaming {
-                        timestampRow
+                        actionRow
                     }
                 }
             }
@@ -112,7 +107,7 @@ struct ChatBubbleView: View {
     private var userContent: some View {
         VStack(alignment: .trailing, spacing: 4) {
             Text(message.content)
-                .font(.system(size: 15, weight: .regular, design: .rounded))
+                .font(.system(size: 15.5, weight: .regular, design: .rounded))
                 .foregroundColor(.white)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 11)
@@ -152,9 +147,9 @@ struct ChatBubbleView: View {
         VStack(alignment: .leading, spacing: 8) {
             if isActivelyStreaming {
                 Text(message.content)
-                    .font(.system(size: 15.5, weight: .regular, design: .rounded))
+                    .font(.system(size: 16, weight: .regular, design: .serif))
                     .foregroundStyle(palette.textPrimary)
-                    .lineSpacing(3)
+                    .lineSpacing(5)
                     .textSelection(.enabled)
 
                 BlinkingCursor(color: palette.accent)
@@ -196,32 +191,39 @@ struct ChatBubbleView: View {
         )
     }
 
-    // MARK: - Save Prayer Link
+    // MARK: - Action Row
 
-    private var savePrayerLink: some View {
-        Button {
-            onSavePrayer?()
-        } label: {
-            HStack(spacing: 5) {
-                Image(systemName: isSavedPrayer ? "checkmark" : "bookmark")
-                    .font(.system(size: 11, weight: .medium))
-                Text(isSavedPrayer ? "Saved" : "Save to Journal")
-                    .font(.system(size: 12, weight: .medium, design: .rounded))
+    private var actionRow: some View {
+        HStack(spacing: 16) {
+            Button {
+                UIPasteboard.general.string = message.content
+                HapticService.success()
+            } label: {
+                Image(systemName: "doc.on.doc")
             }
-            .foregroundStyle(isSavedPrayer ? palette.success : palette.textMuted)
+
+            if let onSave {
+                Button { onSave() } label: {
+                    Image(systemName: "bookmark")
+                }
+            }
+
+            if let onShare {
+                Button { onShare() } label: {
+                    Image(systemName: "square.and.arrow.up")
+                }
+            }
+
+            if isPrayerMessage, let onSavePrayer {
+                Button { onSavePrayer() } label: {
+                    Image(systemName: isSavedPrayer ? "checkmark" : "heart")
+                }
+                .disabled(isSavedPrayer)
+            }
         }
-        .disabled(isSavedPrayer)
-        .padding(.top, 4)
-        .animation(BPAnimation.spring, value: isSavedPrayer)
-    }
-
-    // MARK: - Timestamp Row
-
-    private var timestampRow: some View {
-        Text(message.createdAt, style: .time)
-            .font(.system(size: 11, weight: .regular, design: .rounded))
-            .foregroundStyle(palette.textMuted.opacity(0.5))
-            .padding(.top, 2)
+        .font(.system(size: 13, weight: .light))
+        .foregroundStyle(palette.textMuted.opacity(0.5))
+        .padding(.top, 8)
     }
 
     // MARK: - Context Menu (replaces overflow + reaction bar)
@@ -273,8 +275,8 @@ struct ChatBubbleView: View {
 
     private func textView(_ text: String) -> some View {
         highlightedMarkdownText(text)
-            .font(.system(size: 15.5, weight: .regular, design: .rounded))
-            .lineSpacing(3)
+            .font(.system(size: 16, weight: .regular, design: .serif))
+            .lineSpacing(5)
             .environment(\.openURL, OpenURLAction { url in
                 if url.scheme == "bibleplus",
                    url.host == "bible",
@@ -300,15 +302,15 @@ struct ChatBubbleView: View {
                 .fill(palette.accent.opacity(0.4))
                 .frame(width: 2.5)
 
-            VStack(alignment: .leading, spacing: 6) {
+            VStack(alignment: .leading, spacing: 8) {
                 Text(quote)
-                    .font(.system(size: 15, weight: .regular, design: .serif))
+                    .font(.system(size: 16, weight: .regular, design: .serif))
                     .foregroundStyle(palette.textPrimary)
-                    .lineSpacing(4)
+                    .lineSpacing(5)
                     .italic()
 
                 referenceButton(reference)
-                    .font(.system(size: 13, weight: .medium, design: .rounded))
+                    .font(.system(size: 13, weight: .medium, design: .serif))
             }
             .padding(.leading, 12)
             .padding(.trailing, 8)

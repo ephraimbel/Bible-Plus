@@ -39,7 +39,6 @@ final class ChatViewModel {
     var displayMessages: [ChatMessage] = []
     var inputText: String = ""
     var isStreaming: Bool = false
-    var isChunkTyping: Bool = false
     var errorMessage: String? = nil
     var initialContext: String? = nil
     var followUpSuggestions: [String] = []
@@ -59,7 +58,6 @@ final class ChatViewModel {
     private let personalizationService: PersonalizationService
     private var streamingTask: Task<Void, Never>?
     private var toastDismissTask: Task<Void, Never>?
-    private var chunkTask: Task<Void, Never>?
 
     // MARK: - Computed
 
@@ -75,7 +73,6 @@ final class ChatViewModel {
     var canSend: Bool {
         !inputText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
             && !isStreaming
-            && !isChunkTyping
     }
 
     private var allMessages: [ChatMessage] {
@@ -231,7 +228,7 @@ final class ChatViewModel {
 
     func send() {
         let text = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !text.isEmpty, !isStreaming, !isChunkTyping else { return }
+        guard !text.isEmpty, !isStreaming else { return }
 
         if isRateLimited {
             errorMessage = AIError.rateLimited.errorDescription
@@ -280,10 +277,7 @@ final class ChatViewModel {
     func stopStreaming() {
         streamingTask?.cancel()
         streamingTask = nil
-        chunkTask?.cancel()
-        chunkTask = nil
         isStreaming = false
-        isChunkTyping = false
         try? modelContext.save()
     }
 
@@ -308,7 +302,6 @@ final class ChatViewModel {
     func messageContainsPrayer(_ message: ChatMessage) -> Bool {
         guard message.role == .assistant,
               !isStreaming,
-              !isChunkTyping,
               !savedPrayerMessageIDs.contains(message.id)
         else { return false }
 
@@ -525,24 +518,8 @@ final class ChatViewModel {
                 assistantMessage.content = cleaned
             }
 
-            // Decide chunking BEFORE turning off streaming to avoid flash
-            let fullContent = assistantMessage.content
-            let paragraphs = fullContent
-                .components(separatedBy: "\n\n")
-                .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-                .filter { !$0.isEmpty }
-
-            // Skip chunking for prayer messages — they should appear as one cohesive response
-            let isPrayer = isPrayerContent(fullContent)
-            let willChunk = paragraphs.count >= 3 && !isPrayer
             isStreaming = false
 
-            if willChunk {
-                // Seamlessly transition into chunked delivery
-                await deliverChunked(assistantMessage: assistantMessage, paragraphs: paragraphs)
-            }
-
-            // Show follow-up suggestions only after all chunks delivered
             if !suggestions.isEmpty {
                 followUpSuggestions = suggestions
             }
@@ -568,76 +545,7 @@ final class ChatViewModel {
         }
     }
 
-    // MARK: - Chunked Delivery
-
-    private func deliverChunked(assistantMessage: ChatMessage, paragraphs: [String]) async {
-        let fullContent = assistantMessage.content
-
-        // Group into 2-3 chunks
-        let chunks: [String]
-        if paragraphs.count <= 4 {
-            let mid = paragraphs.count / 2
-            chunks = [
-                paragraphs[0..<mid].joined(separator: "\n\n"),
-                paragraphs[mid...].joined(separator: "\n\n"),
-            ]
-        } else {
-            let third = paragraphs.count / 3
-            let twoThirds = third * 2
-            chunks = [
-                paragraphs[0..<third].joined(separator: "\n\n"),
-                paragraphs[third..<twoThirds].joined(separator: "\n\n"),
-                paragraphs[twoThirds...].joined(separator: "\n\n"),
-            ]
-        }
-
-        guard chunks.count >= 2 else { return }
-
-        // Replace full message content with first chunk (same object, no flash)
-        assistantMessage.content = chunks[0]
-
-        // Deliver remaining chunks with typing indicator between each
-        for chunk in chunks.dropFirst() {
-            isChunkTyping = true
-
-            let delay = UInt64.random(in: 600_000_000...1_000_000_000) // 600-1000ms
-            try? await Task.sleep(nanoseconds: delay)
-
-            guard !Task.isCancelled else {
-                isChunkTyping = false
-                assistantMessage.content = fullContent
-                rebuildDisplayMessages()
-                return
-            }
-
-            isChunkTyping = false
-
-            // Create display-only virtual message for this chunk
-            let virtualMessage = ChatMessage(
-                conversationId: conversationId,
-                role: .assistant,
-                content: chunk
-            )
-            displayMessages.append(virtualMessage)
-        }
-
-        // Restore full content in the persisted message for future loads
-        assistantMessage.content = fullContent
-        try? modelContext.save()
-    }
-
     // MARK: - Private
-
-    private func isPrayerContent(_ content: String) -> Bool {
-        let lower = content.lowercased()
-        let prayerMarkers = [
-            "amen", "heavenly father", "dear god", "dear lord",
-            "in jesus' name", "in jesus\u{2019} name", "in christ's name",
-            "we pray", "i pray", "lord, we", "lord, i",
-            "gracious god", "almighty god", "holy spirit",
-        ]
-        return prayerMarkers.contains { lower.contains($0) }
-    }
 
     private func fetchConversation() -> Conversation? {
         let convId = conversationId
