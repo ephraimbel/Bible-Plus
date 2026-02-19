@@ -23,6 +23,8 @@ final class SettingsViewModel {
     var showSanctuary = false
     var showVoicePicker = false
     var showWidgetBackgroundPicker = false
+    var showHomeWidgetGuide = false
+    var showLockWidgetGuide = false
 
     // MARK: - Local Editing Copies
 

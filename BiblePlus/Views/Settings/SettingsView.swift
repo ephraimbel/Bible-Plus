@@ -101,6 +101,14 @@ private struct SettingsContentView: View {
                 WidgetBackgroundPickerSheet(vm: vm)
                     .presentationDetents([.large])
             }
+            .sheet(isPresented: $vm.showHomeWidgetGuide) {
+                WidgetGuideView(mode: .homeScreen)
+                    .presentationDetents([.large])
+            }
+            .sheet(isPresented: $vm.showLockWidgetGuide) {
+                WidgetGuideView(mode: .lockScreen)
+                    .presentationDetents([.large])
+            }
             .fullScreenCover(isPresented: $showPaywall) {
                 SummaryPaywallView()
             }
@@ -421,81 +429,26 @@ private struct SettingsContentView: View {
             sectionHeader("Widgets", index: 3)
 
             sectionCard {
-                VStack(alignment: .leading, spacing: 16) {
-                    // Header
-                    HStack(spacing: 12) {
-                        Image(systemName: "square.grid.2x2")
-                            .font(.system(size: 16, weight: .medium))
-                            .foregroundStyle(.white)
-                            .frame(width: 36, height: 36)
-                            .background(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .fill(
-                                        LinearGradient(
-                                            colors: [palette.accent, palette.accent.opacity(0.8)],
-                                            startPoint: .topLeading,
-                                            endPoint: .bottomTrailing
-                                        )
-                                    )
-                            )
-
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text("Add Bible+ to Your Home Screen")
-                                .font(.system(size: 15, weight: .semibold, design: .rounded))
-                                .foregroundStyle(palette.textPrimary)
-                            Text("Daily verses right where you need them")
-                                .font(.system(size: 12, weight: .regular, design: .rounded))
-                                .foregroundStyle(palette.textMuted)
-                        }
-                    }
-
-                    Rectangle()
-                        .fill(palette.border.opacity(0.15))
-                        .frame(height: 0.5)
-
-                    // Steps
-                    VStack(spacing: 10) {
-                        widgetStep(number: 1, text: "Long-press on your Home Screen")
-                        widgetStep(number: 2, text: "Tap the + button in the top corner")
-                        widgetStep(number: 3, text: "Search for \"Bible Plus\"")
-                        widgetStep(number: 4, text: "Choose a size and tap Add Widget")
-                    }
-
-                    Rectangle()
-                        .fill(palette.border.opacity(0.15))
-                        .frame(height: 0.5)
-
-                    // Lock Screen
-                    HStack(spacing: 12) {
-                        Image(systemName: "lock.circle")
-                            .font(.system(size: 14, weight: .medium))
-                            .foregroundStyle(palette.accent)
-                            .frame(width: 32, height: 32)
-                            .background(
-                                Circle()
-                                    .fill(palette.accent.opacity(0.08))
-                            )
-
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text("Lock Screen Widget")
-                                .font(.system(size: 14, weight: .semibold, design: .rounded))
-                                .foregroundStyle(palette.textPrimary)
-                            Text("Long-press your Lock Screen, tap Customize, and add Bible Plus to your lock screen widgets.")
-                                .font(.system(size: 12, weight: .regular, design: .rounded))
-                                .foregroundStyle(palette.textMuted)
-                                .fixedSize(horizontal: false, vertical: true)
-                                .lineSpacing(2)
-                        }
-                    }
+                settingsRow(
+                    icon: "square.grid.2x2",
+                    label: "Home Screen Widget",
+                    value: "Setup Guide"
+                ) {
+                    vm.showHomeWidgetGuide = true
                 }
-                .padding(16)
 
-                Rectangle()
-                    .fill(palette.border.opacity(0.12))
-                    .frame(height: 0.5)
-                    .padding(.leading, 62)
+                rowDivider
 
-                // Widget Background picker row
+                settingsRow(
+                    icon: "lock.circle",
+                    label: "Lock Screen Widget",
+                    value: "Setup Guide"
+                ) {
+                    vm.showLockWidgetGuide = true
+                }
+
+                rowDivider
+
                 settingsRow(
                     icon: "photo.artframe",
                     label: "Widget Background",
@@ -507,23 +460,6 @@ private struct SettingsContentView: View {
             .opacity(appeared ? 1 : 0)
             .offset(y: appeared ? 0 : 10)
             .animation(BPAnimation.spring.delay(0.2), value: appeared)
-        }
-    }
-
-    @ViewBuilder
-    private func widgetStep(number: Int, text: String) -> some View {
-        HStack(spacing: 12) {
-            Text("\(number)")
-                .font(.system(size: 11, weight: .bold, design: .rounded))
-                .foregroundStyle(.white)
-                .frame(width: 22, height: 22)
-                .background(
-                    Circle()
-                        .fill(palette.accent)
-                )
-            Text(text)
-                .font(.system(size: 14, weight: .medium, design: .rounded))
-                .foregroundStyle(palette.textPrimary)
         }
     }
 
