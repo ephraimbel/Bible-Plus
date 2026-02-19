@@ -3,7 +3,7 @@ import AVFoundation
 
 // MARK: - Filter Type
 
-private enum BackgroundFilter: CaseIterable, Identifiable {
+enum BackgroundFilter: CaseIterable, Identifiable {
     case all, animated, images, gradients
 
     var id: String { displayName }
@@ -38,7 +38,7 @@ private enum BackgroundFilter: CaseIterable, Identifiable {
 
 // MARK: - Thumbnail Cache
 
-private final class ThumbnailCache: @unchecked Sendable {
+final class ThumbnailCache: @unchecked Sendable {
     static let shared = ThumbnailCache()
     private let cache = NSCache<NSString, UIImage>()
 
@@ -53,7 +53,7 @@ private final class ThumbnailCache: @unchecked Sendable {
 
 // MARK: - Async Thumbnail View
 
-private struct AsyncThumbnailView: View {
+struct AsyncThumbnailView: View {
     let bg: SanctuaryBackground
     @State private var thumbnail: UIImage?
 

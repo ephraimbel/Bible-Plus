@@ -37,7 +37,7 @@ struct HomeDashboardView: View {
                 heroVerseCard
                 streakCard
                 quickActionsRow
-                reflectionCard
+                askCard
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 90)
@@ -427,11 +427,11 @@ struct HomeDashboardView: View {
         .animation(BPAnimation.spring.delay(0.24), value: appeared)
     }
 
-    // MARK: - Daily Reflection Card
+    // MARK: - Ask Card
 
-    private var reflectionCard: some View {
+    private var askCard: some View {
         HStack(spacing: 14) {
-            Image(systemName: "pencil.line")
+            Image(systemName: "bubble.left.and.bubble.right.fill")
                 .font(.system(size: 15, weight: .medium))
                 .foregroundStyle(.white)
                 .frame(width: 36, height: 36)
@@ -447,11 +447,11 @@ struct HomeDashboardView: View {
                 )
 
             VStack(alignment: .leading, spacing: 3) {
-                Text("Daily Reflection")
+                Text("What\u{2019}s on your heart?")
                     .font(.system(size: 14, weight: .bold, design: .rounded))
                     .foregroundStyle(palette.textPrimary)
 
-                Text(dailyPrompt)
+                Text("Ask anything about faith, life, or Scripture")
                     .font(.system(size: 13, weight: .regular, design: .serif))
                     .foregroundStyle(palette.textSecondary)
                     .italic()
@@ -477,20 +477,12 @@ struct HomeDashboardView: View {
                 .stroke(palette.border.opacity(0.3), lineWidth: 0.5)
         )
         .onTapGesture {
-            NotificationCenter.default.post(
-                name: .openJournalWithReflection,
-                object: nil,
-                userInfo: ["prompt": dailyPrompt]
-            )
+            NotificationCenter.default.post(name: .switchToAskTab, object: nil)
             HapticService.lightImpact()
         }
         .opacity(appeared ? 1 : 0)
         .offset(y: appeared ? 0 : 20)
         .animation(BPAnimation.spring.delay(0.32), value: appeared)
-    }
-
-    private var dailyPrompt: String {
-        DailyReflectionProvider.prompt(for: vm.profile)
     }
 
     // MARK: - Quick Action Card

@@ -974,4 +974,5 @@ extension Notification.Name {
     static let plansDeepLink = Notification.Name("PlansDeepLink")
     static let showProgressFromWidget = Notification.Name("ShowProgressFromWidget")
     static let showPlansFromWidget = Notification.Name("ShowPlansFromWidget")
+    static let switchToAskTab = Notification.Name("SwitchToAskTab")
 }

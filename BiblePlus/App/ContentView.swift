@@ -117,6 +117,11 @@ struct ContentView: View {
                 soundscapeService.stop()
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: .switchToAskTab)) { _ in
+            withAnimation(.easeInOut(duration: 0.25)) {
+                selectedTab = .ask
+            }
+        }
         .onReceive(NotificationCenter.default.publisher(for: .feedContentDeepLink)) { _ in
             withAnimation(.easeInOut(duration: 0.25)) {
                 selectedTab = .feed
