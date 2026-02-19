@@ -15,6 +15,11 @@ final class ConversationListViewModel {
 
     // MARK: - Computed
 
+    var userName: String {
+        let descriptor = FetchDescriptor<UserProfile>()
+        return (try? modelContext.fetch(descriptor))?.first?.firstName ?? ""
+    }
+
     var pinnedConversations: [Conversation] {
         conversations.filter { $0.isPinned }
     }

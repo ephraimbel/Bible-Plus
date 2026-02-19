@@ -16,7 +16,8 @@ struct ConversationListView: View {
                     ConversationListContent(
                         viewModel: vm,
                         onNewConversation: { startNewConversation() },
-                        onSelectConversation: { navigationPath.append($0.id) }
+                        onSelectConversation: { navigationPath.append($0.id) },
+                        onPromptTapped: { startNewConversationWithPrompt($0) }
                     )
                 } else {
                     BPLoadingView().onAppear {
@@ -70,6 +71,11 @@ struct ConversationListView: View {
         HapticService.lightImpact()
     }
 
+    private func startNewConversationWithPrompt(_ prompt: String) {
+        pendingContext = prompt
+        startNewConversation()
+    }
+
     private func consumePendingContext() -> String? {
         defer { pendingContext = nil }
         return pendingContext
@@ -82,6 +88,7 @@ private struct ConversationListContent: View {
     @Bindable var viewModel: ConversationListViewModel
     let onNewConversation: () -> Void
     let onSelectConversation: (Conversation) -> Void
+    let onPromptTapped: (String) -> Void
     @Environment(\.bpPalette) private var palette
     @Environment(\.colorScheme) private var colorScheme
     @State private var appeared = false
@@ -236,90 +243,116 @@ private struct ConversationListContent: View {
         .ignoresSafeArea()
     }
 
+    // MARK: - Quick Prompt
+
+    private struct QuickPrompt: Identifiable {
+        let id = UUID()
+        let label: String
+        let icon: String
+    }
+
+    private var quickPrompts: [QuickPrompt] {
+        [
+            QuickPrompt(label: "Pray with me", icon: "hands.sparkles"),
+            QuickPrompt(label: "Explain a verse", icon: "book.fill"),
+            QuickPrompt(label: "I need comfort", icon: "heart.fill"),
+            QuickPrompt(label: "Guide my day", icon: "sunrise.fill"),
+        ]
+    }
+
     // MARK: - Empty State
 
     private var emptyState: some View {
-        VStack(spacing: 24) {
+        VStack(spacing: 0) {
             Spacer()
 
-            ZStack {
-                Circle()
-                    .fill(palette.accent.opacity(0.06))
-                    .frame(width: 120, height: 120)
+            // Greeting
+            Text("What\u{2019}s on your heart, \(viewModel.userName)?")
+                .font(.system(size: 24, weight: .semibold, design: .serif))
+                .foregroundStyle(palette.textPrimary)
+                .multilineTextAlignment(.center)
+                .opacity(appeared ? 1 : 0)
+                .offset(y: appeared ? 0 : 15)
+                .animation(BPAnimation.spring.delay(0.1), value: appeared)
 
-                Circle()
-                    .fill(palette.accent.opacity(0.04))
-                    .frame(width: 88, height: 88)
+            Spacer().frame(height: 32)
 
-                ZStack {
-                    Circle()
-                        .fill(
-                            LinearGradient(
-                                colors: [palette.accent, palette.accent.opacity(0.7)],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                        )
-                        .frame(width: 56, height: 56)
-                        .shadow(color: palette.accent.opacity(0.3), radius: 8, y: 4)
-
-                    Image(systemName: "sparkle")
-                        .font(.system(size: 24, weight: .semibold))
-                        .foregroundStyle(.white)
-                }
-            }
-            .opacity(appeared ? 1 : 0)
-            .scaleEffect(appeared ? 1 : 0.8)
-            .animation(BPAnimation.spring.delay(0.1), value: appeared)
-
-            VStack(spacing: 10) {
-                Text("Start a Conversation")
-                    .font(.system(size: 22, weight: .semibold, design: .rounded))
-                    .foregroundStyle(palette.textPrimary)
-
-                Text("Ask about Scripture, request prayer,\nor talk through what\u{2019}s on your heart.")
-                    .font(.system(size: 15, weight: .regular, design: .rounded))
-                    .foregroundStyle(palette.textMuted)
-                    .multilineTextAlignment(.center)
-                    .lineSpacing(4)
-            }
-            .opacity(appeared ? 1 : 0)
-            .offset(y: appeared ? 0 : 15)
-            .animation(BPAnimation.spring.delay(0.2), value: appeared)
-
+            // Fake input field
             Button {
                 HapticService.lightImpact()
                 onNewConversation()
             } label: {
-                HStack(spacing: 8) {
-                    Image(systemName: "plus")
-                        .font(.system(size: 14, weight: .semibold))
-                    Text("New Conversation")
-                        .font(.system(size: 15, weight: .semibold, design: .rounded))
+                HStack(spacing: 10) {
+                    Image(systemName: "bubble.left")
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundStyle(palette.accent.opacity(0.6))
+
+                    Text("Ask about scripture, prayer, life...")
+                        .font(.system(size: 15, weight: .regular, design: .rounded))
+                        .foregroundStyle(palette.textMuted)
+
+                    Spacer()
                 }
-                .foregroundStyle(.white)
-                .padding(.horizontal, 28)
-                .padding(.vertical, 14)
+                .padding(.horizontal, 18)
+                .padding(.vertical, 16)
                 .background(
-                    Capsule()
-                        .fill(
-                            LinearGradient(
-                                colors: [palette.accent, palette.accent.opacity(0.8)],
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )
-                        )
-                        .shadow(color: palette.accent.opacity(0.3), radius: 8, y: 4)
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(palette.surfaceElevated)
+                        .shadow(color: .black.opacity(0.04), radius: 6, y: 3)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(palette.accent.opacity(0.15), lineWidth: 0.5)
                 )
             }
+            .buttonStyle(.plain)
             .opacity(appeared ? 1 : 0)
             .offset(y: appeared ? 0 : 15)
-            .animation(BPAnimation.spring.delay(0.3), value: appeared)
+            .animation(BPAnimation.spring.delay(0.2), value: appeared)
+
+            Spacer().frame(height: 24)
+
+            // Quick prompt chips — 2 per row
+            VStack(spacing: 10) {
+                ForEach(0..<2, id: \.self) { row in
+                    HStack(spacing: 10) {
+                        ForEach(0..<2, id: \.self) { col in
+                            let prompt = quickPrompts[row * 2 + col]
+                            Button {
+                                HapticService.lightImpact()
+                                onPromptTapped(prompt.label)
+                            } label: {
+                                HStack(spacing: 6) {
+                                    Image(systemName: prompt.icon)
+                                        .font(.system(size: 13, weight: .medium))
+                                    Text(prompt.label)
+                                        .font(.system(size: 13, weight: .medium, design: .rounded))
+                                }
+                                .foregroundStyle(palette.accent)
+                                .padding(.horizontal, 14)
+                                .padding(.vertical, 10)
+                                .background(
+                                    Capsule()
+                                        .fill(palette.accent.opacity(0.08))
+                                )
+                                .overlay(
+                                    Capsule()
+                                        .stroke(palette.accent.opacity(0.15), lineWidth: 0.5)
+                                )
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                    .opacity(appeared ? 1 : 0)
+                    .offset(y: appeared ? 0 : 15)
+                    .animation(BPAnimation.spring.delay(0.3 + Double(row) * 0.08), value: appeared)
+                }
+            }
 
             Spacer()
             Spacer()
         }
-        .padding(.horizontal, 32)
+        .padding(.horizontal, 28)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(topGoldGradient)
         .onAppear {
