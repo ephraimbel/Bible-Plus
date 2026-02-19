@@ -61,7 +61,7 @@ private struct ChatContentView: View {
     var body: some View {
         VStack(spacing: 0) {
             // Messages or quick prompts
-            if viewModel.messages.isEmpty {
+            if viewModel.displayMessages.isEmpty {
                 QuickPromptsView(
                     prompts: viewModel.quickPrompts,
                     userName: viewModel.userName,
@@ -74,7 +74,7 @@ private struct ChatContentView: View {
             }
 
             // Follow-up suggestion chips
-            if !viewModel.followUpSuggestions.isEmpty && !viewModel.isStreaming {
+            if !viewModel.followUpSuggestions.isEmpty && !viewModel.isStreaming && !viewModel.isChunkTyping {
                 followUpChips
             }
 
@@ -148,18 +148,27 @@ private struct ChatContentView: View {
         ScrollViewReader { proxy in
             ScrollView {
                 LazyVStack(spacing: 0) {
-                    ForEach(Array(viewModel.messages.enumerated()), id: \.element.id) { index, message in
+                    ForEach(Array(viewModel.displayMessages.enumerated()), id: \.element.id) { index, message in
                         if message.role != .system {
                             let previousRole: MessageRole? = {
                                 guard index > 0 else { return nil }
-                                let prev = viewModel.messages[index - 1]
+                                let prev = viewModel.displayMessages[index - 1]
                                 return prev.role == .system ? nil : prev.role
                             }()
+
+                            let nextRole: MessageRole? = {
+                                guard index < viewModel.displayMessages.count - 1 else { return nil }
+                                let next = viewModel.displayMessages[index + 1]
+                                return next.role == .system ? nil : next.role
+                            }()
+
+                            let isFirst = message.role == .assistant && previousRole != .assistant
+                            let isLast = message.role == .assistant && nextRole != .assistant
 
                             ChatBubbleView(
                                 message: message,
                                 isStreaming: viewModel.isStreaming
-                                    && message.id == viewModel.messages.last?.id
+                                    && message.id == viewModel.displayMessages.last?.id
                                     && message.role == .assistant,
                                 onSave: message.role == .assistant ? {
                                     viewModel.saveResponse(message)
@@ -176,26 +185,61 @@ private struct ChatContentView: View {
                                 isPrayerMessage: viewModel.messageContainsPrayer(message) || viewModel.savedToJournalMessageIDs.contains(message.id),
                                 isSavedToJournal: viewModel.savedToJournalMessageIDs.contains(message.id),
                                 isFailedMessage: message.role == .user && viewModel.failedMessageId == message.id,
-                                previousMessageRole: previousRole
+                                previousMessageRole: previousRole,
+                                isFirstInAssistantSequence: isFirst,
+                                isLastInAssistantSequence: isLast,
+                                reaction: viewModel.messageReactions[message.id],
+                                onReaction: message.role == .assistant ? { reaction in
+                                    viewModel.toggleReaction(reaction, for: message.id)
+                                } : nil
                             )
                             .id(message.id)
                         }
                     }
+
+                    // Chunk typing indicator
+                    if viewModel.isChunkTyping {
+                        HStack(alignment: .top, spacing: 10) {
+                            Spacer()
+                                .frame(width: 28)
+                                .padding(.top, 2)
+
+                            TypingDotsView()
+                                .transition(.scale(scale: 0.8).combined(with: .opacity))
+
+                            Spacer(minLength: 40)
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.top, 2)
+                        .padding(.bottom, 2)
+                        .id("chunk-typing")
+                    }
                 }
-                .padding(.vertical, 12)
+                .padding(.vertical, 16)
             }
             .scrollDismissesKeyboard(.interactively)
-            .onChange(of: viewModel.messages.count) { _, _ in
+            .onChange(of: viewModel.displayMessages.count) { _, _ in
                 scrollToBottom(proxy: proxy)
             }
-            .onChange(of: viewModel.messages.last?.content) { _, _ in
+            .onChange(of: viewModel.displayMessages.last?.content) { _, _ in
                 scrollToBottom(proxy: proxy)
+            }
+            .onChange(of: viewModel.isChunkTyping) { _, isTyping in
+                if isTyping {
+                    withAnimation(.easeOut(duration: 0.2)) {
+                        proxy.scrollTo("chunk-typing", anchor: .bottom)
+                    }
+                }
             }
         }
     }
 
     private func scrollToBottom(proxy: ScrollViewProxy) {
-        if let lastID = viewModel.messages.last?.id {
+        if viewModel.isChunkTyping {
+            withAnimation(.easeOut(duration: 0.2)) {
+                proxy.scrollTo("chunk-typing", anchor: .bottom)
+            }
+        } else if let lastID = viewModel.displayMessages.last?.id {
             withAnimation(.easeOut(duration: 0.2)) {
                 proxy.scrollTo(lastID, anchor: .bottom)
             }

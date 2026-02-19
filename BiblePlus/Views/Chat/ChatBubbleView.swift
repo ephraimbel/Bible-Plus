@@ -12,7 +12,16 @@ struct ChatBubbleView: View {
     var isFailedMessage: Bool = false
     var previousMessageRole: MessageRole? = nil
 
+    // New: sequence + reaction params
+    var isFirstInAssistantSequence: Bool = true
+    var isLastInAssistantSequence: Bool = true
+    var reaction: ChatReaction? = nil
+    var onReaction: ((ChatReaction) -> Void)? = nil
+    var appearDelay: Double = 0
+
     @Environment(\.bpPalette) private var palette
+    @State private var appeared: Bool = false
+    @State private var showReactionBar: Bool = false
 
     private var isTypingPlaceholder: Bool {
         isStreaming && message.role == .assistant && message.content.isEmpty
@@ -32,38 +41,35 @@ struct ChatBubbleView: View {
             if message.role == .user {
                 Spacer(minLength: 60)
             } else {
-                // AI avatar — gold gradient circle with sparkle
-                ZStack {
-                    Circle()
-                        .fill(
-                            LinearGradient(
-                                colors: [palette.accent, palette.accent.opacity(0.65)],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
+                // AI avatar — only on first message in sequence
+                if isFirstInAssistantSequence {
+                    ZStack {
+                        Circle()
+                            .fill(
+                                LinearGradient(
+                                    colors: [palette.accent, palette.accent.opacity(0.65)],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
                             )
-                        )
-                        .frame(width: 32, height: 32)
-                        .shadow(color: palette.accent.opacity(0.2), radius: 6, y: 2)
+                            .frame(width: 28, height: 28)
+                            .shadow(color: palette.accent.opacity(0.2), radius: 6, y: 2)
 
-                    Image(systemName: "sparkle")
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundStyle(.white)
+                        Image(systemName: "cross.fill")
+                            .font(.system(size: 12, weight: .semibold))
+                            .foregroundStyle(.white)
+                    }
+                    .padding(.top, 2)
+                } else {
+                    Spacer()
+                        .frame(width: 28)
+                        .padding(.top, 2)
                 }
-                .padding(.top, 2)
             }
 
             VStack(alignment: message.role == .user ? .trailing : .leading, spacing: 4) {
                 if isTypingPlaceholder {
                     TypingDotsView()
-                        .background(
-                            RoundedRectangle(cornerRadius: 18)
-                                .fill(palette.surfaceElevated)
-                                .shadow(color: .black.opacity(0.04), radius: 4, y: 2)
-                        )
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 18)
-                                .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
-                        )
                         .transition(.scale(scale: 0.8).combined(with: .opacity))
                 } else if message.role == .user {
                     Text(message.content)
@@ -96,24 +102,48 @@ struct ChatBubbleView: View {
                         .padding(.top, 2)
                     }
                 } else {
-                    // AI message: segmented rendering
-                    assistantBubble
+                    // AI message: no bubble, text flows on background
+                    assistantContent
+
+                    // Reaction badge
+                    if let reaction {
+                        reactionBadge(reaction)
+                    }
 
                     // Save to Journal button
                     if isPrayerMessage {
                         saveToJournalButton
+                    }
+
+                    // Timestamp + overflow menu on last in sequence
+                    if isLastInAssistantSequence && !isStreaming {
+                        HStack(spacing: 8) {
+                            Text(message.createdAt, style: .time)
+                                .font(.system(size: 11, weight: .regular, design: .rounded))
+                                .foregroundStyle(palette.textMuted.opacity(0.6))
+
+                            overflowMenu
+                        }
+                        .padding(.top, 2)
                     }
                 }
             }
             .animation(BPAnimation.spring, value: isTypingPlaceholder)
 
             if message.role == .assistant {
-                Spacer(minLength: 60)
+                Spacer(minLength: 40)
             }
         }
         .padding(.horizontal, 16)
-        .padding(.top, showRoleGap ? 10 : 2)
+        .padding(.top, showRoleGap ? 16 : 2)
         .padding(.bottom, 2)
+        .opacity(appeared ? 1 : 0)
+        .offset(y: appeared ? 0 : 8)
+        .onAppear {
+            withAnimation(.spring(response: 0.4, dampingFraction: 0.85).delay(appearDelay)) {
+                appeared = true
+            }
+        }
     }
 
     // MARK: - Bubble Shapes
@@ -124,15 +154,6 @@ struct ChatBubbleView: View {
             bottomLeadingRadius: 18,
             bottomTrailingRadius: 18,
             topTrailingRadius: 6
-        )
-    }
-
-    private var aiBubbleShape: UnevenRoundedRectangle {
-        UnevenRoundedRectangle(
-            topLeadingRadius: 6,
-            bottomLeadingRadius: 18,
-            bottomTrailingRadius: 18,
-            topTrailingRadius: 18
         )
     }
 
@@ -166,9 +187,9 @@ struct ChatBubbleView: View {
         .animation(BPAnimation.spring, value: isSavedToJournal)
     }
 
-    // MARK: - Assistant Bubble (Segmented)
+    // MARK: - Assistant Content (No Bubble)
 
-    private var assistantBubble: some View {
+    private var assistantContent: some View {
         let segments = MessageParser.parse(message.content)
 
         return VStack(alignment: .leading, spacing: 8) {
@@ -176,7 +197,7 @@ struct ChatBubbleView: View {
                 switch segment {
                 case .text(let text):
                     if !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                        textBubble(text)
+                        textView(text)
                     }
                 case .verseCard(let quote, let reference):
                     verseCardView(quote: quote, reference: reference)
@@ -188,37 +209,34 @@ struct ChatBubbleView: View {
                 streamingCursor
             }
         }
-        .contextMenu {
-            if !isStreaming {
-                if let onSave {
-                    Button {
-                        onSave()
-                    } label: {
-                        Label("Save Response", systemImage: "bookmark")
-                    }
+        .onLongPressGesture(minimumDuration: 0.4) {
+            guard !isStreaming, message.role == .assistant else { return }
+            HapticService.lightImpact()
+            withAnimation(BPAnimation.spring) {
+                showReactionBar = true
+            }
+            // Auto-dismiss after 3 seconds
+            Task {
+                try? await Task.sleep(for: .seconds(3))
+                withAnimation(BPAnimation.spring) {
+                    showReactionBar = false
                 }
-                if let onShare {
-                    Button {
-                        onShare()
-                    } label: {
-                        Label("Share Response", systemImage: "square.and.arrow.up")
-                    }
-                }
-                Button {
-                    UIPasteboard.general.string = message.content
-                    HapticService.success()
-                } label: {
-                    Label("Copy All", systemImage: "doc.on.doc")
-                }
+            }
+        }
+        .overlay(alignment: .topTrailing) {
+            if showReactionBar {
+                reactionBar
+                    .transition(.scale(scale: 0.6).combined(with: .opacity))
             }
         }
     }
 
-    // MARK: - Text Bubble (Markdown + Scripture Highlighting)
+    // MARK: - Text View (No Bubble — flows on background)
 
-    private func textBubble(_ text: String) -> some View {
+    private func textView(_ text: String) -> some View {
         highlightedMarkdownText(text)
-            .font(.system(size: 15, weight: .regular, design: .rounded))
+            .font(.system(size: 15.5, weight: .regular, design: .rounded))
+            .lineSpacing(3)
             .environment(\.openURL, OpenURLAction { url in
                 if url.scheme == "bibleplus",
                    url.host == "bible",
@@ -233,18 +251,87 @@ struct ChatBubbleView: View {
                 }
                 return .systemAction
             })
-            .padding(.horizontal, 14)
-            .padding(.vertical, 11)
-            .background(
-                aiBubbleShape
-                    .fill(palette.surfaceElevated)
-                    .shadow(color: .black.opacity(0.04), radius: 4, y: 2)
-            )
-            .overlay(
-                aiBubbleShape
-                    .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
-            )
             .textSelection(.enabled)
+    }
+
+    // MARK: - Reaction Bar
+
+    private var reactionBar: some View {
+        HStack(spacing: 16) {
+            ForEach(ChatReaction.allCases, id: \.rawValue) { rxn in
+                Button {
+                    onReaction?(rxn)
+                    withAnimation(BPAnimation.spring) {
+                        showReactionBar = false
+                    }
+                } label: {
+                    Image(systemName: rxn.icon)
+                        .font(.system(size: 18))
+                        .foregroundStyle(reaction == rxn ? palette.accent : palette.textMuted)
+                }
+            }
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 10)
+        .background(
+            Capsule()
+                .fill(.ultraThinMaterial)
+                .shadow(color: .black.opacity(0.12), radius: 12, y: 4)
+        )
+        .offset(y: -8)
+    }
+
+    // MARK: - Reaction Badge
+
+    private func reactionBadge(_ rxn: ChatReaction) -> some View {
+        HStack(spacing: 4) {
+            Image(systemName: rxn.icon)
+                .font(.system(size: 11, weight: .medium))
+            Text(rxn.label)
+                .font(.system(size: 11, weight: .medium, design: .rounded))
+        }
+        .foregroundStyle(palette.accent)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 4)
+        .background(
+            Capsule()
+                .fill(palette.accent.opacity(0.08))
+        )
+        .padding(.top, 2)
+        .transition(.scale(scale: 0.6).combined(with: .opacity))
+        .animation(BPAnimation.spring, value: reaction)
+    }
+
+    // MARK: - Overflow Menu
+
+    private var overflowMenu: some View {
+        Menu {
+            if let onSave {
+                Button {
+                    onSave()
+                } label: {
+                    Label("Save Response", systemImage: "bookmark")
+                }
+            }
+            if let onShare {
+                Button {
+                    onShare()
+                } label: {
+                    Label("Share Response", systemImage: "square.and.arrow.up")
+                }
+            }
+            Button {
+                UIPasteboard.general.string = message.content
+                HapticService.success()
+            } label: {
+                Label("Copy All", systemImage: "doc.on.doc")
+            }
+        } label: {
+            Image(systemName: "ellipsis")
+                .font(.system(size: 11, weight: .medium))
+                .foregroundStyle(palette.textMuted.opacity(0.5))
+                .frame(width: 24, height: 20)
+        }
     }
 
     // MARK: - Verse Card
@@ -298,7 +385,7 @@ struct ChatBubbleView: View {
 
     private var streamingCursor: some View {
         BlinkingCursor(color: palette.accent)
-            .padding(.leading, 14)
+            .padding(.leading, 2)
             .transition(.opacity)
     }
 

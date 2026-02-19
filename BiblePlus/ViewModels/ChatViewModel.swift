@@ -30,19 +30,48 @@ enum PromptCategory: String, CaseIterable, Identifiable {
     }
 }
 
+// MARK: - Chat Reaction
+
+enum ChatReaction: String, CaseIterable {
+    case heart
+    case pray
+    case bookmark
+
+    var icon: String {
+        switch self {
+        case .heart: "heart.fill"
+        case .pray: "hands.sparkles.fill"
+        case .bookmark: "bookmark.fill"
+        }
+    }
+
+    var label: String {
+        switch self {
+        case .heart: "Love"
+        case .pray: "Pray"
+        case .bookmark: "Save"
+        }
+    }
+}
+
 @MainActor
 @Observable
 final class ChatViewModel {
     // MARK: - State
 
     var messages: [ChatMessage] = []
+    var displayMessages: [ChatMessage] = []
     var inputText: String = ""
     var isStreaming: Bool = false
+    var isChunkTyping: Bool = false
     var errorMessage: String? = nil
     var initialContext: String? = nil
     var followUpSuggestions: [String] = []
     var shareText: String? = nil
     let conversationId: UUID
+
+    // Reactions (in-memory, display-only)
+    var messageReactions: [UUID: ChatReaction] = [:]
 
     // Premium enhancements
     var selectedPromptCategory: PromptCategory? = nil
@@ -57,6 +86,7 @@ final class ChatViewModel {
     private let personalizationService: PersonalizationService
     private var streamingTask: Task<Void, Never>?
     private var toastDismissTask: Task<Void, Never>?
+    private var chunkTask: Task<Void, Never>?
 
     // MARK: - Computed
 
@@ -72,6 +102,7 @@ final class ChatViewModel {
     var canSend: Bool {
         !inputText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
             && !isStreaming
+            && !isChunkTyping
     }
 
     private var allMessages: [ChatMessage] {
@@ -167,13 +198,29 @@ final class ChatViewModel {
             sortBy: [SortDescriptor(\.createdAt, order: .forward)]
         )
         messages = (try? modelContext.fetch(descriptor)) ?? []
+        rebuildDisplayMessages()
+    }
+
+    private func rebuildDisplayMessages() {
+        displayMessages = messages
+    }
+
+    // MARK: - Reactions
+
+    func toggleReaction(_ reaction: ChatReaction, for messageId: UUID) {
+        if messageReactions[messageId] == reaction {
+            messageReactions[messageId] = nil
+        } else {
+            messageReactions[messageId] = reaction
+            HapticService.lightImpact()
+        }
     }
 
     // MARK: - Sending
 
     func send() {
         let text = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !text.isEmpty, !isStreaming else { return }
+        guard !text.isEmpty, !isStreaming, !isChunkTyping else { return }
 
         if isRateLimited {
             errorMessage = AIError.rateLimited.errorDescription
@@ -193,6 +240,7 @@ final class ChatViewModel {
         )
         modelContext.insert(userMessage)
         messages.append(userMessage)
+        displayMessages.append(userMessage)
         inputText = ""
 
         // Update conversation title from first user message
@@ -209,6 +257,7 @@ final class ChatViewModel {
         )
         modelContext.insert(assistantMessage)
         messages.append(assistantMessage)
+        displayMessages.append(assistantMessage)
         isStreaming = true
 
         streamingTask?.cancel()
@@ -220,7 +269,10 @@ final class ChatViewModel {
     func stopStreaming() {
         streamingTask?.cancel()
         streamingTask = nil
+        chunkTask?.cancel()
+        chunkTask = nil
         isStreaming = false
+        isChunkTyping = false
         try? modelContext.save()
     }
 
@@ -245,6 +297,7 @@ final class ChatViewModel {
     func messageContainsPrayer(_ message: ChatMessage) -> Bool {
         guard message.role == .assistant,
               !isStreaming,
+              !isChunkTyping,
               !savedToJournalMessageIDs.contains(message.id)
         else { return false }
 
@@ -384,6 +437,7 @@ final class ChatViewModel {
             modelContext.delete(message)
         }
         messages.removeAll()
+        displayMessages.removeAll()
 
         if let conv = fetchConversation() {
             modelContext.delete(conv)
@@ -422,6 +476,12 @@ final class ChatViewModel {
                 assistantMessage.content = cleaned
                 followUpSuggestions = suggestions
             }
+
+            isStreaming = false
+            try? modelContext.save()
+
+            // Chunked delivery
+            await deliverChunked(assistantMessage: assistantMessage)
         } catch {
             if assistantMessage.content.isEmpty {
                 // Store the last user message content for retry
@@ -430,13 +490,101 @@ final class ChatViewModel {
                 if let idx = messages.lastIndex(where: { $0.id == assistantMessage.id }) {
                     messages.remove(at: idx)
                 }
+                if let idx = displayMessages.lastIndex(where: { $0.id == assistantMessage.id }) {
+                    displayMessages.remove(at: idx)
+                }
                 failedMessageContent = lastUserContent
                 failedMessageId = messages.last(where: { $0.role == .user })?.id
             }
             errorMessage = error.localizedDescription
+            isStreaming = false
+            try? modelContext.save()
+        }
+    }
+
+    // MARK: - Chunked Delivery
+
+    private func deliverChunked(assistantMessage: ChatMessage) async {
+        let fullContent = assistantMessage.content
+        let paragraphs = fullContent
+            .components(separatedBy: "\n\n")
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+
+        // Only chunk if 3+ paragraphs
+        guard paragraphs.count >= 3 else { return }
+
+        // Group into 2-3 chunks
+        let chunks: [String]
+        if paragraphs.count <= 4 {
+            // 3-4 paragraphs → 2 chunks
+            let mid = paragraphs.count / 2
+            chunks = [
+                paragraphs[0..<mid].joined(separator: "\n\n"),
+                paragraphs[mid...].joined(separator: "\n\n"),
+            ]
+        } else {
+            // 5+ paragraphs → 3 chunks
+            let third = paragraphs.count / 3
+            let twoThirds = third * 2
+            chunks = [
+                paragraphs[0..<third].joined(separator: "\n\n"),
+                paragraphs[third..<twoThirds].joined(separator: "\n\n"),
+                paragraphs[twoThirds...].joined(separator: "\n\n"),
+            ]
         }
 
-        isStreaming = false
+        guard chunks.count >= 2 else { return }
+
+        // Remove the full assistant message from display
+        if let idx = displayMessages.lastIndex(where: { $0.id == assistantMessage.id }) {
+            displayMessages.remove(at: idx)
+        }
+
+        // Show first chunk immediately (same ID as original)
+        assistantMessage.content = chunks[0]
+        displayMessages.append(assistantMessage)
+
+        // Deliver remaining chunks with typing indicator between each
+        for (i, chunk) in chunks.dropFirst().enumerated() {
+            isChunkTyping = true
+
+            let delay = UInt64.random(in: 600_000_000...1_200_000_000) // 600-1200ms
+            try? await Task.sleep(nanoseconds: delay)
+
+            guard !Task.isCancelled else {
+                isChunkTyping = false
+                // Restore full content if cancelled
+                assistantMessage.content = fullContent
+                rebuildDisplayMessages()
+                return
+            }
+
+            isChunkTyping = false
+
+            let isLast = i == chunks.count - 2
+
+            if isLast {
+                // Last chunk: create a virtual message but keep original ID for prayer detection
+                let virtualMessage = ChatMessage(
+                    conversationId: conversationId,
+                    role: .assistant,
+                    content: chunk
+                )
+                // Don't persist — display only
+                displayMessages.append(virtualMessage)
+            } else {
+                let virtualMessage = ChatMessage(
+                    conversationId: conversationId,
+                    role: .assistant,
+                    content: chunk
+                )
+                displayMessages.append(virtualMessage)
+            }
+        }
+
+        // Restore full content in the persisted message for future loads
+        assistantMessage.content = fullContent
         try? modelContext.save()
     }
 
