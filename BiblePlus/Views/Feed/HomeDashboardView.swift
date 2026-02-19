@@ -12,6 +12,7 @@ struct HomeDashboardView: View {
     let onOpenSanctuary: () -> Void
 
     @Environment(\.bpPalette) private var palette
+    @Environment(\.colorScheme) private var colorScheme
     @State private var animateStreak = false
     @State private var showReadingPlans = false
     @State private var appeared = false
@@ -20,34 +21,39 @@ struct HomeDashboardView: View {
     @State private var hasTriggeredHaptic = false
     @State private var glowPulse = false
 
+    private var rubberBandScale: CGFloat {
+        let progress = min(abs(dragOffset) / 120, 1.0)
+        return 1.0 - (progress * 0.03)
+    }
+
+    private let dayLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+    private let dayWeekdays = [2, 3, 4, 5, 6, 7, 1]
+
     // MARK: - Body
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            VStack(spacing: 0) {
-                headerSection
-                    .padding(.bottom, 16)
-
-                heroVerseCard
-                    .padding(.bottom, 12)
-
-                streakProgressStrip
-                    .padding(.bottom, 12)
-
-                quickActionsRow
-
+            VStack(spacing: 16) {
                 Spacer(minLength: 0)
+                headerSection
+                heroVerseCard
+                streakCard
+                quickActionsRow
+                reflectionCard
             }
             .padding(.horizontal, 20)
-            .padding(.top, 6)
+            .padding(.bottom, 90)
             .offset(y: dragOffset)
+            .scaleEffect(rubberBandScale, anchor: .bottom)
 
+            // Pinned above tab bar
             swipeUpPrompt
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(palette.background)
+        .contentShape(Rectangle())
+        .background(fullPageBackground)
         .gesture(
-            DragGesture(minimumDistance: 20)
+            DragGesture(minimumDistance: 30)
                 .onChanged { value in
                     let translation = value.translation.height
                     guard translation < 0 else {
@@ -55,19 +61,20 @@ struct HomeDashboardView: View {
                         return
                     }
                     let raw = -translation
-                    dragOffset = -min(raw, 80 + (raw - 80) * 0.2)
+                    let maxDrag: CGFloat = 120
+                    dragOffset = -maxDrag * (1 - exp(-raw / maxDrag))
 
-                    if raw > 80 && !hasTriggeredHaptic {
+                    if raw > 100 && !hasTriggeredHaptic {
                         HapticService.notification(.success)
                         hasTriggeredHaptic = true
                     }
                 }
                 .onEnded { value in
                     let translation = -value.translation.height
-                    if translation > 80 {
+                    if translation > 100 {
                         onEnterFeed()
                     }
-                    withAnimation(BPAnimation.spring) {
+                    withAnimation(.spring(response: 0.5, dampingFraction: 0.6)) {
                         dragOffset = 0
                     }
                     hasTriggeredHaptic = false
@@ -92,20 +99,45 @@ struct HomeDashboardView: View {
                     appeared = true
                 }
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 withAnimation(.easeOut(duration: 0.6)) {
                     animateStreak = true
                 }
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: .showPlansFromWidget)) { _ in
+            showReadingPlans = true
+        }
+    }
+
+    // MARK: - Full Page Background
+
+    private var fullPageBackground: some View {
+        let tint: Color = colorScheme == .dark
+            ? palette.accent
+            : Color(red: 0.65, green: 0.48, blue: 0.25)
+        let strength: CGFloat = colorScheme == .dark ? 0.20 : 0.28
+        let bg = palette.background
+
+        return LinearGradient(
+            stops: [
+                .init(color: bg, location: 0.0),
+                .init(color: bg, location: 0.50),
+                .init(color: bg.blend(with: tint, amount: strength * 0.3), location: 0.65),
+                .init(color: bg.blend(with: tint, amount: strength * 0.6), location: 0.80),
+                .init(color: bg.blend(with: tint, amount: strength * 0.85), location: 0.90),
+                .init(color: bg.blend(with: tint, amount: strength), location: 1.0)
+            ],
+            startPoint: .top,
+            endPoint: .bottom
+        )
+        .ignoresSafeArea()
     }
 
     // MARK: - Swipe Up Prompt
 
     private var swipeUpPrompt: some View {
         VStack(spacing: 4) {
-            Spacer()
-
             Image(systemName: "chevron.up")
                 .font(.system(size: 12, weight: .semibold))
                 .foregroundStyle(palette.accent.opacity(0.5))
@@ -115,21 +147,11 @@ struct HomeDashboardView: View {
                 .font(.system(size: 12, weight: .medium, design: .rounded))
                 .foregroundStyle(palette.textMuted)
         }
-        .padding(.bottom, 10)
+        .padding(.bottom, 56)
         .frame(maxWidth: .infinity)
-        .background(
-            LinearGradient(
-                colors: [palette.background, palette.background.opacity(0)],
-                startPoint: .bottom,
-                endPoint: .top
-            )
-            .frame(height: 50)
-            .frame(maxHeight: .infinity, alignment: .bottom)
-            .allowsHitTesting(false)
-        )
         .allowsHitTesting(false)
         .opacity(appeared ? 1 : 0)
-        .animation(BPAnimation.spring.delay(0.4), value: appeared)
+        .animation(BPAnimation.spring.delay(0.5), value: appeared)
         .onAppear {
             withAnimation(.easeInOut(duration: 1.8).repeatForever(autoreverses: true)) {
                 floatingOffset = -3
@@ -142,31 +164,22 @@ struct HomeDashboardView: View {
     private var headerSection: some View {
         HStack(alignment: .top) {
             VStack(alignment: .leading, spacing: 4) {
-                // Bible+ brand
                 HStack(spacing: 0) {
                     Text("Bible")
-                        .font(.system(size: 22, weight: .light, design: .serif))
+                        .font(.system(size: 28, weight: .light, design: .serif))
                         .foregroundStyle(palette.textPrimary)
 
                     Text("+")
-                        .font(.system(size: 24, weight: .medium, design: .serif))
-                        .foregroundStyle(
-                            LinearGradient(
-                                colors: [
-                                    Color(red: 1.0, green: 0.88, blue: 0.5),
-                                    Color(red: 0.79, green: 0.66, blue: 0.43),
-                                ],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                        )
-                        .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(glowPulse ? 0.6 : 0.2), radius: glowPulse ? 10 : 4)
-                        .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(glowPulse ? 0.3 : 0.1), radius: glowPulse ? 20 : 8)
+                        .font(.system(size: 30, weight: .medium, design: .serif))
+                        .foregroundStyle(Color(red: 1.0, green: 0.84, blue: 0.3))
+                        .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 4)
+                        .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 10)
+                        .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(glowPulse ? 0.9 : 0.5), radius: 20)
+                        .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(glowPulse ? 0.5 : 0.2), radius: 40)
                 }
 
-                // Greeting + date on one line
                 HStack(spacing: 0) {
-                    Text("\(vm.greetingLabel), \(vm.userName)")
+                    Text("\(vm.greetingLabel) \(vm.userName)")
                         .font(.system(size: 13, weight: .regular, design: .rounded))
                         .foregroundStyle(palette.textSecondary)
 
@@ -183,16 +196,19 @@ struct HomeDashboardView: View {
 
             Spacer()
 
-            Button {
-                onShowSettings()
-                HapticService.lightImpact()
-            } label: {
-                Image(systemName: "gearshape")
-                    .font(.system(size: 13, weight: .medium))
-                    .foregroundStyle(palette.textMuted)
-                    .frame(width: 32, height: 32)
-                    .background(Circle().fill(palette.surface))
-            }
+            Image(systemName: "gearshape")
+                .font(.system(size: 13, weight: .medium))
+                .foregroundStyle(palette.textMuted)
+                .frame(width: 32, height: 32)
+                .background(
+                    Circle()
+                        .fill(palette.surfaceElevated)
+                        .shadow(color: .black.opacity(0.06), radius: 4, y: 2)
+                )
+                .onTapGesture {
+                    onShowSettings()
+                    HapticService.lightImpact()
+                }
         }
         .opacity(appeared ? 1 : 0)
         .offset(y: appeared ? 0 : 20)
@@ -215,122 +231,180 @@ struct HomeDashboardView: View {
                 endPoint: .bottomTrailing
             )
 
-            Button {
-                onDailyVerseTap()
-                HapticService.lightImpact()
-            } label: {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 14)
-                        .fill(gradient)
-
-                    RoundedRectangle(cornerRadius: 14)
-                        .fill(Color.black.opacity(0.35))
-
-                    VStack(spacing: 6) {
-                        // Verse text
-                        Text("\u{201C}\(verse.text)\u{201D}")
-                            .font(.system(size: 14, weight: .regular, design: .serif))
-                            .foregroundStyle(.white)
-                            .multilineTextAlignment(.center)
-                            .lineSpacing(2)
-                            .lineLimit(3)
-
-                        // Ornamental divider
-                        OrnamentalDivider(color: .white, opacity: 0.2)
-
-                        // Reference with book icon
-                        HStack(spacing: 4) {
-                            Image(systemName: "book.closed.fill")
-                                .font(.system(size: 9))
-                                .foregroundStyle(Color(hex: "C9A96E"))
-
-                            Text(verse.reference)
-                                .font(.system(size: 11, weight: .regular, design: .serif))
-                                .italic()
-                                .foregroundStyle(.white.opacity(0.7))
+            ZStack {
+                gradient
+                    .overlay {
+                        if let videoName = vm.currentBackground.videoFileName {
+                            LoopingVideoPlayer(videoName: videoName, isPlaying: true)
+                        } else if let imageName = vm.currentBackground.imageName,
+                                  let uiImage = SanctuaryBackground.loadImage(named: imageName) {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
                         }
                     }
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 12)
+                    .clipped()
+
+                Color.black.opacity(0.35)
+
+                VStack(spacing: 10) {
+                    Spacer(minLength: 0)
+
+                    Text("\u{201C}\(verse.text)\u{201D}")
+                        .font(.system(size: 17, weight: .regular, design: .serif))
+                        .foregroundStyle(.white)
+                        .multilineTextAlignment(.center)
+                        .lineSpacing(4)
+                        .lineLimit(5)
+
+                    OrnamentalDivider(color: .white, opacity: 0.2)
+
+                    HStack(spacing: 4) {
+                        Image(systemName: "book.closed.fill")
+                            .font(.system(size: 10))
+                            .foregroundStyle(Color(hex: "C9A96E"))
+
+                        Text(verse.reference)
+                            .font(.system(size: 12, weight: .regular, design: .serif))
+                            .italic()
+                            .foregroundStyle(.white.opacity(0.7))
+                    }
+
+                    Spacer(minLength: 0)
                 }
-                .frame(maxWidth: .infinity)
-                .clipShape(RoundedRectangle(cornerRadius: 14))
-                .shadow(color: .black.opacity(0.12), radius: 10, y: 4)
+                .padding(.horizontal, 20)
+                .padding(.vertical, 24)
             }
-            .buttonStyle(PressableButtonStyle())
+            .frame(maxWidth: .infinity)
+            .frame(height: 220)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .shadow(color: .black.opacity(0.15), radius: 12, y: 6)
+            .onTapGesture {
+                onDailyVerseTap()
+                HapticService.lightImpact()
+            }
             .opacity(appeared ? 1 : 0)
             .offset(y: appeared ? 0 : 20)
             .animation(BPAnimation.spring.delay(0.08), value: appeared)
         }
     }
 
-    // MARK: - Streak Progress Strip
+    // MARK: - Streak Card
 
-    private var streakProgressStrip: some View {
+    private var streakCard: some View {
         let activeDays = vm.activeDaysThisWeek
         let today = Calendar.current.component(.weekday, from: Date())
-        let dayOrder: [Int] = [2, 3, 4, 5, 6, 7, 1]
 
-        return Button {
-            onShowProgress()
-            HapticService.selection()
-        } label: {
-            HStack(spacing: 0) {
-                // Left: Flame + streak + chevron
-                HStack(spacing: 5) {
+        return VStack(spacing: 14) {
+            HStack {
+                HStack(spacing: 6) {
                     Image(systemName: "flame.fill")
-                        .font(.system(size: 13))
-                        .foregroundStyle(palette.accent)
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundStyle(.white)
+                        .frame(width: 26, height: 26)
+                        .background(
+                            Circle()
+                                .fill(
+                                    LinearGradient(
+                                        colors: [palette.accent, palette.accent.opacity(0.7)],
+                                        startPoint: .top,
+                                        endPoint: .bottom
+                                    )
+                                )
+                        )
 
-                    Text(vm.streakCount >= 2 ? "\(vm.streakCount)-day streak" : "This Week")
-                        .font(.system(size: 13, weight: .semibold, design: .rounded))
-                        .foregroundStyle(palette.textPrimary)
+                    VStack(alignment: .leading, spacing: 1) {
+                        Text(vm.streakCount >= 2 ? "\(vm.streakCount)-day streak" : "This Week")
+                            .font(.system(size: 15, weight: .bold, design: .rounded))
+                            .foregroundStyle(palette.textPrimary)
 
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 9, weight: .semibold))
-                        .foregroundStyle(palette.textMuted)
+                        Text("Your activity")
+                            .font(.system(size: 11, weight: .regular, design: .rounded))
+                            .foregroundStyle(palette.textMuted)
+                    }
                 }
 
                 Spacer()
 
-                // Right: 7 compact dots, no day labels
-                HStack(spacing: 5) {
-                    ForEach(dayOrder, id: \.self) { weekday in
-                        let isActive = activeDays.contains(weekday)
-                        let isToday = weekday == today
+                HStack(spacing: 3) {
+                    Text("Details")
+                        .font(.system(size: 12, weight: .medium, design: .rounded))
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 9, weight: .semibold))
+                }
+                .foregroundStyle(palette.accent)
+            }
+
+            Rectangle()
+                .fill(palette.border.opacity(0.5))
+                .frame(height: 0.5)
+
+            HStack(spacing: 0) {
+                ForEach(Array(zip(dayLabels, dayWeekdays)), id: \.1) { label, weekday in
+                    let isActive = activeDays.contains(weekday)
+                    let isToday = weekday == today
+
+                    VStack(spacing: 8) {
+                        Text(label)
+                            .font(.system(size: 11, weight: isToday ? .bold : .medium, design: .rounded))
+                            .foregroundStyle(isToday ? palette.accent : palette.textMuted)
 
                         ZStack {
                             if isActive {
                                 Circle()
-                                    .fill(palette.accent)
-                                    .frame(width: 16, height: 16)
+                                    .fill(
+                                        LinearGradient(
+                                            colors: [palette.accent, palette.accent.opacity(0.8)],
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        )
+                                    )
+                                    .frame(width: 32, height: 32)
+                                    .shadow(color: palette.accent.opacity(0.3), radius: 4, y: 2)
                                     .scaleEffect(animateStreak ? 1 : 0)
 
                                 Image(systemName: "checkmark")
-                                    .font(.system(size: 7, weight: .bold))
+                                    .font(.system(size: 12, weight: .bold))
                                     .foregroundStyle(.white)
                                     .scaleEffect(animateStreak ? 1 : 0)
                             } else if isToday {
                                 Circle()
-                                    .stroke(palette.accent.opacity(0.5), lineWidth: 1.5)
-                                    .frame(width: 16, height: 16)
+                                    .stroke(palette.accent, lineWidth: 2)
+                                    .frame(width: 32, height: 32)
+
+                                Circle()
+                                    .fill(palette.accent.opacity(0.08))
+                                    .frame(width: 32, height: 32)
                             } else {
                                 Circle()
-                                    .fill(palette.surface)
-                                    .frame(width: 16, height: 16)
+                                    .fill(palette.background)
+                                    .frame(width: 32, height: 32)
+                                    .overlay(
+                                        Circle()
+                                            .stroke(palette.border.opacity(0.4), lineWidth: 1)
+                                    )
                             }
                         }
                     }
+                    .frame(maxWidth: .infinity)
                 }
             }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 10)
-            .background(
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(palette.surface)
-            )
         }
-        .buttonStyle(.plain)
+        .padding(.horizontal, 18)
+        .padding(.vertical, 16)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(palette.surfaceElevated)
+                .shadow(color: .black.opacity(0.06), radius: 8, y: 4)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(palette.border.opacity(0.3), lineWidth: 0.5)
+        )
+        .onTapGesture {
+            onShowProgress()
+            HapticService.selection()
+        }
         .opacity(appeared ? 1 : 0)
         .offset(y: appeared ? 0 : 20)
         .animation(BPAnimation.spring.delay(0.16), value: appeared)
@@ -339,7 +413,7 @@ struct HomeDashboardView: View {
     // MARK: - Quick Actions Row
 
     private var quickActionsRow: some View {
-        HStack(spacing: 8) {
+        HStack(spacing: 10) {
             quickActionCard(
                 icon: "book.fill",
                 title: vm.continueReading != nil ? "Continue" : "Read",
@@ -372,42 +446,131 @@ struct HomeDashboardView: View {
         .animation(BPAnimation.spring.delay(0.24), value: appeared)
     }
 
+    // MARK: - Daily Reflection Card
+
+    private var reflectionCard: some View {
+        HStack(spacing: 14) {
+            Image(systemName: "pencil.line")
+                .font(.system(size: 15, weight: .medium))
+                .foregroundStyle(.white)
+                .frame(width: 36, height: 36)
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(
+                            LinearGradient(
+                                colors: [palette.accent, palette.accent.opacity(0.7)],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+                )
+
+            VStack(alignment: .leading, spacing: 3) {
+                Text("Daily Reflection")
+                    .font(.system(size: 14, weight: .bold, design: .rounded))
+                    .foregroundStyle(palette.textPrimary)
+
+                Text(dailyPrompt)
+                    .font(.system(size: 13, weight: .regular, design: .serif))
+                    .foregroundStyle(palette.textSecondary)
+                    .italic()
+                    .lineLimit(2)
+                    .lineSpacing(2)
+            }
+
+            Spacer()
+
+            Image(systemName: "chevron.right")
+                .font(.system(size: 10, weight: .semibold))
+                .foregroundStyle(palette.textMuted)
+        }
+        .padding(.horizontal, 18)
+        .padding(.vertical, 18)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(palette.surfaceElevated)
+                .shadow(color: .black.opacity(0.06), radius: 8, y: 4)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(palette.border.opacity(0.3), lineWidth: 0.5)
+        )
+        .onTapGesture {
+            NotificationCenter.default.post(
+                name: .openJournalWithReflection,
+                object: nil,
+                userInfo: ["prompt": dailyPrompt]
+            )
+            HapticService.lightImpact()
+        }
+        .opacity(appeared ? 1 : 0)
+        .offset(y: appeared ? 0 : 20)
+        .animation(BPAnimation.spring.delay(0.32), value: appeared)
+    }
+
+    private var dailyPrompt: String {
+        DailyReflectionProvider.prompt(for: vm.profile)
+    }
+
+    // MARK: - Quick Action Card
+
     private func quickActionCard(
         icon: String,
         title: String,
         subtitle: String,
         action: @escaping () -> Void
     ) -> some View {
-        Button(action: action) {
-            VStack(spacing: 5) {
-                Image(systemName: icon)
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundStyle(palette.accent)
-                    .frame(width: 26, height: 26)
-                    .background(Circle().fill(palette.accent.opacity(0.12)))
+        VStack(spacing: 8) {
+            Image(systemName: icon)
+                .font(.system(size: 14, weight: .medium))
+                .foregroundStyle(palette.accent)
+                .frame(width: 32, height: 32)
+                .background(
+                    Circle()
+                        .fill(palette.accent.opacity(0.1))
+                )
 
-                Text(title)
-                    .font(.system(size: 12, weight: .semibold, design: .rounded))
-                    .foregroundStyle(palette.textPrimary)
-                    .lineLimit(1)
+            Text(title)
+                .font(.system(size: 13, weight: .semibold, design: .rounded))
+                .foregroundStyle(palette.textPrimary)
+                .lineLimit(1)
 
-                Text(subtitle)
-                    .font(.system(size: 10, weight: .regular, design: .rounded))
-                    .foregroundStyle(palette.textMuted)
-                    .lineLimit(1)
-            }
-            .padding(.horizontal, 6)
-            .padding(.vertical, 10)
-            .frame(maxWidth: .infinity)
-            .background(
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(palette.accent.opacity(0.06))
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(palette.accent.opacity(0.08), lineWidth: 0.5)
-            )
+            Text(subtitle)
+                .font(.system(size: 11, weight: .regular, design: .rounded))
+                .foregroundStyle(palette.textMuted)
+                .lineLimit(1)
         }
-        .buttonStyle(PressableButtonStyle())
+        .padding(.horizontal, 8)
+        .padding(.vertical, 16)
+        .frame(maxWidth: .infinity)
+        .background(
+            RoundedRectangle(cornerRadius: 14)
+                .fill(palette.surfaceElevated)
+                .shadow(color: .black.opacity(0.05), radius: 6, y: 3)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 14)
+                .stroke(palette.border.opacity(0.25), lineWidth: 0.5)
+        )
+        .onTapGesture(perform: action)
+    }
+}
+
+// MARK: - Color Blending
+
+private extension Color {
+    func blend(with other: Color, amount: CGFloat) -> Color {
+        let a = UIColor(self)
+        let b = UIColor(other)
+        var r1: CGFloat = 0, g1: CGFloat = 0, b1: CGFloat = 0, a1: CGFloat = 0
+        var r2: CGFloat = 0, g2: CGFloat = 0, b2: CGFloat = 0, a2: CGFloat = 0
+        a.getRed(&r1, green: &g1, blue: &b1, alpha: &a1)
+        b.getRed(&r2, green: &g2, blue: &b2, alpha: &a2)
+        let t = min(max(amount, 0), 1)
+        return Color(
+            red: r1 + (r2 - r1) * t,
+            green: g1 + (g2 - g1) * t,
+            blue: b1 + (b2 - b1) * t
+        )
     }
 }

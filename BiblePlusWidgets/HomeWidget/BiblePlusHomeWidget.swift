@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 import WidgetKit
+import AppIntents
 
 // MARK: - Entry
 
@@ -26,35 +27,35 @@ struct HomeWidgetEntry: TimelineEntry {
 
 // MARK: - Provider
 
-struct HomeWidgetProvider: TimelineProvider {
+struct HomeWidgetProvider: AppIntentTimelineProvider {
     func placeholder(in context: Context) -> HomeWidgetEntry {
         .placeholder
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (HomeWidgetEntry) -> Void) {
-        if context.isPreview {
-            completion(.placeholder)
-            return
-        }
-        completion(currentEntry() ?? .placeholder)
+    func snapshot(for configuration: ContentTypeIntent, in context: Context) async -> HomeWidgetEntry {
+        if context.isPreview { return .placeholder }
+        return currentEntry(allowedTypes: configuration.contentType.allowedContentTypes) ?? .placeholder
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<HomeWidgetEntry>) -> Void) {
+    func timeline(for configuration: ContentTypeIntent, in context: Context) async -> Timeline<HomeWidgetEntry> {
+        let allowedTypes = configuration.contentType.allowedContentTypes
+
         guard let container = try? SharedModelContainer.create() else {
-            let timeline = Timeline(entries: [HomeWidgetEntry.placeholder], policy: .after(WidgetTimeWindow.nextBoundary()))
-            completion(timeline)
-            return
+            return Timeline(entries: [.placeholder], policy: .after(WidgetTimeWindow.nextTwoHourBoundary()))
         }
 
         let modelContext = ModelContext(container)
         let profileDescriptor = FetchDescriptor<UserProfile>()
         guard let profile = (try? modelContext.fetch(profileDescriptor))?.first else {
-            let timeline = Timeline(entries: [HomeWidgetEntry.placeholder], policy: .after(WidgetTimeWindow.nextBoundary()))
-            completion(timeline)
-            return
+            return Timeline(entries: [.placeholder], policy: .after(WidgetTimeWindow.nextTwoHourBoundary()))
         }
 
-        let widgetEntries = WidgetContentProvider.timelineEntries(profile: profile, modelContext: modelContext)
+        // 2-hour rotation with mixed content (verses, prayers, quotes, devotionals)
+        let widgetEntries = WidgetContentProvider.homeScreenTimelineEntries(
+            profile: profile,
+            modelContext: modelContext,
+            allowedTypes: allowedTypes
+        )
 
         let entries: [HomeWidgetEntry] = widgetEntries.map { entry in
             HomeWidgetEntry(
@@ -68,12 +69,12 @@ struct HomeWidgetProvider: TimelineProvider {
             )
         }
 
-        let nextReload = WidgetTimeWindow.nextBoundary()
-        let timeline = Timeline(entries: entries.isEmpty ? [.placeholder] : entries, policy: .after(nextReload))
-        completion(timeline)
+        // Reload after the last entry expires (or 24 hours from now)
+        let nextReload = Calendar.current.date(byAdding: .hour, value: 24, to: Date()) ?? WidgetTimeWindow.nextTwoHourBoundary()
+        return Timeline(entries: entries.isEmpty ? [.placeholder] : entries, policy: .after(nextReload))
     }
 
-    private func currentEntry() -> HomeWidgetEntry? {
+    private func currentEntry(allowedTypes: Set<ContentType>? = nil) -> HomeWidgetEntry? {
         guard let container = try? SharedModelContainer.create() else { return nil }
         let modelContext = ModelContext(container)
         let profileDescriptor = FetchDescriptor<UserProfile>()
@@ -83,7 +84,8 @@ struct HomeWidgetProvider: TimelineProvider {
         guard let content = WidgetContentProvider.contentForWidget(
             window: window,
             profile: profile,
-            modelContext: modelContext
+            modelContext: modelContext,
+            allowedTypes: allowedTypes
         ) else { return nil }
 
         let background = SanctuaryBackground.background(for: profile.selectedBackgroundID)
@@ -108,7 +110,7 @@ struct BiblePlusHomeWidget: Widget {
     let kind = "BiblePlusHomeWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: HomeWidgetProvider()) { entry in
+        AppIntentConfiguration(kind: kind, intent: ContentTypeIntent.self, provider: HomeWidgetProvider()) { entry in
             HomeWidgetEntryView(entry: entry)
                 .containerBackground(for: .widget) {
                     ZStack {
@@ -137,7 +139,7 @@ struct BiblePlusHomeWidget: Widget {
                 }
         }
         .configurationDisplayName("Daily Inspiration")
-        .description("Personalized prayers and verses that change throughout the day.")
+        .description("Prayers, verses, and devotionals refreshed every 2 hours.")
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
     }
 }

@@ -153,7 +153,8 @@ enum WidgetContentProvider {
     static func contentForWidget(
         window: WidgetTimeWindow,
         profile: UserProfile,
-        modelContext: ModelContext
+        modelContext: ModelContext,
+        allowedTypes: Set<ContentType>? = nil
     ) -> PrayerContent? {
         let descriptor = FetchDescriptor<PrayerContent>()
         guard let allContent = try? modelContext.fetch(descriptor) else { return nil }
@@ -161,6 +162,7 @@ enum WidgetContentProvider {
         let eligible = allContent.filter { content in
             (!content.isProOnly || profile.isPro)
                 && content.faithLevelMin.numericValue <= profile.faithLevel.numericValue
+                && (allowedTypes == nil || allowedTypes!.contains(content.type))
         }
 
         guard !eligible.isEmpty else { return nil }
@@ -226,7 +228,8 @@ enum WidgetContentProvider {
     /// Generate timeline entries every 2 hours with diverse content types
     static func homeScreenTimelineEntries(
         profile: UserProfile,
-        modelContext: ModelContext
+        modelContext: ModelContext,
+        allowedTypes: Set<ContentType>? = nil
     ) -> [WidgetEntry] {
         let cal = Calendar.current
         let now = Date()
@@ -251,7 +254,8 @@ enum WidgetContentProvider {
                 modelContext: modelContext,
                 excluding: usedIDs,
                 avoidType: lastContentType,
-                avoidCategory: lastCategory
+                avoidCategory: lastCategory,
+                allowedTypes: allowedTypes
             ) {
                 usedIDs.insert(content.id)
                 lastContentType = content.type
@@ -278,12 +282,13 @@ enum WidgetContentProvider {
     /// Returns a single daily inspiration entry (verse, quote, prayer, or reflection) that stays the entire day
     static func dailyInspirationEntry(
         profile: UserProfile,
-        modelContext: ModelContext
+        modelContext: ModelContext,
+        allowedTypes: Set<ContentType>? = nil
     ) -> WidgetEntry? {
         let descriptor = FetchDescriptor<PrayerContent>()
         guard let allContent = try? modelContext.fetch(descriptor) else { return nil }
 
-        let lockScreenTypes: Set<ContentType> = [.verse, .quote, .reflection, .prayer]
+        let lockScreenTypes: Set<ContentType> = allowedTypes ?? [.verse, .quote, .reflection, .prayer]
 
         // Filter to lock-screen-friendly types that fit the screen
         let eligible = allContent.filter { content in
@@ -375,7 +380,8 @@ enum WidgetContentProvider {
         window: WidgetTimeWindow,
         profile: UserProfile,
         modelContext: ModelContext,
-        excluding usedIDs: Set<UUID>
+        excluding usedIDs: Set<UUID>,
+        allowedTypes: Set<ContentType>? = nil
     ) -> PrayerContent? {
         let descriptor = FetchDescriptor<PrayerContent>()
         guard let allContent = try? modelContext.fetch(descriptor) else { return nil }
@@ -384,6 +390,7 @@ enum WidgetContentProvider {
             !usedIDs.contains(content.id)
                 && (!content.isProOnly || profile.isPro)
                 && content.faithLevelMin.numericValue <= profile.faithLevel.numericValue
+                && (allowedTypes == nil || allowedTypes!.contains(content.type))
         }
 
         guard !eligible.isEmpty else { return nil }
@@ -402,7 +409,8 @@ enum WidgetContentProvider {
         modelContext: ModelContext,
         excluding usedIDs: Set<UUID>,
         avoidType: ContentType?,
-        avoidCategory: String? = nil
+        avoidCategory: String? = nil,
+        allowedTypes: Set<ContentType>? = nil
     ) -> PrayerContent? {
         let descriptor = FetchDescriptor<PrayerContent>()
         guard let allContent = try? modelContext.fetch(descriptor) else { return nil }
@@ -411,14 +419,15 @@ enum WidgetContentProvider {
             !usedIDs.contains(content.id)
                 && (!content.isProOnly || profile.isPro)
                 && content.faithLevelMin.numericValue <= profile.faithLevel.numericValue
+                && (allowedTypes == nil || allowedTypes!.contains(content.type))
         }
 
         guard !eligible.isEmpty else { return nil }
 
         var scored = eligible.map { content in
             var s = score(content: content, profile: profile, window: window)
-            // Penalize same type as previous entry to encourage diversity
-            if let avoid = avoidType, content.type == avoid {
+            // Only apply type diversity penalty when showing mixed content
+            if allowedTypes == nil, let avoid = avoidType, content.type == avoid {
                 s *= 0.3
             }
             // Penalize same category as previous entry

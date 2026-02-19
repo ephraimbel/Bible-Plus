@@ -341,13 +341,33 @@ struct RootView: View {
     }
 
     private func handleDeepLink(_ url: URL) {
-        // bibleplus://content/{uuid}
-        guard url.scheme == "bibleplus",
-              url.host == "content",
-              let idString = url.pathComponents.dropFirst().first,
-              let uuid = UUID(uuidString: idString)
-        else { return }
-        deepLinkedContentID = uuid
+        guard url.scheme == "bibleplus" else { return }
+
+        switch url.host {
+        case "content":
+            // bibleplus://content/{uuid}
+            if let idString = url.pathComponents.dropFirst().first,
+               let uuid = UUID(uuidString: idString) {
+                deepLinkedContentID = uuid
+            }
+        case "progress":
+            // bibleplus://progress
+            NotificationCenter.default.post(name: .progressDeepLink, object: nil)
+        case "plans":
+            // bibleplus://plans/{planID}
+            if let planID = url.pathComponents.dropFirst().first {
+                NotificationCenter.default.post(
+                    name: .plansDeepLink,
+                    object: nil,
+                    userInfo: ["planID": planID]
+                )
+            } else {
+                // bibleplus://plans (no specific plan)
+                NotificationCenter.default.post(name: .plansDeepLink, object: nil)
+            }
+        default:
+            break
+        }
     }
 }
 

@@ -166,5 +166,25 @@ struct ContentView: View {
                 try? modelContext.save()
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: .progressDeepLink)) { _ in
+            withAnimation(.easeInOut(duration: 0.25)) {
+                selectedTab = .feed
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                NotificationCenter.default.post(name: .showProgressFromWidget, object: nil)
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .plansDeepLink)) { notification in
+            withAnimation(.easeInOut(duration: 0.25)) {
+                selectedTab = .feed
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                NotificationCenter.default.post(
+                    name: .showPlansFromWidget,
+                    object: nil,
+                    userInfo: notification.userInfo
+                )
+            }
+        }
     }
 }

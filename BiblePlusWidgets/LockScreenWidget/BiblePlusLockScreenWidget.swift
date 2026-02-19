@@ -1,12 +1,13 @@
 import SwiftUI
 import SwiftData
 import WidgetKit
+import AppIntents
 
 // MARK: - Entry
 
 struct LockScreenWidgetEntry: TimelineEntry {
     let date: Date
-    let shortText: String  // ≤40 chars for inline
+    let shortText: String  // <=40 chars for inline
     let displayText: String
     let verseReference: String?
     let contentID: UUID?
@@ -22,38 +23,37 @@ struct LockScreenWidgetEntry: TimelineEntry {
 
 // MARK: - Provider
 
-struct LockScreenWidgetProvider: TimelineProvider {
+struct LockScreenWidgetProvider: AppIntentTimelineProvider {
     func placeholder(in context: Context) -> LockScreenWidgetEntry {
         .placeholder
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (LockScreenWidgetEntry) -> Void) {
-        if context.isPreview {
-            completion(.placeholder)
-            return
-        }
-        completion(currentEntry() ?? .placeholder)
+    func snapshot(for configuration: ContentTypeIntent, in context: Context) async -> LockScreenWidgetEntry {
+        if context.isPreview { return .placeholder }
+        return currentEntry(allowedTypes: configuration.contentType.allowedContentTypes) ?? .placeholder
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<LockScreenWidgetEntry>) -> Void) {
+    func timeline(for configuration: ContentTypeIntent, in context: Context) async -> Timeline<LockScreenWidgetEntry> {
+        let allowedTypes = configuration.contentType.allowedContentTypes
+
         guard let container = try? SharedModelContainer.create() else {
-            let timeline = Timeline(entries: [LockScreenWidgetEntry.placeholder], policy: .after(WidgetTimeWindow.startOfNextDay()))
-            completion(timeline)
-            return
+            return Timeline(entries: [.placeholder], policy: .after(WidgetTimeWindow.startOfNextDay()))
         }
 
         let modelContext = ModelContext(container)
         let profileDescriptor = FetchDescriptor<UserProfile>()
         guard let profile = (try? modelContext.fetch(profileDescriptor))?.first else {
-            let timeline = Timeline(entries: [LockScreenWidgetEntry.placeholder], policy: .after(WidgetTimeWindow.startOfNextDay()))
-            completion(timeline)
-            return
+            return Timeline(entries: [.placeholder], policy: .after(WidgetTimeWindow.startOfNextDay()))
         }
 
         // Single verse of the day — stays all day, refreshes at midnight
         var entries: [LockScreenWidgetEntry] = []
 
-        if let votd = WidgetContentProvider.dailyInspirationEntry(profile: profile, modelContext: modelContext) {
+        if let votd = WidgetContentProvider.dailyInspirationEntry(
+            profile: profile,
+            modelContext: modelContext,
+            allowedTypes: allowedTypes
+        ) {
             entries.append(LockScreenWidgetEntry(
                 date: Date(),
                 shortText: votd.shortText,
@@ -64,11 +64,10 @@ struct LockScreenWidgetProvider: TimelineProvider {
         }
 
         let nextReload = WidgetTimeWindow.startOfNextDay()
-        let timeline = Timeline(entries: entries.isEmpty ? [.placeholder] : entries, policy: .after(nextReload))
-        completion(timeline)
+        return Timeline(entries: entries.isEmpty ? [.placeholder] : entries, policy: .after(nextReload))
     }
 
-    private func currentEntry() -> LockScreenWidgetEntry? {
+    private func currentEntry(allowedTypes: Set<ContentType>? = nil) -> LockScreenWidgetEntry? {
         guard let container = try? SharedModelContainer.create() else { return nil }
         let modelContext = ModelContext(container)
         let profileDescriptor = FetchDescriptor<UserProfile>()
@@ -78,7 +77,8 @@ struct LockScreenWidgetProvider: TimelineProvider {
         guard let content = WidgetContentProvider.contentForWidget(
             window: window,
             profile: profile,
-            modelContext: modelContext
+            modelContext: modelContext,
+            allowedTypes: allowedTypes
         ) else { return nil }
 
         let text = WidgetContentProvider.personalizedText(template: content.templateText, firstName: profile.firstName)
@@ -99,7 +99,7 @@ struct BiblePlusLockScreenWidget: Widget {
     let kind = "BiblePlusLockScreenWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: LockScreenWidgetProvider()) { entry in
+        AppIntentConfiguration(kind: kind, intent: ContentTypeIntent.self, provider: LockScreenWidgetProvider()) { entry in
             LockScreenWidgetEntryView(entry: entry)
                 .containerBackground(.clear, for: .widget)
         }

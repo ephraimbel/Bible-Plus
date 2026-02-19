@@ -970,4 +970,8 @@ extension Notification.Name {
     static let openJournalWithReflection = Notification.Name("OpenJournalWithReflection")
     static let readingPlanDeepLink = Notification.Name("ReadingPlanDeepLink")
     static let feedContentDeepLink = Notification.Name("FeedContentDeepLink")
+    static let progressDeepLink = Notification.Name("ProgressDeepLink")
+    static let plansDeepLink = Notification.Name("PlansDeepLink")
+    static let showProgressFromWidget = Notification.Name("ShowProgressFromWidget")
+    static let showPlansFromWidget = Notification.Name("ShowPlansFromWidget")
 }

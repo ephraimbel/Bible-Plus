@@ -6,6 +6,8 @@ struct BiblePlusWidgetBundle: WidgetBundle {
     var body: some Widget {
         BiblePlusHomeWidget()
         BiblePlusLockScreenWidget()
+        StreakWidget()
+        PlanProgressWidget()
         BibleSessionLiveActivity()
         SanctuarySessionLiveActivity()
     }

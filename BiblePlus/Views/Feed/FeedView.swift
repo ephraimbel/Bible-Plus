@@ -130,6 +130,10 @@ private struct FeedContentView: View {
                 vm.navigateToContent(id: contentID)
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: .showProgressFromWidget)) { _ in
+            vm.showFeed = false
+            showProgress = true
+        }
         .onChange(of: vm.showFeed) { _, showFeed in
             NotificationCenter.default.post(
                 name: .dashboardShowFeedChanged,
