@@ -23371,12 +23371,12 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "hardSeason"
     ],
     "applicableBurdens": [
       "anxiety",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": true,
@@ -23398,7 +23398,7 @@
     ],
     "applicableBurdens": [
       "grief",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -23437,7 +23437,7 @@
     ],
     "applicableSeasons": [
       "hardSeason",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "grief",
@@ -23462,7 +23462,7 @@
       "parent"
     ],
     "applicableBurdens": [
-      "finances",
+      "financial",
       "purpose"
     ],
     "faithLevelMin": "justCurious",
@@ -23481,7 +23481,7 @@
     ],
     "applicableSeasons": [
       "hardSeason",
-      "singleLife"
+      "single"
     ],
     "applicableBurdens": [
       "purpose",
@@ -23506,7 +23506,7 @@
     ],
     "applicableBurdens": [
       "health",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -23523,7 +23523,7 @@
       "midday"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "retired"
     ],
     "applicableBurdens": [
@@ -23550,7 +23550,7 @@
     ],
     "applicableBurdens": [
       "anxiety",
-      "relationships"
+      "relationship"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -23588,11 +23588,11 @@
       "midday"
     ],
     "applicableSeasons": [
-      "newlywed",
+      "married",
       "parent"
     ],
     "applicableBurdens": [
-      "relationships",
+      "relationship",
       "loneliness"
     ],
     "faithLevelMin": "justCurious",
@@ -23610,11 +23610,11 @@
     ],
     "applicableSeasons": [
       "workingProfessional",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "purpose",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -23632,11 +23632,11 @@
     ],
     "applicableSeasons": [
       "student",
-      "singleLife"
+      "single"
     ],
     "applicableBurdens": [
       "purpose",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -23658,7 +23658,7 @@
     ],
     "applicableBurdens": [
       "anxiety",
-      "finances"
+      "financial"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -23696,11 +23696,11 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "hardSeason"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "purpose"
     ],
     "faithLevelMin": "justCurious",
@@ -23739,11 +23739,11 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "hardSeason"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "grief"
     ],
     "faithLevelMin": "justCurious",
@@ -23765,7 +23765,7 @@
     ],
     "applicableBurdens": [
       "anxiety",
-      "relationships"
+      "relationship"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -23786,7 +23786,7 @@
       "workingProfessional"
     ],
     "applicableBurdens": [
-      "finances",
+      "financial",
       "loneliness"
     ],
     "faithLevelMin": "justCurious",
@@ -23804,11 +23804,11 @@
     ],
     "applicableSeasons": [
       "student",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "purpose",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -23848,7 +23848,7 @@
     ],
     "applicableSeasons": [
       "hardSeason",
-      "singleLife"
+      "single"
     ],
     "applicableBurdens": [
       "grief",
@@ -23873,7 +23873,7 @@
     ],
     "applicableBurdens": [
       "purpose",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "growing",
     "isProOnly": true,
@@ -23891,10 +23891,10 @@
     ],
     "applicableSeasons": [
       "hardSeason",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "grief"
     ],
     "faithLevelMin": "justCurious",
@@ -23955,11 +23955,11 @@
       "midday"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "student"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "anxiety"
     ],
     "faithLevelMin": "justCurious",
@@ -23980,7 +23980,7 @@
       "workingProfessional"
     ],
     "applicableBurdens": [
-      "finances",
+      "financial",
       "anxiety"
     ],
     "faithLevelMin": "justCurious",
@@ -23998,10 +23998,10 @@
     ],
     "applicableSeasons": [
       "student",
-      "singleLife"
+      "single"
     ],
     "applicableBurdens": [
-      "relationships",
+      "relationship",
       "purpose"
     ],
     "faithLevelMin": "justCurious",
@@ -24019,11 +24019,11 @@
       "evening"
     ],
     "applicableSeasons": [
-      "newlywed",
+      "married",
       "parent"
     ],
     "applicableBurdens": [
-      "relationships",
+      "relationship",
       "grief"
     ],
     "faithLevelMin": "justCurious",
@@ -24088,7 +24088,7 @@
     ],
     "applicableBurdens": [
       "purpose",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "growing",
     "isProOnly": true,
@@ -24151,7 +24151,7 @@
     ],
     "applicableBurdens": [
       "purpose",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "growing",
     "isProOnly": true,
@@ -24212,11 +24212,11 @@
     ],
     "applicableSeasons": [
       "hardSeason",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "anxiety",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -24232,11 +24232,10 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
-      "growing"
+      "startingOver"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "purpose"
     ],
     "faithLevelMin": "justCurious",
@@ -24276,11 +24275,11 @@
     ],
     "applicableSeasons": [
       "workingProfessional",
-      "singleLife"
+      "single"
     ],
     "applicableBurdens": [
       "purpose",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": true,
@@ -24319,11 +24318,11 @@
       "midday"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "hardSeason"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "grief"
     ],
     "faithLevelMin": "justCurious",
@@ -24344,7 +24343,7 @@
       "student"
     ],
     "applicableBurdens": [
-      "relationships",
+      "relationship",
       "loneliness"
     ],
     "faithLevelMin": "justCurious",
@@ -24366,7 +24365,7 @@
       "retired"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "anxiety"
     ],
     "faithLevelMin": "justCurious",
@@ -24384,11 +24383,11 @@
       "bedtime"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "student"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "loneliness"
     ],
     "faithLevelMin": "justCurious",
@@ -24407,10 +24406,10 @@
     ],
     "applicableSeasons": [
       "workingProfessional",
-      "newlywed"
+      "married"
     ],
     "applicableBurdens": [
-      "finances",
+      "financial",
       "purpose"
     ],
     "faithLevelMin": "growing",
@@ -24428,7 +24427,7 @@
       "bedtime"
     ],
     "applicableSeasons": [
-      "singleLife",
+      "single",
       "hardSeason"
     ],
     "applicableBurdens": [
@@ -24473,10 +24472,10 @@
     ],
     "applicableSeasons": [
       "workingProfessional",
-      "newlywed"
+      "married"
     ],
     "applicableBurdens": [
-      "relationships",
+      "relationship",
       "anxiety"
     ],
     "faithLevelMin": "justCurious",
@@ -24494,10 +24493,10 @@
     ],
     "applicableSeasons": [
       "student",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "anxiety"
     ],
     "faithLevelMin": "justCurious",
@@ -24520,7 +24519,7 @@
     ],
     "applicableBurdens": [
       "anxiety",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -24537,11 +24536,11 @@
     ],
     "applicableSeasons": [
       "student",
-      "singleLife"
+      "single"
     ],
     "applicableBurdens": [
       "purpose",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": true,
@@ -24559,7 +24558,7 @@
     ],
     "applicableSeasons": [
       "hardSeason",
-      "singleLife"
+      "single"
     ],
     "applicableBurdens": [
       "loneliness",
@@ -24579,12 +24578,12 @@
       "midday"
     ],
     "applicableSeasons": [
-      "newBeliever",
-      "singleLife"
+      "startingOver",
+      "single"
     ],
     "applicableBurdens": [
       "loneliness",
-      "relationships"
+      "relationship"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -24601,11 +24600,10 @@
       "evening"
     ],
     "applicableSeasons": [
-      "newBeliever",
-      "growing"
+      "startingOver"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "purpose"
     ],
     "faithLevelMin": "justCurious",
@@ -24628,7 +24626,7 @@
     ],
     "applicableBurdens": [
       "purpose",
-      "finances"
+      "financial"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": true,
@@ -24668,10 +24666,10 @@
     ],
     "applicableSeasons": [
       "hardSeason",
-      "newlywed"
+      "married"
     ],
     "applicableBurdens": [
-      "relationships",
+      "relationship",
       "grief"
     ],
     "faithLevelMin": "justCurious",
@@ -24690,10 +24688,10 @@
     ],
     "applicableSeasons": [
       "hardSeason",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "grief"
     ],
     "faithLevelMin": "justCurious",
@@ -24714,7 +24712,7 @@
       "student"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "health"
     ],
     "faithLevelMin": "growing",
@@ -24757,7 +24755,7 @@
       "workingProfessional"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "anxiety"
     ],
     "faithLevelMin": "growing",
@@ -24776,7 +24774,7 @@
     ],
     "applicableSeasons": [
       "hardSeason",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "grief",
@@ -24796,11 +24794,10 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
-      "growing"
+      "startingOver"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "anxiety"
     ],
     "faithLevelMin": "growing",
@@ -24822,7 +24819,7 @@
       "student"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "purpose"
     ],
     "faithLevelMin": "deepInTheWord",
@@ -24860,12 +24857,12 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "hardSeason"
     ],
     "applicableBurdens": [
       "anxiety",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -24952,7 +24949,7 @@
     ],
     "applicableBurdens": [
       "anxiety",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -24970,7 +24967,7 @@
     ],
     "applicableSeasons": [
       "hardSeason",
-      "singleLife"
+      "single"
     ],
     "applicableBurdens": [
       "grief",
@@ -24991,7 +24988,7 @@
     ],
     "applicableSeasons": [
       "student",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "purpose",
@@ -25098,12 +25095,12 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "hardSeason"
     ],
     "applicableBurdens": [
       "anxiety",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -25120,12 +25117,12 @@
       "midday"
     ],
     "applicableSeasons": [
-      "newBeliever",
-      "singleLife"
+      "startingOver",
+      "single"
     ],
     "applicableBurdens": [
       "loneliness",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -25164,7 +25161,7 @@
     ],
     "applicableSeasons": [
       "student",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "anxiety",
@@ -25208,11 +25205,11 @@
     ],
     "applicableSeasons": [
       "hardSeason",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "anxiety",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -25255,7 +25252,7 @@
     ],
     "applicableBurdens": [
       "purpose",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -25277,7 +25274,7 @@
     ],
     "applicableBurdens": [
       "purpose",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -25315,11 +25312,11 @@
       "midday"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "student"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "purpose"
     ],
     "faithLevelMin": "justCurious",
@@ -25336,11 +25333,11 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "hardSeason"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "grief"
     ],
     "faithLevelMin": "justCurious",
@@ -25362,7 +25359,7 @@
       "workingProfessional"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "anxiety"
     ],
     "faithLevelMin": "justCurious",
@@ -25381,7 +25378,7 @@
     ],
     "applicableSeasons": [
       "hardSeason",
-      "singleLife"
+      "single"
     ],
     "applicableBurdens": [
       "grief",
@@ -25401,12 +25398,12 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "hardSeason"
     ],
     "applicableBurdens": [
       "anxiety",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -25428,7 +25425,7 @@
     ],
     "applicableBurdens": [
       "health",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "growing",
     "isProOnly": true,
@@ -25445,8 +25442,8 @@
       "midday"
     ],
     "applicableSeasons": [
-      "newBeliever",
-      "singleLife"
+      "startingOver",
+      "single"
     ],
     "applicableBurdens": [
       "purpose",
@@ -25472,7 +25469,7 @@
     ],
     "applicableBurdens": [
       "anxiety",
-      "finances"
+      "financial"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -25509,11 +25506,10 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
-      "growing"
+      "startingOver"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "purpose"
     ],
     "faithLevelMin": "justCurious",
@@ -25532,11 +25528,11 @@
     ],
     "applicableSeasons": [
       "student",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "loneliness",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -25552,11 +25548,11 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "student"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "purpose"
     ],
     "faithLevelMin": "justCurious",
@@ -25575,11 +25571,11 @@
     ],
     "applicableSeasons": [
       "hardSeason",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "grief",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -25600,7 +25596,7 @@
       "student"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "purpose"
     ],
     "faithLevelMin": "justCurious",
@@ -25619,10 +25615,10 @@
     ],
     "applicableSeasons": [
       "workingProfessional",
-      "newlywed"
+      "married"
     ],
     "applicableBurdens": [
-      "finances",
+      "financial",
       "purpose"
     ],
     "faithLevelMin": "growing",
@@ -25643,7 +25639,7 @@
       "workingProfessional"
     ],
     "applicableBurdens": [
-      "relationships",
+      "relationship",
       "purpose"
     ],
     "faithLevelMin": "justCurious",
@@ -25682,11 +25678,11 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "hardSeason"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "anxiety"
     ],
     "faithLevelMin": "growing",
@@ -25707,8 +25703,8 @@
       "workingProfessional"
     ],
     "applicableBurdens": [
-      "faith",
-      "relationships"
+      "doubt",
+      "relationship"
     ],
     "faithLevelMin": "growing",
     "isProOnly": true,
@@ -25748,7 +25744,7 @@
     ],
     "applicableSeasons": [
       "hardSeason",
-      "singleLife"
+      "single"
     ],
     "applicableBurdens": [
       "grief",
@@ -25774,7 +25770,7 @@
     ],
     "applicableBurdens": [
       "purpose",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -25794,7 +25790,7 @@
       "student"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "anxiety"
     ],
     "faithLevelMin": "growing",
@@ -25815,7 +25811,7 @@
       "retired"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "purpose"
     ],
     "faithLevelMin": "justCurious",
@@ -25837,7 +25833,7 @@
       "workingProfessional"
     ],
     "applicableBurdens": [
-      "finances",
+      "financial",
       "anxiety"
     ],
     "faithLevelMin": "justCurious",
@@ -25854,7 +25850,7 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "retired"
     ],
     "applicableBurdens": [
@@ -25896,11 +25892,11 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "hardSeason"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "grief"
     ],
     "faithLevelMin": "justCurious",
@@ -25921,7 +25917,7 @@
       "student"
     ],
     "applicableBurdens": [
-      "finances",
+      "financial",
       "purpose"
     ],
     "faithLevelMin": "justCurious",
@@ -25938,11 +25934,10 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
-      "growing"
+      "startingOver"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "purpose"
     ],
     "faithLevelMin": "growing",
@@ -25960,11 +25955,11 @@
       "midday"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "student"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "loneliness"
     ],
     "faithLevelMin": "justCurious",
@@ -25982,7 +25977,7 @@
     ],
     "applicableSeasons": [
       "hardSeason",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "anxiety",
@@ -26002,7 +25997,7 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "retired"
     ],
     "applicableBurdens": [
@@ -26023,11 +26018,10 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
-      "growing"
+      "startingOver"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "purpose"
     ],
     "faithLevelMin": "justCurious",
@@ -26050,7 +26044,7 @@
     ],
     "applicableBurdens": [
       "purpose",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "growing",
     "isProOnly": true,
@@ -26089,11 +26083,10 @@
       "evening"
     ],
     "applicableSeasons": [
-      "newBeliever",
-      "growing"
+      "startingOver"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "anxiety"
     ],
     "faithLevelMin": "growing",
@@ -26116,7 +26109,7 @@
     ],
     "applicableBurdens": [
       "purpose",
-      "finances"
+      "financial"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -26158,7 +26151,7 @@
     ],
     "applicableBurdens": [
       "anxiety",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -26243,7 +26236,7 @@
     ],
     "applicableBurdens": [
       "anxiety",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -26346,12 +26339,12 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "hardSeason"
     ],
     "applicableBurdens": [
-      "faith",
-      "finances"
+      "doubt",
+      "financial"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -26373,7 +26366,7 @@
     ],
     "applicableBurdens": [
       "health",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -26394,7 +26387,7 @@
       "workingProfessional"
     ],
     "applicableBurdens": [
-      "finances",
+      "financial",
       "anxiety"
     ],
     "faithLevelMin": "justCurious",
@@ -26416,7 +26409,7 @@
     ],
     "applicableBurdens": [
       "purpose",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -26433,11 +26426,11 @@
       "evening"
     ],
     "applicableSeasons": [
-      "newlywed",
+      "married",
       "parent"
     ],
     "applicableBurdens": [
-      "relationships",
+      "relationship",
       "grief"
     ],
     "faithLevelMin": "justCurious",
@@ -26458,7 +26451,7 @@
       "student"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "purpose"
     ],
     "faithLevelMin": "growing",
@@ -26476,7 +26469,7 @@
       "bedtime"
     ],
     "applicableSeasons": [
-      "singleLife",
+      "single",
       "hardSeason"
     ],
     "applicableBurdens": [
@@ -26545,7 +26538,7 @@
     ],
     "applicableBurdens": [
       "anxiety",
-      "relationships"
+      "relationship"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -26562,7 +26555,7 @@
     ],
     "applicableSeasons": [
       "student",
-      "singleLife"
+      "single"
     ],
     "applicableBurdens": [
       "loneliness",
@@ -26584,10 +26577,10 @@
     ],
     "applicableSeasons": [
       "hardSeason",
-      "singleLife"
+      "single"
     ],
     "applicableBurdens": [
-      "finances",
+      "financial",
       "anxiety"
     ],
     "faithLevelMin": "justCurious",
@@ -26609,7 +26602,7 @@
     ],
     "applicableBurdens": [
       "purpose",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "growing",
     "isProOnly": true,
@@ -26631,7 +26624,7 @@
     ],
     "applicableBurdens": [
       "purpose",
-      "relationships"
+      "relationship"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -26674,7 +26667,7 @@
     ],
     "applicableBurdens": [
       "purpose",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "growing",
     "isProOnly": true,
@@ -26691,11 +26684,11 @@
     ],
     "applicableSeasons": [
       "hardSeason",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "grief",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -26712,11 +26705,11 @@
       "midday"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "student"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "anxiety"
     ],
     "faithLevelMin": "justCurious",
@@ -26735,10 +26728,10 @@
     ],
     "applicableSeasons": [
       "hardSeason",
-      "newlywed"
+      "married"
     ],
     "applicableBurdens": [
-      "relationships",
+      "relationship",
       "grief"
     ],
     "faithLevelMin": "justCurious",
@@ -26780,7 +26773,7 @@
       "parent"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "purpose"
     ],
     "faithLevelMin": "growing",
@@ -26798,10 +26791,10 @@
     ],
     "applicableSeasons": [
       "hardSeason",
-      "singleLife"
+      "single"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "grief"
     ],
     "faithLevelMin": "justCurious",
@@ -26819,11 +26812,11 @@
       "midday"
     ],
     "applicableSeasons": [
-      "newlywed",
+      "married",
       "parent"
     ],
     "applicableBurdens": [
-      "relationships",
+      "relationship",
       "anxiety"
     ],
     "faithLevelMin": "justCurious",
@@ -26846,7 +26839,7 @@
     ],
     "applicableBurdens": [
       "grief",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -26863,10 +26856,10 @@
     ],
     "applicableSeasons": [
       "student",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "purpose"
     ],
     "faithLevelMin": "justCurious",
@@ -26888,7 +26881,7 @@
       "student"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "anxiety"
     ],
     "faithLevelMin": "justCurious",
@@ -26911,7 +26904,7 @@
     ],
     "applicableBurdens": [
       "loneliness",
-      "relationships"
+      "relationship"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -26971,10 +26964,10 @@
     ],
     "applicableSeasons": [
       "workingProfessional",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "loneliness"
     ],
     "faithLevelMin": "justCurious",
@@ -26991,11 +26984,11 @@
       "evening"
     ],
     "applicableSeasons": [
-      "growing",
+      "startingOver",
       "retired"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "grief"
     ],
     "faithLevelMin": "growing",
@@ -27018,7 +27011,7 @@
     ],
     "applicableBurdens": [
       "purpose",
-      "relationships"
+      "relationship"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -27039,7 +27032,7 @@
     ],
     "applicableBurdens": [
       "loneliness",
-      "relationships"
+      "relationship"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -27056,12 +27049,12 @@
       "midday"
     ],
     "applicableSeasons": [
-      "singleLife",
+      "single",
       "student"
     ],
     "applicableBurdens": [
       "purpose",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -27077,11 +27070,11 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "workingProfessional"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "purpose"
     ],
     "faithLevelMin": "justCurious",
@@ -27103,7 +27096,7 @@
       "student"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "grief"
     ],
     "faithLevelMin": "justCurious",
@@ -27122,11 +27115,11 @@
     ],
     "applicableSeasons": [
       "workingProfessional",
-      "newlywed"
+      "married"
     ],
     "applicableBurdens": [
-      "finances",
-      "relationships"
+      "financial",
+      "relationship"
     ],
     "faithLevelMin": "growing",
     "isProOnly": true,
@@ -27163,11 +27156,10 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
-      "growing"
+      "startingOver"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "grief"
     ],
     "faithLevelMin": "justCurious",
@@ -27190,7 +27182,7 @@
     ],
     "applicableBurdens": [
       "purpose",
-      "finances"
+      "financial"
     ],
     "faithLevelMin": "growing",
     "isProOnly": true,
@@ -27206,11 +27198,11 @@
       "evening"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "retired"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "loneliness"
     ],
     "faithLevelMin": "justCurious",
@@ -27229,10 +27221,10 @@
     ],
     "applicableSeasons": [
       "parent",
-      "newlywed"
+      "married"
     ],
     "applicableBurdens": [
-      "relationships",
+      "relationship",
       "anxiety"
     ],
     "faithLevelMin": "justCurious",
@@ -27249,11 +27241,10 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
-      "growing"
+      "startingOver"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "purpose"
     ],
     "faithLevelMin": "justCurious",
@@ -27270,11 +27261,11 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "workingProfessional"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "anxiety"
     ],
     "faithLevelMin": "justCurious",
@@ -27314,11 +27305,11 @@
     ],
     "applicableSeasons": [
       "workingProfessional",
-      "newlywed"
+      "married"
     ],
     "applicableBurdens": [
-      "finances",
-      "faith"
+      "financial",
+      "doubt"
     ],
     "faithLevelMin": "growing",
     "isProOnly": true,
@@ -27334,11 +27325,11 @@
       "evening"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "retired"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "purpose"
     ],
     "faithLevelMin": "justCurious",
@@ -27360,7 +27351,7 @@
     ],
     "applicableBurdens": [
       "purpose",
-      "relationships"
+      "relationship"
     ],
     "faithLevelMin": "growing",
     "isProOnly": true,
@@ -27380,7 +27371,7 @@
       "student"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "purpose"
     ],
     "faithLevelMin": "deepInTheWord",
@@ -27398,10 +27389,10 @@
     ],
     "applicableSeasons": [
       "hardSeason",
-      "newlywed"
+      "married"
     ],
     "applicableBurdens": [
-      "relationships",
+      "relationship",
       "grief"
     ],
     "faithLevelMin": "justCurious",
@@ -27423,7 +27414,7 @@
       "retired"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "anxiety"
     ],
     "faithLevelMin": "justCurious",
@@ -27441,11 +27432,11 @@
       "midday"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "hardSeason"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "grief"
     ],
     "faithLevelMin": "justCurious",
@@ -27463,7 +27454,7 @@
     ],
     "applicableSeasons": [
       "student",
-      "singleLife"
+      "single"
     ],
     "applicableBurdens": [
       "purpose",
@@ -27488,7 +27479,7 @@
     ],
     "applicableBurdens": [
       "purpose",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -27505,7 +27496,7 @@
       "evening"
     ],
     "applicableSeasons": [
-      "singleLife",
+      "single",
       "hardSeason"
     ],
     "applicableBurdens": [
@@ -27551,7 +27542,7 @@
       "workingProfessional"
     ],
     "applicableBurdens": [
-      "relationships",
+      "relationship",
       "purpose"
     ],
     "faithLevelMin": "justCurious",
@@ -27572,8 +27563,8 @@
       "student"
     ],
     "applicableBurdens": [
-      "faith",
-      "relationships"
+      "doubt",
+      "relationship"
     ],
     "faithLevelMin": "growing",
     "isProOnly": true,
@@ -27593,7 +27584,7 @@
     ],
     "applicableBurdens": [
       "anxiety",
-      "relationships"
+      "relationship"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -27611,7 +27602,7 @@
     ],
     "applicableSeasons": [
       "workingProfessional",
-      "singleLife"
+      "single"
     ],
     "applicableBurdens": [
       "purpose",
@@ -27654,11 +27645,11 @@
     ],
     "applicableSeasons": [
       "workingProfessional",
-      "newlywed"
+      "married"
     ],
     "applicableBurdens": [
-      "relationships",
-      "faith"
+      "relationship",
+      "doubt"
     ],
     "faithLevelMin": "growing",
     "isProOnly": true,
@@ -27676,10 +27667,10 @@
     ],
     "applicableSeasons": [
       "hardSeason",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "grief"
     ],
     "faithLevelMin": "growing",
@@ -27701,7 +27692,7 @@
       "parent"
     ],
     "applicableBurdens": [
-      "relationships",
+      "relationship",
       "purpose"
     ],
     "faithLevelMin": "justCurious",
@@ -27722,7 +27713,7 @@
       "workingProfessional"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "grief"
     ],
     "faithLevelMin": "growing",
@@ -27765,7 +27756,7 @@
     ],
     "applicableBurdens": [
       "purpose",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "deepInTheWord",
     "isProOnly": true,
@@ -27787,7 +27778,7 @@
     ],
     "applicableBurdens": [
       "health",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -27803,11 +27794,11 @@
       "morning"
     ],
     "applicableSeasons": [
-      "growing",
+      "startingOver",
       "hardSeason"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "purpose"
     ],
     "faithLevelMin": "growing",
@@ -27829,8 +27820,8 @@
       "workingProfessional"
     ],
     "applicableBurdens": [
-      "finances",
-      "faith"
+      "financial",
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -27848,10 +27839,10 @@
     ],
     "applicableSeasons": [
       "hardSeason",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "loneliness"
     ],
     "faithLevelMin": "justCurious",
@@ -27890,11 +27881,11 @@
       "morning"
     ],
     "applicableSeasons": [
-      "growing",
+      "startingOver",
       "workingProfessional"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "purpose"
     ],
     "faithLevelMin": "growing",
@@ -27916,8 +27907,8 @@
       "student"
     ],
     "applicableBurdens": [
-      "relationships",
-      "faith"
+      "relationship",
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -27937,8 +27928,8 @@
       "hardSeason"
     ],
     "applicableBurdens": [
-      "faith",
-      "finances"
+      "doubt",
+      "financial"
     ],
     "faithLevelMin": "growing",
     "isProOnly": true,
@@ -27956,7 +27947,7 @@
     ],
     "applicableSeasons": [
       "student",
-      "singleLife"
+      "single"
     ],
     "applicableBurdens": [
       "purpose",
@@ -27980,8 +27971,8 @@
       "retired"
     ],
     "applicableBurdens": [
-      "finances",
-      "relationships"
+      "financial",
+      "relationship"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -28001,7 +27992,7 @@
       "workingProfessional"
     ],
     "applicableBurdens": [
-      "faith",
+      "doubt",
       "loneliness"
     ],
     "faithLevelMin": "justCurious",
@@ -28023,7 +28014,7 @@
       "parent"
     ],
     "applicableBurdens": [
-      "relationships",
+      "relationship",
       "purpose"
     ],
     "faithLevelMin": "justCurious",
@@ -28061,12 +28052,12 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "hardSeason"
     ],
     "applicableBurdens": [
       "loneliness",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "justCurious",
     "isProOnly": false,
@@ -28087,7 +28078,7 @@
     ],
     "applicableBurdens": [
       "purpose",
-      "faith"
+      "doubt"
     ],
     "faithLevelMin": "growing",
     "isProOnly": true,
@@ -28660,7 +28651,7 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "student"
     ],
     "applicableBurdens": [
@@ -28873,7 +28864,7 @@
     ],
     "applicableSeasons": [
       "student",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "doubt"
@@ -28911,7 +28902,7 @@
       "evening"
     ],
     "applicableSeasons": [
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "doubt"
@@ -29352,7 +29343,7 @@
       "bedtime"
     ],
     "applicableSeasons": [
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "temptation"
@@ -29526,7 +29517,7 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "none"
@@ -29584,7 +29575,7 @@
       "evening"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "student"
     ],
     "applicableBurdens": [
@@ -29681,7 +29672,7 @@
     ],
     "applicableSeasons": [
       "student",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "anxiety"
@@ -29777,7 +29768,7 @@
       "evening"
     ],
     "applicableSeasons": [
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "doubt"
@@ -29874,7 +29865,7 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "doubt"
@@ -29932,7 +29923,6 @@
       "evening"
     ],
     "applicableSeasons": [
-      "newBeliever",
       "startingOver"
     ],
     "applicableBurdens": [
@@ -30404,8 +30394,7 @@
       "morning"
     ],
     "applicableSeasons": [
-      "startingOver",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "temptation"
@@ -30424,7 +30413,7 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "purpose"
@@ -30462,7 +30451,7 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "doubt"
@@ -30501,7 +30490,7 @@
       "evening"
     ],
     "applicableSeasons": [
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "none"
@@ -30622,7 +30611,7 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "none"
@@ -30719,7 +30708,6 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
       "startingOver"
     ],
     "applicableBurdens": [
@@ -30739,7 +30727,7 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "none"
@@ -30816,7 +30804,7 @@
       "midday"
     ],
     "applicableSeasons": [
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "doubt"
@@ -31092,7 +31080,7 @@
       "midday"
     ],
     "applicableSeasons": [
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "doubt"
@@ -31111,8 +31099,7 @@
       "morning"
     ],
     "applicableSeasons": [
-      "startingOver",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "none"
@@ -31304,7 +31291,7 @@
       "bedtime"
     ],
     "applicableSeasons": [
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "doubt",
@@ -31520,8 +31507,7 @@
       "bedtime"
     ],
     "applicableSeasons": [
-      "startingOver",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "temptation"
@@ -31580,7 +31566,7 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "none"
@@ -31638,7 +31624,7 @@
       "bedtime"
     ],
     "applicableSeasons": [
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "none"
@@ -31773,7 +31759,7 @@
       "midday"
     ],
     "applicableSeasons": [
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "none"
@@ -32242,7 +32228,7 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "doubt"
@@ -32281,7 +32267,7 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "student"
     ],
     "applicableBurdens": [
@@ -32499,8 +32485,7 @@
       "bedtime"
     ],
     "applicableSeasons": [
-      "startingOver",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "temptation"
@@ -32815,7 +32800,7 @@
       "evening"
     ],
     "applicableSeasons": [
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "none"
@@ -32853,7 +32838,7 @@
       "bedtime"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "student"
     ],
     "applicableBurdens": [
@@ -32933,7 +32918,7 @@
       "bedtime"
     ],
     "applicableSeasons": [
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "doubt"
@@ -32992,7 +32977,7 @@
     ],
     "applicableSeasons": [
       "student",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "doubt"
@@ -33051,7 +33036,7 @@
       "bedtime"
     ],
     "applicableSeasons": [
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "none"
@@ -33170,7 +33155,7 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "doubt",
@@ -33250,7 +33235,7 @@
     ],
     "applicableSeasons": [
       "student",
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "purpose"
@@ -33369,7 +33354,7 @@
       "midday"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "student"
     ],
     "applicableBurdens": [
@@ -33450,7 +33435,7 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "student"
     ],
     "applicableBurdens": [
@@ -33549,7 +33534,7 @@
       "morning"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "student"
     ],
     "applicableBurdens": [
@@ -33628,7 +33613,7 @@
       "evening"
     ],
     "applicableSeasons": [
-      "newBeliever",
+      "startingOver",
       "student"
     ],
     "applicableBurdens": [
@@ -33806,7 +33791,6 @@
       "bedtime"
     ],
     "applicableSeasons": [
-      "newBeliever",
       "startingOver"
     ],
     "applicableBurdens": [
@@ -33948,7 +33932,7 @@
       "bedtime"
     ],
     "applicableSeasons": [
-      "newBeliever"
+      "startingOver"
     ],
     "applicableBurdens": [
       "doubt",
