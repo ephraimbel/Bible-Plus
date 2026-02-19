@@ -367,6 +367,12 @@ struct RootView: View {
                 // bibleplus://plans (no specific plan)
                 NotificationCenter.default.post(name: .plansDeepLink, object: nil)
             }
+        case "bible":
+            NotificationCenter.default.post(name: .bibleDeepLink, object: nil)
+        case "ask":
+            NotificationCenter.default.post(name: .askDeepLink, object: nil)
+        case "sanctuary":
+            NotificationCenter.default.post(name: .sanctuaryDeepLink, object: nil)
         default:
             break
         }

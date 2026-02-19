@@ -199,5 +199,23 @@ struct ContentView: View {
                 )
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: .bibleDeepLink)) { _ in
+            withAnimation(.easeInOut(duration: 0.25)) {
+                selectedTab = .bible
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .askDeepLink)) { _ in
+            withAnimation(.easeInOut(duration: 0.25)) {
+                selectedTab = .ask
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .sanctuaryDeepLink)) { _ in
+            withAnimation(.easeInOut(duration: 0.25)) {
+                selectedTab = .feed
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                NotificationCenter.default.post(name: .openSanctuaryFromWidget, object: nil)
+            }
+        }
     }
 }

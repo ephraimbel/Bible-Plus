@@ -125,6 +125,9 @@ private struct FeedContentView: View {
             vm.showFeed = false
             showProgress = true
         }
+        .onReceive(NotificationCenter.default.publisher(for: .openSanctuaryFromWidget)) { _ in
+            showSanctuary = true
+        }
         .onChange(of: vm.showFeed) { _, showFeed in
             NotificationCenter.default.post(
                 name: .dashboardShowFeedChanged,

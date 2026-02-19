@@ -2990,4 +2990,8 @@ extension Notification.Name {
     static let switchToAskTab = Notification.Name("SwitchToAskTab")
     static let openAIWithContext = Notification.Name("OpenAIWithContext")
     static let navigateToConversation = Notification.Name("NavigateToConversation")
+    static let bibleDeepLink = Notification.Name("BibleDeepLink")
+    static let askDeepLink = Notification.Name("AskDeepLink")
+    static let sanctuaryDeepLink = Notification.Name("SanctuaryDeepLink")
+    static let openSanctuaryFromWidget = Notification.Name("OpenSanctuaryFromWidget")
 }
