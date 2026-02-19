@@ -28,7 +28,10 @@ final class UserProfile {
     var selectedBibleVoiceID: String
     var readerFontSize: Double
     var readerFontStyleRaw: String
+    var readerFontWeightRaw: String?
     var readerLineSpacing: Double
+    var readerTextAlignmentJustified: Bool?
+    var readerShowVerseNumbers: Bool?
     var lastReadBookID: String
     var lastReadChapter: Int
     var lastReadVerseNumber: Int
@@ -38,6 +41,21 @@ final class UserProfile {
     var readerFontStyle: ReaderFontStyle {
         get { ReaderFontStyle(rawValue: readerFontStyleRaw) ?? .serif }
         set { readerFontStyleRaw = newValue.rawValue }
+    }
+
+    var readerFontWeight: ReaderFontWeight {
+        get { readerFontWeightRaw.flatMap { ReaderFontWeight(rawValue: $0) } ?? .regular }
+        set { readerFontWeightRaw = newValue.rawValue }
+    }
+
+    var textAlignmentJustified: Bool {
+        get { readerTextAlignmentJustified ?? false }
+        set { readerTextAlignmentJustified = newValue }
+    }
+
+    var showVerseNumbers: Bool {
+        get { readerShowVerseNumbers ?? true }
+        set { readerShowVerseNumbers = newValue }
     }
 
     init(
@@ -66,7 +84,10 @@ final class UserProfile {
         selectedBibleVoiceID: String = BibleVoice.onyx.rawValue,
         readerFontSize: Double = 20,
         readerFontStyle: ReaderFontStyle = .serif,
+        readerFontWeight: ReaderFontWeight = .regular,
         readerLineSpacing: Double = 6,
+        readerTextAlignmentJustified: Bool = false,
+        readerShowVerseNumbers: Bool = true,
         lastReadBookID: String = "GEN",
         lastReadChapter: Int = 1,
         lastReadVerseNumber: Int = 1
@@ -96,7 +117,10 @@ final class UserProfile {
         self.selectedBibleVoiceID = selectedBibleVoiceID
         self.readerFontSize = readerFontSize
         self.readerFontStyleRaw = readerFontStyle.rawValue
+        self.readerFontWeightRaw = readerFontWeight.rawValue
         self.readerLineSpacing = readerLineSpacing
+        self.readerTextAlignmentJustified = readerTextAlignmentJustified
+        self.readerShowVerseNumbers = readerShowVerseNumbers
         self.lastReadBookID = lastReadBookID
         self.lastReadChapter = lastReadChapter
         self.lastReadVerseNumber = lastReadVerseNumber

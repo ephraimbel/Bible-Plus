@@ -59,14 +59,17 @@ final class BibleReaderViewModel {
 
     var readerFontSize: Double = 20
     var readerFontStyle: ReaderFontStyle = .serif
+    var readerFontWeight: ReaderFontWeight = .regular
     var readerLineSpacing: Double = 6
+    var readerTextAlignmentJustified: Bool = false
+    var readerShowVerseNumbers: Bool = true
 
     // MARK: - Last Read Position
 
     var lastReadVerseNumber: Int? = nil
 
     var readerFontDesign: Font.Design {
-        readerFontStyle == .serif ? .serif : .rounded
+        readerFontStyle.fontDesign
     }
 
     private let repository = BibleRepository.shared
@@ -101,7 +104,10 @@ final class BibleReaderViewModel {
             currentTranslation = profile.preferredTranslation
             readerFontSize = profile.readerFontSize
             readerFontStyle = profile.readerFontStyle
+            readerFontWeight = profile.readerFontWeight
             readerLineSpacing = profile.readerLineSpacing
+            readerTextAlignmentJustified = profile.textAlignmentJustified
+            readerShowVerseNumbers = profile.showVerseNumbers
 
             // Restore last read position
             if let book = BibleData.allBooks.first(where: { $0.id == profile.lastReadBookID }) {
@@ -222,7 +228,10 @@ final class BibleReaderViewModel {
         updateProfile {
             $0.readerFontSize = readerFontSize
             $0.readerFontStyle = readerFontStyle
+            $0.readerFontWeight = readerFontWeight
             $0.readerLineSpacing = readerLineSpacing
+            $0.textAlignmentJustified = readerTextAlignmentJustified
+            $0.showVerseNumbers = readerShowVerseNumbers
         }
     }
 

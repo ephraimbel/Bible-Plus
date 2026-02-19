@@ -711,9 +711,9 @@ private struct BibleContentView: View {
                                 get: { currentColorMode },
                                 set: { updateColorMode($0) }
                             )) {
-                                Label("Golden Hour", systemImage: "sun.max")
+                                Label("Light", systemImage: "sun.max")
                                     .tag(ColorMode.light)
-                                Label("Midnight Study", systemImage: "moon")
+                                Label("Dark", systemImage: "moon")
                                     .tag(ColorMode.dark)
                                 Label("Auto", systemImage: "circle.lefthalf.filled")
                                     .tag(ColorMode.auto)

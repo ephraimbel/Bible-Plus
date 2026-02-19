@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import SwiftUI
 import AVFoundation
 
 // MARK: - Faith Level
@@ -357,8 +358,8 @@ enum ColorMode: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .light: "Golden Hour"
-        case .dark: "Midnight Study"
+        case .light: "Light"
+        case .dark: "Dark"
         case .auto: "Auto"
         case .immersive: "Immersive"
         }
@@ -1155,6 +1156,8 @@ enum VerseHighlightColor: String, Codable, CaseIterable, Identifiable {
 enum ReaderFontStyle: String, Codable, CaseIterable, Identifiable {
     case serif
     case sansSerif
+    case rounded
+    case mono
 
     var id: String { rawValue }
 
@@ -1162,6 +1165,52 @@ enum ReaderFontStyle: String, Codable, CaseIterable, Identifiable {
         switch self {
         case .serif: "Serif"
         case .sansSerif: "Sans Serif"
+        case .rounded: "Rounded"
+        case .mono: "Mono"
+        }
+    }
+
+    var fontDesign: Font.Design {
+        switch self {
+        case .serif: .serif
+        case .sansSerif: .default
+        case .rounded: .rounded
+        case .mono: .monospaced
+        }
+    }
+
+    var previewLetter: String {
+        switch self {
+        case .serif: "Aa"
+        case .sansSerif: "Aa"
+        case .rounded: "Aa"
+        case .mono: "Aa"
+        }
+    }
+}
+
+// MARK: - Reader Font Weight
+
+enum ReaderFontWeight: String, Codable, CaseIterable, Identifiable {
+    case light
+    case regular
+    case medium
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .light: "Light"
+        case .regular: "Regular"
+        case .medium: "Medium"
+        }
+    }
+
+    var fontWeight: Font.Weight {
+        switch self {
+        case .light: .light
+        case .regular: .regular
+        case .medium: .medium
         }
     }
 }

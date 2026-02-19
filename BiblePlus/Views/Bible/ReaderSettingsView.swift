@@ -9,6 +9,9 @@ struct ReaderSettingsView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 24) {
+                    // Live Preview
+                    livePreviewSection
+
                     // Font Size
                     settingsSection(title: "Font Size") {
                         VStack(spacing: 12) {
@@ -36,23 +39,22 @@ struct ReaderSettingsView: View {
                     }
 
                     // Font Style
-                    settingsSection(title: "Font Style") {
-                        VStack(spacing: 12) {
-                            Picker("Font Style", selection: $viewModel.readerFontStyle) {
-                                Text("Serif").tag(ReaderFontStyle.serif)
-                                Text("Sans Serif").tag(ReaderFontStyle.sansSerif)
+                    settingsSection(title: "Typeface") {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 10) {
+                                ForEach(ReaderFontStyle.allCases) { style in
+                                    fontStyleCard(style)
+                                }
                             }
-                            .pickerStyle(.segmented)
+                        }
+                    }
 
-                            Text("For God so loved the world, that he gave his only begotten Son.")
-                                .font(.system(
-                                    size: viewModel.readerFontSize,
-                                    weight: .regular,
-                                    design: currentDesign
-                                ))
-                                .foregroundStyle(palette.textPrimary)
-                                .lineSpacing(viewModel.readerLineSpacing)
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                    // Font Weight
+                    settingsSection(title: "Font Weight") {
+                        HStack(spacing: 10) {
+                            ForEach(ReaderFontWeight.allCases) { weight in
+                                fontWeightPill(weight)
+                            }
                         }
                     }
 
@@ -75,20 +77,40 @@ struct ReaderSettingsView: View {
                                     .font(.system(size: 18))
                                     .foregroundStyle(palette.textMuted)
                             }
+                        }
+                    }
 
-                            // Preview
-                            VStack(alignment: .leading, spacing: 0) {
-                                sampleVerseLine(number: 1, text: "In the beginning God created the heaven and the earth.")
-                                sampleVerseLine(number: 2, text: "And the earth was without form, and void.")
+                    // Text Alignment
+                    settingsSection(title: "Text Alignment") {
+                        HStack(spacing: 10) {
+                            alignmentPill(label: "Left", icon: "text.alignleft", isJustified: false)
+                            alignmentPill(label: "Justified", icon: "text.justify", isJustified: true)
+                        }
+                    }
+
+                    // Verse Numbers
+                    settingsSection(title: "Verse Numbers") {
+                        Toggle(isOn: $viewModel.readerShowVerseNumbers) {
+                            HStack(spacing: 10) {
+                                Image(systemName: "number")
+                                    .font(.system(size: 14, weight: .medium))
+                                    .foregroundStyle(palette.accent)
+                                Text("Show verse numbers")
+                                    .font(.system(size: 15, weight: .medium))
+                                    .foregroundStyle(palette.textPrimary)
                             }
                         }
+                        .tint(palette.accent)
                     }
 
                     // Reset
                     Button {
                         viewModel.readerFontSize = 20
                         viewModel.readerFontStyle = .serif
+                        viewModel.readerFontWeight = .regular
                         viewModel.readerLineSpacing = 6
+                        viewModel.readerTextAlignmentJustified = false
+                        viewModel.readerShowVerseNumbers = true
                         viewModel.persistReaderSettings()
                         HapticService.lightImpact()
                     } label: {
@@ -120,13 +142,164 @@ struct ReaderSettingsView: View {
             }
             .onChange(of: viewModel.readerFontSize) { _, _ in viewModel.persistReaderSettings() }
             .onChange(of: viewModel.readerFontStyle) { _, _ in viewModel.persistReaderSettings() }
+            .onChange(of: viewModel.readerFontWeight) { _, _ in viewModel.persistReaderSettings() }
             .onChange(of: viewModel.readerLineSpacing) { _, _ in viewModel.persistReaderSettings() }
+            .onChange(of: viewModel.readerTextAlignmentJustified) { _, _ in viewModel.persistReaderSettings() }
+            .onChange(of: viewModel.readerShowVerseNumbers) { _, _ in viewModel.persistReaderSettings() }
         }
     }
 
+    // MARK: - Helpers
+
     private var currentDesign: Font.Design {
-        viewModel.readerFontStyle == .serif ? .serif : .rounded
+        viewModel.readerFontStyle.fontDesign
     }
+
+    private var currentWeight: Font.Weight {
+        viewModel.readerFontWeight.fontWeight
+    }
+
+    // MARK: - Live Preview
+
+    private var livePreviewSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Preview")
+                .font(BPFont.button)
+                .foregroundStyle(palette.textPrimary)
+
+            buildPreviewText()
+                .lineSpacing(viewModel.readerLineSpacing)
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .padding(16)
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .fill(palette.surface)
+        )
+    }
+
+    private func buildPreviewText() -> Text {
+        var result = Text("")
+
+        // Verse 16
+        if viewModel.readerShowVerseNumbers {
+            let superSize = max(9, viewModel.readerFontSize * 0.55)
+            result = result + Text("16")
+                .font(.system(size: superSize, weight: .semibold, design: .serif))
+                .foregroundColor(palette.accent)
+                .baselineOffset(6)
+            result = result + Text("\u{2009}")
+                .font(.system(size: viewModel.readerFontSize, design: currentDesign))
+        }
+        result = result + Text("For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life. ")
+            .font(.system(size: viewModel.readerFontSize, weight: currentWeight, design: currentDesign))
+            .foregroundColor(palette.textPrimary)
+
+        // Verse 17
+        if viewModel.readerShowVerseNumbers {
+            let superSize = max(9, viewModel.readerFontSize * 0.55)
+            result = result + Text("17")
+                .font(.system(size: superSize, weight: .semibold, design: .serif))
+                .foregroundColor(palette.accent)
+                .baselineOffset(6)
+            result = result + Text("\u{2009}")
+                .font(.system(size: viewModel.readerFontSize, design: currentDesign))
+        }
+        result = result + Text("For God sent not his Son into the world to condemn the world; but that the world through him might be saved.")
+            .font(.system(size: viewModel.readerFontSize, weight: currentWeight, design: currentDesign))
+            .foregroundColor(palette.textPrimary)
+
+        return result
+    }
+
+    // MARK: - Font Style Card
+
+    private func fontStyleCard(_ style: ReaderFontStyle) -> some View {
+        let isSelected = viewModel.readerFontStyle == style
+
+        return Button {
+            viewModel.readerFontStyle = style
+            HapticService.selection()
+        } label: {
+            VStack(spacing: 8) {
+                Text(style.previewLetter)
+                    .font(.system(size: 22, weight: .medium, design: style.fontDesign))
+                    .foregroundStyle(isSelected ? .white : palette.textPrimary)
+
+                Text(style.displayName)
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundStyle(isSelected ? .white.opacity(0.85) : palette.textMuted)
+            }
+            .frame(width: 72, height: 72)
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(isSelected ? palette.accent : palette.surfaceElevated)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(isSelected ? Color.clear : palette.border.opacity(0.2), lineWidth: 1)
+            )
+        }
+        .buttonStyle(.plain)
+    }
+
+    // MARK: - Font Weight Pill
+
+    private func fontWeightPill(_ weight: ReaderFontWeight) -> some View {
+        let isSelected = viewModel.readerFontWeight == weight
+
+        return Button {
+            viewModel.readerFontWeight = weight
+            HapticService.selection()
+        } label: {
+            Text(weight.displayName)
+                .font(.system(size: 14, weight: weight.fontWeight))
+                .foregroundStyle(isSelected ? .white : palette.textPrimary)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 10)
+                .background(
+                    Capsule()
+                        .fill(isSelected ? palette.accent : palette.surfaceElevated)
+                )
+                .overlay(
+                    Capsule()
+                        .stroke(isSelected ? Color.clear : palette.border.opacity(0.2), lineWidth: 1)
+                )
+        }
+        .buttonStyle(.plain)
+    }
+
+    // MARK: - Alignment Pill
+
+    private func alignmentPill(label: String, icon: String, isJustified: Bool) -> some View {
+        let isSelected = viewModel.readerTextAlignmentJustified == isJustified
+
+        return Button {
+            viewModel.readerTextAlignmentJustified = isJustified
+            HapticService.selection()
+        } label: {
+            HStack(spacing: 6) {
+                Image(systemName: icon)
+                    .font(.system(size: 13, weight: .medium))
+                Text(label)
+                    .font(.system(size: 14, weight: .medium))
+            }
+            .foregroundStyle(isSelected ? .white : palette.textPrimary)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 10)
+            .background(
+                Capsule()
+                    .fill(isSelected ? palette.accent : palette.surfaceElevated)
+            )
+            .overlay(
+                Capsule()
+                    .stroke(isSelected ? Color.clear : palette.border.opacity(0.2), lineWidth: 1)
+            )
+        }
+        .buttonStyle(.plain)
+    }
+
+    // MARK: - Settings Section
 
     private func settingsSection(title: String, @ViewBuilder content: () -> some View) -> some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -141,28 +314,5 @@ struct ReaderSettingsView: View {
             RoundedRectangle(cornerRadius: 12)
                 .fill(palette.surface)
         )
-    }
-
-    private func sampleVerseLine(number: Int, text: String) -> some View {
-        HStack(alignment: .firstTextBaseline, spacing: 8) {
-            Text("\(number)")
-                .font(.system(
-                    size: max(11, viewModel.readerFontSize * 0.65),
-                    weight: .light,
-                    design: .serif
-                ))
-                .foregroundStyle(palette.accent)
-                .frame(width: 20, alignment: .trailing)
-
-            Text(text)
-                .font(.system(
-                    size: viewModel.readerFontSize,
-                    weight: .regular,
-                    design: currentDesign
-                ))
-                .foregroundStyle(palette.textPrimary)
-                .lineSpacing(viewModel.readerLineSpacing)
-        }
-        .padding(.vertical, 4)
     }
 }
