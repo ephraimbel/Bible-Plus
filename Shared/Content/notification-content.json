@@ -1048,5 +1048,1055 @@
     "text": "Close your eyes in peace, {name}. His love covers you through the night.",
     "slots": ["bedtime"],
     "burdens": []
+  },
+  {
+    "id": "notif-151",
+    "category": "prayer",
+    "text": "Lord, anchor my soul in You today. When storms come, let me stand firm.",
+    "slots": ["morning"],
+    "burdens": ["anxiety"]
+  },
+  {
+    "id": "notif-152",
+    "category": "prayer",
+    "text": "Father, teach me contentment. Help me find joy in what I already have.",
+    "slots": ["midday"],
+    "burdens": ["financial"]
+  },
+  {
+    "id": "notif-153",
+    "category": "prayer",
+    "text": "{name}, pray this: God, quiet the noise around me so I can hear Your voice.",
+    "slots": ["midday"],
+    "burdens": []
+  },
+  {
+    "id": "notif-154",
+    "category": "prayer",
+    "text": "Jesus, give me eyes to see the people who need encouragement today.",
+    "slots": ["morning"],
+    "burdens": ["relationship"]
+  },
+  {
+    "id": "notif-155",
+    "category": "prayer",
+    "text": "Lord, I bring my loneliness to You. Fill the empty spaces with Your presence.",
+    "slots": ["evening"],
+    "burdens": ["loneliness"]
+  },
+  {
+    "id": "notif-156",
+    "category": "prayer",
+    "text": "God, help me choose grace over grudges. Let kindness be my reflex today.",
+    "slots": ["morning", "midday"],
+    "burdens": ["anger"]
+  },
+  {
+    "id": "notif-157",
+    "category": "prayer",
+    "text": "Father, when I am tempted, remind me who I am and whose I am.",
+    "slots": ["midday"],
+    "burdens": ["temptation"]
+  },
+  {
+    "id": "notif-158",
+    "category": "prayer",
+    "text": "{name}, lift this up: Lord, restore my hope. Rekindle what has grown dim.",
+    "slots": ["evening"],
+    "burdens": ["doubt", "grief"]
+  },
+  {
+    "id": "notif-159",
+    "category": "prayer",
+    "text": "Jesus, let my life be a living testimony of Your faithfulness and grace.",
+    "slots": ["morning"],
+    "burdens": ["purpose"]
+  },
+  {
+    "id": "notif-160",
+    "category": "prayer",
+    "text": "Lord, steady my emotions today. Let peace rule where chaos wants to reign.",
+    "slots": ["morning", "midday"],
+    "burdens": ["anxiety", "anger"]
+  },
+  {
+    "id": "notif-161",
+    "category": "prayer",
+    "text": "God, bring clarity where there is confusion. Illuminate the path before me.",
+    "slots": ["morning"],
+    "burdens": ["purpose", "doubt"]
+  },
+  {
+    "id": "notif-162",
+    "category": "prayer",
+    "text": "{name}, whisper this: Father, hold my heart gently through this grief.",
+    "slots": ["evening"],
+    "burdens": ["grief"]
+  },
+  {
+    "id": "notif-163",
+    "category": "prayer",
+    "text": "Lord, multiply what I have. Even when it feels like not enough, You are enough.",
+    "slots": ["midday"],
+    "burdens": ["financial"]
+  },
+  {
+    "id": "notif-164",
+    "category": "prayer",
+    "text": "Father, mend what is strained in my relationships. Let love lead the way.",
+    "slots": ["evening"],
+    "burdens": ["relationship"]
+  },
+  {
+    "id": "notif-165",
+    "category": "prayer",
+    "text": "Jesus, be my shelter today. Hide me under the shadow of Your wings.",
+    "slots": ["morning"],
+    "burdens": ["anxiety"]
+  },
+  {
+    "id": "notif-166",
+    "category": "prayer",
+    "text": "God, remove the spirit of heaviness and clothe me in a garment of praise.",
+    "slots": ["morning", "evening"],
+    "burdens": ["grief", "loneliness"]
+  },
+  {
+    "id": "notif-167",
+    "category": "prayer",
+    "text": "{name}, pray now: Lord, give me supernatural strength for what feels impossible.",
+    "slots": ["midday"],
+    "burdens": ["health", "anxiety"]
+  },
+  {
+    "id": "notif-168",
+    "category": "prayer",
+    "text": "Father, place a guard over my mind. Let me dwell on what is true and good.",
+    "slots": ["morning"],
+    "burdens": ["temptation"]
+  },
+  {
+    "id": "notif-169",
+    "category": "prayer",
+    "text": "Lord, I don't need all the answers. I just need You. Be my enough today.",
+    "slots": ["midday"],
+    "burdens": ["doubt"]
+  },
+  {
+    "id": "notif-170",
+    "category": "prayer",
+    "text": "God, revive the dry places in my spirit. Pour out Your living water on me.",
+    "slots": ["evening"],
+    "burdens": ["doubt", "purpose"]
+  },
+  {
+    "id": "notif-171",
+    "category": "prayer",
+    "text": "{name}, pause and pray: Jesus, carry what I cannot carry on my own.",
+    "slots": ["midday"],
+    "burdens": ["anxiety", "grief"]
+  },
+  {
+    "id": "notif-172",
+    "category": "prayer",
+    "text": "Father, let my work today be worship. Use my ordinary tasks for Your glory.",
+    "slots": ["morning"],
+    "burdens": ["purpose"]
+  },
+  {
+    "id": "notif-173",
+    "category": "prayer",
+    "text": "Lord, protect my peace. Don't let circumstances steal what You have given me.",
+    "slots": ["midday", "evening"],
+    "burdens": ["anxiety"]
+  },
+  {
+    "id": "notif-174",
+    "category": "prayer",
+    "text": "God, renew my compassion for those who have hurt me. Help me see them as You do.",
+    "slots": ["evening"],
+    "burdens": ["anger", "relationship"]
+  },
+  {
+    "id": "notif-175",
+    "category": "prayer",
+    "text": "{name}, lift this up: Father, give me faith bold enough to move mountains.",
+    "slots": ["morning"],
+    "burdens": ["doubt"]
+  },
+  {
+    "id": "notif-176",
+    "category": "prayer",
+    "text": "Jesus, heal not just my body but my heart. Make me whole from the inside out.",
+    "slots": ["evening", "bedtime"],
+    "burdens": ["health"]
+  },
+  {
+    "id": "notif-177",
+    "category": "prayer",
+    "text": "Lord, show me one person I can serve today. Use me as an instrument of Your love.",
+    "slots": ["morning"],
+    "burdens": []
+  },
+  {
+    "id": "notif-178",
+    "category": "prayer",
+    "text": "Father, still the racing thoughts within me. You are my calm in every storm.",
+    "slots": ["bedtime"],
+    "burdens": ["anxiety"]
+  },
+  {
+    "id": "notif-179",
+    "category": "prayer",
+    "text": "God, meet me in this season of waiting. Grow my trust while I wait on You.",
+    "slots": ["midday"],
+    "burdens": ["purpose", "financial"]
+  },
+  {
+    "id": "notif-180",
+    "category": "prayer",
+    "text": "{name}, pray this: Lord, let my life overflow with gratitude and generosity.",
+    "slots": ["morning"],
+    "burdens": []
+  },
+  {
+    "id": "notif-181",
+    "category": "affirmation",
+    "text": "You are God's masterpiece, created in Christ Jesus for good works He prepared.",
+    "slots": ["morning"],
+    "burdens": ["purpose"]
+  },
+  {
+    "id": "notif-182",
+    "category": "affirmation",
+    "text": "{name}, you are covered by a love that will never let you go.",
+    "slots": ["morning", "midday"],
+    "burdens": ["loneliness"]
+  },
+  {
+    "id": "notif-183",
+    "category": "affirmation",
+    "text": "You are standing on promises that have never failed. Not once. Not ever.",
+    "slots": ["midday"],
+    "burdens": ["doubt"]
+  },
+  {
+    "id": "notif-184",
+    "category": "affirmation",
+    "text": "You are protected by a God who never takes His eyes off you.",
+    "slots": ["morning"],
+    "burdens": ["anxiety"]
+  },
+  {
+    "id": "notif-185",
+    "category": "affirmation",
+    "text": "{name}, you are worthy of rest. God designed it, and He delights when you receive it.",
+    "slots": ["evening"],
+    "burdens": []
+  },
+  {
+    "id": "notif-186",
+    "category": "affirmation",
+    "text": "You are not invisible. God counts every hair on your head and knows your name.",
+    "slots": ["midday"],
+    "burdens": ["loneliness", "purpose"]
+  },
+  {
+    "id": "notif-187",
+    "category": "affirmation",
+    "text": "You are empowered by the same Spirit that raised Christ from the grave.",
+    "slots": ["morning"],
+    "burdens": ["doubt"]
+  },
+  {
+    "id": "notif-188",
+    "category": "affirmation",
+    "text": "{name}, you are treasured by the King of kings. Let that shape how you see yourself.",
+    "slots": ["morning"],
+    "burdens": ["doubt", "loneliness"]
+  },
+  {
+    "id": "notif-189",
+    "category": "affirmation",
+    "text": "You are not a burden. You are a beloved child whom God delights in.",
+    "slots": ["midday", "evening"],
+    "burdens": ["loneliness", "relationship"]
+  },
+  {
+    "id": "notif-190",
+    "category": "affirmation",
+    "text": "You are an ambassador of Christ. You carry heaven's authority wherever you go.",
+    "slots": ["morning"],
+    "burdens": ["purpose"]
+  },
+  {
+    "id": "notif-191",
+    "category": "affirmation",
+    "text": "{name}, you are free. Christ did not set you free to live in chains again.",
+    "slots": ["morning", "midday"],
+    "burdens": ["temptation"]
+  },
+  {
+    "id": "notif-192",
+    "category": "affirmation",
+    "text": "You are resilient because the God of endurance lives within you.",
+    "slots": ["midday"],
+    "burdens": ["grief", "health"]
+  },
+  {
+    "id": "notif-193",
+    "category": "affirmation",
+    "text": "You are never disqualified by God. He uses the broken to display His glory.",
+    "slots": ["evening"],
+    "burdens": ["temptation", "doubt"]
+  },
+  {
+    "id": "notif-194",
+    "category": "affirmation",
+    "text": "{name}, you are surrounded by grace. It is above you, beneath you, and within you.",
+    "slots": ["midday"],
+    "burdens": []
+  },
+  {
+    "id": "notif-195",
+    "category": "affirmation",
+    "text": "You are the apple of God's eye. He watches over you with fierce tenderness.",
+    "slots": ["morning"],
+    "burdens": ["loneliness"]
+  },
+  {
+    "id": "notif-196",
+    "category": "affirmation",
+    "text": "You are positioned for a breakthrough. God is working behind the scenes right now.",
+    "slots": ["morning", "midday"],
+    "burdens": ["financial", "purpose"]
+  },
+  {
+    "id": "notif-197",
+    "category": "affirmation",
+    "text": "{name}, you are clothed in strength and dignity. The future does not scare you.",
+    "slots": ["morning"],
+    "burdens": ["anxiety"]
+  },
+  {
+    "id": "notif-198",
+    "category": "affirmation",
+    "text": "You are part of something eternal. Your life echoes far beyond what you can see.",
+    "slots": ["evening"],
+    "burdens": ["purpose"]
+  },
+  {
+    "id": "notif-199",
+    "category": "affirmation",
+    "text": "You are accepted. Not because of what you do, but because of what Christ did.",
+    "slots": ["midday"],
+    "burdens": ["doubt"]
+  },
+  {
+    "id": "notif-200",
+    "category": "affirmation",
+    "text": "{name}, you are called to peace. Let nothing disturb the calm God gives.",
+    "slots": ["midday", "evening"],
+    "burdens": ["anxiety", "anger"]
+  },
+  {
+    "id": "notif-201",
+    "category": "affirmation",
+    "text": "You are growing even when you cannot see it. God is faithful to finish His work.",
+    "slots": ["evening"],
+    "burdens": ["doubt", "purpose"]
+  },
+  {
+    "id": "notif-202",
+    "category": "affirmation",
+    "text": "You are rich in grace. No debt can outweigh what God has deposited in you.",
+    "slots": ["midday"],
+    "burdens": ["financial"]
+  },
+  {
+    "id": "notif-203",
+    "category": "affirmation",
+    "text": "{name}, you are a vessel of honor, set apart and useful to the Master.",
+    "slots": ["morning"],
+    "burdens": ["purpose"]
+  },
+  {
+    "id": "notif-204",
+    "category": "affirmation",
+    "text": "You are sheltered in the Most High. No storm can reach the place He keeps you.",
+    "slots": ["evening"],
+    "burdens": ["anxiety", "grief"]
+  },
+  {
+    "id": "notif-205",
+    "category": "affirmation",
+    "text": "{name}, you are whole in Christ. Nothing missing, nothing broken, nothing lacking.",
+    "slots": ["morning"],
+    "burdens": ["health"]
+  },
+  {
+    "id": "notif-206",
+    "category": "encouragement",
+    "text": "The wilderness is not your destination. It is preparation for your promised land.",
+    "slots": ["midday"],
+    "burdens": ["doubt", "purpose"]
+  },
+  {
+    "id": "notif-207",
+    "category": "encouragement",
+    "text": "{name}, the heaviness you carry today is not the end of your story.",
+    "slots": ["midday", "evening"],
+    "burdens": ["grief"]
+  },
+  {
+    "id": "notif-208",
+    "category": "encouragement",
+    "text": "God already knows the outcome. Breathe. He is not panicking, so you don't need to.",
+    "slots": ["midday"],
+    "burdens": ["anxiety"]
+  },
+  {
+    "id": "notif-209",
+    "category": "encouragement",
+    "text": "Every giant in your life is just a chance for God to show up bigger.",
+    "slots": ["morning"],
+    "burdens": ["doubt", "anxiety"]
+  },
+  {
+    "id": "notif-210",
+    "category": "encouragement",
+    "text": "{name}, keep planting seeds of faithfulness. The harvest is on its way.",
+    "slots": ["midday"],
+    "burdens": ["purpose", "financial"]
+  },
+  {
+    "id": "notif-211",
+    "category": "encouragement",
+    "text": "God does not author confusion. If you feel lost, stand still. He will lead you.",
+    "slots": ["midday", "evening"],
+    "burdens": ["purpose"]
+  },
+  {
+    "id": "notif-212",
+    "category": "encouragement",
+    "text": "Healing is not always instant, but it is always in motion. God is working on you.",
+    "slots": ["midday"],
+    "burdens": ["health", "grief"]
+  },
+  {
+    "id": "notif-213",
+    "category": "encouragement",
+    "text": "{name}, the fact that you are still praying proves your faith is alive.",
+    "slots": ["evening"],
+    "burdens": ["doubt"]
+  },
+  {
+    "id": "notif-214",
+    "category": "encouragement",
+    "text": "God's love for you does not fluctuate with your performance. It is constant.",
+    "slots": ["midday"],
+    "burdens": ["temptation", "doubt"]
+  },
+  {
+    "id": "notif-215",
+    "category": "encouragement",
+    "text": "You were not made to carry everything. Let God shoulder what is too heavy.",
+    "slots": ["morning", "midday"],
+    "burdens": ["anxiety"]
+  },
+  {
+    "id": "notif-216",
+    "category": "encouragement",
+    "text": "{name}, a closed door is not rejection. It is redirection by a loving Father.",
+    "slots": ["midday"],
+    "burdens": ["purpose", "relationship"]
+  },
+  {
+    "id": "notif-217",
+    "category": "encouragement",
+    "text": "God can use your brokenness to bring wholeness to someone else.",
+    "slots": ["evening"],
+    "burdens": ["grief"]
+  },
+  {
+    "id": "notif-218",
+    "category": "encouragement",
+    "text": "The pressure you feel is not punishment. God is refining gold, not crushing dirt.",
+    "slots": ["midday"],
+    "burdens": ["anxiety", "purpose"]
+  },
+  {
+    "id": "notif-219",
+    "category": "encouragement",
+    "text": "{name}, God does not give up on slow learners. His patience with you is endless.",
+    "slots": ["evening"],
+    "burdens": ["temptation"]
+  },
+  {
+    "id": "notif-220",
+    "category": "encouragement",
+    "text": "The valley is where rivers run and flowers grow. Beauty is forming around you.",
+    "slots": ["midday", "evening"],
+    "burdens": ["grief", "doubt"]
+  },
+  {
+    "id": "notif-221",
+    "category": "encouragement",
+    "text": "Your struggle is not a sign of God's absence. He is closest in the fire.",
+    "slots": ["midday"],
+    "burdens": ["doubt", "health"]
+  },
+  {
+    "id": "notif-222",
+    "category": "encouragement",
+    "text": "{name}, your tears are not wasted. God collects them and turns them into rivers of joy.",
+    "slots": ["evening"],
+    "burdens": ["grief", "loneliness"]
+  },
+  {
+    "id": "notif-223",
+    "category": "encouragement",
+    "text": "Do not measure your worth by productivity. You are loved simply because you exist.",
+    "slots": ["midday"],
+    "burdens": ["purpose"]
+  },
+  {
+    "id": "notif-224",
+    "category": "encouragement",
+    "text": "God's provision sometimes arrives at the last minute, but it always arrives on time.",
+    "slots": ["morning", "midday"],
+    "burdens": ["financial"]
+  },
+  {
+    "id": "notif-225",
+    "category": "encouragement",
+    "text": "{name}, silence from God is not the same as absence. He is working in the quiet.",
+    "slots": ["evening"],
+    "burdens": ["doubt", "loneliness"]
+  },
+  {
+    "id": "notif-226",
+    "category": "encouragement",
+    "text": "What feels like the end is often the beginning God has been planning all along.",
+    "slots": ["midday"],
+    "burdens": ["grief", "relationship"]
+  },
+  {
+    "id": "notif-227",
+    "category": "encouragement",
+    "text": "You do not need to earn God's attention. You already have it, fully and completely.",
+    "slots": ["morning"],
+    "burdens": ["doubt"]
+  },
+  {
+    "id": "notif-228",
+    "category": "encouragement",
+    "text": "{name}, you are not falling behind. You are being positioned by the God who sees ahead.",
+    "slots": ["morning", "midday"],
+    "burdens": ["purpose", "anxiety"]
+  },
+  {
+    "id": "notif-229",
+    "category": "encouragement",
+    "text": "The battle you face today is already won in the heavenly places. Walk in victory.",
+    "slots": ["morning"],
+    "burdens": ["temptation", "anxiety"]
+  },
+  {
+    "id": "notif-230",
+    "category": "encouragement",
+    "text": "{name}, your story is still unfolding. The Author of life is not done writing.",
+    "slots": ["evening"],
+    "burdens": ["purpose", "doubt"]
+  },
+  {
+    "id": "notif-231",
+    "category": "gratitude",
+    "text": "Thank God for the grace that met you before your feet hit the floor this morning.",
+    "slots": ["morning"],
+    "burdens": []
+  },
+  {
+    "id": "notif-232",
+    "category": "gratitude",
+    "text": "{name}, thank God for every prayer He answered differently than you expected.",
+    "slots": ["evening"],
+    "burdens": ["doubt"]
+  },
+  {
+    "id": "notif-233",
+    "category": "gratitude",
+    "text": "Thank God for the strength you did not know you had. It came from Him.",
+    "slots": ["evening"],
+    "burdens": ["anxiety", "grief"]
+  },
+  {
+    "id": "notif-234",
+    "category": "gratitude",
+    "text": "Thank God for a faith that survives doubt. Wrestling with God means you are holding on.",
+    "slots": ["evening"],
+    "burdens": ["doubt"]
+  },
+  {
+    "id": "notif-235",
+    "category": "gratitude",
+    "text": "{name}, thank God for the meals, the shelter, and the breath. He provides daily.",
+    "slots": ["midday"],
+    "burdens": ["financial"]
+  },
+  {
+    "id": "notif-236",
+    "category": "gratitude",
+    "text": "Thank God for the beauty in ordinary moments. His fingerprints are everywhere.",
+    "slots": ["midday"],
+    "burdens": []
+  },
+  {
+    "id": "notif-237",
+    "category": "gratitude",
+    "text": "Thank God for the comfort of His Word when everything else feels uncertain.",
+    "slots": ["evening"],
+    "burdens": ["anxiety"]
+  },
+  {
+    "id": "notif-238",
+    "category": "gratitude",
+    "text": "{name}, thank God for the courage He gave you today, even when you felt afraid.",
+    "slots": ["evening"],
+    "burdens": ["anxiety"]
+  },
+  {
+    "id": "notif-239",
+    "category": "gratitude",
+    "text": "Thank God for the gift of community. You were never meant to walk alone.",
+    "slots": ["midday"],
+    "burdens": ["loneliness"]
+  },
+  {
+    "id": "notif-240",
+    "category": "gratitude",
+    "text": "Thank God for every sunrise. Each one is a canvas painted just for you.",
+    "slots": ["morning"],
+    "burdens": []
+  },
+  {
+    "id": "notif-241",
+    "category": "gratitude",
+    "text": "{name}, thank God for the battles He fought for you that you never even saw.",
+    "slots": ["evening"],
+    "burdens": ["anxiety"]
+  },
+  {
+    "id": "notif-242",
+    "category": "gratitude",
+    "text": "Thank God for the people who prayed for you when you could not pray for yourself.",
+    "slots": ["evening"],
+    "burdens": ["relationship", "health"]
+  },
+  {
+    "id": "notif-243",
+    "category": "gratitude",
+    "text": "Thank God for new seasons. Every chapter brings fresh grace and new possibilities.",
+    "slots": ["morning"],
+    "burdens": ["purpose"]
+  },
+  {
+    "id": "notif-244",
+    "category": "gratitude",
+    "text": "{name}, thank God that He is your Father, not your critic. He cheers for you.",
+    "slots": ["midday"],
+    "burdens": ["doubt", "purpose"]
+  },
+  {
+    "id": "notif-245",
+    "category": "gratitude",
+    "text": "Thank God for the moments of unexpected laughter. Joy is evidence of His presence.",
+    "slots": ["evening"],
+    "burdens": ["grief"]
+  },
+  {
+    "id": "notif-246",
+    "category": "reflection",
+    "text": "What is God teaching you about rest in a world that glorifies busyness?",
+    "slots": ["evening"],
+    "burdens": ["anxiety", "purpose"]
+  },
+  {
+    "id": "notif-247",
+    "category": "reflection",
+    "text": "{name}, what is God pruning from your life to make room for new growth?",
+    "slots": ["evening"],
+    "burdens": ["relationship", "purpose"]
+  },
+  {
+    "id": "notif-248",
+    "category": "reflection",
+    "text": "What is God showing you about His provision that you might be overlooking?",
+    "slots": ["evening"],
+    "burdens": ["financial"]
+  },
+  {
+    "id": "notif-249",
+    "category": "reflection",
+    "text": "What is God inviting you to release so your hands are open to receive?",
+    "slots": ["evening"],
+    "burdens": ["anxiety", "grief"]
+  },
+  {
+    "id": "notif-250",
+    "category": "reflection",
+    "text": "{name}, what is God revealing about your identity that the world has distorted?",
+    "slots": ["evening"],
+    "burdens": ["doubt", "loneliness"]
+  },
+  {
+    "id": "notif-251",
+    "category": "reflection",
+    "text": "What is God teaching you about joy that has nothing to do with circumstances?",
+    "slots": ["midday", "evening"],
+    "burdens": ["grief"]
+  },
+  {
+    "id": "notif-252",
+    "category": "reflection",
+    "text": "What is God asking you to believe about His goodness in spite of your pain?",
+    "slots": ["evening"],
+    "burdens": ["health", "grief"]
+  },
+  {
+    "id": "notif-253",
+    "category": "reflection",
+    "text": "{name}, what is God highlighting in your life that deserves more gratitude?",
+    "slots": ["evening"],
+    "burdens": []
+  },
+  {
+    "id": "notif-254",
+    "category": "reflection",
+    "text": "What is God calling you to be brave about that you have been avoiding?",
+    "slots": ["evening"],
+    "burdens": ["purpose", "doubt"]
+  },
+  {
+    "id": "notif-255",
+    "category": "reflection",
+    "text": "What is God reshaping in your heart through the relationships around you?",
+    "slots": ["evening"],
+    "burdens": ["relationship", "anger"]
+  },
+  {
+    "id": "notif-256",
+    "category": "blessing",
+    "text": "May God cradle your weary heart tonight. You have fought well today, {name}.",
+    "slots": ["bedtime"],
+    "burdens": ["anxiety", "grief"]
+  },
+  {
+    "id": "notif-257",
+    "category": "blessing",
+    "text": "May every fear dissolve in the warmth of God's presence as you drift to sleep.",
+    "slots": ["bedtime"],
+    "burdens": ["anxiety"]
+  },
+  {
+    "id": "notif-258",
+    "category": "blessing",
+    "text": "{name}, may God speak tenderly to your spirit through the stillness of the night.",
+    "slots": ["bedtime"],
+    "burdens": ["loneliness"]
+  },
+  {
+    "id": "notif-259",
+    "category": "blessing",
+    "text": "May God renew your strength tonight so you rise with fresh courage in the morning.",
+    "slots": ["bedtime"],
+    "burdens": ["doubt"]
+  },
+  {
+    "id": "notif-260",
+    "category": "blessing",
+    "text": "Release every unfinished task to God. He will be awake working while you rest.",
+    "slots": ["bedtime"],
+    "burdens": ["anxiety", "financial"]
+  },
+  {
+    "id": "notif-261",
+    "category": "blessing",
+    "text": "{name}, may the Good Shepherd lead you beside still waters tonight.",
+    "slots": ["bedtime"],
+    "burdens": []
+  },
+  {
+    "id": "notif-262",
+    "category": "blessing",
+    "text": "May God replace every heavy thought with a whisper of His peace as you sleep.",
+    "slots": ["bedtime"],
+    "burdens": ["grief"]
+  },
+  {
+    "id": "notif-263",
+    "category": "blessing",
+    "text": "Breathe out worry. Breathe in grace. God holds your tomorrow, {name}. Sleep well.",
+    "slots": ["bedtime"],
+    "burdens": ["anxiety"]
+  },
+  {
+    "id": "notif-264",
+    "category": "blessing",
+    "text": "May God surround your home with a hedge of protection and fill it with peace.",
+    "slots": ["bedtime"],
+    "burdens": ["relationship"]
+  },
+  {
+    "id": "notif-265",
+    "category": "blessing",
+    "text": "{name}, tonight is for rest, not replaying mistakes. Grace covers it all. Sleep.",
+    "slots": ["bedtime"],
+    "burdens": ["temptation", "anger"]
+  },
+  {
+    "id": "notif-266",
+    "category": "scripture-prompt",
+    "text": "Remember today: God's mercies are new every morning. Great is His faithfulness.",
+    "slots": ["morning"],
+    "burdens": []
+  },
+  {
+    "id": "notif-267",
+    "category": "scripture-prompt",
+    "text": "Meditate on this: nothing can separate you from the love of God in Christ Jesus.",
+    "slots": ["morning", "midday"],
+    "burdens": ["loneliness", "doubt"]
+  },
+  {
+    "id": "notif-268",
+    "category": "scripture-prompt",
+    "text": "{name}, dwell on this: He who began a good work in you will carry it to completion.",
+    "slots": ["morning"],
+    "burdens": ["purpose"]
+  },
+  {
+    "id": "notif-269",
+    "category": "scripture-prompt",
+    "text": "Hold this close: when you pass through the waters, He will be with you.",
+    "slots": ["midday"],
+    "burdens": ["anxiety", "grief"]
+  },
+  {
+    "id": "notif-270",
+    "category": "scripture-prompt",
+    "text": "Let this settle in your spirit: the Lord is your shepherd. You shall not want.",
+    "slots": ["morning", "evening"],
+    "burdens": ["financial"]
+  },
+  {
+    "id": "notif-271",
+    "category": "scripture-prompt",
+    "text": "{name}, remember: God has not given you a spirit of fear, but of power and love.",
+    "slots": ["morning"],
+    "burdens": ["anxiety"]
+  },
+  {
+    "id": "notif-272",
+    "category": "scripture-prompt",
+    "text": "Carry this truth today: cast all your anxiety on Him, because He cares for you.",
+    "slots": ["midday"],
+    "burdens": ["anxiety"]
+  },
+  {
+    "id": "notif-273",
+    "category": "scripture-prompt",
+    "text": "Ponder this: the peace of God, which surpasses all understanding, will guard your heart.",
+    "slots": ["midday", "evening"],
+    "burdens": ["anxiety"]
+  },
+  {
+    "id": "notif-274",
+    "category": "scripture-prompt",
+    "text": "{name}, reflect on this: weeping may last for the night, but joy comes in the morning.",
+    "slots": ["evening", "bedtime"],
+    "burdens": ["grief"]
+  },
+  {
+    "id": "notif-275",
+    "category": "scripture-prompt",
+    "text": "Treasure this today: I can do all things through Christ who strengthens me.",
+    "slots": ["morning", "midday"],
+    "burdens": ["doubt", "health"]
+  },
+  {
+    "id": "notif-276",
+    "category": "scripture-prompt",
+    "text": "Rest in this promise: those who wait on the Lord shall renew their strength.",
+    "slots": ["midday"],
+    "burdens": ["purpose", "anxiety"]
+  },
+  {
+    "id": "notif-277",
+    "category": "scripture-prompt",
+    "text": "{name}, receive this: the Lord fights for you. You need only to be still.",
+    "slots": ["midday"],
+    "burdens": ["anxiety", "temptation"]
+  },
+  {
+    "id": "notif-278",
+    "category": "scripture-prompt",
+    "text": "Anchor yourself in this: God is our refuge and strength, a present help in trouble.",
+    "slots": ["morning", "midday"],
+    "burdens": ["anxiety"]
+  },
+  {
+    "id": "notif-279",
+    "category": "scripture-prompt",
+    "text": "Breathe in this truth: the Lord is close to the brokenhearted and saves the crushed.",
+    "slots": ["evening"],
+    "burdens": ["grief", "loneliness"]
+  },
+  {
+    "id": "notif-280",
+    "category": "scripture-prompt",
+    "text": "{name}, let this guide you: trust in the Lord with all your heart and lean not on your own understanding.",
+    "slots": ["morning"],
+    "burdens": ["doubt", "purpose"]
+  },
+  {
+    "id": "notif-281",
+    "category": "morning-declaration",
+    "text": "Today I choose faith over fear. God goes before me and makes a way.",
+    "slots": ["morning"],
+    "burdens": ["anxiety"]
+  },
+  {
+    "id": "notif-282",
+    "category": "morning-declaration",
+    "text": "This is the day the Lord has made. I will rejoice and be glad in it.",
+    "slots": ["morning"],
+    "burdens": []
+  },
+  {
+    "id": "notif-283",
+    "category": "morning-declaration",
+    "text": "{name}, declare this: I am equipped, empowered, and enough through Christ today.",
+    "slots": ["morning"],
+    "burdens": ["purpose", "doubt"]
+  },
+  {
+    "id": "notif-284",
+    "category": "morning-declaration",
+    "text": "Today I will not be shaken. My feet are planted on the Rock that never moves.",
+    "slots": ["morning"],
+    "burdens": ["anxiety"]
+  },
+  {
+    "id": "notif-285",
+    "category": "morning-declaration",
+    "text": "I declare that no weapon formed against me shall prosper today.",
+    "slots": ["morning"],
+    "burdens": ["temptation"]
+  },
+  {
+    "id": "notif-286",
+    "category": "morning-declaration",
+    "text": "{name}, speak this out: I am loved, I am called, and I walk in purpose today.",
+    "slots": ["morning"],
+    "burdens": ["purpose", "loneliness"]
+  },
+  {
+    "id": "notif-287",
+    "category": "morning-declaration",
+    "text": "Today I release worry and grab hold of worship. God is bigger than my problems.",
+    "slots": ["morning"],
+    "burdens": ["anxiety"]
+  },
+  {
+    "id": "notif-288",
+    "category": "morning-declaration",
+    "text": "I choose joy today, not because everything is perfect, but because God is good.",
+    "slots": ["morning"],
+    "burdens": ["grief"]
+  },
+  {
+    "id": "notif-289",
+    "category": "morning-declaration",
+    "text": "{name}, declare it: today I walk in the favor and blessing of the Most High God.",
+    "slots": ["morning"],
+    "burdens": ["financial"]
+  },
+  {
+    "id": "notif-290",
+    "category": "morning-declaration",
+    "text": "I am not a victim of my circumstances. I am a victor through Jesus Christ.",
+    "slots": ["morning"],
+    "burdens": ["doubt"]
+  },
+  {
+    "id": "notif-291",
+    "category": "morning-declaration",
+    "text": "Today I choose kindness over criticism and grace over judgment.",
+    "slots": ["morning"],
+    "burdens": ["anger", "relationship"]
+  },
+  {
+    "id": "notif-292",
+    "category": "morning-declaration",
+    "text": "{name}, say this aloud: I trust God's plan even when I cannot see the full picture.",
+    "slots": ["morning"],
+    "burdens": ["doubt", "anxiety"]
+  },
+  {
+    "id": "notif-293",
+    "category": "morning-declaration",
+    "text": "Today I will be a light in someone's darkness. God will lead me to them.",
+    "slots": ["morning"],
+    "burdens": []
+  },
+  {
+    "id": "notif-294",
+    "category": "morning-declaration",
+    "text": "I declare my body is a temple of the Holy Spirit. I honor God with it today.",
+    "slots": ["morning"],
+    "burdens": ["health", "temptation"]
+  },
+  {
+    "id": "notif-295",
+    "category": "morning-declaration",
+    "text": "{name}, proclaim this: God's grace is sufficient for everything I face today.",
+    "slots": ["morning"],
+    "burdens": ["anxiety"]
+  },
+  {
+    "id": "notif-296",
+    "category": "morning-declaration",
+    "text": "Today I refuse to let yesterday's failures define me. I am made new each morning.",
+    "slots": ["morning"],
+    "burdens": ["temptation"]
+  },
+  {
+    "id": "notif-297",
+    "category": "morning-declaration",
+    "text": "I step into this day knowing I am never alone. God walks with me always.",
+    "slots": ["morning"],
+    "burdens": ["loneliness"]
+  },
+  {
+    "id": "notif-298",
+    "category": "morning-declaration",
+    "text": "{name}, declare this: today I will trust God one moment at a time.",
+    "slots": ["morning"],
+    "burdens": ["anxiety", "doubt"]
+  },
+  {
+    "id": "notif-299",
+    "category": "morning-declaration",
+    "text": "I declare that goodness and mercy follow me today and all the days of my life.",
+    "slots": ["morning"],
+    "burdens": []
+  },
+  {
+    "id": "notif-300",
+    "category": "morning-declaration",
+    "text": "{name}, speak life today: I am strong, I am blessed, and I am held by God.",
+    "slots": ["morning"],
+    "burdens": ["grief", "health"]
   }
 ]
