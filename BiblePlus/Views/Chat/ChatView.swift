@@ -163,7 +163,10 @@ private struct ChatContentView: View {
                             }()
 
                             let isFirst = message.role == .assistant && previousRole != .assistant
-                            let isLast = message.role == .assistant && nextRole != .assistant
+                            // During chunk typing, the last visible message isn't truly the "last" yet
+                            let isLast = message.role == .assistant
+                                && nextRole != .assistant
+                                && !viewModel.isChunkTyping
 
                             ChatBubbleView(
                                 message: message,
@@ -199,50 +202,48 @@ private struct ChatContentView: View {
 
                     // Chunk typing indicator
                     if viewModel.isChunkTyping {
-                        HStack(alignment: .top, spacing: 10) {
-                            Spacer()
-                                .frame(width: 28)
-                                .padding(.top, 2)
-
-                            TypingDotsView()
-                                .transition(.scale(scale: 0.8).combined(with: .opacity))
-
-                            Spacer(minLength: 40)
-                        }
-                        .padding(.horizontal, 16)
-                        .padding(.top, 2)
-                        .padding(.bottom, 2)
-                        .id("chunk-typing")
+                        chunkTypingIndicator
+                            .id("chunk-typing")
+                            .transition(.opacity.animation(.easeInOut(duration: 0.2)))
                     }
+
+                    // Invisible anchor for scroll tracking
+                    Color.clear.frame(height: 1).id("bottom-anchor")
                 }
                 .padding(.vertical, 16)
             }
+            .defaultScrollAnchor(.bottom)
             .scrollDismissesKeyboard(.interactively)
             .onChange(of: viewModel.displayMessages.count) { _, _ in
                 scrollToBottom(proxy: proxy)
             }
-            .onChange(of: viewModel.displayMessages.last?.content) { _, _ in
+            .onChange(of: viewModel.isChunkTyping) { _, _ in
                 scrollToBottom(proxy: proxy)
-            }
-            .onChange(of: viewModel.isChunkTyping) { _, isTyping in
-                if isTyping {
-                    withAnimation(.easeOut(duration: 0.2)) {
-                        proxy.scrollTo("chunk-typing", anchor: .bottom)
-                    }
-                }
             }
         }
     }
 
+    private var chunkTypingIndicator: some View {
+        HStack(alignment: .top, spacing: 10) {
+            Spacer()
+                .frame(width: 28)
+
+            TypingDotsView()
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(palette.surfaceElevated.opacity(0.5))
+                )
+
+            Spacer(minLength: 40)
+        }
+        .padding(.horizontal, 16)
+        .padding(.top, 4)
+        .padding(.bottom, 2)
+    }
+
     private func scrollToBottom(proxy: ScrollViewProxy) {
-        if viewModel.isChunkTyping {
-            withAnimation(.easeOut(duration: 0.2)) {
-                proxy.scrollTo("chunk-typing", anchor: .bottom)
-            }
-        } else if let lastID = viewModel.displayMessages.last?.id {
-            withAnimation(.easeOut(duration: 0.2)) {
-                proxy.scrollTo(lastID, anchor: .bottom)
-            }
+        withAnimation(.easeOut(duration: 0.15)) {
+            proxy.scrollTo("bottom-anchor", anchor: .bottom)
         }
     }
 

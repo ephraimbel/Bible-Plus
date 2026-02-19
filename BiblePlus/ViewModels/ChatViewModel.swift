@@ -474,14 +474,29 @@ final class ChatViewModel {
             let (cleaned, suggestions) = AIService.extractSuggestions(from: assistantMessage.content)
             if !suggestions.isEmpty {
                 assistantMessage.content = cleaned
+            }
+
+            // Decide chunking BEFORE turning off streaming to avoid flash
+            let fullContent = assistantMessage.content
+            let paragraphs = fullContent
+                .components(separatedBy: "\n\n")
+                .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                .filter { !$0.isEmpty }
+
+            let willChunk = paragraphs.count >= 3
+            isStreaming = false
+
+            if willChunk {
+                // Seamlessly transition into chunked delivery
+                await deliverChunked(assistantMessage: assistantMessage, paragraphs: paragraphs)
+            }
+
+            // Show follow-up suggestions only after all chunks delivered
+            if !suggestions.isEmpty {
                 followUpSuggestions = suggestions
             }
 
-            isStreaming = false
             try? modelContext.save()
-
-            // Chunked delivery
-            await deliverChunked(assistantMessage: assistantMessage)
         } catch {
             if assistantMessage.content.isEmpty {
                 // Store the last user message content for retry
@@ -504,27 +519,18 @@ final class ChatViewModel {
 
     // MARK: - Chunked Delivery
 
-    private func deliverChunked(assistantMessage: ChatMessage) async {
+    private func deliverChunked(assistantMessage: ChatMessage, paragraphs: [String]) async {
         let fullContent = assistantMessage.content
-        let paragraphs = fullContent
-            .components(separatedBy: "\n\n")
-            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-            .filter { !$0.isEmpty }
-
-        // Only chunk if 3+ paragraphs
-        guard paragraphs.count >= 3 else { return }
 
         // Group into 2-3 chunks
         let chunks: [String]
         if paragraphs.count <= 4 {
-            // 3-4 paragraphs → 2 chunks
             let mid = paragraphs.count / 2
             chunks = [
                 paragraphs[0..<mid].joined(separator: "\n\n"),
                 paragraphs[mid...].joined(separator: "\n\n"),
             ]
         } else {
-            // 5+ paragraphs → 3 chunks
             let third = paragraphs.count / 3
             let twoThirds = third * 2
             chunks = [
@@ -536,25 +542,18 @@ final class ChatViewModel {
 
         guard chunks.count >= 2 else { return }
 
-        // Remove the full assistant message from display
-        if let idx = displayMessages.lastIndex(where: { $0.id == assistantMessage.id }) {
-            displayMessages.remove(at: idx)
-        }
-
-        // Show first chunk immediately (same ID as original)
+        // Replace full message content with first chunk (same object, no flash)
         assistantMessage.content = chunks[0]
-        displayMessages.append(assistantMessage)
 
         // Deliver remaining chunks with typing indicator between each
-        for (i, chunk) in chunks.dropFirst().enumerated() {
+        for chunk in chunks.dropFirst() {
             isChunkTyping = true
 
-            let delay = UInt64.random(in: 600_000_000...1_200_000_000) // 600-1200ms
+            let delay = UInt64.random(in: 600_000_000...1_000_000_000) // 600-1000ms
             try? await Task.sleep(nanoseconds: delay)
 
             guard !Task.isCancelled else {
                 isChunkTyping = false
-                // Restore full content if cancelled
                 assistantMessage.content = fullContent
                 rebuildDisplayMessages()
                 return
@@ -562,25 +561,13 @@ final class ChatViewModel {
 
             isChunkTyping = false
 
-            let isLast = i == chunks.count - 2
-
-            if isLast {
-                // Last chunk: create a virtual message but keep original ID for prayer detection
-                let virtualMessage = ChatMessage(
-                    conversationId: conversationId,
-                    role: .assistant,
-                    content: chunk
-                )
-                // Don't persist — display only
-                displayMessages.append(virtualMessage)
-            } else {
-                let virtualMessage = ChatMessage(
-                    conversationId: conversationId,
-                    role: .assistant,
-                    content: chunk
-                )
-                displayMessages.append(virtualMessage)
-            }
+            // Create display-only virtual message for this chunk
+            let virtualMessage = ChatMessage(
+                conversationId: conversationId,
+                role: .assistant,
+                content: chunk
+            )
+            displayMessages.append(virtualMessage)
         }
 
         // Restore full content in the persisted message for future loads

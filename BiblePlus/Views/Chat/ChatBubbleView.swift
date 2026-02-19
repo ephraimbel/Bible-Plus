@@ -22,6 +22,7 @@ struct ChatBubbleView: View {
     @Environment(\.bpPalette) private var palette
     @State private var appeared: Bool = false
     @State private var showReactionBar: Bool = false
+    @State private var reactionDismissTask: Task<Void, Never>?
 
     private var isTypingPlaceholder: Bool {
         isStreaming && message.role == .assistant && message.content.isEmpty
@@ -29,6 +30,11 @@ struct ChatBubbleView: View {
 
     private var isActivelyStreaming: Bool {
         isStreaming && message.role == .assistant && !message.content.isEmpty
+    }
+
+    /// Skip fade-in for streaming messages — they should appear instantly
+    private var shouldSkipFadeIn: Bool {
+        isStreaming && message.role == .assistant
     }
 
     private var showRoleGap: Bool {
@@ -138,10 +144,15 @@ struct ChatBubbleView: View {
         .padding(.top, showRoleGap ? 16 : 2)
         .padding(.bottom, 2)
         .opacity(appeared ? 1 : 0)
-        .offset(y: appeared ? 0 : 8)
+        .offset(y: appeared ? 0 : 6)
         .onAppear {
-            withAnimation(.spring(response: 0.4, dampingFraction: 0.85).delay(appearDelay)) {
+            if shouldSkipFadeIn || appeared {
+                // Streaming messages or already-seen messages appear instantly
                 appeared = true
+            } else {
+                withAnimation(.spring(response: 0.35, dampingFraction: 0.82).delay(appearDelay)) {
+                    appeared = true
+                }
             }
         }
     }
@@ -190,34 +201,42 @@ struct ChatBubbleView: View {
     // MARK: - Assistant Content (No Bubble)
 
     private var assistantContent: some View {
-        let segments = MessageParser.parse(message.content)
+        VStack(alignment: .leading, spacing: 8) {
+            if isActivelyStreaming {
+                // During streaming: lightweight plain text — no regex, no markdown parsing
+                Text(message.content)
+                    .font(.system(size: 15.5, weight: .regular, design: .rounded))
+                    .foregroundStyle(palette.textPrimary)
+                    .lineSpacing(3)
+                    .textSelection(.enabled)
 
-        return VStack(alignment: .leading, spacing: 8) {
-            ForEach(Array(segments.enumerated()), id: \.offset) { _, segment in
-                switch segment {
-                case .text(let text):
-                    if !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                        textView(text)
+                streamingCursor
+            } else {
+                // After streaming: full markdown + scripture highlighting + verse cards
+                let segments = MessageParser.parse(message.content)
+                ForEach(Array(segments.enumerated()), id: \.offset) { _, segment in
+                    switch segment {
+                    case .text(let text):
+                        if !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                            textView(text)
+                        }
+                    case .verseCard(let quote, let reference):
+                        verseCardView(quote: quote, reference: reference)
                     }
-                case .verseCard(let quote, let reference):
-                    verseCardView(quote: quote, reference: reference)
                 }
             }
-
-            // Streaming cursor
-            if isActivelyStreaming {
-                streamingCursor
-            }
         }
+        .animation(.none, value: message.content)
         .onLongPressGesture(minimumDuration: 0.4) {
             guard !isStreaming, message.role == .assistant else { return }
             HapticService.lightImpact()
             withAnimation(BPAnimation.spring) {
                 showReactionBar = true
             }
-            // Auto-dismiss after 3 seconds
-            Task {
+            reactionDismissTask?.cancel()
+            reactionDismissTask = Task {
                 try? await Task.sleep(for: .seconds(3))
+                guard !Task.isCancelled else { return }
                 withAnimation(BPAnimation.spring) {
                     showReactionBar = false
                 }
