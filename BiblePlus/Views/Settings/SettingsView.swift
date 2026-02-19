@@ -295,7 +295,7 @@ private struct SettingsContentView: View {
 
                     rowDivider
 
-                    // Gentle Reminders toggle (Pro)
+                    // Gentle Reminders toggle
                     HStack(spacing: 14) {
                         Image(systemName: "hand.wave")
                             .font(.system(size: 13, weight: .medium))
@@ -307,20 +307,9 @@ private struct SettingsContentView: View {
                             )
 
                         VStack(alignment: .leading, spacing: 2) {
-                            HStack(spacing: 6) {
-                                Text("Gentle Reminders")
-                                    .font(.system(size: 15, weight: .medium, design: .rounded))
-                                    .foregroundStyle(palette.textPrimary)
-
-                                if !vm.profile.isPro {
-                                    Text("PRO")
-                                        .font(.system(size: 9, weight: .bold, design: .rounded))
-                                        .foregroundStyle(.white)
-                                        .padding(.horizontal, 5)
-                                        .padding(.vertical, 2)
-                                        .background(Capsule().fill(palette.accent))
-                                }
-                            }
+                            Text("Gentle Reminders")
+                                .font(.system(size: 15, weight: .medium, design: .rounded))
+                                .foregroundStyle(palette.textPrimary)
                             Text("Short prayers & encouragements throughout the day")
                                 .font(.system(size: 12, weight: .regular, design: .rounded))
                                 .foregroundStyle(palette.textMuted)
@@ -334,7 +323,6 @@ private struct SettingsContentView: View {
                         ))
                         .tint(palette.accent)
                         .labelsHidden()
-                        .disabled(!vm.profile.isPro)
                     }
                     .padding(.horizontal, 16)
                     .padding(.vertical, 12)

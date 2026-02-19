@@ -69,17 +69,14 @@ final class NotificationService {
                 name: name
             )
 
-            let subtitles = slot.notificationSubtitles(name: name).shuffled()
-
             for dayOffset in 0..<scheduleDays {
                 guard let targetDate = calendar.date(byAdding: .day, value: dayOffset, to: today) else { continue }
                 let item = items[dayOffset % items.count]
 
                 let notifContent = UNMutableNotificationContent()
-                notifContent.title = "Bible Plus"
-                notifContent.subtitle = subtitles[dayOffset % subtitles.count]
-                notifContent.body = item.text
-                notifContent.sound = .default
+                notifContent.title = slot.prayerTimeTitle(name: name)
+                notifContent.subtitle = item.text
+                notifContent.sound = UNNotificationSound(named: UNNotificationSoundName("prayerAlarm.m4a"))
                 notifContent.categoryIdentifier = Self.devotionalCategoryIdentifier
 
                 var userInfo: [String: Any] = [:]
@@ -158,17 +155,14 @@ final class NotificationService {
                     content: content
                 )
 
-                let subtitles = slot.notificationSubtitles(name: name).shuffled()
-
                 for dayOffset in 0..<scheduleDays {
                     guard let targetDate = calendar.date(byAdding: .day, value: dayOffset, to: today) else { continue }
                     let item = items[dayOffset % items.count]
 
                     let notifContent = UNMutableNotificationContent()
-                    notifContent.title = "Bible Plus"
-                    notifContent.subtitle = subtitles[dayOffset % subtitles.count]
-                    notifContent.body = item.text
-                    notifContent.sound = .default
+                    notifContent.title = slot.prayerTimeTitle(name: name)
+                    notifContent.subtitle = item.text
+                    notifContent.sound = UNNotificationSound(named: UNNotificationSoundName("prayerAlarm.m4a"))
                     notifContent.categoryIdentifier = Self.devotionalCategoryIdentifier
 
                     var userInfo: [String: Any] = [:]

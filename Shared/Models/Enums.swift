@@ -291,6 +291,15 @@ enum PrayerTimeSlot: String, Codable, CaseIterable, Identifiable {
         }
     }
 
+    func prayerTimeTitle(name: String) -> String {
+        switch self {
+        case .morning: return "Morning Prayer Time, \(name)"
+        case .midday: return "Midday Prayer Time, \(name)"
+        case .evening: return "Evening Prayer Time, \(name)"
+        case .bedtime: return "Bedtime Prayer, \(name)"
+        }
+    }
+
     func notificationSubtitles(name: String) -> [String] {
         switch self {
         case .morning:
