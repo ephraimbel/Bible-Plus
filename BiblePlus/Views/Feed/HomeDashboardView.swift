@@ -449,7 +449,7 @@ struct HomeDashboardView: View {
             VStack(alignment: .leading, spacing: 3) {
                 Text("What\u{2019}s on your heart?")
                     .font(.system(size: 14, weight: .bold, design: .rounded))
-                    .foregroundStyle(palette.textPrimary)
+                    .foregroundStyle(.white)
 
                 Text("Ask anything about faith, life, or Scripture")
                     .font(.system(size: 13, weight: .regular, design: .serif))

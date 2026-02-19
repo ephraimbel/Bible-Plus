@@ -111,60 +111,67 @@ struct ChapterReaderView: View {
             HapticService.selection()
             onVerseTap(VerseItem(number: number, text: text))
         } label: {
-            HStack(alignment: .firstTextBaseline, spacing: 8) {
-                // Verse number with optional bookmark/note indicators
-                ZStack(alignment: .topTrailing) {
-                    Text("\(number)")
-                        .font(.system(size: max(11, readerFontSize * 0.65), weight: .light, design: .serif))
-                        .foregroundStyle(palette.accent)
-                        .frame(width: 24, alignment: .trailing)
-
-                    if isSaved {
-                        Image(systemName: "bookmark.fill")
-                            .font(.system(size: 6))
-                            .foregroundStyle(
-                                highlight != nil
-                                    ? Color(hex: highlight!.dotColor)
-                                    : palette.accent
-                            )
-                            .offset(x: 6, y: -2)
-                    }
-
-                    if hasNote {
-                        Image(systemName: "text.bubble.fill")
-                            .font(.system(size: 5))
-                            .foregroundStyle(palette.accent)
-                            .offset(x: 6, y: isSaved ? 6 : -2)
-                    }
-                }
-
-                Text(text)
-                    .font(.system(size: readerFontSize, weight: .regular, design: readerFontDesign))
-                    .foregroundStyle(isRedLetter ? palette.jesusWords : palette.textPrimary)
-                    .multilineTextAlignment(.leading)
-                    .lineSpacing(readerLineSpacing)
-            }
-            .padding(.vertical, 6)
-            .padding(.horizontal, 8)
+            buildVerseText(
+                number: number,
+                text: text,
+                isRedLetter: isRedLetter,
+                isSaved: isSaved,
+                hasNote: hasNote,
+                highlight: highlight
+            )
+            .multilineTextAlignment(.leading)
+            .lineSpacing(readerLineSpacing)
+            .padding(.vertical, 0)
+            .padding(.horizontal, 4)
             .background(
-                RoundedRectangle(cornerRadius: 8)
+                RoundedRectangle(cornerRadius: 4)
                     .fill(verseBackground(isSelected: isSelected, highlight: highlight, isAudioHighlight: isAudioActive, isLastRead: isLastRead))
             )
-            .overlay(alignment: .leading) {
-                if isAudioActive {
-                    RoundedRectangle(cornerRadius: 2)
-                        .fill(palette.accent)
-                        .frame(width: 3)
-                        .padding(.vertical, 4)
-                } else if isLastRead {
-                    RoundedRectangle(cornerRadius: 2)
-                        .fill(palette.accent.opacity(0.5))
-                        .frame(width: 3)
-                        .padding(.vertical, 4)
-                }
-            }
         }
         .buttonStyle(.plain)
+    }
+
+    private func buildVerseText(
+        number: Int,
+        text: String,
+        isRedLetter: Bool,
+        isSaved: Bool,
+        hasNote: Bool,
+        highlight: VerseHighlightColor?
+    ) -> Text {
+        let superscriptSize = max(9, readerFontSize * 0.55)
+
+        var result = Text("\(number)")
+            .font(.system(size: superscriptSize, weight: .semibold, design: .serif))
+            .foregroundColor(palette.accent)
+            .baselineOffset(6)
+
+        if isSaved {
+            result = result + Text(Image(systemName: "bookmark.fill"))
+                .font(.system(size: 7))
+                .foregroundColor(
+                    highlight != nil
+                        ? Color(hex: highlight!.dotColor)
+                        : palette.accent
+                )
+                .baselineOffset(6)
+        }
+
+        if hasNote {
+            result = result + Text(Image(systemName: "text.bubble.fill"))
+                .font(.system(size: 6))
+                .foregroundColor(palette.accent)
+                .baselineOffset(6)
+        }
+
+        result = result + Text("\u{2009}")
+            .font(.system(size: readerFontSize, design: readerFontDesign))
+
+        result = result + Text(text)
+            .font(.system(size: readerFontSize, weight: .regular, design: readerFontDesign))
+            .foregroundColor(isRedLetter ? palette.jesusWords : palette.textPrimary)
+
+        return result
     }
 
     private func verseBackground(isSelected: Bool, highlight: VerseHighlightColor?, isAudioHighlight: Bool, isLastRead: Bool = false) -> Color {
