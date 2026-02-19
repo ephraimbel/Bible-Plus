@@ -31,16 +31,12 @@ enum ActivityService {
 
     // MARK: - Today
 
-    static func activityCountToday(in context: ModelContext) -> Int {
+    static func hasActivityToday(in context: ModelContext) -> Bool {
         let startOfDay = Calendar.current.startOfDay(for: Date())
         let descriptor = FetchDescriptor<ActivityEvent>(
             predicate: #Predicate { $0.createdAt >= startOfDay }
         )
-        return (try? context.fetchCount(descriptor)) ?? 0
-    }
-
-    static func hasActivityToday(in context: ModelContext) -> Bool {
-        activityCountToday(in: context) > 0
+        return ((try? context.fetchCount(descriptor)) ?? 0) > 0
     }
 
     // MARK: - Stats

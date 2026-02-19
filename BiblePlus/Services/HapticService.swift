@@ -17,15 +17,7 @@ enum HapticService {
         impact(.light)
     }
 
-    static func heavyImpact() {
-        impact(.heavy)
-    }
-
     static func success() {
         notification(.success)
-    }
-
-    static func error() {
-        notification(.error)
     }
 }

@@ -78,13 +78,6 @@ final class PersonalizationService {
         save()
     }
 
-    func updateProStatus(_ isPro: Bool) {
-        let profile = getOrCreateProfile()
-        profile.isPro = isPro
-        profile.updatedAt = Date()
-        save()
-    }
-
     func updateSoundscape(_ soundscapeID: String) {
         let profile = getOrCreateProfile()
         profile.selectedSoundscapeID = soundscapeID
