@@ -430,7 +430,7 @@ final class ChatViewModel {
     func applyInitialContext() {
         guard let context = initialContext, !context.isEmpty else { return }
         initialContext = nil
-        inputText = context
+        sendQuickPrompt(context)
     }
 
     // MARK: - Save / Share AI Response

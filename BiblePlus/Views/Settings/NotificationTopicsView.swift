@@ -115,8 +115,9 @@ struct NotificationTopicsView: View {
         } label: {
             HStack(spacing: 14) {
                 // Icon
-                Text(topic.icon)
-                    .font(.system(size: 18))
+                Image(systemName: topic.icon)
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundStyle(palette.accent)
                     .frame(width: 32, height: 32)
                     .background(
                         Circle()
