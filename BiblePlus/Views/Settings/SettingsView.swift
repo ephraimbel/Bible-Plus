@@ -109,6 +109,10 @@ private struct SettingsContentView: View {
                 WidgetGuideView(mode: .lockScreen)
                     .presentationDetents([.large])
             }
+            .sheet(isPresented: $vm.showNotificationTopics) {
+                NotificationTopicsView(vm: vm, showPaywall: $showPaywall)
+                    .presentationDetents([.large])
+            }
             .fullScreenCover(isPresented: $showPaywall) {
                 SummaryPaywallView()
             }
@@ -261,7 +265,7 @@ private struct SettingsContentView: View {
 
                     rowDivider
 
-                    // Faith Boosts toggle
+                    // Faith Boosts toggle + topic picker
                     HStack(spacing: 14) {
                         Image(systemName: "sparkles")
                             .font(.system(size: 13, weight: .medium))
@@ -276,7 +280,7 @@ private struct SettingsContentView: View {
                             Text("Faith Boosts")
                                 .font(.system(size: 15, weight: .medium, design: .rounded))
                                 .foregroundStyle(palette.textPrimary)
-                            Text("Short verses & prayers every 2 hours")
+                            Text("Verses & prayers throughout your day")
                                 .font(.system(size: 12, weight: .regular, design: .rounded))
                                 .foregroundStyle(palette.textMuted)
                         }
@@ -293,39 +297,42 @@ private struct SettingsContentView: View {
                     .padding(.horizontal, 16)
                     .padding(.vertical, 12)
 
-                    rowDivider
+                    if vm.profile.faithBoostsEnabled {
+                        rowDivider
 
-                    // Gentle Reminders toggle
-                    HStack(spacing: 14) {
-                        Image(systemName: "hand.wave")
-                            .font(.system(size: 13, weight: .medium))
-                            .foregroundStyle(palette.accent)
-                            .frame(width: 32, height: 32)
-                            .background(
-                                Circle()
-                                    .fill(palette.accent.opacity(0.08))
-                            )
+                        Button {
+                            HapticService.selection()
+                            vm.showNotificationTopics = true
+                        } label: {
+                            HStack(spacing: 14) {
+                                Image(systemName: "list.bullet")
+                                    .font(.system(size: 13, weight: .medium))
+                                    .foregroundStyle(palette.accent)
+                                    .frame(width: 32, height: 32)
+                                    .background(
+                                        Circle()
+                                            .fill(palette.accent.opacity(0.08))
+                                    )
 
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text("Gentle Reminders")
-                                .font(.system(size: 15, weight: .medium, design: .rounded))
-                                .foregroundStyle(palette.textPrimary)
-                            Text("Short prayers & encouragements throughout the day")
-                                .font(.system(size: 12, weight: .regular, design: .rounded))
-                                .foregroundStyle(palette.textMuted)
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text("Topics")
+                                        .font(.system(size: 15, weight: .medium, design: .rounded))
+                                        .foregroundStyle(palette.textPrimary)
+                                    Text("\(vm.profile.selectedNotificationTopics.count) selected")
+                                        .font(.system(size: 12, weight: .regular, design: .rounded))
+                                        .foregroundStyle(palette.textMuted)
+                                }
+
+                                Spacer()
+
+                                Image(systemName: "chevron.right")
+                                    .font(.system(size: 11, weight: .semibold))
+                                    .foregroundStyle(palette.textMuted.opacity(0.5))
+                            }
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 12)
                         }
-
-                        Spacer()
-
-                        Toggle("", isOn: Binding(
-                            get: { vm.profile.gentleRemindersEnabled },
-                            set: { _ in vm.toggleGentleReminders() }
-                        ))
-                        .tint(palette.accent)
-                        .labelsHidden()
                     }
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 12)
 
                     rowDivider
 

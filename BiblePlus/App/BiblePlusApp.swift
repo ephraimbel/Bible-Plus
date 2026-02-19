@@ -115,7 +115,7 @@ struct BiblePlusApp: App {
             let streakReminderEnabled = profile.streakReminderEnabled
             let planReminderEnabled = profile.planReminderEnabled
             let faithBoostsEnabled = profile.faithBoostsEnabled
-            let gentleRemindersEnabled = profile.gentleRemindersEnabled
+            let selectedTopics = profile.selectedNotificationTopics
 
             // Find active reading plan for plan reminders
             var activePlanName: String?
@@ -156,7 +156,7 @@ struct BiblePlusApp: App {
                     activePlanNextDay: activePlanNextDay,
                     activePlanTotalDays: activePlanTotalDays,
                     faithBoostsEnabled: faithBoostsEnabled,
-                    gentleRemindersEnabled: gentleRemindersEnabled
+                    selectedTopics: selectedTopics
                 )
             }
         }

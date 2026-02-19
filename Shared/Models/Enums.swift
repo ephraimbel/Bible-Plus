@@ -1627,3 +1627,141 @@ enum ChatEmotion: String, CaseIterable, Identifiable {
         }
     }
 }
+
+// MARK: - Notification Topic
+
+enum NotificationTopic: String, Codable, CaseIterable, Identifiable {
+    // Free topics (8)
+    case morningVerses
+    case eveningPeace
+    case anxiety
+    case strength
+    case hope
+    case gratitude
+    case prayers
+    case encouragement
+
+    // Pro topics (12)
+    case godsLove
+    case faith
+    case wisdom
+    case forgiveness
+    case joy
+    case peace
+    case trust
+    case marriage
+    case parenting
+    case healing
+    case provision
+    case spiritualWarfare
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .morningVerses: "Morning Verses"
+        case .eveningPeace: "Evening Peace"
+        case .anxiety: "Anxiety & Comfort"
+        case .strength: "Strength & Courage"
+        case .hope: "Hope"
+        case .gratitude: "Gratitude"
+        case .prayers: "Prayers"
+        case .encouragement: "Encouragement"
+        case .godsLove: "God's Love"
+        case .faith: "Faith"
+        case .wisdom: "Wisdom"
+        case .forgiveness: "Forgiveness"
+        case .joy: "Joy"
+        case .peace: "Peace"
+        case .trust: "Trust"
+        case .marriage: "Marriage"
+        case .parenting: "Parenting"
+        case .healing: "Comfort & Healing"
+        case .provision: "Provision"
+        case .spiritualWarfare: "Spiritual Warfare"
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .morningVerses: "sunrise"
+        case .eveningPeace: "moon.stars"
+        case .anxiety: "heart.circle"
+        case .strength: "bolt.heart"
+        case .hope: "sun.and.horizon"
+        case .gratitude: "hands.sparkles"
+        case .prayers: "hands.and.sparkles"
+        case .encouragement: "hand.thumbsup"
+        case .godsLove: "heart.fill"
+        case .faith: "sparkles"
+        case .wisdom: "book.closed"
+        case .forgiveness: "arrow.uturn.backward.circle"
+        case .joy: "face.smiling"
+        case .peace: "leaf"
+        case .trust: "shield"
+        case .marriage: "heart.circle.fill"
+        case .parenting: "figure.and.child.holdinghands"
+        case .healing: "cross.case"
+        case .provision: "basket"
+        case .spiritualWarfare: "shield.checkered"
+        }
+    }
+
+    var isPro: Bool {
+        switch self {
+        case .morningVerses, .eveningPeace, .anxiety, .strength,
+             .hope, .gratitude, .prayers, .encouragement:
+            false
+        case .godsLove, .faith, .wisdom, .forgiveness,
+             .joy, .peace, .trust, .marriage,
+             .parenting, .healing, .provision, .spiritualWarfare:
+            true
+        }
+    }
+
+    /// Which curated verse MARK categories this topic maps to.
+    var verseCategories: [String] {
+        switch self {
+        case .morningVerses: ["Morning", "More Morning"]
+        case .eveningPeace: ["Bedtime / Peace", "Rest & Sabbath"]
+        case .anxiety: ["Anxiety & Worry"]
+        case .strength: ["Strength & Courage"]
+        case .hope: ["Hope"]
+        case .gratitude: ["Gratitude & Thanksgiving"]
+        case .prayers: ["Prayer Life"]
+        case .encouragement: ["Patience & Perseverance", "Identity in Christ", "More Identity in Christ"]
+        case .godsLove: ["God's Love"]
+        case .faith: ["Faith"]
+        case .wisdom: ["Wisdom"]
+        case .forgiveness: ["Forgiveness"]
+        case .joy: ["Joy"]
+        case .peace: ["Peace"]
+        case .trust: ["Trust"]
+        case .marriage: ["Marriage"]
+        case .parenting: ["Parenting", "Children & Youth"]
+        case .healing: ["Comfort & Healing", "Health"]
+        case .provision: ["Provision", "More Provision", "Financial", "Work & Diligence", "Generosity & Service"]
+        case .spiritualWarfare: ["Spiritual Warfare", "Protection", "More Protection"]
+        }
+    }
+
+    /// Which notification-content.json categories this topic maps to (if any).
+    var notifCategories: [String] {
+        switch self {
+        case .prayers: ["prayer"]
+        case .encouragement: ["encouragement", "affirmation"]
+        case .gratitude: ["gratitude"]
+        case .hope: ["reflection"]
+        case .eveningPeace: ["blessing"]
+        default: []
+        }
+    }
+
+    static var freeTopics: [NotificationTopic] {
+        allCases.filter { !$0.isPro }
+    }
+
+    static var proTopics: [NotificationTopic] {
+        allCases.filter { $0.isPro }
+    }
+}

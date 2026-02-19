@@ -25,6 +25,7 @@ final class SettingsViewModel {
     var showWidgetBackgroundPicker = false
     var showHomeWidgetGuide = false
     var showLockWidgetGuide = false
+    var showNotificationTopics = false
 
     // MARK: - Local Editing Copies
 
@@ -212,34 +213,45 @@ final class SettingsViewModel {
         profile.updatedAt = Date()
         personalizationService.save()
         if newValue {
-            let contentDescriptor = FetchDescriptor<PrayerContent>()
-            let allContent = (try? modelContext.fetch(contentDescriptor)) ?? []
-            NotificationService.shared.scheduleFaithBoosts(
-                name: profile.firstName.isEmpty ? "Friend" : profile.firstName,
-                burdens: profile.currentBurdens,
-                seasons: profile.lifeSeasons,
-                faithLevel: profile.faithLevel,
-                isPro: profile.isPro,
-                content: allContent
-            )
+            rescheduleFaithBoosts()
         } else {
             NotificationService.shared.cancelFaithBoosts()
         }
     }
 
-    func toggleGentleReminders() {
-        let newValue = !profile.gentleRemindersEnabled
-        profile.gentleRemindersEnabled = newValue
+    func toggleNotificationTopic(_ topic: NotificationTopic) {
+        var topics = profile.selectedNotificationTopics
+        if topics.contains(topic) {
+            // Don't allow removing the last topic
+            guard topics.count > 1 else { return }
+            topics.removeAll { $0 == topic }
+        } else {
+            // Pro gating: only allow Pro topics if user is Pro
+            if topic.isPro && !profile.isPro { return }
+            topics.append(topic)
+        }
+        profile.selectedNotificationTopics = topics
         profile.updatedAt = Date()
         personalizationService.save()
-        if newValue {
-            NotificationService.shared.scheduleGentleReminders(
-                name: profile.firstName.isEmpty ? "Friend" : profile.firstName,
-                burdens: profile.currentBurdens
-            )
-        } else {
-            NotificationService.shared.cancelGentleReminders()
+
+        // Reschedule faith boosts with new topic selection
+        if profile.faithBoostsEnabled {
+            rescheduleFaithBoosts()
         }
+    }
+
+    private func rescheduleFaithBoosts() {
+        let contentDescriptor = FetchDescriptor<PrayerContent>()
+        let allContent = (try? modelContext.fetch(contentDescriptor)) ?? []
+        NotificationService.shared.scheduleFaithBoosts(
+            name: profile.firstName.isEmpty ? "Friend" : profile.firstName,
+            burdens: profile.currentBurdens,
+            seasons: profile.lifeSeasons,
+            faithLevel: profile.faithLevel,
+            isPro: profile.isPro,
+            content: allContent,
+            selectedTopics: profile.selectedNotificationTopics
+        )
     }
 
     private func rescheduleNotifications() {

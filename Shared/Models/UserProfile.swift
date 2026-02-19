@@ -25,7 +25,7 @@ final class UserProfile {
     var streakReminderEnabled: Bool
     var planReminderEnabled: Bool
     var faithBoostsEnabled: Bool
-    var gentleRemindersEnabled: Bool
+    var selectedNotificationTopicsRaw: [String]?
     var selectedBibleVoiceID: String
     var readerFontSize: Double
     var readerFontStyleRaw: String
@@ -38,6 +38,19 @@ final class UserProfile {
     var lastReadVerseNumber: Int
     var createdAt: Date
     var updatedAt: Date
+
+    var selectedNotificationTopics: [NotificationTopic] {
+        get {
+            guard let raw = selectedNotificationTopicsRaw else {
+                return NotificationTopic.freeTopics
+            }
+            let topics = raw.compactMap { NotificationTopic(rawValue: $0) }
+            return topics.isEmpty ? NotificationTopic.freeTopics : topics
+        }
+        set {
+            selectedNotificationTopicsRaw = newValue.map(\.rawValue)
+        }
+    }
 
     var readerFontStyle: ReaderFontStyle {
         get { ReaderFontStyle(rawValue: readerFontStyleRaw) ?? .serif }
@@ -82,7 +95,7 @@ final class UserProfile {
         streakReminderEnabled: Bool = true,
         planReminderEnabled: Bool = true,
         faithBoostsEnabled: Bool = false,
-        gentleRemindersEnabled: Bool = false,
+        selectedNotificationTopicsRaw: [String]? = nil,
         selectedBibleVoiceID: String = BibleVoice.onyx.rawValue,
         readerFontSize: Double = 20,
         readerFontStyle: ReaderFontStyle = .serif,
@@ -116,7 +129,7 @@ final class UserProfile {
         self.streakReminderEnabled = streakReminderEnabled
         self.planReminderEnabled = planReminderEnabled
         self.faithBoostsEnabled = faithBoostsEnabled
-        self.gentleRemindersEnabled = gentleRemindersEnabled
+        self.selectedNotificationTopicsRaw = selectedNotificationTopicsRaw
         self.selectedBibleVoiceID = selectedBibleVoiceID
         self.readerFontSize = readerFontSize
         self.readerFontStyleRaw = readerFontStyle.rawValue

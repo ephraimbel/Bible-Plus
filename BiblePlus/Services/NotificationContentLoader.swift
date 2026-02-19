@@ -42,4 +42,11 @@ final class NotificationContentLoader {
     func items(forSlot slot: String, category: String) -> [NotificationContentItem] {
         loadAll().filter { $0.slots.contains(slot) && $0.category == category }
     }
+
+    /// Filter items by selected notification topics. Returns items whose category matches any topic's notifCategories.
+    func items(forTopics topics: [NotificationTopic]) -> [NotificationContentItem] {
+        let allowedCategories = Set(topics.flatMap(\.notifCategories))
+        guard !allowedCategories.isEmpty else { return [] }
+        return loadAll().filter { allowedCategories.contains($0.category) }
+    }
 }
