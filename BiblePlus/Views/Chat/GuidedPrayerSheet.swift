@@ -134,7 +134,7 @@ struct GuidedPrayerSheet: View {
                             step = 3
                         }
                     } label: {
-                        optionCard(icon: icon, label: label, isSelected: selectedWhat == label)
+                        gridOptionCard(icon: icon, label: label, isSelected: selectedWhat == label)
                     }
                 }
             }
@@ -204,6 +204,38 @@ struct GuidedPrayerSheet: View {
     }
 
     // MARK: - Helpers
+
+    private func gridOptionCard(icon: String, label: String, isSelected: Bool) -> some View {
+        VStack(spacing: 10) {
+            Image(systemName: icon)
+                .font(.system(size: 22, weight: .medium))
+                .foregroundStyle(isSelected ? .white : palette.accent)
+                .frame(width: 44, height: 44)
+                .background(
+                    Circle()
+                        .fill(isSelected ? palette.accent : palette.accent.opacity(0.1))
+                )
+
+            Text(label)
+                .font(.system(size: 14, weight: .medium, design: .rounded))
+                .foregroundStyle(palette.textPrimary)
+                .multilineTextAlignment(.center)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 16)
+        .padding(.horizontal, 8)
+        .background(
+            RoundedRectangle(cornerRadius: 14)
+                .fill(isSelected ? palette.accent.opacity(0.08) : palette.surfaceElevated)
+                .shadow(color: .black.opacity(0.04), radius: 6, y: 3)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 14)
+                .stroke(isSelected ? palette.accent.opacity(0.3) : palette.border.opacity(0.2), lineWidth: 0.5)
+        )
+    }
 
     private func optionCard(icon: String, label: String, isSelected: Bool) -> some View {
         HStack(spacing: 14) {
