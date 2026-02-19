@@ -1,6 +1,7 @@
 import ActivityKit
 import AVFoundation
 import Foundation
+import AVFAudio
 
 @Observable
 @MainActor
@@ -21,6 +22,14 @@ final class AudioBibleService {
     private var progressTimer: Task<Void, Never>?
     private var generateTask: Task<Void, Never>?
     private var interruptionObserver: NSObjectProtocol?
+
+    // MARK: - Speech Synthesis Fallback
+
+    private var speechSynthesizer: AVSpeechSynthesizer?
+    private var speechDelegate: SpeechDelegate?
+    private var usingSpeechSynthesis: Bool = false
+    private var speechVerses: [(number: Int, text: String)] = []
+    private var speechStartIndex: Int = 0
 
     // MARK: - Audio Session Coordination
 
@@ -249,8 +258,14 @@ final class AudioBibleService {
                 }
             } catch {
                 guard !Task.isCancelled else { return }
-                isLoading = false
-                errorMessage = error.localizedDescription
+                // Fall back to on-device speech synthesis
+                self.startSpeechSynthesis(
+                    verses: verses,
+                    book: book,
+                    chapter: chapter,
+                    translation: translation,
+                    startingFromVerseIndex: startingFromVerseIndex
+                )
             }
         }
     }
@@ -258,6 +273,19 @@ final class AudioBibleService {
     // MARK: - Seek to Verse
 
     func seekToVerse(index: Int) {
+        if usingSpeechSynthesis {
+            guard index >= 0, index < speechVerses.count else { return }
+            // AVSpeechSynthesizer can't seek — restart from new index
+            speechSynthesizer?.stopSpeaking(at: .immediate)
+            currentVerseIndex = index
+            requeueSpeechUtterances(from: index)
+            if isPaused {
+                isPlaying = true
+                isPaused = false
+            }
+            return
+        }
+
         guard let player,
               index >= 0,
               index < verseTimings.count
@@ -274,7 +302,11 @@ final class AudioBibleService {
     // MARK: - Pause / Resume / Stop
 
     func pause() {
-        player?.pause()
+        if usingSpeechSynthesis {
+            speechSynthesizer?.pauseSpeaking(at: .word)
+        } else {
+            player?.pause()
+        }
         isPlaying = false
         isPaused = true
         progressTimer?.cancel()
@@ -290,13 +322,20 @@ final class AudioBibleService {
     }
 
     func resume() {
-        guard let player, isPaused else { return }
+        guard isPaused else { return }
         configureAudioSession()
         duckSoundscape()
-        player.play()
+
+        if usingSpeechSynthesis {
+            speechSynthesizer?.continueSpeaking()
+        } else {
+            guard let player else { return }
+            player.play()
+            startProgressTracking()
+        }
+
         isPlaying = true
         isPaused = false
-        startProgressTracking()
 
         if let activity = bibleActivity {
             LiveActivityService.updateBibleSession(
@@ -315,6 +354,12 @@ final class AudioBibleService {
 
         player?.stop()
         player = nil
+
+        speechSynthesizer?.stopSpeaking(at: .immediate)
+        speechSynthesizer = nil
+        speechDelegate = nil
+        usingSpeechSynthesis = false
+        speechVerses = []
 
         isPlaying = false
         isPaused = false
@@ -343,7 +388,15 @@ final class AudioBibleService {
 
     func setSpeed(_ speed: PlaybackSpeed) {
         playbackSpeed = speed
-        player?.rate = Float(speed.rawValue)
+        if usingSpeechSynthesis {
+            // AVSpeechSynthesizer doesn't support rate changes mid-stream — restart
+            guard let synthesizer = speechSynthesizer, synthesizer.isSpeaking || isPaused else { return }
+            let resumeIndex = currentVerseIndex
+            speechSynthesizer?.stopSpeaking(at: .immediate)
+            requeueSpeechUtterances(from: resumeIndex)
+        } else {
+            player?.rate = Float(speed.rawValue)
+        }
     }
 
     var hasActivePlayback: Bool {
@@ -352,6 +405,137 @@ final class AudioBibleService {
 
     func setOnChapterComplete(_ handler: @escaping () -> Void) {
         onChapterComplete = handler
+    }
+
+    // MARK: - Speech Synthesis Fallback
+
+    private func startSpeechSynthesis(
+        verses: [(number: Int, text: String)],
+        book: BibleBook,
+        chapter: Int,
+        translation: BibleTranslation,
+        startingFromVerseIndex: Int
+    ) {
+        self.speechVerses = verses
+        self.speechStartIndex = startingFromVerseIndex
+
+        let synthesizer = AVSpeechSynthesizer()
+        let delegate = SpeechDelegate { [weak self] verseIndex in
+            guard let self else { return }
+            self.currentVerseIndex = verseIndex
+            if let activity = self.bibleActivity {
+                LiveActivityService.updateBibleSession(
+                    activity,
+                    currentVerse: verseIndex + 1,
+                    isPlaying: true
+                )
+            }
+        } onComplete: { [weak self] in
+            guard let self else { return }
+            self.handlePlaybackCompletion()
+        }
+
+        synthesizer.delegate = delegate
+        self.speechSynthesizer = synthesizer
+        self.speechDelegate = delegate
+        self.usingSpeechSynthesis = true
+
+        configureAudioSession()
+        duckSoundscape()
+
+        // Queue utterances starting from the requested verse
+        let voice = AVSpeechSynthesisVoice(language: "en-US")
+        let rate = speechRate(for: playbackSpeed)
+
+        for i in startingFromVerseIndex..<verses.count {
+            let verse = verses[i]
+            var text = verse.text
+            // Prepend chapter intro to the first utterance
+            if i == startingFromVerseIndex {
+                text = "\(book.name), chapter \(chapter). \(text)"
+            }
+
+            let utterance = AVSpeechUtterance(string: text)
+            utterance.voice = voice
+            utterance.rate = rate
+            utterance.postUtteranceDelay = 0.3
+
+            delegate.mapUtterance(utterance, toVerseIndex: i)
+            synthesizer.speak(utterance)
+        }
+
+        isPlaying = true
+        isPaused = false
+        isLoading = false
+
+        // Store metadata for Live Activity
+        self.currentBookName = book.name
+        self.currentChapter = chapter
+        self.currentTranslationName = translation.displayName
+        self.currentTotalVerses = verses.count
+
+        self.bibleActivity = LiveActivityService.startBibleSession(
+            bookName: book.name,
+            chapter: chapter,
+            translationName: translation.displayName,
+            totalVerses: verses.count,
+            currentVerse: startingFromVerseIndex + 1
+        )
+    }
+
+    /// Re-queues speech utterances from a given verse index (used for seek and speed change).
+    private func requeueSpeechUtterances(from index: Int) {
+        guard !speechVerses.isEmpty, index < speechVerses.count else { return }
+
+        let synthesizer = speechSynthesizer ?? AVSpeechSynthesizer()
+        if speechSynthesizer == nil {
+            let delegate = SpeechDelegate { [weak self] verseIndex in
+                guard let self else { return }
+                self.currentVerseIndex = verseIndex
+                if let activity = self.bibleActivity {
+                    LiveActivityService.updateBibleSession(
+                        activity,
+                        currentVerse: verseIndex + 1,
+                        isPlaying: true
+                    )
+                }
+            } onComplete: { [weak self] in
+                guard let self else { return }
+                self.handlePlaybackCompletion()
+            }
+            synthesizer.delegate = delegate
+            self.speechSynthesizer = synthesizer
+            self.speechDelegate = delegate
+        }
+
+        let voice = AVSpeechSynthesisVoice(language: "en-US")
+        let rate = speechRate(for: playbackSpeed)
+
+        speechDelegate?.resetMappings()
+
+        for i in index..<speechVerses.count {
+            let utterance = AVSpeechUtterance(string: speechVerses[i].text)
+            utterance.voice = voice
+            utterance.rate = rate
+            utterance.postUtteranceDelay = 0.3
+
+            speechDelegate?.mapUtterance(utterance, toVerseIndex: i)
+            synthesizer.speak(utterance)
+        }
+
+        currentVerseIndex = index
+        isPlaying = true
+        isPaused = false
+    }
+
+    /// Maps PlaybackSpeed to AVSpeechUtterance rate (0.0–1.0 scale, default 0.5).
+    private func speechRate(for speed: PlaybackSpeed) -> Float {
+        switch speed {
+        case .slow:   return 0.42
+        case .normal: return AVSpeechUtteranceDefaultSpeechRate
+        case .fast:   return 0.55
+        case .faster: return 0.6
+        }
     }
 
     // MARK: - TTS Generation
@@ -741,6 +925,56 @@ private struct VerseTiming {
     let verseIndex: Int
     let startTime: TimeInterval
     let endTime: TimeInterval
+}
+
+// MARK: - Speech Synthesis Delegate
+
+private class SpeechDelegate: NSObject, AVSpeechSynthesizerDelegate {
+    private var utteranceToVerse: [AVSpeechUtterance: Int] = [:]
+    private var totalUtterances: Int = 0
+    private var completedUtterances: Int = 0
+    private let onVerseStarted: (Int) -> Void
+    private let onComplete: () -> Void
+
+    init(
+        onVerseStarted: @escaping (Int) -> Void,
+        onComplete: @escaping () -> Void
+    ) {
+        self.onVerseStarted = onVerseStarted
+        self.onComplete = onComplete
+        super.init()
+    }
+
+    func mapUtterance(_ utterance: AVSpeechUtterance, toVerseIndex index: Int) {
+        utteranceToVerse[utterance] = index
+        totalUtterances += 1
+    }
+
+    func resetMappings() {
+        utteranceToVerse.removeAll()
+        totalUtterances = 0
+        completedUtterances = 0
+    }
+
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
+        guard let verseIndex = utteranceToVerse[utterance] else { return }
+        Task { @MainActor [onVerseStarted] in
+            onVerseStarted(verseIndex)
+        }
+    }
+
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        completedUtterances += 1
+        if completedUtterances >= totalUtterances {
+            Task { @MainActor [onComplete] in
+                onComplete()
+            }
+        }
+    }
+
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
+        // Handled by stop() — no action needed
+    }
 }
 
 enum AudioBibleError: LocalizedError {
