@@ -243,116 +243,93 @@ private struct ConversationListContent: View {
         .ignoresSafeArea()
     }
 
-    // MARK: - Quick Prompt
-
-    private struct QuickPrompt: Identifiable {
-        let id = UUID()
-        let label: String
-        let icon: String
-    }
-
-    private var quickPrompts: [QuickPrompt] {
-        [
-            QuickPrompt(label: "Pray with me", icon: "hands.sparkles"),
-            QuickPrompt(label: "Explain a verse", icon: "book.fill"),
-            QuickPrompt(label: "I need comfort", icon: "heart.fill"),
-            QuickPrompt(label: "Guide my day", icon: "sunrise.fill"),
-        ]
-    }
-
     // MARK: - Empty State
 
     private var emptyState: some View {
         VStack(spacing: 0) {
             Spacer()
 
-            // Greeting
-            Text("What\u{2019}s on your heart, \(viewModel.userName)?")
-                .font(.system(size: 24, weight: .semibold, design: .serif))
-                .foregroundStyle(palette.textPrimary)
-                .multilineTextAlignment(.center)
+            // Icon
+            Image(systemName: "sparkle")
+                .font(.system(size: 34, weight: .light))
+                .foregroundStyle(palette.accent.opacity(0.45))
                 .opacity(appeared ? 1 : 0)
-                .offset(y: appeared ? 0 : 15)
+                .scaleEffect(appeared ? 1 : 0.8)
+                .animation(BPAnimation.spring.delay(0.05), value: appeared)
+
+            Spacer().frame(height: 24)
+
+            // Header
+            Text("Start a new conversation")
+                .font(.system(size: 21, weight: .semibold, design: .serif))
+                .foregroundStyle(palette.textPrimary)
+                .opacity(appeared ? 1 : 0)
+                .offset(y: appeared ? 0 : 12)
                 .animation(BPAnimation.spring.delay(0.1), value: appeared)
+
+            Spacer().frame(height: 10)
+
+            // Subtitle
+            Text("Your personal guide for scripture,\nprayer, and reflection")
+                .font(.system(size: 14, weight: .regular))
+                .foregroundStyle(palette.textSecondary)
+                .multilineTextAlignment(.center)
+                .lineSpacing(3)
+                .opacity(appeared ? 1 : 0)
+                .offset(y: appeared ? 0 : 12)
+                .animation(BPAnimation.spring.delay(0.15), value: appeared)
 
             Spacer().frame(height: 32)
 
-            // Fake input field
+            // New Conversation button
             Button {
                 HapticService.lightImpact()
                 onNewConversation()
             } label: {
-                HStack(spacing: 10) {
-                    Image(systemName: "bubble.left")
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundStyle(palette.accent.opacity(0.6))
-
-                    Text("Ask about scripture, prayer, life...")
-                        .font(.system(size: 15, weight: .regular, design: .rounded))
-                        .foregroundStyle(palette.textMuted)
-
-                    Spacer()
+                HStack(spacing: 8) {
+                    Image(systemName: "plus")
+                        .font(.system(size: 13, weight: .semibold))
+                    Text("New Conversation")
+                        .font(.system(size: 15, weight: .semibold, design: .rounded))
                 }
-                .padding(.horizontal, 18)
-                .padding(.vertical, 16)
+                .foregroundStyle(palette.accent)
+                .padding(.horizontal, 28)
+                .padding(.vertical, 14)
                 .background(
-                    RoundedRectangle(cornerRadius: 16)
-                        .fill(palette.surfaceElevated)
-                        .shadow(color: .black.opacity(0.04), radius: 6, y: 3)
+                    Capsule()
+                        .fill(palette.accent.opacity(0.1))
                 )
                 .overlay(
-                    RoundedRectangle(cornerRadius: 16)
-                        .stroke(palette.accent.opacity(0.15), lineWidth: 0.5)
+                    Capsule()
+                        .stroke(palette.accent.opacity(0.25), lineWidth: 1)
                 )
             }
-            .buttonStyle(.plain)
+            .buttonStyle(PressableButtonStyle())
             .opacity(appeared ? 1 : 0)
-            .offset(y: appeared ? 0 : 15)
+            .offset(y: appeared ? 0 : 10)
             .animation(BPAnimation.spring.delay(0.2), value: appeared)
 
-            Spacer().frame(height: 24)
+            Spacer().frame(height: 40)
 
-            // Quick prompt chips — 2 per row
-            VStack(spacing: 10) {
-                ForEach(0..<2, id: \.self) { row in
-                    HStack(spacing: 10) {
-                        ForEach(0..<2, id: \.self) { col in
-                            let prompt = quickPrompts[row * 2 + col]
-                            Button {
-                                HapticService.lightImpact()
-                                onPromptTapped(prompt.label)
-                            } label: {
-                                HStack(spacing: 6) {
-                                    Image(systemName: prompt.icon)
-                                        .font(.system(size: 13, weight: .medium))
-                                    Text(prompt.label)
-                                        .font(.system(size: 13, weight: .medium, design: .rounded))
-                                }
-                                .foregroundStyle(palette.accent)
-                                .padding(.horizontal, 14)
-                                .padding(.vertical, 10)
-                                .background(
-                                    Capsule()
-                                        .fill(palette.accent.opacity(0.08))
-                                )
-                                .overlay(
-                                    Capsule()
-                                        .stroke(palette.accent.opacity(0.15), lineWidth: 0.5)
-                                )
-                            }
-                            .buttonStyle(.plain)
-                        }
-                    }
-                    .opacity(appeared ? 1 : 0)
-                    .offset(y: appeared ? 0 : 15)
-                    .animation(BPAnimation.spring.delay(0.3 + Double(row) * 0.08), value: appeared)
-                }
+            // Inspiring verse
+            VStack(spacing: 6) {
+                Text("\u{201C}\(inspiringVerse.text)\u{201D}")
+                    .font(.system(size: 13, weight: .regular, design: .serif))
+                    .foregroundStyle(palette.textSecondary.opacity(0.7))
+                    .multilineTextAlignment(.center)
+                    .lineSpacing(3)
+
+                Text(inspiringVerse.reference)
+                    .font(.system(size: 11, weight: .medium, design: .serif))
+                    .foregroundStyle(palette.accent.opacity(0.5))
             }
+            .padding(.horizontal, 20)
+            .opacity(appeared ? 1 : 0)
+            .animation(BPAnimation.spring.delay(0.3), value: appeared)
 
-            Spacer()
             Spacer()
         }
-        .padding(.horizontal, 28)
+        .padding(.horizontal, 24)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(topGoldGradient)
         .onAppear {
@@ -362,6 +339,21 @@ private struct ConversationListContent: View {
                 }
             }
         }
+    }
+
+    private var inspiringVerse: (text: String, reference: String) {
+        let verses: [(String, String)] = [
+            ("Trust in the Lord with all thine heart; and lean not unto thine own understanding.", "Proverbs 3:5"),
+            ("Be still, and know that I am God.", "Psalm 46:10"),
+            ("Cast thy burden upon the Lord, and he shall sustain thee.", "Psalm 55:22"),
+            ("The Lord is my shepherd; I shall not want.", "Psalm 23:1"),
+            ("I can do all things through Christ which strengtheneth me.", "Philippians 4:13"),
+            ("Come unto me, all ye that labour and are heavy laden, and I will give you rest.", "Matthew 11:28"),
+            ("For God so loved the world, that he gave his only begotten Son.", "John 3:16"),
+        ]
+        let dayIndex = Calendar.current.ordinality(of: .day, in: .year, for: .now) ?? 0
+        let verse = verses[dayIndex % verses.count]
+        return (text: verse.0, reference: verse.1)
     }
 }
 
