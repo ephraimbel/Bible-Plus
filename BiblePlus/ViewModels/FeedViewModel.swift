@@ -151,18 +151,6 @@ final class FeedViewModel {
         return (bookName: book.name, chapter: p.lastReadChapter, verse: p.lastReadVerseNumber, totalChapters: book.chapterCount)
     }
 
-    var prayerJournalSummary: (total: Int, answered: Int, unanswered: Int)? {
-        let totalDescriptor = FetchDescriptor<PrayerEntry>()
-        let total = (try? modelContext.fetchCount(totalDescriptor)) ?? 0
-        guard total > 0 else { return nil }
-
-        let answeredDescriptor = FetchDescriptor<PrayerEntry>(
-            predicate: #Predicate { $0.isAnswered == true }
-        )
-        let answered = (try? modelContext.fetchCount(answeredDescriptor)) ?? 0
-        return (total: total, answered: answered, unanswered: total - answered)
-    }
-
     // MARK: - Reading Plans for Dashboard
 
     var dashboardReadingPlans: [ReadingPlan] {

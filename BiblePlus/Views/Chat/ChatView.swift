@@ -99,11 +99,11 @@ private struct ChatContentView: View {
         .background(topGoldGradient)
         .overlay(alignment: .bottom) {
             // Saved to Journal toast
-            if viewModel.showSavedToJournalToast {
-                savedToJournalToast
+            if viewModel.showSavedPrayerToast {
+                savedPrayerToast
                     .padding(.bottom, 80)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
-                    .animation(BPAnimation.spring, value: viewModel.showSavedToJournalToast)
+                    .animation(BPAnimation.spring, value: viewModel.showSavedPrayerToast)
             }
         }
         .onAppear {
@@ -182,11 +182,11 @@ private struct ChatContentView: View {
                                 onScriptureTap: { bookName, chapter, verse in
                                     viewModel.navigateToScripture(bookName: bookName, chapter: chapter, verse: verse)
                                 },
-                                onSavePrayerToJournal: viewModel.messageContainsPrayer(message) || viewModel.savedToJournalMessageIDs.contains(message.id) ? {
-                                    viewModel.savePrayerToJournal(message)
+                                onSavePrayer: viewModel.messageContainsPrayer(message) || viewModel.savedPrayerMessageIDs.contains(message.id) ? {
+                                    viewModel.savePrayer(message)
                                 } : nil,
-                                isPrayerMessage: viewModel.messageContainsPrayer(message) || viewModel.savedToJournalMessageIDs.contains(message.id),
-                                isSavedToJournal: viewModel.savedToJournalMessageIDs.contains(message.id),
+                                isPrayerMessage: viewModel.messageContainsPrayer(message) || viewModel.savedPrayerMessageIDs.contains(message.id),
+                                isSavedPrayer: viewModel.savedPrayerMessageIDs.contains(message.id),
                                 isFailedMessage: message.role == .user && viewModel.failedMessageId == message.id,
                                 previousMessageRole: previousRole,
                                 isFirstInAssistantSequence: isFirst,
@@ -475,13 +475,13 @@ private struct ChatContentView: View {
         .background(.ultraThinMaterial)
     }
 
-    // MARK: - Saved to Journal Toast
+    // MARK: - Saved Prayer Toast
 
-    private var savedToJournalToast: some View {
+    private var savedPrayerToast: some View {
         HStack(spacing: 8) {
             Image(systemName: "checkmark.circle.fill")
                 .font(.system(size: 16, weight: .semibold))
-            Text("Saved to Journal")
+            Text("Prayer Saved")
                 .font(.system(size: 14, weight: .semibold, design: .rounded))
         }
         .foregroundStyle(.white)

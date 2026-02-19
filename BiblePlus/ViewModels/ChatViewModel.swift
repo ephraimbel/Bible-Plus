@@ -77,8 +77,8 @@ final class ChatViewModel {
     var selectedPromptCategory: PromptCategory? = nil
     var failedMessageContent: String? = nil
     var failedMessageId: UUID? = nil
-    var savedToJournalMessageIDs: Set<UUID> = []
-    var showSavedToJournalToast: Bool = false
+    var savedPrayerMessageIDs: Set<UUID> = []
+    var showSavedPrayerToast: Bool = false
 
     // MARK: - Private
 
@@ -141,39 +141,39 @@ final class ChatViewModel {
         switch category {
         case .scripture:
             return [
-                (icon: "book.fill", text: "Where should I start reading the Bible today?"),
-                (icon: "text.magnifyingglass", text: "Explain a difficult passage to me in simple terms."),
-                (icon: "bookmark.fill", text: "What are the most comforting verses for \(burden.displayName.lowercased())?"),
-                (icon: "sparkles", text: "Show me a verse that will strengthen my faith right now."),
+                (icon: "book.fill", text: "What should I read today?"),
+                (icon: "text.magnifyingglass", text: "Break down a tough passage for me"),
+                (icon: "bookmark.fill", text: "Find me a verse for \(burden.displayName.lowercased())"),
+                (icon: "sparkles", text: "Surprise me with something powerful"),
             ]
         case .prayer:
             var prompts: [(icon: String, text: String)] = [
-                (icon: "hands.sparkles", text: "Pray with me \u{2014} I just need to talk to God right now."),
+                (icon: "hands.sparkles", text: "Pray with me right now"),
             ]
             if let s = season {
-                prompts.append((icon: "person.fill", text: "Pray with me for this season of \(s.displayName.lowercased())."))
+                prompts.append((icon: "person.fill", text: "A prayer for this \(s.displayName.lowercased()) season"))
             } else {
-                prompts.append((icon: "person.fill", text: "Write a prayer of gratitude for today's blessings."))
+                prompts.append((icon: "person.fill", text: "Help me write a bedtime prayer"))
             }
-            prompts.append((icon: "moon.stars", text: "Help me write an evening prayer before bed."))
-            prompts.append((icon: "sunrise", text: "Lead me in a morning prayer to start the day."))
+            prompts.append((icon: "moon.stars", text: "Help me write a bedtime prayer"))
+            prompts.append((icon: "sunrise", text: "Start my day with a morning prayer"))
             return prompts
         case .guidance:
             var prompts: [(icon: String, text: String)] = []
             if burden != .none {
-                prompts.append((icon: "heart.fill", text: "I'm struggling with \(burden.displayName.lowercased()). What does God say about this?"))
+                prompts.append((icon: "heart.fill", text: "I'm dealing with \(burden.displayName.lowercased()) \u{2014} what does God say?"))
             } else {
-                prompts.append((icon: "heart.fill", text: "How do I hear God's voice in my daily life?"))
+                prompts.append((icon: "heart.fill", text: "How do I grow closer to God?"))
             }
-            prompts.append((icon: "arrow.triangle.branch", text: "I'm facing a tough decision. Help me think through it biblically."))
-            prompts.append((icon: "figure.walk", text: "How do I grow closer to God in this season?"))
-            prompts.append((icon: "shield.checkered", text: "What does the Bible say about overcoming fear?"))
+            prompts.append((icon: "arrow.triangle.branch", text: "Help me think through a decision biblically"))
+            prompts.append((icon: "figure.walk", text: "How do I grow closer to God?"))
+            prompts.append((icon: "shield.checkered", text: "What does the Bible say about fear?"))
             return prompts
         case .theology:
             return [
-                (icon: "lightbulb.fill", text: "What is the significance of grace in the Bible?"),
-                (icon: "questionmark.circle", text: "Help me understand the Trinity in simple terms."),
-                (icon: "text.book.closed", text: "What's the difference between the Old and New Covenant?"),
+                (icon: "lightbulb.fill", text: "Explain grace to me simply"),
+                (icon: "questionmark.circle", text: "Help me understand the Trinity"),
+                (icon: "text.book.closed", text: "Old vs New Covenant \u{2014} what changed?"),
                 (icon: "brain.head.profile", text: "Why does God allow suffering?"),
             ]
         }
@@ -298,7 +298,7 @@ final class ChatViewModel {
         guard message.role == .assistant,
               !isStreaming,
               !isChunkTyping,
-              !savedToJournalMessageIDs.contains(message.id)
+              !savedPrayerMessageIDs.contains(message.id)
         else { return false }
 
         let lower = message.content.lowercased()
@@ -311,7 +311,7 @@ final class ChatViewModel {
         return prayerMarkers.contains { lower.contains($0) }
     }
 
-    func savePrayerToJournal(_ message: ChatMessage) {
+    func savePrayer(_ message: ChatMessage) {
         let content = message.content
         let title = extractPrayerTitle(from: content)
         let category = detectPrayerCategory(content)
@@ -334,18 +334,18 @@ final class ChatViewModel {
             verseReference: verseRef
         )
         modelContext.insert(entry)
-        savedToJournalMessageIDs.insert(message.id)
+        savedPrayerMessageIDs.insert(message.id)
         try? modelContext.save()
 
         ActivityService.log(.prayerWritten, detail: title, in: modelContext)
         HapticService.success()
 
-        showSavedToJournalToast = true
+        showSavedPrayerToast = true
         toastDismissTask?.cancel()
         toastDismissTask = Task {
             try? await Task.sleep(for: .seconds(2))
             guard !Task.isCancelled else { return }
-            showSavedToJournalToast = false
+            showSavedPrayerToast = false
         }
     }
 

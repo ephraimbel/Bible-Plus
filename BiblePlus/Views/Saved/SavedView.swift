@@ -111,12 +111,12 @@ private struct SavedContentView: View {
 
     @ViewBuilder
     private var favoritesTab: some View {
-        let items = viewModel.favorites
+        let items = viewModel.savedItems
         if items.isEmpty {
             emptyState(
                 icon: "heart",
                 title: "No Favorites Yet",
-                message: "Double-tap or heart any card\nin the feed to save it here."
+                message: "Double-tap any card in the feed\nor save a prayer from Ask to see it here."
             )
         } else {
             ScrollView(.vertical, showsIndicators: false) {
@@ -127,23 +127,36 @@ private struct SavedContentView: View {
                 )
 
                 LazyVStack(spacing: 12) {
-                    ForEach(Array(items.enumerated()), id: \.element.id) { index, content in
-                        Button {
-                            NotificationCenter.default.post(
-                                name: .feedContentDeepLink,
-                                object: nil,
-                                userInfo: ["contentID": content.id]
-                            )
-                            HapticService.lightImpact()
-                        } label: {
-                            SavedFavoriteCard(
-                                content: content,
-                                displayText: viewModel.personalizedText(for: content),
-                                palette: palette,
-                                onUnsave: { viewModel.unsave(content) }
-                            )
+                    ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
+                        Group {
+                            switch item {
+                            case .content(let content):
+                                Button {
+                                    NotificationCenter.default.post(
+                                        name: .feedContentDeepLink,
+                                        object: nil,
+                                        userInfo: ["contentID": content.id]
+                                    )
+                                    HapticService.lightImpact()
+                                } label: {
+                                    SavedFavoriteCard(
+                                        content: content,
+                                        displayText: viewModel.personalizedText(for: content),
+                                        palette: palette,
+                                        onUnsave: { viewModel.unsave(content) }
+                                    )
+                                }
+                                .buttonStyle(.plain)
+
+                            case .prayer(let entry):
+                                NavigationLink {
+                                    SavedPrayerDetailView(entry: entry, viewModel: viewModel)
+                                } label: {
+                                    SavedPrayerCard(entry: entry, palette: palette)
+                                }
+                                .buttonStyle(.plain)
+                            }
                         }
-                        .buttonStyle(.plain)
                         .padding(.horizontal, 20)
                         .opacity(appeared ? 1 : 0)
                         .offset(y: appeared ? 0 : 10)
@@ -578,6 +591,244 @@ private struct NoteCard: View {
                 HapticService.notification(.warning)
             } label: {
                 Label("Clear Note", systemImage: "eraser")
+            }
+        }
+    }
+}
+
+// MARK: - Saved Prayer Card
+
+private struct SavedPrayerCard: View {
+    let entry: PrayerEntry
+    let palette: BPColorPalette
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            // Category + answered row
+            HStack(spacing: 8) {
+                HStack(spacing: 4) {
+                    Image(systemName: entry.category.icon)
+                        .font(.system(size: 10, weight: .medium))
+                    Text(entry.category.displayName)
+                        .font(.system(size: 11, weight: .medium, design: .rounded))
+                }
+                .foregroundStyle(palette.accent)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .background(
+                    Capsule().fill(palette.accent.opacity(0.1))
+                )
+
+                Spacer()
+
+                if entry.isAnswered {
+                    HStack(spacing: 3) {
+                        Image(systemName: "checkmark.seal.fill")
+                            .font(.system(size: 10))
+                        Text("Answered")
+                            .font(.system(size: 11, weight: .medium, design: .rounded))
+                    }
+                    .foregroundStyle(.green)
+                }
+
+                if let ref = entry.verseReference, !ref.isEmpty {
+                    HStack(spacing: 4) {
+                        Image(systemName: "book.closed")
+                            .font(.system(size: 9))
+                        Text(ref)
+                            .font(.system(size: 11, weight: .regular, design: .serif))
+                            .italic()
+                    }
+                    .foregroundStyle(palette.accent)
+                }
+
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(palette.textMuted)
+            }
+
+            // Title
+            Text(entry.title)
+                .font(.system(size: 15, weight: .semibold, design: .rounded))
+                .foregroundStyle(palette.textPrimary)
+                .lineLimit(1)
+
+            // Body preview
+            Text(entry.body)
+                .font(.system(size: 14, weight: .regular, design: .rounded))
+                .foregroundStyle(palette.textSecondary)
+                .lineLimit(3)
+                .lineSpacing(3)
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(palette.surfaceElevated)
+                .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(palette.border.opacity(0.2), lineWidth: 0.5)
+        )
+        // Left accent — green if answered, gold otherwise
+        .overlay(alignment: .leading) {
+            UnevenRoundedRectangle(
+                topLeadingRadius: 16,
+                bottomLeadingRadius: 16,
+                bottomTrailingRadius: 0,
+                topTrailingRadius: 0
+            )
+            .fill(entry.isAnswered ? Color.green.opacity(0.6) : palette.accent.opacity(0.4))
+            .frame(width: 3)
+        }
+    }
+}
+
+// MARK: - Saved Prayer Detail View
+
+private struct SavedPrayerDetailView: View {
+    let entry: PrayerEntry
+    @Bindable var viewModel: SavedViewModel
+    @Environment(\.bpPalette) private var palette
+    @Environment(\.dismiss) private var dismiss
+    @State private var showDeleteConfirm = false
+
+    var body: some View {
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack(alignment: .leading, spacing: 20) {
+                // Category badge
+                HStack(spacing: 4) {
+                    Image(systemName: entry.category.icon)
+                        .font(.system(size: 11, weight: .medium))
+                    Text(entry.category.displayName)
+                        .font(.system(size: 12, weight: .medium, design: .rounded))
+                }
+                .foregroundStyle(palette.accent)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
+                .background(
+                    Capsule().fill(palette.accent.opacity(0.1))
+                )
+
+                // Title
+                Text(entry.title)
+                    .font(.system(size: 22, weight: .bold, design: .rounded))
+                    .foregroundStyle(palette.textPrimary)
+
+                // Date
+                Text(entry.createdAt, style: .date)
+                    .font(.system(size: 13, weight: .regular, design: .rounded))
+                    .foregroundStyle(palette.textMuted)
+
+                // Full body
+                Text(entry.body)
+                    .font(.system(size: 16, weight: .regular, design: .rounded))
+                    .foregroundStyle(palette.textPrimary)
+                    .lineSpacing(5)
+
+                // Verse reference
+                if let ref = entry.verseReference, !ref.isEmpty {
+                    HStack(spacing: 6) {
+                        Image(systemName: "book.closed.fill")
+                            .font(.system(size: 12))
+                        Text(ref)
+                            .font(.system(size: 14, weight: .medium, design: .serif))
+                            .italic()
+                    }
+                    .foregroundStyle(palette.accent)
+                }
+
+                Divider()
+
+                // Answered toggle
+                Button {
+                    viewModel.toggleAnswered(entry)
+                    HapticService.success()
+                } label: {
+                    HStack(spacing: 10) {
+                        Image(systemName: entry.isAnswered ? "checkmark.seal.fill" : "circle")
+                            .font(.system(size: 18))
+                            .foregroundStyle(entry.isAnswered ? .green : palette.textMuted)
+
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(entry.isAnswered ? "Marked as Answered" : "Mark as Answered")
+                                .font(.system(size: 15, weight: .semibold, design: .rounded))
+                                .foregroundStyle(palette.textPrimary)
+
+                            if entry.isAnswered, let date = entry.answeredAt {
+                                Text(date, style: .date)
+                                    .font(.system(size: 12, weight: .regular, design: .rounded))
+                                    .foregroundStyle(palette.textMuted)
+                            }
+                        }
+
+                        Spacer()
+                    }
+                    .padding(14)
+                    .background(
+                        RoundedRectangle(cornerRadius: 14)
+                            .fill(entry.isAnswered ? Color.green.opacity(0.06) : palette.surface)
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 14)
+                            .stroke(entry.isAnswered ? Color.green.opacity(0.2) : palette.border.opacity(0.2), lineWidth: 0.5)
+                    )
+                }
+                .buttonStyle(.plain)
+
+                // Answer notes
+                if entry.isAnswered && !entry.answerNotes.isEmpty {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Answer Notes")
+                            .font(.system(size: 13, weight: .semibold, design: .rounded))
+                            .foregroundStyle(palette.textMuted)
+                        Text(entry.answerNotes)
+                            .font(.system(size: 15, weight: .regular, design: .rounded))
+                            .foregroundStyle(palette.textPrimary)
+                            .lineSpacing(4)
+                    }
+                }
+
+                // Delete button
+                Button(role: .destructive) {
+                    showDeleteConfirm = true
+                } label: {
+                    HStack(spacing: 8) {
+                        Image(systemName: "trash")
+                            .font(.system(size: 13, weight: .medium))
+                        Text("Delete Prayer")
+                            .font(.system(size: 14, weight: .medium, design: .rounded))
+                    }
+                    .foregroundStyle(.red)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.red.opacity(0.06))
+                    )
+                }
+                .buttonStyle(.plain)
+                .padding(.top, 8)
+
+                Spacer().frame(height: 40)
+            }
+            .padding(.horizontal, 20)
+            .padding(.top, 16)
+        }
+        .background(palette.background)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("Prayer")
+                    .font(.system(size: 18, weight: .semibold, design: .serif))
+                    .foregroundStyle(palette.textPrimary)
+            }
+        }
+        .confirmationDialog("Delete this prayer?", isPresented: $showDeleteConfirm, titleVisibility: .visible) {
+            Button("Delete", role: .destructive) {
+                viewModel.deletePrayerEntry(entry)
+                dismiss()
             }
         }
     }

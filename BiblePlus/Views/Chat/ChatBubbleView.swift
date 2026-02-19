@@ -6,9 +6,9 @@ struct ChatBubbleView: View {
     var onSave: (() -> Void)? = nil
     var onShare: (() -> Void)? = nil
     var onScriptureTap: ((String, Int, Int) -> Void)? = nil
-    var onSavePrayerToJournal: (() -> Void)? = nil
+    var onSavePrayer: (() -> Void)? = nil
     var isPrayerMessage: Bool = false
-    var isSavedToJournal: Bool = false
+    var isSavedPrayer: Bool = false
     var isFailedMessage: Bool = false
     var previousMessageRole: MessageRole? = nil
 
@@ -168,34 +168,34 @@ struct ChatBubbleView: View {
         )
     }
 
-    // MARK: - Save to Journal Button
+    // MARK: - Save Prayer Button
 
     private var saveToJournalButton: some View {
         Button {
-            onSavePrayerToJournal?()
+            onSavePrayer?()
         } label: {
             HStack(spacing: 6) {
-                Image(systemName: isSavedToJournal ? "checkmark.circle.fill" : "book.closed.fill")
+                Image(systemName: isSavedPrayer ? "checkmark.circle.fill" : "hands.sparkles.fill")
                     .font(.system(size: 12, weight: .semibold))
-                Text(isSavedToJournal ? "Saved to Journal" : "Save to Journal")
+                Text(isSavedPrayer ? "Prayer Saved" : "Save Prayer")
                     .font(.system(size: 12, weight: .semibold, design: .rounded))
             }
-            .foregroundStyle(isSavedToJournal ? Color.green : palette.accent)
+            .foregroundStyle(isSavedPrayer ? Color.green : palette.accent)
             .padding(.horizontal, 14)
             .padding(.vertical, 7)
             .background(
                 Capsule()
-                    .fill(isSavedToJournal ? Color.green.opacity(0.1) : palette.accent.opacity(0.08))
+                    .fill(isSavedPrayer ? Color.green.opacity(0.1) : palette.accent.opacity(0.08))
             )
             .overlay(
                 Capsule()
-                    .stroke(isSavedToJournal ? Color.green.opacity(0.2) : palette.accent.opacity(0.2), lineWidth: 1)
+                    .stroke(isSavedPrayer ? Color.green.opacity(0.2) : palette.accent.opacity(0.2), lineWidth: 1)
             )
         }
-        .disabled(isSavedToJournal)
+        .disabled(isSavedPrayer)
         .padding(.top, 4)
         .transition(.scale(scale: 0.8).combined(with: .opacity))
-        .animation(BPAnimation.spring, value: isSavedToJournal)
+        .animation(BPAnimation.spring, value: isSavedPrayer)
     }
 
     // MARK: - Assistant Content (No Bubble)
