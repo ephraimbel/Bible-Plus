@@ -44,15 +44,28 @@ struct ChatBubbleView: View {
             } else {
                 // Minimal AI indicator — only on first in sequence
                 if isFirstInAssistantSequence {
-                    Circle()
-                        .fill(palette.accent.opacity(0.12))
-                        .frame(width: 26, height: 26)
-                        .overlay(
-                            Image(systemName: "cross.fill")
-                                .font(.system(size: 10, weight: .semibold))
-                                .foregroundStyle(palette.accent)
-                        )
-                        .padding(.top, 2)
+                    ZStack {
+                        Circle()
+                            .fill(
+                                LinearGradient(
+                                    colors: [palette.accent.opacity(0.15), palette.accent.opacity(0.06)],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                            )
+                            .frame(width: 26, height: 26)
+
+                        Text("+")
+                            .font(.system(size: 18, weight: .medium, design: .serif))
+                            .foregroundStyle(
+                                LinearGradient(
+                                    colors: [Color(red: 1.0, green: 0.84, blue: 0.3), palette.accent],
+                                    startPoint: .top,
+                                    endPoint: .bottom
+                                )
+                            )
+                    }
+                    .padding(.top, 2)
                 } else {
                     Spacer()
                         .frame(width: 26)
