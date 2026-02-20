@@ -65,13 +65,14 @@ struct SummaryPaywallView: View {
 
     private var savingsPercent: Int {
         guard let yearly = storeKitService.yearlyProduct,
-              let weekly = storeKitService.weeklyProduct else {
-            return 81
+              let weekly = storeKitService.weeklyProduct,
+              weekly.price > 0 else {
+            return 81 // Default: ($4.99*52 - $49.99) / ($4.99*52) ≈ 81%
         }
         let weeklyAnnual = weekly.price * 52
         guard weeklyAnnual > 0 else { return 81 }
         let savings = (weeklyAnnual - yearly.price) / weeklyAnnual * 100
-        return NSDecimalNumber(decimal: savings).intValue
+        return max(NSDecimalNumber(decimal: savings).intValue, 0)
     }
 
     // MARK: - Feature Data
@@ -84,7 +85,7 @@ struct SummaryPaywallView: View {
             ProFeature(icon: "speaker.wave.2.fill", title: "Full Audio Bible"),
             ProFeature(icon: "waveform.circle.fill", title: "All 30 Soundscapes"),
             ProFeature(icon: "photo.on.rectangle.fill", title: "184 Backgrounds"),
-            ProFeature(icon: "text.book.closed.fill", title: "122+ Daily Content"),
+            ProFeature(icon: "text.book.closed.fill", title: "1500+ Daily Content"),
             ProFeature(icon: "book.pages.fill", title: "Unlimited Journal"),
         ]
     }
@@ -218,9 +219,9 @@ struct SummaryPaywallView: View {
                     .frame(width: 80, height: 80)
                     .scaleEffect(pulseScale)
 
-                // Plus icon (matches Ask page)
-                Image(systemName: "plus")
-                    .font(.system(size: 44, weight: .medium))
+                // Sparkle icon (matches Ask page)
+                Image(systemName: "sparkle")
+                    .font(.system(size: 44, weight: .light))
                     .foregroundStyle(PaywallColors.goldGradient)
                     .shadow(color: PaywallColors.gold.opacity(heroGlow), radius: 16)
             }
