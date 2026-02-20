@@ -103,11 +103,24 @@ struct PlanProgressWidget: Widget {
         StaticConfiguration(kind: kind, provider: PlanProgressProvider()) { entry in
             PlanProgressEntryView(entry: entry)
                 .containerBackground(for: .widget) {
-                    LinearGradient(
-                        colors: entry.gradientColors.map { Color(hex: $0) },
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
+                    ZStack {
+                        LinearGradient(
+                            colors: entry.gradientColors.map { Color(hex: $0) },
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                        if let uiImage = WidgetBackgroundService.loadWidgetBackgroundImage() {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                        }
+                        RadialGradient(
+                            colors: [Color.clear, Color.black.opacity(0.25)],
+                            center: .center,
+                            startRadius: 80,
+                            endRadius: 250
+                        )
+                    }
                 }
         }
         .configurationDisplayName("Reading Plan")

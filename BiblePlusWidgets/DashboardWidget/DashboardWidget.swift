@@ -123,11 +123,24 @@ struct DashboardWidget: Widget {
         StaticConfiguration(kind: kind, provider: DashboardProvider()) { entry in
             DashboardWidgetEntryView(entry: entry)
                 .containerBackground(for: .widget) {
-                    LinearGradient(
-                        colors: entry.backgroundGradient.map { Color(hex: $0) },
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
+                    ZStack {
+                        LinearGradient(
+                            colors: entry.backgroundGradient.map { Color(hex: $0) },
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                        if let uiImage = WidgetBackgroundService.loadWidgetBackgroundImage() {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                        }
+                        RadialGradient(
+                            colors: [Color.clear, Color.black.opacity(0.25)],
+                            center: .center,
+                            startRadius: 80,
+                            endRadius: 250
+                        )
+                    }
                 }
         }
         .configurationDisplayName("Faith Dashboard")
