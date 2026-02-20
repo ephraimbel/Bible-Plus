@@ -63,16 +63,18 @@ struct SummaryPaywallView: View {
         return "$0.96"
     }
 
+    /// Computed as: ($4.99×52 − $49.99) / ($4.99×52) ≈ 81%
     private var savingsPercent: Int {
         guard let yearly = storeKitService.yearlyProduct,
               let weekly = storeKitService.weeklyProduct,
-              weekly.price > 0 else {
-            return 81 // Default: ($4.99*52 - $49.99) / ($4.99*52) ≈ 81%
+              weekly.price > 0, yearly.price > 0 else {
+            return 81
         }
-        let weeklyAnnual = weekly.price * 52
-        guard weeklyAnnual > 0 else { return 81 }
-        let savings = (weeklyAnnual - yearly.price) / weeklyAnnual * 100
-        return max(NSDecimalNumber(decimal: savings).intValue, 0)
+        let weeklyAnnual = NSDecimalNumber(decimal: weekly.price).doubleValue * 52.0
+        let yearlyPrice = NSDecimalNumber(decimal: yearly.price).doubleValue
+        guard weeklyAnnual > yearlyPrice else { return 81 }
+        let result = Int((weeklyAnnual - yearlyPrice) / weeklyAnnual * 100)
+        return result > 0 ? result : 81
     }
 
     // MARK: - Feature Data
