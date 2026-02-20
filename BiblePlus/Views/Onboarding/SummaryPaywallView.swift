@@ -10,10 +10,22 @@ struct SummaryPaywallView: View {
     @Environment(\.bpPalette) private var palette
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
-    @State private var showContent = false
+
+    // Animation phases (8 staggered entrance beats)
+    @State private var showHero = false
+    @State private var showSocialProof = false
     @State private var showFeatures = false
+    @State private var showTimeline = false
     @State private var showPlans = false
     @State private var showCTA = false
+    @State private var showTrust = false
+    @State private var showFooter = false
+
+    // Hero continuous animations
+    @State private var pulseScale: CGFloat = 1.0
+    @State private var heroGlow: Double = 0.3
+
+    // Existing state
     @State private var isPurchasing = false
     @State private var selectedProductID: String? = nil
     @State private var purchaseError: String? = nil
@@ -51,11 +63,46 @@ struct SummaryPaywallView: View {
         return "$0.96"
     }
 
+    private var savingsPercent: Int {
+        guard let yearly = storeKitService.yearlyProduct,
+              let weekly = storeKitService.weeklyProduct else {
+            return 81
+        }
+        let weeklyAnnual = weekly.price * 52
+        guard weeklyAnnual > 0 else { return 81 }
+        let savings = (weeklyAnnual - yearly.price) / weeklyAnnual * 100
+        return NSDecimalNumber(decimal: savings).intValue
+    }
+
+    // MARK: - Feature Data
+
+    private var featureCategories: [FeatureCategory] {
+        [
+            FeatureCategory(icon: "book.and.wreath.fill", title: "STUDY", features: [
+                ProFeature(icon: "bubble.left.and.text.bubble.right.fill", title: "Unlimited AI Companion", subtitle: "Unlimited conversations & modes"),
+                ProFeature(icon: "book.closed.fill", title: "All 9 Reading Plans", subtitle: "Guided spiritual journeys"),
+                ProFeature(icon: "character.book.closed.fill", title: "7 Bible Translations", subtitle: "KJV, NIV, ESV & more"),
+                ProFeature(icon: "speaker.wave.2.fill", title: "Full Audio Bible", subtitle: "Listen to any chapter, anytime"),
+            ]),
+            FeatureCategory(icon: "sparkles", title: "DEVOTION", features: [
+                ProFeature(icon: "waveform.circle.fill", title: "All 30 Soundscapes", subtitle: "Nature, worship & ambient"),
+                ProFeature(icon: "photo.on.rectangle.fill", title: "184 Backgrounds", subtitle: "54 animated, 69 photos, 61 gradients"),
+                ProFeature(icon: "text.book.closed.fill", title: "122+ Daily Content", subtitle: "Prayers, verses & devotionals"),
+                ProFeature(icon: "bell.badge.fill", title: "Gentle Reminders", subtitle: "3 daily customizable slots"),
+            ]),
+            FeatureCategory(icon: "person.crop.circle.fill", title: "PERSONAL", features: [
+                ProFeature(icon: "folder.fill", title: "Unlimited Collections", subtitle: "Organize your favorites"),
+                ProFeature(icon: "photo.artframe", title: "Premium Verse Images", subtitle: "Beautiful shareable cards"),
+                ProFeature(icon: "book.pages.fill", title: "Unlimited Journal", subtitle: "Unlimited prayer entries"),
+            ]),
+        ]
+    }
+
     // MARK: - Body
 
     var body: some View {
         ZStack {
-            // Smooth dark gradient background
+            // Dark gradient background
             LinearGradient(
                 colors: [
                     Color(red: 0.11, green: 0.1, blue: 0.09),
@@ -66,7 +113,18 @@ struct SummaryPaywallView: View {
             )
             .ignoresSafeArea()
 
-            // Layer 4: Content
+            // Subtle radial gold glow behind hero
+            RadialGradient(
+                colors: [
+                    PaywallColors.gold.opacity(0.08),
+                    Color.clear,
+                ],
+                center: .top,
+                startRadius: 0,
+                endRadius: 300
+            )
+            .ignoresSafeArea()
+
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 0) {
                     // Dismiss button (sheet mode only)
@@ -88,10 +146,12 @@ struct SummaryPaywallView: View {
                     }
 
                     heroSection
-                    featureList
-                    trustStrip
+                    inspirationalVerse
+                    featureShowcase
+                    trialTimeline
                     planCards
                     ctaSection
+                    trustStrip
                     footerSection
                 }
                 .padding(.bottom, 40)
@@ -103,16 +163,34 @@ struct SummaryPaywallView: View {
 
             // Staggered entrance beats
             withAnimation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.15)) {
-                showContent = true
+                showHero = true
             }
-            withAnimation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.4)) {
+            withAnimation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.35)) {
+                showSocialProof = true
+            }
+            withAnimation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.55)) {
                 showFeatures = true
             }
-            withAnimation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.7)) {
+            withAnimation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.75)) {
+                showTimeline = true
+            }
+            withAnimation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.95)) {
                 showPlans = true
             }
-            withAnimation(.spring(response: 0.6, dampingFraction: 0.8).delay(1.0)) {
+            withAnimation(.spring(response: 0.6, dampingFraction: 0.8).delay(1.15)) {
                 showCTA = true
+            }
+            withAnimation(.spring(response: 0.6, dampingFraction: 0.8).delay(1.3)) {
+                showTrust = true
+            }
+            withAnimation(.spring(response: 0.6, dampingFraction: 0.8).delay(1.45)) {
+                showFooter = true
+            }
+
+            // Continuous hero pulse
+            withAnimation(BPAnimation.glowPulse) {
+                pulseScale = 1.15
+                heroGlow = 0.7
             }
         }
         .alert("Purchase Failed", isPresented: Binding(
@@ -129,30 +207,39 @@ struct SummaryPaywallView: View {
 
     private var heroSection: some View {
         VStack(spacing: 16) {
-            // App logo
-            Image("AppLogo")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 88, height: 88)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-                .shadow(color: Color(red: 0.79, green: 0.66, blue: 0.43).opacity(0.3), radius: 12, y: 2)
-                .shadow(color: .black.opacity(0.2), radius: 6, y: 3)
+            // Pulsing concentric rings with cross icon
+            ZStack {
+                // Outermost ring
+                Circle()
+                    .stroke(PaywallColors.gold.opacity(0.08), lineWidth: 1)
+                    .frame(width: 160, height: 160)
+                    .scaleEffect(pulseScale)
 
-            // "Pro" badge with gold glow
-            Text("Pro")
+                // Middle ring
+                Circle()
+                    .stroke(PaywallColors.gold.opacity(0.15), lineWidth: 1)
+                    .frame(width: 120, height: 120)
+                    .scaleEffect(pulseScale)
+
+                // Inner ring
+                Circle()
+                    .stroke(PaywallColors.gold.opacity(0.25), lineWidth: 1.5)
+                    .frame(width: 80, height: 80)
+                    .scaleEffect(pulseScale)
+
+                // Cross icon
+                Image(systemName: "cross.fill")
+                    .font(.system(size: 44, weight: .regular))
+                    .foregroundStyle(PaywallColors.goldGradient)
+                    .shadow(color: PaywallColors.gold.opacity(heroGlow), radius: 16)
+            }
+            .frame(height: 170)
+
+            // Title
+            Text("Bible Plus Pro")
                 .font(.system(size: 30, weight: .bold, design: .rounded))
-                .foregroundStyle(
-                    LinearGradient(
-                        colors: [
-                            Color(red: 1.0, green: 0.88, blue: 0.5),
-                            Color(red: 0.79, green: 0.66, blue: 0.43),
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
-                .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(0.6), radius: 8)
-                .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(0.3), radius: 20)
+                .foregroundStyle(PaywallColors.goldGradient)
+                .shadow(color: PaywallColors.gold.opacity(0.4), radius: 8)
 
             // Personalized subtitle
             Text(personalizedSubtitle)
@@ -161,34 +248,76 @@ struct SummaryPaywallView: View {
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 40)
         }
-        .padding(.top, isOnboarding ? 60 : 32)
-        .opacity(showContent ? 1 : 0)
-        .offset(y: showContent ? 0 : 20)
+        .padding(.top, isOnboarding ? 48 : 24)
+        .opacity(showHero ? 1 : 0)
+        .offset(y: showHero ? 0 : 20)
     }
 
     private var personalizedSubtitle: String {
         let name = (viewModel?.firstName ?? "").trimmingCharacters(in: .whitespaces)
         if name.isEmpty {
-            return "Unlock your complete spiritual companion"
+            return "Your complete spiritual\ncompanion awaits"
         }
-        return "\(name), unlock your complete\nspiritual companion"
+        return "\(name), your complete spiritual\ncompanion awaits"
     }
 
-    // MARK: - Section 2: Feature List
+    // MARK: - Section 2: Inspirational Verse
 
-    private var featureList: some View {
-        VStack(spacing: 12) {
-            featureRow(icon: "bubble.left.and.text.bubble.right.fill", title: "Unlimited AI Companion", subtitle: "Ask anything, anytime")
-            featureRow(icon: "book.closed.fill", title: "All Reading Plans", subtitle: "9 guided spiritual journeys")
-            featureRow(icon: "speaker.wave.2.fill", title: "Full Audio Bible", subtitle: "9 premium narration voices")
-            featureRow(icon: "waveform.circle.fill", title: "All 30 Soundscapes", subtitle: "Nature, worship & ambient")
-            featureRow(icon: "photo.on.rectangle.fill", title: "184 Backgrounds", subtitle: "54 animated, 69 photos & 61 gradients")
-            featureRow(icon: "text.book.closed.fill", title: "122 Daily Content Items", subtitle: "Prayers, verses & devotionals")
-            featureRow(icon: "photo.artframe", title: "Premium Verse Images", subtitle: "Beautiful shareable cards")
-            featureRow(icon: "folder.fill", title: "Unlimited Collections", subtitle: "Organize your favorites")
+    private var inspirationalVerse: some View {
+        VStack(spacing: 8) {
+            OrnamentalDivider(color: .white, opacity: 0.2)
+
+            Text("\"Seek and you shall find\"")
+                .font(.system(size: 15, weight: .regular, design: .serif))
+                .italic()
+                .foregroundStyle(.white.opacity(0.6))
+
+            Text("— Matthew 7:7")
+                .font(.system(size: 12, weight: .regular, design: .rounded))
+                .foregroundStyle(.white.opacity(0.35))
         }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 16)
+        .padding(.top, 24)
+        .opacity(showSocialProof ? 1 : 0)
+    }
+
+    // MARK: - Section 3: Feature Showcase
+
+    private var featureShowcase: some View {
+        VStack(spacing: 12) {
+            ForEach(Array(featureCategories.enumerated()), id: \.element.title) { index, category in
+                featureCategoryCard(category: category)
+                    .opacity(showFeatures ? 1 : 0)
+                    .offset(y: showFeatures ? 0 : 20)
+                    .animation(BPAnimation.staggered(index: index, base: 0.1), value: showFeatures)
+            }
+        }
+        .padding(.horizontal, 24)
+        .padding(.top, 28)
+    }
+
+    private func featureCategoryCard(category: FeatureCategory) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            // Category header
+            HStack(spacing: 8) {
+                Image(systemName: category.icon)
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(PaywallColors.gold)
+
+                Text(category.title)
+                    .font(.system(size: 11, weight: .bold, design: .rounded))
+                    .foregroundStyle(PaywallColors.gold.opacity(0.8))
+                    .tracking(1.2)
+            }
+            .padding(.horizontal, 16)
+            .padding(.top, 14)
+            .padding(.bottom, 10)
+
+            // Feature rows
+            ForEach(category.features, id: \.title) { feature in
+                featureRow(feature: feature)
+            }
+            .padding(.bottom, 4)
+        }
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(.white.opacity(0.04))
@@ -197,72 +326,95 @@ struct SummaryPaywallView: View {
             RoundedRectangle(cornerRadius: 16)
                 .stroke(.white.opacity(0.08), lineWidth: 1)
         )
-        .padding(.horizontal, 24)
-        .padding(.top, 28)
-        .opacity(showFeatures ? 1 : 0)
-        .offset(y: showFeatures ? 0 : 20)
     }
 
-    private func featureRow(icon: String, title: String, subtitle: String) -> some View {
-        HStack(spacing: 14) {
-            Image(systemName: icon)
-                .font(.system(size: 16, weight: .medium))
-                .foregroundStyle(Color(red: 0.79, green: 0.66, blue: 0.43))
-                .frame(width: 36, height: 36)
-                .background(
-                    Circle().fill(Color(red: 0.79, green: 0.66, blue: 0.43).opacity(0.12))
-                )
+    private func featureRow(feature: ProFeature) -> some View {
+        HStack(spacing: 12) {
+            Image(systemName: feature.icon)
+                .font(.system(size: 14, weight: .medium))
+                .foregroundStyle(PaywallColors.gold.opacity(0.7))
+                .frame(width: 28, height: 28)
 
-            VStack(alignment: .leading, spacing: 2) {
-                Text(title)
-                    .font(.system(size: 15, weight: .semibold, design: .rounded))
+            VStack(alignment: .leading, spacing: 1) {
+                Text(feature.title)
+                    .font(.system(size: 14, weight: .semibold, design: .rounded))
                     .foregroundStyle(.white.opacity(0.9))
-                Text(subtitle)
-                    .font(.system(size: 12, weight: .regular, design: .rounded))
-                    .foregroundStyle(.white.opacity(0.45))
+                Text(feature.subtitle)
+                    .font(.system(size: 11, weight: .regular, design: .rounded))
+                    .foregroundStyle(.white.opacity(0.4))
             }
 
             Spacer()
 
             Image(systemName: "checkmark")
-                .font(.system(size: 11, weight: .bold))
-                .foregroundStyle(Color(red: 0.79, green: 0.66, blue: 0.43))
+                .font(.system(size: 10, weight: .bold))
+                .foregroundStyle(PaywallColors.gold)
         }
+        .padding(.horizontal, 16)
+        .frame(height: 38)
     }
 
-    // MARK: - Section 3: Trust Strip
+    // MARK: - Section 4: Trial Timeline
 
-    private var trustStrip: some View {
-        HStack(spacing: 0) {
-            trustItem(icon: "lock.shield.fill", label: "Secure")
-            trustDot
-            trustItem(icon: "hand.raised.fill", label: "Private")
-            trustDot
-            trustItem(icon: "arrow.uturn.left.circle.fill", label: "Cancel Anytime")
+    private var trialTimeline: some View {
+        Group {
+            if selectedProductID == StoreKitService.yearlyID {
+                HStack(spacing: 0) {
+                    timelineStep(icon: "lock.open.fill", label: "Full access", caption: "Today", isActive: true)
+
+                    // Connector line
+                    Rectangle()
+                        .fill(.white.opacity(0.12))
+                        .frame(height: 1)
+
+                    timelineStep(icon: "bell.fill", label: "Reminder", caption: "Day 3", isActive: false)
+
+                    // Connector line
+                    Rectangle()
+                        .fill(.white.opacity(0.12))
+                        .frame(height: 1)
+
+                    timelineStep(icon: "creditcard.fill", label: "Billing starts", caption: "Day 3", isActive: false)
+                }
+                .padding(.horizontal, 32)
+                .padding(.top, 28)
+                .transition(.opacity.combined(with: .scale(scale: 0.95)))
+            }
         }
-        .padding(.top, 28)
-        .opacity(showFeatures ? 1 : 0)
+        .animation(BPAnimation.spring, value: selectedProductID)
+        .opacity(showTimeline ? 1 : 0)
     }
 
-    private func trustItem(icon: String, label: String) -> some View {
-        HStack(spacing: 4) {
-            Image(systemName: icon)
-                .font(.system(size: 11))
-                .foregroundStyle(Color(red: 0.79, green: 0.66, blue: 0.43))
+    private func timelineStep(icon: String, label: String, caption: String, isActive: Bool) -> some View {
+        VStack(spacing: 6) {
+            Text(caption)
+                .font(.system(size: 11, weight: .semibold, design: .rounded))
+                .foregroundStyle(isActive ? PaywallColors.gold : .white.opacity(0.35))
+
+            ZStack {
+                Circle()
+                    .fill(isActive ? PaywallColors.gold.opacity(0.2) : .white.opacity(0.06))
+                    .frame(width: 36, height: 36)
+
+                if isActive {
+                    Circle()
+                        .stroke(PaywallColors.gold.opacity(0.4), lineWidth: 1)
+                        .frame(width: 36, height: 36)
+                }
+
+                Image(systemName: icon)
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundStyle(isActive ? PaywallColors.gold : .white.opacity(0.3))
+            }
+
             Text(label)
-                .font(.system(size: 12, weight: .medium, design: .rounded))
-                .foregroundStyle(.white.opacity(0.5))
+                .font(.system(size: 10, weight: .medium, design: .rounded))
+                .foregroundStyle(isActive ? .white.opacity(0.7) : .white.opacity(0.3))
         }
+        .frame(maxWidth: .infinity)
     }
 
-    private var trustDot: some View {
-        Circle()
-            .fill(.white.opacity(0.2))
-            .frame(width: 3, height: 3)
-            .padding(.horizontal, 10)
-    }
-
-    // MARK: - Section 4: Plan Cards
+    // MARK: - Section 5: Plan Cards
 
     private var planCards: some View {
         VStack(spacing: 12) {
@@ -276,7 +428,7 @@ struct SummaryPaywallView: View {
                     } label: {
                         Text("Tap to Retry")
                             .font(.system(size: 14, weight: .semibold, design: .rounded))
-                            .foregroundStyle(Color(red: 0.79, green: 0.66, blue: 0.43))
+                            .foregroundStyle(PaywallColors.gold)
                     }
                 }
                 .frame(maxWidth: .infinity)
@@ -312,8 +464,8 @@ struct SummaryPaywallView: View {
                         Capsule().fill(
                             LinearGradient(
                                 colors: [
-                                    Color(red: 0.79, green: 0.66, blue: 0.43),
-                                    Color(red: 0.65, green: 0.52, blue: 0.3),
+                                    PaywallColors.gold,
+                                    PaywallColors.gold.opacity(0.8),
                                 ],
                                 startPoint: .leading,
                                 endPoint: .trailing
@@ -328,12 +480,20 @@ struct SummaryPaywallView: View {
                         Text("Yearly")
                             .font(.system(size: 20, weight: .bold, design: .rounded))
                             .foregroundStyle(.white)
+
                         Text("\(yearlyPriceLabel)/year")
                             .font(.system(size: 14, weight: .medium, design: .rounded))
                             .foregroundStyle(.white.opacity(0.7))
-                        Text("\(yearlyWeeklyBreakdown)/week")
-                            .font(.system(size: 12, weight: .regular, design: .rounded))
-                            .foregroundStyle(.white.opacity(0.5))
+
+                        HStack(spacing: 6) {
+                            Text("\(yearlyWeeklyBreakdown)/week")
+                                .font(.system(size: 12, weight: .regular, design: .rounded))
+                                .foregroundStyle(.white.opacity(0.5))
+
+                            Text("3-day free trial")
+                                .font(.system(size: 11, weight: .semibold, design: .rounded))
+                                .foregroundStyle(PaywallColors.green)
+                        }
                     }
 
                     Spacer()
@@ -345,7 +505,7 @@ struct SummaryPaywallView: View {
                                 .frame(width: 24, height: 24)
                             if isSelected {
                                 Circle()
-                                    .fill(Color(red: 0.79, green: 0.66, blue: 0.43))
+                                    .fill(PaywallColors.gold)
                                     .frame(width: 24, height: 24)
                                 Image(systemName: "checkmark")
                                     .font(.system(size: 12, weight: .bold))
@@ -353,9 +513,9 @@ struct SummaryPaywallView: View {
                             }
                         }
 
-                        Text("Save 81%")
+                        Text("Save \(savingsPercent)%")
                             .font(.system(size: 12, weight: .bold, design: .rounded))
-                            .foregroundStyle(Color(red: 0.4, green: 0.8, blue: 0.4))
+                            .foregroundStyle(PaywallColors.green)
                     }
                 }
                 .padding(.horizontal, 20)
@@ -368,8 +528,8 @@ struct SummaryPaywallView: View {
                         isSelected
                             ? LinearGradient(
                                 colors: [
-                                    Color(red: 0.79, green: 0.66, blue: 0.43).opacity(0.25),
-                                    Color(red: 0.65, green: 0.52, blue: 0.3).opacity(0.15),
+                                    PaywallColors.gold.opacity(0.25),
+                                    PaywallColors.gold.opacity(0.12),
                                 ],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
@@ -385,13 +545,13 @@ struct SummaryPaywallView: View {
                 RoundedRectangle(cornerRadius: 16)
                     .stroke(
                         isSelected
-                            ? Color(red: 0.79, green: 0.66, blue: 0.43).opacity(0.6)
+                            ? PaywallColors.gold.opacity(0.6)
                             : .white.opacity(0.1),
                         lineWidth: isSelected ? 1.5 : 1
                     )
             )
             .shadow(
-                color: isSelected ? Color(red: 0.79, green: 0.66, blue: 0.43).opacity(0.2) : .clear,
+                color: isSelected ? PaywallColors.gold.opacity(0.2) : .clear,
                 radius: 12,
                 y: 4
             )
@@ -426,7 +586,7 @@ struct SummaryPaywallView: View {
                         .frame(width: 24, height: 24)
                     if isSelected {
                         Circle()
-                            .fill(Color(red: 0.79, green: 0.66, blue: 0.43))
+                            .fill(PaywallColors.gold)
                             .frame(width: 24, height: 24)
                         Image(systemName: "checkmark")
                             .font(.system(size: 12, weight: .bold))
@@ -465,7 +625,7 @@ struct SummaryPaywallView: View {
         .buttonStyle(.plain)
     }
 
-    // MARK: - Section 5: CTA
+    // MARK: - Section 6: CTA
 
     private var ctaSection: some View {
         VStack(spacing: 10) {
@@ -491,7 +651,7 @@ struct SummaryPaywallView: View {
 
     private var ctaButtonTitle: String {
         if selectedProductID == StoreKitService.yearlyID {
-            return "Try Free for 3 Days"
+            return "Start My Free Trial"
         }
         return "Subscribe Now"
     }
@@ -503,7 +663,39 @@ struct SummaryPaywallView: View {
         return "\(weeklyPriceLabel) billed weekly. Cancel anytime."
     }
 
-    // MARK: - Section 6: Footer
+    // MARK: - Section 7: Trust Strip
+
+    private var trustStrip: some View {
+        HStack(spacing: 0) {
+            trustItem(icon: "lock.shield.fill", label: "Secure")
+            trustDot
+            trustItem(icon: "hand.raised.fill", label: "Private")
+            trustDot
+            trustItem(icon: "arrow.uturn.left.circle.fill", label: "Cancel Anytime")
+        }
+        .padding(.top, 24)
+        .opacity(showTrust ? 1 : 0)
+    }
+
+    private func trustItem(icon: String, label: String) -> some View {
+        HStack(spacing: 4) {
+            Image(systemName: icon)
+                .font(.system(size: 11))
+                .foregroundStyle(PaywallColors.gold)
+            Text(label)
+                .font(.system(size: 12, weight: .medium, design: .rounded))
+                .foregroundStyle(.white.opacity(0.5))
+        }
+    }
+
+    private var trustDot: some View {
+        Circle()
+            .fill(.white.opacity(0.2))
+            .frame(width: 3, height: 3)
+            .padding(.horizontal, 10)
+    }
+
+    // MARK: - Section 8: Footer
 
     private var footerSection: some View {
         VStack(spacing: 14) {
@@ -567,7 +759,7 @@ struct SummaryPaywallView: View {
             }
         }
         .padding(.top, 20)
-        .opacity(showCTA ? 1 : 0)
+        .opacity(showFooter ? 1 : 0)
     }
 
     // MARK: - Purchase
@@ -596,4 +788,29 @@ struct SummaryPaywallView: View {
         }
         isPurchasing = false
     }
+}
+
+// MARK: - Private Helpers
+
+private enum PaywallColors {
+    static let gold = Color(red: 0.79, green: 0.66, blue: 0.43)
+    static let goldLight = Color(red: 1.0, green: 0.88, blue: 0.5)
+    static let goldGradient = LinearGradient(
+        colors: [goldLight, gold],
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
+    static let green = Color(red: 0.4, green: 0.8, blue: 0.4)
+}
+
+private struct ProFeature {
+    let icon: String
+    let title: String
+    let subtitle: String
+}
+
+private struct FeatureCategory {
+    let icon: String
+    let title: String
+    let features: [ProFeature]
 }
