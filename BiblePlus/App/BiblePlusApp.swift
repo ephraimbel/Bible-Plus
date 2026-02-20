@@ -94,9 +94,11 @@ struct BiblePlusApp: App {
 
         // Ensure widget has the current background frame
         let profileFetch = FetchDescriptor<UserProfile>()
-        if let profile = try? seedContext.fetch(profileFetch).first,
-           let bg = SanctuaryBackground.background(for: profile.selectedBackgroundID) {
-            WidgetBackgroundService.updateWidgetBackground(for: bg)
+        if let profile = try? seedContext.fetch(profileFetch).first {
+            let effectiveID = profile.widgetSelectedBackgroundID ?? profile.selectedBackgroundID
+            if let bg = SanctuaryBackground.background(for: effectiveID) {
+                WidgetBackgroundService.updateWidgetBackground(for: bg)
+            }
         }
 
         // Refresh notification content on each launch

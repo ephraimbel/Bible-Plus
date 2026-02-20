@@ -81,13 +81,25 @@ struct PlanProgressProvider: TimelineProvider {
         let fraction = progress.completionFraction(totalDays: plan.totalDays)
         let nextDay = progress.nextDay(totalDays: plan.totalDays)
 
+        // Use user's selected background (same pattern as Home widget)
+        let profileDescriptor = FetchDescriptor<UserProfile>()
+        let profile = (try? modelContext.fetch(profileDescriptor))?.first
+        let effectiveBgID = profile?.widgetSelectedBackgroundID ?? profile?.selectedBackgroundID
+        let bgColors: [String]
+        if let effectiveBgID,
+           let background = SanctuaryBackground.background(for: effectiveBgID) {
+            bgColors = background.gradientColors
+        } else {
+            bgColors = SanctuaryBackground.allBackgrounds[0].gradientColors
+        }
+
         return PlanProgressEntry(
             date: Date(),
             planName: plan.name,
             currentDay: nextDay,
             totalDays: plan.totalDays,
             completionFraction: fraction,
-            gradientColors: plan.gradientColors.isEmpty ? ["#C9A96E", "#8B6914"] : plan.gradientColors,
+            gradientColors: bgColors,
             planID: plan.id,
             isEmpty: false
         )
