@@ -76,25 +76,16 @@ struct SummaryPaywallView: View {
 
     // MARK: - Feature Data
 
-    private var featureCategories: [FeatureCategory] {
+    private var proFeatures: [ProFeature] {
         [
-            FeatureCategory(icon: "book.and.wreath.fill", title: "STUDY", features: [
-                ProFeature(icon: "bubble.left.and.text.bubble.right.fill", title: "Unlimited AI Companion", subtitle: "Unlimited conversations & modes"),
-                ProFeature(icon: "book.closed.fill", title: "All 9 Reading Plans", subtitle: "Guided spiritual journeys"),
-                ProFeature(icon: "character.book.closed.fill", title: "7 Bible Translations", subtitle: "KJV, NIV, ESV & more"),
-                ProFeature(icon: "speaker.wave.2.fill", title: "Full Audio Bible", subtitle: "Listen to any chapter, anytime"),
-            ]),
-            FeatureCategory(icon: "sparkles", title: "DEVOTION", features: [
-                ProFeature(icon: "waveform.circle.fill", title: "All 30 Soundscapes", subtitle: "Nature, worship & ambient"),
-                ProFeature(icon: "photo.on.rectangle.fill", title: "184 Backgrounds", subtitle: "54 animated, 69 photos, 61 gradients"),
-                ProFeature(icon: "text.book.closed.fill", title: "122+ Daily Content", subtitle: "Prayers, verses & devotionals"),
-                ProFeature(icon: "bell.badge.fill", title: "Gentle Reminders", subtitle: "3 daily customizable slots"),
-            ]),
-            FeatureCategory(icon: "person.crop.circle.fill", title: "PERSONAL", features: [
-                ProFeature(icon: "folder.fill", title: "Unlimited Collections", subtitle: "Organize your favorites"),
-                ProFeature(icon: "photo.artframe", title: "Premium Verse Images", subtitle: "Beautiful shareable cards"),
-                ProFeature(icon: "book.pages.fill", title: "Unlimited Journal", subtitle: "Unlimited prayer entries"),
-            ]),
+            ProFeature(icon: "bubble.left.and.text.bubble.right.fill", title: "Unlimited AI Companion"),
+            ProFeature(icon: "book.closed.fill", title: "All 9 Reading Plans"),
+            ProFeature(icon: "character.book.closed.fill", title: "7 Bible Translations"),
+            ProFeature(icon: "speaker.wave.2.fill", title: "Full Audio Bible"),
+            ProFeature(icon: "waveform.circle.fill", title: "All 30 Soundscapes"),
+            ProFeature(icon: "photo.on.rectangle.fill", title: "184 Backgrounds"),
+            ProFeature(icon: "text.book.closed.fill", title: "122+ Daily Content"),
+            ProFeature(icon: "book.pages.fill", title: "Unlimited Journal"),
         ]
     }
 
@@ -227,9 +218,9 @@ struct SummaryPaywallView: View {
                     .frame(width: 80, height: 80)
                     .scaleEffect(pulseScale)
 
-                // Cross icon
-                Image(systemName: "cross.fill")
-                    .font(.system(size: 44, weight: .regular))
+                // Plus icon (matches Ask page)
+                Image(systemName: "plus")
+                    .font(.system(size: 44, weight: .medium))
                     .foregroundStyle(PaywallColors.goldGradient)
                     .shadow(color: PaywallColors.gold.opacity(heroGlow), radius: 16)
             }
@@ -280,44 +271,26 @@ struct SummaryPaywallView: View {
         .opacity(showSocialProof ? 1 : 0)
     }
 
-    // MARK: - Section 3: Feature Showcase
+    // MARK: - Section 3: Feature List
 
     private var featureShowcase: some View {
-        VStack(spacing: 12) {
-            ForEach(Array(featureCategories.enumerated()), id: \.element.title) { index, category in
-                featureCategoryCard(category: category)
-                    .opacity(showFeatures ? 1 : 0)
-                    .offset(y: showFeatures ? 0 : 20)
-                    .animation(BPAnimation.staggered(index: index, base: 0.1), value: showFeatures)
+        VStack(spacing: 8) {
+            ForEach(Array(proFeatures.enumerated()), id: \.element.title) { index, feature in
+                HStack(spacing: 10) {
+                    Image(systemName: "checkmark")
+                        .font(.system(size: 10, weight: .bold))
+                        .foregroundStyle(PaywallColors.gold)
+
+                    Text(feature.title)
+                        .font(.system(size: 14, weight: .medium, design: .rounded))
+                        .foregroundStyle(.white.opacity(0.85))
+
+                    Spacer()
+                }
             }
         }
-        .padding(.horizontal, 24)
-        .padding(.top, 28)
-    }
-
-    private func featureCategoryCard(category: FeatureCategory) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            // Category header
-            HStack(spacing: 8) {
-                Image(systemName: category.icon)
-                    .font(.system(size: 12, weight: .semibold))
-                    .foregroundStyle(PaywallColors.gold)
-
-                Text(category.title)
-                    .font(.system(size: 11, weight: .bold, design: .rounded))
-                    .foregroundStyle(PaywallColors.gold.opacity(0.8))
-                    .tracking(1.2)
-            }
-            .padding(.horizontal, 16)
-            .padding(.top, 14)
-            .padding(.bottom, 10)
-
-            // Feature rows
-            ForEach(category.features, id: \.title) { feature in
-                featureRow(feature: feature)
-            }
-            .padding(.bottom, 4)
-        }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 16)
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(.white.opacity(0.04))
@@ -326,32 +299,10 @@ struct SummaryPaywallView: View {
             RoundedRectangle(cornerRadius: 16)
                 .stroke(.white.opacity(0.08), lineWidth: 1)
         )
-    }
-
-    private func featureRow(feature: ProFeature) -> some View {
-        HStack(spacing: 12) {
-            Image(systemName: feature.icon)
-                .font(.system(size: 14, weight: .medium))
-                .foregroundStyle(PaywallColors.gold.opacity(0.7))
-                .frame(width: 28, height: 28)
-
-            VStack(alignment: .leading, spacing: 1) {
-                Text(feature.title)
-                    .font(.system(size: 14, weight: .semibold, design: .rounded))
-                    .foregroundStyle(.white.opacity(0.9))
-                Text(feature.subtitle)
-                    .font(.system(size: 11, weight: .regular, design: .rounded))
-                    .foregroundStyle(.white.opacity(0.4))
-            }
-
-            Spacer()
-
-            Image(systemName: "checkmark")
-                .font(.system(size: 10, weight: .bold))
-                .foregroundStyle(PaywallColors.gold)
-        }
-        .padding(.horizontal, 16)
-        .frame(height: 38)
+        .padding(.horizontal, 24)
+        .padding(.top, 28)
+        .opacity(showFeatures ? 1 : 0)
+        .offset(y: showFeatures ? 0 : 20)
     }
 
     // MARK: - Section 4: Trial Timeline
@@ -806,11 +757,4 @@ private enum PaywallColors {
 private struct ProFeature {
     let icon: String
     let title: String
-    let subtitle: String
-}
-
-private struct FeatureCategory {
-    let icon: String
-    let title: String
-    let features: [ProFeature]
 }
