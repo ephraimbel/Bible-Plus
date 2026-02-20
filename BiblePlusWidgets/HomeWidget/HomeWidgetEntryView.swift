@@ -21,7 +21,10 @@ struct HomeWidgetEntryView: View {
     // MARK: - Small Widget
 
     private var smallView: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 0) {
+            // Content type label
+            contentTypeLabel(size: 9)
+
             Spacer()
 
             Text(entry.displayText)
@@ -35,8 +38,10 @@ struct HomeWidgetEntryView: View {
             if let ref = entry.verseReference {
                 Text(ref)
                     .font(.caption2)
-                    .foregroundStyle(.white.opacity(0.7))
+                    .fontWeight(.medium)
+                    .foregroundStyle(.white.opacity(0.75))
                     .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
+                    .padding(.top, 4)
             }
         }
         .padding(12)
@@ -46,7 +51,10 @@ struct HomeWidgetEntryView: View {
     // MARK: - Medium Widget
 
     private var mediumView: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 0) {
+            // Content type label
+            contentTypeLabel(size: 9)
+
             Spacer()
 
             Text(entry.displayText)
@@ -60,8 +68,10 @@ struct HomeWidgetEntryView: View {
             if let ref = entry.verseReference {
                 Text(ref)
                     .font(.caption2)
-                    .foregroundStyle(.white.opacity(0.7))
+                    .fontWeight(.medium)
+                    .foregroundStyle(.white.opacity(0.75))
                     .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
+                    .padding(.top, 5)
             }
         }
         .padding(14)
@@ -71,7 +81,10 @@ struct HomeWidgetEntryView: View {
     // MARK: - Large Widget
 
     private var largeView: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 0) {
+            // Content type label
+            contentTypeLabel(size: 10)
+
             Spacer()
 
             Text(entry.displayText)
@@ -85,13 +98,15 @@ struct HomeWidgetEntryView: View {
             if let ref = entry.verseReference {
                 Text(ref)
                     .font(.caption)
-                    .foregroundStyle(.white.opacity(0.7))
+                    .fontWeight(.medium)
+                    .foregroundStyle(.white.opacity(0.75))
                     .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
-                    .padding(.top, 2)
+                    .padding(.top, 6)
             }
 
             Spacer()
 
+            // Branding
             HStack {
                 Spacer()
                 HStack(spacing: 5) {
@@ -109,6 +124,40 @@ struct HomeWidgetEntryView: View {
         }
         .padding(16)
         .widgetURL(deepLinkURL)
+    }
+
+    // MARK: - Content Type Label
+
+    private func contentTypeLabel(size: CGFloat) -> some View {
+        HStack(spacing: 4) {
+            Image(systemName: contentTypeIcon)
+                .font(.system(size: size, weight: .semibold))
+            Text(contentTypeTitle)
+                .font(.system(size: size, weight: .semibold, design: .rounded))
+                .tracking(0.5)
+        }
+        .foregroundStyle(.white.opacity(0.6))
+        .shadow(color: .black.opacity(0.5), radius: 2, y: 1)
+    }
+
+    private var contentTypeIcon: String {
+        switch entry.contentType {
+        case .verse: return "book.closed.fill"
+        case .prayer: return "hands.sparkles.fill"
+        case .devotional: return "text.book.closed.fill"
+        case .quote: return "quote.opening"
+        case .reflection: return "leaf.fill"
+        }
+    }
+
+    private var contentTypeTitle: String {
+        switch entry.contentType {
+        case .verse: return "DAILY VERSE"
+        case .prayer: return "DAILY PRAYER"
+        case .devotional: return "DEVOTIONAL"
+        case .quote: return "FAITH QUOTE"
+        case .reflection: return "REFLECTION"
+        }
     }
 
     // MARK: - Helpers

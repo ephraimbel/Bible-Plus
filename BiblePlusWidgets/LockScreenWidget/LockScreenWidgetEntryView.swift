@@ -19,22 +19,35 @@ struct LockScreenWidgetEntryView: View {
     // MARK: - Inline
 
     private var inlineView: some View {
-        Text(entry.shortText)
-            .widgetURL(deepLinkURL)
+        HStack(spacing: 4) {
+            Image(systemName: "book.closed.fill")
+            Text(entry.shortText)
+        }
+        .widgetURL(deepLinkURL)
     }
 
     // MARK: - Rectangular
 
     private var rectangularView: some View {
-        VStack(alignment: .leading, spacing: 2) {
+        VStack(alignment: .leading, spacing: 3) {
+            // Header
+            HStack(spacing: 4) {
+                Image(systemName: "book.closed.fill")
+                    .font(.system(size: 8, weight: .semibold))
+                Text(entry.verseReference != nil ? "DAILY VERSE" : "DAILY INSPIRATION")
+                    .font(.system(size: 8, weight: .bold, design: .rounded))
+                    .tracking(0.5)
+            }
+            .foregroundStyle(.secondary)
+
             Text(lockScreenText)
                 .font(.system(size: 13, weight: .regular, design: .serif))
-                .lineLimit(3)
+                .lineLimit(2)
                 .minimumScaleFactor(0.9)
 
             if let ref = entry.verseReference {
                 Text(ref)
-                    .font(.system(size: 10, weight: .medium))
+                    .font(.system(size: 10, weight: .semibold))
                     .foregroundStyle(.secondary)
             }
         }
