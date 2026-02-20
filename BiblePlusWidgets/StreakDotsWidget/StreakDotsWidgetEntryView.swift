@@ -16,7 +16,7 @@ struct StreakDotsWidgetEntryView: View {
                 Image(systemName: "flame.fill")
                     .font(.system(size: 12, weight: .semibold))
 
-                Text("\(entry.currentStreak) Day Streak")
+                Text("\(entry.currentStreak) \(entry.currentStreak == 1 ? "Day" : "Days") in the Word")
                     .font(.system(size: 13, weight: .semibold))
                     .lineLimit(1)
             }

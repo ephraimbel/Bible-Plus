@@ -82,8 +82,8 @@ struct StreakDotsWidget: Widget {
             StreakDotsWidgetEntryView(entry: entry)
                 .containerBackground(.clear, for: .widget)
         }
-        .configurationDisplayName("Streak & Week")
-        .description("Your streak with daily activity dots on the lock screen.")
+        .configurationDisplayName("Weekly Faithfulness")
+        .description("Your daily faithfulness with weekly activity dots.")
         .supportedFamilies([.accessoryRectangular])
     }
 }

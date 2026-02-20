@@ -87,8 +87,8 @@ struct StreakWidget: Widget {
                     )
                 }
         }
-        .configurationDisplayName("Daily Streak")
-        .description("Track your daily streak and stay consistent.")
+        .configurationDisplayName("Days in the Word")
+        .description("Track your daily faithfulness in scripture, prayer, and reflection.")
         .supportedFamilies([.systemSmall, .accessoryCircular, .accessoryRectangular])
     }
 }

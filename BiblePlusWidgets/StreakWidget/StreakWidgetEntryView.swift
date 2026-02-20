@@ -21,27 +21,38 @@ struct StreakWidgetEntryView: View {
     // MARK: - System Small
 
     private var smallView: some View {
-        VStack(spacing: 6) {
+        VStack(spacing: 4) {
+            // Faith label
+            HStack(spacing: 4) {
+                Image(systemName: "book.closed.fill")
+                    .font(.system(size: 8, weight: .semibold))
+                Text("FAITHFULNESS")
+                    .font(.system(size: 8, weight: .bold, design: .rounded))
+                    .tracking(0.5)
+            }
+            .foregroundStyle(.white.opacity(0.55))
+            .shadow(color: .black.opacity(0.4), radius: 1, y: 1)
+
             Spacer()
 
             Image(systemName: entry.hasActivityToday ? "flame.fill" : "flame")
-                .font(.system(size: 28, weight: .medium))
+                .font(.system(size: 26, weight: .medium))
                 .foregroundStyle(entry.hasActivityToday ? .orange : .white.opacity(0.7))
                 .shadow(color: .black.opacity(0.5), radius: 3, y: 1)
 
             Text("\(entry.currentStreak)")
-                .font(.system(size: 40, weight: .bold, design: .rounded))
+                .font(.system(size: 38, weight: .bold, design: .rounded))
                 .foregroundStyle(.white)
                 .shadow(color: .black.opacity(0.7), radius: 2, y: 1)
 
-            Text("Day Streak")
-                .font(.system(size: 12, weight: .medium))
+            Text(entry.currentStreak == 1 ? "Day in the Word" : "Days in the Word")
+                .font(.system(size: 11, weight: .medium, design: .serif))
                 .foregroundStyle(.white.opacity(0.85))
                 .shadow(color: .black.opacity(0.5), radius: 1, y: 1)
 
             Text("Best: \(entry.longestStreak)")
                 .font(.system(size: 10, weight: .regular))
-                .foregroundStyle(.white.opacity(0.6))
+                .foregroundStyle(.white.opacity(0.5))
                 .shadow(color: .black.opacity(0.4), radius: 1, y: 1)
 
             Spacer()
@@ -57,7 +68,7 @@ struct StreakWidgetEntryView: View {
             : 0
 
         return Gauge(value: fraction) {
-            Image(systemName: "flame.fill")
+            Image(systemName: "book.closed.fill")
                 .font(.system(size: 10))
         } currentValueLabel: {
             Text("\(entry.currentStreak)")
@@ -75,7 +86,7 @@ struct StreakWidgetEntryView: View {
                 .font(.system(size: 20, weight: .medium))
 
             VStack(alignment: .leading, spacing: 1) {
-                Text("\(entry.currentStreak) Day Streak")
+                Text("\(entry.currentStreak) \(entry.currentStreak == 1 ? "Day" : "Days") in the Word")
                     .font(.system(size: 13, weight: .semibold))
                     .lineLimit(1)
 
