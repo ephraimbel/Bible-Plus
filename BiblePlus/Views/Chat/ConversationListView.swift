@@ -2,6 +2,7 @@ import SwiftUI
 import SwiftData
 
 struct ConversationListView: View {
+    @Binding var pendingConversation: PendingConversation?
     @Environment(\.modelContext) private var modelContext
     @Environment(\.bpPalette) private var palette
     @Environment(\.colorScheme) private var colorScheme
@@ -54,6 +55,13 @@ struct ConversationListView: View {
                         viewModel?.loadConversations()
                     }
             }
+        }
+        .onChange(of: pendingConversation?.conversationId) { _, newValue in
+            guard let pending = pendingConversation else { return }
+            pendingContext = pending.context
+            pendingConversation = nil
+            viewModel?.loadConversations()
+            navigationPath.append(pending.conversationId)
         }
         .onReceive(NotificationCenter.default.publisher(for: .navigateToConversation)) { notification in
             guard let idString = notification.userInfo?["conversationId"] as? String,

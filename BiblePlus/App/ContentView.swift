@@ -10,6 +10,7 @@ struct ContentView: View {
     @State private var soundscapeService = SoundscapeService()
     @State private var audioBibleService = AudioBibleService()
     @State private var showFeedEntryButton = true
+    @State private var pendingConversation: PendingConversation?
     @Environment(\.scenePhase) private var scenePhase
 
     enum Tab: String, CaseIterable {
@@ -46,7 +47,7 @@ struct ContentView: View {
                 .tabItem { Label(Tab.bible.title, systemImage: Tab.bible.icon) }
                 .tag(Tab.bible)
 
-            ConversationListView()
+            ConversationListView(pendingConversation: $pendingConversation)
                 .tabItem { Label(Tab.ask.title, systemImage: Tab.ask.icon) }
                 .tag(Tab.ask)
 
@@ -131,20 +132,15 @@ struct ContentView: View {
             modelContext.insert(conversation)
             try? modelContext.save()
 
+            // Set pending navigation — ConversationListView picks this up on appear
+            pendingConversation = PendingConversation(
+                conversationId: conversation.id,
+                context: context
+            )
+
             // Switch to Ask tab
             withAnimation(.easeInOut(duration: 0.25)) {
                 selectedTab = .ask
-            }
-
-            // Navigate to the conversation after a short delay
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                var userInfo: [String: Any] = ["conversationId": conversation.id.uuidString]
-                if let context { userInfo["context"] = context }
-                NotificationCenter.default.post(
-                    name: .navigateToConversation,
-                    object: nil,
-                    userInfo: userInfo
-                )
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: .feedContentDeepLink)) { _ in
@@ -218,4 +214,11 @@ struct ContentView: View {
             }
         }
     }
+}
+
+// MARK: - Pending Conversation
+
+struct PendingConversation {
+    let conversationId: UUID
+    let context: String?
 }
