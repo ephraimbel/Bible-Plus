@@ -28,9 +28,10 @@ struct HomeWidgetEntryView: View {
             Spacer()
 
             Text(entry.displayText)
-                .font(.custom("NewYork-Regular", size: 13, relativeTo: .body))
+                .font(.system(size: 13, weight: .regular, design: .serif))
                 .foregroundStyle(.white)
                 .lineSpacing(2)
+                .lineLimit(6)
                 .minimumScaleFactor(0.7)
                 .shadow(color: .black.opacity(0.7), radius: 1, y: 1)
                 .shadow(color: .black.opacity(0.4), radius: 4, y: 0)
@@ -58,9 +59,10 @@ struct HomeWidgetEntryView: View {
             Spacer()
 
             Text(entry.displayText)
-                .font(.custom("NewYork-Regular", size: 15, relativeTo: .body))
+                .font(.system(size: 15, weight: .regular, design: .serif))
                 .foregroundStyle(.white)
                 .lineSpacing(3)
+                .lineLimit(5)
                 .minimumScaleFactor(0.75)
                 .shadow(color: .black.opacity(0.7), radius: 1, y: 1)
                 .shadow(color: .black.opacity(0.4), radius: 4, y: 0)
@@ -88,7 +90,7 @@ struct HomeWidgetEntryView: View {
             Spacer()
 
             Text(entry.displayText)
-                .font(.custom("NewYork-Regular", size: 18, relativeTo: .title3))
+                .font(.system(size: 18, weight: .regular, design: .serif))
                 .foregroundStyle(.white)
                 .lineSpacing(4)
                 .minimumScaleFactor(0.75)
@@ -163,7 +165,9 @@ struct HomeWidgetEntryView: View {
     // MARK: - Helpers
 
     private var deepLinkURL: URL? {
-        guard let contentID = entry.contentID else { return nil }
+        guard let contentID = entry.contentID else {
+            return URL(string: "bibleplus://")
+        }
         return URL(string: "bibleplus://content/\(contentID.uuidString)")
     }
 }

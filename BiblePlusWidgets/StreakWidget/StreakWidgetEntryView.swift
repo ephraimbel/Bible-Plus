@@ -43,6 +43,7 @@ struct StreakWidgetEntryView: View {
             Text("\(entry.currentStreak)")
                 .font(.system(size: 38, weight: .bold, design: .rounded))
                 .foregroundStyle(.white)
+                .minimumScaleFactor(0.6)
                 .shadow(color: .black.opacity(0.7), radius: 2, y: 1)
 
             Text(entry.currentStreak == 1 ? "Day in the Word" : "Days in the Word")
@@ -57,6 +58,7 @@ struct StreakWidgetEntryView: View {
 
             Spacer()
         }
+        .padding(10)
         .widgetURL(URL(string: "bibleplus://progress"))
     }
 

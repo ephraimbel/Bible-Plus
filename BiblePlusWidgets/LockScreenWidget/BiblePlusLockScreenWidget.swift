@@ -83,9 +83,22 @@ struct LockScreenWidgetProvider: AppIntentTimelineProvider {
 
         let text = WidgetContentProvider.personalizedText(template: content.templateText, firstName: profile.firstName)
 
+        // Truncate at word boundary for inline widget
+        let shortText: String
+        if text.count <= 40 {
+            shortText = text
+        } else {
+            let prefix = text.prefix(40)
+            if let lastSpace = prefix.lastIndex(of: " ") {
+                shortText = String(prefix[prefix.startIndex..<lastSpace]) + "\u{2026}"
+            } else {
+                shortText = String(prefix) + "\u{2026}"
+            }
+        }
+
         return LockScreenWidgetEntry(
             date: Date(),
-            shortText: String(text.prefix(40)),
+            shortText: shortText,
             displayText: text,
             verseReference: content.verseReference,
             contentID: content.id

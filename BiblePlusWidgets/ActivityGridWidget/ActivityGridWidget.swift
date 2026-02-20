@@ -8,14 +8,12 @@ struct ActivityGridEntry: TimelineEntry {
     let date: Date
     let currentStreak: Int
     let activeDays: Set<Int> // weekday 1 (Sunday) through 7 (Saturday)
-    let hasActivityToday: Bool
     let backgroundGradient: [String]
 
     static let placeholder = ActivityGridEntry(
         date: Date(),
         currentStreak: 5,
         activeDays: [2, 3, 4, 5, 6], // Mon–Fri
-        hasActivityToday: true,
         backgroundGradient: ["#C9A96E", "#8B6914"]
     )
 }
@@ -50,13 +48,6 @@ struct ActivityGridProvider: TimelineProvider {
 
         let activeDays = fetchActiveDaysThisWeek(modelContext: modelContext)
 
-        let hasActivityToday: Bool
-        if let lastActive = profile.lastActiveDate {
-            hasActivityToday = Calendar.current.isDateInToday(lastActive)
-        } else {
-            hasActivityToday = false
-        }
-
         let effectiveBgID = profile.widgetSelectedBackgroundID ?? profile.selectedBackgroundID
         let background = SanctuaryBackground.background(for: effectiveBgID)
             ?? SanctuaryBackground.allBackgrounds[0]
@@ -65,7 +56,6 @@ struct ActivityGridProvider: TimelineProvider {
             date: Date(),
             currentStreak: profile.streakCount,
             activeDays: activeDays,
-            hasActivityToday: hasActivityToday,
             backgroundGradient: background.gradientColors
         )
     }

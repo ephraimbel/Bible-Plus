@@ -10,41 +10,51 @@ struct ActivityGridWidgetEntryView: View {
         ("M", 2), ("T", 3), ("W", 4), ("T", 5), ("F", 6), ("S", 7), ("S", 1)
     ]
 
+    private var todayWeekday: Int {
+        Calendar.current.component(.weekday, from: Date())
+    }
+
     var body: some View {
         VStack(spacing: 8) {
-            // Top: Streak label
+            // Top: Streak label with faith-oriented language
             HStack(spacing: 4) {
-                Image(systemName: "flame.fill")
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundStyle(.orange)
+                Image(systemName: "book.closed.fill")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(.white.opacity(0.8))
 
-                Text("\(entry.currentStreak)-day streak")
-                    .font(.system(size: 13, weight: .bold, design: .rounded))
-                    .foregroundStyle(.white)
+                if entry.currentStreak == 0 {
+                    Text("Start Your Journey")
+                        .font(.system(size: 13, weight: .bold, design: .rounded))
+                        .foregroundStyle(.white)
+                } else {
+                    Text("\(entry.currentStreak) \(entry.currentStreak == 1 ? "Day" : "Days") in the Word")
+                        .font(.system(size: 13, weight: .bold, design: .rounded))
+                        .foregroundStyle(.white)
+                }
             }
             .shadow(color: .black.opacity(0.5), radius: 2, y: 1)
 
             Spacer()
 
-            // Center: 7 day circles
-            HStack(spacing: 6) {
+            // Center: 7 day circles (sized to fit .systemSmall)
+            HStack(spacing: 4) {
                 ForEach(weekdays, id: \.calendarIndex) { day in
                     let isActive = entry.activeDays.contains(day.calendarIndex)
-                    let isToday = isCurrentWeekday(day.calendarIndex)
+                    let isToday = todayWeekday == day.calendarIndex
 
                     VStack(spacing: 3) {
                         ZStack {
                             Circle()
                                 .fill(isActive ? Color.white : Color.white.opacity(0.15))
-                                .frame(width: 16, height: 16)
+                                .frame(width: 14, height: 14)
 
                             if isToday {
                                 Circle()
                                     .stroke(Color.white.opacity(0.8), lineWidth: 1.5)
-                                    .frame(width: 22, height: 22)
+                                    .frame(width: 20, height: 20)
                             }
                         }
-                        .frame(width: 22, height: 22)
+                        .frame(width: 20, height: 20)
 
                         Text(day.label)
                             .font(.system(size: 8, weight: .medium))
@@ -64,9 +74,5 @@ struct ActivityGridWidgetEntryView: View {
         }
         .padding(12)
         .widgetURL(URL(string: "bibleplus://progress"))
-    }
-
-    private func isCurrentWeekday(_ calendarIndex: Int) -> Bool {
-        Calendar.current.component(.weekday, from: Date()) == calendarIndex
     }
 }

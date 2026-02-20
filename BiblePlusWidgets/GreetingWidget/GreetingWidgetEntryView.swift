@@ -22,5 +22,6 @@ struct GreetingWidgetEntryView: View {
                 .foregroundStyle(.secondary)
                 .lineLimit(2)
         }
+        .widgetURL(URL(string: "bibleplus://"))
     }
 }

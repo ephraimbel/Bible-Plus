@@ -31,7 +31,7 @@ struct QuickActionsWidgetEntryView: View {
     }
 
     private func actionCell(_ action: (icon: String, label: String, url: String)) -> some View {
-        Link(destination: URL(string: action.url)!) {
+        Link(destination: URL(string: action.url) ?? URL(string: "bibleplus://")!) {
             VStack(spacing: 4) {
                 Image(systemName: action.icon)
                     .font(.system(size: 20, weight: .medium))

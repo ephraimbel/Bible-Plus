@@ -77,7 +77,7 @@ struct DashboardWidgetEntryView: View {
                     .foregroundStyle(.white)
 
                 Text(planName)
-                    .font(.system(size: 8, weight: .medium))
+                    .font(.system(size: 9, weight: .medium))
                     .foregroundStyle(.white.opacity(0.7))
                     .lineLimit(1)
             } else {
