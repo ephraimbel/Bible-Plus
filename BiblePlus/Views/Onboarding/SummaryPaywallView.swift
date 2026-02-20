@@ -121,24 +121,6 @@ struct SummaryPaywallView: View {
 
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 0) {
-                    // Dismiss button (sheet mode only)
-                    if !isOnboarding {
-                        HStack {
-                            Spacer()
-                            Button {
-                                dismiss()
-                            } label: {
-                                Image(systemName: "xmark")
-                                    .font(.system(size: 15, weight: .bold))
-                                    .foregroundStyle(.white.opacity(0.6))
-                                    .frame(width: 32, height: 32)
-                                    .background(Circle().fill(.white.opacity(0.1)))
-                            }
-                        }
-                        .padding(.horizontal, 20)
-                        .padding(.top, 8)
-                    }
-
                     heroSection
                     inspirationalVerse
                     featureShowcase
