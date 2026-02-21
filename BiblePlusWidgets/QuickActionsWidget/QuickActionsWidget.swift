@@ -1,5 +1,4 @@
 import SwiftUI
-import SwiftData
 import WidgetKit
 
 // MARK: - Entry
@@ -28,30 +27,26 @@ struct QuickActionsProvider: TimelineProvider {
             completion(.placeholder)
             return
         }
-        completion(currentEntry() ?? .placeholder)
+        completion(currentEntry())
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<QuickActionsEntry>) -> Void) {
-        let entry = currentEntry() ?? .placeholder
+        let entry = currentEntry()
         let nextReload = WidgetTimeWindow.startOfNextDay()
         completion(Timeline(entries: [entry], policy: .after(nextReload)))
     }
 
-    private func currentEntry() -> QuickActionsEntry? {
-        guard let container = try? SharedModelContainer.create() else { return nil }
-        let modelContext = ModelContext(container)
-
-        let profileDescriptor = FetchDescriptor<UserProfile>()
-        guard let profile = (try? modelContext.fetch(profileDescriptor))?.first else { return nil }
-
-        let effectiveBgID = profile.widgetSelectedBackgroundID ?? profile.selectedBackgroundID
-        let background = SanctuaryBackground.background(for: effectiveBgID)
-            ?? SanctuaryBackground.allBackgrounds[0]
+    /// Always returns an entry. Background comes from UserDefaults (App Group) —
+    /// no SwiftData needed for this widget since it only needs the background.
+    private func currentEntry() -> QuickActionsEntry {
+        let bgColors = WidgetBackgroundService.loadGradientColors()
+            ?? SanctuaryBackground.allBackgrounds[0].gradientColors
+        let imageData = WidgetBackgroundService.loadWidgetBackgroundImageData()
 
         return QuickActionsEntry(
             date: Date(),
-            backgroundGradient: background.gradientColors,
-            backgroundImageData: WidgetBackgroundService.loadWidgetBackgroundImageData()
+            backgroundGradient: bgColors,
+            backgroundImageData: imageData
         )
     }
 }

@@ -59,6 +59,9 @@ struct HomeWidgetProvider: AppIntentTimelineProvider {
             allowedTypes: allowedTypes
         )
 
+        // Background: read from UserDefaults (App Group) — always reliable
+        let bgColors = WidgetBackgroundService.loadGradientColors()
+            ?? SanctuaryBackground.allBackgrounds[0].gradientColors
         let imageData = WidgetBackgroundService.loadWidgetBackgroundImageData()
         let entries: [HomeWidgetEntry] = widgetEntries.map { entry in
             HomeWidgetEntry(
@@ -68,7 +71,7 @@ struct HomeWidgetProvider: AppIntentTimelineProvider {
                 verseReference: entry.verseReference,
                 contentType: entry.contentType,
                 contentID: entry.contentID,
-                backgroundGradient: entry.backgroundGradient,
+                backgroundGradient: bgColors,
                 backgroundImageData: imageData
             )
         }
@@ -92,9 +95,10 @@ struct HomeWidgetProvider: AppIntentTimelineProvider {
             allowedTypes: allowedTypes
         ) else { return nil }
 
-        let effectiveBgID = profile.widgetSelectedBackgroundID ?? profile.selectedBackgroundID
-        let background = SanctuaryBackground.background(for: effectiveBgID)
-            ?? SanctuaryBackground.allBackgrounds[0]
+        // Background: read from UserDefaults (App Group) — always reliable
+        let bgColors = WidgetBackgroundService.loadGradientColors()
+            ?? SanctuaryBackground.allBackgrounds[0].gradientColors
+        let imageData = WidgetBackgroundService.loadWidgetBackgroundImageData()
         let text = WidgetContentProvider.personalizedText(template: content.templateText, firstName: profile.firstName)
 
         return HomeWidgetEntry(
@@ -104,8 +108,8 @@ struct HomeWidgetProvider: AppIntentTimelineProvider {
             verseReference: content.verseReference,
             contentType: content.type,
             contentID: content.id,
-            backgroundGradient: background.gradientColors,
-            backgroundImageData: WidgetBackgroundService.loadWidgetBackgroundImageData()
+            backgroundGradient: bgColors,
+            backgroundImageData: imageData
         )
     }
 }

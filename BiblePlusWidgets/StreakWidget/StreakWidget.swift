@@ -59,17 +59,18 @@ struct StreakWidgetProvider: TimelineProvider {
             hasActivityToday = false
         }
 
-        let effectiveBgID = profile.widgetSelectedBackgroundID ?? profile.selectedBackgroundID
-        let background = SanctuaryBackground.background(for: effectiveBgID)
-            ?? SanctuaryBackground.allBackgrounds[0]
+        // Background: read from UserDefaults (App Group) — always reliable
+        let bgColors = WidgetBackgroundService.loadGradientColors()
+            ?? SanctuaryBackground.allBackgrounds[0].gradientColors
+        let imageData = WidgetBackgroundService.loadWidgetBackgroundImageData()
 
         return StreakWidgetEntry(
             date: Date(),
             currentStreak: profile.streakCount,
             longestStreak: profile.longestStreak,
             hasActivityToday: hasActivityToday,
-            backgroundGradient: background.gradientColors,
-            backgroundImageData: WidgetBackgroundService.loadWidgetBackgroundImageData()
+            backgroundGradient: bgColors,
+            backgroundImageData: imageData
         )
     }
 }

@@ -14,7 +14,7 @@ struct ActivityGridEntry: TimelineEntry {
     static let placeholder = ActivityGridEntry(
         date: Date(),
         currentStreak: 5,
-        activeDays: [2, 3, 4, 5, 6], // Mon–Fri
+        activeDays: [2, 3, 4, 5, 6], // Mon-Fri
         backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors,
         backgroundImageData: nil
     )
@@ -32,34 +32,43 @@ struct ActivityGridProvider: TimelineProvider {
             completion(.placeholder)
             return
         }
-        completion(currentEntry() ?? .placeholder)
+        completion(currentEntry())
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<ActivityGridEntry>) -> Void) {
-        let entry = currentEntry() ?? .placeholder
+        let entry = currentEntry()
         let nextReload = WidgetTimeWindow.startOfNextDay()
         completion(Timeline(entries: [entry], policy: .after(nextReload)))
     }
 
-    private func currentEntry() -> ActivityGridEntry? {
-        guard let container = try? SharedModelContainer.create() else { return nil }
-        let modelContext = ModelContext(container)
+    /// Always returns an entry — never nil. Background comes from UserDefaults (App Group),
+    /// streak/activity data comes from SwiftData. If SwiftData fails, uses defaults with
+    /// the correct background.
+    private func currentEntry() -> ActivityGridEntry {
+        // Background: read from UserDefaults (App Group) — always reliable
+        let bgColors = WidgetBackgroundService.loadGradientColors()
+            ?? SanctuaryBackground.allBackgrounds[0].gradientColors
+        let imageData = WidgetBackgroundService.loadWidgetBackgroundImageData()
 
-        let profileDescriptor = FetchDescriptor<UserProfile>()
-        guard let profile = (try? modelContext.fetch(profileDescriptor))?.first else { return nil }
+        // Streak + activity data: read from SwiftData (best effort)
+        var streak = 0
+        var activeDays: Set<Int> = []
 
-        let activeDays = fetchActiveDaysThisWeek(modelContext: modelContext)
-
-        let effectiveBgID = profile.widgetSelectedBackgroundID ?? profile.selectedBackgroundID
-        let background = SanctuaryBackground.background(for: effectiveBgID)
-            ?? SanctuaryBackground.allBackgrounds[0]
+        if let container = try? SharedModelContainer.create() {
+            let modelContext = ModelContext(container)
+            let profileDescriptor = FetchDescriptor<UserProfile>()
+            if let profile = (try? modelContext.fetch(profileDescriptor))?.first {
+                streak = profile.streakCount
+            }
+            activeDays = fetchActiveDaysThisWeek(modelContext: modelContext)
+        }
 
         return ActivityGridEntry(
             date: Date(),
-            currentStreak: profile.streakCount,
+            currentStreak: streak,
             activeDays: activeDays,
-            backgroundGradient: background.gradientColors,
-            backgroundImageData: WidgetBackgroundService.loadWidgetBackgroundImageData()
+            backgroundGradient: bgColors,
+            backgroundImageData: imageData
         )
     }
 

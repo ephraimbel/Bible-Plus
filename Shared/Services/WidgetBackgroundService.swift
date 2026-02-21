@@ -4,8 +4,14 @@ import WidgetKit
 
 /// Extracts a static frame from the user's selected background (video or image)
 /// and writes it to the shared App Group container so the widget can use it.
+/// Also stores gradient colors in UserDefaults (App Group) for reliable widget access.
 enum WidgetBackgroundService {
     private static let fileName = "widget-background.jpg"
+    private static let gradientKey = "widgetGradientColors"
+
+    private static var sharedDefaults: UserDefaults? {
+        UserDefaults(suiteName: "group.io.bibleplus.shared")
+    }
 
     static var sharedImageURL: URL? {
         FileManager.default
@@ -15,8 +21,13 @@ enum WidgetBackgroundService {
 
     /// Call when the user changes their background. Extracts a frame from video,
     /// copies a static image, or clears the file for gradient-only backgrounds.
+    /// Also persists gradient colors to UserDefaults for widget providers.
     /// Automatically reloads widget timelines after the image is ready.
     static func updateWidgetBackground(for background: SanctuaryBackground) {
+        // Always persist gradient colors to UserDefaults (App Group)
+        // so widget providers can read them without SwiftData
+        sharedDefaults?.set(background.gradientColors, forKey: gradientKey)
+
         if let videoName = background.videoFileName {
             extractVideoFrame(named: videoName)
         } else if let imageName = background.imageName {
@@ -27,6 +38,12 @@ enum WidgetBackgroundService {
             removeImage()
             reloadWidgets()
         }
+    }
+
+    /// Read gradient colors from UserDefaults (App Group).
+    /// Used by widget providers as a reliable data source that doesn't require SwiftData.
+    static func loadGradientColors() -> [String]? {
+        sharedDefaults?.stringArray(forKey: gradientKey)
     }
 
     /// Load the saved widget background image (used by widget extension)
