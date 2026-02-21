@@ -84,7 +84,7 @@ struct PlanChapterReaderView: View {
 
             Text(text)
                 .font(.system(size: 18, weight: .regular, design: .serif))
-                .foregroundStyle(isRedLetter ? Color(red: 0.7, green: 0.15, blue: 0.1) : palette.textPrimary)
+                .foregroundStyle(isRedLetter ? palette.jesusWords : palette.textPrimary)
                 .lineSpacing(8)
         }
         .padding(.vertical, 2)
