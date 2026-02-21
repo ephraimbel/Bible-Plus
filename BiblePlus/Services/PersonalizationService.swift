@@ -1,6 +1,5 @@
 import Foundation
 import SwiftData
-import WidgetKit
 
 @Observable
 final class PersonalizationService {
@@ -92,10 +91,10 @@ final class PersonalizationService {
         save()
 
         // Only update widget image if no widget-specific background is set
+        // WidgetBackgroundService handles reloadAllTimelines() after the image is ready
         let effectiveWidgetID = profile.widgetSelectedBackgroundID ?? backgroundID
         if let background = SanctuaryBackground.background(for: effectiveWidgetID) {
             WidgetBackgroundService.updateWidgetBackground(for: background)
-            WidgetCenter.shared.reloadAllTimelines()
         }
     }
 
@@ -106,10 +105,10 @@ final class PersonalizationService {
         save()
 
         // Determine which background the widget should use
+        // WidgetBackgroundService handles reloadAllTimelines() after the image is ready
         let effectiveID = backgroundID ?? profile.selectedBackgroundID
         if let background = SanctuaryBackground.background(for: effectiveID) {
             WidgetBackgroundService.updateWidgetBackground(for: background)
-            WidgetCenter.shared.reloadAllTimelines()
         }
     }
 
