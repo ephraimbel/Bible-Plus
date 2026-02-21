@@ -115,23 +115,28 @@ struct PlanProgressWidget: Widget {
         StaticConfiguration(kind: kind, provider: PlanProgressProvider()) { entry in
             PlanProgressEntryView(entry: entry)
                 .containerBackground(for: .widget) {
-                    ZStack {
-                        LinearGradient(
-                            colors: entry.gradientColors.map { Color(hex: $0) },
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                        if let uiImage = WidgetBackgroundService.loadWidgetBackgroundImage() {
-                            Image(uiImage: uiImage)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
+                    GeometryReader { geo in
+                        ZStack {
+                            LinearGradient(
+                                colors: entry.gradientColors.map { Color(hex: $0) },
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                            if let uiImage = WidgetBackgroundService.loadWidgetBackgroundImage() {
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: geo.size.width, height: geo.size.height)
+                                    .clipped()
+                            }
+                            RadialGradient(
+                                colors: [Color.clear, Color.black.opacity(0.25)],
+                                center: .center,
+                                startRadius: 80,
+                                endRadius: 250
+                            )
                         }
-                        RadialGradient(
-                            colors: [Color.clear, Color.black.opacity(0.25)],
-                            center: .center,
-                            startRadius: 80,
-                            endRadius: 250
-                        )
+                        .frame(width: geo.size.width, height: geo.size.height)
                     }
                 }
         }

@@ -114,29 +114,28 @@ struct BiblePlusHomeWidget: Widget {
         AppIntentConfiguration(kind: kind, intent: ContentTypeIntent.self, provider: HomeWidgetProvider()) { entry in
             HomeWidgetEntryView(entry: entry)
                 .containerBackground(for: .widget) {
-                    LinearGradient(
-                        colors: entry.backgroundGradient.map { Color(hex: $0) },
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                    .overlay {
-                        if let uiImage = WidgetBackgroundService.loadWidgetBackgroundImage() {
-                            GeometryReader { geo in
+                    GeometryReader { geo in
+                        ZStack {
+                            LinearGradient(
+                                colors: entry.backgroundGradient.map { Color(hex: $0) },
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                            if let uiImage = WidgetBackgroundService.loadWidgetBackgroundImage() {
                                 Image(uiImage: uiImage)
                                     .resizable()
-                                    .aspectRatio(contentMode: .fill)
+                                    .scaledToFill()
                                     .frame(width: geo.size.width, height: geo.size.height)
                                     .clipped()
                             }
+                            RadialGradient(
+                                colors: [Color.clear, Color.black.opacity(0.25)],
+                                center: .center,
+                                startRadius: 80,
+                                endRadius: 250
+                            )
                         }
-                    }
-                    .overlay {
-                        RadialGradient(
-                            colors: [Color.clear, Color.black.opacity(0.25)],
-                            center: .center,
-                            startRadius: 80,
-                            endRadius: 250
-                        )
+                        .frame(width: geo.size.width, height: geo.size.height)
                     }
                 }
         }
