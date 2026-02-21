@@ -248,75 +248,73 @@ struct WidgetBackgroundPickerSheet: View {
                 vm.updateWidgetBackground(bg.id)
             }
         } label: {
-            Color.clear
-                .aspectRatio(3.0/4.0, contentMode: .fit)
-                .overlay {
-                    ZStack {
-                        // Async thumbnail (gradient -> image/video thumbnail)
-                        AsyncThumbnailView(bg: bg)
+            ZStack {
+                // Async thumbnail (gradient -> image/video thumbnail)
+                AsyncThumbnailView(bg: bg)
 
-                        // Dark scrim for text
-                        Color.black.opacity(0.15)
+                // Dark scrim for text
+                Color.black.opacity(0.15)
 
-                        // Content overlay
-                        VStack(spacing: 6) {
-                            if locked {
-                                Image(systemName: "lock.fill")
-                                    .font(.system(size: 14, weight: .medium))
-                                    .foregroundStyle(.white.opacity(0.7))
-                            } else if isActive {
-                                ZStack {
-                                    Circle()
-                                        .fill(.white.opacity(0.25))
-                                        .frame(width: 24, height: 24)
+                // Content overlay
+                VStack(spacing: 6) {
+                    if locked {
+                        Image(systemName: "lock.fill")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundStyle(.white.opacity(0.7))
+                    } else if isActive {
+                        ZStack {
+                            Circle()
+                                .fill(.white.opacity(0.25))
+                                .frame(width: 24, height: 24)
 
-                                    Image(systemName: "checkmark")
-                                        .font(.system(size: 10, weight: .bold))
-                                        .foregroundStyle(.white)
-                                }
-                            }
-
-                            Text(bg.name)
-                                .font(.system(size: 10, weight: .medium, design: .rounded))
+                            Image(systemName: "checkmark")
+                                .font(.system(size: 10, weight: .bold))
                                 .foregroundStyle(.white)
-                                .lineLimit(1)
-                        }
-
-                        // Type badge for video/image backgrounds
-                        if bg.hasVideo || bg.hasImage {
-                            VStack {
-                                HStack {
-                                    Spacer()
-                                    Text(bg.hasVideo ? "ANIMATED" : "IMAGE")
-                                        .font(.system(size: 7, weight: .bold, design: .rounded))
-                                        .tracking(0.5)
-                                        .foregroundStyle(.white)
-                                        .padding(.horizontal, 5)
-                                        .padding(.vertical, 2)
-                                        .background(
-                                            Capsule()
-                                                .fill(Color(hex: "C9A96E").opacity(0.85))
-                                        )
-                                        .padding(5)
-                                }
-                                Spacer()
-                            }
                         }
                     }
+
+                    Text(bg.name)
+                        .font(.system(size: 10, weight: .medium, design: .rounded))
+                        .foregroundStyle(.white)
+                        .lineLimit(1)
                 }
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 12)
-                        .stroke(
-                            isActive ? Color(hex: "C9A96E").opacity(0.6) : .white.opacity(0.1),
-                            lineWidth: isActive ? 2 : 0.5
-                        )
-                )
-                .shadow(
-                    color: isActive ? Color(hex: "C9A96E").opacity(0.2) : .clear,
-                    radius: 8, y: 4
-                )
-                .opacity(locked ? 0.6 : 1.0)
+
+                // Type badge for video/image backgrounds
+                if bg.hasVideo || bg.hasImage {
+                    VStack {
+                        HStack {
+                            Spacer()
+                            Text(bg.hasVideo ? "ANIMATED" : "IMAGE")
+                                .font(.system(size: 7, weight: .bold, design: .rounded))
+                                .tracking(0.5)
+                                .foregroundStyle(.white)
+                                .padding(.horizontal, 5)
+                                .padding(.vertical, 2)
+                                .background(
+                                    Capsule()
+                                        .fill(Color(hex: "C9A96E").opacity(0.85))
+                                )
+                                .padding(5)
+                        }
+                        Spacer()
+                    }
+                }
+            }
+            .aspectRatio(3.0/4.0, contentMode: .fit)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .contentShape(RoundedRectangle(cornerRadius: 12))
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(
+                        isActive ? Color(hex: "C9A96E").opacity(0.6) : .white.opacity(0.1),
+                        lineWidth: isActive ? 2 : 0.5
+                    )
+            )
+            .shadow(
+                color: isActive ? Color(hex: "C9A96E").opacity(0.2) : .clear,
+                radius: 8, y: 4
+            )
+            .opacity(locked ? 0.6 : 1.0)
         }
         .buttonStyle(.plain)
     }
