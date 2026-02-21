@@ -367,7 +367,7 @@ private struct SettingsContentView: View {
 
                     // Plan Reminders toggle
                     HStack(spacing: 14) {
-                        Image(systemName: "book.pages")
+                        Image(systemName: "calendar")
                             .font(.system(size: 13, weight: .medium))
                             .foregroundStyle(palette.accent)
                             .frame(width: 32, height: 32)
