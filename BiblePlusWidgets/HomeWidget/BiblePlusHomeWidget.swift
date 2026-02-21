@@ -13,6 +13,7 @@ struct HomeWidgetEntry: TimelineEntry {
     let contentType: ContentType
     let contentID: UUID?
     let backgroundGradient: [String]
+    let backgroundImageData: Data?
 
     static let placeholder = HomeWidgetEntry(
         date: Date(),
@@ -21,7 +22,8 @@ struct HomeWidgetEntry: TimelineEntry {
         verseReference: "Psalm 23:1",
         contentType: .verse,
         contentID: nil,
-        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors
+        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors,
+        backgroundImageData: nil
     )
 }
 
@@ -57,6 +59,7 @@ struct HomeWidgetProvider: AppIntentTimelineProvider {
             allowedTypes: allowedTypes
         )
 
+        let imageData = WidgetBackgroundService.loadWidgetBackgroundImageData()
         let entries: [HomeWidgetEntry] = widgetEntries.map { entry in
             HomeWidgetEntry(
                 date: entry.date,
@@ -65,7 +68,8 @@ struct HomeWidgetProvider: AppIntentTimelineProvider {
                 verseReference: entry.verseReference,
                 contentType: entry.contentType,
                 contentID: entry.contentID,
-                backgroundGradient: entry.backgroundGradient
+                backgroundGradient: entry.backgroundGradient,
+                backgroundImageData: imageData
             )
         }
 
@@ -100,7 +104,8 @@ struct HomeWidgetProvider: AppIntentTimelineProvider {
             verseReference: content.verseReference,
             contentType: content.type,
             contentID: content.id,
-            backgroundGradient: background.gradientColors
+            backgroundGradient: background.gradientColors,
+            backgroundImageData: WidgetBackgroundService.loadWidgetBackgroundImageData()
         )
     }
 }
@@ -114,29 +119,10 @@ struct BiblePlusHomeWidget: Widget {
         AppIntentConfiguration(kind: kind, intent: ContentTypeIntent.self, provider: HomeWidgetProvider()) { entry in
             HomeWidgetEntryView(entry: entry)
                 .containerBackground(for: .widget) {
-                    GeometryReader { geo in
-                        ZStack {
-                            LinearGradient(
-                                colors: entry.backgroundGradient.map { Color(hex: $0) },
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                            if let uiImage = WidgetBackgroundService.loadWidgetBackgroundImage() {
-                                Image(uiImage: uiImage)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: geo.size.width, height: geo.size.height)
-                                    .clipped()
-                            }
-                            RadialGradient(
-                                colors: [Color.clear, Color.black.opacity(0.25)],
-                                center: .center,
-                                startRadius: 80,
-                                endRadius: 250
-                            )
-                        }
-                        .frame(width: geo.size.width, height: geo.size.height)
-                    }
+                    WidgetBackgroundView(
+                        gradientColors: entry.backgroundGradient,
+                        imageData: entry.backgroundImageData
+                    )
                 }
         }
         .configurationDisplayName("Daily Inspiration")

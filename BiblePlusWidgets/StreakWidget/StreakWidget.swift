@@ -10,13 +10,15 @@ struct StreakWidgetEntry: TimelineEntry {
     let longestStreak: Int
     let hasActivityToday: Bool
     let backgroundGradient: [String]
+    let backgroundImageData: Data?
 
     static let placeholder = StreakWidgetEntry(
         date: Date(),
         currentStreak: 7,
         longestStreak: 14,
         hasActivityToday: true,
-        backgroundGradient: ["#C9A96E", "#8B6914"]
+        backgroundGradient: ["C9A96E", "8B6914"],
+        backgroundImageData: nil
     )
 }
 
@@ -66,7 +68,8 @@ struct StreakWidgetProvider: TimelineProvider {
             currentStreak: profile.streakCount,
             longestStreak: profile.longestStreak,
             hasActivityToday: hasActivityToday,
-            backgroundGradient: background.gradientColors
+            backgroundGradient: background.gradientColors,
+            backgroundImageData: WidgetBackgroundService.loadWidgetBackgroundImageData()
         )
     }
 }
@@ -80,29 +83,10 @@ struct StreakWidget: Widget {
         StaticConfiguration(kind: kind, provider: StreakWidgetProvider()) { entry in
             StreakWidgetEntryView(entry: entry)
                 .containerBackground(for: .widget) {
-                    GeometryReader { geo in
-                        ZStack {
-                            LinearGradient(
-                                colors: entry.backgroundGradient.map { Color(hex: $0) },
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                            if let uiImage = WidgetBackgroundService.loadWidgetBackgroundImage() {
-                                Image(uiImage: uiImage)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: geo.size.width, height: geo.size.height)
-                                    .clipped()
-                            }
-                            RadialGradient(
-                                colors: [Color.clear, Color.black.opacity(0.25)],
-                                center: .center,
-                                startRadius: 80,
-                                endRadius: 250
-                            )
-                        }
-                        .frame(width: geo.size.width, height: geo.size.height)
-                    }
+                    WidgetBackgroundView(
+                        gradientColors: entry.backgroundGradient,
+                        imageData: entry.backgroundImageData
+                    )
                 }
         }
         .configurationDisplayName("Days in the Word")

@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import WidgetKit
 
 struct ContentView: View {
     @Binding var deepLinkedContentID: UUID?
@@ -116,6 +117,10 @@ struct ContentView: View {
         .onChange(of: scenePhase) { _, newPhase in
             if newPhase == .background {
                 soundscapeService.stop()
+            }
+            if newPhase == .active {
+                // Ensure widgets pick up the latest background on every foreground
+                WidgetCenter.shared.reloadAllTimelines()
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: .switchToAskTab)) { _ in

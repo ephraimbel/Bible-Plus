@@ -11,6 +11,7 @@ struct PlanProgressEntry: TimelineEntry {
     let totalDays: Int
     let completionFraction: Double
     let gradientColors: [String]
+    let backgroundImageData: Data?
     let planID: String?
     let isEmpty: Bool
 
@@ -20,7 +21,8 @@ struct PlanProgressEntry: TimelineEntry {
         currentDay: 3,
         totalDays: 7,
         completionFraction: 0.43,
-        gradientColors: ["#5B86E5", "#36D1DC"],
+        gradientColors: ["5B86E5", "36D1DC"],
+        backgroundImageData: nil,
         planID: nil,
         isEmpty: false
     )
@@ -31,7 +33,8 @@ struct PlanProgressEntry: TimelineEntry {
         currentDay: 0,
         totalDays: 0,
         completionFraction: 0,
-        gradientColors: ["#C9A96E", "#8B6914"],
+        gradientColors: ["C9A96E", "8B6914"],
+        backgroundImageData: nil,
         planID: nil,
         isEmpty: true
     )
@@ -100,6 +103,7 @@ struct PlanProgressProvider: TimelineProvider {
             totalDays: plan.totalDays,
             completionFraction: fraction,
             gradientColors: bgColors,
+            backgroundImageData: WidgetBackgroundService.loadWidgetBackgroundImageData(),
             planID: plan.id,
             isEmpty: false
         )
@@ -115,29 +119,10 @@ struct PlanProgressWidget: Widget {
         StaticConfiguration(kind: kind, provider: PlanProgressProvider()) { entry in
             PlanProgressEntryView(entry: entry)
                 .containerBackground(for: .widget) {
-                    GeometryReader { geo in
-                        ZStack {
-                            LinearGradient(
-                                colors: entry.gradientColors.map { Color(hex: $0) },
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                            if let uiImage = WidgetBackgroundService.loadWidgetBackgroundImage() {
-                                Image(uiImage: uiImage)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: geo.size.width, height: geo.size.height)
-                                    .clipped()
-                            }
-                            RadialGradient(
-                                colors: [Color.clear, Color.black.opacity(0.25)],
-                                center: .center,
-                                startRadius: 80,
-                                endRadius: 250
-                            )
-                        }
-                        .frame(width: geo.size.width, height: geo.size.height)
-                    }
+                    WidgetBackgroundView(
+                        gradientColors: entry.gradientColors,
+                        imageData: entry.backgroundImageData
+                    )
                 }
         }
         .configurationDisplayName("Reading Plan")

@@ -14,6 +14,7 @@ struct DashboardEntry: TimelineEntry {
     let chaptersRead: Int
     let versesSaved: Int
     let backgroundGradient: [String]
+    let backgroundImageData: Data?
 
     static let placeholder = DashboardEntry(
         date: Date(),
@@ -24,7 +25,8 @@ struct DashboardEntry: TimelineEntry {
         planNextDay: 4,
         chaptersRead: 8,
         versesSaved: 15,
-        backgroundGradient: ["#C9A96E", "#8B6914"]
+        backgroundGradient: ["C9A96E", "8B6914"],
+        backgroundImageData: nil
     )
 }
 
@@ -109,7 +111,8 @@ struct DashboardProvider: TimelineProvider {
             planNextDay: planNextDay,
             chaptersRead: chaptersRead,
             versesSaved: versesSaved,
-            backgroundGradient: background.gradientColors
+            backgroundGradient: background.gradientColors,
+            backgroundImageData: WidgetBackgroundService.loadWidgetBackgroundImageData()
         )
     }
 }
@@ -123,29 +126,10 @@ struct DashboardWidget: Widget {
         StaticConfiguration(kind: kind, provider: DashboardProvider()) { entry in
             DashboardWidgetEntryView(entry: entry)
                 .containerBackground(for: .widget) {
-                    GeometryReader { geo in
-                        ZStack {
-                            LinearGradient(
-                                colors: entry.backgroundGradient.map { Color(hex: $0) },
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                            if let uiImage = WidgetBackgroundService.loadWidgetBackgroundImage() {
-                                Image(uiImage: uiImage)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: geo.size.width, height: geo.size.height)
-                                    .clipped()
-                            }
-                            RadialGradient(
-                                colors: [Color.clear, Color.black.opacity(0.25)],
-                                center: .center,
-                                startRadius: 80,
-                                endRadius: 250
-                            )
-                        }
-                        .frame(width: geo.size.width, height: geo.size.height)
-                    }
+                    WidgetBackgroundView(
+                        gradientColors: entry.backgroundGradient,
+                        imageData: entry.backgroundImageData
+                    )
                 }
         }
         .configurationDisplayName("Faith Dashboard")

@@ -36,6 +36,13 @@ enum WidgetBackgroundService {
         return UIImage(contentsOfFile: url.path)
     }
 
+    /// Load raw JPEG data for embedding in timeline entries (more reliable than file access at render time)
+    static func loadWidgetBackgroundImageData() -> Data? {
+        guard let url = sharedImageURL,
+              FileManager.default.fileExists(atPath: url.path) else { return nil }
+        return try? Data(contentsOf: url)
+    }
+
     // MARK: - Private
 
     private static func extractVideoFrame(named videoName: String) {

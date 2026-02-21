@@ -9,12 +9,14 @@ struct ActivityGridEntry: TimelineEntry {
     let currentStreak: Int
     let activeDays: Set<Int> // weekday 1 (Sunday) through 7 (Saturday)
     let backgroundGradient: [String]
+    let backgroundImageData: Data?
 
     static let placeholder = ActivityGridEntry(
         date: Date(),
         currentStreak: 5,
         activeDays: [2, 3, 4, 5, 6], // Mon–Fri
-        backgroundGradient: ["#C9A96E", "#8B6914"]
+        backgroundGradient: ["C9A96E", "8B6914"],
+        backgroundImageData: nil
     )
 }
 
@@ -56,7 +58,8 @@ struct ActivityGridProvider: TimelineProvider {
             date: Date(),
             currentStreak: profile.streakCount,
             activeDays: activeDays,
-            backgroundGradient: background.gradientColors
+            backgroundGradient: background.gradientColors,
+            backgroundImageData: WidgetBackgroundService.loadWidgetBackgroundImageData()
         )
     }
 
@@ -90,29 +93,10 @@ struct ActivityGridWidget: Widget {
         StaticConfiguration(kind: kind, provider: ActivityGridProvider()) { entry in
             ActivityGridWidgetEntryView(entry: entry)
                 .containerBackground(for: .widget) {
-                    GeometryReader { geo in
-                        ZStack {
-                            LinearGradient(
-                                colors: entry.backgroundGradient.map { Color(hex: $0) },
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                            if let uiImage = WidgetBackgroundService.loadWidgetBackgroundImage() {
-                                Image(uiImage: uiImage)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: geo.size.width, height: geo.size.height)
-                                    .clipped()
-                            }
-                            RadialGradient(
-                                colors: [Color.clear, Color.black.opacity(0.25)],
-                                center: .center,
-                                startRadius: 80,
-                                endRadius: 250
-                            )
-                        }
-                        .frame(width: geo.size.width, height: geo.size.height)
-                    }
+                    WidgetBackgroundView(
+                        gradientColors: entry.backgroundGradient,
+                        imageData: entry.backgroundImageData
+                    )
                 }
         }
         .configurationDisplayName("Weekly Activity")
