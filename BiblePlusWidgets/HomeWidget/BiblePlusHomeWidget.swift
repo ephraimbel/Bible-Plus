@@ -147,5 +147,6 @@ struct BiblePlusHomeWidget: Widget {
         .configurationDisplayName("Daily Inspiration")
         .description("Prayers, verses, and devotionals refreshed every 2 hours.")
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
+        .contentMarginsDisabled()
     }
 }

@@ -121,5 +121,6 @@ struct PlanProgressWidget: Widget {
         .configurationDisplayName("Reading Plan")
         .description("Track your reading plan progress at a glance.")
         .supportedFamilies([.systemSmall, .systemMedium, .accessoryRectangular])
+        .contentMarginsDisabled()
     }
 }

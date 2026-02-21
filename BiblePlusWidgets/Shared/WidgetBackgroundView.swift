@@ -10,16 +10,22 @@ struct WidgetBackgroundView: View {
 
     var body: some View {
         ZStack {
-            LinearGradient(
-                colors: gradientColors.map { Color(hex: $0) },
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
+            // Solid fallback in case gradientColors is empty
+            Color(hex: gradientColors.first ?? "C9A96E")
+
+            if gradientColors.count > 1 {
+                LinearGradient(
+                    colors: gradientColors.map { Color(hex: $0) },
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            }
 
             if let imageData, let uiImage = UIImage(data: imageData) {
                 Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFill()
+                    .clipped()
             }
 
             RadialGradient(

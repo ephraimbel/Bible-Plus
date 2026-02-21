@@ -33,8 +33,9 @@ struct DashboardWidgetEntryView: View {
             // Plan Progress
             planColumn
         }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 10)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 14)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .widgetURL(URL(string: "bibleplus://progress"))
     }
 

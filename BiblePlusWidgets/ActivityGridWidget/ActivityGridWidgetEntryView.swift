@@ -72,7 +72,8 @@ struct ActivityGridWidgetEntryView: View {
                 .foregroundStyle(.white.opacity(0.6))
                 .shadow(color: .black.opacity(0.3), radius: 1, y: 1)
         }
-        .padding(12)
+        .padding(16)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .widgetURL(URL(string: "bibleplus://progress"))
     }
 }

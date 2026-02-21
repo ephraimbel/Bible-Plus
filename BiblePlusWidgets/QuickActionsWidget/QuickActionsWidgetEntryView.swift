@@ -27,7 +27,8 @@ struct QuickActionsWidgetEntryView: View {
                 actionCell(actions[3])
             }
         }
-        .padding(8)
+        .padding(16)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     private func actionCell(_ action: (icon: String, label: String, url: String)) -> some View {

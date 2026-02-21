@@ -58,7 +58,8 @@ struct StreakWidgetEntryView: View {
 
             Spacer()
         }
-        .padding(10)
+        .padding(16)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .widgetURL(URL(string: "bibleplus://progress"))
     }
 
@@ -77,6 +78,7 @@ struct StreakWidgetEntryView: View {
                 .font(.system(size: 14, weight: .bold, design: .rounded))
         }
         .gaugeStyle(.accessoryCircular)
+        .padding(2)
         .widgetURL(URL(string: "bibleplus://progress"))
     }
 
@@ -99,6 +101,7 @@ struct StreakWidgetEntryView: View {
 
             Spacer(minLength: 0)
         }
+        .padding(.horizontal, 4)
         .widgetURL(URL(string: "bibleplus://progress"))
     }
 }

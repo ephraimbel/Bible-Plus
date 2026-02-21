@@ -135,5 +135,6 @@ struct DashboardWidget: Widget {
         .configurationDisplayName("Faith Dashboard")
         .description("Your streak, reading, and plan progress at a glance.")
         .supportedFamilies([.systemMedium])
+        .contentMarginsDisabled()
     }
 }

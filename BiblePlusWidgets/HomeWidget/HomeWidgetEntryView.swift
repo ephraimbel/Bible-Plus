@@ -64,7 +64,8 @@ struct HomeWidgetEntryView: View {
                 }
             }
         }
-        .padding(12)
+        .padding(16)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     // MARK: - Medium Widget
@@ -107,8 +108,9 @@ struct HomeWidgetEntryView: View {
             navButton(intent: NextContentIntent(), icon: "chevron.right")
                 .padding(.trailing, 4)
         }
-        .padding(.vertical, 14)
-        .padding(.horizontal, 8)
+        .padding(.vertical, 16)
+        .padding(.horizontal, 12)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     // MARK: - Large Widget
@@ -174,6 +176,7 @@ struct HomeWidgetEntryView: View {
             }
         }
         .padding(16)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     // MARK: - Navigation Button

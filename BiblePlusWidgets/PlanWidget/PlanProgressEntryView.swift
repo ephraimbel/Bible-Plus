@@ -62,9 +62,10 @@ struct PlanProgressEntryView: View {
 
                     Spacer()
                 }
-                .padding(10)
+                .padding(16)
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .widgetURL(deepLinkURL)
     }
 
@@ -85,7 +86,7 @@ struct PlanProgressEntryView: View {
 
             Spacer()
         }
-        .padding(10)
+        .padding(16)
     }
 
     // MARK: - System Medium
@@ -146,9 +147,10 @@ struct PlanProgressEntryView: View {
 
                     Spacer(minLength: 0)
                 }
-                .padding(14)
+                .padding(16)
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .widgetURL(deepLinkURL)
     }
 
@@ -174,7 +176,7 @@ struct PlanProgressEntryView: View {
 
             Spacer(minLength: 0)
         }
-        .padding(14)
+        .padding(16)
     }
 
     // MARK: - Accessory Rectangular
@@ -217,6 +219,7 @@ struct PlanProgressEntryView: View {
                 }
             }
         }
+        .padding(.horizontal, 4)
         .widgetURL(deepLinkURL)
     }
 

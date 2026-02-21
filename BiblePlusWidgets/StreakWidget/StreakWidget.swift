@@ -93,5 +93,6 @@ struct StreakWidget: Widget {
         .configurationDisplayName("Days in the Word")
         .description("Track your daily faithfulness in scripture, prayer, and reflection.")
         .supportedFamilies([.systemSmall, .accessoryCircular, .accessoryRectangular])
+        .contentMarginsDisabled()
     }
 }

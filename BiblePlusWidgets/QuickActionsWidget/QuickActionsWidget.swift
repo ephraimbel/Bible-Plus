@@ -69,5 +69,6 @@ struct QuickActionsWidget: Widget {
         .configurationDisplayName("Quick Actions")
         .description("Jump directly to Read, Plan, Ask, or Sanctuary.")
         .supportedFamilies([.systemSmall])
+        .contentMarginsDisabled()
     }
 }

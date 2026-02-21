@@ -111,5 +111,6 @@ struct ActivityGridWidget: Widget {
         .configurationDisplayName("Weekly Activity")
         .description("See your streak and active days this week.")
         .supportedFamilies([.systemSmall])
+        .contentMarginsDisabled()
     }
 }
