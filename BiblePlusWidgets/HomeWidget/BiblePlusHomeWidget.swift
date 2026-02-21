@@ -88,12 +88,27 @@ struct HomeWidgetProvider: AppIntentTimelineProvider {
         guard let profile = (try? modelContext.fetch(profileDescriptor))?.first else { return nil }
 
         let window = WidgetTimeWindow.current()
-        guard let content = WidgetContentProvider.contentForWidget(
-            window: window,
-            profile: profile,
-            modelContext: modelContext,
-            allowedTypes: allowedTypes
-        ) else { return nil }
+        let offset = WidgetBackgroundService.loadContentOffset()
+
+        let content: PrayerContent?
+        if offset > 0 {
+            content = WidgetContentProvider.contentForWidgetWithOffset(
+                offset: offset,
+                window: window,
+                profile: profile,
+                modelContext: modelContext,
+                allowedTypes: allowedTypes
+            )
+        } else {
+            content = WidgetContentProvider.contentForWidget(
+                window: window,
+                profile: profile,
+                modelContext: modelContext,
+                allowedTypes: allowedTypes
+            )
+        }
+
+        guard let content else { return nil }
 
         // Background: read from UserDefaults (App Group) — always reliable
         let bgColors = WidgetBackgroundService.loadGradientColors()

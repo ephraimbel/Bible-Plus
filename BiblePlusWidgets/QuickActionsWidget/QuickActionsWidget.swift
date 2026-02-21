@@ -59,11 +59,15 @@ struct QuickActionsWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: QuickActionsProvider()) { entry in
             QuickActionsWidgetEntryView(entry: entry)
-                .containerBackground(.clear, for: .widget)
+                .containerBackground(for: .widget) {
+                    WidgetBackgroundView(
+                        gradientColors: entry.backgroundGradient,
+                        imageData: entry.backgroundImageData
+                    )
+                }
         }
         .configurationDisplayName("Quick Actions")
         .description("Jump directly to Read, Plan, Ask, or Sanctuary.")
         .supportedFamilies([.systemSmall])
-        .contentMarginsDisabled()
     }
 }

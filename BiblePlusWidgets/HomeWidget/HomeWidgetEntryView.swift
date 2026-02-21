@@ -1,5 +1,6 @@
 import SwiftUI
 import WidgetKit
+import AppIntents
 
 struct HomeWidgetEntryView: View {
     let entry: HomeWidgetEntry
@@ -21,111 +22,175 @@ struct HomeWidgetEntryView: View {
     // MARK: - Small Widget
 
     private var smallView: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            // Content type label
-            contentTypeLabel(size: 9)
+        ZStack {
+            // Main content — tappable deep link
+            Link(destination: deepLinkURL) {
+                VStack(alignment: .leading, spacing: 0) {
+                    contentTypeLabel(size: 9)
 
-            Spacer()
+                    Spacer()
 
-            Text(entry.displayText)
-                .font(.system(size: 13, weight: .regular, design: .serif))
-                .foregroundStyle(.white)
-                .lineSpacing(2)
-                .lineLimit(6)
-                .minimumScaleFactor(0.7)
-                .shadow(color: .black.opacity(0.7), radius: 1, y: 1)
-                .shadow(color: .black.opacity(0.4), radius: 4, y: 0)
+                    Text(entry.displayText)
+                        .font(.system(size: 13, weight: .regular, design: .serif))
+                        .foregroundStyle(.white)
+                        .lineSpacing(2)
+                        .lineLimit(5)
+                        .minimumScaleFactor(0.7)
+                        .shadow(color: .black.opacity(0.7), radius: 1, y: 1)
+                        .shadow(color: .black.opacity(0.4), radius: 4, y: 0)
 
-            if let ref = entry.verseReference {
-                Text(ref)
-                    .font(.caption2)
-                    .fontWeight(.medium)
-                    .foregroundStyle(.white.opacity(0.75))
-                    .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
-                    .padding(.top, 4)
+                    if let ref = entry.verseReference {
+                        Text(ref)
+                            .font(.caption2)
+                            .fontWeight(.medium)
+                            .foregroundStyle(.white.opacity(0.75))
+                            .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
+                            .padding(.top, 4)
+                    }
+
+                    // Spacer for bottom navigation area
+                    Spacer().frame(height: 20)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            }
+
+            // Navigation arrows at bottom
+            VStack {
+                Spacer()
+                HStack {
+                    navButton(intent: PreviousContentIntent(), icon: "chevron.left")
+                    Spacer()
+                    navButton(intent: NextContentIntent(), icon: "chevron.right")
+                }
             }
         }
         .padding(12)
-        .widgetURL(deepLinkURL)
     }
 
     // MARK: - Medium Widget
 
     private var mediumView: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            // Content type label
-            contentTypeLabel(size: 9)
+        HStack(spacing: 0) {
+            // Left chevron
+            navButton(intent: PreviousContentIntent(), icon: "chevron.left")
+                .padding(.leading, 4)
 
-            Spacer()
+            // Main content
+            Link(destination: deepLinkURL) {
+                VStack(alignment: .leading, spacing: 0) {
+                    contentTypeLabel(size: 9)
 
-            Text(entry.displayText)
-                .font(.system(size: 15, weight: .regular, design: .serif))
-                .foregroundStyle(.white)
-                .lineSpacing(3)
-                .lineLimit(5)
-                .minimumScaleFactor(0.75)
-                .shadow(color: .black.opacity(0.7), radius: 1, y: 1)
-                .shadow(color: .black.opacity(0.4), radius: 4, y: 0)
+                    Spacer()
 
-            if let ref = entry.verseReference {
-                Text(ref)
-                    .font(.caption2)
-                    .fontWeight(.medium)
-                    .foregroundStyle(.white.opacity(0.75))
-                    .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
-                    .padding(.top, 5)
+                    Text(entry.displayText)
+                        .font(.system(size: 15, weight: .regular, design: .serif))
+                        .foregroundStyle(.white)
+                        .lineSpacing(3)
+                        .lineLimit(5)
+                        .minimumScaleFactor(0.75)
+                        .shadow(color: .black.opacity(0.7), radius: 1, y: 1)
+                        .shadow(color: .black.opacity(0.4), radius: 4, y: 0)
+
+                    if let ref = entry.verseReference {
+                        Text(ref)
+                            .font(.caption2)
+                            .fontWeight(.medium)
+                            .foregroundStyle(.white.opacity(0.75))
+                            .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
+                            .padding(.top, 5)
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
             }
+
+            // Right chevron
+            navButton(intent: NextContentIntent(), icon: "chevron.right")
+                .padding(.trailing, 4)
         }
-        .padding(14)
-        .widgetURL(deepLinkURL)
+        .padding(.vertical, 14)
+        .padding(.horizontal, 8)
     }
 
     // MARK: - Large Widget
 
     private var largeView: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            // Content type label
-            contentTypeLabel(size: 10)
+        ZStack {
+            // Main content — tappable deep link
+            Link(destination: deepLinkURL) {
+                VStack(alignment: .leading, spacing: 0) {
+                    contentTypeLabel(size: 10)
 
-            Spacer()
+                    Spacer()
 
-            Text(entry.displayText)
-                .font(.system(size: 18, weight: .regular, design: .serif))
-                .foregroundStyle(.white)
-                .lineSpacing(4)
-                .minimumScaleFactor(0.75)
-                .shadow(color: .black.opacity(0.7), radius: 1, y: 1)
-                .shadow(color: .black.opacity(0.4), radius: 4, y: 0)
+                    Text(entry.displayText)
+                        .font(.system(size: 18, weight: .regular, design: .serif))
+                        .foregroundStyle(.white)
+                        .lineSpacing(4)
+                        .minimumScaleFactor(0.75)
+                        .shadow(color: .black.opacity(0.7), radius: 1, y: 1)
+                        .shadow(color: .black.opacity(0.4), radius: 4, y: 0)
 
-            if let ref = entry.verseReference {
-                Text(ref)
-                    .font(.caption)
-                    .fontWeight(.medium)
-                    .foregroundStyle(.white.opacity(0.75))
-                    .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
-                    .padding(.top, 6)
+                    if let ref = entry.verseReference {
+                        Text(ref)
+                            .font(.caption)
+                            .fontWeight(.medium)
+                            .foregroundStyle(.white.opacity(0.75))
+                            .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
+                            .padding(.top, 6)
+                    }
+
+                    Spacer()
+
+                    // Branding
+                    HStack {
+                        Spacer()
+                        HStack(spacing: 5) {
+                            Image("AppLogo")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 14, height: 14)
+                                .clipShape(RoundedRectangle(cornerRadius: 3))
+                            Text("Bible+")
+                                .font(.system(size: 10, weight: .medium))
+                        }
+                        .foregroundStyle(.white.opacity(0.4))
+                        .shadow(color: .black.opacity(0.3), radius: 2, y: 1)
+                        Spacer()
+                    }
+                    // Space for bottom nav
+                    Spacer().frame(height: 4)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
             }
 
-            Spacer()
-
-            // Branding
-            HStack {
+            // Navigation arrows at bottom
+            VStack {
                 Spacer()
-                HStack(spacing: 5) {
-                    Image("AppLogo")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 14, height: 14)
-                        .clipShape(RoundedRectangle(cornerRadius: 3))
-                    Text("Bible+")
-                        .font(.system(size: 10, weight: .medium))
+                HStack {
+                    navButton(intent: PreviousContentIntent(), icon: "chevron.left")
+                    Spacer()
+                    navButton(intent: NextContentIntent(), icon: "chevron.right")
                 }
-                .foregroundStyle(.white.opacity(0.4))
-                .shadow(color: .black.opacity(0.3), radius: 2, y: 1)
             }
         }
         .padding(16)
-        .widgetURL(deepLinkURL)
+    }
+
+    // MARK: - Navigation Button
+
+    private func navButton(intent: some AppIntent, icon: String) -> some View {
+        Button(intent: intent) {
+            Image(systemName: icon)
+                .font(.system(size: 12, weight: .semibold))
+                .foregroundStyle(.white.opacity(0.5))
+                .frame(width: 24, height: 24)
+                .background(
+                    Circle()
+                        .fill(.white.opacity(0.1))
+                )
+                .shadow(color: .black.opacity(0.3), radius: 2, y: 1)
+        }
+        .buttonStyle(.plain)
     }
 
     // MARK: - Content Type Label
@@ -164,10 +229,10 @@ struct HomeWidgetEntryView: View {
 
     // MARK: - Helpers
 
-    private var deepLinkURL: URL? {
+    private var deepLinkURL: URL {
         guard let contentID = entry.contentID else {
-            return URL(string: "bibleplus://")
+            return URL(string: "bibleplus://")!
         }
-        return URL(string: "bibleplus://content/\(contentID.uuidString)")
+        return URL(string: "bibleplus://content/\(contentID.uuidString)")!
     }
 }

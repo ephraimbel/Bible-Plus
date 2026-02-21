@@ -174,6 +174,33 @@ enum WidgetContentProvider {
         return scored.max(by: { $0.score < $1.score })?.content
     }
 
+    /// Fetch the Nth content item from the scored list (for manual navigation via arrows)
+    static func contentForWidgetWithOffset(
+        offset: Int,
+        window: WidgetTimeWindow,
+        profile: UserProfile,
+        modelContext: ModelContext,
+        allowedTypes: Set<ContentType>? = nil
+    ) -> PrayerContent? {
+        let descriptor = FetchDescriptor<PrayerContent>()
+        guard let allContent = try? modelContext.fetch(descriptor) else { return nil }
+
+        let eligible = allContent.filter { content in
+            (!content.isProOnly || profile.isPro)
+                && content.faithLevelMin.numericValue <= profile.faithLevel.numericValue
+                && (allowedTypes == nil || allowedTypes!.contains(content.type))
+        }
+
+        guard !eligible.isEmpty else { return nil }
+
+        let scored = eligible.map { content in
+            (content: content, score: score(content: content, profile: profile, window: window))
+        }.sorted { $0.score > $1.score }
+
+        let clampedOffset = offset % scored.count
+        return scored[clampedOffset].content
+    }
+
     /// Generate timeline entries for remaining windows today (plus next morning)
     static func timelineEntries(
         profile: UserProfile,

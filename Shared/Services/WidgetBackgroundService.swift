@@ -8,6 +8,7 @@ import WidgetKit
 enum WidgetBackgroundService {
     private static let fileName = "widget-background.jpg"
     private static let gradientKey = "widgetGradientColors"
+    private static let contentOffsetKey = "widgetContentOffset"
 
     private static var sharedDefaults: UserDefaults? {
         UserDefaults(suiteName: "group.io.bibleplus.shared")
@@ -51,6 +52,16 @@ enum WidgetBackgroundService {
         guard let url = sharedImageURL,
               FileManager.default.fileExists(atPath: url.path) else { return nil }
         return UIImage(contentsOfFile: url.path)
+    }
+
+    /// Read the user's manual content offset (for next/prev navigation arrows)
+    static func loadContentOffset() -> Int {
+        sharedDefaults?.integer(forKey: contentOffsetKey) ?? 0
+    }
+
+    /// Save the user's manual content offset
+    static func saveContentOffset(_ offset: Int) {
+        sharedDefaults?.set(offset, forKey: contentOffsetKey)
     }
 
     /// Load raw JPEG data for embedding in timeline entries (more reliable than file access at render time)

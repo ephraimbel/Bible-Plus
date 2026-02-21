@@ -12,30 +12,22 @@ struct QuickActionsWidgetEntryView: View {
     ]
 
     var body: some View {
-        ZStack {
-            // Embedded background — bypasses containerBackground for reliable rendering
-            WidgetBackgroundView(
-                gradientColors: entry.backgroundGradient,
-                imageData: entry.backgroundImageData
-            )
-
-            VStack(spacing: 0) {
-                HStack(spacing: 0) {
-                    actionCell(actions[0])
-                    divider(vertical: true)
-                    actionCell(actions[1])
-                }
-
-                divider(vertical: false)
-
-                HStack(spacing: 0) {
-                    actionCell(actions[2])
-                    divider(vertical: true)
-                    actionCell(actions[3])
-                }
+        VStack(spacing: 0) {
+            HStack(spacing: 0) {
+                actionCell(actions[0])
+                divider(vertical: true)
+                actionCell(actions[1])
             }
-            .padding(4)
+
+            divider(vertical: false)
+
+            HStack(spacing: 0) {
+                actionCell(actions[2])
+                divider(vertical: true)
+                actionCell(actions[3])
+            }
         }
+        .padding(8)
     }
 
     private func actionCell(_ action: (icon: String, label: String, url: String)) -> some View {

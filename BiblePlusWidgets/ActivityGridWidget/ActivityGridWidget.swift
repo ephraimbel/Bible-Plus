@@ -101,11 +101,15 @@ struct ActivityGridWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: ActivityGridProvider()) { entry in
             ActivityGridWidgetEntryView(entry: entry)
-                .containerBackground(.clear, for: .widget)
+                .containerBackground(for: .widget) {
+                    WidgetBackgroundView(
+                        gradientColors: entry.backgroundGradient,
+                        imageData: entry.backgroundImageData
+                    )
+                }
         }
         .configurationDisplayName("Weekly Activity")
         .description("See your streak and active days this week.")
         .supportedFamilies([.systemSmall])
-        .contentMarginsDisabled()
     }
 }
