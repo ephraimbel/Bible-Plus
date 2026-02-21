@@ -58,29 +58,28 @@ struct AsyncThumbnailView: View {
     @State private var thumbnail: UIImage?
 
     var body: some View {
-        ZStack {
-            // Gradient fallback (always visible)
-            RoundedRectangle(cornerRadius: 12)
-                .fill(
-                    LinearGradient(
-                        colors: bg.gradientColors.map { Color(hex: $0) },
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
+        // Fixed 3:4 container — all backgrounds render at exactly the same size
+        GeometryReader { geo in
+            ZStack {
+                // Gradient fallback (always visible)
+                LinearGradient(
+                    colors: bg.gradientColors.map { Color(hex: $0) },
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
                 )
-                .aspectRatio(0.75, contentMode: .fit)
 
-            // Thumbnail once loaded
-            if let thumbnail {
-                Image(uiImage: thumbnail)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .aspectRatio(0.75, contentMode: .fit)
-                    .clipped()
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                // Thumbnail once loaded — fills and crops to match container
+                if let thumbnail {
+                    Image(uiImage: thumbnail)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: geo.size.width, height: geo.size.height)
+                        .clipped()
+                }
             }
+            .clipShape(RoundedRectangle(cornerRadius: 12))
         }
+        .aspectRatio(0.75, contentMode: .fit)
         .task(priority: .utility) {
             await loadThumbnail()
         }
