@@ -123,17 +123,23 @@ struct DashboardWidget: Widget {
         StaticConfiguration(kind: kind, provider: DashboardProvider()) { entry in
             DashboardWidgetEntryView(entry: entry)
                 .containerBackground(for: .widget) {
-                    ZStack {
-                        LinearGradient(
-                            colors: entry.backgroundGradient.map { Color(hex: $0) },
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
+                    LinearGradient(
+                        colors: entry.backgroundGradient.map { Color(hex: $0) },
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                    .overlay {
                         if let uiImage = WidgetBackgroundService.loadWidgetBackgroundImage() {
-                            Image(uiImage: uiImage)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
+                            GeometryReader { geo in
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: geo.size.width, height: geo.size.height)
+                                    .clipped()
+                            }
                         }
+                    }
+                    .overlay {
                         RadialGradient(
                             colors: [Color.clear, Color.black.opacity(0.25)],
                             center: .center,

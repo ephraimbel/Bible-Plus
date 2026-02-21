@@ -114,22 +114,23 @@ struct BiblePlusHomeWidget: Widget {
         AppIntentConfiguration(kind: kind, intent: ContentTypeIntent.self, provider: HomeWidgetProvider()) { entry in
             HomeWidgetEntryView(entry: entry)
                 .containerBackground(for: .widget) {
-                    ZStack {
-                        // Gradient base (always present as fallback)
-                        LinearGradient(
-                            colors: entry.backgroundGradient.map { Color(hex: $0) },
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-
-                        // Background image from shared container (video frame or static image)
+                    LinearGradient(
+                        colors: entry.backgroundGradient.map { Color(hex: $0) },
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                    .overlay {
                         if let uiImage = WidgetBackgroundService.loadWidgetBackgroundImage() {
-                            Image(uiImage: uiImage)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
+                            GeometryReader { geo in
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: geo.size.width, height: geo.size.height)
+                                    .clipped()
+                            }
                         }
-
-                        // Subtle vignette for text readability
+                    }
+                    .overlay {
                         RadialGradient(
                             colors: [Color.clear, Color.black.opacity(0.25)],
                             center: .center,
