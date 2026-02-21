@@ -21,7 +21,7 @@ struct PlanProgressEntry: TimelineEntry {
         currentDay: 3,
         totalDays: 7,
         completionFraction: 0.43,
-        gradientColors: ["5B86E5", "36D1DC"],
+        gradientColors: SanctuaryBackground.allBackgrounds[0].gradientColors,
         backgroundImageData: nil,
         planID: nil,
         isEmpty: false
@@ -33,7 +33,7 @@ struct PlanProgressEntry: TimelineEntry {
         currentDay: 0,
         totalDays: 0,
         completionFraction: 0,
-        gradientColors: ["C9A96E", "8B6914"],
+        gradientColors: SanctuaryBackground.allBackgrounds[0].gradientColors,
         backgroundImageData: nil,
         planID: nil,
         isEmpty: true

@@ -11,7 +11,7 @@ struct QuickActionsEntry: TimelineEntry {
 
     static let placeholder = QuickActionsEntry(
         date: Date(),
-        backgroundGradient: ["C9A96E", "8B6914"],
+        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors,
         backgroundImageData: nil
     )
 }

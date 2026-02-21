@@ -15,7 +15,7 @@ struct ActivityGridEntry: TimelineEntry {
         date: Date(),
         currentStreak: 5,
         activeDays: [2, 3, 4, 5, 6], // Mon–Fri
-        backgroundGradient: ["C9A96E", "8B6914"],
+        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors,
         backgroundImageData: nil
     )
 }

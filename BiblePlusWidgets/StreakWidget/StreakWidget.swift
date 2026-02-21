@@ -17,7 +17,7 @@ struct StreakWidgetEntry: TimelineEntry {
         currentStreak: 7,
         longestStreak: 14,
         hasActivityToday: true,
-        backgroundGradient: ["C9A96E", "8B6914"],
+        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors,
         backgroundImageData: nil
     )
 }

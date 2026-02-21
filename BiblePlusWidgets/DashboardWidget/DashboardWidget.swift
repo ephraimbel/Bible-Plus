@@ -25,7 +25,7 @@ struct DashboardEntry: TimelineEntry {
         planNextDay: 4,
         chaptersRead: 8,
         versesSaved: 15,
-        backgroundGradient: ["C9A96E", "8B6914"],
+        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors,
         backgroundImageData: nil
     )
 }
