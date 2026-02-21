@@ -79,17 +79,7 @@ struct HomeDashboardView: View {
                 }
         )
         .sheet(isPresented: $showReadingPlans) {
-            ReadingPlansView(
-                isPro: vm.profile.isPro,
-                onReadChapter: { bookName, chapter in
-                    showReadingPlans = false
-                    NotificationCenter.default.post(
-                        name: .scriptureDeepLink,
-                        object: nil,
-                        userInfo: ["bookName": bookName, "chapter": chapter]
-                    )
-                }
-            )
+            ReadingPlansView(isPro: vm.profile.isPro)
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {

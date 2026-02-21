@@ -6,7 +6,6 @@ struct PlanDayView: View {
     let isDayCompleted: Bool
     @Bindable var viewModel: ReadingPlansViewModel
     let isPro: Bool
-    let onReadChapter: (String, Int) -> Void
 
     @Environment(\.bpPalette) private var palette
     @Environment(\.dismiss) private var dismiss
@@ -16,6 +15,7 @@ struct PlanDayView: View {
     }
 
     var body: some View {
+        let _ = viewModel.refreshToken
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 // Day header
@@ -191,10 +191,8 @@ struct PlanDayView: View {
     // MARK: - Reading Card
 
     private func readingCard(_ reading: PlanReading) -> some View {
-        Button {
-            HapticService.selection()
-            guard let book = BibleData.book(id: reading.bookID) else { return }
-            onReadChapter(book.name, reading.chapter)
+        NavigationLink {
+            PlanChapterReaderView(reading: reading)
         } label: {
             HStack(spacing: 14) {
                 Image(systemName: "book.fill")

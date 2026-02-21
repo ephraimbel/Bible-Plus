@@ -3,7 +3,6 @@ import SwiftData
 
 struct ReadingPlansView: View {
     let isPro: Bool
-    let onReadChapter: (String, Int) -> Void
 
     @Environment(\.modelContext) private var modelContext
     @Environment(\.bpPalette) private var palette
@@ -132,8 +131,7 @@ struct ReadingPlansView: View {
                             PlanDetailView(
                                 plan: item.plan,
                                 viewModel: vm,
-                                isPro: isPro,
-                                onReadChapter: onReadChapter
+                                isPro: isPro
                             )
                         } label: {
                             PlanCardView(
@@ -167,8 +165,7 @@ struct ReadingPlansView: View {
                             PlanDetailView(
                                 plan: plan,
                                 viewModel: vm,
-                                isPro: isPro,
-                                onReadChapter: onReadChapter
+                                isPro: isPro
                             )
                         } label: {
                             PlanCardView(
@@ -204,8 +201,7 @@ struct ReadingPlansView: View {
                         PlanDetailView(
                             plan: plan,
                             viewModel: vm,
-                            isPro: isPro,
-                            onReadChapter: onReadChapter
+                            isPro: isPro
                         )
                     } label: {
                         PlanCardView(

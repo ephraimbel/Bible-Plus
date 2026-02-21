@@ -849,17 +849,7 @@ private struct BibleContentView: View {
                 isPro: {
                     let descriptor = FetchDescriptor<UserProfile>()
                     return (try? modelContext.fetch(descriptor).first?.isPro) ?? false
-                }(),
-                onReadChapter: { bookName, chapter in
-                    showReadingPlans = false
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                        NotificationCenter.default.post(
-                            name: .scriptureBibleNavigate,
-                            object: nil,
-                            userInfo: ["bookName": bookName, "chapter": chapter]
-                        )
-                    }
-                }
+                }()
             )
         }
         .fullScreenCover(isPresented: $showImmersiveListening) {

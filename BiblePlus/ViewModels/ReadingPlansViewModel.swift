@@ -13,6 +13,8 @@ final class ReadingPlansViewModel {
     var showPaywall = false
     var showCompletion = false
     var completedPlanName = ""
+    var refreshToken: Int = 0
+    var navigateToPlanDayID: String?
 
     private let modelContext: ModelContext
 
@@ -43,6 +45,7 @@ final class ReadingPlansViewModel {
         }
 
         computeRecommendations()
+        refreshToken += 1
     }
 
     // MARK: - Recommendations (FeedEngine-style scoring)
@@ -105,6 +108,7 @@ final class ReadingPlansViewModel {
         try? modelContext.save()
         HapticService.success()
         loadPlans()
+        navigateToPlanDayID = plan.id
     }
 
     func completeDay(progress: UserPlanProgress, day: Int, totalDays: Int) {
@@ -147,6 +151,7 @@ final class ReadingPlansViewModel {
         try? modelContext.save()
         HapticService.success()
         loadPlans()
+        navigateToPlanDayID = plan.id
     }
 
     func progressForPlan(_ planID: String) -> UserPlanProgress? {

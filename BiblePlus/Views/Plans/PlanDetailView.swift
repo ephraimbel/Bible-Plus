@@ -5,7 +5,6 @@ struct PlanDetailView: View {
     let plan: ReadingPlan
     @Bindable var viewModel: ReadingPlansViewModel
     let isPro: Bool
-    let onReadChapter: (String, Int) -> Void
 
     @Environment(\.bpPalette) private var palette
     @Environment(\.dismiss) private var dismiss
@@ -34,6 +33,7 @@ struct PlanDetailView: View {
     }
 
     var body: some View {
+        let _ = viewModel.refreshToken
         ScrollView {
             VStack(spacing: 0) {
                 // Hero header
@@ -79,8 +79,7 @@ struct PlanDetailView: View {
                     day: nextDayData,
                     isDayCompleted: progress.completedDays.contains(nextDayData.day),
                     viewModel: viewModel,
-                    isPro: isPro,
-                    onReadChapter: onReadChapter
+                    isPro: isPro
                 )
             }
         }
@@ -99,6 +98,11 @@ struct PlanDetailView: View {
             withAnimation(BPAnimation.spring.delay(0.2)) {
                 showContent = true
             }
+        }
+        .onChange(of: viewModel.navigateToPlanDayID) { _, newID in
+            guard newID == plan.id else { return }
+            viewModel.navigateToPlanDayID = nil
+            showNextDay = true
         }
     }
 
@@ -338,8 +342,7 @@ struct PlanDetailView: View {
                 day: day,
                 isDayCompleted: isDayCompleted,
                 viewModel: viewModel,
-                isPro: isPro,
-                onReadChapter: onReadChapter
+                isPro: isPro
             )
         } label: {
             HStack(spacing: 14) {
