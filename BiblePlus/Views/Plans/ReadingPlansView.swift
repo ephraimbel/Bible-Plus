@@ -74,6 +74,9 @@ struct ReadingPlansView: View {
                     showContent = true
                 }
             }
+            .onReceive(NotificationCenter.default.publisher(for: .openAIWithContext)) { _ in
+                dismiss()
+            }
         }
         .overlay {
             if let vm = viewModel, vm.showCompletion {
