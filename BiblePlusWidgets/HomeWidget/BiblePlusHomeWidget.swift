@@ -137,12 +137,7 @@ struct BiblePlusHomeWidget: Widget {
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: kind, intent: ContentTypeIntent.self, provider: HomeWidgetProvider()) { entry in
             HomeWidgetEntryView(entry: entry)
-                .containerBackground(for: .widget) {
-                    WidgetBackgroundView(
-                        gradientColors: entry.backgroundGradient,
-                        imageData: entry.backgroundImageData
-                    )
-                }
+                .containerBackground(.clear, for: .widget)
         }
         .configurationDisplayName("Daily Inspiration")
         .description("Prayers, verses, and devotionals refreshed every 2 hours.")

@@ -125,12 +125,7 @@ struct DashboardWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: DashboardProvider()) { entry in
             DashboardWidgetEntryView(entry: entry)
-                .containerBackground(for: .widget) {
-                    WidgetBackgroundView(
-                        gradientColors: entry.backgroundGradient,
-                        imageData: entry.backgroundImageData
-                    )
-                }
+                .containerBackground(.clear, for: .widget)
         }
         .configurationDisplayName("Faith Dashboard")
         .description("Your streak, reading, and plan progress at a glance.")

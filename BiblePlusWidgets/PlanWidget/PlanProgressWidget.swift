@@ -111,12 +111,7 @@ struct PlanProgressWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: PlanProgressProvider()) { entry in
             PlanProgressEntryView(entry: entry)
-                .containerBackground(for: .widget) {
-                    WidgetBackgroundView(
-                        gradientColors: entry.gradientColors,
-                        imageData: entry.backgroundImageData
-                    )
-                }
+                .containerBackground(.clear, for: .widget)
         }
         .configurationDisplayName("Reading Plan")
         .description("Track your reading plan progress at a glance.")

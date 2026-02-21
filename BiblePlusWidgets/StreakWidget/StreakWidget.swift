@@ -83,12 +83,7 @@ struct StreakWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: StreakWidgetProvider()) { entry in
             StreakWidgetEntryView(entry: entry)
-                .containerBackground(for: .widget) {
-                    WidgetBackgroundView(
-                        gradientColors: entry.backgroundGradient,
-                        imageData: entry.backgroundImageData
-                    )
-                }
+                .containerBackground(.clear, for: .widget)
         }
         .configurationDisplayName("Days in the Word")
         .description("Track your daily faithfulness in scripture, prayer, and reflection.")

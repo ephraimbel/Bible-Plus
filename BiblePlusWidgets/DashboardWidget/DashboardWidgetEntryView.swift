@@ -5,37 +5,44 @@ struct DashboardWidgetEntryView: View {
     let entry: DashboardEntry
 
     var body: some View {
-        HStack(spacing: 0) {
-            // Streak
-            statColumn(
-                icon: "flame.fill",
-                iconColor: .orange,
-                value: "\(entry.currentStreak)",
-                label: "Streak"
+        ZStack {
+            WidgetBackgroundView(
+                gradientColors: entry.backgroundGradient,
+                imageData: entry.backgroundImageData
             )
 
-            // Chapters Read
-            statColumn(
-                icon: "book.fill",
-                iconColor: .white,
-                value: "\(entry.chaptersRead)",
-                label: "Read"
-            )
+            HStack(spacing: 0) {
+                // Streak
+                statColumn(
+                    icon: "flame.fill",
+                    iconColor: .orange,
+                    value: "\(entry.currentStreak)",
+                    label: "Streak"
+                )
 
-            // Verses Saved
-            statColumn(
-                icon: "bookmark.fill",
-                iconColor: .white,
-                value: "\(entry.versesSaved)",
-                label: "Saved"
-            )
+                // Chapters Read
+                statColumn(
+                    icon: "book.fill",
+                    iconColor: .white,
+                    value: "\(entry.chaptersRead)",
+                    label: "Read"
+                )
 
-            // Plan Progress
-            planColumn
+                // Verses Saved
+                statColumn(
+                    icon: "bookmark.fill",
+                    iconColor: .white,
+                    value: "\(entry.versesSaved)",
+                    label: "Saved"
+                )
+
+                // Plan Progress
+                planColumn
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 14)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 14)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .widgetURL(URL(string: "bibleplus://progress"))
     }
 

@@ -23,160 +23,181 @@ struct HomeWidgetEntryView: View {
 
     private var smallView: some View {
         ZStack {
-            // Main content — tappable deep link
-            Link(destination: deepLinkURL) {
-                VStack(alignment: .leading, spacing: 0) {
-                    contentTypeLabel(size: 9)
+            WidgetBackgroundView(
+                gradientColors: entry.backgroundGradient,
+                imageData: entry.backgroundImageData
+            )
 
-                    Spacer()
+            ZStack {
+                // Main content — tappable deep link
+                Link(destination: deepLinkURL) {
+                    VStack(alignment: .leading, spacing: 0) {
+                        contentTypeLabel(size: 9)
 
-                    Text(entry.displayText)
-                        .font(.system(size: 13, weight: .regular, design: .serif))
-                        .foregroundStyle(.white)
-                        .lineSpacing(2)
-                        .lineLimit(5)
-                        .minimumScaleFactor(0.7)
-                        .shadow(color: .black.opacity(0.7), radius: 1, y: 1)
-                        .shadow(color: .black.opacity(0.4), radius: 4, y: 0)
+                        Spacer()
 
-                    if let ref = entry.verseReference {
-                        Text(ref)
-                            .font(.caption2)
-                            .fontWeight(.medium)
-                            .foregroundStyle(.white.opacity(0.75))
-                            .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
-                            .padding(.top, 4)
+                        Text(entry.displayText)
+                            .font(.system(size: 13, weight: .regular, design: .serif))
+                            .foregroundStyle(.white)
+                            .lineSpacing(2)
+                            .lineLimit(5)
+                            .minimumScaleFactor(0.7)
+                            .shadow(color: .black.opacity(0.7), radius: 1, y: 1)
+                            .shadow(color: .black.opacity(0.4), radius: 4, y: 0)
+
+                        if let ref = entry.verseReference {
+                            Text(ref)
+                                .font(.caption2)
+                                .fontWeight(.medium)
+                                .foregroundStyle(.white.opacity(0.75))
+                                .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
+                                .padding(.top, 4)
+                        }
+
+                        // Spacer for bottom navigation area
+                        Spacer().frame(height: 20)
                     }
-
-                    // Spacer for bottom navigation area
-                    Spacer().frame(height: 20)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-            }
 
-            // Navigation arrows at bottom
-            VStack {
-                Spacer()
-                HStack {
-                    navButton(intent: PreviousContentIntent(), icon: "chevron.left")
+                // Navigation arrows at bottom
+                VStack {
                     Spacer()
-                    navButton(intent: NextContentIntent(), icon: "chevron.right")
+                    HStack {
+                        navButton(intent: PreviousContentIntent(), icon: "chevron.left")
+                        Spacer()
+                        navButton(intent: NextContentIntent(), icon: "chevron.right")
+                    }
                 }
             }
+            .padding(16)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .padding(16)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     // MARK: - Medium Widget
 
     private var mediumView: some View {
-        HStack(spacing: 0) {
-            // Left chevron
-            navButton(intent: PreviousContentIntent(), icon: "chevron.left")
-                .padding(.leading, 4)
+        ZStack {
+            WidgetBackgroundView(
+                gradientColors: entry.backgroundGradient,
+                imageData: entry.backgroundImageData
+            )
 
-            // Main content
-            Link(destination: deepLinkURL) {
-                VStack(alignment: .leading, spacing: 0) {
-                    contentTypeLabel(size: 9)
+            HStack(spacing: 0) {
+                // Left chevron
+                navButton(intent: PreviousContentIntent(), icon: "chevron.left")
+                    .padding(.leading, 4)
 
-                    Spacer()
+                // Main content
+                Link(destination: deepLinkURL) {
+                    VStack(alignment: .leading, spacing: 0) {
+                        contentTypeLabel(size: 9)
 
-                    Text(entry.displayText)
-                        .font(.system(size: 15, weight: .regular, design: .serif))
-                        .foregroundStyle(.white)
-                        .lineSpacing(3)
-                        .lineLimit(5)
-                        .minimumScaleFactor(0.75)
-                        .shadow(color: .black.opacity(0.7), radius: 1, y: 1)
-                        .shadow(color: .black.opacity(0.4), radius: 4, y: 0)
+                        Spacer()
 
-                    if let ref = entry.verseReference {
-                        Text(ref)
-                            .font(.caption2)
-                            .fontWeight(.medium)
-                            .foregroundStyle(.white.opacity(0.75))
-                            .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
-                            .padding(.top, 5)
+                        Text(entry.displayText)
+                            .font(.system(size: 15, weight: .regular, design: .serif))
+                            .foregroundStyle(.white)
+                            .lineSpacing(3)
+                            .lineLimit(5)
+                            .minimumScaleFactor(0.75)
+                            .shadow(color: .black.opacity(0.7), radius: 1, y: 1)
+                            .shadow(color: .black.opacity(0.4), radius: 4, y: 0)
+
+                        if let ref = entry.verseReference {
+                            Text(ref)
+                                .font(.caption2)
+                                .fontWeight(.medium)
+                                .foregroundStyle(.white.opacity(0.75))
+                                .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
+                                .padding(.top, 5)
+                        }
                     }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-            }
 
-            // Right chevron
-            navButton(intent: NextContentIntent(), icon: "chevron.right")
-                .padding(.trailing, 4)
+                // Right chevron
+                navButton(intent: NextContentIntent(), icon: "chevron.right")
+                    .padding(.trailing, 4)
+            }
+            .padding(.vertical, 16)
+            .padding(.horizontal, 12)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .padding(.vertical, 16)
-        .padding(.horizontal, 12)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     // MARK: - Large Widget
 
     private var largeView: some View {
         ZStack {
-            // Main content — tappable deep link
-            Link(destination: deepLinkURL) {
-                VStack(alignment: .leading, spacing: 0) {
-                    contentTypeLabel(size: 10)
+            WidgetBackgroundView(
+                gradientColors: entry.backgroundGradient,
+                imageData: entry.backgroundImageData
+            )
 
-                    Spacer()
+            ZStack {
+                // Main content — tappable deep link
+                Link(destination: deepLinkURL) {
+                    VStack(alignment: .leading, spacing: 0) {
+                        contentTypeLabel(size: 10)
 
-                    Text(entry.displayText)
-                        .font(.system(size: 18, weight: .regular, design: .serif))
-                        .foregroundStyle(.white)
-                        .lineSpacing(4)
-                        .minimumScaleFactor(0.75)
-                        .shadow(color: .black.opacity(0.7), radius: 1, y: 1)
-                        .shadow(color: .black.opacity(0.4), radius: 4, y: 0)
-
-                    if let ref = entry.verseReference {
-                        Text(ref)
-                            .font(.caption)
-                            .fontWeight(.medium)
-                            .foregroundStyle(.white.opacity(0.75))
-                            .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
-                            .padding(.top, 6)
-                    }
-
-                    Spacer()
-
-                    // Branding
-                    HStack {
                         Spacer()
-                        HStack(spacing: 5) {
-                            Image("AppLogo")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 14, height: 14)
-                                .clipShape(RoundedRectangle(cornerRadius: 3))
-                            Text("Bible+")
-                                .font(.system(size: 10, weight: .medium))
+
+                        Text(entry.displayText)
+                            .font(.system(size: 18, weight: .regular, design: .serif))
+                            .foregroundStyle(.white)
+                            .lineSpacing(4)
+                            .minimumScaleFactor(0.75)
+                            .shadow(color: .black.opacity(0.7), radius: 1, y: 1)
+                            .shadow(color: .black.opacity(0.4), radius: 4, y: 0)
+
+                        if let ref = entry.verseReference {
+                            Text(ref)
+                                .font(.caption)
+                                .fontWeight(.medium)
+                                .foregroundStyle(.white.opacity(0.75))
+                                .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
+                                .padding(.top, 6)
                         }
-                        .foregroundStyle(.white.opacity(0.4))
-                        .shadow(color: .black.opacity(0.3), radius: 2, y: 1)
-                        Spacer()
-                    }
-                    // Space for bottom nav
-                    Spacer().frame(height: 4)
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-            }
 
-            // Navigation arrows at bottom
-            VStack {
-                Spacer()
-                HStack {
-                    navButton(intent: PreviousContentIntent(), icon: "chevron.left")
+                        Spacer()
+
+                        // Branding
+                        HStack {
+                            Spacer()
+                            HStack(spacing: 5) {
+                                Image("AppLogo")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 14, height: 14)
+                                    .clipShape(RoundedRectangle(cornerRadius: 3))
+                                Text("Bible+")
+                                    .font(.system(size: 10, weight: .medium))
+                            }
+                            .foregroundStyle(.white.opacity(0.4))
+                            .shadow(color: .black.opacity(0.3), radius: 2, y: 1)
+                            Spacer()
+                        }
+                        // Space for bottom nav
+                        Spacer().frame(height: 4)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                }
+
+                // Navigation arrows at bottom
+                VStack {
                     Spacer()
-                    navButton(intent: NextContentIntent(), icon: "chevron.right")
+                    HStack {
+                        navButton(intent: PreviousContentIntent(), icon: "chevron.left")
+                        Spacer()
+                        navButton(intent: NextContentIntent(), icon: "chevron.right")
+                    }
                 }
             }
+            .padding(16)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .padding(16)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     // MARK: - Navigation Button

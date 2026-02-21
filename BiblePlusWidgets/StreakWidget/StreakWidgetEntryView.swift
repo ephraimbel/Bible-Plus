@@ -21,45 +21,52 @@ struct StreakWidgetEntryView: View {
     // MARK: - System Small
 
     private var smallView: some View {
-        VStack(spacing: 4) {
-            // Faith label
-            HStack(spacing: 4) {
-                Image(systemName: "book.closed.fill")
-                    .font(.system(size: 8, weight: .semibold))
-                Text("FAITHFULNESS")
-                    .font(.system(size: 8, weight: .bold, design: .rounded))
-                    .tracking(0.5)
-            }
-            .foregroundStyle(.white.opacity(0.55))
-            .shadow(color: .black.opacity(0.4), radius: 1, y: 1)
+        ZStack {
+            WidgetBackgroundView(
+                gradientColors: entry.backgroundGradient,
+                imageData: entry.backgroundImageData
+            )
 
-            Spacer()
-
-            Image(systemName: entry.hasActivityToday ? "flame.fill" : "flame")
-                .font(.system(size: 26, weight: .medium))
-                .foregroundStyle(entry.hasActivityToday ? .orange : .white.opacity(0.7))
-                .shadow(color: .black.opacity(0.5), radius: 3, y: 1)
-
-            Text("\(entry.currentStreak)")
-                .font(.system(size: 38, weight: .bold, design: .rounded))
-                .foregroundStyle(.white)
-                .minimumScaleFactor(0.6)
-                .shadow(color: .black.opacity(0.7), radius: 2, y: 1)
-
-            Text(entry.currentStreak == 1 ? "Day in the Word" : "Days in the Word")
-                .font(.system(size: 11, weight: .medium, design: .serif))
-                .foregroundStyle(.white.opacity(0.85))
-                .shadow(color: .black.opacity(0.5), radius: 1, y: 1)
-
-            Text("Best: \(entry.longestStreak)")
-                .font(.system(size: 10, weight: .regular))
-                .foregroundStyle(.white.opacity(0.5))
+            VStack(spacing: 4) {
+                // Faith label
+                HStack(spacing: 4) {
+                    Image(systemName: "book.closed.fill")
+                        .font(.system(size: 8, weight: .semibold))
+                    Text("FAITHFULNESS")
+                        .font(.system(size: 8, weight: .bold, design: .rounded))
+                        .tracking(0.5)
+                }
+                .foregroundStyle(.white.opacity(0.55))
                 .shadow(color: .black.opacity(0.4), radius: 1, y: 1)
 
-            Spacer()
+                Spacer()
+
+                Image(systemName: entry.hasActivityToday ? "flame.fill" : "flame")
+                    .font(.system(size: 26, weight: .medium))
+                    .foregroundStyle(entry.hasActivityToday ? .orange : .white.opacity(0.7))
+                    .shadow(color: .black.opacity(0.5), radius: 3, y: 1)
+
+                Text("\(entry.currentStreak)")
+                    .font(.system(size: 38, weight: .bold, design: .rounded))
+                    .foregroundStyle(.white)
+                    .minimumScaleFactor(0.6)
+                    .shadow(color: .black.opacity(0.7), radius: 2, y: 1)
+
+                Text(entry.currentStreak == 1 ? "Day in the Word" : "Days in the Word")
+                    .font(.system(size: 11, weight: .medium, design: .serif))
+                    .foregroundStyle(.white.opacity(0.85))
+                    .shadow(color: .black.opacity(0.5), radius: 1, y: 1)
+
+                Text("Best: \(entry.longestStreak)")
+                    .font(.system(size: 10, weight: .regular))
+                    .foregroundStyle(.white.opacity(0.5))
+                    .shadow(color: .black.opacity(0.4), radius: 1, y: 1)
+
+                Spacer()
+            }
+            .padding(16)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .padding(16)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .widgetURL(URL(string: "bibleplus://progress"))
     }
 

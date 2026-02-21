@@ -21,51 +21,58 @@ struct PlanProgressEntryView: View {
     // MARK: - System Small
 
     private var smallView: some View {
-        Group {
-            if entry.isEmpty {
-                emptySmallView
-            } else {
-                VStack(spacing: 8) {
-                    Spacer()
+        ZStack {
+            WidgetBackgroundView(
+                gradientColors: entry.gradientColors,
+                imageData: entry.backgroundImageData
+            )
 
-                    // Circular progress ring
-                    ZStack {
-                        Circle()
-                            .stroke(.white.opacity(0.2), lineWidth: 5)
-                            .frame(width: 60, height: 60)
+            Group {
+                if entry.isEmpty {
+                    emptySmallView
+                } else {
+                    VStack(spacing: 8) {
+                        Spacer()
 
-                        Circle()
-                            .trim(from: 0, to: entry.completionFraction)
-                            .stroke(.white, style: StrokeStyle(lineWidth: 5, lineCap: .round))
-                            .frame(width: 60, height: 60)
-                            .rotationEffect(.degrees(-90))
+                        // Circular progress ring
+                        ZStack {
+                            Circle()
+                                .stroke(.white.opacity(0.2), lineWidth: 5)
+                                .frame(width: 60, height: 60)
 
-                        VStack(spacing: 0) {
-                            Text("Day")
-                                .font(.system(size: 8, weight: .medium))
-                                .foregroundStyle(.white.opacity(0.7))
-                            Text("\(entry.currentDay)")
-                                .font(.system(size: 18, weight: .bold, design: .rounded))
-                                .foregroundStyle(.white)
+                            Circle()
+                                .trim(from: 0, to: entry.completionFraction)
+                                .stroke(.white, style: StrokeStyle(lineWidth: 5, lineCap: .round))
+                                .frame(width: 60, height: 60)
+                                .rotationEffect(.degrees(-90))
+
+                            VStack(spacing: 0) {
+                                Text("Day")
+                                    .font(.system(size: 8, weight: .medium))
+                                    .foregroundStyle(.white.opacity(0.7))
+                                Text("\(entry.currentDay)")
+                                    .font(.system(size: 18, weight: .bold, design: .rounded))
+                                    .foregroundStyle(.white)
+                            }
                         }
-                    }
-                    .shadow(color: .black.opacity(0.3), radius: 2, y: 1)
+                        .shadow(color: .black.opacity(0.3), radius: 2, y: 1)
 
-                    if let name = entry.planName {
-                        Text(name)
-                            .font(.system(size: 11, weight: .medium))
-                            .foregroundStyle(.white.opacity(0.9))
-                            .lineLimit(2)
-                            .multilineTextAlignment(.center)
-                            .shadow(color: .black.opacity(0.5), radius: 1, y: 1)
-                    }
+                        if let name = entry.planName {
+                            Text(name)
+                                .font(.system(size: 11, weight: .medium))
+                                .foregroundStyle(.white.opacity(0.9))
+                                .lineLimit(2)
+                                .multilineTextAlignment(.center)
+                                .shadow(color: .black.opacity(0.5), radius: 1, y: 1)
+                        }
 
-                    Spacer()
+                        Spacer()
+                    }
+                    .padding(16)
                 }
-                .padding(16)
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .widgetURL(deepLinkURL)
     }
 
@@ -92,65 +99,72 @@ struct PlanProgressEntryView: View {
     // MARK: - System Medium
 
     private var mediumView: some View {
-        Group {
-            if entry.isEmpty {
-                emptyMediumView
-            } else {
-                HStack(spacing: 16) {
-                    // Left: circular progress ring
-                    ZStack {
-                        Circle()
-                            .stroke(.white.opacity(0.2), lineWidth: 6)
-                            .frame(width: 70, height: 70)
+        ZStack {
+            WidgetBackgroundView(
+                gradientColors: entry.gradientColors,
+                imageData: entry.backgroundImageData
+            )
 
-                        Circle()
-                            .trim(from: 0, to: entry.completionFraction)
-                            .stroke(.white, style: StrokeStyle(lineWidth: 6, lineCap: .round))
-                            .frame(width: 70, height: 70)
-                            .rotationEffect(.degrees(-90))
+            Group {
+                if entry.isEmpty {
+                    emptyMediumView
+                } else {
+                    HStack(spacing: 16) {
+                        // Left: circular progress ring
+                        ZStack {
+                            Circle()
+                                .stroke(.white.opacity(0.2), lineWidth: 6)
+                                .frame(width: 70, height: 70)
 
-                        Text("\(Int(entry.completionFraction * 100))%")
-                            .font(.system(size: 16, weight: .bold, design: .rounded))
-                            .foregroundStyle(.white)
-                    }
-                    .shadow(color: .black.opacity(0.3), radius: 2, y: 1)
+                            Circle()
+                                .trim(from: 0, to: entry.completionFraction)
+                                .stroke(.white, style: StrokeStyle(lineWidth: 6, lineCap: .round))
+                                .frame(width: 70, height: 70)
+                                .rotationEffect(.degrees(-90))
 
-                    // Right: plan details
-                    VStack(alignment: .leading, spacing: 6) {
-                        if let name = entry.planName {
-                            Text(name)
-                                .font(.system(size: 15, weight: .semibold))
+                            Text("\(Int(entry.completionFraction * 100))%")
+                                .font(.system(size: 16, weight: .bold, design: .rounded))
                                 .foregroundStyle(.white)
-                                .lineLimit(2)
-                                .shadow(color: .black.opacity(0.7), radius: 1, y: 1)
                         }
+                        .shadow(color: .black.opacity(0.3), radius: 2, y: 1)
 
-                        Text("Day \(entry.currentDay) of \(entry.totalDays)")
-                            .font(.system(size: 13, weight: .medium))
-                            .foregroundStyle(.white.opacity(0.85))
-                            .shadow(color: .black.opacity(0.5), radius: 1, y: 1)
-
-                        // Linear progress bar
-                        GeometryReader { geo in
-                            ZStack(alignment: .leading) {
-                                RoundedRectangle(cornerRadius: 3)
-                                    .fill(.white.opacity(0.2))
-                                    .frame(height: 6)
-
-                                RoundedRectangle(cornerRadius: 3)
-                                    .fill(.white)
-                                    .frame(width: geo.size.width * entry.completionFraction, height: 6)
+                        // Right: plan details
+                        VStack(alignment: .leading, spacing: 6) {
+                            if let name = entry.planName {
+                                Text(name)
+                                    .font(.system(size: 15, weight: .semibold))
+                                    .foregroundStyle(.white)
+                                    .lineLimit(2)
+                                    .shadow(color: .black.opacity(0.7), radius: 1, y: 1)
                             }
-                        }
-                        .frame(height: 6)
-                    }
 
-                    Spacer(minLength: 0)
+                            Text("Day \(entry.currentDay) of \(entry.totalDays)")
+                                .font(.system(size: 13, weight: .medium))
+                                .foregroundStyle(.white.opacity(0.85))
+                                .shadow(color: .black.opacity(0.5), radius: 1, y: 1)
+
+                            // Linear progress bar
+                            GeometryReader { geo in
+                                ZStack(alignment: .leading) {
+                                    RoundedRectangle(cornerRadius: 3)
+                                        .fill(.white.opacity(0.2))
+                                        .frame(height: 6)
+
+                                    RoundedRectangle(cornerRadius: 3)
+                                        .fill(.white)
+                                        .frame(width: geo.size.width * entry.completionFraction, height: 6)
+                                }
+                            }
+                            .frame(height: 6)
+                        }
+
+                        Spacer(minLength: 0)
+                    }
+                    .padding(16)
                 }
-                .padding(16)
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .widgetURL(deepLinkURL)
     }
 
