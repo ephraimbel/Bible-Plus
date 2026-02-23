@@ -1,9 +1,9 @@
 import SwiftUI
 
-/// Shared background view used by all widget containerBackgrounds.
+/// Shared background view used by all home-screen widgets.
 /// Renders gradient + optional image (from embedded Data) + vignette.
-/// NOTE: Avoids GeometryReader which can return zero size inside
-/// .containerBackground(for: .widget) on .systemSmall widgets.
+/// Now embedded directly inside each entry view's ZStack (not in containerBackground),
+/// so GeometryReader is safe to use for image sizing.
 struct WidgetBackgroundView: View {
     let gradientColors: [String]
     let imageData: Data?
@@ -22,10 +22,13 @@ struct WidgetBackgroundView: View {
             }
 
             if let imageData, let uiImage = UIImage(data: imageData) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .scaledToFill()
-                    .clipped()
+                GeometryReader { geo in
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: geo.size.width, height: geo.size.height)
+                        .clipped()
+                }
             }
 
             RadialGradient(

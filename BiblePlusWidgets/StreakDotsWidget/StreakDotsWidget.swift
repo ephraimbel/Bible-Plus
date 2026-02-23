@@ -8,11 +8,15 @@ struct StreakDotsEntry: TimelineEntry {
     let date: Date
     let currentStreak: Int
     let activeDays: Set<Int> // Calendar weekday: 1=Sun..7=Sat
+    let backgroundGradient: [String]
+    let backgroundImageData: Data?
 
     static let placeholder = StreakDotsEntry(
         date: Date(),
         currentStreak: 5,
-        activeDays: [2, 3, 4, 5, 6]
+        activeDays: [2, 3, 4, 5, 6],
+        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors,
+        backgroundImageData: nil
     )
 }
 
@@ -46,10 +50,17 @@ struct StreakDotsProvider: TimelineProvider {
 
         let activeDays = fetchActiveDaysThisWeek(modelContext: modelContext)
 
+        // Background: read from UserDefaults (App Group)
+        let bgColors = WidgetBackgroundService.loadGradientColors()
+            ?? SanctuaryBackground.allBackgrounds[0].gradientColors
+        let imageData = WidgetBackgroundService.loadWidgetBackgroundImageData()
+
         return StreakDotsEntry(
             date: Date(),
             currentStreak: profile.streakCount,
-            activeDays: activeDays
+            activeDays: activeDays,
+            backgroundGradient: bgColors,
+            backgroundImageData: imageData
         )
     }
 
@@ -84,6 +95,7 @@ struct StreakDotsWidget: Widget {
         }
         .configurationDisplayName("Weekly Faithfulness")
         .description("Your daily faithfulness with weekly activity dots.")
-        .supportedFamilies([.accessoryRectangular])
+        .supportedFamilies([.systemSmall, .accessoryRectangular])
+        .contentMarginsDisabled()
     }
 }

@@ -8,11 +8,15 @@ struct ChaptersWidgetEntry: TimelineEntry {
     let date: Date
     let chaptersThisWeek: Int
     let weeklyGoal: Int
+    let backgroundGradient: [String]
+    let backgroundImageData: Data?
 
     static let placeholder = ChaptersWidgetEntry(
         date: Date(),
         chaptersThisWeek: 4,
-        weeklyGoal: 7
+        weeklyGoal: 7,
+        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors,
+        backgroundImageData: nil
     )
 }
 
@@ -52,10 +56,17 @@ struct ChaptersWidgetProvider: TimelineProvider {
         )
         let count = (try? modelContext.fetch(descriptor))?.count ?? 0
 
+        // Background: read from UserDefaults (App Group)
+        let bgColors = WidgetBackgroundService.loadGradientColors()
+            ?? SanctuaryBackground.allBackgrounds[0].gradientColors
+        let imageData = WidgetBackgroundService.loadWidgetBackgroundImageData()
+
         return ChaptersWidgetEntry(
             date: Date(),
             chaptersThisWeek: count,
-            weeklyGoal: 7
+            weeklyGoal: 7,
+            backgroundGradient: bgColors,
+            backgroundImageData: imageData
         )
     }
 }
@@ -71,7 +82,8 @@ struct ChaptersWidget: Widget {
                 .containerBackground(.clear, for: .widget)
         }
         .configurationDisplayName("Chapters Read")
-        .description("Track chapters read this week on your lock screen.")
-        .supportedFamilies([.accessoryCircular])
+        .description("Track chapters read this week.")
+        .supportedFamilies([.systemSmall, .accessoryCircular])
+        .contentMarginsDisabled()
     }
 }

@@ -11,13 +11,17 @@ struct LockScreenWidgetEntry: TimelineEntry {
     let displayText: String
     let verseReference: String?
     let contentID: UUID?
+    let backgroundGradient: [String]
+    let backgroundImageData: Data?
 
     static let placeholder = LockScreenWidgetEntry(
         date: Date(),
         shortText: "The Lord is my shepherd",
         displayText: "The Lord is my shepherd; I shall not want.",
         verseReference: "Psalm 23:1",
-        contentID: nil
+        contentID: nil,
+        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors,
+        backgroundImageData: nil
     )
 }
 
@@ -46,6 +50,11 @@ struct LockScreenWidgetProvider: AppIntentTimelineProvider {
             return Timeline(entries: [.placeholder], policy: .after(WidgetTimeWindow.startOfNextDay()))
         }
 
+        // Background: read from UserDefaults (App Group) — always reliable
+        let bgColors = WidgetBackgroundService.loadGradientColors()
+            ?? SanctuaryBackground.allBackgrounds[0].gradientColors
+        let imageData = WidgetBackgroundService.loadWidgetBackgroundImageData()
+
         // Single verse of the day — stays all day, refreshes at midnight
         var entries: [LockScreenWidgetEntry] = []
 
@@ -59,7 +68,9 @@ struct LockScreenWidgetProvider: AppIntentTimelineProvider {
                 shortText: votd.shortText,
                 displayText: votd.displayText,
                 verseReference: votd.verseReference,
-                contentID: votd.contentID
+                contentID: votd.contentID,
+                backgroundGradient: bgColors,
+                backgroundImageData: imageData
             ))
         }
 
@@ -96,12 +107,19 @@ struct LockScreenWidgetProvider: AppIntentTimelineProvider {
             }
         }
 
+        // Background: read from UserDefaults (App Group)
+        let bgColors = WidgetBackgroundService.loadGradientColors()
+            ?? SanctuaryBackground.allBackgrounds[0].gradientColors
+        let imageData = WidgetBackgroundService.loadWidgetBackgroundImageData()
+
         return LockScreenWidgetEntry(
             date: Date(),
             shortText: shortText,
             displayText: text,
             verseReference: content.verseReference,
-            contentID: content.id
+            contentID: content.id,
+            backgroundGradient: bgColors,
+            backgroundImageData: imageData
         )
     }
 }
@@ -118,6 +136,7 @@ struct BiblePlusLockScreenWidget: Widget {
         }
         .configurationDisplayName("Daily Inspiration")
         .description("A personalized verse, quote, or prayer that refreshes daily.")
-        .supportedFamilies([.accessoryInline, .accessoryRectangular])
+        .supportedFamilies([.systemSmall, .accessoryInline, .accessoryRectangular])
+        .contentMarginsDisabled()
     }
 }

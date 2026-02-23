@@ -10,13 +10,17 @@ struct GreetingWidgetEntry: TimelineEntry {
     let firstName: String
     let encouragement: String
     let timeIcon: String
+    let backgroundGradient: [String]
+    let backgroundImageData: Data?
 
     static let placeholder = GreetingWidgetEntry(
         date: Date(),
         greeting: "Good morning",
         firstName: "Friend",
         encouragement: "God's mercies are new today",
-        timeIcon: "sunrise"
+        timeIcon: "sunrise",
+        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors,
+        backgroundImageData: nil
     )
 }
 
@@ -101,12 +105,19 @@ struct GreetingWidgetProvider: TimelineProvider {
         let dayOfYear = cal.ordinality(of: .day, in: .year, for: Date()) ?? 1
         let index = dayOfYear % encouragements.count
 
+        // Background: read from UserDefaults (App Group)
+        let bgColors = WidgetBackgroundService.loadGradientColors()
+            ?? SanctuaryBackground.allBackgrounds[0].gradientColors
+        let imageData = WidgetBackgroundService.loadWidgetBackgroundImageData()
+
         return GreetingWidgetEntry(
             date: Date(),
             greeting: greeting,
             firstName: firstName,
             encouragement: encouragements[index],
-            timeIcon: timeIcon
+            timeIcon: timeIcon,
+            backgroundGradient: bgColors,
+            backgroundImageData: imageData
         )
     }
 }
@@ -123,6 +134,7 @@ struct GreetingWidget: Widget {
         }
         .configurationDisplayName("Greeting")
         .description("A personalized greeting with daily encouragement.")
-        .supportedFamilies([.accessoryRectangular])
+        .supportedFamilies([.systemSmall, .accessoryRectangular])
+        .contentMarginsDisabled()
     }
 }

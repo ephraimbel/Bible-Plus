@@ -7,13 +7,62 @@ struct LockScreenWidgetEntryView: View {
 
     var body: some View {
         switch family {
+        case .systemSmall:
+            smallView
         case .accessoryInline:
             inlineView
         case .accessoryRectangular:
             rectangularView
         default:
-            inlineView
+            smallView
         }
+    }
+
+    // MARK: - System Small
+
+    private var smallView: some View {
+        ZStack {
+            WidgetBackgroundView(
+                gradientColors: entry.backgroundGradient,
+                imageData: entry.backgroundImageData
+            )
+
+            VStack(alignment: .leading, spacing: 0) {
+                // Header
+                HStack(spacing: 4) {
+                    Image(systemName: "book.closed.fill")
+                        .font(.system(size: 9, weight: .semibold))
+                    Text(entry.verseReference != nil ? "DAILY VERSE" : "DAILY INSPIRATION")
+                        .font(.system(size: 9, weight: .bold, design: .rounded))
+                        .tracking(0.5)
+                }
+                .foregroundStyle(.white.opacity(0.6))
+                .shadow(color: .black.opacity(0.5), radius: 2, y: 1)
+
+                Spacer()
+
+                Text(entry.displayText)
+                    .font(.system(size: 13, weight: .regular, design: .serif))
+                    .foregroundStyle(.white)
+                    .lineSpacing(2)
+                    .lineLimit(5)
+                    .minimumScaleFactor(0.7)
+                    .shadow(color: .black.opacity(0.7), radius: 1, y: 1)
+                    .shadow(color: .black.opacity(0.4), radius: 4, y: 0)
+
+                if let ref = entry.verseReference {
+                    Text(ref)
+                        .font(.caption2)
+                        .fontWeight(.medium)
+                        .foregroundStyle(.white.opacity(0.75))
+                        .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
+                        .padding(.top, 4)
+                }
+            }
+            .padding(16)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+        }
+        .widgetURL(deepLinkURL)
     }
 
     // MARK: - Inline
