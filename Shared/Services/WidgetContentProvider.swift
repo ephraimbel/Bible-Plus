@@ -214,6 +214,15 @@ enum WidgetContentProvider {
         let background = SanctuaryBackground.background(for: effectiveBgID)
             ?? SanctuaryBackground.allBackgrounds[0]
 
+        // Single fetch of all content
+        let descriptor = FetchDescriptor<PrayerContent>()
+        guard let allContent = try? modelContext.fetch(descriptor) else { return [] }
+
+        let eligible = allContent.filter { content in
+            (!content.isProOnly || profile.isPro)
+                && content.faithLevelMin.numericValue <= profile.faithLevel.numericValue
+        }
+
         var entries: [WidgetEntry] = []
         var usedIDs: Set<UUID> = []
 
@@ -221,11 +230,13 @@ enum WidgetContentProvider {
         let allWindows = remainingWindows(fromHour: hour)
 
         for (window, date) in allWindows {
-            if let content = bestContent(
+            if let content = bestContentFromArray(
+                eligible,
                 window: window,
                 profile: profile,
-                modelContext: modelContext,
-                excluding: usedIDs
+                excluding: usedIDs,
+                avoidType: nil,
+                avoidCategory: nil
             ) {
                 usedIDs.insert(content.id)
                 let text = personalizedText(template: content.templateText, firstName: profile.firstName)
@@ -251,9 +262,122 @@ enum WidgetContentProvider {
         return template.replacingOccurrences(of: "{name}", with: name)
     }
 
+    // MARK: - Deterministic Scoring & Cache
+
+    /// Same as score() but uses a hash-based jitter instead of random, so the
+    /// same content ID + day seed always produces the same score.
+    static func deterministicScore(
+        content: PrayerContent,
+        profile: UserProfile,
+        window: WidgetTimeWindow,
+        daySeed: Int
+    ) -> Double {
+        var s: Double = 1.0
+
+        // Burden weighting: 3x
+        let userBurdens = Set(profile.currentBurdens)
+        let contentBurdens = Set(content.applicableBurdens)
+        if !userBurdens.intersection(contentBurdens).isEmpty {
+            s *= 3.0
+        }
+
+        // Season weighting: 2x
+        let userSeasons = Set(profile.lifeSeasons)
+        let contentSeasons = Set(content.applicableSeasons)
+        if !userSeasons.intersection(contentSeasons).isEmpty {
+            s *= 2.0
+        }
+
+        // Time awareness: 1.5x
+        if content.timeOfDay.contains(window.prayerTimeSlot) {
+            s *= 1.5
+        }
+
+        // Faith depth: 1.3x
+        if content.faithLevelMin == profile.faithLevel {
+            s *= 1.3
+        }
+
+        // Thematic category bonus: 1.4x
+        if window.thematicCategories.contains(content.category.lowercased()) {
+            s *= 1.4
+        }
+
+        // Deterministic jitter from content ID + day seed (range 0.7–1.3)
+        let hashInput = content.id.uuidString + String(daySeed)
+        let hash = abs(hashInput.hashValue)
+        let jitter = 0.7 + Double(hash % 1000) / 1000.0 * 0.6
+        s *= jitter
+
+        return s
+    }
+
+    /// Fetch all eligible content once, score deterministically, cache the ordered list.
+    /// Returns the cached items (also persisted via WidgetBackgroundService).
+    static func buildAndCacheContentList(
+        profile: UserProfile,
+        modelContext: ModelContext,
+        allowedTypes: Set<ContentType>? = nil
+    ) -> WidgetContentCache? {
+        let descriptor = FetchDescriptor<PrayerContent>()
+        guard let allContent = try? modelContext.fetch(descriptor) else { return nil }
+
+        let eligible = allContent.filter { content in
+            (!content.isProOnly || profile.isPro)
+                && content.faithLevelMin.numericValue <= profile.faithLevel.numericValue
+                && (allowedTypes == nil || allowedTypes!.contains(content.type))
+        }
+
+        guard !eligible.isEmpty else { return nil }
+
+        let window = WidgetTimeWindow.current()
+        let cal = Calendar.current
+        let dayOfYear = cal.ordinality(of: .day, in: .year, for: Date()) ?? 1
+
+        // Score deterministically and sort descending
+        let scored = eligible.map { content in
+            (content: content, score: deterministicScore(
+                content: content, profile: profile, window: window, daySeed: dayOfYear
+            ))
+        }.sorted { $0.score > $1.score }
+
+        // Convert to lightweight Codable items
+        let cachedItems = scored.map { item in
+            let text = personalizedText(template: item.content.templateText, firstName: profile.firstName)
+            return CachedWidgetContent(
+                id: item.content.id.uuidString,
+                displayText: text,
+                shortText: String(text.prefix(40)),
+                verseReference: item.content.verseReference,
+                contentType: item.content.type.rawValue
+            )
+        }
+
+        let cache = WidgetContentCache(
+            items: cachedItems,
+            timeWindow: window.rawValue,
+            createdAt: Date(),
+            daySeed: dayOfYear
+        )
+
+        WidgetBackgroundService.saveContentCache(cache)
+        return cache
+    }
+
+    /// Fast O(1) lookup: get the Nth item from the cached content list.
+    /// Returns nil if cache is stale/missing or offset is out of bounds.
+    static func cachedContentAtOffset(_ offset: Int) -> CachedWidgetContent? {
+        guard let cache = WidgetBackgroundService.loadContentCache(),
+              !cache.isStale,
+              !cache.items.isEmpty else { return nil }
+        let index = offset % cache.items.count
+        return cache.items[index]
+    }
+
     // MARK: - Home Screen (2-hour rotation, mixed content)
 
-    /// Generate timeline entries every 2 hours with diverse content types
+    /// Generate timeline entries every 2 hours with diverse content types.
+    /// Single-fetch: loads PrayerContent once and picks from the array.
     static func homeScreenTimelineEntries(
         profile: UserProfile,
         modelContext: ModelContext,
@@ -266,6 +390,18 @@ enum WidgetContentProvider {
         let background = SanctuaryBackground.background(for: effectiveBgID)
             ?? SanctuaryBackground.allBackgrounds[0]
 
+        // Single fetch of all content
+        let descriptor = FetchDescriptor<PrayerContent>()
+        guard let allContent = try? modelContext.fetch(descriptor) else { return [] }
+
+        let eligible = allContent.filter { content in
+            (!content.isProOnly || profile.isPro)
+                && content.faithLevelMin.numericValue <= profile.faithLevel.numericValue
+                && (allowedTypes == nil || allowedTypes!.contains(content.type))
+        }
+
+        guard !eligible.isEmpty else { return [] }
+
         var entries: [WidgetEntry] = []
         var usedIDs: Set<UUID> = []
         var lastContentType: ContentType?
@@ -277,14 +413,13 @@ enum WidgetContentProvider {
             let entryHour = cal.component(.hour, from: entryDate)
             let window = WidgetTimeWindow.windowForHour(entryHour)
 
-            if let content = bestContentWithDiversity(
+            if let content = bestContentFromArray(
+                eligible,
                 window: window,
                 profile: profile,
-                modelContext: modelContext,
                 excluding: usedIDs,
                 avoidType: lastContentType,
-                avoidCategory: lastCategory,
-                allowedTypes: allowedTypes
+                avoidCategory: lastCategory
             ) {
                 usedIDs.insert(content.id)
                 lastContentType = content.type
@@ -406,65 +541,30 @@ enum WidgetContentProvider {
         return score
     }
 
-    private static func bestContent(
+    /// Picks the best content from a pre-fetched array (no SwiftData fetch),
+    /// favoring content type and category diversity.
+    private static func bestContentFromArray(
+        _ eligible: [PrayerContent],
         window: WidgetTimeWindow,
         profile: UserProfile,
-        modelContext: ModelContext,
-        excluding usedIDs: Set<UUID>,
-        allowedTypes: Set<ContentType>? = nil
-    ) -> PrayerContent? {
-        let descriptor = FetchDescriptor<PrayerContent>()
-        guard let allContent = try? modelContext.fetch(descriptor) else { return nil }
-
-        let eligible = allContent.filter { content in
-            !usedIDs.contains(content.id)
-                && (!content.isProOnly || profile.isPro)
-                && content.faithLevelMin.numericValue <= profile.faithLevel.numericValue
-                && (allowedTypes == nil || allowedTypes!.contains(content.type))
-        }
-
-        guard !eligible.isEmpty else { return nil }
-
-        let scored = eligible.map { content in
-            (content: content, score: score(content: content, profile: profile, window: window))
-        }
-
-        return scored.max(by: { $0.score < $1.score })?.content
-    }
-
-    /// Picks the best content while favoring content type and category diversity
-    private static func bestContentWithDiversity(
-        window: WidgetTimeWindow,
-        profile: UserProfile,
-        modelContext: ModelContext,
         excluding usedIDs: Set<UUID>,
         avoidType: ContentType?,
-        avoidCategory: String? = nil,
-        allowedTypes: Set<ContentType>? = nil
+        avoidCategory: String? = nil
     ) -> PrayerContent? {
-        let descriptor = FetchDescriptor<PrayerContent>()
-        guard let allContent = try? modelContext.fetch(descriptor) else { return nil }
+        let filtered = eligible.filter { !usedIDs.contains($0.id) }
+        guard !filtered.isEmpty else { return nil }
 
-        let eligible = allContent.filter { content in
-            !usedIDs.contains(content.id)
-                && (!content.isProOnly || profile.isPro)
-                && content.faithLevelMin.numericValue <= profile.faithLevel.numericValue
-                && (allowedTypes == nil || allowedTypes!.contains(content.type))
-        }
-
-        guard !eligible.isEmpty else { return nil }
-
-        var scored = eligible.map { content in
+        var scored = filtered.map { content in
             var s = score(content: content, profile: profile, window: window)
-            // Only apply type diversity penalty when showing mixed content
-            if allowedTypes == nil, let avoid = avoidType, content.type == avoid {
+            // Type diversity penalty
+            if let avoid = avoidType, content.type == avoid {
                 s *= 0.3
             }
-            // Penalize same category as previous entry
+            // Category diversity penalty
             if let avoidCat = avoidCategory, content.category.lowercased() == avoidCat.lowercased() {
                 s *= 0.4
             }
-            // Bonus for widget-friendly content length (40-200 chars)
+            // Widget-friendly content length bonus (40-200 chars)
             let len = content.templateText.count
             if len >= 40 && len <= 200 {
                 s *= 1.2

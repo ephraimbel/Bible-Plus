@@ -13,7 +13,6 @@ struct HomeWidgetEntry: TimelineEntry {
     let contentType: ContentType
     let contentID: UUID?
     let backgroundGradient: [String]
-    let backgroundImageData: Data?
 
     static let placeholder = HomeWidgetEntry(
         date: Date(),
@@ -22,8 +21,7 @@ struct HomeWidgetEntry: TimelineEntry {
         verseReference: "Psalm 23:1",
         contentType: .verse,
         contentID: nil,
-        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors,
-        backgroundImageData: nil
+        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors
     )
 }
 
@@ -36,6 +34,15 @@ struct HomeWidgetProvider: AppIntentTimelineProvider {
 
     func snapshot(for configuration: ContentTypeIntent, in context: Context) async -> HomeWidgetEntry {
         if context.isPreview { return .placeholder }
+
+        let offset = WidgetBackgroundService.loadContentOffset()
+
+        // Fast path: if user navigated (offset > 0) and cache is fresh, skip SwiftData entirely
+        if offset > 0, let cached = WidgetContentProvider.cachedContentAtOffset(offset) {
+            return entryFromCached(cached)
+        }
+
+        // Slow path: full SwiftData fetch
         return currentEntry(allowedTypes: configuration.contentType.allowedContentTypes) ?? .placeholder
     }
 
@@ -52,18 +59,53 @@ struct HomeWidgetProvider: AppIntentTimelineProvider {
             return Timeline(entries: [.placeholder], policy: .after(WidgetTimeWindow.nextTwoHourBoundary()))
         }
 
-        // 2-hour rotation with mixed content (verses, prayers, quotes, devotionals)
+        let offset = WidgetBackgroundService.loadContentOffset()
+
+        // Auto-reset offset when time window has changed (cache is stale)
+        if offset > 0 {
+            let existingCache = WidgetBackgroundService.loadContentCache()
+            if existingCache == nil || existingCache!.isStale {
+                WidgetBackgroundService.saveContentOffset(0)
+            }
+        }
+
+        // Build + cache the deterministic content list (single SwiftData fetch)
+        let cache = WidgetContentProvider.buildAndCacheContentList(
+            profile: profile,
+            modelContext: modelContext,
+            allowedTypes: allowedTypes
+        )
+
+        // Background colors
+        let bgColors = WidgetBackgroundService.loadGradientColors()
+            ?? SanctuaryBackground.allBackgrounds[0].gradientColors
+
+        var entries: [HomeWidgetEntry] = []
+
+        // If user navigated, use cached item for the first (immediate) entry
+        let currentOffset = WidgetBackgroundService.loadContentOffset()
+        if currentOffset > 0, let cache, !cache.items.isEmpty {
+            let index = currentOffset % cache.items.count
+            let item = cache.items[index]
+            entries.append(HomeWidgetEntry(
+                date: Date(),
+                window: WidgetTimeWindow.current(),
+                displayText: item.displayText,
+                verseReference: item.verseReference,
+                contentType: ContentType(rawValue: item.contentType) ?? .verse,
+                contentID: UUID(uuidString: item.id),
+                backgroundGradient: bgColors
+            ))
+        }
+
+        // Generate remaining timeline entries via single-fetch helper
         let widgetEntries = WidgetContentProvider.homeScreenTimelineEntries(
             profile: profile,
             modelContext: modelContext,
             allowedTypes: allowedTypes
         )
 
-        // Background: read from UserDefaults (App Group) — always reliable
-        let bgColors = WidgetBackgroundService.loadGradientColors()
-            ?? SanctuaryBackground.allBackgrounds[0].gradientColors
-        let imageData = WidgetBackgroundService.loadWidgetBackgroundImageData()
-        let entries: [HomeWidgetEntry] = widgetEntries.map { entry in
+        let timelineEntries: [HomeWidgetEntry] = widgetEntries.map { entry in
             HomeWidgetEntry(
                 date: entry.date,
                 window: entry.window,
@@ -71,16 +113,41 @@ struct HomeWidgetProvider: AppIntentTimelineProvider {
                 verseReference: entry.verseReference,
                 contentType: entry.contentType,
                 contentID: entry.contentID,
-                backgroundGradient: bgColors,
-                backgroundImageData: imageData
+                backgroundGradient: bgColors
             )
         }
 
-        // Reload after the last entry expires (or 24 hours from now)
+        // If we added a cached first entry, skip the first timeline entry (same timeslot)
+        if !entries.isEmpty && !timelineEntries.isEmpty {
+            entries.append(contentsOf: timelineEntries.dropFirst())
+        } else {
+            entries.append(contentsOf: timelineEntries)
+        }
+
+        // Reload after 24 hours
         let nextReload = Calendar.current.date(byAdding: .hour, value: 24, to: Date()) ?? WidgetTimeWindow.nextTwoHourBoundary()
         return Timeline(entries: entries.isEmpty ? [.placeholder] : entries, policy: .after(nextReload))
     }
 
+    // MARK: - Private
+
+    /// Build entry from cached content (no SwiftData needed)
+    private func entryFromCached(_ cached: CachedWidgetContent) -> HomeWidgetEntry {
+        let bgColors = WidgetBackgroundService.loadGradientColors()
+            ?? SanctuaryBackground.allBackgrounds[0].gradientColors
+
+        return HomeWidgetEntry(
+            date: Date(),
+            window: WidgetTimeWindow.current(),
+            displayText: cached.displayText,
+            verseReference: cached.verseReference,
+            contentType: ContentType(rawValue: cached.contentType) ?? .verse,
+            contentID: UUID(uuidString: cached.id),
+            backgroundGradient: bgColors
+        )
+    }
+
+    /// Full SwiftData fetch for initial load (offset == 0) or stale cache
     private func currentEntry(allowedTypes: Set<ContentType>? = nil) -> HomeWidgetEntry? {
         guard let container = try? SharedModelContainer.create() else { return nil }
         let modelContext = ModelContext(container)
@@ -88,32 +155,18 @@ struct HomeWidgetProvider: AppIntentTimelineProvider {
         guard let profile = (try? modelContext.fetch(profileDescriptor))?.first else { return nil }
 
         let window = WidgetTimeWindow.current()
-        let offset = WidgetBackgroundService.loadContentOffset()
 
-        let content: PrayerContent?
-        if offset > 0 {
-            content = WidgetContentProvider.contentForWidgetWithOffset(
-                offset: offset,
-                window: window,
-                profile: profile,
-                modelContext: modelContext,
-                allowedTypes: allowedTypes
-            )
-        } else {
-            content = WidgetContentProvider.contentForWidget(
-                window: window,
-                profile: profile,
-                modelContext: modelContext,
-                allowedTypes: allowedTypes
-            )
-        }
+        let content = WidgetContentProvider.contentForWidget(
+            window: window,
+            profile: profile,
+            modelContext: modelContext,
+            allowedTypes: allowedTypes
+        )
 
         guard let content else { return nil }
 
-        // Background: read from UserDefaults (App Group) — always reliable
         let bgColors = WidgetBackgroundService.loadGradientColors()
             ?? SanctuaryBackground.allBackgrounds[0].gradientColors
-        let imageData = WidgetBackgroundService.loadWidgetBackgroundImageData()
         let text = WidgetContentProvider.personalizedText(template: content.templateText, firstName: profile.firstName)
 
         return HomeWidgetEntry(
@@ -123,8 +176,7 @@ struct HomeWidgetProvider: AppIntentTimelineProvider {
             verseReference: content.verseReference,
             contentType: content.type,
             contentID: content.id,
-            backgroundGradient: bgColors,
-            backgroundImageData: imageData
+            backgroundGradient: bgColors
         )
     }
 }
@@ -137,7 +189,9 @@ struct BiblePlusHomeWidget: Widget {
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: kind, intent: ContentTypeIntent.self, provider: HomeWidgetProvider()) { entry in
             HomeWidgetEntryView(entry: entry)
-                .containerBackground(.clear, for: .widget)
+                .containerBackground(for: .widget) {
+                    WidgetBackgroundView(gradientColors: entry.backgroundGradient)
+                }
         }
         .configurationDisplayName("Daily Inspiration")
         .description("Prayers, verses, and devotionals refreshed every 2 hours.")
