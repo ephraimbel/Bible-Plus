@@ -913,10 +913,6 @@ final class AudioBibleService {
         UserDefaults.standard.set(current + 1, forKey: Self.usageKey)
         UserDefaults.standard.set(Date(), forKey: Self.usageDateKey)
     }
-
-    static var remainingFreeChapters: Int {
-        max(0, freeChapterLimit - chaptersUsedToday())
-    }
 }
 
 // MARK: - Supporting Types
