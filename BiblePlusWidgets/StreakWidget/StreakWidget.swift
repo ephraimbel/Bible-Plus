@@ -10,15 +10,13 @@ struct StreakWidgetEntry: TimelineEntry {
     let longestStreak: Int
     let hasActivityToday: Bool
     let backgroundGradient: [String]
-    let backgroundImageData: Data?
 
     static let placeholder = StreakWidgetEntry(
         date: Date(),
         currentStreak: 7,
         longestStreak: 14,
         hasActivityToday: true,
-        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors,
-        backgroundImageData: nil
+        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors
     )
 }
 
@@ -62,15 +60,13 @@ struct StreakWidgetProvider: TimelineProvider {
         // Background: read from UserDefaults (App Group) — always reliable
         let bgColors = WidgetBackgroundService.loadGradientColors()
             ?? SanctuaryBackground.allBackgrounds[0].gradientColors
-        let imageData = WidgetBackgroundService.loadWidgetBackgroundImageData()
 
         return StreakWidgetEntry(
             date: Date(),
             currentStreak: profile.streakCount,
             longestStreak: profile.longestStreak,
             hasActivityToday: hasActivityToday,
-            backgroundGradient: bgColors,
-            backgroundImageData: imageData
+            backgroundGradient: bgColors
         )
     }
 }

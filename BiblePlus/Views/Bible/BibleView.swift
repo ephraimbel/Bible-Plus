@@ -875,6 +875,9 @@ private struct BibleContentView: View {
                 audioService.setVoice(voice)
             }
         }
+        .onDisappear {
+            viewModel.onDisappear()
+        }
         .onChange(of: viewModel.verses.count) {
             // Pre-fetch audio as soon as chapter text is loaded — by the time
             // the user reads a few verses and taps play, the audio is cached.

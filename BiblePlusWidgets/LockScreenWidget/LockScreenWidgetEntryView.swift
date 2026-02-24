@@ -22,10 +22,7 @@ struct LockScreenWidgetEntryView: View {
 
     private var smallView: some View {
         ZStack {
-            WidgetBackgroundView(
-                gradientColors: entry.backgroundGradient,
-                imageData: entry.backgroundImageData
-            )
+            WidgetBackgroundView(gradientColors: entry.backgroundGradient)
 
             VStack(alignment: .leading, spacing: 0) {
                 // Header
@@ -60,8 +57,8 @@ struct LockScreenWidgetEntryView: View {
                 }
             }
             .padding(16)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
         .widgetURL(deepLinkURL)
     }
 

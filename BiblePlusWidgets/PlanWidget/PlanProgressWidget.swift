@@ -11,7 +11,6 @@ struct PlanProgressEntry: TimelineEntry {
     let totalDays: Int
     let completionFraction: Double
     let gradientColors: [String]
-    let backgroundImageData: Data?
     let planID: String?
     let isEmpty: Bool
 
@@ -22,7 +21,6 @@ struct PlanProgressEntry: TimelineEntry {
         totalDays: 7,
         completionFraction: 0.43,
         gradientColors: SanctuaryBackground.allBackgrounds[0].gradientColors,
-        backgroundImageData: nil,
         planID: nil,
         isEmpty: false
     )
@@ -34,7 +32,6 @@ struct PlanProgressEntry: TimelineEntry {
         totalDays: 0,
         completionFraction: 0,
         gradientColors: SanctuaryBackground.allBackgrounds[0].gradientColors,
-        backgroundImageData: nil,
         planID: nil,
         isEmpty: true
     )
@@ -87,7 +84,6 @@ struct PlanProgressProvider: TimelineProvider {
         // Background: read from UserDefaults (App Group) — always reliable
         let bgColors = WidgetBackgroundService.loadGradientColors()
             ?? SanctuaryBackground.allBackgrounds[0].gradientColors
-        let imageData = WidgetBackgroundService.loadWidgetBackgroundImageData()
 
         return PlanProgressEntry(
             date: Date(),
@@ -96,7 +92,6 @@ struct PlanProgressProvider: TimelineProvider {
             totalDays: plan.totalDays,
             completionFraction: fraction,
             gradientColors: bgColors,
-            backgroundImageData: imageData,
             planID: plan.id,
             isEmpty: false
         )

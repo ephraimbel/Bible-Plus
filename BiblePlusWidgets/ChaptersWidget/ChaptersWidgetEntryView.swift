@@ -24,10 +24,7 @@ struct ChaptersWidgetEntryView: View {
 
     private var smallView: some View {
         ZStack {
-            WidgetBackgroundView(
-                gradientColors: entry.backgroundGradient,
-                imageData: entry.backgroundImageData
-            )
+            WidgetBackgroundView(gradientColors: entry.backgroundGradient)
 
             VStack(spacing: 8) {
                 // Label

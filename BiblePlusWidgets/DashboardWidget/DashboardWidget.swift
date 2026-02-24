@@ -14,7 +14,6 @@ struct DashboardEntry: TimelineEntry {
     let chaptersRead: Int
     let versesSaved: Int
     let backgroundGradient: [String]
-    let backgroundImageData: Data?
 
     static let placeholder = DashboardEntry(
         date: Date(),
@@ -25,8 +24,7 @@ struct DashboardEntry: TimelineEntry {
         planNextDay: 4,
         chaptersRead: 8,
         versesSaved: 15,
-        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors,
-        backgroundImageData: nil
+        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors
     )
 }
 
@@ -100,7 +98,6 @@ struct DashboardProvider: TimelineProvider {
         // Background: read from UserDefaults (App Group) — always reliable
         let bgColors = WidgetBackgroundService.loadGradientColors()
             ?? SanctuaryBackground.allBackgrounds[0].gradientColors
-        let imageData = WidgetBackgroundService.loadWidgetBackgroundImageData()
 
         return DashboardEntry(
             date: Date(),
@@ -111,8 +108,7 @@ struct DashboardProvider: TimelineProvider {
             planNextDay: planNextDay,
             chaptersRead: chaptersRead,
             versesSaved: versesSaved,
-            backgroundGradient: bgColors,
-            backgroundImageData: imageData
+            backgroundGradient: bgColors
         )
     }
 }

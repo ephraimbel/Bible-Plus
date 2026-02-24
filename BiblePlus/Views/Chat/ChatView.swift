@@ -152,6 +152,12 @@ private struct ChatContentView: View {
         .fullScreenCover(isPresented: $showPaywall) {
             SummaryPaywallView()
         }
+        .onChange(of: viewModel.shouldShowPaywall) { _, show in
+            if show {
+                showPaywall = true
+                viewModel.shouldShowPaywall = false
+            }
+        }
         .sheet(item: $viewModel.shareText) { text in
             ShareSheet(text: text)
         }

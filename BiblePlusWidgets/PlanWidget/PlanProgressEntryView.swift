@@ -22,10 +22,7 @@ struct PlanProgressEntryView: View {
 
     private var smallView: some View {
         ZStack {
-            WidgetBackgroundView(
-                gradientColors: entry.gradientColors,
-                imageData: entry.backgroundImageData
-            )
+            WidgetBackgroundView(gradientColors: entry.gradientColors)
 
             Group {
                 if entry.isEmpty {
@@ -71,8 +68,8 @@ struct PlanProgressEntryView: View {
                     .padding(16)
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .widgetURL(deepLinkURL)
     }
 
@@ -100,10 +97,7 @@ struct PlanProgressEntryView: View {
 
     private var mediumView: some View {
         ZStack {
-            WidgetBackgroundView(
-                gradientColors: entry.gradientColors,
-                imageData: entry.backgroundImageData
-            )
+            WidgetBackgroundView(gradientColors: entry.gradientColors)
 
             Group {
                 if entry.isEmpty {
@@ -163,8 +157,8 @@ struct PlanProgressEntryView: View {
                     .padding(16)
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .widgetURL(deepLinkURL)
     }
 

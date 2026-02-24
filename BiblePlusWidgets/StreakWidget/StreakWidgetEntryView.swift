@@ -22,10 +22,7 @@ struct StreakWidgetEntryView: View {
 
     private var smallView: some View {
         ZStack {
-            WidgetBackgroundView(
-                gradientColors: entry.backgroundGradient,
-                imageData: entry.backgroundImageData
-            )
+            WidgetBackgroundView(gradientColors: entry.backgroundGradient)
 
             VStack(spacing: 4) {
                 // Faith label
@@ -65,8 +62,8 @@ struct StreakWidgetEntryView: View {
                 Spacer()
             }
             .padding(16)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .widgetURL(URL(string: "bibleplus://progress"))
     }
 

@@ -9,14 +9,12 @@ struct ChaptersWidgetEntry: TimelineEntry {
     let chaptersThisWeek: Int
     let weeklyGoal: Int
     let backgroundGradient: [String]
-    let backgroundImageData: Data?
 
     static let placeholder = ChaptersWidgetEntry(
         date: Date(),
         chaptersThisWeek: 4,
         weeklyGoal: 7,
-        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors,
-        backgroundImageData: nil
+        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors
     )
 }
 
@@ -59,14 +57,12 @@ struct ChaptersWidgetProvider: TimelineProvider {
         // Background: read from UserDefaults (App Group)
         let bgColors = WidgetBackgroundService.loadGradientColors()
             ?? SanctuaryBackground.allBackgrounds[0].gradientColors
-        let imageData = WidgetBackgroundService.loadWidgetBackgroundImageData()
 
         return ChaptersWidgetEntry(
             date: Date(),
             chaptersThisWeek: count,
             weeklyGoal: 7,
-            backgroundGradient: bgColors,
-            backgroundImageData: imageData
+            backgroundGradient: bgColors
         )
     }
 }

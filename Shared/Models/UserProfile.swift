@@ -78,7 +78,7 @@ final class UserProfile {
         faithLevel: FaithLevel = .growing,
         lifeSeasons: [LifeSeason] = [],
         currentBurdens: [Burden] = [],
-        preferredTranslation: BibleTranslation = .niv,
+        preferredTranslation: BibleTranslation = .kjv,
         prayerTimes: [PrayerTimeSlot] = [],
         selectedThemeID: String = "sunrise-mountains",
         selectedSoundscapeID: String = "pureSilence",

@@ -9,14 +9,12 @@ struct ActivityGridEntry: TimelineEntry {
     let currentStreak: Int
     let activeDays: Set<Int> // weekday 1 (Sunday) through 7 (Saturday)
     let backgroundGradient: [String]
-    let backgroundImageData: Data?
 
     static let placeholder = ActivityGridEntry(
         date: Date(),
         currentStreak: 5,
         activeDays: [2, 3, 4, 5, 6], // Mon-Fri
-        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors,
-        backgroundImageData: nil
+        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors
     )
 }
 
@@ -48,7 +46,6 @@ struct ActivityGridProvider: TimelineProvider {
         // Background: read from UserDefaults (App Group) — always reliable
         let bgColors = WidgetBackgroundService.loadGradientColors()
             ?? SanctuaryBackground.allBackgrounds[0].gradientColors
-        let imageData = WidgetBackgroundService.loadWidgetBackgroundImageData()
 
         // Streak + activity data: read from SwiftData (best effort)
         var streak = 0
@@ -67,8 +64,7 @@ struct ActivityGridProvider: TimelineProvider {
             date: Date(),
             currentStreak: streak,
             activeDays: activeDays,
-            backgroundGradient: bgColors,
-            backgroundImageData: imageData
+            backgroundGradient: bgColors
         )
     }
 

@@ -76,6 +76,17 @@ final class BibleReaderViewModel {
     private let modelContext: ModelContext
     private var loadTask: Task<Void, Never>?
 
+    // MARK: - Chapter Read Tracking
+
+    /// Minimum seconds on a chapter before it counts as "read"
+    private static let chapterReadThreshold: TimeInterval = 15
+
+    /// Timestamp when the current chapter finished loading
+    private var chapterLoadedAt: Date?
+
+    /// Detail string for the chapter currently being read (e.g. "Genesis 1")
+    private var pendingChapterDetail: String?
+
     var translationName: String { currentTranslation.displayName }
 
     var hasContent: Bool { !verses.isEmpty }
@@ -123,7 +134,7 @@ final class BibleReaderViewModel {
     // MARK: - Navigation
 
     func selectBook(_ book: BibleBook) {
-
+        logChapterReadIfQualified()
         selectedBook = book
         selectedChapter = 1
         lastReadVerseNumber = nil
@@ -133,6 +144,7 @@ final class BibleReaderViewModel {
 
     func selectChapter(_ chapter: Int) {
         guard chapter >= 1, chapter <= selectedBook.chapterCount else { return }
+        logChapterReadIfQualified()
         selectedChapter = chapter
         lastReadVerseNumber = nil
         showBookPicker = false
@@ -140,7 +152,7 @@ final class BibleReaderViewModel {
     }
 
     func goToNextChapter() {
-
+        logChapterReadIfQualified()
         lastReadVerseNumber = nil
         if selectedChapter < selectedBook.chapterCount {
             selectedChapter += 1
@@ -155,7 +167,7 @@ final class BibleReaderViewModel {
     }
 
     func goToPreviousChapter() {
-
+        logChapterReadIfQualified()
         lastReadVerseNumber = nil
         if selectedChapter > 1 {
             selectedChapter -= 1
@@ -253,10 +265,33 @@ final class BibleReaderViewModel {
         }
     }
 
+    // MARK: - Chapter Read Logging
+
+    /// Logs a `.chapterRead` event only if the user spent enough time on the chapter.
+    /// Called when navigating away from the current chapter or when the view disappears.
+    private func logChapterReadIfQualified() {
+        guard let loadedAt = chapterLoadedAt,
+              let detail = pendingChapterDetail else { return }
+
+        let timeSpent = Date().timeIntervalSince(loadedAt)
+        if timeSpent >= Self.chapterReadThreshold {
+            ActivityService.log(.chapterRead, detail: detail, in: modelContext)
+        }
+
+        // Reset so we don't double-log
+        chapterLoadedAt = nil
+        pendingChapterDetail = nil
+    }
+
+    /// Called by the view's `.onDisappear` to flush any pending chapter read.
+    func onDisappear() {
+        logChapterReadIfQualified()
+    }
+
     // MARK: - Search Navigation
 
     func navigateToVerse(book: BibleBook, chapter: Int, verseNumber: Int) {
-
+        logChapterReadIfQualified()
         selectedBook = book
         selectedChapter = chapter
         showSearch = false
@@ -429,7 +464,8 @@ final class BibleReaderViewModel {
                 loadSavedVerses()
                 persistReadPosition()
                 if logActivity {
-                    ActivityService.log(.chapterRead, detail: "\(selectedBook.name) \(selectedChapter)", in: modelContext)
+                    chapterLoadedAt = Date()
+                    pendingChapterDetail = "\(selectedBook.name) \(selectedChapter)"
                 }
             } catch {
                 guard !Task.isCancelled else { return }
@@ -447,7 +483,8 @@ final class BibleReaderViewModel {
                     loadSavedVerses()
                     persistReadPosition()
                     if logActivity {
-                        ActivityService.log(.chapterRead, detail: "\(selectedBook.name) \(selectedChapter)", in: modelContext)
+                        chapterLoadedAt = Date()
+                        pendingChapterDetail = "\(selectedBook.name) \(selectedChapter)"
                     }
                 } else {
                     verses = []

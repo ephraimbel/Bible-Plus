@@ -51,6 +51,7 @@ final class ChatViewModel {
     var failedMessageId: UUID? = nil
     var savedPrayerMessageIDs: Set<UUID> = []
     var showSavedPrayerToast: Bool = false
+    var shouldShowPaywall: Bool = false
 
     // MARK: - Private
 
@@ -231,7 +232,7 @@ final class ChatViewModel {
         guard !text.isEmpty, !isStreaming else { return }
 
         if isRateLimited {
-            errorMessage = AIError.rateLimited.errorDescription
+            shouldShowPaywall = true
             return
         }
 

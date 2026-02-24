@@ -6,12 +6,10 @@ import WidgetKit
 struct QuickActionsEntry: TimelineEntry {
     let date: Date
     let backgroundGradient: [String]
-    let backgroundImageData: Data?
 
     static let placeholder = QuickActionsEntry(
         date: Date(),
-        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors,
-        backgroundImageData: nil
+        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors
     )
 }
 
@@ -41,12 +39,10 @@ struct QuickActionsProvider: TimelineProvider {
     private func currentEntry() -> QuickActionsEntry {
         let bgColors = WidgetBackgroundService.loadGradientColors()
             ?? SanctuaryBackground.allBackgrounds[0].gradientColors
-        let imageData = WidgetBackgroundService.loadWidgetBackgroundImageData()
 
         return QuickActionsEntry(
             date: Date(),
-            backgroundGradient: bgColors,
-            backgroundImageData: imageData
+            backgroundGradient: bgColors
         )
     }
 }

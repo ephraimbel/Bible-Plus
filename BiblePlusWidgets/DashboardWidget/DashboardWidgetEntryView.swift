@@ -6,10 +6,7 @@ struct DashboardWidgetEntryView: View {
 
     var body: some View {
         ZStack {
-            WidgetBackgroundView(
-                gradientColors: entry.backgroundGradient,
-                imageData: entry.backgroundImageData
-            )
+            WidgetBackgroundView(gradientColors: entry.backgroundGradient)
 
             HStack(spacing: 0) {
                 // Streak

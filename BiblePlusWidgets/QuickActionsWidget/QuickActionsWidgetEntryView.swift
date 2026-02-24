@@ -13,10 +13,7 @@ struct QuickActionsWidgetEntryView: View {
 
     var body: some View {
         ZStack {
-            WidgetBackgroundView(
-                gradientColors: entry.backgroundGradient,
-                imageData: entry.backgroundImageData
-            )
+            WidgetBackgroundView(gradientColors: entry.backgroundGradient)
 
             VStack(spacing: 0) {
                 HStack(spacing: 0) {

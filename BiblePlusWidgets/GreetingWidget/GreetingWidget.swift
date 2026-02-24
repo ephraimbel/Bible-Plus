@@ -11,7 +11,6 @@ struct GreetingWidgetEntry: TimelineEntry {
     let encouragement: String
     let timeIcon: String
     let backgroundGradient: [String]
-    let backgroundImageData: Data?
 
     static let placeholder = GreetingWidgetEntry(
         date: Date(),
@@ -19,8 +18,7 @@ struct GreetingWidgetEntry: TimelineEntry {
         firstName: "Friend",
         encouragement: "God's mercies are new today",
         timeIcon: "sunrise",
-        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors,
-        backgroundImageData: nil
+        backgroundGradient: SanctuaryBackground.allBackgrounds[0].gradientColors
     )
 }
 
@@ -108,7 +106,6 @@ struct GreetingWidgetProvider: TimelineProvider {
         // Background: read from UserDefaults (App Group)
         let bgColors = WidgetBackgroundService.loadGradientColors()
             ?? SanctuaryBackground.allBackgrounds[0].gradientColors
-        let imageData = WidgetBackgroundService.loadWidgetBackgroundImageData()
 
         return GreetingWidgetEntry(
             date: Date(),
@@ -116,8 +113,7 @@ struct GreetingWidgetProvider: TimelineProvider {
             firstName: firstName,
             encouragement: encouragements[index],
             timeIcon: timeIcon,
-            backgroundGradient: bgColors,
-            backgroundImageData: imageData
+            backgroundGradient: bgColors
         )
     }
 }

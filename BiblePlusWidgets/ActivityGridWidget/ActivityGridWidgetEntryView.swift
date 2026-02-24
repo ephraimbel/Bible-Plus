@@ -16,10 +16,7 @@ struct ActivityGridWidgetEntryView: View {
 
     var body: some View {
         ZStack {
-            WidgetBackgroundView(
-                gradientColors: entry.backgroundGradient,
-                imageData: entry.backgroundImageData
-            )
+            WidgetBackgroundView(gradientColors: entry.backgroundGradient)
 
             VStack(spacing: 8) {
                 // Top: Streak label with faith-oriented language

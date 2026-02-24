@@ -23,10 +23,7 @@ struct StreakDotsWidgetEntryView: View {
 
     private var smallView: some View {
         ZStack {
-            WidgetBackgroundView(
-                gradientColors: entry.backgroundGradient,
-                imageData: entry.backgroundImageData
-            )
+            WidgetBackgroundView(gradientColors: entry.backgroundGradient)
 
             VStack(spacing: 8) {
                 // Top: Flame + streak
@@ -67,8 +64,8 @@ struct StreakDotsWidgetEntryView: View {
                 .shadow(color: .black.opacity(0.4), radius: 2, y: 1)
             }
             .padding(16)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .widgetURL(URL(string: "bibleplus://progress"))
     }
 
