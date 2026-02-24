@@ -13,7 +13,6 @@ final class ProgressViewModel {
     var versesSavedTotal: Int = 0
     var planDaysTotal: Int = 0
     var aiChatsTotal: Int = 0
-    var audioChaptersTotal: Int = 0
     var activeDays: Set<Int> = []
     var heatmapData: [Date: Int] = [:]
     var recentActivity: [ActivityEvent] = []
@@ -35,7 +34,6 @@ final class ProgressViewModel {
         }
 
         chaptersReadTotal = ActivityService.totalCount(of: .chapterRead, in: modelContext)
-        audioChaptersTotal = ActivityService.totalCount(of: .audioChapterCompleted, in: modelContext)
         versesSavedTotal = ActivityService.totalCount(of: .verseSaved, in: modelContext)
         planDaysTotal = ActivityService.totalCount(of: .planDayCompleted, in: modelContext)
         aiChatsTotal = ActivityService.totalCount(of: .aiChatSent, in: modelContext)

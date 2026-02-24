@@ -378,12 +378,6 @@ private struct ProgressContentView: View {
                     label: "AI Chats",
                     delay: 0.18
                 )
-                animatedStatCard(
-                    icon: "ear",
-                    count: vm.audioChaptersTotal,
-                    label: "Chapters Heard",
-                    delay: 0.24
-                )
             }
         }
         .padding(.horizontal, 20)
