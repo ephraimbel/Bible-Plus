@@ -71,7 +71,6 @@ private struct ProgressContentView: View {
     @State private var animatedVerses: Int = 0
     @State private var animatedPlans: Int = 0
     @State private var animatedChats: Int = 0
-    @State private var animatedPrayers: Int = 0
     @State private var ringProgress: CGFloat = 0
     @State private var heatmapAppeared = false
 
@@ -272,7 +271,7 @@ private struct ProgressContentView: View {
 
     private var insightsSection: some View {
         let daysActive = vm.activeDays.count
-        let totalActions = vm.chaptersReadTotal + vm.versesSavedTotal + vm.planDaysTotal + vm.aiChatsTotal + vm.prayersWrittenTotal
+        let totalActions = vm.chaptersReadTotal + vm.versesSavedTotal + vm.planDaysTotal + vm.aiChatsTotal
 
         return VStack(alignment: .leading, spacing: 14) {
             Text("INSIGHTS")
@@ -380,16 +379,10 @@ private struct ProgressContentView: View {
                     delay: 0.18
                 )
                 animatedStatCard(
-                    icon: "pencil.line",
-                    count: animatedPrayers,
-                    label: "Prayers Written",
-                    delay: 0.24
-                )
-                animatedStatCard(
                     icon: "ear",
                     count: vm.audioChaptersTotal,
                     label: "Chapters Heard",
-                    delay: 0.30
+                    delay: 0.24
                 )
             }
         }
@@ -675,7 +668,6 @@ private struct ProgressContentView: View {
             animateCount(to: vm.versesSavedTotal, current: $animatedVerses, duration: 0.5)
             animateCount(to: vm.planDaysTotal, current: $animatedPlans, duration: 0.5)
             animateCount(to: vm.aiChatsTotal, current: $animatedChats, duration: 0.5)
-            animateCount(to: vm.prayersWrittenTotal, current: $animatedPrayers, duration: 0.5)
         }
 
         // Heatmap staggered entrance

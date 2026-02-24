@@ -13,7 +13,6 @@ final class ProgressViewModel {
     var versesSavedTotal: Int = 0
     var planDaysTotal: Int = 0
     var aiChatsTotal: Int = 0
-    var prayersWrittenTotal: Int = 0
     var audioChaptersTotal: Int = 0
     var activeDays: Set<Int> = []
     var heatmapData: [Date: Int] = [:]
@@ -35,14 +34,11 @@ final class ProgressViewModel {
             longestStreak = profile.longestStreak
         }
 
-        let chaptersRead = ActivityService.totalCount(of: .chapterRead, in: modelContext)
-        let audioChapters = ActivityService.totalCount(of: .audioChapterCompleted, in: modelContext)
-        chaptersReadTotal = chaptersRead + audioChapters
-        audioChaptersTotal = audioChapters
+        chaptersReadTotal = ActivityService.totalCount(of: .chapterRead, in: modelContext)
+        audioChaptersTotal = ActivityService.totalCount(of: .audioChapterCompleted, in: modelContext)
         versesSavedTotal = ActivityService.totalCount(of: .verseSaved, in: modelContext)
         planDaysTotal = ActivityService.totalCount(of: .planDayCompleted, in: modelContext)
         aiChatsTotal = ActivityService.totalCount(of: .aiChatSent, in: modelContext)
-        prayersWrittenTotal = ActivityService.totalCount(of: .prayerWritten, in: modelContext)
 
         activeDays = ActivityService.activeDaysThisWeek(in: modelContext)
         heatmapData = ActivityService.heatmapData(days: 35, in: modelContext)
