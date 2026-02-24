@@ -714,14 +714,6 @@ private struct SettingsContentView: View {
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, 12)
-                #if DEBUG
-                .contentShape(Rectangle())
-                .onTapGesture(count: 5) {
-                    vm.profile.isPro.toggle()
-                    try? modelContext.save()
-                    HapticService.impact(.heavy)
-                }
-                #endif
             }
             .opacity(appeared ? 1 : 0)
             .offset(y: appeared ? 0 : 10)
