@@ -41,6 +41,11 @@ targets:
       - path: Shared
         excludes:
           - "**/.DS_Store"
+          - "Content/*.json"
+      - path: Shared/Content
+        includes:
+          - "*.json"
+        buildPhase: resources
       - path: Resources/Sounds
         buildPhase: resources
       - path: Resources/Backgrounds
@@ -83,6 +88,11 @@ targets:
       - path: Shared
         excludes:
           - "**/.DS_Store"
+          - "Content/*.json"
+      - path: Shared/Content
+        includes:
+          - "*.json"
+        buildPhase: resources
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: io.bibleplus.app.widgets
