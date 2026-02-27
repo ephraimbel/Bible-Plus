@@ -14,35 +14,29 @@ struct TimeToggleRow: View {
         }) {
             VStack(alignment: .leading, spacing: 0) {
                 HStack(spacing: 14) {
-                    // Icon in circle with outer glow
-                    ZStack {
-                        Circle()
-                            .fill(palette.accent.opacity(0.04))
-                            .frame(width: 46, height: 46)
-
-                        Image(systemName: slot.icon)
-                            .font(.system(size: 16, weight: .medium))
-                            .foregroundStyle(isSelected ? .white : palette.accent)
-                            .frame(width: 38, height: 38)
-                            .background(
-                                Circle()
-                                    .fill(
-                                        isSelected
-                                            ? AnyShapeStyle(
-                                                LinearGradient(
-                                                    colors: [palette.accent, palette.accent.opacity(0.8)],
-                                                    startPoint: .topLeading,
-                                                    endPoint: .bottomTrailing
-                                                )
+                    // Icon in circle
+                    Image(systemName: slot.icon)
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundStyle(isSelected ? .white : palette.accent)
+                        .frame(width: 38, height: 38)
+                        .background(
+                            Circle()
+                                .fill(
+                                    isSelected
+                                        ? AnyShapeStyle(
+                                            LinearGradient(
+                                                colors: [palette.accent, palette.accent.opacity(0.8)],
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
                                             )
-                                            : AnyShapeStyle(palette.accent.opacity(0.08))
-                                    )
-                                    .shadow(
-                                        color: isSelected ? palette.accent.opacity(0.3) : .clear,
-                                        radius: 4, y: 2
-                                    )
-                            )
-                    }
+                                        )
+                                        : AnyShapeStyle(palette.accent.opacity(0.08))
+                                )
+                                .shadow(
+                                    color: isSelected ? palette.accent.opacity(0.3) : .clear,
+                                    radius: 4, y: 2
+                                )
+                        )
 
                     // Labels
                     VStack(alignment: .leading, spacing: 3) {
@@ -61,7 +55,7 @@ struct TimeToggleRow: View {
                     ZStack {
                         Circle()
                             .stroke(
-                                isSelected ? palette.accent : palette.border.opacity(0.3),
+                                isSelected ? palette.accent : palette.border.opacity(0.4),
                                 lineWidth: isSelected ? 0 : 1.5
                             )
                             .frame(width: 26, height: 26)
@@ -111,14 +105,14 @@ struct TimeToggleRow: View {
                         color: isSelected
                             ? palette.accent.opacity(0.1)
                             : .black.opacity(0.04),
-                        radius: isSelected ? 12 : 10,
-                        y: isSelected ? 6 : 5
+                        radius: isSelected ? 8 : 4,
+                        y: isSelected ? 4 : 2
                     )
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
                     .stroke(
-                        isSelected ? palette.accent.opacity(0.3) : palette.border.opacity(0.1),
+                        isSelected ? palette.accent.opacity(0.3) : palette.border.opacity(0.15),
                         lineWidth: isSelected ? 1 : 0.5
                     )
             )

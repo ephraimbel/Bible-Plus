@@ -24,26 +24,19 @@ struct OnboardingContainerView: View {
                                 Button {
                                     vm.goBack()
                                 } label: {
-                                    ZStack {
-                                        Circle()
-                                            .fill(palette.accent.opacity(0.04))
-                                            .frame(width: 44, height: 44)
-
-                                        Image(systemName: "chevron.left")
-                                            .font(.system(size: 12, weight: .semibold))
-                                            .foregroundStyle(palette.textSecondary)
-                                            .opacity(0.7)
-                                            .frame(width: 36, height: 36)
-                                            .background(
-                                                Circle()
-                                                    .fill(palette.surfaceElevated)
-                                                    .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
-                                            )
-                                            .overlay(
-                                                Circle()
-                                                    .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
-                                            )
-                                    }
+                                    Image(systemName: "chevron.left")
+                                        .font(.system(size: 14, weight: .semibold))
+                                        .foregroundStyle(palette.textSecondary)
+                                        .frame(width: 36, height: 36)
+                                        .background(
+                                            Circle()
+                                                .fill(palette.surfaceElevated)
+                                                .shadow(color: .black.opacity(0.06), radius: 4, y: 2)
+                                        )
+                                        .overlay(
+                                            Circle()
+                                                .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
+                                        )
                                 }
 
                                 Spacer()

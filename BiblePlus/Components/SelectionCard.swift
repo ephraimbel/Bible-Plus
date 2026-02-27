@@ -14,20 +14,14 @@ struct SelectionCard: View {
             action()
         }) {
             HStack(spacing: 14) {
-                ZStack {
-                    Circle()
-                        .fill(palette.accent.opacity(0.04))
-                        .frame(width: 44, height: 44)
-
-                    Image(systemName: icon)
-                        .font(.system(size: 18, weight: .medium))
-                        .foregroundStyle(palette.accent)
-                        .frame(width: 36, height: 36)
-                        .background(
-                            Circle()
-                                .fill(palette.accent.opacity(0.08))
-                        )
-                }
+                Image(systemName: icon)
+                    .font(.system(size: 18, weight: .medium))
+                    .foregroundStyle(palette.accent)
+                    .frame(width: 36, height: 36)
+                    .background(
+                        Circle()
+                            .fill(palette.accent.opacity(0.08))
+                    )
 
                 VStack(alignment: .leading, spacing: 3) {
                     Text(title)
@@ -62,14 +56,14 @@ struct SelectionCard: View {
                         color: isSelected
                             ? palette.accent.opacity(0.1)
                             : .black.opacity(0.04),
-                        radius: isSelected ? 12 : 10,
-                        y: isSelected ? 6 : 5
+                        radius: isSelected ? 8 : 4,
+                        y: isSelected ? 4 : 2
                     )
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
                     .stroke(
-                        isSelected ? palette.accent : palette.border.opacity(0.1),
+                        isSelected ? palette.accent : palette.border.opacity(0.15),
                         lineWidth: isSelected ? 1.5 : 0.5
                     )
             )
@@ -94,20 +88,14 @@ struct CompactSelectionCard: View {
             action()
         }) {
             VStack(spacing: 10) {
-                ZStack {
-                    Circle()
-                        .fill(palette.accent.opacity(0.04))
-                        .frame(width: 48, height: 48)
-
-                    Image(systemName: icon)
-                        .font(.system(size: 20, weight: .medium))
-                        .foregroundStyle(palette.accent)
-                        .frame(width: 40, height: 40)
-                        .background(
-                            Circle()
-                                .fill(palette.accent.opacity(0.08))
-                        )
-                }
+                Image(systemName: icon)
+                    .font(.system(size: 20, weight: .medium))
+                    .foregroundStyle(palette.accent)
+                    .frame(width: 40, height: 40)
+                    .background(
+                        Circle()
+                            .fill(palette.accent.opacity(0.08))
+                    )
 
                 Text(title)
                     .font(.system(size: 13, weight: .medium, design: .rounded))
@@ -130,14 +118,14 @@ struct CompactSelectionCard: View {
                         color: isSelected
                             ? palette.accent.opacity(0.1)
                             : .black.opacity(0.04),
-                        radius: isSelected ? 12 : 10,
-                        y: isSelected ? 6 : 5
+                        radius: isSelected ? 8 : 4,
+                        y: isSelected ? 4 : 2
                     )
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
                     .stroke(
-                        isSelected ? palette.accent : palette.border.opacity(0.1),
+                        isSelected ? palette.accent : palette.border.opacity(0.15),
                         lineWidth: isSelected ? 1.5 : 0.5
                     )
             )

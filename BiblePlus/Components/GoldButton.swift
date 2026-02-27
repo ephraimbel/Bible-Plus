@@ -35,10 +35,6 @@ struct GoldButton: View {
                 )
                 .overlay(
                     Capsule()
-                        .stroke(palette.accent.opacity(0.12), lineWidth: 0.5)
-                )
-                .overlay(
-                    Capsule()
                         .stroke(palette.accent.opacity(0.5), lineWidth: 1.5)
                         .blur(radius: showGlow ? 8 : 0)
                         .opacity(showGlow ? glowOpacity : 0)

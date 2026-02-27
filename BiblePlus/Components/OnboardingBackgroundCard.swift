@@ -48,10 +48,6 @@ struct OnboardingBackgroundCard: View {
                                 Circle()
                                     .fill(Color(hex: "C9A96E"))
                                     .frame(width: 20, height: 20)
-                                    .overlay(
-                                        Circle()
-                                            .stroke(.white.opacity(0.12), lineWidth: 0.5)
-                                    )
 
                                 Image(systemName: "crown.fill")
                                     .font(.system(size: 9, weight: .bold))
@@ -77,10 +73,6 @@ struct OnboardingBackgroundCard: View {
                         Circle()
                             .fill(.white.opacity(0.25))
                             .frame(width: 28, height: 28)
-                            .overlay(
-                                Circle()
-                                    .stroke(.white.opacity(0.12), lineWidth: 0.5)
-                            )
 
                         Image(systemName: "checkmark")
                             .font(.system(size: 12, weight: .bold))
@@ -99,8 +91,8 @@ struct OnboardingBackgroundCard: View {
             )
             .shadow(
                 color: isSelected ? Color(hex: "C9A96E").opacity(0.3) : .black.opacity(0.1),
-                radius: isSelected ? 10 : 6,
-                y: isSelected ? 4 : 3
+                radius: isSelected ? 10 : 2,
+                y: isSelected ? 4 : 1
             )
             .opacity(isLocked ? 0.65 : 1.0)
         }

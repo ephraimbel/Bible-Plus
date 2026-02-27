@@ -14,15 +14,11 @@ struct ProgressDots: View {
                             ? palette.accent
                             : index < currentStep
                                 ? palette.accent.opacity(0.4)
-                                : palette.border.opacity(0.3)
+                                : palette.border.opacity(0.4)
                     )
                     .frame(
                         width: index == currentStep ? 20 : 6,
                         height: 4
-                    )
-                    .shadow(
-                        color: index == currentStep ? palette.accent.opacity(0.3) : .clear,
-                        radius: 4, y: 0
                     )
             }
         }

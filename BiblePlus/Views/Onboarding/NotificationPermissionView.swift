@@ -15,20 +15,11 @@ struct NotificationPermissionView: View {
         VStack(spacing: 0) {
             Spacer().frame(height: 28)
 
-            // Bell icon with triple-ring hero
+            // Bell icon with glow
             ZStack {
-                Circle()
-                    .stroke(palette.accent.opacity(0.08), lineWidth: 1)
-                    .frame(width: 112, height: 112)
-
-                Circle()
-                    .fill(palette.accent.opacity(0.04))
-                    .frame(width: 100, height: 100)
-
                 Circle()
                     .fill(palette.accent.opacity(0.12))
                     .frame(width: 88, height: 88)
-                    .shadow(color: palette.accent.opacity(0.15), radius: 12, y: 4)
 
                 Image(systemName: "bell.badge.fill")
                     .font(.system(size: 44))
@@ -100,20 +91,14 @@ struct NotificationPermissionView: View {
 
     private func benefitRow(icon: String, text: String) -> some View {
         HStack(spacing: 14) {
-            ZStack {
-                Circle()
-                    .fill(palette.accent.opacity(0.04))
-                    .frame(width: 40, height: 40)
-
-                Image(systemName: icon)
-                    .font(.system(size: 14, weight: .medium))
-                    .foregroundStyle(palette.accent)
-                    .frame(width: 32, height: 32)
-                    .background(
-                        Circle()
-                            .fill(palette.accent.opacity(0.1))
-                    )
-            }
+            Image(systemName: icon)
+                .font(.system(size: 14, weight: .medium))
+                .foregroundStyle(palette.accent)
+                .frame(width: 32, height: 32)
+                .background(
+                    Circle()
+                        .fill(palette.accent.opacity(0.1))
+                )
 
             Text(text)
                 .font(.system(size: 15, weight: .medium, design: .rounded))
