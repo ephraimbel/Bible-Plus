@@ -30,6 +30,10 @@ struct TranslationPreviewCard: View {
                                 Circle()
                                     .fill(.white.opacity(0.25))
                             )
+                            .overlay(
+                                Circle()
+                                    .stroke(.white.opacity(0.12), lineWidth: 0.5)
+                            )
                             .transition(.scale.combined(with: .opacity))
                     }
                 }
@@ -81,14 +85,14 @@ struct TranslationPreviewCard: View {
                         color: isSelected
                             ? palette.accent.opacity(0.3)
                             : .black.opacity(0.05),
-                        radius: isSelected ? 12 : 6,
-                        y: isSelected ? 4 : 2
+                        radius: isSelected ? 14 : 10,
+                        y: isSelected ? 6 : 5
                     )
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
                     .stroke(
-                        isSelected ? Color.clear : palette.border.opacity(0.15),
+                        isSelected ? Color.clear : palette.border.opacity(0.1),
                         lineWidth: 0.5
                     )
             )

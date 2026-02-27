@@ -59,8 +59,12 @@ struct FaithLevelView: View {
             viewModel.selectedFaithLevel = level
         } label: {
             HStack(spacing: 16) {
-                // Large icon circle
+                // Large icon circle with outer glow
                 ZStack {
+                    Circle()
+                        .fill(palette.accent.opacity(0.04))
+                        .frame(width: 62, height: 62)
+
                     Circle()
                         .fill(palette.accent.opacity(0.1))
                         .frame(width: 52, height: 52)
@@ -103,14 +107,14 @@ struct FaithLevelView: View {
                         color: isSelected
                             ? palette.accent.opacity(0.1)
                             : .black.opacity(0.04),
-                        radius: isSelected ? 8 : 4,
-                        y: isSelected ? 4 : 2
+                        radius: isSelected ? 12 : 10,
+                        y: isSelected ? 6 : 5
                     )
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 18)
                     .stroke(
-                        isSelected ? palette.accent : palette.border.opacity(0.15),
+                        isSelected ? palette.accent : palette.border.opacity(0.1),
                         lineWidth: isSelected ? 1.5 : 0.5
                     )
             )

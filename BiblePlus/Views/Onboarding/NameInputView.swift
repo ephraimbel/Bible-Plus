@@ -62,16 +62,16 @@ struct NameInputView: View {
                             color: isNameFocused
                                 ? palette.accent.opacity(0.12)
                                 : .black.opacity(0.05),
-                            radius: isNameFocused ? 8 : 4,
-                            y: isNameFocused ? 4 : 2
+                            radius: isNameFocused ? 12 : 10,
+                            y: isNameFocused ? 6 : 5
                         )
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: 16)
                         .stroke(
                             isNameFocused
-                                ? palette.accent.opacity(0.6)
-                                : palette.border.opacity(0.2),
+                                ? palette.accent.opacity(0.5)
+                                : palette.border.opacity(0.1),
                             lineWidth: isNameFocused ? 1.5 : 0.5
                         )
                 )

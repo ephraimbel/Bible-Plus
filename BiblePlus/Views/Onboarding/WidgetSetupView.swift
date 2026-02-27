@@ -61,10 +61,10 @@ struct WidgetSetupView: View {
                             Circle()
                                 .fill(palette.surfaceElevated)
                                 .frame(width: 88, height: 88)
-                                .shadow(color: palette.accent.opacity(0.12), radius: 8, y: 4)
+                                .shadow(color: palette.accent.opacity(0.12), radius: 10, y: 5)
                                 .overlay(
                                     Circle()
-                                        .stroke(palette.accent.opacity(0.15), lineWidth: 0.5)
+                                        .stroke(palette.accent.opacity(0.1), lineWidth: 0.5)
                                 )
 
                             Image(systemName: step.icon)
@@ -77,6 +77,16 @@ struct WidgetSetupView: View {
                                 .font(.system(size: 11, weight: .bold, design: .rounded))
                                 .tracking(1.5)
                                 .foregroundStyle(palette.accent)
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 4)
+                                .background(
+                                    Capsule()
+                                        .fill(palette.accent.opacity(0.06))
+                                )
+                                .overlay(
+                                    Capsule()
+                                        .stroke(palette.accent.opacity(0.12), lineWidth: 0.5)
+                                )
 
                             Text(step.title)
                                 .font(BPFont.headingSmall)
@@ -103,6 +113,10 @@ struct WidgetSetupView: View {
                     Capsule()
                         .fill(currentSetupStep == index ? palette.accent : palette.accent.opacity(0.2))
                         .frame(width: currentSetupStep == index ? 20 : 7, height: 7)
+                        .shadow(
+                            color: currentSetupStep == index ? palette.accent.opacity(0.3) : .clear,
+                            radius: 4, y: 0
+                        )
                         .animation(.spring(response: 0.35, dampingFraction: 0.7), value: currentSetupStep)
                 }
             }
