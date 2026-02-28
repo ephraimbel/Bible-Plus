@@ -47,10 +47,9 @@ final class ChatViewModel {
 
     // Premium enhancements
     var selectedPromptCategory: PromptCategory? = nil
+    var promptSeed: Int = 0
     var failedMessageContent: String? = nil
     var failedMessageId: UUID? = nil
-    var savedPrayerMessageIDs: Set<UUID> = []
-    var showSavedPrayerToast: Bool = false
     var shouldShowPaywall: Bool = false
 
     // MARK: - Private
@@ -58,7 +57,8 @@ final class ChatViewModel {
     private let modelContext: ModelContext
     private let personalizationService: PersonalizationService
     private var streamingTask: Task<Void, Never>?
-    private var toastDismissTask: Task<Void, Never>?
+    private var tokenBuffer: String = ""
+    private var bufferDrainTask: Task<Void, Never>?
 
     // MARK: - Computed
 
@@ -144,59 +144,21 @@ final class ChatViewModel {
         }
     }
 
-    // MARK: - Quick Prompts (Category-Aware)
+    // MARK: - Quick Prompts (Dynamic, Engine-Driven)
 
     var quickPrompts: [(icon: String, text: String)] {
-        if let category = selectedPromptCategory {
-            return categoryPrompts(for: category)
-        }
-        // Default: 1 from each category
-        return PromptCategory.allCases.compactMap { categoryPrompts(for: $0).first }
+        // promptSeed is read to force SwiftUI re-evaluation on refresh
+        _ = promptSeed
+        let topics = QuickPromptEngine.extractRecentTopics(from: modelContext)
+        return QuickPromptEngine.selectPrompts(
+            for: profile,
+            category: selectedPromptCategory,
+            chatTopics: topics
+        )
     }
 
-    private func categoryPrompts(for category: PromptCategory) -> [(icon: String, text: String)] {
-        let burden = profile.currentBurdens.first ?? .none
-        let season = profile.lifeSeasons.first
-
-        switch category {
-        case .scripture:
-            return [
-                (icon: "book.fill", text: "What should I read today?"),
-                (icon: "text.magnifyingglass", text: "Break down a tough passage for me"),
-                (icon: "bookmark.fill", text: "Find me a verse for \(burden.displayName.lowercased())"),
-                (icon: "sparkles", text: "Surprise me with something powerful"),
-            ]
-        case .prayer:
-            var prompts: [(icon: String, text: String)] = [
-                (icon: "hands.sparkles", text: "Pray with me right now"),
-            ]
-            if let s = season {
-                prompts.append((icon: "person.fill", text: "A prayer for this \(s.displayName.lowercased()) season"))
-            } else {
-                prompts.append((icon: "person.fill", text: "Help me write a bedtime prayer"))
-            }
-            prompts.append((icon: "moon.stars", text: "Help me write a bedtime prayer"))
-            prompts.append((icon: "sunrise", text: "Start my day with a morning prayer"))
-            return prompts
-        case .guidance:
-            var prompts: [(icon: String, text: String)] = []
-            if burden != .none {
-                prompts.append((icon: "heart.fill", text: "I'm dealing with \(burden.displayName.lowercased()) \u{2014} what does God say?"))
-            } else {
-                prompts.append((icon: "heart.fill", text: "How do I grow closer to God?"))
-            }
-            prompts.append((icon: "arrow.triangle.branch", text: "Help me think through a decision biblically"))
-            prompts.append((icon: "figure.walk", text: "How do I grow closer to God?"))
-            prompts.append((icon: "shield.checkered", text: "What does the Bible say about fear?"))
-            return prompts
-        case .theology:
-            return [
-                (icon: "lightbulb.fill", text: "Explain grace to me simply"),
-                (icon: "questionmark.circle", text: "Help me understand the Trinity"),
-                (icon: "text.book.closed", text: "Old vs New Covenant \u{2014} what changed?"),
-                (icon: "brain.head.profile", text: "Why does God allow suffering?"),
-            ]
-        }
+    func refreshPrompts() {
+        promptSeed += 1
     }
 
     // MARK: - Init
@@ -278,6 +240,9 @@ final class ChatViewModel {
     func stopStreaming() {
         streamingTask?.cancel()
         streamingTask = nil
+        bufferDrainTask?.cancel()
+        bufferDrainTask = nil
+        tokenBuffer = ""
         isStreaming = false
         try? modelContext.save()
     }
@@ -296,107 +261,6 @@ final class ChatViewModel {
         errorMessage = nil
         inputText = content
         send()
-    }
-
-    // MARK: - Prayer Detection & Save to Journal
-
-    func messageContainsPrayer(_ message: ChatMessage) -> Bool {
-        guard message.role == .assistant,
-              !isStreaming,
-              !savedPrayerMessageIDs.contains(message.id)
-        else { return false }
-
-        let lower = message.content.lowercased()
-        let prayerMarkers = [
-            "amen", "heavenly father", "dear god", "dear lord",
-            "in jesus' name", "in jesus\u{2019} name", "in christ's name",
-            "we pray", "i pray", "lord, we", "lord, i",
-            "gracious god", "almighty god", "holy spirit",
-        ]
-        return prayerMarkers.contains { lower.contains($0) }
-    }
-
-    func savePrayer(_ message: ChatMessage) {
-        let content = message.content
-        let title = extractPrayerTitle(from: content)
-        let category = detectPrayerCategory(content)
-
-        // Extract verse reference if present
-        let refPattern = #"(?:\d\s+)?[A-Z][a-z]{2,}(?:\s+(?:of\s+)?[A-Z][a-z]+)*\s+\d{1,3}:\d{1,3}(?:\s*[-–]\s*\d{1,3})?"#
-        let verseRef: String?
-        if let regex = try? NSRegularExpression(pattern: refPattern),
-           let match = regex.firstMatch(in: content, range: NSRange(location: 0, length: (content as NSString).length)),
-           let range = Range(match.range, in: content) {
-            verseRef = String(content[range])
-        } else {
-            verseRef = nil
-        }
-
-        let entry = PrayerEntry(
-            title: title,
-            body: content,
-            category: category,
-            verseReference: verseRef
-        )
-        modelContext.insert(entry)
-        savedPrayerMessageIDs.insert(message.id)
-        try? modelContext.save()
-
-        ActivityService.log(.prayerWritten, detail: title, in: modelContext)
-        HapticService.success()
-
-        showSavedPrayerToast = true
-        toastDismissTask?.cancel()
-        toastDismissTask = Task {
-            try? await Task.sleep(for: .seconds(2))
-            guard !Task.isCancelled else { return }
-            showSavedPrayerToast = false
-        }
-    }
-
-    private func extractPrayerTitle(from content: String) -> String {
-        // Use first meaningful line, stripped of markdown
-        let lines = content.components(separatedBy: .newlines)
-            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-            .filter { !$0.isEmpty }
-
-        if let first = lines.first {
-            var title = first
-                .replacingOccurrences(of: "**", with: "")
-                .replacingOccurrences(of: "*", with: "")
-                .replacingOccurrences(of: "#", with: "")
-                .trimmingCharacters(in: .whitespacesAndNewlines)
-            if title.count > 50 {
-                title = String(title.prefix(47)) + "..."
-            }
-            return title
-        }
-        return "Prayer from AI Companion"
-    }
-
-    private func detectPrayerCategory(_ content: String) -> PrayerCategory {
-        let lower = content.lowercased()
-
-        let patterns: [(PrayerCategory, [String])] = [
-            (.gratitude, ["thank you", "grateful", "thankful", "gratitude", "bless", "appreciate"]),
-            (.praise, ["praise", "worship", "glory", "hallelujah", "magnify", "exalt"]),
-            (.confession, ["forgive", "confess", "repent", "sorry", "fallen short", "mercy"]),
-            (.intercession, ["pray for", "lift up", "on behalf", "intercede", "watch over them"]),
-            (.lament, ["weep", "sorrow", "grief", "pain", "suffering", "broken", "cry out"]),
-        ]
-
-        var bestMatch: PrayerCategory = .petition
-        var bestCount = 0
-
-        for (category, keywords) in patterns {
-            let count = keywords.filter { lower.contains($0) }.count
-            if count > bestCount {
-                bestCount = count
-                bestMatch = category
-            }
-        }
-
-        return bestMatch
     }
 
     // MARK: - Mode & Character
@@ -497,7 +361,7 @@ final class ChatViewModel {
             (role: "system", content: systemPrompt)
         ]
 
-        let recentMessages = messages.suffix(21).dropLast()
+        let recentMessages = messages.suffix(11).dropLast()
         for msg in recentMessages {
             apiMessages.append((role: msg.role.rawValue, content: msg.content))
         }
@@ -510,9 +374,15 @@ final class ChatViewModel {
         }
 
         do {
+            // Start the buffer drain loop — releases characters smoothly
+            startBufferDrain(into: assistantMessage)
+
             try await AIService.streamCompletion(messages: apiMessages) { token in
-                assistantMessage.content += token
+                self.tokenBuffer += token
             }
+
+            // Wait for buffer to fully drain
+            await drainRemainingBuffer(into: assistantMessage)
 
             let (cleaned, suggestions) = AIService.extractSuggestions(from: assistantMessage.content)
             if !suggestions.isEmpty {
@@ -544,6 +414,71 @@ final class ChatViewModel {
             isStreaming = false
             try? modelContext.save()
         }
+    }
+
+    // MARK: - Token Buffer (smooth word-level reveal)
+
+    /// Drains the token buffer one word at a time for a natural writing feel.
+    private func startBufferDrain(into message: ChatMessage) {
+        bufferDrainTask?.cancel()
+        bufferDrainTask = Task {
+            while !Task.isCancelled {
+                if !tokenBuffer.isEmpty {
+                    let word = extractNextWord()
+                    if let word {
+                        message.content += word
+                    } else {
+                        // Buffer has content but no word boundary yet — wait for more
+                        try? await Task.sleep(nanoseconds: 25_000_000)
+                        continue
+                    }
+                }
+                // ~35ms between words ≈ natural reading pace
+                try? await Task.sleep(nanoseconds: 35_000_000)
+            }
+        }
+    }
+
+    /// Pulls the next word (up to and including the space) from the buffer.
+    private func extractNextWord() -> String? {
+        guard !tokenBuffer.isEmpty else { return nil }
+        // Look for a space to split on
+        if let spaceIdx = tokenBuffer.firstIndex(of: " ") {
+            let end = tokenBuffer.index(after: spaceIdx)
+            let word = String(tokenBuffer[tokenBuffer.startIndex..<end])
+            tokenBuffer.removeFirst(word.count)
+            return word
+        }
+        // Look for newline
+        if let nlIdx = tokenBuffer.firstIndex(of: "\n") {
+            let end = tokenBuffer.index(after: nlIdx)
+            let word = String(tokenBuffer[tokenBuffer.startIndex..<end])
+            tokenBuffer.removeFirst(word.count)
+            return word
+        }
+        // No boundary but buffer is large — flush a chunk to avoid stalling
+        if tokenBuffer.count > 15 {
+            let chunk = String(tokenBuffer.prefix(8))
+            tokenBuffer.removeFirst(8)
+            return chunk
+        }
+        return nil
+    }
+
+    /// Flushes remaining buffer after the stream finishes.
+    private func drainRemainingBuffer(into message: ChatMessage) async {
+        while !tokenBuffer.isEmpty {
+            if let word = extractNextWord() {
+                message.content += word
+                try? await Task.sleep(nanoseconds: 35_000_000)
+            } else {
+                // Flush whatever's left
+                message.content += tokenBuffer
+                tokenBuffer = ""
+            }
+        }
+        bufferDrainTask?.cancel()
+        bufferDrainTask = nil
     }
 
     // MARK: - Private

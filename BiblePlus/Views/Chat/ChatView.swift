@@ -43,6 +43,10 @@ struct ChatView: View {
                             Capsule()
                                 .fill(palette.accent.opacity(0.1))
                         )
+                        .overlay(
+                            Capsule()
+                                .stroke(palette.accent.opacity(0.12), lineWidth: 0.5)
+                        )
                     } else if let mode = vm.conversationMode {
                         HStack(spacing: 5) {
                             Image(systemName: mode.icon)
@@ -56,6 +60,10 @@ struct ChatView: View {
                         .background(
                             Capsule()
                                 .fill(palette.accent.opacity(0.1))
+                        )
+                        .overlay(
+                            Capsule()
+                                .stroke(palette.accent.opacity(0.12), lineWidth: 0.5)
                         )
                     }
                 }
@@ -73,6 +81,10 @@ struct ChatView: View {
                             .background(
                                 Circle()
                                     .fill(palette.surface)
+                            )
+                            .overlay(
+                                Circle()
+                                    .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
                             )
                     }
                     .accessibilityLabel("Delete conversation")
@@ -107,7 +119,8 @@ private struct ChatContentView: View {
                     onSelectMode: { viewModel.setConversationMode($0) },
                     onSelectCharacter: { viewModel.startCharacterConversation($0) },
                     onSelectEmotion: { viewModel.sendQuickPrompt($0.prompt) },
-                    onGuidedPrayer: { showGuidedPrayer = true }
+                    onGuidedPrayer: { showGuidedPrayer = true },
+                    onRefresh: { viewModel.refreshPrompts() }
                 )
             } else {
                 messageList
@@ -137,15 +150,6 @@ private struct ChatContentView: View {
             inputBar
         }
         .background(topGoldGradient)
-        .overlay(alignment: .bottom) {
-            // Saved to Journal toast
-            if viewModel.showSavedPrayerToast {
-                savedPrayerToast
-                    .padding(.bottom, 80)
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
-                    .animation(BPAnimation.spring, value: viewModel.showSavedPrayerToast)
-            }
-        }
         .onAppear {
             viewModel.applyInitialContext()
         }
@@ -247,11 +251,6 @@ private struct ChatContentView: View {
                                 onScriptureTap: { bookName, chapter, verse in
                                     viewModel.navigateToScripture(bookName: bookName, chapter: chapter, verse: verse)
                                 },
-                                onSavePrayer: viewModel.messageContainsPrayer(message) || viewModel.savedPrayerMessageIDs.contains(message.id) ? {
-                                    viewModel.savePrayer(message)
-                                } : nil,
-                                isPrayerMessage: viewModel.messageContainsPrayer(message) || viewModel.savedPrayerMessageIDs.contains(message.id),
-                                isSavedPrayer: viewModel.savedPrayerMessageIDs.contains(message.id),
                                 isFailedMessage: message.role == .user && viewModel.failedMessageId == message.id,
                                 previousMessageRole: previousRole,
                                 typingContextLabel: isStreamingMsg ? viewModel.typingContextLabel : nil,
@@ -320,7 +319,7 @@ private struct ChatContentView: View {
                             )
                             .overlay(
                                 Capsule()
-                                    .stroke(palette.accent.opacity(0.15), lineWidth: 0.5)
+                                    .stroke(palette.accent.opacity(0.1), lineWidth: 0.5)
                             )
                     }
                     .transition(.scale(scale: 0.9).combined(with: .opacity))
@@ -444,11 +443,11 @@ private struct ChatContentView: View {
                     .background(
                         RoundedRectangle(cornerRadius: 22)
                             .fill(palette.surfaceElevated)
-                            .shadow(color: .black.opacity(0.04), radius: 4, y: 2)
+                            .shadow(color: .black.opacity(0.06), radius: 8, y: 4)
                     )
                     .overlay(
                         RoundedRectangle(cornerRadius: 22)
-                            .stroke(palette.border.opacity(0.2), lineWidth: 0.5)
+                            .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
                     )
 
                 Button {
@@ -460,6 +459,13 @@ private struct ChatContentView: View {
                     HapticService.lightImpact()
                 } label: {
                     ZStack {
+                        // Outer glow ring when active
+                        if viewModel.canSend || viewModel.isStreaming {
+                            Circle()
+                                .fill(palette.accent.opacity(0.08))
+                                .frame(width: 48, height: 48)
+                        }
+
                         Circle()
                             .fill(
                                 viewModel.canSend || viewModel.isStreaming
@@ -477,8 +483,8 @@ private struct ChatContentView: View {
                             .frame(width: 38, height: 38)
                             .shadow(
                                 color: viewModel.canSend || viewModel.isStreaming
-                                    ? palette.accent.opacity(0.2) : .clear,
-                                radius: 4, y: 2
+                                    ? palette.accent.opacity(0.25) : .clear,
+                                radius: 6, y: 3
                             )
 
                         Image(systemName: viewModel.isStreaming ? "stop.fill" : "arrow.up")
@@ -510,24 +516,6 @@ private struct ChatContentView: View {
         .background(.ultraThinMaterial)
     }
 
-    // MARK: - Saved Prayer Toast
-
-    private var savedPrayerToast: some View {
-        HStack(spacing: 8) {
-            Image(systemName: "checkmark.circle.fill")
-                .font(.system(size: 16, weight: .semibold))
-            Text("Prayer Saved")
-                .font(.system(size: 14, weight: .semibold, design: .rounded))
-        }
-        .foregroundStyle(.white)
-        .padding(.horizontal, 20)
-        .padding(.vertical, 12)
-        .background(
-            Capsule()
-                .fill(Color.green)
-                .shadow(color: Color.green.opacity(0.3), radius: 8, y: 4)
-        )
-    }
 }
 
 // MARK: - Share Sheet (plain text)

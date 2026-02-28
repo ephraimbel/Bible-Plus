@@ -11,9 +11,11 @@ struct QuickPromptsView: View {
     var onSelectCharacter: ((BiblicalCharacter) -> Void)? = nil
     var onSelectEmotion: ((ChatEmotion) -> Void)? = nil
     var onGuidedPrayer: (() -> Void)? = nil
+    var onRefresh: (() -> Void)? = nil
 
     @Environment(\.bpPalette) private var palette
     @State private var appeared = false
+    @State private var shuffleRotation: Double = 0
 
     var body: some View {
         GeometryReader { geo in
@@ -27,11 +29,38 @@ struct QuickPromptsView: View {
                         .font(.system(size: 14, weight: .medium, design: .rounded))
                         .foregroundStyle(palette.textMuted)
 
-                    Text("What\u{2019}s on\nyour heart?")
-                        .font(.system(size: 30, weight: .semibold, design: .serif))
-                        .foregroundStyle(palette.textPrimary)
-                        .multilineTextAlignment(.center)
-                        .lineSpacing(4)
+                    HStack(spacing: 8) {
+                        Text("What\u{2019}s on\nyour heart?")
+                            .font(.system(size: 30, weight: .semibold, design: .serif))
+                            .foregroundStyle(palette.textPrimary)
+                            .multilineTextAlignment(.center)
+                            .lineSpacing(4)
+
+                        if onRefresh != nil {
+                            Button {
+                                onRefresh?()
+                                HapticService.lightImpact()
+                                withAnimation(BPAnimation.spring) {
+                                    shuffleRotation += 180
+                                }
+                            } label: {
+                                Image(systemName: "arrow.2.squarepath")
+                                    .font(.system(size: 13, weight: .medium))
+                                    .foregroundStyle(palette.textMuted)
+                                    .frame(width: 30, height: 30)
+                                    .background(
+                                        Circle()
+                                            .fill(palette.surface)
+                                    )
+                                    .overlay(
+                                        Circle()
+                                            .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
+                                    )
+                                    .rotationEffect(.degrees(shuffleRotation))
+                            }
+                            .padding(.top, 20)
+                        }
+                    }
                 }
                 .opacity(appeared ? 1 : 0)
                 .offset(y: appeared ? 0 : 12)
@@ -92,10 +121,20 @@ struct QuickPromptsView: View {
             HapticService.lightImpact()
         } label: {
             HStack(spacing: 12) {
-                Image(systemName: icon)
-                    .font(.system(size: 14, weight: .medium))
-                    .foregroundStyle(palette.accent)
-                    .frame(width: 20)
+                ZStack {
+                    Circle()
+                        .fill(palette.accent.opacity(0.04))
+                        .frame(width: 38, height: 38)
+
+                    Image(systemName: icon)
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundStyle(palette.accent)
+                        .frame(width: 30, height: 30)
+                        .background(
+                            Circle()
+                                .fill(palette.accent.opacity(0.08))
+                        )
+                }
 
                 VStack(alignment: .leading, spacing: subtitle != nil ? 2 : 0) {
                     Text(title)
@@ -115,12 +154,13 @@ struct QuickPromptsView: View {
             .padding(.horizontal, 16)
             .padding(.vertical, 14)
             .background(
-                RoundedRectangle(cornerRadius: 12)
+                RoundedRectangle(cornerRadius: 14)
                     .fill(palette.surfaceElevated)
+                    .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
             )
             .overlay(
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
+                RoundedRectangle(cornerRadius: 14)
+                    .stroke(palette.border.opacity(0.08), lineWidth: 0.5)
             )
         }
     }
