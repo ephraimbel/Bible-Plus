@@ -1,27 +1,47 @@
 import SwiftUI
 
 struct SplashView: View {
-    @State private var logoScale: CGFloat = 0.85
-    @State private var logoOpacity: Double = 0
+    @Environment(\.colorScheme) private var colorScheme
+
+    @State private var textOpacity: Double = 0
+    @State private var textScale: CGFloat = 0.92
+    @State private var glowIntensity: Double = 0
+    @State private var exitOpacity: Double = 1
+
+    private let gold = Color(red: 1.0, green: 0.84, blue: 0.3)
 
     var body: some View {
         ZStack {
-            Color(hex: "FAF8F4")
+            (colorScheme == .dark ? Color(hex: "2B2A27") : Color(hex: "FAF8F4"))
                 .ignoresSafeArea()
 
-            Image("AppLogo")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 120, height: 120)
-                .clipShape(RoundedRectangle(cornerRadius: 28))
-                .shadow(color: .black.opacity(0.25), radius: 16, y: 6)
-                .scaleEffect(logoScale)
-                .opacity(logoOpacity)
+            HStack(spacing: 0) {
+                Text("Bible")
+                    .font(.system(size: 42, weight: .light, design: .serif))
+                    .foregroundStyle(colorScheme == .dark ? .white : Color(hex: "1A1A1A"))
+
+                Text("+")
+                    .font(.system(size: 44, weight: .medium, design: .serif))
+                    .foregroundStyle(gold)
+                    .shadow(color: gold.opacity(glowIntensity), radius: 4)
+                    .shadow(color: gold.opacity(glowIntensity), radius: 10)
+                    .shadow(color: gold.opacity(glowIntensity * 0.7), radius: 20)
+                    .shadow(color: gold.opacity(glowIntensity * 0.4), radius: 40)
+            }
+            .scaleEffect(textScale)
+            .opacity(textOpacity)
         }
+        .opacity(exitOpacity)
         .onAppear {
-            withAnimation(.easeOut(duration: 0.5)) {
-                logoScale = 1.0
-                logoOpacity = 1.0
+            // Phase 1: Fade in text
+            withAnimation(.easeOut(duration: 0.6)) {
+                textOpacity = 1.0
+                textScale = 1.0
+            }
+
+            // Phase 2: Glow blooms after text settles
+            withAnimation(.easeInOut(duration: 0.8).delay(0.4)) {
+                glowIntensity = 1.0
             }
         }
     }
