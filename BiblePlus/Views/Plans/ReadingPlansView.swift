@@ -17,15 +17,19 @@ struct ReadingPlansView: View {
                 if let vm = viewModel {
                     plansContent(vm)
                 } else {
-                    // Loading state with concentric circles
+                    // Loading state with layered rings
                     VStack(spacing: 16) {
                         ZStack {
                             Circle()
-                                .fill(palette.accent.opacity(0.04))
-                                .frame(width: 100, height: 100)
+                                .fill(palette.accent.opacity(0.03))
+                                .frame(width: 120, height: 120)
                             Circle()
-                                .fill(palette.accent.opacity(0.06))
-                                .frame(width: 72, height: 72)
+                                .stroke(palette.accent.opacity(0.08), lineWidth: 1)
+                                .frame(width: 90, height: 90)
+                            Circle()
+                                .fill(palette.surfaceElevated)
+                                .frame(width: 60, height: 60)
+                                .shadow(color: palette.accent.opacity(0.12), radius: 8, y: 2)
                             ProgressView()
                                 .tint(palette.accent)
                         }
@@ -125,7 +129,7 @@ struct ReadingPlansView: View {
 
     private func activePlansSection(_ vm: ReadingPlansViewModel) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            sectionHeader("YOUR ACTIVE PLANS")
+            sectionHeader("YOUR ACTIVE PLANS", icon: "flame.fill")
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 14) {
@@ -159,7 +163,7 @@ struct ReadingPlansView: View {
 
     private func recommendedSection(_ vm: ReadingPlansViewModel) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            sectionHeader("FOR YOU")
+            sectionHeader("FOR YOU", icon: "sparkles")
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 14) {
@@ -193,7 +197,7 @@ struct ReadingPlansView: View {
 
     private func allPlansSection(_ vm: ReadingPlansViewModel) -> some View {
         VStack(alignment: .leading, spacing: 16) {
-            sectionHeader("ALL PLANS")
+            sectionHeader("ALL PLANS", icon: "books.vertical.fill")
 
             LazyVGrid(columns: [
                 GridItem(.flexible(), spacing: 14),
@@ -264,18 +268,18 @@ struct ReadingPlansView: View {
                 Spacer()
 
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundStyle(.tertiary)
+                    .font(.system(size: 10, weight: .semibold))
+                    .foregroundStyle(palette.textMuted.opacity(0.4))
             }
             .padding(16)
             .background(
                 RoundedRectangle(cornerRadius: 16)
                     .fill(palette.surfaceElevated)
-                    .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+                    .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
-                    .stroke(palette.accent.opacity(0.2), lineWidth: 0.5)
+                    .stroke(palette.accent.opacity(0.15), lineWidth: 0.5)
             )
         }
         .buttonStyle(.plain)
@@ -284,11 +288,25 @@ struct ReadingPlansView: View {
 
     // MARK: - Section Header
 
-    private func sectionHeader(_ title: String) -> some View {
-        Text(title)
-            .font(.system(size: 11, weight: .bold, design: .rounded))
-            .tracking(1.5)
-            .foregroundStyle(palette.textMuted)
-            .padding(.horizontal, 20)
+    private func sectionHeader(_ title: String, icon: String = "book.fill") -> some View {
+        HStack(spacing: 8) {
+            Image(systemName: icon)
+                .font(.system(size: 10, weight: .semibold))
+                .foregroundStyle(palette.accent)
+                .frame(width: 22, height: 22)
+                .background(
+                    Circle()
+                        .fill(palette.accent.opacity(0.1))
+                )
+
+            Text(title)
+                .font(.system(size: 11, weight: .bold, design: .rounded))
+                .tracking(1.5)
+                .foregroundStyle(palette.textMuted)
+
+            VStack { Divider() }
+                .padding(.leading, 4)
+        }
+        .padding(.horizontal, 20)
     }
 }

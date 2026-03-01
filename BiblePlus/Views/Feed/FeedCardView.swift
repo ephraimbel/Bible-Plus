@@ -126,8 +126,14 @@ struct FeedCardView: View {
             Text(content.type.displayName.uppercased())
                 .font(BPFont.caption)
                 .tracking(1.5)
-                .foregroundStyle(.white.opacity(0.85))
-                .shadow(color: .black.opacity(0.3), radius: 3, y: 1)
+                .foregroundStyle(.white.opacity(0.9))
+                .padding(.horizontal, 12)
+                .padding(.vertical, 5)
+                .background(
+                    Capsule()
+                        .fill(.white.opacity(0.12))
+                )
+                .shadow(color: .black.opacity(0.2), radius: 3, y: 1)
                 .padding(.bottom, 16)
                 .opacity(immersiveMode ? 0 : 1)
 
@@ -148,8 +154,14 @@ struct FeedCardView: View {
             // Category label — hides in immersive mode
             Text(content.category)
                 .font(BPFont.caption)
-                .foregroundStyle(.white.opacity(0.7))
-                .shadow(color: .black.opacity(0.25), radius: 3, y: 1)
+                .foregroundStyle(.white.opacity(0.75))
+                .padding(.horizontal, 10)
+                .padding(.vertical, 4)
+                .background(
+                    Capsule()
+                        .fill(.white.opacity(0.08))
+                )
+                .shadow(color: .black.opacity(0.15), radius: 2, y: 1)
                 .padding(.top, 8)
                 .opacity(immersiveMode ? 0 : 1)
 

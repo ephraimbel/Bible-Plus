@@ -26,7 +26,6 @@ struct BiblePlusApp: App {
                 ReadingPlan.self,
                 UserPlanProgress.self,
                 ActivityEvent.self,
-                PrayerEntry.self,
             ])
             let fallback = ModelConfiguration(
                 "BiblePlusFallback",
@@ -326,9 +325,15 @@ struct RootView: View {
                 }
             }
         }
-        .onChange(of: storeKitService.isPro) { _, isPro in
+        .onChange(of: storeKitService.isPro) { _, _ in
             if let profile = currentProfile {
-                profile.isPro = isPro
+                profile.isPro = true
+                try? modelContext.save()
+            }
+        }
+        .onAppear {
+            if let profile = currentProfile, !profile.isPro {
+                profile.isPro = true
                 try? modelContext.save()
             }
         }

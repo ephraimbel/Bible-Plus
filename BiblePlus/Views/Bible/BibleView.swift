@@ -301,6 +301,7 @@ private struct BibleContentView: View {
                     readerTextAlignmentJustified: viewModel.readerTextAlignmentJustified,
                     readerShowVerseNumbers: viewModel.readerShowVerseNumbers,
                     onVerseTap: { viewModel.selectVerse($0) },
+                    onNoteCardTap: { viewModel.selectVerse($0) },
                     onRetry: { viewModel.retryLoading() }
                 )
 
@@ -335,6 +336,7 @@ private struct BibleContentView: View {
                         readerTextAlignmentJustified: viewModel.readerTextAlignmentJustified,
                         readerShowVerseNumbers: viewModel.readerShowVerseNumbers,
                         onVerseTap: { _ in },
+                        onNoteCardTap: nil,
                         onRetry: { }
                     )
                     .background(paperColor)
@@ -420,11 +422,11 @@ private struct BibleContentView: View {
                     .background(
                         RoundedRectangle(cornerRadius: 16)
                             .fill(palette.surfaceElevated)
-                            .shadow(color: .black.opacity(0.08), radius: 8, y: 2)
+                            .shadow(color: .black.opacity(0.08), radius: 10, y: 5)
                     )
                     .overlay(
                         RoundedRectangle(cornerRadius: 16)
-                            .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
+                            .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
                     )
                     .padding(.horizontal, 20)
                     .padding(.top, 8)
@@ -643,6 +645,10 @@ private struct BibleContentView: View {
                         .background(
                             Capsule()
                                 .fill(palette.accent.opacity(0.12))
+                        )
+                        .overlay(
+                            Capsule()
+                                .stroke(palette.accent.opacity(0.15), lineWidth: 0.5)
                         )
                     }
                     .accessibilityLabel("Change translation")

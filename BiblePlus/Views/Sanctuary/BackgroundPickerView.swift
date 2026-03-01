@@ -168,17 +168,24 @@ struct BackgroundPickerView: View {
                         ForEach(filteredCollections()) { collection in
                             let backgrounds = filteredBackgrounds(in: vm.backgroundsByCollection(collection))
                             VStack(alignment: .leading, spacing: 12) {
-                                HStack(spacing: 6) {
+                                HStack(spacing: 8) {
+                                    Image(systemName: collection.isProOnly ? "crown.fill" : "paintpalette.fill")
+                                        .font(.system(size: 10, weight: .semibold))
+                                        .foregroundStyle(palette.accent)
+                                        .frame(width: 22, height: 22)
+                                        .background(
+                                            Circle()
+                                                .fill(palette.accent.opacity(0.08))
+                                        )
+
                                     Text(collection.displayName.uppercased())
                                         .font(.system(size: 11, weight: .bold, design: .rounded))
                                         .tracking(1.5)
                                         .foregroundStyle(palette.textMuted)
 
-                                    if collection.isProOnly {
-                                        Image(systemName: "crown.fill")
-                                            .font(.system(size: 10))
-                                            .foregroundStyle(palette.accent)
-                                    }
+                                    Rectangle()
+                                        .fill(palette.border.opacity(0.1))
+                                        .frame(height: 0.5)
                                 }
 
                                 LazyVGrid(columns: columns, spacing: 8) {
@@ -325,8 +332,14 @@ struct BackgroundPickerView: View {
                             .foregroundStyle(.white.opacity(0.7))
                     } else if isActive {
                         ZStack {
+                            // Outer glow
                             Circle()
-                                .fill(.white.opacity(0.25))
+                                .fill(.white.opacity(0.12))
+                                .frame(width: 32, height: 32)
+
+                            // Inner circle
+                            Circle()
+                                .fill(.white.opacity(0.3))
                                 .frame(width: 24, height: 24)
 
                             Image(systemName: "checkmark")
@@ -373,8 +386,8 @@ struct BackgroundPickerView: View {
                     )
             )
             .shadow(
-                color: isActive ? Color(hex: "C9A96E").opacity(0.2) : .clear,
-                radius: 8, y: 4
+                color: isActive ? Color(hex: "C9A96E").opacity(0.25) : .black.opacity(0.06),
+                radius: isActive ? 10 : 6, y: isActive ? 5 : 3
             )
             .opacity(locked ? 0.6 : 1.0)
         }

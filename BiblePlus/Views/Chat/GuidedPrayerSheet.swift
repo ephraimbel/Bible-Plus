@@ -77,10 +77,17 @@ struct GuidedPrayerSheet: View {
     private var progressDots: some View {
         HStack(spacing: 8) {
             ForEach(1...3, id: \.self) { i in
-                Circle()
-                    .fill(i <= step ? palette.accent : palette.accent.opacity(0.2))
-                    .frame(width: 8, height: 8)
-                    .animation(BPAnimation.spring, value: step)
+                ZStack {
+                    if i <= step {
+                        Circle()
+                            .fill(palette.accent.opacity(0.12))
+                            .frame(width: 14, height: 14)
+                    }
+                    Circle()
+                        .fill(i <= step ? palette.accent : palette.accent.opacity(0.2))
+                        .frame(width: 8, height: 8)
+                }
+                .animation(BPAnimation.spring, value: step)
             }
         }
     }
@@ -185,10 +192,11 @@ struct GuidedPrayerSheet: View {
             .background(
                 RoundedRectangle(cornerRadius: 14)
                     .fill(palette.surfaceElevated)
+                    .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 14)
-                    .stroke(palette.border.opacity(0.2), lineWidth: 0.5)
+                    .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
             )
             .padding(.horizontal, 24)
 
@@ -207,14 +215,20 @@ struct GuidedPrayerSheet: View {
 
     private func gridOptionCard(icon: String, label: String, isSelected: Bool) -> some View {
         VStack(spacing: 10) {
-            Image(systemName: icon)
-                .font(.system(size: 22, weight: .medium))
-                .foregroundStyle(isSelected ? .white : palette.accent)
-                .frame(width: 44, height: 44)
-                .background(
-                    Circle()
-                        .fill(isSelected ? palette.accent : palette.accent.opacity(0.1))
-                )
+            ZStack {
+                Circle()
+                    .fill(palette.accent.opacity(isSelected ? 0.12 : 0.04))
+                    .frame(width: 54, height: 54)
+
+                Image(systemName: icon)
+                    .font(.system(size: 22, weight: .medium))
+                    .foregroundStyle(isSelected ? .white : palette.accent)
+                    .frame(width: 44, height: 44)
+                    .background(
+                        Circle()
+                            .fill(isSelected ? palette.accent : palette.accent.opacity(0.1))
+                    )
+            }
 
             Text(label)
                 .font(.system(size: 14, weight: .medium, design: .rounded))
@@ -229,24 +243,30 @@ struct GuidedPrayerSheet: View {
         .background(
             RoundedRectangle(cornerRadius: 14)
                 .fill(isSelected ? palette.accent.opacity(0.08) : palette.surfaceElevated)
-                .shadow(color: .black.opacity(0.04), radius: 6, y: 3)
+                .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
         )
         .overlay(
             RoundedRectangle(cornerRadius: 14)
-                .stroke(isSelected ? palette.accent.opacity(0.3) : palette.border.opacity(0.2), lineWidth: 0.5)
+                .stroke(isSelected ? palette.accent.opacity(0.25) : palette.border.opacity(0.1), lineWidth: 0.5)
         )
     }
 
     private func optionCard(icon: String, label: String, isSelected: Bool) -> some View {
         HStack(spacing: 14) {
-            Image(systemName: icon)
-                .font(.system(size: 16, weight: .medium))
-                .foregroundStyle(isSelected ? .white : palette.accent)
-                .frame(width: 36, height: 36)
-                .background(
-                    Circle()
-                        .fill(isSelected ? palette.accent : palette.accent.opacity(0.1))
-                )
+            ZStack {
+                Circle()
+                    .fill(palette.accent.opacity(isSelected ? 0.12 : 0.04))
+                    .frame(width: 44, height: 44)
+
+                Image(systemName: icon)
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundStyle(isSelected ? .white : palette.accent)
+                    .frame(width: 36, height: 36)
+                    .background(
+                        Circle()
+                            .fill(isSelected ? palette.accent : palette.accent.opacity(0.1))
+                    )
+            }
 
             Text(label)
                 .font(.system(size: 15, weight: .medium, design: .rounded))
@@ -265,11 +285,11 @@ struct GuidedPrayerSheet: View {
         .background(
             RoundedRectangle(cornerRadius: 14)
                 .fill(isSelected ? palette.accent.opacity(0.08) : palette.surfaceElevated)
-                .shadow(color: .black.opacity(0.04), radius: 6, y: 3)
+                .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
         )
         .overlay(
             RoundedRectangle(cornerRadius: 14)
-                .stroke(isSelected ? palette.accent.opacity(0.3) : palette.border.opacity(0.2), lineWidth: 0.5)
+                .stroke(isSelected ? palette.accent.opacity(0.25) : palette.border.opacity(0.1), lineWidth: 0.5)
         )
     }
 

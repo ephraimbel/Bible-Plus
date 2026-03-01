@@ -37,7 +37,7 @@ struct ChatSharePreviewSheet: View {
                     .clipShape(RoundedRectangle(cornerRadius: 12 / scale))
                     .scaleEffect(scale)
                     .frame(width: cardWidth * scale, height: cardHeight * scale)
-                    .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
+                    .shadow(color: .black.opacity(0.2), radius: 12, y: 6)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
 

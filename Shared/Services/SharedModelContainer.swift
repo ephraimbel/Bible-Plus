@@ -13,7 +13,6 @@ enum SharedModelContainer {
             ReadingPlan.self,
             UserPlanProgress.self,
             ActivityEvent.self,
-            PrayerEntry.self,
         ])
         let config = ModelConfiguration(
             "BiblePlus",

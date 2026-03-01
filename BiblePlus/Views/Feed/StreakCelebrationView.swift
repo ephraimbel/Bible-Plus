@@ -34,8 +34,22 @@ struct StreakCelebrationView: View {
             VStack(spacing: 24) {
                 Spacer()
 
-                // Flame icon with glow + particle burst
+                // Flame icon with layered rings + glow + particle burst
                 ZStack {
+                    // Outer glow ring
+                    Circle()
+                        .fill(palette.accent.opacity(0.04))
+                        .frame(width: 160, height: 160)
+                        .scaleEffect(showFlame ? 1.0 : 0.5)
+                        .opacity(showFlame && !autoDismissing ? 1 : 0)
+
+                    // Middle ring
+                    Circle()
+                        .stroke(palette.accent.opacity(0.12), lineWidth: 1)
+                        .frame(width: 120, height: 120)
+                        .scaleEffect(showFlame ? 1.0 : 0.5)
+                        .opacity(showFlame && !autoDismissing ? 1 : 0)
+
                     if isMilestone {
                         particleBurst
                     }

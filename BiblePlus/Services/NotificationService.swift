@@ -74,8 +74,8 @@ final class NotificationService {
                 let item = items[dayOffset % items.count]
 
                 let notifContent = UNMutableNotificationContent()
-                notifContent.title = slot.prayerTimeTitle(name: name)
-                notifContent.subtitle = item.text
+                notifContent.title = "Bible Plus"
+                notifContent.body = item.text
                 notifContent.sound = UNNotificationSound(named: UNNotificationSoundName("prayerAlarm.m4a"))
                 notifContent.categoryIdentifier = Self.devotionalCategoryIdentifier
 
@@ -160,8 +160,8 @@ final class NotificationService {
                     let item = items[dayOffset % items.count]
 
                     let notifContent = UNMutableNotificationContent()
-                    notifContent.title = slot.prayerTimeTitle(name: name)
-                    notifContent.subtitle = item.text
+                    notifContent.title = "Bible Plus"
+                    notifContent.body = item.text
                     notifContent.sound = UNNotificationSound(named: UNNotificationSoundName("prayerAlarm.m4a"))
                     notifContent.categoryIdentifier = Self.devotionalCategoryIdentifier
 
@@ -367,19 +367,6 @@ final class NotificationService {
     private let faithBoostScheduleDays = 3
     private let faithBoostHours = [8, 10, 12, 14, 16, 18, 20, 22]
 
-    private let faithBoostSubtitles: [String] = [
-        "A word for your heart",
-        "Strength for this moment",
-        "{name}, take a breath",
-        "God sees you right now",
-        "A reminder of His love",
-        "Pause and be still",
-        "You're not alone, {name}",
-        "His grace is enough",
-        "Something for your soul",
-        "A moment with God",
-    ]
-
     func scheduleFaithBoosts(
         name: String,
         burdens: [Burden],
@@ -405,10 +392,6 @@ final class NotificationService {
             selectedTopics: selectedTopics
         )
 
-        let subtitles = faithBoostSubtitles.map {
-            $0.replacingOccurrences(of: "{name}", with: name)
-        }.shuffled()
-
         var itemIndex = 0
         for dayOffset in 0..<faithBoostScheduleDays {
             guard let targetDate = calendar.date(byAdding: .day, value: dayOffset, to: today) else { continue }
@@ -418,7 +401,6 @@ final class NotificationService {
 
                 let notifContent = UNMutableNotificationContent()
                 notifContent.title = "Bible Plus"
-                notifContent.subtitle = subtitles[itemIndex % subtitles.count]
                 notifContent.body = item.text
                 notifContent.sound = .default
                 notifContent.categoryIdentifier = Self.devotionalCategoryIdentifier

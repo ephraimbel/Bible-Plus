@@ -79,11 +79,11 @@ struct SoundscapePickerView: View {
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(palette.surfaceElevated)
-                .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+                .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
         )
         .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
+                .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
         )
     }
 
@@ -92,16 +92,26 @@ struct SoundscapePickerView: View {
     @ViewBuilder
     private func soundscapeSection(title: String, icon: String?, sounds: [Soundscape], locked: Bool) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            HStack(spacing: 6) {
+            HStack(spacing: 8) {
+                if let icon {
+                    Image(systemName: icon)
+                        .font(.system(size: 10, weight: .semibold))
+                        .foregroundStyle(palette.accent)
+                        .frame(width: 22, height: 22)
+                        .background(
+                            Circle()
+                                .fill(palette.accent.opacity(0.08))
+                        )
+                }
+
                 Text(title)
                     .font(.system(size: 11, weight: .bold, design: .rounded))
                     .tracking(1.5)
                     .foregroundStyle(palette.textMuted)
-                if let icon {
-                    Image(systemName: icon)
-                        .font(.system(size: 10))
-                        .foregroundStyle(palette.accent)
-                }
+
+                Rectangle()
+                    .fill(palette.border.opacity(0.1))
+                    .frame(height: 0.5)
             }
             .padding(.horizontal, 20)
 
@@ -121,11 +131,11 @@ struct SoundscapePickerView: View {
             .background(
                 RoundedRectangle(cornerRadius: 16)
                     .fill(palette.surfaceElevated)
-                    .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+                    .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
-                    .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
+                    .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
             )
             .padding(.horizontal, 20)
         }
@@ -148,29 +158,37 @@ struct SoundscapePickerView: View {
             }
         } label: {
             HStack(spacing: 14) {
-                // Icon in circle
-                Image(systemName: soundscape.icon)
-                    .font(.system(size: 18, weight: .medium))
-                    .foregroundStyle(isActive ? .white : palette.accent)
-                    .frame(width: 42, height: 42)
-                    .background(
-                        Circle()
-                            .fill(
-                                isActive
-                                    ? AnyShapeStyle(
-                                        LinearGradient(
-                                            colors: [palette.accent, palette.accent.opacity(0.85)],
-                                            startPoint: .topLeading,
-                                            endPoint: .bottomTrailing
+                // Icon with double-layer ring
+                ZStack {
+                    // Outer glow ring
+                    Circle()
+                        .fill(palette.accent.opacity(isActive ? 0.12 : 0.04))
+                        .frame(width: 50, height: 50)
+
+                    // Inner icon circle
+                    Image(systemName: soundscape.icon)
+                        .font(.system(size: 18, weight: .medium))
+                        .foregroundStyle(isActive ? .white : palette.accent)
+                        .frame(width: 42, height: 42)
+                        .background(
+                            Circle()
+                                .fill(
+                                    isActive
+                                        ? AnyShapeStyle(
+                                            LinearGradient(
+                                                colors: [palette.accent, palette.accent.opacity(0.85)],
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            )
                                         )
-                                    )
-                                    : AnyShapeStyle(palette.accent.opacity(0.08))
-                            )
-                    )
-                    .shadow(
-                        color: isActive ? palette.accent.opacity(0.3) : .clear,
-                        radius: 4, y: 2
-                    )
+                                        : AnyShapeStyle(palette.accent.opacity(0.08))
+                                )
+                        )
+                        .shadow(
+                            color: isActive ? palette.accent.opacity(0.3) : .clear,
+                            radius: 4, y: 2
+                        )
+                }
 
                 // Name + description
                 VStack(alignment: .leading, spacing: 3) {

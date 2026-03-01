@@ -73,7 +73,11 @@ struct FeedPagingView: View {
                                     .fill(.ultraThinMaterial)
                                     .environment(\.colorScheme, .dark)
                             )
-                            .shadow(color: .black.opacity(0.25), radius: 6, y: 2)
+                            .overlay(
+                                Circle()
+                                    .stroke(.white.opacity(0.1), lineWidth: 0.5)
+                            )
+                            .shadow(color: .black.opacity(0.3), radius: 8, y: 3)
                     }
 
                     Spacer()

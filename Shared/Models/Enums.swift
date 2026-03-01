@@ -291,15 +291,6 @@ enum PrayerTimeSlot: String, Codable, CaseIterable, Identifiable {
         }
     }
 
-    func prayerTimeTitle(name: String) -> String {
-        switch self {
-        case .morning: return "Morning Prayer Time, \(name)"
-        case .midday: return "Midday Prayer Time, \(name)"
-        case .evening: return "Evening Prayer Time, \(name)"
-        case .bedtime: return "Bedtime Prayer, \(name)"
-        }
-    }
-
     func notificationSubtitles(name: String) -> [String] {
         switch self {
         case .morning:
@@ -1190,6 +1181,13 @@ enum VerseHighlightColor: String, Codable, CaseIterable, Identifiable {
         case .lavender: "8B7BC9"
         }
     }
+
+    /// Returns gradient colors for the luminous highlight effect (full tint → 30% tint → clear).
+    func gradientColors(for colorScheme: ColorScheme) -> [Color] {
+        let hex = colorScheme == .dark ? darkTint : lightTint
+        let tint = Color(hex: hex)
+        return [tint, tint.opacity(0.3), .clear]
+    }
 }
 
 // MARK: - Reader Font Style
@@ -1461,41 +1459,6 @@ enum ActivityEventType: String, Codable, CaseIterable, Identifiable {
         case .prayerWritten: "pencil.and.scribble"
         case .prayerAnswered: "checkmark.seal.fill"
         case .appOpened: "app.badge"
-        }
-    }
-}
-
-// MARK: - Prayer Category
-
-enum PrayerCategory: String, Codable, CaseIterable, Identifiable {
-    case gratitude
-    case petition
-    case confession
-    case praise
-    case lament
-    case intercession
-
-    var id: String { rawValue }
-
-    var displayName: String {
-        switch self {
-        case .gratitude: "Gratitude"
-        case .petition: "Petition"
-        case .confession: "Confession"
-        case .praise: "Praise"
-        case .lament: "Lament"
-        case .intercession: "Intercession"
-        }
-    }
-
-    var icon: String {
-        switch self {
-        case .gratitude: "heart.fill"
-        case .petition: "hands.sparkles"
-        case .confession: "person.crop.circle.badge.checkmark"
-        case .praise: "music.note"
-        case .lament: "drop"
-        case .intercession: "person.2"
         }
     }
 }

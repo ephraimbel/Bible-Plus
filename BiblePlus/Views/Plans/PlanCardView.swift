@@ -12,15 +12,18 @@ struct PlanCardView: View {
         VStack(alignment: .leading, spacing: 0) {
             // Top: Icon + Pro/Complete badge
             HStack {
-                // Icon in accent circle
-                Image(systemName: plan.iconName.isEmpty ? "book.fill" : plan.iconName)
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundStyle(palette.accent)
-                    .frame(width: 36, height: 36)
-                    .background(
-                        Circle()
-                            .fill(palette.accent.opacity(0.08))
-                    )
+                // Icon in double-layer ring
+                ZStack {
+                    Circle()
+                        .fill(palette.accent.opacity(0.05))
+                        .frame(width: 42, height: 42)
+                    Circle()
+                        .fill(palette.accent.opacity(0.1))
+                        .frame(width: 36, height: 36)
+                    Image(systemName: plan.iconName.isEmpty ? "book.fill" : plan.iconName)
+                        .font(.system(size: 15, weight: .medium))
+                        .foregroundStyle(palette.accent)
+                }
 
                 Spacer()
 
@@ -92,10 +95,11 @@ struct PlanCardView: View {
 
             // Progress bar if active
             if let progress, !isCompleted {
+                let fraction = progress.completionFraction(totalDays: plan.totalDays)
                 GeometryReader { geo in
                     ZStack(alignment: .leading) {
                         Capsule()
-                            .fill(palette.border.opacity(0.2))
+                            .fill(palette.border.opacity(0.15))
                             .frame(height: 3)
 
                         Capsule()
@@ -107,13 +111,23 @@ struct PlanCardView: View {
                                 )
                             )
                             .frame(
-                                width: geo.size.width * progress.completionFraction(totalDays: plan.totalDays),
+                                width: max(6, geo.size.width * fraction),
                                 height: 3
                             )
+                            .shadow(color: palette.accent.opacity(0.4), radius: 3, y: 0)
+
+                        // Glow dot at progress tip
+                        if fraction > 0 && fraction < 1 {
+                            Circle()
+                                .fill(palette.accent)
+                                .frame(width: 7, height: 7)
+                                .shadow(color: palette.accent.opacity(0.5), radius: 4)
+                                .offset(x: max(0, geo.size.width * fraction - 3.5))
+                        }
                     }
                 }
-                .frame(height: 3)
-                .padding(.top, 10)
+                .frame(height: 7)
+                .padding(.top, 8)
             }
         }
         .padding(14)
@@ -122,11 +136,11 @@ struct PlanCardView: View {
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(palette.surfaceElevated)
-                .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+                .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
         )
         .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
+                .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
         )
     }
 }

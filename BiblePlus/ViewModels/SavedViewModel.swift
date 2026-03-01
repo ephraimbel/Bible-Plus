@@ -7,27 +7,6 @@ enum SavedTab: String, CaseIterable {
     case notes
 }
 
-// MARK: - Saved Item Wrapper
-
-enum SavedItem: Identifiable {
-    case content(PrayerContent)
-    case prayer(PrayerEntry)
-
-    var id: UUID {
-        switch self {
-        case .content(let c): c.id
-        case .prayer(let p): p.id
-        }
-    }
-
-    var date: Date {
-        switch self {
-        case .content(let c): c.createdAt
-        case .prayer(let p): p.createdAt
-        }
-    }
-}
-
 @MainActor
 @Observable
 final class SavedViewModel {
@@ -58,34 +37,6 @@ final class SavedViewModel {
             sortBy: [SortDescriptor(\.createdAt, order: .reverse)]
         )
         return (try? modelContext.fetch(descriptor)) ?? []
-    }
-
-    // MARK: - Prayer Entries
-
-    var prayerEntries: [PrayerEntry] {
-        let descriptor = FetchDescriptor<PrayerEntry>(
-            sortBy: [SortDescriptor(\.createdAt, order: .reverse)]
-        )
-        return (try? modelContext.fetch(descriptor)) ?? []
-    }
-
-    /// Merged favorites + prayer entries, sorted by date descending
-    var savedItems: [SavedItem] {
-        let contentItems: [SavedItem] = favorites.map { .content($0) }
-        let prayerItems: [SavedItem] = prayerEntries.map { .prayer($0) }
-        return (contentItems + prayerItems).sorted { $0.date > $1.date }
-    }
-
-    func deletePrayerEntry(_ entry: PrayerEntry) {
-        modelContext.delete(entry)
-        try? modelContext.save()
-    }
-
-    func toggleAnswered(_ entry: PrayerEntry) {
-        entry.isAnswered.toggle()
-        entry.answeredAt = entry.isAnswered ? Date() : nil
-        entry.updatedAt = Date()
-        try? modelContext.save()
     }
 
     // MARK: - Saved Verses

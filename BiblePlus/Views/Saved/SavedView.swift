@@ -38,6 +38,7 @@ private struct SavedContentView: View {
     @Bindable var viewModel: SavedViewModel
     @Environment(\.bpPalette) private var palette
     @Environment(\.colorScheme) private var colorScheme
+    @Namespace private var tabNamespace
     @State private var appeared = false
 
     var body: some View {
@@ -46,14 +47,17 @@ private struct SavedContentView: View {
             tabBar
 
             // Content
-            switch viewModel.selectedTab {
-            case .favorites:
-                favoritesTab
-            case .verses:
-                versesTab
-            case .notes:
-                notesTab
+            Group {
+                switch viewModel.selectedTab {
+                case .favorites:
+                    favoritesTab
+                case .verses:
+                    versesTab
+                case .notes:
+                    notesTab
+                }
             }
+            .transition(.opacity.animation(.easeInOut(duration: 0.15)))
         }
         .background(palette.background)
         .onAppear {
@@ -71,7 +75,7 @@ private struct SavedContentView: View {
         HStack(spacing: 4) {
             tabButton("Favorites", icon: "heart.fill", tab: .favorites)
             tabButton("Verses", icon: "bookmark.fill", tab: .verses)
-            tabButton("Notes", icon: "text.bubble", tab: .notes)
+            tabButton("Notes", icon: "note.text", tab: .notes)
         }
         .padding(4)
         .background(
@@ -100,10 +104,13 @@ private struct SavedContentView: View {
             .foregroundStyle(isSelected ? .white : palette.textSecondary)
             .frame(maxWidth: .infinity)
             .padding(.vertical, 10)
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(isSelected ? palette.accent : Color.clear)
-            )
+            .background {
+                if isSelected {
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(palette.accent)
+                        .matchedGeometryEffect(id: "activeTab", in: tabNamespace)
+                }
+            }
         }
     }
 
@@ -111,52 +118,39 @@ private struct SavedContentView: View {
 
     @ViewBuilder
     private var favoritesTab: some View {
-        let items = viewModel.savedItems
+        let items = viewModel.favorites
         if items.isEmpty {
             emptyState(
                 icon: "heart",
+                accentIcon: "heart.fill",
                 title: "No Favorites Yet",
-                message: "Double-tap any card in the feed\nor save a prayer from Ask to see it here."
+                message: "Double-tap any card in the feed\nto save it here."
             )
         } else {
             ScrollView(.vertical, showsIndicators: false) {
-                // Summary
                 summaryBar(
                     icon: "heart.fill",
                     text: "\(items.count) saved \(items.count == 1 ? "item" : "items")"
                 )
 
-                LazyVStack(spacing: 12) {
-                    ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
-                        Group {
-                            switch item {
-                            case .content(let content):
-                                Button {
-                                    NotificationCenter.default.post(
-                                        name: .feedContentDeepLink,
-                                        object: nil,
-                                        userInfo: ["contentID": content.id]
-                                    )
-                                    HapticService.lightImpact()
-                                } label: {
-                                    SavedFavoriteCard(
-                                        content: content,
-                                        displayText: viewModel.personalizedText(for: content),
-                                        palette: palette,
-                                        onUnsave: { viewModel.unsave(content) }
-                                    )
-                                }
-                                .buttonStyle(.plain)
-
-                            case .prayer(let entry):
-                                NavigationLink {
-                                    SavedPrayerDetailView(entry: entry, viewModel: viewModel)
-                                } label: {
-                                    SavedPrayerCard(entry: entry, palette: palette)
-                                }
-                                .buttonStyle(.plain)
-                            }
+                LazyVStack(spacing: 14) {
+                    ForEach(Array(items.enumerated()), id: \.element.id) { index, content in
+                        Button {
+                            NotificationCenter.default.post(
+                                name: .feedContentDeepLink,
+                                object: nil,
+                                userInfo: ["contentID": content.id]
+                            )
+                            HapticService.lightImpact()
+                        } label: {
+                            SavedFavoriteCard(
+                                content: content,
+                                displayText: viewModel.personalizedText(for: content),
+                                palette: palette,
+                                onUnsave: { viewModel.unsave(content) }
+                            )
                         }
+                        .buttonStyle(.plain)
                         .padding(.horizontal, 20)
                         .opacity(appeared ? 1 : 0)
                         .offset(y: appeared ? 0 : 10)
@@ -177,6 +171,7 @@ private struct SavedContentView: View {
         if items.isEmpty {
             emptyState(
                 icon: "book.closed",
+                accentIcon: "bookmark.fill",
                 title: "No Saved Verses Yet",
                 message: "Tap any verse in the Bible reader\nand save it to find it here."
             )
@@ -187,7 +182,7 @@ private struct SavedContentView: View {
                     text: "\(items.count) saved \(items.count == 1 ? "verse" : "verses")"
                 )
 
-                LazyVStack(spacing: 12) {
+                LazyVStack(spacing: 14) {
                     ForEach(Array(items.enumerated()), id: \.element.id) { index, verse in
                         Button {
                             NotificationCenter.default.post(
@@ -204,6 +199,7 @@ private struct SavedContentView: View {
                             SavedVerseCard(
                                 verse: verse,
                                 palette: palette,
+                                colorScheme: colorScheme,
                                 onDelete: { viewModel.deleteSavedVerse(verse) }
                             )
                         }
@@ -227,18 +223,19 @@ private struct SavedContentView: View {
         let items = viewModel.notedVerses
         if items.isEmpty {
             emptyState(
-                icon: "text.bubble",
+                icon: "note.text",
+                accentIcon: "pencil.line",
                 title: "No Notes Yet",
                 message: "Add notes to any verse in the\nBible reader to see them here."
             )
         } else {
             ScrollView(.vertical, showsIndicators: false) {
                 summaryBar(
-                    icon: "text.bubble.fill",
+                    icon: "note.text",
                     text: "\(items.count) \(items.count == 1 ? "note" : "notes")"
                 )
 
-                LazyVStack(spacing: 12) {
+                LazyVStack(spacing: 14) {
                     ForEach(Array(items.enumerated()), id: \.element.id) { index, verse in
                         Button {
                             NotificationCenter.default.post(
@@ -274,40 +271,64 @@ private struct SavedContentView: View {
     // MARK: - Summary Bar
 
     private func summaryBar(icon: String, text: String) -> some View {
-        HStack(spacing: 8) {
+        HStack(spacing: 6) {
             Image(systemName: icon)
-                .font(.system(size: 12, weight: .medium))
+                .font(.system(size: 10, weight: .semibold))
                 .foregroundStyle(palette.accent)
+
             Text(text)
-                .font(.system(size: 13, weight: .medium, design: .rounded))
-                .foregroundStyle(palette.textSecondary)
-            Spacer()
+                .font(.system(size: 12, weight: .semibold, design: .rounded))
+                .foregroundStyle(palette.accent)
         }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 6)
+        .background(
+            Capsule().fill(palette.accent.opacity(0.08))
+        )
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 24)
         .padding(.top, 8)
-        .padding(.bottom, 4)
+        .padding(.bottom, 6)
         .opacity(appeared ? 1 : 0)
         .animation(BPAnimation.spring.delay(0.05), value: appeared)
     }
 
     // MARK: - Empty State
 
-    private func emptyState(icon: String, title: String, message: String) -> some View {
-        VStack(spacing: 24) {
+    private func emptyState(icon: String, accentIcon: String, title: String, message: String) -> some View {
+        VStack(spacing: 28) {
             Spacer()
 
             ZStack {
-                Circle()
-                    .fill(palette.accent.opacity(0.06))
-                    .frame(width: 120, height: 120)
-
+                // Outer glow ring
                 Circle()
                     .fill(palette.accent.opacity(0.04))
-                    .frame(width: 88, height: 88)
+                    .frame(width: 140, height: 140)
+
+                // Inner glow ring
+                Circle()
+                    .fill(palette.accent.opacity(0.06))
+                    .frame(width: 100, height: 100)
+
+                // Center icon circle
+                Circle()
+                    .fill(palette.surfaceElevated)
+                    .frame(width: 72, height: 72)
+                    .shadow(color: palette.accent.opacity(0.1), radius: 12, y: 4)
+                    .overlay(
+                        Circle()
+                            .stroke(palette.accent.opacity(0.12), lineWidth: 0.5)
+                    )
 
                 Image(systemName: icon)
-                    .font(.system(size: 36, weight: .thin))
+                    .font(.system(size: 28, weight: .light))
                     .foregroundStyle(palette.accent)
+
+                // Small floating accent icon
+                Image(systemName: accentIcon)
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(palette.accent.opacity(0.5))
+                    .offset(x: 36, y: -28)
             }
             .opacity(appeared ? 1 : 0)
             .scaleEffect(appeared ? 1 : 0.8)
@@ -354,11 +375,11 @@ private struct SavedFavoriteCard: View {
                     Text(content.type.displayName)
                         .font(.system(size: 11, weight: .medium, design: .rounded))
                 }
-                .foregroundStyle(palette.accent)
+                .foregroundStyle(typeColor)
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
                 .background(
-                    Capsule().fill(palette.accent.opacity(0.1))
+                    Capsule().fill(typeColor.opacity(0.1))
                 )
 
                 Spacer()
@@ -375,8 +396,8 @@ private struct SavedFavoriteCard: View {
                 }
 
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 11, weight: .semibold))
-                    .foregroundStyle(palette.textMuted)
+                    .font(.system(size: 10, weight: .semibold))
+                    .foregroundStyle(palette.textMuted.opacity(0.5))
             }
 
             // Content text
@@ -391,12 +412,23 @@ private struct SavedFavoriteCard: View {
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(palette.surfaceElevated)
-                .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+                .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
         )
         .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(palette.border.opacity(0.2), lineWidth: 0.5)
+                .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
         )
+        // Left accent colored by content type
+        .overlay(alignment: .leading) {
+            UnevenRoundedRectangle(
+                topLeadingRadius: 16,
+                bottomLeadingRadius: 16,
+                bottomTrailingRadius: 0,
+                topTrailingRadius: 0
+            )
+            .fill(typeColor.opacity(0.6))
+            .frame(width: 3)
+        }
         .contextMenu {
             Button(role: .destructive) {
                 onUnsave()
@@ -404,6 +436,16 @@ private struct SavedFavoriteCard: View {
             } label: {
                 Label("Remove from Favorites", systemImage: "heart.slash")
             }
+        }
+    }
+
+    private var typeColor: Color {
+        switch content.type {
+        case .prayer: Color(hex: "9B7BD5")
+        case .verse: Color(hex: "C9A96E")
+        case .devotional: Color(hex: "5B9BD5")
+        case .quote: Color(hex: "E8944A")
+        case .reflection: Color(hex: "4ABFB5")
         }
     }
 
@@ -423,7 +465,12 @@ private struct SavedFavoriteCard: View {
 private struct SavedVerseCard: View {
     let verse: SavedBibleVerse
     let palette: BPColorPalette
+    let colorScheme: ColorScheme
     let onDelete: () -> Void
+
+    private var accentColor: Color {
+        verse.highlightColor.map { Color(hex: $0.dotColor) } ?? palette.accent
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -432,10 +479,7 @@ private struct SavedVerseCard: View {
                 HStack(spacing: 5) {
                     Image(systemName: "bookmark.fill")
                         .font(.system(size: 10, weight: .medium))
-                        .foregroundStyle(
-                            verse.highlightColor.map { Color(hex: $0.dotColor) }
-                                ?? palette.accent
-                        )
+                        .foregroundStyle(accentColor)
 
                     Text("\(verse.bookName) \(verse.chapter):\(verse.verseNumber)")
                         .font(.system(size: 13, weight: .semibold, design: .rounded))
@@ -445,7 +489,7 @@ private struct SavedVerseCard: View {
                 Spacer()
 
                 Text(verse.translation)
-                    .font(.system(size: 10, weight: .medium, design: .rounded))
+                    .font(.system(size: 10, weight: .semibold, design: .rounded))
                     .foregroundStyle(palette.textMuted)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 3)
@@ -454,8 +498,8 @@ private struct SavedVerseCard: View {
                     )
 
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 11, weight: .semibold))
-                    .foregroundStyle(palette.textMuted)
+                    .font(.system(size: 10, weight: .semibold))
+                    .foregroundStyle(palette.textMuted.opacity(0.5))
             }
 
             // Verse text
@@ -465,20 +509,28 @@ private struct SavedVerseCard: View {
                 .lineLimit(3)
                 .lineSpacing(4)
 
-            // Notes
+            // Notes — marginalia style
             if !verse.notes.isEmpty {
-                HStack(alignment: .top, spacing: 6) {
-                    Image(systemName: "text.bubble.fill")
-                        .font(.system(size: 10))
-                        .foregroundStyle(palette.accent.opacity(0.6))
-                        .padding(.top, 2)
+                HStack(alignment: .top, spacing: 0) {
+                    RoundedRectangle(cornerRadius: 1)
+                        .fill(palette.accent.opacity(0.4))
+                        .frame(width: 2)
 
-                    Text(verse.notes)
-                        .font(.system(size: 13, weight: .regular, design: .rounded))
-                        .foregroundStyle(palette.textMuted)
-                        .italic()
-                        .lineLimit(2)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("NOTE")
+                            .font(.system(size: 8, weight: .bold))
+                            .tracking(0.6)
+                            .foregroundStyle(palette.accent.opacity(0.6))
+
+                        Text(verse.notes)
+                            .font(.system(size: 13, weight: .regular, design: .serif))
+                            .italic()
+                            .foregroundStyle(palette.textMuted)
+                            .lineLimit(2)
+                    }
+                    .padding(.leading, 8)
                 }
+                .padding(.top, 2)
             }
         }
         .padding(16)
@@ -486,11 +538,20 @@ private struct SavedVerseCard: View {
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(palette.surfaceElevated)
-                .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+                .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
         )
         .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(palette.border.opacity(0.2), lineWidth: 0.5)
+                .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
+        )
+        // Highlight color tinted background wash
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(
+                    verse.highlightColor.map {
+                        Color(hex: colorScheme == .dark ? $0.darkTint : $0.lightTint).opacity(0.3)
+                    } ?? Color.clear
+                )
         )
         // Left accent with highlight color
         .overlay(alignment: .leading) {
@@ -500,10 +561,7 @@ private struct SavedVerseCard: View {
                 bottomTrailingRadius: 0,
                 topTrailingRadius: 0
             )
-            .fill(
-                verse.highlightColor.map { Color(hex: $0.dotColor) }
-                    ?? palette.accent.opacity(0.4)
-            )
+            .fill(accentColor.opacity(0.6))
             .frame(width: 3)
         }
         .contextMenu {
@@ -517,74 +575,76 @@ private struct SavedVerseCard: View {
     }
 }
 
-// MARK: - Note Card
+// MARK: - Note Card (Marginalia Style)
 
 private struct NoteCard: View {
     let verse: SavedBibleVerse
     let palette: BPColorPalette
     let onClearNote: () -> Void
 
+    private var accentColor: Color {
+        verse.highlightColor.map { Color(hex: $0.dotColor) } ?? palette.accent
+    }
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            // Reference row with highlight accent
-            HStack(spacing: 8) {
-                HStack(spacing: 5) {
-                    Image(systemName: "text.bubble.fill")
-                        .font(.system(size: 10, weight: .medium))
-                        .foregroundStyle(palette.accent)
+        HStack(alignment: .top, spacing: 0) {
+            // Gold accent bar
+            RoundedRectangle(cornerRadius: 1.5)
+                .fill(accentColor)
+                .frame(width: 3)
+
+            VStack(alignment: .leading, spacing: 10) {
+                // Reference row
+                HStack(spacing: 8) {
+                    HStack(spacing: 4) {
+                        Image(systemName: "pencil.line")
+                            .font(.system(size: 9, weight: .semibold))
+                        Text("NOTE")
+                            .font(.system(size: 9, weight: .bold))
+                            .tracking(0.8)
+                    }
+                    .foregroundStyle(accentColor)
 
                     Text("\(verse.bookName) \(verse.chapter):\(verse.verseNumber)")
-                        .font(.system(size: 13, weight: .semibold, design: .rounded))
-                        .foregroundStyle(palette.textPrimary)
+                        .font(.system(size: 12, weight: .medium, design: .rounded))
+                        .foregroundStyle(palette.textMuted)
+
+                    Spacer()
+
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 10, weight: .semibold))
+                        .foregroundStyle(palette.textMuted.opacity(0.5))
                 }
 
-                Spacer()
+                // Note text (primary — italic serif)
+                Text(verse.notes)
+                    .font(.system(size: 15, weight: .regular, design: .serif))
+                    .italic()
+                    .foregroundStyle(palette.textPrimary)
+                    .lineLimit(4)
+                    .lineSpacing(4)
 
-                Image(systemName: "chevron.right")
-                    .font(.system(size: 11, weight: .semibold))
-                    .foregroundStyle(palette.textMuted)
+                // Verse snippet (secondary)
+                Text(verse.text)
+                    .font(.system(size: 13, weight: .regular, design: .serif))
+                    .foregroundStyle(palette.textMuted.opacity(0.7))
+                    .lineLimit(2)
+                    .lineSpacing(3)
             }
-
-            // Note text (primary)
-            Text(verse.notes)
-                .font(.system(size: 15, weight: .regular, design: .rounded))
-                .foregroundStyle(palette.textPrimary)
-                .lineLimit(3)
-                .lineSpacing(3)
-
-            // Verse snippet (secondary)
-            Text(verse.text)
-                .font(.system(size: 13, weight: .regular, design: .serif))
-                .foregroundStyle(palette.textMuted)
-                .italic()
-                .lineLimit(2)
-                .lineSpacing(3)
+            .padding(.leading, 12)
+            .padding(.vertical, 14)
+            .padding(.trailing, 16)
         }
-        .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(palette.surfaceElevated)
-                .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+            RoundedRectangle(cornerRadius: 14)
+                .fill(palette.surfaceElevated.opacity(0.9))
+                .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
         )
         .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(palette.border.opacity(0.2), lineWidth: 0.5)
+            RoundedRectangle(cornerRadius: 14)
+                .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
         )
-        // Left accent with highlight color
-        .overlay(alignment: .leading) {
-            UnevenRoundedRectangle(
-                topLeadingRadius: 16,
-                bottomLeadingRadius: 16,
-                bottomTrailingRadius: 0,
-                topTrailingRadius: 0
-            )
-            .fill(
-                verse.highlightColor.map { Color(hex: $0.dotColor) }
-                    ?? palette.accent.opacity(0.4)
-            )
-            .frame(width: 3)
-        }
         .contextMenu {
             Button(role: .destructive) {
                 onClearNote()
@@ -596,274 +656,3 @@ private struct NoteCard: View {
     }
 }
 
-// MARK: - Saved Prayer Card
-
-private struct SavedPrayerCard: View {
-    let entry: PrayerEntry
-    let palette: BPColorPalette
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            // Category + answered row
-            HStack(spacing: 8) {
-                HStack(spacing: 4) {
-                    Image(systemName: entry.category.icon)
-                        .font(.system(size: 10, weight: .medium))
-                    Text(entry.category.displayName)
-                        .font(.system(size: 11, weight: .medium, design: .rounded))
-                }
-                .foregroundStyle(palette.accent)
-                .padding(.horizontal, 8)
-                .padding(.vertical, 4)
-                .background(
-                    Capsule().fill(palette.accent.opacity(0.1))
-                )
-
-                Spacer()
-
-                if entry.isAnswered {
-                    HStack(spacing: 3) {
-                        Image(systemName: "checkmark.seal.fill")
-                            .font(.system(size: 10))
-                        Text("Answered")
-                            .font(.system(size: 11, weight: .medium, design: .rounded))
-                    }
-                    .foregroundStyle(.green)
-                }
-
-                if let ref = entry.verseReference, !ref.isEmpty {
-                    HStack(spacing: 4) {
-                        Image(systemName: "book.closed")
-                            .font(.system(size: 9))
-                        Text(ref)
-                            .font(.system(size: 11, weight: .regular, design: .serif))
-                            .italic()
-                    }
-                    .foregroundStyle(palette.accent)
-                }
-
-                Image(systemName: "chevron.right")
-                    .font(.system(size: 11, weight: .semibold))
-                    .foregroundStyle(palette.textMuted)
-            }
-
-            // Title
-            Text(entry.title)
-                .font(.system(size: 15, weight: .semibold, design: .rounded))
-                .foregroundStyle(palette.textPrimary)
-                .lineLimit(1)
-
-            // Body preview
-            Text(entry.body)
-                .font(.system(size: 14, weight: .regular, design: .rounded))
-                .foregroundStyle(palette.textSecondary)
-                .lineLimit(3)
-                .lineSpacing(3)
-        }
-        .padding(16)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(palette.surfaceElevated)
-                .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(palette.border.opacity(0.2), lineWidth: 0.5)
-        )
-        // Left accent — green if answered, gold otherwise
-        .overlay(alignment: .leading) {
-            UnevenRoundedRectangle(
-                topLeadingRadius: 16,
-                bottomLeadingRadius: 16,
-                bottomTrailingRadius: 0,
-                topTrailingRadius: 0
-            )
-            .fill(entry.isAnswered ? Color.green.opacity(0.6) : palette.accent.opacity(0.4))
-            .frame(width: 3)
-        }
-    }
-}
-
-// MARK: - Saved Prayer Detail View
-
-private struct SavedPrayerDetailView: View {
-    let entry: PrayerEntry
-    @Bindable var viewModel: SavedViewModel
-    @Environment(\.bpPalette) private var palette
-    @Environment(\.dismiss) private var dismiss
-    @State private var showDeleteConfirm = false
-
-    var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 20) {
-                // Category badge
-                HStack(spacing: 4) {
-                    Image(systemName: entry.category.icon)
-                        .font(.system(size: 11, weight: .medium))
-                    Text(entry.category.displayName)
-                        .font(.system(size: 12, weight: .medium, design: .rounded))
-                }
-                .foregroundStyle(palette.accent)
-                .padding(.horizontal, 10)
-                .padding(.vertical, 5)
-                .background(
-                    Capsule().fill(palette.accent.opacity(0.1))
-                )
-
-                // Title
-                Text(entry.title)
-                    .font(.system(size: 22, weight: .bold, design: .rounded))
-                    .foregroundStyle(palette.textPrimary)
-
-                // Date
-                Text(entry.createdAt, style: .date)
-                    .font(.system(size: 13, weight: .regular, design: .rounded))
-                    .foregroundStyle(palette.textMuted)
-
-                // Full body
-                Text(entry.body)
-                    .font(.system(size: 16, weight: .regular, design: .rounded))
-                    .foregroundStyle(palette.textPrimary)
-                    .lineSpacing(5)
-
-                // Verse reference
-                if let ref = entry.verseReference, !ref.isEmpty {
-                    HStack(spacing: 6) {
-                        Image(systemName: "book.closed.fill")
-                            .font(.system(size: 12))
-                        Text(ref)
-                            .font(.system(size: 14, weight: .medium, design: .serif))
-                            .italic()
-                    }
-                    .foregroundStyle(palette.accent)
-                }
-
-                Divider()
-
-                // Answered toggle
-                Button {
-                    viewModel.toggleAnswered(entry)
-                    HapticService.success()
-                } label: {
-                    HStack(spacing: 10) {
-                        Image(systemName: entry.isAnswered ? "checkmark.seal.fill" : "circle")
-                            .font(.system(size: 18))
-                            .foregroundStyle(entry.isAnswered ? .green : palette.textMuted)
-
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(entry.isAnswered ? "Marked as Answered" : "Mark as Answered")
-                                .font(.system(size: 15, weight: .semibold, design: .rounded))
-                                .foregroundStyle(palette.textPrimary)
-
-                            if entry.isAnswered, let date = entry.answeredAt {
-                                Text(date, style: .date)
-                                    .font(.system(size: 12, weight: .regular, design: .rounded))
-                                    .foregroundStyle(palette.textMuted)
-                            }
-                        }
-
-                        Spacer()
-                    }
-                    .padding(14)
-                    .background(
-                        RoundedRectangle(cornerRadius: 14)
-                            .fill(entry.isAnswered ? Color.green.opacity(0.06) : palette.surface)
-                    )
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 14)
-                            .stroke(entry.isAnswered ? Color.green.opacity(0.2) : palette.border.opacity(0.2), lineWidth: 0.5)
-                    )
-                }
-                .buttonStyle(.plain)
-
-                // Answer notes
-                if entry.isAnswered && !entry.answerNotes.isEmpty {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Answer Notes")
-                            .font(.system(size: 13, weight: .semibold, design: .rounded))
-                            .foregroundStyle(palette.textMuted)
-                        Text(entry.answerNotes)
-                            .font(.system(size: 15, weight: .regular, design: .rounded))
-                            .foregroundStyle(palette.textPrimary)
-                            .lineSpacing(4)
-                    }
-                }
-
-                // Continue in Chat
-                Button {
-                    NotificationCenter.default.post(
-                        name: .openAIWithContext,
-                        object: nil,
-                        userInfo: [
-                            "context": "I wrote this prayer earlier: \"\(entry.body)\". Help me continue praying about this.",
-                            "title": entry.title,
-                        ]
-                    )
-                    HapticService.lightImpact()
-                } label: {
-                    HStack(spacing: 8) {
-                        Image(systemName: "bubble.left.fill")
-                            .font(.system(size: 13, weight: .medium))
-                        Text("Continue in Chat")
-                            .font(.system(size: 14, weight: .semibold, design: .rounded))
-                    }
-                    .foregroundStyle(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 14)
-                    .background(
-                        Capsule()
-                            .fill(
-                                LinearGradient(
-                                    colors: [palette.accent, palette.accent.opacity(0.85)],
-                                    startPoint: .leading,
-                                    endPoint: .trailing
-                                )
-                            )
-                    )
-                }
-                .buttonStyle(.plain)
-
-                // Delete button
-                Button(role: .destructive) {
-                    showDeleteConfirm = true
-                } label: {
-                    HStack(spacing: 8) {
-                        Image(systemName: "trash")
-                            .font(.system(size: 13, weight: .medium))
-                        Text("Delete Prayer")
-                            .font(.system(size: 14, weight: .medium, design: .rounded))
-                    }
-                    .foregroundStyle(.red)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 12)
-                    .background(
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color.red.opacity(0.06))
-                    )
-                }
-                .buttonStyle(.plain)
-                .padding(.top, 8)
-
-                Spacer().frame(height: 40)
-            }
-            .padding(.horizontal, 20)
-            .padding(.top, 16)
-        }
-        .background(palette.background)
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                Text("Prayer")
-                    .font(.system(size: 18, weight: .semibold, design: .serif))
-                    .foregroundStyle(palette.textPrimary)
-            }
-        }
-        .confirmationDialog("Delete this prayer?", isPresented: $showDeleteConfirm, titleVisibility: .visible) {
-            Button("Delete", role: .destructive) {
-                viewModel.deletePrayerEntry(entry)
-                dismiss()
-            }
-        }
-    }
-}

@@ -11,15 +11,20 @@ struct BookPickerView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 28) {
-                    bookSection(title: "Old Testament", books: BibleData.oldTestament)
-                    bookSection(title: "New Testament", books: BibleData.newTestament)
+            ScrollViewReader { proxy in
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 32) {
+                        bookSection(title: "Old Testament", icon: "scroll", bookCount: 39, books: BibleData.oldTestament)
+                            .id("ot")
+                        bookSection(title: "New Testament", icon: "book.closed", bookCount: 27, books: BibleData.newTestament)
+                            .id("nt")
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.top, 8)
+                    .padding(.bottom, 24)
                 }
-                .padding(.horizontal, 20)
-                .padding(.vertical, 16)
+                .background(palette.background)
             }
-            .background(palette.background)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
@@ -47,17 +52,42 @@ struct BookPickerView: View {
         }
     }
 
+    // MARK: - Book Section
+
     @ViewBuilder
-    private func bookSection(title: String, books: [BibleBook]) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(title)
-                .font(.system(size: 11, weight: .bold, design: .rounded))
-                .foregroundStyle(palette.textMuted)
-                .textCase(.uppercase)
-                .tracking(1.5)
-                .padding(.leading, 4)
-                .opacity(appeared ? 1 : 0)
-                .animation(BPAnimation.spring.delay(0.05), value: appeared)
+    private func bookSection(title: String, icon: String, bookCount: Int, books: [BibleBook]) -> some View {
+        VStack(alignment: .leading, spacing: 14) {
+            // Section header with icon and divider
+            HStack(spacing: 8) {
+                Image(systemName: icon)
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(palette.accent)
+                    .frame(width: 24, height: 24)
+                    .background(
+                        Circle()
+                            .fill(palette.accent.opacity(0.1))
+                    )
+
+                Text(title.uppercased())
+                    .font(.system(size: 11, weight: .bold, design: .rounded))
+                    .foregroundStyle(palette.textMuted)
+                    .tracking(1.5)
+
+                Text("\(bookCount)")
+                    .font(.system(size: 10, weight: .semibold, design: .rounded))
+                    .foregroundStyle(palette.accent)
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 2)
+                    .background(
+                        Capsule().fill(palette.accent.opacity(0.08))
+                    )
+
+                VStack { Divider() }
+                    .padding(.leading, 4)
+            }
+            .padding(.leading, 4)
+            .opacity(appeared ? 1 : 0)
+            .animation(BPAnimation.spring.delay(0.05), value: appeared)
 
             LazyVGrid(
                 columns: [GridItem(.adaptive(minimum: 100), spacing: 10)],
@@ -70,6 +100,8 @@ struct BookPickerView: View {
         }
     }
 
+    // MARK: - Book Button
+
     private func bookButton(_ book: BibleBook, index: Int) -> some View {
         let isExpanded = expandedBook == book
 
@@ -78,50 +110,59 @@ struct BookPickerView: View {
             if book.chapterCount == 1 {
                 onSelectChapter(book, 1)
             } else if expandedBook == book {
-                expandedBook = nil
+                withAnimation(BPAnimation.selection) {
+                    expandedBook = nil
+                }
             } else {
                 withAnimation(BPAnimation.selection) {
                     expandedBook = book
                 }
             }
         } label: {
-            Text(book.name)
-                .font(.system(size: 13, weight: .medium, design: .rounded))
-                .foregroundStyle(isExpanded ? .white : palette.textPrimary)
-                .lineLimit(1)
-                .minimumScaleFactor(0.8)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 11)
-                .background(
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(
-                            isExpanded
-                                ? AnyShapeStyle(
-                                    LinearGradient(
-                                        colors: [palette.accent, palette.accent.opacity(0.8)],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    )
+            VStack(spacing: 3) {
+                Text(book.name)
+                    .font(.system(size: 13, weight: isExpanded ? .semibold : .medium, design: .rounded))
+                    .foregroundStyle(isExpanded ? .white : palette.textPrimary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+
+                Text("\(book.chapterCount) ch")
+                    .font(.system(size: 9, weight: .medium, design: .rounded))
+                    .foregroundStyle(isExpanded ? .white.opacity(0.7) : palette.textMuted)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 11)
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(
+                        isExpanded
+                            ? AnyShapeStyle(
+                                LinearGradient(
+                                    colors: [palette.accent, palette.accent.opacity(0.8)],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
                                 )
-                                : AnyShapeStyle(palette.surfaceElevated)
-                        )
-                        .shadow(
-                            color: isExpanded
-                                ? palette.accent.opacity(0.3)
-                                : .black.opacity(0.04),
-                            radius: isExpanded ? 6 : 4,
-                            y: isExpanded ? 3 : 2
-                        )
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 12)
-                        .stroke(
-                            isExpanded
-                                ? Color.clear
-                                : palette.border.opacity(0.15),
-                            lineWidth: 0.5
-                        )
-                )
+                            )
+                            : AnyShapeStyle(palette.surfaceElevated)
+                    )
+                    .shadow(
+                        color: isExpanded
+                            ? palette.accent.opacity(0.3)
+                            : .black.opacity(0.05),
+                        radius: isExpanded ? 8 : 4,
+                        y: isExpanded ? 4 : 2
+                    )
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(
+                        isExpanded
+                            ? Color.clear
+                            : palette.border.opacity(0.1),
+                        lineWidth: 0.5
+                    )
+            )
+            .scaleEffect(isExpanded ? 1.04 : 1.0)
         }
         .opacity(appeared ? 1 : 0)
         .offset(y: appeared ? 0 : 8)
@@ -135,17 +176,46 @@ struct BookPickerView: View {
         }
     }
 
+    // MARK: - Chapter Grid Popover
+
     private func chapterGrid(for book: BibleBook) -> some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 10) {
-                Text(book.name)
-                    .font(.system(size: 15, weight: .semibold, design: .serif))
-                    .foregroundStyle(palette.textPrimary)
-                    .padding(.horizontal, 14)
-                    .padding(.top, 14)
+            VStack(alignment: .leading, spacing: 12) {
+                // Book header
+                HStack(spacing: 10) {
+                    ZStack {
+                        Circle()
+                            .fill(palette.accent.opacity(0.04))
+                            .frame(width: 38, height: 38)
+
+                        Image(systemName: "book.closed.fill")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundStyle(palette.accent)
+                            .frame(width: 30, height: 30)
+                            .background(
+                                Circle()
+                                    .fill(palette.accent.opacity(0.08))
+                            )
+                    }
+
+                    VStack(alignment: .leading, spacing: 1) {
+                        Text(book.name)
+                            .font(.system(size: 16, weight: .semibold, design: .serif))
+                            .foregroundStyle(palette.textPrimary)
+
+                        Text("\(book.chapterCount) chapters")
+                            .font(.system(size: 11, weight: .medium, design: .rounded))
+                            .foregroundStyle(palette.textMuted)
+                    }
+                }
+                .padding(.horizontal, 16)
+                .padding(.top, 16)
+
+                Divider()
+                    .padding(.horizontal, 16)
 
                 LazyVGrid(
-                    columns: [GridItem(.adaptive(minimum: 44), spacing: 8)],
+                    columns: [GridItem(.adaptive(minimum: 46), spacing: 8)],
                     spacing: 8
                 ) {
                     ForEach(1...book.chapterCount, id: \.self) { chapter in
@@ -157,24 +227,41 @@ struct BookPickerView: View {
                             Text("\(chapter)")
                                 .font(.system(size: 15, weight: .medium, design: .rounded))
                                 .foregroundStyle(palette.textPrimary)
-                                .frame(width: 44, height: 44)
+                                .frame(width: 46, height: 46)
                                 .background(
                                     RoundedRectangle(cornerRadius: 10)
                                         .fill(palette.surfaceElevated)
-                                        .shadow(color: .black.opacity(0.04), radius: 3, y: 1)
+                                        .shadow(color: .black.opacity(0.05), radius: 6, y: 3)
                                 )
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 10)
-                                        .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
+                                        .stroke(palette.border.opacity(0.08), lineWidth: 0.5)
                                 )
                         }
+                        .buttonStyle(ChapterButtonStyle(accent: palette.accent))
                     }
                 }
                 .padding(.horizontal, 14)
-                .padding(.bottom, 14)
+                .padding(.bottom, 16)
             }
         }
-        .frame(minWidth: 280, maxHeight: 320)
+        .frame(minWidth: 290, maxHeight: 340)
         .background(palette.background)
+    }
+}
+
+// MARK: - Chapter Button Style
+
+private struct ChapterButtonStyle: ButtonStyle {
+    let accent: Color
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.92 : 1.0)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(accent.opacity(configuration.isPressed ? 0.15 : 0))
+            )
+            .animation(.easeOut(duration: 0.15), value: configuration.isPressed)
     }
 }

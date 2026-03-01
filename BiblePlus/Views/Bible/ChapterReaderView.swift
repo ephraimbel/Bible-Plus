@@ -22,6 +22,7 @@ struct ChapterReaderView: View {
     let readerTextAlignmentJustified: Bool
     let readerShowVerseNumbers: Bool
     let onVerseTap: (VerseItem) -> Void
+    let onNoteCardTap: ((VerseItem) -> Void)?
     let onRetry: () -> Void
     @Environment(\.bpPalette) private var palette
     @Environment(\.colorScheme) private var colorScheme
@@ -101,55 +102,78 @@ struct ChapterReaderView: View {
         }
     }
 
+    // MARK: - Verse Row
+
     private func verseRow(number: Int, text: String, isRedLetter: Bool = false) -> some View {
         let isSelected = selectedVerseNumber == number
         let highlight = highlightColors[number]
         let isSaved = savedVerseNumbers.contains(number)
-        let hasNote = verseNotes[number] != nil
+        let noteText = verseNotes[number]
         let isAudioActive = audioVerseIndex != nil
             && (verses.firstIndex(where: { $0.number == number }).map { $0 == audioVerseIndex } ?? false)
         let isLastRead = lastReadVerseNumber == number && !isAudioActive
 
-        return Button {
-            HapticService.selection()
-            onVerseTap(VerseItem(number: number, text: text))
-        } label: {
-            buildVerseText(
-                number: number,
-                text: text,
-                isRedLetter: isRedLetter,
-                isSaved: isSaved,
-                hasNote: hasNote,
-                highlight: highlight
-            )
-            .multilineTextAlignment(.leading)
-            .lineSpacing(readerLineSpacing)
-            .padding(.vertical, 0)
-            .padding(.horizontal, 4)
+        return VStack(alignment: .leading, spacing: 0) {
+            // Verse text row with optional ribbon on left
+            HStack(alignment: .top, spacing: 0) {
+                // Ribbon bookmark on left edge
+                if isSaved {
+                    ribbonTab(highlight: highlight)
+                }
+
+                Button {
+                    HapticService.selection()
+                    onVerseTap(VerseItem(number: number, text: text))
+                } label: {
+                    buildVerseText(
+                        number: number,
+                        text: text,
+                        isRedLetter: isRedLetter,
+                        highlight: highlight
+                    )
+                    .multilineTextAlignment(.leading)
+                    .lineSpacing(readerLineSpacing)
+                    .padding(.vertical, 0)
+                    .padding(.horizontal, 4)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .buttonStyle(.plain)
+            }
             .background(
                 RoundedRectangle(cornerRadius: 4)
-                    .fill(verseBackground(isSelected: isSelected, highlight: highlight, isAudioHighlight: isAudioActive, isLastRead: isLastRead))
+                    .fill(verseBackground(
+                        isSelected: isSelected,
+                        highlight: highlight,
+                        isAudioHighlight: isAudioActive,
+                        isLastRead: isLastRead
+                    ))
             )
-        }
-        .buttonStyle(.plain)
-        .overlay {
-            if isSelected {
-                GeometryReader { geo in
-                    Color.clear.preference(
-                        key: SelectedVerseFrameKey.self,
-                        value: geo.frame(in: .named("bibleContent"))
-                    )
+            .overlay {
+                if isSelected {
+                    GeometryReader { geo in
+                        Color.clear.preference(
+                            key: SelectedVerseFrameKey.self,
+                            value: geo.frame(in: .named("bibleContent"))
+                        )
+                    }
                 }
             }
+
+            // Inline note card
+            if let noteText {
+                inlineNoteCard(noteText: noteText, number: number, text: text)
+                    .transition(.opacity.combined(with: .move(edge: .top)))
+            }
         }
+        .animation(BPAnimation.spring, value: noteText != nil)
     }
+
+    // MARK: - Verse Text Builder
 
     private func buildVerseText(
         number: Int,
         text: String,
         isRedLetter: Bool,
-        isSaved: Bool,
-        hasNote: Bool,
         highlight: VerseHighlightColor?
     ) -> Text {
         var result = Text("")
@@ -162,24 +186,6 @@ struct ChapterReaderView: View {
                 .foregroundColor(palette.accent)
                 .baselineOffset(6)
 
-            if isSaved {
-                result = result + Text(Image(systemName: "bookmark.fill"))
-                    .font(.system(size: 7))
-                    .foregroundColor(
-                        highlight != nil
-                            ? Color(hex: highlight!.dotColor)
-                            : palette.accent
-                    )
-                    .baselineOffset(6)
-            }
-
-            if hasNote {
-                result = result + Text(Image(systemName: "text.bubble.fill"))
-                    .font(.system(size: 6))
-                    .foregroundColor(palette.accent)
-                    .baselineOffset(6)
-            }
-
             result = result + Text("\u{2009}")
                 .font(.system(size: readerFontSize, design: readerFontDesign))
         }
@@ -191,7 +197,9 @@ struct ChapterReaderView: View {
         return result
     }
 
-    private func verseBackground(isSelected: Bool, highlight: VerseHighlightColor?, isAudioHighlight: Bool, isLastRead: Bool = false) -> Color {
+    // MARK: - Verse Background (Flat Tint)
+
+    private func verseBackground(isSelected: Bool, highlight: VerseHighlightColor?, isAudioHighlight: Bool, isLastRead: Bool) -> Color {
         if isAudioHighlight {
             return palette.accent.opacity(0.15)
         }
@@ -208,6 +216,74 @@ struct ChapterReaderView: View {
         return .clear
     }
 
+    // MARK: - Ribbon Bookmark (Left Edge)
+
+    private func ribbonTab(highlight: VerseHighlightColor?) -> some View {
+        let ribbonColor = highlight != nil
+            ? Color(hex: highlight!.dotColor)
+            : palette.accent
+
+        return RibbonShape()
+            .fill(ribbonColor)
+            .frame(width: 6, height: 32)
+            .shadow(color: ribbonColor.opacity(0.35), radius: 3, x: 1, y: 1)
+            .padding(.leading, -4)
+    }
+
+    // MARK: - Inline Note Card (Marginalia)
+
+    private func inlineNoteCard(noteText: String, number: Int, text: String) -> some View {
+        let noteFontSize = max(13, readerFontSize * 0.7)
+
+        return Button {
+            onNoteCardTap?(VerseItem(number: number, text: text))
+        } label: {
+            HStack(alignment: .top, spacing: 0) {
+                // Gold accent bar
+                RoundedRectangle(cornerRadius: 1.5)
+                    .fill(palette.accent)
+                    .frame(width: 3)
+
+                VStack(alignment: .leading, spacing: 4) {
+                    // Micro-header
+                    HStack(spacing: 4) {
+                        Image(systemName: "pencil")
+                            .font(.system(size: 8, weight: .semibold))
+                        Text("PERSONAL NOTE")
+                            .font(.system(size: 9, weight: .semibold))
+                            .tracking(0.8)
+                    }
+                    .foregroundStyle(palette.accent)
+
+                    // Note text
+                    Text(noteText)
+                        .font(.system(size: noteFontSize, design: .serif))
+                        .italic()
+                        .foregroundStyle(palette.textSecondary)
+                        .lineLimit(4)
+                        .multilineTextAlignment(.leading)
+                        .lineSpacing(3)
+                }
+                .padding(.leading, 10)
+                .padding(.vertical, 10)
+                .padding(.trailing, 12)
+            }
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(palette.surfaceElevated.opacity(0.85))
+                    .shadow(color: .black.opacity(0.04), radius: 6, y: 3)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(palette.border.opacity(0.08), lineWidth: 0.5)
+            )
+        }
+        .buttonStyle(.plain)
+        .padding(.leading, 20)
+        .padding(.top, 6)
+        .padding(.bottom, 4)
+    }
+
     // MARK: - Loading State
 
     private var loadingState: some View {
@@ -215,6 +291,10 @@ struct ChapterReaderView: View {
             Spacer()
 
             ZStack {
+                Circle()
+                    .stroke(palette.accent.opacity(0.06), lineWidth: 0.5)
+                    .frame(width: 130, height: 130)
+
                 Circle()
                     .fill(palette.accent.opacity(0.06))
                     .frame(width: 100, height: 100)
@@ -245,6 +325,10 @@ struct ChapterReaderView: View {
             Spacer()
 
             ZStack {
+                Circle()
+                    .stroke(palette.accent.opacity(0.06), lineWidth: 0.5)
+                    .frame(width: 150, height: 150)
+
                 Circle()
                     .fill(palette.accent.opacity(0.06))
                     .frame(width: 120, height: 120)
@@ -325,11 +409,11 @@ struct ChapterReaderView: View {
         .background(
             RoundedRectangle(cornerRadius: 12)
                 .fill(palette.surfaceElevated)
-                .shadow(color: .black.opacity(0.04), radius: 4, y: 2)
+                .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
         )
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .stroke(palette.accent.opacity(0.15), lineWidth: 0.5)
+                .stroke(palette.accent.opacity(0.1), lineWidth: 0.5)
         )
         .padding(.top, 4)
     }
@@ -341,6 +425,10 @@ struct ChapterReaderView: View {
             Spacer()
 
             ZStack {
+                Circle()
+                    .stroke(palette.accent.opacity(0.06), lineWidth: 0.5)
+                    .frame(width: 150, height: 150)
+
                 Circle()
                     .fill(palette.accent.opacity(0.06))
                     .frame(width: 120, height: 120)
@@ -372,5 +460,28 @@ struct ChapterReaderView: View {
         .padding(.horizontal, 32)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(palette.parchment)
+    }
+}
+
+// MARK: - Ribbon Shape (Notched Tail)
+
+private struct RibbonShape: Shape {
+    func path(in rect: CGRect) -> Path {
+        Path { p in
+            // Top-right rounded corner
+            p.move(to: CGPoint(x: rect.minX, y: rect.minY))
+            p.addLine(to: CGPoint(x: rect.maxX - 2, y: rect.minY))
+            p.addQuadCurve(
+                to: CGPoint(x: rect.maxX, y: rect.minY + 2),
+                control: CGPoint(x: rect.maxX, y: rect.minY)
+            )
+            // Right edge down
+            p.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
+            // Notch (V-cut) at bottom
+            p.addLine(to: CGPoint(x: rect.midX, y: rect.maxY - 6))
+            p.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
+            // Left edge back up
+            p.closeSubpath()
+        }
     }
 }

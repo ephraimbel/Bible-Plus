@@ -327,14 +327,15 @@ struct HomeDashboardView: View {
                 HStack(spacing: 3) {
                     Text("Details")
                         .font(.system(size: 12, weight: .medium, design: .rounded))
+                        .foregroundStyle(palette.accent)
                     Image(systemName: "chevron.right")
                         .font(.system(size: 9, weight: .semibold))
+                        .foregroundStyle(palette.accent.opacity(0.6))
                 }
-                .foregroundStyle(palette.accent)
             }
 
             Rectangle()
-                .fill(palette.border.opacity(0.5))
+                .fill(palette.border.opacity(0.15))
                 .frame(height: 0.5)
 
             HStack(spacing: 0) {
@@ -379,7 +380,7 @@ struct HomeDashboardView: View {
                                     .frame(width: 32, height: 32)
                                     .overlay(
                                         Circle()
-                                            .stroke(palette.border.opacity(0.4), lineWidth: 1)
+                                            .stroke(palette.border.opacity(0.2), lineWidth: 1)
                                     )
                             }
                         }
@@ -393,11 +394,11 @@ struct HomeDashboardView: View {
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(palette.surfaceElevated)
-                .shadow(color: .black.opacity(0.06), radius: 8, y: 4)
+                .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
         )
         .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(palette.border.opacity(0.3), lineWidth: 0.5)
+                .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
         )
         .onTapGesture {
             onShowProgress()
@@ -448,20 +449,25 @@ struct HomeDashboardView: View {
 
     private var askCard: some View {
         HStack(spacing: 14) {
-            Image(systemName: "bubble.left.and.bubble.right.fill")
-                .font(.system(size: 15, weight: .medium))
-                .foregroundStyle(.white)
-                .frame(width: 36, height: 36)
-                .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(
-                            LinearGradient(
-                                colors: [palette.accent, palette.accent.opacity(0.7)],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
+            ZStack {
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(palette.accent.opacity(0.08))
+                    .frame(width: 42, height: 42)
+                Image(systemName: "bubble.left.and.bubble.right.fill")
+                    .font(.system(size: 15, weight: .medium))
+                    .foregroundStyle(.white)
+                    .frame(width: 36, height: 36)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(
+                                LinearGradient(
+                                    colors: [palette.accent, palette.accent.opacity(0.7)],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
                             )
-                        )
-                )
+                    )
+            }
 
             VStack(alignment: .leading, spacing: 3) {
                 Text("What\u{2019}s on your heart?")
@@ -480,18 +486,18 @@ struct HomeDashboardView: View {
 
             Image(systemName: "chevron.right")
                 .font(.system(size: 10, weight: .semibold))
-                .foregroundStyle(palette.textMuted)
+                .foregroundStyle(palette.textMuted.opacity(0.4))
         }
         .padding(.horizontal, 18)
         .padding(.vertical, 18)
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(palette.surfaceElevated)
-                .shadow(color: .black.opacity(0.06), radius: 8, y: 4)
+                .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
         )
         .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(palette.border.opacity(0.3), lineWidth: 0.5)
+                .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
         )
         .onTapGesture {
             NotificationCenter.default.post(name: .switchToAskTab, object: nil)
@@ -511,14 +517,17 @@ struct HomeDashboardView: View {
         action: @escaping () -> Void
     ) -> some View {
         VStack(spacing: 8) {
-            Image(systemName: icon)
-                .font(.system(size: 14, weight: .medium))
-                .foregroundStyle(palette.accent)
-                .frame(width: 32, height: 32)
-                .background(
-                    Circle()
-                        .fill(palette.accent.opacity(0.1))
-                )
+            ZStack {
+                Circle()
+                    .fill(palette.accent.opacity(0.05))
+                    .frame(width: 38, height: 38)
+                Circle()
+                    .fill(palette.accent.opacity(0.1))
+                    .frame(width: 32, height: 32)
+                Image(systemName: icon)
+                    .font(.system(size: 13, weight: .medium))
+                    .foregroundStyle(palette.accent)
+            }
 
             Text(title)
                 .font(.system(size: 13, weight: .semibold, design: .rounded))
@@ -536,11 +545,11 @@ struct HomeDashboardView: View {
         .background(
             RoundedRectangle(cornerRadius: 14)
                 .fill(palette.surfaceElevated)
-                .shadow(color: .black.opacity(0.05), radius: 6, y: 3)
+                .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
         )
         .overlay(
             RoundedRectangle(cornerRadius: 14)
-                .stroke(palette.border.opacity(0.25), lineWidth: 0.5)
+                .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
         )
         .onTapGesture(perform: action)
     }

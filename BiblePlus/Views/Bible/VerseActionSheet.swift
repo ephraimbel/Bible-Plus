@@ -44,7 +44,7 @@ struct VerseToolbarOverlay: View {
     var body: some View {
         GeometryReader { geo in
             let containerSize = geo.size
-            let cardHeight: CGFloat = showHighlightStrip ? 215 : 155
+            let cardHeight: CGFloat = showHighlightStrip ? 230 : 165
 
             let showBelow = verseFrame != .zero
                 && verseFrame.maxY + cardHeight + 16 < containerSize.height
@@ -200,10 +200,10 @@ struct VerseToolbarOverlay: View {
         }
         .background(palette.surfaceElevated)
         .clipShape(RoundedRectangle(cornerRadius: 16))
-        .shadow(color: .black.opacity(0.12), radius: 16, y: 4)
+        .shadow(color: .black.opacity(0.15), radius: 20, y: 6)
         .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
+                .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
         )
     }
 
@@ -219,17 +219,22 @@ struct VerseToolbarOverlay: View {
             HapticService.selection()
             action()
         } label: {
-            VStack(spacing: 3) {
+            VStack(spacing: 4) {
                 Image(systemName: icon)
-                    .font(.system(size: 17, weight: .medium))
+                    .font(.system(size: 16, weight: .medium))
                     .foregroundStyle(isActive ? palette.accent : palette.textSecondary)
+                    .frame(width: 32, height: 32)
+                    .background(
+                        Circle()
+                            .fill(isActive ? palette.accent.opacity(0.1) : palette.accent.opacity(0.04))
+                    )
                     .contentTransition(.symbolEffect(.replace))
                 Text(label)
                     .font(.system(size: 10, weight: .medium, design: .rounded))
                     .foregroundStyle(isActive ? palette.accent : palette.textMuted)
             }
             .frame(maxWidth: .infinity)
-            .frame(height: 50)
+            .frame(height: 56)
             .contentShape(Rectangle())
         }
         .buttonStyle(ToolbarButtonStyle())
@@ -276,6 +281,13 @@ private struct HighlightColorStrip: View {
                     }
                 } label: {
                     ZStack {
+                        // Outer glow for active
+                        if isActive {
+                            Circle()
+                                .fill(Color(hex: color.dotColor).opacity(0.12))
+                                .frame(width: 36, height: 36)
+                        }
+
                         if isActive {
                             Circle()
                                 .stroke(Color(hex: color.dotColor), lineWidth: 2)
@@ -290,7 +302,7 @@ private struct HighlightColorStrip: View {
                                 color: isActive
                                     ? Color(hex: color.dotColor).opacity(0.4)
                                     : .clear,
-                                radius: 3, y: 1
+                                radius: 4, y: 2
                             )
 
                         if isActive {
@@ -303,7 +315,7 @@ private struct HighlightColorStrip: View {
                                 .foregroundStyle(.white.opacity(0.8))
                         }
                     }
-                    .frame(width: 32, height: 32)
+                    .frame(width: 36, height: 36)
                 }
                 .accessibilityLabel("\(color.displayName) highlight\(isLocked ? " (Pro)" : "")")
             }
@@ -327,7 +339,7 @@ private struct VerseNoteEditorSheet: View {
         NavigationStack {
             VStack(spacing: 16) {
                 TextEditor(text: $noteText)
-                    .font(.system(size: 16, weight: .regular, design: .rounded))
+                    .font(.system(size: 16, weight: .regular, design: .serif).italic())
                     .foregroundStyle(palette.textPrimary)
                     .scrollContentBackground(.hidden)
                     .frame(minHeight: 120)
@@ -335,10 +347,11 @@ private struct VerseNoteEditorSheet: View {
                     .background(
                         RoundedRectangle(cornerRadius: 14)
                             .fill(palette.background)
+                            .shadow(color: .black.opacity(0.04), radius: 6, y: 3)
                     )
                     .overlay(
                         RoundedRectangle(cornerRadius: 14)
-                            .stroke(palette.border.opacity(0.2), lineWidth: 0.5)
+                            .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
                     )
 
                 HStack(spacing: 12) {

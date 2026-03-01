@@ -123,7 +123,11 @@ private struct SanctuaryContentView: View {
                     .background(.ultraThinMaterial)
                     .environment(\.colorScheme, .dark)
                     .clipShape(Circle())
-                    .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
+                    .overlay(
+                        Circle()
+                            .stroke(.white.opacity(0.12), lineWidth: 0.5)
+                    )
+                    .shadow(color: .black.opacity(0.25), radius: 10, y: 5)
             }
             .accessibilityLabel("Close sanctuary")
 
@@ -139,7 +143,11 @@ private struct SanctuaryContentView: View {
                     .background(.ultraThinMaterial)
                     .environment(\.colorScheme, .dark)
                     .clipShape(Circle())
-                    .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
+                    .overlay(
+                        Circle()
+                            .stroke(.white.opacity(0.12), lineWidth: 0.5)
+                    )
+                    .shadow(color: .black.opacity(0.25), radius: 10, y: 5)
             }
             .accessibilityLabel("Choose background")
         }
@@ -151,8 +159,14 @@ private struct SanctuaryContentView: View {
 
     private var centerContent: some View {
         VStack(spacing: 20) {
-            // Pulsing soundscape icon with glow ring
+            // Pulsing soundscape icon with layered glow rings
             ZStack {
+                // Outermost breath ring
+                Circle()
+                    .stroke(.white.opacity(0.04), lineWidth: 0.5)
+                    .frame(width: 170, height: 170)
+                    .scaleEffect(iconScale)
+
                 // Outer glow ring
                 Circle()
                     .stroke(.white.opacity(0.08), lineWidth: 1)
@@ -168,7 +182,7 @@ private struct SanctuaryContentView: View {
                 Image(systemName: vm.currentSoundscape.icon)
                     .font(.system(size: 56, weight: .light))
                     .foregroundStyle(.white.opacity(0.9))
-                    .shadow(color: .white.opacity(0.2), radius: 12)
+                    .shadow(color: .white.opacity(0.25), radius: 16)
                     .scaleEffect(iconScale)
             }
             .onAppear {
@@ -214,6 +228,10 @@ private struct SanctuaryContentView: View {
                 .background(.ultraThinMaterial)
                 .environment(\.colorScheme, .dark)
                 .clipShape(Capsule())
+                .overlay(
+                    Capsule()
+                        .stroke(.white.opacity(0.1), lineWidth: 0.5)
+                )
                 .padding(.top, 4)
             }
         }
@@ -239,7 +257,11 @@ private struct SanctuaryContentView: View {
                         .background(.ultraThinMaterial)
                         .environment(\.colorScheme, .dark)
                         .clipShape(Circle())
-                        .shadow(color: .black.opacity(0.15), radius: 6, y: 3)
+                        .overlay(
+                            Circle()
+                                .stroke(.white.opacity(0.12), lineWidth: 0.5)
+                        )
+                        .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
                 }
                 .accessibilityLabel("Set sleep timer")
 
@@ -249,12 +271,17 @@ private struct SanctuaryContentView: View {
                     vm.togglePlayback()
                 } label: {
                     ZStack {
+                        // Outer glow ring
+                        Circle()
+                            .stroke(Color(hex: "C9A96E").opacity(0.15), lineWidth: 1)
+                            .frame(width: 90, height: 90)
+
                         // Glass circle
                         Circle()
                             .fill(.ultraThinMaterial)
                             .environment(\.colorScheme, .dark)
                             .frame(width: 76, height: 76)
-                            .shadow(color: .black.opacity(0.2), radius: 10, y: 4)
+                            .shadow(color: .black.opacity(0.25), radius: 12, y: 5)
 
                         // Accent ring
                         Circle()
@@ -287,7 +314,11 @@ private struct SanctuaryContentView: View {
                         .background(.ultraThinMaterial)
                         .environment(\.colorScheme, .dark)
                         .clipShape(Circle())
-                        .shadow(color: .black.opacity(0.15), radius: 6, y: 3)
+                        .overlay(
+                            Circle()
+                                .stroke(.white.opacity(0.12), lineWidth: 0.5)
+                        )
+                        .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
                 }
                 .accessibilityLabel("Choose soundscape")
             }

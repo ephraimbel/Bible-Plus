@@ -12,14 +12,21 @@ struct SleepTimerPickerView: View {
                     // Active timer status
                     if let formatted = vm.sleepTimerFormatted {
                         VStack(spacing: 8) {
-                            Image(systemName: "moon.zzz.fill")
-                                .font(.system(size: 20, weight: .medium))
-                                .foregroundStyle(palette.accent)
-                                .frame(width: 44, height: 44)
-                                .background(
-                                    Circle()
-                                        .fill(palette.accent.opacity(0.08))
-                                )
+                            // Double-layer icon ring
+                            ZStack {
+                                Circle()
+                                    .fill(palette.accent.opacity(0.04))
+                                    .frame(width: 56, height: 56)
+
+                                Image(systemName: "moon.zzz.fill")
+                                    .font(.system(size: 20, weight: .medium))
+                                    .foregroundStyle(palette.accent)
+                                    .frame(width: 44, height: 44)
+                                    .background(
+                                        Circle()
+                                            .fill(palette.accent.opacity(0.08))
+                                    )
+                            }
 
                             Text("TIMER ACTIVE")
                                 .font(.system(size: 11, weight: .bold, design: .rounded))
@@ -36,11 +43,11 @@ struct SleepTimerPickerView: View {
                         .background(
                             RoundedRectangle(cornerRadius: 16)
                                 .fill(palette.surfaceElevated)
-                                .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+                                .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
                         )
                         .overlay(
                             RoundedRectangle(cornerRadius: 16)
-                                .stroke(palette.accent.opacity(0.15), lineWidth: 0.5)
+                                .stroke(palette.accent.opacity(0.12), lineWidth: 0.5)
                         )
                     }
 
@@ -55,24 +62,31 @@ struct SleepTimerPickerView: View {
                                 dismiss()
                             } label: {
                                 HStack(spacing: 14) {
-                                    Image(systemName: iconForDuration(duration))
-                                        .font(.system(size: 16, weight: .medium))
-                                        .foregroundStyle(isActive ? .white : palette.accent)
-                                        .frame(width: 36, height: 36)
-                                        .background(
-                                            Circle()
-                                                .fill(
-                                                    isActive
-                                                        ? AnyShapeStyle(
-                                                            LinearGradient(
-                                                                colors: [palette.accent, palette.accent.opacity(0.85)],
-                                                                startPoint: .topLeading,
-                                                                endPoint: .bottomTrailing
+                                    // Double-layer icon ring
+                                    ZStack {
+                                        Circle()
+                                            .fill(palette.accent.opacity(isActive ? 0.12 : 0.04))
+                                            .frame(width: 44, height: 44)
+
+                                        Image(systemName: iconForDuration(duration))
+                                            .font(.system(size: 16, weight: .medium))
+                                            .foregroundStyle(isActive ? .white : palette.accent)
+                                            .frame(width: 36, height: 36)
+                                            .background(
+                                                Circle()
+                                                    .fill(
+                                                        isActive
+                                                            ? AnyShapeStyle(
+                                                                LinearGradient(
+                                                                    colors: [palette.accent, palette.accent.opacity(0.85)],
+                                                                    startPoint: .topLeading,
+                                                                    endPoint: .bottomTrailing
+                                                                )
                                                             )
-                                                        )
-                                                        : AnyShapeStyle(palette.accent.opacity(0.08))
-                                                )
-                                        )
+                                                            : AnyShapeStyle(palette.accent.opacity(0.08))
+                                                    )
+                                            )
+                                    }
 
                                     Text(duration.displayName)
                                         .font(.system(size: 15, weight: .semibold, design: .rounded))
@@ -99,8 +113,8 @@ struct SleepTimerPickerView: View {
                                         }
                                     } else {
                                         Image(systemName: "chevron.right")
-                                            .font(.system(size: 13, weight: .semibold))
-                                            .foregroundStyle(.tertiary)
+                                            .font(.system(size: 10, weight: .semibold))
+                                            .foregroundStyle(palette.textMuted.opacity(0.4))
                                     }
                                 }
                                 .padding(.horizontal, 16)
@@ -121,11 +135,11 @@ struct SleepTimerPickerView: View {
                     .background(
                         RoundedRectangle(cornerRadius: 16)
                             .fill(palette.surfaceElevated)
-                            .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+                            .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
                     )
                     .overlay(
                         RoundedRectangle(cornerRadius: 16)
-                            .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
+                            .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
                     )
 
                     // Cancel timer

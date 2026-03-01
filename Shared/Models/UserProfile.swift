@@ -88,7 +88,7 @@ final class UserProfile {
         streakCount: Int = 0,
         lastActiveDate: Date? = nil,
         longestStreak: Int = 0,
-        isPro: Bool = false,
+        isPro: Bool = true,
         aiConversationCount: Int = 0,
         hasCompletedOnboarding: Bool = false,
         notificationsEnabled: Bool = false,

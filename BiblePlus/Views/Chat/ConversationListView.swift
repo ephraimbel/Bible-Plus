@@ -38,14 +38,20 @@ struct ConversationListView: View {
                     Button {
                         startNewConversation()
                     } label: {
-                        Image(systemName: "square.and.pencil")
-                            .font(.system(size: 14, weight: .medium))
-                            .foregroundStyle(palette.accent)
-                            .frame(width: 32, height: 32)
-                            .background(
-                                Circle()
-                                    .fill(palette.accent.opacity(0.1))
-                            )
+                        ZStack {
+                            Circle()
+                                .fill(palette.accent.opacity(0.04))
+                                .frame(width: 40, height: 40)
+
+                            Image(systemName: "square.and.pencil")
+                                .font(.system(size: 14, weight: .medium))
+                                .foregroundStyle(palette.accent)
+                                .frame(width: 32, height: 32)
+                                .background(
+                                    Circle()
+                                        .fill(palette.accent.opacity(0.1))
+                                )
+                        }
                     }
                 }
             }
@@ -106,27 +112,14 @@ private struct ConversationListContent: View {
             emptyState
         } else {
             ScrollView(.vertical, showsIndicators: false) {
-                // Summary
-                HStack(spacing: 8) {
-                    Image(systemName: "bubble.left.and.bubble.right.fill")
-                        .font(.system(size: 12, weight: .medium))
-                        .foregroundStyle(palette.accent)
-                    Text("\(viewModel.conversations.count) \(viewModel.conversations.count == 1 ? "conversation" : "conversations")")
-                        .font(.system(size: 13, weight: .medium, design: .rounded))
-                        .foregroundStyle(palette.textSecondary)
-                    Spacer()
-                }
-                .padding(.horizontal, 24)
-                .padding(.top, 12)
-                .padding(.bottom, 4)
-                .opacity(appeared ? 1 : 0)
-                .animation(BPAnimation.spring.delay(0.05), value: appeared)
+                // Summary pill
+                summaryBar
 
                 // Pinned section
                 if !viewModel.pinnedConversations.isEmpty {
                     sectionHeader(title: "PINNED", icon: "pin.fill")
 
-                    LazyVStack(spacing: 10) {
+                    LazyVStack(spacing: 12) {
                         ForEach(viewModel.pinnedConversations) { conversation in
                             conversationButton(conversation, isPinned: true)
                         }
@@ -139,7 +132,7 @@ private struct ConversationListContent: View {
                         sectionHeader(title: "RECENT", icon: nil)
                     }
 
-                    LazyVStack(spacing: 10) {
+                    LazyVStack(spacing: 12) {
                         ForEach(Array(viewModel.unpinnedConversations.enumerated()), id: \.element.id) { index, conversation in
                             conversationButton(conversation, isPinned: false)
                                 .opacity(appeared ? 1 : 0)
@@ -162,24 +155,62 @@ private struct ConversationListContent: View {
         }
     }
 
+    // MARK: - Summary Bar
+
+    private var summaryBar: some View {
+        HStack(spacing: 6) {
+            Image(systemName: "bubble.left.and.bubble.right.fill")
+                .font(.system(size: 10, weight: .semibold))
+                .foregroundStyle(palette.accent)
+
+            Text("\(viewModel.conversations.count) \(viewModel.conversations.count == 1 ? "conversation" : "conversations")")
+                .font(.system(size: 12, weight: .semibold, design: .rounded))
+                .foregroundStyle(palette.accent)
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 6)
+        .background(
+            Capsule().fill(palette.accent.opacity(0.08))
+        )
+        .overlay(
+            Capsule()
+                .stroke(palette.accent.opacity(0.1), lineWidth: 0.5)
+        )
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 24)
+        .padding(.top, 12)
+        .padding(.bottom, 4)
+        .opacity(appeared ? 1 : 0)
+        .animation(BPAnimation.spring.delay(0.05), value: appeared)
+    }
+
     // MARK: - Section Header
 
     private func sectionHeader(title: String, icon: String?) -> some View {
-        HStack(spacing: 6) {
+        HStack(spacing: 8) {
             if let icon {
                 Image(systemName: icon)
-                    .font(.system(size: 10, weight: .bold))
+                    .font(.system(size: 9, weight: .bold))
                     .foregroundStyle(palette.accent)
+                    .frame(width: 22, height: 22)
+                    .background(
+                        Circle()
+                            .fill(palette.accent.opacity(0.08))
+                    )
             }
+
             Text(title)
                 .font(.system(size: 11, weight: .bold, design: .rounded))
                 .tracking(1.5)
                 .foregroundStyle(palette.textMuted)
-            Spacer()
+
+            Rectangle()
+                .fill(palette.border.opacity(0.1))
+                .frame(height: 0.5)
         }
         .padding(.horizontal, 24)
-        .padding(.top, 16)
-        .padding(.bottom, 4)
+        .padding(.top, 18)
+        .padding(.bottom, 6)
     }
 
     // MARK: - Conversation Button
@@ -192,22 +223,12 @@ private struct ConversationListContent: View {
             ConversationCard(
                 conversation: conversation,
                 preview: viewModel.lastMessagePreview(for: conversation),
-                palette: palette
+                palette: palette,
+                colorScheme: colorScheme
             )
         }
         .buttonStyle(.plain)
         .padding(.horizontal, 20)
-        .swipeActions(edge: .leading) {
-            Button {
-                viewModel.togglePin(conversation)
-            } label: {
-                Label(
-                    conversation.isPinned ? "Unpin" : "Pin",
-                    systemImage: conversation.isPinned ? "pin.slash.fill" : "pin.fill"
-                )
-            }
-            .tint(palette.accent)
-        }
         .contextMenu {
             Button {
                 viewModel.togglePin(conversation)
@@ -257,15 +278,44 @@ private struct ConversationListContent: View {
         VStack(spacing: 0) {
             Spacer()
 
-            // Icon
-            Image(systemName: "sparkle")
-                .font(.system(size: 34, weight: .light))
-                .foregroundStyle(palette.accent.opacity(0.45))
-                .opacity(appeared ? 1 : 0)
-                .scaleEffect(appeared ? 1 : 0.8)
-                .animation(BPAnimation.spring.delay(0.05), value: appeared)
+            // Icon with layered rings
+            ZStack {
+                Circle()
+                    .stroke(palette.accent.opacity(0.06), lineWidth: 0.5)
+                    .frame(width: 170, height: 170)
 
-            Spacer().frame(height: 24)
+                Circle()
+                    .fill(palette.accent.opacity(0.04))
+                    .frame(width: 140, height: 140)
+
+                Circle()
+                    .fill(palette.accent.opacity(0.06))
+                    .frame(width: 100, height: 100)
+
+                Circle()
+                    .fill(palette.surfaceElevated)
+                    .frame(width: 72, height: 72)
+                    .shadow(color: palette.accent.opacity(0.1), radius: 12, y: 4)
+                    .overlay(
+                        Circle()
+                            .stroke(palette.accent.opacity(0.12), lineWidth: 0.5)
+                    )
+
+                Image(systemName: "sparkle")
+                    .font(.system(size: 28, weight: .light))
+                    .foregroundStyle(palette.accent)
+
+                // Small floating accent icon
+                Image(systemName: "bubble.left.fill")
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(palette.accent.opacity(0.4))
+                    .offset(x: 38, y: -26)
+            }
+            .opacity(appeared ? 1 : 0)
+            .scaleEffect(appeared ? 1 : 0.8)
+            .animation(BPAnimation.spring.delay(0.05), value: appeared)
+
+            Spacer().frame(height: 28)
 
             // Header
             Text("Start a new conversation")
@@ -300,16 +350,19 @@ private struct ConversationListContent: View {
                     Text("New Conversation")
                         .font(.system(size: 15, weight: .semibold, design: .rounded))
                 }
-                .foregroundStyle(palette.accent)
+                .foregroundStyle(.white)
                 .padding(.horizontal, 28)
                 .padding(.vertical, 14)
                 .background(
                     Capsule()
-                        .fill(palette.accent.opacity(0.1))
-                )
-                .overlay(
-                    Capsule()
-                        .stroke(palette.accent.opacity(0.25), lineWidth: 1)
+                        .fill(
+                            LinearGradient(
+                                colors: [palette.accent, palette.accent.opacity(0.85)],
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                        )
+                        .shadow(color: palette.accent.opacity(0.25), radius: 8, y: 4)
                 )
             }
             .buttonStyle(PressableButtonStyle())
@@ -371,6 +424,7 @@ private struct ConversationCard: View {
     let conversation: Conversation
     let preview: String
     let palette: BPColorPalette
+    let colorScheme: ColorScheme
 
     private var cardIcon: String {
         if let character = conversation.character {
@@ -379,31 +433,42 @@ private struct ConversationCard: View {
         return "sparkle"
     }
 
+    private var iconAccent: Color {
+        if conversation.isPinned { return palette.accent }
+        if conversation.character != nil { return Color(hex: "9B7BD5") }
+        return palette.accent
+    }
+
     var body: some View {
         HStack(spacing: 14) {
-            // Icon
+            // Icon with layered depth
             ZStack {
+                Circle()
+                    .fill(iconAccent.opacity(0.08))
+                    .frame(width: 46, height: 46)
+
                 Circle()
                     .fill(
                         LinearGradient(
-                            colors: [palette.accent.opacity(0.15), palette.accent.opacity(0.05)],
+                            colors: [iconAccent.opacity(0.18), iconAccent.opacity(0.06)],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
                     )
-                    .frame(width: 42, height: 42)
+                    .frame(width: 40, height: 40)
 
                 Image(systemName: cardIcon)
                     .font(.system(size: 16, weight: .medium))
-                    .foregroundStyle(palette.accent)
+                    .foregroundStyle(iconAccent)
             }
 
             VStack(alignment: .leading, spacing: 5) {
                 HStack(spacing: 6) {
                     if conversation.isPinned {
                         Image(systemName: "pin.fill")
-                            .font(.system(size: 9, weight: .bold))
+                            .font(.system(size: 8, weight: .bold))
                             .foregroundStyle(palette.accent)
+                            .rotationEffect(.degrees(-15))
                     }
 
                     Text(conversation.title)
@@ -413,13 +478,17 @@ private struct ConversationCard: View {
 
                     if let mode = conversation.mode {
                         Text(mode.displayName)
-                            .font(.system(size: 10, weight: .semibold, design: .rounded))
+                            .font(.system(size: 9, weight: .bold, design: .rounded))
                             .foregroundStyle(palette.accent)
                             .padding(.horizontal, 6)
                             .padding(.vertical, 2)
                             .background(
                                 Capsule()
                                     .fill(palette.accent.opacity(0.1))
+                            )
+                            .overlay(
+                                Capsule()
+                                    .stroke(palette.accent.opacity(0.12), lineWidth: 0.5)
                             )
                     }
 
@@ -438,18 +507,36 @@ private struct ConversationCard: View {
             }
 
             Image(systemName: "chevron.right")
-                .font(.system(size: 11, weight: .semibold))
-                .foregroundStyle(palette.textMuted)
+                .font(.system(size: 10, weight: .semibold))
+                .foregroundStyle(palette.textMuted.opacity(0.4))
         }
         .padding(14)
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(palette.surfaceElevated)
-                .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+                .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
         )
         .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(palette.border.opacity(0.2), lineWidth: 0.5)
+                .stroke(
+                    conversation.isPinned
+                        ? palette.accent.opacity(0.15)
+                        : palette.border.opacity(0.1),
+                    lineWidth: conversation.isPinned ? 1 : 0.5
+                )
         )
+        // Left accent bar for pinned conversations
+        .overlay(alignment: .leading) {
+            if conversation.isPinned {
+                UnevenRoundedRectangle(
+                    topLeadingRadius: 16,
+                    bottomLeadingRadius: 16,
+                    bottomTrailingRadius: 0,
+                    topTrailingRadius: 0
+                )
+                .fill(palette.accent.opacity(0.5))
+                .frame(width: 3)
+            }
+        }
     }
 }

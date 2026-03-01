@@ -46,17 +46,19 @@ private struct SettingsContentView: View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 24) {
+                    profileHeader
                     profileSection
                     notificationsSection
                     appearanceSection
                     widgetsSection
                     subscriptionSection
                     aboutSection
+                    versionFooter
 
                     Spacer().frame(height: 40)
                 }
                 .padding(.horizontal, 20)
-                .padding(.top, 16)
+                .padding(.top, 8)
             }
             .background(palette.background)
             .navigationBarTitleDisplayMode(.inline)
@@ -126,7 +128,86 @@ private struct SettingsContentView: View {
         }
     }
 
-    // MARK: - Section Card
+    // MARK: - Profile Header (Hero Card)
+
+    private var profileHeader: some View {
+        HStack(spacing: 16) {
+            // Avatar circle
+            ZStack {
+                Circle()
+                    .fill(
+                        LinearGradient(
+                            colors: [palette.accent, palette.accent.opacity(0.7)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .frame(width: 56, height: 56)
+                    .shadow(color: palette.accent.opacity(0.25), radius: 8, y: 3)
+
+                Text(vm.profile.firstName.prefix(1).uppercased())
+                    .font(.system(size: 22, weight: .bold, design: .rounded))
+                    .foregroundStyle(.white)
+            }
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(vm.profile.firstName.isEmpty ? "Welcome" : vm.profile.firstName)
+                    .font(.system(size: 20, weight: .bold, design: .rounded))
+                    .foregroundStyle(palette.textPrimary)
+
+                HStack(spacing: 6) {
+                    Text(vm.profile.faithLevel.displayName)
+                        .font(.system(size: 12, weight: .semibold, design: .rounded))
+                        .foregroundStyle(palette.accent)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 3)
+                        .background(
+                            Capsule().fill(palette.accent.opacity(0.1))
+                        )
+
+                    if vm.profile.isPro {
+                        HStack(spacing: 3) {
+                            Image(systemName: "crown.fill")
+                                .font(.system(size: 8, weight: .bold))
+                            Text("PRO")
+                                .font(.system(size: 9, weight: .bold, design: .rounded))
+                                .tracking(0.5)
+                        }
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 3)
+                        .background(
+                            Capsule()
+                                .fill(
+                                    LinearGradient(
+                                        colors: [palette.accent, palette.accent.opacity(0.8)],
+                                        startPoint: .leading,
+                                        endPoint: .trailing
+                                    )
+                                )
+                        )
+                    }
+                }
+            }
+
+            Spacer()
+        }
+        .padding(16)
+        .background(
+            RoundedRectangle(cornerRadius: 18)
+                .fill(palette.surfaceElevated)
+                .shadow(color: .black.opacity(0.06), radius: 12, y: 5)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 18)
+                .stroke(palette.accent.opacity(0.08), lineWidth: 0.5)
+        )
+        .opacity(appeared ? 1 : 0)
+        .offset(y: appeared ? 0 : 10)
+        .animation(BPAnimation.spring.delay(0.02), value: appeared)
+    }
+
+    // MARK: - Section Helpers
 
     private func sectionCard<Content: View>(
         @ViewBuilder content: () -> Content
@@ -137,24 +218,31 @@ private struct SettingsContentView: View {
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(palette.surfaceElevated)
-                .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+                .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
         )
         .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
+                .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
         )
     }
 
-    private func sectionHeader(_ title: String, index: Int) -> some View {
-        Text(title)
-            .font(.system(size: 11, weight: .bold, design: .rounded))
-            .foregroundStyle(palette.textMuted)
-            .textCase(.uppercase)
-            .tracking(1.5)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.leading, 4)
-            .opacity(appeared ? 1 : 0)
-            .animation(BPAnimation.spring.delay(Double(index) * 0.05), value: appeared)
+    private func sectionHeader(_ title: String, icon: String, index: Int) -> some View {
+        HStack(spacing: 8) {
+            Image(systemName: icon)
+                .font(.system(size: 9, weight: .bold))
+                .foregroundStyle(palette.accent)
+
+            Text(title.uppercased())
+                .font(.system(size: 11, weight: .bold, design: .rounded))
+                .foregroundStyle(palette.textMuted)
+                .tracking(1.5)
+
+            VStack { Divider() }
+                .padding(.leading, 4)
+        }
+        .padding(.leading, 4)
+        .opacity(appeared ? 1 : 0)
+        .animation(BPAnimation.spring.delay(Double(index) * 0.05), value: appeared)
     }
 
     private func sectionFooter(_ text: String) -> some View {
@@ -169,7 +257,7 @@ private struct SettingsContentView: View {
 
     private var profileSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            sectionHeader("Profile", index: 0)
+            sectionHeader("Profile", icon: "person.fill", index: 0)
 
             sectionCard {
                 settingsRow(
@@ -222,35 +310,18 @@ private struct SettingsContentView: View {
 
     private var notificationsSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            sectionHeader("Notifications", index: 1)
+            sectionHeader("Notifications", icon: "bell.fill", index: 1)
 
             sectionCard {
                 // Master toggle
-                HStack(spacing: 14) {
-                    Image(systemName: vm.profile.notificationsEnabled ? "bell.fill" : "bell.slash")
-                        .font(.system(size: 13, weight: .medium))
-                        .foregroundStyle(palette.accent)
-                        .frame(width: 32, height: 32)
-                        .background(
-                            Circle()
-                                .fill(palette.accent.opacity(0.08))
-                        )
-
-                    Text("Notifications")
-                        .font(.system(size: 15, weight: .medium, design: .rounded))
-                        .foregroundStyle(palette.textPrimary)
-
-                    Spacer()
-
-                    Toggle("", isOn: Binding(
+                toggleRow(
+                    icon: vm.profile.notificationsEnabled ? "bell.fill" : "bell.slash",
+                    label: "Notifications",
+                    isOn: Binding(
                         get: { vm.profile.notificationsEnabled },
                         set: { _ in vm.toggleNotifications() }
-                    ))
-                    .tint(palette.accent)
-                    .labelsHidden()
-                }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 12)
+                    )
+                )
 
                 if vm.profile.notificationsEnabled {
                     rowDivider
@@ -266,131 +337,49 @@ private struct SettingsContentView: View {
                     rowDivider
 
                     // Faith Boosts toggle + topic picker
-                    HStack(spacing: 14) {
-                        Image(systemName: "sparkles")
-                            .font(.system(size: 13, weight: .medium))
-                            .foregroundStyle(palette.accent)
-                            .frame(width: 32, height: 32)
-                            .background(
-                                Circle()
-                                    .fill(palette.accent.opacity(0.08))
-                            )
-
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text("Faith Boosts")
-                                .font(.system(size: 15, weight: .medium, design: .rounded))
-                                .foregroundStyle(palette.textPrimary)
-                            Text("Verses & prayers throughout your day")
-                                .font(.system(size: 12, weight: .regular, design: .rounded))
-                                .foregroundStyle(palette.textMuted)
-                        }
-
-                        Spacer()
-
-                        Toggle("", isOn: Binding(
+                    toggleRow(
+                        icon: "sparkles",
+                        label: "Faith Boosts",
+                        subtitle: "Verses & prayers throughout your day",
+                        isOn: Binding(
                             get: { vm.profile.faithBoostsEnabled },
                             set: { _ in vm.toggleFaithBoosts() }
-                        ))
-                        .tint(palette.accent)
-                        .labelsHidden()
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 12)
+                        )
+                    )
 
                     if vm.profile.faithBoostsEnabled {
                         rowDivider
 
-                        Button {
-                            HapticService.selection()
+                        settingsRow(
+                            icon: "list.bullet",
+                            label: "Topics",
+                            value: "\(vm.profile.selectedNotificationTopics.count) selected"
+                        ) {
                             vm.showNotificationTopics = true
-                        } label: {
-                            HStack(spacing: 14) {
-                                Image(systemName: "list.bullet")
-                                    .font(.system(size: 13, weight: .medium))
-                                    .foregroundStyle(palette.accent)
-                                    .frame(width: 32, height: 32)
-                                    .background(
-                                        Circle()
-                                            .fill(palette.accent.opacity(0.08))
-                                    )
-
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text("Topics")
-                                        .font(.system(size: 15, weight: .medium, design: .rounded))
-                                        .foregroundStyle(palette.textPrimary)
-                                    Text("\(vm.profile.selectedNotificationTopics.count) selected")
-                                        .font(.system(size: 12, weight: .regular, design: .rounded))
-                                        .foregroundStyle(palette.textMuted)
-                                }
-
-                                Spacer()
-
-                                Image(systemName: "chevron.right")
-                                    .font(.system(size: 11, weight: .semibold))
-                                    .foregroundStyle(palette.textMuted.opacity(0.5))
-                            }
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 12)
                         }
                     }
 
                     rowDivider
 
-                    // Streak Reminders toggle
-                    HStack(spacing: 14) {
-                        Image(systemName: "flame")
-                            .font(.system(size: 13, weight: .medium))
-                            .foregroundStyle(palette.accent)
-                            .frame(width: 32, height: 32)
-                            .background(
-                                Circle()
-                                    .fill(palette.accent.opacity(0.08))
-                            )
-
-                        Text("Streak Reminders")
-                            .font(.system(size: 15, weight: .medium, design: .rounded))
-                            .foregroundStyle(palette.textPrimary)
-
-                        Spacer()
-
-                        Toggle("", isOn: Binding(
+                    toggleRow(
+                        icon: "flame",
+                        label: "Streak Reminders",
+                        isOn: Binding(
                             get: { vm.profile.streakReminderEnabled },
                             set: { _ in vm.toggleStreakReminder() }
-                        ))
-                        .tint(palette.accent)
-                        .labelsHidden()
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 12)
+                        )
+                    )
 
                     rowDivider
 
-                    // Plan Reminders toggle
-                    HStack(spacing: 14) {
-                        Image(systemName: "calendar")
-                            .font(.system(size: 13, weight: .medium))
-                            .foregroundStyle(palette.accent)
-                            .frame(width: 32, height: 32)
-                            .background(
-                                Circle()
-                                    .fill(palette.accent.opacity(0.08))
-                            )
-
-                        Text("Plan Reminders")
-                            .font(.system(size: 15, weight: .medium, design: .rounded))
-                            .foregroundStyle(palette.textPrimary)
-
-                        Spacer()
-
-                        Toggle("", isOn: Binding(
+                    toggleRow(
+                        icon: "calendar",
+                        label: "Plan Reminders",
+                        isOn: Binding(
                             get: { vm.profile.planReminderEnabled },
                             set: { _ in vm.togglePlanReminder() }
-                        ))
-                        .tint(palette.accent)
-                        .labelsHidden()
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 12)
+                        )
+                    )
                 }
             }
             .opacity(appeared ? 1 : 0)
@@ -403,39 +392,21 @@ private struct SettingsContentView: View {
 
     private var appearanceSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            sectionHeader("Appearance", index: 2)
+            sectionHeader("Appearance", icon: "paintbrush.fill", index: 2)
 
             sectionCard {
-                // Theme toggle
-                HStack(spacing: 14) {
-                    Image(systemName: vm.profile.colorMode == .dark ? "moon.fill" : "sun.max.fill")
-                        .font(.system(size: 13, weight: .medium))
-                        .foregroundStyle(palette.accent)
-                        .frame(width: 32, height: 32)
-                        .background(
-                            Circle()
-                                .fill(palette.accent.opacity(0.08))
-                        )
-                        .contentTransition(.symbolEffect(.replace))
-
-                    Text("Dark Mode")
-                        .font(.system(size: 15, weight: .medium, design: .rounded))
-                        .foregroundStyle(palette.textPrimary)
-
-                    Spacer()
-
-                    Toggle("", isOn: Binding(
+                toggleRow(
+                    icon: vm.profile.colorMode == .dark ? "moon.fill" : "sun.max.fill",
+                    label: "Dark Mode",
+                    isOn: Binding(
                         get: { vm.profile.colorMode == .dark },
                         set: { isDark in
                             HapticService.lightImpact()
                             vm.updateColorMode(isDark ? .dark : .light)
                         }
-                    ))
-                    .tint(palette.accent)
-                    .labelsHidden()
-                }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 12)
+                    ),
+                    useSymbolTransition: true
+                )
 
                 rowDivider
 
@@ -467,7 +438,7 @@ private struct SettingsContentView: View {
 
     private var widgetsSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            sectionHeader("Widgets", index: 3)
+            sectionHeader("Widgets", icon: "square.grid.2x2.fill", index: 3)
 
             sectionCard {
                 settingsRow(
@@ -508,121 +479,152 @@ private struct SettingsContentView: View {
 
     private var subscriptionSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            sectionHeader("Subscription", index: 4)
+            sectionHeader("Subscription", icon: "crown.fill", index: 4)
 
-            sectionCard {
-                if vm.profile.isPro {
-                    HStack(spacing: 14) {
-                        Image(systemName: "crown.fill")
-                            .font(.system(size: 13, weight: .medium))
-                            .foregroundStyle(.white)
-                            .frame(width: 32, height: 32)
-                            .background(
-                                Circle()
-                                    .fill(
-                                        LinearGradient(
-                                            colors: [palette.accent, palette.accent.opacity(0.8)],
-                                            startPoint: .topLeading,
-                                            endPoint: .bottomTrailing
-                                        )
-                                    )
+            if vm.profile.isPro {
+                // Pro status — accent gradient card
+                HStack(spacing: 14) {
+                    ZStack {
+                        Circle()
+                            .fill(
+                                LinearGradient(
+                                    colors: [palette.accent, palette.accent.opacity(0.7)],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
                             )
+                            .frame(width: 40, height: 40)
 
-                        Text("Status")
-                            .font(.system(size: 15, weight: .medium, design: .rounded))
+                        Image(systemName: "crown.fill")
+                            .font(.system(size: 16, weight: .medium))
+                            .foregroundStyle(.white)
+                    }
+
+                    VStack(alignment: .leading, spacing: 3) {
+                        Text("Bible+ Pro")
+                            .font(.system(size: 16, weight: .bold, design: .rounded))
                             .foregroundStyle(palette.textPrimary)
 
-                        Spacer()
-
-                        Text("Bible+ Pro")
-                            .font(.system(size: 14, weight: .semibold, design: .rounded))
-                            .foregroundStyle(palette.accent)
+                        Text("All features unlocked")
+                            .font(.system(size: 12, weight: .regular, design: .rounded))
+                            .foregroundStyle(palette.textSecondary)
                     }
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 12)
 
-                    rowDivider
+                    Spacer()
 
                     Button {
                         if let url = URL(string: "https://apps.apple.com/account/subscriptions") {
                             UIApplication.shared.open(url)
                         }
                     } label: {
-                        HStack(spacing: 14) {
-                            Image(systemName: "gear")
-                                .font(.system(size: 13, weight: .medium))
-                                .foregroundStyle(palette.accent)
-                                .frame(width: 32, height: 32)
-                                .background(
-                                    Circle()
-                                        .fill(palette.accent.opacity(0.08))
-                                )
-
-                            Text("Manage Subscription")
-                                .font(.system(size: 15, weight: .medium, design: .rounded))
-                                .foregroundStyle(palette.textPrimary)
-
-                            Spacer()
-
-                            Image(systemName: "arrow.up.right")
-                                .font(.system(size: 11, weight: .semibold))
-                                .foregroundStyle(palette.textMuted.opacity(0.5))
-                        }
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 12)
-                    }
-                } else {
-                    Button {
-                        showPaywall = true
-                    } label: {
-                        HStack(spacing: 14) {
-                            Image(systemName: "crown")
-                                .font(.system(size: 13, weight: .medium))
-                                .foregroundStyle(palette.accent)
-                                .frame(width: 32, height: 32)
-                                .background(
-                                    Circle()
-                                        .fill(palette.accent.opacity(0.08))
-                                )
-
-                            Text("Status")
-                                .font(.system(size: 15, weight: .medium, design: .rounded))
-                                .foregroundStyle(palette.textPrimary)
-
-                            Spacer()
-
-                            Text("Free")
-                                .font(.system(size: 14, weight: .semibold, design: .rounded))
-                                .foregroundStyle(palette.accent)
-
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: 11, weight: .semibold))
-                                .foregroundStyle(palette.textMuted.opacity(0.5))
-                        }
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 12)
+                        Text("Manage")
+                            .font(.system(size: 12, weight: .semibold, design: .rounded))
+                            .foregroundStyle(palette.accent)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(
+                                Capsule().fill(palette.accent.opacity(0.1))
+                            )
                     }
                 }
+                .padding(16)
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(palette.surfaceElevated)
+                        .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(palette.accent.opacity(0.15), lineWidth: 1)
+                )
+            } else {
+                // Free — upgrade CTA
+                Button {
+                    showPaywall = true
+                } label: {
+                    HStack(spacing: 14) {
+                        ZStack {
+                            Circle()
+                                .fill(palette.accent.opacity(0.12))
+                                .frame(width: 40, height: 40)
+
+                            Image(systemName: "crown")
+                                .font(.system(size: 16, weight: .medium))
+                                .foregroundStyle(palette.accent)
+                        }
+
+                        VStack(alignment: .leading, spacing: 3) {
+                            Text("Upgrade to Pro")
+                                .font(.system(size: 16, weight: .bold, design: .rounded))
+                                .foregroundStyle(palette.textPrimary)
+
+                            Text("Unlock all features & content")
+                                .font(.system(size: 12, weight: .regular, design: .rounded))
+                                .foregroundStyle(palette.textSecondary)
+                        }
+
+                        Spacer()
+
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 12, weight: .semibold))
+                            .foregroundStyle(palette.accent)
+                            .frame(width: 28, height: 28)
+                            .background(
+                                Circle().fill(palette.accent.opacity(0.1))
+                            )
+                    }
+                    .padding(16)
+                    .background(
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(palette.surfaceElevated)
+                            .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(palette.accent.opacity(0.12), lineWidth: 0.5)
+                    )
+                }
+                .buttonStyle(.plain)
             }
-            .opacity(appeared ? 1 : 0)
-            .offset(y: appeared ? 0 : 10)
-            .animation(BPAnimation.spring.delay(0.25), value: appeared)
+
+            // Restore purchases (always visible)
+            if !vm.profile.isPro {
+                Button {
+                    isRestoringPurchases = true
+                    Task {
+                        await storeKitService.restorePurchases()
+                        isRestoringPurchases = false
+                    }
+                } label: {
+                    HStack(spacing: 6) {
+                        if isRestoringPurchases {
+                            ProgressView()
+                                .tint(palette.accent)
+                                .scaleEffect(0.8)
+                        } else {
+                            Image(systemName: "arrow.clockwise")
+                                .font(.system(size: 11, weight: .medium))
+                        }
+                        Text("Restore Purchases")
+                            .font(.system(size: 13, weight: .medium, design: .rounded))
+                    }
+                    .foregroundStyle(palette.textMuted)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(.top, 6)
+                }
+                .disabled(isRestoringPurchases)
+            }
         }
+        .opacity(appeared ? 1 : 0)
+        .offset(y: appeared ? 0 : 10)
+        .animation(BPAnimation.spring.delay(0.25), value: appeared)
     }
 
     // MARK: - About Section
 
-    private var appVersion: String {
-        Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0"
-    }
-
-    private var buildNumber: String {
-        Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
-    }
-
     private var aboutSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            sectionHeader("About", index: 5)
+            sectionHeader("About", icon: "info.circle.fill", index: 5)
 
             sectionCard {
                 aboutRow(icon: "star", label: "Rate the App", trailing: .chevron) {
@@ -652,73 +654,29 @@ private struct SettingsContentView: View {
                         openURL(url)
                     }
                 }
-
-                rowDivider
-
-                // Restore Purchases
-                Button {
-                    isRestoringPurchases = true
-                    Task {
-                        await storeKitService.restorePurchases()
-                        isRestoringPurchases = false
-                    }
-                } label: {
-                    HStack(spacing: 14) {
-                        Image(systemName: "arrow.clockwise")
-                            .font(.system(size: 13, weight: .medium))
-                            .foregroundStyle(palette.accent)
-                            .frame(width: 32, height: 32)
-                            .background(
-                                Circle()
-                                    .fill(palette.accent.opacity(0.08))
-                            )
-
-                        Text("Restore Purchases")
-                            .font(.system(size: 15, weight: .medium, design: .rounded))
-                            .foregroundStyle(palette.textPrimary)
-
-                        Spacer()
-
-                        if isRestoringPurchases {
-                            ProgressView()
-                                .tint(palette.accent)
-                        }
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 12)
-                }
-                .disabled(isRestoringPurchases)
-
-                rowDivider
-
-                // Version
-                HStack(spacing: 14) {
-                    Image(systemName: "info.circle")
-                        .font(.system(size: 13, weight: .medium))
-                        .foregroundStyle(palette.accent)
-                        .frame(width: 32, height: 32)
-                        .background(
-                            Circle()
-                                .fill(palette.accent.opacity(0.08))
-                        )
-
-                    Text("Version")
-                        .font(.system(size: 15, weight: .medium, design: .rounded))
-                        .foregroundStyle(palette.textPrimary)
-
-                    Spacer()
-
-                    Text("\(appVersion) (\(buildNumber))")
-                        .font(.system(size: 14, weight: .medium, design: .rounded))
-                        .foregroundStyle(palette.textMuted)
-                }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 12)
             }
             .opacity(appeared ? 1 : 0)
             .offset(y: appeared ? 0 : 10)
             .animation(BPAnimation.spring.delay(0.3), value: appeared)
         }
+    }
+
+    // MARK: - Version Footer
+
+    private var appVersion: String {
+        Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0"
+    }
+
+    private var buildNumber: String {
+        Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
+    }
+
+    private var versionFooter: some View {
+        Text("Bible+ v\(appVersion) (\(buildNumber))")
+            .font(.system(size: 12, weight: .medium, design: .rounded))
+            .foregroundStyle(palette.textMuted.opacity(0.6))
+            .frame(maxWidth: .infinity, alignment: .center)
+            .padding(.top, 4)
     }
 
     // MARK: - About Row Helper
@@ -749,8 +707,8 @@ private struct SettingsContentView: View {
                 Spacer()
 
                 Image(systemName: trailing == .external ? "arrow.up.right" : "chevron.right")
-                    .font(.system(size: 11, weight: .semibold))
-                    .foregroundStyle(palette.textMuted.opacity(0.5))
+                    .font(.system(size: 10, weight: .semibold))
+                    .foregroundStyle(palette.textMuted.opacity(0.4))
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
@@ -761,7 +719,7 @@ private struct SettingsContentView: View {
 
     private var rowDivider: some View {
         Rectangle()
-            .fill(palette.border.opacity(0.12))
+            .fill(palette.border.opacity(0.1))
             .frame(height: 0.5)
             .padding(.leading, 62)
     }
@@ -790,17 +748,75 @@ private struct SettingsContentView: View {
 
                 if let value {
                     Text(value)
-                        .font(.system(size: 14, weight: .medium, design: .rounded))
+                        .font(.system(size: 13, weight: .medium, design: .rounded))
                         .foregroundStyle(palette.accent)
                         .lineLimit(1)
                 }
 
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 11, weight: .semibold))
-                    .foregroundStyle(palette.textMuted.opacity(0.5))
+                    .font(.system(size: 10, weight: .semibold))
+                    .foregroundStyle(palette.textMuted.opacity(0.4))
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
+        }
+    }
+
+    // MARK: - Toggle Row Helper
+
+    @ViewBuilder
+    private func toggleRow(
+        icon: String,
+        label: String,
+        subtitle: String? = nil,
+        isOn: Binding<Bool>,
+        useSymbolTransition: Bool = false
+    ) -> some View {
+        HStack(spacing: 14) {
+            Image(systemName: icon)
+                .font(.system(size: 13, weight: .medium))
+                .foregroundStyle(palette.accent)
+                .frame(width: 32, height: 32)
+                .background(
+                    Circle()
+                        .fill(palette.accent.opacity(0.08))
+                )
+                .if(useSymbolTransition) { view in
+                    view.contentTransition(.symbolEffect(.replace))
+                }
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(label)
+                    .font(.system(size: 15, weight: .medium, design: .rounded))
+                    .foregroundStyle(palette.textPrimary)
+
+                if let subtitle {
+                    Text(subtitle)
+                        .font(.system(size: 12, weight: .regular, design: .rounded))
+                        .foregroundStyle(palette.textMuted)
+                }
+            }
+
+            Spacer()
+
+            Toggle("", isOn: isOn)
+                .tint(palette.accent)
+                .labelsHidden()
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
+    }
+}
+
+// MARK: - Conditional Modifier
+
+private extension View {
+    @ViewBuilder
+    func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
+        if condition {
+            transform(self)
+        } else {
+            self
         }
     }
 }

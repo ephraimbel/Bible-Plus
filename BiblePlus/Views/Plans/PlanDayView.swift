@@ -38,39 +38,64 @@ struct PlanDayView: View {
                         RoundedRectangle(cornerRadius: 2)
                             .fill(
                                 LinearGradient(
-                                    colors: [palette.accent, palette.accent.opacity(0.5)],
+                                    colors: [palette.accent, palette.accent.opacity(0.4)],
                                     startPoint: .top,
                                     endPoint: .bottom
                                 )
                             )
                             .frame(width: 3)
 
-                        Text(reflection)
-                            .font(.system(size: 16, weight: .regular, design: .serif))
-                            .foregroundStyle(palette.textSecondary)
-                            .lineSpacing(6)
-                            .italic()
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack(spacing: 5) {
+                                Image(systemName: "text.quote")
+                                    .font(.system(size: 8, weight: .bold))
+                                Text("REFLECTION")
+                                    .font(.system(size: 9, weight: .bold, design: .rounded))
+                                    .tracking(1.2)
+                            }
+                            .foregroundStyle(palette.accent.opacity(0.7))
+
+                            Text(reflection)
+                                .font(.system(size: 16, weight: .regular, design: .serif))
+                                .foregroundStyle(palette.textSecondary)
+                                .lineSpacing(6)
+                                .italic()
+                        }
                     }
                     .padding(16)
                     .background(
                         RoundedRectangle(cornerRadius: 16)
                             .fill(palette.surfaceElevated)
-                            .shadow(color: .black.opacity(0.04), radius: 6, y: 3)
+                            .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
                     )
                     .overlay(
                         RoundedRectangle(cornerRadius: 16)
-                            .stroke(palette.border.opacity(0.12), lineWidth: 0.5)
+                            .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
                     )
                     .padding(.horizontal, 24)
                     .fixedSize(horizontal: false, vertical: true)
                 }
 
                 // Readings header
-                Text("TODAY'S READINGS")
-                    .font(.system(size: 11, weight: .bold, design: .rounded))
-                    .tracking(1.5)
-                    .foregroundStyle(palette.textMuted)
-                    .padding(.horizontal, 24)
+                HStack(spacing: 8) {
+                    Image(systemName: "book.fill")
+                        .font(.system(size: 10, weight: .semibold))
+                        .foregroundStyle(palette.accent)
+                        .frame(width: 22, height: 22)
+                        .background(
+                            Circle()
+                                .fill(palette.accent.opacity(0.1))
+                        )
+
+                    Text("TODAY'S READINGS")
+                        .font(.system(size: 11, weight: .bold, design: .rounded))
+                        .tracking(1.5)
+                        .foregroundStyle(palette.textMuted)
+
+                    VStack { Divider() }
+                        .padding(.leading, 4)
+                }
+                .padding(.horizontal, 24)
 
                 // Reading cards
                 VStack(spacing: 0) {
@@ -89,11 +114,11 @@ struct PlanDayView: View {
                 .background(
                     RoundedRectangle(cornerRadius: 16)
                         .fill(palette.surfaceElevated)
-                        .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+                        .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: 16)
-                        .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
+                        .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
                 )
                 .padding(.horizontal, 24)
 
@@ -195,14 +220,17 @@ struct PlanDayView: View {
             PlanChapterReaderView(reading: reading)
         } label: {
             HStack(spacing: 14) {
-                Image(systemName: "book.fill")
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundStyle(palette.accent)
-                    .frame(width: 36, height: 36)
-                    .background(
-                        Circle()
-                            .fill(palette.accent.opacity(0.08))
-                    )
+                ZStack {
+                    Circle()
+                        .fill(palette.accent.opacity(0.05))
+                        .frame(width: 42, height: 42)
+                    Circle()
+                        .fill(palette.accent.opacity(0.1))
+                        .frame(width: 36, height: 36)
+                    Image(systemName: "book.fill")
+                        .font(.system(size: 15, weight: .medium))
+                        .foregroundStyle(palette.accent)
+                }
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(reading.displayReference)

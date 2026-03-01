@@ -123,15 +123,23 @@ struct PlanDetailView: View {
                 .offset(x: 80, y: -10)
 
             VStack(spacing: 14) {
-                // Icon in glass circle
-                Image(systemName: plan.iconName.isEmpty ? "book.fill" : plan.iconName)
-                    .font(.system(size: 28, weight: .light))
-                    .foregroundStyle(.white)
-                    .frame(width: 64, height: 64)
-                    .background(.ultraThinMaterial)
-                    .environment(\.colorScheme, .dark)
-                    .clipShape(Circle())
-                    .shadow(color: .black.opacity(0.15), radius: 8, y: 4)
+                // Icon in double-layer glass circle
+                ZStack {
+                    Circle()
+                        .fill(.white.opacity(0.06))
+                        .frame(width: 80, height: 80)
+                    Circle()
+                        .stroke(.white.opacity(0.12), lineWidth: 1)
+                        .frame(width: 80, height: 80)
+                    Image(systemName: plan.iconName.isEmpty ? "book.fill" : plan.iconName)
+                        .font(.system(size: 28, weight: .light))
+                        .foregroundStyle(.white)
+                        .frame(width: 64, height: 64)
+                        .background(.ultraThinMaterial)
+                        .environment(\.colorScheme, .dark)
+                        .clipShape(Circle())
+                        .shadow(color: .black.opacity(0.2), radius: 10, y: 4)
+                }
 
                 Text(plan.name)
                     .font(.system(size: 26, weight: .bold, design: .rounded))
@@ -275,18 +283,18 @@ struct PlanDetailView: View {
             Spacer()
 
             Image(systemName: "chevron.right")
-                .font(.system(size: 11, weight: .semibold))
-                .foregroundStyle(.tertiary)
+                .font(.system(size: 10, weight: .semibold))
+                .foregroundStyle(palette.textMuted.opacity(0.4))
         }
         .padding(14)
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(palette.surfaceElevated)
-                .shadow(color: .black.opacity(0.05), radius: 6, y: 3)
+                .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
         )
         .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(palette.accent.opacity(0.2), lineWidth: 0.5)
+                .stroke(palette.accent.opacity(0.15), lineWidth: 0.5)
         )
         .onTapGesture {
             HapticService.lightImpact()
@@ -298,12 +306,26 @@ struct PlanDetailView: View {
 
     private var dayList: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("DAILY READINGS")
-                .font(.system(size: 11, weight: .bold, design: .rounded))
-                .tracking(1.5)
-                .foregroundStyle(palette.textMuted)
-                .padding(.horizontal, 8)
-                .padding(.bottom, 12)
+            HStack(spacing: 8) {
+                Image(systemName: "calendar")
+                    .font(.system(size: 10, weight: .semibold))
+                    .foregroundStyle(palette.accent)
+                    .frame(width: 22, height: 22)
+                    .background(
+                        Circle()
+                            .fill(palette.accent.opacity(0.1))
+                    )
+
+                Text("DAILY READINGS")
+                    .font(.system(size: 11, weight: .bold, design: .rounded))
+                    .tracking(1.5)
+                    .foregroundStyle(palette.textMuted)
+
+                VStack { Divider() }
+                    .padding(.leading, 4)
+            }
+            .padding(.horizontal, 8)
+            .padding(.bottom, 12)
 
             VStack(spacing: 0) {
                 ForEach(Array(days.enumerated()), id: \.element.day) { index, day in
@@ -326,11 +348,11 @@ struct PlanDetailView: View {
             .background(
                 RoundedRectangle(cornerRadius: 16)
                     .fill(palette.surfaceElevated)
-                    .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
+                    .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
-                    .stroke(palette.border.opacity(0.15), lineWidth: 0.5)
+                    .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
             )
         }
     }
@@ -365,6 +387,9 @@ struct PlanDetailView: View {
                             .foregroundStyle(.white)
                     } else if isCurrentDay {
                         Circle()
+                            .fill(palette.accent.opacity(0.08))
+                            .frame(width: 40, height: 40)
+                        Circle()
                             .fill(
                                 LinearGradient(
                                     colors: [palette.accent, palette.accent.opacity(0.85)],
@@ -373,7 +398,7 @@ struct PlanDetailView: View {
                                 )
                             )
                             .frame(width: 32, height: 32)
-                            .shadow(color: palette.accent.opacity(0.25), radius: 3, y: 1)
+                            .shadow(color: palette.accent.opacity(0.3), radius: 4, y: 1)
 
                         Text("\(day.day)")
                             .font(.system(size: 13, weight: .bold, design: .rounded))
@@ -407,10 +432,10 @@ struct PlanDetailView: View {
                 Spacer()
 
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 11, weight: .semibold))
-                    .foregroundStyle(.tertiary)
+                    .font(.system(size: 10, weight: .semibold))
+                    .foregroundStyle(palette.textMuted.opacity(0.4))
             }
-            .padding(.vertical, 12)
+            .padding(.vertical, 13)
             .padding(.horizontal, 14)
             .background(
                 RoundedRectangle(cornerRadius: 10)
