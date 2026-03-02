@@ -50,7 +50,7 @@ final class SavedViewModel {
 
     func deleteSavedVerse(_ verse: SavedBibleVerse) {
         modelContext.delete(verse)
-        try? modelContext.save()
+        modelContext.safeSave()
     }
 
     // MARK: - Notes (verses with annotations)
@@ -66,7 +66,7 @@ final class SavedViewModel {
     func clearNote(_ verse: SavedBibleVerse) {
         verse.notes = ""
         verse.updatedAt = Date()
-        try? modelContext.save()
+        modelContext.safeSave()
     }
 
     // MARK: - Collections (used by CollectionPickerSheet)
@@ -90,18 +90,18 @@ final class SavedViewModel {
 
     func unsave(_ content: PrayerContent) {
         content.isSaved = false
-        try? modelContext.save()
+        modelContext.safeSave()
     }
 
     func deleteCollection(_ collection: ContentCollection) {
         modelContext.delete(collection)
-        try? modelContext.save()
+        modelContext.safeSave()
     }
 
     func removeFromCollection(_ content: PrayerContent, collection: ContentCollection) {
         collection.contentIDs.removeAll { $0 == content.id }
         collection.updatedAt = Date()
-        try? modelContext.save()
+        modelContext.safeSave()
     }
 
 }

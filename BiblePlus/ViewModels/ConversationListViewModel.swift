@@ -48,7 +48,7 @@ final class ConversationListViewModel {
     func createNewConversation(title: String = "New Conversation") -> Conversation {
         let conversation = Conversation(title: title)
         modelContext.insert(conversation)
-        try? modelContext.save()
+        modelContext.safeSave()
         conversations.insert(conversation, at: pinnedConversations.count)
         return conversation
     }
@@ -59,7 +59,7 @@ final class ConversationListViewModel {
             character: character
         )
         modelContext.insert(conversation)
-        try? modelContext.save()
+        modelContext.safeSave()
         conversations.insert(conversation, at: pinnedConversations.count)
         return conversation
     }
@@ -67,7 +67,7 @@ final class ConversationListViewModel {
     func createConversationWithMode(_ mode: ConversationMode) -> Conversation {
         let conversation = Conversation(title: "New Conversation", mode: mode)
         modelContext.insert(conversation)
-        try? modelContext.save()
+        modelContext.safeSave()
         conversations.insert(conversation, at: pinnedConversations.count)
         return conversation
     }
@@ -77,7 +77,7 @@ final class ConversationListViewModel {
     func togglePin(_ conversation: Conversation) {
         conversation.isPinned.toggle()
         conversation.updatedAt = Date()
-        try? modelContext.save()
+        modelContext.safeSave()
         loadConversations()
         HapticService.lightImpact()
     }
@@ -95,7 +95,7 @@ final class ConversationListViewModel {
             }
         }
         modelContext.delete(conversation)
-        try? modelContext.save()
+        modelContext.safeSave()
         conversations.removeAll { $0.id == conversation.id }
     }
 

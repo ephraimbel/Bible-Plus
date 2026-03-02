@@ -155,7 +155,7 @@ struct CollectionPickerSheet: View {
 
         let collection = ContentCollection(name: name, contentIDs: [content.id])
         modelContext.insert(collection)
-        try? modelContext.save()
+        modelContext.safeSave()
         newCollectionName = ""
         HapticService.success()
     }
@@ -167,7 +167,7 @@ struct CollectionPickerSheet: View {
             collection.contentIDs.append(content.id)
         }
         collection.updatedAt = Date()
-        try? modelContext.save()
+        modelContext.safeSave()
         HapticService.selection()
     }
 
@@ -175,6 +175,6 @@ struct CollectionPickerSheet: View {
         for index in offsets {
             modelContext.delete(collections[index])
         }
-        try? modelContext.save()
+        modelContext.safeSave()
     }
 }

@@ -56,10 +56,24 @@ final class StreakService {
 
     // MARK: - Core Logic
 
+    private static let lastStreakCheckKey = "io.bibleplus.lastStreakCheckDate"
+
     func checkAndUpdateStreak() -> StreakCheckResult {
         let profile = personalizationService.getOrCreateProfile()
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
+
+        // Dedup gate: only run once per calendar day
+        if let lastCheck = UserDefaults.standard.object(forKey: Self.lastStreakCheckKey) as? Date,
+           calendar.isDate(calendar.startOfDay(for: lastCheck), inSameDayAs: today) {
+            return StreakCheckResult(
+                currentStreak: profile.streakCount,
+                isNewDay: false,
+                isMilestone: false,
+                milestoneType: nil
+            )
+        }
+        UserDefaults.standard.set(Date(), forKey: Self.lastStreakCheckKey)
 
         // First ever open
         guard let lastActive = profile.lastActiveDate else {

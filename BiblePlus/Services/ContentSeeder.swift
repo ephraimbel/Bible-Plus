@@ -41,7 +41,7 @@ enum ContentSeeder {
             maxVersion = max(maxVersion, item.seedVersion)
         }
 
-        try? modelContext.save()
+        modelContext.safeSave()
         UserDefaults.standard.set(maxVersion, forKey: seedVersionKey)
     }
 
@@ -83,7 +83,7 @@ enum ContentSeeder {
             maxVersion = max(maxVersion, item.seedVersion)
         }
 
-        try? modelContext.save()
+        modelContext.safeSave()
         UserDefaults.standard.set(maxVersion, forKey: plansSeedVersionKey)
     }
 
@@ -109,7 +109,7 @@ enum ContentSeeder {
             for msg in nilMessages {
                 msg.conversationId = legacyId
             }
-            try? modelContext.save()
+            modelContext.safeSave()
         }
 
         guard !legacyExists else { return }
@@ -130,7 +130,7 @@ enum ContentSeeder {
             updatedAt: orphans.last?.createdAt ?? Date()
         )
         modelContext.insert(conversation)
-        try? modelContext.save()
+        modelContext.safeSave()
         UserDefaults.standard.set(true, forKey: migrationCompleteKey)
     }
 }

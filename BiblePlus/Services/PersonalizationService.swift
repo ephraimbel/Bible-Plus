@@ -17,7 +17,7 @@ final class PersonalizationService {
         }
         let newProfile = UserProfile()
         modelContext.insert(newProfile)
-        try? modelContext.save()
+        modelContext.safeSave()
         return newProfile
     }
 
@@ -120,6 +120,6 @@ final class PersonalizationService {
     }
 
     func save() {
-        try? modelContext.save()
+        modelContext.safeSave()
     }
 }

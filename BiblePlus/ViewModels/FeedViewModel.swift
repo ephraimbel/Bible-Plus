@@ -255,7 +255,7 @@ final class FeedViewModel {
         } else {
             savedContentIDs.remove(content.id)
         }
-        try? modelContext.save()
+        modelContext.safeSave()
         HapticService.lightImpact()
     }
 
@@ -263,7 +263,7 @@ final class FeedViewModel {
         if !content.isSaved {
             content.isSaved = true
             savedContentIDs.insert(content.id)
-            try? modelContext.save()
+            modelContext.safeSave()
         }
         doubleTapHeartID = content.id
         HapticService.impact(.medium)
@@ -307,7 +307,7 @@ final class FeedViewModel {
         let title = String(personalizedText(for: content).prefix(40))
         let conversation = Conversation(title: title)
         modelContext.insert(conversation)
-        try? modelContext.save()
+        modelContext.safeSave()
         return conversation.id
     }
 
@@ -315,7 +315,7 @@ final class FeedViewModel {
         if !content.isSaved {
             content.isSaved = true
             savedContentIDs.insert(content.id)
-            try? modelContext.save()
+            modelContext.safeSave()
         }
         collectionContent = content
         HapticService.selection()

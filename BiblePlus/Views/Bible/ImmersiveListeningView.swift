@@ -71,7 +71,7 @@ struct ImmersiveListeningView: View {
                 if let profile = try? modelContext.fetch(descriptor).first {
                     profile.selectedBackgroundID = bg.id
                     profile.updatedAt = Date()
-                    try? modelContext.save()
+                    modelContext.safeSave()
                 }
             }
         }

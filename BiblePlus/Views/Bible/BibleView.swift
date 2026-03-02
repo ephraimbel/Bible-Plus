@@ -132,7 +132,7 @@ private struct BibleContentView: View {
         let descriptor = FetchDescriptor<UserProfile>()
         guard let profile = try? modelContext.fetch(descriptor).first else { return }
         profile.colorMode = mode
-        try? modelContext.save()
+        modelContext.safeSave()
     }
 
     private var paperColor: Color {
@@ -143,7 +143,7 @@ private struct BibleContentView: View {
         let title = String(explainPrompt.prefix(40))
         let conversation = Conversation(title: title)
         modelContext.insert(conversation)
-        try? modelContext.save()
+        modelContext.safeSave()
         explainConversationId = conversation.id
     }
 
@@ -828,7 +828,7 @@ private struct BibleContentView: View {
                 let descriptor = FetchDescriptor<UserProfile>()
                 if let profile = try? modelContext.fetch(descriptor).first {
                     profile.selectedBibleVoiceID = voice.rawValue
-                    try? modelContext.save()
+                    modelContext.safeSave()
                 }
 
                 if wasPlaying && !viewModel.verses.isEmpty {

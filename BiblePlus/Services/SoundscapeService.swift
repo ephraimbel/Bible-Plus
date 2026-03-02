@@ -194,11 +194,11 @@ final class SoundscapeService {
 
     private func applyVolume() {
         guard let player = activePlayer, isPlaying else { return }
-        fadeVolume(player: player, to: volume, duration: 0.3)
+        player.setVolume(volume, fadeDuration: 0.3)
     }
 
     private func fadeIn(player: AVAudioPlayer, to target: Float, duration: TimeInterval) {
-        fadeVolume(player: player, to: target, duration: duration)
+        player.setVolume(target, fadeDuration: duration)
     }
 
     private func fadeOut(player: AVAudioPlayer?, duration: TimeInterval, completion: @escaping () -> Void) {
@@ -206,26 +206,9 @@ final class SoundscapeService {
             completion()
             return
         }
-        fadeVolume(player: player, to: 0, duration: duration)
+        player.setVolume(0, fadeDuration: duration)
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
             completion()
-        }
-    }
-
-    private func fadeVolume(player: AVAudioPlayer, to target: Float, duration: TimeInterval) {
-        let steps = 20
-        let interval = duration / Double(steps)
-        let startVolume = player.volume
-        let volumeStep = (target - startVolume) / Float(steps)
-
-        for i in 0...steps {
-            DispatchQueue.main.asyncAfter(deadline: .now() + interval * Double(i)) {
-                if i == steps {
-                    player.volume = target
-                } else {
-                    player.volume = startVolume + volumeStep * Float(i)
-                }
-            }
         }
     }
 

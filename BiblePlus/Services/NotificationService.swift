@@ -190,7 +190,13 @@ final class NotificationService {
                         trigger: trigger
                     )
 
-                    try? await center.add(request)
+                    do {
+                        try await center.add(request)
+                    } catch {
+                        #if DEBUG
+                        print("[NotificationService] Failed to schedule: \(error)")
+                        #endif
+                    }
                 }
             }
         }
@@ -364,7 +370,7 @@ final class NotificationService {
 
     // MARK: - Faith Boosts
 
-    private let faithBoostScheduleDays = 3
+    private let faithBoostScheduleDays = 2  // Reduced from 3 to stay under iOS 64 notification limit
     private let faithBoostHours = [8, 10, 12, 14, 16, 18, 20, 22]
 
     func scheduleFaithBoosts(

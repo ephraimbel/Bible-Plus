@@ -325,16 +325,16 @@ struct RootView: View {
                 }
             }
         }
-        .onChange(of: storeKitService.isPro) { _, _ in
-            if let profile = currentProfile {
-                profile.isPro = true
-                try? modelContext.save()
+        .onChange(of: storeKitService.isPro) { _, newValue in
+            if let profile = currentProfile, profile.isPro != newValue {
+                profile.isPro = newValue
+                modelContext.safeSave()
             }
         }
         .onAppear {
-            if let profile = currentProfile, !profile.isPro {
-                profile.isPro = true
-                try? modelContext.save()
+            if let profile = currentProfile {
+                profile.isPro = storeKitService.isPro
+                modelContext.safeSave()
             }
         }
         } // else

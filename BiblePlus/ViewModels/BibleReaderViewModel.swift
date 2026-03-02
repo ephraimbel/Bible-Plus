@@ -74,7 +74,11 @@ final class BibleReaderViewModel {
 
     private let repository = BibleRepository.shared
     private let modelContext: ModelContext
-    private var loadTask: Task<Void, Never>?
+    private nonisolated(unsafe) var loadTask: Task<Void, Never>?
+
+    deinit {
+        loadTask?.cancel()
+    }
 
     // MARK: - Chapter Read Tracking
 
@@ -192,7 +196,7 @@ final class BibleReaderViewModel {
         if let profile = try? modelContext.fetch(descriptor).first {
             update(profile)
             profile.updatedAt = Date()
-            try? modelContext.save()
+            modelContext.safeSave()
         }
     }
 
@@ -359,7 +363,7 @@ final class BibleReaderViewModel {
             translation: currentTranslation.displayName
         )
         modelContext.insert(saved)
-        try? modelContext.save()
+        modelContext.safeSave()
         savedVerseMap[verse.number] = saved
         ActivityService.log(.verseSaved, detail: "\(selectedBook.name) \(selectedChapter):\(verse.number)", in: modelContext)
         HapticService.success()
@@ -368,7 +372,7 @@ final class BibleReaderViewModel {
     func unsaveVerse(_ verse: VerseItem) {
         guard let saved = savedVerseMap[verse.number] else { return }
         modelContext.delete(saved)
-        try? modelContext.save()
+        modelContext.safeSave()
         savedVerseMap.removeValue(forKey: verse.number)
         HapticService.lightImpact()
     }
@@ -390,7 +394,7 @@ final class BibleReaderViewModel {
             modelContext.insert(saved)
             savedVerseMap[verse.number] = saved
         }
-        try? modelContext.save()
+        modelContext.safeSave()
         ActivityService.log(.verseHighlighted, detail: "\(selectedBook.name) \(selectedChapter):\(verse.number)", in: modelContext)
         HapticService.lightImpact()
     }
@@ -399,7 +403,7 @@ final class BibleReaderViewModel {
         guard let saved = savedVerseMap[verse.number] else { return }
         saved.highlightColor = nil
         saved.updatedAt = Date()
-        try? modelContext.save()
+        modelContext.safeSave()
     }
 
     func noteText(for number: Int) -> String? {
@@ -424,7 +428,7 @@ final class BibleReaderViewModel {
             modelContext.insert(saved)
             savedVerseMap[verse.number] = saved
         }
-        try? modelContext.save()
+        modelContext.safeSave()
         HapticService.success()
     }
 

@@ -65,11 +65,12 @@ enum QuickPromptEngine {
 
     /// Scans recent user messages to extract topic keywords.
     static func extractRecentTopics(from modelContext: ModelContext, limit: Int = 50) -> [String: Int] {
-        let descriptor = FetchDescriptor<ChatMessage>(
+        var descriptor = FetchDescriptor<ChatMessage>(
             sortBy: [SortDescriptor(\.createdAt, order: .reverse)]
         )
-        let allMessages = (try? modelContext.fetch(descriptor)) ?? []
-        let userMessages = allMessages.filter { $0.role == .user }.prefix(limit)
+        descriptor.fetchLimit = limit * 2 // Fetch a small multiple to account for non-user messages
+        let messages = (try? modelContext.fetch(descriptor)) ?? []
+        let userMessages = messages.filter { $0.role == .user }.prefix(limit)
 
         var topicCounts: [String: Int] = [:]
         for message in userMessages {

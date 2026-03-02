@@ -78,7 +78,7 @@ struct ContentView: View {
                 let descriptor = FetchDescriptor<UserProfile>()
                 if let profile = try? modelContext.fetch(descriptor).first {
                     profile.selectedSoundscapeID = Soundscape.eveningRest.rawValue
-                    try? modelContext.save()
+                    modelContext.safeSave()
                 }
             }
         }
@@ -135,7 +135,7 @@ struct ContentView: View {
             // Create conversation
             let conversation = Conversation(title: title)
             modelContext.insert(conversation)
-            try? modelContext.save()
+            modelContext.safeSave()
 
             // Set pending navigation — ConversationListView picks this up on appear
             pendingConversation = PendingConversation(
@@ -177,7 +177,7 @@ struct ContentView: View {
             )
             if let content = try? modelContext.fetch(descriptor).first {
                 content.isSaved = true
-                try? modelContext.save()
+                modelContext.safeSave()
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: .progressDeepLink)) { _ in

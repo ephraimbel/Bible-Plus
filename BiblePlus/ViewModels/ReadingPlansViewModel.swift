@@ -105,7 +105,7 @@ final class ReadingPlansViewModel {
 
         let progress = UserPlanProgress(planID: plan.id)
         modelContext.insert(progress)
-        try? modelContext.save()
+        modelContext.safeSave()
         HapticService.success()
         loadPlans()
         navigateToPlanDayID = plan.id
@@ -125,14 +125,14 @@ final class ReadingPlansViewModel {
             showCompletion = true
         }
 
-        try? modelContext.save()
+        modelContext.safeSave()
         HapticService.success()
         loadPlans()
     }
 
     func abandonPlan(_ progress: UserPlanProgress) {
         progress.isActive = false
-        try? modelContext.save()
+        modelContext.safeSave()
         HapticService.lightImpact()
         loadPlans()
     }
@@ -148,7 +148,7 @@ final class ReadingPlansViewModel {
         }
         let progress = UserPlanProgress(planID: plan.id)
         modelContext.insert(progress)
-        try? modelContext.save()
+        modelContext.safeSave()
         HapticService.success()
         loadPlans()
         navigateToPlanDayID = plan.id
