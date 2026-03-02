@@ -3,98 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bible Plus - Scripture That Speaks to Your Life</title>
-    <meta name="description" content="A premium Bible app with personalized daily content, AI-powered guidance, audio Bible, and sanctuary mode. Available on iOS.">
+    <title>Bible Plus — Scripture That Speaks to Your Life</title>
+    <meta name="description" content="A premium Bible app with personalized daily content, AI-powered pastoral guidance, and a sanctuary for your quiet time. Free on iOS.">
+    <meta property="og:title" content="Bible Plus — Scripture That Speaks to Your Life">
+    <meta property="og:description" content="Personalized daily verses, AI-powered guidance, and a sanctuary for your quiet time with God.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bibleplus.io">
+    <meta property="og:image" content="https://bibleplus.io/images/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="apple-itunes-app" content="app-id=YOUR_APP_ID">
     <link rel="icon" type="image/png" href="/images/logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* ========== DESIGN SYSTEM ========== */
         :root {
             --bg: #FAF8F4;
+            --bg-warm: #F5F0E8;
             --surface: #F0E8D8;
             --accent: #C9A96E;
             --accent-deep: #B8943E;
+            --accent-light: #E8D4B0;
             --ink: #2A2118;
-            --ink-80: rgba(42, 33, 24, 0.8);
-            --ink-70: rgba(42, 33, 24, 0.7);
-            --ink-50: rgba(42, 33, 24, 0.5);
-            --ink-10: rgba(42, 33, 24, 0.1);
-            --ink-05: rgba(42, 33, 24, 0.05);
-            --accent-10: rgba(201, 169, 110, 0.1);
-            --accent-15: rgba(201, 169, 110, 0.15);
-            --accent-20: rgba(201, 169, 110, 0.2);
-            --accent-30: rgba(201, 169, 110, 0.3);
+            --ink-90: rgba(42,33,24,0.9);
+            --ink-80: rgba(42,33,24,0.8);
+            --ink-70: rgba(42,33,24,0.7);
+            --ink-50: rgba(42,33,24,0.5);
+            --ink-30: rgba(42,33,24,0.3);
+            --ink-10: rgba(42,33,24,0.1);
+            --ink-05: rgba(42,33,24,0.05);
+            --accent-10: rgba(201,169,110,0.1);
+            --accent-15: rgba(201,169,110,0.15);
+            --accent-20: rgba(201,169,110,0.2);
+            --accent-30: rgba(201,169,110,0.3);
+            --dark: #1C1814;
+            --dark-surface: #2A2218;
+            --dark-text: #F5F0E8;
             --white: #FFFFFF;
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
+        /* ========== RESET & BASE ========== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg);
             color: var(--ink);
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
         }
 
-        /* --- Animations --- */
+        /* Subtle grain overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            opacity: 0.025;
+            pointer-events: none;
+            z-index: 9999;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 200px;
+        }
+
+        img { display: block; max-width: 100%; }
+        a { color: inherit; }
+
+        /* ========== SCROLL PROGRESS BAR ========== */
+        .scroll-progress {
+            position: fixed;
+            top: 0; left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            z-index: 200;
+            transition: none;
+        }
+
+        /* ========== ANIMATIONS ========== */
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(40px) rotate(1.5deg); }
-            to { opacity: 1; transform: translateY(0) rotate(0deg); }
+            from { opacity: 0; transform: translateY(36px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-16px); }
+            50% { transform: translateY(-14px); }
         }
         @keyframes floatSlow {
-            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            0%, 100% { transform: translateY(0) rotate(-1.5deg); }
             50% { transform: translateY(-10px) rotate(1deg); }
         }
+        @keyframes auroraMove1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(60px, -40px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.95); }
+        }
+        @keyframes auroraMove2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-50px, 50px) scale(1.05); }
+            66% { transform: translate(40px, -20px) scale(0.9); }
+        }
+        @keyframes auroraMove3 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -60px) scale(1.15); }
+        }
         @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
         }
         @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(201,169,110,0.3); }
-            50% { box-shadow: 0 0 40px 8px rgba(201,169,110,0.15); }
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.7; }
         }
 
-        .fade-up {
-            opacity: 0;
-            animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        .fade-up-d1 { animation-delay: 0.12s; }
-        .fade-up-d2 { animation-delay: 0.24s; }
-        .fade-up-d3 { animation-delay: 0.4s; }
-        .fade-up-d4 { animation-delay: 0.55s; }
+        .fade-up { opacity: 0; animation: fadeUp 0.9s var(--ease-out) forwards; }
+        .fade-up-d1 { animation-delay: 0.1s; }
+        .fade-up-d2 { animation-delay: 0.2s; }
+        .fade-up-d3 { animation-delay: 0.35s; }
+        .fade-up-d4 { animation-delay: 0.5s; }
+        .fade-up-d5 { animation-delay: 0.65s; }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(48px);
-            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal { opacity: 0; transform: translateY(48px); transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
 
-        /* --- Nav --- */
+        /* ========== NAVIGATION ========== */
         nav {
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 100;
-            padding: 14px 32px;
-            transition: background 0.5s, border-color 0.5s, box-shadow 0.5s;
+            padding: 16px 32px;
+            transition: background 0.4s, border-color 0.4s, box-shadow 0.4s, padding 0.4s;
             border-bottom: 1px solid transparent;
         }
         nav.scrolled {
-            background: rgba(250, 248, 244, 0.82);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            padding: 10px 32px;
+            background: rgba(250, 248, 244, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom-color: var(--ink-10);
-            box-shadow: 0 1px 20px rgba(42,33,24,0.04);
+            box-shadow: 0 1px 24px rgba(42,33,24,0.04);
         }
         .nav-inner {
             max-width: 1200px;
@@ -110,15 +164,13 @@
             text-decoration: none;
         }
         .nav-logo {
-            width: 40px;
-            height: 40px;
+            width: 40px; height: 40px;
             border-radius: 10px;
             object-fit: cover;
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.3s var(--ease-out);
         }
         .nav-brand:hover .nav-logo { transform: scale(1.08) rotate(3deg); }
         .nav-name {
-            font-family: 'Manrope', sans-serif;
             font-size: 20px;
             font-weight: 800;
             color: var(--ink);
@@ -126,7 +178,7 @@
         }
         .nav-links {
             display: flex;
-            gap: 32px;
+            gap: 36px;
             align-items: center;
         }
         .nav-links a {
@@ -141,33 +193,92 @@
         .nav-links a:not(.nav-cta)::after {
             content: '';
             position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
+            bottom: -4px; left: 0;
+            width: 0; height: 2px;
             background: var(--accent);
             border-radius: 1px;
-            transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: width 0.3s var(--ease-out);
         }
         .nav-links a:not(.nav-cta):hover::after { width: 100%; }
         .nav-cta {
-            background: var(--accent) !important;
+            background: var(--ink) !important;
             color: var(--white) !important;
             padding: 10px 24px;
-            border-radius: 30px;
+            border-radius: 100px;
             font-weight: 700 !important;
             font-size: 13px !important;
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s;
-            box-shadow: 0 4px 20px rgba(201, 169, 110, 0.25);
+            letter-spacing: 0.3px;
+            transition: transform 0.25s var(--ease-out), box-shadow 0.25s;
+            box-shadow: 0 4px 16px rgba(42,33,24,0.12);
         }
         .nav-cta:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 28px rgba(201, 169, 110, 0.35);
+            box-shadow: 0 8px 28px rgba(42,33,24,0.18);
         }
 
-        /* --- Hero --- */
+        /* Mobile menu button */
+        .nav-hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 32px; height: 32px;
+            position: relative;
+            z-index: 110;
+        }
+        .nav-hamburger span {
+            display: block;
+            width: 22px; height: 2px;
+            background: var(--ink);
+            border-radius: 2px;
+            transition: transform 0.3s var(--ease-out), opacity 0.3s;
+            position: absolute;
+            left: 5px;
+        }
+        .nav-hamburger span:nth-child(1) { top: 9px; }
+        .nav-hamburger span:nth-child(2) { top: 15px; }
+        .nav-hamburger span:nth-child(3) { top: 21px; }
+        .nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+        .nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+        /* Mobile menu overlay */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(250, 248, 244, 0.98);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            z-index: 99;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+            opacity: 0;
+            transition: opacity 0.3s var(--ease-out);
+        }
+        .mobile-menu.open { display: flex; opacity: 1; }
+        .mobile-menu a {
+            font-family: 'Instrument Serif', serif;
+            font-size: 32px;
+            color: var(--ink);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .mobile-menu a:hover { color: var(--accent); }
+        .mobile-menu .mobile-cta {
+            font-family: 'Manrope', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            background: var(--ink);
+            color: var(--white);
+            padding: 16px 40px;
+            border-radius: 100px;
+            margin-top: 16px;
+        }
+
+        /* ========== HERO ========== */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -176,32 +287,49 @@
             text-align: center;
             padding: 140px 32px 80px;
             position: relative;
+            overflow: hidden;
         }
-        .hero-blur-1 {
+        .aurora {
             position: absolute;
-            top: -100px;
-            right: -80px;
-            width: 600px;
-            height: 600px;
-            background: var(--accent-15);
-            border-radius: 50%;
-            filter: blur(130px);
+            inset: 0;
+            overflow: hidden;
             pointer-events: none;
         }
-        .hero-blur-2 {
+        .aurora-orb {
             position: absolute;
-            bottom: -100px;
-            left: -150px;
-            width: 500px;
-            height: 500px;
-            background: var(--accent-10);
             border-radius: 50%;
-            filter: blur(110px);
+            filter: blur(120px);
+            will-change: transform;
+        }
+        .aurora-orb:nth-child(1) {
+            width: 600px; height: 600px;
+            background: rgba(201,169,110,0.2);
+            top: -200px; right: -100px;
+            animation: auroraMove1 25s ease-in-out infinite;
+        }
+        .aurora-orb:nth-child(2) {
+            width: 500px; height: 500px;
+            background: rgba(212,184,150,0.18);
+            bottom: -150px; left: -150px;
+            animation: auroraMove2 30s ease-in-out infinite;
+        }
+        .aurora-orb:nth-child(3) {
+            width: 400px; height: 400px;
+            background: rgba(232,212,176,0.15);
+            top: 30%; left: 35%;
+            animation: auroraMove3 20s ease-in-out infinite;
+        }
+        #particles-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
         }
         .hero-content {
-            max-width: 840px;
+            max-width: 880px;
             position: relative;
+            z-index: 2;
         }
         .hero-badge {
             display: inline-flex;
@@ -209,62 +337,64 @@
             gap: 8px;
             background: var(--white);
             border: 1px solid var(--accent-20);
-            border-radius: 30px;
+            border-radius: 100px;
             padding: 8px 20px;
-            font-size: 14px;
+            font-size: 13px;
             color: var(--accent-deep);
-            font-weight: 600;
-            margin-bottom: 40px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            margin-bottom: 36px;
+            box-shadow: 0 2px 12px rgba(201,169,110,0.08);
         }
-        .hero-badge svg {
-            width: 16px;
-            height: 16px;
-            color: var(--accent);
-        }
+        .hero-badge svg { width: 14px; height: 14px; color: var(--accent); }
         .hero h1 {
             font-family: 'Instrument Serif', serif;
-            font-size: clamp(3.2rem, 8vw, 8rem);
+            font-size: clamp(3.2rem, 8.5vw, 7.5rem);
             font-weight: 400;
-            line-height: 1.0;
+            line-height: 0.98;
             letter-spacing: -2px;
-            margin-bottom: 28px;
+            margin-bottom: 32px;
         }
         .hero h1 em {
             font-style: italic;
-            color: var(--accent);
+            background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         .hero-sub {
-            font-size: 19px;
+            font-size: 18px;
             line-height: 1.7;
             color: var(--ink-70);
-            max-width: 520px;
-            margin: 0 auto 48px;
+            max-width: 500px;
+            margin: 0 auto 44px;
             font-weight: 400;
         }
         .hero-buttons {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 16px;
+            gap: 14px;
             flex-wrap: wrap;
         }
         .btn-primary {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: var(--accent);
+            background: var(--ink);
             color: var(--white);
-            padding: 18px 42px;
-            border-radius: 30px;
+            padding: 18px 40px;
+            border-radius: 100px;
             font-size: 16px;
             font-weight: 700;
             text-decoration: none;
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
-            box-shadow: 0 8px 32px rgba(201, 169, 110, 0.25);
+            transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
+            box-shadow: 0 8px 32px rgba(42,33,24,0.15);
+            letter-spacing: -0.2px;
         }
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 14px 44px rgba(201, 169, 110, 0.35);
+            box-shadow: 0 16px 48px rgba(42,33,24,0.2);
         }
         .btn-primary svg { width: 20px; height: 20px; }
         .btn-ghost {
@@ -274,114 +404,218 @@
             background: transparent;
             color: var(--ink);
             padding: 18px 36px;
-            border-radius: 30px;
+            border-radius: 100px;
             font-size: 16px;
             font-weight: 600;
             text-decoration: none;
-            border: 2px solid var(--ink-10);
-            transition: border-color 0.25s, background 0.25s;
+            border: 1.5px solid var(--ink-10);
+            transition: border-color 0.25s, background 0.25s, transform 0.25s var(--ease-out);
+            letter-spacing: -0.2px;
         }
         .btn-ghost:hover {
             border-color: var(--accent-30);
             background: var(--accent-10);
+            transform: translateY(-2px);
         }
-        .hero-note {
-            margin-top: 20px;
+        .hero-trust {
+            margin-top: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+        .hero-trust-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
             font-size: 14px;
             color: var(--ink-50);
-            font-weight: 500;
+            font-weight: 600;
         }
+        .hero-trust-item svg { width: 16px; height: 16px; color: var(--accent); }
 
-        /* --- Phone Showcase --- */
-        .showcase {
-            padding: 0 32px 120px;
-            position: relative;
+        /* ========== SOCIAL PROOF BAR ========== */
+        .social-proof {
+            padding: 48px 32px;
+            border-top: 1px solid var(--ink-05);
+            border-bottom: 1px solid var(--ink-05);
+            background: var(--white);
         }
-        .showcase-inner {
-            max-width: 1200px;
+        .social-proof-inner {
+            max-width: 900px;
             margin: 0 auto;
             display: flex;
             justify-content: center;
-            align-items: flex-end;
-            gap: 24px;
-            perspective: 1200px;
+            align-items: center;
+            gap: 64px;
+            flex-wrap: wrap;
         }
-        .phone-frame {
-            width: 200px;
-            border-radius: 32px;
+        .proof-stat {
+            text-align: center;
+        }
+        .proof-stat-number {
+            font-family: 'Instrument Serif', serif;
+            font-size: 36px;
+            color: var(--ink);
+            letter-spacing: -1px;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        .proof-stat-label {
+            font-size: 13px;
+            color: var(--ink-50);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .proof-divider {
+            width: 1px;
+            height: 40px;
+            background: var(--ink-10);
+        }
+
+        /* ========== IPHONE BEZEL ========== */
+        .iphone {
+            background: #000;
+            border-radius: 48px;
+            padding: 10px;
+            position: relative;
+            box-shadow:
+                0 0 0 1px rgba(255,255,255,0.1) inset,
+                0 24px 80px rgba(0,0,0,0.2),
+                0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+            will-change: transform;
+        }
+        .iphone-screen {
+            border-radius: 38px;
             overflow: hidden;
-            box-shadow: 0 24px 80px rgba(42,33,24,0.12), 0 4px 20px rgba(42,33,24,0.06);
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
         }
-        .phone-frame img {
+        .iphone-screen img {
             width: 100%;
             height: auto;
             display: block;
         }
-        .phone-frame:nth-child(1) { animation: floatSlow 7s ease-in-out infinite; animation-delay: 0s; }
-        .phone-frame:nth-child(2) { animation: floatSlow 6.5s ease-in-out infinite; animation-delay: 0.3s; }
-        .phone-frame:nth-child(3) { animation: float 6s ease-in-out infinite; animation-delay: 0.6s; transform: scale(1.08); z-index: 2; }
-        .phone-frame:nth-child(4) { animation: floatSlow 7.5s ease-in-out infinite; animation-delay: 0.9s; }
-        .phone-frame:nth-child(5) { animation: floatSlow 7s ease-in-out infinite; animation-delay: 1.2s; }
-        .phone-frame:hover { transform: translateY(-8px) scale(1.04); z-index: 10; }
-        .phone-frame:nth-child(3):hover { transform: translateY(-8px) scale(1.12); }
+        /* Side button details */
+        .iphone::before {
+            content: '';
+            position: absolute;
+            right: -2px;
+            top: 120px;
+            width: 3px;
+            height: 56px;
+            background: #1a1a1a;
+            border-radius: 0 2px 2px 0;
+        }
+        .iphone::after {
+            content: '';
+            position: absolute;
+            left: -2px;
+            top: 100px;
+            width: 3px;
+            height: 32px;
+            background: #1a1a1a;
+            border-radius: 2px 0 0 2px;
+            box-shadow: 0 44px 0 #1a1a1a, 0 80px 0 #1a1a1a;
+        }
 
-        /* --- Features Section --- */
+        /* ========== PHONE SHOWCASE ========== */
+        .showcase {
+            padding: 80px 32px 140px;
+            position: relative;
+        }
+        .showcase-glow {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(201,169,110,0.12) 0%, transparent 70%);
+            pointer-events: none;
+            animation: pulseGlow 6s ease-in-out infinite;
+        }
+        .showcase-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 28px;
+            perspective: 1200px;
+            position: relative;
+            z-index: 1;
+        }
+        .showcase-inner .iphone { width: 200px; }
+        .showcase-inner .iphone:nth-child(1) { animation: floatSlow 7s ease-in-out infinite; opacity: 0.8; transform: scale(0.88) rotate(-3deg); }
+        .showcase-inner .iphone:nth-child(2) { animation: float 6s ease-in-out infinite 0.3s; transform: scale(1.05); z-index: 2; opacity: 1; box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset, 0 40px 100px rgba(0,0,0,0.25), 0 8px 32px rgba(0,0,0,0.12); }
+        .showcase-inner .iphone:nth-child(3) { animation: floatSlow 6.5s ease-in-out infinite 0.6s; opacity: 0.85; transform: scale(0.92); }
+        .showcase-inner .iphone:nth-child(4) { animation: floatSlow 7.5s ease-in-out infinite 0.9s; opacity: 0.8; transform: scale(0.88) rotate(3deg); }
+        .showcase-inner .iphone:hover { transform: translateY(-8px) scale(1.04) rotate(0deg) !important; z-index: 10; opacity: 1 !important; box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset, 0 48px 100px rgba(0,0,0,0.25); }
+
+        /* ========== FEATURES ========== */
         .features {
-            padding: 120px 32px;
+            padding: 120px 32px 80px;
             max-width: 1200px;
             margin: 0 auto;
         }
         .features-header {
             text-align: center;
-            margin-bottom: 72px;
+            margin-bottom: 100px;
+        }
+        .section-label {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 20px;
         }
         .features-header h2 {
             font-family: 'Instrument Serif', serif;
-            font-size: clamp(2.4rem, 4vw, 3.5rem);
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
             font-weight: 400;
             letter-spacing: -1px;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
+            line-height: 1.1;
         }
         .features-header p {
             color: var(--ink-70);
             font-size: 18px;
             line-height: 1.7;
-            max-width: 480px;
+            max-width: 460px;
             margin: 0 auto;
         }
 
-        /* Feature Row */
         .feature-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 80px;
             align-items: center;
-            margin-bottom: 120px;
+            margin-bottom: 140px;
         }
         .feature-row.reverse { direction: rtl; }
         .feature-row.reverse > * { direction: ltr; }
-        .feature-text {}
         .feature-label {
             display: inline-block;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.8px;
             color: var(--accent);
             background: var(--accent-10);
             padding: 6px 14px;
-            border-radius: 20px;
+            border-radius: 100px;
             margin-bottom: 20px;
         }
         .feature-text h3 {
             font-family: 'Instrument Serif', serif;
             font-size: clamp(1.8rem, 3vw, 2.6rem);
             font-weight: 400;
-            line-height: 1.15;
+            line-height: 1.12;
             letter-spacing: -0.5px;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
         .feature-text h3 em {
             font-style: italic;
@@ -393,132 +627,221 @@
             color: var(--ink-70);
             max-width: 420px;
         }
-        .feature-visual {
-            display: flex;
-            justify-content: center;
+        .feature-visual { display: flex; justify-content: center; }
+        .feature-visual .iphone {
+            width: 280px;
         }
-        .feature-phone {
-            width: 260px;
-            border-radius: 36px;
-            overflow: hidden;
-            box-shadow: 0 32px 80px rgba(42,33,24,0.12), 0 4px 24px rgba(42,33,24,0.06);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .feature-phone:hover { transform: translateY(-6px) rotate(1deg); }
-        .feature-phone img {
-            width: 100%;
-            height: auto;
-            display: block;
+        .feature-visual .iphone:hover {
+            transform: translateY(-8px) rotate(1deg);
         }
 
-        /* --- Verse Section --- */
-        .verse-section {
-            padding: 100px 32px;
+        /* ========== SPIRITUAL BREAK (DARK) ========== */
+        .spiritual-break {
+            background: var(--dark);
+            padding: 140px 32px;
             text-align: center;
             position: relative;
+            overflow: hidden;
         }
-        .verse-section::before {
-            content: '\201C';
-            font-family: 'Instrument Serif', serif;
-            font-size: 220px;
-            color: var(--accent-15);
+        .spiritual-glow {
             position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            line-height: 1;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px; height: 400px;
+            background: radial-gradient(ellipse, rgba(201,169,110,0.1) 0%, transparent 70%);
             pointer-events: none;
         }
-        .verse-section blockquote {
+        .spiritual-break .quote-icon {
             font-family: 'Instrument Serif', serif;
-            font-size: clamp(1.6rem, 3.5vw, 2.5rem);
-            font-style: italic;
-            line-height: 1.5;
-            max-width: 640px;
-            margin: 0 auto 20px;
-            color: var(--ink);
+            font-size: 180px;
+            color: rgba(201,169,110,0.08);
+            line-height: 0.6;
+            margin-bottom: 24px;
             position: relative;
         }
-        .verse-section cite {
+        .spiritual-break blockquote {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+            font-style: italic;
+            line-height: 1.45;
+            max-width: 680px;
+            margin: 0 auto 28px;
+            color: var(--dark-text);
+            position: relative;
+        }
+        .spiritual-break cite {
             font-family: 'Manrope', sans-serif;
             font-style: normal;
-            font-size: 16px;
+            font-size: 15px;
             color: var(--accent);
             font-weight: 700;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
         }
 
-        /* --- CTA Section --- */
+        /* ========== TESTIMONIALS ========== */
+        .testimonials {
+            padding: 140px 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 72px;
+        }
+        .testimonials-header h2 {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+            font-weight: 400;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+        }
+        .testimonials-header p {
+            color: var(--ink-70);
+            font-size: 18px;
+            max-width: 440px;
+            margin: 0 auto;
+        }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+        .testimonial-card {
+            background: var(--white);
+            border: 1px solid var(--ink-05);
+            border-radius: 24px;
+            padding: 36px;
+            transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+        }
+        .testimonial-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(42,33,24,0.08);
+        }
+        .testimonial-stars {
+            display: flex;
+            gap: 3px;
+            margin-bottom: 20px;
+        }
+        .testimonial-stars svg {
+            width: 16px; height: 16px;
+            fill: var(--accent);
+        }
+        .testimonial-card blockquote {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--ink-80);
+            margin-bottom: 24px;
+            font-style: normal;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .testimonial-avatar {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: var(--accent-15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--accent-deep);
+        }
+        .testimonial-name {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--ink);
+        }
+        .testimonial-loc {
+            font-size: 13px;
+            color: var(--ink-50);
+        }
+
+        /* ========== CTA SECTION ========== */
         .cta-section {
-            padding: 0 32px 120px;
+            padding: 0 32px 140px;
             max-width: 1200px;
             margin: 0 auto;
         }
         .cta-card {
-            background: var(--accent);
-            border-radius: 48px;
-            padding: 88px 48px;
+            background: var(--dark);
+            border-radius: 40px;
+            padding: 100px 48px;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
-        .cta-card::before {
-            content: '';
+        .cta-glow {
             position: absolute;
-            inset: 0;
-            background-image: radial-gradient(rgba(255,255,255,0.18) 1px, transparent 1px);
-            background-size: 30px 30px;
+            top: -100px; left: 50%;
+            transform: translateX(-50%);
+            width: 600px; height: 400px;
+            background: radial-gradient(ellipse, rgba(201,169,110,0.15) 0%, transparent 70%);
             pointer-events: none;
         }
         .cta-card h2 {
             font-family: 'Instrument Serif', serif;
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-size: clamp(2.5rem, 5.5vw, 4.5rem);
             font-weight: 400;
-            color: var(--white);
+            color: var(--dark-text);
             margin-bottom: 20px;
             position: relative;
             letter-spacing: -1px;
+            line-height: 1.05;
+        }
+        .cta-card h2 em {
+            font-style: italic;
+            color: var(--accent);
         }
         .cta-card p {
             font-size: 18px;
-            color: rgba(255,255,255,0.8);
-            margin-bottom: 40px;
+            color: rgba(245,240,232,0.6);
+            margin-bottom: 44px;
             position: relative;
+            max-width: 420px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
         }
-        .btn-cta-white {
+        .btn-cta {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: var(--white);
-            color: var(--accent-deep);
-            padding: 18px 42px;
-            border-radius: 30px;
-            font-size: 16px;
+            background: var(--accent);
+            color: var(--white);
+            padding: 20px 48px;
+            border-radius: 100px;
+            font-size: 17px;
             font-weight: 700;
             text-decoration: none;
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
+            box-shadow: 0 8px 32px rgba(201,169,110,0.3);
             position: relative;
+            letter-spacing: -0.2px;
         }
-        .btn-cta-white:hover {
+        .btn-cta:hover {
             transform: translateY(-3px);
-            box-shadow: 0 14px 44px rgba(0,0,0,0.15);
+            box-shadow: 0 16px 48px rgba(201,169,110,0.4);
         }
-        .btn-cta-white svg { width: 20px; height: 20px; }
+        .btn-cta svg { width: 20px; height: 20px; }
         .cta-trust {
             margin-top: 28px;
             font-size: 13px;
-            color: rgba(255,255,255,0.55);
+            color: rgba(245,240,232,0.35);
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             position: relative;
         }
 
-        /* --- Footer --- */
+        /* ========== FOOTER ========== */
         footer {
-            background: var(--ink);
-            padding: 72px 32px 44px;
+            background: var(--dark);
+            border-top: 1px solid rgba(201,169,110,0.08);
+            padding: 80px 32px 48px;
         }
         .footer-inner {
             max-width: 1200px;
@@ -528,7 +851,7 @@
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: 48px;
-            margin-bottom: 56px;
+            margin-bottom: 64px;
         }
         .footer-logo {
             display: flex;
@@ -537,19 +860,18 @@
             margin-bottom: 20px;
         }
         .footer-logo img {
-            width: 36px;
-            height: 36px;
+            width: 36px; height: 36px;
             border-radius: 8px;
         }
         .footer-logo-name {
             font-size: 20px;
             font-weight: 800;
-            color: var(--white);
+            color: var(--dark-text);
             letter-spacing: -0.5px;
         }
         .footer-tagline {
             font-size: 15px;
-            color: rgba(255,255,255,0.45);
+            color: rgba(245,240,232,0.4);
             line-height: 1.65;
             max-width: 280px;
         }
@@ -557,20 +879,20 @@
             font-family: 'Instrument Serif', serif;
             font-size: 18px;
             font-weight: 400;
-            color: var(--white);
+            color: var(--dark-text);
             margin-bottom: 20px;
         }
         .footer-col a {
             display: block;
             font-size: 14px;
-            color: rgba(255,255,255,0.45);
+            color: rgba(245,240,232,0.4);
             text-decoration: none;
             margin-bottom: 14px;
             transition: color 0.25s;
         }
-        .footer-col a:hover { color: var(--white); }
+        .footer-col a:hover { color: var(--dark-text); }
         .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.06);
+            border-top: 1px solid rgba(245,240,232,0.06);
             padding-top: 28px;
             display: flex;
             justify-content: space-between;
@@ -580,7 +902,7 @@
         }
         .footer-bottom span {
             font-size: 13px;
-            color: rgba(255,255,255,0.3);
+            color: rgba(245,240,232,0.25);
         }
         .footer-legal {
             display: flex;
@@ -588,43 +910,72 @@
         }
         .footer-legal a {
             font-size: 13px;
-            color: rgba(255,255,255,0.3);
+            color: rgba(245,240,232,0.25);
             text-decoration: none;
             transition: color 0.25s;
         }
-        .footer-legal a:hover { color: rgba(255,255,255,0.6); }
+        .footer-legal a:hover { color: rgba(245,240,232,0.5); }
 
-        /* --- Responsive --- */
+        /* ========== RESPONSIVE ========== */
         @media (max-width: 900px) {
+            .nav-links { display: none; }
+            .nav-hamburger { display: block; }
             .showcase-inner { flex-wrap: wrap; gap: 16px; }
-            .phone-frame { width: 140px; }
-            .phone-frame:nth-child(3) { transform: scale(1); }
-            .phone-frame:nth-child(5) { display: none; }
-            .feature-row, .feature-row.reverse { grid-template-columns: 1fr; gap: 48px; direction: ltr; text-align: center; }
+            .showcase-inner .iphone { width: 150px; border-radius: 36px; padding: 7px; }
+            .showcase-inner .iphone-screen { border-radius: 29px; }
+            .showcase-inner .iphone:nth-child(4) { display: none; }
+            .feature-row,
+            .feature-row.reverse {
+                grid-template-columns: 1fr;
+                gap: 48px;
+                direction: ltr;
+                text-align: center;
+            }
             .feature-text p { margin: 0 auto; }
-            .feature-label { margin-left: auto; margin-right: auto; }
+            .feature-visual .iphone { width: 240px; }
+            .testimonials-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
             .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+            .social-proof-inner { gap: 32px; }
+            .proof-divider { display: none; }
         }
         @media (max-width: 640px) {
-            .nav-links a:not(.nav-cta) { display: none; }
             .hero { padding: 120px 20px 60px; }
             .hero h1 { letter-spacing: -1px; }
-            .hero-buttons { flex-direction: column; }
-            .btn-primary, .btn-ghost, .btn-cta-white { width: 100%; justify-content: center; }
-            .showcase-inner { gap: 10px; }
-            .phone-frame { width: 140px; border-radius: 24px; }
-            .phone-frame:nth-child(4),
-            .phone-frame:nth-child(5) { display: none; }
-            .features, .cta-section { padding-left: 20px; padding-right: 20px; }
-            .feature-phone { width: 220px; border-radius: 28px; }
-            .cta-card { padding: 60px 24px; border-radius: 32px; }
+            .hero-buttons { flex-direction: column; width: 100%; }
+            .btn-primary, .btn-ghost, .btn-cta { width: 100%; justify-content: center; }
+            .hero-trust { gap: 20px; }
+            .showcase-inner { gap: 12px; }
+            .showcase-inner .iphone { width: 130px; border-radius: 30px; padding: 6px; }
+            .showcase-inner .iphone-screen { border-radius: 24px; }
+            .showcase-inner .iphone:nth-child(3),
+            .showcase-inner .iphone:nth-child(4) { display: none; }
+            .features { padding: 80px 20px 40px; }
+            .feature-row { margin-bottom: 80px; gap: 36px; }
+            .feature-visual .iphone { width: 230px; }
+            .spiritual-break { padding: 100px 20px; }
+            .testimonials { padding: 80px 20px; }
+            .cta-section { padding: 0 16px 100px; }
+            .cta-card { padding: 72px 24px; border-radius: 28px; }
             .footer-grid { grid-template-columns: 1fr; }
+            .proof-stat-number { font-size: 28px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .reveal { opacity: 1; transform: none; }
         }
     </style>
 </head>
 <body>
 
-<!-- Nav -->
+<!-- Scroll Progress -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Navigation -->
 <nav id="navbar">
     <div class="nav-inner">
         <a href="/" class="nav-brand">
@@ -633,51 +984,111 @@
         </a>
         <div class="nav-links">
             <a href="#features">Features</a>
+            <a href="#testimonials">Reviews</a>
             <a href="/support">Support</a>
             <a href="https://apps.apple.com/app/bible-plus/idYOUR_APP_ID" class="nav-cta">Download</a>
         </div>
+        <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
     </div>
 </nav>
 
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#features" onclick="closeMobileMenu()">Features</a>
+    <a href="#testimonials" onclick="closeMobileMenu()">Reviews</a>
+    <a href="/support" onclick="closeMobileMenu()">Support</a>
+    <a href="https://apps.apple.com/app/bible-plus/idYOUR_APP_ID" class="mobile-cta">Download Free</a>
+</div>
+
 <!-- Hero -->
 <section class="hero">
-    <div class="hero-blur-1"></div>
-    <div class="hero-blur-2"></div>
+    <div class="aurora">
+        <div class="aurora-orb"></div>
+        <div class="aurora-orb"></div>
+        <div class="aurora-orb"></div>
+    </div>
+    <canvas id="particles-canvas"></canvas>
     <div class="hero-content">
         <div class="hero-badge fade-up">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.912 5.813a2 2 0 001.272 1.272L21 12l-5.813 1.912a2 2 0 00-1.272 1.272L12 21l-1.912-5.813a2 2 0 00-1.272-1.272L3 12l5.813-1.912a2 2 0 001.272-1.272L12 3z"/></svg>
             Available on iOS
         </div>
         <h1 class="fade-up fade-up-d1">Scripture that<br><em>speaks to your life</em></h1>
-        <p class="hero-sub fade-up fade-up-d2">Personalized daily verses, AI-powered pastoral guidance, audio Bible narration, and a sanctuary for your quiet time.</p>
+        <p class="hero-sub fade-up fade-up-d2">Personalized daily verses, AI-powered pastoral guidance, and a sanctuary for your quiet time with God.</p>
         <div class="hero-buttons fade-up fade-up-d3">
             <a href="https://apps.apple.com/app/bible-plus/idYOUR_APP_ID" class="btn-primary">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.5 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
                 Download Free
             </a>
             <a href="#features" class="btn-ghost">Explore Features</a>
         </div>
-        <p class="hero-note fade-up fade-up-d4">Free with optional Pro upgrade &middot; 3-day free trial</p>
+        <div class="hero-trust fade-up fade-up-d4">
+            <div class="hero-trust-item">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                4.9 App Store
+            </div>
+            <div class="hero-trust-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                100% Private
+            </div>
+            <div class="hero-trust-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                Free Forever
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Social Proof -->
+<section class="social-proof reveal">
+    <div class="social-proof-inner">
+        <div class="proof-stat">
+            <div class="proof-stat-number" data-count="66" data-suffix="+">0</div>
+            <div class="proof-stat-label">Bible Books</div>
+        </div>
+        <div class="proof-divider"></div>
+        <div class="proof-stat">
+            <div class="proof-stat-number" data-count="122" data-suffix="+">0</div>
+            <div class="proof-stat-label">Daily Devotionals</div>
+        </div>
+        <div class="proof-divider"></div>
+        <div class="proof-stat">
+            <div class="proof-stat-number" data-count="9" data-suffix="">0</div>
+            <div class="proof-stat-label">Reading Plans</div>
+        </div>
+        <div class="proof-divider"></div>
+        <div class="proof-stat">
+            <div class="proof-stat-number" data-count="52" data-suffix="+">0</div>
+            <div class="proof-stat-label">Sanctuary Themes</div>
+        </div>
     </div>
 </section>
 
 <!-- Phone Showcase -->
 <section class="showcase reveal">
+    <div class="showcase-glow"></div>
     <div class="showcase-inner">
-        <div class="phone-frame">
-            <img src="/images/screenshot-home.png" alt="Bible Plus - Home Dashboard" loading="lazy">
+        <div class="iphone">
+            <div class="iphone-screen">
+                <img src="/images/screenshot-bible.png" alt="Bible Plus Bible Reader" loading="lazy">
+            </div>
         </div>
-        <div class="phone-frame">
-            <img src="/images/screenshot-feed.png" alt="Bible Plus - Personalized Feed" loading="lazy">
+        <div class="iphone">
+            <div class="iphone-screen">
+                <img src="/images/screenshot-home.png" alt="Bible Plus Home Feed" loading="lazy">
+            </div>
         </div>
-        <div class="phone-frame">
-            <img src="/images/screenshot-bible.png" alt="Bible Plus - Bible Reader" loading="lazy">
+        <div class="iphone">
+            <div class="iphone-screen">
+                <img src="/images/screenshot-ask.png" alt="Bible Plus AI Companion" loading="lazy">
+            </div>
         </div>
-        <div class="phone-frame">
-            <img src="/images/screenshot-ask.png" alt="Bible Plus - AI Companion" loading="lazy">
-        </div>
-        <div class="phone-frame">
-            <img src="/images/screenshot-saved.png" alt="Bible Plus - Saved Verses" loading="lazy">
+        <div class="iphone">
+            <div class="iphone-screen">
+                <img src="/images/screenshot-saved.png" alt="Bible Plus Saved Verses" loading="lazy">
+            </div>
         </div>
     </div>
 </section>
@@ -685,39 +1096,41 @@
 <!-- Features -->
 <section class="features" id="features">
     <div class="features-header reveal">
+        <div class="section-label">Features</div>
         <h2>Five pillars of your<br>faith journey</h2>
-        <p>Every feature is designed to draw you closer to God's Word, every single day.</p>
+        <p>Every feature designed to draw you closer to God's Word, every single day.</p>
     </div>
 
-    <!-- Feature 1: Home Dashboard -->
     <div class="feature-row reveal">
         <div class="feature-text">
             <span class="feature-label">Your Daily Home</span>
             <h3>Start each day <em>with God</em></h3>
-            <p>A daily verse, your reading streak, quick actions, and a reflection prompt — all in one beautiful dashboard. Swipe up to explore a personalized feed of prayers, verses, and devotionals.</p>
+            <p>A morning verse, your reading streak, quick actions, and a reflection prompt — all in one beautiful dashboard. Swipe up to explore a personalized feed of prayers, verses, and devotionals.</p>
         </div>
         <div class="feature-visual">
-            <div class="feature-phone">
-                <img src="/images/screenshot-home.png" alt="Home Dashboard" loading="lazy">
+            <div class="iphone">
+                <div class="iphone-screen">
+                    <img src="/images/screenshot-home.png" alt="Home Dashboard" loading="lazy">
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Feature 2: Bible Reader -->
     <div class="feature-row reverse reveal">
         <div class="feature-text">
             <span class="feature-label">Bible Reader</span>
             <h3>All 66 books, <em>beautifully presented</em></h3>
-            <p>A clean, distraction-free reading experience. Tap any verse to save, share, or get an AI-powered explanation. Listen with 9 natural narrator voices.</p>
+            <p>A clean, distraction-free reading experience. Tap any verse to save, share, or get an AI-powered explanation. Navigate with ease between chapters and books.</p>
         </div>
         <div class="feature-visual">
-            <div class="feature-phone">
-                <img src="/images/screenshot-bible.png" alt="Bible Reader" loading="lazy">
+            <div class="iphone">
+                <div class="iphone-screen">
+                    <img src="/images/screenshot-bible.png" alt="Bible Reader" loading="lazy">
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Feature 3: AI Companion -->
     <div class="feature-row reveal">
         <div class="feature-text">
             <span class="feature-label">AI Companion</span>
@@ -725,27 +1138,29 @@
             <p>Get warm, pastoral guidance rooted in God's Word. Every response includes real Bible verses. Ask questions, request prayers, or explore a passage deeper.</p>
         </div>
         <div class="feature-visual">
-            <div class="feature-phone">
-                <img src="/images/screenshot-ask.png" alt="AI Companion" loading="lazy">
+            <div class="iphone">
+                <div class="iphone-screen">
+                    <img src="/images/screenshot-ask.png" alt="AI Companion" loading="lazy">
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Feature 4: Saved -->
     <div class="feature-row reverse reveal">
         <div class="feature-text">
             <span class="feature-label">Saved & Collections</span>
             <h3>Your verses, <em>always with you</em></h3>
-            <p>Save your favorite verses with color highlights and personal notes. Organize them into collections for quick access. Build your personal library of Scripture that matters most.</p>
+            <p>Save your favorite verses with personal notes. Organize them into collections for quick access. Build your personal library of Scripture that matters most.</p>
         </div>
         <div class="feature-visual">
-            <div class="feature-phone">
-                <img src="/images/screenshot-saved.png" alt="Saved Verses" loading="lazy">
+            <div class="iphone">
+                <div class="iphone-screen">
+                    <img src="/images/screenshot-saved.png" alt="Saved Verses" loading="lazy">
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Feature 5: Personalized Feed -->
     <div class="feature-row reveal">
         <div class="feature-text">
             <span class="feature-label">Personalized Feed</span>
@@ -753,29 +1168,96 @@
             <p>Swipe through prayers, verses, and devotionals tailored to your season of life. Beautiful full-screen cards with ambient backgrounds. No two feeds are alike.</p>
         </div>
         <div class="feature-visual">
-            <div class="feature-phone">
-                <img src="/images/screenshot-feed.png" alt="Personalized Feed" loading="lazy">
+            <div class="iphone">
+                <div class="iphone-screen">
+                    <img src="/images/screenshot-feed.png" alt="Personalized Feed" loading="lazy">
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Verse Quote -->
-<section class="verse-section reveal">
-    <blockquote>"Thy word is a lamp unto my feet, and a light unto my path."</blockquote>
+<!-- Spiritual Verse Break -->
+<section class="spiritual-break reveal">
+    <div class="spiritual-glow"></div>
+    <div class="quote-icon">&ldquo;</div>
+    <blockquote>Thy word is a lamp unto my feet, and a light unto my path.</blockquote>
     <cite>Psalm 119:105</cite>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials" id="testimonials">
+    <div class="testimonials-header reveal">
+        <div class="section-label">Testimonials</div>
+        <h2>Loved by believers</h2>
+        <p>Join a growing community of people deepening their faith every day.</p>
+    </div>
+    <div class="testimonials-grid">
+        <div class="testimonial-card reveal reveal-delay-1">
+            <div class="testimonial-stars">
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <blockquote>"Bible Plus has transformed my morning devotional. The personalized verses always seem to know exactly what I need to hear that day."</blockquote>
+            <div class="testimonial-author">
+                <div class="testimonial-avatar">S</div>
+                <div>
+                    <div class="testimonial-name">Sarah M.</div>
+                    <div class="testimonial-loc">Houston, TX</div>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-2">
+            <div class="testimonial-stars">
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <blockquote>"As a new believer, the AI companion has been incredibly helpful for understanding Scripture in context. Like having a patient pastor available anytime."</blockquote>
+            <div class="testimonial-author">
+                <div class="testimonial-avatar">M</div>
+                <div>
+                    <div class="testimonial-name">Marcus J.</div>
+                    <div class="testimonial-loc">Atlanta, GA</div>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-3">
+            <div class="testimonial-stars">
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <blockquote>"Sanctuary mode is my favorite. After a long day, I put on the peaceful sounds and just soak in God's Word. It's become my nightly ritual."</blockquote>
+            <div class="testimonial-author">
+                <div class="testimonial-avatar">R</div>
+                <div>
+                    <div class="testimonial-name">Rachel K.</div>
+                    <div class="testimonial-loc">Nashville, TN</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <!-- CTA -->
 <section class="cta-section reveal">
     <div class="cta-card">
-        <h2>Start your journey today</h2>
-        <p>Free to download. Try Pro free for 3 days.</p>
-        <a href="https://apps.apple.com/app/bible-plus/idYOUR_APP_ID" class="btn-cta-white">
+        <div class="cta-glow"></div>
+        <h2>Begin your journey<br><em>with God today</em></h2>
+        <p>Download Bible Plus free. Try every Pro feature free for 3 days. No credit card required.</p>
+        <a href="https://apps.apple.com/app/bible-plus/idYOUR_APP_ID" class="btn-cta">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.5 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            Download Free
+            Download Free on iOS
         </a>
-        <div class="cta-trust">Free forever &middot; No credit card required</div>
+        <div class="cta-trust">Free forever &middot; Pro trial included &middot; Cancel anytime</div>
     </div>
 </section>
 
@@ -818,24 +1300,112 @@
 </footer>
 
 <script>
-    // Nav glassmorphism on scroll
+    // ========== NAV GLASSMORPHISM ==========
     const nav = document.getElementById('navbar');
+    const scrollProgress = document.getElementById('scrollProgress');
+
     window.addEventListener('scroll', () => {
         nav.classList.toggle('scrolled', window.scrollY > 40);
+        const scrolled = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+        scrollProgress.style.width = (scrolled * 100) + '%';
     }, { passive: true });
 
-    // Scroll reveal with stagger
+    // ========== MOBILE MENU ==========
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        mobileMenu.classList.toggle('open');
+        document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+
+    function closeMobileMenu() {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    // ========== SCROLL REVEAL ==========
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
             }
         });
-    }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+    }, { threshold: 0.06, rootMargin: '0px 0px -80px 0px' });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Smooth scroll for anchor links
+    // ========== COUNTER ANIMATION ==========
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                const target = parseInt(el.dataset.count);
+                const suffix = el.dataset.suffix || '';
+                const duration = 1800;
+                const start = performance.now();
+
+                function update(now) {
+                    const elapsed = now - start;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    el.textContent = Math.floor(eased * target) + suffix;
+                    if (progress < 1) requestAnimationFrame(update);
+                }
+                requestAnimationFrame(update);
+                counterObserver.unobserve(el);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+
+    // ========== GOLDEN PARTICLES ==========
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animFrameId;
+
+    function initCanvas() {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+        particles = Array.from({ length: 35 }, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 2.5 + 0.5,
+            speedY: Math.random() * 0.4 + 0.15,
+            speedX: (Math.random() - 0.5) * 0.2,
+            opacity: Math.random() * 0.35 + 0.08,
+        }));
+    }
+
+    function drawParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(201, 169, 110, ${p.opacity})`;
+            ctx.fill();
+            p.y -= p.speedY;
+            p.x += p.speedX;
+            if (p.y < -10) {
+                p.y = canvas.height + 10;
+                p.x = Math.random() * canvas.width;
+            }
+            if (p.x < -10 || p.x > canvas.width + 10) {
+                p.x = Math.random() * canvas.width;
+            }
+        });
+        animFrameId = requestAnimationFrame(drawParticles);
+    }
+
+    initCanvas();
+    drawParticles();
+    window.addEventListener('resize', () => { initCanvas(); });
+
+    // ========== SMOOTH ANCHOR SCROLL ==========
     document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', e => {
             e.preventDefault();

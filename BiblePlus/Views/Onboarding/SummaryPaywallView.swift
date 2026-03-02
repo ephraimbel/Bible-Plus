@@ -42,7 +42,7 @@ struct SummaryPaywallView: View {
     // MARK: - Price Helpers
 
     private var yearlyPriceLabel: String {
-        storeKitService.yearlyProduct?.displayPrice ?? "$49.99"
+        storeKitService.yearlyProduct?.displayPrice ?? "$79.99"
     }
 
     private var weeklyPriceLabel: String {
@@ -55,23 +55,23 @@ struct SummaryPaywallView: View {
             let formatter = NumberFormatter()
             formatter.numberStyle = .currency
             formatter.locale = product.priceFormatStyle.locale
-            return formatter.string(from: weekly as NSDecimalNumber) ?? "$0.77"
+            return formatter.string(from: weekly as NSDecimalNumber) ?? "$1.54"
         }
-        return "$0.96"
+        return "$1.54"
     }
 
-    /// Computed as: ($4.99x52 - $49.99) / ($4.99x52) ~ 81%
+    /// Computed as: ($4.99x52 - $79.99) / ($4.99x52) ~ 69%
     private var savingsPercent: Int {
         guard let yearly = storeKitService.yearlyProduct,
               let weekly = storeKitService.weeklyProduct,
               weekly.price > 0, yearly.price > 0 else {
-            return 81
+            return 69
         }
         let weeklyAnnual = NSDecimalNumber(decimal: weekly.price).doubleValue * 52.0
         let yearlyPrice = NSDecimalNumber(decimal: yearly.price).doubleValue
-        guard weeklyAnnual > yearlyPrice else { return 81 }
+        guard weeklyAnnual > yearlyPrice else { return 69 }
         let result = Int((weeklyAnnual - yearlyPrice) / weeklyAnnual * 100)
-        return result > 0 ? result : 81
+        return result > 0 ? result : 69
     }
 
     // MARK: - Body
