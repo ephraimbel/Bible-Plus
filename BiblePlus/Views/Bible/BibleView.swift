@@ -896,6 +896,15 @@ private struct BibleContentView: View {
                 viewModel.updateLastReadVerse(verseNumber)
             }
         }
+        .onChange(of: viewModel.verses.count) {
+            // Prefetch audio for this chapter as soon as verses load
+            guard isPro, !viewModel.verses.isEmpty else { return }
+            audioService.prefetchCurrentChapter(
+                verses: viewModel.verses,
+                book: viewModel.selectedBook,
+                chapter: viewModel.selectedChapter
+            )
+        }
     }
 }
 

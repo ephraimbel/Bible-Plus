@@ -1348,11 +1348,11 @@ enum BibleVoice: String, CaseIterable, Identifiable, Codable {
 
     var subtitle: String {
         switch self {
-        case .onyx:  "Deep & commanding · American"
-        case .echo:  "Warm & smooth · British"
-        case .fable: "Rich & expressive · Australian"
-        case .nova:  "Warm & heartfelt · American"
-        case .sage:  "Tender & wise · British"
+        case .onyx:  "Deep & commanding"
+        case .echo:  "Warm & smooth"
+        case .fable: "Rich & expressive"
+        case .nova:  "Warm & heartfelt"
+        case .sage:  "Tender & wise"
         }
     }
 
@@ -1363,13 +1363,10 @@ enum BibleVoice: String, CaseIterable, Identifiable, Codable {
         }
     }
 
-    var isProOnly: Bool {
-        self != .onyx
-    }
+    var isProOnly: Bool { true }
 
-    static let freeVoices: [BibleVoice] = [.onyx]
-    static let proMaleVoices: [BibleVoice] = [.echo, .fable]
-    static let proFemaleVoices: [BibleVoice] = [.nova, .sage]
+    static let maleVoices: [BibleVoice] = [.onyx, .echo, .fable]
+    static let femaleVoices: [BibleVoice] = [.nova, .sage]
 
     static func voice(for id: String) -> BibleVoice? {
         allCases.first { $0.rawValue == id }
