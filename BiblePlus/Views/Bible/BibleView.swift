@@ -254,10 +254,11 @@ private struct BibleContentView: View {
     private func performPageFlip(forward: Bool) {
         guard !isPageFlipping else { return }
 
-        // Stop audio when manually changing chapter
+        // Stop audio and cancel prefetches when manually changing chapter
         if audioService.hasActivePlayback {
             audioService.stop()
         }
+        audioService.cancelPrefetches()
 
         // Snapshot the current page content into local state
         cachedVerses = viewModel.verses

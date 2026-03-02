@@ -47,7 +47,7 @@ final class AudioBibleService {
     private var queuePlayer: AVQueuePlayer?
     private var playerItems: [AVPlayerItem] = []
     private var itemToVerseIndex: [AVPlayerItem: Int] = [:]
-    private var playerObserver: NSObjectProtocol?
+    nonisolated(unsafe) private var playerObserver: NSObjectProtocol?
     private var tempFileURLs: [URL] = []
 
     // MARK: - Speech Fallback
@@ -81,12 +81,12 @@ final class AudioBibleService {
 
     // MARK: - Interruption Handling
 
-    private var interruptionObserver: NSObjectProtocol?
+    nonisolated(unsafe) private var interruptionObserver: NSObjectProtocol?
 
     // MARK: - Auto-Stop (Background Timer)
 
-    private var backgroundObserver: NSObjectProtocol?
-    private var foregroundObserver: NSObjectProtocol?
+    nonisolated(unsafe) private var backgroundObserver: NSObjectProtocol?
+    nonisolated(unsafe) private var foregroundObserver: NSObjectProtocol?
     private var autoStopTask: Task<Void, Never>?
     private static let autoStopDelay: TimeInterval = 120
 
@@ -94,6 +94,11 @@ final class AudioBibleService {
 
     private var fetchTask: Task<Void, Never>?
     private var prefetchTasks: [Task<Void, Never>] = []
+
+    // MARK: - Prefetch Deduplication
+
+    /// Tracks chapter keys currently being prefetched to avoid duplicate work.
+    private var prefetchingChapters: Set<String> = []
 
     // MARK: - Concurrency
 
@@ -123,8 +128,30 @@ final class AudioBibleService {
     // MARK: - Init
 
     init() {
+        Self.cleanupOrphanedTempFiles()
         setupInterruptionHandling()
         setupBackgroundObservers()
+    }
+
+    deinit {
+        let i = interruptionObserver
+        let b = backgroundObserver
+        let f = foregroundObserver
+        let p = playerObserver
+        if let obs = i { NotificationCenter.default.removeObserver(obs) }
+        if let obs = b { NotificationCenter.default.removeObserver(obs) }
+        if let obs = f { NotificationCenter.default.removeObserver(obs) }
+        if let obs = p { NotificationCenter.default.removeObserver(obs) }
+    }
+
+    /// Removes any orphaned temp files from previous sessions (e.g. after a crash).
+    private nonisolated static func cleanupOrphanedTempFiles() {
+        let fm = FileManager.default
+        let dir = tempDirectory
+        guard let files = try? fm.contentsOfDirectory(at: dir, includingPropertiesForKeys: nil) else { return }
+        for file in files {
+            try? fm.removeItem(at: file)
+        }
     }
 
     func setSoundscapeService(_ service: SoundscapeService) {
@@ -513,6 +540,11 @@ final class AudioBibleService {
         fetchTask?.cancel()
         fetchTask = nil
 
+        // Cancel all prefetch tasks
+        for task in prefetchTasks { task.cancel() }
+        prefetchTasks.removeAll()
+        prefetchingChapters.removeAll()
+
         // Stop AVQueuePlayer
         queuePlayer?.pause()
         queuePlayer?.removeAllItems()
@@ -590,7 +622,7 @@ final class AudioBibleService {
     // MARK: - Prefetch (Background)
 
     /// Prefetches audio for an entire chapter's verses in the background.
-    /// Called when user navigates to a chapter or after voice change.
+    /// Deduplicates by chapter key so the same chapter is never prefetched twice.
     func prefetchAudio(
         verses: [(number: Int, text: String)],
         book: BibleBook,
@@ -598,6 +630,15 @@ final class AudioBibleService {
         translation: BibleTranslation
     ) {
         let voice = selectedVoice
+        let chapterKey = "\(book.id)-\(chapter)-\(voice.apiVoice)"
+
+        // Skip if already prefetching this chapter+voice
+        guard !prefetchingChapters.contains(chapterKey) else { return }
+        prefetchingChapters.insert(chapterKey)
+
+        // Evict completed tasks to keep array bounded
+        prefetchTasks.removeAll { $0.isCancelled }
+
         let task = Task.detached(priority: .utility) { [weak self] in
             guard let self else { return }
             await withTaskGroup(of: Void.self) { group in
@@ -611,6 +652,10 @@ final class AudioBibleService {
                     }
                 }
             }
+            // Remove from in-progress set when done
+            await MainActor.run { [weak self] in
+                self?.prefetchingChapters.remove(chapterKey)
+            }
         }
         prefetchTasks.append(task)
     }
@@ -623,6 +668,13 @@ final class AudioBibleService {
         chapter: Int
     ) {
         prefetchAudio(verses: verses, book: book, chapter: chapter, translation: .kjv)
+    }
+
+    /// Cancels all in-flight prefetch tasks (e.g. when navigating away).
+    func cancelPrefetches() {
+        for task in prefetchTasks { task.cancel() }
+        prefetchTasks.removeAll()
+        prefetchingChapters.removeAll()
     }
 
     // MARK: - Speech Fallback

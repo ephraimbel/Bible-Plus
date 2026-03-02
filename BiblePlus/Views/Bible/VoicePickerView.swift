@@ -12,6 +12,7 @@ struct VoicePickerView: View {
     @State private var previewingVoice: BibleVoice? = nil
     @State private var isLoadingPreview: Bool = false
     @State private var previewPlayer: AVAudioPlayer?
+    @State private var previewDelegate: PreviewAudioDelegate?
     @State private var previewTask: Task<Void, Never>?
     @State private var showPaywall = false
 
@@ -90,8 +91,11 @@ struct VoicePickerView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Done") { dismiss() }
-                        .foregroundStyle(palette.accent)
+                    Button("Done") {
+                        stopPreview()
+                        dismiss()
+                    }
+                    .foregroundStyle(palette.accent)
                 }
             }
             .toolbarBackground(palette.background, for: .navigationBar)
@@ -113,6 +117,7 @@ struct VoicePickerView: View {
                 showPaywall = true
                 return
             }
+            stopPreview()
             HapticService.selection()
             onSelect(voice)
             dismiss()
@@ -169,7 +174,7 @@ struct VoicePickerView: View {
         .opacity(locked ? 0.5 : 1)
     }
 
-    // MARK: - Preview (OpenAI TTS)
+    // MARK: - Preview (OpenAI TTS with delegate)
 
     private func previewVoice(_ voice: BibleVoice) {
         // Toggle off if already previewing this voice
@@ -185,7 +190,7 @@ struct VoicePickerView: View {
         previewingVoice = voice
         isLoadingPreview = true
 
-        previewTask = Task {
+        previewTask = Task { [weak audioService] in
             do {
                 let audioData = try await fetchPreviewAudio(voice: voice)
                 guard !Task.isCancelled else { return }
@@ -193,21 +198,30 @@ struct VoicePickerView: View {
                 let player = try AVAudioPlayer(data: audioData)
                 player.prepareToPlay()
 
+                // Set up delegate for completion (no polling)
+                let delegate = PreviewAudioDelegate {
+                    Task { @MainActor in
+                        // Only clear if this voice is still the one previewing
+                        if previewingVoice == voice {
+                            previewingVoice = nil
+                            previewPlayer = nil
+                            previewDelegate = nil
+                        }
+                    }
+                }
+                player.delegate = delegate
+
                 // Configure audio session
                 let session = AVAudioSession.sharedInstance()
                 try session.setCategory(.playback, options: [.duckOthers])
                 try session.setActive(true)
 
+                guard !Task.isCancelled else { return }
+
+                self.previewDelegate = delegate
                 self.previewPlayer = player
                 self.isLoadingPreview = false
                 player.play()
-
-                // Wait for playback to finish
-                while player.isPlaying {
-                    try await Task.sleep(nanoseconds: 200_000_000)
-                }
-                guard !Task.isCancelled else { return }
-                self.previewingVoice = nil
             } catch {
                 guard !Task.isCancelled else { return }
                 self.isLoadingPreview = false
@@ -267,7 +281,27 @@ struct VoicePickerView: View {
         previewTask = nil
         previewPlayer?.stop()
         previewPlayer = nil
+        previewDelegate = nil
         previewingVoice = nil
         isLoadingPreview = false
+    }
+}
+
+// MARK: - Preview Audio Delegate
+
+private class PreviewAudioDelegate: NSObject, AVAudioPlayerDelegate {
+    private let onComplete: () -> Void
+
+    init(onComplete: @escaping () -> Void) {
+        self.onComplete = onComplete
+        super.init()
+    }
+
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        onComplete()
+    }
+
+    func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: (any Error)?) {
+        onComplete()
     }
 }

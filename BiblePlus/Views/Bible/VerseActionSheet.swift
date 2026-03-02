@@ -125,7 +125,8 @@ struct VerseToolbarOverlay: View {
 
                     actionItem(
                         icon: "bubble.left.and.bubble.right",
-                        label: "Explain"
+                        label: "Explain",
+                        goldGradient: true
                     ) { onExplain() }
 
                     actionItem(
@@ -213,6 +214,7 @@ struct VerseToolbarOverlay: View {
         icon: String,
         label: String,
         isActive: Bool = false,
+        goldGradient: Bool = false,
         action: @escaping () -> Void
     ) -> some View {
         Button {
@@ -220,24 +222,76 @@ struct VerseToolbarOverlay: View {
             action()
         } label: {
             VStack(spacing: 4) {
-                Image(systemName: icon)
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundStyle(isActive ? palette.accent : palette.textSecondary)
-                    .frame(width: 32, height: 32)
-                    .background(
-                        Circle()
-                            .fill(isActive ? palette.accent.opacity(0.1) : palette.accent.opacity(0.04))
-                    )
-                    .contentTransition(.symbolEffect(.replace))
+                if goldGradient {
+                    AIExplainIcon(icon: icon, accent: palette.accent)
+                } else {
+                    Image(systemName: icon)
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundStyle(isActive ? palette.accent : palette.textSecondary)
+                        .frame(width: 32, height: 32)
+                        .background(
+                            Circle()
+                                .fill(isActive ? palette.accent.opacity(0.1) : palette.accent.opacity(0.04))
+                        )
+                        .contentTransition(.symbolEffect(.replace))
+                }
                 Text(label)
                     .font(.system(size: 10, weight: .medium, design: .rounded))
-                    .foregroundStyle(isActive ? palette.accent : palette.textMuted)
+                    .foregroundStyle(
+                        goldGradient
+                            ? AnyShapeStyle(palette.accent)
+                            : AnyShapeStyle(isActive ? palette.accent : palette.textMuted)
+                    )
             }
             .frame(maxWidth: .infinity)
             .frame(height: 56)
             .contentShape(Rectangle())
         }
         .buttonStyle(ToolbarButtonStyle())
+    }
+}
+
+// MARK: - AI Explain Icon (subtle gold glow from behind)
+
+private struct AIExplainIcon: View {
+    let icon: String
+    let accent: Color
+
+    @State private var glowing = false
+
+    var body: some View {
+        ZStack {
+            // Soft gold radial glow behind the icon
+            Circle()
+                .fill(
+                    RadialGradient(
+                        colors: [
+                            accent.opacity(glowing ? 0.25 : 0.1),
+                            accent.opacity(0)
+                        ],
+                        center: .center,
+                        startRadius: 2,
+                        endRadius: 20
+                    )
+                )
+                .frame(width: 38, height: 38)
+
+            Image(systemName: icon)
+                .font(.system(size: 16, weight: .medium))
+                .foregroundStyle(
+                    LinearGradient(
+                        colors: [Color(hex: "E8D4B0"), accent, Color(hex: "B8943E")],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                )
+        }
+        .frame(width: 32, height: 32)
+        .onAppear {
+            withAnimation(.easeInOut(duration: 2.2).repeatForever(autoreverses: true)) {
+                glowing = true
+            }
+        }
     }
 }
 
