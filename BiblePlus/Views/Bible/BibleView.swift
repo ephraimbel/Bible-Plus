@@ -147,11 +147,25 @@ private struct BibleContentView: View {
         explainConversationId = conversation.id
     }
 
+    // MARK: - Pro Check
+
+    private var isPro: Bool {
+        let descriptor = FetchDescriptor<UserProfile>()
+        return (try? modelContext.fetch(descriptor).first?.isPro) ?? false
+    }
+
     // MARK: - Audio Bible
 
     private func handleAudioTap() {
+        // Allow pause/resume for active playback
         if audioService.isPlaying || audioService.isPaused {
             audioService.togglePlayback()
+            return
+        }
+
+        // Pro gate — audio Bible requires subscription
+        guard isPro else {
+            showPaywall = true
             return
         }
 
@@ -191,6 +205,9 @@ private struct BibleContentView: View {
             translation: viewModel.currentTranslation,
             startingFromVerseIndex: startIndex
         )
+
+        // Prefetch next chapter
+        prefetchNextChapter()
     }
 
     // MARK: - Immersive Listening
@@ -201,9 +218,35 @@ private struct BibleContentView: View {
             return
         }
 
+        // Pro gate
+        guard isPro else {
+            showPaywall = true
+            return
+        }
+
         guard !viewModel.verses.isEmpty else { return }
 
         showImmersiveListening = true
+    }
+
+    // MARK: - Prefetch
+
+    private func prefetchNextChapter() {
+        guard viewModel.canGoForward else { return }
+        let nextChapter = viewModel.selectedChapter + 1
+        let book = viewModel.selectedBook
+        guard nextChapter <= book.chapterCount else { return }
+        let translation = viewModel.currentTranslation
+        Task {
+            guard let verses = try? await BibleRepository.shared.verses(book: book.id, chapter: nextChapter, translation: translation),
+                  !verses.isEmpty else { return }
+            audioService.prefetchAudio(
+                verses: verses,
+                book: book,
+                chapter: nextChapter,
+                translation: translation
+            )
+        }
     }
 
     // MARK: - Page Flip
@@ -491,6 +534,12 @@ private struct BibleContentView: View {
                         if audioService.hasActivePlayback {
                             audioService.seekToVerse(index: verseIndex)
                         } else {
+                            // Pro gate
+                            guard isPro else {
+                                showPaywall = true
+                                return
+                            }
+
                             audioService.setOnChapterComplete { [modelContext] in
                                 ActivityService.log(.audioChapterCompleted, detail: "\(viewModel.selectedBook.name) \(viewModel.selectedChapter)", in: modelContext)
                                 if viewModel.canGoForward {
@@ -791,6 +840,9 @@ private struct BibleContentView: View {
                         startingFromVerseIndex: resumeIndex
                     )
                 }
+
+                // Prefetch next chapter with new voice
+                prefetchNextChapter()
             }
             .presentationDetents([.medium, .large])
         }

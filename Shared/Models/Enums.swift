@@ -1282,76 +1282,84 @@ enum BibleVoice: String, CaseIterable, Identifiable, Codable {
 
     // Pro — Male
     case echo
-    case ash
     case fable
-    case alloy
 
     // Pro — Female
     case nova
-    case shimmer
-    case coral
     case sage
 
     var id: String { rawValue }
 
-    /// Maps each voice to a high-quality iOS system voice identifier.
-    var systemVoiceIdentifier: String {
+    /// The OpenAI TTS API voice name (cases match 1:1).
+    var apiVoice: String { rawValue }
+
+    /// Ordered list of voice identifiers to try, from highest to lowest quality.
+    /// Each voice uses a different locale so they sound distinct even with compact fallbacks.
+    var preferredVoiceIdentifiers: [String] {
         switch self {
-        case .onyx:    "com.apple.voice.enhanced.en-US.Aaron"
-        case .echo:    "com.apple.voice.enhanced.en-GB.Daniel"
-        case .ash:     "com.apple.voice.enhanced.en-US.Nicky"
-        case .fable:   "com.apple.voice.enhanced.en-AU.Lee"
-        case .alloy:   "com.apple.voice.premium.en-US.Zac"
-        case .nova:    "com.apple.voice.premium.en-US.Ava"
-        case .shimmer: "com.apple.voice.enhanced.en-US.Samantha"
-        case .coral:   "com.apple.voice.enhanced.en-US.Allison"
-        case .sage:    "com.apple.voice.enhanced.en-GB.Kate"
+        case .onyx: // American male
+            ["com.apple.voice.premium.en-US.Zac",
+             "com.apple.voice.enhanced.en-US.Aaron",
+             "com.apple.voice.compact.en-US.Aaron"]
+        case .echo: // British male
+            ["com.apple.voice.enhanced.en-GB.Daniel",
+             "com.apple.voice.compact.en-GB.Daniel"]
+        case .fable: // Australian male
+            ["com.apple.voice.enhanced.en-AU.Lee",
+             "com.apple.voice.compact.en-AU.Lee"]
+        case .nova: // American female
+            ["com.apple.voice.premium.en-US.Ava",
+             "com.apple.voice.enhanced.en-US.Samantha",
+             "com.apple.voice.compact.en-US.Samantha"]
+        case .sage: // British female
+            ["com.apple.voice.enhanced.en-GB.Kate",
+             "com.apple.voice.compact.en-GB.Kate"]
         }
     }
 
-    /// Resolves the system voice, falling back to the default en-US voice if not installed.
-    var resolvedVoice: AVSpeechSynthesisVoice? {
-        AVSpeechSynthesisVoice(identifier: systemVoiceIdentifier)
-            ?? AVSpeechSynthesisVoice(language: "en-US")
+    /// The language locale for this voice (used as final fallback).
+    var voiceLanguage: String {
+        switch self {
+        case .onyx, .nova: "en-US"
+        case .echo, .sage: "en-GB"
+        case .fable: "en-AU"
+        }
     }
 
-    /// Whether the enhanced/premium voice is downloaded on this device.
-    var isVoiceDownloaded: Bool {
-        AVSpeechSynthesisVoice(identifier: systemVoiceIdentifier) != nil
+    /// Resolves the best available voice on this device.
+    var resolvedVoice: AVSpeechSynthesisVoice? {
+        for identifier in preferredVoiceIdentifiers {
+            if let voice = AVSpeechSynthesisVoice(identifier: identifier) {
+                return voice
+            }
+        }
+        return AVSpeechSynthesisVoice(language: voiceLanguage)
     }
 
     var displayName: String {
         switch self {
-        case .onyx:    "Solomon"
-        case .echo:    "Elijah"
-        case .ash:     "Daniel"
-        case .fable:   "Arthur"
-        case .alloy:   "James"
-        case .nova:    "Grace"
-        case .shimmer: "Sarah"
-        case .coral:   "Hannah"
-        case .sage:    "Naomi"
+        case .onyx:  "Solomon"
+        case .echo:  "Elijah"
+        case .fable: "Arthur"
+        case .nova:  "Grace"
+        case .sage:  "Naomi"
         }
     }
 
     var subtitle: String {
         switch self {
-        case .onyx:    "Deep & commanding"
-        case .echo:    "Warm & smooth"
-        case .ash:     "Clear & steady"
-        case .fable:   "Rich & expressive"
-        case .alloy:   "Steady & unhurried"
-        case .nova:    "Warm & heartfelt"
-        case .shimmer: "Bright & gentle"
-        case .coral:   "Soft & clear"
-        case .sage:    "Tender & wise"
+        case .onyx:  "Deep & commanding · American"
+        case .echo:  "Warm & smooth · British"
+        case .fable: "Rich & expressive · Australian"
+        case .nova:  "Warm & heartfelt · American"
+        case .sage:  "Tender & wise · British"
         }
     }
 
     var gender: String {
         switch self {
-        case .onyx, .echo, .ash, .fable, .alloy: "Male"
-        case .nova, .shimmer, .coral, .sage: "Female"
+        case .onyx, .echo, .fable: "Male"
+        case .nova, .sage: "Female"
         }
     }
 
@@ -1360,8 +1368,8 @@ enum BibleVoice: String, CaseIterable, Identifiable, Codable {
     }
 
     static let freeVoices: [BibleVoice] = [.onyx]
-    static let proMaleVoices: [BibleVoice] = [.echo, .ash, .fable, .alloy]
-    static let proFemaleVoices: [BibleVoice] = [.nova, .shimmer, .coral, .sage]
+    static let proMaleVoices: [BibleVoice] = [.echo, .fable]
+    static let proFemaleVoices: [BibleVoice] = [.nova, .sage]
 
     static func voice(for id: String) -> BibleVoice? {
         allCases.first { $0.rawValue == id }

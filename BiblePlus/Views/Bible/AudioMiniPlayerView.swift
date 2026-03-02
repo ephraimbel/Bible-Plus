@@ -93,7 +93,7 @@ struct AudioMiniPlayerView: View {
 
     private var verseProgressText: String {
         if audioService.isLoading {
-            return "Preparing..."
+            return "Generating audio..."
         }
         let voiceName = audioService.selectedVoice.displayName
         return "Verse \(audioService.currentVerseIndex + 1) of \(totalVerses) \u{00B7} \(voiceName)"

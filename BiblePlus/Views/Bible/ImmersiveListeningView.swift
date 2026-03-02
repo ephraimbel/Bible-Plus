@@ -79,6 +79,14 @@ struct ImmersiveListeningView: View {
             if wasAlreadyPlaying {
                 displayedVerseIndex = audioService.currentVerseIndex
             } else {
+                // Pro check — dismiss if not Pro (shouldn't reach here, but safety net)
+                let descriptor = FetchDescriptor<UserProfile>()
+                let userIsPro = (try? modelContext.fetch(descriptor).first?.isPro) ?? false
+                guard userIsPro else {
+                    dismiss()
+                    return
+                }
+
                 setupAutoAdvance()
                 guard !viewModel.verses.isEmpty else { return }
                 audioService.play(
