@@ -84,16 +84,16 @@ struct DashboardProvider: TimelineProvider {
             }
         }
 
-        // Count chapters read (all time)
+        // Count chapters read (all time) — use fetchCount to avoid loading all objects
         let chapterType = ActivityEventType.chapterRead.rawValue
         let chapterDescriptor = FetchDescriptor<ActivityEvent>(
             predicate: #Predicate { $0.typeRaw == chapterType }
         )
-        let chaptersRead = (try? modelContext.fetch(chapterDescriptor))?.count ?? 0
+        let chaptersRead = (try? modelContext.fetchCount(chapterDescriptor)) ?? 0
 
-        // Count verses saved (all time)
+        // Count verses saved (all time) — use fetchCount to avoid loading all objects
         let savedDescriptor = FetchDescriptor<SavedBibleVerse>()
-        let versesSaved = (try? modelContext.fetch(savedDescriptor))?.count ?? 0
+        let versesSaved = (try? modelContext.fetchCount(savedDescriptor)) ?? 0
 
         // Background: read from UserDefaults (App Group) — always reliable
         let bgColors = WidgetBackgroundService.loadGradientColors()

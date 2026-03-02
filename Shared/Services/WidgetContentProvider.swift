@@ -535,8 +535,12 @@ enum WidgetContentProvider {
             score *= 1.4
         }
 
-        // Random jitter for freshness
-        score *= Double.random(in: 0.7...1.3)
+        // Deterministic jitter from content ID + day (prevents flicker on widget reload)
+        let dayOfYear = Calendar.current.ordinality(of: .day, in: .year, for: Date()) ?? 1
+        let hashInput = content.id.uuidString + String(dayOfYear)
+        let hash = abs(hashInput.hashValue)
+        let jitter = 0.7 + Double(hash % 1000) / 1000.0 * 0.6
+        score *= jitter
 
         return score
     }
