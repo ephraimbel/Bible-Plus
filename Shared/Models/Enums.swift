@@ -1294,12 +1294,30 @@ enum BibleVoice: String, CaseIterable, Identifiable, Codable {
 
     var id: String { rawValue }
 
-    /// The OpenAI TTS voice name sent to the API.
-    var apiVoice: String {
+    /// Maps each voice to a high-quality iOS system voice identifier.
+    var systemVoiceIdentifier: String {
         switch self {
-        case .alloy: "echo" // Uses echo at slower speed for a distinct male sound
-        default: rawValue
+        case .onyx:    "com.apple.voice.enhanced.en-US.Aaron"
+        case .echo:    "com.apple.voice.enhanced.en-GB.Daniel"
+        case .ash:     "com.apple.voice.enhanced.en-US.Nicky"
+        case .fable:   "com.apple.voice.enhanced.en-AU.Lee"
+        case .alloy:   "com.apple.voice.premium.en-US.Zac"
+        case .nova:    "com.apple.voice.premium.en-US.Ava"
+        case .shimmer: "com.apple.voice.enhanced.en-US.Samantha"
+        case .coral:   "com.apple.voice.enhanced.en-US.Allison"
+        case .sage:    "com.apple.voice.enhanced.en-GB.Kate"
         }
+    }
+
+    /// Resolves the system voice, falling back to the default en-US voice if not installed.
+    var resolvedVoice: AVSpeechSynthesisVoice? {
+        AVSpeechSynthesisVoice(identifier: systemVoiceIdentifier)
+            ?? AVSpeechSynthesisVoice(language: "en-US")
+    }
+
+    /// Whether the enhanced/premium voice is downloaded on this device.
+    var isVoiceDownloaded: Bool {
+        AVSpeechSynthesisVoice(identifier: systemVoiceIdentifier) != nil
     }
 
     var displayName: String {
@@ -1334,14 +1352,6 @@ enum BibleVoice: String, CaseIterable, Identifiable, Codable {
         switch self {
         case .onyx, .echo, .ash, .fable, .alloy: "Male"
         case .nova, .shimmer, .coral, .sage: "Female"
-        }
-    }
-
-    /// Per-voice TTS speed. Lower = slower, more deliberate.
-    var ttsSpeed: Double {
-        switch self {
-        case .alloy: 0.85
-        default: 1.0
         }
     }
 

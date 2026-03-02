@@ -92,7 +92,6 @@ private struct BibleContentView: View {
     @State private var explainConversationId = UUID()
     @State private var shareText: String?
     @State private var searchViewModel: BibleSearchViewModel?
-    @State private var showAudioProGate = false
     @State private var showVoicePicker = false
     @State private var showImmersiveListening = false
     @State private var showPaywall = false
@@ -150,24 +149,9 @@ private struct BibleContentView: View {
 
     // MARK: - Audio Bible
 
-    /// Provides verses for a given book/chapter — used by prefetch for next-chapter lookups.
-    private func versesProvider(book: BibleBook, chapter: Int) async -> [(number: Int, text: String)] {
-        let repo = BibleRepository.shared
-        return (try? await repo.verses(book: book.id, chapter: chapter)) ?? []
-    }
-
     private func handleAudioTap() {
         if audioService.isPlaying || audioService.isPaused {
             audioService.togglePlayback()
-            return
-        }
-
-        // Rate limit check
-        let descriptor = FetchDescriptor<UserProfile>()
-        let isPro = (try? modelContext.fetch(descriptor).first?.isPro) ?? false
-
-        guard AudioBibleService.canPlayChapter(isPro: isPro) else {
-            showAudioProGate = true
             return
         }
 
@@ -185,8 +169,7 @@ private struct BibleContentView: View {
                         verses: viewModel.verses,
                         book: viewModel.selectedBook,
                         chapter: viewModel.selectedChapter,
-                        translation: viewModel.currentTranslation,
-                        versesProvider: versesProvider
+                        translation: viewModel.currentTranslation
                     )
                 }
             }
@@ -206,8 +189,7 @@ private struct BibleContentView: View {
             book: viewModel.selectedBook,
             chapter: viewModel.selectedChapter,
             translation: viewModel.currentTranslation,
-            startingFromVerseIndex: startIndex,
-            versesProvider: versesProvider
+            startingFromVerseIndex: startIndex
         )
     }
 
@@ -216,15 +198,6 @@ private struct BibleContentView: View {
     private func handleImmersiveListeningTap() {
         if audioService.hasActivePlayback {
             showImmersiveListening = true
-            return
-        }
-
-        // Rate limit check for fresh playback
-        let descriptor = FetchDescriptor<UserProfile>()
-        let isPro = (try? modelContext.fetch(descriptor).first?.isPro) ?? false
-
-        guard AudioBibleService.canPlayChapter(isPro: isPro) else {
-            showAudioProGate = true
             return
         }
 
@@ -518,14 +491,6 @@ private struct BibleContentView: View {
                         if audioService.hasActivePlayback {
                             audioService.seekToVerse(index: verseIndex)
                         } else {
-                            let descriptor = FetchDescriptor<UserProfile>()
-                            let isPro = (try? modelContext.fetch(descriptor).first?.isPro) ?? false
-
-                            guard AudioBibleService.canPlayChapter(isPro: isPro) else {
-                                showAudioProGate = true
-                                return
-                            }
-
                             audioService.setOnChapterComplete { [modelContext] in
                                 ActivityService.log(.audioChapterCompleted, detail: "\(viewModel.selectedBook.name) \(viewModel.selectedChapter)", in: modelContext)
                                 if viewModel.canGoForward {
@@ -537,8 +502,7 @@ private struct BibleContentView: View {
                                             verses: viewModel.verses,
                                             book: viewModel.selectedBook,
                                             chapter: viewModel.selectedChapter,
-                                            translation: viewModel.currentTranslation,
-                                            versesProvider: versesProvider
+                                            translation: viewModel.currentTranslation
                                         )
                                     }
                                 }
@@ -549,8 +513,7 @@ private struct BibleContentView: View {
                                 book: viewModel.selectedBook,
                                 chapter: viewModel.selectedChapter,
                                 translation: viewModel.currentTranslation,
-                                startingFromVerseIndex: verseIndex,
-                                versesProvider: versesProvider
+                                startingFromVerseIndex: verseIndex
                             )
                         }
                     },
@@ -825,27 +788,11 @@ private struct BibleContentView: View {
                         book: viewModel.selectedBook,
                         chapter: viewModel.selectedChapter,
                         translation: viewModel.currentTranslation,
-                        startingFromVerseIndex: resumeIndex,
-                        versesProvider: versesProvider
-                    )
-                } else if !viewModel.verses.isEmpty {
-                    // Not playing — just prefetch with the new voice
-                    audioService.prefetch(
-                        verses: viewModel.verses,
-                        book: viewModel.selectedBook,
-                        chapter: viewModel.selectedChapter,
-                        translation: viewModel.currentTranslation,
-                        versesProvider: versesProvider
+                        startingFromVerseIndex: resumeIndex
                     )
                 }
             }
             .presentationDetents([.medium, .large])
-        }
-        .onChange(of: showAudioProGate) { _, show in
-            if show {
-                showAudioProGate = false
-                showPaywall = true
-            }
         }
         .fullScreenCover(isPresented: $showPaywall) {
             SummaryPaywallView()
@@ -883,18 +830,6 @@ private struct BibleContentView: View {
         }
         .onDisappear {
             viewModel.onDisappear()
-        }
-        .onChange(of: viewModel.verses.count) {
-            // Pre-fetch audio as soon as chapter text is loaded — by the time
-            // the user reads a few verses and taps play, the audio is cached.
-            guard !viewModel.verses.isEmpty else { return }
-            audioService.prefetch(
-                verses: viewModel.verses,
-                book: viewModel.selectedBook,
-                chapter: viewModel.selectedChapter,
-                translation: viewModel.currentTranslation,
-                versesProvider: versesProvider
-            )
         }
         .onChange(of: audioService.currentVerseIndex) { _, newIndex in
             guard audioService.isPlaying, newIndex < viewModel.verses.count else { return }

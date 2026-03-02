@@ -1,7 +1,6 @@
 import ActivityKit
 import AVFoundation
 import Foundation
-import AVFAudio
 
 @Observable
 @MainActor
@@ -15,21 +14,11 @@ final class AudioBibleService {
     var errorMessage: String? = nil
     var playbackSpeed: PlaybackSpeed = .normal
 
-    // MARK: - Internal
-
-    private var player: AVAudioPlayer?
-    private var verseTimings: [VerseTiming] = []
-    private var progressTimer: Task<Void, Never>?
-    private var generateTask: Task<Void, Never>?
-    private var interruptionObserver: NSObjectProtocol?
-
-    // MARK: - Speech Synthesis Fallback
+    // MARK: - Speech Synthesis
 
     private var speechSynthesizer: AVSpeechSynthesizer?
     private var speechDelegate: SpeechDelegate?
-    private var usingSpeechSynthesis: Bool = false
     private var speechVerses: [(number: Int, text: String)] = []
-    private var speechStartIndex: Int = 0
 
     // MARK: - Audio Session Coordination
 
@@ -39,12 +28,6 @@ final class AudioBibleService {
     // MARK: - Chapter Complete Callback
 
     private var onChapterComplete: (() -> Void)?
-
-    // MARK: - Rate Limiting
-
-    static let freeChapterLimit = 1
-    private static let usageKey = "audioBibleDailyUsage"
-    private static let usageDateKey = "audioBibleUsageDate"
 
     // MARK: - Voice
 
@@ -58,9 +41,9 @@ final class AudioBibleService {
     private var currentTranslationName: String = ""
     private var currentTotalVerses: Int = 0
 
-    // MARK: - Prefetch
+    // MARK: - Interruption Handling
 
-    private var prefetchTask: Task<Void, Never>?
+    private var interruptionObserver: NSObjectProtocol?
 
     // MARK: - Init
 
@@ -72,107 +55,6 @@ final class AudioBibleService {
         self.soundscapeService = service
     }
 
-    // MARK: - Prefetch Audio (background generation before user taps play)
-
-    /// Call when a chapter is displayed. Generates audio in the background so
-    /// tapping play is instant. Safe to call multiple times — checks cache first.
-    func prefetch(
-        verses: [(number: Int, text: String)],
-        book: BibleBook,
-        chapter: Int,
-        translation: BibleTranslation,
-        versesProvider: ((BibleBook, Int) async -> [(number: Int, text: String)])? = nil
-    ) {
-        prefetchTask?.cancel()
-        guard !verses.isEmpty else { return }
-
-        // Skip if already cached
-        let voice = selectedVoice
-        let cacheKey = Self.makeCacheKey(book: book, chapter: chapter, translation: translation, voice: voice)
-        let cacheURL = Self.cacheFileURL(for: cacheKey)
-        if FileManager.default.fileExists(atPath: cacheURL.path) {
-            // Current chapter cached — still prefetch next chapter eagerly
-            if let provider = versesProvider {
-                prefetchNextChapter(
-                    currentBook: book,
-                    currentChapter: chapter,
-                    translation: translation,
-                    versesProvider: provider
-                )
-            }
-            return
-        }
-
-        prefetchTask = Task.detached(priority: .userInitiated) { [weak self] in
-            guard let self else { return }
-            _ = try? await self.fetchOrGenerateAudio(
-                verses: verses,
-                book: book,
-                chapter: chapter,
-                translation: translation,
-                voice: voice
-            )
-
-            // After current chapter is generated, start prefetching next chapter
-            if let provider = versesProvider {
-                await self.prefetchNextChapter(
-                    currentBook: book,
-                    currentChapter: chapter,
-                    translation: translation,
-                    versesProvider: provider
-                )
-            }
-        }
-    }
-
-    /// Pre-generates the next chapter's audio during playback so chapter
-    /// auto-advance feels seamless.
-    func prefetchNextChapter(
-        currentBook: BibleBook,
-        currentChapter: Int,
-        translation: BibleTranslation,
-        versesProvider: @escaping (BibleBook, Int) async -> [(number: Int, text: String)]
-    ) {
-        let nextBook: BibleBook
-        let nextChapter: Int
-
-        if currentChapter < currentBook.chapterCount {
-            nextBook = currentBook
-            nextChapter = currentChapter + 1
-        } else if let idx = BibleData.allBooks.firstIndex(of: currentBook),
-                  idx + 1 < BibleData.allBooks.count {
-            nextBook = BibleData.allBooks[idx + 1]
-            nextChapter = 1
-        } else {
-            return // Last chapter of Revelation — nothing to prefetch
-        }
-
-        // Skip if already cached
-        let voice = selectedVoice
-        let cacheKey = Self.makeCacheKey(book: nextBook, chapter: nextChapter, translation: translation, voice: voice)
-        let cacheURL = Self.cacheFileURL(for: cacheKey)
-        if FileManager.default.fileExists(atPath: cacheURL.path) { return }
-
-        Task.detached(priority: .userInitiated) { [weak self] in
-            guard let self else { return }
-            let verses = await versesProvider(nextBook, nextChapter)
-            guard !verses.isEmpty else { return }
-            _ = try? await self.fetchOrGenerateAudio(
-                verses: verses,
-                book: nextBook,
-                chapter: nextChapter,
-                translation: translation,
-                voice: voice
-            )
-        }
-    }
-
-    /// Check if audio for the given chapter is already cached on disk.
-    static func isCached(book: BibleBook, chapter: Int, translation: BibleTranslation, voice: BibleVoice = .onyx) -> Bool {
-        let cacheKey = makeCacheKey(book: book, chapter: chapter, translation: translation, voice: voice)
-        return FileManager.default.fileExists(atPath: cacheFileURL(for: cacheKey).path)
-    }
-
     // MARK: - Play Chapter
 
     func play(
@@ -180,244 +62,14 @@ final class AudioBibleService {
         book: BibleBook,
         chapter: Int,
         translation: BibleTranslation,
-        startingFromVerseIndex: Int = 0,
-        versesProvider: ((BibleBook, Int) async -> [(number: Int, text: String)])? = nil
+        startingFromVerseIndex: Int = 0
     ) {
         stop()
-        prefetchTask?.cancel() // No longer needed — we're playing now
 
         guard !verses.isEmpty else { return }
 
-        isLoading = true
-        errorMessage = nil
-        currentVerseIndex = startingFromVerseIndex
-
-        let voice = selectedVoice
-        generateTask = Task {
-            do {
-                let audioData = try await fetchOrGenerateAudio(
-                    verses: verses,
-                    book: book,
-                    chapter: chapter,
-                    translation: translation,
-                    voice: voice
-                )
-                guard !Task.isCancelled else { return }
-
-                let audioPlayer = try AVAudioPlayer(data: audioData)
-                audioPlayer.enableRate = true
-                audioPlayer.rate = Float(playbackSpeed.rawValue)
-                audioPlayer.prepareToPlay()
-
-                self.verseTimings = Self.calculateTimings(
-                    verses: verses,
-                    totalDuration: audioPlayer.duration
-                )
-                self.player = audioPlayer
-
-                // Seek to the requested verse
-                if startingFromVerseIndex > 0,
-                   startingFromVerseIndex < self.verseTimings.count {
-                    audioPlayer.currentTime = self.verseTimings[startingFromVerseIndex].startTime
-                }
-
-                configureAudioSession()
-                duckSoundscape()
-
-                audioPlayer.play()
-                isPlaying = true
-                isPaused = false
-                isLoading = false
-
-                // Store metadata for Live Activity
-                self.currentBookName = book.name
-                self.currentChapter = chapter
-                self.currentTranslationName = translation.displayName
-                self.currentTotalVerses = verses.count
-
-                // Start Live Activity
-                self.bibleActivity = LiveActivityService.startBibleSession(
-                    bookName: book.name,
-                    chapter: chapter,
-                    translationName: translation.displayName,
-                    totalVerses: verses.count,
-                    currentVerse: startingFromVerseIndex + 1
-                )
-
-                startProgressTracking()
-                incrementDailyUsage()
-
-                // Pre-fetch the next chapter while this one plays
-                if let provider = versesProvider {
-                    prefetchNextChapter(
-                        currentBook: book,
-                        currentChapter: chapter,
-                        translation: translation,
-                        versesProvider: provider
-                    )
-                }
-            } catch {
-                guard !Task.isCancelled else { return }
-                // Fall back to on-device speech synthesis
-                self.startSpeechSynthesis(
-                    verses: verses,
-                    book: book,
-                    chapter: chapter,
-                    translation: translation,
-                    startingFromVerseIndex: startingFromVerseIndex
-                )
-            }
-        }
-    }
-
-    // MARK: - Seek to Verse
-
-    func seekToVerse(index: Int) {
-        if usingSpeechSynthesis {
-            guard index >= 0, index < speechVerses.count else { return }
-            // AVSpeechSynthesizer can't seek — restart from new index
-            speechSynthesizer?.stopSpeaking(at: .immediate)
-            currentVerseIndex = index
-            requeueSpeechUtterances(from: index)
-            if isPaused {
-                isPlaying = true
-                isPaused = false
-            }
-            return
-        }
-
-        guard let player,
-              index >= 0,
-              index < verseTimings.count
-        else { return }
-
-        player.currentTime = verseTimings[index].startTime
-        currentVerseIndex = index
-
-        if isPaused {
-            resume()
-        }
-    }
-
-    // MARK: - Pause / Resume / Stop
-
-    func pause() {
-        if usingSpeechSynthesis {
-            speechSynthesizer?.pauseSpeaking(at: .word)
-        } else {
-            player?.pause()
-        }
-        isPlaying = false
-        isPaused = true
-        progressTimer?.cancel()
-        restoreSoundscape()
-
-        if let activity = bibleActivity {
-            LiveActivityService.updateBibleSession(
-                activity,
-                currentVerse: currentVerseIndex + 1,
-                isPlaying: false
-            )
-        }
-    }
-
-    func resume() {
-        guard isPaused else { return }
-        configureAudioSession()
-        duckSoundscape()
-
-        if usingSpeechSynthesis {
-            speechSynthesizer?.continueSpeaking()
-        } else {
-            guard let player else { return }
-            player.play()
-            startProgressTracking()
-        }
-
-        isPlaying = true
-        isPaused = false
-
-        if let activity = bibleActivity {
-            LiveActivityService.updateBibleSession(
-                activity,
-                currentVerse: currentVerseIndex + 1,
-                isPlaying: true
-            )
-        }
-    }
-
-    func stop() {
-        generateTask?.cancel()
-        generateTask = nil
-        progressTimer?.cancel()
-        progressTimer = nil
-
-        player?.stop()
-        player = nil
-
-        speechSynthesizer?.stopSpeaking(at: .immediate)
-        speechSynthesizer = nil
-        speechDelegate = nil
-        usingSpeechSynthesis = false
-        speechVerses = []
-
-        isPlaying = false
-        isPaused = false
-        isLoading = false
-        currentVerseIndex = 0
-        verseTimings = []
-        errorMessage = nil
-
-        if let activity = bibleActivity {
-            LiveActivityService.endBibleSession(activity)
-            bibleActivity = nil
-        }
-
-        restoreSoundscape()
-    }
-
-    func togglePlayback() {
-        if isPlaying {
-            pause()
-        } else if isPaused {
-            resume()
-        }
-    }
-
-    // MARK: - Speed Control
-
-    func setSpeed(_ speed: PlaybackSpeed) {
-        playbackSpeed = speed
-        if usingSpeechSynthesis {
-            // AVSpeechSynthesizer doesn't support rate changes mid-stream — restart
-            guard let synthesizer = speechSynthesizer, synthesizer.isSpeaking || isPaused else { return }
-            let resumeIndex = currentVerseIndex
-            speechSynthesizer?.stopSpeaking(at: .immediate)
-            requeueSpeechUtterances(from: resumeIndex)
-        } else {
-            player?.rate = Float(speed.rawValue)
-        }
-    }
-
-    var hasActivePlayback: Bool {
-        isPlaying || isPaused || isLoading
-    }
-
-    func setOnChapterComplete(_ handler: @escaping () -> Void) {
-        onChapterComplete = handler
-    }
-
-    // MARK: - Speech Synthesis Fallback
-
-    private func startSpeechSynthesis(
-        verses: [(number: Int, text: String)],
-        book: BibleBook,
-        chapter: Int,
-        translation: BibleTranslation,
-        startingFromVerseIndex: Int
-    ) {
         self.speechVerses = verses
-        self.speechStartIndex = startingFromVerseIndex
+        currentVerseIndex = startingFromVerseIndex
 
         let synthesizer = AVSpeechSynthesizer()
         let delegate = SpeechDelegate { [weak self] verseIndex in
@@ -438,13 +90,12 @@ final class AudioBibleService {
         synthesizer.delegate = delegate
         self.speechSynthesizer = synthesizer
         self.speechDelegate = delegate
-        self.usingSpeechSynthesis = true
 
         configureAudioSession()
         duckSoundscape()
 
         // Queue utterances starting from the requested verse
-        let voice = AVSpeechSynthesisVoice(language: "en-US")
+        let voice = selectedVoice.resolvedVoice
         let rate = speechRate(for: playbackSpeed)
 
         for i in startingFromVerseIndex..<verses.count {
@@ -483,6 +134,104 @@ final class AudioBibleService {
         )
     }
 
+    // MARK: - Seek to Verse
+
+    func seekToVerse(index: Int) {
+        guard index >= 0, index < speechVerses.count else { return }
+        speechSynthesizer?.stopSpeaking(at: .immediate)
+        currentVerseIndex = index
+        requeueSpeechUtterances(from: index)
+        if isPaused {
+            isPlaying = true
+            isPaused = false
+        }
+    }
+
+    // MARK: - Pause / Resume / Stop
+
+    func pause() {
+        speechSynthesizer?.pauseSpeaking(at: .word)
+        isPlaying = false
+        isPaused = true
+        restoreSoundscape()
+
+        if let activity = bibleActivity {
+            LiveActivityService.updateBibleSession(
+                activity,
+                currentVerse: currentVerseIndex + 1,
+                isPlaying: false
+            )
+        }
+    }
+
+    func resume() {
+        guard isPaused else { return }
+        configureAudioSession()
+        duckSoundscape()
+
+        speechSynthesizer?.continueSpeaking()
+
+        isPlaying = true
+        isPaused = false
+
+        if let activity = bibleActivity {
+            LiveActivityService.updateBibleSession(
+                activity,
+                currentVerse: currentVerseIndex + 1,
+                isPlaying: true
+            )
+        }
+    }
+
+    func stop() {
+        speechSynthesizer?.stopSpeaking(at: .immediate)
+        speechSynthesizer = nil
+        speechDelegate = nil
+        speechVerses = []
+
+        isPlaying = false
+        isPaused = false
+        isLoading = false
+        currentVerseIndex = 0
+        errorMessage = nil
+
+        if let activity = bibleActivity {
+            LiveActivityService.endBibleSession(activity)
+            bibleActivity = nil
+        }
+
+        restoreSoundscape()
+    }
+
+    func togglePlayback() {
+        if isPlaying {
+            pause()
+        } else if isPaused {
+            resume()
+        }
+    }
+
+    // MARK: - Speed Control
+
+    func setSpeed(_ speed: PlaybackSpeed) {
+        playbackSpeed = speed
+        // AVSpeechSynthesizer doesn't support rate changes mid-stream — restart
+        guard let synthesizer = speechSynthesizer, synthesizer.isSpeaking || isPaused else { return }
+        let resumeIndex = currentVerseIndex
+        speechSynthesizer?.stopSpeaking(at: .immediate)
+        requeueSpeechUtterances(from: resumeIndex)
+    }
+
+    var hasActivePlayback: Bool {
+        isPlaying || isPaused || isLoading
+    }
+
+    func setOnChapterComplete(_ handler: @escaping () -> Void) {
+        onChapterComplete = handler
+    }
+
+    // MARK: - Speech Synthesis Helpers
+
     /// Re-queues speech utterances from a given verse index (used for seek and speed change).
     private func requeueSpeechUtterances(from index: Int) {
         guard !speechVerses.isEmpty, index < speechVerses.count else { return }
@@ -508,7 +257,7 @@ final class AudioBibleService {
             self.speechDelegate = delegate
         }
 
-        let voice = AVSpeechSynthesisVoice(language: "en-US")
+        let voice = selectedVoice.resolvedVoice
         let rate = speechRate(for: playbackSpeed)
 
         speechDelegate?.resetMappings()
@@ -538,266 +287,11 @@ final class AudioBibleService {
         }
     }
 
-    // MARK: - TTS Generation
-
-    private func fetchOrGenerateAudio(
-        verses: [(number: Int, text: String)],
-        book: BibleBook,
-        chapter: Int,
-        translation: BibleTranslation,
-        voice: BibleVoice = .onyx
-    ) async throws -> Data {
-        let cacheKey = Self.makeCacheKey(book: book, chapter: chapter, translation: translation, voice: voice)
-        let cacheURL = Self.cacheFileURL(for: cacheKey)
-
-        // Check disk cache
-        if let cached = try? Data(contentsOf: cacheURL) {
-            return cached
-        }
-
-        // Build narration text
-        let chapterText = buildNarrationText(
-            verses: verses,
-            bookName: book.name,
-            chapter: chapter
-        )
-
-        // OpenAI TTS has 4096 char limit — split long chapters
-        let audioData: Data
-        if chapterText.count <= 1500 {
-            audioData = try await callTTSAPI(text: chapterText, voice: voice)
-        } else {
-            audioData = try await generateLongChapter(
-                verses: verses,
-                bookName: book.name,
-                chapter: chapter,
-                voice: voice
-            )
-        }
-
-        // Write to disk cache
-        let dir = cacheURL.deletingLastPathComponent()
-        try? FileManager.default.createDirectory(
-            at: dir,
-            withIntermediateDirectories: true
-        )
-        try? audioData.write(to: cacheURL, options: .atomic)
-
-        return audioData
-    }
-
-    private func buildNarrationText(
-        verses: [(number: Int, text: String)],
-        bookName: String,
-        chapter: Int
-    ) -> String {
-        var parts: [String] = []
-        parts.append("\(bookName), chapter \(chapter).")
-        for verse in verses {
-            parts.append(verse.text)
-        }
-        return parts.joined(separator: " ")
-    }
-
-    private func generateLongChapter(
-        verses: [(number: Int, text: String)],
-        bookName: String,
-        chapter: Int,
-        voice: BibleVoice = .onyx
-    ) async throws -> Data {
-        var segments: [[(number: Int, text: String)]] = []
-        var current: [(number: Int, text: String)] = []
-        var currentLen = "\(bookName), chapter \(chapter). ".count
-
-        for verse in verses {
-            let verseLen = verse.text.count + 1
-            if currentLen + verseLen > 1500 && !current.isEmpty {
-                segments.append(current)
-                current = []
-                currentLen = 0
-            }
-            current.append(verse)
-            currentLen += verseLen
-        }
-        if !current.isEmpty { segments.append(current) }
-
-        // Generate all segments concurrently for much faster loading
-        let results: [(Int, Data)] = try await withThrowingTaskGroup(of: (Int, Data).self) { group in
-            for (i, segment) in segments.enumerated() {
-                group.addTask {
-                    try Task.checkCancellation()
-                    let prefix = i == 0 ? "\(bookName), chapter \(chapter). " : ""
-                    let text = prefix + segment.map(\.text).joined(separator: " ")
-                    return (i, try await self.callTTSAPI(text: text, voice: voice))
-                }
-            }
-
-            var collected: [(Int, Data)] = []
-            for try await result in group {
-                collected.append(result)
-            }
-            return collected.sorted { $0.0 < $1.0 }
-        }
-
-        var allData = Data()
-        for (_, data) in results {
-            allData.append(data)
-        }
-        return allData
-    }
-
-    private static let ttsEndpoint = URL(string: "\(Secrets.supabaseURL)/functions/v1/tts")
-
-    private static let maxRetries = 1
-    private static let retryBaseDelay: UInt64 = 2_000_000_000 // 2 seconds
-
-    /// Whether a TTS error is transient and worth retrying.
-    private static func isRetryable(_ error: Error) -> Bool {
-        if let audioError = error as? AudioBibleError, case .apiError(let code, _) = audioError {
-            return code >= 500
-        }
-        return (error as NSError).code == NSURLErrorTimedOut
-            || (error as NSError).code == NSURLErrorNetworkConnectionLost
-    }
-
-    private func callTTSAPI(text: String, voice: BibleVoice = .onyx) async throws -> Data {
-        var lastError: Error = AudioBibleError.invalidResponse
-
-        for attempt in 0...Self.maxRetries {
-            if attempt > 0 {
-                let delay = Self.retryBaseDelay * UInt64(attempt)
-                try await Task.sleep(nanoseconds: delay)
-                try Task.checkCancellation()
-            }
-
-            do {
-                return try await performTTSRequest(text: text, voice: voice)
-            } catch {
-                lastError = error
-                guard attempt < Self.maxRetries, Self.isRetryable(error) else { throw error }
-            }
-        }
-
-        throw lastError
-    }
-
-    private func performTTSRequest(text: String, voice: BibleVoice = .onyx) async throws -> Data {
-        guard let endpoint = Self.ttsEndpoint else { throw AudioBibleError.invalidResponse }
-        let body: [String: Any] = [
-            "model": "tts-1",
-            "input": text,
-            "voice": voice.apiVoice,
-            "response_format": "mp3",
-            "speed": voice.ttsSpeed
-        ]
-
-        var request = URLRequest(url: endpoint)
-        request.httpMethod = "POST"
-        request.setValue(
-            "Bearer \(Secrets.supabaseAnonKey)",
-            forHTTPHeaderField: "Authorization"
-        )
-        request.setValue(Secrets.supabaseAnonKey, forHTTPHeaderField: "apikey")
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try JSONSerialization.data(withJSONObject: body)
-        request.timeoutInterval = 60
-
-        let (data, response) = try await URLSession.shared.data(for: request)
-
-        guard let httpResponse = response as? HTTPURLResponse else {
-            throw AudioBibleError.invalidResponse
-        }
-        guard httpResponse.statusCode == 200 else {
-            let errorBody = String(data: data, encoding: .utf8) ?? ""
-            throw AudioBibleError.apiError(
-                statusCode: httpResponse.statusCode,
-                message: errorBody
-            )
-        }
-        guard !data.isEmpty else {
-            throw AudioBibleError.emptyAudioData
-        }
-
-        return data
-    }
-
-    // MARK: - Verse Timing Estimation
-
-    private static func calculateTimings(
-        verses: [(number: Int, text: String)],
-        totalDuration: TimeInterval
-    ) -> [VerseTiming] {
-        guard !verses.isEmpty, totalDuration > 0 else { return [] }
-
-        let totalChars = verses.reduce(0) { $0 + $1.text.count }
-        guard totalChars > 0 else { return [] }
-
-        var timings: [VerseTiming] = []
-        var cumulativeTime: TimeInterval = 0
-
-        for (index, verse) in verses.enumerated() {
-            let proportion = Double(verse.text.count) / Double(totalChars)
-            let verseDuration = proportion * totalDuration
-            let startTime = cumulativeTime
-            let endTime = cumulativeTime + verseDuration
-            timings.append(VerseTiming(
-                verseIndex: index,
-                startTime: startTime,
-                endTime: endTime
-            ))
-            cumulativeTime = endTime
-        }
-
-        return timings
-    }
-
-    // MARK: - Progress Tracking
-
-    private func startProgressTracking() {
-        progressTimer?.cancel()
-        progressTimer = Task { [weak self] in
-            while !Task.isCancelled {
-                try? await Task.sleep(nanoseconds: 100_000_000) // 0.1s
-                guard !Task.isCancelled, let self else { return }
-
-                guard let player = self.player else { return }
-
-                // Check if playback finished
-                if !player.isPlaying && self.isPlaying && !self.isPaused {
-                    self.handlePlaybackCompletion()
-                    return
-                }
-
-                let currentTime = player.currentTime
-
-                for timing in self.verseTimings {
-                    if currentTime >= timing.startTime && currentTime < timing.endTime {
-                        if self.currentVerseIndex != timing.verseIndex {
-                            self.currentVerseIndex = timing.verseIndex
-                            // Update Live Activity on verse change
-                            if let activity = self.bibleActivity {
-                                LiveActivityService.updateBibleSession(
-                                    activity,
-                                    currentVerse: timing.verseIndex + 1,
-                                    isPlaying: true
-                                )
-                            }
-                        }
-                        break
-                    }
-                }
-
-                if let last = self.verseTimings.last, currentTime >= last.endTime {
-                    self.currentVerseIndex = last.verseIndex
-                }
-            }
-        }
-    }
+    // MARK: - Playback Completion
 
     private func handlePlaybackCompletion() {
         isPlaying = false
         isPaused = false
-        progressTimer?.cancel()
 
         if let activity = bibleActivity {
             LiveActivityService.endBibleSession(activity)
@@ -876,51 +370,6 @@ final class AudioBibleService {
     func setVoice(_ voice: BibleVoice) {
         selectedVoice = voice
     }
-
-    // MARK: - Cache
-
-    private static func makeCacheKey(book: BibleBook, chapter: Int, translation: BibleTranslation, voice: BibleVoice) -> String {
-        "\(book.id)-\(chapter)-\(translation.apiCode)-\(voice.rawValue)-v2"
-    }
-
-    private static func cacheFileURL(for key: String) -> URL {
-        let caches = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
-        return caches
-            .appendingPathComponent("AudioBible", isDirectory: true)
-            .appendingPathComponent("\(key).mp3")
-    }
-
-    // MARK: - Rate Limiting
-
-    static func chaptersUsedToday() -> Int {
-        let defaults = UserDefaults.standard
-        let stored = defaults.object(forKey: usageDateKey) as? Date ?? .distantPast
-        if !Calendar.current.isDateInToday(stored) {
-            defaults.set(0, forKey: usageKey)
-            defaults.set(Date(), forKey: usageDateKey)
-            return 0
-        }
-        return defaults.integer(forKey: usageKey)
-    }
-
-    static func canPlayChapter(isPro: Bool) -> Bool {
-        if isPro { return true }
-        return chaptersUsedToday() < freeChapterLimit
-    }
-
-    private func incrementDailyUsage() {
-        let current = Self.chaptersUsedToday()
-        UserDefaults.standard.set(current + 1, forKey: Self.usageKey)
-        UserDefaults.standard.set(Date(), forKey: Self.usageDateKey)
-    }
-}
-
-// MARK: - Supporting Types
-
-private struct VerseTiming {
-    let verseIndex: Int
-    let startTime: TimeInterval
-    let endTime: TimeInterval
 }
 
 // MARK: - Speech Synthesis Delegate
@@ -970,22 +419,5 @@ private class SpeechDelegate: NSObject, AVSpeechSynthesizerDelegate {
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
         // Handled by stop() — no action needed
-    }
-}
-
-enum AudioBibleError: LocalizedError {
-    case invalidResponse
-    case apiError(statusCode: Int, message: String)
-    case emptyAudioData
-
-    var errorDescription: String? {
-        switch self {
-        case .invalidResponse:
-            "Received an invalid response. Please try again."
-        case .apiError(let code, _):
-            "Audio generation failed (\(code)). Please try again."
-        case .emptyAudioData:
-            "No audio was generated. Please try again."
-        }
     }
 }

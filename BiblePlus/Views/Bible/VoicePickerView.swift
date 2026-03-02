@@ -9,9 +9,7 @@ struct VoicePickerView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.bpPalette) private var palette
     @State private var previewingVoice: BibleVoice? = nil
-    @State private var isPreviewLoading = false
-    @State private var previewTask: Task<Void, Never>?
-    @State private var previewPlayer: AVAudioPlayer?
+    @State private var previewSynthesizer: AVSpeechSynthesizer?
     @State private var showPaywall = false
 
     var body: some View {
@@ -76,9 +74,9 @@ struct VoicePickerView: View {
             .toolbarBackground(palette.background, for: .navigationBar)
         }
         .onDisappear {
-            previewTask?.cancel()
-            previewPlayer?.stop()
-            previewPlayer = nil
+            previewSynthesizer?.stopSpeaking(at: .immediate)
+            previewSynthesizer = nil
+            previewingVoice = nil
         }
         .fullScreenCover(isPresented: $showPaywall) {
             SummaryPaywallView()
@@ -105,9 +103,17 @@ struct VoicePickerView: View {
                         .font(BPFont.button)
                         .foregroundStyle(palette.textPrimary)
 
-                    Text(voice.subtitle)
-                        .font(BPFont.caption)
-                        .foregroundStyle(palette.textMuted)
+                    HStack(spacing: 4) {
+                        Text(voice.subtitle)
+                            .font(BPFont.caption)
+                            .foregroundStyle(palette.textMuted)
+
+                        if !voice.isVoiceDownloaded {
+                            Text("· Download in Settings")
+                                .font(BPFont.caption)
+                                .foregroundStyle(palette.accent.opacity(0.7))
+                        }
+                    }
                 }
 
                 Spacer()
@@ -117,19 +123,12 @@ struct VoicePickerView: View {
                     Button {
                         previewVoice(voice)
                     } label: {
-                        Group {
-                            if isPreviewLoading && previewingVoice == voice {
-                                ProgressView()
-                                    .scaleEffect(0.7)
-                            } else {
-                                Image(systemName: previewingVoice == voice
-                                    ? "speaker.wave.2.fill"
-                                    : "play.circle")
-                                    .font(.system(size: 18))
-                            }
-                        }
-                        .foregroundStyle(palette.accent)
-                        .frame(width: 36, height: 36)
+                        Image(systemName: previewingVoice == voice
+                            ? "speaker.wave.2.fill"
+                            : "play.circle")
+                            .font(.system(size: 18))
+                            .foregroundStyle(palette.accent)
+                            .frame(width: 36, height: 36)
                     }
                     .buttonStyle(.plain)
                 }
@@ -154,75 +153,38 @@ struct VoicePickerView: View {
     // MARK: - Preview
 
     private func previewVoice(_ voice: BibleVoice) {
-        previewTask?.cancel()
-
+        // Toggle off if already previewing this voice
         if previewingVoice == voice {
-            previewPlayer?.stop()
-            previewPlayer = nil
+            previewSynthesizer?.stopSpeaking(at: .immediate)
+            previewSynthesizer = nil
             previewingVoice = nil
             return
         }
 
+        // Stop any current preview
+        previewSynthesizer?.stopSpeaking(at: .immediate)
+
         previewingVoice = voice
-        isPreviewLoading = true
         HapticService.lightImpact()
 
-        previewTask = Task {
-            do {
-                let sampleText = "The Lord is my shepherd; I shall not want. He maketh me to lie down in green pastures."
-                let data = try await generatePreview(text: sampleText, voice: voice)
-                guard !Task.isCancelled else { return }
+        let sampleText = "The Lord is my shepherd; I shall not want. He maketh me to lie down in green pastures."
+        let utterance = AVSpeechUtterance(string: sampleText)
+        utterance.voice = voice.resolvedVoice
+        utterance.rate = AVSpeechUtteranceDefaultSpeechRate
 
-                let player = try AVAudioPlayer(data: data)
-                self.previewPlayer = player
-                player.play()
+        let synthesizer = AVSpeechSynthesizer()
+        self.previewSynthesizer = synthesizer
+        synthesizer.speak(utterance)
 
-                isPreviewLoading = false
-
-                // Wait for playback to finish, then reset
-                try await Task.sleep(nanoseconds: UInt64(player.duration * 1_000_000_000) + 500_000_000)
-                if previewingVoice == voice {
-                    previewingVoice = nil
-                }
-            } catch {
-                guard !Task.isCancelled else { return }
-                isPreviewLoading = false
+        // Reset state when preview finishes
+        Task {
+            // Estimate duration (~100ms per word for default rate)
+            let wordCount = sampleText.split(separator: " ").count
+            let estimatedDuration = Double(wordCount) * 0.3 + 1.0
+            try? await Task.sleep(nanoseconds: UInt64(estimatedDuration * 1_000_000_000))
+            if previewingVoice == voice {
                 previewingVoice = nil
             }
         }
-    }
-
-    private static let ttsEndpoint = URL(string: "\(Secrets.supabaseURL)/functions/v1/tts")
-
-    private func generatePreview(text: String, voice: BibleVoice) async throws -> Data {
-        guard let endpoint = Self.ttsEndpoint else { throw AudioBibleError.invalidResponse }
-        let body: [String: Any] = [
-            "model": "tts-1-hd",
-            "input": text,
-            "voice": voice.apiVoice,
-            "response_format": "mp3",
-            "speed": voice.ttsSpeed
-        ]
-
-        var request = URLRequest(url: endpoint)
-        request.httpMethod = "POST"
-        request.setValue(
-            "Bearer \(Secrets.supabaseAnonKey)",
-            forHTTPHeaderField: "Authorization"
-        )
-        request.setValue(Secrets.supabaseAnonKey, forHTTPHeaderField: "apikey")
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try JSONSerialization.data(withJSONObject: body)
-        request.timeoutInterval = 30
-
-        let (data, response) = try await URLSession.shared.data(for: request)
-
-        guard let httpResponse = response as? HTTPURLResponse,
-              httpResponse.statusCode == 200,
-              !data.isEmpty else {
-            throw AudioBibleError.invalidResponse
-        }
-
-        return data
     }
 }

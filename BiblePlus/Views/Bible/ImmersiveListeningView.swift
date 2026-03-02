@@ -85,8 +85,7 @@ struct ImmersiveListeningView: View {
                     verses: viewModel.verses,
                     book: viewModel.selectedBook,
                     chapter: viewModel.selectedChapter,
-                    translation: viewModel.currentTranslation,
-                    versesProvider: versesProvider
+                    translation: viewModel.currentTranslation
                 )
             }
             scheduleHide()
@@ -356,17 +355,11 @@ struct ImmersiveListeningView: View {
                         verses: viewModel.verses,
                         book: viewModel.selectedBook,
                         chapter: viewModel.selectedChapter,
-                        translation: viewModel.currentTranslation,
-                        versesProvider: versesProvider
+                        translation: viewModel.currentTranslation
                     )
                 }
             }
         }
-    }
-
-    private func versesProvider(book: BibleBook, chapter: Int) async -> [(number: Int, text: String)] {
-        let repo = BibleRepository.shared
-        return (try? await repo.verses(book: book.id, chapter: chapter)) ?? []
     }
 
     // MARK: - Controls Logic
