@@ -59,6 +59,7 @@ final class ChatViewModel {
     private var streamingTask: Task<Void, Never>?
     private var tokenBuffer: String = ""
     private var bufferDrainTask: Task<Void, Never>?
+    private var isSending: Bool = false
 
     // MARK: - Computed
 
@@ -76,23 +77,28 @@ final class ChatViewModel {
             && !isStreaming
     }
 
-    private var allMessages: [ChatMessage] {
+    /// Count of user messages sent this week, queried with a date predicate to avoid loading all messages.
+    private var userMessagesThisWeek: Int {
+        let calendar = Calendar.current
+        let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date())) ?? Date()
         let descriptor = FetchDescriptor<ChatMessage>(
-            sortBy: [SortDescriptor(\.createdAt)]
+            predicate: #Predicate { $0.createdAt >= startOfWeek }
         )
-        return (try? modelContext.fetch(descriptor)) ?? []
+        let recentMessages = (try? modelContext.fetch(descriptor)) ?? []
+        return recentMessages.filter { $0.role == .user }.count
     }
 
     var messagesUsedThisWeek: Int {
-        AIService.messagesUsedThisWeek(messages: allMessages)
+        userMessagesThisWeek
     }
 
     var isRateLimited: Bool {
-        !AIService.canSendMessage(messages: allMessages, isPro: profile.isPro)
+        let limit = profile.isPro ? AIService.proMessagesPerWeek : AIService.freeMessagesPerWeek
+        return userMessagesThisWeek >= limit
     }
 
     var remainingMessages: Int {
-        max(0, AIService.freeMessagesPerWeek - messagesUsedThisWeek)
+        max(0, AIService.freeMessagesPerWeek - userMessagesThisWeek)
     }
 
     // MARK: - Typing Context Label
@@ -191,7 +197,9 @@ final class ChatViewModel {
 
     func send() {
         let text = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !text.isEmpty, !isStreaming else { return }
+        guard !text.isEmpty, !isStreaming, !isSending else { return }
+        isSending = true
+        defer { isSending = false }
 
         if isRateLimited {
             shouldShowPaywall = true
@@ -217,7 +225,7 @@ final class ChatViewModel {
         // Update conversation title from first user message
         updateConversationMeta(from: text)
 
-        try? modelContext.save()
+        do { try modelContext.save() } catch { print("[ChatVM] Save failed: \(error)") }
         ActivityService.log(.aiChatSent, detail: String(text.prefix(50)), in: modelContext)
 
         // Start streaming
@@ -242,9 +250,15 @@ final class ChatViewModel {
         streamingTask = nil
         bufferDrainTask?.cancel()
         bufferDrainTask = nil
+
+        // Flush any remaining buffered tokens into the last assistant message
+        if !tokenBuffer.isEmpty, let lastAssistant = messages.last(where: { $0.role == .assistant }) {
+            lastAssistant.content += tokenBuffer
+        }
         tokenBuffer = ""
+
         isStreaming = false
-        try? modelContext.save()
+        do { try modelContext.save() } catch { print("[ChatVM] Save error on stop: \(error)") }
     }
 
     func sendQuickPrompt(_ prompt: String) {
@@ -277,7 +291,7 @@ final class ChatViewModel {
         guard let conversation = fetchConversation() else { return }
         conversation.mode = mode
         conversation.updatedAt = Date()
-        try? modelContext.save()
+        do { try modelContext.save() } catch { print("[ChatVM] Save failed: \(error)") }
     }
 
     func startCharacterConversation(_ character: BiblicalCharacter) {
@@ -285,7 +299,7 @@ final class ChatViewModel {
         conversation.character = character
         conversation.title = "Conversation with \(character.displayName)"
         conversation.updatedAt = Date()
-        try? modelContext.save()
+        do { try modelContext.save() } catch { print("[ChatVM] Save failed: \(error)") }
 
         sendQuickPrompt("Hello \(character.displayName), I'd like to talk with you about what's on my heart.")
     }
@@ -308,7 +322,7 @@ final class ChatViewModel {
             isSaved: true
         )
         modelContext.insert(content)
-        try? modelContext.save()
+        do { try modelContext.save() } catch { print("[ChatVM] Save failed: \(error)") }
         HapticService.success()
     }
 
@@ -338,7 +352,7 @@ final class ChatViewModel {
         if let conv = fetchConversation() {
             modelContext.delete(conv)
         }
-        try? modelContext.save()
+        do { try modelContext.save() } catch { print("[ChatVM] Save failed: \(error)") }
     }
 
     // MARK: - Streaming
@@ -395,7 +409,7 @@ final class ChatViewModel {
                 followUpSuggestions = suggestions
             }
 
-            try? modelContext.save()
+            do { try modelContext.save() } catch { print("[ChatVM] Save failed: \(error)") }
         } catch {
             if assistantMessage.content.isEmpty {
                 // Store the last user message content for retry
@@ -412,7 +426,7 @@ final class ChatViewModel {
             }
             errorMessage = error.localizedDescription
             isStreaming = false
-            try? modelContext.save()
+            do { try modelContext.save() } catch { print("[ChatVM] Save failed: \(error)") }
         }
     }
 
@@ -495,7 +509,9 @@ final class ChatViewModel {
         guard let conversation = fetchConversation() else { return }
 
         if conversation.title == "New Conversation" {
-            conversation.title = String(text.prefix(40))
+            conversation.title = text.count > 40
+                ? String(text.prefix(40)) + "…"
+                : text
         }
         conversation.updatedAt = Date()
     }

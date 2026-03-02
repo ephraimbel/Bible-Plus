@@ -24,6 +24,9 @@ struct ChatView: View {
                 }
             }
         }
+        .onDisappear {
+            viewModel?.stopStreaming()
+        }
         .navigationBarTitleDisplayMode(.inline)
         .toolbarBackground(.hidden, for: .navigationBar)
         .toolbar {
