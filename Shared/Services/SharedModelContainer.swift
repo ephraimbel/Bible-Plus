@@ -3,28 +3,28 @@ import SwiftData
 
 enum SharedModelContainer {
     static func create() throws -> ModelContainer {
-        let schema = Schema([
-            UserProfile.self,
-            PrayerContent.self,
-            ContentCollection.self,
-            ChatMessage.self,
-            Conversation.self,
-            SavedBibleVerse.self,
-            ReadingPlan.self,
-            UserPlanProgress.self,
-            ActivityEvent.self,
-        ])
+        let schema = Schema(versionedSchema: BiblePlusSchemaV1.self)
         let config = ModelConfiguration(
             "BiblePlus",
             schema: schema,
             groupContainer: .identifier("group.io.bibleplus.shared")
         )
         do {
-            return try ModelContainer(for: schema, configurations: [config])
+            return try ModelContainer(
+                for: schema,
+                migrationPlan: BiblePlusMigrationPlan.self,
+                configurations: [config]
+            )
         } catch {
+            #if DEBUG
             print("[BiblePlus] ModelContainer failed: \(error). Deleting old store and retrying…")
+            #endif
             deleteAllStores()
-            return try ModelContainer(for: schema, configurations: [config])
+            return try ModelContainer(
+                for: schema,
+                migrationPlan: BiblePlusMigrationPlan.self,
+                configurations: [config]
+            )
         }
     }
 
@@ -46,7 +46,9 @@ enum SharedModelContainer {
                 let url = appSupport.appendingPathComponent("\(name)\(ext)")
                 if fm.fileExists(atPath: url.path) {
                     try? fm.removeItem(at: url)
+                    #if DEBUG
                     print("[BiblePlus] Deleted: \(url.lastPathComponent)")
+                    #endif
                 }
             }
         }
@@ -55,7 +57,9 @@ enum SharedModelContainer {
         if let contents = try? fm.contentsOfDirectory(at: groupURL, includingPropertiesForKeys: nil) {
             for url in contents where url.pathExtension.contains("store") || url.pathExtension.contains("sqlite") {
                 try? fm.removeItem(at: url)
+                #if DEBUG
                 print("[BiblePlus] Deleted root: \(url.lastPathComponent)")
+                #endif
             }
         }
 
@@ -63,7 +67,9 @@ enum SharedModelContainer {
         if let contents = try? fm.contentsOfDirectory(at: appSupport, includingPropertiesForKeys: nil) {
             for url in contents where url.pathExtension.contains("store") || url.pathExtension.contains("sqlite") {
                 try? fm.removeItem(at: url)
+                #if DEBUG
                 print("[BiblePlus] Deleted appSupport: \(url.lastPathComponent)")
+                #endif
             }
         }
     }

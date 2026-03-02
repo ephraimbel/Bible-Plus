@@ -225,7 +225,11 @@ final class ChatViewModel {
         // Update conversation title from first user message
         updateConversationMeta(from: text)
 
-        do { try modelContext.save() } catch { print("[ChatVM] Save failed: \(error)") }
+        do { try modelContext.save() } catch {
+            #if DEBUG
+            print("[ChatVM] Save failed: \(error)")
+            #endif
+        }
         ActivityService.log(.aiChatSent, detail: String(text.prefix(50)), in: modelContext)
 
         // Start streaming
@@ -258,7 +262,11 @@ final class ChatViewModel {
         tokenBuffer = ""
 
         isStreaming = false
-        do { try modelContext.save() } catch { print("[ChatVM] Save error on stop: \(error)") }
+        do { try modelContext.save() } catch {
+            #if DEBUG
+            print("[ChatVM] Save error on stop: \(error)")
+            #endif
+        }
     }
 
     func sendQuickPrompt(_ prompt: String) {
@@ -291,7 +299,11 @@ final class ChatViewModel {
         guard let conversation = fetchConversation() else { return }
         conversation.mode = mode
         conversation.updatedAt = Date()
-        do { try modelContext.save() } catch { print("[ChatVM] Save failed: \(error)") }
+        do { try modelContext.save() } catch {
+            #if DEBUG
+            print("[ChatVM] Save failed: \(error)")
+            #endif
+        }
     }
 
     func startCharacterConversation(_ character: BiblicalCharacter) {
@@ -299,7 +311,11 @@ final class ChatViewModel {
         conversation.character = character
         conversation.title = "Conversation with \(character.displayName)"
         conversation.updatedAt = Date()
-        do { try modelContext.save() } catch { print("[ChatVM] Save failed: \(error)") }
+        do { try modelContext.save() } catch {
+            #if DEBUG
+            print("[ChatVM] Save failed: \(error)")
+            #endif
+        }
 
         sendQuickPrompt("Hello \(character.displayName), I'd like to talk with you about what's on my heart.")
     }
@@ -322,7 +338,11 @@ final class ChatViewModel {
             isSaved: true
         )
         modelContext.insert(content)
-        do { try modelContext.save() } catch { print("[ChatVM] Save failed: \(error)") }
+        do { try modelContext.save() } catch {
+            #if DEBUG
+            print("[ChatVM] Save failed: \(error)")
+            #endif
+        }
         HapticService.success()
     }
 
@@ -352,7 +372,11 @@ final class ChatViewModel {
         if let conv = fetchConversation() {
             modelContext.delete(conv)
         }
-        do { try modelContext.save() } catch { print("[ChatVM] Save failed: \(error)") }
+        do { try modelContext.save() } catch {
+            #if DEBUG
+            print("[ChatVM] Save failed: \(error)")
+            #endif
+        }
     }
 
     // MARK: - Streaming
@@ -409,7 +433,11 @@ final class ChatViewModel {
                 followUpSuggestions = suggestions
             }
 
-            do { try modelContext.save() } catch { print("[ChatVM] Save failed: \(error)") }
+            do { try modelContext.save() } catch {
+            #if DEBUG
+            print("[ChatVM] Save failed: \(error)")
+            #endif
+        }
         } catch {
             if assistantMessage.content.isEmpty {
                 // Store the last user message content for retry
@@ -426,7 +454,11 @@ final class ChatViewModel {
             }
             errorMessage = error.localizedDescription
             isStreaming = false
-            do { try modelContext.save() } catch { print("[ChatVM] Save failed: \(error)") }
+            do { try modelContext.save() } catch {
+            #if DEBUG
+            print("[ChatVM] Save failed: \(error)")
+            #endif
+        }
         }
     }
 

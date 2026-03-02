@@ -648,7 +648,13 @@ final class AudioBibleService {
                         if i == 0 {
                             text = "\(book.name), chapter \(chapter). \(text)"
                         }
-                        _ = try? await self.fetchVerseAudio(text: text, voice: voice)
+                        do {
+                            _ = try await self.fetchVerseAudio(text: text, voice: voice)
+                        } catch {
+                            #if DEBUG
+                            print("[AudioBible] Prefetch failed for verse \(i): \(error)")
+                            #endif
+                        }
                     }
                 }
             }

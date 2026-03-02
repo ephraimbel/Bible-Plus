@@ -64,7 +64,13 @@ final class StoreKitService {
     }
 
     func restorePurchases() async {
-        try? await AppStore.sync()
+        do {
+            try await AppStore.sync()
+        } catch {
+            #if DEBUG
+            print("[StoreKit] Restore sync failed: \(error)")
+            #endif
+        }
         await updatePurchasedProducts()
     }
 

@@ -13,7 +13,13 @@ enum ActivityService {
     ) {
         let event = ActivityEvent(type: type, detail: detail)
         context.insert(event)
-        try? context.save()
+        do {
+            try context.save()
+        } catch {
+            #if DEBUG
+            print("[ActivityService] Save failed: \(error)")
+            #endif
+        }
     }
 
     /// Log app opened once per day so streak tracking works
