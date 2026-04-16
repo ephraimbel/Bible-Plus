@@ -9,14 +9,16 @@ struct PaywallContainerView: View {
 
     @Environment(StoreKitService.self) private var storeKitService
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.bpPalette) private var palette
 
-    private let palette = BPColorPalette.light
     @Query private var profiles: [UserProfile]
 
     @State private var vm: PaywallViewModel?
     @State private var showCTA = false
 
-    /// Standalone initializer
+    private let accentGold = Color(red: 0.79, green: 0.66, blue: 0.43)
+
+    /// Standalone initializer (from settings, pro gates, etc.)
     init() {
         self.onboardingViewModel = nil
         self.isOnboarding = false
@@ -28,11 +30,9 @@ struct PaywallContainerView: View {
         self.isOnboarding = true
     }
 
-    private let accentGold = Color(red: 0.79, green: 0.66, blue: 0.43)
-
     var body: some View {
         ZStack {
-            // Warm blurred biblical art background — matches onboarding
+            // Warm blurred biblical art background — consistent everywhere
             Image("biblical_jacob_ladder")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
@@ -101,13 +101,12 @@ struct PaywallContainerView: View {
                 vm.dismissPaywall(dismiss: dismiss)
             } label: {
                 Image(systemName: "xmark")
-                    .font(.system(size: isOnboarding ? 4 : 13, weight: .regular))
+                    .font(.system(size: isOnboarding ? 4 : 14, weight: .medium))
                     .foregroundStyle(isOnboarding ? .clear : palette.textMuted)
-                    .frame(width: isOnboarding ? 16 : 32, height: isOnboarding ? 16 : 32)
+                    .frame(width: 32, height: 32)
                     .background(
                         Circle()
-                            .fill(isOnboarding ? Color.clear : palette.surface)
-                            .stroke(isOnboarding ? Color.clear : palette.border.opacity(0.5), lineWidth: 0.5)
+                            .fill(isOnboarding ? Color.clear : palette.surfaceElevated)
                     )
                     .opacity(isOnboarding ? 0.01 : 1)
             }
@@ -121,7 +120,6 @@ struct PaywallContainerView: View {
 
     private func stickyCTA(vm: PaywallViewModel) -> some View {
         VStack(spacing: 8) {
-            // Frosted glass + gold border button (matches onboarding)
             Button {
                 HapticService.impact(.light)
                 Task { await vm.purchaseSelected(storeKitService: storeKitService, dismiss: dismiss) }

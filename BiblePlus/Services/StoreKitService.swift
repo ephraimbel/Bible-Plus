@@ -18,9 +18,6 @@ final class StoreKitService {
 
     var isPro: Bool { _isPro }
     #if DEBUG
-    // Debug builds default to Pro so simulator/dev sessions aren't blocked by
-    // rate limits, paywall sheets, or feature gates. Production builds start
-    // false and update via RevenueCat entitlement checks (see init).
     private var _isPro: Bool = true
     #else
     private var _isPro: Bool = false
