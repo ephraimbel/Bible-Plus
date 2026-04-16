@@ -81,7 +81,7 @@ struct VerseImageSheet: View {
                 }
             }
             .fullScreenCover(isPresented: $showPaywall) {
-                SummaryPaywallView()
+                PaywallContainerView()
             }
         }
     }

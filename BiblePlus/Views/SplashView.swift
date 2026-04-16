@@ -15,13 +15,13 @@ struct SplashView: View {
             (colorScheme == .dark ? Color(hex: "2B2A27") : Color(hex: "FAF8F4"))
                 .ignoresSafeArea()
 
-            HStack(spacing: 0) {
+            HStack(spacing: 2) {
                 Text("Bible")
                     .font(.system(size: 42, weight: .light, design: .serif))
                     .foregroundStyle(colorScheme == .dark ? .white : Color(hex: "1A1A1A"))
 
-                Text("+")
-                    .font(.system(size: 44, weight: .medium, design: .serif))
+                Image(systemName: "sparkle")
+                    .font(.system(size: 32, weight: .medium))
                     .foregroundStyle(gold)
                     .shadow(color: gold.opacity(glowIntensity), radius: 4)
                     .shadow(color: gold.opacity(glowIntensity), radius: 10)

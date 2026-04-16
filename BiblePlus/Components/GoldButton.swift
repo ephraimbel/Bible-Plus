@@ -15,7 +15,8 @@ struct GoldButton: View {
             action()
         }) {
             Text(title)
-                .font(.system(size: 17, weight: .semibold, design: .rounded))
+                .font(.system(size: 17, weight: .medium, design: .serif))
+                .tracking(0.3)
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 18)

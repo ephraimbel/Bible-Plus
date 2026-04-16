@@ -1,0 +1,13 @@
+{
+  "images" : [
+    {
+      "filename" : "biblical_lords_prayer.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

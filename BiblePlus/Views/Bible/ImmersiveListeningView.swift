@@ -524,7 +524,7 @@ private struct ListeningBackgroundPickerView: View {
         .presentationDetents([.large])
         .presentationBackground(palette.background)
         .fullScreenCover(isPresented: $showPaywall) {
-            SummaryPaywallView()
+            PaywallContainerView()
         }
     }
 

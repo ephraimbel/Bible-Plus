@@ -46,7 +46,7 @@ struct SoundscapePickerView: View {
         }
         .presentationBackground(palette.background)
         .fullScreenCover(isPresented: $showPaywall) {
-            SummaryPaywallView()
+            PaywallContainerView()
         }
     }
 

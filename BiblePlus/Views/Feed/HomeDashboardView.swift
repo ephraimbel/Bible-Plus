@@ -24,6 +24,13 @@ struct HomeDashboardView: View {
         return 1.0 - (progress * 0.03)
     }
 
+    /// Card border opacity. Bumped in light mode because the warm cream
+    /// background washes out a 30% gold stroke; dark mode reads cleanly at
+    /// the lower value so borders never feel heavy on the dark surface.
+    private var cardBorderOpacity: Double {
+        colorScheme == .dark ? 0.30 : 0.55
+    }
+
     private let dayLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     private let dayWeekdays = [2, 3, 4, 5, 6, 7, 1]
 
@@ -150,14 +157,14 @@ struct HomeDashboardView: View {
     // MARK: - Header
 
     private var headerSection: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            HStack(spacing: 0) {
+        HStack {
+            HStack(spacing: 2) {
                 Text("Bible")
                     .font(.system(size: 28, weight: .light, design: .serif))
                     .foregroundStyle(palette.textPrimary)
 
-                Text("+")
-                    .font(.system(size: 30, weight: .medium, design: .serif))
+                Image(systemName: "sparkle")
+                    .font(.system(size: 22, weight: .medium))
                     .foregroundStyle(Color(red: 1.0, green: 0.84, blue: 0.3))
                     .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 4)
                     .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 10)
@@ -165,22 +172,11 @@ struct HomeDashboardView: View {
                     .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(glowPulse ? 0.5 : 0.2), radius: 40)
             }
 
-            HStack(spacing: 0) {
-                Text("\(vm.greetingLabel) \(vm.userName)")
-                    .font(.system(size: 13, weight: .regular, design: .rounded))
-                    .foregroundStyle(palette.textSecondary)
+            Spacer()
 
-                Text("  \u{00B7}  ")
-                    .foregroundStyle(palette.textMuted)
-
-                Text(vm.formattedDate)
-                    .font(.system(size: 11, weight: .medium, design: .rounded))
-                    .foregroundStyle(palette.textMuted)
-                    .textCase(.uppercase)
-                    .tracking(0.8)
-            }
+            profileAvatar
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.top, 12)
         .opacity(appeared ? 1 : 0)
         .offset(y: appeared ? 0 : 20)
         .onAppear {
@@ -190,7 +186,52 @@ struct HomeDashboardView: View {
         }
     }
 
+    private var profileAvatar: some View {
+        Button {
+            NotificationCenter.default.post(name: .switchToSettingsTab, object: nil)
+        } label: {
+            ZStack {
+                Circle()
+                    .fill(
+                        LinearGradient(
+                            colors: [palette.accent, palette.accent.opacity(0.7)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .frame(width: 34, height: 34)
+
+                if let data = vm.profile.profileImageData,
+                   let uiImage = UIImage(data: data) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 34, height: 34)
+                        .clipShape(Circle())
+                } else {
+                    Text(vm.profile.firstName.prefix(1).uppercased())
+                        .font(.system(size: 14, weight: .bold, design: .rounded))
+                        .foregroundStyle(.white)
+                }
+            }
+        }
+    }
+
     // MARK: - Hero Verse Card
+
+    @ViewBuilder
+    /// Trims verse text to ~100 chars at a natural word boundary so it
+    /// always fits cleanly on the card without SwiftUI truncation.
+    private func truncatedVerse(_ text: String) -> String {
+        let maxLength = 100
+        guard text.count > maxLength else { return text }
+        // Find the last space before the limit
+        let prefix = text.prefix(maxLength)
+        if let lastSpace = prefix.lastIndex(of: " ") {
+            return String(text[text.startIndex..<lastSpace]) + "..."
+        }
+        return String(prefix) + "..."
+    }
 
     @ViewBuilder
     private var heroVerseCard: some View {
@@ -221,12 +262,12 @@ struct HomeDashboardView: View {
                 VStack(spacing: 10) {
                     Spacer(minLength: 0)
 
-                    Text("\u{201C}\(verse.text)\u{201D}")
-                        .font(.system(size: 17, weight: .regular, design: .serif))
+                    Text("\u{201C}\(truncatedVerse(verse.text))\u{201D}")
+                        .font(.custom("Georgia", size: 16))
                         .foregroundStyle(.white)
                         .multilineTextAlignment(.center)
-                        .lineSpacing(4)
-                        .lineLimit(5)
+                        .lineSpacing(5)
+                        .lineLimit(4)
 
                     OrnamentalDivider(color: .white, opacity: 0.2)
 
@@ -396,10 +437,6 @@ struct HomeDashboardView: View {
                 .fill(palette.surfaceElevated)
                 .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
         )
-        .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
-        )
         .onTapGesture {
             onShowProgress()
             HapticService.selection()
@@ -430,15 +467,6 @@ struct HomeDashboardView: View {
                 showReadingPlans = true
                 HapticService.lightImpact()
             }
-
-            quickActionCard(
-                icon: "moon.stars",
-                title: "Sanctuary",
-                subtitle: soundscapeService.isPlaying ? "Playing" : "Enter"
-            ) {
-                onOpenSanctuary()
-                HapticService.lightImpact()
-            }
         }
         .opacity(appeared ? 1 : 0)
         .offset(y: appeared ? 0 : 20)
@@ -448,61 +476,10 @@ struct HomeDashboardView: View {
     // MARK: - Ask Card
 
     private var askCard: some View {
-        HStack(spacing: 14) {
-            ZStack {
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(palette.accent.opacity(0.08))
-                    .frame(width: 42, height: 42)
-                Image(systemName: "bubble.left.and.bubble.right.fill")
-                    .font(.system(size: 15, weight: .medium))
-                    .foregroundStyle(.white)
-                    .frame(width: 36, height: 36)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(
-                                LinearGradient(
-                                    colors: [palette.accent, palette.accent.opacity(0.7)],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                )
-                            )
-                    )
-            }
-
-            VStack(alignment: .leading, spacing: 3) {
-                Text("What\u{2019}s on your heart?")
-                    .font(.system(size: 14, weight: .bold, design: .rounded))
-                    .foregroundStyle(palette.textPrimary)
-
-                Text("Ask anything about faith, life, or Scripture")
-                    .font(.system(size: 13, weight: .regular, design: .serif))
-                    .foregroundStyle(palette.textSecondary)
-                    .italic()
-                    .lineLimit(2)
-                    .lineSpacing(2)
-            }
-
-            Spacer()
-
-            Image(systemName: "chevron.right")
-                .font(.system(size: 10, weight: .semibold))
-                .foregroundStyle(palette.textMuted.opacity(0.4))
-        }
-        .padding(.horizontal, 18)
-        .padding(.vertical, 18)
-        .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(palette.surfaceElevated)
-                .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
+        InlineAskComposer(
+            firstName: vm.profile.firstName,
+            palette: palette
         )
-        .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
-        )
-        .onTapGesture {
-            NotificationCenter.default.post(name: .switchToAskTab, object: nil)
-            HapticService.lightImpact()
-        }
         .opacity(appeared ? 1 : 0)
         .offset(y: appeared ? 0 : 20)
         .animation(BPAnimation.spring.delay(0.32), value: appeared)
@@ -516,41 +493,143 @@ struct HomeDashboardView: View {
         subtitle: String,
         action: @escaping () -> Void
     ) -> some View {
-        VStack(spacing: 8) {
+        VStack(spacing: 10) {
             ZStack {
                 Circle()
-                    .fill(palette.accent.opacity(0.05))
-                    .frame(width: 38, height: 38)
+                    .fill(palette.accent.opacity(0.06))
+                    .frame(width: 48, height: 48)
                 Circle()
-                    .fill(palette.accent.opacity(0.1))
-                    .frame(width: 32, height: 32)
+                    .fill(palette.accent.opacity(0.12))
+                    .frame(width: 40, height: 40)
                 Image(systemName: icon)
-                    .font(.system(size: 13, weight: .medium))
+                    .font(.system(size: 17, weight: .medium))
                     .foregroundStyle(palette.accent)
             }
 
             Text(title)
-                .font(.system(size: 13, weight: .semibold, design: .rounded))
+                .font(.system(size: 17, weight: .bold, design: .rounded))
                 .foregroundStyle(palette.textPrimary)
                 .lineLimit(1)
 
             Text(subtitle)
-                .font(.system(size: 11, weight: .regular, design: .rounded))
+                .font(.system(size: 13, weight: .regular, design: .rounded))
                 .foregroundStyle(palette.textMuted)
                 .lineLimit(1)
         }
-        .padding(.horizontal, 8)
-        .padding(.vertical, 16)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 18)
         .frame(maxWidth: .infinity)
         .background(
             RoundedRectangle(cornerRadius: 14)
                 .fill(palette.surfaceElevated)
                 .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
         )
-        .overlay(
-            RoundedRectangle(cornerRadius: 14)
-                .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
-        )
         .onTapGesture(perform: action)
+    }
+}
+
+// MARK: - Inline Ask Composer
+//
+// Real text input on the Home dashboard. Tapping it focuses the field and
+// the keyboard pushes the entire dashboard up so the composer stays visible
+// (SwiftUI's default keyboard avoidance handles this for free as long as
+// the parent isn't pinned with .ignoresSafeArea(.keyboard)). Submitting
+// posts `.openAIWithContext` — the same pipeline used by Feed "Discuss" and
+// Plan deep links — which ContentView listens for and routes into a fresh
+// streaming Conversation in the Ask tab.
+
+private struct InlineAskComposer: View {
+    let firstName: String
+    let palette: BPColorPalette
+
+    @Environment(\.colorScheme) private var colorScheme
+    @State private var borderRotation: Double = 0
+
+    private var cardBorderOpacity: Double {
+        colorScheme == .dark ? 0.30 : 0.55
+    }
+
+    /// Personalized placeholder. Shows once focus enters/leaves.
+    private var placeholder: String {
+        let trimmed = firstName.trimmingCharacters(in: .whitespacesAndNewlines)
+        if trimmed.isEmpty {
+            return "What\u{2019}s on your heart?"
+        }
+        return "Hey \(trimmed), what\u{2019}s on your heart?"
+    }
+
+    private let gold = Color(red: 1.0, green: 0.84, blue: 0.3)
+
+    var body: some View {
+        HStack(spacing: 12) {
+            // Golden sparkle icon
+            Image(systemName: "sparkle")
+                .font(.system(size: 18, weight: .semibold))
+                .foregroundStyle(
+                    LinearGradient(
+                        colors: [
+                            Color(red: 1.0, green: 0.95, blue: 0.6),
+                            gold,
+                            palette.accent
+                        ],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .shadow(color: gold, radius: 4)
+                .shadow(color: gold.opacity(0.5), radius: 10)
+
+            Text("Ask anything about Scripture")
+                .font(.custom("Georgia", size: 15))
+                .foregroundStyle(palette.textSecondary)
+                .lineLimit(1)
+
+            Spacer(minLength: 0)
+
+            Image(systemName: "chevron.right")
+                .font(.system(size: 12, weight: .semibold))
+                .foregroundStyle(palette.textMuted)
+        }
+        .padding(.horizontal, 18)
+        .padding(.vertical, 16)
+        .background(
+            // Solid card surface so the gradient border reads cleanly
+            RoundedRectangle(cornerRadius: 22)
+                .fill(palette.surfaceElevated)
+                .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
+        )
+        .overlay(
+            // Animated halo — an angular gold gradient that rotates slowly
+            // around the border. The bright→dim→bright→dim→bright stops
+            // create two visible "highlights" that sweep around the field
+            // continuously, like a candle flickering on gold leaf.
+            RoundedRectangle(cornerRadius: 22)
+                .strokeBorder(
+                    AngularGradient(
+                        gradient: Gradient(colors: [
+                            palette.accent.opacity(0.95),
+                            palette.accent.opacity(0.10),
+                            palette.accent.opacity(0.95),
+                            palette.accent.opacity(0.10),
+                            palette.accent.opacity(0.95),
+                        ]),
+                        center: .center,
+                        angle: .degrees(borderRotation)
+                    ),
+                    lineWidth: 1.6
+                )
+                .blur(radius: 0.4)
+                .allowsHitTesting(false)
+        )
+        .contentShape(Rectangle())
+        .onTapGesture {
+            HapticService.lightImpact()
+            NotificationCenter.default.post(name: .switchToAskTab, object: nil)
+        }
+        .onAppear {
+            withAnimation(.linear(duration: 6).repeatForever(autoreverses: false)) {
+                borderRotation = 360
+            }
+        }
     }
 }

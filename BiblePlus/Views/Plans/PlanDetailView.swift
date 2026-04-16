@@ -108,55 +108,75 @@ struct PlanDetailView: View {
 
     // MARK: - Hero Header
 
+    /// Bundled biblical artwork for this plan, resolved by tag overlap
+    /// against the plan name + description + category. Falls back to the
+    /// legacy gradient if no asset matches.
+    private var planImage: UIImage? {
+        BiblicalImageService.image(
+            for: plan.id,
+            context: "\(plan.name) \(plan.planDescription) \(plan.category)"
+        )
+    }
+
     private var heroHeader: some View {
         ZStack {
+            // Background — blurred painting fills the hero so there are
+            // never letterbox bars, while the sharp painting on top is
+            // shown via .fit so the focal subject is always preserved.
+            if let image = planImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .blur(radius: 32, opaque: true)
+                    .overlay(Color.black.opacity(0.12))
+
+                Image(uiImage: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                LinearGradient(
+                    colors: gradientColors.isEmpty
+                        ? [palette.accent, palette.accent.opacity(0.7)]
+                        : gradientColors,
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            }
+
+            // Dark scrim — softer at top, deeper at bottom so the title and
+            // description always stay legible regardless of the painting.
             LinearGradient(
-                colors: gradientColors.isEmpty ? [palette.accent, palette.accent.opacity(0.7)] : gradientColors,
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
+                stops: [
+                    .init(color: .black.opacity(0.15), location: 0.0),
+                    .init(color: .black.opacity(0.45), location: 0.5),
+                    .init(color: .black.opacity(0.78), location: 1.0),
+                ],
+                startPoint: .top,
+                endPoint: .bottom
             )
 
-            // Background icon
-            Image(systemName: plan.iconName.isEmpty ? "book.fill" : plan.iconName)
-                .font(.system(size: 120, weight: .thin))
-                .foregroundStyle(.white.opacity(0.08))
-                .offset(x: 80, y: -10)
-
-            VStack(spacing: 14) {
-                // Icon in double-layer glass circle
-                ZStack {
-                    Circle()
-                        .fill(.white.opacity(0.06))
-                        .frame(width: 80, height: 80)
-                    Circle()
-                        .stroke(.white.opacity(0.12), lineWidth: 1)
-                        .frame(width: 80, height: 80)
-                    Image(systemName: plan.iconName.isEmpty ? "book.fill" : plan.iconName)
-                        .font(.system(size: 28, weight: .light))
-                        .foregroundStyle(.white)
-                        .frame(width: 64, height: 64)
-                        .background(.ultraThinMaterial)
-                        .environment(\.colorScheme, .dark)
-                        .clipShape(Circle())
-                        .shadow(color: .black.opacity(0.2), radius: 10, y: 4)
-                }
+            VStack(spacing: 12) {
+                Spacer(minLength: 0)
 
                 Text(plan.name)
-                    .font(.system(size: 26, weight: .bold, design: .rounded))
+                    .font(.system(size: 28, weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
                     .multilineTextAlignment(.center)
-                    .shadow(color: .black.opacity(0.2), radius: 4, y: 2)
+                    .shadow(color: .black.opacity(0.5), radius: 6, y: 2)
+                    .padding(.horizontal, 24)
 
                 Text(plan.planDescription)
                     .font(.system(size: 15, weight: .regular, design: .rounded))
-                    .foregroundStyle(.white.opacity(0.85))
+                    .foregroundStyle(.white.opacity(0.92))
                     .multilineTextAlignment(.center)
                     .lineSpacing(4)
+                    .shadow(color: .black.opacity(0.4), radius: 4, y: 1)
                     .padding(.horizontal, 32)
             }
-            .padding(.vertical, 36)
+            .padding(.vertical, 28)
         }
-        .frame(minHeight: 240)
+        .frame(minHeight: 280)
     }
 
     // MARK: - Stats Row

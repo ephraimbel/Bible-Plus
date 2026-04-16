@@ -21,7 +21,6 @@ final class SoundscapeService {
     // MARK: - Private
 
     private var activePlayer: AVAudioPlayer?
-    private var crossfadePlayer: AVAudioPlayer?
     private var sleepTimerTask: Task<Void, Never>?
     private var timerTickTask: Task<Void, Never>?
     private var interruptionObserver: NSObjectProtocol?
@@ -44,13 +43,18 @@ final class SoundscapeService {
 
     // MARK: - Audio Session
 
+    private var audioSessionConfigured = false
+
     private func configureAudioSession() {
+        guard !audioSessionConfigured else { return }
         do {
             let session = AVAudioSession.sharedInstance()
             try session.setCategory(.playback, options: [.mixWithOthers])
             try session.setActive(true)
+            audioSessionConfigured = true
         } catch {
-            // Silently handle — audio won't play but app won't crash
+            NSLog("[SoundscapeService] Audio session config failed: \(error)")
+            // Will retry on next playback attempt
         }
     }
 

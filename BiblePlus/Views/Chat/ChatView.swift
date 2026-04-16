@@ -28,6 +28,11 @@ struct ChatView: View {
             viewModel?.stopStreaming()
         }
         .navigationBarTitleDisplayMode(.inline)
+        // Toolbar stays transparent so the chat gradient flows through
+        // unbroken. Content bleed-through behind the toolbar buttons is
+        // prevented by a top fade mask on the ScrollView itself (see
+        // messageList) — content elegantly fades out as it scrolls past
+        // the toolbar zone.
         .toolbarBackground(.hidden, for: .navigationBar)
         .toolbar {
             ToolbarItem(placement: .principal) {
@@ -107,6 +112,9 @@ private struct ChatContentView: View {
     @State private var sendButtonScale: CGFloat = 1.0
     @State private var showGuidedPrayer = false
     @State private var shareAsCardMessage: ChatMessage?
+    @State private var ttsService = ChatTTSService()
+    @State private var scripturePreview: ScriptureReferenceTarget? = nil
+    @State private var showVoiceChat = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -144,8 +152,8 @@ private struct ChatContentView: View {
                 retryBanner
             }
 
-            // Rate limit indicator
-            if !viewModel.profile.isPro && !viewModel.messages.isEmpty {
+            // Rate limit indicator (hidden while streaming to reduce clutter)
+            if !viewModel.profile.isPro && !viewModel.messages.isEmpty && !viewModel.isStreaming {
                 rateLimitBanner
             }
 
@@ -156,8 +164,13 @@ private struct ChatContentView: View {
         .onAppear {
             viewModel.applyInitialContext()
         }
+        .onDisappear {
+            // Halt any in-progress speech read so it doesn't keep playing
+            // after the user navigates back to the conversation list.
+            ttsService.stop()
+        }
         .fullScreenCover(isPresented: $showPaywall) {
-            SummaryPaywallView()
+            PaywallContainerView()
         }
         .onChange(of: viewModel.shouldShowPaywall) { _, show in
             if show {
@@ -178,6 +191,24 @@ private struct ChatContentView: View {
                 messageContent: message.content,
                 background: SanctuaryBackground.background(for: viewModel.profile.selectedBackgroundID) ?? SanctuaryBackground.allBackgrounds[0]
             )
+        }
+        .sheet(item: $scripturePreview) { target in
+            ScripturePopoverSheet(
+                target: target,
+                onOpenInBible: {
+                    viewModel.navigateToScripture(
+                        bookName: target.bookName,
+                        chapter: target.chapter,
+                        verse: target.verse
+                    )
+                },
+                onDiscuss: { prompt in
+                    viewModel.sendQuickPrompt(prompt)
+                }
+            )
+        }
+        .fullScreenCover(isPresented: $showVoiceChat) {
+            VoiceChatView(chatViewModel: viewModel)
         }
     }
 
@@ -239,26 +270,12 @@ private struct ChatContentView: View {
                                 && message.id == viewModel.displayMessages.last?.id
                                 && message.role == .assistant
 
-                            ChatBubbleView(
-                                message: message,
-                                isStreaming: isStreamingMsg,
-                                onSave: message.role == .assistant ? {
-                                    viewModel.saveResponse(message)
-                                } : nil,
-                                onShare: message.role == .assistant ? {
-                                    viewModel.prepareShare(message)
-                                } : nil,
-                                onShareAsCard: message.role == .assistant && !isStreamingMsg ? {
-                                    shareAsCardMessage = message
-                                } : nil,
-                                onScriptureTap: { bookName, chapter, verse in
-                                    viewModel.navigateToScripture(bookName: bookName, chapter: chapter, verse: verse)
-                                },
-                                isFailedMessage: message.role == .user && viewModel.failedMessageId == message.id,
-                                previousMessageRole: previousRole,
-                                typingContextLabel: isStreamingMsg ? viewModel.typingContextLabel : nil,
-                                isFirstInAssistantSequence: isFirst,
-                                isLastInAssistantSequence: isLast
+                            bubbleView(
+                                for: message,
+                                isStreamingMsg: isStreamingMsg,
+                                previousRole: previousRole,
+                                isFirst: isFirst,
+                                isLast: isLast
                             )
                             .id(message.id)
                         }
@@ -267,14 +284,102 @@ private struct ChatContentView: View {
                     // Invisible anchor for scroll tracking
                     Color.clear.frame(height: 1).id("bottom-anchor")
                 }
-                .padding(.vertical, 16)
+                .padding(.top, 70)   // clear the toolbar zone
+                .padding(.bottom, 16)
             }
             .defaultScrollAnchor(.bottom)
+            // Top fade mask: content elegantly fades to invisible as it
+            // scrolls into the top 50pt of the ScrollView, so messages don't
+            // visibly bleed through the transparent toolbar. The gradient
+            // background still shows through unbroken — this only masks the
+            // ScrollView's scroll content, not its background.
+            .mask(
+                VStack(spacing: 0) {
+                    LinearGradient(
+                        colors: [.clear, .black],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                    .frame(height: 50)
+                    Color.black
+                }
+                .ignoresSafeArea()
+            )
             .scrollDismissesKeyboard(.interactively)
             .onChange(of: viewModel.displayMessages.count) { _, _ in
                 scrollToBottom(proxy: proxy)
             }
         }
+    }
+
+    // MARK: - Bubble Builder
+    //
+    // Extracted from the ScrollView body so the SwiftUI type checker doesn't
+    // have to infer the entire bubble construction inline. Adding new
+    // ChatBubbleView parameters (e.g. onListen, isPlayingTTS) tipped the
+    // inline expression past the inference budget; the helper keeps it cheap.
+
+    @ViewBuilder
+    private func bubbleView(
+        for message: ChatMessage,
+        isStreamingMsg: Bool,
+        previousRole: MessageRole?,
+        isFirst: Bool,
+        isLast: Bool
+    ) -> some View {
+        let onSave: (() -> Void)? = message.role == .assistant
+            ? { viewModel.saveResponse(message) }
+            : nil
+
+        let onShare: (() -> Void)? = message.role == .assistant
+            ? { viewModel.prepareShare(message) }
+            : nil
+
+        let onShareAsCard: (() -> Void)? = (message.role == .assistant && !isStreamingMsg)
+            ? { shareAsCardMessage = message }
+            : nil
+
+        // Tapping a scripture reference (citation pill, cross-ref row, etc.)
+        // now shows an in-conversation half-sheet preview instead of jumping
+        // straight to the Bible reader. The popover has its own "Open in
+        // Bible" CTA so users can still navigate explicitly when they want to.
+        let onScriptureTap: ((String, Int, Int) -> Void) = { bookName, chapter, verse in
+            scripturePreview = ScriptureReferenceTarget(
+                bookName: bookName,
+                chapter: chapter,
+                verse: verse
+            )
+        }
+
+        let onListen: (() -> Void)? = (message.role == .assistant && !isStreamingMsg)
+            ? {
+                // Chat narration is always the deep male "Solomon" voice
+                // regardless of the Bible reader voice preference — a user
+                // who picked a female voice for Scripture playback still
+                // wants the AI companion to read with gravitas here.
+                ttsService.play(messageId: message.id, content: message.content, voice: .onyx)
+            }
+            : nil
+
+        let isPlayingTTS = ttsService.isPlaying(messageId: message.id)
+        let isFailed = message.role == .user && viewModel.failedMessageId == message.id
+        let typingLabel: String? = isStreamingMsg ? viewModel.typingContextLabel : nil
+
+        ChatBubbleView(
+            message: message,
+            isStreaming: isStreamingMsg,
+            onSave: onSave,
+            onShare: onShare,
+            onShareAsCard: onShareAsCard,
+            onScriptureTap: onScriptureTap,
+            onListen: onListen,
+            isPlayingTTS: isPlayingTTS,
+            isFailedMessage: isFailed,
+            previousMessageRole: previousRole,
+            typingContextLabel: typingLabel,
+            isFirstInAssistantSequence: isFirst,
+            isLastInAssistantSequence: isLast
+        )
     }
 
     // MARK: - Date Divider
@@ -301,37 +406,44 @@ private struct ChatContentView: View {
         }
     }
 
-    // MARK: - Follow-Up Chips
+    // MARK: - Follow-Up Pills
+    //
+    // Compact horizontal-scrolling quick-reply pills. Replaces the previous
+    // numbered editorial list which took ~200pt of vertical space and felt
+    // like a major UI element. The new design is subtle: capsule pills with
+    // small rounded text, scrollable horizontally, sit just above the input
+    // bar like keyboard suggestions.
 
     private var followUpChips: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
-                ForEach(Array(viewModel.followUpSuggestions.enumerated()), id: \.element) { index, suggestion in
+                ForEach(Array(viewModel.followUpSuggestions.enumerated()), id: \.element) { _, suggestion in
                     Button {
                         viewModel.sendQuickPrompt(suggestion)
+                        Analytics.track(.aiFollowUpTapped)
                         HapticService.lightImpact()
                     } label: {
                         Text(suggestion)
-                            .font(.system(size: 13, weight: .medium, design: .rounded))
+                            .font(.system(size: 12.5, weight: .medium, design: .rounded))
                             .foregroundStyle(palette.accent)
+                            .lineLimit(1)
                             .padding(.horizontal, 14)
-                            .padding(.vertical, 9)
+                            .padding(.vertical, 8)
                             .background(
                                 Capsule()
-                                    .fill(palette.accent.opacity(0.06))
+                                    .fill(palette.accent.opacity(0.08))
                             )
                             .overlay(
                                 Capsule()
-                                    .stroke(palette.accent.opacity(0.1), lineWidth: 0.5)
+                                    .stroke(palette.accent.opacity(0.18), lineWidth: 0.5)
                             )
                     }
-                    .transition(.scale(scale: 0.9).combined(with: .opacity))
-                    .animation(BPAnimation.spring.delay(Double(index) * 0.05), value: viewModel.followUpSuggestions)
+                    .buttonStyle(.plain)
                 }
             }
             .padding(.horizontal, 16)
-            .padding(.vertical, 8)
         }
+        .padding(.vertical, 8)
         .transition(.move(edge: .bottom).combined(with: .opacity))
         .animation(BPAnimation.spring, value: viewModel.followUpSuggestions)
     }
@@ -400,7 +512,7 @@ private struct ChatContentView: View {
 
     private var rateLimitBanner: some View {
         HStack(spacing: 8) {
-            Text("\(viewModel.remainingMessages) messages remaining this week")
+            Text(rateLimitLabel)
                 .font(.system(size: 12, weight: .medium, design: .rounded))
                 .foregroundStyle(palette.textMuted)
 
@@ -428,6 +540,21 @@ private struct ChatContentView: View {
         .padding(.vertical, 6)
     }
 
+    /// Free users see lifetime quota left ("3 free messages remaining"),
+    /// pro users see today's count. Once the quota is exhausted the label
+    /// flips to a more aggressive ask.
+    private var rateLimitLabel: String {
+        if viewModel.profile.isPro {
+            return viewModel.remainingMessages > 0
+                ? "\(viewModel.remainingMessages) messages remaining today"
+                : "Daily cap reached"
+        }
+        if viewModel.remainingMessages > 0 {
+            return "\(viewModel.remainingMessages) free messages remaining"
+        }
+        return "Free messages used — upgrade to keep going"
+    }
+
     // MARK: - Input Bar
 
     private var inputBar: some View {
@@ -438,6 +565,26 @@ private struct ChatContentView: View {
                 .frame(height: 0.5)
 
             HStack(spacing: 12) {
+                // Voice chat entry — opens a hands-free conversation surface.
+                Button {
+                    HapticService.lightImpact()
+                    showVoiceChat = true
+                } label: {
+                    Image(systemName: "waveform")
+                        .font(.system(size: 15, weight: .semibold))
+                        .foregroundStyle(palette.accent)
+                        .frame(width: 38, height: 38)
+                        .background(
+                            Circle().fill(palette.accent.opacity(0.10))
+                        )
+                        .overlay(
+                            Circle().stroke(palette.accent.opacity(0.18), lineWidth: 0.5)
+                        )
+                }
+                .buttonStyle(.plain)
+                .disabled(viewModel.isStreaming)
+                .opacity(viewModel.isStreaming ? 0.4 : 1.0)
+
                 TextField("Ask anything about Scripture...", text: $viewModel.inputText, axis: .vertical)
                     .font(.system(size: 15, weight: .regular, design: .rounded))
                     .lineLimit(1...5)

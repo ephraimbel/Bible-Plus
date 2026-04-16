@@ -208,7 +208,7 @@ struct BibleSearchView: View {
                         .lineLimit(4)
                         .multilineTextAlignment(.leading)
 
-                    Text(viewModel.currentTranslation.displayName)
+                    Text(viewModel.currentTranslation.abbreviation)
                         .font(BPFont.caption)
                         .foregroundStyle(palette.textMuted)
                         .padding(.horizontal, 8)
@@ -246,7 +246,7 @@ struct BibleSearchView: View {
                         .font(BPFont.button)
                         .foregroundStyle(palette.accent)
 
-                    Text("\(verses.count) verse\(verses.count == 1 ? "" : "s") · \(viewModel.currentTranslation.displayName)")
+                    Text("\(verses.count) verse\(verses.count == 1 ? "" : "s") · \(viewModel.currentTranslation.abbreviation)")
                         .font(BPFont.caption)
                         .foregroundStyle(palette.textMuted)
                 }
@@ -337,11 +337,13 @@ struct BibleSearchView: View {
     }
 
     private func highlightedText(_ text: String, query: String) -> Text {
-        let lowercaseText = text.lowercased()
-        let lowercaseQuery = query.lowercased().trimmingCharacters(in: .whitespaces)
+        let trimmedQuery = query.trimmingCharacters(in: .whitespaces)
+        guard !trimmedQuery.isEmpty else { return Text(text) }
 
-        guard !lowercaseQuery.isEmpty,
-              let range = lowercaseText.range(of: lowercaseQuery) else {
+        // Use case-insensitive range search on the original string to
+        // preserve correct character indices (avoids Unicode mapping bugs
+        // when lowercased strings have different character counts).
+        guard let range = text.range(of: trimmedQuery, options: .caseInsensitive) else {
             return Text(text)
         }
 

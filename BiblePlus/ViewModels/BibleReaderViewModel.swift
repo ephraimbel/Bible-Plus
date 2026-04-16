@@ -91,7 +91,7 @@ final class BibleReaderViewModel {
     /// Detail string for the chapter currently being read (e.g. "Genesis 1")
     private var pendingChapterDetail: String?
 
-    var translationName: String { currentTranslation.displayName }
+    var translationName: String { currentTranslation.abbreviation }
 
     var hasContent: Bool { !verses.isEmpty }
 
@@ -280,6 +280,7 @@ final class BibleReaderViewModel {
         let timeSpent = Date().timeIntervalSince(loadedAt)
         if timeSpent >= Self.chapterReadThreshold {
             ActivityService.log(.chapterRead, detail: detail, in: modelContext)
+            Analytics.track(.bibleChapterRead, properties: ["chapter": detail])
         }
 
         // Reset so we don't double-log
@@ -360,7 +361,7 @@ final class BibleReaderViewModel {
             chapter: selectedChapter,
             verseNumber: verse.number,
             text: verse.text,
-            translation: currentTranslation.displayName
+            translation: currentTranslation.abbreviation
         )
         modelContext.insert(saved)
         modelContext.safeSave()
@@ -388,7 +389,7 @@ final class BibleReaderViewModel {
                 chapter: selectedChapter,
                 verseNumber: verse.number,
                 text: verse.text,
-                translation: currentTranslation.displayName,
+                translation: currentTranslation.abbreviation,
                 highlightColor: color
             )
             modelContext.insert(saved)
@@ -422,7 +423,7 @@ final class BibleReaderViewModel {
                 chapter: selectedChapter,
                 verseNumber: verse.number,
                 text: verse.text,
-                translation: currentTranslation.displayName,
+                translation: currentTranslation.abbreviation,
                 notes: note
             )
             modelContext.insert(saved)

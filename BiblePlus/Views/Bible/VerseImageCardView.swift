@@ -115,7 +115,7 @@ struct VerseImageCardView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 16, height: 16)
                             .clipShape(RoundedRectangle(cornerRadius: 4))
-                        Text("Bible+")
+                        (Text("Bible") + Text(Image(systemName: "sparkle")))
                             .font(.system(size: 11, weight: .medium))
                     }
                     .foregroundStyle(.white.opacity(0.5))

@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 import UserNotifications
+import RevenueCat
 
 @main
 struct BiblePlusApp: App {
@@ -82,6 +83,12 @@ struct BiblePlusApp: App {
         UINavigationBar.appearance().scrollEdgeAppearance = navAppearance
         UINavigationBar.appearance().compactAppearance = navAppearance
         UINavigationBar.appearance().tintColor = UIColor(red: 0.79, green: 0.66, blue: 0.43, alpha: 1) // #C9A96E accent
+
+        // RevenueCat — full integration (handles purchases, entitlements, renewals)
+        Purchases.configure(withAPIKey: "appl_FjknWibdqNxzGBryURSpcNKbxcv")
+
+        // TelemetryDeck — privacy-first analytics
+        Analytics.configure()
 
         guard !hadError else { return }
 
@@ -239,6 +246,17 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             return
         }
 
+        // Daily welcome-back tap → route to the Feed so the user lands
+        // on the day's content. This is the recurring retention push set
+        // up at the end of onboarding.
+        if let type = userInfo["type"] as? String, type == "welcome_back" {
+            await MainActor.run {
+                NotificationCenter.default.post(name: .feedContentDeepLink, object: nil)
+                Analytics.track(.welcomeNotificationTapped)
+            }
+            return
+        }
+
         // Default tap — deep link to content or Bible verse
         if let idString = userInfo["contentID"] as? String,
            let uuid = UUID(uuidString: idString) {
@@ -270,6 +288,7 @@ struct RootView: View {
     @State private var deepLinkedContentID: UUID?
     @State private var showSplash = true
     @State private var storeKitService = StoreKitService()
+    @State private var reviewService = ReviewService.shared
 
     private var currentProfile: UserProfile? { profiles.first }
     private var hasCompletedOnboarding: Bool {
@@ -289,7 +308,7 @@ struct RootView: View {
                             removal: .opacity
                         ))
                 } else {
-                    OnboardingContainerView()
+                    ConversationalOnboardingView()
                         .transition(.opacity)
                 }
             }
@@ -317,7 +336,24 @@ struct RootView: View {
                     .transition(.opacity)
                     .zIndex(1)
             }
+
+            // Review prompt overlay
+            if reviewService.showPrompt {
+                Color.black.opacity(0.4)
+                    .ignoresSafeArea()
+                    .zIndex(2)
+                    .onTapGesture { reviewService.userTappedNotYet() }
+
+                ReviewPromptView(
+                    onYes: { reviewService.userTappedYes() },
+                    onNotYet: { reviewService.userTappedNotYet() }
+                )
+                .zIndex(3)
+                .transition(.scale(scale: 0.85).combined(with: .opacity))
+            }
         }
+        .environment(reviewService)
+        .animation(.spring(response: 0.4, dampingFraction: 0.8), value: reviewService.showPrompt)
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 withAnimation(.easeInOut(duration: 0.5)) {

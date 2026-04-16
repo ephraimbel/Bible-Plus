@@ -86,7 +86,7 @@ struct WidgetBackgroundPickerSheet: View {
         }
         .presentationBackground(palette.background)
         .fullScreenCover(isPresented: $showPaywall) {
-            SummaryPaywallView()
+            PaywallContainerView()
         }
     }
 

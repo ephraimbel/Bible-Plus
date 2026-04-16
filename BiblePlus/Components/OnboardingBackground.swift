@@ -1,23 +1,27 @@
 import SwiftUI
 
 struct OnboardingBackground: View {
+    @Environment(\.bpPalette) private var palette
+
     var body: some View {
         ZStack {
-            LinearGradient(
-                colors: [
-                    Color(hex: "FFF8F0"),
-                    Color(hex: "FAF3E8"),
-                    Color(hex: "F5EFE0"),
-                ],
-                startPoint: .top,
-                endPoint: .bottom
-            )
+            // Blurred biblical art — matches the welcome screen aesthetic
+            Image("biblical_jacob_ladder")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .blur(radius: 28)
+                .scaleEffect(1.15)
+                .clipped()
 
+            // Warm cream overlay for legibility
+            palette.background.opacity(0.72)
+
+            // Gold glow from top
             RadialGradient(
-                colors: [Color(hex: "C9A96E").opacity(0.08), Color.clear],
-                center: .init(x: 0.5, y: 0.15),
+                colors: [Color(hex: "C9A96E").opacity(0.10), Color.clear],
+                center: .init(x: 0.5, y: 0.12),
                 startRadius: 0,
-                endRadius: 300
+                endRadius: 350
             )
         }
         .ignoresSafeArea()
@@ -37,7 +41,6 @@ struct SunriseBackground: View {
                 endPoint: .bottom
             )
 
-            // Subtle radial glow at center top
             RadialGradient(
                 colors: [
                     Color(hex: "C9A96E").opacity(0.15),

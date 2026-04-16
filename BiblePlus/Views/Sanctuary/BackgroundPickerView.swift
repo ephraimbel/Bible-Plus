@@ -218,7 +218,7 @@ struct BackgroundPickerView: View {
         }
         .presentationBackground(palette.background)
         .fullScreenCover(isPresented: $showPaywall) {
-            SummaryPaywallView()
+            PaywallContainerView()
         }
     }
 

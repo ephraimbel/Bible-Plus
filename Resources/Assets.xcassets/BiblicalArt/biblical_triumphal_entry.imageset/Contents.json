@@ -1,0 +1,13 @@
+{
+  "images" : [
+    {
+      "filename" : "biblical_triumphal_entry.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

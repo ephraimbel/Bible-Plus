@@ -110,16 +110,23 @@ final class FeedViewModel {
             ("Trust in the Lord with all thine heart; and lean not unto thine own understanding.", "Proverbs 3:5"),
             ("I can do all things through Christ which strengtheneth me.", "Philippians 4:13"),
             ("The Lord is my shepherd; I shall not want.", "Psalm 23:1"),
-            ("Be strong and of a good courage; be not afraid, neither be thou dismayed: for the Lord thy God is with thee whithersoever thou goest.", "Joshua 1:9"),
+            ("Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you.", "Joshua 1:9"),
             ("And we know that all things work together for good to them that love God.", "Romans 8:28"),
             ("Cast all your anxiety on him because he cares for you.", "1 Peter 5:7"),
             ("The Lord is my light and my salvation; whom shall I fear?", "Psalm 27:1"),
-            ("But they that wait upon the Lord shall renew their strength; they shall mount up with wings as eagles.", "Isaiah 40:31"),
+            ("They that wait upon the Lord shall renew their strength; they shall mount up with wings as eagles.", "Isaiah 40:31"),
             ("Come unto me, all ye that labour and are heavy laden, and I will give you rest.", "Matthew 11:28"),
             ("For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you.", "Jeremiah 29:11"),
             ("Be still, and know that I am God.", "Psalm 46:10"),
             ("The Lord is close to the brokenhearted and saves those who are crushed in spirit.", "Psalm 34:18"),
             ("Create in me a clean heart, O God; and renew a right spirit within me.", "Psalm 51:10"),
+            ("He hath made every thing beautiful in his time.", "Ecclesiastes 3:11"),
+            ("The Lord bless thee, and keep thee.", "Numbers 6:24"),
+            ("Thy word is a lamp unto my feet, and a light unto my path.", "Psalm 119:105"),
+            ("Peace I leave with you, my peace I give unto you.", "John 14:27"),
+            ("The joy of the Lord is your strength.", "Nehemiah 8:10"),
+            ("Draw nigh to God, and he will draw nigh to you.", "James 4:8"),
+            ("In all thy ways acknowledge him, and he shall direct thy paths.", "Proverbs 3:6"),
         ]
         // Date-seeded index so it changes daily
         let dayOfYear = Calendar.current.ordinality(of: .day, in: .year, for: Date()) ?? 1
@@ -149,6 +156,34 @@ final class FeedViewModel {
         }
         guard let book = BibleData.allBooks.first(where: { $0.id == p.lastReadBookID }) else { return nil }
         return (bookName: book.name, chapter: p.lastReadChapter, verse: p.lastReadVerseNumber, totalChapters: book.chapterCount)
+    }
+
+    /// Most recently saved/pinned PrayerContent title (or short text). Used by
+    /// the Home dashboard's "Saved" quick-action tile to show what to come
+    /// back to. Returns nil when the user has nothing saved yet.
+    var latestSavedTitle: String? {
+        var descriptor = FetchDescriptor<PrayerContent>(
+            predicate: #Predicate { $0.isSaved == true },
+            sortBy: [SortDescriptor(\.createdAt, order: .reverse)]
+        )
+        descriptor.fetchLimit = 1
+        guard let content = try? modelContext.fetch(descriptor).first else { return nil }
+        // Prefer the verse reference if it's a verse card; otherwise the
+        // first few words of the body so the tile reads like a real bookmark.
+        if let ref = content.verseReference, !ref.isEmpty {
+            return ref
+        }
+        let body = content.templateText.trimmingCharacters(in: .whitespacesAndNewlines)
+        let words = body.split(separator: " ").prefix(4).joined(separator: " ")
+        return words.isEmpty ? nil : "\(words)\u{2026}"
+    }
+
+    /// Total saved count — drives the empty-state copy on the Saved tile.
+    var savedCount: Int {
+        let descriptor = FetchDescriptor<PrayerContent>(
+            predicate: #Predicate { $0.isSaved == true }
+        )
+        return (try? modelContext.fetchCount(descriptor)) ?? 0
     }
 
     // MARK: - Reading Plans for Dashboard
@@ -252,6 +287,7 @@ final class FeedViewModel {
         content.isSaved.toggle()
         if content.isSaved {
             savedContentIDs.insert(content.id)
+            Analytics.track(.feedCardLiked, properties: ["category": content.category])
         } else {
             savedContentIDs.remove(content.id)
         }
@@ -264,6 +300,7 @@ final class FeedViewModel {
             content.isSaved = true
             savedContentIDs.insert(content.id)
             modelContext.safeSave()
+            Analytics.track(.feedCardLiked, properties: ["category": content.category])
         }
         doubleTapHeartID = content.id
         HapticService.impact(.medium)
@@ -286,6 +323,7 @@ final class FeedViewModel {
 
     func shareCard(_ content: PrayerContent) {
         shareContent = content
+        Analytics.track(.feedCardShared, properties: ["category": content.category])
         HapticService.impact(.medium)
     }
 
@@ -333,6 +371,10 @@ final class FeedViewModel {
         streakMilestone = result.milestoneType
         if result.isNewDay {
             showStreakCelebration = true
+            // Ask for review at streak milestones (3, 7, etc.)
+            if result.currentStreak == 3 || result.isMilestone {
+                ReviewService.shared.requestIfAppropriate()
+            }
         }
     }
 

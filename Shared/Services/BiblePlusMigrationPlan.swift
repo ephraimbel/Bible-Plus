@@ -18,6 +18,7 @@ enum BiblePlusSchemaV1: VersionedSchema {
             ContentCollection.self,
             ChatMessage.self,
             Conversation.self,
+            ConversationTopic.self,
             SavedBibleVerse.self,
             ReadingPlan.self,
             UserPlanProgress.self,

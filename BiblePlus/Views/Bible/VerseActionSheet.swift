@@ -39,6 +39,7 @@ struct VerseToolbarOverlay: View {
     @State private var showHighlightStrip = false
     @State private var showNoteEditor = false
     @State private var showCopyConfirmation = false
+    @State private var copyResetTask: Task<Void, Never>?
     @State private var noteText = ""
 
     var body: some View {
@@ -135,7 +136,10 @@ struct VerseToolbarOverlay: View {
                     ) {
                         onCopy()
                         showCopyConfirmation = true
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                        copyResetTask?.cancel()
+                        copyResetTask = Task {
+                            try? await Task.sleep(nanoseconds: 1_200_000_000)
+                            guard !Task.isCancelled else { return }
                             showCopyConfirmation = false
                         }
                     }

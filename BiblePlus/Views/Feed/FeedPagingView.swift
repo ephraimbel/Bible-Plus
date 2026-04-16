@@ -13,6 +13,14 @@ struct FeedPagingView: View {
 
     var body: some View {
         ZStack {
+            // Empty state — visible whenever the feed is somehow empty.
+            // Without this the user gets a silent black screen, which is
+            // exactly the bug reported. Tapping reload re-runs the seeder +
+            // generator path that should always produce content.
+            if vm.cards.isEmpty {
+                emptyState
+            }
+
             ScrollView(.vertical, showsIndicators: false) {
                 LazyVStack(spacing: 0) {
                     ForEach(Array(vm.cards.enumerated()), id: \.element.id) { index, content in
@@ -93,6 +101,13 @@ struct FeedPagingView: View {
         .toolbar(immersiveMode ? .hidden : .visible, for: .tabBar)
         .animation(.easeInOut(duration: 0.25), value: immersiveMode)
         .onAppear {
+            // Safety net: if we landed in the feed with zero cards (e.g. a
+            // refreshFeed left it empty, or the seeder ran after init), force
+            // a reload so the user never sees an empty paging view.
+            if vm.cards.isEmpty {
+                vm.loadInitialFeed()
+            }
+
             // Handle pending deep link that was set before this view existed
             if let targetIndex = vm.deepLinkScrollIndex {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
@@ -101,5 +116,33 @@ struct FeedPagingView: View {
                 }
             }
         }
+    }
+
+    // MARK: - Empty State
+
+    private var emptyState: some View {
+        VStack(spacing: 14) {
+            Image(systemName: "sparkles")
+                .font(.system(size: 36, weight: .light))
+                .foregroundStyle(.white.opacity(0.7))
+            Text("Preparing your feed…")
+                .font(.system(size: 16, weight: .semibold, design: .rounded))
+                .foregroundStyle(.white.opacity(0.85))
+            Button {
+                vm.loadInitialFeed()
+            } label: {
+                Text("Reload")
+                    .font(.system(size: 14, weight: .semibold, design: .rounded))
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 18)
+                    .padding(.vertical, 9)
+                    .background(Capsule().fill(.white.opacity(0.18)))
+                    .overlay(Capsule().stroke(.white.opacity(0.25), lineWidth: 0.5))
+            }
+            .buttonStyle(.plain)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.black.ignoresSafeArea())
+        .zIndex(60)
     }
 }

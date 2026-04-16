@@ -20,37 +20,33 @@ struct GreetingWidgetEntryView: View {
         ZStack {
             WidgetBackgroundView(gradientColors: entry.backgroundGradient)
 
-            VStack(spacing: 8) {
+            VStack(spacing: 6) {
                 Spacer()
 
                 // Time icon
                 Image(systemName: entry.timeIcon)
-                    .font(.system(size: 28, weight: .light))
+                    .font(.system(size: 24, weight: .light))
                     .foregroundStyle(.white.opacity(0.8))
                     .shadow(color: .black.opacity(0.5), radius: 3, y: 1)
 
-                // Greeting
-                Text("\(entry.greeting),")
-                    .font(.system(size: 13, weight: .medium, design: .serif))
-                    .foregroundStyle(.white.opacity(0.8))
-                    .shadow(color: .black.opacity(0.5), radius: 1, y: 1)
-
-                Text(entry.firstName)
-                    .font(.system(size: 20, weight: .bold, design: .rounded))
+                // Greeting + name on one line
+                Text("\(entry.greeting), \(entry.firstName)")
+                    .font(.system(size: 15, weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
+                    .minimumScaleFactor(0.7)
                     .shadow(color: .black.opacity(0.7), radius: 2, y: 1)
 
                 Spacer()
 
-                // Encouragement
+                // Encouragement — fully visible
                 Text(entry.encouragement)
-                    .font(.system(size: 11, weight: .regular, design: .serif))
-                    .foregroundStyle(.white.opacity(0.75))
+                    .font(.system(size: 12, weight: .regular, design: .serif))
+                    .foregroundStyle(.white.opacity(0.85))
                     .multilineTextAlignment(.center)
-                    .lineLimit(2)
+                    .minimumScaleFactor(0.6)
                     .shadow(color: .black.opacity(0.5), radius: 1, y: 1)
             }
-            .padding(16)
+            .padding(14)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .widgetURL(URL(string: "bibleplus://"))
@@ -59,22 +55,22 @@ struct GreetingWidgetEntryView: View {
     // MARK: - Accessory Rectangular
 
     private var rectangularView: some View {
-        VStack(alignment: .leading, spacing: 3) {
+        VStack(alignment: .leading, spacing: 2) {
             // Row 1: Time icon + greeting
             HStack(spacing: 4) {
                 Image(systemName: entry.timeIcon)
-                    .font(.system(size: 12, weight: .semibold))
+                    .font(.system(size: 11, weight: .semibold))
 
                 Text("\(entry.greeting), \(entry.firstName)")
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.system(size: 12, weight: .semibold))
+                    .minimumScaleFactor(0.7)
                     .lineLimit(1)
             }
 
-            // Row 2: Encouragement
+            // Row 2: Encouragement — fully visible
             Text(entry.encouragement)
-                .font(.system(size: 11))
-                .foregroundStyle(.secondary)
-                .lineLimit(2)
+                .font(.system(size: 12, weight: .regular, design: .serif))
+                .minimumScaleFactor(0.6)
         }
         .widgetURL(URL(string: "bibleplus://"))
     }

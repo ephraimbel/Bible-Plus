@@ -1,109 +1,125 @@
 import StoreKit
 import Foundation
+import RevenueCat
 
 @Observable
 final class StoreKitService {
-    private(set) var subscriptions: [Product] = []
-    private(set) var purchasedProductIDs: Set<String> = []
     private(set) var productsLoaded = false
     private(set) var productsLoadError = false
-    private var transactionListener: Task<Void, Error>?
 
     static let weeklyID = "io.bibleplus.pro.weekly"
     static let yearlyID = "io.bibleplus.pro.yearly"
 
-    var isPro: Bool { !purchasedProductIDs.isEmpty }
+    // RevenueCat packages for purchasing
+    private var packages: [Package] = []
 
-    var weeklyProduct: Product? {
-        subscriptions.first { $0.id == Self.weeklyID }
+    // Expose StoreProduct wrappers that have .displayPrice, .price, .priceFormatStyle
+    private(set) var subscriptions: [RevenueCat.StoreProduct] = []
+
+    var isPro: Bool { _isPro }
+    #if DEBUG
+    // Debug builds default to Pro so simulator/dev sessions aren't blocked by
+    // rate limits, paywall sheets, or feature gates. Production builds start
+    // false and update via RevenueCat entitlement checks (see init).
+    private var _isPro: Bool = true
+    #else
+    private var _isPro: Bool = false
+    #endif
+
+    var weeklyProduct: RevenueCat.StoreProduct? {
+        subscriptions.first { $0.productIdentifier == Self.weeklyID }
     }
 
-    var yearlyProduct: Product? {
-        subscriptions.first { $0.id == Self.yearlyID }
+    var yearlyProduct: RevenueCat.StoreProduct? {
+        subscriptions.first { $0.productIdentifier == Self.yearlyID }
     }
 
     init() {
-        transactionListener = listenForTransactions()
         Task {
             await loadProducts()
-            await updatePurchasedProducts()
+            #if DEBUG
+            // Skip entitlement checks — _isPro defaults to true in DEBUG
+            #else
+            await updateEntitlements()
+            await listenForEntitlementChanges()
+            #endif
         }
-    }
-
-    deinit {
-        transactionListener?.cancel()
     }
 
     func loadProducts() async {
         do {
-            subscriptions = try await Product.products(for: [
-                Self.weeklyID,
-                Self.yearlyID,
-            ]).sorted { $0.price < $1.price }
+            let offerings = try await Purchases.shared.offerings()
+            guard let current = offerings.current else {
+                productsLoadError = true
+                return
+            }
+            packages = current.availablePackages
+            subscriptions = packages
+                .map(\.storeProduct)
+                .sorted { $0.price < $1.price }
             productsLoaded = true
             productsLoadError = false
         } catch {
             productsLoadError = true
+            #if DEBUG
+            print("[RevenueCat] Failed to load offerings: \(error)")
+            #endif
         }
     }
 
+    var purchaseError: String? = nil
+
     @discardableResult
-    func purchase(_ product: Product) async throws -> Transaction? {
-        let result = try await product.purchase()
-        switch result {
-        case .success(let verification):
-            let transaction = try checkVerified(verification)
-            await transaction.finish()
-            await updatePurchasedProducts()
-            return transaction
-        case .userCancelled, .pending:
-            return nil
-        @unknown default:
-            return nil
+    func purchase(_ product: RevenueCat.StoreProduct) async throws -> Bool {
+        purchaseError = nil
+        do {
+            let (_, customerInfo, _) = try await Purchases.shared.purchase(product: product)
+            let active = customerInfo.entitlements["bibleplus Pro"]?.isActive == true
+            await MainActor.run { _isPro = active }
+            return active
+        } catch {
+            let nsError = error as NSError
+            // RevenueCat error code 1 = user cancelled — not a real error
+            if nsError.domain == "RevenueCat.ErrorCode", nsError.code == 1 {
+                return false
+            }
+            await MainActor.run { purchaseError = error.localizedDescription }
+            #if DEBUG
+            print("[RevenueCat] Purchase failed: \(error)")
+            #endif
+            throw error
         }
     }
 
     func restorePurchases() async {
         do {
-            try await AppStore.sync()
+            let customerInfo = try await Purchases.shared.restorePurchases()
+            let active = customerInfo.entitlements["bibleplus Pro"]?.isActive == true
+            await MainActor.run { _isPro = active }
         } catch {
             #if DEBUG
-            print("[StoreKit] Restore sync failed: \(error)")
+            print("[RevenueCat] Restore failed: \(error)")
             #endif
         }
-        await updatePurchasedProducts()
     }
 
-    private func listenForTransactions() -> Task<Void, Error> {
-        Task.detached { [weak self] in
-            for await result in Transaction.updates {
-                if let transaction = try? self?.checkVerified(result) {
-                    await transaction.finish()
-                    await self?.updatePurchasedProducts()
-                }
-            }
+    /// Listen for real-time entitlement changes (renewal, expiry, upgrade, etc.)
+    private func listenForEntitlementChanges() async {
+        for await customerInfo in Purchases.shared.customerInfoStream {
+            let active = customerInfo.entitlements["bibleplus Pro"]?.isActive == true
+            await MainActor.run { _isPro = active }
         }
     }
 
-    private func updatePurchasedProducts() async {
-        var ids: [String] = []
-        for await result in Transaction.currentEntitlements {
-            if let transaction = try? checkVerified(result) {
-                ids.append(transaction.productID)
-            }
-        }
-        let newPurchased = Set(ids)
-        await MainActor.run {
-            purchasedProductIDs = newPurchased
-        }
-    }
-
-    private func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
-        switch result {
-        case .unverified:
-            throw StoreError.failedVerification
-        case .verified(let safe):
-            return safe
+    private func updateEntitlements() async {
+        do {
+            let customerInfo = try await Purchases.shared.customerInfo()
+            let active = customerInfo.entitlements["bibleplus Pro"]?.isActive == true
+            await MainActor.run { _isPro = active }
+        } catch {
+            #if DEBUG
+            print("[RevenueCat] Failed to get customer info: \(error)")
+            #endif
         }
     }
 

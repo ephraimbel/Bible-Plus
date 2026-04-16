@@ -179,26 +179,40 @@ enum BibleTranslation: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
+        case .kjv: "King James Version"
+        case .web: "World English Bible"
+        case .niv: "New International Version"
+        case .esv: "English Standard Version"
+        case .nlt: "New Living Translation"
+        case .nasb: "New American Standard Bible"
+        case .message: "The Message"
+        case .nkjv: "New King James Version"
+        }
+    }
+
+    /// Short abbreviation shown in compact UI (toolbar badge, etc.)
+    var abbreviation: String {
+        switch self {
         case .kjv: "KJV"
         case .web: "WEB"
         case .niv: "NIV"
         case .esv: "ESV"
         case .nlt: "NLT"
         case .nasb: "NASB"
-        case .message: "The Message"
+        case .message: "MSG"
         case .nkjv: "NKJV"
         }
     }
 
     var subtitle: String {
         switch self {
-        case .kjv: "Classic and poetic"
+        case .kjv: "Classic and poetic language"
         case .web: "Modern English, public domain"
-        case .niv: "Clear and widely trusted"
-        case .esv: "Precise and faithful to the original"
-        case .nlt: "Simple, modern, and easy to read"
-        case .nasb: "Word-for-word accuracy"
-        case .message: "Conversational and fresh"
+        case .niv: "Clear, accurate, and widely trusted"
+        case .esv: "Precise and faithful to the original texts"
+        case .nlt: "Simple, natural, and easy to read"
+        case .nasb: "Literal word-for-word accuracy"
+        case .message: "Conversational and contemporary paraphrase"
         case .nkjv: "Modern update of the classic King James"
         }
     }
@@ -622,7 +636,7 @@ enum Soundscape: String, Codable, CaseIterable, Identifiable {
 
     var isProOnly: Bool {
         switch self {
-        case .stillWaters, .morningLight, .eveningRest, .pureSilence:
+        case .pureSilence:
             false
         default:
             true
@@ -783,9 +797,10 @@ struct SanctuaryBackground: Identifiable, Hashable {
     static let allBackgrounds: [SanctuaryBackground] = {
         var bgs: [SanctuaryBackground] = []
 
-        // MARK: Essentials (12 — all free)
+        // MARK: Essentials (12 free gradients)
         bgs.append(contentsOf: [
             SanctuaryBackground(id: "warm-gold", name: "Warm Gold", collection: .essentials, gradientColors: ["C9A96E", "D4B483", "F0E8D8"]),
+            SanctuaryBackground(id: "soft-cream", name: "Soft Cream", collection: .essentials, gradientColors: ["FAF8F4", "F0E8D8", "E8DCC8"]),
             SanctuaryBackground(id: "forest-dawn", name: "Forest Dawn", collection: .essentials, gradientColors: ["2D5016", "4A7A2E", "8FB174"]),
             SanctuaryBackground(id: "mountain-mist", name: "Mountain Mist", collection: .essentials, gradientColors: ["6B7B8D", "9AACBD", "C8D5E0"]),
             SanctuaryBackground(id: "desert-sun", name: "Desert Sun", collection: .essentials, gradientColors: ["C2842F", "D4A054", "F0D8A0"]),
@@ -795,7 +810,6 @@ struct SanctuaryBackground: Identifiable, Hashable {
             SanctuaryBackground(id: "ember-glow", name: "Ember Glow", collection: .essentials, gradientColors: ["4A1A1A", "7A2D2D", "A04040"]),
             SanctuaryBackground(id: "midnight-blue", name: "Midnight Blue", collection: .essentials, gradientColors: ["0A1628", "1A2D50", "2A4478"]),
             SanctuaryBackground(id: "rose-gold", name: "Rose Gold", collection: .essentials, gradientColors: ["8B6B61", "B89485", "E0C4B8"]),
-            SanctuaryBackground(id: "soft-cream", name: "Soft Cream", collection: .essentials, gradientColors: ["FAF8F4", "F0E8D8", "E8DCC8"]),
             SanctuaryBackground(id: "steel-grey", name: "Steel Grey", collection: .essentials, gradientColors: ["2C2C2C", "484848", "6A6A6A"]),
         ])
 
@@ -1297,10 +1311,15 @@ enum BibleVoice: String, CaseIterable, Identifiable, Codable {
     /// Each voice uses a different locale so they sound distinct even with compact fallbacks.
     var preferredVoiceIdentifiers: [String] {
         switch self {
-        case .onyx: // American male
+        case .onyx: // Deep profound male — prefers American Aaron/Zac,
+                    // falls back to British Daniel (which ships preinstalled
+                    // on every iOS device, so resolution never falls through
+                    // to the system default Samantha voice).
             ["com.apple.voice.premium.en-US.Zac",
              "com.apple.voice.enhanced.en-US.Aaron",
-             "com.apple.voice.compact.en-US.Aaron"]
+             "com.apple.voice.compact.en-US.Aaron",
+             "com.apple.voice.enhanced.en-GB.Daniel",
+             "com.apple.voice.compact.en-GB.Daniel"]
         case .echo: // British male
             ["com.apple.voice.enhanced.en-GB.Daniel",
              "com.apple.voice.compact.en-GB.Daniel"]
@@ -1327,12 +1346,32 @@ enum BibleVoice: String, CaseIterable, Identifiable, Codable {
     }
 
     /// Resolves the best available voice on this device.
+    ///
+    /// Resolution order:
+    ///   1. Named identifiers in `preferredVoiceIdentifiers` (premium → enhanced → compact).
+    ///   2. A gender-matched scan of installed voices in the target language —
+    ///      prevents an all-male choice like `.onyx` from silently falling
+    ///      through to Samantha (the en-US system default) when Aaron/Zac
+    ///      aren't downloaded.
+    ///   3. Final language fallback.
     var resolvedVoice: AVSpeechSynthesisVoice? {
         for identifier in preferredVoiceIdentifiers {
             if let voice = AVSpeechSynthesisVoice(identifier: identifier) {
                 return voice
             }
         }
+
+        let targetGender: AVSpeechSynthesisVoiceGender = BibleVoice.maleVoices.contains(self) ? .male : .female
+        let installed = AVSpeechSynthesisVoice.speechVoices()
+        if let match = installed.first(where: {
+            $0.gender == targetGender && $0.language.hasPrefix(voiceLanguage.prefix(2))
+        }) {
+            return match
+        }
+        if let match = installed.first(where: { $0.gender == targetGender }) {
+            return match
+        }
+
         return AVSpeechSynthesisVoice(language: voiceLanguage)
     }
 
@@ -1528,7 +1567,7 @@ enum BiblicalCharacter: String, CaseIterable, Identifiable {
 // MARK: - Conversation Mode
 
 enum ConversationMode: String, CaseIterable, Identifiable {
-    case comfort, challenge, teach, pray
+    case comfort, challenge, teach, pray, story
 
     var id: String { rawValue }
 
@@ -1538,6 +1577,7 @@ enum ConversationMode: String, CaseIterable, Identifiable {
         case .challenge: "Challenge me"
         case .teach: "Teach me"
         case .pray: "Pray with me"
+        case .story: "Tell me a story"
         }
     }
 
@@ -1547,6 +1587,7 @@ enum ConversationMode: String, CaseIterable, Identifiable {
         case .challenge: "flame.fill"
         case .teach: "book.fill"
         case .pray: "hands.sparkles.fill"
+        case .story: "book.pages.fill"
         }
     }
 }

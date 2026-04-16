@@ -26,6 +26,7 @@ final class SettingsViewModel {
     var showHomeWidgetGuide = false
     var showLockWidgetGuide = false
     var showNotificationTopics = false
+    var showPhotoPicker = false
 
     // MARK: - Local Editing Copies
 
@@ -269,6 +270,10 @@ final class SettingsViewModel {
                 content: allContent
             )
         }
+    }
+
+    func updateProfileImage(_ data: Data?) {
+        personalizationService.updateProfileImage(data)
     }
 
     func updateColorMode(_ mode: ColorMode) {

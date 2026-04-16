@@ -484,13 +484,14 @@ private struct BibleContentView: View {
                     verseFrame: selectedVerseFrame,
                     onExplain: {
                         // Verse explain counts toward AI rate limit
-                        let descriptor = FetchDescriptor<UserProfile>()
-                        let isPro = (try? modelContext.fetch(descriptor).first?.isPro) ?? false
+                        let profileDescriptor = FetchDescriptor<UserProfile>()
+                        let profile = try? modelContext.fetch(profileDescriptor).first
+                        let isPro = profile?.isPro ?? false
                         let allMsgDescriptor = FetchDescriptor<ChatMessage>(
                             sortBy: [SortDescriptor(\.createdAt)]
                         )
                         let allMessages = (try? modelContext.fetch(allMsgDescriptor)) ?? []
-                        if !AIService.canSendMessage(messages: allMessages, isPro: isPro) {
+                        if !AIService.canSendMessage(allMessages: allMessages, isPro: isPro) {
                             viewModel.selectedVerse = nil
                             showPaywall = true
                             return
@@ -571,7 +572,7 @@ private struct BibleContentView: View {
                         verseImageData = (
                             text: verse.text,
                             reference: viewModel.verseReference(for: verse),
-                            translation: viewModel.currentTranslation.displayName
+                            translation: viewModel.currentTranslation.abbreviation
                         )
                         viewModel.selectedVerse = nil
                     },
@@ -762,6 +763,7 @@ private struct BibleContentView: View {
         .sheet(isPresented: $viewModel.showTranslationPicker) {
             BibleTranslationPickerView(
                 currentTranslation: viewModel.currentTranslation,
+                isPro: isPro,
                 onSelect: { viewModel.changeTranslation($0) }
             )
             .presentationDetents([.medium, .large])
@@ -848,7 +850,7 @@ private struct BibleContentView: View {
             .presentationDetents([.medium, .large])
         }
         .fullScreenCover(isPresented: $showPaywall) {
-            SummaryPaywallView()
+            PaywallContainerView()
         }
         .sheet(isPresented: $showReadingPlans) {
             ReadingPlansView(

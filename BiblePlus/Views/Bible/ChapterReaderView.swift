@@ -27,6 +27,11 @@ struct ChapterReaderView: View {
     @Environment(\.bpPalette) private var palette
     @Environment(\.colorScheme) private var colorScheme
 
+    /// Filters out empty verses (e.g. WEB omits certain verses).
+    private var displayVerses: [(number: Int, text: String)] {
+        verses.filter { !$0.text.trimmingCharacters(in: .whitespaces).isEmpty }
+    }
+
     var body: some View {
         if isLoading && verses.isEmpty {
             loadingState
@@ -45,24 +50,38 @@ struct ChapterReaderView: View {
 
                         // Chapter heading
                         Text(chapterTitle)
-                            .font(BPFont.headingSmall)
+                            .font(.system(size: 32, weight: .bold, design: .serif))
                             .foregroundStyle(palette.textPrimary)
                             .frame(maxWidth: .infinity, alignment: .center)
-                            .padding(.vertical, 24)
+                            .padding(.top, 28)
+                            .padding(.bottom, 8)
 
                         // Ornamental divider below chapter heading
                         OrnamentalDivider(color: palette.accent, opacity: 0.3)
                             .frame(maxWidth: .infinity)
-                            .padding(.bottom, 16)
+                            .padding(.bottom, 20)
+
+                        // Psalm heading (bracketed superscription)
+                        if let firstVerse = displayVerses.first,
+                           let heading = extractPsalmHeading(firstVerse.text) {
+                            Text(heading)
+                                .font(.system(size: max(13, readerFontSize * 0.72), weight: .regular, design: .serif))
+                                .italic()
+                                .foregroundStyle(palette.textSecondary)
+                                .multilineTextAlignment(.center)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .padding(.bottom, 16)
+                        }
 
                         // Verses as flowing text
-                        ForEach(verses, id: \.number) { verse in
+                        ForEach(displayVerses, id: \.number) { verse in
                             let isRed = RedLetterData.isRedLetter(
                                 book: bookID,
                                 chapter: chapterNumber,
                                 verse: verse.number
                             )
-                            verseRow(number: verse.number, text: verse.text, isRedLetter: isRed)
+                            let cleanText = stripPsalmHeading(verse.text)
+                            verseRow(number: verse.number, text: cleanText, isRedLetter: isRed)
                                 .id(verse.number)
                         }
                     }
@@ -74,11 +93,11 @@ struct ChapterReaderView: View {
                     RadialGradient(
                         colors: [
                             Color.clear,
-                            Color.black.opacity(0.06)
+                            Color.black.opacity(0.04)
                         ],
                         center: .center,
-                        startRadius: 300,
-                        endRadius: 600
+                        startRadius: 350,
+                        endRadius: 650
                     )
                     .allowsHitTesting(false)
                 )
@@ -100,6 +119,26 @@ struct ChapterReaderView: View {
                 }
             }
         }
+    }
+
+    // MARK: - Psalm Heading Extraction
+
+    /// Extracts bracketed heading from Psalm verses, e.g. "[A Psalm of David.]"
+    private func extractPsalmHeading(_ text: String) -> String? {
+        guard text.hasPrefix("["),
+              let closingIndex = text.firstIndex(of: "]") else { return nil }
+        let heading = String(text[text.startIndex...closingIndex])
+        // Remove the brackets for display
+        return String(heading.dropFirst().dropLast())
+    }
+
+    /// Strips the bracketed heading from a verse, returning the remaining text.
+    private func stripPsalmHeading(_ text: String) -> String {
+        guard text.hasPrefix("["),
+              let closingIndex = text.firstIndex(of: "]") else { return text }
+        let afterBracket = text[text.index(after: closingIndex)...]
+        let cleaned = afterBracket.trimmingCharacters(in: .whitespaces)
+        return cleaned.isEmpty ? text : cleaned
     }
 
     // MARK: - Verse Row
@@ -133,7 +172,7 @@ struct ChapterReaderView: View {
                     )
                     .multilineTextAlignment(.leading)
                     .lineSpacing(readerLineSpacing)
-                    .padding(.vertical, 0)
+                    .padding(.vertical, readerLineSpacing * 0.3)
                     .padding(.horizontal, 4)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
@@ -177,20 +216,31 @@ struct ChapterReaderView: View {
         highlight: VerseHighlightColor?
     ) -> Text {
         var result = Text("")
+        let isFirstVerse = number == (displayVerses.first?.number ?? 1)
+        let scaledBaselineOffset = max(4, readerFontSize * 0.35)
 
         if readerShowVerseNumbers {
-            let superscriptSize = max(9, readerFontSize * 0.55)
+            if isFirstVerse {
+                // Drop cap style chapter number for first verse
+                let dropCapSize = readerFontSize * 1.8
+                result = result + Text("\(number) ")
+                    .font(.system(size: dropCapSize, weight: .bold, design: .serif))
+                    .foregroundColor(palette.accent)
+            } else {
+                let superscriptSize = max(9, readerFontSize * 0.55)
+                result = result + Text("\(number)")
+                    .font(.system(size: superscriptSize, weight: .semibold, design: .serif))
+                    .foregroundColor(palette.accent)
+                    .baselineOffset(scaledBaselineOffset)
 
-            result = result + Text("\(number)")
-                .font(.system(size: superscriptSize, weight: .semibold, design: .serif))
-                .foregroundColor(palette.accent)
-                .baselineOffset(6)
-
-            result = result + Text("\u{2009}")
-                .font(.system(size: readerFontSize, design: readerFontDesign))
+                result = result + Text("\u{2009}")
+                    .font(.system(size: readerFontSize, design: readerFontDesign))
+            }
         }
 
-        result = result + Text(text)
+        // Add trailing space so verses flow visually into each other
+        let verseText = text.hasSuffix(" ") ? text : text + " "
+        result = result + Text(verseText)
             .font(.system(size: readerFontSize, weight: readerFontWeight, design: readerFontDesign))
             .foregroundColor(isRedLetter ? palette.jesusWords : palette.textPrimary)
 

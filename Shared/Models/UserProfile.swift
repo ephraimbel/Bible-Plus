@@ -39,6 +39,45 @@ final class UserProfile {
     var createdAt: Date
     var updatedAt: Date
 
+    /// Long-term memory digest — a 3-5 sentence natural-language summary of
+    /// who this user is spiritually, what they're walking through, and what
+    /// passages resonate with them. Rebuilt periodically by AIService and
+    /// injected into the system prompt on every primary chat call. Optional
+    /// so existing rows migrate cleanly.
+    var aiMemoryDigest: String? = nil
+
+    /// When the digest was last refreshed. Used to throttle the refresh
+    /// cadence (we don't refresh on every message — too expensive).
+    var aiMemoryDigestUpdatedAt: Date? = nil
+
+    /// Count of user messages since the last digest refresh. Used by the
+    /// throttling logic to decide when to fire the next refresh.
+    var aiMessagesSinceDigestRefresh: Int = 0
+
+    /// Pinned facts the AI has been told to never forget. Each entry is one
+    /// short, atomic fact ("Has a daughter named Sarah", "Husband died Oct
+    /// 2024", "Walks through deconstruction"). Capped at 20 to keep the
+    /// system prompt bounded. Optional so existing rows migrate cleanly.
+    var aiPinnedFactsRaw: [String]? = nil
+
+    /// User-supplied profile picture (PFP). Stored as raw image data so it
+    /// travels with SwiftData and survives across launches without an
+    /// external file. Optional so existing rows migrate cleanly.
+    var profileImageData: Data? = nil
+
+    /// ID of the conversation pre-seeded at the end of onboarding. Messages
+    /// in this conversation are excluded from the 5-message lifetime free
+    /// quota — see `Conversation.isOnboarding`. Stored on UserProfile so the
+    /// router can deep-link the user into it on first launch.
+    var welcomeConversationID: UUID? = nil
+
+    /// Friendly accessor for pinned facts. Setting an empty array clears the
+    /// field to nil so SwiftData stays tidy.
+    var aiPinnedFacts: [String] {
+        get { aiPinnedFactsRaw ?? [] }
+        set { aiPinnedFactsRaw = newValue.isEmpty ? nil : newValue }
+    }
+
     var selectedNotificationTopics: [NotificationTopic] {
         get {
             guard let raw = selectedNotificationTopicsRaw else {

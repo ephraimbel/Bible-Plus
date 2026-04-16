@@ -45,22 +45,104 @@ enum QuickPromptEngine {
         for profile: UserProfile,
         category: PromptCategory? = nil,
         chatTopics: [String: Int] = [:],
+        continuations: [ConversationTopic] = [],
         count: Int = 4
     ) -> [(icon: String, text: String)] {
+        // Build continuation prompts from conversation memory
+        let continuationPrompts = buildContinuationPrompts(from: continuations, profile: profile)
+
         if let category {
             // Category mode: top N from selected category
             let pool = allPrompts.filter { $0.category == category }
             let scored = pool.map { (prompt: $0, score: score($0, profile: profile, chatTopics: chatTopics)) }
             let sorted = scored.sorted { $0.score > $1.score }
-            return sorted.prefix(count).map { resolve($0.prompt, profile: profile) }
+            var results = sorted.prefix(count).map { resolve($0.prompt, profile: profile) }
+            // Inject one continuation if available
+            if let cont = continuationPrompts.first, !results.isEmpty {
+                results.insert(cont, at: min(1, results.count))
+                results = Array(results.prefix(count))
+            }
+            return results
         }
 
-        // Default mode: top 1 from each category
-        return PromptCategory.allCases.compactMap { cat in
+        // Default mode: top 1 from each category, with continuation replacing one
+        var results = PromptCategory.allCases.compactMap { cat in
             let pool = allPrompts.filter { $0.category == cat }
             let scored = pool.map { (prompt: $0, score: score($0, profile: profile, chatTopics: chatTopics)) }
             return scored.max(by: { $0.score < $1.score }).map { resolve($0.prompt, profile: profile) }
         }
+
+        // Prepend a continuation prompt if we have topic history
+        if let cont = continuationPrompts.first {
+            results.insert(cont, at: 0)
+            if results.count > 4 { results.removeLast() }
+        }
+
+        return results
+    }
+
+    // MARK: - Continuation Prompts (from conversation memory)
+
+    /// Generates personalized prompts that reference past topics.
+    static func buildContinuationPrompts(
+        from topics: [ConversationTopic],
+        profile: UserProfile
+    ) -> [(icon: String, text: String)] {
+        guard !topics.isEmpty else { return [] }
+        let name = profile.firstName.isEmpty ? "Friend" : profile.firstName
+
+        var prompts: [(icon: String, text: String)] = []
+        let calendar = Calendar.current
+        let now = Date()
+
+        // Find the most recently discussed deep/explored topic
+        let significant = topics.filter { $0.depth != .surface }
+            .sorted { $0.lastMentioned > $1.lastMentioned }
+
+        if let top = significant.first {
+            let daysSince = calendar.dateComponents([.day], from: top.lastMentioned, to: now).day ?? 0
+
+            if daysSince == 0 {
+                // Same day — continue the thread
+                prompts.append((
+                    icon: "arrow.uturn.forward",
+                    text: "Let\u{2019}s keep exploring \(top.topic)"
+                ))
+            } else if daysSince <= 3 {
+                // Recent — check back in
+                prompts.append((
+                    icon: "bubble.left.and.bubble.right",
+                    text: "Last time we talked about \(top.topic). How are you?"
+                ))
+            } else {
+                // Been a while
+                prompts.append((
+                    icon: "clock.arrow.circlepath",
+                    text: "It\u{2019}s been a few days \u{2014} still thinking about \(top.topic)?"
+                ))
+            }
+        }
+
+        // If user has been studying a biblical book
+        let bookTopics = topics.filter { isBookName($0.topic) && $0.mentionCount >= 2 }
+            .sorted { $0.lastMentioned > $1.lastMentioned }
+        if let book = bookTopics.first, prompts.count < 2 {
+            prompts.append((
+                icon: "book.fill",
+                text: "Ready to go deeper in \(book.topic.capitalized)?"
+            ))
+        }
+
+        return prompts
+    }
+
+    private static func isBookName(_ topic: String) -> Bool {
+        let books = Set([
+            "genesis", "exodus", "psalms", "proverbs", "matthew", "john",
+            "romans", "revelation", "corinthians", "ephesians", "philippians",
+            "james", "hebrews", "acts", "luke", "mark", "isaiah", "jeremiah", "daniel"
+        ])
+        return books.contains(topic.lowercased())
     }
 
     /// Scans recent user messages to extract topic keywords.

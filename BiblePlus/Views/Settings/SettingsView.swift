@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 import StoreKit
+import PhotosUI
 
 struct SettingsView: View {
     @Environment(\.modelContext) private var modelContext
@@ -41,6 +42,9 @@ private struct SettingsContentView: View {
     @State private var showPaywall = false
     @State private var isRestoringPurchases = false
     @State private var appeared = false
+    @State private var showMemorySettings = false
+    @State private var pickedPhoto: PhotosPickerItem?
+    @State private var showPhotoActions = false
 
     var body: some View {
         NavigationStack {
@@ -69,6 +73,18 @@ private struct SettingsContentView: View {
                     Text("Settings")
                         .font(.system(size: 18, weight: .semibold, design: .serif))
                         .foregroundStyle(palette.textPrimary)
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        HapticService.lightImpact()
+                        let isDark = vm.profile.colorMode != .dark
+                        vm.updateColorMode(isDark ? .dark : .light)
+                    } label: {
+                        Image(systemName: vm.profile.colorMode == .dark ? "moon.fill" : "sun.max.fill")
+                            .font(.system(size: 18, weight: .medium))
+                            .foregroundStyle(palette.accent)
+                            .contentTransition(.symbolEffect(.replace))
+                    }
                 }
             }
             .sheet(isPresented: $vm.showEditName) {
@@ -115,8 +131,47 @@ private struct SettingsContentView: View {
                 NotificationTopicsView(vm: vm, showPaywall: $showPaywall)
                     .presentationDetents([.large])
             }
+            .sheet(isPresented: $showMemorySettings) {
+                MemorySettingsView(profile: vm.profile)
+                    .presentationDetents([.large])
+            }
             .fullScreenCover(isPresented: $showPaywall) {
-                SummaryPaywallView()
+                PaywallContainerView()
+            }
+            .photosPicker(
+                isPresented: $vm.showPhotoPicker,
+                selection: $pickedPhoto,
+                matching: .images,
+                photoLibrary: .shared()
+            )
+            .confirmationDialog(
+                "Profile Picture",
+                isPresented: $showPhotoActions,
+                titleVisibility: .visible
+            ) {
+                Button("Choose from Library") {
+                    vm.showPhotoPicker = true
+                }
+                if vm.profile.profileImageData != nil {
+                    Button("Remove Photo", role: .destructive) {
+                        vm.updateProfileImage(nil)
+                    }
+                }
+                Button("Cancel", role: .cancel) {}
+            }
+            .onChange(of: pickedPhoto) { _, newItem in
+                guard let newItem else { return }
+                Task {
+                    if let data = try? await newItem.loadTransferable(type: Data.self) {
+                        // Downscale to a reasonable avatar size to keep
+                        // SwiftData rows light and avoid storing 10MB photos.
+                        let resized = Self.resizedAvatar(from: data) ?? data
+                        await MainActor.run {
+                            vm.updateProfileImage(resized)
+                            pickedPhoto = nil
+                        }
+                    }
+                }
             }
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -132,23 +187,50 @@ private struct SettingsContentView: View {
 
     private var profileHeader: some View {
         HStack(spacing: 16) {
-            // Avatar circle
-            ZStack {
-                Circle()
-                    .fill(
-                        LinearGradient(
-                            colors: [palette.accent, palette.accent.opacity(0.7)],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
+            // Avatar circle — tappable to set/change/remove the user's PFP
+            Button {
+                HapticService.lightImpact()
+                showPhotoActions = true
+            } label: {
+                ZStack {
+                    Circle()
+                        .fill(
+                            LinearGradient(
+                                colors: [palette.accent, palette.accent.opacity(0.7)],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
                         )
-                    )
-                    .frame(width: 56, height: 56)
-                    .shadow(color: palette.accent.opacity(0.25), radius: 8, y: 3)
+                        .frame(width: 56, height: 56)
+                        .shadow(color: palette.accent.opacity(0.25), radius: 8, y: 3)
 
-                Text(vm.profile.firstName.prefix(1).uppercased())
-                    .font(.system(size: 22, weight: .bold, design: .rounded))
-                    .foregroundStyle(.white)
+                    if let data = vm.profile.profileImageData,
+                       let uiImage = UIImage(data: data) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 56, height: 56)
+                            .clipShape(Circle())
+                    } else {
+                        Text(vm.profile.firstName.prefix(1).uppercased())
+                            .font(.system(size: 22, weight: .bold, design: .rounded))
+                            .foregroundStyle(.white)
+                    }
+
+                    // Tiny camera badge so the avatar reads as editable
+                    Circle()
+                        .fill(palette.surfaceElevated)
+                        .frame(width: 20, height: 20)
+                        .overlay(
+                            Image(systemName: "camera.fill")
+                                .font(.system(size: 9, weight: .bold))
+                                .foregroundStyle(palette.accent)
+                        )
+                        .overlay(Circle().stroke(palette.background, lineWidth: 1.5))
+                        .offset(x: 20, y: 20)
+                }
             }
+            .buttonStyle(.plain)
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(vm.profile.firstName.isEmpty ? "Welcome" : vm.profile.firstName)
@@ -297,6 +379,16 @@ private struct SettingsContentView: View {
                 ) {
                     vm.beginEditingBurdens()
                 }
+
+                rowDivider
+
+                settingsRow(
+                    icon: "brain.head.profile",
+                    label: "AI Memory",
+                    value: memoryRowValue
+                ) {
+                    showMemorySettings = true
+                }
             }
             .opacity(appeared ? 1 : 0)
             .offset(y: appeared ? 0 : 10)
@@ -304,6 +396,15 @@ private struct SettingsContentView: View {
 
             sectionFooter("Changes to your profile will refresh your feed.")
         }
+    }
+
+    /// Compact summary for the AI Memory row's trailing label.
+    private var memoryRowValue: String {
+        let factCount = vm.profile.aiPinnedFacts.count
+        let hasDigest = (vm.profile.aiMemoryDigest?.isEmpty ?? true) == false
+        if factCount == 0 && !hasDigest { return "Empty" }
+        if factCount == 0 { return "Digest only" }
+        return "\(factCount) pinned"
     }
 
     // MARK: - Notifications Section
@@ -395,21 +496,6 @@ private struct SettingsContentView: View {
             sectionHeader("Appearance", icon: "paintbrush.fill", index: 2)
 
             sectionCard {
-                toggleRow(
-                    icon: vm.profile.colorMode == .dark ? "moon.fill" : "sun.max.fill",
-                    label: "Dark Mode",
-                    isOn: Binding(
-                        get: { vm.profile.colorMode == .dark },
-                        set: { isDark in
-                            HapticService.lightImpact()
-                            vm.updateColorMode(isDark ? .dark : .light)
-                        }
-                    ),
-                    useSymbolTransition: true
-                )
-
-                rowDivider
-
                 settingsRow(
                     icon: "music.note",
                     label: "Soundscape",
@@ -501,7 +587,7 @@ private struct SettingsContentView: View {
                     }
 
                     VStack(alignment: .leading, spacing: 3) {
-                        Text("Bible+ Pro")
+                        (Text("Bible") + Text(Image(systemName: "sparkle")) + Text(" Pro"))
                             .font(.system(size: 16, weight: .bold, design: .rounded))
                             .foregroundStyle(palette.textPrimary)
 
@@ -672,7 +758,7 @@ private struct SettingsContentView: View {
     }
 
     private var versionFooter: some View {
-        Text("Bible+ v\(appVersion) (\(buildNumber))")
+        (Text("Bible") + Text(Image(systemName: "sparkle")) + Text(" v\(appVersion) (\(buildNumber))"))
             .font(.system(size: 12, weight: .medium, design: .rounded))
             .foregroundStyle(palette.textMuted.opacity(0.6))
             .frame(maxWidth: .infinity, alignment: .center)
@@ -805,6 +891,30 @@ private struct SettingsContentView: View {
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
+    }
+}
+
+// MARK: - Avatar Helpers
+
+extension SettingsContentView {
+    /// Downscale a picked photo to a square ~512px JPEG so it stores cheaply
+    /// in SwiftData and renders fast at avatar sizes. Returns nil if decoding
+    /// fails — caller falls back to the raw data.
+    static func resizedAvatar(from data: Data, maxDimension: CGFloat = 512) -> Data? {
+        guard let image = UIImage(data: data) else { return nil }
+        let size = image.size
+        let longest = max(size.width, size.height)
+        let scale: CGFloat = longest > maxDimension ? maxDimension / longest : 1
+        let newSize = CGSize(width: size.width * scale, height: size.height * scale)
+
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = 1
+        format.opaque = true
+        let renderer = UIGraphicsImageRenderer(size: newSize, format: format)
+        let resized = renderer.image { _ in
+            image.draw(in: CGRect(origin: .zero, size: newSize))
+        }
+        return resized.jpegData(compressionQuality: 0.85)
     }
 }
 

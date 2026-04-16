@@ -7,6 +7,11 @@ struct ContentView: View {
     @Environment(\.bpPalette) private var palette
     @Environment(\.modelContext) private var modelContext
     @AppStorage("hasAutoPlayedSoundscape") private var hasAutoPlayedSoundscape = false
+    /// One-time flag: have we deep-linked the user into the seeded welcome
+    /// conversation yet? Trips on the first ContentView appear after
+    /// onboarding so the user lands inside their first chat instead of on
+    /// Home. Persisted so re-launches don't keep hijacking the user.
+    @AppStorage("hasRoutedToWelcomeConversation") private var hasRoutedToWelcomeConversation = false
     @State private var selectedTab: Tab = .feed
     @State private var soundscapeService = SoundscapeService()
     @State private var audioBibleService = AudioBibleService()
@@ -31,14 +36,15 @@ struct ContentView: View {
             switch self {
             case .feed: "house.fill"
             case .bible: "book.fill"
-            case .ask: "bubble.left.and.bubble.right.fill"
+            case .ask: "sparkle"
             case .saved: "bookmark.fill"
             case .settings: "gearshape.fill"
             }
         }
     }
 
-    var body: some View {
+    @ViewBuilder
+    private var tabs: some View {
         TabView(selection: $selectedTab) {
             FeedView()
                 .tabItem { Label(Tab.feed.title, systemImage: Tab.feed.icon) }
@@ -60,6 +66,11 @@ struct ContentView: View {
                 .tabItem { Label(Tab.settings.title, systemImage: Tab.settings.icon) }
                 .tag(Tab.settings)
         }
+    }
+
+    @ViewBuilder
+    private var configuredTabs: some View {
+        tabs
         .environment(soundscapeService)
         .environment(audioBibleService)
         .tint(palette.accent)
@@ -69,6 +80,7 @@ struct ContentView: View {
 
             // Log app opened for streak tracking
             ActivityService.logAppOpenedIfNeeded(in: modelContext)
+            Analytics.track(.appOpened)
 
             // Auto-play Evening Rest for new users entering after onboarding
             if !hasAutoPlayedSoundscape {
@@ -81,6 +93,20 @@ struct ContentView: View {
                     modelContext.safeSave()
                 }
             }
+
+            // First-launch-after-onboarding deep link: drop the user
+            // directly inside their seeded welcome conversation. This is
+            // the single highest-impact retention move — the user lands
+            // INSIDE a personal AI conversation instead of on an empty
+            // Home tab. One-shot via @AppStorage flag.
+            routeToWelcomeConversationIfNeeded()
+
+            // Recovery path for the daily welcome-back notification.
+            // Catches users who denied notification permission during
+            // onboarding (so it was never scheduled) but later enabled
+            // notifications via Settings — without this, they'd be
+            // permanently locked out of the day-2 retention hook.
+            ensureWelcomeBackNotificationIfPossible()
         }
         .toolbarBackground(.hidden, for: .tabBar)
         .onAppear {
@@ -100,6 +126,25 @@ struct ContentView: View {
                 showFeedEntryButton = !showFeed
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: .switchToAskTab)) { _ in
+            withAnimation(.easeInOut(duration: 0.25)) {
+                selectedTab = .ask
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .switchToSettingsTab)) { _ in
+            withAnimation(.easeInOut(duration: 0.25)) {
+                selectedTab = .settings
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .switchToSavedTab)) { _ in
+            withAnimation(.easeInOut(duration: 0.25)) {
+                selectedTab = .saved
+            }
+        }
+    }
+
+    var body: some View {
+        configuredTabs
         .onChange(of: deepLinkedContentID) { _, newValue in
             if let contentID = newValue {
                 selectedTab = .feed
@@ -121,11 +166,6 @@ struct ContentView: View {
             if newPhase == .active {
                 // Ensure widgets pick up the latest background on every foreground
                 WidgetCenter.shared.reloadAllTimelines()
-            }
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .switchToAskTab)) { _ in
-            withAnimation(.easeInOut(duration: 0.25)) {
-                selectedTab = .ask
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: .openAIWithContext)) { notification in
@@ -217,6 +257,54 @@ struct ContentView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 NotificationCenter.default.post(name: .openSanctuaryFromWidget, object: nil)
             }
+        }
+    }
+
+    /// Recovery path: every launch, if the user has notifications enabled
+    /// and at least one prayer time set, but the daily welcome-back push
+    /// isn't scheduled, schedule it. Idempotent — `ensureWelcomeBack…` no-ops
+    /// if a request is already pending. Catches users who denied permission
+    /// during onboarding then enabled it later via Settings.
+    private func ensureWelcomeBackNotificationIfPossible() {
+        let descriptor = FetchDescriptor<UserProfile>()
+        guard let profile = try? modelContext.fetch(descriptor).first,
+              profile.hasCompletedOnboarding,
+              let firstSlot = profile.prayerTimes
+                .sorted(by: { $0.rawValue < $1.rawValue })
+                .first
+        else { return }
+
+        NotificationService.shared.ensureWelcomeBackScheduledIfNeeded(
+            name: profile.firstName,
+            slot: firstSlot
+        )
+    }
+
+    /// Routes the user directly into their seeded welcome conversation on
+    /// the FIRST launch after onboarding completes. Subsequent launches are
+    /// no-ops because the @AppStorage flag has been flipped.
+    private func routeToWelcomeConversationIfNeeded() {
+        guard !hasRoutedToWelcomeConversation else { return }
+        let descriptor = FetchDescriptor<UserProfile>()
+        guard let profile = try? modelContext.fetch(descriptor).first,
+              profile.hasCompletedOnboarding,
+              let convoID = profile.welcomeConversationID
+        else { return }
+
+        hasRoutedToWelcomeConversation = true
+
+        // Switch tabs first; the pending conversation gets picked up by
+        // ConversationListView's existing onAppear handler which already
+        // knows how to push a conversation onto the navigation stack.
+        // Tiny delay so the tab transition lands before the push.
+        withAnimation(.easeInOut(duration: 0.25)) {
+            selectedTab = .ask
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            pendingConversation = PendingConversation(
+                conversationId: convoID,
+                context: nil
+            )
         }
     }
 }

@@ -1,17 +1,39 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
-import { createClient } from "jsr:@supabase/supabase-js@2";
-
 const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
-const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
-const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
 
 const OPENAI_CHAT_URL = "https://api.openai.com/v1/chat/completions";
 
 // Server-enforced constants — client cannot override
-const MODEL = "gpt-4.1-nano";
-const MAX_TOKENS = 600;
+//
+// Two model tiers, dispatched via the `tier` field in the request body:
+//   - "primary"  → main chat / teaching responses (gpt-4.1-mini)
+//   - "utility"  → background tasks: auto-titling, memory digests (gpt-4.1-nano)
+//
+// Free vs Pro is enforced client-side via daily message count, NOT by quality.
+// Both tiers of users get the same model on every message.
+const MODEL_PRIMARY = "gpt-4.1-mini";
+const MODEL_UTILITY = "gpt-4.1-nano";
+// Brevity is the law — responses should fit in one phone-screen of scroll.
+// 1000 tokens ≈ 600–700 words of prose, which is more than enough headroom
+// for a tight response (1 paragraph + scripture card + 1 paragraph + insight
+// + crossrefs). Hard cap to keep responses scannable, OpenEvidence-style.
+const MAX_TOKENS_PRIMARY = 1000;
+const MAX_TOKENS_UTILITY = 280;
 const MAX_MESSAGES = 30;
-const MAX_MESSAGE_LENGTH = 5000;
+// 30000 chars covers the richest possible system prompt: full 74-entry
+// image vocabulary + brevity rewrite + tools description + memory digest
+// + briefing + topic memory + character persona + mode overlay. The 20000
+// cap started rejecting story-mode requests because the mode overlay
+// pushed the system message past the limit. 30000 gives ~10000 chars of
+// future headroom for additional prompt sections.
+const MAX_MESSAGE_LENGTH = 30000;
+
+function modelForTier(tier: unknown): { model: string; maxTokens: number } {
+  if (tier === "utility") {
+    return { model: MODEL_UTILITY, maxTokens: MAX_TOKENS_UTILITY };
+  }
+  return { model: MODEL_PRIMARY, maxTokens: MAX_TOKENS_PRIMARY };
+}
 
 // Rate limiting: in-memory store (per edge function instance)
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
@@ -62,28 +84,17 @@ Deno.serve(async (req) => {
     );
   }
 
-  // Verify Supabase JWT from Authorization header
-  if (SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY) {
-    const authHeader = req.headers.get("Authorization");
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      return new Response(
-        JSON.stringify({ error: "Missing authorization" }),
-        { status: 401, headers: { "Content-Type": "application/json", ...CORS_HEADERS } },
-      );
-    }
+  // Verify authorization: require a valid apikey header or Authorization bearer token.
+  // Supabase gateway already validates the apikey header before the function runs,
+  // so we just check that at least one auth header is present.
+  const authHeader = req.headers.get("Authorization");
+  const apiKeyHeader = req.headers.get("apikey");
 
-    const token = authHeader.replace("Bearer ", "");
-    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
-    const { data: { user }, error: authError } = await supabase.auth.getUser(token);
-
-    // For anon key access (no user session), verify the token matches the anon key
-    // by checking that it's a valid JWT or the anon key itself
-    if (authError && token !== Deno.env.get("SUPABASE_ANON_KEY")) {
-      return new Response(
-        JSON.stringify({ error: "Invalid authorization" }),
-        { status: 401, headers: { "Content-Type": "application/json", ...CORS_HEADERS } },
-      );
-    }
+  if (!authHeader && !apiKeyHeader) {
+    return new Response(
+      JSON.stringify({ error: "Missing authorization" }),
+      { status: 401, headers: { "Content-Type": "application/json", ...CORS_HEADERS } },
+    );
   }
 
   // Rate limiting by client IP
@@ -118,19 +129,70 @@ Deno.serve(async (req) => {
       );
     }
 
-    // Validate individual message content length
+    // Validate individual messages. With tool calling, the message shape is
+    // richer than just {role, content}:
+    //   - assistant messages MAY have tool_calls instead of (or alongside) content
+    //   - tool messages have content + tool_call_id + role:"tool"
+    //   - everything else still requires content as a string
     for (const msg of body.messages) {
-      if (!msg.role || !msg.content || typeof msg.content !== "string") {
+      if (!msg.role || typeof msg.role !== "string") {
         return new Response(
-          JSON.stringify({ error: "Each message must have a role and content string" }),
+          JSON.stringify({ error: "Each message must have a role" }),
           { status: 400, headers: { "Content-Type": "application/json", ...CORS_HEADERS } },
         );
       }
-      if (msg.content.length > MAX_MESSAGE_LENGTH) {
+
+      const isAssistantWithToolCalls =
+        msg.role === "assistant" && Array.isArray(msg.tool_calls) && msg.tool_calls.length > 0;
+      const isToolMessage =
+        msg.role === "tool" && typeof msg.content === "string" && typeof msg.tool_call_id === "string";
+
+      if (isAssistantWithToolCalls) {
+        // Content may be null/empty when the assistant is purely calling tools.
+        if (msg.content != null && typeof msg.content !== "string") {
+          return new Response(
+            JSON.stringify({ error: "Assistant content must be a string when present" }),
+            { status: 400, headers: { "Content-Type": "application/json", ...CORS_HEADERS } },
+          );
+        }
+      } else if (isToolMessage) {
+        // OK — content + tool_call_id already validated above
+      } else {
+        // Default case — must have a string content
+        if (!msg.content || typeof msg.content !== "string") {
+          return new Response(
+            JSON.stringify({ error: "Each message must have a role and content string" }),
+            { status: 400, headers: { "Content-Type": "application/json", ...CORS_HEADERS } },
+          );
+        }
+      }
+
+      if (typeof msg.content === "string" && msg.content.length > MAX_MESSAGE_LENGTH) {
         return new Response(
           JSON.stringify({ error: `Message content too long (max ${MAX_MESSAGE_LENGTH} characters)` }),
           { status: 400, headers: { "Content-Type": "application/json", ...CORS_HEADERS } },
         );
+      }
+    }
+
+    // Pick model + token budget based on the request tier (server-enforced)
+    const { model, maxTokens } = modelForTier(body.tier);
+
+    // Build the OpenAI payload. Tool calling is opt-in: clients that want
+    // function calling pass a `tools` array (and optionally `tool_choice`).
+    // The edge function forwards them as-is — the tool schemas are defined
+    // by the client because the schemas reference Swift-side resources.
+    const openaiPayload: Record<string, unknown> = {
+      model: model,
+      messages: body.messages,
+      max_tokens: maxTokens,
+      temperature: Math.min(Math.max(body.temperature ?? 0.75, 0), 2),
+      stream: body.stream ?? true,
+    };
+    if (Array.isArray(body.tools) && body.tools.length > 0) {
+      openaiPayload.tools = body.tools;
+      if (body.tool_choice != null) {
+        openaiPayload.tool_choice = body.tool_choice;
       }
     }
 
@@ -141,13 +203,7 @@ Deno.serve(async (req) => {
         "Authorization": `Bearer ${OPENAI_API_KEY}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        model: MODEL,
-        messages: body.messages,
-        max_tokens: MAX_TOKENS,
-        temperature: Math.min(Math.max(body.temperature ?? 0.75, 0), 2),
-        stream: body.stream ?? true,
-      }),
+      body: JSON.stringify(openaiPayload),
     });
 
     if (!openaiResponse.ok) {

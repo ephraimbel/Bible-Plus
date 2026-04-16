@@ -104,7 +104,7 @@ struct VoicePickerView: View {
             stopPreview()
         }
         .fullScreenCover(isPresented: $showPaywall) {
-            SummaryPaywallView()
+            PaywallContainerView()
         }
     }
 

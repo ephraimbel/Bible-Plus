@@ -82,6 +82,67 @@ final class OnboardingViewModel {
         personalizationService.completeOnboarding()
         audioService.stop()
         HapticService.notification(.success)
+
+        // ── First-session retention hooks ────────────────────────────────
+        // Each of these is independently safe to fail — none of them throw
+        // and none gate the onboarding completion. The user is now in the
+        // app regardless of whether the seeding succeeds.
+        seedDay1Streak()
+        seedWelcomeConversation()
+        scheduleDay1WelcomeBackNotification()
+    }
+
+    // MARK: - First Session Hooks
+
+    /// Change 1 — log a single activity event for "today" so the streak
+    /// counter immediately shows Day 1 instead of Day 0. This is the
+    /// psychological foundation of the don't-break-the-chain loop.
+    private func seedDay1Streak() {
+        ActivityService.log(.appOpened, detail: "onboarding_completed", in: modelContext)
+    }
+
+    /// Change 2 — pre-seed an EMPTY Conversation marked `isOnboarding`.
+    /// We deliberately don't create any ChatMessage here. The greeting
+    /// itself is generated and typed out by `ChatViewModel` when the user
+    /// first opens the conversation, and the typewriter writes into a
+    /// non-persistent placeholder until completion — that way if the
+    /// user backs out mid-animation or the app dies, nothing partial is
+    /// ever saved to disk. On reopen the typewriter cleanly replays.
+    private func seedWelcomeConversation() {
+        let profile = personalizationService.getOrCreateProfile()
+        // If somehow already seeded (re-entry, debug), don't double-create.
+        if profile.welcomeConversationID != nil { return }
+
+        let conversation = Conversation(
+            id: UUID(),
+            title: "Your first conversation",
+            createdAt: .now,
+            updatedAt: .now,
+            isPinned: true,
+            isOnboarding: true
+        )
+
+        modelContext.insert(conversation)
+        profile.welcomeConversationID = conversation.id
+
+        try? modelContext.save()
+    }
+
+    /// Change 4 — schedule a recurring local notification at the user's
+    /// first chosen prayer time, starting tomorrow. Recurring (not
+    /// one-shot) so the daily ritual anchors the streak hook from day 2
+    /// onward. Skipped if the user opted out of notifications.
+    private func scheduleDay1WelcomeBackNotification() {
+        let profile = personalizationService.getOrCreateProfile()
+        guard profile.notificationsEnabled else { return }
+        guard let firstSlot = selectedPrayerTimes.sorted(by: { $0.rawValue < $1.rawValue }).first
+            ?? profile.prayerTimes.sorted(by: { $0.rawValue < $1.rawValue }).first
+        else { return }
+
+        NotificationService.shared.scheduleWelcomeBackDaily(
+            name: firstName.trimmingCharacters(in: .whitespaces),
+            slot: firstSlot
+        )
     }
 
     // MARK: - Multi-Select Toggles
@@ -167,33 +228,77 @@ final class OnboardingViewModel {
     // MARK: - Notification Permission (Step 7)
 
     func requestNotificationPermission() {
+        Task {
+            await requestNotificationPermissionStandalone()
+            goNext()
+        }
+    }
+
+    /// Request notification permission WITHOUT calling goNext at the end.
+    /// Used by the conversational onboarding flow which controls its own
+    /// step transitions.
+    @discardableResult
+    func requestNotificationPermissionStandalone() async -> Bool {
         let profile = personalizationService.getOrCreateProfile()
         let contentDescriptor = FetchDescriptor<PrayerContent>()
         let allContent = (try? modelContext.fetch(contentDescriptor)) ?? []
 
-        Task {
-            let granted = await NotificationService.shared.requestAuthorization()
-            if granted {
-                profile.notificationsEnabled = true
-                profile.streakReminderEnabled = true
-                profile.planReminderEnabled = true
-                personalizationService.save()
+        let granted = await NotificationService.shared.requestAuthorization()
+        if granted {
+            profile.notificationsEnabled = true
+            profile.streakReminderEnabled = true
+            profile.planReminderEnabled = true
+            personalizationService.save()
 
-                // Schedule prayer notifications
-                if !profile.prayerTimes.isEmpty {
-                    NotificationService.shared.reschedule(
-                        profile: profile,
-                        content: allContent
-                    )
-                }
-
-                // Schedule streak reminders
-                NotificationService.shared.scheduleStreakReminders(
-                    streakCount: profile.streakCount,
-                    firstName: profile.firstName
+            if !profile.prayerTimes.isEmpty {
+                NotificationService.shared.reschedule(
+                    profile: profile,
+                    content: allContent
                 )
             }
-            goNext()
+
+            NotificationService.shared.scheduleStreakReminders(
+                streakCount: profile.streakCount,
+                firstName: profile.firstName
+            )
         }
+        return granted
+    }
+
+    // MARK: - Conversational Onboarding Helpers
+    //
+    // Each `persist*` method writes the corresponding field to the user
+    // profile *without* changing currentStep — the conversational view drives
+    // its own navigation, so it needs save-only entry points distinct from
+    // the legacy `goNext`/`saveCurrentStep` flow.
+
+    func persistName() {
+        personalizationService.updateName(firstName.trimmingCharacters(in: .whitespaces))
+    }
+
+    func persistFaithLevel() {
+        if let level = selectedFaithLevel {
+            personalizationService.updateFaithLevel(level)
+        }
+    }
+
+    func persistLifeSeasons() {
+        personalizationService.updateLifeSeasons(Array(selectedLifeSeasons))
+    }
+
+    func persistBurdens() {
+        personalizationService.updateBurdens(Array(selectedBurdens))
+    }
+
+    func persistPrayerTimes() {
+        personalizationService.updatePrayerTimes(Array(selectedPrayerTimes))
+    }
+
+    func persistBackground() {
+        personalizationService.updateSanctuaryBackground(selectedBackgroundID)
+        let themeID = SanctuaryBackground.nearestThemeID(for: selectedBackgroundID)
+        selectedThemeID = themeID
+        personalizationService.updateTheme(themeID)
+        personalizationService.save()
     }
 }

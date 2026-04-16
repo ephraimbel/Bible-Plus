@@ -8,25 +8,50 @@ enum ContentSeeder {
     static func seedIfNeeded(modelContext: ModelContext) {
         let lastVersion = UserDefaults.standard.integer(forKey: seedVersionKey)
 
-        guard let url = Bundle.main.url(forResource: "feed-content", withExtension: "json"),
-            let data = try? Data(contentsOf: url)
-        else {
+        // Self-healing: if the store has zero PrayerContent (e.g. a prior
+        // seed silently failed and the version flag was never written, or a
+        // schema migration wiped the table), force a full reseed regardless
+        // of the lastVersion gate.
+        let existingCount: Int = {
+            let descriptor = FetchDescriptor<PrayerContent>()
+            return (try? modelContext.fetchCount(descriptor)) ?? 0
+        }()
+        let forceReseed = existingCount == 0
+
+        guard let url = Bundle.main.url(forResource: "feed-content", withExtension: "json") else {
+            NSLog("[ContentSeeder] feed-content.json missing from bundle")
+            return
+        }
+        let data: Data
+        do {
+            data = try Data(contentsOf: url)
+        } catch {
+            NSLog("[ContentSeeder] read failed: \(error)")
             return
         }
 
         let decoder = JSONDecoder()
-        guard let items = try? decoder.decode([SeedContentItem].self, from: data) else {
+        let items: [SeedContentItem]
+        do {
+            items = try decoder.decode([SeedContentItem].self, from: data)
+        } catch {
+            NSLog("[ContentSeeder] decode failed: \(error)")
             return
         }
 
-        let newItems = items.filter { $0.seedVersion > lastVersion }
-        guard !newItems.isEmpty else { return }
+        let newItems = forceReseed
+            ? items
+            : items.filter { $0.seedVersion > lastVersion }
+        guard !newItems.isEmpty else {
+            NSLog("[ContentSeeder] no new items (lastVersion=\(lastVersion))")
+            return
+        }
 
         var maxVersion = lastVersion
         for item in newItems {
             let content = PrayerContent(
                 type: item.type,
-                templateText: item.templateText,
+                templateText: item.templateText ?? item.verseText ?? "",
                 verseReference: item.verseReference,
                 verseText: item.verseText,
                 category: item.category,
@@ -41,8 +66,13 @@ enum ContentSeeder {
             maxVersion = max(maxVersion, item.seedVersion)
         }
 
-        modelContext.safeSave()
-        UserDefaults.standard.set(maxVersion, forKey: seedVersionKey)
+        do {
+            try modelContext.save()
+            UserDefaults.standard.set(maxVersion, forKey: seedVersionKey)
+            NSLog("[ContentSeeder] seeded \(newItems.count) items, version=\(maxVersion)")
+        } catch {
+            NSLog("[ContentSeeder] save failed: \(error)")
+        }
     }
 
     // MARK: - Reading Plans Seeder
@@ -52,6 +82,16 @@ enum ContentSeeder {
     static func seedPlansIfNeeded(modelContext: ModelContext) {
         let lastVersion = UserDefaults.standard.integer(forKey: plansSeedVersionKey)
 
+        // Self-healing: if the SwiftData store has zero ReadingPlan rows
+        // (e.g. a schema migration wiped the table while UserDefaults still
+        // remembers the previous seed version) force a full reseed so the
+        // Reading Plans screen never renders blank.
+        let existingCount: Int = {
+            let descriptor = FetchDescriptor<ReadingPlan>()
+            return (try? modelContext.fetchCount(descriptor)) ?? 0
+        }()
+        let forceReseed = existingCount == 0
+
         guard let url = Bundle.main.url(forResource: "reading-plans", withExtension: "json"),
               let data = try? Data(contentsOf: url)
         else { return }
@@ -59,7 +99,9 @@ enum ContentSeeder {
         let decoder = JSONDecoder()
         guard let items = try? decoder.decode([SeedPlanItem].self, from: data) else { return }
 
-        let newItems = items.filter { $0.seedVersion > lastVersion }
+        let newItems = forceReseed
+            ? items
+            : items.filter { $0.seedVersion > lastVersion }
         guard !newItems.isEmpty else { return }
 
         var maxVersion = lastVersion
@@ -83,8 +125,13 @@ enum ContentSeeder {
             maxVersion = max(maxVersion, item.seedVersion)
         }
 
-        modelContext.safeSave()
-        UserDefaults.standard.set(maxVersion, forKey: plansSeedVersionKey)
+        do {
+            try modelContext.save()
+            UserDefaults.standard.set(maxVersion, forKey: plansSeedVersionKey)
+            NSLog("[ContentSeeder] seeded \(newItems.count) plans, version=\(maxVersion)")
+        } catch {
+            NSLog("[ContentSeeder] plan save failed: \(error)")
+        }
     }
 
     private static let migrationCompleteKey = "io.bibleplus.migrationComplete"
@@ -139,7 +186,11 @@ enum ContentSeeder {
 
 struct SeedContentItem: Decodable {
     let type: ContentType
-    let templateText: String
+    // Verse-type entries in feed-content.json carry no template (the verseText
+    // itself is the body), so this field can legitimately be null in the JSON.
+    // Keep it optional here and fall back to "" or verseText when constructing
+    // the SwiftData record.
+    let templateText: String?
     let verseReference: String?
     let verseText: String?
     let category: String

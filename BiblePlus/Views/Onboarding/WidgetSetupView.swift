@@ -19,10 +19,10 @@ struct WidgetSetupView: View {
 
             VStack(spacing: 10) {
                 VStack(spacing: 2) {
-                    HStack(spacing: 0) {
+                    HStack(spacing: 2) {
                         Text("Add ")
                         Text("Bible")
-                        Text("+")
+                        Image(systemName: "sparkle")
                             .foregroundStyle(Color(red: 1.0, green: 0.84, blue: 0.3))
                             .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 4)
                             .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 10)

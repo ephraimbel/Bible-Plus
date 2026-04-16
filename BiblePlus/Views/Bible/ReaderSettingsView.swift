@@ -80,14 +80,6 @@ struct ReaderSettingsView: View {
                         }
                     }
 
-                    // Text Alignment
-                    settingsSection(title: "Text Alignment") {
-                        HStack(spacing: 10) {
-                            alignmentPill(label: "Left", icon: "text.alignleft", isJustified: false)
-                            alignmentPill(label: "Justified", icon: "text.justify", isJustified: true)
-                        }
-                    }
-
                     // Verse Numbers
                     settingsSection(title: "Verse Numbers") {
                         Toggle(isOn: $viewModel.readerShowVerseNumbers) {
@@ -109,7 +101,6 @@ struct ReaderSettingsView: View {
                         viewModel.readerFontStyle = .serif
                         viewModel.readerFontWeight = .regular
                         viewModel.readerLineSpacing = 6
-                        viewModel.readerTextAlignmentJustified = false
                         viewModel.readerShowVerseNumbers = true
                         viewModel.persistReaderSettings()
                         HapticService.lightImpact()
@@ -144,7 +135,6 @@ struct ReaderSettingsView: View {
             .onChange(of: viewModel.readerFontStyle) { _, _ in viewModel.persistReaderSettings() }
             .onChange(of: viewModel.readerFontWeight) { _, _ in viewModel.persistReaderSettings() }
             .onChange(of: viewModel.readerLineSpacing) { _, _ in viewModel.persistReaderSettings() }
-            .onChange(of: viewModel.readerTextAlignmentJustified) { _, _ in viewModel.persistReaderSettings() }
             .onChange(of: viewModel.readerShowVerseNumbers) { _, _ in viewModel.persistReaderSettings() }
         }
     }
@@ -180,6 +170,7 @@ struct ReaderSettingsView: View {
 
     private func buildPreviewText() -> Text {
         var result = Text("")
+        let scaledBaseline = max(4, viewModel.readerFontSize * 0.35)
 
         // Verse 16
         if viewModel.readerShowVerseNumbers {
@@ -187,7 +178,7 @@ struct ReaderSettingsView: View {
             result = result + Text("16")
                 .font(.system(size: superSize, weight: .semibold, design: .serif))
                 .foregroundColor(palette.accent)
-                .baselineOffset(6)
+                .baselineOffset(scaledBaseline)
             result = result + Text("\u{2009}")
                 .font(.system(size: viewModel.readerFontSize, design: currentDesign))
         }
@@ -201,11 +192,11 @@ struct ReaderSettingsView: View {
             result = result + Text("17")
                 .font(.system(size: superSize, weight: .semibold, design: .serif))
                 .foregroundColor(palette.accent)
-                .baselineOffset(6)
+                .baselineOffset(scaledBaseline)
             result = result + Text("\u{2009}")
                 .font(.system(size: viewModel.readerFontSize, design: currentDesign))
         }
-        result = result + Text("For God sent not his Son into the world to condemn the world; but that the world through him might be saved.")
+        result = result + Text("For God sent not his Son into the world to condemn the world; but that the world through him might be saved. ")
             .font(.system(size: viewModel.readerFontSize, weight: currentWeight, design: currentDesign))
             .foregroundColor(palette.textPrimary)
 
@@ -265,36 +256,6 @@ struct ReaderSettingsView: View {
                     Capsule()
                         .stroke(isSelected ? Color.clear : palette.border.opacity(0.2), lineWidth: 1)
                 )
-        }
-        .buttonStyle(.plain)
-    }
-
-    // MARK: - Alignment Pill
-
-    private func alignmentPill(label: String, icon: String, isJustified: Bool) -> some View {
-        let isSelected = viewModel.readerTextAlignmentJustified == isJustified
-
-        return Button {
-            viewModel.readerTextAlignmentJustified = isJustified
-            HapticService.selection()
-        } label: {
-            HStack(spacing: 6) {
-                Image(systemName: icon)
-                    .font(.system(size: 13, weight: .medium))
-                Text(label)
-                    .font(.system(size: 14, weight: .medium))
-            }
-            .foregroundStyle(isSelected ? .white : palette.textPrimary)
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 10)
-            .background(
-                Capsule()
-                    .fill(isSelected ? palette.accent : palette.surfaceElevated)
-            )
-            .overlay(
-                Capsule()
-                    .stroke(isSelected ? Color.clear : palette.border.opacity(0.2), lineWidth: 1)
-            )
         }
         .buttonStyle(.plain)
     }

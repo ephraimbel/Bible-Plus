@@ -107,6 +107,7 @@ final class ReadingPlansViewModel {
         modelContext.insert(progress)
         modelContext.safeSave()
         HapticService.success()
+        Analytics.track(.planStarted, properties: ["plan": plan.name])
         loadPlans()
         navigateToPlanDayID = plan.id
     }
@@ -117,12 +118,14 @@ final class ReadingPlansViewModel {
         progress.lastReadDate = Date()
         let planName = allPlans.first(where: { $0.id == progress.planID })?.name ?? "Plan"
         ActivityService.log(.planDayCompleted, detail: "\(planName) — Day \(day)", in: modelContext)
+        Analytics.track(.planDayCompleted, properties: ["plan": planName, "day": "\(day)"])
 
         if progress.completedDays.count >= totalDays {
             progress.completedDate = Date()
             progress.isActive = false
             completedPlanName = allPlans.first(where: { $0.id == progress.planID })?.name ?? "Reading Plan"
             showCompletion = true
+            ReviewService.shared.requestIfAppropriate()
         }
 
         modelContext.safeSave()

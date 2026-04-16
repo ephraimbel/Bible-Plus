@@ -112,11 +112,19 @@ final class PersonalizationService {
         }
     }
 
+    func updateProfileImage(_ data: Data?) {
+        let profile = getOrCreateProfile()
+        profile.profileImageData = data
+        profile.updatedAt = Date()
+        save()
+    }
+
     func completeOnboarding() {
         let profile = getOrCreateProfile()
         profile.hasCompletedOnboarding = true
         profile.updatedAt = Date()
         save()
+        Analytics.track(.onboardingCompleted)
     }
 
     func save() {

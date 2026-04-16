@@ -176,7 +176,7 @@ final class AudioBibleService {
         self.currentChapter = chapter
         self.currentTranslation = translation
         self.currentBookName = book.name
-        self.currentTranslationName = translation.displayName
+        self.currentTranslationName = translation.abbreviation
         self.currentTotalVerses = verses.count
         self.currentVerseIndex = startingFromVerseIndex
         self.isLoading = true
@@ -324,7 +324,7 @@ final class AudioBibleService {
                         self.bibleActivity = LiveActivityService.startBibleSession(
                             bookName: book.name,
                             chapter: chapter,
-                            translationName: translation.displayName,
+                            translationName: translation.abbreviation,
                             totalVerses: allVerses.count,
                             currentVerse: startIndex + 1
                         )
@@ -743,7 +743,7 @@ final class AudioBibleService {
         bibleActivity = LiveActivityService.startBibleSession(
             bookName: book.name,
             chapter: chapter,
-            translationName: translation.displayName,
+            translationName: translation.abbreviation,
             totalVerses: verses.count,
             currentVerse: startingFromVerseIndex + 1
         )

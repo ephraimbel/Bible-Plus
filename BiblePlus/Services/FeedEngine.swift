@@ -72,8 +72,15 @@ final class FeedEngine {
             score *= 1.3
         }
 
-        // Random jitter for freshness (0.8 to 1.2)
-        score *= Double.random(in: 0.8...1.2)
+        // Deterministic jitter seeded by content ID + day (stable within a session,
+        // refreshes daily). Uses djb2 hash instead of random() so the feed order
+        // doesn't shuffle on every call and stays consistent with widgets.
+        let dayOfYear = Calendar.current.ordinality(of: .day, in: .year, for: Date()) ?? 1
+        let jitterInput = content.id.uuidString + String(dayOfYear)
+        var djb2: UInt64 = 5381
+        for byte in jitterInput.utf8 { djb2 = ((djb2 &<< 5) &+ djb2) &+ UInt64(byte) }
+        let jitter = 0.8 + Double(Int(djb2 & 0x7FFFFFFFFFFFFFFF) % 1000) / 1000.0 * 0.4
+        score *= jitter
 
         return score
     }

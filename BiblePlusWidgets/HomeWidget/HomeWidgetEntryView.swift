@@ -154,7 +154,7 @@ struct HomeWidgetEntryView: View {
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 14, height: 14)
                                 .clipShape(RoundedRectangle(cornerRadius: 3))
-                            Text("Bible+")
+                            (Text("Bible") + Text(Image(systemName: "sparkle")))
                                 .font(.system(size: 10, weight: .medium))
                         }
                         .foregroundStyle(.white.opacity(0.4))

@@ -10,6 +10,7 @@ struct SharePreviewSheet: View {
     @State private var selectedRatio: ShareAspectRatio = .story
     @State private var showActivitySheet = false
     @State private var renderedImage: UIImage?
+    @State private var showRenderError = false
 
     var body: some View {
         NavigationStack {
@@ -70,6 +71,11 @@ struct SharePreviewSheet: View {
                     .presentationDetents([.medium, .large])
                 }
             }
+            .alert("Couldn't Create Image", isPresented: $showRenderError) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text("There wasn't enough memory to render the image. Try closing other apps and trying again.")
+            }
         }
     }
 
@@ -82,6 +88,9 @@ struct SharePreviewSheet: View {
         )
         if renderedImage != nil {
             showActivitySheet = true
+        } else {
+            showRenderError = true
+            HapticService.notification(.error)
         }
     }
 }

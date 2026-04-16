@@ -138,6 +138,16 @@ enum WidgetTimeWindow: String, CaseIterable {
 
 enum WidgetContentProvider {
 
+    /// djb2 hash — deterministic across app and widget processes
+    /// (unlike Swift's String.hashValue which is randomized per process).
+    private static func stableHash(_ string: String) -> Int {
+        var hash: UInt64 = 5381
+        for byte in string.utf8 {
+            hash = ((hash &<< 5) &+ hash) &+ UInt64(byte)
+        }
+        return Int(hash & 0x7FFFFFFFFFFFFFFF)
+    }
+
     struct WidgetEntry {
         let date: Date
         let window: WidgetTimeWindow
@@ -304,8 +314,9 @@ enum WidgetContentProvider {
         }
 
         // Deterministic jitter from content ID + day seed (range 0.7–1.3)
+        // Uses djb2 hash (stable across processes, unlike String.hashValue)
         let hashInput = content.id.uuidString + String(daySeed)
-        let hash = abs(hashInput.hashValue)
+        let hash = Self.stableHash(hashInput)
         let jitter = 0.7 + Double(hash % 1000) / 1000.0 * 0.6
         s *= jitter
 
@@ -454,13 +465,16 @@ enum WidgetContentProvider {
 
         let lockScreenTypes: Set<ContentType> = allowedTypes ?? [.verse, .quote, .reflection, .prayer]
 
-        // Filter to lock-screen-friendly types that fit the screen
-        let eligible = allContent.filter { content in
+        // Filter to lock-screen-friendly types — no length cap, widget scales text to fit
+        let allEligible = allContent.filter { content in
             lockScreenTypes.contains(content.type)
-                && content.templateText.count <= 120
                 && (!content.isProOnly || profile.isPro)
                 && content.faithLevelMin.numericValue <= profile.faithLevel.numericValue
         }
+
+        // Strongly prefer actual Bible verses (have verseReference) for the lock screen
+        let versesOnly = allEligible.filter { $0.verseReference != nil }
+        let eligible = versesOnly.isEmpty ? allEligible : versesOnly
 
         guard !eligible.isEmpty else { return nil }
 
@@ -536,9 +550,10 @@ enum WidgetContentProvider {
         }
 
         // Deterministic jitter from content ID + day (prevents flicker on widget reload)
+        // Uses djb2 hash (stable across processes, unlike String.hashValue)
         let dayOfYear = Calendar.current.ordinality(of: .day, in: .year, for: Date()) ?? 1
         let hashInput = content.id.uuidString + String(dayOfYear)
-        let hash = abs(hashInput.hashValue)
+        let hash = Self.stableHash(hashInput)
         let jitter = 0.7 + Double(hash % 1000) / 1000.0 * 0.6
         score *= jitter
 

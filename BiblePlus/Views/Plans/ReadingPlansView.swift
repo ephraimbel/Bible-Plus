@@ -121,7 +121,7 @@ struct ReadingPlansView: View {
             get: { vm.showPaywall },
             set: { vm.showPaywall = $0 }
         )) {
-            SummaryPaywallView()
+            PaywallContainerView()
         }
     }
 
@@ -200,9 +200,9 @@ struct ReadingPlansView: View {
             sectionHeader("ALL PLANS", icon: "books.vertical.fill")
 
             LazyVGrid(columns: [
-                GridItem(.flexible(), spacing: 14),
-                GridItem(.flexible(), spacing: 14)
-            ], spacing: 14) {
+                GridItem(.flexible(), spacing: 16, alignment: .top),
+                GridItem(.flexible(), spacing: 16, alignment: .top)
+            ], spacing: 20) {
                 ForEach(Array(vm.allPlans.enumerated()), id: \.element.id) { index, plan in
                     NavigationLink {
                         PlanDetailView(

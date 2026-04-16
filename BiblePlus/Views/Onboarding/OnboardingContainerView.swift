@@ -69,7 +69,7 @@ struct OnboardingContainerView: View {
                             case 6: DailyRhythmView(viewModel: vm)
                             case 7: NotificationPermissionView(viewModel: vm)
                             case 8: AestheticView(viewModel: vm)
-                            case 9: SummaryPaywallView(viewModel: vm)
+                            case 9: PaywallContainerView(viewModel: vm)
                             case 10: WidgetSetupView(viewModel: vm)
                             default: EmptyView()
                             }

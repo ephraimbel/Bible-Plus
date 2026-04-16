@@ -10,7 +10,7 @@
     "applicableSeasons": ["hardSeason"],
     "applicableBurdens": ["anxiety", "grief"],
     "faithLevelMin": "justCurious",
-    "isProOnly": false,
+    "isProOnly": true,
     "seedVersion": 1,
     "days": [
       {

@@ -1,0 +1,13 @@
+{
+  "images" : [
+    {
+      "filename" : "biblical_manna_wilderness.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

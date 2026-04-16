@@ -16,15 +16,57 @@ enum SharedModelContainer {
                 configurations: [config]
             )
         } catch {
-            #if DEBUG
-            print("[BiblePlus] ModelContainer failed: \(error). Deleting old store and retrying…")
-            #endif
+            NSLog("[BiblePlus] ModelContainer failed: \(error). Backing up store and retrying…")
+
+            // Back up the existing store before deleting so user data can
+            // potentially be recovered if the fresh container also works.
+            backupStores()
             deleteAllStores()
+
             return try ModelContainer(
                 for: schema,
                 migrationPlan: BiblePlusMigrationPlan.self,
                 configurations: [config]
             )
+        }
+    }
+
+    /// Copies existing store files to a timestamped backup directory
+    /// so data is not irreversibly lost if the fresh container succeeds.
+    private static func backupStores() {
+        guard let groupURL = FileManager.default.containerURL(
+            forSecurityApplicationGroupIdentifier: "group.io.bibleplus.shared"
+        ) else { return }
+
+        let fm = FileManager.default
+        let appSupport = groupURL.appendingPathComponent("Library/Application Support")
+        let timestamp = ISO8601DateFormatter().string(from: Date())
+            .replacingOccurrences(of: ":", with: "-")
+        let backupDir = appSupport.appendingPathComponent("Backups/\(timestamp)")
+
+        do {
+            try fm.createDirectory(at: backupDir, withIntermediateDirectories: true)
+        } catch {
+            NSLog("[BiblePlus] Could not create backup directory: \(error)")
+            return
+        }
+
+        let storeNames = ["BiblePlus", "default"]
+        let extensions = ["", ".store", ".sqlite", ".sqlite-wal", ".sqlite-shm",
+                          ".store-wal", ".store-shm"]
+
+        for name in storeNames {
+            for ext in extensions {
+                let source = appSupport.appendingPathComponent("\(name)\(ext)")
+                guard fm.fileExists(atPath: source.path) else { continue }
+                let dest = backupDir.appendingPathComponent("\(name)\(ext)")
+                do {
+                    try fm.copyItem(at: source, to: dest)
+                    NSLog("[BiblePlus] Backed up: \(source.lastPathComponent)")
+                } catch {
+                    NSLog("[BiblePlus] Backup copy failed for \(source.lastPathComponent): \(error)")
+                }
+            }
         }
     }
 
@@ -46,9 +88,7 @@ enum SharedModelContainer {
                 let url = appSupport.appendingPathComponent("\(name)\(ext)")
                 if fm.fileExists(atPath: url.path) {
                     try? fm.removeItem(at: url)
-                    #if DEBUG
-                    print("[BiblePlus] Deleted: \(url.lastPathComponent)")
-                    #endif
+                    NSLog("[BiblePlus] Deleted: \(url.lastPathComponent)")
                 }
             }
         }
@@ -57,19 +97,16 @@ enum SharedModelContainer {
         if let contents = try? fm.contentsOfDirectory(at: groupURL, includingPropertiesForKeys: nil) {
             for url in contents where url.pathExtension.contains("store") || url.pathExtension.contains("sqlite") {
                 try? fm.removeItem(at: url)
-                #if DEBUG
-                print("[BiblePlus] Deleted root: \(url.lastPathComponent)")
-                #endif
+                NSLog("[BiblePlus] Deleted root: \(url.lastPathComponent)")
             }
         }
 
-        // And in app support
+        // And in app support (excluding Backups directory)
         if let contents = try? fm.contentsOfDirectory(at: appSupport, includingPropertiesForKeys: nil) {
-            for url in contents where url.pathExtension.contains("store") || url.pathExtension.contains("sqlite") {
+            for url in contents where (url.pathExtension.contains("store") || url.pathExtension.contains("sqlite"))
+                && !url.path.contains("Backups") {
                 try? fm.removeItem(at: url)
-                #if DEBUG
-                print("[BiblePlus] Deleted appSupport: \(url.lastPathComponent)")
-                #endif
+                NSLog("[BiblePlus] Deleted appSupport: \(url.lastPathComponent)")
             }
         }
     }
