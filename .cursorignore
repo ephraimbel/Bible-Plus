@@ -1,0 +1,55 @@
+# Xcode build artifacts (regenerated, huge — build/ was 5.8GB / 39k files)
+build/
+DerivedData/
+.build/
+*.xcodeproj/
+*.xcworkspace/
+DerivedSources/
+*.xcuserstate
+xcuserdata/
+CompilationCache.noindex/
+Index.noindex/
+ModuleCache.noindex/
+SDKStatCaches.noindex/
+SwiftExplicitPrecompiledModules/
+XCBuildData/
+
+# Generated / binary
+*.ipa
+*.dSYM
+*.dSYM.zip
+*.app
+*.framework
+*.xcarchive
+
+# Images & media (no code context)
+Resources/Sounds/
+Resources/Backgrounds/
+website/images/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.mp3
+*.m4a
+*.mp4
+*.mov
+*.wav
+
+# Large bundled content JSON (app loads at runtime — AI doesn't need full text)
+Shared/Content/bible-kjv.json
+Shared/Content/bible-web.json
+
+# Dependency caches
+node_modules/
+Pods/
+.swiftpm/
+Package.resolved
+
+# Supabase build artifacts (keep source)
+supabase/.branches/
+supabase/.temp/
+
+# System
+.DS_Store
+*.log
