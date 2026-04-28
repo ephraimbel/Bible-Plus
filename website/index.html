@@ -11,8 +11,10 @@
     <meta property="og:url" content="https://bibleplus.io">
     <meta property="og:image" content="https://bibleplus.io/images/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="apple-itunes-app" content="app-id=YOUR_APP_ID">
-    <link rel="icon" type="image/png" href="/images/logo.png">
+    <meta name="apple-itunes-app" content="app-id=6759114318">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="256x256" href="/images/logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -193,11 +195,12 @@
         .nav-links a:not(.nav-cta)::after {
             content: '';
             position: absolute;
-            bottom: -4px; left: 0;
+            bottom: -4px; left: 50%;
             width: 0; height: 2px;
             background: var(--accent);
             border-radius: 1px;
-            transition: width 0.3s var(--ease-out);
+            transform: translateX(-50%);
+            transition: width 0.32s var(--ease-out);
         }
         .nav-links a:not(.nav-cta):hover::after { width: 100%; }
         .nav-cta {
@@ -302,22 +305,22 @@
             will-change: transform;
         }
         .aurora-orb:nth-child(1) {
-            width: 600px; height: 600px;
-            background: rgba(201,169,110,0.2);
-            top: -200px; right: -100px;
-            animation: auroraMove1 25s ease-in-out infinite;
+            width: 640px; height: 640px;
+            background: rgba(201,169,110,0.13);
+            top: -220px; right: -120px;
+            animation: auroraMove1 28s ease-in-out infinite;
         }
         .aurora-orb:nth-child(2) {
-            width: 500px; height: 500px;
-            background: rgba(212,184,150,0.18);
-            bottom: -150px; left: -150px;
-            animation: auroraMove2 30s ease-in-out infinite;
+            width: 540px; height: 540px;
+            background: rgba(212,184,150,0.11);
+            bottom: -180px; left: -170px;
+            animation: auroraMove2 34s ease-in-out infinite;
         }
         .aurora-orb:nth-child(3) {
-            width: 400px; height: 400px;
-            background: rgba(232,212,176,0.15);
+            width: 420px; height: 420px;
+            background: rgba(232,212,176,0.09);
             top: 30%; left: 35%;
-            animation: auroraMove3 20s ease-in-out infinite;
+            animation: auroraMove3 22s ease-in-out infinite;
         }
         #particles-canvas {
             position: absolute;
@@ -351,9 +354,10 @@
             font-family: 'Instrument Serif', serif;
             font-size: clamp(3.2rem, 8.5vw, 7.5rem);
             font-weight: 400;
-            line-height: 0.98;
+            line-height: 1.02;
             letter-spacing: -2px;
             margin-bottom: 32px;
+            text-shadow: 0 1px 0 rgba(255,255,255,0.6), 0 2px 20px rgba(42,33,24,0.04);
         }
         .hero h1 em {
             font-style: italic;
@@ -435,6 +439,55 @@
         }
         .hero-trust-item svg { width: 16px; height: 16px; color: var(--accent); }
 
+        /* App Store ribbon under hero */
+        .hero-ribbon {
+            margin-top: 28px;
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            padding: 10px 18px 10px 14px;
+            background: var(--white);
+            border: 1px solid var(--ink-05);
+            border-radius: 100px;
+            box-shadow: 0 8px 30px rgba(42,33,24,0.06);
+        }
+        .hero-ribbon-icon {
+            width: 34px; height: 34px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            box-shadow: 0 4px 12px rgba(201,169,110,0.35);
+        }
+        .hero-ribbon-icon svg { width: 18px; height: 18px; }
+        .hero-ribbon-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.15;
+        }
+        .hero-ribbon-top {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--ink-50);
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
+        .hero-ribbon-bottom {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--ink);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .hero-ribbon-bottom svg {
+            width: 13px; height: 13px;
+            fill: var(--accent);
+        }
+
         /* ========== SOCIAL PROOF BAR ========== */
         .social-proof {
             padding: 48px 32px;
@@ -475,50 +528,109 @@
             background: var(--ink-10);
         }
 
-        /* ========== IPHONE BEZEL ========== */
+        /* ========== IPHONE BEZEL (titanium-style, true-to-hardware) ========== */
         .iphone {
-            background: #000;
-            border-radius: 48px;
-            padding: 10px;
+            background: linear-gradient(150deg, #2A2A2D 0%, #121214 45%, #1C1C1F 100%);
+            border-radius: 54px;
+            padding: 7px;
             position: relative;
             box-shadow:
-                0 0 0 1px rgba(255,255,255,0.1) inset,
-                0 24px 80px rgba(0,0,0,0.2),
-                0 4px 20px rgba(0,0,0,0.1);
+                inset 0 0 0 1.25px rgba(255,255,255,0.12),
+                inset 0 -1px 0 rgba(255,255,255,0.05),
+                0 0 0 1.5px #0a0a0c,
+                0 36px 80px -12px rgba(0,0,0,0.32),
+                0 12px 28px -6px rgba(0,0,0,0.18),
+                0 2px 6px rgba(0,0,0,0.1);
             transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
             will-change: transform;
         }
         .iphone-screen {
-            border-radius: 38px;
+            border-radius: 47px;
             overflow: hidden;
             position: relative;
+            aspect-ratio: 1206 / 2622;
+            background:
+                radial-gradient(120% 80% at 50% 0%, rgba(201,169,110,0.22), transparent 60%),
+                linear-gradient(180deg, #2A2218 0%, #1C1814 100%);
+            box-shadow: inset 0 0 0 1px rgba(0,0,0,0.6);
+        }
+        /* Dynamic Island */
+        .iphone-screen::before {
+            content: '';
+            position: absolute;
+            top: 5.5%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 31%;
+            height: 3.1%;
+            background: #000;
+            border-radius: 100px;
+            z-index: 3;
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.03);
+        }
+        /* Subtle screen glare highlight */
+        .iphone-screen::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, rgba(255,255,255,0.04) 0%, transparent 28%, transparent 75%, rgba(255,255,255,0.015) 100%);
+            pointer-events: none;
+            z-index: 2;
+            mix-blend-mode: overlay;
         }
         .iphone-screen img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
             display: block;
+            position: relative;
+            z-index: 1;
         }
-        /* Side button details */
+        .iphone-screen img.failed { display: none; }
+        .iphone-screen-fallback {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            text-align: center;
+            padding: 24px;
+            font-family: 'Instrument Serif', serif;
+            color: rgba(245,240,232,0.85);
+        }
+        .iphone-screen-fallback svg { width: 40px; height: 40px; color: var(--accent); }
+        .iphone-screen-fallback-title { font-size: 22px; letter-spacing: -0.3px; }
+        .iphone-screen-fallback-sub {
+            font-family: 'Manrope', sans-serif;
+            font-size: 11px;
+            color: rgba(245,240,232,0.45);
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+        }
+        /* Side button details — minimal power button silhouette on right */
         .iphone::before {
             content: '';
             position: absolute;
-            right: -2px;
-            top: 120px;
-            width: 3px;
-            height: 56px;
-            background: #1a1a1a;
+            right: -1.5px;
+            top: 28%;
+            width: 2px;
+            height: 14%;
+            background: linear-gradient(90deg, #1a1a1c, #3a3a3d);
             border-radius: 0 2px 2px 0;
         }
         .iphone::after {
             content: '';
             position: absolute;
-            left: -2px;
-            top: 100px;
-            width: 3px;
-            height: 32px;
-            background: #1a1a1a;
+            left: -1.5px;
+            top: 22%;
+            width: 2px;
+            height: 18%;
+            background: linear-gradient(270deg, #1a1a1c, #3a3a3d);
             border-radius: 2px 0 0 2px;
-            box-shadow: 0 44px 0 #1a1a1a, 0 80px 0 #1a1a1a;
+            opacity: 0.85;
         }
 
         /* ========== PHONE SHOWCASE ========== */
@@ -548,10 +660,10 @@
         }
         .showcase-inner .iphone { width: 200px; }
         .showcase-inner .iphone:nth-child(1) { animation: floatSlow 7s ease-in-out infinite; opacity: 0.8; transform: scale(0.88) rotate(-3deg); }
-        .showcase-inner .iphone:nth-child(2) { animation: float 6s ease-in-out infinite 0.3s; transform: scale(1.05); z-index: 2; opacity: 1; box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset, 0 40px 100px rgba(0,0,0,0.25), 0 8px 32px rgba(0,0,0,0.12); }
+        .showcase-inner .iphone:nth-child(2) { animation: float 6s ease-in-out infinite 0.3s; transform: scale(1.05); z-index: 2; opacity: 1; box-shadow: inset 0 0 0 1.25px rgba(255,255,255,0.12), inset 0 -1px 0 rgba(255,255,255,0.05), 0 0 0 1.5px #0a0a0c, 0 50px 110px -18px rgba(0,0,0,0.35), 0 20px 40px -8px rgba(0,0,0,0.18); }
         .showcase-inner .iphone:nth-child(3) { animation: floatSlow 6.5s ease-in-out infinite 0.6s; opacity: 0.85; transform: scale(0.92); }
         .showcase-inner .iphone:nth-child(4) { animation: floatSlow 7.5s ease-in-out infinite 0.9s; opacity: 0.8; transform: scale(0.88) rotate(3deg); }
-        .showcase-inner .iphone:hover { transform: translateY(-8px) scale(1.04) rotate(0deg) !important; z-index: 10; opacity: 1 !important; box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset, 0 48px 100px rgba(0,0,0,0.25); }
+        .showcase-inner .iphone:hover { transform: translateY(-8px) scale(1.04) rotate(0deg) !important; z-index: 10; opacity: 1 !important; box-shadow: inset 0 0 0 1.25px rgba(255,255,255,0.14), inset 0 -1px 0 rgba(255,255,255,0.05), 0 0 0 1.5px #0a0a0c, 0 56px 120px -20px rgba(0,0,0,0.4), 0 24px 50px -10px rgba(201,169,110,0.18); }
 
         /* ========== FEATURES ========== */
         .features {
@@ -580,6 +692,13 @@
             margin-bottom: 20px;
             line-height: 1.1;
         }
+        .features-header h2 em {
+            font-style: italic;
+            background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
         .features-header p {
             color: var(--ink-70);
             font-size: 18px;
@@ -598,16 +717,26 @@
         .feature-row.reverse { direction: rtl; }
         .feature-row.reverse > * { direction: ltr; }
         .feature-label {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1.8px;
-            color: var(--accent);
+            color: var(--accent-deep);
             background: var(--accent-10);
-            padding: 6px 14px;
+            padding: 7px 14px 7px 10px;
             border-radius: 100px;
             margin-bottom: 20px;
+            border: 1px solid var(--accent-15);
+        }
+        .feature-label::before {
+            content: '';
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 8px var(--accent);
         }
         .feature-text h3 {
             font-family: 'Instrument Serif', serif;
@@ -627,9 +756,28 @@
             color: var(--ink-70);
             max-width: 420px;
         }
-        .feature-visual { display: flex; justify-content: center; }
+        .feature-visual { display: flex; justify-content: center; position: relative; }
+        .feature-visual::before {
+            content: '';
+            position: absolute;
+            width: 360px; height: 360px;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(201,169,110,0.16) 0%, transparent 65%);
+            pointer-events: none;
+            z-index: 0;
+        }
         .feature-visual .iphone {
             width: 280px;
+            position: relative;
+            z-index: 1;
+            box-shadow:
+                inset 0 0 0 1.25px rgba(255,255,255,0.12),
+                inset 0 -1px 0 rgba(255,255,255,0.05),
+                0 0 0 1.5px #0a0a0c,
+                0 44px 100px -18px rgba(42,33,24,0.28),
+                0 18px 40px -10px rgba(201,169,110,0.14),
+                0 4px 10px rgba(0,0,0,0.12);
         }
         .feature-visual .iphone:hover {
             transform: translateY(-8px) rotate(1deg);
@@ -713,12 +861,26 @@
             border: 1px solid var(--ink-05);
             border-radius: 24px;
             padding: 36px;
-            transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+            transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out), border-color 0.4s;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(42,33,24,0.02);
+        }
+        .testimonial-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-30), transparent);
+            border-radius: 24px 24px 0 0;
+            opacity: 0;
+            transition: opacity 0.4s;
         }
         .testimonial-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 60px rgba(42,33,24,0.08);
+            transform: translateY(-6px);
+            box-shadow: 0 24px 60px rgba(42,33,24,0.09), 0 4px 12px rgba(201,169,110,0.06);
+            border-color: var(--accent-20);
         }
+        .testimonial-card:hover::before { opacity: 1; }
         .testimonial-stars {
             display: flex;
             gap: 3px;
@@ -741,15 +903,17 @@
             gap: 12px;
         }
         .testimonial-avatar {
-            width: 40px; height: 40px;
+            width: 44px; height: 44px;
             border-radius: 50%;
-            background: var(--accent-15);
+            background: linear-gradient(135deg, var(--accent-light), var(--accent));
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 15px;
-            color: var(--accent-deep);
+            font-size: 16px;
+            color: var(--white);
+            box-shadow: 0 4px 12px rgba(201,169,110,0.35), 0 0 0 3px var(--white), 0 0 0 4px var(--accent-20);
+            flex-shrink: 0;
         }
         .testimonial-name {
             font-weight: 700;
@@ -761,6 +925,77 @@
             color: var(--ink-50);
         }
 
+        /* ========== WHAT'S NEW STRIP ========== */
+        .whats-new {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 32px 72px;
+        }
+        .whats-new-card {
+            background: var(--white);
+            border: 1px solid var(--ink-05);
+            border-radius: 24px;
+            padding: 32px 40px;
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            box-shadow: 0 2px 20px rgba(42,33,24,0.03);
+        }
+        .whats-new-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--accent-10), var(--accent-15));
+            border: 1px solid var(--accent-20);
+            color: var(--accent-deep);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 100px;
+            flex-shrink: 0;
+        }
+        .whats-new-tag::before {
+            content: '';
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent), 0 0 0 3px rgba(201,169,110,0.2);
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+        .whats-new-body h4 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 22px;
+            font-weight: 400;
+            letter-spacing: -0.4px;
+            margin-bottom: 6px;
+        }
+        .whats-new-body p {
+            font-size: 14px;
+            color: var(--ink-70);
+            line-height: 1.55;
+        }
+        .whats-new-version {
+            margin-left: auto;
+            text-align: right;
+            flex-shrink: 0;
+        }
+        .whats-new-version-num {
+            font-family: 'Instrument Serif', serif;
+            font-size: 28px;
+            color: var(--ink);
+            line-height: 1;
+        }
+        .whats-new-version-date {
+            font-size: 12px;
+            color: var(--ink-50);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
         /* ========== CTA SECTION ========== */
         .cta-section {
             padding: 0 32px 140px;
@@ -768,12 +1003,53 @@
             margin: 0 auto;
         }
         .cta-card {
-            background: var(--dark);
+            background:
+                radial-gradient(1000px 500px at 20% 0%, rgba(201,169,110,0.14), transparent 60%),
+                radial-gradient(800px 400px at 100% 100%, rgba(201,169,110,0.08), transparent 55%),
+                linear-gradient(135deg, #1C1814 0%, #2A2218 100%);
             border-radius: 40px;
-            padding: 100px 48px;
-            text-align: center;
+            padding: 88px 72px;
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(201,169,110,0.15);
+            box-shadow: 0 40px 100px rgba(42,33,24,0.18), inset 0 0 0 1px rgba(255,255,255,0.03);
+        }
+        .cta-inner {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 64px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        .cta-qr {
+            background: var(--white);
+            border-radius: 28px;
+            padding: 28px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 0 1px rgba(201,169,110,0.2);
+            max-width: 280px;
+            margin-left: auto;
+        }
+        .cta-qr img, .cta-qr svg {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 16px;
+        }
+        .cta-qr-label {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent-deep);
+            margin-top: 16px;
+        }
+        .cta-qr-sub {
+            font-size: 14px;
+            color: var(--ink-70);
+            margin-top: 6px;
+            font-weight: 500;
         }
         .cta-glow {
             position: absolute;
@@ -785,7 +1061,7 @@
         }
         .cta-card h2 {
             font-family: 'Instrument Serif', serif;
-            font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+            font-size: clamp(2.2rem, 4.8vw, 3.8rem);
             font-weight: 400;
             color: var(--dark-text);
             margin-bottom: 20px;
@@ -795,17 +1071,18 @@
         }
         .cta-card h2 em {
             font-style: italic;
-            color: var(--accent);
+            background: linear-gradient(135deg, #E8D4B0, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         .cta-card p {
-            font-size: 18px;
-            color: rgba(245,240,232,0.6);
-            margin-bottom: 44px;
+            font-size: 17px;
+            color: rgba(245,240,232,0.65);
+            margin-bottom: 36px;
             position: relative;
-            max-width: 420px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
+            max-width: 460px;
+            line-height: 1.65;
         }
         .btn-cta {
             display: inline-flex;
@@ -831,10 +1108,33 @@
         .cta-trust {
             margin-top: 28px;
             font-size: 13px;
-            color: rgba(245,240,232,0.35);
+            color: rgba(245,240,232,0.4);
             font-weight: 600;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             position: relative;
+        }
+        .cta-buttons {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .btn-cta-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(245,240,232,0.9);
+            padding: 20px 32px;
+            border-radius: 100px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            border: 1px solid rgba(245,240,232,0.15);
+            transition: background 0.25s, border-color 0.25s;
+        }
+        .btn-cta-ghost:hover {
+            background: rgba(245,240,232,0.05);
+            border-color: rgba(245,240,232,0.3);
         }
 
         /* ========== FOOTER ========== */
@@ -920,9 +1220,15 @@
         @media (max-width: 900px) {
             .nav-links { display: none; }
             .nav-hamburger { display: block; }
+            .cta-inner { grid-template-columns: 1fr; gap: 48px; text-align: center; }
+            .cta-card p { margin-left: auto; margin-right: auto; }
+            .cta-buttons { justify-content: center; }
+            .cta-qr { margin: 0 auto; }
+            .whats-new-card { flex-direction: column; text-align: center; gap: 18px; }
+            .whats-new-version { margin-left: 0; text-align: center; }
             .showcase-inner { flex-wrap: wrap; gap: 16px; }
-            .showcase-inner .iphone { width: 150px; border-radius: 36px; padding: 7px; }
-            .showcase-inner .iphone-screen { border-radius: 29px; }
+            .showcase-inner .iphone { width: 150px; border-radius: 42px; padding: 6px; }
+            .showcase-inner .iphone-screen { border-radius: 36px; }
             .showcase-inner .iphone:nth-child(4) { display: none; }
             .feature-row,
             .feature-row.reverse {
@@ -945,8 +1251,8 @@
             .btn-primary, .btn-ghost, .btn-cta { width: 100%; justify-content: center; }
             .hero-trust { gap: 20px; }
             .showcase-inner { gap: 12px; }
-            .showcase-inner .iphone { width: 130px; border-radius: 30px; padding: 6px; }
-            .showcase-inner .iphone-screen { border-radius: 24px; }
+            .showcase-inner .iphone { width: 130px; border-radius: 36px; padding: 5px; }
+            .showcase-inner .iphone-screen { border-radius: 31px; }
             .showcase-inner .iphone:nth-child(3),
             .showcase-inner .iphone:nth-child(4) { display: none; }
             .features { padding: 80px 20px 40px; }
@@ -955,7 +1261,13 @@
             .spiritual-break { padding: 100px 20px; }
             .testimonials { padding: 80px 20px; }
             .cta-section { padding: 0 16px 100px; }
-            .cta-card { padding: 72px 24px; border-radius: 28px; }
+            .cta-card { padding: 64px 24px; border-radius: 28px; }
+            .cta-inner { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+            .cta-card p { margin-left: auto; margin-right: auto; }
+            .cta-buttons { justify-content: center; }
+            .cta-qr { margin: 0 auto; }
+            .whats-new-card { flex-direction: column; text-align: center; gap: 18px; padding: 28px 24px; }
+            .whats-new-version { margin-left: 0; text-align: center; }
             .footer-grid { grid-template-columns: 1fr; }
             .proof-stat-number { font-size: 28px; }
         }
@@ -979,14 +1291,14 @@
 <nav id="navbar">
     <div class="nav-inner">
         <a href="/" class="nav-brand">
-            <img src="/images/logo.png" alt="Bible Plus" class="nav-logo">
+            <img src="/images/logo.png?v=2" alt="Bible Plus" class="nav-logo">
             <span class="nav-name">Bible+</span>
         </a>
         <div class="nav-links">
             <a href="#features">Features</a>
             <a href="#testimonials">Reviews</a>
             <a href="/support">Support</a>
-            <a href="https://apps.apple.com/app/bible-plus/idYOUR_APP_ID" class="nav-cta">Download</a>
+            <a href="https://apps.apple.com/app/id6759114318" class="nav-cta" target="_blank" rel="noopener">Download</a>
         </div>
         <button class="nav-hamburger" id="hamburger" aria-label="Menu">
             <span></span><span></span><span></span>
@@ -999,7 +1311,7 @@
     <a href="#features" onclick="closeMobileMenu()">Features</a>
     <a href="#testimonials" onclick="closeMobileMenu()">Reviews</a>
     <a href="/support" onclick="closeMobileMenu()">Support</a>
-    <a href="https://apps.apple.com/app/bible-plus/idYOUR_APP_ID" class="mobile-cta">Download Free</a>
+    <a href="https://apps.apple.com/app/id6759114318" class="mobile-cta" target="_blank" rel="noopener">Download Free</a>
 </div>
 
 <!-- Hero -->
@@ -1018,17 +1330,13 @@
         <h1 class="fade-up fade-up-d1">Scripture that<br><em>speaks to your life</em></h1>
         <p class="hero-sub fade-up fade-up-d2">Personalized daily verses, AI-powered pastoral guidance, and a sanctuary for your quiet time with God.</p>
         <div class="hero-buttons fade-up fade-up-d3">
-            <a href="https://apps.apple.com/app/bible-plus/idYOUR_APP_ID" class="btn-primary">
+            <a href="https://apps.apple.com/app/id6759114318" class="btn-primary" target="_blank" rel="noopener">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.5 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
                 Download Free
             </a>
             <a href="#features" class="btn-ghost">Explore Features</a>
         </div>
         <div class="hero-trust fade-up fade-up-d4">
-            <div class="hero-trust-item">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                4.9 App Store
-            </div>
             <div class="hero-trust-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 100% Private
@@ -1037,6 +1345,24 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
                 Free Forever
             </div>
+            <div class="hero-trust-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><circle cx="12" cy="18" r="1" fill="currentColor"/></svg>
+                iOS 17+
+            </div>
+        </div>
+        <div class="fade-up fade-up-d5" style="margin-top: 28px;">
+            <a href="https://apps.apple.com/app/id6759114318" class="hero-ribbon" target="_blank" rel="noopener">
+                <span class="hero-ribbon-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.5 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                </span>
+                <span class="hero-ribbon-text">
+                    <span class="hero-ribbon-top">On the App Store</span>
+                    <span class="hero-ribbon-bottom">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        4.9 &middot; Free on iOS
+                    </span>
+                </span>
+            </a>
         </div>
     </div>
 </section>
@@ -1072,22 +1398,17 @@
     <div class="showcase-inner">
         <div class="iphone">
             <div class="iphone-screen">
-                <img src="/images/screenshot-bible.png" alt="Bible Plus Bible Reader" loading="lazy">
+                <img src="/images/screenshot-bible.png?v=3" alt="Bible Plus Bible Reader" loading="lazy">
             </div>
         </div>
         <div class="iphone">
             <div class="iphone-screen">
-                <img src="/images/screenshot-home.png" alt="Bible Plus Home Feed" loading="lazy">
+                <img src="/images/screenshot-home.png?v=3" alt="Bible Plus Home Feed" loading="lazy">
             </div>
         </div>
         <div class="iphone">
             <div class="iphone-screen">
-                <img src="/images/screenshot-ask.png" alt="Bible Plus AI Companion" loading="lazy">
-            </div>
-        </div>
-        <div class="iphone">
-            <div class="iphone-screen">
-                <img src="/images/screenshot-saved.png" alt="Bible Plus Saved Verses" loading="lazy">
+                <img src="/images/screenshot-ask.png?v=3" alt="Bible Plus AI Companion" loading="lazy">
             </div>
         </div>
     </div>
@@ -1097,20 +1418,20 @@
 <section class="features" id="features">
     <div class="features-header reveal">
         <div class="section-label">Features</div>
-        <h2>Five pillars of your<br>faith journey</h2>
-        <p>Every feature designed to draw you closer to God's Word, every single day.</p>
+        <h2>Built for your<br><em>quiet time</em></h2>
+        <p>Four ways Bible Plus meets you — every day, in every season.</p>
     </div>
 
     <div class="feature-row reveal">
         <div class="feature-text">
             <span class="feature-label">Your Daily Home</span>
-            <h3>Start each day <em>with God</em></h3>
-            <p>A morning verse, your reading streak, quick actions, and a reflection prompt — all in one beautiful dashboard. Swipe up to explore a personalized feed of prayers, verses, and devotionals.</p>
+            <h3>Start each day <em>with Him</em></h3>
+            <p>A morning verse, your streak, and a gentle prompt to reflect — gathered into one quiet, intentional space.</p>
         </div>
         <div class="feature-visual">
             <div class="iphone">
                 <div class="iphone-screen">
-                    <img src="/images/screenshot-home.png" alt="Home Dashboard" loading="lazy">
+                    <img src="/images/screenshot-home.png?v=3" alt="Home Dashboard" loading="lazy">
                 </div>
             </div>
         </div>
@@ -1120,12 +1441,12 @@
         <div class="feature-text">
             <span class="feature-label">Bible Reader</span>
             <h3>All 66 books, <em>beautifully presented</em></h3>
-            <p>A clean, distraction-free reading experience. Tap any verse to save, share, or get an AI-powered explanation. Navigate with ease between chapters and books.</p>
+            <p>A clean, distraction-free reading experience. Tap any verse to save, share, or ask for an explanation in plain language.</p>
         </div>
         <div class="feature-visual">
             <div class="iphone">
                 <div class="iphone-screen">
-                    <img src="/images/screenshot-bible.png" alt="Bible Reader" loading="lazy">
+                    <img src="/images/screenshot-bible.png?v=3" alt="Bible Reader" loading="lazy">
                 </div>
             </div>
         </div>
@@ -1135,12 +1456,12 @@
         <div class="feature-text">
             <span class="feature-label">AI Companion</span>
             <h3>Ask anything about <em>Scripture</em></h3>
-            <p>Get warm, pastoral guidance rooted in God's Word. Every response includes real Bible verses. Ask questions, request prayers, or explore a passage deeper.</p>
+            <p>Warm, pastoral guidance grounded in real Bible verses. Bring your questions, your prayers, or a passage you want to understand.</p>
         </div>
         <div class="feature-visual">
             <div class="iphone">
                 <div class="iphone-screen">
-                    <img src="/images/screenshot-ask.png" alt="AI Companion" loading="lazy">
+                    <img src="/images/screenshot-ask.png?v=3" alt="AI Companion" loading="lazy">
                 </div>
             </div>
         </div>
@@ -1148,29 +1469,14 @@
 
     <div class="feature-row reverse reveal">
         <div class="feature-text">
-            <span class="feature-label">Saved & Collections</span>
-            <h3>Your verses, <em>always with you</em></h3>
-            <p>Save your favorite verses with personal notes. Organize them into collections for quick access. Build your personal library of Scripture that matters most.</p>
-        </div>
-        <div class="feature-visual">
-            <div class="iphone">
-                <div class="iphone-screen">
-                    <img src="/images/screenshot-saved.png" alt="Saved Verses" loading="lazy">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="feature-row reveal">
-        <div class="feature-text">
             <span class="feature-label">Personalized Feed</span>
             <h3>Content that <em>knows your heart</em></h3>
-            <p>Swipe through prayers, verses, and devotionals tailored to your season of life. Beautiful full-screen cards with ambient backgrounds. No two feeds are alike.</p>
+            <p>Prayers, verses, and devotionals chosen for your season. Full-screen cards, ambient artwork — no two feeds alike.</p>
         </div>
         <div class="feature-visual">
             <div class="iphone">
                 <div class="iphone-screen">
-                    <img src="/images/screenshot-feed.png" alt="Personalized Feed" loading="lazy">
+                    <img src="/images/screenshot-feed.png?v=3" alt="Personalized Feed" loading="lazy">
                 </div>
             </div>
         </div>
@@ -1247,17 +1553,45 @@
     </div>
 </section>
 
+<!-- What's New -->
+<section class="whats-new reveal">
+    <div class="whats-new-card">
+        <div class="whats-new-tag">New</div>
+        <div class="whats-new-body">
+            <h4>Premium onboarding, polished Bible reader, new widgets</h4>
+            <p>Version 1.0.6 brings a redesigned welcome flow, a refined reading experience, and 10 beautifully-crafted widgets for your Home and Lock screens.</p>
+        </div>
+        <div class="whats-new-version">
+            <div class="whats-new-version-num">v1.0.6</div>
+            <div class="whats-new-version-date">Latest release</div>
+        </div>
+    </div>
+</section>
+
 <!-- CTA -->
 <section class="cta-section reveal">
     <div class="cta-card">
         <div class="cta-glow"></div>
-        <h2>Begin your journey<br><em>with God today</em></h2>
-        <p>Download Bible Plus free. Try every Pro feature free for 3 days. No credit card required.</p>
-        <a href="https://apps.apple.com/app/bible-plus/idYOUR_APP_ID" class="btn-cta">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.5 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            Download Free on iOS
-        </a>
-        <div class="cta-trust">Free forever &middot; Pro trial included &middot; Cancel anytime</div>
+        <div class="cta-inner">
+            <div>
+                <h2>Begin your journey<br><em>with God today</em></h2>
+                <p>Download Bible Plus free. Try every Pro feature free for 3 days. No credit card required.</p>
+                <div class="cta-buttons">
+                    <a href="https://apps.apple.com/app/id6759114318" class="btn-cta" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.5 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                        Download Free on iOS
+                    </a>
+                    <a href="#features" class="btn-cta-ghost">See features</a>
+                </div>
+                <div class="cta-trust">Free forever &middot; Pro trial included &middot; Cancel anytime</div>
+            </div>
+            <div class="cta-qr">
+                <!-- QR generated client-side below -->
+                <div id="app-qr" aria-label="QR code to App Store"></div>
+                <div class="cta-qr-label">Scan with iPhone</div>
+                <div class="cta-qr-sub">Opens the App Store</div>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -1267,7 +1601,7 @@
         <div class="footer-grid">
             <div>
                 <div class="footer-logo">
-                    <img src="/images/logo.png" alt="Bible Plus">
+                    <img src="/images/logo.png?v=2" alt="Bible Plus">
                     <span class="footer-logo-name">Bible+</span>
                 </div>
                 <p class="footer-tagline">Scripture that speaks to your life. Personalized, beautiful, and always with you.</p>
@@ -1275,7 +1609,7 @@
             <div class="footer-col">
                 <h4>Product</h4>
                 <a href="#features">Features</a>
-                <a href="https://apps.apple.com/app/bible-plus/idYOUR_APP_ID">Download</a>
+                <a href="https://apps.apple.com/app/id6759114318" target="_blank" rel="noopener">Download</a>
             </div>
             <div class="footer-col">
                 <h4>Legal</h4>
@@ -1413,6 +1747,51 @@
             if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
     });
+
+    // ========== SCREENSHOT FALLBACKS ==========
+    // If any screenshot image fails to load, swap it for a premium gradient placeholder
+    // so no broken-image icon ever shows inside an iPhone bezel.
+    document.querySelectorAll('.iphone-screen img').forEach(img => {
+        const finalize = () => {
+            if (!img.complete || img.naturalWidth === 0) {
+                img.classList.add('failed');
+                const screen = img.parentElement;
+                if (!screen.querySelector('.iphone-screen-fallback')) {
+                    const fb = document.createElement('div');
+                    fb.className = 'iphone-screen-fallback';
+                    fb.innerHTML = `
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+                        <div class="iphone-screen-fallback-title">Bible+</div>
+                        <div class="iphone-screen-fallback-sub">Preview coming soon</div>
+                    `;
+                    screen.appendChild(fb);
+                }
+            }
+        };
+        if (img.complete) finalize();
+        else {
+            img.addEventListener('error', finalize);
+            img.addEventListener('load', () => {
+                if (img.naturalWidth === 0) finalize();
+            });
+        }
+    });
+
+    // ========== APP STORE QR CODE ==========
+    (function renderQR() {
+        const container = document.getElementById('app-qr');
+        if (!container) return;
+        const url = 'https://apps.apple.com/app/id6759114318';
+        // Use QR Server API (free, no key) — returns SVG, inherits theme colors.
+        const img = new Image();
+        img.alt = 'Scan to download Bible Plus on the App Store';
+        img.width = 224;
+        img.height = 224;
+        img.loading = 'lazy';
+        img.style.cssText = 'width:100%;height:auto;display:block;border-radius:14px;';
+        img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=400x400&margin=8&color=2A2118&bgcolor=FFFFFF&data=' + encodeURIComponent(url);
+        container.appendChild(img);
+    })();
 </script>
 
 </body>
