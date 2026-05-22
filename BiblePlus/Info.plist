@@ -18,6 +18,8 @@
 	<string>Bible+ uses your microphone for voice conversations with the AI companion. Audio is processed on-device and never recorded.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>Bible+ converts your spoken words to text so you can talk with the AI companion hands-free. Recognition runs on-device when possible.</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Bible Plus uses this to measure ad performance and help us reach people who would benefit from the app. Your data is never sold.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>

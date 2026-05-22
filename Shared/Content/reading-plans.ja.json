@@ -1,0 +1,5943 @@
+[
+  {
+    "id": "psalms-of-peace",
+    "name": "平和の詩篇",
+    "description": "あなたの不安な心に直接語りかける詩篇を通して、神だけが与える静けさと平和へと導く7日間の旅です。",
+    "totalDays": 7,
+    "category": "Comfort",
+    "gradientColors": [
+      "#4A6741",
+      "#2D4A3E"
+    ],
+    "iconName": "leaf.fill",
+    "imageKey": "jesus_calms_storm",
+    "applicableSeasons": [
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "羊飼いのケア",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "この人生の季節において、神があなたの羊飼いであることは何を意味しますか？"
+      },
+      {
+        "day": 2,
+        "title": "光の中で自信を持つ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "暗闇の瞬間に神を光として経験したのはいつですか？"
+      },
+      {
+        "day": 3,
+        "title": "味わい、見よ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神がかつてあなたを捕らえていた恐れからどのように解放してくれましたか？"
+      },
+      {
+        "day": 4,
+        "title": "神は私たちの避け所",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今日、彼が神であることを「静まって知れ」と言われる場所はどこですか？"
+      },
+      {
+        "day": 5,
+        "title": "彼の翼の下で",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 91,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "最も高き方の陰に住むことはどのような感覚ですか？"
+      },
+      {
+        "day": 6,
+        "title": "決して眠らない守り手",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 121,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神が決してまどろまないことを知ることは、今夜にどのように向き合うかを変えますか？"
+      },
+      {
+        "day": 7,
+        "title": "恐れ多く、素晴らしく作られた",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神があなたを知っていることについてのどの真実が、今最も慰めをもたらしますか？"
+      }
+    ]
+  },
+  {
+    "id": "gospel-of-john",
+    "name": "ヨハネの福音書",
+    "description": "21日間でヨハネの福音書全体を歩み、肉となった言葉であるイエスに出会いましょう — 一章ずつ。",
+    "totalDays": 21,
+    "category": "Gospel",
+    "gradientColors": [
+      "#8B6914",
+      "#5C4A1C"
+    ],
+    "iconName": "book.fill",
+    "imageKey": "baptism_jesus",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "肉となった言葉",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "イエスがすべてのものの前に存在し、私たちの間に住むことを選んだことは、あなたにとって何を意味しますか？"
+      },
+      {
+        "day": 2,
+        "title": "水をワインに",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたの人生のどこで、イエスに普通のものを奇跡的なものに変えてもらう必要がありますか？"
+      },
+      {
+        "day": 3,
+        "title": "再生まれなければならない",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "「再生まれなければならない」という考えは、あなたの信仰の理解にどのように挑戦または励ましを与えますか？"
+      },
+      {
+        "day": 4,
+        "title": "生ける水",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたが渇きを感じる井戸はどれで、生ける水はどのようなものですか？"
+      },
+      {
+        "day": 5,
+        "title": "池での癒し",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "癒しを待っているが、イエスに完全に求めていない領域はありますか？"
+      },
+      {
+        "day": 6,
+        "title": "命のパン",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "毎日、イエスを命のパンとして食べることはどのようなものですか？"
+      },
+      {
+        "day": 7,
+        "title": "生ける水の川",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "イエスについての世界の意見があなた自身の経験と対立する時、あなたはどのように反応しますか？"
+      },
+      {
+        "day": 8,
+        "title": "世界の光",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "恥や暗闇の場所にイエスの光を照らしてもらう必要があるのはどこですか？"
+      },
+      {
+        "day": 9,
+        "title": "盲人のための視力",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "イエスに目を開いてもらいたい霊的盲目の一つの領域は何ですか？"
+      },
+      {
+        "day": 10,
+        "title": "良い羊飼い",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "イエスが自らの命を喜んで捨てたことを知ることは、彼の愛に対するあなたの見方をどのように変えますか？"
+      },
+      {
+        "day": 11,
+        "title": "ラザロ、出て来い",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたの人生のどの死んだ領域にイエスに命を呼び戻してもらう必要がありますか？"
+      },
+      {
+        "day": 12,
+        "title": "埋葬のために油を注がれた",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今日、イエスにどのような贅沢な礼拝を捧げることができるでしょうか？"
+      },
+      {
+        "day": 13,
+        "title": "仕える王",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今週、イエスがあなたに謙虚な奉仕を通して洗うように求めているのは誰の足ですか？"
+      },
+      {
+        "day": 14,
+        "title": "道、真理、命",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "イエスの約束があなたのために場所を準備することが、今日のあなたの生き方にどのように影響しますか？"
+      },
+      {
+        "day": 15,
+        "title": "真のぶどうの木",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今週、あなたがイエスに「留まる」ことは実際にどのような姿ですか？"
+      },
+      {
+        "day": 16,
+        "title": "助け手が来る",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "聖霊があなたを真理へ導いていることをどのように体験しましたか？"
+      },
+      {
+        "day": 17,
+        "title": "イエスがあなたのために祈る",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "イエスがあなたと父との一致のために個人的に祈ってくれたことを知ることは、どのような気持ちですか？"
+      },
+      {
+        "day": 18,
+        "title": "裏切りと逮捕",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたはいつ、ペテロのように言葉や行動を通してイエスを知らないと否定しましたか？"
+      },
+      {
+        "day": 19,
+        "title": "それは成し遂げられた",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "イエスがすでに十字架で成し遂げた burdens は何ですか？"
+      },
+      {
+        "day": 20,
+        "title": "彼は復活した",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "復活の現実は、あなたが最大の恐れに直面する方法をどのように変えますか？"
+      },
+      {
+        "day": 21,
+        "title": "私を愛していますか？",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "もしイエスが今日「私を愛していますか？」と3回尋ねたら、あなたの答えはどのように行動を形作りますか？"
+      }
+    ]
+  },
+  {
+    "id": "30-days-of-wisdom",
+    "name": "30日間の知恵",
+    "description": "月の各日に箴言の一章 — 決断、関係、仕事、日常生活のための時を超えた知恵。",
+    "totalDays": 30,
+    "category": "Wisdom",
+    "gradientColors": [
+      "#6B4C8A",
+      "#3D2B5C"
+    ],
+    "iconName": "lightbulb.fill",
+    "imageKey": "ten_commandments",
+    "applicableSeasons": [
+      "workingProfessional",
+      "parenthood"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "知恵の始まり",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "主を恐れることがすべての知恵の出発点であるとは、どういう意味ですか？"
+      },
+      {
+        "day": 2,
+        "title": "隠された宝を求める",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "隠された宝を探すように、どれだけ意図的に知恵を探していますか？"
+      },
+      {
+        "day": 3,
+        "title": "心を尽くして信頼する",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたが直面している決断の中で、どのように神を信頼する必要がありますか？"
+      },
+      {
+        "day": 4,
+        "title": "心を守る",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "知恵の道からあなたを引き離すかもしれないものを、あなたは心に入れていますか？"
+      },
+      {
+        "day": 5,
+        "title": "愚かさの危険",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたの人生の中で、神の最善から遠ざかるショートカットを取る誘惑に最もさらされているのはどこですか？"
+      },
+      {
+        "day": 6,
+        "title": "蟻からの教訓",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "蟻の勤勉さから、あなたの現在の責任について何を学ぶことができますか？"
+      },
+      {
+        "day": 7,
+        "title": "誘惑の代償",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "誘惑から自分を守るために、どのような境界を設定する必要がありますか？"
+      },
+      {
+        "day": 8,
+        "title": "知恵が呼びかける",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "日常生活の雑音の中で、知恵の声をどのように認識しますか？"
+      },
+      {
+        "day": 9,
+        "title": "二つの招待",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたはどちらの招待をより頻繁に受け入れていますか — 知恵の宴か、愚かさのショートカットか？"
+      },
+      {
+        "day": 10,
+        "title": "賢い息子",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "家庭でのあなたの性格は、公共の場で求める知恵をどのように反映していますか？"
+      },
+      {
+        "day": 11,
+        "title": "正直な天秤",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたの人生のどこで、より大きな正直さと誠実さを追求する必要がありますか？"
+      },
+      {
+        "day": 12,
+        "title": "癒しの言葉",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今日、あなたの言葉が周りの誰かに害を与えるのではなく、癒しをもたらすためにどのようにできるでしょうか？"
+      },
+      {
+        "day": 13,
+        "title": "賢者と共に歩む",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたの人生における賢い仲間は誰で、彼らからもっと学ぶためにどのようにできますか？"
+      },
+      {
+        "day": 14,
+        "title": "正しいように見える道",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたにとって正しいように見えた道が、間違った方向に導くことがあったのはいつですか？"
+      },
+      {
+        "day": 15,
+        "title": "優しい答え",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたの人生の中で、厳しい言葉の代わりに優しい答えを必要としているのは誰ですか？"
+      },
+      {
+        "day": 16,
+        "title": "計画を委ねる",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたが持っている計画の中で、主に完全に委ねる必要があるものは何ですか？"
+      },
+      {
+        "day": 17,
+        "title": "いつもそばにいる友",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "逆境を乗り越えている誰かに、より忠実な友となるためにはどうすればよいですか？"
+      },
+      {
+        "day": 18,
+        "title": "強い塔",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "困難が訪れたとき、あなたは最初に主の名に走りますか、それとも他の何かに走りますか？"
+      },
+      {
+        "day": 19,
+        "title": "貧しい人への親切",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今週、礼拝の行為として、必要な誰かにどのように寛大さを示すことができますか？"
+      },
+      {
+        "day": 20,
+        "title": "王の心",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "指導者や国々に対する神の主権を信じることは、あなたの祈りの仕方をどのように変えますか？"
+      },
+      {
+        "day": 21,
+        "title": "正義と義",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "日常生活の中で、どこでより忠実に正義と義を追求できますか？"
+      },
+      {
+        "day": 22,
+        "title": "良い名声",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたはどのような評判を築いており、それはキリストの性格を反映していますか？"
+      },
+      {
+        "day": 23,
+        "title": "嫉妬しない",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたの心に嫉妬を引き起こすものは何ですか、そして感謝がそれを置き換えるにはどうすればよいですか？"
+      },
+      {
+        "day": 24,
+        "title": "困難における力",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "逆境があなたの信仰の力を試すとき、あなたはどのように反応しますか？"
+      },
+      {
+        "day": 25,
+        "title": "金のリンゴ",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "誰かのタイミングの良い言葉があなたにとって金のリンゴのようだったのはいつですか？"
+      },
+      {
+        "day": 26,
+        "title": "怠け者の鏡",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神の最善からあなたを引き離している怠惰や先延ばしの領域はどこですか？"
+      },
+      {
+        "day": 27,
+        "title": "鉄は鉄を研ぐ",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたの人生であなたを研ぐのは誰で、その関係に意図的に投資していますか？"
+      },
+      {
+        "day": 28,
+        "title": "義人は大胆である",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "正しいことを主張するために、どこでより大胆さが必要ですか？"
+      },
+      {
+        "day": 29,
+        "title": "ビジョンと従順",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神の言葉に根ざしたビジョンを持つことは、あなたが無目的にさまようのをどのように防ぎますか？"
+      },
+      {
+        "day": 30,
+        "title": "神のすべての言葉",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 30,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "アグルの祈り — '貧困も富も与えないでください' — は、満足についてあなたに何を教えていますか？"
+      }
+    ]
+  },
+  {
+    "id": "romans-heart-of-the-gospel",
+    "name": "ローマ人への手紙: 福音の心",
+    "description": "パウロのローマ人への手紙に関する16日間の深い探求 — 書かれた中で最も完全な福音の提示です。",
+    "totalDays": 16,
+    "category": "Theology",
+    "gradientColors": [
+      "#8B3A3A",
+      "#5C2424"
+    ],
+    "iconName": "flame.fill",
+    "imageKey": "crucifixion",
+    "applicableSeasons": [
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "神の福音",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "福音を恥じることはありますか？恥じることなく生きるとはどのようなことですか？"
+      },
+      {
+        "day": 2,
+        "title": "神の正義の裁き",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神が公平に裁くことを知ることは、他人を裁く方法にどのように影響しますか？"
+      },
+      {
+        "day": 3,
+        "title": "すべての人が罪を犯した",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "すべての人が罪を犯したという現実は、あなたと他のすべての人との間の地面をどのように平らにしますか？"
+      },
+      {
+        "day": 4,
+        "title": "アブラハムのような信仰",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神からのどの不可能な約束を信じるように呼ばれていますか？"
+      },
+      {
+        "day": 5,
+        "title": "神との平和",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "苦しみが忍耐を生むことを知ることは、あなたの試練を見る方法をどのように変えますか？"
+      },
+      {
+        "day": 6,
+        "title": "罪に死に、キリストに生きる",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "キリストのために完全に生きるために、どの罪を死んだものと見なす必要がありますか？"
+      },
+      {
+        "day": 7,
+        "title": "内なる闘い",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "パウロの罪との正直な闘いは、あなた自身の戦いにどのように励ましを与えますか？"
+      },
+      {
+        "day": 8,
+        "title": "非難なし",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "キリストがすでに取り除いた非難を、あなたはまだ抱えていますか？"
+      },
+      {
+        "day": 9,
+        "title": "神の主権の選び",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神の主権と人間の責任の神秘にどのように反応しますか？"
+      },
+      {
+        "day": 10,
+        "title": "言葉はあなたの近くにある",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたの人生の中で良い知らせを聞く必要があるのは誰で、何がそれを共有することを妨げていますか？"
+      },
+      {
+        "day": 11,
+        "title": "オリーブの木",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "「接ぎ木された」枝としての自分の位置を理解することは、あなたの感謝の気持ちをどのように深めますか？"
+      },
+      {
+        "day": 12,
+        "title": "生けるいけにえ",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今日、あなたの体を生けるいけにえとして捧げることは実際にどのようなことですか？"
+      },
+      {
+        "day": 13,
+        "title": "服従と愛",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "「愛以外は何も負わない」という命令は、今週あなたの関係をどのように再形成できますか？"
+      },
+      {
+        "day": 14,
+        "title": "兄弟を裁いてはいけない",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "信念が異なる信者に対して、どこでより多くの恵みを示す必要がありますか？"
+      },
+      {
+        "day": 15,
+        "title": "神の栄光のための一致",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神の栄光のために、他の信者との一致をより積極的に追求するにはどうすればよいですか？"
+      },
+      {
+        "day": 16,
+        "title": "挨拶と平和の神",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたの信仰を強めるために神があなたの周りに置いた人々は誰で、彼らに感謝しましたか？"
+      }
+    ]
+  },
+  {
+    "id": "new-believers-journey",
+    "name": "新しい信者の旅",
+    "description": "聖書の最も重要な章を通じての14日間のガイドツアー — キリスト教の信仰を探求し始めたばかりの人に最適です。",
+    "totalDays": 14,
+    "category": "Foundations",
+    "gradientColors": [
+      "#3A6B8B",
+      "#1C3D5C"
+    ],
+    "iconName": "sunrise.fill",
+    "imageKey": "samuel_called",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "生まれ変わる",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "完全に新しい霊的な生活を始めることは、あなたにとって何を意味しますか？"
+      },
+      {
+        "day": 2,
+        "title": "羊飼い",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神があなたを大切にする羊飼いであると想像することは、彼に対するあなたの感情をどのように変えますか？"
+      },
+      {
+        "day": 3,
+        "title": "全ての人が罪を犯した",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "誰もが欠けていることを理解することは、恥を感じることなく神の恵みを受け入れるのにどのように役立ちますか？"
+      },
+      {
+        "day": 4,
+        "title": "恵みの贈り物",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "自分では決して得られないものを受け取ることは、どのような意味がありますか？"
+      },
+      {
+        "day": 5,
+        "title": "非難なし",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "キリストにおいて非難がないという真実を考慮して、どの罪悪感や恥を手放す必要がありますか？"
+      },
+      {
+        "day": 6,
+        "title": "恵みによって救われる",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "救いが報酬ではなく贈り物であることを知ることは、あなた自身にかけるプレッシャーをどのように変えますか？"
+      },
+      {
+        "day": 7,
+        "title": "道、真理、命",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "未来について迷ったり不安を感じたりしているとき、イエスが道であることはどのような意味がありますか？"
+      },
+      {
+        "day": 8,
+        "title": "神は愛",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "'神は愛である'という言葉は、神が誰であるかの理解をどのように再形成しますか？"
+      },
+      {
+        "day": 9,
+        "title": "神の平和",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今、あなたが神に持っていくことができる心配は何ですか？それは理解を超えた彼の平和と交換できますか？"
+      },
+      {
+        "day": 10,
+        "title": "信仰のホール",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "この章の中で、どの信仰の人物が最もあなたを鼓舞し、なぜですか？"
+      },
+      {
+        "day": 11,
+        "title": "試練と知恵",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "現在の試練を罰ではなく成長の機会として見ることをどのように始められますか？"
+      },
+      {
+        "day": 12,
+        "title": "幸いな人々",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今のあなたの人生に最も直接的に語りかける幸いな人々はどれですか？"
+      },
+      {
+        "day": 13,
+        "title": "主の祈り",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "主の祈りが、あなたが毎日神に話す方法の枠組みになるにはどうすればよいですか？"
+      },
+      {
+        "day": 14,
+        "title": "すべてのものが新しく",
+        "readings": [
+          {
+            "bookID": "REV",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神がすべてのものを新しくするという約束は、未来への希望をどのように与えますか？"
+      }
+    ]
+  },
+  {
+    "id": "finding-purpose",
+    "name": "目的を見つける",
+    "description": "アイデンティティ、召し、神があなたの人生に織り込んだ目的についての聖書の最も力強い箇所を探る10日間の探求。",
+    "totalDays": 10,
+    "category": "Purpose",
+    "gradientColors": [
+      "#8B7B3A",
+      "#5C5124"
+    ],
+    "iconName": "star.fill",
+    "imageKey": "miraculous_catch",
+    "applicableSeasons": [
+      "workingProfessional",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "あなたを繁栄させる計画",
+        "readings": [
+          {
+            "bookID": "JER",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神があなたの幸福と未来のための計画を持っていることを知ることは、不確実性にどのように向き合うかを変えますか？"
+      },
+      {
+        "day": 2,
+        "title": "素晴らしく作られた",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたが恐れ多く素晴らしく作られたと本当に信じた場合、何が変わりますか？"
+      },
+      {
+        "day": 3,
+        "title": "主に信頼する",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神を認めるのではなく、自分自身で導こうとしている道はどれですか？"
+      },
+      {
+        "day": 4,
+        "title": "良い行いのために創造された",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神があなたのためにあらかじめ用意した良い行いは何だと感じますか？"
+      },
+      {
+        "day": 5,
+        "title": "生けるいけにえ",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今週、神があなたに与えた独自の賜物を使って他の人に仕えるにはどうすればよいですか？"
+      },
+      {
+        "day": 6,
+        "title": "名前で呼ばれる",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 43,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神があなたを名前で呼び、あなたを自分のものとして主張することは、あなたのアイデンティティの感覚をどのように形作りますか？"
+      },
+      {
+        "day": 7,
+        "title": "生きることはキリスト",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "'生きることはキリスト' とは、あなたの仕事や人間関係にどのようにアプローチすることを意味しますか？"
+      },
+      {
+        "day": 8,
+        "title": "心を上に向ける",
+        "readings": [
+          {
+            "bookID": "COL",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたがしがみついている地上的なものは何ですか、それが上のものからあなたを気を散らせていますか？"
+      },
+      {
+        "day": 9,
+        "title": "選ばれた民",
+        "readings": [
+          {
+            "bookID": "1PE",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "'王の祭司' と呼ばれることは、あなたの目的意識や帰属感をどのように再定義しますか？"
+      },
+      {
+        "day": 10,
+        "title": "主を喜ぶ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたがすべてのものの上に主を喜ぶことにコミットすると、あなたの欲望はどうなりますか？"
+      }
+    ]
+  },
+  {
+    "id": "comfort-in-hard-times",
+    "name": "困難な時の慰め",
+    "description": "苦しみの季節のための聖書の7日間の避難所 — これらの聖句は、何千年もの間、信者たちを最も暗い谷を通して支えてきました。",
+    "totalDays": 7,
+    "category": "Comfort",
+    "gradientColors": [
+      "#5C7A8B",
+      "#3A4F5C"
+    ],
+    "iconName": "heart.fill",
+    "imageKey": "job_suffering",
+    "applicableSeasons": [
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "health"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "主は打ちひしがれた者のそばにいる",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神が特に打ちひしがれた者に近いことを知ることは、今あなたにどのように慰めを与えますか？"
+      },
+      {
+        "day": 2,
+        "title": "恐れるな、私はあなたと共にいる",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 41,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神があなたにその手に委ねるように求めている恐れは何ですか？"
+      },
+      {
+        "day": 3,
+        "title": "すべての慰めの神",
+        "readings": [
+          {
+            "bookID": "2CO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなた自身の苦しみは、他の誰かを慰めるためにどのように役立つかもしれませんか？"
+      },
+      {
+        "day": 4,
+        "title": "私たちを引き離すものはない",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "どのような状況があなたを神の愛から引き離していると感じさせ、そしてこの章はそれについて何を語っていますか？"
+      },
+      {
+        "day": 5,
+        "title": "静まり、知れ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたの人生の中で、神が '静まりなさい' と言う声を聞くために沈黙させる必要がある騒音は何ですか？"
+      },
+      {
+        "day": 6,
+        "title": "私のもとに来て休みなさい",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今日、イエスがあなたに下ろすように招いている重い荷は何ですか？"
+      },
+      {
+        "day": 7,
+        "title": "すべての涙が拭い去られる",
+        "readings": [
+          {
+            "bookID": "REV",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神があなたの目からすべての涙を拭い去るという約束は、今日あなたにどのように耐える力を与えますか？"
+      }
+    ]
+  },
+  {
+    "id": "sermon-on-the-mount",
+    "name": "山上の垂訓",
+    "description": "イエスの最も有名な説教の7日間の詳細な研究 — 世界の価値観をひっくり返した過激な教え。",
+    "totalDays": 7,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A8B5C",
+      "#4F5C3A"
+    ],
+    "iconName": "text.book.closed.fill",
+    "imageKey": "sermon_mount",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "幸いな者と地の塩",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 26
+          }
+        ],
+        "reflection": "どの幸いな者があなたに最も挑戦を与え、今日それを生きることはどのようなことになるでしょうか？"
+      },
+      {
+        "day": 2,
+        "title": "より高い義",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 27,
+            "verseEnd": 48
+          }
+        ],
+        "reflection": "'あなたの父が完全であるように、あなたも完全であれ' というイエスの呼びかけは、あなたをルールに従うことから心の変革へとどのように押し進めますか？"
+      },
+      {
+        "day": 3,
+        "title": "隠れたところでの施し、祈り、断食",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "あなたはどこで、他の人に見られることから神だけに見られることへとあなたの霊的実践をシフトする必要がありますか？"
+      },
+      {
+        "day": 4,
+        "title": "天の宝",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 19,
+            "verseEnd": 34
+          }
+        ],
+        "reflection": "イエスがあなたに完全に信頼するように求めていることで、あなたは何を心配していますか？"
+      },
+      {
+        "day": 5,
+        "title": "裁いてはならない",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": 1,
+            "verseEnd": 14
+          }
+        ],
+        "reflection": "あなたが他の誰かの小さな塵を指摘する前に、あなた自身の目の中の梁は何ですか？"
+      },
+      {
+        "day": 6,
+        "title": "岩の上に築かれて",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": 15,
+            "verseEnd": 29
+          }
+        ],
+        "reflection": "あなたの人生はイエスの言葉の岩の上に築かれていますか、それとも世界の知恵の砂の上に築かれていますか？"
+      },
+      {
+        "day": 7,
+        "title": "全体としての説教",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "山上の垂訓全体を読んだ後、あなたが最も実践したい教えは何ですか？"
+      }
+    ]
+  },
+  {
+    "id": "psalms-in-30-days",
+    "name": "30日で詩篇",
+    "description": "30日間で150篇の詩篇を読み通しましょう — 毎日5篇の詩篇で、聖書の最も豊かな礼拝、祈り、賛美の書に浸りましょう。",
+    "totalDays": 30,
+    "category": "Worship",
+    "gradientColors": [
+      "#3A5C8B",
+      "#1C2D5C"
+    ],
+    "iconName": "music.note",
+    "imageKey": "jacob_ladder",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "詩篇 1–5: 祝福された者と壊れた者",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "主の律法を昼も夜も喜ぶことは、あなたにとって何を意味しますか？"
+      },
+      {
+        "day": 2,
+        "title": "詩篇 6–10: 神に叫ぶ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇作者の神への叫びの正直さは、あなたが生の感情を神に持っていくことをどのように許可しますか？"
+      },
+      {
+        "day": 3,
+        "title": "詩篇 11–15: 正しい者と悪者",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇 15は、神の御前に住むことができる人の種類について何を明らかにしていますか？"
+      },
+      {
+        "day": 4,
+        "title": "詩篇 16–20: 逃れと救い",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇 19で天が神の栄光を宣言することは、あなたの心の中でどのように礼拝をかき立てますか？"
+      },
+      {
+        "day": 5,
+        "title": "詩篇 21–25: 羊飼いと探求者",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇 22の見捨てられた叫び — 十字架の上でイエスによって繰り返された — は、彼の犠牲についてのあなたの理解をどのように深めますか？"
+      },
+      {
+        "day": 6,
+        "title": "詩篇 26–30: 闇の中の光",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 30,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "涙は一晩続くかもしれませんが、喜びは朝に来るということは、あなたにとって何を意味しますか？"
+      },
+      {
+        "day": 7,
+        "title": "詩篇 31–35: 信頼と解放",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 31,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 33,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 35,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇 32の赦しの祝福は、あなたが隠していることを告白するようにどのように励ましますか？"
+      },
+      {
+        "day": 8,
+        "title": "詩篇 36–40: 不変の愛",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 36,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 38,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 39,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 40,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇 37の『主を喜びなさい』は、あなたの日常生活の中でどのように見えますか？"
+      },
+      {
+        "day": 9,
+        "title": "詩篇 41–45: 神への渇望",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 41,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 42,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 43,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 44,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 45,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたの魂が神を渇望したのは、鹿が水を求めるようにいつですか？"
+      },
+      {
+        "day": 10,
+        "title": "詩篇 46–50: 神は私たちの砦",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 47,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 48,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 49,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 50,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇 46の『静まれ』という思い出は、今のあなたの生活の混乱にどのように語りかけますか？"
+      },
+      {
+        "day": 11,
+        "title": "詩篇 51–55: 壊れた霊",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 51,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 52,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 53,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 54,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 55,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇 51でダビデが清い心を求める祈りは、あなたが失敗を持って神に近づく勇気をどのように与えますか？"
+      },
+      {
+        "day": 12,
+        "title": "詩篇 56–60: 私が恐れるとき",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 56,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 57,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 58,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 59,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 60,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇 56の『私が恐れるとき、私はあなたを信じます』は、あなたの現在の状況でどのように見えますか？"
+      },
+      {
+        "day": 13,
+        "title": "詩篇 61–65: 神にのみ休む",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 61,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 62,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 63,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 64,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 65,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたはどこで休息を見つけますか — 本当に神にのみ、または他の源に平和を求めていますか？"
+      },
+      {
+        "day": 14,
+        "title": "詩篇 66–70: 喜びの声を上げる",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 66,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 67,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 68,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 69,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 70,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたの人生の中で神の素晴らしい業について、他の人に伝えたいことは何ですか？"
+      },
+      {
+        "day": 15,
+        "title": "詩篇 71–75: 永遠の希望",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 71,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 72,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 73,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 74,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 75,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇 73の詩篇作者の嫉妬との闘いは、あなた自身の経験をどのように反映していますか？"
+      },
+      {
+        "day": 16,
+        "title": "詩篇 76–80: 彼の驚くべき業を思い出す",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 76,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 77,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 78,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 79,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 80,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今日の信仰を強めるために、あなたが思い出し、繰り返すことができる神の過去の行為は何ですか？"
+      },
+      {
+        "day": 17,
+        "title": "詩篇 81–85: 復活と回復",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 81,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 82,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 83,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 84,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 85,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇 84で神の庭を求める渇望は、あなたの礼拝への欲求とどのように共鳴しますか？"
+      },
+      {
+        "day": 18,
+        "title": "詩篇 86–90: 永遠から永遠へ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 86,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 87,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 88,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 89,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 90,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇 90の人生の短さに関する視点は、あなたが時間をどのように評価するかをどのように変えますか？"
+      },
+      {
+        "day": 19,
+        "title": "詩篇 91–95: 避難所と歌",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 91,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 92,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 93,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 94,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 95,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "最も高き者の避難所に住むことは何を意味し、今日それをどのように実践できますか？"
+      },
+      {
+        "day": 20,
+        "title": "詩篇 96–100: 主は治める",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 96,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 97,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 98,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 99,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 100,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇 100 の「喜びの声を上げよ」という呼びかけは、あなたがより熱心に礼拝することにどのように挑戦していますか？"
+      },
+      {
+        "day": 21,
+        "title": "詩篇 101–105: 私の魂よ、主を賛美せよ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 101,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 102,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 103,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 104,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 105,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇 103 に記されている主からの恵みの中で、あなたが感謝するのを忘れているものは何ですか？"
+      },
+      {
+        "day": 22,
+        "title": "詩篇 106–110: 神の忠実さを思い出す",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 106,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 107,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 108,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 109,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 110,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたはどのように神の揺るぎない愛によって自分のさまよいから救われたと感じていますか？"
+      },
+      {
+        "day": 23,
+        "title": "詩篇 111–115: 主を賛美せよ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 111,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 112,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 113,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 114,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 115,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇 115 における生ける神と無生物の偶像との対比は、あなたがどこに信頼を置くかにどのように挑戦していますか？"
+      },
+      {
+        "day": 24,
+        "title": "詩篇 116–120: 上昇の歌が始まる",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 116,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 117,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 118,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 119,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 120,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "最も長い詩篇 — 詩篇 119 — の中で、神の言葉へのあなたの愛に最も力強く語りかける節はどれですか？"
+      },
+      {
+        "day": 25,
+        "title": "詩篇 121–125: 主に向かって上昇する",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 121,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 122,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 123,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 124,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 125,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたの助けはどこから来るのか、そして詩篇 121 は神の保護に対するあなたの信頼をどのように強めていますか？"
+      },
+      {
+        "day": 26,
+        "title": "詩篇 126–130: 涙の中で種を蒔く",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 126,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 127,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 128,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 129,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 130,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今、あなたはどのような種を涙の中で蒔いており、喜びの叫びで刈り取ることを信じていますか？"
+      },
+      {
+        "day": 27,
+        "title": "詩篇 131–135: 謙遜な信頼",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 131,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 132,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 133,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 134,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 135,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇 133 の一致のイメージは、他の信者とのより深い交わりを追求するようにあなたをどのように鼓舞していますか？"
+      },
+      {
+        "day": 28,
+        "title": "詩篇 136–140: 彼の愛は永遠に続く",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 136,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 137,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 138,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 140,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇 136 の「彼の愛は永遠に続く」というリフレインは、他のすべてが不確かに感じられるときにあなたをどのように支えていますか？"
+      },
+      {
+        "day": 29,
+        "title": "詩篇 141–145: 夕の祈り",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 141,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 142,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 143,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 144,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 145,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神は偉大であり、称賛されるべきであるというダビデの宣言は、今夜のあなたの夕の祈りをどのように形作っていますか？"
+      },
+      {
+        "day": 30,
+        "title": "詩篇 146–150: すべてのものが主を賛美せよ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 146,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 147,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 148,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 149,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 150,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇が「息のあるすべてのものが主を賛美せよ」と締めくくられるとき、あなたはどのように賛美を日常の習慣にしますか？"
+      }
+    ]
+  },
+  {
+    "id": "life-of-david",
+    "name": "ダビデの生涯",
+    "description": "羊飼いの王との14日間の旅 — 聖油を注がれた日から巨人を倒す日、追放から王座へ — 各季節から生まれた詩篇と共に。",
+    "totalDays": 14,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6B2D2D",
+      "#3A1818"
+    ],
+    "iconName": "shield.lefthalf.filled",
+    "imageKey": "david_goliath",
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "隠れた場所での油注ぎ",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "世界が気づく前の静かで見えない場所で、神はあなたにどのように出会っていますか？"
+      },
+      {
+        "day": 2,
+        "title": "巨人に立ち向かう",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今日、あなたはどの巨人に立ち向かっていますか、そして誰の名によってそれに立ち向かいますか？"
+      },
+      {
+        "day": 3,
+        "title": "ヨナタンの忠誠",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "誰があなたにとってのヨナタンであり、あなたは他の誰かにその友であることができますか？"
+      },
+      {
+        "day": 4,
+        "title": "命をかけて逃げる",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ダビデの洞窟での詩篇は、解放が訪れる前に神を賛美することをどのように教えていますか？"
+      },
+      {
+        "day": 5,
+        "title": "洞窟での自制",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "誰かに間違えられたとき、あなたはどこで自制を実践する必要がありますか？"
+      },
+      {
+        "day": 6,
+        "title": "アビガイルからの知恵",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "最近、あなたが抵抗している賢い助言は、愚かな決断からあなたを救っているかもしれません。誰の助言ですか？"
+      },
+      {
+        "day": 7,
+        "title": "サウルの没落",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 31,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "2SA",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ダビデが敵サウルのために悲しむ姿は、あなたが苦しむ人々をどのように見るかをどのように再形成していますか？"
+      },
+      {
+        "day": 8,
+        "title": "王が踊る",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "最後に誰かの目を気にせずに全力で礼拝したのはいつですか？"
+      },
+      {
+        "day": 9,
+        "title": "永遠の契約",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神がダビデを通して与えた終わりのない王座の約束は、今日あなたのキリストへの希望をどのように深めますか？"
+      },
+      {
+        "day": 10,
+        "title": "羊飼いの王の堕落",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "2SA",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "小さな妥協が放置されると大きな罪に成長する可能性がある場所はどこですか？"
+      },
+      {
+        "day": 11,
+        "title": "壊れた祈り",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 51,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今夜、あなたの人生で「私に清い心を創造してください」という祈りが必要なものは何ですか？"
+      },
+      {
+        "day": 12,
+        "title": "私の魂よ、主を賛美せよ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 103,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ここに挙げられた主の恵みの中で、今日最も思い出す必要があるものはどれですか？"
+      },
+      {
+        "day": 13,
+        "title": "恐れ多くも知られる",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神があなたの心の隠れた隅々を見ていることを知って、どんな慰め — または挑戦 — を感じますか？"
+      },
+      {
+        "day": 14,
+        "title": "羊飼いは残る",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ダビデのすべての季節を通して、羊飼いは決して彼を離れませんでした — あなた自身の物語の中で、その同じ忠実さをどのように経験しましたか？"
+      }
+    ]
+  },
+  {
+    "id": "christmas-story",
+    "name": "クリスマスの物語",
+    "description": "古代の予言から飼い葉桶まで — 神が近くに来る驚きを再発見する7日間のアドベントの旅。",
+    "totalDays": 7,
+    "category": "Advent",
+    "gradientColors": [
+      "#3C5A7A",
+      "#1F2F45"
+    ],
+    "iconName": "star.fill",
+    "imageKey": "nativity",
+    "applicableSeasons": [
+      "parenthood",
+      "newlyMarried",
+      "growing",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "grief",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "予告された子供",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "イザヤが予告した子供の名前 — 驚くべき助言者、力ある神、平和の君 — の中で、今最も必要なものはどれですか？"
+      },
+      {
+        "day": 2,
+        "title": "小さなベツレヘムから",
+        "readings": [
+          {
+            "bookID": "MIC",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神が小さく見落とされがちなベツレヘムの町を選んだことは、あなた自身の人生の隠れた場所にどのように語りかけますか？"
+      },
+      {
+        "day": 3,
+        "title": "マリアの「はい」",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "不確実な季節の中で、神があなたに「あなたの言葉のとおりになりますように」と求めている場所はどこですか？"
+      },
+      {
+        "day": 4,
+        "title": "ヨセフの静かな従順",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ヨセフの静かで高価な忠実さは、他者に見られることについてのあなたの考え方にどのように挑戦しますか？"
+      },
+      {
+        "day": 5,
+        "title": "肉となった言葉",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "永遠の言葉があなたの近所に引っ越すことを選んだことは、あなたにとって何を意味しますか？"
+      },
+      {
+        "day": 6,
+        "title": "羊飼いと飼い葉桶",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "なぜ天使の「大いなる喜びの良い知らせ」が最初に羊飼いに告げられたと思いますか？"
+      },
+      {
+        "day": 7,
+        "title": "遠くからの賢者たち",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今日、あなたがイエスに自分の最良のもの — 金、乳香、没薬 — を捧げることはどのような姿になるでしょうか？"
+      }
+    ]
+  },
+  {
+    "id": "walking-with-elijah",
+    "name": "エリヤと共に歩む",
+    "description": "王国に対して一人立ち向かった預言者と、彼をカラス、洞窟、そして静かな小声で出会った神についての10日間の学び。",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6E4A2C",
+      "#3A2814"
+    ],
+    "iconName": "flame.fill",
+    "imageKey": "elijah_ravens",
+    "applicableSeasons": [
+      "hardSeason",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose",
+      "anxiety"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "アハブの前で",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 6
+          }
+        ],
+        "reflection": "神があなたに難しい真実を語るよう求めている場所はどこですか？そして、あなたは従った後に神が提供してくれると信じていますか？"
+      },
+      {
+        "day": 2,
+        "title": "サレプタのやもめ",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 17,
+            "verseStart": 7,
+            "verseEnd": 24
+          }
+        ],
+        "reflection": "今週、神があなたに信仰を持って捧げるよう求めている小さな「最後の一握りの小麦粉」は何ですか？"
+      },
+      {
+        "day": 3,
+        "title": "カルメルでの対決",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたの人生で再建する必要がある祭壇はどれですか — 無視されている礼拝の場所は？"
+      },
+      {
+        "day": 4,
+        "title": "荒野に逃げ込む",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 19,
+            "verseStart": 1,
+            "verseEnd": 8
+          }
+        ],
+        "reflection": "燃え尽きている最中に、神の優しい供給 — 食事、昼寝、友人 — を経験したのはいつですか？"
+      },
+      {
+        "day": 5,
+        "title": "静かな小声",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 19,
+            "verseStart": 9,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "あなたが神のささやきを聞くために静める必要がある音は何ですか？地震を待つのではなく。"
+      },
+      {
+        "day": 6,
+        "title": "ナボトのぶどう園",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "他の誰も対処しようとしない不正をどのように見直すことができるでしょうか？"
+      },
+      {
+        "day": 7,
+        "title": "天からの火",
+        "readings": [
+          {
+            "bookID": "2KI",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたの恐れを主に持っていくのではなく、他の「エクロンの神々」に相談したくなるのはどこですか？"
+      },
+      {
+        "day": 8,
+        "title": "マントが渡される",
+        "readings": [
+          {
+            "bookID": "2KI",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神があなたに拾い上げるように求めているマントは誰のものでしょうか — または、あなたが渡す準備ができているマントは誰のものでしょうか？"
+      },
+      {
+        "day": 9,
+        "title": "キリストと共に山にいるエリヤ",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "最も孤独を感じていた同じ預言者が、ある日栄光の中でイエスと共に立っていたことは何を意味しますか？"
+      },
+      {
+        "day": 10,
+        "title": "私たちのような人",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": 13,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "ヤコブはエリヤを「私たちと同じ性質を持つ人」と言っています — それは今週あなたの祈り方をどのように変えますか？"
+      }
+    ]
+  },
+  {
+    "id": "beatitudes-deep-dive",
+    "name": "八つの幸い：八つの肖像",
+    "description": "イエスの王国の市民についての8日間の肖像研究 — 一つの幸いずつ、各々にその絵を補完する聖句が付いています。",
+    "totalDays": 8,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A6B3A",
+      "#4F4524"
+    ],
+    "iconName": "sparkles",
+    "imageKey": "beatitudes",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "心の貧しい者",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 3
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 57,
+            "verseStart": 14,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "今日、あなたの完全な依存を認めて神のもとに来ることはどのような姿でしょうか？"
+      },
+      {
+        "day": 2,
+        "title": "悲しむ者たち",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 4,
+            "verseEnd": 4
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 42,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたが回避しようとしている喪失や悲しみは何であり、イエスが実際にそれと向き合うように招いているのでしょうか？"
+      },
+      {
+        "day": 3,
+        "title": "柔和な者たち",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 5,
+            "verseEnd": 5
+          },
+          {
+            "bookID": "NUM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "どこで柔和さを弱さと混同しており、モーセの例がそれをどのように再形成しますか？"
+      },
+      {
+        "day": 4,
+        "title": "義に飢えている者たち",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 6,
+            "verseEnd": 6
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 63,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今週、神の義に対する食欲をかき消している小さな飢えは何ですか？"
+      },
+      {
+        "day": 5,
+        "title": "憐れみ深い者たち",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 7,
+            "verseEnd": 7
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "今日、神があなたの道に置いた人は誰で、あなたが祭司ではなくサマリア人である必要があるのは誰ですか？"
+      },
+      {
+        "day": 6,
+        "title": "心の清い者たち",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 8,
+            "verseEnd": 8
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたの心がその献身において一つであるために、どの隠れた動機を光に持ち出す必要がありますか？"
+      },
+      {
+        "day": 7,
+        "title": "平和を作る者たち",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 9,
+            "verseEnd": 9
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": 9,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "神があなたに、単に平和を保つのではなく、平和を作るというより困難な仕事をするように呼びかけているのはどこですか？"
+      },
+      {
+        "day": 8,
+        "title": "迫害される者たち",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 10,
+            "verseEnd": 16
+          },
+          {
+            "bookID": "1PE",
+            "chapter": 4,
+            "verseStart": 12,
+            "verseEnd": 19
+          }
+        ],
+        "reflection": "イエスが約束する喜びは、あなたが忠実さのために何かを犠牲にする次の時に、どのようにあなたの反応を再形成しますか？"
+      }
+    ]
+  },
+  {
+    "id": "holy-week",
+    "name": "聖週間：イースターへの旅",
+    "description": "聖週間を日ごとに歩み — 勝利の入城から十字架を経て空の墓まで — そして歴史上最も重要な週を生きる。",
+    "totalDays": 8,
+    "category": "Easter",
+    "gradientColors": [
+      "#5A2E2E",
+      "#2F1515"
+    ],
+    "iconName": "cross.fill",
+    "imageKey": "triumphal_entry",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "grief",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "棕櫚の主日",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 21,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "予期しない方法で来るとき、イエスを王として迎えることは何を意味しますか？"
+      },
+      {
+        "day": 2,
+        "title": "神殿の浄化",
+        "readings": [
+          {
+            "bookID": "MRK",
+            "chapter": 11,
+            "verseStart": 12,
+            "verseEnd": 25
+          }
+        ],
+        "reflection": "イエスがその存在を正しく歓迎するために覆すように求めているあなたの心の「テーブル」は何ですか？"
+      },
+      {
+        "day": 3,
+        "title": "神殿での教え",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 22,
+            "verseStart": 34,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "あなたが持っているすべてで神を愛し、隣人を自分自身のように愛することは、あなたの週をどのように再編成しますか？"
+      },
+      {
+        "day": 4,
+        "title": "ベタニアでの塗油",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 12,
+            "verseStart": 1,
+            "verseEnd": 11
+          }
+        ],
+        "reflection": "たとえ世界がそれを無駄だと呼んでも、今日イエスにどのような贅沢な愛の行為を捧げることができますか？"
+      },
+      {
+        "day": 5,
+        "title": "最後の晩餐",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今週、イエスがあなたに洗うように求めているのは誰の足であり、何のプライドがそれを難しくしていますか？"
+      },
+      {
+        "day": 6,
+        "title": "ゲッセマネ",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 26,
+            "verseStart": 36,
+            "verseEnd": 56
+          }
+        ],
+        "reflection": "あなたの人生のどこで「私の意志ではなく、あなたの意志がなりますように」と祈る必要がありますか — そしてそれを本当に意味しますか？"
+      },
+      {
+        "day": 7,
+        "title": "グッドフライデー",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたの人生のどの未完のことが、イエスの言葉「それは完了した」を聞く必要がありますか？"
+      },
+      {
+        "day": 8,
+        "title": "イースターの朝",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今日、死んだ希望の墓であなたを迎える復活の力が必要な場所はどこですか？"
+      }
+    ]
+  },
+  {
+    "id": "genesis-beginnings",
+    "name": "創世記：初めに",
+    "description": "聖書の最初の書である創世記を通しての12日間の旅 — 創造、堕落、大洪水、先祖たち — そこから神の忠実な追求をたどります。",
+    "totalDays": 12,
+    "category": "Foundations",
+    "gradientColors": [
+      "#3A5A4A",
+      "#1C2D24"
+    ],
+    "iconName": "globe.americas.fill",
+    "imageKey": "noah_ark",
+    "applicableSeasons": [
+      "growing",
+      "startingOver",
+      "newlyMarried"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "初めに",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたの人生のどの「形のない空虚な」領域に、神が今、秩序と光を語っているのでしょうか？"
+      },
+      {
+        "day": 2,
+        "title": "園と像",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神があなたを自分の手で形作り、自分の命を吹き込んだことは、あなたにとって何を意味しますか？"
+      },
+      {
+        "day": 3,
+        "title": "堕落",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたが繰り返し聞く「神は本当に言ったのか？」という蛇の嘘は何ですか、そしてそれに真実で答えるためにはどうすればよいですか？"
+      },
+      {
+        "day": 4,
+        "title": "ノアと洪水",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "GEN",
+            "chapter": 9,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "まだ洪水のように感じる季節の中で、神の虹の約束を信じる必要があるのはどこですか？"
+      },
+      {
+        "day": 5,
+        "title": "アブラムの召命",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神があなたに何を捨てて新しいものに従うように求めているのでしょうか？「国と親族」とは何ですか？"
+      },
+      {
+        "day": 6,
+        "title": "星を数える",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたが信じ続ける必要がある神からの不可能な約束は何ですか、それが笑い話のように思える夜でも？"
+      },
+      {
+        "day": 7,
+        "title": "イサクの捧げ物",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたにとって「イサク」となったもの — あなたがとても愛している贈り物は何ですか、それが神自身に匹敵し始めていますか？"
+      },
+      {
+        "day": 8,
+        "title": "ヤコブの階段",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "最近、神が予期せず現れた場所はどこですか、確かにあなたが知らなかった場所で？"
+      },
+      {
+        "day": 9,
+        "title": "一晩中の格闘",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今、あなたは神と何を格闘していますか、そしてそれが神の祝福を受けることを意味するなら、足を引きずってでも歩く覚悟はありますか？"
+      },
+      {
+        "day": 10,
+        "title": "ヨセフの夢",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今、あなたがいる「穴」は何ですか、それが神がもっと大きな物語の最初の章として使っているかもしれませんか？"
+      },
+      {
+        "day": 11,
+        "title": "エジプトで再会",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 45,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたの人生のどの関係が、ヨセフが示した許しの準備ができていますか：「あなたは悪を意図しましたが、神はそれを良いことのために意図しました」？"
+      },
+      {
+        "day": 12,
+        "title": "神はそれを良いことのために意図した",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 50,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたが歩んできた最も困難なことを振り返ると、今、神の手がそれを良いことのために織りなしているのをどこで見ますか？"
+      }
+    ]
+  },
+  {
+    "id": "daniel-exile",
+    "name": "ダニエル：追放の中の忠実",
+    "description": "ダニエル書を通しての12日間の旅 — 異教の宮廷で堅く立ち、違法な時に祈り、歴史全体を神に委ねる。",
+    "totalDays": 12,
+    "category": "Character Study",
+    "gradientColors": [
+      "#5A3A2A",
+      "#2E1F16"
+    ],
+    "iconName": "shield.fill",
+    "imageKey": "daniel_lions",
+    "applicableSeasons": [
+      "workingProfessional",
+      "hardSeason",
+      "student",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "汚れないことを決意",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神があなたに「もはや受け入れない」と決意するように招いている小さな日常の妥協は何ですか？"
+      },
+      {
+        "day": 2,
+        "title": "王の夢",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "深い隠されたことを明らかにする神が、あなたの時代の帝国を支配していると信じる必要があるのはどこですか？"
+      },
+      {
+        "day": 3,
+        "title": "燃える炉",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今週、あなたにとって「しかしそうでない場合」の信仰はどのようなものになるでしょうか — 救出の保証がなくても従う信頼？"
+      },
+      {
+        "day": 4,
+        "title": "謙虚な王",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたが築いたものは何か、そして神があなたに目を上げるよう呼びかけているのはどこですか？"
+      },
+      {
+        "day": 5,
+        "title": "壁に書かれた文字",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたの人生の中で、神によって「量られた」ことは何ですか、そしてどのような悔い改めが招かれていますか？"
+      },
+      {
+        "day": 6,
+        "title": "ライオンの穴",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "たとえそれが社会的または職業的に何かを犠牲にすることになっても、どのようなオープンウィンドウの祈りの実践を守る価値がありますか？"
+      },
+      {
+        "day": 7,
+        "title": "古き日々の者",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "古き日々の者と人の子のビジョンは、どのようにあなたに見出しの長期的な視点を与えますか？"
+      },
+      {
+        "day": 8,
+        "title": "羊とヤギ",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "未来が混乱していると感じるとき、始めから終わりを見る神にあなたをどのように繋ぎ止めますか？"
+      },
+      {
+        "day": 9,
+        "title": "告白の祈り",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたのコミュニティや家族は、ダニエルのような告白の祈りであなたがその隙間を埋めることを必要としているのはどこですか？"
+      },
+      {
+        "day": 10,
+        "title": "亜麻布の男",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "目に見えない霊的戦いの現実は、何も動かないように見えるときにあなたが祈りの中でどのように忍耐を持つかをどのように変えますか？"
+      },
+      {
+        "day": 11,
+        "title": "王たちと王国",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたが過度に重視している地上の王国はどれですか、そしてどのように希望を再び根付かせることができますか？"
+      },
+      {
+        "day": 12,
+        "title": "賢い者は輝く",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "「賢い者は天の輝きのように輝く」という約束は、今日のあなたの忠実さをどのように支えますか？"
+      }
+    ]
+  },
+  {
+    "id": "lords-prayer-deep-dive",
+    "name": "主の祈り：私たちに祈ることを教えてください",
+    "description": "イエスが私たちに教えた祈りについての7日間の瞑想 — 一日一つの請願 — 各言葉を意味するためにゆっくりと進めます。",
+    "totalDays": 7,
+    "category": "Prayer",
+    "gradientColors": [
+      "#4A5A7A",
+      "#242D3D"
+    ],
+    "iconName": "hands.sparkles.fill",
+    "imageKey": "lords_prayer",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "parenthood",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "天におられる私たちの父",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 5,
+            "verseEnd": 13
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": 12,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "もしあなたが本当に遠くの神ではなく、あなたの父に近づいていると信じるなら、今日のあなたの祈りはどのように変わりますか？"
+      },
+      {
+        "day": 2,
+        "title": "あなたの名が聖なるものとされますように",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 99,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 6,
+            "verseStart": 1,
+            "verseEnd": 8
+          }
+        ],
+        "reflection": "今日、あなたの思考、口、選択の中で神の名を聖なるものとして扱うことはどのようなものですか？"
+      },
+      {
+        "day": 3,
+        "title": "あなたの王国が来ますように",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 13,
+            "verseStart": 31,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "今週、神の王国があなたの世界に入ってくるのを見たいと思っているのはどこですか — そしてどのように期待を持って祈りますか？"
+      },
+      {
+        "day": 4,
+        "title": "あなたの御心がなりますように",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 26,
+            "verseStart": 36,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "あなたのどの祈りが正直な「私の意志ではなく、あなたの意志がなりますように」を待っていますか？それには何が必要で、何が解放されますか？"
+      },
+      {
+        "day": 5,
+        "title": "今日の私たちに与えてください",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 10,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "日々のパンの祈りは、今日明日の恵みを蓄えようとする不安をどのように癒しますか？"
+      },
+      {
+        "day": 6,
+        "title": "私たちが許すように私たちを許してください",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 18,
+            "verseStart": 21,
+            "verseEnd": 35
+          }
+        ],
+        "reflection": "あなたの許しの祈りが閉ざされた心に跳ね返らないようにするために、誰の負債を解放する必要がありますか？"
+      },
+      {
+        "day": 7,
+        "title": "悪から私たちを救ってください",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 6,
+            "verseStart": 10,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "今日、あなたは神の武具を身に着け、悪者からの解放のために具体的に祈る必要があるのはどこですか？"
+      }
+    ]
+  },
+  {
+    "id": "parables-kingdom",
+    "name": "王国のたとえ話",
+    "description": "イエスの最も鋭いたとえ話を通しての10日間の歩み — 心を変え、神の逆転した王国を明らかにする短い物語。",
+    "totalDays": 10,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A4A2A",
+      "#3E2516"
+    ],
+    "iconName": "quote.opening",
+    "imageKey": "prodigal_son",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "workingProfessional",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "relationships",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "種まき",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 13,
+            "verseStart": 1,
+            "verseEnd": 23
+          }
+        ],
+        "reflection": "あなたの心は今どのような土壌ですか、そしてこの季節に「良い土壌」になるために何をする必要がありますか？"
+      },
+      {
+        "day": 2,
+        "title": "良きサマリア人",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "あなたは誰を通り過ぎる誘惑に駆られていますか、そして代わりに道を渡ることはどのようなものですか？"
+      },
+      {
+        "day": 3,
+        "title": "放蕩息子",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 15,
+            "verseStart": 11,
+            "verseEnd": 32
+          }
+        ],
+        "reflection": "今日、あなたはどちらの息子に最も似ていますか — 放浪者か、恨みを抱く兄か — そして、父はあなたに何を与えたいと思っていますか？"
+      },
+      {
+        "day": 4,
+        "title": "失われた羊とコイン",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 15,
+            "verseStart": 1,
+            "verseEnd": 10
+          }
+        ],
+        "reflection": "あなたの人生のどこで迷子になったと感じていますか、そして天があなたを積極的に探していることを知ると、物事はどのように変わりますか？"
+      },
+      {
+        "day": 5,
+        "title": "愚かな金持ち",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 12,
+            "verseStart": 13,
+            "verseEnd": 34
+          }
+        ],
+        "reflection": "あなたが建てようと誘惑されている「大きな倉庫」は何ですか、そして代わりに神に対して豊かになるにはどうすればよいですか？"
+      },
+      {
+        "day": 6,
+        "title": "許さざる者",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 18,
+            "verseStart": 21,
+            "verseEnd": 35
+          }
+        ],
+        "reflection": "あなたがまだ誰かに対して窒息させている小さな侮辱は何ですか、そしてあなた自身の許しの山はそれをどのように形作り直しますか？"
+      },
+      {
+        "day": 7,
+        "title": "パリサイ人と徴税人",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 18,
+            "verseStart": 9,
+            "verseEnd": 14
+          }
+        ],
+        "reflection": "あなたの祈りはどこで密かにパリサイ人のように聞こえ、徴税人のようではなくなっていますか — そして、今日はどのように低く来ることができますか？"
+      },
+      {
+        "day": 8,
+        "title": "ぶどう園の労働者",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 20,
+            "verseStart": 1,
+            "verseEnd": 16
+          }
+        ],
+        "reflection": "あなたの人生で遅れて到着した恵みに対して、あなたは誰に恨みを抱いていますか、そして土地の所有者の寛大さはそれからあなたをどのように解放しますか？"
+      },
+      {
+        "day": 9,
+        "title": "十人の処女",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 25,
+            "verseStart": 1,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "キリストとの継続的な関係の「油」が不足しているかもしれませんが、今週それにどのように対処できますか？"
+      },
+      {
+        "day": 10,
+        "title": "羊と山羊",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 25,
+            "verseStart": 31,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "今日、イエスは誰の顔の前で認識されるのを待っていますか — そして、あなたは応じますか？"
+      }
+    ]
+  },
+  {
+    "id": "esther-for-such-a-time",
+    "name": "エステル: 今のために",
+    "description": "エステル記を通しての10日間の歩み — 10章、10日 — 危機、勇気、逆転を通して神の隠された摂理をたどります。",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6A3A5C",
+      "#2E1826"
+    ],
+    "iconName": "crown.fill",
+    "imageKey": "mordecai_triumph",
+    "applicableSeasons": [
+      "workingProfessional",
+      "student",
+      "hardSeason",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "宮殿でのパーティー",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたの世界の騒音と過剰の中で、神が静かに舞台を整えていると感じる場所はどこですか？"
+      },
+      {
+        "day": 2,
+        "title": "ありえない女王",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたの人生のどの選ばれなかった状況が、神によってあなたをまだ見えない目的のために位置づけるために使われているかもしれませんか？"
+      },
+      {
+        "day": 3,
+        "title": "ハマンの影",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "悪があなたの世界で勢いを増しているように見えるとき、どのように神の善を保ちますか？"
+      },
+      {
+        "day": 4,
+        "title": "今のために",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "他の誰かのために、神があなたに求めているかもしれないリスクのある「もし私が滅びるなら、滅びる」というステップは何ですか？"
+      },
+      {
+        "day": 5,
+        "title": "王に近づく",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神の恵みがあなたが通るのを恐れていた扉を開けたと感じたのはいつですか？"
+      },
+      {
+        "day": 6,
+        "title": "眠れぬ夜",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたのために「偶然」を整えている神の見えない摂理をどこで見ましたか？"
+      },
+      {
+        "day": 7,
+        "title": "大逆転",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今、どの状況が不可能に感じますか、それはあなたが気づいているよりも逆転に近いかもしれませんか？"
+      },
+      {
+        "day": 8,
+        "title": "新しい法令",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "見放された状況に対して、どこで大胆な新しい「法令」の希望を祈る必要がありますか？"
+      },
+      {
+        "day": 9,
+        "title": "プリムの日",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神があなたのためにすでに行った救いは何ですか、それは意図的に思い出され、祝われるに値しますか？"
+      },
+      {
+        "day": 10,
+        "title": "モルデカイの擁護者",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "あなたの周りの誰が、あなたがモルデカイのように — 代償を払ってでも彼らのために声を上げる必要がありますか？"
+      }
+    ]
+  },
+  {
+    "id": "ruth-redemption",
+    "name": "ルツ: 贖いの物語",
+    "description": "ルツの小さな書を通しての4日間の歩み — 喪失が忠誠に出会い、刈り取りが摂理に出会い、外国の未亡人がダビデ王の曾祖母になる物語。",
+    "totalDays": 4,
+    "category": "Character Study",
+    "gradientColors": [
+      "#8B6642",
+      "#4A331F"
+    ],
+    "iconName": "heart.circle.fill",
+    "imageKey": "jacob_rachel_well",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "relationships",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "喪失と忠誠",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ナオミは自分を「マラ」と呼びます — 苦い。ルツは喪失に対して誓いで応えます: 「あなたが行くところに、私も行きます。」この季節にあなたがどのように向き合っているかを、苦い正直さと頑固な忠誠のどちらの声がよりよく表しているでしょうか、そして両方が共存することが許されれば何が変わるでしょうか？"
+      },
+      {
+        "day": 2,
+        "title": "予期しない親切",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "語り手がルツがボアズの畑で「偶然」穫ったと言うことに注目してください — この物語の中で何も実際には偶然ではないという静かな合図です。あなたの人生のどこで神が偶然のように見えるものを静かな親切に編成しているでしょうか？"
+      },
+      {
+        "day": 3,
+        "title": "脱穀場での大胆な信仰",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ルツのボアズへのアプローチは、親族の贖い主というヘブライの概念を呼び起こします — 失われた土地と命を買い戻す親族。聖書の贖いの絵がここ、脱穀場から始まることはあなたにとって何を意味しますか？それは神殿ではなく？"
+      },
+      {
+        "day": 4,
+        "title": "贖い主と王家の系譜",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 1,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "ルツ — モアブ人、未亡人、外国人 — がイエスの家系に現れます。その結末は、神がどのように彼の救いの物語にあなたを織り込んでいるか、あなたの理解をどのように再形成しますか？"
+      }
+    ]
+  },
+  {
+    "id": "jonah-reluctant-prophet",
+    "name": "ヨナ: 消極的な預言者",
+    "description": "逃げた預言者、彼を捕まえた嵐、悔い改めた街、そしてヨナの偏見を超えた神の慈悲についての4日間の旅。",
+    "totalDays": 4,
+    "category": "Character Study",
+    "gradientColors": [
+      "#2E5A6B",
+      "#15303A"
+    ],
+    "iconName": "water.waves",
+    "imageKey": "jesus_calms_storm",
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "神からの逃避",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神は「ニネベに行け」と言い、ヨナはタルシシュ行きの船に乗ります — 知られている世界の反対側です。あなたは神からどのような任務から逃げており、実際に警告を発すべき嵐はどこから来ているのでしょうか？"
+      },
+      {
+        "day": 2,
+        "title": "深いところからの祈り",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ヨナは魚の中から祈ります — 想像できる最低の地点 — そしてそれを「神殿」と呼びます。この再構築はあなた自身の低い場所に対する見方をどのように変えますか？祈りはどんな深さも聖域に変えることができるでしょうか？"
+      },
+      {
+        "day": 3,
+        "title": "悔い改めた街",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ニネベはイスラエルの最も残酷な敵でしたが、彼らは聖書の中で最も短い説教 — わずか8語 — で悔い改めます。それは、たとえ使者が消極的であっても、神の言葉の神秘的な力について何を教えているのでしょうか？"
+      },
+      {
+        "day": 4,
+        "title": "神の心",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "この書は答えではなく質問で終わります — 神はヨナに120,000人を憐れむべきか尋ねます。誰の救いがあなたを秘密裏に失望させるでしょうか、そして神の最後の質問はあなたに何を手放すように呼びかけていますか？"
+      }
+    ]
+  },
+  {
+    "id": "fruit-of-the-spirit",
+    "name": "御霊の実",
+    "description": "聖霊が私たちの中に育てる性格についての9日間の学び — 毎日1つの実、ガラテヤ人への手紙5に根ざし、それを生き生きとさせる聖句とペアになっています。",
+    "totalDays": 9,
+    "category": "Discipleship",
+    "gradientColors": [
+      "#4A7A5C",
+      "#2A4A38"
+    ],
+    "iconName": "leaf.circle.fill",
+    "imageKey": "annunciation",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional",
+      "parenthood",
+      "newlyMarried"
+    ],
+    "applicableBurdens": [
+      "relationships",
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "愛",
+        "readings": [
+          {
+            "bookID": "GAL",
+            "chapter": 5,
+            "verseStart": 16,
+            "verseEnd": 26
+          },
+          {
+            "bookID": "1CO",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "パウロは御霊の実は愛であると言います — 単数形 — 他の8つがそれから流れ出るかのように。コリント人への第一の手紙13章のどの一節があなたの愛がまだ成長している場所を最も明らかにし、聖霊があなたに協力するように招いているのはどこですか？"
+      },
+      {
+        "day": 2,
+        "title": "喜び",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 4,
+            "verseEnd": 13
+          },
+          {
+            "bookID": "NEH",
+            "chapter": 8,
+            "verseStart": 1,
+            "verseEnd": 12
+          }
+        ],
+        "reflection": "聖書の喜びは悲しみの不在ではなく、神に根ざした深い喜びです。あなたはどこで幸せを喜びと勘違いしており、状況が協力しないときに喜びを何が支えていますか？"
+      },
+      {
+        "day": 3,
+        "title": "平和",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": 25,
+            "verseEnd": 31
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 26,
+            "verseStart": 1,
+            "verseEnd": 9
+          }
+        ],
+        "reflection": "イエスは「世が与えるようには与えない平和」を与えます — 争いの不在ではなく、彼の存在です。今日、あなたが抱えている心配は何であり、イエスはそれを彼の平和と交換することを提案していますか？"
+      },
+      {
+        "day": 4,
+        "title": "忍耐",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": 7,
+            "verseEnd": 11
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 11
+          }
+        ],
+        "reflection": "ここでのギリシャ語「マクロトゥミア」は、文字通り「長い気持ち」を意味します — 煮えたぎるのが遅い。あなたの人生のどこであなたのヒューズが短くなっており、その特定の人や状況に対して長い気持ちでいることはどのようなものになるでしょうか？"
+      },
+      {
+        "day": 5,
+        "title": "親切",
+        "readings": [
+          {
+            "bookID": "COL",
+            "chapter": 3,
+            "verseStart": 12,
+            "verseEnd": 17
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "親切は単に優しいことではありません — 返報できない誰かのためにわざわざ行動することです。今週、あなたが親切にするために何かを費やす必要がある人は誰ですか？"
+      },
+      {
+        "day": 6,
+        "title": "善",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": 9,
+            "verseEnd": 21
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "善は誰も見ていないときでも持続する誠実さです。あなたの私生活のどこで、聖霊があなたに秘密と評判を一致させるように静かに招いていますか？"
+      },
+      {
+        "day": 7,
+        "title": "忠実",
+        "readings": [
+          {
+            "bookID": "LAM",
+            "chapter": 3,
+            "verseStart": 19,
+            "verseEnd": 33
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 16,
+            "verseStart": 10,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "神の忠実さは毎朝新たです; 私たちの忠実さは小さなことにおいて安定しているべきです。主は誰も拍手しない「小さな」ことにおいてあなたに忠実であるように求めていますか？"
+      },
+      {
+        "day": 8,
+        "title": "柔和",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 1,
+            "verseEnd": 9
+          },
+          {
+            "bookID": "PRO",
+            "chapter": 15,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "柔和は制御された力です — 吼えることができる人の柔らかい答えです。あなたの言葉で誰の傷を刺激しており、本当に優しいタッチが必要な人は誰ですか？"
+      },
+      {
+        "day": 9,
+        "title": "自己制御",
+        "readings": [
+          {
+            "bookID": "2PE",
+            "chapter": 1,
+            "verseStart": 3,
+            "verseEnd": 11
+          },
+          {
+            "bookID": "PRO",
+            "chapter": 25,
+            "verseStart": 21,
+            "verseEnd": 28
+          }
+        ],
+        "reflection": "箴言は自己制御のない人を壊れた壁のある街として描写します — 何にでも開かれています。今週、聖霊があなたの人生で再建したい「壁」は何であり、誰がそれを手入れするのを手伝ってくれるでしょうか？"
+      }
+    ]
+  },
+  {
+    "id": "philippians-joy",
+    "name": "フィリピ人への手紙: すべての季節における喜び",
+    "description": "パウロの最も喜びに満ちた手紙を4日間かけて歩く — 刑務所の独房から書かれた — 毎日1章ずつ、状況が届かない喜びの異なる側面を展開します。",
+    "totalDays": 4,
+    "category": "Epistles",
+    "gradientColors": [
+      "#7A6A2E",
+      "#3C3314"
+    ],
+    "iconName": "sun.max.fill",
+    "imageKey": "magi_journey",
+    "applicableSeasons": [
+      "hardSeason",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "苦しみの中の喜び",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "パウロは鎖に繋がれた状態でこの手紙を書き、なおかつそれを彼の「喜び」と呼びます。彼は自らの牢獄を福音のためのプラットフォームとして再構築します。あなたの人生の中で、神があなたに逃げるのではなく再構築するよう招いている望まれない状況は何ですか？"
+      },
+      {
+        "day": 2,
+        "title": "謙遜の中の喜び",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "6–11節の賛美歌は、神と等しいイエスの下方への動きを描きます — 空にされ、人間となり、従順で、十字架にかけられる — その後、父が彼を高めます。あなたは、イエスが降伏を示している場所で地位を求めているのはどこですか？そして「同じ心」が実際にはどのように見えるのでしょうか？"
+      },
+      {
+        "day": 3,
+        "title": "キリストを知る中の喜び",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "パウロは、キリストを知ることと比べて、自身の印象的な履歴書を「ゴミ」と呼びます。あなた自身の履歴書のどの部分 — 資格、役割、業績 — が、キリストとあなたのアイデンティティの中心を争っているのでしょうか？"
+      },
+      {
+        "day": 4,
+        "title": "すべての状況の中の喜び",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "パウロは、彼が豊かさの中でも不足の中でも満足する秘訣を学んだと言います — 過去形で、苦労して得たものです。あなたの人生のどこで、主が今その秘訣を教えているのでしょうか？そして、あなたが実際に使うことを拒んでいる実践（祈り、感謝、正しい思考）は何ですか？"
+      }
+    ]
+  },
+  {
+    "id": "life-of-moses",
+    "name": "モーセの生涯",
+    "description": "モーセの生涯を通じた10日間の旅 — バスケットから燃える柴へ、紅海からシナイへ — 呼びかけ、解放し、語り、留まる神に出会います。",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6C4E2A",
+      "#382712"
+    ],
+    "iconName": "flame.circle.fill",
+    "imageKey": "manna_wilderness",
+    "applicableSeasons": [
+      "workingProfessional",
+      "startingOver",
+      "hardSeason",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "バスケットに生まれて",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ヘブライの助産婦たちはファラオの命令に逆らい、母親は息子をナイル川のバスケットに入れ、神はすでに解放の物語を書いています。あなたは、救いが必要だと知るずっと前から、神が静かにあなたを準備していたのはどこですか？"
+      },
+      {
+        "day": 2,
+        "title": "燃える柴",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "モーセは燃え尽きることのない柴を見に寄り道し、神は彼の名を呼びます。神があなたの注意を引くために使っている普通のものは何ですか？そして、あなたはそれを見に寄り道する意志がありますか？"
+      },
+      {
+        "day": 3,
+        "title": "言い訳と印",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "モーセは神と議論します：『私は誰ですか？彼らが私を信じなかったらどうしますか？私は雄弁ではありません。』神はそれぞれの異議に応じます。モーセの言い訳の中で、あなたが神に繰り返し与えているものに最も似ているのはどれですか？そして、神のあなたへの忍耐強い答えは何ですか？"
+      },
+      {
+        "day": 4,
+        "title": "私の民を解放せよ",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "災害は体系的にすべてのエジプトの神を dethrone します — ナイル川、太陽、家畜 — 誰が本当に支配しているのかを示します。あなたの文化の中で、神があなたの人生で無力であることを暴露する必要がある「神」は何ですか？"
+      },
+      {
+        "day": 5,
+        "title": "過越の祭り",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "イスラエルは彼らの功績によってではなく、家の戸口にある子羊の血によって救われます — 来るべき大いなる子羊の影です。過越の祭りをキリストの肖像として見ることは、彼の血が実際に成し遂げたことの理解をどのように深めますか？"
+      },
+      {
+        "day": 6,
+        "title": "海を越えて",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "『立ち止まり、主の救いを見よ』とモーセは閉じ込められた人々に言います — そして神は『前に進め』と言います。神が心の静けさと信仰の一歩を求めているとき、あなたはどこでパニックになるか、または立ち止まる誘惑に駆られていますか？"
+      },
+      {
+        "day": 7,
+        "title": "マナと水",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 7
+          }
+        ],
+        "reflection": "神は蓄えることのできないパンと岩からの水を与えます。あなたが不安のために蓄えようとしている日々の恵みは何ですか？"
+      },
+      {
+        "day": 8,
+        "title": "シナイと十の言葉",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神は救いの文脈の中で律法を与えます — 『私はあなたを連れ出した主、あなたの神です』 — 彼の愛を得るための方法としてではなく、彼との生活の形として。あなたが最も負担として読む傾向のある戒めはどれですか？"
+      },
+      {
+        "day": 9,
+        "title": "あなたの栄光を見せてください",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 33,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "モーセは言います：『もしあなたの御臨在が私たちと共に行かないなら、ここから私たちを送らないでください。』あなたは神から何をもっと求めていますか — 彼の贈り物か、彼自身か？もしあなたが彼を最も求めていたら、今日の様子はどのように違っていたでしょうか？"
+      },
+      {
+        "day": 10,
+        "title": "忠実な僕",
+        "readings": [
+          {
+            "bookID": "DEU",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "モーセは約束の地に入らずに死にますが、神自身が彼を埋葬します。神があなたに託けるよう求めている未完のことは何ですか？物語はあなたよりも大きいことを知っていますか？"
+      }
+    ]
+  },
+  {
+    "id": "psalm-23-deep-dive",
+    "name": "詩篇23篇：羊飼いの歌",
+    "description": "聖書で最も愛されている詩篇に関する6日間の瞑想 — 一節ずつ — 詩篇が常に指し示していた羊飼いとしてのキリストを明らかにする新約聖書の箇所と組み合わせています。",
+    "totalDays": 6,
+    "category": "Worship",
+    "gradientColors": [
+      "#4A6B3F",
+      "#253A22"
+    ],
+    "iconName": "sparkle",
+    "imageKey": "suffer_little_children",
+    "applicableSeasons": [
+      "hardSeason",
+      "growing",
+      "retired",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "主は私の羊飼い",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 1,
+            "verseEnd": 1
+          },
+          {
+            "bookID": "JHN",
+            "chapter": 10,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "ダビデは羊飼いでした — 彼はその仕事の重みを知っていました。イエスは自らを命を捨てる「良い羊飼い」と呼びます。あなたは、あなたの価値を定義することを許している偽の羊飼い（仕事、成功、関係）は何ですか？そして、主自身が杖を持つとき、何が変わりますか？"
+      },
+      {
+        "day": 2,
+        "title": "緑の牧場、静かな水",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 2,
+            "verseEnd": 2
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 11,
+            "verseStart": 25,
+            "verseEnd": 30
+          }
+        ],
+        "reflection": "羊は不安、空腹、または対立しているときには横になることができません。羊飼いは「彼らを休ませる」のです。あなたの人生のどこで、イエスが優しくあなたを休ませているのでしょうか？そして、あなたは何に対して立ち上がり続けようと戦っていますか？"
+      },
+      {
+        "day": 3,
+        "title": "義の道",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 3,
+            "verseEnd": 3
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "羊飼いは「私の魂を回復させる」前に、正しい道に導きます — Comfort precedes correction. 神があなたを回復させていた場所はどこですか？それを神が沈黙していると誤解していたのはどこですか？そして、今彼があなたと共に歩む準備ができている道は何ですか？"
+      },
+      {
+        "day": 4,
+        "title": "谷を越えて",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 4,
+            "verseEnd": 4
+          },
+          {
+            "bookID": "2CO",
+            "chapter": 4,
+            "verseStart": 7,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "ダビデは「周りを」とは言わず「通り抜ける」と言います。ここで主語は「彼」から「あなた」に変わります — 危険が近づくほど、羊飼いはより個人的になります。あなたはどの谷にいますか？そして、神の近さはどのように強まっていますか？"
+      },
+      {
+        "day": 5,
+        "title": "敵の前に置かれた食卓",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 5,
+            "verseEnd": 5
+          },
+          {
+            "bookID": "REV",
+            "chapter": 19,
+            "verseStart": 1,
+            "verseEnd": 10
+          }
+        ],
+        "reflection": "神は、あなたが去ってほしいと願う敵の前であなたをもてなします。彼が常にあなたの苦しみを取り除くのではなく、時にはあなたを招いて座り、食べるようにすることは何を意味するのでしょうか？"
+      },
+      {
+        "day": 6,
+        "title": "善と慈しみ、そして家",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 6,
+            "verseEnd": 6
+          },
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": 1,
+            "verseEnd": 6
+          }
+        ],
+        "reflection": "ヘブライ語で「私について来なさい」は「追いかける」とも読まれます — 善と慈しみはあなたの後ろを歩いているのではなく、あなたを追いかけています。その再定義は、あなたの過去を思い出し、神との未来を見つめる方法をどのように変えるでしょうか？"
+      }
+    ]
+  },
+  {
+    "id": "acts-early-church",
+    "name": "使徒行伝：初期の教会",
+    "description": "使徒行伝を通じての14日間の旅 — 1日2章 — ペンテコステからローマまで、聖霊が今日のすべての信者に響く運動を生み出す様子を見守ります。",
+    "totalDays": 14,
+    "category": "Foundations",
+    "gradientColors": [
+      "#7A4A1C",
+      "#3E2510"
+    ],
+    "iconName": "wind",
+    "imageKey": "loaves_fishes",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional",
+      "student"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "ペンテコステ",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "教会は、普通の人々が聖霊で満たされ、学んだことのない言語でイエスを宣言し始めるときに生まれます。あなたの人生のどこで、聖霊が与える言葉を信頼するのではなく、もっと訓練を待っているのでしょうか？"
+      },
+      {
+        "day": 2,
+        "title": "権威の前での大胆さ",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ペテロとヨハネは説教をやめるように言われます — そして、より大胆さを求めて祈ります。社会的圧力があなたをイエスについて静かにさせたのはどこで、どのような祈りがあなたの姿勢を妥協から勇気へと変えるでしょうか？"
+      },
+      {
+        "day": 3,
+        "title": "成長し、試される教会",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "アナニアとサッピラの嘘は若い共同体の純粋さを脅かします；後に使徒たちは言葉が続くように委任します。あなたの霊的な生活の中で、静かに使命を停滞させている組織的または個人的な妥協は何ですか？"
+      },
+      {
+        "day": 4,
+        "title": "ステファノと散乱",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ステファノの死は運動の終わりのように見えます — しかし、その後の迫害は福音を知られている世界中に散らします。あなたの人生のどの終わりが、神がまだ見えない始まりとして使っているかもしれませんか？"
+      },
+      {
+        "day": 5,
+        "title": "サウルの改心、コルネリウスの受け入れ",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "教会の最も激しい敵が最大の宣教師となり、ローマの百人隊長が兄弟となります。誰の改心があなたを最も驚かせるでしょうか、そしてそれを本気で祈る準備はできていますか？"
+      },
+      {
+        "day": 6,
+        "title": "アンティオキアと天使",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "信者たちはアンティオキアで初めて「クリスチャン」と呼ばれます — 外部者の教会が中心地となります。神は周縁の人々をどのように使って、宗教的中心が見えない方法で彼の教会を成長させているのでしょうか？"
+      },
+      {
+        "day": 7,
+        "title": "最初の宣教旅行",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "聖霊は言います、「パウロとバルナバを私が呼んだ仕事のために分けなさい。」あなたは誰の派遣に関わっていますか — 送られるか、または祈りで支えるか、そしてその管理をどれほど真剣に受け止めていますか？"
+      },
+      {
+        "day": 8,
+        "title": "エルサレム会議とフィリピの牢獄",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "教会は恵みが本当に異邦人のためであることを決定し、パウロは真夜中の牢獄で歌います。あなたはどこで神の恵みに無言の要求を加え続けており、あなたの最も困難な場所に待っている歌は何ですか？"
+      },
+      {
+        "day": 9,
+        "title": "アテネとコリント",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "パウロはアレオパゴスで異教徒の哲学者たちと自分の詩人を引用して対話します。あなたの周りの人々の語彙で福音を語ることを学ぶにはどうすればよいでしょうか、真実を薄めることなく？"
+      },
+      {
+        "day": 10,
+        "title": "エフェソと優しい別れ",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "パウロはエフェソの長老たちと共に泣き、「与えることは受けることよりも祝福されている」と思い出させます。神はあなたに誰を牧するように与え、今週彼らをより意図的に愛する必要があるのは誰ですか？"
+      },
+      {
+        "day": 11,
+        "title": "エルサレムで逮捕されたパウロ",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "パウロは「霊に縛られている」ため、苦しみに向かい続けます。神はあなたに従順であるために困難に向かうように求めている場所はどこですか、そしてそれを避けるのではなく？"
+      },
+      {
+        "day": 12,
+        "title": "支配者の前での勇気",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "主は夜、パウロのそばに立ち、「勇気を持て」と言います。あなたが続けるために見えない言葉が必要だったのはいつで、神が今夜それをあなたにささやいているかもしれない方法はどのようなものでしょうか？"
+      },
+      {
+        "day": 13,
+        "title": "ほぼ説得された",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "アグリッパはパウロが彼をクリスチャンに「ほぼ」説得したと言います。あなた自身の人生のどこで「ほぼ」コミットしており、信念と降伏の間のギャップを埋めるためには何が必要でしょうか？"
+      },
+      {
+        "day": 14,
+        "title": "ローマへの難破",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "使徒行伝は突然終わります — パウロは兵士に鎖で繋がれた借りた家から王国を宣教し、物語は明らかに終わっていません。あなたはその未完成の物語の一部です。神があなたを通して書いている次の行は何ですか？"
+      }
+    ]
+  },
+  {
+    "id": "first-john-assurance",
+    "name": "ヨハネの第一の手紙：あなたが知るために",
+    "description": "ヨハネの第一の手紙を通じての5日間の歩み — 信者が「あなたが永遠の命を持っていることを知るために」書かれました。各章は本物の信仰の異なる試練を探ります。",
+    "totalDays": 5,
+    "category": "Epistles",
+    "gradientColors": [
+      "#3D5A8B",
+      "#1C2D5C"
+    ],
+    "iconName": "checkmark.seal.fill",
+    "imageKey": "bethany_mary_martha",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "anxiety",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "光の中を歩く",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ヨハネは神との交わりが光の中を歩くことに結びついていると主張します — 隠されたものを明らかにすることです。あなたが正直な告白が恥ではなく交わりをもたらすと偽っている一つの領域はどこですか？"
+      },
+      {
+        "day": 2,
+        "title": "住まうこと、ただ信じることではなく",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神への愛の試練はシンプルです：「彼の言葉を守る者の中に、神の愛は真に完成されます。」あなたの最も親しい関係は、あなたの信念と行動の違いをどのように説明するでしょうか？"
+      },
+      {
+        "day": 3,
+        "title": "神の子供たち",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "'父が私たちに与えてくださった愛を見てください — 私たちが神の子供と呼ばれるために。' あなたが最も真実なアイデンティティが '愛される子' であると信じてこの日を歩んだら、どのように違って見えるでしょうか？"
+      },
+      {
+        "day": 4,
+        "title": "神は愛です",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ヨハネは '私たちは、彼が最初に私たちを愛してくださったから愛する' と言っています — 私たちの愛は常に応答です。あなたがそれを得られるかのように追い求めている愛は誰のもので、神の先立つ愛がどのようにあなたをその人を必要からではなく、安らぎから愛することを自由にしているのでしょうか？"
+      },
+      {
+        "day": 5,
+        "title": "あなたが知るために",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ヨハネはこの手紙を書いたのは 'あなたが永遠の命を持っていることを知るために' だと言っています。ヨハネのテストのうち — イエスへの信仰、他者への愛、彼の言葉への従順 — 今日、聖霊が最もあなたを安心させたいと思っているのはどれですか？"
+      }
+    ]
+  },
+  {
+    "id": "james-faith-that-works",
+    "name": "ヤコブ: 働く信仰",
+    "description": "ヤコブの5日間の学び — 新約聖書で最も実践的な手紙 — 私たちが信じていると語ることと、実際にどのように生きているかのギャップに立ち向かいます。",
+    "totalDays": 5,
+    "category": "Epistles",
+    "gradientColors": [
+      "#8B5A2E",
+      "#44290F"
+    ],
+    "iconName": "hammer.fill",
+    "imageKey": "davids_three_mighty_men",
+    "applicableSeasons": [
+      "workingProfessional",
+      "growing",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "relationships",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "すべてを喜びと数えなさい",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ヤコブは試練が喜びであるとは言っていません — 彼は神が生み出しているもののためにそれを喜びとして数えなさいと言っています。もしあなたが実際に神があなたの中で何かを成熟させていると信じているなら、今週どの試練を再構成する必要がありますか？"
+      },
+      {
+        "day": 2,
+        "title": "行いのない信仰は死んでいる",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ヤコブは信仰を行いに対立させているのではありません — 彼は本物の信仰は常に働くと言っています。今週、あなたの私的な信仰を可視化するために必要な具体的な従順の行為は何ですか？"
+      },
+      {
+        "day": 3,
+        "title": "舌を制御する",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ヤコブは舌を大きな船を操る小さな舵や、森を燃やす小さな火花に例えています。あなたの言葉は、あなたの人生や他の人の人生を、あなたが恥ずかしいと思う方向に操っているのはどこですか？"
+      },
+      {
+        "day": 4,
+        "title": "世との友情",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ヤコブは争いは私たちの内にある欲望から来ると言っています — そして私たちは '求めないから持っていない' と。今、あなたの人生の中でその欲望は何が争いを引き起こしており、それを正直に神に祈りに持っていきましたか？"
+      },
+      {
+        "day": 5,
+        "title": "忍耐と祈り",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ヤコブは教会に互いに祈るよう呼びかけ、癒しが来るために罪を告白するように言っています。あなたの人生の中で、あなたが告白するのを聞くのに十分安全な人は誰ですか？そして、実際に彼らに一緒に祈るよう頼むことはあなたにどれだけの代償を伴いますか？"
+      }
+    ]
+  },
+  {
+    "id": "hebrews-jesus-is-better",
+    "name": "ヘブル人への手紙: イエスはより優れています",
+    "description": "ヘブル人への手紙を13日間かけて学ぶ — 1日1章 — イエスがどのように旧約聖書のすべての象徴を成就し、超えているかを示します。",
+    "totalDays": 13,
+    "category": "Theology",
+    "gradientColors": [
+      "#5A2F2F",
+      "#2C1414"
+    ],
+    "iconName": "crown.fill",
+    "imageKey": "sacrifice_isaac",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "御子、天使よりも優れた者",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ヘブル人への手紙は、神が御子において最も完全に語られたと宣言しています — '神の栄光の輝き'。あなたは神がイエスにおいて最も明確に語られたとき、千の二次的な情報源で神を聞こうとしていたのはどこですか？"
+      },
+      {
+        "day": 2,
+        "title": "非常に偉大な救い",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "イエスは天使よりも低くなり — 人間として、誘惑され、苦しみ — すべての人のために '死を味わう' ために。イエスがあなたの正確な肉体を共有することは、あなたが彼にあなたの弱さを持っていく方法をどのように変えますか？"
+      },
+      {
+        "day": 3,
+        "title": "モーセよりも偉大な者",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "モーセは神の家で忠実な僕として仕えていました; イエスはその上で忠実な御子です。あなたはどのように神の家に仕えており、それが秘密裏に神の御子を信頼することから逸れているのでしょうか？"
+      },
+      {
+        "day": 4,
+        "title": "彼の安息に入る",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "著者は神の民のために安息日が残っていると言っています — しかし、私たちはそれに入るために努力しなければなりません。あなたの人生の中で、実際にはクリストの働きがあなたのものであると信じて止まることを拒む不安な努力は何ですか？"
+      },
+      {
+        "day": 5,
+        "title": "偉大な大祭司",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "イエスは '肉体の時代に大声で涙を流し、祈りと願いを捧げた' 祭司です。涙を流す同情的な祭司としてのイエスを思い描くことは、あなたが自分の涙を彼に持っていく方法をどのように変えますか？"
+      },
+      {
+        "day": 6,
+        "title": "成熟に向かって進む",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "著者は読者に霊的な幼児のままでいるのではなく、前進するように促しています。あなたはどの '初歩的な' 真理に落ち着いてしまい、しっかりとした食物に成長することを避けているのでしょうか？"
+      },
+      {
+        "day": 7,
+        "title": "メルキゼデクのような祭司",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "イエスの祭司職は永遠です — '彼は常に取り成すために生きています。' あなたが今持っているものを明日へ持っていくとき、イエスがあなたのために祈っていることを知ることはどのように形を変えますか？"
+      },
+      {
+        "day": 8,
+        "title": "より良い契約",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "新しい契約の下で、神は彼の律法を '彼らの心に' 書きます。あなたは神と外部の規則を通してどのように関わり続けており、彼が内側からあなたを変えたいと思っているのはどこですか？"
+      },
+      {
+        "day": 9,
+        "title": "一度限り",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "古い祭司たちは日々の犠牲を捧げましたが、それは決して良心を清めることはできませんでした; キリストの一度の犠牲はそうします。あなたはどの罪を再び告白し続けており、彼の完成した働きがあなたの繰り返しを必要とするかのように思っていますか？"
+      },
+      {
+        "day": 10,
+        "title": "自信を持って近づく",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "イエスの血によって、私たちは '自信を持って' 近づくことができます — 幕が裂かれています。あなたが神に来るとき、それは恵みの座に近づくように感じますか、それとも渋る役人の待合室のように感じますか？何が変わりますか？"
+      },
+      {
+        "day": 11,
+        "title": "信仰のホール",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ここに名前が挙げられているすべての人は、約束されたものを受け取ることなく死にましたが、'彼らはそれを見て、遠くからそれを迎えました。' あなたの待つ物語は、この同じ信仰のホールの一章として数えられるでしょうか？"
+      },
+      {
+        "day": 12,
+        "title": "偉大な証人の雲",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "著者は私たちに、'私たちの信仰の創始者であり完成者であるイエス' に目を向け、忍耐をもって走るよう促しています。あなたの走りを遅くしている重荷 — 必ずしも罪深いわけではありませんが、重いもの — は何ですか？それを置き去りにする準備はできていますか？"
+      },
+      {
+        "day": 13,
+        "title": "キャンプの外で",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "イエスは 'キャンプの外で' 苦しみました — 彼の時代の宗教的な尊厳を超えて。彼はあなたをどこに呼び出して、尊敬される世界が見捨てた人々の中で彼と共にいるようにしていますか？"
+      }
+    ]
+  }
+]

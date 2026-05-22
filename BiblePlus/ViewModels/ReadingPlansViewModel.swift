@@ -10,11 +10,32 @@ final class ReadingPlansViewModel {
     var allPlans: [ReadingPlan] = []
     var activePlans: [(plan: ReadingPlan, progress: UserPlanProgress)] = []
     var recommendedPlans: [ReadingPlan] = []
+    /// Active progress keyed by planID, refreshed in `loadPlans`. Lets grid
+    /// cards look up progress in O(1) instead of running a fresh
+    /// FetchDescriptor for every card on every render.
+    private(set) var activeProgressByPlanID: [String: UserPlanProgress] = [:]
+    /// Completed plan IDs cached at load time so grid cards can render the
+    /// "DONE" badge without doing a per-card fetch.
+    private(set) var completedPlanIDs: Set<String> = []
     var showPaywall = false
     var showCompletion = false
     var completedPlanName = ""
+    /// Gradient hex for the plan just completed — lets `PlanCompletionView`
+    /// paint the trophy/glow in the plan's own palette instead of the generic
+    /// accent. Captured at completion so the overlay matches the plan the user
+    /// actually finished, not whatever plan gets tapped next.
+    var completedPlanGradient: [String] = []
+    /// Curated artwork key for the plan just completed — the completion
+    /// overlay uses it as a dimmed radial backdrop so each finish feels
+    /// specific (Romans ≠ Psalms of Peace ≠ Jonah).
+    var completedPlanImageKey: String = ""
     var refreshToken: Int = 0
     var navigateToPlanDayID: String?
+
+    /// Milestone just crossed by the most recent `completeDay` call. Detail
+    /// view observes this to fire the milestone celebration overlay.
+    var pendingMilestonePercent: Int?
+    var pendingMilestonePlanID: String?
 
     private let modelContext: ModelContext
 
@@ -35,7 +56,7 @@ final class ReadingPlansViewModel {
         }
 
         let progressDescriptor = FetchDescriptor<UserPlanProgress>(
-            predicate: #Predicate { $0.isActive == true }
+            predicate: #Predicate { $0.isActive && $0.completedDate == nil }
         )
         let activeProgress = (try? modelContext.fetch(progressDescriptor)) ?? []
 
@@ -43,6 +64,15 @@ final class ReadingPlansViewModel {
             guard let plan = allPlans.first(where: { $0.id == progress.planID }) else { return nil }
             return (plan: plan, progress: progress)
         }
+
+        activeProgressByPlanID = Dictionary(
+            uniqueKeysWithValues: activePlans.map { ($0.plan.id, $0.progress) }
+        )
+
+        let completedDescriptor = FetchDescriptor<UserPlanProgress>(
+            predicate: #Predicate { $0.completedDate != nil }
+        )
+        completedPlanIDs = Set(((try? modelContext.fetch(completedDescriptor)) ?? []).map { $0.planID })
 
         computeRecommendations()
         refreshToken += 1
@@ -58,10 +88,7 @@ final class ReadingPlansViewModel {
         }
 
         let activePlanIDs = Set(activePlans.map { $0.plan.id })
-        let completedDescriptor = FetchDescriptor<UserPlanProgress>(
-            predicate: #Predicate { $0.completedDate != nil }
-        )
-        let completedIDs = Set(((try? modelContext.fetch(completedDescriptor)) ?? []).map { $0.planID })
+        let completedIDs = completedPlanIDs
 
         let userBurdens = Set(profile.currentBurdens.map { $0.rawValue })
         let userSeasons = Set(profile.lifeSeasons.map { $0.rawValue })
@@ -118,19 +145,48 @@ final class ReadingPlansViewModel {
         progress.lastReadDate = Date()
         let planName = allPlans.first(where: { $0.id == progress.planID })?.name ?? "Plan"
         ActivityService.log(.planDayCompleted, detail: "\(planName) — Day \(day)", in: modelContext)
-        Analytics.track(.planDayCompleted, properties: ["plan": planName, "day": "\(day)"])
 
-        if progress.completedDays.count >= totalDays {
+        let isFinishing = progress.completedDays.count >= totalDays
+        let milestone = isFinishing ? nil : progress.milestoneJustCrossed(totalDays: totalDays)
+
+        var analyticsProps: [String: String] = ["plan": planName, "day": "\(day)"]
+        if let milestone { analyticsProps["milestone"] = "\(milestone)" }
+        Analytics.track(.planDayCompleted, properties: analyticsProps)
+
+        if isFinishing {
             progress.completedDate = Date()
             progress.isActive = false
-            completedPlanName = allPlans.first(where: { $0.id == progress.planID })?.name ?? "Reading Plan"
+            let finished = allPlans.first(where: { $0.id == progress.planID })
+            completedPlanName = finished?.name ?? "Reading Plan"
+            completedPlanGradient = finished?.gradientColors ?? []
+            completedPlanImageKey = finished?.imageKey ?? ""
             showCompletion = true
             ReviewService.shared.requestIfAppropriate()
+        } else if let milestone {
+            // First 25/50/75 crossing — mark it before saving so it doesn't
+            // re-trigger on reload, and publish to the detail view.
+            progress.markMilestoneCelebrated(milestone)
+            pendingMilestonePercent = milestone
+            pendingMilestonePlanID = progress.planID
         }
 
         modelContext.safeSave()
         HapticService.success()
         loadPlans()
+    }
+
+    func saveReflection(_ text: String, for day: Int, progress: UserPlanProgress) {
+        progress.setReflection(text, for: day)
+        modelContext.safeSave()
+        refreshToken += 1
+    }
+
+    func consumePendingMilestone(planID: String) -> Int? {
+        guard pendingMilestonePlanID == planID,
+              let percent = pendingMilestonePercent else { return nil }
+        pendingMilestonePercent = nil
+        pendingMilestonePlanID = nil
+        return percent
     }
 
     func abandonPlan(_ progress: UserPlanProgress) {
@@ -158,10 +214,7 @@ final class ReadingPlansViewModel {
     }
 
     func progressForPlan(_ planID: String) -> UserPlanProgress? {
-        let descriptor = FetchDescriptor<UserPlanProgress>(
-            predicate: #Predicate { $0.planID == planID && $0.isActive == true }
-        )
-        return try? modelContext.fetch(descriptor).first
+        activeProgressByPlanID[planID]
     }
 
     /// Returns the most recent progress for a plan regardless of active/completed status.
@@ -176,10 +229,7 @@ final class ReadingPlansViewModel {
     }
 
     func isCompleted(_ planID: String) -> Bool {
-        let descriptor = FetchDescriptor<UserPlanProgress>(
-            predicate: #Predicate { $0.planID == planID && $0.completedDate != nil }
-        )
-        return !((try? modelContext.fetch(descriptor))?.isEmpty ?? true)
+        completedPlanIDs.contains(planID)
     }
 
     // MARK: - Categories

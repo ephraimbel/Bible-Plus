@@ -1,0 +1,5943 @@
+[
+  {
+    "id": "psalms-of-peace",
+    "name": "Zaburi za Amani",
+    "description": "Safari ya siku 7 kupitia zaburi zinazozungumza moja kwa moja na moyo wako wenye wasiwasi, zikikuongoza kuelekea kimya na amani ambayo Mungu pekee anaweza kutoa.",
+    "totalDays": 7,
+    "category": "Comfort",
+    "gradientColors": [
+      "#4A6741",
+      "#2D4A3E"
+    ],
+    "iconName": "leaf.fill",
+    "imageKey": "jesus_calms_storm",
+    "applicableSeasons": [
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Utunzaji wa Mchungaji",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Inamaanisha nini kwa Mungu kuwa mchungaji wako katika msimu huu wa maisha yako?"
+      },
+      {
+        "day": 2,
+        "title": "Kujiamini katika Mwanga",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni lini umepata Mungu kama mwanga wako katika wakati wa giza?"
+      },
+      {
+        "day": 3,
+        "title": "Onja na Uone",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Mungu amekutoa vipi katika hofu ambayo wakati mmoja ilikushikilia?"
+      },
+      {
+        "day": 4,
+        "title": "Mungu Ni Kimbilio Letu",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Unahitaji 'kukaa kimya na kujua' kwamba Yeye ni Mungu wapi leo?"
+      },
+      {
+        "day": 5,
+        "title": "Chini ya Mabawa Yake",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 91,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Inajisikiaje kukaa katika kivuli cha Aliye Juu Zaidi?"
+      },
+      {
+        "day": 6,
+        "title": "Mlinzi Asiye Lala",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 121,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kujua kwamba Mungu hakai usingizi kunabadilisha vipi jinsi unavyokabiliana na usiku huu?"
+      },
+      {
+        "day": 7,
+        "title": "Uumbaji wa Heshima na Ajabu",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni ukweli gani kuhusu jinsi Mungu anavyokujua unakuletea faraja zaidi sasa hivi?"
+      }
+    ]
+  },
+  {
+    "id": "gospel-of-john",
+    "name": "Injili ya Yohana",
+    "description": "Tembea kupitia Injili yote ya Yohana katika siku 21 na kukutana na Yesu — Neno lililofanywa mwili — sura moja kwa wakati.",
+    "totalDays": 21,
+    "category": "Gospel",
+    "gradientColors": [
+      "#8B6914",
+      "#5C4A1C"
+    ],
+    "iconName": "book.fill",
+    "imageKey": "baptism_jesus",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Neno Lililofanywa Mwili",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Inamaanisha nini kwako kwamba Yesu alikuwepo kabla ya vitu vyote na kuchagua kukaa kati yetu?"
+      },
+      {
+        "day": 2,
+        "title": "Maji kuwa Divai",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Wapi katika maisha yako unahitaji Yesu kubadilisha ya kawaida kuwa jambo la ajabu?"
+      },
+      {
+        "day": 3,
+        "title": "Lazima Uzaliwe Tena",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Wazo la 'kuzaliwa tena' linakupatia changamoto au faraja gani katika kuelewa imani?"
+      },
+      {
+        "day": 4,
+        "title": "Maji ya Uzima",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni visima gani unavyovuta kutoka navyo ambavyo vinakuacha ukiwa na kiu, na maji ya uzima yanakaaje?"
+      },
+      {
+        "day": 5,
+        "title": "Uponyaji Katika Bwawa",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Je, kuna eneo ambalo umekuwa ukisubiri uponyaji lakini hujaomba kabisa Yesu kwa ajili yake?"
+      },
+      {
+        "day": 6,
+        "title": "Mkate wa Maisha",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Inakaaje kula Yesu kama mkate wa maisha kila siku?"
+      },
+      {
+        "day": 7,
+        "title": "Mito ya Maji ya Uzima",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Unajibu vipi wakati maoni ya dunia kuhusu Yesu yanapokinzana na uzoefu wako naye?"
+      },
+      {
+        "day": 8,
+        "title": "Mwanga wa Ulimwengu",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Wapi unahitaji Yesu kuangaza mwanga wake katika mahali pa aibu au giza?"
+      },
+      {
+        "day": 9,
+        "title": "Macho kwa Vipofu",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni eneo gani moja la upofu wa kiroho ungependa Yesu akufungue macho yako?"
+      },
+      {
+        "day": 10,
+        "title": "Mchungaji Mwema",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kujua kwamba Yesu alitoa maisha yake kwa hiari kunabadilisha vipi mtazamo wako wa upendo wake?"
+      },
+      {
+        "day": 11,
+        "title": "Lazaro, Njoo Nje",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni eneo gani lililo kufa katika maisha yako unahitaji Yesu akuite kurudi kwenye maisha?"
+      },
+      {
+        "day": 12,
+        "title": "Aliyetiwa Mafuta kwa ajili ya Mazishi",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni kitendo gani cha ibada ambacho unaweza kumtolea Yesu leo?"
+      },
+      {
+        "day": 13,
+        "title": "Mfalme Mtumishi",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni miguu ya nani Yesu anakutaka uyoshe kupitia huduma ya unyenyekevu wiki hii?"
+      },
+      {
+        "day": 14,
+        "title": "Njia, Ukweli, Uzima",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ahadi ya Yesu ya kukutayarishia mahali inakuwaje katika maisha yako leo?"
+      },
+      {
+        "day": 15,
+        "title": "Mzabibu wa Kweli",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Inakuwaje kwa vitendo kwako 'kukaa' ndani ya Yesu wiki hii?"
+      },
+      {
+        "day": 16,
+        "title": "Msaidizi Anakuja",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Umejifunza vipi kuhusu Roho Mtakatifu akikuongoza katika ukweli?"
+      },
+      {
+        "day": 17,
+        "title": "Yesu Anaomba Kwa Ajili Yako",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Inakuwaje kujua kwamba Yesu aliomba binafsi kwa ajili ya umoja wako na Yeye na Baba?"
+      },
+      {
+        "day": 18,
+        "title": "Kusalitiwa na Kukamatwa",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni lini umekataa kumjua Yesu kama Petro kupitia maneno au matendo yako?"
+      },
+      {
+        "day": 19,
+        "title": "Imekamilika",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni mzigo gani unayobeba ambao Yesu tayari amekamilisha msalabani?"
+      },
+      {
+        "day": 20,
+        "title": "Amefufuka",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Uhalisia wa ufufuo unabadilisha vipi jinsi unavyokabiliana na hofu yako kubwa?"
+      },
+      {
+        "day": 21,
+        "title": "Je, Unanipenda?",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ikiwa Yesu angekuuliza 'Je, unanipenda?' mara tatu leo, jibu lako lingebadilisha vipi matendo yako?"
+      }
+    ]
+  },
+  {
+    "id": "30-days-of-wisdom",
+    "name": "Siku 30 za Hekima",
+    "description": "Sura moja ya Methali kwa kila siku ya mwezi — hekima isiyopitwa na wakati kwa maamuzi, mahusiano, kazi, na maisha ya kila siku.",
+    "totalDays": 30,
+    "category": "Wisdom",
+    "gradientColors": [
+      "#6B4C8A",
+      "#3D2B5C"
+    ],
+    "iconName": "lightbulb.fill",
+    "imageKey": "ten_commandments",
+    "applicableSeasons": [
+      "workingProfessional",
+      "parenthood"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Mwanzo wa Hekima",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Inamaanisha nini kwamba hofu ya Bwana iwe mwanzo wa hekima yote?"
+      },
+      {
+        "day": 2,
+        "title": "Kutafuta Hazina Iliyofichwa",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Unatafuta hekima kwa makusudi kiasi gani kama unavyotafuta hazina iliyofichwa?"
+      },
+      {
+        "day": 3,
+        "title": "Amini kwa Moyo Wako Wote",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni uamuzi gani unakabiliana nao ambapo unahitaji kumwamini Mungu badala ya kutegemea ufahamu wako mwenyewe?"
+      },
+      {
+        "day": 4,
+        "title": "Linda Moyo Wako",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Unaruhusu nini ndani ya moyo wako ambacho kinaweza kukuvuta mbali na njia ya hekima?"
+      },
+      {
+        "day": 5,
+        "title": "Hatari ya Upumbavu",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni wapi katika maisha yako unavyovutiwa zaidi kuchukua njia za mkato ambazo zinaelekea mbali na bora ya Mungu?"
+      },
+      {
+        "day": 6,
+        "title": "Masomo Kutoka kwa Mchwa",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nini kinaweza kujifunza kutoka kwa bidii ya mchwa kuhusu majukumu yako ya sasa?"
+      },
+      {
+        "day": 7,
+        "title": "Gharama ya Jaribu",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni mipaka gani unahitaji kuweka ili kujilinda na jaribu?"
+      },
+      {
+        "day": 8,
+        "title": "Hekima Inaita",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Unatambua vipi sauti ya hekima ikikuita katikati ya kelele za maisha ya kila siku?"
+      },
+      {
+        "day": 9,
+        "title": "Mialiko Miwili",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni mialiko ipi unayokubali mara nyingi zaidi — sherehe ya hekima au njia ya mkato ya upumbavu?"
+      },
+      {
+        "day": 10,
+        "title": "Mwana Mwenye Hekima",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Tabia yako nyumbani inaakisi vipi hekima unayoitafuta hadharani?"
+      },
+      {
+        "day": 11,
+        "title": "Mizani ya Uaminifu",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Wapi katika maisha yako unahitaji kufuatilia uaminifu na uadilifu zaidi?"
+      },
+      {
+        "day": 12,
+        "title": "Maneno Yanayoponya",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Maneno yako leo yanaweza vipi kuleta uponyaji badala ya madhara kwa mtu aliye karibu nawe?"
+      },
+      {
+        "day": 13,
+        "title": "Kutembea na Wenye Hekima",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni nani wenzako wenye hekima katika maisha yako, na unaweza kujifunza vipi zaidi kutoka kwao?"
+      },
+      {
+        "day": 14,
+        "title": "Njia Inayonekana Sahihi",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni lini njia ambayo ilionekana sahihi kwako iligeuka kuwa inakupeleka katika mwelekeo mbaya?"
+      },
+      {
+        "day": 15,
+        "title": "Jibu Lenye Upole",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni nani katika maisha yako anahitaji jibu lenye upole kutoka kwako badala ya neno kali?"
+      },
+      {
+        "day": 16,
+        "title": "Weka Mipango Yako",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni mipango ipi unayoishikilia ambayo unahitaji kuikabidhi kikamilifu kwa Bwana?"
+      },
+      {
+        "day": 17,
+        "title": "Rafiki Wakati Wote",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Unaweza vipi kuwa rafiki mwaminifu zaidi kwa mtu anayepitia shida?"
+      },
+      {
+        "day": 18,
+        "title": "Mnara Imara",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Wakati shida inakuja, je, unakimbilia kwanza kwa jina la Bwana au kwa kitu kingine?"
+      },
+      {
+        "day": 19,
+        "title": "Wema kwa Maskini",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Unaweza vipi kuonyesha ukarimu kwa mtu anaye hitaji wiki hii kama tendo la ibada?"
+      },
+      {
+        "day": 20,
+        "title": "Moyo wa Mfalme",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kuamini utawala wa Mungu juu ya viongozi na mataifa kunaathirije jinsi unavyosali?"
+      },
+      {
+        "day": 21,
+        "title": "Haki na Uadilifu",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Wapi unaweza kufuatilia haki na uadilifu kwa uaminifu zaidi katika maisha yako ya kila siku?"
+      },
+      {
+        "day": 22,
+        "title": "Jina Zuri",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Unajenga aina gani ya sifa, na je, inawakilisha tabia ya Kristo?"
+      },
+      {
+        "day": 23,
+        "title": "Usiwe na Wivu",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nini kinachochochea wivu moyoni mwako, na unaweza vipi shukrani kuchukua nafasi yake?"
+      },
+      {
+        "day": 24,
+        "title": "Nguvu Katika Shida",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Unajibu vipi wakati shida inajaribu nguvu ya imani yako?"
+      },
+      {
+        "day": 25,
+        "title": "Tufaha za Dhahabu",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni lini mara ya mwisho maneno ya mtu yaliyokuwa na wakati mzuri yalikuwa kama tufaha za dhahabu kwako?"
+      },
+      {
+        "day": 26,
+        "title": "Kioo cha Mvivu",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni eneo gani la uvivu au kuchelewesha linakuzuia kufikia bora ya Mungu kwako?"
+      },
+      {
+        "day": 27,
+        "title": "Chuma Kinakata Chuma",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni nani katika maisha yako anayekukata, na je, unajitahidi kuwekeza katika uhusiano huo?"
+      },
+      {
+        "day": 28,
+        "title": "Wenye Haki Ni Wajasiri",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Wapi unahitaji ujasiri zaidi kusimama kwa kile kilicho sahihi?"
+      },
+      {
+        "day": 29,
+        "title": "Maono na Utii",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kuwa na maono yaliyojikita katika Neno la Mungu kunawezaje kukuepusha na kutangatanga bila malengo?"
+      },
+      {
+        "day": 30,
+        "title": "Kila Neno la Mungu",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 30,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Maombi ya Agur — 'usinipe umaskini wala utajiri' — yanakufundisha nini kuhusu kuridhika?"
+      }
+    ]
+  },
+  {
+    "id": "romans-heart-of-the-gospel",
+    "name": "Warumi: Moyo wa Injili",
+    "description": "Safari ya siku 16 ya kina katika barua ya Paulo kwa Warumi — uwasilishaji kamili zaidi wa injili uliowahi kuandikwa.",
+    "totalDays": 16,
+    "category": "Theology",
+    "gradientColors": [
+      "#8B3A3A",
+      "#5C2424"
+    ],
+    "iconName": "flame.fill",
+    "imageKey": "crucifixion",
+    "applicableSeasons": [
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Injili ya Mungu",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Je, wakati mwingine unajihisi aibu kuhusu injili, na itakuwaje kuishi bila aibu?"
+      },
+      {
+        "day": 2,
+        "title": "Hukumu ya Haki ya Mungu",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kujua kwamba Mungu hukumu bila upendeleo kunaathirije jinsi unavyowahukumu wengine?"
+      },
+      {
+        "day": 3,
+        "title": "Wote Wamefanya Dhambi",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Je, ukweli kwamba wote wamefanya dhambi unaleta usawa gani kati yako na wengine?"
+      },
+      {
+        "day": 4,
+        "title": "Imani kama Abrahamu",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni ahadi ipi isiyowezekana kutoka kwa Mungu unayoitwa kuamini kwa imani?"
+      },
+      {
+        "day": 5,
+        "title": "Amani na Mungu",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kujua kwamba mateso yanazalisha uvumilivu kunaathirije jinsi unavyotazama majaribu yako?"
+      },
+      {
+        "day": 6,
+        "title": "Kufa kwa Dhambi, Kuwa Hai katika Kristo",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni dhambi ipi unahitaji kujiona umefariki ili uweze kuishi kikamilifu kwa Kristo?"
+      },
+      {
+        "day": 7,
+        "title": "Mapambano ya Ndani",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jinsi mapambano ya Paulo na dhambi yanavyokutia moyo katika vita vyako mwenyewe?"
+      },
+      {
+        "day": 8,
+        "title": "Hakuna Hukumu",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni hukumu ipi unayoendelea kubeba ambayo Kristo tayari ameiondoa?"
+      },
+      {
+        "day": 9,
+        "title": "Chaguo la Kifalme la Mungu",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Unajibu vipi kwa siri ya utawala wa Mungu na wajibu wa mwanadamu?"
+      },
+      {
+        "day": 10,
+        "title": "Neno Liko Karibu Nako",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nani katika maisha yako anahitaji kusikia habari njema, na ni nini kinachokuzuia kushiriki?"
+      },
+      {
+        "day": 11,
+        "title": "Mti wa Mizeituni",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kuelewa nafasi yako kama tawi 'lililounganishwa' kunazidisha vipi shukrani yako?"
+      },
+      {
+        "day": 12,
+        "title": "Sadaka Inayoishi",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Inaonekana vipi kwa vitendo kutoa mwili wako kama sadaka inayohishi leo?"
+      },
+      {
+        "day": 13,
+        "title": "Kujisalimisha na Upendo",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Amri ya 'usikopeshe chochote ila upendo' inaweza vipi kubadilisha mahusiano yako wiki hii?"
+      },
+      {
+        "day": 14,
+        "title": "Usimhukumu Ndugu Yako",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Unahitaji kupanua neema zaidi wapi kwa muumini mwenzako ambaye imani zake zinatofautiana na zako?"
+      },
+      {
+        "day": 15,
+        "title": "Umuhimu kwa Utukufu wa Mungu",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Unaweza vipi kutafuta kwa nguvu umoja na waumini wengine kwa utukufu wa Mungu?"
+      },
+      {
+        "day": 16,
+        "title": "Salamu na Mungu wa Amani",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nani ni watu ambao Mungu amekuweka karibu nawe ili kuimarisha imani yako, na je, umewashukuru?"
+      }
+    ]
+  },
+  {
+    "id": "new-believers-journey",
+    "name": "Safari ya Waumini Wapya",
+    "description": "Safari ya siku 14 ya mwongozo kupitia sura muhimu zaidi za Biblia — bora kwa yeyote anayeanza kuchunguza imani ya Kikristo.",
+    "totalDays": 14,
+    "category": "Foundations",
+    "gradientColors": [
+      "#3A6B8B",
+      "#1C3D5C"
+    ],
+    "iconName": "sunrise.fill",
+    "imageKey": "samuel_called",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Kuzaliwa Tena",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Inamaanisha nini kwako kuanza upya na maisha mapya ya kiroho kabisa?"
+      },
+      {
+        "day": 2,
+        "title": "Mchungaji",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Je, kufikiria Mungu kama mchungaji anayekujali kunawezaje kubadilisha jinsi unavyohisi kumhusu?"
+      },
+      {
+        "day": 3,
+        "title": "Wote Wamefanya Dhambi",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Je, kuelewa kwamba kila mtu anashindwa kunawezaje kukusaidia kukubali neema ya Mungu bila aibu?"
+      },
+      {
+        "day": 4,
+        "title": "Zawadi ya Neema",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Je, inamaanisha nini kupokea kitu ambacho huwezi kamwe kukipata kwa juhudi zako?"
+      },
+      {
+        "day": 5,
+        "title": "Hakuna Hukumu",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni hatia au aibu gani unahitaji kuachilia kwa kuzingatia ukweli kwamba hakuna hukumu katika Kristo?"
+      },
+      {
+        "day": 6,
+        "title": "Kuhifadhiwa kwa Neema",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Je, kujua kwamba wokovu ni zawadi — si malipo — kunawezaje kubadilisha shinikizo unaloweka kwako mwenyewe?"
+      },
+      {
+        "day": 7,
+        "title": "Njia, Ukweli, Uzima",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Je, inamaanisha nini kwa Yesu kuwa njia unapojisikia kupotea au kutokuwa na uhakika kuhusu siku zijazo?"
+      },
+      {
+        "day": 8,
+        "title": "Mungu Ni Upendo",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Je, kauli 'Mungu ni upendo' inabadilisha vipi ufahamu wako wa nani Mungu ni?"
+      },
+      {
+        "day": 9,
+        "title": "Amani ya Mungu",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni wasiwasi gani unaweza kumleta Mungu sasa hivi kwa kubadilishana na amani Yake inayopita ufahamu?"
+      },
+      {
+        "day": 10,
+        "title": "Ukumbi wa Imani",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni nani katika sura hii ya imani anayekuhamasisha zaidi, na kwa nini?"
+      },
+      {
+        "day": 11,
+        "title": "Majaribu na Hekima",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Je, unaweza vipi kuanza kuona majaribu yako ya sasa kama fursa ya kukua badala ya adhabu?"
+      },
+      {
+        "day": 12,
+        "title": "Mibaraka",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni mbaraka gani inayozungumza moja kwa moja na mahali ulipo maishani sasa hivi?"
+      },
+      {
+        "day": 13,
+        "title": "Sala ya Bwana",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Je, Sala ya Bwana inaweza vipi kuwa muundo wa jinsi unavyomzungumzia Mungu kila siku?"
+      },
+      {
+        "day": 14,
+        "title": "Mambo Yote Mapya",
+        "readings": [
+          {
+            "bookID": "REV",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Je, ahadi kwamba Mungu atafanya mambo yote kuwa mapya inakupa vipi tumaini kwa siku zijazo?"
+      }
+    ]
+  },
+  {
+    "id": "finding-purpose",
+    "name": "Kupata Kusudi",
+    "description": "Uchunguzi wa siku 10 wa maandiko yenye nguvu zaidi kuhusu utambulisho, wito, na kusudi ambalo Mungu ameunganisha katika maisha yako.",
+    "totalDays": 10,
+    "category": "Purpose",
+    "gradientColors": [
+      "#8B7B3A",
+      "#5C5124"
+    ],
+    "iconName": "star.fill",
+    "imageKey": "miraculous_catch",
+    "applicableSeasons": [
+      "workingProfessional",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Mipango ya Kukufanikisha",
+        "readings": [
+          {
+            "bookID": "JER",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Je, kujua kwamba Mungu ana mipango ya ustawi na siku zako zijazo kunawezaje kubadilisha jinsi unavyokabiliana na kutokuwa na uhakika?"
+      },
+      {
+        "day": 2,
+        "title": "Umeumbwa kwa Njia ya Ajabu",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni nini kitakachobadilika ikiwa kweli ungeamini kwamba umeumbwa kwa hofu na kwa njia ya ajabu?"
+      },
+      {
+        "day": 3,
+        "title": "Amini katika Bwana",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni njia gani unayojaribu kuongoza peke yako badala ya kumtambua Mungu ndani yake?"
+      },
+      {
+        "day": 4,
+        "title": "Umeumbwa kwa Matendo Mazuri",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni matendo gani mazuri unayohisi Mungu aliandaa mapema ili utembee ndani yake?"
+      },
+      {
+        "day": 5,
+        "title": "Dhabihu ya Hai",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Je, unaweza vipi kutumia vipaji vya kipekee ambavyo Mungu alikupa kuhudumia wengine wiki hii?"
+      },
+      {
+        "day": 6,
+        "title": "Kuitwa kwa Jina",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 43,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Je, Mungu akikuita kwa jina na kukutambua kama wake kunawezaje kuunda hisia yako ya utambulisho?"
+      },
+      {
+        "day": 7,
+        "title": "Kuishi Ni Kristo",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ikiwa 'kuishi ni Kristo,' hiyo inamaanisha nini kwa jinsi unavyokabili kazi yako na uhusiano?"
+      },
+      {
+        "day": 8,
+        "title": "Weka Akili Yako Juu",
+        "readings": [
+          {
+            "bookID": "COL",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni kitu gani cha kidunia unachoshikilia ambacho kinakutenganisha na mambo ya juu?"
+      },
+      {
+        "day": 9,
+        "title": "Watu Walioteuliwa",
+        "readings": [
+          {
+            "bookID": "1PE",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kuitwa 'kikundi cha kifalme' kunarejelea vipi hisia yako ya kusudi na kutegemea?"
+      },
+      {
+        "day": 10,
+        "title": "Furahia Katika Bwana",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nini kinatokea kwa matakwa yako unapojitolea kufurahia katika Bwana zaidi ya yote?"
+      }
+    ]
+  },
+  {
+    "id": "comfort-in-hard-times",
+    "name": "Faraja Katika Nyakati Ngumu",
+    "description": "Mahali pa kujificha kwa siku 7 katika Maandiko kwa misimu ya mateso — aya hizi zimewasaidia waamini kupitia mabonde meusi kwa maelfu ya miaka.",
+    "totalDays": 7,
+    "category": "Comfort",
+    "gradientColors": [
+      "#5C7A8B",
+      "#3A4F5C"
+    ],
+    "iconName": "heart.fill",
+    "imageKey": "job_suffering",
+    "applicableSeasons": [
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "health"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "Bwana Yuko Karibu na Waliovunjika Moyo",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kujua kwamba Mungu yuko karibu sana na waliovunjika moyo kunakufariji vipi sasa hivi?"
+      },
+      {
+        "day": 2,
+        "title": "Usiogope, Niko Pamoja Nako",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 41,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni hofu gani unayoibeba ambayo Mungu anakuitia kuachilia mikononi Mwake?"
+      },
+      {
+        "day": 3,
+        "title": "Mungu wa Faraja Yote",
+        "readings": [
+          {
+            "bookID": "2CO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jinsi gani mateso yako yanaweza kukuwezesha kumfariji mtu mwingine anayeteseka?"
+      },
+      {
+        "day": 4,
+        "title": "Hakuna Kinachoweza Kututenganisha",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni hali gani imekufanya ujisikie kutengwa na upendo wa Mungu, na sura hii inazungumzia vipi kuhusu hilo?"
+      },
+      {
+        "day": 5,
+        "title": "Kaa Kimya na Ujue",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni kelele gani katika maisha yako unahitaji kuinyamazisha ili usikie Mungu akisema 'kaa kimya'?"
+      },
+      {
+        "day": 6,
+        "title": "Njooni Kwangu na Pumzika",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni mzigo gani mzito unayobeba ambao Yesu anakualika kuuweka chini leo?"
+      },
+      {
+        "day": 7,
+        "title": "Kila Damu Imefutwa",
+        "readings": [
+          {
+            "bookID": "REV",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ahadi kwamba Mungu atafuta kila damu kutoka kwa macho yako inakupa nguvu gani ya kustahimili leo?"
+      }
+    ]
+  },
+  {
+    "id": "sermon-on-the-mount",
+    "name": "Mahubiri Katika Mlima",
+    "description": "Utafiti wa karibu wa siku 7 wa mahubiri maarufu zaidi ya Yesu — mafundisho ya kimapinduzi ambayo yaligeuza thamani za ulimwengu.",
+    "totalDays": 7,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A8B5C",
+      "#4F5C3A"
+    ],
+    "iconName": "text.book.closed.fill",
+    "imageKey": "sermon_mount",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Baraka na Chumvi ya Ardhi",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 26
+          }
+        ],
+        "reflection": "Ni baraka ipi inakukabili zaidi, na itakuwaje kuishi hiyo leo?"
+      },
+      {
+        "day": 2,
+        "title": "Haki ya Juu",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 27,
+            "verseEnd": 48
+          }
+        ],
+        "reflection": "Kuanzia wito wa Yesu wa 'kuwa mkamilifu kama Baba yako alivyo mkamilifu' kunakusukuma vipi zaidi ya kufuata sheria hadi mabadiliko ya moyo?"
+      },
+      {
+        "day": 3,
+        "title": "Kutoa, Kuomba, na Kufunga kwa Siri",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "Ni wapi unahitaji kuhamasisha mazoea yako ya kiroho kutoka kwa kuonekana na wengine hadi kuonekana na Mungu pekee?"
+      },
+      {
+        "day": 4,
+        "title": "Hazina Mbingu",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 19,
+            "verseEnd": 34
+          }
+        ],
+        "reflection": "Ni nini kinachokufanya uwe na wasiwasi ambacho Yesu anakuitia kuamini Kwake kikamilifu?"
+      },
+      {
+        "day": 5,
+        "title": "Usihukumu",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": 1,
+            "verseEnd": 14
+          }
+        ],
+        "reflection": "Ni mbao gani katika jicho lako unahitaji kushughulikia kabla ya kuonyesha vumbi katika jicho la mwingine?"
+      },
+      {
+        "day": 6,
+        "title": "Imara Kwenye Mwamba",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": 15,
+            "verseEnd": 29
+          }
+        ],
+        "reflection": "Maisha yako yamejengwa juu ya mwamba wa maneno ya Yesu, au juu ya mchanga wa hekima ya ulimwengu?"
+      },
+      {
+        "day": 7,
+        "title": "Mahubiri Kama Jumla",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Baada ya kusoma Mahubiri yote ya Mlima, ni mafundisho gani moja unayotaka sana kuyatekeleza?"
+      }
+    ]
+  },
+  {
+    "id": "psalms-in-30-days",
+    "name": "Zaburi katika Siku 30",
+    "description": "Soma Zaburi zote 150 katika siku 30 — zaburi tano kwa siku ili kujitumbukiza katika kitabu chenye utukufu zaidi cha ibada, maombi, na sifa katika Biblia.",
+    "totalDays": 30,
+    "category": "Worship",
+    "gradientColors": [
+      "#3A5C8B",
+      "#1C2D5C"
+    ],
+    "iconName": "music.note",
+    "imageKey": "jacob_ladder",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Zaburi 1–5: Waliobarikiwa na Waliovunjika",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Inamaanisha nini kwako kufurahia sheria ya Bwana mchana na usiku?"
+      },
+      {
+        "day": 2,
+        "title": "Zaburi 6–10: Kuita kwa Mungu",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jinsi gani ukweli wa kilio cha mwandishi wa zaburi unakupa ruhusa ya kuleta hisia zako za ndani kwake?"
+      },
+      {
+        "day": 3,
+        "title": "Zaburi 11–15: Wenye Haki na Wenye Dhambi",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Zaburi ya 15 inafichua nini kuhusu aina ya mtu anayeweza kukaa katika uwepo wa Mungu?"
+      },
+      {
+        "day": 4,
+        "title": "Zaburi 16–20: Kimbilio na Wokovu",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jinsi gani mbingu zinavyotangaza utukufu wa Mungu katika Zaburi 19 zinakichochea ibada katika moyo wako?"
+      },
+      {
+        "day": 5,
+        "title": "Zaburi 21–25: Mchungaji na Mtafutaji",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jinsi gani kilio cha kuachwa katika Zaburi 22 — kilichorudiwa na Yesu msalabani — kinaongeza uelewa wako kuhusu dhabihu yake?"
+      },
+      {
+        "day": 6,
+        "title": "Zaburi 26–30: Mwanga katika Giza",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 30,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Inamaanisha nini kwamba kilio kinaweza kudumu usiku lakini furaha inakuja asubuhi?"
+      },
+      {
+        "day": 7,
+        "title": "Zaburi 31–35: Kuamini na Wokovu",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 31,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 33,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 35,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jinsi gani baraka ya msamaha katika Zaburi 32 inakuhamasisha kukiri kile ambacho umekuwa ukificha?"
+      },
+      {
+        "day": 8,
+        "title": "Zaburi 36–40: Upendo wa Kudumu",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 36,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 38,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 39,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 40,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Inakuwaje 'jifurahishe katika Bwana' kutoka Zaburi 37 katika ratiba yako ya kila siku?"
+      },
+      {
+        "day": 9,
+        "title": "Zaburi 41–45: Kiu kwa Mungu",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 41,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 42,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 43,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 44,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 45,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni lini roho yako ilipohitaji Mungu kama vile paa anavyohitaji maji?"
+      },
+      {
+        "day": 10,
+        "title": "Zaburi 46–50: Mungu Ni Ngome Yetu",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 47,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 48,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 49,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 50,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jinsi gani ukumbusho wa Zaburi 46 wa 'kuwa kimya' unavyosema kuhusu machafuko katika maisha yako sasa hivi?"
+      },
+      {
+        "day": 11,
+        "title": "Zaburi 51–55: Roho iliyo Vunjika",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 51,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 52,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 53,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 54,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 55,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jinsi gani maombi ya Daudi ya moyo safi katika Zaburi 51 yanakupa ujasiri wa kumkaribia Mungu na kushindwa kwako?"
+      },
+      {
+        "day": 12,
+        "title": "Zaburi 56–60: Wakati Ninapohofia",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 56,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 57,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 58,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 59,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 60,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Inakuwaje 'wakati ninapohofia, nitakutegemea' kutoka Zaburi 56 katika hali zako za sasa?"
+      },
+      {
+        "day": 13,
+        "title": "Zaburi 61–65: Kupumzika Katika Mungu Pekee",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 61,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 62,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 63,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 64,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 65,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Unapata wapi kupumzika — kweli katika Mungu pekee, au unatafuta vyanzo vingine vya amani?"
+      },
+      {
+        "day": 14,
+        "title": "Zaburi 66–70: Paza Sauti kwa Furaha",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 66,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 67,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 68,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 69,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 70,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni kazi zipi za ajabu za Mungu katika maisha yako ungependa kuwambia wengine?"
+      },
+      {
+        "day": 15,
+        "title": "Zaburi 71–75: Tumaini la Milele",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 71,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 72,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 73,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 74,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 75,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jinsi gani mapambano ya mwandishi wa zaburi na wivu katika Zaburi 73 yanaakisi uzoefu wako mwenyewe?"
+      },
+      {
+        "day": 16,
+        "title": "Zaburi 76–80: Kumbuka Miujiza Yake",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 76,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 77,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 78,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 79,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 80,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni matendo gani ya zamani ya Mungu unaweza kukumbuka na kuyarejelea ili kuimarisha imani yako leo?"
+      },
+      {
+        "day": 17,
+        "title": "Zaburi 81–85: Uamsho na Urejeleaji",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 81,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 82,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 83,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 84,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 85,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jinsi gani kutamani kwa nyua za Mungu katika Zaburi 84 kunavyohusiana na tamaa yako ya ibada?"
+      },
+      {
+        "day": 18,
+        "title": "Zaburi 86–90: Kutoka Milele Hadi Milele",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 86,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 87,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 88,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 89,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 90,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jinsi gani mtazamo wa Zaburi 90 kuhusu ufupi wa maisha unavyobadilisha jinsi unavyothamini wakati wako?"
+      },
+      {
+        "day": 19,
+        "title": "Zaburi 91–95: Kimbilio na Wimbo",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 91,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 92,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 93,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 94,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 95,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Inamaanisha nini kukaa katika kimbilio cha Aliye Juu, na unaweza kufanya hivyo vipi leo?"
+      },
+      {
+        "day": 20,
+        "title": "Zaburi 96–100: Bwana Anatawala",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 96,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 97,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 98,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 99,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 100,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jinsi gani wito wa 'fanya kelele ya furaha' katika Zaburi 100 unakuchochea kuabudu kwa shauku zaidi?"
+      },
+      {
+        "day": 21,
+        "title": "Zaburi 101–105: Mbariki Bwana, Ee Nafsi Yangu",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 101,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 102,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 103,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 104,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 105,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni faida zipi kutoka kwa Bwana zilizoorodheshwa katika Zaburi 103 ambazo umesahau kumshukuru?"
+      },
+      {
+        "day": 22,
+        "title": "Zaburi 106–110: Kukumbuka Uaminifu wa Mungu",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 106,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 107,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 108,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 109,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 110,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jinsi gani umepitia upendo wa Mungu usiobadilika ukikuokoa kutoka kwa kuzunguka kwako?"
+      },
+      {
+        "day": 23,
+        "title": "Zaburi 111–115: Mhimidi Bwana",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 111,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 112,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 113,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 114,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 115,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jinsi gani tofauti kati ya Mungu aliye hai na sanamu zisizo na uhai katika Zaburi 115 inakuchochea kuangalia ambapo unaweka imani yako?"
+      },
+      {
+        "day": 24,
+        "title": "Zaburi 116–120: Nyimbo za Kupanda Zaanza",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 116,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 117,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 118,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 119,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 120,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni andiko lipi kutoka kwa zaburi ndefu zaidi — Zaburi 119 — linazungumza kwa nguvu zaidi kuhusu upendo wako kwa Neno la Mungu?"
+      },
+      {
+        "day": 25,
+        "title": "Zaburi 121–125: Kupanda kwa Bwana",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 121,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 122,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 123,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 124,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 125,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Wapi msaada wako unatoka, na jinsi gani Zaburi 121 inaimarisha imani yako katika ulinzi wa Mungu?"
+      },
+      {
+        "day": 26,
+        "title": "Zaburi 126–130: Kupanda kwa Machozi",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 126,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 127,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 128,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 129,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 130,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni mbegu zipi unazopanda kwa machozi sasa hivi, ukitumaini kwamba utavuna kwa kelele za furaha?"
+      },
+      {
+        "day": 27,
+        "title": "Zaburi 131–135: Imani ya Kijicho",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 131,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 132,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 133,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 134,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 135,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jinsi gani picha ya umoja katika Zaburi 133 inakuhamasisha kufuatilia ushirika wa kina na waamini wengine?"
+      },
+      {
+        "day": 28,
+        "title": "Zaburi 136–140: Upendo Wake Unadumu Milele",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 136,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 137,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 138,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 140,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jinsi gani wimbo 'Upendo Wake unadumu milele' katika Zaburi 136 unakushikilia unapohisi kila kitu hakina uhakika?"
+      },
+      {
+        "day": 29,
+        "title": "Zaburi 141–145: Maombi ya Jioni",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 141,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 142,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 143,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 144,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 145,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jinsi gani tangazo la Daudi kwamba Mungu ni mkuu na anastahili kusifiwa linaathiri maombi yako ya jioni usiku wa leo?"
+      },
+      {
+        "day": 30,
+        "title": "Zaburi 146–150: Kila Kitu Kimsifu Bwana",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 146,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 147,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 148,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 149,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 150,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kadri Zaburi zinavyomalizika na 'kila kitu kilicho na pumzi kimsifu Bwana,' utafanya vipi sifa kuwa tabia ya kila siku?"
+      }
+    ]
+  },
+  {
+    "id": "life-of-david",
+    "name": "Maisha ya Daudi",
+    "description": "Safari ya siku 14 na mfalme-mchungaji — kutoka kupakwa mafuta hadi kuua jitu, kutoka uhamishoni hadi kwenye kiti cha enzi — ikishirikishwa na zaburi zilizozaliwa katika kila msimu.",
+    "totalDays": 14,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6B2D2D",
+      "#3A1818"
+    ],
+    "iconName": "shield.lefthalf.filled",
+    "imageKey": "david_goliath",
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Kupakwa Mafuta kwa Siri",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Wapi Mungu anakutana na wewe katika maeneo ya kimya, yasiyoonekana kabla ya ulimwengu kugundua?"
+      },
+      {
+        "day": 2,
+        "title": "Kukabiliana na Jitu",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni jitu gani unakabiliana nalo leo, na ni jina la nani utalikabili?"
+      },
+      {
+        "day": 3,
+        "title": "Uaminifu wa Yonathani",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nani amekuwa Yonathani kwako, na unaweza vipi kuwa rafiki huyo kwa mtu mwingine?"
+      },
+      {
+        "day": 4,
+        "title": "Kukimbia kwa Ajili ya Maisha Yako",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jinsi gani zaburi ya Daudi katika pango inakufundisha kumhimidi Mungu kabla ya ukombozi kuwasili?"
+      },
+      {
+        "day": 5,
+        "title": "Kujizuia katika Pango",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Wapi unahitaji kufanya mazoezi ya kujizuia unapoweza kumjibu mtu aliyekukosea?"
+      },
+      {
+        "day": 6,
+        "title": "Hekima kutoka kwa Abigaili",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni ushauri wa nani wa busara umekataa hivi karibuni ambao unaweza kuwa unakuokoa kutokana na uamuzi wa kijinga?"
+      },
+      {
+        "day": 7,
+        "title": "Anguko la Sauli",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 31,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "2SA",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jinsi gani huzuni ya Daudi kwa adui yake Sauli inabadilisha jinsi unavyowaona watu unaoshughulika nao?"
+      },
+      {
+        "day": 8,
+        "title": "Mfalme Anacheza",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni lini mara ya mwisho uliabudu kwa ukamilifu, bila kuwa na wasiwasi kuhusu kile mtu yeyote anafikiria?"
+      },
+      {
+        "day": 9,
+        "title": "Agano la Milele",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ahadi ya Mungu ya kiti cha enzi kisichokuwa na mwisho kupitia Daudi inakuimarisha vipi katika tumaini lako kwa Kristo leo?"
+      },
+      {
+        "day": 10,
+        "title": "Anguko la Mfalme Mchungaji",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "2SA",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Uko wapi dhaifu zaidi kwa makubaliano madogo ambayo yanaweza kukua kuwa dhambi kubwa ikiwa hayakukabiliwa?"
+      },
+      {
+        "day": 11,
+        "title": "Sala Iliyo Vunjika",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 51,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nini katika maisha yako kinahitaji sala 'niumbe ndani yangu moyo safi' usiku huu?"
+      },
+      {
+        "day": 12,
+        "title": "Mbariki Bwana, Ee Nafsi Yangu",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 103,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni faida gani za Bwana zilizoorodheshwa hapa unahitaji kukumbuka zaidi leo?"
+      },
+      {
+        "day": 13,
+        "title": "Kujulikana kwa Hofu",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni faraja gani — au changamoto — unayohisi ukijua Mungu anaona kila kona ya siri ya moyo wako?"
+      },
+      {
+        "day": 14,
+        "title": "Mchungaji Anaendelea",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Katika misimu yote ya Daudi, Mchungaji hakumwacha — umejifunza vipi uaminifu huo katika hadithi yako mwenyewe?"
+      }
+    ]
+  },
+  {
+    "id": "christmas-story",
+    "name": "Hadithi ya Krismasi",
+    "description": "Safari ya siku 7 ya kujiandaa kupitia kuzaliwa — kutoka unabii wa zamani hadi zizi — gundua tena ajabu ya Mungu anayekaribia.",
+    "totalDays": 7,
+    "category": "Advent",
+    "gradientColors": [
+      "#3C5A7A",
+      "#1F2F45"
+    ],
+    "iconName": "star.fill",
+    "imageKey": "nativity",
+    "applicableSeasons": [
+      "parenthood",
+      "newlyMarried",
+      "growing",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "grief",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Mtoto Aliyetabiriwa",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni jina gani la Isaya kwa mtoto anayekuja — Mshauri Mwenye Ajabu, Mungu Mwenye Nguvu, Mkuu wa Amani — unahitaji zaidi sasa hivi?"
+      },
+      {
+        "day": 2,
+        "title": "Kutoka Bethlehemu Ndogo",
+        "readings": [
+          {
+            "bookID": "MIC",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Mungu kuchagua mji mdogo na usiokumbukwa wa Bethlehemu kuna maana gani kwa sehemu za siri katika maisha yako mwenyewe?"
+      },
+      {
+        "day": 3,
+        "title": "Ndio ya Maria",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Wapi Mungu anakuuliza 'iwe kwangu kama ilivyo neno lako' katika msimu wa kutokuwa na uhakika?"
+      },
+      {
+        "day": 4,
+        "title": "Utiifu wa Kimya wa Yusufu",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Utiifu wa kimya na wenye gharama wa Yusufu unakupatia changamoto gani katika jinsi unavyofikiri kuhusu kuonekana na wengine?"
+      },
+      {
+        "day": 5,
+        "title": "Neno Liliofanywa Mwili",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Inamaanisha nini kwako kwamba Neno la milele lilichagua kuhamia jirani yako?"
+      },
+      {
+        "day": 6,
+        "title": "Mchungaji na Zizi",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kwa nini unafikiri 'habari njema za furaha kubwa' za malaika zilitangazwa kwanza kwa wachungaji, si wafalme?"
+      },
+      {
+        "day": 7,
+        "title": "Wanaume Wajanja Kutoka Mbali",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Itakuwa vipi kwako kuleta bora yako — dhahabu yako, ubani, na manemane — kwa Yesu leo?"
+      }
+    ]
+  },
+  {
+    "id": "walking-with-elijah",
+    "name": "Kutembea na Eliya",
+    "description": "Masomo ya siku 10 ya nabii aliyesimama peke yake dhidi ya ufalme — na Mungu aliyemkuta katika njiwa, pango, na sauti ndogo ya kimya.",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6E4A2C",
+      "#3A2814"
+    ],
+    "iconName": "flame.fill",
+    "imageKey": "elijah_ravens",
+    "applicableSeasons": [
+      "hardSeason",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose",
+      "anxiety"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Kabla ya Ahab",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 6
+          }
+        ],
+        "reflection": "Wapi Mungu anakuuliza kusema ukweli mgumu, na unamwamini Yeye kutoa baada ya kuti?"
+      },
+      {
+        "day": 2,
+        "title": "Mjane wa Sarepathi",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 17,
+            "verseStart": 7,
+            "verseEnd": 24
+          }
+        ],
+        "reflection": "Nini kidogo 'kikundi cha mwisho cha unga' Mungu anakutaka utoe kwa imani wiki hii?"
+      },
+      {
+        "day": 3,
+        "title": "Mkutano wa Carmel",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni madhabahu gani katika maisha yako unahitaji kujenga tena — mahali pa ibada ambalo limeanguka katika kusahaulika?"
+      },
+      {
+        "day": 4,
+        "title": "Kukimbilia Jangwani",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 19,
+            "verseStart": 1,
+            "verseEnd": 8
+          }
+        ],
+        "reflection": "Ni lini umepata uandaaji wa upole wa Mungu — chakula, usingizi, rafiki — katikati ya kuchoka kwako?"
+      },
+      {
+        "day": 5,
+        "title": "Sauti Ndogo ya Kimya",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 19,
+            "verseStart": 9,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "Ni kelele gani unahitaji kimya ili uweze kusikia kunong'ona kwa Mungu badala ya kusubiri tetemeko la ardhi?"
+      },
+      {
+        "day": 6,
+        "title": "Shamba la Naboth",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Hadithi hii inabadilisha vipi jinsi unavyoona ukosefu wa haki ambao hakuna mtu mwingine anayeonekana kutaka kukabiliana nao?"
+      },
+      {
+        "day": 7,
+        "title": "Moto kutoka Mbingu",
+        "readings": [
+          {
+            "bookID": "2KI",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Unajikuta wapi ukijaribiwa kushauriana na 'miungu ya Ekron' badala ya kuleta hofu zako kwa Bwana?"
+      },
+      {
+        "day": 8,
+        "title": "Kazi ya Kichwa",
+        "readings": [
+          {
+            "bookID": "2KI",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kazi ya nani Mungu anakutaka uchukue — au kazi ya nani uko tayari kuhamasisha?"
+      },
+      {
+        "day": 9,
+        "title": "Elia Kwenye Mlima Pamoja na Kristo",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "Inamaanisha nini kwamba nabii yule yule aliyekuwa na hisia za upweke zaidi siku moja alisimama na Yesu katika utukufu?"
+      },
+      {
+        "day": 10,
+        "title": "Mtu Kama Sisi",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": 13,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "Yakobo anasema Elia alikuwa 'mtu mwenye asili kama yetu' — hiyo inabadilisha vipi jinsi unavyosali wiki hii?"
+      }
+    ]
+  },
+  {
+    "id": "beatitudes-deep-dive",
+    "name": "Mibaraka: Picha Nane",
+    "description": "Utafiti wa picha wa siku 8 wa raia wa ufalme wa Yesu — mbaraka mmoja kwa wakati, kila mmoja ukiambatana na andiko linalojaza picha.",
+    "totalDays": 8,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A6B3A",
+      "#4F4524"
+    ],
+    "iconName": "sparkles",
+    "imageKey": "beatitudes",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Maskini katika Roho",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 3
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 57,
+            "verseStart": 14,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "Iweje leo kuja kwa Mungu ukikiri utegemezi wako wote badala ya kuonyesha uwezo wako?"
+      },
+      {
+        "day": 2,
+        "title": "Wale Wanaolia",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 4,
+            "verseEnd": 4
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 42,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni hasara au huzuni gani umekuwa ukijaribu kuikwepa ambayo Yesu anakualika kukaa nayo?"
+      },
+      {
+        "day": 3,
+        "title": "Wanyenyekevu",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 5,
+            "verseEnd": 5
+          },
+          {
+            "bookID": "NUM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Unachanganya wanyenyekevu na udhaifu wapi, na mfano wa Musa unabadilisha vipi hilo?"
+      },
+      {
+        "day": 4,
+        "title": "Njaa ya Haki",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 6,
+            "verseEnd": 6
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 63,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni njaa zipi ndogo zimekuwa zikichukua nafasi ya hamu yako ya haki ya Mungu wiki hii?"
+      },
+      {
+        "day": 5,
+        "title": "Wanaohurumia",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 7,
+            "verseEnd": 7
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "Nani Mungu amekuweka katika njia yako leo anahitaji wewe kuwa Samaria badala ya kuhani?"
+      },
+      {
+        "day": 6,
+        "title": "Safi katika Moyo",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 8,
+            "verseEnd": 8
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni sababu gani ya siri unahitaji kuleta kwenye mwanga ili moyo wako uwe mmoja katika ibada yake?"
+      },
+      {
+        "day": 7,
+        "title": "Wafanya Amani",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 9,
+            "verseEnd": 9
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": 9,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "Wapi Mungu anakuitia kufanya kazi ngumu ya kufanya amani badala ya kuishikilia tu?"
+      },
+      {
+        "day": 8,
+        "title": "Wanaoteswa",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 10,
+            "verseEnd": 16
+          },
+          {
+            "bookID": "1PE",
+            "chapter": 4,
+            "verseStart": 12,
+            "verseEnd": 19
+          }
+        ],
+        "reflection": "Jinsi gani furaha ambayo Yesu anahidi inaweza kubadilisha jinsi unavyopokea wakati wa uaminifu unakugharimu kitu?"
+      }
+    ]
+  },
+  {
+    "id": "holy-week",
+    "name": "Wiki Takatifu: Safari ya Pasaka",
+    "description": "Tembea Wiki Takatifu siku kwa siku — kutoka kwenye kuingia kwa ushindi kupitia msalaba hadi kaburi lililo tupu — na uishi wiki yenye matokeo makubwa zaidi katika historia.",
+    "totalDays": 8,
+    "category": "Easter",
+    "gradientColors": [
+      "#5A2E2E",
+      "#2F1515"
+    ],
+    "iconName": "cross.fill",
+    "imageKey": "triumphal_entry",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "grief",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Jumapili ya Mitende",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 21,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "Inamaanisha nini kumkaribisha Yesu kama Mfalme anapokuja kwa njia ambayo hukutarajia?"
+      },
+      {
+        "day": 2,
+        "title": "Kusafisha Hekalu",
+        "readings": [
+          {
+            "bookID": "MRK",
+            "chapter": 11,
+            "verseStart": 12,
+            "verseEnd": 25
+          }
+        ],
+        "reflection": "Ni 'meza' zipi katika moyo wako Yesu anakuomba uzipindue ili uwepo wake uweze kukaribishwa ipasavyo?"
+      },
+      {
+        "day": 3,
+        "title": "Kufundisha Katika Hekalu",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 22,
+            "verseStart": 34,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "Kuingia kwa upendo kwa Mungu kwa yote uliyo — na jirani yako kama wewe mwenyewe — kutabadilisha vipi wiki yako?"
+      },
+      {
+        "day": 4,
+        "title": "Upako Katika Bethania",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 12,
+            "verseStart": 1,
+            "verseEnd": 11
+          }
+        ],
+        "reflection": "Ni tendo gani la kupenda kupita kiasi unaweza kumtolea Yesu leo, hata kama dunia inakiita kuwa ni kupoteza?"
+      },
+      {
+        "day": 5,
+        "title": "Hapana ya Mwisho",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni miguu ya nani Yesu anakutaka usafishe wiki hii, na kiburi kipi kinachofanya iwe ngumu?"
+      },
+      {
+        "day": 6,
+        "title": "Gethsemane",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 26,
+            "verseStart": 36,
+            "verseEnd": 56
+          }
+        ],
+        "reflection": "Wapi katika maisha yako unahitaji kuomba, 'Si mapenzi yangu, bali yako yafanyike' — na kweli uamini hivyo?"
+      },
+      {
+        "day": 7,
+        "title": "Ijumaa Kuu",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nini kisichokamilika katika maisha yako kinahitaji kusikia maneno ya Yesu: 'Imekamilika'?"
+      },
+      {
+        "day": 8,
+        "title": "Asubuhi ya Pasaka",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Wapi unahitaji nguvu ya ufufuo kukutana nawe katika kaburi la tumaini lililokufa leo?"
+      }
+    ]
+  },
+  {
+    "id": "genesis-beginnings",
+    "name": "Mwanzo: Katika Mwanzo",
+    "description": "Safari ya siku 12 kupitia kitabu cha kwanza cha Biblia — uumbaji, kuanguka, mafuriko, baba wa taifa — ikifuatilia ufuatiliaji wa Mungu wa uaminifu tangu mwanzo.",
+    "totalDays": 12,
+    "category": "Foundations",
+    "gradientColors": [
+      "#3A5A4A",
+      "#1C2D24"
+    ],
+    "iconName": "globe.americas.fill",
+    "imageKey": "noah_ark",
+    "applicableSeasons": [
+      "growing",
+      "startingOver",
+      "newlyMarried"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Katika Mwanzo",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nini 'isiyo na umbo na tupu' katika maisha yako ambayo Mungu anazungumza mpangilio na mwangaza sasa hivi?"
+      },
+      {
+        "day": 2,
+        "title": "Bustani na Picha",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Inamaanisha nini kwako kwamba Mungu alikuumba kwa mikono Yake mwenyewe na kupuliza maisha Yake ndani yako?"
+      },
+      {
+        "day": 3,
+        "title": "Kuanguka",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni uwongo gani wa nyoka — 'Je, Mungu alisema kweli?' — unazidi kusikia, na unaweza kujibu vipi kwa ukweli?"
+      },
+      {
+        "day": 4,
+        "title": "Noah na Mafuriko",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "GEN",
+            "chapter": 9,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "Wapi unahitaji kuamini ahadi za Mungu za upinde wa mvua katikati ya msimu ambao bado unajisikia kama umejaa mafuriko?"
+      },
+      {
+        "day": 5,
+        "title": "Mwito wa Abram",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nini 'nchi na ukoo' Mungu anakuitisha uache ili kumfuata katika kitu kipya?"
+      },
+      {
+        "day": 6,
+        "title": "Kuhesabu Nyota",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nini ahadi isiyowezekana kutoka kwa Mungu ambayo unahitaji kuendelea kuamini, hata katika usiku ambapo inaonekana ni ya kuchekesha?"
+      },
+      {
+        "day": 7,
+        "title": "Sadaka ya Isaka",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nini kimekuwa 'Isaka' kwako — zawadi unayoipenda sana kiasi kwamba inaanza kushindana na Mungu Mwenyewe?"
+      },
+      {
+        "day": 8,
+        "title": "Ngazi ya Yakobo",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Wapi Mungu ameonekana bila kutarajia hivi karibuni, bila shaka katika mahali ambapo hukujua Yuko?"
+      },
+      {
+        "day": 9,
+        "title": "Kupigana Usiku Mzima",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Unapigania nini kwa Mungu sasa hivi, na je, uko tayari kutembea ukiwa na kilema ikiwa inamaanisha kupokea baraka Zake?"
+      },
+      {
+        "day": 10,
+        "title": "Ndoto za Yusufu",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nini 'shimo' ulilomo sasa hivi ambalo Mungu anaweza kuwa anatumia kama sura ya kwanza ya hadithi kubwa zaidi?"
+      },
+      {
+        "day": 11,
+        "title": "Kukutana Tena Misri",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 45,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nini uhusiano katika maisha yako uko tayari kwa msamaha ambao Yusufu alionyesha: 'Mliwaza mabaya, lakini Mungu alikusudia mema'?"
+      },
+      {
+        "day": 12,
+        "title": "Mungu Alikusudia Mema",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 50,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ukirejea nyuma kwenye jambo gumu zaidi ulilopitia, wapi sasa unaona mkono wa Mungu ukikifanyia kazi kwa mema?"
+      }
+    ]
+  },
+  {
+    "id": "daniel-exile",
+    "name": "Daniel: Mwaminifu Katika Uhamishoni",
+    "description": "Safari ya siku 12 kupitia kitabu cha Daniel — kusimama imara katika mahakama ya kipagani, kuomba wakati ni haramu, na kumtumaini Mungu kwa historia yote.",
+    "totalDays": 12,
+    "category": "Character Study",
+    "gradientColors": [
+      "#5A3A2A",
+      "#2E1F16"
+    ],
+    "iconName": "shield.fill",
+    "imageKey": "daniel_lions",
+    "applicableSeasons": [
+      "workingProfessional",
+      "hardSeason",
+      "student",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Kujitenga Kutokuweka Unajisi",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nini kidogo cha kila siku ambacho Mungu anakualika 'kuamua' huwezi kukubali tena?"
+      },
+      {
+        "day": 2,
+        "title": "Ndoto ya Mfalme",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Wapi unahitaji kuamini kwamba Mungu anayefichua mambo ya ndani na yaliyofichika ana mamlaka juu ya falme za siku zako?"
+      },
+      {
+        "day": 3,
+        "title": "Tanuru ya Moto",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Imani ya 'lakini ikiwa sivyo' itakuwaje kwako wiki hii — imani inayotii hata bila dhamana ya kuokolewa?"
+      },
+      {
+        "day": 4,
+        "title": "Mfalme Aliyejinyenyekea",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Wapi kiburi kinakusihi kwamba umejenga kile ulichonacho, na Mungu anakuita vipi kuinua macho yako?"
+      },
+      {
+        "day": 5,
+        "title": "Andiko Kwenye Ukuta",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nini katika maisha yako umepimwa na Mungu, na toba ipi inakaribishwa?"
+      },
+      {
+        "day": 6,
+        "title": "Kwenye Tundu la Simba",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni mazoea gani ya sala ya dirisha wazi yanayostahili kuendelea, hata kama yanakugharimu kitu kijamii au kitaaluma?"
+      },
+      {
+        "day": 7,
+        "title": "Mzee wa Siku",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jinsi gani maono ya Mzee wa Siku na Mwana wa Mtu yanakupa mtazamo mrefu wa vichwa vya habari?"
+      },
+      {
+        "day": 8,
+        "title": "Mbuzi na Kondoo",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Wakati siku zijazo zinapojisikia kuwa za kutatanisha, nini kinakushikilia katika Mungu anayeyaona mwisho tangu mwanzo?"
+      },
+      {
+        "day": 9,
+        "title": "Sala ya Kutubu",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Wapi jamii yako au familia inahitaji wewe kusimama katika pengo na sala ya kutubu kama ya Daniel?"
+      },
+      {
+        "day": 10,
+        "title": "Mtu aliyevaa Kitani",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jinsi gani ukweli wa vita vya kiroho visivyoonekana unabadilisha jinsi unavyoendelea katika sala wakati hakuna kinachonekana kusonga?"
+      },
+      {
+        "day": 11,
+        "title": "Mfalme na Falme",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni falme gani za kidunia umepatia uzito mwingi, na unaweza vipi kuimarisha tena tumaini lako?"
+      },
+      {
+        "day": 12,
+        "title": "Wanaojua Wataangaza",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jinsi gani ahadi kwamba 'wanaojua wataangaza kama mwangaza wa mbingu' inakuhamasisha leo?"
+      }
+    ]
+  },
+  {
+    "id": "lords-prayer-deep-dive",
+    "name": "Sala ya Bwana: Tufundishe Kuomba",
+    "description": "Meditation ya siku 7 juu ya sala aliyotufundisha Yesu — ombi moja kwa siku — kupunguza kasi ili kumaanisha kila neno.",
+    "totalDays": 7,
+    "category": "Prayer",
+    "gradientColors": [
+      "#4A5A7A",
+      "#242D3D"
+    ],
+    "iconName": "hands.sparkles.fill",
+    "imageKey": "lords_prayer",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "parenthood",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Baba Yetu Mbinguni",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 5,
+            "verseEnd": 13
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": 12,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "Nini kinabadilika kuhusu sala yako leo ikiwa unamini kweli unakaribia Baba yako, si mungu aliye mbali tu?"
+      },
+      {
+        "day": 2,
+        "title": "Jina Lako Litukuzwe",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 99,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 6,
+            "verseStart": 1,
+            "verseEnd": 8
+          }
+        ],
+        "reflection": "Ili kuonekana vipi leo kwako kut treating jina la Mungu kuwa takatifu katika mawazo yako, kinywa chako, na chaguo zako?"
+      },
+      {
+        "day": 3,
+        "title": "Ufalme Wako Uje",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 13,
+            "verseStart": 31,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "Wapi unataka kuona ufalme wa Mungu ukivunja katika ulimwengu wako wiki hii — na utaomba vipi kwa matarajio?"
+      },
+      {
+        "day": 4,
+        "title": "Mapenzi Yako Yafanyike",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 26,
+            "verseStart": 36,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "Ni sala ipi yako inasubiri 'siyo mapenzi yangu, bali yako'? Itakugharimu nini, na itakufungua nini?"
+      },
+      {
+        "day": 5,
+        "title": "Tupatie Leo",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 10,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "Jinsi gani sala ya mkate wa kila siku inatibu wasiwasi wa kujaribu kuhifadhi neema ya kesho leo?"
+      },
+      {
+        "day": 6,
+        "title": "Tusamehe Kama Tunavyosamehe",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 18,
+            "verseStart": 21,
+            "verseEnd": 35
+          }
+        ],
+        "reflection": "Ni deni la nani unahitaji kuachilia ili sala yako ya msamaha isijikute ikigonga moyo uliofungwa?"
+      },
+      {
+        "day": 7,
+        "title": "Tukomboe Kutoka kwa Mbaya",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 6,
+            "verseStart": 10,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "Wapi unahitaji kuvaa silaha za Mungu na kuomba kwa usahihi kwa ukombozi kutoka kwa yule mbaya leo?"
+      }
+    ]
+  },
+  {
+    "id": "parables-kingdom",
+    "name": "Methali za Ufalme",
+    "description": "Kutembea kwa siku 10 kupitia methali za Yesu zenye nguvu — hadithi fupi zinazobadilisha mioyo na kufichua ufalme wa Mungu ulio kinyume.",
+    "totalDays": 10,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A4A2A",
+      "#3E2516"
+    ],
+    "iconName": "quote.opening",
+    "imageKey": "prodigal_son",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "workingProfessional",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "relationships",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Mpanda Mbegu",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 13,
+            "verseStart": 1,
+            "verseEnd": 23
+          }
+        ],
+        "reflection": "Nini aina ya udongo moyo wako uko sasa, na unahitaji kufanya nini kuwa 'ardhi nzuri' msimu huu?"
+      },
+      {
+        "day": 2,
+        "title": "Samaria Mwema",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "Nani unayejaribiwa kupita, na itakuwaje kuvuka barabara badala yake?"
+      },
+      {
+        "day": 3,
+        "title": "Mwana Mpotevu",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 15,
+            "verseStart": 11,
+            "verseEnd": 32
+          }
+        ],
+        "reflection": "Ni mwana yupi unayefanana naye zaidi leo — mtembea au kaka mkubwa mwenye hasira — na Baba anataka kukupa nini?"
+      },
+      {
+        "day": 4,
+        "title": "Kondoo na Sarafu Walio Potea",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 15,
+            "verseStart": 1,
+            "verseEnd": 10
+          }
+        ],
+        "reflection": "Wapi katika maisha yako unahisi umepotea, na inabadilisha vipi mambo kujua kwamba mbingu inakutafuta kwa nguvu?"
+      },
+      {
+        "day": 5,
+        "title": "Mpumbavu Tajiri",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 12,
+            "verseStart": 13,
+            "verseEnd": 34
+          }
+        ],
+        "reflection": "Ni 'ghala' kubwa gani unayojaribu kujenga, na unaweza vipi kuwa tajiri kwa Mungu badala yake?"
+      },
+      {
+        "day": 6,
+        "title": "Mtumwa Asiyesamehe",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 18,
+            "verseStart": 21,
+            "verseEnd": 35
+          }
+        ],
+        "reflection": "Ni kosa dogo gani bado unamshikilia mtu, na jinsi gani mlima wa msamaha wako unavyoweza kubadilisha hilo?"
+      },
+      {
+        "day": 7,
+        "title": "Farisayo na Mkusanya Ushuru",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 18,
+            "verseStart": 9,
+            "verseEnd": 14
+          }
+        ],
+        "reflection": "Wapi katika maombi yako sauti yako kwa siri inasikika zaidi kama Farisayo kuliko mkusanya ushuru — na unaweza vipi kujishusha leo?"
+      },
+      {
+        "day": 8,
+        "title": "Wafanyakazi Katika Shamba la Mizabibu",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 20,
+            "verseStart": 1,
+            "verseEnd": 16
+          }
+        ],
+        "reflection": "Ni neema ya nani iliyoingia kwa kuchelewa katika maisha yako umekasirika nayo, na jinsi gani ukarimu wa Mwenye Shamba unavyokukomboa kutoka hapo?"
+      },
+      {
+        "day": 9,
+        "title": "Wasichana Kumi",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 25,
+            "verseStart": 1,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "Ni 'mafuta' gani ya uhusiano wa kudumu na Kristo yanaweza kuwa yanakosekana, na unaweza vipi kuyatunza wiki hii?"
+      },
+      {
+        "day": 10,
+        "title": "Kondoo na Mbuzi",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 25,
+            "verseStart": 31,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "Katika uso wa nani, leo, Yesu anasubiri kutambuliwa — na je, utajibu?"
+      }
+    ]
+  },
+  {
+    "id": "esther-for-such-a-time",
+    "name": "Esther: Kwa Wakati Kama Huu",
+    "description": "Safari ya siku 10 kupitia kitabu cha Esther — sura 10, siku 10 — ikifuatilia uongozi wa siri wa Mungu kupitia mgogoro, ujasiri, na mabadiliko.",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6A3A5C",
+      "#2E1826"
+    ],
+    "iconName": "crown.fill",
+    "imageKey": "mordecai_triumph",
+    "applicableSeasons": [
+      "workingProfessional",
+      "student",
+      "hardSeason",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Sherehe Katika Ikulu",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Wapi katika kelele na ziada ya ulimwengu wako unahisi Mungu kwa kimya anapanga jukwaa?"
+      },
+      {
+        "day": 2,
+        "title": "Malkia Asiyetarajiwa",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni hali gani isiyo chaguliwa katika maisha yako ambayo Mungu anaweza kuwa anaitumia kukuweka kwa kusudi ambalo huwezi bado kuona?"
+      },
+      {
+        "day": 3,
+        "title": "Kivuli cha Haman",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Wakati uovu unaonekana kukusanya nguvu katika ulimwengu wako, unashikaje wema wa Mungu?"
+      },
+      {
+        "day": 4,
+        "title": "Kwa Wakati Kama Huu",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni hatua ipi hatari ya 'nikifa, nikifa' ambayo Mungu anaweza kuwa anakutaka ufanye kwa ajili ya mtu mwingine?"
+      },
+      {
+        "day": 5,
+        "title": "Kukaribia Mfalme",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni lini umewahi kuhisi neema ya Mungu ikifungua mlango ambao ulikuwa na hofu ya kuingia?"
+      },
+      {
+        "day": 6,
+        "title": "Usiku wa Kukosa Usingizi",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Wapi umewahi kuona uongozi usioonekana wa Mungu ukipanga 'matukio ya bahati' kwa ajili ya wema wako?"
+      },
+      {
+        "day": 7,
+        "title": "Mabadiliko Makubwa",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni hali gani inayoonekana kuwa ngumu sasa hivi ambayo inaweza kuwa karibu na mabadiliko zaidi kuliko unavyofikiri?"
+      },
+      {
+        "day": 8,
+        "title": "Amri Mpya",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Wapi unahitaji kuomba amri mpya za ujasiri za matumaini juu ya hali ambayo imeandikwa off?"
+      },
+      {
+        "day": 9,
+        "title": "Siku ya Purimu",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ni ukombozi gani Mungu tayari amefanya kwa ajili yako ambao unastahili kukumbukwa na kusherehekewa kwa makusudi?"
+      },
+      {
+        "day": 10,
+        "title": "Mordekai Mwakilishi",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nani karibu nawe anahitaji uwe Mordekai — mtu anayezungumza kwa ajili ya ustawi wao hata wakati ni gharama?"
+      }
+    ]
+  },
+  {
+    "id": "ruth-redemption",
+    "name": "Ruth: Hadithi ya Ukombozi",
+    "description": "Safari ya siku 4 kupitia kitabu kidogo cha Ruth — ambapo kupoteza kunakutana na uaminifu, kukusanya kunakutana na uongozi, na mjane mgeni anakuwa bibi mkubwa wa Mfalme Daudi.",
+    "totalDays": 4,
+    "category": "Character Study",
+    "gradientColors": [
+      "#8B6642",
+      "#4A331F"
+    ],
+    "iconName": "heart.circle.fill",
+    "imageKey": "jacob_rachel_well",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "relationships",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Kupoteza na Uaminifu",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Naomi anajiita 'Mara' — mwenye uchungu. Ruth anajibu kupoteza kwa kiapo: 'Mahali unapoenda, nitakwenda.' Ni sauti ipi kati ya hizo mbili — ukweli wenye uchungu au uaminifu thabiti — inayoelezea kwa karibu jinsi unavyokutana na msimu huu, na nini kinaweza kubadilika ikiwa zote zitaruhusiwa kuwepo pamoja?"
+      },
+      {
+        "day": 2,
+        "title": "Wema Usio Tarajiwa",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Angalia jinsi mhadithi anavyosema Ruth 'alitokea' kukusanya katika shamba la Boaz — ishara ya kimya kwamba hakuna kitu katika hadithi hii ni cha bahati mbaya. Wapi katika maisha yako Mungu anaweza kuwa anapanga kile kinachohisi kama bahati mbaya kuwa wema wa kimya?"
+      },
+      {
+        "day": 3,
+        "title": "Imani ya Ujasiri katika Uwanja wa Kupuria",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Njia ya Ruth kwa Boaz inakumbusha dhana ya Kiebrania ya mkombozi wa ukoo — jamaa anayeweza kununua tena ardhi na maisha yaliyopotea. Inamaanisha nini kwako kwamba picha ya Biblia ya ukombozi inaanza hapa, katika uwanja wa kupuria, si katika hekalu?"
+      },
+      {
+        "day": 4,
+        "title": "Mkombozi na Mstari wa Kifalme",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 1,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "Ruth — Mmoabiti, mjane, mgeni — anajitokeza katika familia ya Yesu. Jinsi gani mwisho huo unabadilisha kuelewa kwako kuhusu ni nani Mungu anayeshona katika hadithi Yake ya kuokoa, na jinsi anavyoweza kuwa anakushona ndani?"
+      }
+    ]
+  },
+  {
+    "id": "jonah-reluctant-prophet",
+    "name": "Yona: Nabii Asiyependa",
+    "description": "Safari ya siku 4 kupitia Yona — nabii aliyekimbia, dhoruba iliyomkamata, jiji lililoongoka, na Mungu ambaye huruma Yake ilifikia mbali zaidi ya upendeleo wa Yona.",
+    "totalDays": 4,
+    "category": "Character Study",
+    "gradientColors": [
+      "#2E5A6B",
+      "#15303A"
+    ],
+    "iconName": "water.waves",
+    "imageKey": "jesus_calms_storm",
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "Kukimbia Kutoka kwa Mungu",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Mungu anasema 'enda Ninawi' na Yona anapanda mashua kuelekea Tarshishi — mwisho wa kinyume wa ulimwengu unaojulikana. Ni kazi ipi kutoka kwa Mungu unayoondoka nayo, na wapi dhoruba inayopaswa kukujulisha inatoka?"
+      },
+      {
+        "day": 2,
+        "title": "Maombi kutoka kwa Kina",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Yona anaomba kutoka ndani ya samahani — kiwango cha chini kabisa kinachoweza kufikiriwa — na anakiita 'hekalu.' Jinsi gani kufafanua huko kunabadilisha mtazamo wako wa maeneo yako ya chini? Je, maombi yanaweza kubadilisha kina chochote kuwa mahali pa ibada?"
+      },
+      {
+        "day": 3,
+        "title": "Jiji Lililoongoka",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ninawi ilikuwa adui mkatili wa Israeli, na hata hivyo wanatubu katika mahubiri mafupi zaidi katika Biblia — maneno nane tu. Hii inakufundisha nini kuhusu nguvu ya ajabu ya Neno la Mungu, hata wakati mjumbe hayuko tayari?"
+      },
+      {
+        "day": 4,
+        "title": "Moyo wa Mungu",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kitabu kinaishia na swali, si jibu — Mungu anamwuliza Yona kama anapaswa kuwahurumia watu mia moja na ishirini elfu. Ni nani wa wokovu ambao kwa siri ungeweza kukatishwa tamaa, na swali la mwisho la Mungu linakuita kuweka chini nini?"
+      }
+    ]
+  },
+  {
+    "id": "fruit-of-the-spirit",
+    "name": "Matunda ya Roho",
+    "description": "Masomo ya siku 9 kuhusu tabia ambayo Roho Mtakatifu anakuza ndani yetu — tunda moja kwa siku, kila moja likitokana na Wagalatia 5 na kuunganishwa na kifungu kinachokifanya kuwa hai.",
+    "totalDays": 9,
+    "category": "Discipleship",
+    "gradientColors": [
+      "#4A7A5C",
+      "#2A4A38"
+    ],
+    "iconName": "leaf.circle.fill",
+    "imageKey": "annunciation",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional",
+      "parenthood",
+      "newlyMarried"
+    ],
+    "applicableBurdens": [
+      "relationships",
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "Upendo",
+        "readings": [
+          {
+            "bookID": "GAL",
+            "chapter": 5,
+            "verseStart": 16,
+            "verseEnd": 26
+          },
+          {
+            "bookID": "1CO",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paulo anasema matunda ya Roho ni upendo — moja tu — kana kwamba mengine nane yanatokana na hilo. Ni mstari upi wa 1 Wakorintho 13 unaonyesha wazi ambapo upendo wako bado unakua, na wapi Roho anakualika kushirikiana?"
+      },
+      {
+        "day": 2,
+        "title": "Furaha",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 4,
+            "verseEnd": 13
+          },
+          {
+            "bookID": "NEH",
+            "chapter": 8,
+            "verseStart": 1,
+            "verseEnd": 12
+          }
+        ],
+        "reflection": "Furaha ya kibiblia si kukosekana kwa huzuni bali ni furaha ya kina iliyozungukwa na Mungu. Wapi unakosea furaha na furaha, na nini kinashikilia furaha wakati hali hazishirikiani?"
+      },
+      {
+        "day": 3,
+        "title": "Amani",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": 25,
+            "verseEnd": 31
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 26,
+            "verseStart": 1,
+            "verseEnd": 9
+          }
+        ],
+        "reflection": "Yesu anatoa amani 'siyo kama ulimwengu unavyotoa' — si kukosekana kwa mizozo, bali uwepo Wake. Ni wasiwasi gani unachokibeba leo ambacho Yesu anatoa kubadilisha na amani Yake?"
+      },
+      {
+        "day": 4,
+        "title": "Uvumilivu",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": 7,
+            "verseEnd": 11
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 11
+          }
+        ],
+        "reflection": "Neno la Kigiriki hapa, 'makrothumia,' linamaanisha 'mrefu wa hasira' — polepole kuchemka. Wapi katika maisha yako fuse yako ni fupi, na itakuwa vipi kuwa mrefu wa hasira na mtu au hali hiyo maalum?"
+      },
+      {
+        "day": 5,
+        "title": "Wema",
+        "readings": [
+          {
+            "bookID": "COL",
+            "chapter": 3,
+            "verseStart": 12,
+            "verseEnd": 17
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "Wema si tu kuwa mzuri — ni kujitolea kwa mtu ambaye hawezi kukulipa. Ni nani Mungu amekuweka katika njia yako wiki hii ambaye inakugharimu kitu kuwa mwema kwake?"
+      },
+      {
+        "day": 6,
+        "title": "Wema",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": 9,
+            "verseEnd": 21
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Wema ni uaminifu unaoshikilia hata wakati hakuna mtu anayekutazama. Wapi katika maisha yako ya faragha Roho anakualika kwa kimya kuoanisha siri yako na sifa yako?"
+      },
+      {
+        "day": 7,
+        "title": "Uaminifu",
+        "readings": [
+          {
+            "bookID": "LAM",
+            "chapter": 3,
+            "verseStart": 19,
+            "verseEnd": 33
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 16,
+            "verseStart": 10,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "Uaminifu wa Mungu ni mpya kila asubuhi; wetu unapaswa kuwa thabiti katika mambo madogo. Wapi Bwana anakuuliza uwe mwaminifu katika 'kitu kidogo' ambacho hakuna mtu anayepiga makofi?"
+      },
+      {
+        "day": 8,
+        "title": "Ukarimu",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 1,
+            "verseEnd": 9
+          },
+          {
+            "bookID": "PRO",
+            "chapter": 15,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "Ukarimu ni nguvu iliyo chini ya udhibiti — jibu laini la mtu ambaye angeweza kupiga kelele. Ni jeraha la nani unalolichochea kwa maneno yako ambalo linahitaji kugusa kwa upole?"
+      },
+      {
+        "day": 9,
+        "title": "Kujidhibiti",
+        "readings": [
+          {
+            "bookID": "2PE",
+            "chapter": 1,
+            "verseStart": 3,
+            "verseEnd": 11
+          },
+          {
+            "bookID": "PRO",
+            "chapter": 25,
+            "verseStart": 21,
+            "verseEnd": 28
+          }
+        ],
+        "reflection": "Methali inaonyesha mtu asiye na kujidhibiti kama jiji lenye kuta zilizovunjika — wazi kwa chochote. Ni 'ukuta' mmoja gani Roho anataka kujenga tena katika maisha yako wiki hii, na nani anaweza kukusaidia kuutunza?"
+      }
+    ]
+  },
+  {
+    "id": "philippians-joy",
+    "name": "Wafilipi: Furaha Katika Kila Msimu",
+    "description": "Kutembea kwa siku 4 kupitia barua yenye furaha zaidi ya Paulo — iliyoandikwa kutoka seli ya gereza — sura moja kwa siku, kila moja ikifichua uso tofauti wa furaha ambayo hali haiwezi kufikia.",
+    "totalDays": 4,
+    "category": "Epistles",
+    "gradientColors": [
+      "#7A6A2E",
+      "#3C3314"
+    ],
+    "iconName": "sun.max.fill",
+    "imageKey": "magi_journey",
+    "applicableSeasons": [
+      "hardSeason",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "Furaha katika Dhiki",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paulo anaandika barua hii akiwa katika minyororo na bado anaiita 'furaha' yake. Anarejesha gereza lake kama jukwaa la injili. Ni hali gani isiyotakikana katika maisha yako ambayo Mungu anakualika uirejeshe badala ya kukimbia?"
+      },
+      {
+        "day": 2,
+        "title": "Furaha katika Unyenyekevu",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Wimbo katika mistari 6–11 unafuatilia mwendo wa Yesu wa kushuka — sawa na Mungu, akijitenga, kuwa mwanadamu, mtiifu, alisulubiwa — kabla Baba amwinue. Unashikilia wapi hadhi katika mahali ambapo Yesu anatumika kama mfano wa kujisalimisha, na 'akili ile ile' ingekuwa vipi?"
+      },
+      {
+        "day": 3,
+        "title": "Furaha katika Kumjua Kristo",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paulo anaita wasifu wake wa kuvutia 'mavi' ikilinganishwa na kumjua Kristo. Ni sehemu gani ya wasifu wako — vyeti, majukumu, mafanikio — inayoshindana kimya kimya na Kristo kwa ajili ya kitovu cha utambulisho wako?"
+      },
+      {
+        "day": 4,
+        "title": "Furaha katika Kila Hali",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paulo anasema amejifunza — wakati uliopita, kwa juhudi kubwa — siri ya kuwa na kuridhika katika wingi au katika uhaba. Wapi katika maisha yako Bwana anakufundisha siri hiyo sasa hivi, na ni mazoea gani (ombi, shukrani, fikra sahihi) unakataa kuyatumia kwa kweli?"
+      }
+    ]
+  },
+  {
+    "id": "life-of-moses",
+    "name": "Maisha ya Musa",
+    "description": "Safari ya siku 10 kupitia maisha ya Musa — kutoka kwenye kikapu hadi kwenye kichaka kinachowaka, kutoka Bahari Nyekundu hadi Sinai — kukutana na Mungu anayepiga simu, kuokoa, kuzungumza, na kubaki.",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6C4E2A",
+      "#382712"
+    ],
+    "iconName": "flame.circle.fill",
+    "imageKey": "manna_wilderness",
+    "applicableSeasons": [
+      "workingProfessional",
+      "startingOver",
+      "hardSeason",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Alizaliwa Kwenye Kikapu",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Wakunga wa Kihebrania wanakataa amri ya Farao, mama anamweka mwanawe kwenye kikapu kwenye Nile, na Mungu tayari anaandika hadithi ya ukombozi. Wapi Mungu amekuwa akikuandaa kimya kimya, kabla hujajua kuwa ukombozi unahitajika?"
+      },
+      {
+        "day": 2,
+        "title": "Kichaka Kinachowaka",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Musa anageuka kutazama kichaka kinachowaka bila kuteketea, na Mungu anamwita kwa jina. Ni kitu gani cha kawaida ambacho Mungu anaweza kuwa anatumia kukuvuta, na je, uko tayari kugeuka kutazama?"
+      },
+      {
+        "day": 3,
+        "title": "Visingizio na Ishara",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Musa anajadili na Mungu: 'Mimi ni nani? Na ikiwa hawataniamini? Sijui kusema vizuri.' Mungu anakutana na kila pingamizi. Ni kisingizio kipi cha Musa kinachofanana zaidi na kile unachompa Mungu, na ni jibu gani la subira la Mungu kwako?"
+      },
+      {
+        "day": 4,
+        "title": "Waacheni Watu Wangu Wende",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Mizuko inamtoa madarakani kila mungu wa Wamisri — Nile, jua, mifugo — ikionyesha ni nani anayekalia kiti cha enzi kwa kweli. Ni 'mungu' gani wa tamaduni zako unahitaji Mungu akufichue kuwa hana nguvu katika maisha yako?"
+      },
+      {
+        "day": 5,
+        "title": "Pasaka",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Israeli wanaokolewa si kwa sababu ya haki zao bali kwa damu ya mwanakondoo kwenye milango yao — kivuli cha Mwanakondoo mkubwa atakayekuja. Kuona Pasaka kama picha ya Kristo kunaongeza vipi ufahamu wako wa kile damu Yake ilikamilisha?"
+      },
+      {
+        "day": 6,
+        "title": "Kupitia Baharini",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "'Simama kimya na uone wokovu wa Bwana,' Musa anawaambia watu waliokwama — na kisha Mungu anasema 'nendeni mbele.' Wapi unajikuta ukijaribiwa kuogopa au kusimama wakati Mungu anauliza kimya cha moyo na hatua za imani?"
+      },
+      {
+        "day": 7,
+        "title": "Manna na Maji",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 7
+          }
+        ],
+        "reflection": "Mungu anatoa mkate ambao hauwezi kuhifadhiwa na maji kutoka kwenye jiwe. Ni neema gani anayoikupa kila siku ambayo unajaribu kuhifadhi kwa ajili ya wasiwasi?"
+      },
+      {
+        "day": 8,
+        "title": "Sinai na Maneno Kumi",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Mungu anatoa sheria katika muktadha wa ukombozi — 'Mimi ndimi Bwana Mungu wako niliyewatoa' — si kama njia ya kupata upendo Wake bali kama muundo wa maisha pamoja Naye. Ni amri gani unayoisoma zaidi kama mzigo badala ya kama mipaka ya uhuru?"
+      },
+      {
+        "day": 9,
+        "title": "Nionyeshe Utukufu Wako",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 33,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Musa anasema, 'Ikiwa uwepo Wako hautakuja pamoja nasi, usitume sisi kutoka hapa.' Unataka nini kutoka kwa Mungu zaidi — zawadi Zake, au Yeye? Leo ingekuwa vipi tofauti ikiwa ungependa Yeye zaidi?"
+      },
+      {
+        "day": 10,
+        "title": "Mtumishi Mwaminifu",
+        "readings": [
+          {
+            "bookID": "DEU",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Musa anakufa bila kuingia Nchi ya Ahadi, lakini Mungu Mwenyewe anamzika. Ni mambo gani yasiyokamilika katika maisha yako ambayo Mungu anakuliza uyakabidhi Kwake, ukijua hadithi ni kubwa zaidi kuliko wewe?"
+      }
+    ]
+  },
+  {
+    "id": "psalm-23-deep-dive",
+    "name": "Zaburi 23: Wimbo wa Mchungaji",
+    "description": "Meditation ya siku 6 juu ya zaburi inayopendwa zaidi katika Maandiko — mstari mmoja kwa wakati — ukiunganishwa na kifungu cha Agano Jipya kinachoonyesha Kristo kama Mchungaji ambaye zaburi hiyo daima ilikuwa ikimuelekeza.",
+    "totalDays": 6,
+    "category": "Worship",
+    "gradientColors": [
+      "#4A6B3F",
+      "#253A22"
+    ],
+    "iconName": "sparkle",
+    "imageKey": "suffer_little_children",
+    "applicableSeasons": [
+      "hardSeason",
+      "growing",
+      "retired",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Bwana Ndiye Mchungaji Wangu",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 1,
+            "verseEnd": 1
+          },
+          {
+            "bookID": "JHN",
+            "chapter": 10,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "Dawudi alikuwa mchungaji — alijua uzito wa kazi hiyo. Yesu anajitaja kama 'Mchungaji Mwema' anayetoa maisha Yake. Ni mchungaji wa uongo (kazi, mafanikio, uhusiano) umekuwa ukiruhusu kufafanua thamani yako, na nini kinabadilika wakati Bwana Mwenyewe anashikilia fimbo?"
+      },
+      {
+        "day": 2,
+        "title": "Malisho ya Kijani, Maji Tulivu",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 2,
+            "verseEnd": 2
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 11,
+            "verseStart": 25,
+            "verseEnd": 30
+          }
+        ],
+        "reflection": "Mifugo haitaketi wakati wana wasiwasi, njaa, au katika mgogoro. Mchungaji 'anawafanya' hivyo. Wapi katika maisha yako Yesu anakuwezesha kupumzika kwa upole, na unashindana na nini ili kubaki wima?"
+      },
+      {
+        "day": 3,
+        "title": "Njia za Haki",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 3,
+            "verseEnd": 3
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Mchungaji 'anarejesha nafsi yangu' kabla ya kuiongoza katika njia sahihi — faraja inatangulia kurekebisha. Wapi Mungu amekuwa akikurejesha ambayo umekosea kufikiria kuwa Mungu alikuwa kimya, na ni njia gani anaweza kuwa tayari kutembea nawe sasa?"
+      },
+      {
+        "day": 4,
+        "title": "Kupitia Bonde",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 4,
+            "verseEnd": 4
+          },
+          {
+            "bookID": "2CO",
+            "chapter": 4,
+            "verseStart": 7,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "Dawudi hasemi 'kuzunguka' bali 'kupitia' bonde, na mada inabadilika hapa kutoka 'Yeye' hadi 'Wewe' — hatari inakaribia, mchungaji anakuwa wa kibinafsi zaidi. Ni bonde gani uko ndani yake, na jinsi gani ukaribu wa Mungu umeongezeka ndani yake?"
+      },
+      {
+        "day": 5,
+        "title": "Meza Katika Uwepo wa Maadui",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 5,
+            "verseEnd": 5
+          },
+          {
+            "bookID": "REV",
+            "chapter": 19,
+            "verseStart": 1,
+            "verseEnd": 10
+          }
+        ],
+        "reflection": "Mungu anakufanya uwe na sherehe mbele ya maadui ambao ungependa waondoke. Inamaanisha nini kwamba Yeye si kila wakati huondoa shida yako, bali wakati mwingine anakualika kukaa na kula wakati shida inakutazama?"
+      },
+      {
+        "day": 6,
+        "title": "Wema, Rehema, na Nyumbani",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 6,
+            "verseEnd": 6
+          },
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": 1,
+            "verseEnd": 6
+          }
+        ],
+        "reflection": "Kihibrania, 'niifuate' inaweza kusomwa kama 'fuata' — wema na rehema si wanatembea nyuma yako, wanakufuata kwa karibu. Jinsi gani mabadiliko haya yanavyobadilisha jinsi unavyokumbuka zamani zako na kuangalia mbele kwa Mungu?"
+      }
+    ]
+  },
+  {
+    "id": "acts-early-church",
+    "name": "Matendo: Kanisa la Mapema",
+    "description": "Safari ya siku 14 kupitia kitabu cha Matendo — sura mbili kwa siku — kutoka Pentekoste hadi Roma, tukitazama Roho akizaa harakati ambayo bado inasikika kwa kila muumini leo.",
+    "totalDays": 14,
+    "category": "Foundations",
+    "gradientColors": [
+      "#7A4A1C",
+      "#3E2510"
+    ],
+    "iconName": "wind",
+    "imageKey": "loaves_fishes",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional",
+      "student"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Pentekoste",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kanisa linaanzishwa wakati watu wa kawaida wanajazwa na Roho na kuanza kutangaza Yesu katika lugha ambazo hawakuwahi kusoma. Wapi katika maisha yako umekuwa ukisubiri mafunzo zaidi badala ya kumwamini Roho akuwezeshe kusema ulionayo?"
+      },
+      {
+        "day": 2,
+        "title": "Ujasiri Mbele ya Mamlaka",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Petro na Yohana wanasemwa wasihubiri — na kuomba ujasiri zaidi, si kidogo. Wapi shinikizo la kijamii limetengeneza kimya chako kuhusu Yesu, na ni maombi gani yangebadilisha mtazamo wako kutoka kwa kukubali hadi ujasiri?"
+      },
+      {
+        "day": 3,
+        "title": "Kanisa Linalokua, Linalojaribiwa",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Uongo wa Anania na Safira unahatarisha usafi wa jamii changa; baadaye, mitume wanateua ili Neno liendelee. Ni makubaliano gani ya kiutawala au binafsi katika maisha yako ya kiroho yanayonyamaza kimya misheni?"
+      },
+      {
+        "day": 4,
+        "title": "Stefano na Kutawanyika",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kifo cha Stefano kinaonekana kama mwisho wa harakati — lakini dhuluma inayofuata inatawanya injili kote ulimwengu uliojulikana. Ni mwisho gani katika maisha yako ambao Mungu anaweza kuwa akitumia kama mwanzo usioweza kuiona bado?"
+      },
+      {
+        "day": 5,
+        "title": "Sauli Aligeuzwa, Kornelio Alijumuishwa",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Adui mkali wa kanisa anakuwa mjumbe wake mkuu, na centurion wa Kirumi anakuwa ndugu. Ni kubadilika kwa nani kutaweza kukushangaza zaidi, na je, uko tayari kuomba kwa hilo kwa matarajio halisi?"
+      },
+      {
+        "day": 6,
+        "title": "Antiokia na Malaika",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Waumini wanaitwa 'Wakristo' kwa mara ya kwanza Antiokia — kanisa la wageni likiwa kituo. Jinsi gani Mungu anatumia watu walioko pembezoni kukua kanisa lake kwa njia ambazo kituo cha kidini hakiwezi kuona?"
+      },
+      {
+        "day": 7,
+        "title": "Safari ya Kwanza ya Ujumbe",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Roho anasema, 'Mtenganishe Paulo na Barnaba kwa kazi ambayo nimewaita.' Ni kutumwa kwa nani unachohusika — ama kutumwa au kuunga mkono kwa maombi — na unachukuliaje uaminifu huo kwa uzito?"
+      },
+      {
+        "day": 8,
+        "title": "Baraza la Yerusalemu na Gereza la Wafilipi",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kanisa linakubaliana kwamba neema ni kweli kwa Mataifa, na Paulo anaimba katika seli ya gereza usiku. Wapi bado unazidisha masharti yasiyoelezwa kwa neema ya Mungu, na ni wimbo gani unaweza kuwa unakusubiri katika mahali pako pa ugumu?"
+      },
+      {
+        "day": 9,
+        "title": "Athene na Korintho",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paulo anashiriki na wafalsafa wa kipagani katika Areopagus kwa kunukuu washairi wao wenyewe. Jinsi gani unaweza kujifunza kuzungumza injili kwa msamiati wa watu walio karibu nawe bila kupunguza ukweli?"
+      },
+      {
+        "day": 10,
+        "title": "Efeso na Kuaga kwa Upole",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paulo analia pamoja na wazee wa Efeso, akiwaambia kwamba 'ni heri kutoa kuliko kupokea.' Ni nani Mungu amekupa kumtunza, na unahitaji kumpenda vipi kwa makusudi zaidi wiki hii?"
+      },
+      {
+        "day": 11,
+        "title": "Paulo Alikamatwa Yerusalemu",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paulo anaendelea kuelekea mateso kwa sababu 'amefungwa katika Roho.' Wapi Mungu anakutaka uelekee kwenye ugumu kwa sababu ni utii, si kuuepuka kwa sababu ni mgumu?"
+      },
+      {
+        "day": 12,
+        "title": "Ujasiri Mbele ya Watawala",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bwana anasimama karibu na Paulo usiku na kusema, 'Chukua ujasiri.' Ni lini umekuwa ukihitaji neno lisiloonekana ili kuendelea, na jinsi gani Mungu anaweza kuwa anakunong'oneza usiku huu?"
+      },
+      {
+        "day": 13,
+        "title": "Karibu Kuamuriwa",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Agrippa anasema Paulo 'karibu' alimshawishi kuwa Mkristo. Wapi katika maisha yako mwenyewe uko 'karibu' kujitolea, na ni nini kitakachohitajika kufunga pengo kati ya dhamira na kujisalimisha?"
+      },
+      {
+        "day": 14,
+        "title": "Kukabiliwa na Baharini hadi Roma",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Matendo yanaisha ghafla — Paulo anahubiri ufalme kutoka nyumba aliyokodisha, amefungwa kwa askari, na hadithi hiyo wazi wazi haijaisha. Wewe ni sehemu ya hadithi hiyo isiyokamilika. Ni mstari gani ujao Mungu anauandika kupitia wewe?"
+      }
+    ]
+  },
+  {
+    "id": "first-john-assurance",
+    "name": "1 Yohana: Ili Ujue",
+    "description": "Kutembea kwa siku 5 kupitia barua ya kwanza ya Yohana — imeandikwa ili waumini 'wajue kwamba wana uzima wa milele.' Kila sura inachunguza jaribio tofauti la imani halisi.",
+    "totalDays": 5,
+    "category": "Epistles",
+    "gradientColors": [
+      "#3D5A8B",
+      "#1C2D5C"
+    ],
+    "iconName": "checkmark.seal.fill",
+    "imageKey": "bethany_mary_martha",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "anxiety",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Kutembea Katika Mwanga",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Yohana anasisitiza kwamba ushirika na Mungu unahusiana na kutembea katika mwanga — kuleta kile kilichofichika wazi. Ni eneo gani moja ambapo umekuwa ukijifanya kwamba kukiri kwa dhati kutaleta ushirika badala ya aibu?"
+      },
+      {
+        "day": 2,
+        "title": "Kukaa, Siyo Kuamini Tu",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jaribio la Yohana la upendo kwa Mungu ni rahisi: 'Yeyote anayeshika neno lake, ndani yake kweli upendo wa Mungu umekamilishwa.' Je, uhusiano wako wa karibu ungetaja tofauti kati ya imani zako na tabia yako vipi?"
+      },
+      {
+        "day": 3,
+        "title": "Watoto wa Mungu",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "'Tazama aina gani ya upendo Baba ametupa — kwamba tuitwe watoto wa Mungu.' Siku hii ingekuwa tofauti vipi kama ungeingia ukiamini kwamba utambulisho wako wa kweli ni 'mtoto mpendwa'?"
+      },
+      {
+        "day": 4,
+        "title": "Mungu Ni Upendo",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Yohana anasema 'tunapenda kwa sababu Yeye alitupenda kwanza' — upendo wetu daima ni jibu. Upendo wa nani umekuwa ukikufuata kana kwamba unaweza kuupata, na jinsi gani upendo wa Mungu wa awali unakufungua kupenda mtu huyo kwa mapumziko, si kwa hitaji?"
+      },
+      {
+        "day": 5,
+        "title": "Ili Ujue",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Yohana anasema aliandika barua hii 'ili ujue kwamba una uzima wa milele.' Ni mtihani upi wa Yohana — imani katika Yesu, upendo kwa wengine, utiifu kwa Neno Lake — ambao Roho anataka kukuhakikishia zaidi leo?"
+      }
+    ]
+  },
+  {
+    "id": "james-faith-that-works",
+    "name": "Yakobo: Imani Inayoleta Matendo",
+    "description": "Utafiti wa siku 5 wa Yakobo — barua yenye vitendo zaidi katika Agano Jipya — ikikabiliana na pengo kati ya kile tunachosema tunaamini na jinsi tunavyoishi.",
+    "totalDays": 5,
+    "category": "Epistles",
+    "gradientColors": [
+      "#8B5A2E",
+      "#44290F"
+    ],
+    "iconName": "hammer.fill",
+    "imageKey": "davids_three_mighty_men",
+    "applicableSeasons": [
+      "workingProfessional",
+      "growing",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "relationships",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Hesabu Yote Kuwa Furaha",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Yakobo hasemi majaribu NI furaha — anasema hesabu majaribu KAMA furaha kwa sababu ya kile Mungu anachozalisha. Ni jaribu gani la sasa litalazimika kufanywa upya wiki hii ikiwa ungeamini kweli Mungu anakuza kitu ndani yako kupitia hilo?"
+      },
+      {
+        "day": 2,
+        "title": "Imani Bila Matendo Ipo Kifo",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Yakobo hatoi imani dhidi ya matendo — anasema imani halisi daima inafanya kazi. Ni kitendo kimoja maalum cha utiifu ambacho kingefanya imani yako ya faragha ionekane wiki hii?"
+      },
+      {
+        "day": 3,
+        "title": "Kukandamiza Lugha",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Yakobo analinganisha lugha na rudder ndogo inayongoza meli kubwa na spark ndogo inayowaka msitu. Ni wapi maneno yako yanayoongoza maisha yako au maisha ya watu wengine katika mwelekeo ambao ungekuwa na aibu kufika?"
+      },
+      {
+        "day": 4,
+        "title": "Urafiki na Ulimwengu",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Yakobo anasema ugumu unatokana na tamaa zinazopigana ndani yetu — na kwamba 'hatuna kwa sababu hatuombi.' Ni tamaa ipi inayosababisha mgogoro katika maisha yako hivi sasa, na je, umemleta kwa Mungu kwa ukweli katika maombi?"
+      },
+      {
+        "day": 5,
+        "title": "Mvumilivu na Anayeomba",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Yakobo anamaliza kwa kuitisha kanisa kuombeana, wakikiri dhambi ili uponyaji uje. Ni nani katika maisha yako ambaye yuko salama vya kutosha kusikia ukikiri, na itakugharimu kiasi gani kumwomba kuomba pamoja nawe?"
+      }
+    ]
+  },
+  {
+    "id": "hebrews-jesus-is-better",
+    "name": "Waebrania: Yesu Ni Bora",
+    "description": "Kupanda kwa siku 13 kupitia Waebrania — sura moja kwa siku — ikionyesha jinsi Yesu anavyotimiza na kuzidi kila picha ya Agano la Kale iliyomuelekeza.",
+    "totalDays": 13,
+    "category": "Theology",
+    "gradientColors": [
+      "#5A2F2F",
+      "#2C1414"
+    ],
+    "iconName": "crown.fill",
+    "imageKey": "sacrifice_isaac",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Mwana, Aliye Bora Kuliko Malaika",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Waebrania inaanza kwa kutangaza kwamba Mungu amesema kwa ukamilifu zaidi katika Mwana Wake — 'mwangaza wa utukufu wa Mungu.' Wapi umekuwa ukisikiliza Mungu katika vyanzo elfu vya pili wakati tayari amezungumza kwa wazi zaidi katika Yesu?"
+      },
+      {
+        "day": 2,
+        "title": "Wokovu Mkubwa Hivi",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Yesu alishuka chini kuliko malaika — mwanadamu, aliyetekwa, akiteseka — ili 'akate mauti kwa ajili ya kila mtu.' Jinsi gani Yesu anashiriki mwili wako halisi inabadilisha jinsi unavyomleta udhaifu wako kwake?"
+      },
+      {
+        "day": 3,
+        "title": "Bora Kuliko Musa",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Musa alikuwa mwaminifu kama mtumishi katika nyumba ya Mungu; Yesu ni mwaminifu kama Mwana juu yake. Wapi unahudumu katika nyumba ya Mungu kwa njia ambayo kwa siri inakimbia mbali na kumtumaini Mwana wa Mungu?"
+      },
+      {
+        "day": 4,
+        "title": "Ingiza Katika Mapumziko Yake",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Mwandishi anasema mapumziko ya Sabato yanabaki kwa watu wa Mungu — lakini tunapaswa kujitahidi kuingia ndani yake. Ni jitihada gani zisizo na mapumziko katika maisha yako ambazo kwa kweli ni kutokuweza kusimama na kuamini kwamba kazi ni ya Kristo, si yako?"
+      },
+      {
+        "day": 5,
+        "title": "Kuhani Mkubwa",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Yesu ni kuhani ambaye 'katika siku za mwili wake alitoa maombi na dua kwa sauti kubwa na machozi.' Jinsi gani kufikiria Yesu kama kuhani anayelia na mwenye huruma kunabadilisha jinsi unavyomleta machozi yako kwake?"
+      },
+      {
+        "day": 6,
+        "title": "Kuendelea Katika Ukuaji",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Mwandishi anawahimiza wasomaji wasikaze kama watoto wa kiroho bali waendelee. Ni ukweli upi wa 'misingi' umejikita ndani yake badala ya kukua katika chakula thabiti?"
+      },
+      {
+        "day": 7,
+        "title": "Kuhani Kama Melkizedeki",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ushuhuda wa Yesu ni wa kudumu — 'Yeye daima anaishi kufanya maombezi.' Jinsi gani kujua Yesu anaomba kwa ajili yako sasa hivi kunabadilisha kile unachobeba kuingia kesho?"
+      },
+      {
+        "day": 8,
+        "title": "Agano Bora",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Chini ya agano jipya, Mungu anaandika sheria zake 'katika mioyo yao.' Wapi bado unahusiana na Mungu kupitia sheria za nje wakati anataka kukugeuza kutoka ndani?"
+      },
+      {
+        "day": 9,
+        "title": "Maramoja kwa Wote",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Makuhani wa zamani walitoa dhabihu za kila siku ambazo hazingeweza kusafisha dhamiri; dhabihu moja ya Kristo inafanya hivyo. Ni dhambi ipi unayoendelea kujikiri kana kwamba kazi yake iliyokamilika inahitaji kurudi kwako ili iweze kushikilia?"
+      },
+      {
+        "day": 10,
+        "title": "Njoo Karibu Kwa Ujasiri",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kwa sababu ya damu ya Yesu tunaweza kuja karibu 'kwa ujasiri' — pazia limekatwa. Unapokuja kwa Mungu, je, inahisi kama kukaribia kiti cha enzi cha neema au chumba cha kusubiri cha afisa asiye na shauku? Nini kingebadilika?"
+      },
+      {
+        "day": 11,
+        "title": "Ukumbi wa Imani",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kila mtu aliyeorodheshwa hapa alikufa bila kupokea kile kilichoahidiwa, 'lakini walikiona na kukisalimu kwa mbali.' Hadithi yako ya kusubiri inaweza kuhesabiwa kama sura ya ukumbi huu wa imani vipi?"
+      },
+      {
+        "day": 12,
+        "title": "Wingu Kubwa la Mashahidi",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Mwandishi anatusihi tuweke macho yetu kwa Yesu, 'mwanzo na mkamilishaji wa imani yetu,' na kukimbia kwa uvumilivu. Ni uzito gani — sio lazima uwe dhambi, lakini mzito — unayekwamisha mbio zako, na je, uko tayari kuuweka chini?"
+      },
+      {
+        "day": 13,
+        "title": "Nje ya Kambi",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Yesu aliteseka 'nje ya kambi' — mbali na heshima ya kidini ya siku yake. Yuko wapi akikuita nje ya kambi yako ya faraja ili uwe pamoja Naye kati ya wale ambao ulimwengu wa heshima umewatenga?"
+      }
+    ]
+  }
+]

@@ -1,0 +1,456 @@
+{
+  "version": 1,
+  "testimonials": [
+    {
+      "id": "t_001",
+      "name": "Sarah M.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "loneliness"
+      ],
+      "seasons": [
+        "single",
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "現在在電子郵件之前打開它。難以解釋，但我的早晨感覺不同。",
+      "daysUsing": 94
+    },
+    {
+      "id": "t_002",
+      "name": "James T.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "purpose"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "隨意問了一些神學問題給AI，想看看能否難倒它。結果沒有。我真的很驚訝。",
+      "daysUsing": 142
+    },
+    {
+      "id": "t_003",
+      "name": "Lauren R.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "relationship"
+      ],
+      "seasons": [
+        "married",
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "凌晨三點的焦慮現在有了歸宿。醒來，讀點東西，深呼吸，然後再睡。就這樣。",
+      "daysUsing": 58
+    },
+    {
+      "id": "t_004",
+      "name": "David C.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "doubt"
+      ],
+      "seasons": [
+        "startingOver"
+      ],
+      "rating": 5,
+      "quote": "已經12年多沒進過教堂了。這裡不覺得像教堂。更像是一位恰好知道經文的朋友。",
+      "daysUsing": 23
+    },
+    {
+      "id": "t_005",
+      "name": "Maria V.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "grief"
+      ],
+      "seasons": [
+        "hardSeason"
+      ],
+      "rating": 5,
+      "quote": "在失去我媽媽之後，這些詩篇並不是泛泛之談。它們正是我所需要的。",
+      "daysUsing": 77
+    },
+    {
+      "id": "t_006",
+      "name": "Marcus J.",
+      "faithStage": "growing",
+      "burdens": [
+        "purpose",
+        "temptation"
+      ],
+      "seasons": [
+        "student"
+      ],
+      "rating": 5,
+      "quote": "已經連續42天了，還在繼續。老實說，自從中學以來，我沒有保持這麼久的事情。",
+      "daysUsing": 42
+    },
+    {
+      "id": "t_007",
+      "name": "Elena K.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "financial"
+      ],
+      "seasons": [
+        "parent",
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "這段經文在我打開Twitter之前就觸動了我。僅此一點就值得了。",
+      "daysUsing": 61
+    },
+    {
+      "id": "t_008",
+      "name": "Robert H.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "health"
+      ],
+      "seasons": [
+        "retired"
+      ],
+      "rating": 5,
+      "quote": "我68歲了。我以為我已經讀過所有的東西。早晨散步時的音頻聖經讓我看到了我一生中略過的經文。",
+      "daysUsing": 186
+    },
+    {
+      "id": "t_009",
+      "name": "Priya S.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "loneliness",
+        "purpose"
+      ],
+      "seasons": [
+        "single",
+        "startingOver"
+      ],
+      "rating": 5,
+      "quote": "我不是在教會長大的。我想在不被評判的情況下理解經文。這是我找到的最溫和的介紹。",
+      "daysUsing": 31
+    },
+    {
+      "id": "t_010",
+      "name": "Thomas W.",
+      "faithStage": "growing",
+      "burdens": [
+        "anger",
+        "relationship"
+      ],
+      "seasons": [
+        "married",
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "這本祈禱日記溫柔地提醒我，哈哈。因為這，我成為了一個更好的丈夫。",
+      "daysUsing": 89
+    },
+    {
+      "id": "t_011",
+      "name": "Naomi B.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "doubt",
+        "purpose"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "我可以和它辯論。它用經文反擊，而不是空洞的話語。這很少見。",
+      "daysUsing": 119
+    },
+    {
+      "id": "t_012",
+      "name": "Hassan A.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety"
+      ],
+      "seasons": [
+        "student"
+      ],
+      "rating": 5,
+      "quote": "期末考周，卻沒有失控。早上8點的經文讓我保持穩定。",
+      "daysUsing": 46
+    },
+    {
+      "id": "t_013",
+      "name": "Grace L.",
+      "faithStage": "growing",
+      "burdens": [
+        "relationship",
+        "loneliness"
+      ],
+      "seasons": [
+        "single"
+      ],
+      "rating": 5,
+      "quote": "約會應用程式在我的主屏幕上，和這個並排。單身的這十年真奇怪。這個會留下來。",
+      "daysUsing": 38
+    },
+    {
+      "id": "t_014",
+      "name": "Paul M.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "purpose"
+      ],
+      "seasons": [
+        "workingProfessional",
+        "married"
+      ],
+      "rating": 5,
+      "quote": "我是一名牧師。我在自己的靈修中使用這個，而不僅僅是為了準備講道。這就是證據。",
+      "daysUsing": 203
+    },
+    {
+      "id": "t_015",
+      "name": "Rachel F.",
+      "faithStage": "growing",
+      "burdens": [
+        "grief",
+        "loneliness"
+      ],
+      "seasons": [
+        "hardSeason",
+        "startingOver"
+      ],
+      "rating": 5,
+      "quote": "離婚年。當我無法打開聖經而哭泣時，這讓我保持在神的話語中。",
+      "daysUsing": 67
+    },
+    {
+      "id": "t_016",
+      "name": "Kenji T.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "purpose",
+        "anxiety"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "我退出了兩個冥想應用程式，因為它們讓我感到內疚。這個沒有——而這正是我在第52天仍然在這裡的原因。",
+      "daysUsing": 52
+    },
+    {
+      "id": "t_017",
+      "name": "Abigail O.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "health"
+      ],
+      "seasons": [
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "我女兒這週要求一起祈禱。第一次。我把這歸咎於這個應用，哈哈。",
+      "daysUsing": 104
+    },
+    {
+      "id": "t_018",
+      "name": "Jonathan P.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "temptation",
+        "purpose"
+      ],
+      "seasons": [
+        "single",
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "晚上9點的經文正好在我通常開始無意義滑動的時候發送。僅此一點就值得了。",
+      "daysUsing": 131
+    },
+    {
+      "id": "t_019",
+      "name": "Mia D.",
+      "faithStage": "growing",
+      "burdens": [
+        "loneliness"
+      ],
+      "seasons": [
+        "student"
+      ],
+      "rating": 5,
+      "quote": "大學生活孤獨，我的朋友群體不是信徒。在我找到教會之前，這就是我的教會。",
+      "daysUsing": 73
+    },
+    {
+      "id": "t_020",
+      "name": "Carlos G.",
+      "faithStage": "growing",
+      "burdens": [
+        "financial",
+        "anxiety"
+      ],
+      "seasons": [
+        "workingProfessional",
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "現在經濟緊張，但我仍然為這個付費。這大概已經說明了一切。",
+      "daysUsing": 87
+    },
+    {
+      "id": "t_021",
+      "name": "Hannah W.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "grief"
+      ],
+      "seasons": [
+        "married"
+      ],
+      "rating": 5,
+      "quote": "一月份流產。這個應用從未知道，但那些經文知道。不知怎的。",
+      "daysUsing": 112
+    },
+    {
+      "id": "t_022",
+      "name": "Samir N.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "doubt"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "我是一個懷疑論者。我來這裡是準備要反駁的。我留下來是因為誠實的回答。",
+      "daysUsing": 29
+    },
+    {
+      "id": "t_023",
+      "name": "Olivia S.",
+      "faithStage": "growing",
+      "burdens": [
+        "relationship",
+        "purpose"
+      ],
+      "seasons": [
+        "single"
+      ],
+      "rating": 5,
+      "quote": "在第三週停止將我的生活與Instagram比較。每日經文取代了那個滑動的習慣。",
+      "daysUsing": 54
+    },
+    {
+      "id": "t_024",
+      "name": "Michael A.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "purpose"
+      ],
+      "seasons": [
+        "retired"
+      ],
+      "rating": 5,
+      "quote": "65歲。早晨散步時的音頻聖經是我今年花的最值得的錢。",
+      "daysUsing": 168
+    },
+    {
+      "id": "t_025",
+      "name": "Victoria B.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "loneliness"
+      ],
+      "seasons": [
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "產後的腦袋無法讀完整章。每天一節的格式拯救了我。",
+      "daysUsing": 48
+    },
+    {
+      "id": "t_026",
+      "name": "Nathan R.",
+      "faithStage": "growing",
+      "burdens": [
+        "temptation",
+        "anger"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "AI不會奉承我。它告訴我真相。我奇怪地需要這樣的工具。",
+      "daysUsing": 96
+    },
+    {
+      "id": "t_027",
+      "name": "Esther C.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "health"
+      ],
+      "seasons": [
+        "hardSeason",
+        "married"
+      ],
+      "rating": 5,
+      "quote": "化療的日子是安靜的日子。聲音景觀加上詩篇讓我度過了第4、5和6輪。",
+      "daysUsing": 135
+    },
+    {
+      "id": "t_028",
+      "name": "Andre L.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "anxiety",
+        "loneliness"
+      ],
+      "seasons": [
+        "startingOver",
+        "single"
+      ],
+      "rating": 5,
+      "quote": "戒毒六個月。當會議不夠時，這讓我保持安靜。",
+      "daysUsing": 78
+    },
+    {
+      "id": "t_029",
+      "name": "Faith M.",
+      "faithStage": "growing",
+      "burdens": [
+        "purpose",
+        "doubt"
+      ],
+      "seasons": [
+        "student"
+      ],
+      "rating": 5,
+      "quote": "是的，我的名字真的叫Faith。是的，我知道。這個應用仍然讓我驚訝。",
+      "daysUsing": 41
+    },
+    {
+      "id": "t_030",
+      "name": "Isaac B.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "purpose",
+        "anger"
+      ],
+      "seasons": [
+        "workingProfessional",
+        "married"
+      ],
+      "rating": 5,
+      "quote": "在這個之前刪除了三個聖經應用。我現在真的在打開我的聖經，而不僅僅是接收每日經文。這就是整個區別。",
+      "daysUsing": 157
+    }
+  ]
+}

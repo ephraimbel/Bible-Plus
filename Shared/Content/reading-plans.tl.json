@@ -1,0 +1,5943 @@
+[
+  {
+    "id": "psalms-of-peace",
+    "name": "Mga Awit ng Kapayapaan",
+    "description": "Isang 7-araw na paglalakbay sa mga awit na tuwirang nagsasalita sa iyong nag-aalalang puso, ginagabayan ka patungo sa katahimikan at kapayapaang tanging Diyos lamang ang makapagbibigay.",
+    "totalDays": 7,
+    "category": "Comfort",
+    "gradientColors": [
+      "#4A6741",
+      "#2D4A3E"
+    ],
+    "iconName": "leaf.fill",
+    "imageKey": "jesus_calms_storm",
+    "applicableSeasons": [
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Ang Pag-aalaga ng Pastol",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang ibig sabihin para sa iyo na ang Diyos ay iyong pastol sa panahong ito ng iyong buhay?"
+      },
+      {
+        "day": 2,
+        "title": "Tiwala sa Liwanag",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kailan mo naranasan ang Diyos bilang iyong liwanag sa isang sandali ng kadiliman?"
+      },
+      {
+        "day": 3,
+        "title": "Tikman at Tingnan",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano ka iniligtas ng Diyos mula sa isang takot na minsang nagpasakop sa iyo?"
+      },
+      {
+        "day": 4,
+        "title": "Ang Diyos ay Aming Kanlungan",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Saan mo kailangan 'manahimik at malaman' na Siya ay Diyos ngayon?"
+      },
+      {
+        "day": 5,
+        "title": "Sa Ilalim ng Kanyang mga Pakpak",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 91,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang pakiramdam na manatili sa kanlungan ng Kataas-taasan?"
+      },
+      {
+        "day": 6,
+        "title": "Ang Tagapag-ingat na Hindi Natutulog",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 121,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano binabago ng kaalaman na ang Diyos ay hindi natutulog ang paraan ng iyong pagharap sa gabing ito?"
+      },
+      {
+        "day": 7,
+        "title": "Kakaibang Nilalang",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong katotohanan tungkol sa kung paano ka kilala ng Diyos ang nagbibigay ng pinaka-kapayapaan sa ngayon?"
+      }
+    ]
+  },
+  {
+    "id": "gospel-of-john",
+    "name": "Ang Ebanghelyo ni Juan",
+    "description": "Maglakbay sa buong Ebanghelyo ni Juan sa loob ng 21 araw at makatagpo kay Jesus — ang Salita na naging laman — isang kabanata sa isang pagkakataon.",
+    "totalDays": 21,
+    "category": "Gospel",
+    "gradientColors": [
+      "#8B6914",
+      "#5C4A1C"
+    ],
+    "iconName": "book.fill",
+    "imageKey": "baptism_jesus",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Ang Salita na Naging Laman",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang ibig sabihin sa iyo na si Jesus ay umiiral bago ang lahat ng bagay at piniling manirahan sa atin?"
+      },
+      {
+        "day": 2,
+        "title": "Tubig sa Alak",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Saan sa iyong buhay mo kailangan si Jesus upang gawing milagroso ang karaniwan?"
+      },
+      {
+        "day": 3,
+        "title": "Dapat Kang Isilang Muli",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano hinahamon o hinihikayat ng ideya ng 'pagsilang muli' ang iyong pag-unawa sa pananampalataya?"
+      },
+      {
+        "day": 4,
+        "title": "Buhay na Tubig",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong mga balon ang iyong pinagmumulan na nag-iiwan sa iyo ng uhaw, at ano ang itsura ng buhay na tubig?"
+      },
+      {
+        "day": 5,
+        "title": "Pagpapagaling sa Batis",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Mayroon bang isang lugar kung saan ikaw ay naghihintay ng pagpapagaling ngunit hindi mo pa ganap na hiniling ito kay Jesus?"
+      },
+      {
+        "day": 6,
+        "title": "Tinapay ng Buhay",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang hitsura ng pagpapakain kay Jesus bilang tinapay ng buhay araw-araw?"
+      },
+      {
+        "day": 7,
+        "title": "Mga Ilog ng Buhay na Tubig",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano ka tumutugon kapag ang mga opinyon ng mundo tungkol kay Jesus ay salungat sa iyong sariling karanasan sa Kanya?"
+      },
+      {
+        "day": 8,
+        "title": "Ang Liwanag ng Mundo",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Saan mo kailangan si Jesus upang iilaw ang Kanyang liwanag sa isang lugar ng kahihiyan o kadiliman?"
+      },
+      {
+        "day": 9,
+        "title": "Paningin para sa mga Bulag",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang isang lugar ng espirituwal na pagkabulag na nais mong buksan ng mga mata ni Jesus?"
+      },
+      {
+        "day": 10,
+        "title": "Ang Mabuting Pastol",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano binabago ng kaalaman na si Jesus ay nagbigay ng Kanyang buhay ng kusa ang iyong pananaw sa Kanyang pag-ibig?"
+      },
+      {
+        "day": 11,
+        "title": "Lazarus, Lumabas Ka",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong patay na bahagi sa iyong buhay ang kailangan mong tawagin ni Jesus pabalik sa buhay?"
+      },
+      {
+        "day": 12,
+        "title": "Pinahiran para sa Libing",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang pinaka-marangyang gawa ng pagsamba na maiaalok mo kay Jesus ngayon?"
+      },
+      {
+        "day": 13,
+        "title": "Ang Lingkod na Hari",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kanino mga paa ang hinihiling ni Jesus na hugasan mo sa pamamagitan ng mapagpakumbabang paglilingkod ngayong linggo?"
+      },
+      {
+        "day": 14,
+        "title": "Ang Daan, ang Katotohanan, ang Buhay",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano naaapektuhan ng pangako ni Jesus na maghanda ng lugar para sa iyo ang paraan ng iyong pamumuhay ngayon?"
+      },
+      {
+        "day": 15,
+        "title": "Ang Tunay na Ubasan",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang hitsura ng 'pananatili' kay Jesus para sa iyo ngayong linggo?"
+      },
+      {
+        "day": 16,
+        "title": "Darating ang Tulong",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano mo naranasan ang Banal na Espiritu na ginagabayan ka patungo sa katotohanan?"
+      },
+      {
+        "day": 17,
+        "title": "Nanalangin si Jesus para sa Iyo",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang pakiramdam na malaman na personal na nanalangin si Jesus para sa iyong pagkakaisa sa Kanya at sa Ama?"
+      },
+      {
+        "day": 18,
+        "title": "Pagtataksil at Pag-aresto",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kailan mo, tulad ni Pedro, itinanggi ang pagkakakilala kay Jesus sa pamamagitan ng iyong mga salita o kilos?"
+      },
+      {
+        "day": 19,
+        "title": "Tapos Na",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong pasanin ang dala-dala mo na natapos na ni Jesus sa krus?"
+      },
+      {
+        "day": 20,
+        "title": "Siya ay Nabuhay",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano binabago ng katotohanan ng muling pagkabuhay ang paraan ng iyong pagharap sa iyong pinakamalaking takot?"
+      },
+      {
+        "day": 21,
+        "title": "Mahal Mo Ba Ako?",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kung tinanong ka ni Jesus ng 'Mahal mo ba ako?' ng tatlong beses ngayon, paano huhubog ang iyong sagot sa iyong mga kilos?"
+      }
+    ]
+  },
+  {
+    "id": "30-days-of-wisdom",
+    "name": "30 Araw ng Karunungan",
+    "description": "Isang kabanata ng Kawikaan para sa bawat araw ng buwan — walang panahong karunungan para sa mga desisyon, relasyon, trabaho, at pang-araw-araw na buhay.",
+    "totalDays": 30,
+    "category": "Wisdom",
+    "gradientColors": [
+      "#6B4C8A",
+      "#3D2B5C"
+    ],
+    "iconName": "lightbulb.fill",
+    "imageKey": "ten_commandments",
+    "applicableSeasons": [
+      "workingProfessional",
+      "parenthood"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Ang Simula ng Karunungan",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang ibig sabihin ng takot sa Panginoon bilang panimulang punto ng lahat ng karunungan?"
+      },
+      {
+        "day": 2,
+        "title": "Paghahanap ng Nakatagong Kayamanan",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Gaano ka sinadyang naghahanap ng karunungan tulad ng paghahanap mo sa nakatagong kayamanan?"
+      },
+      {
+        "day": 3,
+        "title": "Magtiwala nang Buong Puso",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong desisyon ang iyong hinaharap kung saan kailangan mong magtiwala sa Diyos sa halip na umasa sa iyong sariling pag-unawa?"
+      },
+      {
+        "day": 4,
+        "title": "Ingatan ang Iyong Puso",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang pinapayagan mong pumasok sa iyong puso na maaaring humihila sa iyo palayo sa landas ng karunungan?"
+      },
+      {
+        "day": 5,
+        "title": "Ang Panganib ng Kakulangan sa Karunungan",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Saan sa iyong buhay ka pinaka-tinukso na kumuha ng mga shortcut na humahantong palayo sa pinakamainam ng Diyos?"
+      },
+      {
+        "day": 6,
+        "title": "Mga Aral mula sa Langgam",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang maituturo sa iyo ng sipag ng langgam tungkol sa iyong kasalukuyang mga responsibilidad?"
+      },
+      {
+        "day": 7,
+        "title": "Ang Gastos ng Tukso",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong mga hangganan ang kailangan mong itakda upang protektahan ang iyong sarili mula sa tukso?"
+      },
+      {
+        "day": 8,
+        "title": "Tumatawag ang Karunungan",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano mo nakikilala ang tinig ng karunungan na tumatawag sa iyo sa gitna ng ingay ng pang-araw-araw na buhay?"
+      },
+      {
+        "day": 9,
+        "title": "Dalawang Paanyaya",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Aling paanyaya ang madalas mong tinatanggap — ang piging ng karunungan o ang shortcut ng kahangalan?"
+      },
+      {
+        "day": 10,
+        "title": "Ang Matalinong Anak",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano sumasalamin ang iyong karakter sa bahay sa karunungan na hinahanap mo sa publiko?"
+      },
+      {
+        "day": 11,
+        "title": "Tapat na Timbangan",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Saan sa iyong buhay kailangan mong itaguyod ang higit pang katapatan at integridad?"
+      },
+      {
+        "day": 12,
+        "title": "Mga Salitang Nagpapagaling",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano makapagdadala ng pagpapagaling ang iyong mga salita ngayon sa halip na pinsala sa sinumang nasa paligid mo?"
+      },
+      {
+        "day": 13,
+        "title": "Nakikilala sa mga Matalino",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Sino ang mga matalinong kasama sa iyong buhay, at paano ka makatututo nang higit mula sa kanila?"
+      },
+      {
+        "day": 14,
+        "title": "Ang Daan na Mukhang Tama",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kailan naging mali ang daan na mukhang tama sa iyo?"
+      },
+      {
+        "day": 15,
+        "title": "Isang Maamo na Sagot",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Sino sa iyong buhay ang nangangailangan ng maamo na sagot mula sa iyo sa halip na isang masakit na salita?"
+      },
+      {
+        "day": 16,
+        "title": "Ihandog ang Iyong mga Plano",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong mga plano ang hawak mo na kailangan mong lubos na ipagkatiwala sa Panginoon?"
+      },
+      {
+        "day": 17,
+        "title": "Isang Kaibigan sa Lahat ng Panahon",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano ka magiging mas tapat na kaibigan sa isang tao na dumadaan sa pagsubok?"
+      },
+      {
+        "day": 18,
+        "title": "Isang Matibay na Tore",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kapag dumating ang problema, tumatakbo ka ba muna sa pangalan ng Panginoon o sa ibang bagay?"
+      },
+      {
+        "day": 19,
+        "title": "Kabaitan sa mga Mahihirap",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano mo maipapakita ang pagiging mapagbigay sa isang nangangailangan ngayong linggo bilang isang gawa ng pagsamba?"
+      },
+      {
+        "day": 20,
+        "title": "Puso ng Hari",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano binabago ng pagtitiwala sa kapangyarihan ng Diyos sa mga pinuno at bansa ang paraan ng iyong panalangin?"
+      },
+      {
+        "day": 21,
+        "title": "Katarungan at Katuwiran",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Saan mo maipagpapatuloy ang katarungan at katuwiran nang mas tapat sa iyong pang-araw-araw na buhay?"
+      },
+      {
+        "day": 22,
+        "title": "Isang Magandang Pangalan",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong uri ng reputasyon ang iyong binubuo, at sumasalamin ba ito sa karakter ni Cristo?"
+      },
+      {
+        "day": 23,
+        "title": "Huwag Mag-inggit",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang nag-uudyok ng inggit sa iyong puso, at paano maaaring palitan ito ng pasasalamat?"
+      },
+      {
+        "day": 24,
+        "title": "Lakas sa Pagsubok",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano ka tumutugon kapag sinusubok ng pagsubok ang lakas ng iyong pananampalataya?"
+      },
+      {
+        "day": 25,
+        "title": "Mga Mansanas ng Ginto",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kailan ang huling pagkakataon na ang mga tamang salita ng isang tao ay parang mga mansanas ng ginto sa iyo?"
+      },
+      {
+        "day": 26,
+        "title": "Salamin ng Tamad",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong bahagi ng katamaran o pagpapaliban ang humahadlang sa iyo mula sa pinakamainam ng Diyos para sa iyo?"
+      },
+      {
+        "day": 27,
+        "title": "Ang Bakal ay Nagpapatalas sa Bakal",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Sino sa iyong buhay ang nagpapatalas sa iyo, at sinasadya mo bang namumuhunan sa relasyong iyon?"
+      },
+      {
+        "day": 28,
+        "title": "Ang mga Matuwid ay Matapang",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Saan mo kailangan ng higit pang tapang upang ipaglaban ang kung ano ang tama?"
+      },
+      {
+        "day": 29,
+        "title": "Bisyon at Pagsunod",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano nakatutulong ang pagkakaroon ng bisyon na nakaugat sa Salita ng Diyos upang hindi ka magpal wander nang walang layunin?"
+      },
+      {
+        "day": 30,
+        "title": "Bawat Salita ng Diyos",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 30,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang itinuturo sa iyo ng panalangin ni Agur — 'huwag mo akong bigyan ng kahirapan o kayamanan' — tungkol sa kasiyahan?"
+      }
+    ]
+  },
+  {
+    "id": "romans-heart-of-the-gospel",
+    "name": "Mga Romano: Puso ng Ebanghelyo",
+    "description": "Isang 16-araw na malalim na pag-aaral sa liham ni Pablo sa mga Romano — ang pinaka-kumpletong presentasyon ng ebanghelyo na naisulat kailanman.",
+    "totalDays": 16,
+    "category": "Theology",
+    "gradientColors": [
+      "#8B3A3A",
+      "#5C2424"
+    ],
+    "iconName": "flame.fill",
+    "imageKey": "crucifixion",
+    "applicableSeasons": [
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Ang Ebanghelyo ng Diyos",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nahihiya ka ba sa ebanghelyo, at ano ang magiging hitsura ng pamumuhay na walang kahihiyan?"
+      },
+      {
+        "day": 2,
+        "title": "Makatarungang Paghuhukom ng Diyos",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano nakakaapekto ang kaalaman na ang Diyos ay humuhusga ng walang pinapanigan sa paraan ng iyong paghuhusga sa iba?"
+      },
+      {
+        "day": 3,
+        "title": "Lahat ay Nagkasala",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano ang katotohanan na lahat ay nagkasala ay nagpapantay ng lupa sa pagitan mo at ng iba?"
+      },
+      {
+        "day": 4,
+        "title": "Panampalataya na Tulad ni Abraham",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong imposibleng pangako mula sa Diyos ang tinatawag kang maniwala sa pamamagitan ng pananampalataya?"
+      },
+      {
+        "day": 5,
+        "title": "Kapayapaan sa Diyos",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano binabago ng kaalaman na ang pagdurusa ay nagbubunga ng pagtitiis ang iyong pananaw sa iyong mga pagsubok?"
+      },
+      {
+        "day": 6,
+        "title": "Patay sa Kasalanan, Buhay kay Cristo",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong kasalanan ang kailangan mong isaalang-alang na patay ka na upang makapamuhay ng buong-buo para kay Cristo?"
+      },
+      {
+        "day": 7,
+        "title": "Ang Laban sa Loob",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano ang tapat na pakikibaka ni Pablo sa kasalanan ay nagbibigay ng lakas sa iyo sa iyong sariling laban?"
+      },
+      {
+        "day": 8,
+        "title": "Walang Paghatol",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong paghatol ang dala-dala mo pa na inalis na ni Cristo?"
+      },
+      {
+        "day": 9,
+        "title": "Soberanong Pagpili ng Diyos",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano ka tumutugon sa misteryo ng soberanya ng Diyos at pananagutan ng tao?"
+      },
+      {
+        "day": 10,
+        "title": "Malapit sa Iyo ang Salita",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Sino sa iyong buhay ang nangangailangan marinig ang magandang balita, at ano ang pumipigil sa iyo na ibahagi ito?"
+      },
+      {
+        "day": 11,
+        "title": "Ang Puno ng Oliba",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano pinapalalim ng pag-unawa sa iyong lugar bilang 'naka-ugat' na sanga ang iyong pasasalamat?"
+      },
+      {
+        "day": 12,
+        "title": "Isang Buhay na Handog",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang itsura ng praktikal na pag-aalok ng iyong katawan bilang isang buhay na handog ngayon?"
+      },
+      {
+        "day": 13,
+        "title": "Pagsunod at Pag-ibig",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano maaaring baguhin ng utos na 'huwag mangutang kundi pag-ibig' ang iyong mga relasyon sa linggong ito?"
+      },
+      {
+        "day": 14,
+        "title": "Huwag Husgahan ang Iyong Kapatid",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Saan ka dapat magbigay ng higit na biyaya sa isang kapwa mananampalataya na ang mga paniniwala ay naiiba sa iyo?"
+      },
+      {
+        "day": 15,
+        "title": "Pagkakaisa para sa Kaluwalhatian ng Diyos",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano mo mas aktibong maipagsasama ang pagkakaisa sa ibang mga mananampalataya para sa kaluwalhatian ng Diyos?"
+      },
+      {
+        "day": 16,
+        "title": "Bati at ang Diyos ng Kapayapaan",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Sino ang mga tao na inilagay ng Diyos sa paligid mo upang palakasin ang iyong pananampalataya, at napasalamatan mo ba sila?"
+      }
+    ]
+  },
+  {
+    "id": "new-believers-journey",
+    "name": "Paglalakbay ng mga Bagong Mananampalataya",
+    "description": "Isang 14-araw na guided tour sa mga pinaka-mahalagang kabanata ng Bibliya — perpekto para sa sinumang nagsisimulang tuklasin ang pananampalatayang Kristiyano.",
+    "totalDays": 14,
+    "category": "Foundations",
+    "gradientColors": [
+      "#3A6B8B",
+      "#1C3D5C"
+    ],
+    "iconName": "sunrise.fill",
+    "imageKey": "samuel_called",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Isinilang na Muli",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang kahulugan nito sa iyo na magsimula muli sa isang ganap na bagong espiritwal na buhay?"
+      },
+      {
+        "day": 2,
+        "title": "Ang Pastol",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano binabago ng pag-iisip sa Diyos bilang isang pastol na nagmamalasakit sa iyo ang iyong nararamdaman tungkol sa Kanya?"
+      },
+      {
+        "day": 3,
+        "title": "Lahat ay Nagkasala",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano nakatutulong ang pag-unawa na lahat ay nagkukulang upang tanggapin mo ang biyaya ng Diyos nang walang kahihiyan?"
+      },
+      {
+        "day": 4,
+        "title": "Ang Regalo ng Biyaya",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang ibig sabihin ng tumanggap ng isang bagay na hindi mo kailanman makakamit sa iyong sarili?"
+      },
+      {
+        "day": 5,
+        "title": "Walang Paghatol",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong pagkakasala o kahihiyan ang kailangan mong bitawan sa liwanag ng katotohanan na walang paghatol kay Cristo?"
+      },
+      {
+        "day": 6,
+        "title": "Nailigtas sa Pamamagitan ng Biyaya",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano binabago ng kaalaman na ang kaligtasan ay isang regalo — hindi gantimpala — ang presyon na inilalagay mo sa iyong sarili?"
+      },
+      {
+        "day": 7,
+        "title": "Ang Daan, ang Katotohanan, ang Buhay",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang ibig sabihin para kay Jesus na maging daan kapag ikaw ay nawawala o hindi sigurado tungkol sa hinaharap?"
+      },
+      {
+        "day": 8,
+        "title": "Ang Diyos ay Pag-ibig",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano binabago ng pahayag na 'Ang Diyos ay pag-ibig' ang iyong pag-unawa kung sino ang Diyos?"
+      },
+      {
+        "day": 9,
+        "title": "Ang Kapayapaan ng Diyos",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong mga alalahanin ang maaari mong dalhin sa Diyos ngayon kapalit ng Kanyang kapayapaang lampas sa pag-unawa?"
+      },
+      {
+        "day": 10,
+        "title": "Ang Bulwagan ng Pananampalataya",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Aling tao ng pananampalataya sa kabanatang ito ang pinaka-nagbibigay inspirasyon sa iyo, at bakit?"
+      },
+      {
+        "day": 11,
+        "title": "Mga Pagsubok at Karunungan",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano mo masisimulang tingnan ang iyong kasalukuyang mga pagsubok bilang isang pagkakataon para sa paglago sa halip na parusa?"
+      },
+      {
+        "day": 12,
+        "title": "Ang Mga Beatitudes",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Alin sa mga Beatitudes ang pinaka-tumutukoy sa iyong kalagayan sa buhay ngayon?"
+      },
+      {
+        "day": 13,
+        "title": "Ang Panalangin ng Panginoon",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano maaaring maging balangkas ang Panalangin ng Panginoon para sa paraan ng iyong pakikipag-usap sa Diyos araw-araw?"
+      },
+      {
+        "day": 14,
+        "title": "Lahat ng Bagay ay Bago",
+        "readings": [
+          {
+            "bookID": "REV",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano nagbibigay ng pag-asa para sa hinaharap ang pangako na gagawin ng Diyos na lahat ng bagay ay bago?"
+      }
+    ]
+  },
+  {
+    "id": "finding-purpose",
+    "name": "Paghahanap ng Layunin",
+    "description": "Isang 10-araw na pagsisiyasat ng mga pinaka-makapangyarihang talata ng Kasulatan tungkol sa pagkakakilanlan, pagtawag, at ang layunin na hinabi ng Diyos sa iyong buhay.",
+    "totalDays": 10,
+    "category": "Purpose",
+    "gradientColors": [
+      "#8B7B3A",
+      "#5C5124"
+    ],
+    "iconName": "star.fill",
+    "imageKey": "miraculous_catch",
+    "applicableSeasons": [
+      "workingProfessional",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Mga Plano para sa Iyong Kaunlaran",
+        "readings": [
+          {
+            "bookID": "JER",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano binabago ng kaalaman na may mga plano ang Diyos para sa iyong kapakanan at hinaharap ang iyong pagharap sa kawalang-katiyakan?"
+      },
+      {
+        "day": 2,
+        "title": "Kahanga-hangang Nilikhang",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang magbabago kung tunay mong pinaniwalaan na ikaw ay nilikhang may takot at kahanga-hanga?"
+      },
+      {
+        "day": 3,
+        "title": "Tiwala sa Panginoon",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong landas ang sinusubukan mong i-direkta sa iyong sarili sa halip na kilalanin ang Diyos dito?"
+      },
+      {
+        "day": 4,
+        "title": "Nilikhang para sa Mabuting Gawa",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong mga mabuting gawa ang sa tingin mo ay inihanda ng Diyos nang maaga para sa iyo na lakaran?"
+      },
+      {
+        "day": 5,
+        "title": "Isang Buhay na Handog",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano mo magagamit ang natatanging mga kaloob na ibinigay sa iyo ng Diyos upang maglingkod sa iba sa linggong ito?"
+      },
+      {
+        "day": 6,
+        "title": "Tinawag sa Pangalan",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 43,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano hinuhubog ng pagtawag sa iyo ng Diyos sa iyong pangalan at pag-angkin sa iyo bilang Kanya ang iyong pakiramdam ng pagkakakilanlan?"
+      },
+      {
+        "day": 7,
+        "title": "Ang Mabuhay ay si Cristo",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kung 'ang mabuhay ay si Cristo,' ano ang ibig sabihin nito para sa paraan ng iyong paglapit sa iyong trabaho at mga relasyon?"
+      },
+      {
+        "day": 8,
+        "title": "Itakda ang Iyong Isip sa Itaas",
+        "readings": [
+          {
+            "bookID": "COL",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong bagay sa lupa ang iyong pinahawakan na nakakapagpawala sa iyo mula sa mga bagay sa itaas?"
+      },
+      {
+        "day": 9,
+        "title": "Isang Piniling Bayan",
+        "readings": [
+          {
+            "bookID": "1PE",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano binabago ng tawag na 'isang hariing pagkasaserdote' ang iyong pakiramdam ng layunin at pag-aari?"
+      },
+      {
+        "day": 10,
+        "title": "Magalak sa Panginoon",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang nangyayari sa iyong mga hangarin kapag nagpasya kang magalak sa Panginoon higit sa lahat?"
+      }
+    ]
+  },
+  {
+    "id": "comfort-in-hard-times",
+    "name": "Kaaliwan sa mga Panahon ng Pagsubok",
+    "description": "Isang 7-araw na kanlungan sa Kasulatan para sa mga panahon ng pagdurusa — ang mga talatang ito ay nagdala ng mga mananampalataya sa pinakamadilim na lambak sa loob ng libu-libong taon.",
+    "totalDays": 7,
+    "category": "Comfort",
+    "gradientColors": [
+      "#5C7A8B",
+      "#3A4F5C"
+    ],
+    "iconName": "heart.fill",
+    "imageKey": "job_suffering",
+    "applicableSeasons": [
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "health"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "Malapit ang Panginoon sa mga Sugatang Puso",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano ka pinapakalma ng kaalaman na ang Diyos ay lalo na malapit sa mga sugatang puso sa ngayon?"
+      },
+      {
+        "day": 2,
+        "title": "Huwag Matakot, Ako ay Kasama Mo",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 41,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong takot ang iyong dinadala na hinihiling ng Diyos na iyong bitawan sa Kanyang mga kamay?"
+      },
+      {
+        "day": 3,
+        "title": "Ang Diyos ng Lahat ng Kaaliwan",
+        "readings": [
+          {
+            "bookID": "2CO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano maaaring ang iyong sariling pagdurusa ay magbigay sa iyo ng kakayahan na aliwin ang ibang tao na nasasaktan?"
+      },
+      {
+        "day": 4,
+        "title": "Walang Makakapaghiwalay sa Atin",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong sitwasyon ang nagbigay sa iyo ng pakiramdam na hiwalay ka sa pag-ibig ng Diyos, at paano ito nagsasalita sa kabanatang ito?"
+      },
+      {
+        "day": 5,
+        "title": "Tumahimik at Malaman",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong ingay sa iyong buhay ang kailangan mong patahimikin upang marinig mong sinasabi ng Diyos na 'Tumahimik'?"
+      },
+      {
+        "day": 6,
+        "title": "Lumapit Ka sa Akin at Magpahinga",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong mabigat na pasanin ang iyong dinadala na inaanyayahan ka ni Jesus na ilapag ngayon?"
+      },
+      {
+        "day": 7,
+        "title": "Bawat Luha ay Papatakbuhin",
+        "readings": [
+          {
+            "bookID": "REV",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano nagbibigay sa iyo ng lakas ang pangako na papatakbuhin ng Diyos ang bawat luha mula sa iyong mga mata upang magpatuloy ngayon?"
+      }
+    ]
+  },
+  {
+    "id": "sermon-on-the-mount",
+    "name": "Ang Sermon sa Bundok",
+    "description": "Isang 7-araw na malapit na pag-aaral ng pinaka sikat na sermon ni Jesus — ang radikal na turo na nagbago sa mga halaga ng mundo.",
+    "totalDays": 7,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A8B5C",
+      "#4F5C3A"
+    ],
+    "iconName": "text.book.closed.fill",
+    "imageKey": "sermon_mount",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Ang mga Beatitudes at Asin ng Lupa",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 26
+          }
+        ],
+        "reflection": "Alin sa mga beatitude ang pinaka hamon sa iyo, at ano ang hitsura nito kung isasabuhay mo ito ngayon?"
+      },
+      {
+        "day": 2,
+        "title": "Isang Mas Mataas na Katuwiran",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 27,
+            "verseEnd": 48
+          }
+        ],
+        "reflection": "Paano ang tawag ni Jesus na 'maging perpekto tulad ng iyong Ama ay perpekto' ay nagtutulak sa iyo na lampasan ang pagsunod sa mga alituntunin patungo sa pagbabago ng puso?"
+      },
+      {
+        "day": 3,
+        "title": "Pagbibigay, Panalangin, at Pag-aayuno sa Lihim",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "Saan mo kailangang ilipat ang iyong mga espiritwal na gawi mula sa pagiging nakikita ng iba patungo sa pagiging nakikita lamang ng Diyos?"
+      },
+      {
+        "day": 4,
+        "title": "Kayamanan sa Langit",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 19,
+            "verseEnd": 34
+          }
+        ],
+        "reflection": "Ano ang iyong ikinababahala na hinihiling ni Jesus na lubos mong pagkatiwalaan sa Kanya?"
+      },
+      {
+        "day": 5,
+        "title": "Huwag Humusga",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": 1,
+            "verseEnd": 14
+          }
+        ],
+        "reflection": "Anong piraso sa iyong sariling mata ang kailangan mong ayusin bago ituro ang tuldok sa mata ng iba?"
+      },
+      {
+        "day": 6,
+        "title": "Nakatayo sa Bato",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": 15,
+            "verseEnd": 29
+          }
+        ],
+        "reflection": "Ang iyong buhay ba ay nakatayo sa bato ng mga salita ni Jesus, o sa buhangin ng karunungan ng mundo?"
+      },
+      {
+        "day": 7,
+        "title": "Ang Sermon Bilang Kabuuan",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Matapos basahin ang buong Sermon sa Bundok, anong isang turo ang pinaka nais mong isagawa?"
+      }
+    ]
+  },
+  {
+    "id": "psalms-in-30-days",
+    "name": "Mga Awit sa 30 Araw",
+    "description": "Basahin ang lahat ng 150 Awit sa loob ng 30 araw — limang awit sa isang araw upang lubos na makapasok sa pinakamayamang aklat ng pagsamba, panalangin, at papuri sa Bibliya.",
+    "totalDays": 30,
+    "category": "Worship",
+    "gradientColors": [
+      "#3A5C8B",
+      "#1C2D5C"
+    ],
+    "iconName": "music.note",
+    "imageKey": "jacob_ladder",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Mga Awit 1–5: Ang Binasbasan at ang Nasugatan",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang kahulugan nito sa iyo na magalak sa batas ng Panginoon araw at gabi?"
+      },
+      {
+        "day": 2,
+        "title": "Mga Awit 6–10: Pagsisigaw sa Diyos",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano nagbibigay ng pahintulot ang katapatan ng mga sigaw ng salmista sa Diyos upang dalhin ang iyong mga tunay na damdamin sa Kanya?"
+      },
+      {
+        "day": 3,
+        "title": "Mga Awit 11–15: Ang Matuwid at ang Masama",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang ipinapakita ng Awit 15 tungkol sa uri ng tao na maaaring manirahan sa presensya ng Diyos?"
+      },
+      {
+        "day": 4,
+        "title": "Mga Awit 16–20: Kanlungan at Pagsagip",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano pinasisigla ng mga langit na nagdedeklara ng kaluwalhatian ng Diyos sa Awit 19 ang pagsamba sa iyong sariling puso?"
+      },
+      {
+        "day": 5,
+        "title": "Mga Awit 21–25: Ang Pastol at ang Naghahanap",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano pinapalalim ng sigaw ng pag-iwan sa Awit 22 — na inawit ni Jesus sa krus — ang iyong pang-unawa sa Kanyang sakripisyo?"
+      },
+      {
+        "day": 6,
+        "title": "Mga Awit 26–30: Liwanag sa Kadiliman",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 30,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang kahulugan na ang pag-iyak ay maaaring magtagal sa isang gabi ngunit ang kagalakan ay dumarating sa umaga?"
+      },
+      {
+        "day": 7,
+        "title": "Mga Awit 31–35: Tiwala at Pagsagip",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 31,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 33,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 35,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano nakapagbibigay ng lakas ng loob ang pagpapala ng kapatawaran sa Awit 32 sa iyo upang aminin ang iyong mga itinagong kasalanan?"
+      },
+      {
+        "day": 8,
+        "title": "Mga Awit 36–40: Tapat na Pag-ibig",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 36,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 38,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 39,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 40,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang hitsura ng 'magalak ka sa Panginoon' mula sa Awit 37 sa iyong pang-araw-araw na gawain?"
+      },
+      {
+        "day": 9,
+        "title": "Mga Awit 41–45: Uhaw sa Diyos",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 41,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 42,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 43,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 44,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 45,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kailan ka nahawakan ng uhaw ng iyong kaluluwa sa Diyos na parang usa na humihingal para sa tubig?"
+      },
+      {
+        "day": 10,
+        "title": "Mga Awit 46–50: Ang Diyos ay Aming Kanlungan",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 47,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 48,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 49,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 50,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano nakikipag-usap ang paalala ng Awit 46 na 'maging tahimik' sa kaguluhan sa iyong buhay ngayon?"
+      },
+      {
+        "day": 11,
+        "title": "Mga Awit 51–55: Isang Nasugatang Espiritu",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 51,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 52,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 53,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 54,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 55,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano nagbibigay sa iyo ng lakas ng loob ang panalangin ni David para sa isang malinis na puso sa Awit 51 upang lumapit sa Diyos sa iyong mga pagkukulang?"
+      },
+      {
+        "day": 12,
+        "title": "Mga Awit 56–60: Kapag Ako ay Natatakot",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 56,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 57,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 58,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 59,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 60,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang hitsura ng 'kapag ako ay natatakot, magtitiwala ako sa iyo' mula sa Awit 56 sa iyong kasalukuyang kalagayan?"
+      },
+      {
+        "day": 13,
+        "title": "Mga Awit 61–65: Pahinga sa Diyos Lamang",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 61,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 62,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 63,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 64,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 65,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Saan ka nakakahanap ng pahinga — tunay na sa Diyos lamang, o naghahanap ka ba ng ibang mga pinagkukunan para sa kapayapaan?"
+      },
+      {
+        "day": 14,
+        "title": "Mga Awit 66–70: Sumigaw ng Kagalakan",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 66,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 67,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 68,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 69,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 70,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong mga kahanga-hangang gawa ng Diyos sa iyong buhay ang nais mong ipaalam sa iba?"
+      },
+      {
+        "day": 15,
+        "title": "Mga Awit 71–75: Walang Hanggang Pag-asa",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 71,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 72,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 73,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 74,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 75,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano ang pakikibaka ng salmista sa inggit sa Awit 73 ay sumasalamin sa iyong sariling karanasan?"
+      },
+      {
+        "day": 16,
+        "title": "Mga Awit 76–80: Alalahanin ang Kanyang mga Kababalaghan",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 76,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 77,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 78,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 79,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 80,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong mga nakaraang gawa ng Diyos ang maaari mong alalahanin at ulitin upang palakasin ang iyong pananampalataya ngayon?"
+      },
+      {
+        "day": 17,
+        "title": "Mga Awit 81–85: Muling Pagsisilang at Pagbawi",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 81,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 82,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 83,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 84,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 85,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano ang pananabik para sa mga looban ng Diyos sa Awit 84 ay umaayon sa iyong pagnanais para sa pagsamba?"
+      },
+      {
+        "day": 18,
+        "title": "Mga Awit 86–90: Mula sa Walang Hanggan Hanggang sa Walang Hanggan",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 86,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 87,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 88,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 89,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 90,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano binabago ng pananaw ng Awit 90 sa pagkakaiksi ng buhay ang paraan ng iyong pagpapahalaga sa iyong oras?"
+      },
+      {
+        "day": 19,
+        "title": "Mga Awit 91–95: Kanlungan at Awit",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 91,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 92,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 93,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 94,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 95,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang kahulugan ng manirahan sa kanlungan ng Kataas-taasan, at paano mo ito maisasagawa ngayon?"
+      },
+      {
+        "day": 20,
+        "title": "Mga Awit 96–100: Ang Panginoon ay Nagahari",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 96,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 97,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 98,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 99,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 100,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano ka hinahamon ng tawag na 'gumawa ng masayang ingay' sa Awit 100 na sumamba nang may higit na sigasig?"
+      },
+      {
+        "day": 21,
+        "title": "Mga Awit 101–105: Purihin ang Panginoon, O Aking Kaluluwa",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 101,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 102,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 103,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 104,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 105,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong mga benepisyo mula sa Panginoon na nakalista sa Awit 103 ang nakalimutan mong pasalamatan Siya?"
+      },
+      {
+        "day": 22,
+        "title": "Mga Awit 106–110: Pag-alala sa Katapatan ng Diyos",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 106,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 107,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 108,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 109,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 110,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano mo naranasan ang matatag na pag-ibig ng Diyos na iniligtas ka mula sa iyong sariling pag-aalangan?"
+      },
+      {
+        "day": 23,
+        "title": "Mga Awit 111–115: Purihin ang Panginoon",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 111,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 112,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 113,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 114,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 115,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano hinahamon ng kaibahan sa pagitan ng buhay na Diyos at walang buhay na mga diyus-diyosan sa Awit 115 kung saan mo inilalagay ang iyong tiwala?"
+      },
+      {
+        "day": 24,
+        "title": "Mga Awit 116–120: Nagsisimula ang mga Awit ng Pag-akyat",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 116,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 117,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 118,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 119,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 120,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong taludtod mula sa pinakamahabang awit — Awit 119 — ang pinakamakapangyarihan sa iyong pag-ibig para sa Salita ng Diyos?"
+      },
+      {
+        "day": 25,
+        "title": "Mga Awit 121–125: Umaakyat sa Panginoon",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 121,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 122,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 123,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 124,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 125,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Saan nagmumula ang iyong tulong, at paano pinatitibay ng Awit 121 ang iyong tiwala sa proteksyon ng Diyos?"
+      },
+      {
+        "day": 26,
+        "title": "Mga Awit 126–130: Pagtatanim sa Luha",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 126,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 127,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 128,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 129,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 130,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong mga buto ang itinatanim mo sa luha ngayon, umaasa na ikaw ay aanihin na may mga sigaw ng kagalakan?"
+      },
+      {
+        "day": 27,
+        "title": "Mga Awit 131–135: Mapagpakumbabang Tiwala",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 131,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 132,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 133,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 134,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 135,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano ka hinihimok ng larawan ng pagkakaisa sa Awit 133 na ituloy ang mas malalim na pakikipag-ugnayan sa ibang mga mananampalataya?"
+      },
+      {
+        "day": 28,
+        "title": "Mga Awit 136–140: Ang Kanyang Pag-ibig ay Mananatili Magpakailanman",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 136,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 137,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 138,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 140,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano ka pinapangalagaan ng salin na 'Ang Kanyang pag-ibig ay mananatili magpakailanman' sa Awit 136 kapag ang lahat ay tila hindi tiyak?"
+      },
+      {
+        "day": 29,
+        "title": "Mga Awit 141–145: Mga Panalangin sa Gabi",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 141,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 142,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 143,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 144,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 145,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano hinuhubog ng pahayag ni David na ang Diyos ay dakila at karapat-dapat purihin ang iyong panalangin sa gabi ngayong gabi?"
+      },
+      {
+        "day": 30,
+        "title": "Mga Awit 146–150: Hayaan ang Lahat ay Purihin ang Panginoon",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 146,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 147,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 148,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 149,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 150,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Habang nagtatapos ang mga Awit sa 'hayaan ang lahat ng may hininga ay purihin ang Panginoon,' paano mo gagawing ugali ang pagpuri araw-araw?"
+      }
+    ]
+  },
+  {
+    "id": "life-of-david",
+    "name": "Ang Buhay ni David",
+    "description": "Isang 14-araw na paglalakbay kasama ang pastol-hari — mula sa pag-aalay hanggang sa pagpatay ng higante, mula sa pagpapaalis hanggang sa trono — na sinamahan ng mga awit na isinilang sa bawat panahon.",
+    "totalDays": 14,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6B2D2D",
+      "#3A1818"
+    ],
+    "iconName": "shield.lefthalf.filled",
+    "imageKey": "david_goliath",
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Pinahiran sa Kakulangan",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Saan ka nakikita ng Diyos sa tahimik, hindi nakikita na mga lugar bago pa man mapansin ng mundo?"
+      },
+      {
+        "day": 2,
+        "title": "Haharapin ang Higante",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong higante ang hinaharap mo ngayon, at sa pangalan ng sino mo ito haharapin?"
+      },
+      {
+        "day": 3,
+        "title": "Ang Katapatan ni Jonathan",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Sino ang naging Jonathan sa iyo, at paano ka magiging kaibigang iyon sa iba?"
+      },
+      {
+        "day": 4,
+        "title": "Tumakas para sa Iyong Buhay",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano ka tinuturuan ng awit ni David sa yungib na purihin ang Diyos bago dumating ang kaligtasan?"
+      },
+      {
+        "day": 5,
+        "title": "Pagpipigil sa Yungib",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Saan mo kailangang magsanay ng pagpipigil kapag maaari kang gumanti sa isang tao na nagkamali sa iyo?"
+      },
+      {
+        "day": 6,
+        "title": "Karunungan mula kay Abigail",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kanino ang matalinong payo ang iyong tinanggihan kamakailan na maaaring nagliligtas sa iyo mula sa isang hangal na desisyon?"
+      },
+      {
+        "day": 7,
+        "title": "Ang Pagbagsak ni Saul",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 31,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "2SA",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano binabago ng kalungkutan ni David para sa kanyang kaaway na si Saul ang iyong pananaw sa mga tao na iyong pinagdaraanan?"
+      },
+      {
+        "day": 8,
+        "title": "Ang Hari ay Sumayaw",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kailan ang huli mong sumamba nang walang pag-aalala, hindi nag-aalala sa iniisip ng sinuman?"
+      },
+      {
+        "day": 9,
+        "title": "Isang Walang Hanggang Tipan",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano pinapalalim ng pangako ng Diyos ng isang walang katapusang trono sa pamamagitan ni David ang iyong pag-asa kay Cristo ngayon?"
+      },
+      {
+        "day": 10,
+        "title": "Ang Pagbagsak ng isang Pastol na Hari",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "2SA",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Saan ka pinaka-mahina sa maliliit na kompromiso na maaaring lumaki sa malalaking kasalanan kung hindi ito haharapin?"
+      },
+      {
+        "day": 11,
+        "title": "Isang Wasak na Panalangin",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 51,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano sa iyong buhay ang nangangailangan ng panalangin na 'lumikha ka sa akin ng isang dalisay na puso' ngayong gabi?"
+      },
+      {
+        "day": 12,
+        "title": "Purihin ang Panginoon, O Aking Kaluluwa",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 103,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Alin sa mga benepisyo ng Panginoon na nakalista dito ang pinaka-kailangan mong alalahanin ngayon?"
+      },
+      {
+        "day": 13,
+        "title": "Takot na Kilala",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong kaaliwan — o hamon — ang nararamdaman mo na alam mong nakikita ng Diyos ang bawat nakatagong sulok ng iyong puso?"
+      },
+      {
+        "day": 14,
+        "title": "Ang Pastol ay Nananatili",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Sa lahat ng panahon ni David, hindi siya iniwan ng Pastol — paano mo naranasan ang parehong katapatan sa iyong sariling kwento?"
+      }
+    ]
+  },
+  {
+    "id": "christmas-story",
+    "name": "Ang Kwento ng Pasko",
+    "description": "Isang 7-araw na paglalakbay sa advent sa pamamagitan ng natividad — mula sa sinaunang propesiya hanggang sa sabsaban — muling tuklasin ang hiwaga ng Diyos na lumalapit.",
+    "totalDays": 7,
+    "category": "Advent",
+    "gradientColors": [
+      "#3C5A7A",
+      "#1F2F45"
+    ],
+    "iconName": "star.fill",
+    "imageKey": "nativity",
+    "applicableSeasons": [
+      "parenthood",
+      "newlyMarried",
+      "growing",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "grief",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Isang Batang Inasahan",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Alin sa mga pangalan ni Isaias para sa darating na bata — Kahanga-hangang Tagapayo, Makapangyarihang Diyos, Prinsipe ng Kapayapaan — ang pinaka-kailangan mo ngayon?"
+      },
+      {
+        "day": 2,
+        "title": "Mula sa Maliit na Bethlehem",
+        "readings": [
+          {
+            "bookID": "MIC",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano nagsasalita ang pagpili ng Diyos sa maliit at hindi napapansin na bayan ng Bethlehem sa mga nakatagong lugar sa iyong sariling buhay?"
+      },
+      {
+        "day": 3,
+        "title": "Oo ni Maria",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Saan humihingi ang Diyos ng iyong 'mangyari sa akin ayon sa iyong salita' sa isang panahon ng kawalang-katiyakan?"
+      },
+      {
+        "day": 4,
+        "title": "Tahimik na Pagsunod ni Jose",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano hinahamon ng tahimik, magastos na katapatan ni Jose ang paraan ng iyong pag-iisip tungkol sa pagiging nakikita ng iba?"
+      },
+      {
+        "day": 5,
+        "title": "Ang Salita na Naging Katawang Tao",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang kahulugan nito sa iyo na ang walang hanggan na Salita ay piniling lumipat sa iyong kapitbahayan?"
+      },
+      {
+        "day": 6,
+        "title": "Mga Pastol at isang Sabsaban",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bakit sa tingin mo ang 'mabuting balita ng malaking kagalakan' ng mga anghel ay unang inihayag sa mga pastol, hindi sa mga hari?"
+      },
+      {
+        "day": 7,
+        "title": "Mga Matalinong Tao mula sa Malayo",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang magiging hitsura ng pagdadala mo ng iyong pinakamahusay — iyong ginto, insenso, at mira — kay Jesus ngayon?"
+      }
+    ]
+  },
+  {
+    "id": "walking-with-elijah",
+    "name": "Paglakad kasama si Elias",
+    "description": "Isang 10-araw na pag-aaral ng propeta na nag-iisa laban sa isang kaharian — at ang Diyos na nakatagpo sa kanya sa mga uwak, sa yungib, at sa tahimik na maliit na tinig.",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6E4A2C",
+      "#3A2814"
+    ],
+    "iconName": "flame.fill",
+    "imageKey": "elijah_ravens",
+    "applicableSeasons": [
+      "hardSeason",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose",
+      "anxiety"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Bago si Ahab",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 6
+          }
+        ],
+        "reflection": "Saan humihingi ang Diyos sa iyo na magsalita ng isang mahirap na katotohanan, at nagtitiwala ka ba sa Kanya na magbigay pagkatapos mong sumunod?"
+      },
+      {
+        "day": 2,
+        "title": "Ang Balo ng Zarephath",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 17,
+            "verseStart": 7,
+            "verseEnd": 24
+          }
+        ],
+        "reflection": "Anong maliit na 'huling dakot ng harina' ang hinihiling ng Diyos na ialay mo sa pananampalataya ngayong linggo?"
+      },
+      {
+        "day": 3,
+        "title": "Pagtutunggali sa Carmel",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Aling altar sa iyong buhay ang kailangan mong muling itayo — isang lugar ng pagsamba na naligaw ng landas?"
+      },
+      {
+        "day": 4,
+        "title": "Tumakas sa Kawangis ng Disyerto",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 19,
+            "verseStart": 1,
+            "verseEnd": 8
+          }
+        ],
+        "reflection": "Kailan mo naranasan ang mahinahong provision ng Diyos — isang pagkain, isang tulog, isang kaibigan — sa gitna ng iyong pagkapagod?"
+      },
+      {
+        "day": 5,
+        "title": "Ang Tahimik na Maliit na Tinig",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 19,
+            "verseStart": 9,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "Anong ingay ang kailangan mong patahimikin upang marinig ang bulong ng Diyos sa halip na maghintay para sa lindol?"
+      },
+      {
+        "day": 6,
+        "title": "Bubungan ni Naboth",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano binabago ng kwentong ito ang iyong pananaw sa kawalang-katarungan na tila ayaw harapin ng iba?"
+      },
+      {
+        "day": 7,
+        "title": "Apoy mula sa Langit",
+        "readings": [
+          {
+            "bookID": "2KI",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Saan ka natutukso na kumonsulta sa ibang 'diyos ng Ekron' sa halip na dalhin ang iyong mga takot sa Panginoon?"
+      },
+      {
+        "day": 8,
+        "title": "Ang Balabal ay Ipinapasa",
+        "readings": [
+          {
+            "bookID": "2KI",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong balabal ang hinihiling sa iyo ng Diyos na kunin — o anong balabal ang handa kang ipasa?"
+      },
+      {
+        "day": 9,
+        "title": "Si Elias sa Bundok kasama si Cristo",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "Ano ang ibig sabihin na ang parehong propeta na nakaramdam ng labis na pag-iisa ay isang araw nakatayo kasama si Jesus sa kaluwalhatian?"
+      },
+      {
+        "day": 10,
+        "title": "Isang Tao na Katulad Natin",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": 13,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "Sabi ni Santiago, si Elias ay 'isang tao na may kalikasan tulad natin' — paano nito binabago ang paraan ng iyong panalangin sa linggong ito?"
+      }
+    ]
+  },
+  {
+    "id": "beatitudes-deep-dive",
+    "name": "Ang mga Beatitudes: Walong Larawan",
+    "description": "Isang 8-araw na pag-aaral ng mga larawan ng mga mamamayan ng kaharian ni Jesus — isang beatitude sa isang pagkakataon, bawat isa ay sinamahan ng isang talata na nagpapaliwanag sa larawan.",
+    "totalDays": 8,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A6B3A",
+      "#4F4524"
+    ],
+    "iconName": "sparkles",
+    "imageKey": "beatitudes",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Mahihirap sa Espiritu",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 3
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 57,
+            "verseStart": 14,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "Ano ang magiging itsura ngayon na lumapit sa Diyos na umaamin ng iyong kabuuang pag-asa sa Kanya sa halip na ipakita ang iyong kakayahan?"
+      },
+      {
+        "day": 2,
+        "title": "Ang mga Nagdadalamhati",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 4,
+            "verseEnd": 4
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 42,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong pagkawala o kalungkutan ang sinusubukan mong iwasan na inaanyayahan ka ni Jesus na talagang harapin?"
+      },
+      {
+        "day": 3,
+        "title": "Ang mga Maamo",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 5,
+            "verseEnd": 5
+          },
+          {
+            "bookID": "NUM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Saan mo nalilito ang pagiging maamo sa kahinaan, at paano binabago ng halimbawa ni Moises iyon?"
+      },
+      {
+        "day": 4,
+        "title": "Nagugutom para sa Katuwiran",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 6,
+            "verseEnd": 6
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 63,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong mga mas mababang gutom ang sumasakop sa iyong pagnanasa para sa katuwiran ng Diyos sa linggong ito?"
+      },
+      {
+        "day": 5,
+        "title": "Ang mga Maawain",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 7,
+            "verseEnd": 7
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "Sino ang inilagay ng Diyos sa iyong daraanan ngayon na nangangailangan na ikaw ang maging Samaritano sa halip na pari?"
+      },
+      {
+        "day": 6,
+        "title": "Dalisay sa Puso",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 8,
+            "verseEnd": 8
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong nakatagong motibo ang kailangan mong ilabas sa liwanag upang ang iyong puso ay maging tapat sa kanyang debosyon?"
+      },
+      {
+        "day": 7,
+        "title": "Mga Tagagawa ng Kapayapaan",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 9,
+            "verseEnd": 9
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": 9,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "Saan ka tinatawag ng Diyos na gawin ang mas mahirap na gawain ng paggawa ng kapayapaan sa halip na basta panatilihin ito?"
+      },
+      {
+        "day": 8,
+        "title": "Ang mga Pin persecute",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 10,
+            "verseEnd": 16
+          },
+          {
+            "bookID": "1PE",
+            "chapter": 4,
+            "verseStart": 12,
+            "verseEnd": 19
+          }
+        ],
+        "reflection": "Paano maaaring baguhin ng kagalakan na ipinapangako ni Jesus ang paraan ng iyong pagtugon sa susunod na ang katapatan ay may halaga sa iyo?"
+      }
+    ]
+  },
+  {
+    "id": "holy-week",
+    "name": "Banal na Linggo: Ang Paglalakbay patungong Pasko ng Pagkabuhay",
+    "description": "Lakad sa Banal na Linggo araw-araw — mula sa matagumpay na pagpasok hanggang sa krus at sa walang laman na libingan — at ipamuhay ang pinaka-maimpluwensyang linggo sa kasaysayan.",
+    "totalDays": 8,
+    "category": "Easter",
+    "gradientColors": [
+      "#5A2E2E",
+      "#2F1515"
+    ],
+    "iconName": "cross.fill",
+    "imageKey": "triumphal_entry",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "grief",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Linggo ng Palaspas",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 21,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "Ano ang ibig sabihin na tanggapin si Jesus bilang Hari kapag Siya ay dumating sa paraang hindi mo inaasahan?"
+      },
+      {
+        "day": 2,
+        "title": "Paglilinis sa Templo",
+        "readings": [
+          {
+            "bookID": "MRK",
+            "chapter": 11,
+            "verseStart": 12,
+            "verseEnd": 25
+          }
+        ],
+        "reflection": "Anong 'mga mesa' sa iyong puso ang hinihiling ni Jesus na baligtarin upang ang Kanyang presensya ay maayos na matanggap?"
+      },
+      {
+        "day": 3,
+        "title": "Pagtuturo sa Templo",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 22,
+            "verseStart": 34,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "Paano ang pagmamahal sa Diyos ng buong puso — at sa iyong kapwa gaya ng iyong sarili — ay mag-aayos ng iyong linggo?"
+      },
+      {
+        "day": 4,
+        "title": "Ang Pagsasangguni sa Bethany",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 12,
+            "verseStart": 1,
+            "verseEnd": 11
+          }
+        ],
+        "reflection": "Anong labis na gawa ng pag-ibig ang maaari mong ialok kay Jesus ngayon, kahit na tinatawag ito ng mundo na isang pag-aaksaya?"
+      },
+      {
+        "day": 5,
+        "title": "Ang Huling Hapunan",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kanino mga paa ang hinihiling ni Jesus na hugasan mo sa linggong ito, at anong kayabangan ang nagpapahirap dito?"
+      },
+      {
+        "day": 6,
+        "title": "Getsemani",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 26,
+            "verseStart": 36,
+            "verseEnd": 56
+          }
+        ],
+        "reflection": "Saan sa iyong buhay ang kailangan mong ipagdasal, 'Hindi ang aking kalooban, kundi ang sa iyo ang mangyari' — at talagang ibig sabihin ito?"
+      },
+      {
+        "day": 7,
+        "title": "Biyernes Santo",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong hindi natapos na bagay sa iyong buhay ang kailangang marinig ang mga salita ni Jesus: 'Naganap na'?"
+      },
+      {
+        "day": 8,
+        "title": "Umaga ng Pasko ng Pagkabuhay",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Saan mo kailangan ang kapangyarihan ng muling pagkabuhay upang salubungin ka sa libingan ng isang patay na pag-asa ngayon?"
+      }
+    ]
+  },
+  {
+    "id": "genesis-beginnings",
+    "name": "Genesis: Sa Pasimula",
+    "description": "Isang 12-araw na paglalakbay sa unang aklat ng Biblia — paglikha, pagbagsak, baha, mga patriyarka — sinusubaybayan ang tapat na pagsunod ng Diyos mula sa simula.",
+    "totalDays": 12,
+    "category": "Foundations",
+    "gradientColors": [
+      "#3A5A4A",
+      "#1C2D24"
+    ],
+    "iconName": "globe.americas.fill",
+    "imageKey": "noah_ark",
+    "applicableSeasons": [
+      "growing",
+      "startingOver",
+      "newlyMarried"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Sa Pasimula",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong 'walang anyo at walang laman' na bahagi ng iyong buhay ang sinasalita ng Diyos ng kaayusan at liwanag ngayon?"
+      },
+      {
+        "day": 2,
+        "title": "Ang Hardin at ang Imahe",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang kahulugan nito sa iyo na hinubog ka ng Diyos gamit ang Kanyang sariling mga kamay at hiningahan ka ng Kanyang sariling buhay?"
+      },
+      {
+        "day": 3,
+        "title": "Ang Pagbagsak",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong kasinungalingan ng ahas — 'Talaga bang sinabi ng Diyos?' — ang patuloy mong naririnig, at paano mo ito masasagot ng katotohanan?"
+      },
+      {
+        "day": 4,
+        "title": "Si Noe at ang Baha",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "GEN",
+            "chapter": 9,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "Saan mo kailangan magtiwala sa mga pangako ng bahaghari ng Diyos sa gitna ng isang panahon na tila binaha pa rin?"
+      },
+      {
+        "day": 5,
+        "title": "Ang Tawag kay Abram",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong 'bansa at angkan' ang hinihiling sa iyo ng Diyos na iwanan upang sundan Siya sa isang bagong bagay?"
+      },
+      {
+        "day": 6,
+        "title": "Bilangin ang mga Bituin",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang imposibleng pangako mula sa Diyos na kailangan mong patuloy na paniwalaan, kahit sa mga gabi na tila katawa-tawa?"
+      },
+      {
+        "day": 7,
+        "title": "Ang Handog ni Isaac",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang naging 'Isaac' sa iyo — isang regalo na labis mong mahal na nagsisimula nang makipagkumpitensya sa Diyos Mismo?"
+      },
+      {
+        "day": 8,
+        "title": "Ang Hagdang-bato ni Jacob",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Saan nagpakita ang Diyos nang hindi inaasahan kamakailan, tiyak sa isang lugar na hindi mo alam na naroon Siya?"
+      },
+      {
+        "day": 9,
+        "title": "Nakikipagbuno ng Buong Gabi",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang ipinaglalaban mo sa Diyos ngayon, at handa ka bang maglakad na may pilay kung ito ay nangangahulugang pagtanggap ng Kanyang pagpapala?"
+      },
+      {
+        "day": 10,
+        "title": "Mga Pangarap ni Jose",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong 'balon' ang kinaroroonan mo ngayon na maaaring ginagamit ng Diyos bilang unang kabanata ng isang mas malaking kwento?"
+      },
+      {
+        "day": 11,
+        "title": "Nagkita sa Ehipto",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 45,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong relasyon sa iyong buhay ang handa na para sa pagpapatawad na ipinakita ni Jose: 'Nais mo ng masama, ngunit ang Diyos ay nagbigay ng mabuti'?"
+      },
+      {
+        "day": 12,
+        "title": "Nais ng Diyos na ito ay Maging Mabuti",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 50,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Sa pagtingin sa pinakamahirap na bagay na iyong pinagdaanan, saan mo ngayon nakikita ang kamay ng Diyos na hinahabi ito para sa kabutihan?"
+      }
+    ]
+  },
+  {
+    "id": "daniel-exile",
+    "name": "Daniel: Tapat sa Pagkakatapon",
+    "description": "Isang 12-araw na paglalakbay sa aklat ni Daniel — matatag sa isang paganong hukuman, nagdarasal kahit na ito ay ilegal, at nagtitiwala sa Diyos sa buong kasaysayan.",
+    "totalDays": 12,
+    "category": "Character Study",
+    "gradientColors": [
+      "#5A3A2A",
+      "#2E1F16"
+    ],
+    "iconName": "shield.fill",
+    "imageKey": "daniel_lions",
+    "applicableSeasons": [
+      "workingProfessional",
+      "hardSeason",
+      "student",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Nagtakda na Huwag Dumumi",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong maliit na pang-araw-araw na kompromiso ang inaanyayahan ka ng Diyos na 'itakda' na hindi mo na tatanggapin?"
+      },
+      {
+        "day": 2,
+        "title": "Ang Panaginip ng Hari",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Saan mo kailangan magtiwala na ang Diyos na nagbubunyag ng malalim at nakatagong mga bagay ay may kapangyarihan sa mga imperyo ng iyong panahon?"
+      },
+      {
+        "day": 3,
+        "title": "Ang Nagniningas na Hurno",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano ang magiging hitsura ng 'ngunit kung hindi' na pananampalataya para sa iyo sa linggong ito — tiwala na sumusunod kahit na walang garantiya ng pagliligtas?"
+      },
+      {
+        "day": 4,
+        "title": "Isang Naghumbaling na Hari",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Saan nagbubulong ang kayabangan na ikaw ang bumuo ng iyong mayroon, at paano ka tinatawag ng Diyos na itaas ang iyong mga mata?"
+      },
+      {
+        "day": 5,
+        "title": "Ang Sulat sa Pader",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ano sa iyong buhay ang 'sinukat' ng Diyos, at anong pagsisisi ang inaanyayahan?"
+      },
+      {
+        "day": 6,
+        "title": "Ang Lungga ng mga Leon",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong bukas na bintana ng panalangin ang dapat mong panatilihin, kahit na ito ay mayroong halaga sa iyo sa lipunan o propesyonal?"
+      },
+      {
+        "day": 7,
+        "title": "Ang Sinaunang ng mga Araw",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano nagbibigay sa iyo ng mas mahabang pananaw ang bisyon ng Sinaunang ng mga Araw at ng Anak ng Tao sa mga balita?"
+      },
+      {
+        "day": 8,
+        "title": "Ang Ram at ang Kambing",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kapag ang hinaharap ay tila nakakalito, ano ang nag-uugnay sa iyo sa Diyos na nakikita ang wakas mula sa simula?"
+      },
+      {
+        "day": 9,
+        "title": "Isang Panalangin ng Pagsisisi",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Saan kailangan ng iyong komunidad o pamilya na ikaw ay tumayo sa puwang na may panalangin ng pagsisisi tulad ng kay Daniel?"
+      },
+      {
+        "day": 10,
+        "title": "Ang Tao sa Linen",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano binabago ng katotohanan ng hindi nakikitang espiritwal na laban ang paraan ng iyong pagtitiyaga sa panalangin kapag walang tila gumagalaw?"
+      },
+      {
+        "day": 11,
+        "title": "Mga Hari at Kaharian",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Aling makalupang kaharian ang iyong binigyan ng labis na timbang, at paano mo maibabalik ang iyong pag-asa?"
+      },
+      {
+        "day": 12,
+        "title": "Ang mga Marunong ay Magniningning",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paano pinapagana ng pangako na 'ang mga marunong ay magniningning tulad ng liwanag ng mga langit' ang iyong katapatan ngayon?"
+      }
+    ]
+  },
+  {
+    "id": "lords-prayer-deep-dive",
+    "name": "Ang Panalangin ng Panginoon: Turuan Mo Kaming Manalangin",
+    "description": "Isang 7-araw na pagmumuni-muni sa panalangin na itinuro sa atin ni Jesus — isang kahilingan bawat araw — bumabagal upang bigyang-kahulugan ang bawat salita.",
+    "totalDays": 7,
+    "category": "Prayer",
+    "gradientColors": [
+      "#4A5A7A",
+      "#242D3D"
+    ],
+    "iconName": "hands.sparkles.fill",
+    "imageKey": "lords_prayer",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "parenthood",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Amang Nasa Langit",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 5,
+            "verseEnd": 13
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": 12,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "Ano ang nagbabago sa iyong panalangin ngayon kung tunay mong pinaniniwalaan na ikaw ay lumalapit sa iyong Ama, hindi lamang sa isang malalayong diyos?"
+      },
+      {
+        "day": 2,
+        "title": "Sambahin ang Iyong Pangalan",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 99,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 6,
+            "verseStart": 1,
+            "verseEnd": 8
+          }
+        ],
+        "reflection": "Ano ang hitsura nito ngayon kung ituturing mong banal ang pangalan ng Diyos sa iyong mga iniisip, sa iyong bibig, at sa iyong mga pagpili?"
+      },
+      {
+        "day": 3,
+        "title": "Dumating ang Iyong Kaharian",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 13,
+            "verseStart": 31,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "Saan mo nais makita ang kaharian ng Diyos na pumasok sa iyong mundo sa linggong ito — at paano ka mananalangin na may inaasahan?"
+      },
+      {
+        "day": 4,
+        "title": "Mangyari ang Iyong Kalooban",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 26,
+            "verseStart": 36,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "Anong panalangin mo ang naghihintay para sa tapat na 'hindi ang aking kalooban, kundi ang sa iyo'? Ano ang magiging halaga nito, at ano ang magiging kalayaan nito?"
+      },
+      {
+        "day": 5,
+        "title": "Ibigay Mo sa Amin ang Araw na Ito",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 10,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "Paano ginagamutang ng panalangin para sa pang-araw-araw na tinapay ang pagkabahala sa pagsubok na ipunin ang biyaya ng bukas ngayon?"
+      },
+      {
+        "day": 6,
+        "title": "Patawarin Mo Kami Gaya ng Pagpapatawad Namin",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 18,
+            "verseStart": 21,
+            "verseEnd": 35
+          }
+        ],
+        "reflection": "Kanino utang ang kailangan mong pakawalan upang ang iyong panalangin para sa pagpapatawad ay hindi tumama sa isang saradong puso?"
+      },
+      {
+        "day": 7,
+        "title": "Iligtas Mo Kami Mula sa Masama",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 6,
+            "verseStart": 10,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "Saan mo kailangan isuot ang baluti ng Diyos at manalangin nang tiyak para sa kaligtasan mula sa masama ngayon?"
+      }
+    ]
+  },
+  {
+    "id": "parables-kingdom",
+    "name": "Mga Talinhaga ng Kaharian",
+    "description": "Isang 10-araw na paglalakad sa mga pinakamasakit na talinhaga ni Jesus — maiikling kwento na nagbabago ng puso at nagpapakita ng baligtad na kaharian ng Diyos.",
+    "totalDays": 10,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A4A2A",
+      "#3E2516"
+    ],
+    "iconName": "quote.opening",
+    "imageKey": "prodigal_son",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "workingProfessional",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "relationships",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Ang Maghasik",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 13,
+            "verseStart": 1,
+            "verseEnd": 23
+          }
+        ],
+        "reflection": "Anong uri ng lupa ang iyong puso sa ngayon, at ano ang kailangan mong gawin upang maging 'mabuting lupa' sa panahong ito?"
+      },
+      {
+        "day": 2,
+        "title": "Ang Mabuting Samaritano",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "Sino ang tinutukso kang lampasan, at ano ang hitsura nito kung tatawid ka sa kalsada sa halip?"
+      },
+      {
+        "day": 3,
+        "title": "Ang Alibughang Anak",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 15,
+            "verseStart": 11,
+            "verseEnd": 32
+          }
+        ],
+        "reflection": "Alin sa mga anak ang pinaka-katulad mo ngayon — ang naglalakbay o ang nagagalit na nakatatandang kapatid — at ano ang nais ibigay sa iyo ng Ama?"
+      },
+      {
+        "day": 4,
+        "title": "Ang Nawalang Tupa at Barya",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 15,
+            "verseStart": 1,
+            "verseEnd": 10
+          }
+        ],
+        "reflection": "Saan sa iyong buhay mo nararamdaman na nawawala ka, at paano nagbabago ang mga bagay kapag alam mong aktibong hinahanap ka ng langit?"
+      },
+      {
+        "day": 5,
+        "title": "Ang Mayamang Hangal",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 12,
+            "verseStart": 13,
+            "verseEnd": 34
+          }
+        ],
+        "reflection": "Anong mas malaking 'kamalig' ang tinutukso mong itayo, at paano ka magiging mayaman sa Diyos sa halip?"
+      },
+      {
+        "day": 6,
+        "title": "Ang Hindi Nagpapatawad na Lingkod",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 18,
+            "verseStart": 21,
+            "verseEnd": 35
+          }
+        ],
+        "reflection": "Anong maliit na pagkakasala ang patuloy mong pinipigilan ang isang tao, at paano binabago ng bundok ng iyong sariling pagpapatawad ang sitwasyong iyon?"
+      },
+      {
+        "day": 7,
+        "title": "Ang Pariseo at ang Maniningil ng Buwis",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 18,
+            "verseStart": 9,
+            "verseEnd": 14
+          }
+        ],
+        "reflection": "Saan sa iyong panalangin ang lihim na mas kahawig ng Pariseo kaysa sa maniningil ng buwis — at paano ka makakapagpakumbaba ngayon?"
+      },
+      {
+        "day": 8,
+        "title": "Ang mga Manggagawa sa Ubasan",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 20,
+            "verseStart": 1,
+            "verseEnd": 16
+          }
+        ],
+        "reflection": "Kanino sa iyong buhay ang huli nang dumating na biyaya ang iyong kinaiinisan, at paano ka pinapalaya ng kabutihan ng May-ari ng Lupa mula doon?"
+      },
+      {
+        "day": 9,
+        "title": "Ang Sampung Dalaga",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 25,
+            "verseStart": 1,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "Anong 'langis' ng patuloy na relasyon kay Cristo ang maaaring nauubos na, at paano mo ito mapapangalagaan sa linggong ito?"
+      },
+      {
+        "day": 10,
+        "title": "Ang mga Tupa at mga Kambing",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 25,
+            "verseStart": 31,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "Sa mukha ng sino, ngayon, si Jesus ay naghihintay na makilala — at ikaw ba ay tutugon?"
+      }
+    ]
+  },
+  {
+    "id": "esther-for-such-a-time",
+    "name": "Esther: Para sa Ganitong Panahon",
+    "description": "Isang 10-araw na paglalakbay sa aklat ni Esther — 10 kabanata, 10 araw — na sumusubaybay sa nakatagong pagkakaloob ng Diyos sa panahon ng krisis, tapang, at pagbabago.",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6A3A5C",
+      "#2E1826"
+    ],
+    "iconName": "crown.fill",
+    "imageKey": "mordecai_triumph",
+    "applicableSeasons": [
+      "workingProfessional",
+      "student",
+      "hardSeason",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Isang Party sa Palasyo",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Saan sa ingay at labis ng iyong mundo mo nararamdaman na tahimik na inihahanda ng Diyos ang isang entablado?"
+      },
+      {
+        "day": 2,
+        "title": "Isang Hindi Inaasahang Reyna",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong hindi piniling sitwasyon sa iyong buhay ang maaaring ginagamit ng Diyos upang ilagay ka sa isang layunin na hindi mo pa nakikita?"
+      },
+      {
+        "day": 3,
+        "title": "Ang Anino ni Haman",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kapag tila ang kasamaan ay nagiging mas malakas sa iyong mundo, paano mo pinapanatili ang kabutihan ng Diyos?"
+      },
+      {
+        "day": 4,
+        "title": "Para sa Ganitong Panahon",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong mapanganib na 'kung mamamatay ako, mamamatay ako' na hakbang ang maaaring hinihiling sa iyo ng Diyos para sa kapakanan ng iba?"
+      },
+      {
+        "day": 5,
+        "title": "Lumapit sa Hari",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kailan mo naramdaman ang pabor ng Diyos na nagbukas ng isang pintuan na natatakot kang tawirin?"
+      },
+      {
+        "day": 6,
+        "title": "Isang Walang Tulog na Gabi",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Saan mo nakita ang hindi nakikitang pagkakaloob ng Diyos na nag-aayos ng 'mga pagkakataon' para sa iyong kabutihan?"
+      },
+      {
+        "day": 7,
+        "title": "Ang Dakilang Pagbabago",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong sitwasyon ang tila imposibleng ngayon na maaaring mas malapit sa pagbabago kaysa sa iyong inaakala?"
+      },
+      {
+        "day": 8,
+        "title": "Mga Bagong Dekreto",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Saan mo kailangan manalangin ng matatag na mga bagong 'dekreto' ng pag-asa sa isang sitwasyon na naitakwil na?"
+      },
+      {
+        "day": 9,
+        "title": "Ang Araw ng Purim",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Anong mga pagliligtas ang nagawa na ng Diyos para sa iyo na nararapat alalahanin at ipagdiwang sa layunin?"
+      },
+      {
+        "day": 10,
+        "title": "Si Mordecai ang Tagapagsalita",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Sino sa paligid mo ang nangangailangan na ikaw ang maging Mordecai — isang tao na nagsasalita para sa kanilang kapakanan kahit na ito ay may halaga?"
+      }
+    ]
+  },
+  {
+    "id": "ruth-redemption",
+    "name": "Ruth: Isang Kwento ng Pagtubos",
+    "description": "Isang 4-araw na paglalakbay sa maliit na aklat ni Ruth — kung saan ang pagkawala ay nakatagpo ng katapatan, ang pag-aani ay nakatagpo ng pagkakaloob, at isang banyagang balo ay naging lola ng Hari David.",
+    "totalDays": 4,
+    "category": "Character Study",
+    "gradientColors": [
+      "#8B6642",
+      "#4A331F"
+    ],
+    "iconName": "heart.circle.fill",
+    "imageKey": "jacob_rachel_well",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "relationships",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Pagkawala at Katapatan",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Tinawag ni Naomi ang kanyang sarili na 'Mara' — mapait. Tumugon si Ruth sa pagkawala sa pamamagitan ng isang pangako: 'Saan ka man pumunta, doon ako pupunta.' Alin sa dalawang tinig — mapait na katotohanan o matigas na katapatan — ang mas malapit na naglalarawan kung paano mo hinaharap ang panahong ito, at ano ang maaaring magbago kung parehong pinahintulutan na magkasama?"
+      },
+      {
+        "day": 2,
+        "title": "Hindi Inaasahang Kabutihan",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Pansinin kung paano sinasabi ng tagapagsalaysay na si Ruth ay 'nangyari' na mag-ani sa bukirin ni Boaz — isang tahimik na pagtango na walang bagay sa kwentong ito ang talagang random. Saan sa iyong buhay maaaring pinaplanong ng Diyos ang tila pagkakataon tungo sa tahimik na kabutihan?"
+      },
+      {
+        "day": 3,
+        "title": "Matapang na Pananampalataya sa Pagsasaka",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ang paraan ni Ruth sa paglapit kay Boaz ay nag-uugnay sa konsepto ng Hebreo ng kinsman-redeemer — isang kamag-anak na bumibili muli ng lupa at mga buhay na nawala. Ano ang kahulugan nito sa iyo na ang larawan ng Biblia ng pagtubos ay nagsisimula dito, sa isang lugar ng pagsasaka, hindi sa isang templo?"
+      },
+      {
+        "day": 4,
+        "title": "Ang Tagapagligtas at ang Royal Line",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 1,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "Si Ruth — isang Moabita, isang balo, isang dayuhan — ay lumilitaw sa puno ng pamilya ni Jesus. Paano binabago ng wakas na iyon ang iyong pag-unawa sa kung sino ang hinahabi ng Diyos sa Kanyang kwento ng kaligtasan, at paano ka Niya hinahabi?"
+      }
+    ]
+  },
+  {
+    "id": "jonah-reluctant-prophet",
+    "name": "Jonas: Ang Nag-aatubiling Propeta",
+    "description": "Isang 4-araw na paglalakbay sa pamamagitan ni Jonas — isang propeta na tumakbo, isang bagyo na humuli sa kanya, isang lungsod na nagbago, at isang Diyos na ang awa ay umabot nang higit pa kaysa sa pagkiling ni Jonas.",
+    "totalDays": 4,
+    "category": "Character Study",
+    "gradientColors": [
+      "#2E5A6B",
+      "#15303A"
+    ],
+    "iconName": "water.waves",
+    "imageKey": "jesus_calms_storm",
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "Tumakas Mula sa Diyos",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Sinasabi ng Diyos na 'pumunta sa Nineveh' at sumakay si Jonas sa isang bangka patungong Tarshish — ang kabaligtaran ng kilalang mundo. Anong tungkulin mula sa Diyos ang iniiwasan mong tahakin, at saan nagmumula ang bagyong dapat magbigay sa iyo ng babala?"
+      },
+      {
+        "day": 2,
+        "title": "Panalangin Mula sa Kaloob-looban",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nananalangin si Jonas mula sa loob ng isang isda — ang pinakamababang punto na maisip — at tinatawag itong 'templo.' Paano binabago ng pag-reframe na ito ang iyong pananaw sa iyong sariling mababang mga lugar? Maaari bang gawing santuwaryo ng panalangin ang anumang lalim?"
+      },
+      {
+        "day": 3,
+        "title": "Isang Lungsod na Nagbago",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ang Nineveh ang pinakamalupit na kaaway ng Israel, at gayunpaman sila ay nagbago sa pinakamaikling sermon sa Biblia — walong salita lamang. Ano ang itinuturo nito sa iyo tungkol sa mahiwagang kapangyarihan ng Salita ng Diyos, kahit na ang mensahero ay nag-aatubili?"
+      },
+      {
+        "day": 4,
+        "title": "Ang Puso ng Diyos",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nagtatapos ang aklat sa isang tanong, hindi isang sagot — tinatanong ng Diyos si Jonas kung dapat ba Siyang maawa sa isang daan at dalawampung libong tao. Kaninong kaligtasan ang lihim na magdudulot sa iyo ng pagkabigo, at ano ang tinatawag ng huling tanong ng Diyos na isuko mo?"
+      }
+    ]
+  },
+  {
+    "id": "fruit-of-the-spirit",
+    "name": "Bunga ng Espiritu",
+    "description": "Isang 9-araw na pag-aaral ng katangian na pinapalago ng Banal na Espiritu sa atin — isang bunga bawat araw, bawat isa ay nakaugat sa Galacia 5 at nakapareha sa isang talata na nagbibigay-buhay dito.",
+    "totalDays": 9,
+    "category": "Discipleship",
+    "gradientColors": [
+      "#4A7A5C",
+      "#2A4A38"
+    ],
+    "iconName": "leaf.circle.fill",
+    "imageKey": "annunciation",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional",
+      "parenthood",
+      "newlyMarried"
+    ],
+    "applicableBurdens": [
+      "relationships",
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "Pag-ibig",
+        "readings": [
+          {
+            "bookID": "GAL",
+            "chapter": 5,
+            "verseStart": 16,
+            "verseEnd": 26
+          },
+          {
+            "bookID": "1CO",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Sinasabi ni Pablo na ang bunga ng Espiritu ay pag-ibig — nag-iisa — na para bang ang iba pang walong bunga ay umaagos mula rito. Aling linya ng 1 Corinto 13 ang pinaka-nagpapakita kung saan ang iyong pag-ibig ay patuloy na lumalaki, at saan ka inaanyayahan ng Espiritu na makipagtulungan?"
+      },
+      {
+        "day": 2,
+        "title": "Kaligayahan",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 4,
+            "verseEnd": 13
+          },
+          {
+            "bookID": "NEH",
+            "chapter": 8,
+            "verseStart": 1,
+            "verseEnd": 12
+          }
+        ],
+        "reflection": "Ang biblikal na kaligayahan ay hindi kawalan ng dalamhati kundi isang malalim na kasiyahan na nakaugat sa Diyos. Saan mo nalilito ang kaligayahan sa kaligayahan, at ano ang nag-uugnay sa kaligayahan kapag ang mga pangyayari ay hindi nakikipagtulungan?"
+      },
+      {
+        "day": 3,
+        "title": "Kapayapaan",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": 25,
+            "verseEnd": 31
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 26,
+            "verseStart": 1,
+            "verseEnd": 9
+          }
+        ],
+        "reflection": "Nagbibigay si Jesus ng kapayapaan 'hindi gaya ng ibinibigay ng mundo' — hindi kawalan ng hidwaan, kundi ang Kanyang presensya. Anong alalahanin ang dala-dala mo ngayon na inaalok ni Jesus na ipagpalit sa Kanyang kapayapaan?"
+      },
+      {
+        "day": 4,
+        "title": "Pagtitiis",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": 7,
+            "verseEnd": 11
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 11
+          }
+        ],
+        "reflection": "Ang salitang Griyego dito, 'makrothumia,' ay literal na nangangahulugang 'mahaba ang pasensya' — mabagal magalit. Saan sa iyong buhay ang iyong pasensya ay maikli, at ano ang magiging hitsura ng pagiging mahaba ang pasensya sa partikular na tao o sitwasyon na iyon?"
+      },
+      {
+        "day": 5,
+        "title": "Kabutihan",
+        "readings": [
+          {
+            "bookID": "COL",
+            "chapter": 3,
+            "verseStart": 12,
+            "verseEnd": 17
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "Ang kabutihan ay hindi lamang pagiging mabait — ito ay paglabas ng iyong paraan para sa isang tao na hindi makabawi sa iyo. Sino ang inilagay ng Diyos sa iyong landas sa linggong ito na nagkakahalaga ng iyong kabutihan?"
+      },
+      {
+        "day": 6,
+        "title": "Kabutihan",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": 9,
+            "verseEnd": 21
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ang kabutihan ay integridad na nananatili kahit walang nakakakita. Saan sa iyong pribadong buhay ang Espiritu ay tahimik na inaanyayahan kang itugma ang iyong lihim sa iyong reputasyon?"
+      },
+      {
+        "day": 7,
+        "title": "Katapatan",
+        "readings": [
+          {
+            "bookID": "LAM",
+            "chapter": 3,
+            "verseStart": 19,
+            "verseEnd": 33
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 16,
+            "verseStart": 10,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "Ang katapatan ng Diyos ay bago tuwing umaga; ang sa atin ay dapat na matatag sa maliliit na bagay. Saan ka tinatanong ng Panginoon na maging tapat sa isang 'maliit' na bagay na walang pumapalakpak?"
+      },
+      {
+        "day": 8,
+        "title": "Kahinhinan",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 1,
+            "verseEnd": 9
+          },
+          {
+            "bookID": "PRO",
+            "chapter": 15,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "Ang kahinhinan ay lakas na nasa ilalim ng kontrol — ang malambot na sagot ng isang tao na puwedeng umuungal. Kaninong sugat ang iyong pinipindot sa iyong mga salita na talagang nangangailangan ng malambot na paghawak?"
+      },
+      {
+        "day": 9,
+        "title": "Sariling Kontrol",
+        "readings": [
+          {
+            "bookID": "2PE",
+            "chapter": 1,
+            "verseStart": 3,
+            "verseEnd": 11
+          },
+          {
+            "bookID": "PRO",
+            "chapter": 25,
+            "verseStart": 21,
+            "verseEnd": 28
+          }
+        ],
+        "reflection": "Ang Kawikaan ay naglalarawan ng isang tao na walang sariling kontrol bilang isang lungsod na may sirang pader — bukas sa kahit ano. Anong 'pader' ang nais ng Espiritu na muling itayo sa iyong buhay sa linggong ito, at sino ang makakatulong sa iyo na alagaan ito?"
+      }
+    ]
+  },
+  {
+    "id": "philippians-joy",
+    "name": "Mga Taga-Filipos: Kaligayahan sa Bawat Panahon",
+    "description": "Isang 4-araw na paglalakad sa pinaka-masayang liham ni Pablo — isinulat mula sa isang selda ng bilangguan — isang kabanata bawat araw, bawat isa ay nagbubukas ng iba't ibang aspeto ng kaligayahan na hindi maabot ng mga pangyayari.",
+    "totalDays": 4,
+    "category": "Epistles",
+    "gradientColors": [
+      "#7A6A2E",
+      "#3C3314"
+    ],
+    "iconName": "sun.max.fill",
+    "imageKey": "magi_journey",
+    "applicableSeasons": [
+      "hardSeason",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "Kagalakan sa Paghihirap",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Isinusulat ni Pablo ang liham na ito sa mga tanikala at tinatawag pa rin itong kanyang 'kagalakan.' Binabago niya ang kanyang bilangguan bilang isang plataporma para sa ebanghelyo. Anong hindi kanais-nais na sitwasyon sa iyong buhay ang inaanyayahan ka ng Diyos na baguhin sa halip na takasan?"
+      },
+      {
+        "day": 2,
+        "title": "Kagalakan sa Kababaang-loob",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ang awit sa mga taludtod 6–11 ay naglalarawan ng pababang galaw ni Jesus — kapantay ng Diyos, nawalang laman, tao, masunurin, ipinako — bago siya itaas ng Ama. Saan ka humahawak sa katayuan sa isang lugar na ginagaya ni Jesus ang pagsuko, at ano ang hitsura ng 'parehong isip'?"
+      },
+      {
+        "day": 3,
+        "title": "Kagalakan sa Pagkilala kay Cristo",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Tinatawag ni Pablo ang kanyang kahanga-hangang résumé na 'basura' kumpara sa pagkilala kay Cristo. Anong bahagi ng iyong sariling résumé — mga kredensyal, tungkulin, mga nagawa — ang tahimik na nakikipagkumpitensya kay Cristo para sa sentro ng iyong pagkatao?"
+      },
+      {
+        "day": 4,
+        "title": "Kagalakan sa Bawat Sitwasyon",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Sinasabi ni Pablo na natutunan niya — nakaraan, mahirap na nakuha — ang lihim ng pagiging kontento sa kasaganaan o kakulangan. Saan sa iyong buhay tinuturuan ka ng Panginoon ng lihim na iyon ngayon, at anong mga gawi (panalangin, pasasalamat, tamang pag-iisip) ang tinatanggihan mong talagang gamitin?"
+      }
+    ]
+  },
+  {
+    "id": "life-of-moses",
+    "name": "Ang Buhay ni Moises",
+    "description": "Isang 10-araw na paglalakbay sa buhay ni Moises — mula sa basket hanggang sa nasusunog na bush, mula sa Dagat na Pula hanggang Sinai — nakikilala ang Diyos na tumatawag, nagliligtas, nagsasalita, at nananatili.",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6C4E2A",
+      "#382712"
+    ],
+    "iconName": "flame.circle.fill",
+    "imageKey": "manna_wilderness",
+    "applicableSeasons": [
+      "workingProfessional",
+      "startingOver",
+      "hardSeason",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Isinilang sa Isang Basket",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Tinatanggihan ng mga Hebreong mga midwife ang utos ni Paraon, inilalagay ng isang ina ang kanyang anak sa isang basket sa Nile, at ang Diyos ay nagsusulat na ng kwento ng pagliligtas. Saan ka pinaghahandaan ng Diyos nang tahimik, matagal bago mo nalaman na kailangan ng pagliligtas?"
+      },
+      {
+        "day": 2,
+        "title": "Ang Nasusunog na Bush",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Lumihis si Moises upang tingnan ang isang bush na nasusunog ngunit hindi nauubos, at tinawag siya ng Diyos sa kanyang pangalan. Anong ordinaryong bagay ang maaaring ginagamit ng Diyos upang makuha ang iyong atensyon, at handa ka bang lumihis upang tumingin?"
+      },
+      {
+        "day": 3,
+        "title": "Mga Dahilan at Mga Palatandaan",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nakikipagtalo si Moises sa Diyos: 'Sino ako? Paano kung hindi sila maniwala sa akin? Hindi ako magaling magsalita.' Sinasagot ng Diyos ang bawat pagtutol. Alin sa mga dahilan ni Moises ang pinaka kahawig ng dahilan na patuloy mong ibinibigay sa Diyos, at ano ang mapagpasensya na sagot ng Diyos sa iyo?"
+      },
+      {
+        "day": 4,
+        "title": "Paalisin Mo ang Aking mga Tao",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ang mga salot ay sistematikong nag-aalis ng kapangyarihan sa bawat diyos ng Ehipto — ang Nile, ang araw, ang mga hayop — na nagpapakita kung sino ang tunay na naghahari. Anong 'diyos' ng iyong sariling kultura ang kailangan mong ipakita ng Diyos bilang walang kapangyarihan sa iyong buhay?"
+      },
+      {
+        "day": 5,
+        "title": "Ang Paskuwa",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ang Israel ay nailigtas hindi dahil sa kanilang merito kundi sa dugo ng isang tupa sa kanilang mga pintuan — isang anino ng mas dakilang Tupa na darating. Paano nakakatulong ang pagtingin sa Paskuwa bilang isang larawan ni Cristo sa iyong pag-unawa sa kung ano talaga ang nagawa ng Kanyang dugo?"
+      },
+      {
+        "day": 6,
+        "title": "Sa Pamamagitan ng Dagat",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "'Tumayo ka at tingnan ang kaligtasan ng Panginoon,' sabi ni Moises sa mga taong nahuli — at pagkatapos ay sinabi ng Diyos 'lumakad ka pasulong.' Saan ka natutukso na mag-panic o huminto kapag ang Diyos ay humihingi ng parehong katahimikan ng puso at mga hakbang ng pananampalataya?"
+      },
+      {
+        "day": 7,
+        "title": "Manna at Tubig",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 7
+          }
+        ],
+        "reflection": "Nagbibigay ang Diyos ng tinapay na hindi maaaring ipunin at tubig mula sa isang bato. Anong biyaya ang inaalok Niya sa iyo araw-araw na patuloy mong sinusubukang ipunin para sa takot?"
+      },
+      {
+        "day": 8,
+        "title": "Sinai at ang Sampung Salita",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nagbibigay ang Diyos ng batas sa konteksto ng pagliligtas — 'Ako ang Panginoon mong Diyos na naglabas sa iyo' — hindi bilang paraan upang makuha ang Kanyang pag-ibig kundi bilang hugis para sa buhay kasama Siya. Alin sa mga utos ang madalas mong binabasa bilang pasanin sa halip na hangganan ng kalayaan?"
+      },
+      {
+        "day": 9,
+        "title": "Ipakita Mo sa Akin ang Iyong Kaluwalhatian",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 33,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Sabi ni Moises, 'Kung ang Iyong presensya ay hindi sumasama sa amin, huwag mo kaming ipadala mula rito.' Ano ang mas gusto mo mula sa Diyos — ang Kanyang mga regalo, o Siya? Paano magiging iba ang araw na ito kung Siya ang pinaka gusto mo?"
+      },
+      {
+        "day": 10,
+        "title": "Ang Tapat na Lingkod",
+        "readings": [
+          {
+            "bookID": "DEU",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Namamatay si Moises nang hindi nakapasok sa Lupang Pangako, ngunit ang Diyos mismo ang naglibing sa kanya. Anong mga hindi natapos na bagay sa iyong buhay ang hinihiling sa iyo ng Diyos na ipagkatiwala sa Kanya, na alam na ang kwento ay mas malaki kaysa sa iyo?"
+      }
+    ]
+  },
+  {
+    "id": "psalm-23-deep-dive",
+    "name": "Awit 23: Ang Awit ng Pastol",
+    "description": "Isang 6-araw na pagmumuni-muni sa pinaka-mahal na awit ng Kasulatan — isang taludtod sa isang pagkakataon — na sinamahan ng isang talata mula sa Bagong Tipan na nagpapakita kay Cristo bilang Pastol na palaging tinutukoy ng awit.",
+    "totalDays": 6,
+    "category": "Worship",
+    "gradientColors": [
+      "#4A6B3F",
+      "#253A22"
+    ],
+    "iconName": "sparkle",
+    "imageKey": "suffer_little_children",
+    "applicableSeasons": [
+      "hardSeason",
+      "growing",
+      "retired",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Ang Panginoon ang Aking Pastol",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 1,
+            "verseEnd": 1
+          },
+          {
+            "bookID": "JHN",
+            "chapter": 10,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "Si David ay isang pastol — alam niya ang bigat ng trabahong iyon. Tinatawag ni Jesus ang Kanyang sarili na 'Mabuting Pastol' na nag-aalay ng Kanyang buhay. Anong maling pastol (trabaho, tagumpay, relasyon) ang pinapayagan mong tukuyin ang iyong halaga, at ano ang nagbabago kapag ang Panginoon mismo ang humahawak ng tungkod?"
+      },
+      {
+        "day": 2,
+        "title": "Berde at Tahimik na Tubig",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 2,
+            "verseEnd": 2
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 11,
+            "verseStart": 25,
+            "verseEnd": 30
+          }
+        ],
+        "reflection": "Ang mga tupa ay hindi mahihiga kapag sila ay nababahala, nagugutom, o nasa hidwaan. 'Ginagawa' sila ng Pastol. Saan sa iyong buhay ang dahan-dahang pinapahinto ka ni Jesus, at ano ang nilalabanan mong manatiling nakatayo?"
+      },
+      {
+        "day": 3,
+        "title": "Mga Landas ng Katuwiran",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 3,
+            "verseEnd": 3
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ang Pastol ay 'ibinabalik ang aking kaluluwa' bago Niya ito dalhin sa mga tamang landas — ang kaaliwan ay nauuna sa pagsasaayos. Saan ka pinapanumbalik ng Diyos na akala mo ay tahimik Siya, at anong landas ang handa na Siyang lakaran kasama ka ngayon?"
+      },
+      {
+        "day": 4,
+        "title": "Sa Gitna ng Libis",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 4,
+            "verseEnd": 4
+          },
+          {
+            "bookID": "2CO",
+            "chapter": 4,
+            "verseStart": 7,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "Hindi sinasabi ni David na 'sa paligid' kundi 'sa loob' ng libis, at ang paksa ay nagbabago dito mula sa 'Siya' patungo sa 'Ikaw' — mas malapit ang panganib, mas nagiging personal ang Pastol. Anong libis ang iyong kinaroroonan, at paano tumitindi ang pagiging malapit ng Diyos dito?"
+      },
+      {
+        "day": 5,
+        "title": "Isang Mesa sa Harap ng mga Kaaway",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 5,
+            "verseEnd": 5
+          },
+          {
+            "bookID": "REV",
+            "chapter": 19,
+            "verseStart": 1,
+            "verseEnd": 10
+          }
+        ],
+        "reflection": "Pinapagsaluhan ka ng Diyos sa harap ng mga kaaway na nais mong mawala. Ano ang ibig sabihin na hindi Niya palaging inaalis ang iyong problema, kundi minsang inaanyayahan kang umupo at kumain habang ang problema ay nanonood?"
+      },
+      {
+        "day": 6,
+        "title": "Kabutihan, Awa, at Tahanan",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 6,
+            "verseEnd": 6
+          },
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": 1,
+            "verseEnd": 6
+          }
+        ],
+        "reflection": "Ang Hebreo para sa 'sundan mo ako' ay maaaring basahin bilang 'habulin' — ang kabutihan at awa ay hindi naglalakad sa likod mo, sila ay humahabol sa iyo. Paano binabago ng pagbabagong ito ang paraan ng iyong pag-alala sa iyong nakaraan at pagtingin sa iyong hinaharap kasama ang Diyos?"
+      }
+    ]
+  },
+  {
+    "id": "acts-early-church",
+    "name": "Mga Gawa: Ang Maagang Simbahan",
+    "description": "Isang 14-araw na paglalakbay sa aklat ng Mga Gawa — dalawang kabanata bawat araw — mula sa Pentecostes hanggang Roma, pinapanood ang Espiritu na nagbubuo ng isang kilusan na patuloy na umuukit sa bawat mananampalataya ngayon.",
+    "totalDays": 14,
+    "category": "Foundations",
+    "gradientColors": [
+      "#7A4A1C",
+      "#3E2510"
+    ],
+    "iconName": "wind",
+    "imageKey": "loaves_fishes",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional",
+      "student"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Pentecostes",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ang simbahan ay isinilang kapag ang mga ordinaryong tao ay napuno ng Espiritu at nagsimulang ipahayag si Jesus sa mga wika na hindi nila pinag-aralan. Saan sa iyong buhay ka naghintay ng higit pang pagsasanay sa halip na magtiwala sa Espiritu na bigyang-lakas ang pananalita na mayroon ka?"
+      },
+      {
+        "day": 2,
+        "title": "Matatag sa Harap ng Awtoridad",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Sinabihan si Pedro at Juan na itigil ang pangangaral — at manalangin para sa higit pang katapangan, hindi mas kaunti. Saan ka nahirapan sa presyur ng lipunan na maging tahimik tungkol kay Jesus, at anong panalangin ang makapagpapabago ng iyong postura mula sa pag-aangkop tungo sa tapang?"
+      },
+      {
+        "day": 3,
+        "title": "Isang Lumalagong, Nagtatangkang Simbahan",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ang kasinungalingan nina Ananias at Safira ay nagbabanta sa kadalisayan ng isang batang komunidad; kalaunan, ang mga apostol ay nagtalaga upang ang Salita ay patuloy na umusad. Anong organisasyonal o personal na kompromiso sa iyong espirituwal na buhay ang tahimik na humihinto sa misyon?"
+      },
+      {
+        "day": 4,
+        "title": "Si Esteban at ang Pagsasakapang",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ang kamatayan ni Esteban ay tila katapusan ng kilusan — ngunit ang pag-uusig na sumusunod ay nagkalat ng ebanghelyo sa buong kilalang mundo. Anong pagtatapos sa iyong buhay ang maaaring ginagamit ng Diyos bilang isang simula na hindi mo pa nakikita?"
+      },
+      {
+        "day": 5,
+        "title": "Si Saul ay Naging Kristiyano, Si Cornelio ay Kasama",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ang pinakamalupit na kaaway ng simbahan ay nagiging pinakamalaking misyonero nito, at ang isang Romanong senturiyon ay nagiging kapatid. Kaninong pagbabagong-loob ang pinaka magugulat sa iyo, at handa ka bang ipanalangin ito na may tunay na inaasahan?"
+      },
+      {
+        "day": 6,
+        "title": "Antioquia at isang Anghel",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ang mga mananampalataya ay unang tinawag na 'Kristiyano' sa Antioquia — isang simbahan ng mga dayuhan na nagiging sentro. Paano ginagamit ng Diyos ang mga tao sa mga gilid upang palaguin ang Kanyang simbahan sa mga paraang hindi nakikita ng relihiyosong sentro?"
+      },
+      {
+        "day": 7,
+        "title": "Ang Unang Misyonerong Paglalakbay",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Sinabi ng Espiritu, 'Ihiwalay si Pablo at si Bernabe para sa gawain na tinawag ko sila.' Kaninong pagpapadala ang bahagi mo — alinman sa pagiging ipinadala o taimtim na sumusuporta — at gaano ka seryoso sa pangangalaga na iyon?"
+      },
+      {
+        "day": 8,
+        "title": "Konseho ng Jerusalem at isang Bilangguan sa Filipos",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nagpasya ang simbahan na ang biyaya ay tunay na para sa mga Gentil, at umaawit si Pablo sa isang selda ng bilangguan sa gitna ng gabi. Saan ka pa nagdadagdag ng mga hindi sinasabi na kinakailangan sa biyaya ng Diyos, at anong awit ang maaaring naghihintay sa iyong pinakamahirap na lugar?"
+      },
+      {
+        "day": 9,
+        "title": "Athens at Corinto",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nakipag-ugnayan si Pablo sa mga paganong pilosopo sa Areopagus sa pamamagitan ng pagsipi sa kanilang sariling mga makata. Paano mo matututuhan na ipahayag ang ebanghelyo sa bokabularyo ng mga tao sa paligid mo nang hindi binabawasan ang katotohanan?"
+      },
+      {
+        "day": 10,
+        "title": "Efeso at isang Malambing na Pamamaalam",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Umiiyak si Pablo kasama ang mga matatanda ng Efeso, na pinapaalala sa kanila na 'mas pinagpala ang magbigay kaysa tumanggap.' Sino ang ibinigay sa iyo ng Diyos upang alagaan, at paano mo sila dapat mahalin nang mas sinadya sa linggong ito?"
+      },
+      {
+        "day": 11,
+        "title": "Naaresto si Pablo sa Jerusalem",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Patuloy na tumutungo si Pablo patungo sa pagdurusa dahil siya ay 'nakagapos sa Espiritu.' Saan hinihiling ng Diyos na lumipat ka patungo sa hirap dahil ito ay pagsunod, hindi upang iwasan ito dahil ito ay mahirap?"
+      },
+      {
+        "day": 12,
+        "title": "Tapang sa Harap ng mga Pinuno",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nakatayo ang Panginoon kay Pablo sa gabi at sinabi, 'Magkaroon ng tapang.' Kailan ka nangangailangan ng isang hindi nakikitang salita upang magpatuloy, at paano maaaring ibinubulong ito ng Diyos sa iyo ngayong gabi?"
+      },
+      {
+        "day": 13,
+        "title": "Halos Napaniwala",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Sinabi ni Agrippa na 'halos' siya'y napaniwala ni Pablo na maging Kristiyano. Saan sa iyong sariling buhay ka 'halos' nakatuon, at ano ang kinakailangan upang isara ang agwat sa pagitan ng paniniwala at pagsuko?"
+      },
+      {
+        "day": 14,
+        "title": "Nasalanta ng Barko patungong Roma",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nagtatapos ang Mga Gawa nang biglaan — nangangaral si Pablo ng kaharian mula sa isang inuupahang bahay, nakagapos sa isang sundalo, at malinaw na hindi pa tapos ang kwento. Ikaw ay bahagi ng hindi natapos na kwentong iyon. Anong susunod na linya ang isinusulat ng Diyos sa pamamagitan mo?"
+      }
+    ]
+  },
+  {
+    "id": "first-john-assurance",
+    "name": "1 Juan: Upang Malaman Mo",
+    "description": "Isang 5-araw na paglalakad sa unang sulat ni Juan — isinulat upang ang mga mananampalataya ay 'malaman na mayroon silang buhay na walang hanggan.' Bawat kabanata ay nag-explore ng iba't ibang pagsubok ng tunay na pananampalataya.",
+    "totalDays": 5,
+    "category": "Epistles",
+    "gradientColors": [
+      "#3D5A8B",
+      "#1C2D5C"
+    ],
+    "iconName": "checkmark.seal.fill",
+    "imageKey": "bethany_mary_martha",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "anxiety",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Naglalakad sa Liwanag",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Iginiit ni Juan na ang pakikipag-isa sa Diyos ay nakatali sa paglalakad sa liwanag — dinadala ang mga nakatago sa bukas. Ano ang isang bahagi kung saan nagkukunwari ka na ang tapat na pagkumpuni ay talagang magdadala sa pakikipag-isa sa halip na kahihiyan?"
+      },
+      {
+        "day": 2,
+        "title": "Manatili, Hindi Lamang Maniwala",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ang pagsubok ni Juan sa pag-ibig para sa Diyos ay simple: 'Sinumang tumutupad sa Kanyang salita, sa kanya tunay na ang pag-ibig ng Diyos ay natatapos.' Paano ilalarawan ng iyong pinakamalapit na relasyon ang pagkakaiba sa pagitan ng iyong mga paniniwala at iyong mga asal?"
+      },
+      {
+        "day": 3,
+        "title": "Mga Anak ng Diyos",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "'Tingnan mo kung anong klaseng pag-ibig ang ibinigay sa atin ng Ama — na tayo'y tawaging mga anak ng Diyos.' Paano magiging iba ang araw na ito kung pumasok ka rito na naniniwala na ang iyong tunay na pagkakakilanlan ay 'minamahal na anak'?"
+      },
+      {
+        "day": 4,
+        "title": "Ang Diyos ay Pag-ibig",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Sinasabi ni Juan 'umiibig tayo dahil Siya ang unang umibig sa atin' — ang ating pag-ibig ay laging isang tugon. Anong pag-ibig ang iyong hinahabol na para bang maaari mo itong makamit, at paano ka pinapalaya ng naunang pag-ibig ng Diyos upang mahalin ang taong iyon mula sa kapahingahan, hindi mula sa pangangailangan?"
+      },
+      {
+        "day": 5,
+        "title": "Upang Iyong Malaman",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Sinasabi ni Juan na isinulat niya ang liham na ito 'upang iyong malaman na ikaw ay may buhay na walang hanggan.' Alin sa mga pagsubok ni Juan — pananampalataya kay Jesus, pag-ibig sa kapwa, pagsunod sa Kanyang salita — ang pinaka nais ng Espiritu na bigyang-katiyakan ka ngayon?"
+      }
+    ]
+  },
+  {
+    "id": "james-faith-that-works",
+    "name": "Santiago: Pananampalatayang May Gawa",
+    "description": "Isang 5-araw na pag-aaral ng Santiago — ang pinaka praktikal na liham sa Bagong Tipan — na humaharap sa agwat sa pagitan ng sinasabi nating pinaniniwalaan at kung paano talaga tayo namumuhay.",
+    "totalDays": 5,
+    "category": "Epistles",
+    "gradientColors": [
+      "#8B5A2E",
+      "#44290F"
+    ],
+    "iconName": "hammer.fill",
+    "imageKey": "davids_three_mighty_men",
+    "applicableSeasons": [
+      "workingProfessional",
+      "growing",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "relationships",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Bilangin ang Lahat ng Kaligayahan",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Hindi sinasabi ni Santiago na ang mga pagsubok ay KALIGAYAHAN — sinasabi niyang bilangin ang mga ito bilang kaligayahan dahil sa kung ano ang ginagawa ng Diyos. Alin sa mga kasalukuyang pagsubok ang kailangang muling isaalang-alang ngayong linggo kung talagang naniniwala ka na ang Diyos ay nagmumulat ng isang bagay sa iyo sa pamamagitan nito?"
+      },
+      {
+        "day": 2,
+        "title": "Ang Pananampalataya na Walang Gawa ay Patay",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Hindi itinatakda ni Santiago ang pananampalataya laban sa mga gawa — sinasabi niyang ang tunay na pananampalataya ay laging may gawa. Ano ang isang tiyak na kilos ng pagsunod na makikita ang iyong pribadong pananampalataya ngayong linggo?"
+      },
+      {
+        "day": 3,
+        "title": "Pagpigil sa Dila",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ikinukumpara ni Santiago ang dila sa isang maliit na timon na nagmamaneho ng isang malaking barko at isang maliit na spark na nagsusunog ng gubat. Saan nagdadala ang iyong mga salita sa iyong buhay o sa buhay ng ibang tao sa isang direksyon na ikinahihiya mong marating?"
+      },
+      {
+        "day": 4,
+        "title": "Pakikipagkaibigan sa Mundo",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Sinasabi ni Santiago na ang mga alitan ay nagmumula sa mga pagnanasa na nakikipagdigma sa loob natin — at na 'wala tayong natatanggap dahil hindi tayo humihingi.' Anong pagnanasa ang nagtutulak sa hidwaan sa iyong buhay ngayon, at naiparating mo na ba ito nang tapat sa Diyos sa panalangin?"
+      },
+      {
+        "day": 5,
+        "title": "Matyaga at Nanalangin",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nagtatapos si Santiago sa pagtawag sa simbahan na manalangin para sa isa't isa, na umamin ng kasalanan upang makamit ang pagpapagaling. Sino sa iyong buhay ang sapat na ligtas upang marinig kang umamin, at ano ang magiging halaga nito sa iyo upang talagang hilingin sa kanila na manalangin kasama mo?"
+      }
+    ]
+  },
+  {
+    "id": "hebrews-jesus-is-better",
+    "name": "Mga Hebreo: Si Jesus ay Mas Mabuti",
+    "description": "Isang 13-araw na pag-akyat sa Mga Hebreo — isang kabanata bawat araw — na nagpapakita kung paano tinutupad at nalalampasan ni Jesus ang bawat larawan sa Lumang Tipan na tumuturo sa Kanya.",
+    "totalDays": 13,
+    "category": "Theology",
+    "gradientColors": [
+      "#5A2F2F",
+      "#2C1414"
+    ],
+    "iconName": "crown.fill",
+    "imageKey": "sacrifice_isaac",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Ang Anak, Mas Mataas sa mga Anghel",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Binubuksan ng Mga Hebreo sa pagsasabi na ang Diyos ay nagsalita nang pinaka-kumpleto sa Kanyang Anak — 'ang sinag ng kaluwalhatian ng Diyos.' Saan ka nakikinig para sa Diyos sa isang libong pangalawang mapagkukunan nang Siya ay nagsalita na nang pinaka-malinaw kay Jesus?"
+      },
+      {
+        "day": 2,
+        "title": "Isang Napakagandang Kaligtasan",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Si Jesus ay naging mas mababa kaysa sa mga anghel — tao, tinukso, nagdurusa — upang Siya ay 'matikman ang kamatayan para sa lahat.' Paano binabago ng pagkakaroon ni Jesus ng iyong tiyak na laman ang paraan ng iyong pagdadala ng iyong kahinaan sa Kanya?"
+      },
+      {
+        "day": 3,
+        "title": "Mas Dakila Kaysa kay Moises",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Si Moises ay tapat bilang isang lingkod sa bahay ng Diyos; si Jesus ay tapat bilang Anak sa ibabaw nito. Saan ka naglilingkod sa bahay ng Diyos sa paraang lihim na lumalayo mula sa pagtitiwala sa Anak ng Diyos?"
+      },
+      {
+        "day": 4,
+        "title": "Pumasok sa Kanyang Kapahingahan",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Sinasabi ng manunulat na may natitirang Sabbath na kapahingahan para sa mga tao ng Diyos — ngunit kailangan nating magsikap upang makapasok dito. Anong walang kapayapang pagsisikap sa iyong buhay ang talagang isang kawalang-kakayahang huminto at magtiwala na ang gawain ay kay Cristo, hindi sa iyo?"
+      },
+      {
+        "day": 5,
+        "title": "Isang Dakilang Mataas na Pari",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Si Jesus ay isang pari na 'sa mga araw ng Kanyang laman ay nag-alay ng mga panalangin at mga pakiusap na may malalakas na sigaw at luha.' Paano binabago ng pag-iisip kay Jesus bilang isang luhaang, maunawain na pari ang paraan ng iyong pagdadala ng iyong sariling mga luha sa Kanya?"
+      },
+      {
+        "day": 6,
+        "title": "Magpatuloy sa Pagtanda",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Hinimok ng manunulat ang mga mambabasa na huwag manatili bilang mga espiritwal na sanggol kundi magpatuloy. Alin sa mga 'batayang' katotohanan ang iyong tinanggap sa halip na lumago sa solidong pagkain?"
+      },
+      {
+        "day": 7,
+        "title": "Isang Pari na Katulad ni Melquisedec",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ang pagkasaserdote ni Jesus ay permanente — 'Siya ay palaging nabubuhay upang manalangin.' Paano binabago ng kaalaman na si Jesus ay nananalangin para sa iyo ngayon ang anumang dala-dala mo papunta sa bukas?"
+      },
+      {
+        "day": 8,
+        "title": "Isang Mas Mabuting Tipan",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Sa ilalim ng bagong tipan, isinusulat ng Diyos ang Kanyang mga batas 'sa kanilang mga puso.' Saan ka pa rin nakikipag-ugnayan sa Diyos sa pamamagitan ng mga panlabas na alituntunin kapag nais Niyang baguhin ka mula sa loob?"
+      },
+      {
+        "day": 9,
+        "title": "Isang Beses para sa Lahat",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ang mga dating pari ay nag-alay ng mga araw-araw na sakripisyo na hindi kailanman makapaglinis ng budhi; ang nag-iisang sakripisyo ni Cristo ay nagagawa ito. Anong kasalanan ang patuloy mong inuulit na para bang ang natapos na gawain Niya ay nangangailangan ng iyong pag-uulit upang ito'y manatili?"
+      },
+      {
+        "day": 10,
+        "title": "Lumapit na may Katiyakan",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Dahil sa dugo ni Jesus, maaari tayong lumapit 'na may katiyakan' — ang kurtina ay napunit. Kapag lumapit ka sa Diyos, parang ba ito ay paglapit sa isang trono ng biyaya o sa waiting room ng isang nag-aalinlangan na opisyal? Ano ang magbabago?"
+      },
+      {
+        "day": 11,
+        "title": "Ang Bulwagan ng Pananampalataya",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bawat tao na nakalista dito ay namatay nang hindi natanggap ang ipinangako, 'ngunit nakita nila ito at tinanggap mula sa malayo.' Paano maaaring ang iyong kwento ng paghihintay ay ituring na isang kabanata ng parehong bulwagan ng pananampalataya?"
+      },
+      {
+        "day": 12,
+        "title": "Isang Dakilang Ulap ng mga Saksi",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Hinihimok tayo ng manunulat na ituon ang ating mga mata kay Jesus, 'ang tagapagtatag at tagapagpahusay ng ating pananampalataya,' at tumakbo nang may pagtitiis. Anong bigat — hindi kinakailangang makasalanan, ngunit mabigat — ang nagpapabagal sa iyong takbo, at handa ka bang iwanan ito?"
+      },
+      {
+        "day": 13,
+        "title": "Sa Labas ng Kampo",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Si Jesus ay nagdusa 'sa labas ng kampo' — lampas sa relihiyosong paggalang ng Kanyang panahon. Saan ka Niya tinatawag na lumabas sa iyong sariling komportableng kampo upang makasama Siya sa mga taong isinantabi ng respetadong mundo?"
+      }
+    ]
+  }
+]

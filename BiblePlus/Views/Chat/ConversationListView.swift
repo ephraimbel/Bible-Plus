@@ -9,6 +9,10 @@ struct ConversationListView: View {
     @State private var viewModel: ConversationListViewModel?
     @State private var navigationPath = NavigationPath()
     @State private var pendingContext: String?
+    /// Optional message to scroll to once the destination ChatView mounts.
+    /// Set when a `.navigateToConversation` notification arrives carrying
+    /// a `messageId` (e.g. tapping a saved AI reply on the Saved page).
+    @State private var pendingMessageId: UUID?
 
     var body: some View {
         NavigationStack(path: $navigationPath) {
@@ -45,10 +49,14 @@ struct ConversationListView: View {
                 }
             }
             .navigationDestination(for: UUID.self) { conversationId in
-                ChatView(conversationId: conversationId, initialContext: consumePendingContext())
-                    .onDisappear {
-                        viewModel?.loadConversations()
-                    }
+                ChatView(
+                    conversationId: conversationId,
+                    initialContext: consumePendingContext(),
+                    initialMessageId: consumePendingMessageId()
+                )
+                .onDisappear {
+                    viewModel?.loadConversations()
+                }
             }
         }
         .onChange(of: pendingConversation?.conversationId) { _, newValue in
@@ -62,9 +70,20 @@ struct ConversationListView: View {
             guard let idString = notification.userInfo?["conversationId"] as? String,
                   let conversationId = UUID(uuidString: idString) else { return }
             pendingContext = notification.userInfo?["context"] as? String
+            // Optional — set when navigating from a saved chat reply so
+            // ChatView can scroll to the original message after load.
+            if let msgIdString = notification.userInfo?["messageId"] as? String,
+               let msgId = UUID(uuidString: msgIdString) {
+                pendingMessageId = msgId
+            }
             viewModel?.loadConversations()
             navigationPath.append(conversationId)
         }
+    }
+
+    private func consumePendingMessageId() -> UUID? {
+        defer { pendingMessageId = nil }
+        return pendingMessageId
     }
 
     private func startNewConversation() {
@@ -258,9 +277,7 @@ private struct ConversationListContent: View {
     // MARK: - Top Gold Gradient
 
     private var topGoldGradient: some View {
-        let tint: Color = colorScheme == .dark
-            ? palette.accent
-            : Color(red: 0.65, green: 0.48, blue: 0.25)
+        let tint = palette.accent
         let strength: CGFloat = colorScheme == .dark ? 0.20 : 0.28
         let bg = palette.background
 

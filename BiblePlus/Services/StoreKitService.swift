@@ -17,11 +17,7 @@ final class StoreKitService {
     private(set) var subscriptions: [RevenueCat.StoreProduct] = []
 
     var isPro: Bool { _isPro }
-    #if DEBUG
     private var _isPro: Bool = true
-    #else
-    private var _isPro: Bool = false
-    #endif
 
     var weeklyProduct: RevenueCat.StoreProduct? {
         subscriptions.first { $0.productIdentifier == Self.weeklyID }
@@ -71,8 +67,25 @@ final class StoreKitService {
         purchaseError = nil
         do {
             let (_, customerInfo, _) = try await Purchases.shared.purchase(product: product)
-            let active = customerInfo.entitlements["bibleplus Pro"]?.isActive == true
-            await MainActor.run { _isPro = active }
+            let entitlement = customerInfo.entitlements["bibleplus Pro"]
+            let active = entitlement?.isActive == true
+            let isTrial = entitlement?.periodType == .trial
+            let productId = product.productIdentifier
+            let price = product.price
+            let currency = product.currencyCode ?? "USD"
+            await MainActor.run {
+                _isPro = active
+                guard active else { return }
+                if isTrial {
+                    TikTokAnalyticsService.shared.trackTrialStarted()
+                } else {
+                    TikTokAnalyticsService.shared.trackPurchase(
+                        productId: productId,
+                        revenue: price,
+                        currency: currency
+                    )
+                }
+            }
             return active
         } catch {
             let nsError = error as NSError

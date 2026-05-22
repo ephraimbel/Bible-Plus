@@ -10,6 +10,7 @@ final class ReadingPlan {
     var category: String = ""
     var gradientColors: [String] = []
     var iconName: String = ""
+    var imageKey: String = ""
     var daysJSON: Data = Data()
     var applicableSeasons: [String] = []
     var applicableBurdens: [String] = []
@@ -25,6 +26,7 @@ final class ReadingPlan {
         category: String,
         gradientColors: [String],
         iconName: String,
+        imageKey: String,
         days: [PlanDay],
         applicableSeasons: [String],
         applicableBurdens: [String],
@@ -39,6 +41,7 @@ final class ReadingPlan {
         self.category = category
         self.gradientColors = gradientColors
         self.iconName = iconName
+        self.imageKey = imageKey
         self.daysJSON = (try? JSONEncoder().encode(days)) ?? Data()
         self.applicableSeasons = applicableSeasons
         self.applicableBurdens = applicableBurdens
@@ -48,7 +51,12 @@ final class ReadingPlan {
     }
 
     var days: [PlanDay] {
-        (try? JSONDecoder().decode([PlanDay].self, from: daysJSON)) ?? []
+        do {
+            return try JSONDecoder().decode([PlanDay].self, from: daysJSON)
+        } catch {
+            print("[ReadingPlan] Failed to decode days for plan \(id): \(error)")
+            return []
+        }
     }
 }
 

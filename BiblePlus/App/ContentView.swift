@@ -15,6 +15,10 @@ struct ContentView: View {
     @State private var selectedTab: Tab = .feed
     @State private var soundscapeService = SoundscapeService()
     @State private var audioBibleService = AudioBibleService()
+    // Single shared instance so Settings, onboarding, and any deep-link entry
+    // all read from the same `currentCode`. Reassigning language in Settings
+    // immediately re-renders every view tree under this environment.
+    @State private var localizationService: LocalizationService = .shared
     @State private var showFeedEntryButton = true
     @State private var pendingConversation: PendingConversation?
     @Environment(\.scenePhase) private var scenePhase
@@ -22,7 +26,11 @@ struct ContentView: View {
     enum Tab: String, CaseIterable {
         case feed, bible, ask, saved, settings
 
-        var title: String {
+        /// Returning `LocalizedStringKey` (not `String`) is what routes these
+        /// through the String Catalog. A raw `String` would bypass the
+        /// Bundle-swizzle lookup entirely — tab items would stay in English
+        /// even after the user switched languages.
+        var title: LocalizedStringKey {
             switch self {
             case .feed: "Home"
             case .bible: "Bible"
@@ -73,6 +81,10 @@ struct ContentView: View {
         tabs
         .environment(soundscapeService)
         .environment(audioBibleService)
+        .environment(localizationService)
+        .environment(\.locale, localizationService.locale)
+        .environment(\.layoutDirection, localizationService.layoutDirection)
+        .id(localizationService.currentCode ?? "system")
         .tint(palette.accent)
         .sensoryFeedback(.selection, trigger: selectedTab)
         .onAppear {
@@ -193,6 +205,15 @@ struct ContentView: View {
                 selectedTab = .feed
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: .navigateToConversation)) { _ in
+            // SavedView and other call sites post this when they want to
+            // jump into an existing AI conversation. ConversationListView
+            // handles the actual nav-stack push; we just make sure the
+            // Ask tab is selected first so its NavigationStack is mounted.
+            withAnimation(.easeInOut(duration: 0.25)) {
+                selectedTab = .ask
+            }
+        }
         .onReceive(NotificationCenter.default.publisher(for: .scriptureDeepLink)) { notification in
             if let bookName = notification.userInfo?["bookName"] as? String,
                let chapter = notification.userInfo?["chapter"] as? Int {
@@ -293,19 +314,16 @@ struct ContentView: View {
 
         hasRoutedToWelcomeConversation = true
 
-        // Switch tabs first; the pending conversation gets picked up by
-        // ConversationListView's existing onAppear handler which already
-        // knows how to push a conversation onto the navigation stack.
-        // Tiny delay so the tab transition lands before the push.
-        withAnimation(.easeInOut(duration: 0.25)) {
-            selectedTab = .ask
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            pendingConversation = PendingConversation(
-                conversationId: convoID,
-                context: nil
-            )
-        }
+        // Instant, unanimated handoff: the user has just dismissed the
+        // paywall and hasn't seen Home yet, so animating a tab switch
+        // only adds visible flicker. Setting both values synchronously
+        // lets SwiftUI render Ask + push the welcome conversation in
+        // the same frame, before Home has a chance to appear.
+        selectedTab = .ask
+        pendingConversation = PendingConversation(
+            conversationId: convoID,
+            context: nil
+        )
     }
 }
 

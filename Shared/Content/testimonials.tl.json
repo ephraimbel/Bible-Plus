@@ -1,0 +1,456 @@
+{
+  "version": 1,
+  "testimonials": [
+    {
+      "id": "t_001",
+      "name": "Sarah M.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "loneliness"
+      ],
+      "seasons": [
+        "single",
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "Buksan ito bago ang email ngayon. Mahirap ipaliwanag pero iba ang pakiramdam ng mga umaga ko.",
+      "daysUsing": 94
+    },
+    {
+      "id": "t_002",
+      "name": "James T.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "purpose"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "Nagtanong ako ng ilang random na teolohiya sa AI na akala ko'y mahihirapan ito. Hindi ito nangyari. Totoong humanga ako.",
+      "daysUsing": 142
+    },
+    {
+      "id": "t_003",
+      "name": "Lauren R.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "relationship"
+      ],
+      "seasons": [
+        "married",
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "May tahanan na ang 3am na pagkabahala. Gumising, magbasa ng something, huminga, bumalik sa tulog. Yun na yun.",
+      "daysUsing": 58
+    },
+    {
+      "id": "t_004",
+      "name": "David C.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "doubt"
+      ],
+      "seasons": [
+        "startingOver"
+      ],
+      "rating": 5,
+      "quote": "Hindi ako nakapunta sa simbahan sa mahigit 12 taon. Hindi ito parang simbahan. Parang kaibigan na nangyayari lang na marunong ng kasulatan.",
+      "daysUsing": 23
+    },
+    {
+      "id": "t_005",
+      "name": "Maria V.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "grief"
+      ],
+      "seasons": [
+        "hardSeason"
+      ],
+      "rating": 5,
+      "quote": "Matapos mawala ang aking ina, ang mga Awit na ipinadala sa akin ay hindi generic. Sila ang mga kailangan ko.",
+      "daysUsing": 77
+    },
+    {
+      "id": "t_006",
+      "name": "Marcus J.",
+      "faithStage": "growing",
+      "burdens": [
+        "purpose",
+        "temptation"
+      ],
+      "seasons": [
+        "student"
+      ],
+      "rating": 5,
+      "quote": "42 na araw na tuloy-tuloy at patuloy pa. Wala akong napanatili ng ganito katagal mula pa noong middle school, sa totoo lang.",
+      "daysUsing": 42
+    },
+    {
+      "id": "t_007",
+      "name": "Elena K.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "financial"
+      ],
+      "seasons": [
+        "parent",
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "Ang talatang widget ay tumatama sa akin bago pa ang Twitter. Sulit na iyon para sa akin.",
+      "daysUsing": 61
+    },
+    {
+      "id": "t_008",
+      "name": "Robert H.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "health"
+      ],
+      "seasons": [
+        "retired"
+      ],
+      "rating": 5,
+      "quote": "Ako ay 68. Akala ko nabasa ko na ang lahat. Ang audio Bible sa aking mga umaga ay nagpapakita sa akin ng mga talata na sinilip ko sa buong buhay ko.",
+      "daysUsing": 186
+    },
+    {
+      "id": "t_009",
+      "name": "Priya S.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "loneliness",
+        "purpose"
+      ],
+      "seasons": [
+        "single",
+        "startingOver"
+      ],
+      "rating": 5,
+      "quote": "Hindi ako lumaki sa simbahan. Gusto kong maunawaan ang Kasulatan nang hindi nakakaramdam ng paghuhusga. Ito ang pinakamalambot na pagpapakilala na nahanap ko.",
+      "daysUsing": 31
+    },
+    {
+      "id": "t_010",
+      "name": "Thomas W.",
+      "faithStage": "growing",
+      "burdens": [
+        "anger",
+        "relationship"
+      ],
+      "seasons": [
+        "married",
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "ang journal ng panalangin ay mahinahong tinatawag akong lumabas lol. mas mabuti akong asawa dahil dito.",
+      "daysUsing": 89
+    },
+    {
+      "id": "t_011",
+      "name": "Naomi B.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "doubt",
+        "purpose"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "Maaari akong makipagtalo dito. Bumabalik ito gamit ang Kasulatan, hindi mga platitudes. Bihira iyon.",
+      "daysUsing": 119
+    },
+    {
+      "id": "t_012",
+      "name": "Hassan A.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety"
+      ],
+      "seasons": [
+        "student"
+      ],
+      "rating": 5,
+      "quote": "linggo ng finals at sa ilang paraan ay hindi ako nalulumbay. Ang talatang 8am ay nagpapanatili sa akin na nakatayo.",
+      "daysUsing": 46
+    },
+    {
+      "id": "t_013",
+      "name": "Grace L.",
+      "faithStage": "growing",
+      "burdens": [
+        "relationship",
+        "loneliness"
+      ],
+      "seasons": [
+        "single"
+      ],
+      "rating": 5,
+      "quote": "mga dating app sa aking home screen katabi nito. kakaibang dekada na maging single. ito ay mananatili.",
+      "daysUsing": 38
+    },
+    {
+      "id": "t_014",
+      "name": "Paul M.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "purpose"
+      ],
+      "seasons": [
+        "workingProfessional",
+        "married"
+      ],
+      "rating": 5,
+      "quote": "Ako ay isang pastor. Ginagamit ko ito sa aking sariling paglalakad, hindi lang para sa paghahanda ng sermon. Iyan ang tanda.",
+      "daysUsing": 203
+    },
+    {
+      "id": "t_015",
+      "name": "Rachel F.",
+      "faithStage": "growing",
+      "burdens": [
+        "grief",
+        "loneliness"
+      ],
+      "seasons": [
+        "hardSeason",
+        "startingOver"
+      ],
+      "rating": 5,
+      "quote": "Taon ng diborsyo. Ito ang nagpapanatili sa akin sa Salita nang hindi ko ma-buksan ang Bibliya nang hindi umiiyak.",
+      "daysUsing": 67
+    },
+    {
+      "id": "t_016",
+      "name": "Kenji T.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "purpose",
+        "anxiety"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "Tumigil ako sa dalawang meditation app dahil pinagsisihan nila ako. Hindi ito — at sa ilang paraan, iyon ang dahilan kung bakit nandito pa ako sa araw 52.",
+      "daysUsing": 52
+    },
+    {
+      "id": "t_017",
+      "name": "Abigail O.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "health"
+      ],
+      "seasons": [
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "Humiling ang aking anak na manalangin tayong magkasama ngayong linggo. Unang pagkakataon. Sinasisi ko ang app na ito lol.",
+      "daysUsing": 104
+    },
+    {
+      "id": "t_018",
+      "name": "Jonathan P.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "temptation",
+        "purpose"
+      ],
+      "seasons": [
+        "single",
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "Ang talatang 9pm ay tumutunog sa tamang oras na karaniwan akong nagsisimulang mag-scroll ng doom. Ang palitan na iyon ay sulit.",
+      "daysUsing": 131
+    },
+    {
+      "id": "t_019",
+      "name": "Mia D.",
+      "faithStage": "growing",
+      "burdens": [
+        "loneliness"
+      ],
+      "seasons": [
+        "student"
+      ],
+      "rating": 5,
+      "quote": "Malungkot ang kolehiyo at ang grupo ng mga kaibigan ko ay hindi mga mananampalataya. Ito ang simbahan ko hanggang makahanap ako ng isa.",
+      "daysUsing": 73
+    },
+    {
+      "id": "t_020",
+      "name": "Carlos G.",
+      "faithStage": "growing",
+      "burdens": [
+        "financial",
+        "anxiety"
+      ],
+      "seasons": [
+        "workingProfessional",
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "masikip ang pera ngayon pero nagbabayad pa rin ako para dito. marahil sapat na iyon.",
+      "daysUsing": 87
+    },
+    {
+      "id": "t_021",
+      "name": "Hannah W.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "grief"
+      ],
+      "seasons": [
+        "married"
+      ],
+      "rating": 5,
+      "quote": "Pagkawala ng bata noong Enero. Hindi alam ng app, pero alam ng mga talata. Sa ilang paraan.",
+      "daysUsing": 112
+    },
+    {
+      "id": "t_022",
+      "name": "Samir N.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "doubt"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "Ako ay isang skeptiko. Pumasok ako na handang manghusga. Nanatili ako para sa mga tapat na sagot.",
+      "daysUsing": 29
+    },
+    {
+      "id": "t_023",
+      "name": "Olivia S.",
+      "faithStage": "growing",
+      "burdens": [
+        "relationship",
+        "purpose"
+      ],
+      "seasons": [
+        "single"
+      ],
+      "rating": 5,
+      "quote": "tumigil sa paghahambing ng aking buhay sa instagram sa paligid ng linggo 3. ang pang-araw-araw na talata ay pumalit sa ugali ng pag-scroll na iyon.",
+      "daysUsing": 54
+    },
+    {
+      "id": "t_024",
+      "name": "Michael A.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "purpose"
+      ],
+      "seasons": [
+        "retired"
+      ],
+      "rating": 5,
+      "quote": "65 taong gulang. Ang audio Bible sa aking umaga ay ang pinakamagandang pera na ginastos ko ngayong taon.",
+      "daysUsing": 168
+    },
+    {
+      "id": "t_025",
+      "name": "Victoria B.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "loneliness"
+      ],
+      "seasons": [
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "Hindi makabasa ng buong kabanata ang postpartum brain. Ang format na isang talata sa isang araw ang nagligtas sa akin.",
+      "daysUsing": 48
+    },
+    {
+      "id": "t_026",
+      "name": "Nathan R.",
+      "faithStage": "growing",
+      "burdens": [
+        "temptation",
+        "anger"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "Hindi ako pinapuri ng AI. Sinasabi nito sa akin ang katotohanan. Kailangan ko iyon mula sa isang tool, kakaiba.",
+      "daysUsing": 96
+    },
+    {
+      "id": "t_027",
+      "name": "Esther C.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "health"
+      ],
+      "seasons": [
+        "hardSeason",
+        "married"
+      ],
+      "rating": 5,
+      "quote": "Tahimik ang mga araw ng chemo. Ang mga tunog at Awit ay nakatulong sa akin sa mga round 4, 5, at 6.",
+      "daysUsing": 135
+    },
+    {
+      "id": "t_028",
+      "name": "Andre L.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "anxiety",
+        "loneliness"
+      ],
+      "seasons": [
+        "startingOver",
+        "single"
+      ],
+      "rating": 5,
+      "quote": "Anim na buwan na akong nasa labas ng rehab. Ito ang nagpapanatili ng ingay nang hindi sapat ang mga pulong.",
+      "daysUsing": 78
+    },
+    {
+      "id": "t_029",
+      "name": "Faith M.",
+      "faithStage": "growing",
+      "burdens": [
+        "purpose",
+        "doubt"
+      ],
+      "seasons": [
+        "student"
+      ],
+      "rating": 5,
+      "quote": "Oo, ang pangalan ko ay talagang Faith. Oo, alam ko. Nagulat pa rin ako sa app.",
+      "daysUsing": 41
+    },
+    {
+      "id": "t_030",
+      "name": "Isaac B.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "purpose",
+        "anger"
+      ],
+      "seasons": [
+        "workingProfessional",
+        "married"
+      ],
+      "rating": 5,
+      "quote": "Tatlong Bible app ang tinanggal bago ito. Talagang binubuksan ko na ang aking Bibliya ngayon, hindi lang tumatanggap ng pang-araw-araw na talata. Iyan ang buong pagkakaiba.",
+      "daysUsing": 157
+    }
+  ]
+}

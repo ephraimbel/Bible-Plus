@@ -57,7 +57,13 @@ struct OnboardingContainerView: View {
                             .transition(.opacity)
                         }
 
-                        // Screen content
+                        // Screen content. Note: this legacy container view is
+                        // retained for reference and previews — the live root
+                        // routes to `ConversationalOnboardingView` instead.
+                        // Widget setup was cut from the flow (research showed
+                        // post-paywall setup screens don't lift retention
+                        // enough to justify the friction); nudged later from
+                        // the home dashboard instead.
                         Group {
                             switch vm.currentStep {
                             case 0: WelcomeView(viewModel: vm)
@@ -70,7 +76,6 @@ struct OnboardingContainerView: View {
                             case 7: NotificationPermissionView(viewModel: vm)
                             case 8: AestheticView(viewModel: vm)
                             case 9: PaywallContainerView(viewModel: vm)
-                            case 10: WidgetSetupView(viewModel: vm)
                             default: EmptyView()
                             }
                         }

@@ -15,8 +15,8 @@ struct BibleBook: Identifiable, Hashable {
 
         var displayName: String {
             switch self {
-            case .old: "Old Testament"
-            case .new: "New Testament"
+            case .old: String(localized: "Old Testament")
+            case .new: String(localized: "New Testament")
             }
         }
     }

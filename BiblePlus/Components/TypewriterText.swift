@@ -39,6 +39,15 @@ struct TypewriterText: View {
     /// for an inline `sparkle` glyph that matches the brand logo.
     var highlightSymbol: String? = nil
     var highlightColor: Color = Color(red: 1.0, green: 0.84, blue: 0.3)
+    /// When true, the full text is rendered immediately at mount and no
+    /// typing animation plays. Used for layers that are already being
+    /// torn down (e.g., the outgoing page during a transition) so text
+    /// doesn't visibly re-type on a fresh mount.
+    var startCompleted: Bool = false
+    /// Delay between `onAppear` and the first character typing out. Raise
+    /// this when the view is mounted during a page transition so typing
+    /// doesn't begin until the incoming page is fully settled.
+    var initialDelay: TimeInterval = 0.18
     var onComplete: (() -> Void)? = nil
 
     @State private var displayed: String = ""
@@ -67,7 +76,12 @@ struct TypewriterText: View {
             revealAll()
         }
         .onAppear {
-            start()
+            if startCompleted {
+                displayed = text
+                isComplete = true
+            } else {
+                start()
+            }
         }
         .onDisappear {
             revealTask?.cancel()
@@ -129,9 +143,13 @@ struct TypewriterText: View {
         guard displayed.isEmpty, !isComplete else { return }
 
         revealTask = Task { @MainActor in
-            // Tiny initial pause so the message doesn't pop in the same
-            // frame as the bubble appearing — gives the eye time to land.
-            try? await Task.sleep(nanoseconds: 180_000_000)
+            // Initial pause so the message doesn't pop in the same frame
+            // as the view appearing — gives the eye time to land. Callers
+            // raise this when mounting mid-transition so typing waits for
+            // the page to finish sliding/fading in.
+            if initialDelay > 0 {
+                try? await Task.sleep(nanoseconds: UInt64(initialDelay * 1_000_000_000))
+            }
 
             // Soft haptic when typing actually begins — signals to the user
             // "the AI is replying now" without being intrusive.

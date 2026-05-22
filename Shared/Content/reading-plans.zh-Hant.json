@@ -1,0 +1,5943 @@
+[
+  {
+    "id": "psalms-of-peace",
+    "name": "平安詩篇",
+    "description": "一個為期7天的旅程，透過詩篇直接對你焦慮的心靈說話，引導你走向只有神能賜予的寧靜與平安。",
+    "totalDays": 7,
+    "category": "Comfort",
+    "gradientColors": [
+      "#4A6741",
+      "#2D4A3E"
+    ],
+    "iconName": "leaf.fill",
+    "imageKey": "jesus_calms_storm",
+    "applicableSeasons": [
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "牧者的關懷",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "在你生命的這個季節，神作為你的牧者意味著什麼？"
+      },
+      {
+        "day": 2,
+        "title": "在光中自信",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你何時在黑暗的時刻經歷過神作為你的光？"
+      },
+      {
+        "day": 3,
+        "title": "品嚐與看見",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神如何將你從曾經束縛你的恐懼中拯救出來？"
+      },
+      {
+        "day": 4,
+        "title": "神是我們的避難所",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今天你在哪裡需要「安靜，知道祂是神」？"
+      },
+      {
+        "day": 5,
+        "title": "在祂的翅膀下",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 91,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "住在至高者的庇護下是什麼感覺？"
+      },
+      {
+        "day": 6,
+        "title": "永不打盹的守護者",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 121,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "知道神從不打盹，這如何改變你面對今晚的方式？"
+      },
+      {
+        "day": 7,
+        "title": "奇妙而可畏地被造",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "關於神如何認識你的真理，現在帶給你最大的安慰是什麼？"
+      }
+    ]
+  },
+  {
+    "id": "gospel-of-john",
+    "name": "約翰福音",
+    "description": "在21天內走過整本約翰福音，逐章遇見耶穌——道成肉身。",
+    "totalDays": 21,
+    "category": "Gospel",
+    "gradientColors": [
+      "#8B6914",
+      "#5C4A1C"
+    ],
+    "iconName": "book.fill",
+    "imageKey": "baptism_jesus",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "道成肉身",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "耶穌在萬物之前就存在並選擇住在我們中間，對你來說意味著什麼？"
+      },
+      {
+        "day": 2,
+        "title": "水變酒",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "在你的生活中，你需要耶穌將平凡變為奇蹟的地方是在哪裡？"
+      },
+      {
+        "day": 3,
+        "title": "你必須重生",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "「重生」的概念如何挑戰或鼓勵你對信仰的理解？"
+      },
+      {
+        "day": 4,
+        "title": "活水",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你正在從哪些井中汲水，讓你感到口渴，活水會是什麼樣子？"
+      },
+      {
+        "day": 5,
+        "title": "池邊的醫治",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "是否有一個地方你一直在等待醫治，但還沒有完全向耶穌求助？"
+      },
+      {
+        "day": 6,
+        "title": "生命的餅",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "每天以耶穌作為生命的餅來滋養自己是什麼樣子？"
+      },
+      {
+        "day": 7,
+        "title": "活水的江河",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "當世界對耶穌的看法與你自己的經歷衝突時，你會如何反應？"
+      },
+      {
+        "day": 8,
+        "title": "世界的光",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你在哪裡需要耶穌將祂的光照進羞恥或黑暗的地方？"
+      },
+      {
+        "day": 9,
+        "title": "瞎子的視力",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你希望耶穌為你打開的靈性盲點是什麼？"
+      },
+      {
+        "day": 10,
+        "title": "好牧人",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "知道耶穌甘願獻上自己的生命，這如何改變你對祂愛的看法？"
+      },
+      {
+        "day": 11,
+        "title": "拉撒路，出來！",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你生命中哪個死去的地方需要耶穌呼喚回來？"
+      },
+      {
+        "day": 12,
+        "title": "為埋葬而膏抹",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今天你能為耶穌獻上什麼最奢華的敬拜行為？"
+      },
+      {
+        "day": 13,
+        "title": "僕人王",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "這週耶穌在呼召你通過謙卑的服事來洗誰的腳？"
+      },
+      {
+        "day": 14,
+        "title": "道路、真理、生命",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "耶穌為你預備地方的應許如何影響你今天的生活方式？"
+      },
+      {
+        "day": 15,
+        "title": "真葡萄樹",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "這週對你來說，'常在'耶穌裡實際上是什麼樣子？"
+      },
+      {
+        "day": 16,
+        "title": "幫助者要來了",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你如何經歷聖靈引導你進入真理？"
+      },
+      {
+        "day": 17,
+        "title": "耶穌為你祈禱",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "知道耶穌親自為你與祂和父的合一祈禱，感覺如何？"
+      },
+      {
+        "day": 18,
+        "title": "背叛與逮捕",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你何時像彼得一樣，通過你的言語或行為否認認識耶穌？"
+      },
+      {
+        "day": 19,
+        "title": "成了",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你正在承擔什麼重擔，而耶穌已經在十字架上完成了？"
+      },
+      {
+        "day": 20,
+        "title": "祂復活了",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "復活的現實如何改變你面對最大恐懼的方式？"
+      },
+      {
+        "day": 21,
+        "title": "你愛我嗎？",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "如果今天耶穌問你'你愛我嗎？'三次，你的回答將如何影響你的行動？"
+      }
+    ]
+  },
+  {
+    "id": "30-days-of-wisdom",
+    "name": "30天的智慧",
+    "description": "每個月的一章箴言——為決策、關係、工作和日常生活提供永恆的智慧。",
+    "totalDays": 30,
+    "category": "Wisdom",
+    "gradientColors": [
+      "#6B4C8A",
+      "#3D2B5C"
+    ],
+    "iconName": "lightbulb.fill",
+    "imageKey": "ten_commandments",
+    "applicableSeasons": [
+      "workingProfessional",
+      "parenthood"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "智慧的開始",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "主的敬畏作為所有智慧的起點意味著什麼？"
+      },
+      {
+        "day": 2,
+        "title": "尋找隱藏的寶藏",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你在多大程度上像尋找隱藏的寶藏一樣，故意尋求智慧？"
+      },
+      {
+        "day": 3,
+        "title": "全心信靠",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你面臨什麼決定，需要信靠神而不是依靠自己的理解？"
+      },
+      {
+        "day": 4,
+        "title": "保守你的心",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你允許什麼進入你的心，可能使你遠離智慧的道路？"
+      },
+      {
+        "day": 5,
+        "title": "愚蠢的危險",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "在你的生活中，在哪裡你最容易受到誘惑，走上偏離神最佳計劃的捷徑？"
+      },
+      {
+        "day": 6,
+        "title": "螞蟻的教訓",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "螞蟻的勤勉能教會你什麼關於你當前的責任？"
+      },
+      {
+        "day": 7,
+        "title": "誘惑的代價",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你需要設置什麼界限來保護自己免受誘惑？"
+      },
+      {
+        "day": 8,
+        "title": "智慧呼喚",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "在日常生活的喧囂中，你如何辨識智慧的聲音在呼喚你？"
+      },
+      {
+        "day": 9,
+        "title": "兩個邀請",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你更常接受哪個邀請——智慧的盛宴還是愚蠢的捷徑？"
+      },
+      {
+        "day": 10,
+        "title": "智慧的兒子",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你在家中的品格如何反映出你在公共場合所追求的智慧？"
+      },
+      {
+        "day": 11,
+        "title": "誠實的天平",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "在你的生活中，哪裡需要追求更大的誠實和正直？"
+      },
+      {
+        "day": 12,
+        "title": "治癒的言語",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你今天的言語如何能為你周圍的人帶來治癒而不是傷害？"
+      },
+      {
+        "day": 13,
+        "title": "與智慧同行",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你生活中有哪些智慧的夥伴，你如何能從他們身上學到更多？"
+      },
+      {
+        "day": 14,
+        "title": "看似正確的道路",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "什麼時候你認為正確的道路卻最終導致錯誤的方向？"
+      },
+      {
+        "day": 15,
+        "title": "溫柔的回答",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你生活中誰需要你給予溫柔的回答，而不是嚴厲的話語？"
+      },
+      {
+        "day": 16,
+        "title": "委身於你的計劃",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你正在堅持哪些計劃，需要完全委身於主？"
+      },
+      {
+        "day": 17,
+        "title": "隨時的朋友",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你如何能成為一個更忠實的朋友，支持正在經歷逆境的人？"
+      },
+      {
+        "day": 18,
+        "title": "堅固的塔",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "當困難來臨時，你首先是向主的名呼求，還是向其他事物尋求幫助？"
+      },
+      {
+        "day": 19,
+        "title": "對窮人的善良",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "這週你如何能向有需要的人表現出慷慨，作為一種敬拜的行為？"
+      },
+      {
+        "day": 20,
+        "title": "王的心",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "信靠神對領袖和國家的主權如何改變你禱告的方式？"
+      },
+      {
+        "day": 21,
+        "title": "公義與正直",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "在日常生活中，你在哪裡能更忠實地追求公義與正直？"
+      },
+      {
+        "day": 22,
+        "title": "美好的名聲",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你正在建立什麼樣的名聲，這是否反映出基督的品格？"
+      },
+      {
+        "day": 23,
+        "title": "不要嫉妒",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "什麼觸發了你心中的嫉妒，感恩如何能取而代之？"
+      },
+      {
+        "day": 24,
+        "title": "困境中的力量",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "當逆境考驗你的信心時，你如何反應？"
+      },
+      {
+        "day": 25,
+        "title": "金蘋果",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "上一次別人的及時言語像金蘋果一樣對你有幫助是什麼時候？"
+      },
+      {
+        "day": 26,
+        "title": "懶惰者的鏡子",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "哪一個懶惰或拖延的領域讓你無法得到神為你預備的最好？"
+      },
+      {
+        "day": 27,
+        "title": "鐵磨鐵",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你生活中誰在磨練你，你是否在有意投資這段關係？"
+      },
+      {
+        "day": 28,
+        "title": "義人必剛強",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你在哪裡需要更多的勇氣來堅持正確的事？"
+      },
+      {
+        "day": 29,
+        "title": "異象與順服",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "擁有根植於神話語的異象如何能防止你漫無目的地遊蕩？"
+      },
+      {
+        "day": 30,
+        "title": "神的每一句話",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 30,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "阿古爾的禱告——「不要給我貧窮，也不要給我富有」——教會你關於滿足的什麼呢？"
+      }
+    ]
+  },
+  {
+    "id": "romans-heart-of-the-gospel",
+    "name": "羅馬書：福音的心臟",
+    "description": "深入探討保羅寫給羅馬人的信件的16天旅程——這是有史以來最完整的福音呈現。",
+    "totalDays": 16,
+    "category": "Theology",
+    "gradientColors": [
+      "#8B3A3A",
+      "#5C2424"
+    ],
+    "iconName": "flame.fill",
+    "imageKey": "crucifixion",
+    "applicableSeasons": [
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "神的福音",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你是否曾對福音感到羞愧，活得不羞愧會是什麼樣子？"
+      },
+      {
+        "day": 2,
+        "title": "神的公義審判",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "知道神不偏待人如何影響你對他人的評判方式？"
+      },
+      {
+        "day": 3,
+        "title": "眾人都犯了罪",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "所有人都犯了罪的現實如何平等地將你和其他人置於同一水平？"
+      },
+      {
+        "day": 4,
+        "title": "像亞伯拉罕一樣的信心",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神呼召你憑信心相信什麼不可能的應許？"
+      },
+      {
+        "day": 5,
+        "title": "與神和好",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "知道苦難產生忍耐如何改變你看待試煉的方式？"
+      },
+      {
+        "day": 6,
+        "title": "對罪死，對基督活",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你需要考慮自己對什麼罪死去，以便能夠全心全意地為基督而活？"
+      },
+      {
+        "day": 7,
+        "title": "內心的掙扎",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "保羅對罪的誠實掙扎如何鼓勵你在自己的戰鬥中？"
+      },
+      {
+        "day": 8,
+        "title": "沒有定罪",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你仍在承擔什麼基督已經除去的定罪？"
+      },
+      {
+        "day": 9,
+        "title": "神的主權選擇",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你如何回應神的主權與人類責任之間的奧秘？"
+      },
+      {
+        "day": 10,
+        "title": "話語就在你身邊",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你生活中誰需要聽到好消息，什麼在阻止你分享它？"
+      },
+      {
+        "day": 11,
+        "title": "橄欖樹",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "理解你作為「接枝的」枝條的地位如何加深你的感恩？"
+      },
+      {
+        "day": 12,
+        "title": "活的祭物",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今天將你的身體獻為活祭實際上是什麼樣子？"
+      },
+      {
+        "day": 13,
+        "title": "順服與愛",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "「除了愛，什麼都不欠」的命令如何重塑你這週的關係？"
+      },
+      {
+        "day": 14,
+        "title": "不要評判你的弟兄",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你在哪裡需要對信仰觀點不同的弟兄姐妹施予更多的恩典？"
+      },
+      {
+        "day": 15,
+        "title": "為神的榮耀而合一",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你如何更積極地追求與其他信徒的合一，以榮耀神？"
+      },
+      {
+        "day": 16,
+        "title": "問候與和平的神",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神在你周圍放置了哪些人來增強你的信心，你有感謝他們嗎？"
+      }
+    ]
+  },
+  {
+    "id": "new-believers-journey",
+    "name": "新信徒之旅",
+    "description": "為期14天的導覽，帶你走過聖經中最重要的章節——非常適合剛開始探索基督教信仰的任何人。",
+    "totalDays": 14,
+    "category": "Foundations",
+    "gradientColors": [
+      "#3A6B8B",
+      "#1C3D5C"
+    ],
+    "iconName": "sunrise.fill",
+    "imageKey": "samuel_called",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "重生",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "開始一個全新的靈性生活對你來說意味著什麼？"
+      },
+      {
+        "day": 2,
+        "title": "牧羊人",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "想像上帝作為一位牧羊人關心你，這如何改變你對祂的感受？"
+      },
+      {
+        "day": 3,
+        "title": "人人都犯了罪",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "理解每個人都不完美，這如何幫助你無愧地接受上帝的恩典？"
+      },
+      {
+        "day": 4,
+        "title": "恩典的禮物",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "接受一件你永遠無法自己獲得的東西意味著什麼？"
+      },
+      {
+        "day": 5,
+        "title": "無罪的宣判",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "在基督裡沒有定罪的真理下，你需要釋放什麼罪疚感或羞愧？"
+      },
+      {
+        "day": 6,
+        "title": "因恩典得救",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "知道救恩是禮物——而不是獎賞——如何改變你對自己的壓力？"
+      },
+      {
+        "day": 7,
+        "title": "道路、真理、生命",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "當你感到迷失或對未來不確定時，耶穌作為道路意味著什麼？"
+      },
+      {
+        "day": 8,
+        "title": "上帝是愛",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "「上帝是愛」這句話如何重塑你對上帝的理解？"
+      },
+      {
+        "day": 9,
+        "title": "上帝的平安",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你現在可以把什麼擔憂帶給上帝，以換取超越理解的平安？"
+      },
+      {
+        "day": 10,
+        "title": "信心的殿堂",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "這一章中哪位信心之人最激勵你，為什麼？"
+      },
+      {
+        "day": 11,
+        "title": "試煉與智慧",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你如何開始將當前的試煉視為成長的機會，而不是懲罰？"
+      },
+      {
+        "day": 12,
+        "title": "八福",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "哪一項八福最直接地對你目前的生活狀況發聲？"
+      },
+      {
+        "day": 13,
+        "title": "主禱文",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "主禱文如何成為你每天與上帝交談的框架？"
+      },
+      {
+        "day": 14,
+        "title": "萬物更新",
+        "readings": [
+          {
+            "bookID": "REV",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "上帝會使萬物更新的應許如何給你對未來的希望？"
+      }
+    ]
+  },
+  {
+    "id": "finding-purpose",
+    "name": "尋找目的",
+    "description": "為期10天的探索，深入聖經中關於身份、呼召和上帝編織進你生命中的目的的最強大經文。",
+    "totalDays": 10,
+    "category": "Purpose",
+    "gradientColors": [
+      "#8B7B3A",
+      "#5C5124"
+    ],
+    "iconName": "star.fill",
+    "imageKey": "miraculous_catch",
+    "applicableSeasons": [
+      "workingProfessional",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "要使你繁榮的計劃",
+        "readings": [
+          {
+            "bookID": "JER",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "知道上帝對你的福祉和未來有計劃，這如何改變你面對不確定性的方式？"
+      },
+      {
+        "day": 2,
+        "title": "奇妙的造物",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "如果你真的相信自己是被敬畏和奇妙地造出來的，會有什麼改變？"
+      },
+      {
+        "day": 3,
+        "title": "信靠主",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你正在試圖自己引導哪條道路，而不是在其中承認上帝？"
+      },
+      {
+        "day": 4,
+        "title": "為善工而造",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你感覺上帝為你預備了哪些善工讓你去行？"
+      },
+      {
+        "day": 5,
+        "title": "活的祭物",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你如何利用上帝賜予你的獨特恩賜來服侍他人？"
+      },
+      {
+        "day": 6,
+        "title": "按名被召",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 43,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "上帝按名呼召你並宣告你為祂的產業，這如何塑造你的身份感？"
+      },
+      {
+        "day": 7,
+        "title": "活著就是基督",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "如果「活著就是基督」，那對你處理工作和人際關係的方式意味著什麼？"
+      },
+      {
+        "day": 8,
+        "title": "心思要高舉",
+        "readings": [
+          {
+            "bookID": "COL",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你正在緊緊抓住什麼世俗的事物，使你無法專注於天上的事？"
+      },
+      {
+        "day": 9,
+        "title": "被揀選的子民",
+        "readings": [
+          {
+            "bookID": "1PE",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "被稱為「王的祭司」如何重新定義你對目的和歸屬感的理解？"
+      },
+      {
+        "day": 10,
+        "title": "在主裡喜樂",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "當你承諾在主裡喜樂於一切之上時，你的渴望會發生什麼變化？"
+      }
+    ]
+  },
+  {
+    "id": "comfort-in-hard-times",
+    "name": "艱難時期的安慰",
+    "description": "在苦難季節中，聖經中的7天避難所——這些經文幫助信徒度過了數千年的黑暗山谷。",
+    "totalDays": 7,
+    "category": "Comfort",
+    "gradientColors": [
+      "#5C7A8B",
+      "#3A4F5C"
+    ],
+    "iconName": "heart.fill",
+    "imageKey": "job_suffering",
+    "applicableSeasons": [
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "health"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "主靠近傷心的人",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "知道神特別靠近傷心的人，現在如何安慰你？"
+      },
+      {
+        "day": 2,
+        "title": "不要懼怕，我與你同在",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 41,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你正在承擔什麼恐懼，神希望你將其交託給祂？"
+      },
+      {
+        "day": 3,
+        "title": "一切安慰的神",
+        "readings": [
+          {
+            "bookID": "2CO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你的痛苦如何使你能夠安慰其他正在受苦的人？"
+      },
+      {
+        "day": 4,
+        "title": "沒有什麼能使我們隔絕",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "什麼情況讓你感到與神的愛隔絕，這一章如何對此發聲？"
+      },
+      {
+        "day": 5,
+        "title": "安靜，知道祂是神",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你生活中需要靜音的噪音是什麼，以便你能聽到神說「安靜」？"
+      },
+      {
+        "day": 6,
+        "title": "來到我這裡，得著安息",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你正在承擔什麼沉重的負擔，耶穌邀請你今天放下？"
+      },
+      {
+        "day": 7,
+        "title": "每一滴眼淚都被擦去",
+        "readings": [
+          {
+            "bookID": "REV",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神會擦去你眼中的每一滴眼淚的應許，如何給你力量去忍耐今天？"
+      }
+    ]
+  },
+  {
+    "id": "sermon-on-the-mount",
+    "name": "登山寶訓",
+    "description": "對耶穌最著名的講道進行為期7天的深入研究——這一徹底的教導顛覆了世界的價值觀。",
+    "totalDays": 7,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A8B5C",
+      "#4F5C3A"
+    ],
+    "iconName": "text.book.closed.fill",
+    "imageKey": "sermon_mount",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "八福與地上的鹽",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 26
+          }
+        ],
+        "reflection": "哪一條八福對你挑戰最大，今天實踐它會是什麼樣子？"
+      },
+      {
+        "day": 2,
+        "title": "更高的義",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 27,
+            "verseEnd": 48
+          }
+        ],
+        "reflection": "耶穌呼召「要像你們的天父一樣完全」如何推動你超越遵守規則，進入心靈的轉變？"
+      },
+      {
+        "day": 3,
+        "title": "在暗中施捨、禱告和禁食",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "你需要在哪裡將你的靈修實踐從被他人看見轉向僅被神看見？"
+      },
+      {
+        "day": 4,
+        "title": "天上的財寶",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 19,
+            "verseEnd": 34
+          }
+        ],
+        "reflection": "你在焦慮什麼，耶穌希望你完全信任祂？"
+      },
+      {
+        "day": 5,
+        "title": "不要論斷",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": 1,
+            "verseEnd": 14
+          }
+        ],
+        "reflection": "在指出別人的刺之前，你需要處理自己眼中的梁木嗎？"
+      },
+      {
+        "day": 6,
+        "title": "建立在磐石上",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": 15,
+            "verseEnd": 29
+          }
+        ],
+        "reflection": "你的生活是建立在耶穌的話語的磐石上，還是建立在世俗智慧的沙土上？"
+      },
+      {
+        "day": 7,
+        "title": "整體的講道",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "在閱讀整個登山寶訓後，你最想實踐的教導是什麼？"
+      }
+    ]
+  },
+  {
+    "id": "psalms-in-30-days",
+    "name": "30天詩篇",
+    "description": "在30天內閱讀所有150篇詩篇——每天五篇詩篇，讓你沉浸在聖經中最豐富的敬拜、禱告和讚美的書卷中。",
+    "totalDays": 30,
+    "category": "Worship",
+    "gradientColors": [
+      "#3A5C8B",
+      "#1C2D5C"
+    ],
+    "iconName": "music.note",
+    "imageKey": "jacob_ladder",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "詩篇 1–5：有福與破碎",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "在主的律法中日夜喜悅對你來說意味著什麼？"
+      },
+      {
+        "day": 2,
+        "title": "詩篇 6–10：向神呼求",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩人向神呼求的誠實如何讓你有勇氣將你真實的情感帶到祂面前？"
+      },
+      {
+        "day": 3,
+        "title": "詩篇 11–15：義人與惡人",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇15揭示了什麼樣的人能夠住在神的面前？"
+      },
+      {
+        "day": 4,
+        "title": "詩篇 16–20：避難所與拯救",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇19中天宣揚神的榮耀如何在你心中激起敬拜？"
+      },
+      {
+        "day": 5,
+        "title": "詩篇 21–25：牧者與尋求者",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇22中被遺棄的呼喊——耶穌在十字架上所呼喊的——如何加深你對祂犧牲的理解？"
+      },
+      {
+        "day": 6,
+        "title": "詩篇 26–30：黑暗中的光",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 30,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "哭泣可能持續一夜，但喜樂會在早晨來臨，這意味著什麼？"
+      },
+      {
+        "day": 7,
+        "title": "詩篇 31–35：信靠與拯救",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 31,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 33,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 35,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇32中赦免的祝福如何鼓勵你坦白你所隱藏的事情？"
+      },
+      {
+        "day": 8,
+        "title": "詩篇 36–40：堅定的愛",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 36,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 38,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 39,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 40,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇37中『以耶和華為樂』在你的日常生活中是什麼樣子？"
+      },
+      {
+        "day": 9,
+        "title": "詩篇 41–45：渴望神",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 41,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 42,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 43,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 44,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 45,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你的靈魂何時像鹿渴望水一樣渴望神？"
+      },
+      {
+        "day": 10,
+        "title": "詩篇 46–50：神是我們的堡壘",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 47,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 48,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 49,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 50,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇46中『安靜』的提醒如何對你目前生活中的混亂發聲？"
+      },
+      {
+        "day": 11,
+        "title": "詩篇 51–55：破碎的心靈",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 51,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 52,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 53,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 54,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 55,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "大衛在詩篇51中為潔淨的心所做的禱告如何給你勇氣面對神，帶著你的失敗？"
+      },
+      {
+        "day": 12,
+        "title": "詩篇 56–60：當我害怕時",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 56,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 57,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 58,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 59,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 60,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇56中『當我害怕時，我要信靠你』在你當前的環境中是什麼樣子？"
+      },
+      {
+        "day": 13,
+        "title": "詩篇 61–65：單單在神裡面安息",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 61,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 62,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 63,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 64,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 65,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你在哪裡找到真正的安息——是在神裡面，還是你在尋求其他來源的平安？"
+      },
+      {
+        "day": 14,
+        "title": "詩篇 66–70：歡呼喜樂",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 66,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 67,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 68,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 69,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 70,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你生活中有哪些神的奇妙作為是你想告訴別人的？"
+      },
+      {
+        "day": 15,
+        "title": "詩篇 71–75：永恆的盼望",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 71,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 72,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 73,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 74,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 75,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇73中詩人對嫉妒的掙扎如何反映你的經歷？"
+      },
+      {
+        "day": 16,
+        "title": "詩篇 76–80：記住祂的奇事",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 76,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 77,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 78,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 79,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 80,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你能記得和重溫哪些過去神的作為，以增強你今天的信心？"
+      },
+      {
+        "day": 17,
+        "title": "詩篇 81–85：復興與恢復",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 81,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 82,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 83,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 84,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 85,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇84中對神院子的渴望如何與你對敬拜的渴望共鳴？"
+      },
+      {
+        "day": 18,
+        "title": "詩篇 86–90：從永恆到永恆",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 86,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 87,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 88,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 89,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 90,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇90中對生命短暫的看法如何改變你對時間的重視？"
+      },
+      {
+        "day": 19,
+        "title": "詩篇 91–95：庇護與歌唱",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 91,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 92,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 93,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 94,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 95,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "住在至高者的庇護下意味著什麼，你今天如何能實踐這一點？"
+      },
+      {
+        "day": 20,
+        "title": "詩篇 96–100：主掌權",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 96,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 97,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 98,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 99,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 100,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇 100 中呼籲「發出喜樂的聲音」如何挑戰你以更大的熱情來敬拜？"
+      },
+      {
+        "day": 21,
+        "title": "詩篇 101–105：我的靈啊，當讚美主",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 101,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 102,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 103,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 104,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 105,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇 103 中列出的主的恩惠中，你忘記感謝祂的是什麼？"
+      },
+      {
+        "day": 22,
+        "title": "詩篇 106–110：記住神的信實",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 106,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 107,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 108,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 109,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 110,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你如何經歷神堅定的愛將你從自己的迷失中拯救出來？"
+      },
+      {
+        "day": 23,
+        "title": "詩篇 111–115：讚美主",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 111,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 112,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 113,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 114,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 115,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇 115 中活神與無生命偶像的對比如何挑戰你信任的所在？"
+      },
+      {
+        "day": 24,
+        "title": "詩篇 116–120：上行之歌開始",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 116,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 117,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 118,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 119,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 120,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "從最長的詩篇——詩篇 119 中，哪一節最有力地表達了你對神話語的愛？"
+      },
+      {
+        "day": 25,
+        "title": "詩篇 121–125：向主升高",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 121,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 122,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 123,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 124,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 125,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你的幫助從何而來，詩篇 121 如何增強你對神保護的信心？"
+      },
+      {
+        "day": 26,
+        "title": "詩篇 126–130：在眼淚中播種",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 126,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 127,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 128,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 129,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 130,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你現在在眼淚中播下了什麼種子，信靠你將以歡呼的聲音收穫？"
+      },
+      {
+        "day": 27,
+        "title": "詩篇 131–135：謙卑的信任",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 131,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 132,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 133,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 134,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 135,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇 133 中的合一形象如何激勵你追求與其他信徒更深的團契？"
+      },
+      {
+        "day": 28,
+        "title": "詩篇 136–140：祂的愛永不止息",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 136,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 137,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 138,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 140,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "詩篇 136 中的重複「祂的愛永不止息」如何在一切都感到不確定時穩住你？"
+      },
+      {
+        "day": 29,
+        "title": "詩篇 141–145：晚間祈禱",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 141,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 142,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 143,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 144,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 145,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "大衛宣告神偉大且當大大讚美的話如何塑造你今晚的晚間祈禱？"
+      },
+      {
+        "day": 30,
+        "title": "詩篇 146–150：讓一切讚美主",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 146,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 147,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 148,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 149,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 150,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "當詩篇以「讓一切有氣息的讚美主」結束時，你將如何使讚美成為每日的習慣？"
+      }
+    ]
+  },
+  {
+    "id": "life-of-david",
+    "name": "大衛的生平",
+    "description": "與這位牧羊王的 14 天旅程——從受膏到擊敗巨人，從流亡到登基——搭配每個季節所誕生的詩篇。",
+    "totalDays": 14,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6B2D2D",
+      "#3A1818"
+    ],
+    "iconName": "shield.lefthalf.filled",
+    "imageKey": "david_goliath",
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "在隱秘中受膏",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "在世人尚未注意的安靜無形之處，神在哪裡與你相遇？"
+      },
+      {
+        "day": 2,
+        "title": "面對巨人",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你今天面對的是什麼巨人，你將以誰的名義面對它？"
+      },
+      {
+        "day": 3,
+        "title": "約拿單的忠誠",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "誰曾是你的約拿單，你又如何能成為別人的那位朋友？"
+      },
+      {
+        "day": 4,
+        "title": "為了生命而逃",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "大衛在洞穴中的詩篇如何教導你在拯救來臨之前讚美神？"
+      },
+      {
+        "day": 5,
+        "title": "在洞穴中的克制",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "當你可以對傷害你的人反擊時，你在哪裡需要練習克制？"
+      },
+      {
+        "day": 6,
+        "title": "來自亞比蓋的智慧",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "最近你抵抗了誰的明智建議，這可能正在拯救你免於愚蠢的決定？"
+      },
+      {
+        "day": 7,
+        "title": "掃羅的墮落",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 31,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "2SA",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "大衛對敵人掃羅的悲傷如何重塑你看待與你掙扎的人？"
+      },
+      {
+        "day": 8,
+        "title": "王者舞蹈",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你上一次全心全意敬拜、不在意他人想法的時候是什麼時候？"
+      },
+      {
+        "day": 9,
+        "title": "永恆的約",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神透過大衛所應許的無盡王位，今天如何深化你對基督的盼望？"
+      },
+      {
+        "day": 10,
+        "title": "牧羊王的墮落",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "2SA",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你在哪些地方最脆弱，容易因小妥協而成為未被面對的大罪？"
+      },
+      {
+        "day": 11,
+        "title": "破碎的祈禱",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 51,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今晚你生活中需要「在我裡面創造一顆清潔的心」的祈禱的是什麼？"
+      },
+      {
+        "day": 12,
+        "title": "我的靈啊，當讚美耶和華",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 103,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "在這裡列出的耶和華的恩惠中，今天你最需要記住的是哪一項？"
+      },
+      {
+        "day": 13,
+        "title": "被敬畏地認識",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "知道神看見你心中每一個隱藏角落，你感受到什麼安慰——或挑戰？"
+      },
+      {
+        "day": 14,
+        "title": "牧者依然存在",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "在大衛的所有季節中，牧者從未離開他——你在自己的故事中如何經歷到這份信實？"
+      }
+    ]
+  },
+  {
+    "id": "christmas-story",
+    "name": "聖誕故事",
+    "description": "一段為期7天的降臨旅程，從古老的預言到馬槽——重新發現神親近的奇妙。",
+    "totalDays": 7,
+    "category": "Advent",
+    "gradientColors": [
+      "#3C5A7A",
+      "#1F2F45"
+    ],
+    "iconName": "star.fill",
+    "imageKey": "nativity",
+    "applicableSeasons": [
+      "parenthood",
+      "newlyMarried",
+      "growing",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "grief",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "預言中的孩子",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "以賽亞對即將來臨的孩子的名字——奇妙的策士、全能的神、和平的君——你現在最需要的是哪一個？"
+      },
+      {
+        "day": 2,
+        "title": "來自小伯利恆",
+        "readings": [
+          {
+            "bookID": "MIC",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神選擇小而被忽視的伯利恆，對你生活中隱藏的地方有什麼啟示？"
+      },
+      {
+        "day": 3,
+        "title": "瑪麗亞的順服",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "在不確定的季節中，神在哪裡要求你「願照你的話成就於我」？"
+      },
+      {
+        "day": 4,
+        "title": "約瑟的安靜順服",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "約瑟的沉默而昂貴的信實如何挑戰你對他人看見的想法？"
+      },
+      {
+        "day": 5,
+        "title": "道成肉身",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "永恆的道選擇搬到你的鄰里，對你而言意味著什麼？"
+      },
+      {
+        "day": 6,
+        "title": "牧羊人與馬槽",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你認為為什麼天使的「大喜的信息」首先是向牧羊人而不是君王宣告的？"
+      },
+      {
+        "day": 7,
+        "title": "來自遠方的智者",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "今天你將你的最好——金子、乳香和沒藥——帶給耶穌會是什麼樣子？"
+      }
+    ]
+  },
+  {
+    "id": "walking-with-elijah",
+    "name": "與以利亞同行",
+    "description": "一段為期10天的學習，關於那位獨自對抗王國的先知——以及在烏鴉、洞穴和微小聲音中與他相遇的神。",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6E4A2C",
+      "#3A2814"
+    ],
+    "iconName": "flame.fill",
+    "imageKey": "elijah_ravens",
+    "applicableSeasons": [
+      "hardSeason",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose",
+      "anxiety"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "在亞哈面前",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 6
+          }
+        ],
+        "reflection": "神在哪裡要求你說出一個困難的真理，而你是否信靠祂在你順服後提供？"
+      },
+      {
+        "day": 2,
+        "title": "撒勒法的寡婦",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 17,
+            "verseStart": 7,
+            "verseEnd": 24
+          }
+        ],
+        "reflection": "這週神要求你以信心奉獻的小「最後一把麵粉」是什麼？"
+      },
+      {
+        "day": 3,
+        "title": "迦密山的對決",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你生活中需要重建的祭壇是哪一個——一個已經被忽視的敬拜之地？"
+      },
+      {
+        "day": 4,
+        "title": "逃入曠野",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 19,
+            "verseStart": 1,
+            "verseEnd": 8
+          }
+        ],
+        "reflection": "在你疲憊的時候，你何時經歷到神溫柔的供應——一頓餐、一個小憩、一位朋友？"
+      },
+      {
+        "day": 5,
+        "title": "微小的聲音",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 19,
+            "verseStart": 9,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "你需要沉默什麼噪音，以便能聽見神的低語，而不是等待地震？"
+      },
+      {
+        "day": 6,
+        "title": "拿伯的葡萄園",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "這個故事如何重塑你對不公義的看法，而這些不公義似乎沒有人願意面對？"
+      },
+      {
+        "day": 7,
+        "title": "天上的火",
+        "readings": [
+          {
+            "bookID": "2KI",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你在哪裡受到誘惑去諮詢其他「以革倫的神」，而不是將你的恐懼帶到主面前？"
+      },
+      {
+        "day": 8,
+        "title": "外袍的傳遞",
+        "readings": [
+          {
+            "bookID": "2KI",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神要你拾起的是誰的外袍——或者你準備傳遞的是誰的外袍？"
+      },
+      {
+        "day": 9,
+        "title": "以利亞與基督在山上",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "同一位感到最孤獨的先知，某一天與耶穌同在榮耀中，這意味著什麼？"
+      },
+      {
+        "day": 10,
+        "title": "像我們一樣的人",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": 13,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "雅各說以利亞是「一位與我們有相同性情的人」——這如何改變你本週的禱告方式？"
+      }
+    ]
+  },
+  {
+    "id": "beatitudes-deep-dive",
+    "name": "八福：八幅肖像",
+    "description": "為期8天的肖像研究，探索耶穌國度的公民——每次聚焦一個八福，並配上填補畫面的經文。",
+    "totalDays": 8,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A6B3A",
+      "#4F4524"
+    ],
+    "iconName": "sparkles",
+    "imageKey": "beatitudes",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "心靈貧窮",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 3
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 57,
+            "verseStart": 14,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "今天來到神面前承認你的完全依賴，而不是表現你的能力，會是什麼樣子？"
+      },
+      {
+        "day": 2,
+        "title": "哀悼的人",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 4,
+            "verseEnd": 4
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 42,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你一直試圖避開的損失或悲傷是什麼，耶穌邀請你實際去面對？"
+      },
+      {
+        "day": 3,
+        "title": "溫柔的人",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 5,
+            "verseEnd": 5
+          },
+          {
+            "bookID": "NUM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你在哪裡將溫柔與軟弱混淆，而摩西的榜樣又如何重塑這一點？"
+      },
+      {
+        "day": 4,
+        "title": "渴望公義",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 6,
+            "verseEnd": 6
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 63,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "本週有哪些較小的渴望擠占了你對神公義的渴望？"
+      },
+      {
+        "day": 5,
+        "title": "有憐憫的人",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 7,
+            "verseEnd": 7
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "今天神將誰放在你的路上，需要你成為撒馬利亞人，而不是祭司？"
+      },
+      {
+        "day": 6,
+        "title": "心靈純潔",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 8,
+            "verseEnd": 8
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你需要帶到光明中的隱藏動機是什麼，以便你的心能在奉獻中專一？"
+      },
+      {
+        "day": 7,
+        "title": "締造和平的人",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 9,
+            "verseEnd": 9
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": 9,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "神在呼召你做更艱難的和平工作，而不僅僅是維持和平的地方是在哪裡？"
+      },
+      {
+        "day": 8,
+        "title": "受迫害的人",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 10,
+            "verseEnd": 16
+          },
+          {
+            "bookID": "1PE",
+            "chapter": 4,
+            "verseStart": 12,
+            "verseEnd": 19
+          }
+        ],
+        "reflection": "耶穌所應許的喜樂如何重塑你下次在忠心付出代價時的反應？"
+      }
+    ]
+  },
+  {
+    "id": "holy-week",
+    "name": "聖週：通往復活節的旅程",
+    "description": "逐日走過聖週——從榮耀進入到十字架，再到空墓——活出歷史上最重要的一週。",
+    "totalDays": 8,
+    "category": "Easter",
+    "gradientColors": [
+      "#5A2E2E",
+      "#2F1515"
+    ],
+    "iconName": "cross.fill",
+    "imageKey": "triumphal_entry",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "grief",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "棕櫚主日",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 21,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "當耶穌以你意想不到的方式來時，迎接祂作為王意味著什麼？"
+      },
+      {
+        "day": 2,
+        "title": "潔淨聖殿",
+        "readings": [
+          {
+            "bookID": "MRK",
+            "chapter": 11,
+            "verseStart": 12,
+            "verseEnd": 25
+          }
+        ],
+        "reflection": "耶穌要求你翻轉心中哪些「桌子」，以便祂的同在能夠被正確地歡迎？"
+      },
+      {
+        "day": 3,
+        "title": "在聖殿教導",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 22,
+            "verseStart": 34,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "全心愛神——以及愛你的鄰居如同自己——會如何重新排列你的一週？"
+      },
+      {
+        "day": 4,
+        "title": "在伯大尼的膏抹",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 12,
+            "verseStart": 1,
+            "verseEnd": 11
+          }
+        ],
+        "reflection": "今天你能為耶穌提供什麼奢華的愛，即使世界稱之為浪費？"
+      },
+      {
+        "day": 5,
+        "title": "最後的晚餐",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "這週耶穌要求你洗的是誰的腳，而什麼驕傲讓這變得困難？"
+      },
+      {
+        "day": 6,
+        "title": "客西馬尼",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 26,
+            "verseStart": 36,
+            "verseEnd": 56
+          }
+        ],
+        "reflection": "在你生活中的哪個地方，你需要祈禱，'不是我的意願，而是祢的意願成就' — 並且真正地意味著這句話？"
+      },
+      {
+        "day": 7,
+        "title": "耶穌受難日",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你生活中哪件未完成的事情需要聽到耶穌的話：'成了'？"
+      },
+      {
+        "day": 8,
+        "title": "復活節早晨",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "在今天，你需要復活的力量在哪裡與你相遇，進入一個死去的希望的墳墓？"
+      }
+    ]
+  },
+  {
+    "id": "genesis-beginnings",
+    "name": "創世記：起初",
+    "description": "為期12天的旅程，穿越聖經的第一卷書 — 創造、墮落、大洪水、族長 — 追溯上帝從一開始的信實追求。",
+    "totalDays": 12,
+    "category": "Foundations",
+    "gradientColors": [
+      "#3A5A4A",
+      "#1C2D24"
+    ],
+    "iconName": "globe.americas.fill",
+    "imageKey": "noah_ark",
+    "applicableSeasons": [
+      "growing",
+      "startingOver",
+      "newlyMarried"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "起初",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "上帝現在在你生活中哪個'混沌和空虛'的區域正在說出秩序和光明？"
+      },
+      {
+        "day": 2,
+        "title": "園中與形象",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "上帝用祂自己的手塑造了你，並將祂自己的生命吹入你，這對你意味著什麼？"
+      },
+      {
+        "day": 3,
+        "title": "墮落",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你不斷聽到的蛇的謊言 — '上帝真的說過嗎？' — 是什麼，你如何用真理來回答它？"
+      },
+      {
+        "day": 4,
+        "title": "挪亞與洪水",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "GEN",
+            "chapter": 9,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "在一個仍然感覺被洪水淹沒的季節中，你需要在哪裡信靠上帝的彩虹應許？"
+      },
+      {
+        "day": 5,
+        "title": "亞伯拉罕的呼召",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "上帝要求你放下什麼'國家和親屬'，以跟隨祂進入新的事物？"
+      },
+      {
+        "day": 6,
+        "title": "數算星星",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你需要持續相信的上帝的那個不可能的應許是什麼，即使在那些看起來可笑的夜晚？"
+      },
+      {
+        "day": 7,
+        "title": "以撒的奉獻",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "對你來說，什麼已經成為'以撒' — 一個你如此喜愛的禮物，以至於它開始與上帝本身相抗衡？"
+      },
+      {
+        "day": 8,
+        "title": "雅各的天梯",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "最近上帝在哪裡意外地出現，肯定是在你不知道祂在的地方？"
+      },
+      {
+        "day": 9,
+        "title": "整夜摔跤",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你現在正在為什麼與上帝摔跤，你是否願意帶著跛腳走路，如果這意味著接受祂的祝福？"
+      },
+      {
+        "day": 10,
+        "title": "約瑟的夢",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你現在身處的'坑'是什麼，上帝可能正在利用它作為一個更大故事的第一章？"
+      },
+      {
+        "day": 11,
+        "title": "在埃及重聚",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 45,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你生活中哪段關係準備好接受約瑟所示範的寬恕：'你們的意思是惡，但上帝的意思是好的'？"
+      },
+      {
+        "day": 12,
+        "title": "上帝的意思是好的",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 50,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "回顧你所經歷的最艱難的事情，你現在在哪裡看到上帝的手在為好的事情編織？"
+      }
+    ]
+  },
+  {
+    "id": "daniel-exile",
+    "name": "但以理：在流亡中忠心",
+    "description": "為期12天的旅程，穿越但以理書 — 在異教的宮廷中堅定不移，非法祈禱，並信靠上帝掌管整個歷史的進程。",
+    "totalDays": 12,
+    "category": "Character Study",
+    "gradientColors": [
+      "#5A3A2A",
+      "#2E1F16"
+    ],
+    "iconName": "shield.fill",
+    "imageKey": "daniel_lions",
+    "applicableSeasons": [
+      "workingProfessional",
+      "hardSeason",
+      "student",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "決心不玷污",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "上帝邀請你'決心'不再接受的哪個小日常妥協？"
+      },
+      {
+        "day": 2,
+        "title": "王的夢",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "在哪裡你需要信任那位揭示深奧和隱秘事物的上帝，祂掌管著你這個時代的帝國？"
+      },
+      {
+        "day": 3,
+        "title": "烈火的爐子",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "對你來說，這週'但如果不'的信心會是什麼樣子 — 即使沒有救贖的保證，仍然信任並服從？"
+      },
+      {
+        "day": 4,
+        "title": "謙卑的王",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "驕傲在哪裡低語著你所擁有的一切是你自己建造的，而神又如何呼召你抬起眼睛？"
+      },
+      {
+        "day": 5,
+        "title": "牆上的字",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "在你的生活中，有什麼是神在稱量你的？你被邀請悔改的是什麼？"
+      },
+      {
+        "day": 6,
+        "title": "獅子坑",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "哪一種開窗祈禱的做法值得堅持，即使這會讓你在社交或職業上付出代價？"
+      },
+      {
+        "day": 7,
+        "title": "古老的日子",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "古老的日子和人子之子的異象如何讓你對新聞標題有更長遠的看法？"
+      },
+      {
+        "day": 8,
+        "title": "公羊與山羊",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "當未來感到困惑時，什麼讓你在那位從開始就看見結局的神裡找到依靠？"
+      },
+      {
+        "day": 9,
+        "title": "懺悔的祈禱",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你的社區或家庭在哪裡需要你像但以理一樣站在懺悔的空隙中？"
+      },
+      {
+        "day": 10,
+        "title": "穿麻衣的人",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "看不見的靈性戰鬥的現實如何改變你在祈禱中堅持的方式，當一切似乎都沒有改變？"
+      },
+      {
+        "day": 11,
+        "title": "君王與國度",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你把哪個地上的國度看得過於重要？你如何重新固定你的希望？"
+      },
+      {
+        "day": 12,
+        "title": "智慧的人必發光",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "‘智慧的人必發光，如天上的光輝’的應許如何激勵你今天的忠誠？"
+      }
+    ]
+  },
+  {
+    "id": "lords-prayer-deep-dive",
+    "name": "主禱文：教我們祈禱",
+    "description": "為期7天的默想，關於耶穌教導我們的禱告——每天一項請求——慢下來，讓每個字都有意義。",
+    "totalDays": 7,
+    "category": "Prayer",
+    "gradientColors": [
+      "#4A5A7A",
+      "#242D3D"
+    ],
+    "iconName": "hands.sparkles.fill",
+    "imageKey": "lords_prayer",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "parenthood",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "我們在天上的父",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 5,
+            "verseEnd": 13
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": 12,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "如果你真的相信你是在接近你的父，而不僅僅是一位遙遠的神，這會改變你今天的祈禱嗎？"
+      },
+      {
+        "day": 2,
+        "title": "願你的名被尊為聖",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 99,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 6,
+            "verseStart": 1,
+            "verseEnd": 8
+          }
+        ],
+        "reflection": "今天你如何在思想、口舌和選擇上將神的名視為聖潔？"
+      },
+      {
+        "day": 3,
+        "title": "願你的國降臨",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 13,
+            "verseStart": 31,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "這週你渴望看到神的國度如何進入你的世界——你將如何充滿期待地祈禱？"
+      },
+      {
+        "day": 4,
+        "title": "願你的旨意成就",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 26,
+            "verseStart": 36,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "你哪一個祈禱在等待誠實的‘不是我的旨意，而是你的旨意’？那會付出什麼代價，又會釋放什麼？"
+      },
+      {
+        "day": 5,
+        "title": "賜給我們今日的飲食",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 10,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "每日的飲食祈禱如何治癒你今天試圖囤積明天恩典的焦慮？"
+      },
+      {
+        "day": 6,
+        "title": "赦免我們，如同我們赦免人一樣",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 18,
+            "verseStart": 21,
+            "verseEnd": 35
+          }
+        ],
+        "reflection": "你需要釋放誰的債務，以便你的赦免祈禱不會被關閉的心靈所拒絕？"
+      },
+      {
+        "day": 7,
+        "title": "救我們脫離惡者",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 6,
+            "verseStart": 10,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "今天你在哪裡需要穿上神的全副軍裝，並具體祈禱從惡者那裡得著拯救？"
+      }
+    ]
+  },
+  {
+    "id": "parables-kingdom",
+    "name": "天國的比喻",
+    "description": "為期10天的旅程，通過耶穌最深刻的比喻——短小的故事，轉變心靈，揭示顛倒的神的國度。",
+    "totalDays": 10,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A4A2A",
+      "#3E2516"
+    ],
+    "iconName": "quote.opening",
+    "imageKey": "prodigal_son",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "workingProfessional",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "relationships",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "撒種的人",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 13,
+            "verseStart": 1,
+            "verseEnd": 23
+          }
+        ],
+        "reflection": "你現在的心像什麼樣的土壤？在這個季節你需要做什麼才能成為‘好土壤’？"
+      },
+      {
+        "day": 2,
+        "title": "好撒瑪利亞人",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "你被誘惑要走過誰？如果你選擇過馬路，會是什麼樣子？"
+      },
+      {
+        "day": 3,
+        "title": "浪子",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 15,
+            "verseStart": 11,
+            "verseEnd": 32
+          }
+        ],
+        "reflection": "今天你最像哪一位兒子——流浪者還是心懷不滿的哥哥——天父想要給你什麼？"
+      },
+      {
+        "day": 4,
+        "title": "失落的羊與錢幣",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 15,
+            "verseStart": 1,
+            "verseEnd": 10
+          }
+        ],
+        "reflection": "在你的生活中，哪裡讓你感到迷失，知道天堂正在積極尋找你，這會改變什麼？"
+      },
+      {
+        "day": 5,
+        "title": "富有的愚人",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 12,
+            "verseStart": 13,
+            "verseEnd": 34
+          }
+        ],
+        "reflection": "你被誘惑去建造什麼更大的「穀倉」，而你又如何能夠在神面前富有呢？"
+      },
+      {
+        "day": 6,
+        "title": "不饒恕的僕人",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 18,
+            "verseStart": 21,
+            "verseEnd": 35
+          }
+        ],
+        "reflection": "你還在為什麼小小的冒犯而窒息著某人，自己的寬恕之山又如何改變這一切？"
+      },
+      {
+        "day": 7,
+        "title": "法利賽人與稅吏",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 18,
+            "verseStart": 9,
+            "verseEnd": 14
+          }
+        ],
+        "reflection": "你的禱告在哪裡秘密地更像法利賽人而不是稅吏——今天你又如何能夠謙卑下來？"
+      },
+      {
+        "day": 8,
+        "title": "葡萄園的工人",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 20,
+            "verseStart": 1,
+            "verseEnd": 16
+          }
+        ],
+        "reflection": "在你的生活中，你對誰的晚到的恩典感到不滿，而地主的慷慨又如何使你擺脫這種感受？"
+      },
+      {
+        "day": 9,
+        "title": "十個童女",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 25,
+            "verseStart": 1,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "你與基督的持續關係中，哪一種「油」可能快要耗盡，而你本週又如何能夠照顧它？"
+      },
+      {
+        "day": 10,
+        "title": "羊與山羊",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 25,
+            "verseStart": 31,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "今天耶穌在誰的臉上等待被認出——你會作出回應嗎？"
+      }
+    ]
+  },
+  {
+    "id": "esther-for-such-a-time",
+    "name": "以斯帖：為這樣的時刻",
+    "description": "為期10天的以斯帖書之旅——10章，10天——追溯神在危機、勇氣和逆轉中的隱藏供應。",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6A3A5C",
+      "#2E1826"
+    ],
+    "iconName": "crown.fill",
+    "imageKey": "mordecai_triumph",
+    "applicableSeasons": [
+      "workingProfessional",
+      "student",
+      "hardSeason",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "宮殿的宴會",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "在你世界的喧囂與過度中，你感受到神在靜靜地設置舞台的地方是在哪裡？"
+      },
+      {
+        "day": 2,
+        "title": "不太可能的女王",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "在你的生活中，神可能正在利用什麼未被選擇的情況來為你定位一個你尚未看見的目的？"
+      },
+      {
+        "day": 3,
+        "title": "哈曼的陰影",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "當邪惡似乎在你的世界中聚集動力時，你如何堅持神的良善？"
+      },
+      {
+        "day": 4,
+        "title": "為這樣的時刻",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神可能在要求你冒什麼風險的「如果我滅亡，我就滅亡」的步驟，為了他人？"
+      },
+      {
+        "day": 5,
+        "title": "接近王",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你何時感受到神的恩典在為你打開一扇你害怕走過的門？"
+      },
+      {
+        "day": 6,
+        "title": "不眠之夜",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你在哪裡看到神的無形供應為你的好處安排了「巧合」？"
+      },
+      {
+        "day": 7,
+        "title": "偉大的逆轉",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "現在有什麼情況感覺不可能，卻可能比你意識到的更接近逆轉？"
+      },
+      {
+        "day": 8,
+        "title": "新的法令",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "在什麼情況下你需要為一個被放棄的情況禱告大膽的新「法令」的希望？"
+      },
+      {
+        "day": 9,
+        "title": "普珥日",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神已經為你做了哪些拯救，值得被記住並故意慶祝？"
+      },
+      {
+        "day": 10,
+        "title": "為人代言的莫爾德凱",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "你周圍誰需要你成為莫爾德凱——即使代價高昂，也為他們的福祉發聲的人？"
+      }
+    ]
+  },
+  {
+    "id": "ruth-redemption",
+    "name": "路得：救贖的故事",
+    "description": "為期4天的路得書之旅——在失去與忠誠相遇，拾取與供應相遇，外國寡婦成為大衛王的曾祖母。",
+    "totalDays": 4,
+    "category": "Character Study",
+    "gradientColors": [
+      "#8B6642",
+      "#4A331F"
+    ],
+    "iconName": "heart.circle.fill",
+    "imageKey": "jacob_rachel_well",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "relationships",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "失落與忠誠",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "拿俄米稱自己為「瑪拉」——苦澀。路得以誓言回應失落：「你往哪裡去，我也往哪裡去。」在這個季節中，哪一種聲音——苦澀的誠實或固執的忠誠——更能描述你目前的狀態？如果兩者都能共存，會有什麼改變？"
+      },
+      {
+        "day": 2,
+        "title": "意外的善良",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "注意敘述者如何說路得「恰好」在波阿斯的田裡拾穗——這是一個靜默的暗示，這個故事中的一切並非隨機。在你的生活中，神可能在哪裡將看似巧合的事情編織成靜默的善良？"
+      },
+      {
+        "day": 3,
+        "title": "打穀場上的大膽信心",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "路得對波阿斯的接觸喚起了希伯來的近親救贖者的概念——一位購回失去土地和生命的親屬。對你來說，聖經中救贖的畫面從這裡開始，在打穀場而不是在聖殿，意味著什麼？"
+      },
+      {
+        "day": 4,
+        "title": "救贖者與王室血統",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 1,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "路得——一位摩押人、一位寡婦、一位外邦人——出現在耶穌的家譜中。這個結局如何重塑你對神在祂的救贖故事中編織誰的理解，以及祂可能如何將你編織進去？"
+      }
+    ]
+  },
+  {
+    "id": "jonah-reluctant-prophet",
+    "name": "約拿：不情願的先知",
+    "description": "為期4天的約拿之旅——一位逃跑的先知、一場抓住他的風暴、一座悔改的城市，以及一位其憐憫超越約拿偏見的神。",
+    "totalDays": 4,
+    "category": "Character Study",
+    "gradientColors": [
+      "#2E5A6B",
+      "#15303A"
+    ],
+    "iconName": "water.waves",
+    "imageKey": "jesus_calms_storm",
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "逃避神",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神說「去尼尼微」，而約拿卻登上了前往他施的船——這是已知世界的另一端。你正在逃避哪一項神的使命，而那場風暴實際上是從哪裡來的？"
+      },
+      {
+        "day": 2,
+        "title": "深處的禱告",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "約拿在魚肚裡禱告——這是可以想像的最低點——並稱之為「聖殿」。這樣的重新框架如何改變你對自己低谷的看法？禱告能否將任何深度轉變為聖所？"
+      },
+      {
+        "day": 3,
+        "title": "悔改的城市",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "尼尼微是以色列最殘酷的敵人，然而他們在聖經中最短的講道——僅僅八個字——下悔改。這教會了你什麼關於神話語的神秘力量，即使傳遞者不情願？"
+      },
+      {
+        "day": 4,
+        "title": "神的心",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "這本書以一個問題結束，而不是答案——神問約拿，祂是否應該憐憫一百二十萬人。誰的救恩會讓你暗自失望，而神的最後問題呼召你放下什麼？"
+      }
+    ]
+  },
+  {
+    "id": "fruit-of-the-spirit",
+    "name": "聖靈的果子",
+    "description": "為期9天的聖靈在我們裡面所成長的品格研究——每天一種果子，每種根植於加拉太書5章，並搭配一段使其生動的經文。",
+    "totalDays": 9,
+    "category": "Discipleship",
+    "gradientColors": [
+      "#4A7A5C",
+      "#2A4A38"
+    ],
+    "iconName": "leaf.circle.fill",
+    "imageKey": "annunciation",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional",
+      "parenthood",
+      "newlyMarried"
+    ],
+    "applicableBurdens": [
+      "relationships",
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "愛",
+        "readings": [
+          {
+            "bookID": "GAL",
+            "chapter": 5,
+            "verseStart": 16,
+            "verseEnd": 26
+          },
+          {
+            "bookID": "1CO",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "保羅說聖靈的果子是愛——單數——彷彿其他八種果子都源自於此。哥林多前書13章的哪一句話最能揭示你愛的成長空間，而聖靈在邀請你合作的地方在哪裡？"
+      },
+      {
+        "day": 2,
+        "title": "喜樂",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 4,
+            "verseEnd": 13
+          },
+          {
+            "bookID": "NEH",
+            "chapter": 8,
+            "verseStart": 1,
+            "verseEnd": 12
+          }
+        ],
+        "reflection": "聖經中的喜樂不是悲傷的缺失，而是根植於神的深切快樂。你在哪裡將快樂誤認為喜樂，而在環境不合作時，什麼能讓喜樂穩定？"
+      },
+      {
+        "day": 3,
+        "title": "平安",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": 25,
+            "verseEnd": 31
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 26,
+            "verseStart": 1,
+            "verseEnd": 9
+          }
+        ],
+        "reflection": "耶穌賜予的平安「不是世俗所賜」——不是衝突的缺失，而是祂的同在。今天你正在承擔什麼擔憂，而耶穌正提供用祂的平安來交換？"
+      },
+      {
+        "day": 4,
+        "title": "忍耐",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": 7,
+            "verseEnd": 11
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 11
+          }
+        ],
+        "reflection": "這裡的希臘詞「makrothumia」字面意思是「長期的」——不易激動。在你的生活中，哪裡的脾氣短，對那個特定的人或情況長期忍耐會是什麼樣子？"
+      },
+      {
+        "day": 5,
+        "title": "善良",
+        "readings": [
+          {
+            "bookID": "COL",
+            "chapter": 3,
+            "verseStart": 12,
+            "verseEnd": 17
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "善良不僅僅是友好——而是為無法回報你的人付出努力。這周神將誰放在你的路上，使你付出一些代價來表現善良？"
+      },
+      {
+        "day": 6,
+        "title": "良善",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": 9,
+            "verseEnd": 21
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "良善是即使沒有人在看時仍然保持的正直。在你的私生活中，聖靈安靜地邀請你將秘密與名聲相匹配的地方在哪裡？"
+      },
+      {
+        "day": 7,
+        "title": "信實",
+        "readings": [
+          {
+            "bookID": "LAM",
+            "chapter": 3,
+            "verseStart": 19,
+            "verseEnd": 33
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 16,
+            "verseStart": 10,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "神的信實每早都是新的；我們的信實應在小事上穩定。主在呼召你在一件「小」事上保持信實，而這件事沒有人會鼓掌的地方在哪裡？"
+      },
+      {
+        "day": 8,
+        "title": "溫柔",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 1,
+            "verseEnd": 9
+          },
+          {
+            "bookID": "PRO",
+            "chapter": 15,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "溫柔是控制下的力量——可以咆哮的人卻柔和的回答。你用言語刺激了誰的傷口，而那真正需要溫柔觸碰？"
+      },
+      {
+        "day": 9,
+        "title": "自制",
+        "readings": [
+          {
+            "bookID": "2PE",
+            "chapter": 1,
+            "verseStart": 3,
+            "verseEnd": 11
+          },
+          {
+            "bookID": "PRO",
+            "chapter": 25,
+            "verseStart": 21,
+            "verseEnd": 28
+          }
+        ],
+        "reflection": "箴言將一個沒有自制的人比作一座破碎的城牆——對任何事物敞開。這周聖靈想在你的生活中重建哪一面「牆」，而誰能幫助你照顧它？"
+      }
+    ]
+  },
+  {
+    "id": "philippians-joy",
+    "name": "腓立比書：每個季節的喜樂",
+    "description": "為期4天的保羅最喜樂的書信之旅——在監獄裡寫成——每天一章，每章展現喜樂的不同面向，這種喜樂是環境無法觸及的。",
+    "totalDays": 4,
+    "category": "Epistles",
+    "gradientColors": [
+      "#7A6A2E",
+      "#3C3314"
+    ],
+    "iconName": "sun.max.fill",
+    "imageKey": "magi_journey",
+    "applicableSeasons": [
+      "hardSeason",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "在苦難中的喜樂",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "保羅在鎖鏈中寫下這封信，卻仍稱之為他的「喜樂」。他將監獄重新框架為福音的平台。你生活中哪個不想要的情況是上帝邀請你重新框架而不是逃避的？"
+      },
+      {
+        "day": 2,
+        "title": "在謙卑中的喜樂",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "這首詩歌在第6至11節中描繪了耶穌的降卑 — 與神同等，空虛，成為人，順服，被釘十字架 — 然後父親將他提升起來。你在哪裡抓住地位，而耶穌卻在示範放下，什麼才是真正的「同樣的心思」？"
+      },
+      {
+        "day": 3,
+        "title": "在認識基督中的喜樂",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "保羅將他令人印象深刻的履歷稱為「垃圾」，與認識基督相比。你自己的履歷中 — 資格、角色、成就 — 哪一部分在安靜地與基督競爭你的身份中心？"
+      },
+      {
+        "day": 4,
+        "title": "在每一種情況中的喜樂",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "保羅說他已經學會 — 過去式，艱難獲得 — 在豐富或缺乏中滿足的秘密。現在你生活中的哪個地方是主正在教導你這個秘密，而你拒絕實際運用的哪些實踐（禱告、感恩、正確思考）？"
+      }
+    ]
+  },
+  {
+    "id": "life-of-moses",
+    "name": "摩西的生命",
+    "description": "為期10天的旅程，探索摩西的生命 — 從籃子到燃燒的荊棘，從紅海到西奈 — 遇見呼召、拯救、說話並與我們同在的神。",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6C4E2A",
+      "#382712"
+    ],
+    "iconName": "flame.circle.fill",
+    "imageKey": "manna_wilderness",
+    "applicableSeasons": [
+      "workingProfessional",
+      "startingOver",
+      "hardSeason",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "出生在籃子裡",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "希伯來的助產士違抗法老的命令，一位母親將她的兒子放在尼羅河的籃子裡，而神已經在編寫一個拯救的故事。上帝在你生命中早已悄悄地為你準備了什麼，早在你知道需要拯救之前？"
+      },
+      {
+        "day": 2,
+        "title": "燃燒的荊棘",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "摩西轉身去看一棵不會燒盡的燃燒荊棘，神呼喚他的名字。上帝可能用什麼平凡的事物來引起你的注意，你願意轉身去看嗎？"
+      },
+      {
+        "day": 3,
+        "title": "藉口與神蹟",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "摩西與神爭辯：「我算什麼？如果他們不相信我怎麼辦？我不口才。」神逐一回應每個異議。摩西的哪一個藉口最像你不斷給神的藉口，而神對你的耐心回答是什麼？"
+      },
+      {
+        "day": 4,
+        "title": "讓我的百姓去",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "災難系統性地推翻每一位埃及神 — 尼羅河、太陽、牲畜 — 顯示誰真正掌權。你自己文化中的哪一個「神」需要神在你生命中揭露為無能的？"
+      },
+      {
+        "day": 5,
+        "title": "逾越節",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "以色列人不是因為他們的功德而被拯救，而是因為羊羔的血在他們的門框上 — 這是將要來的更大羔羊的影子。看到逾越節作為基督的肖像，如何加深你對他血所實現的理解？"
+      },
+      {
+        "day": 6,
+        "title": "穿越海洋",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "摩西告訴被困的人：「站著，看主的拯救」 — 然後神說「向前走」。當神要求你同時保持心靈的平靜和信心的步伐時，你在哪裡受到驚慌或停滯的誘惑？"
+      },
+      {
+        "day": 7,
+        "title": "嗎哪與水",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 7
+          }
+        ],
+        "reflection": "神賜下無法囤積的餅和從磐石中流出的水。祂每天向你提供什麼恩典，而你卻不斷試圖為了焦慮而囤積？"
+      },
+      {
+        "day": 8,
+        "title": "西奈與十誡",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "神在拯救的背景下賜下律法 — 「我是將你帶出來的主你的神」 — 不是作為獲得祂的愛的方式，而是作為與祂同在的生命的形狀。你最傾向於將哪一條誡命視為負擔，而不是自由的界限？"
+      },
+      {
+        "day": 9,
+        "title": "顯示你的榮耀",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 33,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "摩西說：「如果你的同在不與我們同去，就不要從這裡送我們上去。」你更想從神那裡得到什麼 — 祂的恩賜，還是祂自己？如果你最想要的是祂，今天會有什麼不同？"
+      },
+      {
+        "day": 10,
+        "title": "忠心的僕人",
+        "readings": [
+          {
+            "bookID": "DEU",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "摩西死於未進入應許之地，但神自己埋葬了他。神在你生命中要求你信託給祂的未完成的事情是什麼，知道這個故事比你更大？"
+      }
+    ]
+  },
+  {
+    "id": "psalm-23-deep-dive",
+    "name": "詩篇23篇：牧者之歌",
+    "description": "為期6天的默想，探索聖經中最受喜愛的詩篇 — 每次一節 — 配合揭示基督作為詩篇所指向的牧者的新約經文。",
+    "totalDays": 6,
+    "category": "Worship",
+    "gradientColors": [
+      "#4A6B3F",
+      "#253A22"
+    ],
+    "iconName": "sparkle",
+    "imageKey": "suffer_little_children",
+    "applicableSeasons": [
+      "hardSeason",
+      "growing",
+      "retired",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "主是我的牧者",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 1,
+            "verseEnd": 1
+          },
+          {
+            "bookID": "JHN",
+            "chapter": 10,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "大衛是一位牧者 — 他知道這份工作的重量。耶穌稱自己為「好牧人」，為羊捨命。你讓哪一位假牧人（工作、成功、關係）來定義你的價值，而當主自己握著杖時，會有什麼改變？"
+      },
+      {
+        "day": 2,
+        "title": "青草地，安靜的水",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 2,
+            "verseEnd": 2
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 11,
+            "verseStart": 25,
+            "verseEnd": 30
+          }
+        ],
+        "reflection": "羊在焦慮、飢餓或衝突時不會躺下。牧者「使」他們如此。在你的生活中，耶穌在哪裡溫柔地使你安息，而你又在為什麼而掙扎不願坐下？"
+      },
+      {
+        "day": 3,
+        "title": "義路",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 3,
+            "verseEnd": 3
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "牧者在引導我的靈魂走正路之前「恢復我的靈魂」 — 安慰先於矯正。神在哪裡恢復了你，而你卻錯誤地認為神在沉默，祂現在準備與你同行的道路是什麼？"
+      },
+      {
+        "day": 4,
+        "title": "穿越幽谷",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 4,
+            "verseEnd": 4
+          },
+          {
+            "bookID": "2CO",
+            "chapter": 4,
+            "verseStart": 7,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "大衛沒有說「繞過」，而是說「穿越」幽谷，主題從「他」變成「你」 — 危險越近，牧者變得越個人化。你在哪個幽谷中，神的親近感在其中如何加強？"
+      },
+      {
+        "day": 5,
+        "title": "在敵人面前的筵席",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 5,
+            "verseEnd": 5
+          },
+          {
+            "bookID": "REV",
+            "chapter": 19,
+            "verseStart": 1,
+            "verseEnd": 10
+          }
+        ],
+        "reflection": "神在你希望他們離開的敵人面前款待你。這意味著什麼，當他不總是移除你的困難，而是有時邀請你坐下來吃飯，讓困難旁觀？"
+      },
+      {
+        "day": 6,
+        "title": "良善、慈悲與家",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 6,
+            "verseEnd": 6
+          },
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": 1,
+            "verseEnd": 6
+          }
+        ],
+        "reflection": "希伯來文的「跟隨我」可以解讀為「追逐」——良善和慈悲並不是在你身後閒逛，而是在追趕你。這種重新詮釋如何改變你回憶過去和展望未來與神同行的方式？"
+      }
+    ]
+  },
+  {
+    "id": "acts-early-church",
+    "name": "使徒行傳：早期教會",
+    "description": "為期14天的使徒行傳之旅——每天兩章——從五旬節到羅馬，觀察聖靈如何孕育出一個運動，至今仍在每位信徒心中回響。",
+    "totalDays": 14,
+    "category": "Foundations",
+    "gradientColors": [
+      "#7A4A1C",
+      "#3E2510"
+    ],
+    "iconName": "wind",
+    "imageKey": "loaves_fishes",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional",
+      "student"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "五旬節",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "當普通人被聖靈充滿並開始用他們從未學過的語言宣講耶穌時，教會誕生了。在你的生活中，哪裡你一直在等待更多的訓練，而不是信任聖靈賦予你所擁有的言語？"
+      },
+      {
+        "day": 2,
+        "title": "在權威面前的勇敢",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "彼得和約翰被告知停止傳講——而是祈求更多的勇氣，而不是更少。在社會壓力使你對耶穌保持沉默的地方，你的祈禱會如何將你的姿態從迎合轉變為勇氣？"
+      },
+      {
+        "day": 3,
+        "title": "一個成長與考驗的教會",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "亞拿尼亞和撒非拉的謊言威脅著年輕社區的純潔；後來，使徒們委派工作，以便神的話語可以繼續傳播。在你的靈性生活中，哪個組織或個人妥協正在靜靜地拖延使命？"
+      },
+      {
+        "day": 4,
+        "title": "斯提反與散佈",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "斯提反的死亡看似運動的結束——但隨之而來的迫害將福音散播到已知的世界。你生活中的哪個結局可能是神正在使用的開始，而你尚未看見？"
+      },
+      {
+        "day": 5,
+        "title": "掃羅的轉變，哥尼流的接納",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "教會最兇猛的敵人成為了它最偉大的宣教士，而一位羅馬百夫長成為了兄弟。誰的轉變會讓你最震驚，你是否願意懷著真實的期待為此祈禱？"
+      },
+      {
+        "day": 6,
+        "title": "安提阿與天使",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "信徒們在安提阿首次被稱為「基督徒」——一個外來者的教會成為了中心。神如何利用邊緣的人來以宗教中心看不見的方式增長他的教會？"
+      },
+      {
+        "day": 7,
+        "title": "第一次宣教之旅",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "聖靈說：『分別保羅和巴拿巴，為我所召的工作。』你是誰的差遣的一部分——無論是被差遣還是禱告支持——你對這份管理有多認真？"
+      },
+      {
+        "day": 8,
+        "title": "耶路撒冷會議與腓立比的監獄",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "教會決定恩典確實是為外邦人而設，保羅在午夜的監獄牢房中歌唱。在哪裡你仍然對神的恩典添加了未說出的要求，而在你最艱難的地方，可能有什麼歌在等待著你？"
+      },
+      {
+        "day": 9,
+        "title": "雅典與哥林多",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "保羅在亞略巴古與異教哲學家交鋒，引用他們自己的詩人。你如何學會用周圍人們的詞彙來傳講福音，而不削弱真理？"
+      },
+      {
+        "day": 10,
+        "title": "以弗所與溫柔的告別",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "保羅與以弗所的長老們哭泣，提醒他們『施比受更為有福。』神給了你誰來牧養，而這週你需要如何更有意識地愛他們？"
+      },
+      {
+        "day": 11,
+        "title": "保羅在耶路撒冷被捕",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "保羅因為『被聖靈捆綁』而繼續走向苦難。神在要求你朝向困難前進的地方是什麼，因為這是順服，而不是因為困難而避免？"
+      },
+      {
+        "day": 12,
+        "title": "在統治者面前的勇氣",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "主在夜間站在保羅身邊，說：『要有勇氣。』你何時需要一個看不見的話語來繼續前行，神今晚可能如何在對你低語？"
+      },
+      {
+        "day": 13,
+        "title": "差不多被說服",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "亞基帕說保羅『差不多』說服了他成為基督徒。在你自己的生活中，哪裡你是『差不多』承諾的，什麼需要改變才能縮小信念與投降之間的差距？"
+      },
+      {
+        "day": 14,
+        "title": "船難到羅馬",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "使徒行傳突然結束——保羅在一個租來的房子裡宣講天國，鏈著一名士兵，故事顯然還沒有結束。你是那個未完故事的一部分。神正透過你寫下什麼下一句？"
+      }
+    ]
+  },
+  {
+    "id": "first-john-assurance",
+    "name": "約翰一書：使你們知道",
+    "description": "為期5天的約翰第一封信之旅——寫給信徒，使他們『知道你們有永生。』每一章探討真實信仰的不同考驗。",
+    "totalDays": 5,
+    "category": "Epistles",
+    "gradientColors": [
+      "#3D5A8B",
+      "#1C2D5C"
+    ],
+    "iconName": "checkmark.seal.fill",
+    "imageKey": "bethany_mary_martha",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "anxiety",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "行在光中",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "約翰堅持認為與神的團契與行在光中有關——將隱藏的事物帶入公開。你在哪一個領域一直在假裝，誠實的懺悔實際上會帶來團契而不是羞辱？"
+      },
+      {
+        "day": 2,
+        "title": "常在，不只是相信",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "約翰對神的愛的考驗很簡單：『凡遵守他話語的，神的愛在他裡面實在是完全的。』你最親密的關係會如何描述你信念與行為之間的差異？"
+      },
+      {
+        "day": 3,
+        "title": "神的兒女",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "'看啊，父賜給我們何等的愛，使我們可以稱為神的兒女。' 如果你相信你最真實的身份是'被愛的孩子'，今天的日子會有什麼不同呢？"
+      },
+      {
+        "day": 4,
+        "title": "神就是愛",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "約翰說'我們愛，因為神先愛了我們' — 我們的愛總是回應。你在追求誰的愛，仿佛你可以賺得它，而神的先愛又如何讓你從安息中去愛那個人，而不是出於需求？"
+      },
+      {
+        "day": 5,
+        "title": "使你知道",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "約翰說他寫這封信'使你知道你有永生。' 約翰的哪一個考驗 — 信耶穌、愛他人、遵行祂的話 — 今天聖靈最想在你心中帶來安慰？"
+      }
+    ]
+  },
+  {
+    "id": "james-faith-that-works",
+    "name": "雅各：行動的信心",
+    "description": "為期5天的雅各書學習 — 新約中最實用的信件 — 面對我們所說的信仰與我們實際生活之間的差距。",
+    "totalDays": 5,
+    "category": "Epistles",
+    "gradientColors": [
+      "#8B5A2E",
+      "#44290F"
+    ],
+    "iconName": "hammer.fill",
+    "imageKey": "davids_three_mighty_men",
+    "applicableSeasons": [
+      "workingProfessional",
+      "growing",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "relationships",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "以喜樂計算一切",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "雅各並不是說試煉就是喜樂 — 他說要因為神所產生的而把它們算作喜樂。如果你真的相信神正在透過這些試煉使你成熟，這周你需要重新框架的試煉是什麼？"
+      },
+      {
+        "day": 2,
+        "title": "沒有行為的信心是死的",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "雅各並不是將信心與行為對立 — 他是在說真正的信心總是會有行為。這周有哪一個具體的順服行為會讓你的私下信仰變得可見？"
+      },
+      {
+        "day": 3,
+        "title": "馴服舌頭",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "雅各將舌頭比作小舵，能引導大船，和小火星，能燒毀森林。你的言語在哪些方面引導著你的生活或他人的生活，讓你感到羞愧？"
+      },
+      {
+        "day": 4,
+        "title": "與世界的友誼",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "雅各說爭吵來自我們內心的慾望 — 而且我們'沒有，因為我們不求。' 目前在你生活中驅動衝突的慾望是什麼？你是否誠實地將它帶到神面前禱告？"
+      },
+      {
+        "day": 5,
+        "title": "耐心與禱告",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "雅各以呼籲教會彼此禱告結束，承認罪，以便醫治能來到。你生活中誰是安全的人，可以聽你懺悔？實際上請他們與你一起禱告會讓你付出什麼代價？"
+      }
+    ]
+  },
+  {
+    "id": "hebrews-jesus-is-better",
+    "name": "希伯來書：耶穌更美",
+    "description": "為期13天的希伯來書學習 — 每天一章 — 展示耶穌如何實現並超越每一個指向祂的舊約圖畫。",
+    "totalDays": 13,
+    "category": "Theology",
+    "gradientColors": [
+      "#5A2F2F",
+      "#2C1414"
+    ],
+    "iconName": "crown.fill",
+    "imageKey": "sacrifice_isaac",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "優於天使的兒子",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "希伯來書開篇宣告神在祂的兒子中最完全地說話 — '神的榮耀的光輝。' 你在哪些次要的來源中聆聽神，卻忽略了祂已經在耶穌中最清楚地說話？"
+      },
+      {
+        "day": 2,
+        "title": "如此偉大的救恩",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "耶穌比天使更低 — 成為人，受試探，受苦 — 以便'為每個人嘗試死亡。' 耶穌分享你的肉身如何改變你將自己的軟弱帶到祂面前的方式？"
+      },
+      {
+        "day": 3,
+        "title": "超越摩西",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "摩西在神的家中作為僕人是忠心的；耶穌作為兒子在其上是忠心的。你在哪些方面在神的家中服侍，卻秘密地偏離了對神兒子的信任？"
+      },
+      {
+        "day": 4,
+        "title": "進入祂的安息",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "作者說神的子民仍然有安息可進 — 但我們必須努力進入。你生活中哪種不安的努力實際上是不願意停止並相信工作是基督的，而不是你的？"
+      },
+      {
+        "day": 5,
+        "title": "偉大的大祭司",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "耶穌是一位祭司，'在祂肉身的日子裡，帶著大聲的呼求和淚水獻上禱告和懇求。' 想像耶穌是一位流淚的、同情的祭司，如何改變你將自己的眼淚帶到祂面前的方式？"
+      },
+      {
+        "day": 6,
+        "title": "向成熟邁進",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "作者敦促讀者不要停留在靈性嬰兒的狀態，而要向前邁進。你已經安於哪一個'基本'真理，而不是成長為堅固的食物？"
+      },
+      {
+        "day": 7,
+        "title": "像麥基洗德的祭司",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "耶穌的祭司職位是永久的 — '祂總是活著為我們代求。' 知道耶穌現在正在為你禱告，如何重塑你明天所承擔的一切？"
+      },
+      {
+        "day": 8,
+        "title": "更美的約",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "在新約中，神將祂的律法'寫在他們的心上。' 你在哪些方面仍然通過外在的規則與神關係，而祂想要從內心改變你？"
+      },
+      {
+        "day": 9,
+        "title": "一次永遠",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "舊祭司每日獻上的祭物永遠無法潔淨良心；基督的單一獻祭卻能。你一直重複懺悔的罪是什麼，仿佛祂已完成的工作需要你的重複才能生效？"
+      },
+      {
+        "day": 10,
+        "title": "坦然無懼地親近",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "因為耶穌的血，我們可以'坦然無懼'地親近 — 幕已經撕裂。當你來到神面前時，感覺像是接近恩典的寶座，還是猶豫不決的官員的候診室？有什麼會改變？"
+      },
+      {
+        "day": 11,
+        "title": "信心的殿堂",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "這裡列出的每一個人都在未得到所應許的事物之前就去世了，'但他們從遠處看見並歡迎它。' 你的等待故事如何被算作這同一信心殿堂的一章？"
+      },
+      {
+        "day": 12,
+        "title": "偉大的見證雲彩",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "作者敦促我們將目光定睛在耶穌身上，'我們信仰的創始者和成全者，' 並要忍耐地奔跑。什麼樣的重擔——不一定是罪惡，但卻很沉重——正在拖慢你的奔跑，你願意放下它嗎？"
+      },
+      {
+        "day": 13,
+        "title": "營外",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "耶穌在'營外'受苦——超越了他那個時代的宗教尊嚴。他在呼召你走出自己舒適的營地，與那些被世俗尊重的世界所忽視的人同在嗎？"
+      }
+    ]
+  }
+]

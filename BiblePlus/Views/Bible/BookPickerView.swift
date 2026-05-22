@@ -3,11 +3,27 @@ import SwiftUI
 struct BookPickerView: View {
     let onSelectBook: (BibleBook) -> Void
     let onSelectChapter: (BibleBook, Int) -> Void
+    /// When non-nil, the picker shows book names in the active translation
+    /// (e.g. "Génesis" for Spanish Reina-Valera) by looking up
+    /// `BibleRepository.localizedBookName`. Falls back to `book.name` (English)
+    /// when the cache hasn't been populated yet or when no ref is active.
+    var activeRefID: String? = nil
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.bpPalette) private var palette
     @State private var expandedBook: BibleBook? = nil
     @State private var appeared = false
+
+    /// Resolve a book's display name, preferring the helloao-sourced localized
+    /// name when the active translation has primed the cache. Thin wrapper
+    /// around `BibleRepository.localizedBookName` so the row code stays tidy.
+    private func displayName(for book: BibleBook) -> String {
+        if let refID = activeRefID,
+           let localized = BibleRepository.shared.localizedBookName(refID: refID, bookID: book.id) {
+            return localized
+        }
+        return book.name
+    }
 
     var body: some View {
         NavigationStack {
@@ -120,7 +136,7 @@ struct BookPickerView: View {
             }
         } label: {
             VStack(spacing: 3) {
-                Text(book.name)
+                Text(displayName(for: book))
                     .font(.system(size: 13, weight: isExpanded ? .semibold : .medium, design: .rounded))
                     .foregroundStyle(isExpanded ? .white : palette.textPrimary)
                     .lineLimit(1)
@@ -199,7 +215,7 @@ struct BookPickerView: View {
                     }
 
                     VStack(alignment: .leading, spacing: 1) {
-                        Text(book.name)
+                        Text(displayName(for: book))
                             .font(.system(size: 16, weight: .semibold, design: .serif))
                             .foregroundStyle(palette.textPrimary)
 

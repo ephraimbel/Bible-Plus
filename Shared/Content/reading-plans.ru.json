@@ -1,0 +1,5943 @@
+[
+  {
+    "id": "psalms-of-peace",
+    "name": "Псалмы мира",
+    "description": "7-дневное путешествие по псалмам, которые говорят прямо к вашему тревожному сердцу, направляя вас к тишине и миру, которые может дать только Бог.",
+    "totalDays": 7,
+    "category": "Comfort",
+    "gradientColors": [
+      "#4A6741",
+      "#2D4A3E"
+    ],
+    "iconName": "leaf.fill",
+    "imageKey": "jesus_calms_storm",
+    "applicableSeasons": [
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Забота пастыря",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Что значит для вас, что Бог является вашим пастырем в этот сезон вашей жизни?"
+      },
+      {
+        "day": 2,
+        "title": "Уверенность в свете",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Когда вы испытывали Бога как свой свет в момент тьмы?"
+      },
+      {
+        "day": 3,
+        "title": "Вкусите и увидите",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как Бог освободил вас от страха, который когда-то держал вас в плену?"
+      },
+      {
+        "day": 4,
+        "title": "Бог — наше прибежище",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Где вам нужно 'успокоиться и знать', что Он есть Бог сегодня?"
+      },
+      {
+        "day": 5,
+        "title": "Под Его крыльями",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 91,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Каково это — находиться в укрытии Всевышнего?"
+      },
+      {
+        "day": 6,
+        "title": "Хранитель, который никогда не спит",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 121,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как знание о том, что Бог никогда не дремлет, меняет ваш взгляд на то, как вы встречаете эту ночь?"
+      },
+      {
+        "day": 7,
+        "title": "Славно и чудесно сотворённые",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какая истина о том, как Бог знает вас, приносит вам наибольшее утешение прямо сейчас?"
+      }
+    ]
+  },
+  {
+    "id": "gospel-of-john",
+    "name": "Евангелие от Иоанна",
+    "description": "Пройдите через всё Евангелие от Иоанна за 21 день и встретите Иисуса — Слово, ставшее плотью — по одной главе за раз.",
+    "totalDays": 21,
+    "category": "Gospel",
+    "gradientColors": [
+      "#8B6914",
+      "#5C4A1C"
+    ],
+    "iconName": "book.fill",
+    "imageKey": "baptism_jesus",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Слово стало плотью",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Что для вас значит, что Иисус существовал прежде всего и выбрал жить среди нас?"
+      },
+      {
+        "day": 2,
+        "title": "Вода в вино",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Где в вашей жизни вам нужно, чтобы Иисус преобразовал обыденное в нечто чудесное?"
+      },
+      {
+        "day": 3,
+        "title": "Нужно родиться свыше",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как идея 'рождения свыше' бросает вызов или вдохновляет ваше понимание веры?"
+      },
+      {
+        "day": 4,
+        "title": "Живая вода",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Из каких колодцев вы черпаете, которые оставляют вас жаждущими, и как бы выглядела живая вода?"
+      },
+      {
+        "day": 5,
+        "title": "Исцеление у купальни",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Есть ли область, где вы ждали исцеления, но не полностью просили Иисуса об этом?"
+      },
+      {
+        "day": 6,
+        "title": "Хлеб жизни",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как выглядит питание Иисусом как хлебом жизни каждый день?"
+      },
+      {
+        "day": 7,
+        "title": "Реки живой воды",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как вы реагируете, когда мнения мира о Иисусе противоречат вашему собственному опыту с Ним?"
+      },
+      {
+        "day": 8,
+        "title": "Свет мира",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Где вам нужно, чтобы Иисус осветил место стыда или тьмы?"
+      },
+      {
+        "day": 9,
+        "title": "Зрение для слепых",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какую одну область духовной слепоты вы хотели бы, чтобы Иисус открыл ваши глаза?"
+      },
+      {
+        "day": 10,
+        "title": "Добрый пастырь",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как знание о том, что Иисус добровольно отдал свою жизнь, меняет ваше представление о Его любви?"
+      },
+      {
+        "day": 11,
+        "title": "Лазарь, выйди вон",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какую мёртвую область в вашей жизни вам нужно, чтобы Иисус воскресил?"
+      },
+      {
+        "day": 12,
+        "title": "Помазан для погребения",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какой самый экстравагантный акт поклонения вы могли бы предложить Иисусу сегодня?"
+      },
+      {
+        "day": 13,
+        "title": "Царь-Слуга",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Чьи ноги Иисус просит вас вымыть через смиренное служение на этой неделе?"
+      },
+      {
+        "day": 14,
+        "title": "Путь, Истина, Жизнь",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как обещание Иисуса подготовить для вас место влияет на то, как вы живете сегодня?"
+      },
+      {
+        "day": 15,
+        "title": "Истинная Виноградная Лоза",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как это практически выглядит для вас — 'пребывать' в Иисусе на этой неделе?"
+      },
+      {
+        "day": 16,
+        "title": "Помощник Идет",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как вы испытывали, что Святой Дух направляет вас к истине?"
+      },
+      {
+        "day": 17,
+        "title": "Иисус молится за вас",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Каково это — знать, что Иисус лично молился за ваше единство с Ним и Отцом?"
+      },
+      {
+        "day": 18,
+        "title": "Предательство и Арест",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Когда вы, как Петр, отрицали знание Иисуса через свои слова или действия?"
+      },
+      {
+        "day": 19,
+        "title": "Свершилось",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какое бремя вы несете, которое Иисус уже завершил на кресте?"
+      },
+      {
+        "day": 20,
+        "title": "Он Воскрес",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как реальность воскресения меняет то, как вы сталкиваетесь со своим величайшим страхом?"
+      },
+      {
+        "day": 21,
+        "title": "Ты любишь Меня?",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Если бы Иисус спросил вас 'Ты любишь Меня?' трижды сегодня, как бы ваш ответ повлиял на ваши действия?"
+      }
+    ]
+  },
+  {
+    "id": "30-days-of-wisdom",
+    "name": "30 Дней Мудрости",
+    "description": "Одна глава Притч для каждого дня месяца — вечная мудрость для решений, отношений, работы и повседневной жизни.",
+    "totalDays": 30,
+    "category": "Wisdom",
+    "gradientColors": [
+      "#6B4C8A",
+      "#3D2B5C"
+    ],
+    "iconName": "lightbulb.fill",
+    "imageKey": "ten_commandments",
+    "applicableSeasons": [
+      "workingProfessional",
+      "parenthood"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Начало Мудрости",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Что значит, что страх Господа является отправной точкой всей мудрости?"
+      },
+      {
+        "day": 2,
+        "title": "Поиск Скрытого Сокровища",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Насколько целенаправленно вы ищете мудрость так, как будто ищете скрытое сокровище?"
+      },
+      {
+        "day": 3,
+        "title": "Доверяй Всем Сердцем",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какое решение вы принимаете, где вам нужно доверять Богу, а не полагаться на собственное понимание?"
+      },
+      {
+        "day": 4,
+        "title": "Береги Сердце",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Что вы позволяете входить в свое сердце, что может отвлекать вас от пути мудрости?"
+      },
+      {
+        "day": 5,
+        "title": "Опасность Глупости",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Где в вашей жизни вы наиболее подвержены искушению искать короткие пути, которые ведут от Божьего лучшего?"
+      },
+      {
+        "day": 6,
+        "title": "Уроки от Муравья",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Что усердие муравья может научить вас о ваших текущих обязанностях?"
+      },
+      {
+        "day": 7,
+        "title": "Цена Искушения",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какие границы вам нужно установить, чтобы защитить себя от искушения?"
+      },
+      {
+        "day": 8,
+        "title": "Мудрость Призывает",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как вы распознаете голос мудрости, призывающий вас среди шума повседневной жизни?"
+      },
+      {
+        "day": 9,
+        "title": "Два Приглашения",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какое приглашение вы принимаете чаще — пиршество мудрости или короткий путь глупости?"
+      },
+      {
+        "day": 10,
+        "title": "Мудрый сын",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как ваш характер дома отражает мудрость, которую вы ищете на публике?"
+      },
+      {
+        "day": 11,
+        "title": "Честные весы",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Где в вашей жизни вам нужно стремиться к большей честности и целостности?"
+      },
+      {
+        "day": 12,
+        "title": "Слова, которые исцеляют",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как ваши слова сегодня могут принести исцеление вместо вреда кому-то вокруг вас?"
+      },
+      {
+        "day": 13,
+        "title": "Прогулка с мудрыми",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Кто мудрые спутники в вашей жизни, и как вы можете научиться у них больше?"
+      },
+      {
+        "day": 14,
+        "title": "Путь, который кажется правильным",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Когда путь, который казался вам правильным, оказался неверным?"
+      },
+      {
+        "day": 15,
+        "title": "Нежный ответ",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Кто в вашей жизни нуждается в нежном ответе от вас вместо резкого слова?"
+      },
+      {
+        "day": 16,
+        "title": "Посвятите свои планы",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какие планы вы держите при себе, которые вам нужно полностью посвятить Господу?"
+      },
+      {
+        "day": 17,
+        "title": "Друг во все времена",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как вы можете быть более верным другом для кого-то, кто проходит через трудности?"
+      },
+      {
+        "day": 18,
+        "title": "Сильная башня",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Когда приходит беда, вы сначала обращаетесь к имени Господа или к чему-то другому?"
+      },
+      {
+        "day": 19,
+        "title": "Доброта к бедным",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как вы можете проявить щедрость к кому-то в нужде на этой неделе как акт поклонения?"
+      },
+      {
+        "day": 20,
+        "title": "Сердце царя",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как доверие Божьему суверенитету над лидерами и народами изменяет вашу молитву?"
+      },
+      {
+        "day": 21,
+        "title": "Справедливость и праведность",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Где вы можете более верно стремиться к справедливости и праведности в своей повседневной жизни?"
+      },
+      {
+        "day": 22,
+        "title": "Хорошее имя",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какую репутацию вы строите, и отражает ли она характер Христа?"
+      },
+      {
+        "day": 23,
+        "title": "Не завидуй",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Что вызывает зависть в вашем сердце, и как благодарность может ее заменить?"
+      },
+      {
+        "day": 24,
+        "title": "Сила в беде",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как вы реагируете, когда трудности испытывают силу вашей веры?"
+      },
+      {
+        "day": 25,
+        "title": "Золотые яблоки",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Когда в последний раз слова кого-то в нужный момент были для вас как золотые яблоки?"
+      },
+      {
+        "day": 26,
+        "title": "Зеркало ленивца",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какая область лени или прокрастинации удерживает вас от Божьего лучшего для вас?"
+      },
+      {
+        "day": 27,
+        "title": "Железо точит железо",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Кто в вашей жизни точит вас, и вкладываете ли вы намеренно в эти отношения?"
+      },
+      {
+        "day": 28,
+        "title": "Праведные смелы",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Где вам нужно больше смелости, чтобы стоять за то, что правильно?"
+      },
+      {
+        "day": 29,
+        "title": "Видение и послушание",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как наличие видения, основанного на Слове Божьем, помогает вам не блуждать без цели?"
+      },
+      {
+        "day": 30,
+        "title": "Каждое слово Божие",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 30,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Что молитва Агура — 'не дай мне ни бедности, ни богатства' — учит тебя о довольстве?"
+      }
+    ]
+  },
+  {
+    "id": "romans-heart-of-the-gospel",
+    "name": "Римлянам: Сердце Евангелия",
+    "description": "16-дневное углубленное изучение послания Павла к Римлянам — самое полное изложение евангелия, когда-либо написанное.",
+    "totalDays": 16,
+    "category": "Theology",
+    "gradientColors": [
+      "#8B3A3A",
+      "#5C2424"
+    ],
+    "iconName": "flame.fill",
+    "imageKey": "crucifixion",
+    "applicableSeasons": [
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Евангелие Божие",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ты когда-нибудь стыдишься евангелия, и как бы выглядела жизнь без стыда?"
+      },
+      {
+        "day": 2,
+        "title": "Праведный Суд Божий",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как знание о том, что Бог судит беспристрастно, влияет на то, как ты судишь других?"
+      },
+      {
+        "day": 3,
+        "title": "Все согрешили",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как реальность того, что все согрешили, выравнивает землю между тобой и всеми остальными?"
+      },
+      {
+        "day": 4,
+        "title": "Вера как у Авраама",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какое невозможное обещание от Бога ты призван верить верой?"
+      },
+      {
+        "day": 5,
+        "title": "Мир с Богом",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как знание о том, что страдания производят терпение, изменяет твое восприятие испытаний?"
+      },
+      {
+        "day": 6,
+        "title": "Мертв для греха, жив во Христе",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какой грех тебе нужно считать себя мертвым, чтобы жить полностью для Христа?"
+      },
+      {
+        "day": 7,
+        "title": "Борьба внутри",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как честная борьба Павла с грехом вдохновляет тебя в твоей собственной битве?"
+      },
+      {
+        "day": 8,
+        "title": "Нет осуждения",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какое осуждение ты все еще несешь, которое Христос уже снял?"
+      },
+      {
+        "day": 9,
+        "title": "Суверенный выбор Божий",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как ты реагируешь на тайну Божьей суверенности и человеческой ответственности?"
+      },
+      {
+        "day": 10,
+        "title": "Слово близко к тебе",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Кто в твоей жизни нуждается в хорошей вести, и что удерживает тебя от ее распространения?"
+      },
+      {
+        "day": 11,
+        "title": "Оливковое дерево",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как понимание твоего места как 'привитой' ветви углубляет твою благодарность?"
+      },
+      {
+        "day": 12,
+        "title": "Живая жертва",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как это выглядит на практике — предложить свое тело в качестве живой жертвы сегодня?"
+      },
+      {
+        "day": 13,
+        "title": "Подчинение и любовь",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как заповедь 'не быть должным никому, кроме любви' может изменить твои отношения на этой неделе?"
+      },
+      {
+        "day": 14,
+        "title": "Не суди своего брата",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Где тебе нужно проявить больше благодати к брату во Христе, чьи убеждения отличаются от твоих?"
+      },
+      {
+        "day": 15,
+        "title": "Единство для славы Божией",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как ты можешь более активно стремиться к единству с другими верующими для славы Божией?"
+      },
+      {
+        "day": 16,
+        "title": "Приветствия и Бог мира",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Кто те люди, которых Бог поставил вокруг тебя, чтобы укрепить твою веру, и поблагодарил ли ты их?"
+      }
+    ]
+  },
+  {
+    "id": "new-believers-journey",
+    "name": "Путешествие нового верующего",
+    "description": "14-дневная экскурсия по самым важным главам Библии — идеально подходит для тех, кто только начинает исследовать христианскую веру.",
+    "totalDays": 14,
+    "category": "Foundations",
+    "gradientColors": [
+      "#3A6B8B",
+      "#1C3D5C"
+    ],
+    "iconName": "sunrise.fill",
+    "imageKey": "samuel_called",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Рожденный свыше",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Что для тебя значит начать заново с совершенно новой духовной жизнью?"
+      },
+      {
+        "day": 2,
+        "title": "Пастырь",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как представление Бога как пастыря, заботящегося о вас, изменяет ваше отношение к Нему?"
+      },
+      {
+        "day": 3,
+        "title": "Все согрешили",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как понимание того, что все падают, помогает вам принять благодать Бога без стыда?"
+      },
+      {
+        "day": 4,
+        "title": "Дар благодати",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Что значит получить то, что вы никогда не могли бы заработать самостоятельно?"
+      },
+      {
+        "day": 5,
+        "title": "Нет осуждения",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какое чувство вины или стыда вам нужно отпустить в свете истины, что в Христе нет осуждения?"
+      },
+      {
+        "day": 6,
+        "title": "Спасены благодатью",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как знание о том, что спасение — это дар, а не награда, изменяет давление, которое вы оказываете на себя?"
+      },
+      {
+        "day": 7,
+        "title": "Путь, Истина, Жизнь",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Что значит для Иисуса быть путем, когда вы чувствуете себя потерянным или неуверенным в будущем?"
+      },
+      {
+        "day": 8,
+        "title": "Бог есть любовь",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как утверждение 'Бог есть любовь' изменяет ваше понимание того, кто есть Бог?"
+      },
+      {
+        "day": 9,
+        "title": "Мир Божий",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какие беспокойства вы можете принести Богу прямо сейчас в обмен на Его мир, который превосходит всякое понимание?"
+      },
+      {
+        "day": 10,
+        "title": "Зал веры",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какой человек веры в этой главе вдохновляет вас больше всего и почему?"
+      },
+      {
+        "day": 11,
+        "title": "Испытания и мудрость",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как вы можете начать видеть свои текущие испытания как возможность для роста, а не как наказание?"
+      },
+      {
+        "day": 12,
+        "title": "Блаженства",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какое из блаженств говорит наиболее непосредственно о том, где вы находитесь в жизни прямо сейчас?"
+      },
+      {
+        "day": 13,
+        "title": "Молитва Господня",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как молитва Господня может стать основой для того, как вы говорите с Богом каждый день?"
+      },
+      {
+        "day": 14,
+        "title": "Все новое",
+        "readings": [
+          {
+            "bookID": "REV",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как обещание, что Бог сделает все новое, дает вам надежду на будущее?"
+      }
+    ]
+  },
+  {
+    "id": "finding-purpose",
+    "name": "Поиск цели",
+    "description": "10-дневное исследование самых мощных отрывков Писания о идентичности, призвании и цели, которую Бог вплел в вашу жизнь.",
+    "totalDays": 10,
+    "category": "Purpose",
+    "gradientColors": [
+      "#8B7B3A",
+      "#5C5124"
+    ],
+    "iconName": "star.fill",
+    "imageKey": "miraculous_catch",
+    "applicableSeasons": [
+      "workingProfessional",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Планы на ваше благо",
+        "readings": [
+          {
+            "bookID": "JER",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как знание о том, что у Бога есть планы для вашего благополучия и будущего, изменяет ваш подход к неопределенности?"
+      },
+      {
+        "day": 2,
+        "title": "Чудесно сотворены",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Что изменится, если вы действительно поверите, что вы созданы с благоговением и чудесно?"
+      },
+      {
+        "day": 3,
+        "title": "Доверие Господу",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какой путь вы пытаетесь направить самостоятельно, вместо того чтобы признать Бога в этом?"
+      },
+      {
+        "day": 4,
+        "title": "Созданы для добрых дел",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какие добрые дела вы чувствуете, что Бог приготовил заранее для вас, чтобы вы в них ходили?"
+      },
+      {
+        "day": 5,
+        "title": "Живая жертва",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как вы можете использовать уникальные дары, которые Бог дал вам, чтобы служить другим на этой неделе?"
+      },
+      {
+        "day": 6,
+        "title": "Называемый по имени",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 43,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как то, что Бог называет вас по имени и признает вас Своим, формирует ваше чувство идентичности?"
+      },
+      {
+        "day": 7,
+        "title": "Жить — значит Христос",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Если 'жить — значит Христос', что это значит для вашего подхода к работе и отношениям?"
+      },
+      {
+        "day": 8,
+        "title": "Установите свой ум на высшем",
+        "readings": [
+          {
+            "bookID": "COL",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "К чему земному вы цепляетесь, что отвлекает вас от небесных вещей?"
+      },
+      {
+        "day": 9,
+        "title": "Избранный народ",
+        "readings": [
+          {
+            "bookID": "1PE",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как то, что вас называют 'царственным священством', переопределяет ваше чувство цели и принадлежности?"
+      },
+      {
+        "day": 10,
+        "title": "Радуйтесь в Господе",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Что происходит с вашими желаниями, когда вы решаете радоваться в Господе выше всего?"
+      }
+    ]
+  },
+  {
+    "id": "comfort-in-hard-times",
+    "name": "Утешение в трудные времена",
+    "description": "7-дневное убежище в Писании для сезонов страдания — эти отрывки поддерживали верующих на протяжении тысячелетий в самых темных долинах.",
+    "totalDays": 7,
+    "category": "Comfort",
+    "gradientColors": [
+      "#5C7A8B",
+      "#3A4F5C"
+    ],
+    "iconName": "heart.fill",
+    "imageKey": "job_suffering",
+    "applicableSeasons": [
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "health"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "Господь близок к сокрушенным сердцем",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как знание о том, что Бог особенно близок к сокрушенным сердцем, утешает вас прямо сейчас?"
+      },
+      {
+        "day": 2,
+        "title": "Не бойтесь, Я с вами",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 41,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какой страх вы несете, который Бог просит вас отпустить в Его руки?"
+      },
+      {
+        "day": 3,
+        "title": "Бог всякого утешения",
+        "readings": [
+          {
+            "bookID": "2CO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как ваше собственное страдание может подготовить вас к тому, чтобы утешить кого-то другого, кто страдает?"
+      },
+      {
+        "day": 4,
+        "title": "Ничто не может разлучить нас",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какие обстоятельства заставили вас почувствовать себя отделенным от Божьей любви, и как эта глава говорит об этом?"
+      },
+      {
+        "day": 5,
+        "title": "Успокойтесь и знайте",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какой шум в вашей жизни вам нужно заглушить, чтобы услышать, как Бог говорит 'Успокойтесь'?"
+      },
+      {
+        "day": 6,
+        "title": "Придите ко Мне и отдохните",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какое тяжелое бремя вы несете, которое Иисус приглашает вас положить сегодня?"
+      },
+      {
+        "day": 7,
+        "title": "Каждая слеза будет стерта",
+        "readings": [
+          {
+            "bookID": "REV",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как обещание, что Бог сотрет каждую слезу с ваших глаз, дает вам силы терпеть сегодня?"
+      }
+    ]
+  },
+  {
+    "id": "sermon-on-the-mount",
+    "name": "Нагорная проповедь",
+    "description": "7-дневное глубокое изучение самой известной проповеди Иисуса — радикальное учение, которое перевернуло ценности мира.",
+    "totalDays": 7,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A8B5C",
+      "#4F5C3A"
+    ],
+    "iconName": "text.book.closed.fill",
+    "imageKey": "sermon_mount",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Блаженства и соль земли",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 26
+          }
+        ],
+        "reflection": "Какое блаженство бросает вам вызов больше всего, и как это могло бы выглядеть в вашей жизни сегодня?"
+      },
+      {
+        "day": 2,
+        "title": "Высшая праведность",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 27,
+            "verseEnd": 48
+          }
+        ],
+        "reflection": "Как призыв Иисуса 'будьте совершенны, как Отец ваш совершен' толкает вас за пределы соблюдения правил к преобразованию сердца?"
+      },
+      {
+        "day": 3,
+        "title": "Давать, молиться и поститься в тайне",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "Где вам нужно изменить свои духовные практики с того, чтобы быть замеченным другими, на то, чтобы быть замеченным только Богом?"
+      },
+      {
+        "day": 4,
+        "title": "Сокровище на небесах",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 19,
+            "verseEnd": 34
+          }
+        ],
+        "reflection": "О чем вы беспокоитесь, что Иисус просит вас полностью доверить Ему?"
+      },
+      {
+        "day": 5,
+        "title": "Не судите",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": 1,
+            "verseEnd": 14
+          }
+        ],
+        "reflection": "Какую бревно в своем глазу вам нужно устранить, прежде чем указывать на сор в глазу другого?"
+      },
+      {
+        "day": 6,
+        "title": "Построено на скале",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": 15,
+            "verseEnd": 29
+          }
+        ],
+        "reflection": "Построена ли ваша жизнь на скале слов Иисуса или на песке мудрости мира?"
+      },
+      {
+        "day": 7,
+        "title": "Проповедь в целом",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "После прочтения всей Нагорной проповеди, какое одно учение вы больше всего хотите воплотить в жизнь?"
+      }
+    ]
+  },
+  {
+    "id": "psalms-in-30-days",
+    "name": "Псалмы за 30 дней",
+    "description": "Прочитайте все 150 псалмов за 30 дней — пять псалмов в день, чтобы погрузиться в самую богатую книгу поклонения, молитвы и хвалы Библии.",
+    "totalDays": 30,
+    "category": "Worship",
+    "gradientColors": [
+      "#3A5C8B",
+      "#1C2D5C"
+    ],
+    "iconName": "music.note",
+    "imageKey": "jacob_ladder",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Псалмы 1–5: Благословенные и Сломленные",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Что для вас значит радоваться закону Господа день и ночь?"
+      },
+      {
+        "day": 2,
+        "title": "Псалмы 6–10: Вопль к Богу",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как честность воплей псалмопевца к Богу дает вам разрешение приносить свои искренние эмоции к Нему?"
+      },
+      {
+        "day": 3,
+        "title": "Псалмы 11–15: Праведные и Злые",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Что псалом 15 открывает о том, каким человеком можно пребывать в присутствии Бога?"
+      },
+      {
+        "day": 4,
+        "title": "Псалмы 16–20: Убежище и Спасение",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как небеса, провозглашающие славу Бога в псалме 19, пробуждают поклонение в вашем сердце?"
+      },
+      {
+        "day": 5,
+        "title": "Псалмы 21–25: Пастырь и Искатель",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как крик о покинутом в псалме 22 — повторенный Иисусом на кресте — углубляет ваше понимание Его жертвы?"
+      },
+      {
+        "day": 6,
+        "title": "Псалмы 26–30: Свет во Тьме",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 30,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Что значит, что плач может длиться ночь, но радость приходит с утра?"
+      },
+      {
+        "day": 7,
+        "title": "Псалмы 31–35: Доверие и Избавление",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 31,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 33,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 35,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как благословение прощения в псалме 32 вдохновляет вас исповедовать то, что вы скрывали?"
+      },
+      {
+        "day": 8,
+        "title": "Псалмы 36–40: Непоколебимая Любовь",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 36,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 38,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 39,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 40,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как выглядит 'наслаждайся Господом' из псалма 37 в вашем повседневном распорядке?"
+      },
+      {
+        "day": 9,
+        "title": "Псалмы 41–45: Жажда по Богу",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 41,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 42,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 43,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 44,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 45,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Когда ваша душа жаждала Бога так, как олень жаждет воды?"
+      },
+      {
+        "day": 10,
+        "title": "Псалмы 46–50: Бог — наша Крепость",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 47,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 48,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 49,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 50,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как напоминание псалма 46 'успокойтесь' говорит о хаосе в вашей жизни прямо сейчас?"
+      },
+      {
+        "day": 11,
+        "title": "Псалмы 51–55: Сломленный Дух",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 51,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 52,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 53,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 54,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 55,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как молитва Давида о чистом сердце в псалме 51 дает вам смелость подойти к Богу с вашими неудачами?"
+      },
+      {
+        "day": 12,
+        "title": "Псалмы 56–60: Когда Я Боюсь",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 56,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 57,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 58,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 59,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 60,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как выглядит 'когда я боюсь, я буду доверять Тебе' из псалма 56 в ваших текущих обстоятельствах?"
+      },
+      {
+        "day": 13,
+        "title": "Псалмы 61–65: Отдых только в Боге",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 61,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 62,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 63,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 64,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 65,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Где вы находите отдых — действительно только в Боге или ищете другие источники мира?"
+      },
+      {
+        "day": 14,
+        "title": "Псалмы 66–70: Восклицание от Радости",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 66,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 67,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 68,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 69,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 70,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "О каких удивительных делах Бога в вашей жизни вы хотели бы рассказать другим?"
+      },
+      {
+        "day": 15,
+        "title": "Псалмы 71–75: Вечная Надежда",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 71,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 72,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 73,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 74,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 75,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как борьба псалмопевца с завистью в псалме 73 отражает ваш собственный опыт?"
+      },
+      {
+        "day": 16,
+        "title": "Псалмы 76–80: Помни Его Чудеса",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 76,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 77,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 78,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 79,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 80,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какие прошлые дела Бога вы можете вспомнить и повторить, чтобы укрепить свою веру сегодня?"
+      },
+      {
+        "day": 17,
+        "title": "Псалмы 81–85: Пробуждение и Восстановление",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 81,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 82,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 83,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 84,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 85,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как стремление к двору Бога в псалме 84 перекликается с вашим желанием поклоняться?"
+      },
+      {
+        "day": 18,
+        "title": "Псалмы 86–90: От Вечности до Вечности",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 86,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 87,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 88,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 89,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 90,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как перспектива псалма 90 о краткости жизни меняет ваше отношение к времени?"
+      },
+      {
+        "day": 19,
+        "title": "Псалмы 91–95: Убежище и Песня",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 91,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 92,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 93,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 94,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 95,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Что значит пребывать в убежище Всевышнего, и как вы можете практиковать это сегодня?"
+      },
+      {
+        "day": 20,
+        "title": "Псалмы 96–100: Господь царствует",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 96,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 97,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 98,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 99,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 100,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как призыв 'воздайте радостный звук' в Псалме 100 побуждает вас поклоняться с большим энтузиазмом?"
+      },
+      {
+        "day": 21,
+        "title": "Псалмы 101–105: Благослови, душа моя, Господа",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 101,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 102,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 103,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 104,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 105,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какие благословения от Господа, перечисленные в Псалме 103, вы забыли поблагодарить Его за?"
+      },
+      {
+        "day": 22,
+        "title": "Псалмы 106–110: Воспоминание о верности Бога",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 106,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 107,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 108,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 109,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 110,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как вы испытали неизменную любовь Бога, спасающую вас от вашего блуждания?"
+      },
+      {
+        "day": 23,
+        "title": "Псалмы 111–115: Хвалите Господа",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 111,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 112,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 113,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 114,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 115,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как контраст между живым Богом и бездушными идолами в Псалме 115 бросает вызов тому, на что вы полагаетесь?"
+      },
+      {
+        "day": 24,
+        "title": "Псалмы 116–120: Песни восхождения начинаются",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 116,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 117,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 118,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 119,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 120,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какой стих из самого длинного псалма — Псалма 119 — наиболее сильно говорит о вашей любви к Слову Божьему?"
+      },
+      {
+        "day": 25,
+        "title": "Псалмы 121–125: Восходя к Господу",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 121,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 122,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 123,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 124,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 125,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Откуда приходит ваша помощь, и как Псалом 121 укрепляет вашу уверенность в защите Бога?"
+      },
+      {
+        "day": 26,
+        "title": "Псалмы 126–130: Сеять в слезах",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 126,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 127,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 128,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 129,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 130,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какие семена вы сейчас сеете в слезах, доверяя, что пожнете с радостными криками?"
+      },
+      {
+        "day": 27,
+        "title": "Псалмы 131–135: Смиренное доверие",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 131,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 132,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 133,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 134,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 135,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как образ единства в Псалме 133 вдохновляет вас стремиться к более глубокому общению с другими верующими?"
+      },
+      {
+        "day": 28,
+        "title": "Псалмы 136–140: Его любовь вечна",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 136,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 137,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 138,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 140,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как рефрен 'Его любовь вечна' в Псалме 136 укрепляет вас, когда все остальное кажется неопределенным?"
+      },
+      {
+        "day": 29,
+        "title": "Псалмы 141–145: Вечерние молитвы",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 141,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 142,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 143,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 144,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 145,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как заявление Давида о том, что Бог велик и достоин хвалы, формирует вашу вечернюю молитву сегодня?"
+      },
+      {
+        "day": 30,
+        "title": "Псалмы 146–150: Пусть все хвалят Господа",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 146,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 147,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 148,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 149,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 150,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Когда Псалмы заканчиваются словами 'пусть все, что дышит, хвалит Господа', как вы сделаете хвалу ежедневной привычкой?"
+      }
+    ]
+  },
+  {
+    "id": "life-of-david",
+    "name": "Жизнь Давида",
+    "description": "14-дневное путешествие с пастушьим царем — от помазания до поражения гиганта, от изгнания до трона — в паре с псалмами, рожденными в каждом сезоне.",
+    "totalDays": 14,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6B2D2D",
+      "#3A1818"
+    ],
+    "iconName": "shield.lefthalf.filled",
+    "imageKey": "david_goliath",
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Помазанный в неизвестности",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Где Бог встречает вас в тихих, незаметных местах, прежде чем мир когда-либо это заметит?"
+      },
+      {
+        "day": 2,
+        "title": "Лицом к лицу с гигантом",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "С каким гигантом вы сталкиваетесь сегодня, и в чьем имени вы будете с ним сражаться?"
+      },
+      {
+        "day": 3,
+        "title": "Верность Ионатана",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Кто был для вас Ионатаном, и как вы можете стать таким другом для кого-то другого?"
+      },
+      {
+        "day": 4,
+        "title": "Бегство за свою жизнь",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как псалом Давида в пещере учит вас хвалить Бога до того, как придет избавление?"
+      },
+      {
+        "day": 5,
+        "title": "Сдержанность в пещере",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Где вам нужно практиковать сдержанность, когда вы могли бы ответить кому-то, кто вас обидел?"
+      },
+      {
+        "day": 6,
+        "title": "Мудрость от Авигеи",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Чей мудрый совет вы недавно отвергли, который мог бы спасти вас от глупого решения?"
+      },
+      {
+        "day": 7,
+        "title": "Падение Саула",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 31,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "2SA",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как горе Давида по своему врагу Саулу изменяет ваше восприятие людей, с которыми вы боретесь?"
+      },
+      {
+        "day": 8,
+        "title": "Царь танцует",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Когда в последний раз вы поклонялись с полной самоотдачей, не беспокоясь о том, что кто-то подумает?"
+      },
+      {
+        "day": 9,
+        "title": "Вечный Завет",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как обещание Бога о бесконечном троне через Давида углубляет вашу надежду на Христа сегодня?"
+      },
+      {
+        "day": 10,
+        "title": "Падение Царя-Пастыря",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "2SA",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Где вы наиболее уязвимы к небольшим компромиссам, которые могут вырасти в великие грехи, если их не остановить?"
+      },
+      {
+        "day": 11,
+        "title": "Сломанная Молитва",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 51,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Что в вашей жизни нуждается в молитве 'создай во мне чистое сердце' сегодня вечером?"
+      },
+      {
+        "day": 12,
+        "title": "Благослови, Господи, душу мою",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 103,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какое из благ Господа, перечисленных здесь, вам больше всего нужно помнить сегодня?"
+      },
+      {
+        "day": 13,
+        "title": "Страхом известный",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какое утешение — или вызов — вы чувствуете, зная, что Бог видит каждую скрытую уголок вашего сердца?"
+      },
+      {
+        "day": 14,
+        "title": "Пастырь остается",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "На протяжении всех сезонов Давида Пастырь никогда не оставлял его — как вы испытали ту же верность в своей истории?"
+      }
+    ]
+  },
+  {
+    "id": "christmas-story",
+    "name": "Рождественская история",
+    "description": "7-дневное путешествие Адвента через Рождество — от древнего пророчества до ясел — заново откройте чудо приближения Бога.",
+    "totalDays": 7,
+    "category": "Advent",
+    "gradientColors": [
+      "#3C5A7A",
+      "#1F2F45"
+    ],
+    "iconName": "star.fill",
+    "imageKey": "nativity",
+    "applicableSeasons": [
+      "parenthood",
+      "newlyMarried",
+      "growing",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "grief",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Предсказанный Ребенок",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какое из имен Исайи для приходящего ребенка — Чудный Советник, Могучий Бог, Князь мира — вам больше всего нужно прямо сейчас?"
+      },
+      {
+        "day": 2,
+        "title": "Из Маленького Вифлеема",
+        "readings": [
+          {
+            "bookID": "MIC",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как выбор Бога маленького и незамеченного города Вифлеема говорит о скрытых местах в вашей жизни?"
+      },
+      {
+        "day": 3,
+        "title": "Да Марии",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Где Бог просит вас сказать 'да будет мне по слову твоему' в сезоне неопределенности?"
+      },
+      {
+        "day": 4,
+        "title": "Тихое Послушание Иосифа",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как молчаливая, дорогостоящая верность Иосифа бросает вызов вашему восприятию того, как вас видят другие?"
+      },
+      {
+        "day": 5,
+        "title": "Слово стало плотью",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Что для вас значит, что вечное Слово выбрало прийти в ваш район?"
+      },
+      {
+        "day": 6,
+        "title": "Пастухи и ясла",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Почему, по вашему мнению, 'добрая весть о великой радости' была сначала объявлена пастухам, а не царям?"
+      },
+      {
+        "day": 7,
+        "title": "Мудрецы издалека",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как бы выглядело для вас принести ваше лучшее — золото, ладан и смирну — Иисусу сегодня?"
+      }
+    ]
+  },
+  {
+    "id": "walking-with-elijah",
+    "name": "Прогулка с Ильей",
+    "description": "10-дневное изучение пророка, который стоял один против царства — и Бога, который встретил его в воробьях, пещере и тихом голосе.",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6E4A2C",
+      "#3A2814"
+    ],
+    "iconName": "flame.fill",
+    "imageKey": "elijah_ravens",
+    "applicableSeasons": [
+      "hardSeason",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose",
+      "anxiety"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Перед Ахавом",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 6
+          }
+        ],
+        "reflection": "Где Бог просит вас сказать трудную правду, и доверяете ли вы Ему, что Он обеспечит вас после вашего послушания?"
+      },
+      {
+        "day": 2,
+        "title": "Вдова из Сарепты",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 17,
+            "verseStart": 7,
+            "verseEnd": 24
+          }
+        ],
+        "reflection": "Какой маленький 'последний горстка муки' Бог просит вас предложить в вере на этой неделе?"
+      },
+      {
+        "day": 3,
+        "title": "Схватка на Кармеле",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какой алтарь в вашей жизни вам нужно восстановить — место поклонения, которое пришло в запустение?"
+      },
+      {
+        "day": 4,
+        "title": "Бегство в пустыню",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 19,
+            "verseStart": 1,
+            "verseEnd": 8
+          }
+        ],
+        "reflection": "Когда вы испытывали нежное обеспечение Бога — еду, сон, друга — посреди вашего выгорания?"
+      },
+      {
+        "day": 5,
+        "title": "Тихий малый голос",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 19,
+            "verseStart": 9,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "Какой шум вам нужно заглушить, чтобы услышать шепот Бога, а не ждать землетрясения?"
+      },
+      {
+        "day": 6,
+        "title": "Виноградник Навофея",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как эта история изменяет ваше восприятие несправедливости, с которой никто другой, похоже, не хочет столкнуться?"
+      },
+      {
+        "day": 7,
+        "title": "Огонь с Небес",
+        "readings": [
+          {
+            "bookID": "2KI",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Где вы искушены обращаться к другим 'богам Экрона', вместо того чтобы принести свои страхи к Господу?"
+      },
+      {
+        "day": 8,
+        "title": "Мантия передается",
+        "readings": [
+          {
+            "bookID": "2KI",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Чью мантию Бог просит вас поднять — или чью мантию вы готовы передать?"
+      },
+      {
+        "day": 9,
+        "title": "Илия на горе с Христом",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "Что значит, что тот же пророк, который чувствовал себя наиболее одиноким, однажды стоял с Иисусом в славе?"
+      },
+      {
+        "day": 10,
+        "title": "Человек, как мы",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": 13,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "Иаков говорит, что Илия был 'человеком с природой, как у нас' — как это меняет вашу молитву на этой неделе?"
+      }
+    ]
+  },
+  {
+    "id": "beatitudes-deep-dive",
+    "name": "Блаженства: Восемь портретов",
+    "description": "8-дневное изучение портретов граждан Царства Иисуса — одно блаженство за раз, каждое в паре с писанием, которое дополняет картину.",
+    "totalDays": 8,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A6B3A",
+      "#4F4524"
+    ],
+    "iconName": "sparkles",
+    "imageKey": "beatitudes",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Бедные духом",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 3
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 57,
+            "verseStart": 14,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "Как бы это выглядело сегодня — прийти к Богу, признавая свою полную зависимость, а не демонстрируя свои способности?"
+      },
+      {
+        "day": 2,
+        "title": "Печальные",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 4,
+            "verseEnd": 4
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 42,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какую утрату или горе вы пытались обойти, что Иисус приглашает вас на самом деле пережить?"
+      },
+      {
+        "day": 3,
+        "title": "Кроткие",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 5,
+            "verseEnd": 5
+          },
+          {
+            "bookID": "NUM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Где вы путаете кротость со слабостью, и как пример Моисея изменяет это?"
+      },
+      {
+        "day": 4,
+        "title": "Голодные по праведности",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 6,
+            "verseEnd": 6
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 63,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какие меньшие голоды затмевают вашу жажду праведности Божьей на этой неделе?"
+      },
+      {
+        "day": 5,
+        "title": "Милосердные",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 7,
+            "verseEnd": 7
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "Кто сегодня оказался на вашем пути, кому нужно, чтобы вы были самаритянином, а не священником?"
+      },
+      {
+        "day": 6,
+        "title": "Чисты сердцем",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 8,
+            "verseEnd": 8
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какой скрытый мотив вам нужно вынести на свет, чтобы ваше сердце могло быть единым в своем преданности?"
+      },
+      {
+        "day": 7,
+        "title": "Миротворцы",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 9,
+            "verseEnd": 9
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": 9,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "Куда Бог призывает вас делать более трудную работу по установлению мира, а не просто его сохранению?"
+      },
+      {
+        "day": 8,
+        "title": "Гонимые",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 10,
+            "verseEnd": 16
+          },
+          {
+            "bookID": "1PE",
+            "chapter": 4,
+            "verseStart": 12,
+            "verseEnd": 19
+          }
+        ],
+        "reflection": "Как радость, которую обещает Иисус, может изменить ваш ответ в следующий раз, когда верность будет стоить вам чего-то?"
+      }
+    ]
+  },
+  {
+    "id": "holy-week",
+    "name": "Святая неделя: Путешествие к Пасхе",
+    "description": "Проходите Святую неделю день за днем — от триумфального входа через крест к пустой гробнице — и переживите самую значимую неделю в истории.",
+    "totalDays": 8,
+    "category": "Easter",
+    "gradientColors": [
+      "#5A2E2E",
+      "#2F1515"
+    ],
+    "iconName": "cross.fill",
+    "imageKey": "triumphal_entry",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "grief",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Вербное воскресенье",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 21,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "Что значит приветствовать Иисуса как Царя, когда Он приходит так, как вы не ожидали?"
+      },
+      {
+        "day": 2,
+        "title": "Очищение храма",
+        "readings": [
+          {
+            "bookID": "MRK",
+            "chapter": 11,
+            "verseStart": 12,
+            "verseEnd": 25
+          }
+        ],
+        "reflection": "Какие 'столы' в вашем сердце Иисус просит перевернуть, чтобы Его присутствие могло быть правильно принято?"
+      },
+      {
+        "day": 3,
+        "title": "Учение в храме",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 22,
+            "verseStart": 34,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "Как любовь к Богу всем, что вы есть — и к ближнему, как к себе — переупорядочит вашу неделю?"
+      },
+      {
+        "day": 4,
+        "title": "Помазание в Вифании",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 12,
+            "verseStart": 1,
+            "verseEnd": 11
+          }
+        ],
+        "reflection": "Какой экстравагантный акт любви вы можете предложить Иисусу сегодня, даже если мир называет это расточительством?"
+      },
+      {
+        "day": 5,
+        "title": "Тайная вечеря",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Чьи ноги Иисус просит вас вымыть на этой неделе, и какая гордость мешает вам это сделать?"
+      },
+      {
+        "day": 6,
+        "title": "Гефсимания",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 26,
+            "verseStart": 36,
+            "verseEnd": 56
+          }
+        ],
+        "reflection": "Где в вашей жизни вам нужно молиться: 'Да будет не моя, а Твоя воля' — и на самом деле это иметь в виду?"
+      },
+      {
+        "day": 7,
+        "title": "Страстная пятница",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какое незавершенное дело в вашей жизни должно услышать слова Иисуса: 'Свершилось'?"
+      },
+      {
+        "day": 8,
+        "title": "Воскресное утро",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Где вам нужна сила воскресения, чтобы встретиться с вами в гробнице мертвой надежды сегодня?"
+      }
+    ]
+  },
+  {
+    "id": "genesis-beginnings",
+    "name": "Бытие: В начале",
+    "description": "12-дневная прогулка по первой книге Библии — творение, падение, потоп, патриархи — прослеживая верное стремление Бога с самого начала.",
+    "totalDays": 12,
+    "category": "Foundations",
+    "gradientColors": [
+      "#3A5A4A",
+      "#1C2D24"
+    ],
+    "iconName": "globe.americas.fill",
+    "imageKey": "noah_ark",
+    "applicableSeasons": [
+      "growing",
+      "startingOver",
+      "newlyMarried"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "В начале",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какую 'пустую и безформенную' область вашей жизни Бог сейчас наполняет порядком и светом?"
+      },
+      {
+        "day": 2,
+        "title": "Сад и образ",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Что для вас значит, что Бог создал вас Своими собственными руками и вдохнул в вас Свою жизнь?"
+      },
+      {
+        "day": 3,
+        "title": "Падение",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какую ложь змия — 'Разве Бог действительно сказал?' — вы продолжаете слышать, и как вы можете ответить на нее истиной?"
+      },
+      {
+        "day": 4,
+        "title": "Ной и потоп",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "GEN",
+            "chapter": 9,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "Где вам нужно доверять обещаниям Бога в виде радуги посреди сезона, который все еще кажется затопленным?"
+      },
+      {
+        "day": 5,
+        "title": "Призыв Авраама",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какую 'страну и родство' Бог просит вас оставить, чтобы следовать за Ним в нечто новое?"
+      },
+      {
+        "day": 6,
+        "title": "Счет звезд",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какое невозможное обещание от Бога вам нужно продолжать верить, даже в те ночи, когда это кажется смехотворным?"
+      },
+      {
+        "day": 7,
+        "title": "Жертва Исаака",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Что стало для вас 'Исааком' — даром, который вы так любите, что он начинает соперничать с самим Богом?"
+      },
+      {
+        "day": 8,
+        "title": "Лестница Иакова",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Где Бог недавно неожиданно явился, несомненно, в месте, о котором вы не знали, что Он там?"
+      },
+      {
+        "day": 9,
+        "title": "Борьба всю ночь",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "За что вы сейчас боретесь с Богом, и готовы ли вы идти с хромотой, если это означает получение Его благословения?"
+      },
+      {
+        "day": 10,
+        "title": "Сны Иосифа",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "В каком 'колодце' вы сейчас находитесь, который Бог может использовать как первую главу гораздо большей истории?"
+      },
+      {
+        "day": 11,
+        "title": "Воссоединение в Египте",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 45,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какие отношения в вашей жизни готовы к прощению, которое Иосиф продемонстрировал: 'Вы замышляли зло, но Бог замыслил это к добру'?"
+      },
+      {
+        "day": 12,
+        "title": "Бог замыслил это к добру",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 50,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Оглядываясь назад на самое трудное, что вы пережили, где вы теперь видите руку Бога, плетущую это к добру?"
+      }
+    ]
+  },
+  {
+    "id": "daniel-exile",
+    "name": "Даниил: Верный в изгнании",
+    "description": "12-дневное путешествие по книге Даниила — стойкость в языческом дворе, молитва, когда это незаконно, и доверие Богу с учетом всей истории.",
+    "totalDays": 12,
+    "category": "Character Study",
+    "gradientColors": [
+      "#5A3A2A",
+      "#2E1F16"
+    ],
+    "iconName": "shield.fill",
+    "imageKey": "daniel_lions",
+    "applicableSeasons": [
+      "workingProfessional",
+      "hardSeason",
+      "student",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Решение не оскверняться",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какой маленький ежедневный компромисс Бог приглашает вас 'решить', что вы больше не будете принимать?"
+      },
+      {
+        "day": 2,
+        "title": "Сон царя",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Где вам нужно доверять, что Бог, который открывает глубокие и сокровенные вещи, властвует над империями вашего времени?"
+      },
+      {
+        "day": 3,
+        "title": "Огненная печь",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как бы выглядела вера 'но если нет' для вас на этой неделе — доверие, которое подчиняется даже без гарантии спасения?"
+      },
+      {
+        "day": 4,
+        "title": "Смиренный царь",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Где гордость шепчет, что ты построил то, что имеешь, и как Бог призывает тебя поднять свои глаза?"
+      },
+      {
+        "day": 5,
+        "title": "Письмо на стене",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Что в твоей жизни было 'взвешено' Богом, и к какому покаянию тебя призывают?"
+      },
+      {
+        "day": 6,
+        "title": "Львиная яма",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какую практику молитвы с открытым окном стоит сохранить, даже если это стоит тебе чего-то социально или профессионально?"
+      },
+      {
+        "day": 7,
+        "title": "Древний дней",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как видение Древнего дней и Сына Человеческого дает тебе более широкий взгляд на заголовки?"
+      },
+      {
+        "day": 8,
+        "title": "Баран и козел",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Когда будущее кажется запутанным, что укрепляет тебя в Боге, который видит конец с самого начала?"
+      },
+      {
+        "day": 9,
+        "title": "Молитва покаяния",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Где твоему сообществу или семье нужно, чтобы ты встал в проломе с молитвой покаяния, как у Даниила?"
+      },
+      {
+        "day": 10,
+        "title": "Человек в льняной одежде",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как реальность невидимой духовной битвы меняет твое упорство в молитве, когда ничего не кажется движущимся?"
+      },
+      {
+        "day": 11,
+        "title": "Цари и царства",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "На какое земное царство ты положил слишком много надежд, и как ты можешь заново укрепить свою надежду?"
+      },
+      {
+        "day": 12,
+        "title": "Мудрые будут сиять",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Как обещание, что 'мудрые будут сиять, как яркость небес', вдохновляет твою верность сегодня?"
+      }
+    ]
+  },
+  {
+    "id": "lords-prayer-deep-dive",
+    "name": "Молитва Господня: Научи нас молиться",
+    "description": "7-дневная медитация о молитве, которую Иисус научил нас — одна просьба в день — замедляясь, чтобы осознать каждое слово.",
+    "totalDays": 7,
+    "category": "Prayer",
+    "gradientColors": [
+      "#4A5A7A",
+      "#242D3D"
+    ],
+    "iconName": "hands.sparkles.fill",
+    "imageKey": "lords_prayer",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "parenthood",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Отче наш на небесах",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 5,
+            "verseEnd": 13
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": 12,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "Что изменится в твоей молитве сегодня, если ты действительно веришь, что приближаешься к своему Отцу, а не просто к далекому божеству?"
+      },
+      {
+        "day": 2,
+        "title": "Да святится Имя Твое",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 99,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 6,
+            "verseStart": 1,
+            "verseEnd": 8
+          }
+        ],
+        "reflection": "Как бы выглядело сегодня, если бы ты относился к имени Бога как к святому в своих мыслях, устах и выборах?"
+      },
+      {
+        "day": 3,
+        "title": "Да придет Царствие Твое",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 13,
+            "verseStart": 31,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "Где ты стремишься увидеть, как Царство Божие проникает в твой мир на этой неделе — и как ты будешь молиться с ожиданием?"
+      },
+      {
+        "day": 4,
+        "title": "Да будет воля Твоя",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 26,
+            "verseStart": 36,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "Какая твоя молитва ждет честного 'не моя воля, но Твоя'? Какова будет цена этого, и что это освободит?"
+      },
+      {
+        "day": 5,
+        "title": "Дай нам насущный хлеб",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 10,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "Как молитва о ежедневном хлебе исцеляет тревогу от попыток накопить благодать завтрашнего дня сегодня?"
+      },
+      {
+        "day": 6,
+        "title": "Прости нам, как и мы прощаем",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 18,
+            "verseStart": 21,
+            "verseEnd": 35
+          }
+        ],
+        "reflection": "Чей долг тебе нужно простить, чтобы твоя молитва о прощении не отскакивала от закрытого сердца?"
+      },
+      {
+        "day": 7,
+        "title": "Избавь нас от злого",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 6,
+            "verseStart": 10,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "Где тебе нужно надеть броню Божию и молиться конкретно о избавлении от злого сегодня?"
+      }
+    ]
+  },
+  {
+    "id": "parables-kingdom",
+    "name": "Притчи о Царстве",
+    "description": "10-дневная прогулка через самые проникающие притчи Иисуса — короткие истории, которые изменяют сердца и раскрывают перевернутое царство Бога.",
+    "totalDays": 10,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A4A2A",
+      "#3E2516"
+    ],
+    "iconName": "quote.opening",
+    "imageKey": "prodigal_son",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "workingProfessional",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "relationships",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Сеятель",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 13,
+            "verseStart": 1,
+            "verseEnd": 23
+          }
+        ],
+        "reflection": "Какой сейчас почва твоего сердца, и что тебе нужно сделать, чтобы стать 'хорошей землей' в этом сезоне?"
+      },
+      {
+        "day": 2,
+        "title": "Добрый самарянин",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "Мимо кого ты соблазняешься пройти, и как бы это выглядело, если бы ты вместо этого перешел дорогу?"
+      },
+      {
+        "day": 3,
+        "title": "Блудный сын",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 15,
+            "verseStart": 11,
+            "verseEnd": 32
+          }
+        ],
+        "reflection": "Какой сын больше всего похож на тебя сегодня — блуждающий или обиженный старший брат — и что Отец хочет тебе дать?"
+      },
+      {
+        "day": 4,
+        "title": "Потерянная овца и монета",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 15,
+            "verseStart": 1,
+            "verseEnd": 10
+          }
+        ],
+        "reflection": "Где в твоей жизни ты чувствуешь себя потерянным, и как изменяет ситуацию осознание того, что небеса активно ищут тебя?"
+      },
+      {
+        "day": 5,
+        "title": "Богатый дурак",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 12,
+            "verseStart": 13,
+            "verseEnd": 34
+          }
+        ],
+        "reflection": "Какую большую 'амбара' ты искушаешься построить, и как ты можешь быть богатым перед Богом вместо этого?"
+      },
+      {
+        "day": 6,
+        "title": "Непрощённый слуга",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 18,
+            "verseStart": 21,
+            "verseEnd": 35
+          }
+        ],
+        "reflection": "Какое мелкое оскорбление ты всё ещё не можешь простить кому-то, и как гора твоего собственного прощения изменяет это?"
+      },
+      {
+        "day": 7,
+        "title": "Фарисей и сборщик налогов",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 18,
+            "verseStart": 9,
+            "verseEnd": 14
+          }
+        ],
+        "reflection": "Где твоя молитва тайно звучит больше как молитва фарисея, чем сборщика налогов — и как ты можешь смириться сегодня?"
+      },
+      {
+        "day": 8,
+        "title": "Рабочие в винограднике",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 20,
+            "verseStart": 1,
+            "verseEnd": 16
+          }
+        ],
+        "reflection": "Чью позднюю благодать в твоей жизни ты не принимаешь, и как щедрость Землевладельца освобождает тебя от этого?"
+      },
+      {
+        "day": 9,
+        "title": "Десять дев",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 25,
+            "verseStart": 1,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "Какое 'масло' продолжающегося общения с Христом может заканчиваться, и как ты можешь позаботиться об этом на этой неделе?"
+      },
+      {
+        "day": 10,
+        "title": "Овцы и козлы",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 25,
+            "verseStart": 31,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "В чьем лице, сегодня, Иисус ждет, чтобы его узнали — и ответишь ли ты?"
+      }
+    ]
+  },
+  {
+    "id": "esther-for-such-a-time",
+    "name": "Есфирь: На такой момент, как этот",
+    "description": "10-дневная прогулка по книге Есфирь — 10 глав, 10 дней — прослеживая скрытое провидение Бога через кризис, мужество и переворот.",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6A3A5C",
+      "#2E1826"
+    ],
+    "iconName": "crown.fill",
+    "imageKey": "mordecai_triumph",
+    "applicableSeasons": [
+      "workingProfessional",
+      "student",
+      "hardSeason",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Праздник во дворце",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Где в шуме и избытке твоего мира ты чувствуешь, что Бог тихо ставит сцену?"
+      },
+      {
+        "day": 2,
+        "title": "Невероятная королева",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какую непредвиденную ситуацию в твоей жизни Бог может использовать, чтобы подготовить тебя к цели, которую ты пока не видишь?"
+      },
+      {
+        "day": 3,
+        "title": "Тень Гамана",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Когда зло, кажется, набирает силу в твоем мире, как ты держишься за доброту Бога?"
+      },
+      {
+        "day": 4,
+        "title": "На такой момент, как этот",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какой рискованный шаг 'если я погибну, я погибну' может Бог просить от тебя ради кого-то другого?"
+      },
+      {
+        "day": 5,
+        "title": "Приближение к царю",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Когда ты чувствовал благоволение Бога, открывающее дверь, через которую ты боялся пройти?"
+      },
+      {
+        "day": 6,
+        "title": "Бессонная ночь",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Где ты видел невидимое провидение Бога, организующее 'совпадения' для твоего блага?"
+      },
+      {
+        "day": 7,
+        "title": "Великий переворот",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какая ситуация сейчас кажется невозможной, которая может быть ближе к перевороту, чем ты осознаешь?"
+      },
+      {
+        "day": 8,
+        "title": "Новые указания",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Где тебе нужно молиться смелыми новыми 'указами' надежды над ситуацией, которая была списана со счетов?"
+      },
+      {
+        "day": 9,
+        "title": "День Пурима",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Какие спасения Бог уже совершил для тебя, которые заслуживают того, чтобы их помнили и отмечали с намерением?"
+      },
+      {
+        "day": 10,
+        "title": "Мордехай, защитник",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Кто вокруг тебя нуждается в том, чтобы ты был Мордехаем — тем, кто говорит за их благополучие, даже когда это дорого?"
+      }
+    ]
+  },
+  {
+    "id": "ruth-redemption",
+    "name": "Рут: История искупления",
+    "description": "4-дневная прогулка по маленькой книге Рут — где утрата встречается с верностью, жатва встречается с провидением, и иностранная вдова становится прабабушкой царя Давида.",
+    "totalDays": 4,
+    "category": "Character Study",
+    "gradientColors": [
+      "#8B6642",
+      "#4A331F"
+    ],
+    "iconName": "heart.circle.fill",
+    "imageKey": "jacob_rachel_well",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "relationships",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Потеря и Верность",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Наоми называет себя 'Мара' — горькой. Руфь отвечает на потерю клятвой: 'Куда ты пойдешь, туда и я пойду.' Какой из двух голосов — горькая честность или упрямая верность — более точно описывает, как вы встречаете этот сезон, и что может измениться, если оба будут допущены к сосуществованию?"
+      },
+      {
+        "day": 2,
+        "title": "Неожиданная Доброта",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Обратите внимание, как рассказчик говорит, что Руфь 'случайно' собирала колосья на поле Вооза — тихий намек на то, что ничего в этой истории на самом деле не случайно. Где в вашей жизни Бог может orchestrate то, что кажется совпадением, в тихую доброту?"
+      },
+      {
+        "day": 3,
+        "title": "Смелая Вера на Току",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Подход Руфи к Воозу вызывает еврейскую концепцию искупителя — родственника, который выкупает потерянную землю и жизни. Что для вас значит, что библейское изображение искупления начинается здесь, на току, а не в храме?"
+      },
+      {
+        "day": 4,
+        "title": "Искупитель и Королевская Линия",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 1,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "Руфь — моавитянка, вдова, иностранка — появляется в родословной Иисуса. Как это окончание изменяет ваше понимание того, кого Бог вплетает в Свою спасительную историю, и как Он может вплетать вас?"
+      }
+    ]
+  },
+  {
+    "id": "jonah-reluctant-prophet",
+    "name": "Иона: Нерешительный Пророк",
+    "description": "4-дневное путешествие по Ионе — пророку, который бежал, буре, которая поймала его, городу, который покаялся, и Богу, чья милость была больше, чем предвзятость Ионы.",
+    "totalDays": 4,
+    "category": "Character Study",
+    "gradientColors": [
+      "#2E5A6B",
+      "#15303A"
+    ],
+    "iconName": "water.waves",
+    "imageKey": "jesus_calms_storm",
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "Бегство от Бога",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Бог говорит 'иди в Ниневию', а Иона садится на корабль в Таршиш — на противоположный конец известного мира. Какое задание от Бога вы покидаете, и откуда на самом деле приходит буря, которая должна вас предупредить?"
+      },
+      {
+        "day": 2,
+        "title": "Молитва из Глубины",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Иона молится изнутри рыбы — самой низкой точки, которую можно представить — и называет это 'храмом.' Как это переосмысление меняет ваше представление о ваших собственных низких местах? Может ли молитва превратить любую глубину в святилище?"
+      },
+      {
+        "day": 3,
+        "title": "Город, который Покаялся",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ниневия была самым жестоким врагом Израиля, и все же они покаялись на самой короткой проповеди в Библии — всего восемь слов. Что это учит вас о таинственной силе Слова Божьего, даже когда посланник нерешителен?"
+      },
+      {
+        "day": 4,
+        "title": "Сердце Бога",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Книга заканчивается вопросом, а не ответом — Бог спрашивает Иону, должен ли Он жалеть сто двадцать тысяч людей. Чья спасение тайно разочарует вас, и что последний вопрос Бога призывает вас отпустить?"
+      }
+    ]
+  },
+  {
+    "id": "fruit-of-the-spirit",
+    "name": "Плод Духа",
+    "description": "9-дневное изучение характера, который Святой Дух растит в нас — один плод в день, каждый основан на Галатам 5 и paired с отрывком, который оживляет его.",
+    "totalDays": 9,
+    "category": "Discipleship",
+    "gradientColors": [
+      "#4A7A5C",
+      "#2A4A38"
+    ],
+    "iconName": "leaf.circle.fill",
+    "imageKey": "annunciation",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional",
+      "parenthood",
+      "newlyMarried"
+    ],
+    "applicableBurdens": [
+      "relationships",
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "Любовь",
+        "readings": [
+          {
+            "bookID": "GAL",
+            "chapter": 5,
+            "verseStart": 16,
+            "verseEnd": 26
+          },
+          {
+            "bookID": "1CO",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Павел говорит, что плод Духа — это любовь — единственная — как будто остальные восемь проистекают из нее. Какая строка из 1 Коринфянам 13 наиболее явно показывает, где ваша любовь все еще растет, и где Дух приглашает вас сотрудничать?"
+      },
+      {
+        "day": 2,
+        "title": "Радость",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 4,
+            "verseEnd": 13
+          },
+          {
+            "bookID": "NEH",
+            "chapter": 8,
+            "verseStart": 1,
+            "verseEnd": 12
+          }
+        ],
+        "reflection": "Библейская радость — это не отсутствие печали, а глубокая радость, укорененная в Боге. Где вы путаете счастье с радостью, и что якорит радость, когда обстоятельства не будут сотрудничать?"
+      },
+      {
+        "day": 3,
+        "title": "Мир",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": 25,
+            "verseEnd": 31
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 26,
+            "verseStart": 1,
+            "verseEnd": 9
+          }
+        ],
+        "reflection": "Иисус дает мир 'не так, как мир дает' — не отсутствие конфликта, а присутствие Его. Какую заботу вы несете сегодня, которую Иисус предлагает обменять на Его мир?"
+      },
+      {
+        "day": 4,
+        "title": "Терпение",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": 7,
+            "verseEnd": 11
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 11
+          }
+        ],
+        "reflection": "Греческое слово здесь, 'макротимия', буквально означает 'долгожданный' — медленный к кипению. Где в вашей жизни у вас короткий запал, и как бы это выглядело, если бы вы были долгожданными с этим конкретным человеком или ситуацией?"
+      },
+      {
+        "day": 5,
+        "title": "Доброта",
+        "readings": [
+          {
+            "bookID": "COL",
+            "chapter": 3,
+            "verseStart": 12,
+            "verseEnd": 17
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "Доброта — это не просто быть хорошим — это выходить из своего пути для кого-то, кто не может вас отблагодарить. Кто был поставлен Богом на вашем пути на этой неделе, чтобы вам стоило что-то, чтобы быть добрым к нему?"
+      },
+      {
+        "day": 6,
+        "title": "Добродетель",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": 9,
+            "verseEnd": 21
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Добродетель — это целостность, которая сохраняется даже когда никто не смотрит. Где в вашей личной жизни Дух тихо приглашает вас согласовать вашу тайну с вашей репутацией?"
+      },
+      {
+        "day": 7,
+        "title": "Верность",
+        "readings": [
+          {
+            "bookID": "LAM",
+            "chapter": 3,
+            "verseStart": 19,
+            "verseEnd": 33
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 16,
+            "verseStart": 10,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "Верность Бога нова каждое утро; наша должна быть стабильной в мелочах. Где Господь просит вас быть верным в 'маленькой' вещи, которую никто не аплодирует?"
+      },
+      {
+        "day": 8,
+        "title": "Нежность",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 1,
+            "verseEnd": 9
+          },
+          {
+            "bookID": "PRO",
+            "chapter": 15,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "Нежность — это сила под контролем — мягкий ответ кого-то, кто мог бы зареветь. Чью рану вы подталкиваете своими словами, которая действительно нуждается в нежном прикосновении?"
+      },
+      {
+        "day": 9,
+        "title": "Самоконтроль",
+        "readings": [
+          {
+            "bookID": "2PE",
+            "chapter": 1,
+            "verseStart": 3,
+            "verseEnd": 11
+          },
+          {
+            "bookID": "PRO",
+            "chapter": 25,
+            "verseStart": 21,
+            "verseEnd": 28
+          }
+        ],
+        "reflection": "Притчи изображают человека без самоконтроля как город с разрушенными стенами — открытым для всего. Какую одну 'стену' Дух хочет восстановить в вашей жизни на этой неделе, и кто мог бы помочь вам заботиться о ней?"
+      }
+    ]
+  },
+  {
+    "id": "philippians-joy",
+    "name": "Филиппийцам: Радость в Каждом Сезоне",
+    "description": "4-дневная прогулка по самой радостной письму Павла — написанному из тюремной камеры — одна глава в день, каждая раскрывающая другую грань радости, которую обстоятельства не могут достичь.",
+    "totalDays": 4,
+    "category": "Epistles",
+    "gradientColors": [
+      "#7A6A2E",
+      "#3C3314"
+    ],
+    "iconName": "sun.max.fill",
+    "imageKey": "magi_journey",
+    "applicableSeasons": [
+      "hardSeason",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "Радость в страданиях",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Павел пишет это письмо в цепях и все равно называет его своей 'радостью.' Он переосмысляет свою тюрьму как платформу для Евангелия. Какую нежелательную ситуацию в вашей жизни Бог приглашает вас переосмыслить, а не избегать?"
+      },
+      {
+        "day": 2,
+        "title": "Радость в смирении",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Гимн в стихах 6–11 описывает нисходящее движение Иисуса — равного Богу, опустошенного, человеческого, послушного, распятого — прежде чем Отец поднимает Его. Где вы стремитесь к статусу в том месте, где Иисус демонстрирует смирение, и как будет выглядеть 'один ум' на самом деле?"
+      },
+      {
+        "day": 3,
+        "title": "Радость в познании Христа",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Павел называет свое впечатляющее резюме 'мусором' по сравнению с познанием Христа. Какая часть вашего собственного резюме — квалификации, роли, достижения — тихо конкурирует с Христом за центр вашей идентичности?"
+      },
+      {
+        "day": 4,
+        "title": "Радость в каждой ситуации",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Павел говорит, что он научился — в прошедшем времени, с трудом — секрету быть довольным в изобилии или в нужде. Где в вашей жизни Господь учит вас этому секрету прямо сейчас, и какие практики (молитва, благодарность, правильное мышление) вы отказываетесь использовать?"
+      }
+    ]
+  },
+  {
+    "id": "life-of-moses",
+    "name": "Жизнь Моисея",
+    "description": "10-дневное путешествие по жизни Моисея — от корзины до горящего куста, от Красного моря до Синая — встреча с Богом, который зовет, освобождает, говорит и остается.",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6C4E2A",
+      "#382712"
+    ],
+    "iconName": "flame.circle.fill",
+    "imageKey": "manna_wilderness",
+    "applicableSeasons": [
+      "workingProfessional",
+      "startingOver",
+      "hardSeason",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Рожденный в корзине",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Еврейские повивальные бабки игнорируют указ Фараона, мать кладет своего сына в корзину на Ниле, и Бог уже пишет историю освобождения. Где Бог тихо готовил вас, задолго до того, как вы узнали, что спасение необходимо?"
+      },
+      {
+        "day": 2,
+        "title": "Горящий куст",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Моисей отворачивается, чтобы посмотреть на куст, который горит, но не сгорает, и Бог зовет его по имени. Какую обычную вещь Бог может использовать, чтобы привлечь ваше внимание, и готовы ли вы отвлечься, чтобы посмотреть?"
+      },
+      {
+        "day": 3,
+        "title": "Извинения и знаки",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Моисей спорит с Богом: 'Кто я? Что если они не поверят мне? Я не красноречив.' Бог отвечает на каждое возражение. Какое из извинений Моисея больше всего похоже на то, которое вы постоянно даете Богу, и каков терпеливый ответ Бога для вас?"
+      },
+      {
+        "day": 4,
+        "title": "Отпусти мой народ",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Скрижали бедствий систематически свергли каждого египетского бога — Нил, солнце, скот — показывая, кто на самом деле царствует. Какого 'бога' вашей культуры вам нужно, чтобы Бог обнажил как бессильного в вашей жизни?"
+      },
+      {
+        "day": 5,
+        "title": "Пасха",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Израиль спасен не по своей заслуге, а по крови агнца на их дверях — тень великого Агнца, который должен прийти. Как восприятие Пасхи как портрета Христа углубляет ваше понимание того, что Его кровь на самом деле достигла?"
+      },
+      {
+        "day": 6,
+        "title": "Через море",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "'Стойте и смотрите на спасение Господа,' говорит Моисей запертому народу — а затем Бог говорит 'идите вперед.' Где вы искушаетесь либо паниковать, либо застрять, когда Бог требует как спокойствия сердца, так и шагов веры?"
+      },
+      {
+        "day": 7,
+        "title": "Манна и вода",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 7
+          }
+        ],
+        "reflection": "Бог дает хлеб, который нельзя запасать, и воду из скалы. Какую благодать Он предлагает вам ежедневно, которую вы продолжаете пытаться накопить из-за тревоги?"
+      },
+      {
+        "day": 8,
+        "title": "Синай и десять слов",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Бог дает закон в контексте спасения — 'Я Господь, Бог ваш, который вывел вас' — не как способ заслужить Его любовь, а как форму жизни с Ним. Какую заповедь вы чаще всего читаете как бремя, а не как границу свободы?"
+      },
+      {
+        "day": 9,
+        "title": "Покажи мне Славу Твою",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 33,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Моисей говорит: 'Если Твое присутствие не пойдет с нами, не отправляй нас отсюда.' Что вы хотите от Бога больше — Его дары или Его? Как бы сегодня выглядело иначе, если бы вы хотели Его больше всего?"
+      },
+      {
+        "day": 10,
+        "title": "Верный слуга",
+        "readings": [
+          {
+            "bookID": "DEU",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Моисей умирает, не войдя в Обетованную землю, но сам Бог хоронит его. Какие незавершенные дела в вашей жизни Бог просит вас доверить Ему, зная, что история больше, чем вы?"
+      }
+    ]
+  },
+  {
+    "id": "psalm-23-deep-dive",
+    "name": "Псалом 23: Песня пастыря",
+    "description": "6-дневная медитация на самый любимый псалом Писания — по одному стиху за раз — в паре с отрывком из Нового Завета, который открывает Христа как Пастыря, на которого всегда указывал псалом.",
+    "totalDays": 6,
+    "category": "Worship",
+    "gradientColors": [
+      "#4A6B3F",
+      "#253A22"
+    ],
+    "iconName": "sparkle",
+    "imageKey": "suffer_little_children",
+    "applicableSeasons": [
+      "hardSeason",
+      "growing",
+      "retired",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Господь — мой пастырь",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 1,
+            "verseEnd": 1
+          },
+          {
+            "bookID": "JHN",
+            "chapter": 10,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "Давид был пастырем — он знал тяжесть этой работы. Иисус называет Себя 'Добрым пастырем', который отдает свою жизнь. Какого ложного пастыря (работа, успех, отношения) вы позволяли определять вашу ценность, и что меняется, когда Сам Господь держит жезл?"
+      },
+      {
+        "day": 2,
+        "title": "Зеленые пастбища, тихие воды",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 2,
+            "verseEnd": 2
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 11,
+            "verseStart": 25,
+            "verseEnd": 30
+          }
+        ],
+        "reflection": "Овцы не лягут, когда они тревожны, голодны или в конфликте. Пастырь 'заставляет' их. Где в вашей жизни Иисус нежно заставляет вас отдыхать, и с чем вы боретесь, чтобы остаться на ногах?"
+      },
+      {
+        "day": 3,
+        "title": "Пути праведности",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 3,
+            "verseEnd": 3
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Пастырь 'восстанавливает мою душу' прежде чем ведет ее по праведным путям — утешение предшествует исправлению. Где Бог восстанавливал вас, что вы приняли за молчание Бога, и какой путь Он может быть готов пройти с вами сейчас?"
+      },
+      {
+        "day": 4,
+        "title": "Через долину",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 4,
+            "verseEnd": 4
+          },
+          {
+            "bookID": "2CO",
+            "chapter": 4,
+            "verseStart": 7,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "Давид не говорит 'вокруг', а 'через' долину, и здесь субъект меняется с 'Он' на 'Ты' — чем ближе опасность, тем более личным становится Пастырь. В какой долине вы находитесь, и как близость Бога усилилась в ней?"
+      },
+      {
+        "day": 5,
+        "title": "Стол в присутствии врагов",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 5,
+            "verseEnd": 5
+          },
+          {
+            "bookID": "REV",
+            "chapter": 19,
+            "verseStart": 1,
+            "verseEnd": 10
+          }
+        ],
+        "reflection": "Бог угощает тебя перед самими врагами, которых ты желаешь, чтобы они ушли. Что значит, что Он не всегда устраняет твои проблемы, но иногда приглашает тебя сесть и поесть, пока проблемы наблюдают?"
+      },
+      {
+        "day": 6,
+        "title": "Доброта, Милосердие и Дом",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 6,
+            "verseEnd": 6
+          },
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": 1,
+            "verseEnd": 6
+          }
+        ],
+        "reflection": "Еврейское слово для 'следуй за мной' можно прочитать как 'преследуй' — доброта и милосердие не идут за тобой, они преследуют тебя. Как это переосмысление меняет то, как ты вспоминаешь свое прошлое и смотришь в будущее с Богом?"
+      }
+    ]
+  },
+  {
+    "id": "acts-early-church",
+    "name": "Деяния: Ранняя Церковь",
+    "description": "14-дневное путешествие по книге Деяний — две главы в день — от Пятидесятницы до Рима, наблюдая, как Дух рождает движение, которое до сих пор отзывается в каждом верующем сегодня.",
+    "totalDays": 14,
+    "category": "Foundations",
+    "gradientColors": [
+      "#7A4A1C",
+      "#3E2510"
+    ],
+    "iconName": "wind",
+    "imageKey": "loaves_fishes",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional",
+      "student"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Пятидесятница",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Церковь рождается, когда обычные люди наполняются Духом и начинают провозглашать Иисуса на языках, которые они никогда не изучали. Где в твоей жизни ты ждал большего обучения вместо того, чтобы доверять Духу, чтобы Он дал тебе силу говорить?"
+      },
+      {
+        "day": 2,
+        "title": "Смелость перед Властью",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Петру и Иоанну говорят прекратить проповедовать — и молиться о большей смелости, а не о меньшей. Где социальное давление заставило тебя замолчать о Иисусе, и какая молитва могла бы изменить твою позицию с уступчивости на смелость?"
+      },
+      {
+        "day": 3,
+        "title": "Растущая, Испытующая Церковь",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ложь Анании и Сапфиры угрожает чистоте молодой общины; позже апостолы делегируют, чтобы Слово продолжало идти. Какой организационный или личный компромисс в твоей духовной жизни тихо останавливает миссию?"
+      },
+      {
+        "day": 4,
+        "title": "Стефан и Рассеяние",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Смерть Стефана выглядит как конец движения — но преследование, которое следует за этим, рассекает Евангелие по известному миру. Какой конец в твоей жизни Бог может использовать как начало, которое ты еще не видишь?"
+      },
+      {
+        "day": 5,
+        "title": "Павел Обращенный, Корнилий Включенный",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Самый яростный враг церкви становится ее величайшим миссионером, а римский сотник становится братом. Чье обращение удивило бы тебя больше всего, и готов ли ты молиться об этом с настоящим ожиданием?"
+      },
+      {
+        "day": 6,
+        "title": "Антиохия и Ангел",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Верующих впервые называют 'христианами' в Антиохии — церковь аутсайдеров становится центром. Как Бог использует людей на краях, чтобы развивать Свою церковь так, как религиозный центр не может видеть?"
+      },
+      {
+        "day": 7,
+        "title": "Первое Миссионерское Путешествие",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Дух говорит: 'Отделите Павла и Варнаву для дела, к которому Я их призвал.' Чьим отправлением ты являешься частью — либо будучи отправленным, либо молитвенно поддерживая — и насколько серьезно ты относишься к этому управлению?"
+      },
+      {
+        "day": 8,
+        "title": "Иерусалимский Совет и Филиппийская Тюрьма",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Церковь решает, что благодать действительно для язычников, и Павел поет в камере в полночь. Где ты все еще добавляешь невысказанные требования к благодати Бога, и какая песня может ждать в твоем самом трудном месте?"
+      },
+      {
+        "day": 9,
+        "title": "Афины и Коринф",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Павел взаимодействует с языческими философами на Ареопаге, цитируя их собственных поэтов. Как ты можешь научиться говорить Евангелие на языке людей вокруг тебя, не смягчая истину?"
+      },
+      {
+        "day": 10,
+        "title": "Ефес и Нежное Прощание",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Павел плачет с ефесскими старейшинами, напоминая им, что 'блаженнее давать, нежели получать.' Кого Бог дал тебе, чтобы пасти, и как тебе нужно любить их более целенаправленно на этой неделе?"
+      },
+      {
+        "day": 11,
+        "title": "Павел Арестован в Иерусалиме",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Павел продолжает двигаться к страданиям, потому что он 'связан Духом.' Куда Бог призывает тебя двигаться к трудностям, потому что это послушание, а не избегать их, потому что это трудно?"
+      },
+      {
+        "day": 12,
+        "title": "Смелость перед Властями",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Господь стоит рядом с Павлом ночью и говорит: 'Будь смелым.' Когда тебе нужно было невидимое слово, чтобы продолжать, и как Бог может шептать его тебе сегодня вечером?"
+      },
+      {
+        "day": 13,
+        "title": "Почти Убежденный",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Агриппа говорит, что Павел 'почти' убедил его стать христианином. Где в твоей жизни ты 'почти' предан, и что потребуется, чтобы сократить разрыв между убеждением и преданием?"
+      },
+      {
+        "day": 14,
+        "title": "Кораблекрушение к Риму",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Деяния заканчиваются резко — Павел проповедует царство из арендуемого дома, прикованный к солдату, и история явно не закончена. Ты часть этой незавершенной истории. Какую следующую строку Бог пишет через тебя?"
+      }
+    ]
+  },
+  {
+    "id": "first-john-assurance",
+    "name": "1 Иоанн: Чтобы Вы Знали",
+    "description": "5-дневная прогулка по первому посланию Иоанна — написанному для того, чтобы верующие 'знали, что у вас есть вечная жизнь.' Каждая глава исследует различный тест подлинной веры.",
+    "totalDays": 5,
+    "category": "Epistles",
+    "gradientColors": [
+      "#3D5A8B",
+      "#1C2D5C"
+    ],
+    "iconName": "checkmark.seal.fill",
+    "imageKey": "bethany_mary_martha",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "anxiety",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Хождение в Свете",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Иоанн настаивает, что общение с Богом связано с хождением в свете — вынося то, что скрыто, на свет. Какова одна область, где ты притворялся, что честное исповедание на самом деле приведет к общению, а не к позору?"
+      },
+      {
+        "day": 2,
+        "title": "Пребывание, а Не Просто Вера",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Тест Иоанна на любовь к Богу прост: 'Кто соблюдает Его слово, в том действительно совершенствуется любовь к Богу.' Как бы описали ваши ближайшие отношения разницу между вашими убеждениями и вашим поведением?"
+      },
+      {
+        "day": 3,
+        "title": "Дети Божьи",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "'Посмотрите, какую любовь дал нам Отец, чтобы нам называться детьми Божьими.' Как бы выглядел этот день, если бы вы вошли в него, веря, что ваша истинная идентичность — 'возлюбленный ребенок'?"
+      },
+      {
+        "day": 4,
+        "title": "Бог есть Любовь",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Иоанн говорит: 'мы любим, потому что Он сначала возлюбил нас' — наша любовь всегда является ответом. Чью любовь вы искали, как будто могли бы заслужить её, и как любовь Бога освобождает вас любить этого человека из покоя, а не из нужды?"
+      },
+      {
+        "day": 5,
+        "title": "Чтобы вы знали",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Иоанн говорит, что он написал это письмо 'чтобы вы знали, что у вас есть вечная жизнь.' Какой из испытаний Иоанна — вера в Иисуса, любовь к другим, послушание Его слову — Дух больше всего хочет успокоить вас сегодня?"
+      }
+    ]
+  },
+  {
+    "id": "james-faith-that-works",
+    "name": "Иаков: Вера, Которая Действует",
+    "description": "5-дневное изучение Иакова — самого практичного послания в Новом Завете — противостоящее разрыву между тем, что мы говорим, что верим, и тем, как мы на самом деле живем.",
+    "totalDays": 5,
+    "category": "Epistles",
+    "gradientColors": [
+      "#8B5A2E",
+      "#44290F"
+    ],
+    "iconName": "hammer.fill",
+    "imageKey": "davids_three_mighty_men",
+    "applicableSeasons": [
+      "workingProfessional",
+      "growing",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "relationships",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Считайте это Всей Радостью",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Иаков не говорит, что испытания — это радость — он говорит, считайте их радостью из-за того, что производит Бог. Какое текущее испытание нужно переосмыслить на этой неделе, если вы действительно верили, что Бог созревает что-то в вас через это?"
+      },
+      {
+        "day": 2,
+        "title": "Вера Без Дел Мертва",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Иаков не ставит веру против дел — он говорит, что настоящая вера всегда действует. Какой конкретный акт послушания сделал бы вашу частную веру видимой на этой неделе?"
+      },
+      {
+        "day": 3,
+        "title": "Укрощение Языка",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Иаков сравнивает язык с маленьким рулем, который управляет большим кораблем, и маленькой искрой, которая сжигает лес. Куда ваши слова направляют вашу жизнь или жизни других людей в направлении, в котором вам было бы стыдно оказаться?"
+      },
+      {
+        "day": 4,
+        "title": "Дружба с Миром",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Иаков говорит, что споры возникают из желаний, которые воюют внутри нас — и что мы 'не имеем, потому что не просим.' Какое желание движет конфликтом в вашей жизни прямо сейчас, и принесли ли вы его честно к Богу в молитве?"
+      },
+      {
+        "day": 5,
+        "title": "Терпеливый и Молящийся",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Иаков заканчивает, призывая церковь молиться друг за друга, исповедуя грех, чтобы пришло исцеление. Кто в вашей жизни достаточно безопасен, чтобы услышать вашу исповедь, и что вам стоит, чтобы на самом деле попросить их помолиться с вами?"
+      }
+    ]
+  },
+  {
+    "id": "hebrews-jesus-is-better",
+    "name": "Послание к Евреям: Иисус Лучше",
+    "description": "13-дневное восхождение через Послание к Евреям — одна глава в день — показывающее, как Иисус исполняет и превосходит каждую картину Ветхого Завета, указывающую на Него.",
+    "totalDays": 13,
+    "category": "Theology",
+    "gradientColors": [
+      "#5A2F2F",
+      "#2C1414"
+    ],
+    "iconName": "crown.fill",
+    "imageKey": "sacrifice_isaac",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Сын, Превосходящий Ангелов",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Послание к Евреям открывается заявлением, что Бог говорил наиболее полно в Сыне Своем — 'сиянии славы Божьей.' Где вы слушали Бога в тысячах вторичных источников, когда Он уже говорил наиболее ясно в Иисусе?"
+      },
+      {
+        "day": 2,
+        "title": "Такое Великое Спасение",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Иисус стал ниже ангелов — человеком, искушаемым, страдающим — чтобы 'вкусить смерть за каждого.' Как то, что Иисус разделяет вашу плоть, меняет способ, которым вы приносите свою слабость к Нему?"
+      },
+      {
+        "day": 3,
+        "title": "Больше, Чем Моисей",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Моисей был верен как слуга в доме Божьем; Иисус верен как Сын над ним. Где вы служите в доме Божьем таким образом, который тайно уходит от доверия Сыну Божьему?"
+      },
+      {
+        "day": 4,
+        "title": "Войдите в Его Покой",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Автор говорит, что для народа Божьего остается субботний покой — но мы должны стремиться войти в него. Какое беспокойное стремление в вашей жизни на самом деле является нежеланием остановиться и довериться, что работа принадлежит Христу, а не вам?"
+      },
+      {
+        "day": 5,
+        "title": "Великий Первосвященник",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Иисус — первосвященник, который 'в дни своей плоти приносил молитвы и прошения с громкими криками и слезами.' Как представление Иисуса как слезливого, сочувствующего первосвященника меняет способ, которым вы приносите свои собственные слезы к Нему?"
+      },
+      {
+        "day": 6,
+        "title": "Продолжайте Расти до Совершенства",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Автор призывает читателей не оставаться духовными младенцами, а продолжать расти. Какую 'элементарную' истину вы приняли вместо того, чтобы расти в твердую пищу?"
+      },
+      {
+        "day": 7,
+        "title": "Первосвященник, Как Мелхиседек",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Священство Иисуса постоянно — 'Он всегда живет, чтобы ходатайствовать.' Как знание о том, что Иисус молится за вас прямо сейчас, меняет то, что вы несете в завтрашний день?"
+      },
+      {
+        "day": 8,
+        "title": "Лучший Завет",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "По новому завету Бог пишет Свои законы 'на их сердцах.' Где вы все еще относитесь к Богу через внешние правила, когда Он хочет преобразить вас изнутри?"
+      },
+      {
+        "day": 9,
+        "title": "Один Раз и Навсегда",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Старые священники приносили ежедневные жертвы, которые никогда не могли очистить совесть; единственная жертва Христа делает это. Какой грех вы продолжаете исповедовать, как будто Его завершенная работа нуждается в вашем повторении, чтобы остаться?"
+      },
+      {
+        "day": 10,
+        "title": "Приходите с Уверенностью",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Из-за крови Иисуса мы можем подходить 'с уверенностью' — завеса разорвана. Когда вы приходите к Богу, кажется ли, что вы приближаетесь к престолу благодати или в зал ожидания неохотного чиновника? Что бы изменилось?"
+      },
+      {
+        "day": 11,
+        "title": "Зал веры",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Каждый человек, упомянутый здесь, умер, не получив обещанного, 'но они увидели это и приветствовали издалека.' Как ваша история ожидания может быть учтена как глава этого самого зала веры?"
+      },
+      {
+        "day": 12,
+        "title": "Великая облако свидетелей",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Автор призывает нас устремить взор на Иисуса, 'основателя и совершителя нашей веры,' и бежать с терпением. Какой груз — не обязательно греховный, но тяжелый — замедляет ваш бег, и готовы ли вы его сбросить?"
+      },
+      {
+        "day": 13,
+        "title": "За пределами лагеря",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Иисус страдал 'за пределами лагеря' — за пределами религиозной респектабельности Его времени. Куда Он призывает вас выйти из вашего комфортного лагеря, чтобы быть с Ним среди тех, кого респектабельный мир отверг?"
+      }
+    ]
+  }
+]

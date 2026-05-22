@@ -17,6 +17,7 @@ struct ImmersiveListeningView: View {
     @State private var hideTask: Task<Void, Never>?
     @State private var currentBackground: SanctuaryBackground?
     @State private var showBackgroundPicker = false
+    @State private var showStillListeningAlert = false
 
     private var background: SanctuaryBackground {
         currentBackground ?? initialBackground
@@ -55,6 +56,15 @@ struct ImmersiveListeningView: View {
         }
         .ignoresSafeArea()
         .statusBarHidden()
+        .onChange(of: audioService.showStillListeningPrompt) { _, showing in
+            showStillListeningAlert = showing
+        }
+        .alert("Still listening?", isPresented: $showStillListeningAlert) {
+            Button("Keep going") { audioService.confirmStillListening() }
+            Button("Stop", role: .cancel) { audioService.dismissStillListening() }
+        } message: {
+            Text("You've listened for a while. Tap Keep going to continue, or Stop to pause playback.")
+        }
         .sheet(isPresented: $showBackgroundPicker) {
             ListeningBackgroundPickerView(
                 selectedBackground: background,
@@ -363,7 +373,8 @@ struct ImmersiveListeningView: View {
                         verses: viewModel.verses,
                         book: viewModel.selectedBook,
                         chapter: viewModel.selectedChapter,
-                        translation: viewModel.currentTranslation
+                        translation: viewModel.currentTranslation,
+                        isAutoAdvance: true
                     )
                 }
             }
@@ -427,10 +438,10 @@ private enum ListeningBackgroundFilter: CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .all: "All"
-        case .animated: "Animated"
-        case .images: "Images"
-        case .gradients: "Gradients"
+        case .all: String(localized: "All")
+        case .animated: String(localized: "Animated")
+        case .images: String(localized: "Images")
+        case .gradients: String(localized: "Gradients")
         }
     }
 

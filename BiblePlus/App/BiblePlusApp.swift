@@ -3,6 +3,14 @@ import SwiftData
 import UserNotifications
 import RevenueCat
 
+/// Bridge to the C function defined in `BPEarlyBootstrap.m`. Declaring it
+/// here serves two purposes: (1) we can invoke it explicitly from init()
+/// as belt-and-suspenders, and (2) the Swift reference pins the `.o` so
+/// the linker doesn't dead-strip the translation unit — the constructor
+/// attribute alone was getting silently dropped.
+@_silgen_name("BPEarlyLanguageLock")
+private func _bpEarlyLanguageLock()
+
 @main
 struct BiblePlusApp: App {
     let modelContainer: ModelContainer
@@ -10,6 +18,18 @@ struct BiblePlusApp: App {
     @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
 
     init() {
+        // Belt-and-suspenders: BPEarlyBootstrap.m's constructor attribute
+        // already runs this at dyld load time (before @main), but we call
+        // it again here so the symbol is guaranteed referenced — otherwise
+        // the linker dead-strips the whole translation unit and the
+        // first-launch English lock never fires.
+        _bpEarlyLanguageLock()
+
+        // Bootstrap the localization service BEFORE anything else. On first
+        // launch this mirrors the AppleLanguages write above and initializes
+        // the Swift-side state (Bundle override + @Observable service).
+        LocalizationService.bootstrap()
+
         let container: ModelContainer
         var hadError = false
         do {
@@ -66,12 +86,12 @@ struct BiblePlusApp: App {
         let titleColor = UIColor { traits in
             traits.userInterfaceStyle == .dark
                 ? UIColor(red: 0.93, green: 0.93, blue: 0.93, alpha: 1)   // #ECECEC
-                : UIColor(red: 0.18, green: 0.18, blue: 0.18, alpha: 1)   // #2D2D2D
+                : UIColor(red: 0.231, green: 0.169, blue: 0.114, alpha: 1)  // #3B2B1D sepia brown
         }
         let bgColor = UIColor { traits in
             traits.userInterfaceStyle == .dark
                 ? UIColor(red: 0.17, green: 0.17, blue: 0.15, alpha: 1)   // #2B2A27
-                : UIColor(red: 0.98, green: 0.97, blue: 0.96, alpha: 1)   // #FAF8F4
+                : UIColor(red: 0.937, green: 0.894, blue: 0.839, alpha: 1) // #EFE4D6 Haven tan paper
         }
         let navAppearance = UINavigationBarAppearance()
         navAppearance.configureWithOpaqueBackground()
@@ -83,6 +103,13 @@ struct BiblePlusApp: App {
         UINavigationBar.appearance().scrollEdgeAppearance = navAppearance
         UINavigationBar.appearance().compactAppearance = navAppearance
         UINavigationBar.appearance().tintColor = UIColor(red: 0.79, green: 0.66, blue: 0.43, alpha: 1) // #C9A96E accent
+
+        // Kick off a background refresh of the multilingual translation
+        // catalog (bible.helloao.org). Fire-and-forget — the reader falls
+        // back to bundled KJV if the manifest hasn't landed yet.
+        Task { @MainActor in
+            TranslationCatalog.shared.refreshIfNeeded()
+        }
 
         // RevenueCat — full integration (handles purchases, entitlements, renewals)
         Purchases.configure(withAPIKey: "appl_FjknWibdqNxzGBryURSpcNKbxcv")
@@ -188,6 +215,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         UNUserNotificationCenter.current().delegate = self
         Task { @MainActor in
             NotificationService.shared.registerCategories()
+            TikTokAnalyticsService.shared.initializeSDK()
         }
         return true
     }
@@ -289,6 +317,10 @@ struct RootView: View {
     @State private var showSplash = true
     @State private var storeKitService = StoreKitService()
     @State private var reviewService = ReviewService.shared
+    // LocalizationService is a singleton; holding it in @State gives SwiftUI
+    // a stable identity for observation so the whole tree re-renders when
+    // the user switches languages from Settings.
+    @State private var localizationService: LocalizationService = .shared
 
     private var currentProfile: UserProfile? { profiles.first }
     private var hasCompletedOnboarding: Bool {
@@ -353,10 +385,20 @@ struct RootView: View {
             }
         }
         .environment(reviewService)
+        .environment(localizationService)
+        .environment(\.locale, localizationService.locale)
+        .environment(\.layoutDirection, localizationService.layoutDirection)
+        // Force the whole tree to rebuild when the active language changes —
+        // ensures every cached `Text(...)` re-resolves immediately without
+        // requiring an app relaunch.
+        .id(localizationService.currentCode ?? "system")
         .animation(.spring(response: 0.4, dampingFraction: 0.8), value: reviewService.showPrompt)
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                withAnimation(.easeInOut(duration: 0.5)) {
+            // Splash hold tuned to let the glow bloom land (~1.0s) plus a
+            // short beat so the handoff to Welcome feels intentional, not
+            // impatient. Cut from 2.0s — the extra 800ms was dead air.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                withAnimation(.easeInOut(duration: 0.45)) {
                     showSplash = false
                 }
             }

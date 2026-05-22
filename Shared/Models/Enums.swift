@@ -14,17 +14,17 @@ enum FaithLevel: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .justCurious: "Just Curious"
-        case .growing: "Growing"
-        case .deepInTheWord: "Deep in the Word"
+        case .justCurious: String(localized: "Just Curious")
+        case .growing: String(localized: "Growing")
+        case .deepInTheWord: String(localized: "Deep in the Word")
         }
     }
 
     var description: String {
         switch self {
-        case .justCurious: "I'm exploring faith"
-        case .growing: "I'm building my faith"
-        case .deepInTheWord: "I study Scripture seriously"
+        case .justCurious: String(localized: "I'm exploring faith")
+        case .growing: String(localized: "I'm building my faith")
+        case .deepInTheWord: String(localized: "I study Scripture seriously")
         }
     }
 
@@ -61,14 +61,14 @@ enum LifeSeason: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .student: "Student"
-        case .workingProfessional: "Working Professional"
-        case .parent: "Parent"
-        case .single: "Single"
-        case .married: "Married"
-        case .retired: "Retired / Elder"
-        case .hardSeason: "In a Hard Season"
-        case .startingOver: "Starting Over"
+        case .student: String(localized: "Student")
+        case .workingProfessional: String(localized: "Working Professional")
+        case .parent: String(localized: "Parent")
+        case .single: String(localized: "Single")
+        case .married: String(localized: "Married")
+        case .retired: String(localized: "Retired / Elder")
+        case .hardSeason: String(localized: "In a Hard Season")
+        case .startingOver: String(localized: "Starting Over")
         }
     }
 
@@ -105,17 +105,17 @@ enum Burden: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .anxiety: "Anxiety & Worry"
-        case .grief: "Grief & Loss"
-        case .doubt: "Doubt & Uncertainty"
-        case .loneliness: "Loneliness"
-        case .anger: "Anger & Frustration"
-        case .temptation: "Temptation"
-        case .health: "Health Concerns"
-        case .financial: "Financial Stress"
-        case .relationship: "Relationship Pain"
-        case .purpose: "Purpose & Direction"
-        case .none: "Nothing Specific"
+        case .anxiety: String(localized: "Anxiety & Worry")
+        case .grief: String(localized: "Grief & Loss")
+        case .doubt: String(localized: "Doubt & Uncertainty")
+        case .loneliness: String(localized: "Loneliness")
+        case .anger: String(localized: "Anger & Frustration")
+        case .temptation: String(localized: "Temptation")
+        case .health: String(localized: "Health Concerns")
+        case .financial: String(localized: "Financial Stress")
+        case .relationship: String(localized: "Relationship Pain")
+        case .purpose: String(localized: "Purpose & Direction")
+        case .none: String(localized: "Nothing Specific")
         }
     }
 
@@ -179,14 +179,14 @@ enum BibleTranslation: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .kjv: "King James Version"
-        case .web: "World English Bible"
-        case .niv: "New International Version"
-        case .esv: "English Standard Version"
-        case .nlt: "New Living Translation"
-        case .nasb: "New American Standard Bible"
-        case .message: "The Message"
-        case .nkjv: "New King James Version"
+        case .kjv: String(localized: "King James Version")
+        case .web: String(localized: "World English Bible")
+        case .niv: String(localized: "New International Version")
+        case .esv: String(localized: "English Standard Version")
+        case .nlt: String(localized: "New Living Translation")
+        case .nasb: String(localized: "New American Standard Bible")
+        case .message: String(localized: "The Message")
+        case .nkjv: String(localized: "New King James Version")
         }
     }
 
@@ -206,14 +206,14 @@ enum BibleTranslation: String, Codable, CaseIterable, Identifiable {
 
     var subtitle: String {
         switch self {
-        case .kjv: "Classic and poetic language"
-        case .web: "Modern English, public domain"
-        case .niv: "Clear, accurate, and widely trusted"
-        case .esv: "Precise and faithful to the original texts"
-        case .nlt: "Simple, natural, and easy to read"
-        case .nasb: "Literal word-for-word accuracy"
-        case .message: "Conversational and contemporary paraphrase"
-        case .nkjv: "Modern update of the classic King James"
+        case .kjv: String(localized: "Classic and poetic language")
+        case .web: String(localized: "Modern English, public domain")
+        case .niv: String(localized: "Clear, accurate, and widely trusted")
+        case .esv: String(localized: "Precise and faithful to the original texts")
+        case .nlt: String(localized: "Simple, natural, and easy to read")
+        case .nasb: String(localized: "Literal word-for-word accuracy")
+        case .message: String(localized: "Conversational and contemporary paraphrase")
+        case .nkjv: String(localized: "Modern update of the classic King James")
         }
     }
 
@@ -280,10 +280,10 @@ enum PrayerTimeSlot: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .morning: "Morning"
-        case .midday: "Midday"
-        case .evening: "Evening"
-        case .bedtime: "Before Sleep"
+        case .morning: String(localized: "Morning")
+        case .midday: String(localized: "Midday")
+        case .evening: String(localized: "Evening")
+        case .bedtime: String(localized: "Before Sleep")
         }
     }
 
@@ -404,10 +404,10 @@ enum ColorMode: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .light: "Light"
-        case .dark: "Dark"
-        case .auto: "Auto"
-        case .immersive: "Immersive"
+        case .light: String(localized: "Light")
+        case .dark: String(localized: "Dark")
+        case .auto: String(localized: "Auto")
+        case .immersive: String(localized: "Immersive")
         }
     }
 }
@@ -425,11 +425,11 @@ enum ContentType: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .prayer: "Prayer"
-        case .verse: "Bible Verse"
-        case .devotional: "Devotional"
-        case .quote: "Quote"
-        case .reflection: "Reflection"
+        case .prayer: String(localized: "Prayer")
+        case .verse: String(localized: "Bible Verse")
+        case .devotional: String(localized: "Devotional")
+        case .quote: String(localized: "Quote")
+        case .reflection: String(localized: "Reflection")
         }
     }
 
@@ -459,9 +459,9 @@ enum ShareAspectRatio: String, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .story: "Story"
-        case .square: "Square"
-        case .wide: "Wide"
+        case .story: String(localized: "Story")
+        case .square: String(localized: "Square")
+        case .wide: String(localized: "Wide")
         }
     }
 
@@ -524,71 +524,71 @@ enum Soundscape: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .stillWaters: "Still Waters"
-        case .morningLight: "Morning Light"
-        case .eveningRest: "Evening Rest"
-        case .pureSilence: "Pure Silence"
-        case .forestBirds: "Forest Birds"
-        case .babblingBrook: "Babbling Brook"
-        case .gentleBreeze: "Gentle Breeze"
-        case .nightCrickets: "Night Crickets"
-        case .gentleWaves: "Gentle Waves"
-        case .gentleWaterfall: "Gentle Waterfall"
-        case .thunderstorm: "Thunderstorm"
-        case .morningDew: "Morning Dew"
-        case .whaleSong: "Whale Song"
-        case .peacefulPiano: "Peaceful Piano"
-        case .softFlute: "Soft Flute"
-        case .softGuitar: "Soft Guitar"
-        case .heavenlyHarp: "Heavenly Harp"
-        case .singingBowls: "Singing Bowls"
-        case .tibetanBells: "Tibetan Bells"
-        case .gregorianChant: "Gregorian Chant"
-        case .celestialVoices: "Celestial Voices"
-        case .worshipPads: "Worship Pads"
-        case .deepSpace: "Deep Space"
-        case .gardenPrayer: "Garden Prayer"
-        case .mountainTop: "Mountain Top"
-        case .nightWatch: "Night Watch"
-        case .oceanOfGrace: "Ocean of Grace"
-        case .heavenlyWorship: "Heavenly Worship"
-        case .rainOfBlessing: "Rain of Blessing"
-        case .fireplace: "Fireplace"
+        case .stillWaters: String(localized: "Still Waters")
+        case .morningLight: String(localized: "Morning Light")
+        case .eveningRest: String(localized: "Evening Rest")
+        case .pureSilence: String(localized: "Pure Silence")
+        case .forestBirds: String(localized: "Forest Birds")
+        case .babblingBrook: String(localized: "Babbling Brook")
+        case .gentleBreeze: String(localized: "Gentle Breeze")
+        case .nightCrickets: String(localized: "Night Crickets")
+        case .gentleWaves: String(localized: "Gentle Waves")
+        case .gentleWaterfall: String(localized: "Gentle Waterfall")
+        case .thunderstorm: String(localized: "Thunderstorm")
+        case .morningDew: String(localized: "Morning Dew")
+        case .whaleSong: String(localized: "Whale Song")
+        case .peacefulPiano: String(localized: "Peaceful Piano")
+        case .softFlute: String(localized: "Soft Flute")
+        case .softGuitar: String(localized: "Soft Guitar")
+        case .heavenlyHarp: String(localized: "Heavenly Harp")
+        case .singingBowls: String(localized: "Singing Bowls")
+        case .tibetanBells: String(localized: "Tibetan Bells")
+        case .gregorianChant: String(localized: "Gregorian Chant")
+        case .celestialVoices: String(localized: "Celestial Voices")
+        case .worshipPads: String(localized: "Worship Pads")
+        case .deepSpace: String(localized: "Deep Space")
+        case .gardenPrayer: String(localized: "Garden Prayer")
+        case .mountainTop: String(localized: "Mountain Top")
+        case .nightWatch: String(localized: "Night Watch")
+        case .oceanOfGrace: String(localized: "Ocean of Grace")
+        case .heavenlyWorship: String(localized: "Heavenly Worship")
+        case .rainOfBlessing: String(localized: "Rain of Blessing")
+        case .fireplace: String(localized: "Fireplace")
         }
     }
 
     var description: String {
         switch self {
-        case .stillWaters: "Gentle flowing water for peaceful meditation"
-        case .morningLight: "Soft piano and birds to start your day"
-        case .eveningRest: "Warm ambient tones for winding down"
-        case .pureSilence: "No sound — just you and God"
-        case .forestBirds: "Birdsong in a peaceful forest canopy"
-        case .babblingBrook: "Flowing stream through a quiet woodland"
-        case .gentleBreeze: "Soft wind whispering through the trees"
-        case .nightCrickets: "Crickets chirping under a starlit sky"
-        case .gentleWaves: "Calm ocean waves lapping at the shore"
-        case .gentleWaterfall: "Soothing cascade of falling water"
-        case .thunderstorm: "Distant thunder and steady rain"
-        case .morningDew: "Peaceful dawn with soft nature sounds"
-        case .whaleSong: "Majestic whale calls in the deep ocean"
-        case .peacefulPiano: "Soft solo piano for quiet reflection"
-        case .softFlute: "Delicate flute melodies for meditation"
-        case .softGuitar: "Gentle acoustic guitar for devotion"
-        case .heavenlyHarp: "Soothing harp melodies for worship"
-        case .singingBowls: "Resonant singing bowls for deep meditation"
-        case .tibetanBells: "Harmonic bell tones for contemplation"
-        case .gregorianChant: "Ancient monastic chanting for contemplation"
-        case .celestialVoices: "Ethereal vocal harmonies for prayer"
-        case .worshipPads: "Ambient atmosphere for prayerful moments"
-        case .deepSpace: "Cosmic ambient tones for wonder and awe"
-        case .gardenPrayer: "Nature sounds with gentle wind"
-        case .mountainTop: "Sweeping atmosphere for deep worship"
-        case .nightWatch: "Deep midnight ambience for late prayers"
-        case .oceanOfGrace: "Rolling waves and distant shore"
-        case .heavenlyWorship: "Ethereal pads and soft vocals"
-        case .rainOfBlessing: "Gentle rainfall with distant thunder"
-        case .fireplace: "Warm crackling fire for cozy devotions"
+        case .stillWaters: String(localized: "Gentle flowing water for peaceful meditation")
+        case .morningLight: String(localized: "Soft piano and birds to start your day")
+        case .eveningRest: String(localized: "Warm ambient tones for winding down")
+        case .pureSilence: String(localized: "No sound — just you and God")
+        case .forestBirds: String(localized: "Birdsong in a peaceful forest canopy")
+        case .babblingBrook: String(localized: "Flowing stream through a quiet woodland")
+        case .gentleBreeze: String(localized: "Soft wind whispering through the trees")
+        case .nightCrickets: String(localized: "Crickets chirping under a starlit sky")
+        case .gentleWaves: String(localized: "Calm ocean waves lapping at the shore")
+        case .gentleWaterfall: String(localized: "Soothing cascade of falling water")
+        case .thunderstorm: String(localized: "Distant thunder and steady rain")
+        case .morningDew: String(localized: "Peaceful dawn with soft nature sounds")
+        case .whaleSong: String(localized: "Majestic whale calls in the deep ocean")
+        case .peacefulPiano: String(localized: "Soft solo piano for quiet reflection")
+        case .softFlute: String(localized: "Delicate flute melodies for meditation")
+        case .softGuitar: String(localized: "Gentle acoustic guitar for devotion")
+        case .heavenlyHarp: String(localized: "Soothing harp melodies for worship")
+        case .singingBowls: String(localized: "Resonant singing bowls for deep meditation")
+        case .tibetanBells: String(localized: "Harmonic bell tones for contemplation")
+        case .gregorianChant: String(localized: "Ancient monastic chanting for contemplation")
+        case .celestialVoices: String(localized: "Ethereal vocal harmonies for prayer")
+        case .worshipPads: String(localized: "Ambient atmosphere for prayerful moments")
+        case .deepSpace: String(localized: "Cosmic ambient tones for wonder and awe")
+        case .gardenPrayer: String(localized: "Nature sounds with gentle wind")
+        case .mountainTop: String(localized: "Sweeping atmosphere for deep worship")
+        case .nightWatch: String(localized: "Deep midnight ambience for late prayers")
+        case .oceanOfGrace: String(localized: "Rolling waves and distant shore")
+        case .heavenlyWorship: String(localized: "Ethereal pads and soft vocals")
+        case .rainOfBlessing: String(localized: "Gentle rainfall with distant thunder")
+        case .fireplace: String(localized: "Warm crackling fire for cozy devotions")
         }
     }
 
@@ -685,11 +685,11 @@ enum SleepTimerDuration: String, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .fifteenMin: "15 Minutes"
-        case .thirtyMin: "30 Minutes"
-        case .oneHour: "1 Hour"
-        case .twoHours: "2 Hours"
-        case .untilClose: "Until I Close"
+        case .fifteenMin: String(localized: "15 Minutes")
+        case .thirtyMin: String(localized: "30 Minutes")
+        case .oneHour: String(localized: "1 Hour")
+        case .twoHours: String(localized: "2 Hours")
+        case .untilClose: String(localized: "Until I Close")
         }
     }
 
@@ -721,15 +721,15 @@ enum BackgroundCollection: String, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .essentials: "Essentials"
-        case .nature: "Nature"
-        case .oceanAndWater: "Ocean & Water"
-        case .nightSky: "Night Sky"
-        case .warmthAndGlow: "Warmth & Glow"
-        case .calmAndSerene: "Calm & Serene"
-        case .sacred: "Sacred"
-        case .heavenly: "Heavenly"
-        case .seasonal: "Seasonal"
+        case .essentials: String(localized: "Essentials")
+        case .nature: String(localized: "Nature")
+        case .oceanAndWater: String(localized: "Ocean & Water")
+        case .nightSky: String(localized: "Night Sky")
+        case .warmthAndGlow: String(localized: "Warmth & Glow")
+        case .calmAndSerene: String(localized: "Calm & Serene")
+        case .sacred: String(localized: "Sacred")
+        case .heavenly: String(localized: "Heavenly")
+        case .seasonal: String(localized: "Seasonal")
         }
     }
 
@@ -1146,14 +1146,14 @@ enum VerseHighlightColor: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .gold: "Gold"
-        case .blue: "Blue"
-        case .green: "Green"
-        case .pink: "Pink"
-        case .purple: "Purple"
-        case .orange: "Orange"
-        case .teal: "Teal"
-        case .lavender: "Lavender"
+        case .gold: String(localized: "Gold")
+        case .blue: String(localized: "Blue")
+        case .green: String(localized: "Green")
+        case .pink: String(localized: "Pink")
+        case .purple: String(localized: "Purple")
+        case .orange: String(localized: "Orange")
+        case .teal: String(localized: "Teal")
+        case .lavender: String(localized: "Lavender")
         }
     }
 
@@ -1216,10 +1216,10 @@ enum ReaderFontStyle: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .serif: "Serif"
-        case .sansSerif: "Sans Serif"
-        case .rounded: "Rounded"
-        case .mono: "Mono"
+        case .serif: String(localized: "Serif")
+        case .sansSerif: String(localized: "Sans Serif")
+        case .rounded: String(localized: "Rounded")
+        case .mono: String(localized: "Mono")
         }
     }
 
@@ -1253,9 +1253,9 @@ enum ReaderFontWeight: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .light: "Light"
-        case .regular: "Regular"
-        case .medium: "Medium"
+        case .light: String(localized: "Light")
+        case .regular: String(localized: "Regular")
+        case .medium: String(localized: "Medium")
         }
     }
 
@@ -1281,7 +1281,7 @@ enum PlaybackSpeed: Double, CaseIterable, Identifiable {
     var displayName: String {
         switch self {
         case .slow: "0.75x"
-        case .normal: "1x"
+        case .normal: String(localized: "1x")
         case .fast: "1.25x"
         case .faster: "1.5x"
         }
@@ -1377,21 +1377,21 @@ enum BibleVoice: String, CaseIterable, Identifiable, Codable {
 
     var displayName: String {
         switch self {
-        case .onyx:  "Solomon"
-        case .echo:  "Elijah"
-        case .fable: "Arthur"
-        case .nova:  "Grace"
-        case .sage:  "Naomi"
+        case .onyx:  String(localized: "Solomon")
+        case .echo:  String(localized: "Elijah")
+        case .fable: String(localized: "Arthur")
+        case .nova:  String(localized: "Grace")
+        case .sage:  String(localized: "Naomi")
         }
     }
 
     var subtitle: String {
         switch self {
-        case .onyx:  "Deep & commanding"
-        case .echo:  "Warm & smooth"
-        case .fable: "Rich & expressive"
-        case .nova:  "Warm & heartfelt"
-        case .sage:  "Tender & wise"
+        case .onyx:  String(localized: "Deep & commanding")
+        case .echo:  String(localized: "Warm & smooth")
+        case .fable: String(localized: "Rich & expressive")
+        case .nova:  String(localized: "Warm & heartfelt")
+        case .sage:  String(localized: "Tender & wise")
         }
     }
 
@@ -1490,15 +1490,15 @@ enum ActivityEventType: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .chapterRead: "Read a Chapter"
-        case .planDayCompleted: "Completed a Plan Day"
-        case .aiChatSent: "Asked AI Companion"
-        case .verseSaved: "Saved a Verse"
-        case .verseHighlighted: "Highlighted a Verse"
-        case .audioChapterCompleted: "Listened to a Chapter"
-        case .prayerWritten: "Wrote a Prayer"
-        case .prayerAnswered: "Prayer Answered"
-        case .appOpened: "Opened the App"
+        case .chapterRead: String(localized: "Read a Chapter")
+        case .planDayCompleted: String(localized: "Completed a Plan Day")
+        case .aiChatSent: String(localized: "Asked AI Companion")
+        case .verseSaved: String(localized: "Saved a Verse")
+        case .verseHighlighted: String(localized: "Highlighted a Verse")
+        case .audioChapterCompleted: String(localized: "Listened to a Chapter")
+        case .prayerWritten: String(localized: "Wrote a Prayer")
+        case .prayerAnswered: String(localized: "Prayer Answered")
+        case .appOpened: String(localized: "Opened the App")
         }
     }
 
@@ -1526,14 +1526,14 @@ enum BiblicalCharacter: String, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .paul: "Paul"
-        case .david: "David"
-        case .moses: "Moses"
-        case .mary: "Mary"
-        case .solomon: "Solomon"
-        case .ruth: "Ruth"
-        case .peter: "Peter"
-        case .esther: "Esther"
+        case .paul: String(localized: "Paul")
+        case .david: String(localized: "David")
+        case .moses: String(localized: "Moses")
+        case .mary: String(localized: "Mary")
+        case .solomon: String(localized: "Solomon")
+        case .ruth: String(localized: "Ruth")
+        case .peter: String(localized: "Peter")
+        case .esther: String(localized: "Esther")
         }
     }
 
@@ -1552,14 +1552,14 @@ enum BiblicalCharacter: String, CaseIterable, Identifiable {
 
     var subtitle: String {
         switch self {
-        case .paul: "Apostle & Theologian"
-        case .david: "King & Psalmist"
-        case .moses: "Deliverer & Lawgiver"
-        case .mary: "Mother of Jesus"
-        case .solomon: "Wisest King"
-        case .ruth: "Woman of Loyalty"
-        case .peter: "Rock of the Church"
-        case .esther: "Queen of Courage"
+        case .paul: String(localized: "Apostle & Theologian")
+        case .david: String(localized: "King & Psalmist")
+        case .moses: String(localized: "Deliverer & Lawgiver")
+        case .mary: String(localized: "Mother of Jesus")
+        case .solomon: String(localized: "Wisest King")
+        case .ruth: String(localized: "Woman of Loyalty")
+        case .peter: String(localized: "Rock of the Church")
+        case .esther: String(localized: "Queen of Courage")
         }
     }
 }
@@ -1573,11 +1573,11 @@ enum ConversationMode: String, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .comfort: "Comfort me"
-        case .challenge: "Challenge me"
-        case .teach: "Teach me"
-        case .pray: "Pray with me"
-        case .story: "Tell me a story"
+        case .comfort: String(localized: "Comfort me")
+        case .challenge: String(localized: "Challenge me")
+        case .teach: String(localized: "Teach me")
+        case .pray: String(localized: "Pray with me")
+        case .story: String(localized: "Tell me a story")
         }
     }
 
@@ -1601,14 +1601,14 @@ enum ChatEmotion: String, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .anxious: "Anxious"
-        case .sad: "Sad"
-        case .grateful: "Grateful"
-        case .lost: "Lost"
-        case .angry: "Angry"
-        case .hopeful: "Hopeful"
-        case .lonely: "Lonely"
-        case .peaceful: "Peaceful"
+        case .anxious: String(localized: "Anxious")
+        case .sad: String(localized: "Sad")
+        case .grateful: String(localized: "Grateful")
+        case .lost: String(localized: "Lost")
+        case .angry: String(localized: "Angry")
+        case .hopeful: String(localized: "Hopeful")
+        case .lonely: String(localized: "Lonely")
+        case .peaceful: String(localized: "Peaceful")
         }
     }
 
@@ -1678,26 +1678,26 @@ enum NotificationTopic: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .morningVerses: "Morning Verses"
-        case .eveningPeace: "Evening Peace"
-        case .anxiety: "Anxiety & Comfort"
-        case .strength: "Strength & Courage"
-        case .hope: "Hope"
-        case .gratitude: "Gratitude"
-        case .prayers: "Prayers"
-        case .encouragement: "Encouragement"
-        case .godsLove: "God's Love"
-        case .faith: "Faith"
-        case .wisdom: "Wisdom"
-        case .forgiveness: "Forgiveness"
-        case .joy: "Joy"
-        case .peace: "Peace"
-        case .trust: "Trust"
-        case .marriage: "Marriage"
-        case .parenting: "Parenting"
-        case .healing: "Comfort & Healing"
-        case .provision: "Provision"
-        case .spiritualWarfare: "Spiritual Warfare"
+        case .morningVerses: String(localized: "Morning Verses")
+        case .eveningPeace: String(localized: "Evening Peace")
+        case .anxiety: String(localized: "Anxiety & Comfort")
+        case .strength: String(localized: "Strength & Courage")
+        case .hope: String(localized: "Hope")
+        case .gratitude: String(localized: "Gratitude")
+        case .prayers: String(localized: "Prayers")
+        case .encouragement: String(localized: "Encouragement")
+        case .godsLove: String(localized: "God's Love")
+        case .faith: String(localized: "Faith")
+        case .wisdom: String(localized: "Wisdom")
+        case .forgiveness: String(localized: "Forgiveness")
+        case .joy: String(localized: "Joy")
+        case .peace: String(localized: "Peace")
+        case .trust: String(localized: "Trust")
+        case .marriage: String(localized: "Marriage")
+        case .parenting: String(localized: "Parenting")
+        case .healing: String(localized: "Comfort & Healing")
+        case .provision: String(localized: "Provision")
+        case .spiritualWarfare: String(localized: "Spiritual Warfare")
         }
     }
 

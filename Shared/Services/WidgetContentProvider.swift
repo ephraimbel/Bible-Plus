@@ -13,12 +13,12 @@ enum WidgetTimeWindow: String, CaseIterable {
 
     var displayName: String {
         switch self {
-        case .gratitude: "Gratitude"
-        case .strength: "Strength"
-        case .pause: "Pause"
-        case .intercession: "Intercession"
-        case .reflection: "Reflection"
-        case .peace: "Peace"
+        case .gratitude: String(localized: "Gratitude")
+        case .strength: String(localized: "Strength")
+        case .pause: String(localized: "Pause")
+        case .intercession: String(localized: "Intercession")
+        case .reflection: String(localized: "Reflection")
+        case .peace: String(localized: "Peace")
         }
     }
 

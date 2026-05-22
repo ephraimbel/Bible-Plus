@@ -41,6 +41,29 @@ private struct SavedContentView: View {
     @Namespace private var tabNamespace
     @State private var appeared = false
 
+    // SwiftData @Query observes the store and re-renders the view the
+    // moment a saved item flips `isSaved`, gets deleted, or has its
+    // note cleared — no need to navigate away and back. Previously these
+    // lists came from `viewModel.favorites`/etc. (computed properties
+    // that re-fetched on access), which SwiftUI couldn't observe, so
+    // save/unsave changes only appeared on a fresh tab mount.
+    @Query(
+        filter: #Predicate<PrayerContent> { $0.isSaved == true },
+        sort: \PrayerContent.createdAt,
+        order: .reverse
+    )
+    private var favorites: [PrayerContent]
+
+    @Query(sort: \SavedBibleVerse.createdAt, order: .reverse)
+    private var savedVerses: [SavedBibleVerse]
+
+    @Query(
+        filter: #Predicate<SavedBibleVerse> { $0.notes != "" },
+        sort: \SavedBibleVerse.updatedAt,
+        order: .reverse
+    )
+    private var notedVerses: [SavedBibleVerse]
+
     var body: some View {
         VStack(spacing: 0) {
             // Custom tab bar
@@ -118,7 +141,7 @@ private struct SavedContentView: View {
 
     @ViewBuilder
     private var favoritesTab: some View {
-        let items = viewModel.favorites
+        let items = favorites
         if items.isEmpty {
             emptyState(
                 icon: "heart",
@@ -136,11 +159,29 @@ private struct SavedContentView: View {
                 LazyVStack(spacing: 14) {
                     ForEach(Array(items.enumerated()), id: \.element.id) { index, content in
                         Button {
-                            NotificationCenter.default.post(
-                                name: .feedContentDeepLink,
-                                object: nil,
-                                userInfo: ["contentID": content.id]
-                            )
+                            // If this saved item came from an AI chat, jump
+                            // back to the original conversation (and message,
+                            // if we have it). Older saves without source IDs
+                            // fall through to the legacy feed-sheet path.
+                            if let convId = content.sourceConversationId {
+                                var userInfo: [String: Any] = [
+                                    "conversationId": convId.uuidString
+                                ]
+                                if let msgId = content.sourceMessageId {
+                                    userInfo["messageId"] = msgId.uuidString
+                                }
+                                NotificationCenter.default.post(
+                                    name: .navigateToConversation,
+                                    object: nil,
+                                    userInfo: userInfo
+                                )
+                            } else {
+                                NotificationCenter.default.post(
+                                    name: .feedContentDeepLink,
+                                    object: nil,
+                                    userInfo: ["contentID": content.id]
+                                )
+                            }
                             HapticService.lightImpact()
                         } label: {
                             SavedFavoriteCard(
@@ -167,7 +208,7 @@ private struct SavedContentView: View {
 
     @ViewBuilder
     private var versesTab: some View {
-        let items = viewModel.savedVerses
+        let items = savedVerses
         if items.isEmpty {
             emptyState(
                 icon: "book.closed",
@@ -220,7 +261,7 @@ private struct SavedContentView: View {
 
     @ViewBuilder
     private var notesTab: some View {
-        let items = viewModel.notedVerses
+        let items = notedVerses
         if items.isEmpty {
             emptyState(
                 icon: "note.text",
@@ -336,11 +377,11 @@ private struct SavedContentView: View {
 
             VStack(spacing: 10) {
                 Text(title)
-                    .font(.system(size: 22, weight: .semibold, design: .rounded))
+                    .font(BPFont.elegantHeadingLarge)
                     .foregroundStyle(palette.textPrimary)
 
                 Text(message)
-                    .font(.system(size: 15, weight: .regular, design: .rounded))
+                    .font(BPFont.elegantBody)
                     .foregroundStyle(palette.textMuted)
                     .multilineTextAlignment(.center)
                     .lineSpacing(4)

@@ -22,10 +22,10 @@ enum PromptCategory: String, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .scripture: "Scripture"
-        case .prayer: "Prayer"
-        case .guidance: "Guidance"
-        case .theology: "Theology"
+        case .scripture: String(localized: "Scripture")
+        case .prayer: String(localized: "Prayer")
+        case .guidance: String(localized: "Guidance")
+        case .theology: String(localized: "Theology")
         }
     }
 }
@@ -273,8 +273,9 @@ final class ChatViewModel {
         streamingTask?.cancel()
         streamingTask = Task { @MainActor in
             // Brief beat so the user sees the typing-dots state before the
-            // first character lands. Feels intentional, not jarring.
-            try? await Task.sleep(nanoseconds: 650_000_000)
+            // first character lands. Trimmed from 650ms → 400ms: 650ms
+            // read as dead air on top of the paywall→chat transition.
+            try? await Task.sleep(nanoseconds: 400_000_000)
             if Task.isCancelled { isStreaming = false; return }
 
             for char in greeting {
@@ -680,11 +681,17 @@ final class ChatViewModel {
         let cleaned = Self.stripMarkup(message.content)
         guard !cleaned.isEmpty else { return }
 
+        // Capture the source conversation + message so the Saved page can
+        // navigate back to the exact chat moment instead of opening this
+        // in a feed-style sheet. `resolvedConversationId` falls back to
+        // legacyConversationId for migrated rows.
         let content = PrayerContent(
             type: .devotional,
             templateText: cleaned,
             category: "AI Companion",
-            isSaved: true
+            isSaved: true,
+            sourceConversationId: message.resolvedConversationId,
+            sourceMessageId: message.id
         )
         modelContext.insert(content)
         do { try modelContext.save() } catch {

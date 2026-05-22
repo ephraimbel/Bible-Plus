@@ -1,0 +1,456 @@
+{
+  "version": 1,
+  "testimonials": [
+    {
+      "id": "t_001",
+      "name": "Sarah M.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "loneliness"
+      ],
+      "seasons": [
+        "single",
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "Открой это перед электронной почтой сейчас. Трудно объяснить, но мои утренние часы ощущаются иначе.",
+      "daysUsing": 94
+    },
+    {
+      "id": "t_002",
+      "name": "James T.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "purpose"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "Задавал несколько случайных теологических вопросов ИИ, думая, что смогу его запутать. Не получилось. Искренне впечатлён.",
+      "daysUsing": 142
+    },
+    {
+      "id": "t_003",
+      "name": "Lauren R.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "relationship"
+      ],
+      "seasons": [
+        "married",
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "Тревога в 3 часа ночи теперь имеет дом. Просыпаюсь, читаю что-то, дышу, снова сплю. Вот и всё.",
+      "daysUsing": 58
+    },
+    {
+      "id": "t_004",
+      "name": "David C.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "doubt"
+      ],
+      "seasons": [
+        "startingOver"
+      ],
+      "rating": 5,
+      "quote": "Не заходил в церковь более 12 лет. Это не похоже на церковь. Это как друг, который случайно знает Писание.",
+      "daysUsing": 23
+    },
+    {
+      "id": "t_005",
+      "name": "Maria V.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "grief"
+      ],
+      "seasons": [
+        "hardSeason"
+      ],
+      "rating": 5,
+      "quote": "После потери мамы псалмы, которые мне прислали, были не общими. Это были те, которые мне нужны.",
+      "daysUsing": 77
+    },
+    {
+      "id": "t_006",
+      "name": "Marcus J.",
+      "faithStage": "growing",
+      "burdens": [
+        "purpose",
+        "temptation"
+      ],
+      "seasons": [
+        "student"
+      ],
+      "rating": 5,
+      "quote": "42 дня подряд и продолжаю. Честно говоря, ничего не держал так долго с тех пор, как был в средней школе.",
+      "daysUsing": 42
+    },
+    {
+      "id": "t_007",
+      "name": "Elena K.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "financial"
+      ],
+      "seasons": [
+        "parent",
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "Виджет стиха задевает меня раньше, чем Twitter. Это стоит того только за это.",
+      "daysUsing": 61
+    },
+    {
+      "id": "t_008",
+      "name": "Robert H.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "health"
+      ],
+      "seasons": [
+        "retired"
+      ],
+      "rating": 5,
+      "quote": "Мне 68. Я думал, что уже всё прочитал. Аудио Библия на моих утренних прогулках показывает мне отрывки, которые я просматривал всю свою жизнь.",
+      "daysUsing": 186
+    },
+    {
+      "id": "t_009",
+      "name": "Priya S.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "loneliness",
+        "purpose"
+      ],
+      "seasons": [
+        "single",
+        "startingOver"
+      ],
+      "rating": 5,
+      "quote": "Я не рос в церкви. Я хотел понять Писание, не чувствуя осуждения. Это самое мягкое введение, которое я нашёл.",
+      "daysUsing": 31
+    },
+    {
+      "id": "t_010",
+      "name": "Thomas W.",
+      "faithStage": "growing",
+      "burdens": [
+        "anger",
+        "relationship"
+      ],
+      "seasons": [
+        "married",
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "Дневник молитв мягко меня подталкивает, хаха. Я стал лучшим мужем благодаря этому.",
+      "daysUsing": 89
+    },
+    {
+      "id": "t_011",
+      "name": "Naomi B.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "doubt",
+        "purpose"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "Я могу спорить с ним. Он отвечает мне Писанием, а не пустыми словами. Это редко.",
+      "daysUsing": 119
+    },
+    {
+      "id": "t_012",
+      "name": "Hassan A.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety"
+      ],
+      "seasons": [
+        "student"
+      ],
+      "rating": 5,
+      "quote": "Неделя экзаменов, и как-то не впадаю в панику. Стих на 8 утра держит меня на земле.",
+      "daysUsing": 46
+    },
+    {
+      "id": "t_013",
+      "name": "Grace L.",
+      "faithStage": "growing",
+      "burdens": [
+        "relationship",
+        "loneliness"
+      ],
+      "seasons": [
+        "single"
+      ],
+      "rating": 5,
+      "quote": "Приложения для знакомств на моем главном экране рядом с этим. Странное десятилетие, чтобы быть одиноким. Это останется.",
+      "daysUsing": 38
+    },
+    {
+      "id": "t_014",
+      "name": "Paul M.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "purpose"
+      ],
+      "seasons": [
+        "workingProfessional",
+        "married"
+      ],
+      "rating": 5,
+      "quote": "Я пастор. Я использую это в своей личной практике, а не только для подготовки к проповеди. Это и есть знак.",
+      "daysUsing": 203
+    },
+    {
+      "id": "t_015",
+      "name": "Rachel F.",
+      "faithStage": "growing",
+      "burdens": [
+        "grief",
+        "loneliness"
+      ],
+      "seasons": [
+        "hardSeason",
+        "startingOver"
+      ],
+      "rating": 5,
+      "quote": "Год развода. Это держало меня в Слове, когда я не мог открыть Библию без слёз.",
+      "daysUsing": 67
+    },
+    {
+      "id": "t_016",
+      "name": "Kenji T.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "purpose",
+        "anxiety"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "Я бросил два приложения для медитации, потому что они вызывали у меня чувство вины. Это не делает этого — и, как ни странно, именно поэтому я всё ещё здесь на 52-й день.",
+      "daysUsing": 52
+    },
+    {
+      "id": "t_017",
+      "name": "Abigail O.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "health"
+      ],
+      "seasons": [
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "Моя дочь попросила помолиться вместе на этой неделе. Впервые. Я виню это приложение, хаха.",
+      "daysUsing": 104
+    },
+    {
+      "id": "t_018",
+      "name": "Jonathan P.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "temptation",
+        "purpose"
+      ],
+      "seasons": [
+        "single",
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "Стих на 9 вечера приходит как раз в тот момент, когда я обычно начинаю прокручивать новости. Эта замена стоит того.",
+      "daysUsing": 131
+    },
+    {
+      "id": "t_019",
+      "name": "Mia D.",
+      "faithStage": "growing",
+      "burdens": [
+        "loneliness"
+      ],
+      "seasons": [
+        "student"
+      ],
+      "rating": 5,
+      "quote": "В колледже одиноко, и моя группа друзей не верующие. Это моя церковь, пока я не найду другую.",
+      "daysUsing": 73
+    },
+    {
+      "id": "t_020",
+      "name": "Carlos G.",
+      "faithStage": "growing",
+      "burdens": [
+        "financial",
+        "anxiety"
+      ],
+      "seasons": [
+        "workingProfessional",
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "Деньги сейчас на исходе, но я всё равно плачу за это. Наверное, это говорит само за себя.",
+      "daysUsing": 87
+    },
+    {
+      "id": "t_021",
+      "name": "Hannah W.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "grief"
+      ],
+      "seasons": [
+        "married"
+      ],
+      "rating": 5,
+      "quote": "Выкидыш в январе. Приложение никогда не знало, но стихи знали. Как-то.",
+      "daysUsing": 112
+    },
+    {
+      "id": "t_022",
+      "name": "Samir N.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "doubt"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "Я скептик. Я пришёл, готовый критиковать. Я остался ради честных ответов.",
+      "daysUsing": 29
+    },
+    {
+      "id": "t_023",
+      "name": "Olivia S.",
+      "faithStage": "growing",
+      "burdens": [
+        "relationship",
+        "purpose"
+      ],
+      "seasons": [
+        "single"
+      ],
+      "rating": 5,
+      "quote": "Перестал сравнивать свою жизнь с Instagram примерно на третьей неделе. Ежедневный стих заменил эту привычку прокрутки.",
+      "daysUsing": 54
+    },
+    {
+      "id": "t_024",
+      "name": "Michael A.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "purpose"
+      ],
+      "seasons": [
+        "retired"
+      ],
+      "rating": 5,
+      "quote": "65 лет. Аудио Библия на моей утренней прогулке — это лучшие деньги, которые я потратил в этом году.",
+      "daysUsing": 168
+    },
+    {
+      "id": "t_025",
+      "name": "Victoria B.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "loneliness"
+      ],
+      "seasons": [
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "После родов мозг не мог прочитать целую главу. Формат «один стих в день» спас меня.",
+      "daysUsing": 48
+    },
+    {
+      "id": "t_026",
+      "name": "Nathan R.",
+      "faithStage": "growing",
+      "burdens": [
+        "temptation",
+        "anger"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "ИИ не льстит мне. Он говорит мне правду. Мне это было нужно от инструмента, как ни странно.",
+      "daysUsing": 96
+    },
+    {
+      "id": "t_027",
+      "name": "Esther C.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "health"
+      ],
+      "seasons": [
+        "hardSeason",
+        "married"
+      ],
+      "rating": 5,
+      "quote": "Дни химиотерапии — тихие дни. Звуковые пейзажи плюс псалмы помогли мне пройти через 4, 5 и 6 раунды.",
+      "daysUsing": 135
+    },
+    {
+      "id": "t_028",
+      "name": "Andre L.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "anxiety",
+        "loneliness"
+      ],
+      "seasons": [
+        "startingOver",
+        "single"
+      ],
+      "rating": 5,
+      "quote": "Вне реабилитации шесть месяцев. Это помогало снизить шум, когда встреч не хватало.",
+      "daysUsing": 78
+    },
+    {
+      "id": "t_029",
+      "name": "Faith M.",
+      "faithStage": "growing",
+      "burdens": [
+        "purpose",
+        "doubt"
+      ],
+      "seasons": [
+        "student"
+      ],
+      "rating": 5,
+      "quote": "Да, меня действительно зовут Вера. Да, я знаю. Приложение всё равно удивило меня.",
+      "daysUsing": 41
+    },
+    {
+      "id": "t_030",
+      "name": "Isaac B.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "purpose",
+        "anger"
+      ],
+      "seasons": [
+        "workingProfessional",
+        "married"
+      ],
+      "rating": 5,
+      "quote": "Три приложения Библии были удалены до этого. Я действительно открываю свою Библию сейчас, а не просто получаю ежедневный стих. Вот в чём вся разница.",
+      "daysUsing": 157
+    }
+  ]
+}

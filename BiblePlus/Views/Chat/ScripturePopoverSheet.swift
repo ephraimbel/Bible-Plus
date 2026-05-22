@@ -253,10 +253,8 @@ struct ScripturePopoverSheet: View {
     // MARK: - Background
 
     private var backgroundGradient: some View {
-        let tint: Color = colorScheme == .dark
-            ? palette.accent
-            : Color(red: 0.65, green: 0.48, blue: 0.25)
-        let strength: CGFloat = colorScheme == .dark ? 0.18 : 0.22
+        let tint = palette.accent
+        let strength: CGFloat = colorScheme == .dark ? 0.18 : 0.16
         let bg = palette.background
 
         return LinearGradient(

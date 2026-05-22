@@ -8,13 +8,15 @@ struct PlanCardView: View {
 
     @Environment(\.bpPalette) private var palette
 
-    /// Resolves a bundled biblical artwork for this plan via the existing
-    /// tag-overlap engine. Plan name + description + category drive the
-    /// match, so updating plan copy automatically improves the picture
-    /// without any hardcoded mapping. Returns nil only if no asset matches
-    /// at all — in which case we fall back to the legacy gradient.
+    /// Curated artwork for the plan. Prefers the explicit `imageKey` set in
+    /// seed JSON (keeps every plan on a distinct, intentional painting); if
+    /// that's missing or doesn't resolve, falls back to the tag-overlap engine.
     private var planImage: UIImage? {
-        BiblicalImageService.image(
+        if !plan.imageKey.isEmpty,
+           let direct = BiblicalImageService.rawImage(for: plan.imageKey) {
+            return direct
+        }
+        return BiblicalImageService.image(
             for: plan.id,
             context: "\(plan.name) \(plan.planDescription) \(plan.category)"
         )

@@ -50,9 +50,9 @@ enum TopicDepth: String, CaseIterable {
 
     var displayName: String {
         switch self {
-        case .surface: "surface"
-        case .explored: "explored"
-        case .deep: "deep"
+        case .surface: String(localized: "surface")
+        case .explored: String(localized: "explored")
+        case .deep: String(localized: "deep")
         }
     }
 }

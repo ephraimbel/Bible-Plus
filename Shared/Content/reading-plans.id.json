@@ -1,0 +1,5943 @@
+[
+  {
+    "id": "psalms-of-peace",
+    "name": "Mazmur Damai",
+    "description": "Sebuah perjalanan 7 hari melalui mazmur yang berbicara langsung kepada hati Anda yang cemas, membimbing Anda menuju ketenangan dan damai yang hanya bisa diberikan oleh Tuhan.",
+    "totalDays": 7,
+    "category": "Comfort",
+    "gradientColors": [
+      "#4A6741",
+      "#2D4A3E"
+    ],
+    "iconName": "leaf.fill",
+    "imageKey": "jesus_calms_storm",
+    "applicableSeasons": [
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Perawatan Sang Gembala",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa artinya bagi Tuhan untuk menjadi gembalamu di musim hidupmu ini?"
+      },
+      {
+        "day": 2,
+        "title": "Percaya pada Cahaya",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kapan Anda mengalami Tuhan sebagai cahaya Anda di saat kegelapan?"
+      },
+      {
+        "day": 3,
+        "title": "Cicipi dan Lihat",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana Tuhan membebaskan Anda dari ketakutan yang pernah menahan Anda?"
+      },
+      {
+        "day": 4,
+        "title": "Tuhan adalah Perlindungan Kita",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Di mana Anda perlu 'diam dan tahu' bahwa Dia adalah Tuhan hari ini?"
+      },
+      {
+        "day": 5,
+        "title": "Di Bawah Sayap-Nya",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 91,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana rasanya tinggal di tempat perlindungan Yang Mahatinggi?"
+      },
+      {
+        "day": 6,
+        "title": "Penjaga yang Tak Pernah Tidur",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 121,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana mengetahui bahwa Tuhan tidak pernah terlelap mengubah cara Anda menghadapi malam ini?"
+      },
+      {
+        "day": 7,
+        "title": "Diciptakan dengan Takut dan Mengagumkan",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kebenaran apa tentang bagaimana Tuhan mengenal Anda yang membawa kenyamanan terbesar saat ini?"
+      }
+    ]
+  },
+  {
+    "id": "gospel-of-john",
+    "name": "Injil Yohanes",
+    "description": "Jelajahi seluruh Injil Yohanes dalam 21 hari dan temui Yesus — Firman yang menjadi daging — satu bab pada satu waktu.",
+    "totalDays": 21,
+    "category": "Gospel",
+    "gradientColors": [
+      "#8B6914",
+      "#5C4A1C"
+    ],
+    "iconName": "book.fill",
+    "imageKey": "baptism_jesus",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Firman yang Menjadi Daging",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa artinya bagi Anda bahwa Yesus ada sebelum segala sesuatu dan memilih untuk tinggal di antara kita?"
+      },
+      {
+        "day": 2,
+        "title": "Air Menjadi Anggur",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Di mana dalam hidup Anda Anda perlu Yesus mengubah yang biasa menjadi sesuatu yang ajaib?"
+      },
+      {
+        "day": 3,
+        "title": "Engkau Harus Dilahirkan Kembali",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana gagasan tentang 'dilahirkan kembali' menantang atau mendorong pemahaman Anda tentang iman?"
+      },
+      {
+        "day": 4,
+        "title": "Air Hidup",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Sumur mana yang Anda ambil yang membuat Anda haus, dan seperti apa air hidup itu?"
+      },
+      {
+        "day": 5,
+        "title": "Penyembuhan di Kolam",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apakah ada area di mana Anda telah menunggu penyembuhan tetapi belum sepenuhnya meminta Yesus untuk itu?"
+      },
+      {
+        "day": 6,
+        "title": "Roti Hidup",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Seperti apa rasanya makan Yesus sebagai roti hidup setiap hari?"
+      },
+      {
+        "day": 7,
+        "title": "Sungai Air Hidup",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana Anda merespons ketika pendapat dunia tentang Yesus bertentangan dengan pengalaman Anda sendiri tentang Dia?"
+      },
+      {
+        "day": 8,
+        "title": "Cahaya Dunia",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Di mana Anda perlu Yesus menerangi tempat yang penuh rasa malu atau kegelapan?"
+      },
+      {
+        "day": 9,
+        "title": "Penglihatan bagi yang Buta",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa satu area kebutaan spiritual yang ingin Anda Yesus buka matamu?"
+      },
+      {
+        "day": 10,
+        "title": "Gembala yang Baik",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana mengetahui bahwa Yesus dengan sukarela menyerahkan hidup-Nya mengubah pandangan Anda tentang kasih-Nya?"
+      },
+      {
+        "day": 11,
+        "title": "Lazarus, Keluarlah",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Area mati apa dalam hidup Anda yang perlu Yesus panggil kembali hidup?"
+      },
+      {
+        "day": 12,
+        "title": "Diurapi untuk Pemakaman",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa tindakan penyembahan yang paling luar biasa yang bisa kamu tawarkan kepada Yesus hari ini?"
+      },
+      {
+        "day": 13,
+        "title": "Raja yang Melayani",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kaki siapa yang Yesus minta kamu cuci melalui pelayanan yang rendah hati minggu ini?"
+      },
+      {
+        "day": 14,
+        "title": "Jalan, Kebenaran, dan Hidup",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana janji Yesus untuk mempersiapkan tempat untukmu mempengaruhi cara kamu hidup hari ini?"
+      },
+      {
+        "day": 15,
+        "title": "Pokok Anggur yang Sejati",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa artinya secara praktis bagimu untuk 'tinggal' di dalam Yesus minggu ini?"
+      },
+      {
+        "day": 16,
+        "title": "Penolong Akan Datang",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana kamu mengalami Roh Kudus membimbingmu ke dalam kebenaran?"
+      },
+      {
+        "day": 17,
+        "title": "Yesus Berdoa untukmu",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana rasanya mengetahui bahwa Yesus secara pribadi berdoa untuk kesatuanmu dengan Dia dan Bapa?"
+      },
+      {
+        "day": 18,
+        "title": "Pengkhianatan dan Penangkapan",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kapan kamu, seperti Petrus, menyangkal mengenal Yesus melalui kata-kata atau tindakanmu?"
+      },
+      {
+        "day": 19,
+        "title": "Itu Sudah Selesai",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Beban apa yang kamu bawa yang sudah diselesaikan Yesus di kayu salib?"
+      },
+      {
+        "day": 20,
+        "title": "Ia Telah Bangkit",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana kenyataan kebangkitan mengubah cara kamu menghadapi ketakutan terbesarmu?"
+      },
+      {
+        "day": 21,
+        "title": "Apakah Kamu Mengasihiku?",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jika Yesus bertanya kepadamu 'Apakah kamu mengasihiku?' tiga kali hari ini, bagaimana jawabanmu membentuk tindakanmu?"
+      }
+    ]
+  },
+  {
+    "id": "30-days-of-wisdom",
+    "name": "30 Hari Kebijaksanaan",
+    "description": "Satu bab Amsal untuk setiap hari dalam bulan — kebijaksanaan yang abadi untuk keputusan, hubungan, pekerjaan, dan kehidupan sehari-hari.",
+    "totalDays": 30,
+    "category": "Wisdom",
+    "gradientColors": [
+      "#6B4C8A",
+      "#3D2B5C"
+    ],
+    "iconName": "lightbulb.fill",
+    "imageKey": "ten_commandments",
+    "applicableSeasons": [
+      "workingProfessional",
+      "parenthood"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Awal Kebijaksanaan",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa artinya bagi ketakutan akan Tuhan menjadi titik awal dari semua kebijaksanaan?"
+      },
+      {
+        "day": 2,
+        "title": "Mencari Harta Tersembunyi",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Seberapa sengaja kamu mencari kebijaksanaan seperti kamu mencari harta tersembunyi?"
+      },
+      {
+        "day": 3,
+        "title": "Percaya dengan Sepenuh Hati",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Keputusan apa yang kamu hadapi di mana kamu perlu mempercayai Tuhan daripada mengandalkan pemahamanmu sendiri?"
+      },
+      {
+        "day": 4,
+        "title": "Jaga Hatimu",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa yang kamu biarkan masuk ke dalam hatimu yang mungkin menarikmu menjauh dari jalan kebijaksanaan?"
+      },
+      {
+        "day": 5,
+        "title": "Bahaya Kebodohan",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Di mana dalam hidupmu kamu paling tergoda untuk mengambil jalan pintas yang menjauh dari yang terbaik dari Tuhan?"
+      },
+      {
+        "day": 6,
+        "title": "Pelajaran dari Semut",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa yang dapat diajarkan ketekunan semut kepadamu tentang tanggung jawabmu saat ini?"
+      },
+      {
+        "day": 7,
+        "title": "Biaya Pencobaan",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Batasan apa yang perlu kamu tetapkan untuk melindungi dirimu dari pencobaan?"
+      },
+      {
+        "day": 8,
+        "title": "Kebijaksanaan Memanggil",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana kamu mengenali suara kebijaksanaan yang memanggilmu di tengah kebisingan kehidupan sehari-hari?"
+      },
+      {
+        "day": 9,
+        "title": "Dua Undangan",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Undangan mana yang lebih sering kamu terima — jamuan kebijaksanaan atau jalan pintas kebodohan?"
+      },
+      {
+        "day": 10,
+        "title": "Anak yang Bijak",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana karakter Anda di rumah mencerminkan kebijaksanaan yang Anda cari di tempat umum?"
+      },
+      {
+        "day": 11,
+        "title": "Timbangan yang Jujur",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Di mana dalam hidup Anda Anda perlu mengejar kejujuran dan integritas yang lebih besar?"
+      },
+      {
+        "day": 12,
+        "title": "Kata-Kata yang Menyembuhkan",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana kata-kata Anda hari ini dapat membawa penyembuhan daripada bahaya bagi seseorang di sekitar Anda?"
+      },
+      {
+        "day": 13,
+        "title": "Berjalan dengan Orang Bijak",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Siapa teman-teman bijak dalam hidup Anda, dan bagaimana Anda bisa belajar lebih banyak dari mereka?"
+      },
+      {
+        "day": 14,
+        "title": "Jalan yang Tampak Benar",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kapan sebuah jalan yang tampak benar bagi Anda ternyata mengarah ke arah yang salah?"
+      },
+      {
+        "day": 15,
+        "title": "Jawaban yang Lembut",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Siapa dalam hidup Anda yang membutuhkan jawaban lembut dari Anda daripada kata-kata yang keras?"
+      },
+      {
+        "day": 16,
+        "title": "Serahkan Rencana Anda",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Rencana apa yang Anda pegang yang perlu Anda serahkan sepenuhnya kepada Tuhan?"
+      },
+      {
+        "day": 17,
+        "title": "Seorang Teman di Segala Waktu",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana Anda bisa menjadi teman yang lebih setia bagi seseorang yang sedang menghadapi kesulitan?"
+      },
+      {
+        "day": 18,
+        "title": "Menara yang Kuat",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ketika masalah datang, apakah Anda pertama-tama berlari ke nama Tuhan atau ke sesuatu yang lain?"
+      },
+      {
+        "day": 19,
+        "title": "Kebaikan kepada Orang Miskin",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana Anda bisa menunjukkan kemurahan hati kepada seseorang yang membutuhkan minggu ini sebagai tindakan ibadah?"
+      },
+      {
+        "day": 20,
+        "title": "Hati Sang Raja",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana mempercayai kedaulatan Tuhan atas pemimpin dan bangsa mengubah cara Anda berdoa?"
+      },
+      {
+        "day": 21,
+        "title": "Keadilan dan Kebenaran",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Di mana Anda bisa mengejar keadilan dan kebenaran dengan lebih setia dalam kehidupan sehari-hari Anda?"
+      },
+      {
+        "day": 22,
+        "title": "Nama yang Baik",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Reputasi seperti apa yang Anda bangun, dan apakah itu mencerminkan karakter Kristus?"
+      },
+      {
+        "day": 23,
+        "title": "Jangan Iri",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa yang memicu iri di hati Anda, dan bagaimana syukur dapat menggantikannya?"
+      },
+      {
+        "day": 24,
+        "title": "Kekuatan dalam Kesulitan",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana Anda merespons ketika kesulitan menguji kekuatan iman Anda?"
+      },
+      {
+        "day": 25,
+        "title": "Apel Emas",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kapan terakhir kali kata-kata seseorang yang tepat waktu seperti apel emas bagi Anda?"
+      },
+      {
+        "day": 26,
+        "title": "Cermin Si Malas",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bidang kemalasan atau penundaan apa yang menghalangi Anda dari yang terbaik yang Tuhan miliki untuk Anda?"
+      },
+      {
+        "day": 27,
+        "title": "Besi Mengasah Besi",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Siapa dalam hidup Anda yang mengasah Anda, dan apakah Anda secara sengaja berinvestasi dalam hubungan itu?"
+      },
+      {
+        "day": 28,
+        "title": "Orang Benar Berani",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Di mana Anda perlu lebih berani untuk berdiri atas apa yang benar?"
+      },
+      {
+        "day": 29,
+        "title": "Visi dan Ketaatan",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana memiliki visi yang berakar dalam Firman Tuhan menjaga Anda dari mengembara tanpa tujuan?"
+      },
+      {
+        "day": 30,
+        "title": "Setiap Kata dari Tuhan",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 30,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa yang diajarkan doa Agur — 'jangan berikan aku kemiskinan atau kekayaan' — tentang kepuasan?"
+      }
+    ]
+  },
+  {
+    "id": "romans-heart-of-the-gospel",
+    "name": "Roma: Hati dari Injil",
+    "description": "Sebuah penyelaman mendalam selama 16 hari ke dalam surat Paulus kepada jemaat di Roma — presentasi paling lengkap dari injil yang pernah ditulis.",
+    "totalDays": 16,
+    "category": "Theology",
+    "gradientColors": [
+      "#8B3A3A",
+      "#5C2424"
+    ],
+    "iconName": "flame.fill",
+    "imageKey": "crucifixion",
+    "applicableSeasons": [
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Injil Tuhan",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apakah kamu pernah merasa malu dengan injil, dan seperti apa hidup tanpa rasa malu itu?"
+      },
+      {
+        "day": 2,
+        "title": "Penghakiman Adil Tuhan",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana mengetahui bahwa Tuhan menghakimi tanpa memihak mempengaruhi cara kamu menghakimi orang lain?"
+      },
+      {
+        "day": 3,
+        "title": "Semua Telah Berbuat Dosa",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana kenyataan bahwa semua telah berbuat dosa meratakan tanah antara kamu dan orang lain?"
+      },
+      {
+        "day": 4,
+        "title": "Iman Seperti Abraham",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Janji mustahil apa dari Tuhan yang kamu dipanggil untuk percayai dengan iman?"
+      },
+      {
+        "day": 5,
+        "title": "Damai dengan Tuhan",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana mengetahui bahwa penderitaan menghasilkan ketekunan mengubah cara kamu memandang ujianmu?"
+      },
+      {
+        "day": 6,
+        "title": "Mati untuk Dosa, Hidup dalam Kristus",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Dosa apa yang perlu kamu anggap sebagai mati agar kamu bisa hidup sepenuhnya untuk Kristus?"
+      },
+      {
+        "day": 7,
+        "title": "Pertarungan di Dalam",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana perjuangan jujur Paulus dengan dosa memberimu dorongan dalam pertarunganmu sendiri?"
+      },
+      {
+        "day": 8,
+        "title": "Tidak Ada Penghukuman",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Penghukuman apa yang masih kamu bawa yang sudah dihapus oleh Kristus?"
+      },
+      {
+        "day": 9,
+        "title": "Pilihan Berdaulat Tuhan",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana kamu merespons misteri kedaulatan Tuhan dan tanggung jawab manusia?"
+      },
+      {
+        "day": 10,
+        "title": "Firman Dekat denganmu",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Siapa dalam hidupmu yang perlu mendengar kabar baik, dan apa yang menghalangimu untuk membagikannya?"
+      },
+      {
+        "day": 11,
+        "title": "Pohon Zaitun",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana memahami tempatmu sebagai cabang yang 'disambungkan' memperdalam rasa syukurmu?"
+      },
+      {
+        "day": 12,
+        "title": "Korban Hidup",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Seperti apa secara praktis menawarkan tubuhmu sebagai korban hidup hari ini?"
+      },
+      {
+        "day": 13,
+        "title": "Penyerahan dan Cinta",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana perintah untuk 'tidak berutang apa-apa kecuali cinta' dapat membentuk kembali hubunganmu minggu ini?"
+      },
+      {
+        "day": 14,
+        "title": "Jangan Menghakimi Saudaramu",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Di mana kamu perlu memberikan lebih banyak kasih karunia kepada sesama percaya yang keyakinannya berbeda darimu?"
+      },
+      {
+        "day": 15,
+        "title": "Persatuan untuk Kemuliaan Tuhan",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana kamu dapat lebih aktif mengejar persatuan dengan orang percaya lain untuk kemuliaan Tuhan?"
+      },
+      {
+        "day": 16,
+        "title": "Salam dan Tuhan Damai",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Siapa orang-orang yang Tuhan tempatkan di sekitarmu untuk memperkuat imanmu, dan apakah kamu telah mengucapkan terima kasih kepada mereka?"
+      }
+    ]
+  },
+  {
+    "id": "new-believers-journey",
+    "name": "Perjalanan Orang Percaya Baru",
+    "description": "Sebuah tur panduan selama 14 hari melalui bab-bab paling penting dalam Alkitab — sempurna untuk siapa saja yang baru mulai menjelajahi iman Kristen.",
+    "totalDays": 14,
+    "category": "Foundations",
+    "gradientColors": [
+      "#3A6B8B",
+      "#1C3D5C"
+    ],
+    "iconName": "sunrise.fill",
+    "imageKey": "samuel_called",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Lahir Kembali",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa artinya bagimu untuk memulai kembali dengan kehidupan spiritual yang sepenuhnya baru?"
+      },
+      {
+        "day": 2,
+        "title": "Gembala",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana membayangkan Tuhan sebagai gembala yang merawatmu mengubah cara kamu merasa tentang-Nya?"
+      },
+      {
+        "day": 3,
+        "title": "Semua Telah Berbuat Dosa",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana memahami bahwa setiap orang telah jatuh dalam dosa membantumu menerima kasih karunia Tuhan tanpa rasa malu?"
+      },
+      {
+        "day": 4,
+        "title": "Karunia Kasih Karunia",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa artinya menerima sesuatu yang tidak pernah bisa kamu peroleh sendiri?"
+      },
+      {
+        "day": 5,
+        "title": "Tidak Ada Hukuman",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa rasa bersalah atau malu yang perlu kamu lepaskan sehubungan dengan kebenaran bahwa tidak ada hukuman dalam Kristus?"
+      },
+      {
+        "day": 6,
+        "title": "Diselamatkan oleh Kasih Karunia",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana mengetahui bahwa keselamatan adalah karunia — bukan imbalan — mengubah tekanan yang kamu berikan pada dirimu sendiri?"
+      },
+      {
+        "day": 7,
+        "title": "Jalan, Kebenaran, Hidup",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa artinya bagi Yesus untuk menjadi jalan ketika kamu merasa tersesat atau tidak pasti tentang masa depan?"
+      },
+      {
+        "day": 8,
+        "title": "Tuhan adalah Kasih",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana pernyataan 'Tuhan adalah kasih' membentuk kembali pemahamanmu tentang siapa Tuhan?"
+      },
+      {
+        "day": 9,
+        "title": "Damai Tuhan",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kekhawatiran apa yang bisa kamu bawa kepada Tuhan sekarang sebagai ganti damai-Nya yang melampaui pengertian?"
+      },
+      {
+        "day": 10,
+        "title": "Ruang Iman",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Siapa tokoh iman dalam bab ini yang paling menginspirasimu, dan mengapa?"
+      },
+      {
+        "day": 11,
+        "title": "Ujian dan Hikmat",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana kamu bisa mulai melihat ujianmu saat ini sebagai kesempatan untuk tumbuh daripada sebagai hukuman?"
+      },
+      {
+        "day": 12,
+        "title": "Berbahagialah",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Yang mana dari Berbahagialah yang paling langsung berbicara tentang keadaanmu dalam hidup saat ini?"
+      },
+      {
+        "day": 13,
+        "title": "Doa Tuhan",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana Doa Tuhan dapat menjadi kerangka untuk cara kamu berbicara kepada Tuhan setiap hari?"
+      },
+      {
+        "day": 14,
+        "title": "Segala Sesuatu Menjadi Baru",
+        "readings": [
+          {
+            "bookID": "REV",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana janji bahwa Tuhan akan membuat segala sesuatu baru memberimu harapan untuk masa depan?"
+      }
+    ]
+  },
+  {
+    "id": "finding-purpose",
+    "name": "Menemukan Tujuan",
+    "description": "Eksplorasi selama 10 hari tentang ayat-ayat Alkitab yang paling kuat tentang identitas, panggilan, dan tujuan yang Tuhan tenun dalam hidupmu.",
+    "totalDays": 10,
+    "category": "Purpose",
+    "gradientColors": [
+      "#8B7B3A",
+      "#5C5124"
+    ],
+    "iconName": "star.fill",
+    "imageKey": "miraculous_catch",
+    "applicableSeasons": [
+      "workingProfessional",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Rencana untuk Mensejahterakanmu",
+        "readings": [
+          {
+            "bookID": "JER",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana mengetahui Tuhan memiliki rencana untuk kesejahteraan dan masa depanmu mengubah cara kamu menghadapi ketidakpastian?"
+      },
+      {
+        "day": 2,
+        "title": "Diciptakan dengan Indah",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa yang akan berubah jika kamu benar-benar percaya bahwa kamu diciptakan dengan takut dan indah?"
+      },
+      {
+        "day": 3,
+        "title": "Percaya kepada Tuhan",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jalan apa yang sedang kamu coba arahkan sendiri alih-alih mengakui Tuhan di dalamnya?"
+      },
+      {
+        "day": 4,
+        "title": "Diciptakan untuk Perbuatan Baik",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Perbuatan baik apa yang kamu rasakan Tuhan siapkan sebelumnya untuk kamu jalani?"
+      },
+      {
+        "day": 5,
+        "title": "Pengorbanan yang Hidup",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana kamu bisa menggunakan karunia unik yang Tuhan berikan kepadamu untuk melayani orang lain minggu ini?"
+      },
+      {
+        "day": 6,
+        "title": "Dipanggil dengan Nama",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 43,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana Tuhan memanggilmu dengan nama dan mengklaimmu sebagai milik-Nya membentuk rasa identitasmu?"
+      },
+      {
+        "day": 7,
+        "title": "Hidup adalah Kristus",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jika 'hidup adalah Kristus,' apa artinya itu bagi cara Anda mendekati pekerjaan dan hubungan Anda?"
+      },
+      {
+        "day": 8,
+        "title": "Arahkan Pikiran Anda ke Atas",
+        "readings": [
+          {
+            "bookID": "COL",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa hal duniawi yang Anda pegang yang mengalihkan perhatian Anda dari hal-hal di atas?"
+      },
+      {
+        "day": 9,
+        "title": "Umat Pilihan",
+        "readings": [
+          {
+            "bookID": "1PE",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana disebut 'satu imamat yang rajani' mendefinisikan kembali rasa tujuan dan keterikatan Anda?"
+      },
+      {
+        "day": 10,
+        "title": "Bergembiralah di Dalam Tuhan",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa yang terjadi pada keinginan Anda ketika Anda berkomitmen untuk bergembira di dalam Tuhan di atas segalanya?"
+      }
+    ]
+  },
+  {
+    "id": "comfort-in-hard-times",
+    "name": "Penghiburan di Masa Sulit",
+    "description": "Sebuah tempat perlindungan 7 hari dalam Kitab Suci untuk musim penderitaan — ayat-ayat ini telah mengantarkan orang percaya melalui lembah yang paling gelap selama ribuan tahun.",
+    "totalDays": 7,
+    "category": "Comfort",
+    "gradientColors": [
+      "#5C7A8B",
+      "#3A4F5C"
+    ],
+    "iconName": "heart.fill",
+    "imageKey": "job_suffering",
+    "applicableSeasons": [
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "health"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "Tuhan Dekat dengan yang Patah Hati",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana mengetahui bahwa Tuhan sangat dekat dengan yang patah hati menghibur Anda saat ini?"
+      },
+      {
+        "day": 2,
+        "title": "Jangan Takut, Aku Bersamamu",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 41,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ketakutan apa yang Anda bawa yang Tuhan minta Anda serahkan ke dalam tangan-Nya?"
+      },
+      {
+        "day": 3,
+        "title": "Tuhan Segala Penghiburan",
+        "readings": [
+          {
+            "bookID": "2CO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana penderitaan Anda sendiri dapat mempersiapkan Anda untuk menghibur orang lain yang sedang terluka?"
+      },
+      {
+        "day": 4,
+        "title": "Tidak Ada yang Dapat Memisahkan Kita",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Keadaan apa yang membuat Anda merasa terpisah dari kasih Tuhan, dan bagaimana bab ini berbicara tentang itu?"
+      },
+      {
+        "day": 5,
+        "title": "Diam dan Ketahuilah",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Suara apa dalam hidup Anda yang perlu Anda diamkan agar Anda dapat mendengar Tuhan berkata 'Diamlah'?"
+      },
+      {
+        "day": 6,
+        "title": "Datanglah kepada-Ku dan Beristirahat",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Beban berat apa yang Anda bawa yang Yesus mengundang Anda untuk meletakkannya hari ini?"
+      },
+      {
+        "day": 7,
+        "title": "Setiap Air Mata Dihapus",
+        "readings": [
+          {
+            "bookID": "REV",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana janji bahwa Tuhan akan menghapus setiap air mata dari matamu memberi Anda kekuatan untuk bertahan hari ini?"
+      }
+    ]
+  },
+  {
+    "id": "sermon-on-the-mount",
+    "name": "Khotbah di Bukit",
+    "description": "Studi mendalam selama 7 hari tentang khotbah Yesus yang paling terkenal — ajaran radikal yang membalikkan nilai-nilai dunia.",
+    "totalDays": 7,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A8B5C",
+      "#4F5C3A"
+    ],
+    "iconName": "text.book.closed.fill",
+    "imageKey": "sermon_mount",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Berbahagialah dan Garam Bumi",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 26
+          }
+        ],
+        "reflection": "Beatitude mana yang paling menantang Anda, dan seperti apa rasanya untuk menghidupkannya hari ini?"
+      },
+      {
+        "day": 2,
+        "title": "Kebenaran yang Lebih Tinggi",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 27,
+            "verseEnd": 48
+          }
+        ],
+        "reflection": "Bagaimana panggilan Yesus untuk 'menjadi sempurna seperti Bapa Anda yang sempurna' mendorong Anda melampaui mengikuti aturan menuju transformasi hati?"
+      },
+      {
+        "day": 3,
+        "title": "Memberi, Berdoa, dan Berpuasa dalam Diam",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "Di mana Anda perlu mengalihkan praktik spiritual Anda dari dilihat oleh orang lain menjadi dilihat hanya oleh Tuhan?"
+      },
+      {
+        "day": 4,
+        "title": "Harta di Surga",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 19,
+            "verseEnd": 34
+          }
+        ],
+        "reflection": "Apa yang membuat Anda cemas yang Yesus minta Anda percayakan sepenuhnya kepada-Nya?"
+      },
+      {
+        "day": 5,
+        "title": "Jangan Menghakimi",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": 1,
+            "verseEnd": 14
+          }
+        ],
+        "reflection": "Apa balok di mata Anda sendiri yang perlu Anda tangani sebelum menunjukkan serpihan di mata orang lain?"
+      },
+      {
+        "day": 6,
+        "title": "Dibangun di Atas Batu",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": 15,
+            "verseEnd": 29
+          }
+        ],
+        "reflection": "Apakah hidup Anda dibangun di atas batu firman Yesus, atau di atas pasir kebijaksanaan dunia?"
+      },
+      {
+        "day": 7,
+        "title": "Khotbah Secara Keseluruhan",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Setelah membaca seluruh Khotbah di Bukit, ajaran mana yang paling ingin Anda praktikkan?"
+      }
+    ]
+  },
+  {
+    "id": "psalms-in-30-days",
+    "name": "Mazmur dalam 30 Hari",
+    "description": "Bacalah semua 150 Mazmur dalam 30 hari — lima mazmur sehari untuk membenamkan diri Anda dalam kitab pujian, doa, dan pujian yang paling kaya di Alkitab.",
+    "totalDays": 30,
+    "category": "Worship",
+    "gradientColors": [
+      "#3A5C8B",
+      "#1C2D5C"
+    ],
+    "iconName": "music.note",
+    "imageKey": "jacob_ladder",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Mazmur 1–5: Yang Diberkati dan yang Patah",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa artinya bagi Anda untuk bersukacita dalam hukum Tuhan siang dan malam?"
+      },
+      {
+        "day": 2,
+        "title": "Mazmur 6–10: Berteriak kepada Tuhan",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana kejujuran teriakan pujangga kepada Tuhan memberi Anda izin untuk membawa emosi mentah Anda kepada-Nya?"
+      },
+      {
+        "day": 3,
+        "title": "Mazmur 11–15: Yang Benar dan yang Jahat",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa yang diungkapkan Mazmur 15 tentang jenis orang yang dapat tinggal di hadirat Tuhan?"
+      },
+      {
+        "day": 4,
+        "title": "Mazmur 16–20: Perlindungan dan Penyelamatan",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana langit yang memberitakan kemuliaan Tuhan dalam Mazmur 19 membangkitkan ibadah di dalam hati Anda?"
+      },
+      {
+        "day": 5,
+        "title": "Mazmur 21–25: Gembala dan Pencari",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana teriakan ditinggalkan dalam Mazmur 22 — yang diulang oleh Yesus di kayu salib — memperdalam pemahaman Anda tentang pengorbanan-Nya?"
+      },
+      {
+        "day": 6,
+        "title": "Mazmur 26–30: Cahaya dalam Kegelapan",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 30,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa artinya bahwa tangisan mungkin bertahan semalam tetapi sukacita datang di pagi hari?"
+      },
+      {
+        "day": 7,
+        "title": "Mazmur 31–35: Percaya dan Penyelamatan",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 31,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 33,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 35,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana berkat pengampunan dalam Mazmur 32 mendorong Anda untuk mengaku apa yang telah Anda sembunyikan?"
+      },
+      {
+        "day": 8,
+        "title": "Mazmur 36–40: Kasih yang Teguh",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 36,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 38,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 39,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 40,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa artinya 'bersukacitalah dalam Tuhan' dari Mazmur 37 dalam rutinitas harian Anda?"
+      },
+      {
+        "day": 9,
+        "title": "Mazmur 41–45: Haus akan Tuhan",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 41,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 42,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 43,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 44,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 45,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kapan jiwa Anda haus akan Tuhan seperti rusa yang mendambakan air?"
+      },
+      {
+        "day": 10,
+        "title": "Mazmur 46–50: Tuhan adalah Benteng Kita",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 47,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 48,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 49,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 50,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana pengingat dalam Mazmur 46 untuk 'diamlah' berbicara kepada kekacauan dalam hidup Anda saat ini?"
+      },
+      {
+        "day": 11,
+        "title": "Mazmur 51–55: Roh yang Patah",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 51,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 52,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 53,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 54,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 55,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana doa Daud untuk hati yang bersih dalam Mazmur 51 memberi Anda keberanian untuk mendekati Tuhan dengan kegagalan Anda?"
+      },
+      {
+        "day": 12,
+        "title": "Mazmur 56–60: Ketika Saya Takut",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 56,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 57,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 58,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 59,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 60,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa artinya 'ketika saya takut, saya akan percaya kepada-Mu' dari Mazmur 56 dalam keadaan Anda saat ini?"
+      },
+      {
+        "day": 13,
+        "title": "Mazmur 61–65: Istirahat dalam Tuhan Saja",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 61,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 62,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 63,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 64,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 65,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Di mana Anda menemukan istirahat — benar-benar hanya dalam Tuhan, atau apakah Anda mencari sumber lain untuk kedamaian?"
+      },
+      {
+        "day": 14,
+        "title": "Mazmur 66–70: Bersoraklah dengan Sukacita",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 66,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 67,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 68,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 69,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 70,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa karya-karya Tuhan yang menakjubkan dalam hidup Anda yang ingin Anda ceritakan kepada orang lain?"
+      },
+      {
+        "day": 15,
+        "title": "Mazmur 71–75: Harapan yang Abadi",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 71,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 72,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 73,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 74,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 75,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana perjuangan pujangga dengan iri hati dalam Mazmur 73 mencerminkan pengalaman Anda sendiri?"
+      },
+      {
+        "day": 16,
+        "title": "Mazmur 76–80: Ingatlah Keajaiban-Nya",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 76,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 77,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 78,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 79,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 80,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa tindakan Tuhan di masa lalu yang dapat Anda ingat dan ulang untuk memperkuat iman Anda hari ini?"
+      },
+      {
+        "day": 17,
+        "title": "Mazmur 81–85: Kebangkitan dan Pemulihan",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 81,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 82,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 83,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 84,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 85,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana kerinduan akan pelataran Tuhan dalam Mazmur 84 beresonansi dengan keinginan Anda untuk beribadah?"
+      },
+      {
+        "day": 18,
+        "title": "Mazmur 86–90: Dari Abadi ke Abadi",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 86,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 87,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 88,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 89,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 90,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana perspektif Mazmur 90 tentang singkatnya hidup mengubah cara Anda menghargai waktu Anda?"
+      },
+      {
+        "day": 19,
+        "title": "Mazmur 91–95: Perlindungan dan Lagu",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 91,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 92,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 93,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 94,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 95,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa artinya tinggal di dalam perlindungan Yang Mahatinggi, dan bagaimana Anda bisa mempraktikkannya hari ini?"
+      },
+      {
+        "day": 20,
+        "title": "Mazmur 96–100: Tuhan Memerintah",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 96,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 97,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 98,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 99,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 100,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana panggilan untuk 'membuat suara yang penuh sukacita' dalam Mazmur 100 menantangmu untuk beribadah dengan semangat yang lebih besar?"
+      },
+      {
+        "day": 21,
+        "title": "Mazmur 101–105: Puji Tuhan, Hai Jiwaku",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 101,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 102,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 103,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 104,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 105,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Manfaat apa dari Tuhan yang tercantum dalam Mazmur 103 yang telah kau lupakan untuk syukuri?"
+      },
+      {
+        "day": 22,
+        "title": "Mazmur 106–110: Mengingat Kesetiaan Tuhan",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 106,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 107,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 108,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 109,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 110,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana kau mengalami kasih setia Tuhan yang menyelamatkanmu dari pengembaraanmu sendiri?"
+      },
+      {
+        "day": 23,
+        "title": "Mazmur 111–115: Puji Tuhan",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 111,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 112,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 113,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 114,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 115,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana kontras antara Tuhan yang hidup dan berhala yang tak bernyawa dalam Mazmur 115 menantang tempat kau menaruh kepercayaanmu?"
+      },
+      {
+        "day": 24,
+        "title": "Mazmur 116–120: Nyanyian Pendakian Dimulai",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 116,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 117,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 118,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 119,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 120,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ayat mana dari mazmur terpanjang — Mazmur 119 — yang paling kuat berbicara tentang cintamu kepada Firman Tuhan?"
+      },
+      {
+        "day": 25,
+        "title": "Mazmur 121–125: Mendaki kepada Tuhan",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 121,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 122,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 123,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 124,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 125,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Dari mana pertolonganmu datang, dan bagaimana Mazmur 121 menguatkan keyakinanmu dalam perlindungan Tuhan?"
+      },
+      {
+        "day": 26,
+        "title": "Mazmur 126–130: Menabur dalam Air Mata",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 126,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 127,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 128,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 129,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 130,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Benih apa yang sedang kau tabur dalam air mata saat ini, mempercayai bahwa kau akan menuai dengan sorak-sorai sukacita?"
+      },
+      {
+        "day": 27,
+        "title": "Mazmur 131–135: Kepercayaan yang Rendah Hati",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 131,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 132,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 133,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 134,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 135,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana gambaran persatuan dalam Mazmur 133 menginspirasimu untuk mengejar persekutuan yang lebih dalam dengan orang percaya lainnya?"
+      },
+      {
+        "day": 28,
+        "title": "Mazmur 136–140: Kasih-Nya Abadi Selamanya",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 136,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 137,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 138,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 140,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana pengulangan 'Kasih-Nya abadi selamanya' dalam Mazmur 136 mengakarimu ketika segala sesuatu terasa tidak pasti?"
+      },
+      {
+        "day": 29,
+        "title": "Mazmur 141–145: Doa Malam",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 141,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 142,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 143,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 144,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 145,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana pernyataan Daud bahwa Tuhan itu besar dan sangat patut dipuji membentuk doa malammu malam ini?"
+      },
+      {
+        "day": 30,
+        "title": "Mazmur 146–150: Biarlah Segala Sesuatu Memuji Tuhan",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 146,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 147,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 148,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 149,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 150,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Saat Mazmur ditutup dengan 'biarlah segala sesuatu yang bernapas memuji Tuhan,' bagaimana kau akan menjadikan pujian sebagai kebiasaan sehari-hari?"
+      }
+    ]
+  },
+  {
+    "id": "life-of-david",
+    "name": "Kehidupan Daud",
+    "description": "Sebuah perjalanan 14 hari bersama raja-gembala — dari pengurapan hingga membunuh raksasa, dari pengasingan hingga tahta — dipadukan dengan mazmur yang lahir dari setiap musim.",
+    "totalDays": 14,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6B2D2D",
+      "#3A1818"
+    ],
+    "iconName": "shield.lefthalf.filled",
+    "imageKey": "david_goliath",
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Diurapi dalam Ketidakjelasan",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Di mana Tuhan menemui kamu di tempat yang tenang dan tak terlihat sebelum dunia menyadarinya?"
+      },
+      {
+        "day": 2,
+        "title": "Menghadapi Raksasa",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Raksasa apa yang kau hadapi hari ini, dan atas nama siapa kau akan menghadapinya?"
+      },
+      {
+        "day": 3,
+        "title": "Kesetiaan Yonatan",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Siapa yang telah menjadi Yonatan bagimu, dan bagaimana kau bisa menjadi teman itu bagi orang lain?"
+      },
+      {
+        "day": 4,
+        "title": "Melarikan Diri untuk Hidupmu",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana mazmur Daud di gua mengajarkanmu untuk memuji Tuhan sebelum pertolongan tiba?"
+      },
+      {
+        "day": 5,
+        "title": "Pengendalian Diri di Gua",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Di mana kau perlu berlatih pengendalian diri ketika kau bisa membalas kepada seseorang yang telah berbuat salah padamu?"
+      },
+      {
+        "day": 6,
+        "title": "Kebijaksanaan dari Abigail",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nasihat bijak siapa yang telah kau tolak belakangan ini yang mungkin menyelamatkanmu dari keputusan yang bodoh?"
+      },
+      {
+        "day": 7,
+        "title": "Kejatuhan Saul",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 31,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "2SA",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana kesedihan Daud untuk musuhnya Saul membentuk kembali cara pandangmu terhadap orang-orang yang kau perjuangkan?"
+      },
+      {
+        "day": 8,
+        "title": "Raja Menari",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kapan terakhir kali kau beribadah dengan sepenuh hati, tanpa khawatir tentang apa yang dipikirkan orang lain?"
+      },
+      {
+        "day": 9,
+        "title": "Perjanjian yang Abadi",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana janji Tuhan akan tahta yang tak berujung melalui Daud memperdalam harapanmu dalam Kristus hari ini?"
+      },
+      {
+        "day": 10,
+        "title": "Jatuhnya Seorang Raja Gembala",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "2SA",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Di mana kamu paling rentan terhadap kompromi kecil yang bisa berkembang menjadi dosa besar jika tidak dihadapi?"
+      },
+      {
+        "day": 11,
+        "title": "Doa yang Patah",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 51,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa dalam hidupmu yang membutuhkan doa 'ciptakanlah dalam diriku hati yang bersih' malam ini?"
+      },
+      {
+        "day": 12,
+        "title": "Pujilah Tuhan, Hai Jiwaku",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 103,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Manakah dari manfaat Tuhan yang tercantum di sini yang paling perlu kamu ingat hari ini?"
+      },
+      {
+        "day": 13,
+        "title": "Dikenal dengan Takut",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa penghiburan — atau tantangan — yang kamu rasakan mengetahui Tuhan melihat setiap sudut tersembunyi dari hatimu?"
+      },
+      {
+        "day": 14,
+        "title": "Gembala Tetap Ada",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Melalui semua musim Daud, Gembala tidak pernah meninggalkannya — bagaimana kamu mengalami kesetiaan yang sama dalam ceritamu sendiri?"
+      }
+    ]
+  },
+  {
+    "id": "christmas-story",
+    "name": "Kisah Natal",
+    "description": "Sebuah perjalanan advent 7 hari melalui kelahiran — dari nubuat kuno hingga palungan — temukan kembali keajaiban Tuhan yang mendekat.",
+    "totalDays": 7,
+    "category": "Advent",
+    "gradientColors": [
+      "#3C5A7A",
+      "#1F2F45"
+    ],
+    "iconName": "star.fill",
+    "imageKey": "nativity",
+    "applicableSeasons": [
+      "parenthood",
+      "newlyMarried",
+      "growing",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "grief",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Seorang Anak yang Diberitakan",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Manakah dari nama-nama Yesaya untuk anak yang akan datang — Penasihat yang Ajaib, Allah yang Perkasa, Raja Damai — yang paling kamu butuhkan saat ini?"
+      },
+      {
+        "day": 2,
+        "title": "Dari Betlehem yang Kecil",
+        "readings": [
+          {
+            "bookID": "MIC",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana Tuhan memilih kota kecil dan terabaikan Betlehem berbicara kepada tempat-tempat tersembunyi dalam hidupmu sendiri?"
+      },
+      {
+        "day": 3,
+        "title": "Ya Maria",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Di mana Tuhan meminta 'jadilah padaku menurut perkataan-Mu' di musim ketidakpastian?"
+      },
+      {
+        "day": 4,
+        "title": "Ketaatan Diam Yusuf",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana kesetiaan Yusuf yang diam dan mahal menantang cara kamu berpikir tentang dilihat oleh orang lain?"
+      },
+      {
+        "day": 5,
+        "title": "Firman yang Menjadi Daging",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa artinya bagimu bahwa Firman yang kekal memilih untuk tinggal di lingkunganmu?"
+      },
+      {
+        "day": 6,
+        "title": "Gembala dan Palungan",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Mengapa menurutmu 'kabar baik yang besar' dari para malaikat diumumkan pertama kali kepada gembala, bukan raja?"
+      },
+      {
+        "day": 7,
+        "title": "Orang Bijak dari Jauh",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Seperti apa rasanya bagimu untuk membawa yang terbaik — emas, kemenyan, dan mur — kepada Yesus hari ini?"
+      }
+    ]
+  },
+  {
+    "id": "walking-with-elijah",
+    "name": "Berjalan Bersama Elia",
+    "description": "Sebuah studi 10 hari tentang nabi yang berdiri sendiri melawan sebuah kerajaan — dan Tuhan yang menemuinya di burung gagak, gua, dan suara lembut yang tenang.",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6E4A2C",
+      "#3A2814"
+    ],
+    "iconName": "flame.fill",
+    "imageKey": "elijah_ravens",
+    "applicableSeasons": [
+      "hardSeason",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose",
+      "anxiety"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Sebelum Ahab",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 6
+          }
+        ],
+        "reflection": "Di mana Tuhan meminta kamu untuk mengucapkan kebenaran yang sulit, dan apakah kamu mempercayai-Nya untuk menyediakan setelah kamu taat?"
+      },
+      {
+        "day": 2,
+        "title": "Janda di Sarfat",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 17,
+            "verseStart": 7,
+            "verseEnd": 24
+          }
+        ],
+        "reflection": "Apa 'segenggam tepung terakhir' kecil yang Tuhan minta kamu tawarkan dalam iman minggu ini?"
+      },
+      {
+        "day": 3,
+        "title": "Pertarungan di Karmel",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Altar mana dalam hidupmu yang perlu kamu bangun kembali — tempat ibadah yang telah jatuh ke dalam pengabaian?"
+      },
+      {
+        "day": 4,
+        "title": "Melarikan Diri ke Padang Gurun",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 19,
+            "verseStart": 1,
+            "verseEnd": 8
+          }
+        ],
+        "reflection": "Kapan kamu mengalami penyediaan lembut Tuhan — sebuah makanan, tidur siang, seorang teman — di tengah kelelahanmu?"
+      },
+      {
+        "day": 5,
+        "title": "Suara Lembut yang Tenang",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 19,
+            "verseStart": 9,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "Suara apa yang perlu kamu diamkan agar kamu bisa mendengar bisikan Tuhan alih-alih menunggu gempa bumi?"
+      },
+      {
+        "day": 6,
+        "title": "Kebun Anggur Naboth",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana cerita ini membentuk kembali cara Anda memandang ketidakadilan yang tampaknya tidak ingin dihadapi oleh orang lain?"
+      },
+      {
+        "day": 7,
+        "title": "Api dari Surga",
+        "readings": [
+          {
+            "bookID": "2KI",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Di mana Anda tergoda untuk berkonsultasi dengan 'dewa-dewa Ekron' lainnya daripada membawa ketakutan Anda kepada Tuhan?"
+      },
+      {
+        "day": 8,
+        "title": "Jubah Diberikan",
+        "readings": [
+          {
+            "bookID": "2KI",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jubah siapa yang Tuhan meminta Anda untuk angkat — atau jubah siapa yang Anda siap untuk berikan?"
+      },
+      {
+        "day": 9,
+        "title": "Elia di Gunung Bersama Kristus",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "Apa artinya bahwa nabi yang merasa paling sendirian suatu hari berdiri dengan Yesus dalam kemuliaan?"
+      },
+      {
+        "day": 10,
+        "title": "Seorang Manusia Seperti Kita",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": 13,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "Yakobus berkata Elia adalah 'seorang manusia dengan sifat seperti kita' — bagaimana itu mengubah cara Anda berdoa minggu ini?"
+      }
+    ]
+  },
+  {
+    "id": "beatitudes-deep-dive",
+    "name": "Sermon di Bukit: Delapan Potret",
+    "description": "Studi potret selama 8 hari tentang warga kerajaan Yesus — satu beatitude pada satu waktu, masing-masing dipasangkan dengan kitab suci yang melengkapi gambaran.",
+    "totalDays": 8,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A6B3A",
+      "#4F4524"
+    ],
+    "iconName": "sparkles",
+    "imageKey": "beatitudes",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Miskin dalam Roh",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 3
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 57,
+            "verseStart": 14,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "Seperti apa hari ini jika datang kepada Tuhan dengan mengakui ketergantungan total Anda daripada menunjukkan kemampuan Anda?"
+      },
+      {
+        "day": 2,
+        "title": "Mereka yang Berduka",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 4,
+            "verseEnd": 4
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 42,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kerugian atau kesedihan apa yang telah Anda coba hindari yang Yesus mengundang Anda untuk benar-benar duduk bersamanya?"
+      },
+      {
+        "day": 3,
+        "title": "Yang Lemah Lembut",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 5,
+            "verseEnd": 5
+          },
+          {
+            "bookID": "NUM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Di mana Anda membingungkan kelemahlembutan dengan kelemahan, dan bagaimana contoh Musa membentuk kembali itu?"
+      },
+      {
+        "day": 4,
+        "title": "Lapar akan Kebenaran",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 6,
+            "verseEnd": 6
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 63,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa lapar yang lebih kecil telah menghalangi nafsu Anda untuk kebenaran Tuhan minggu ini?"
+      },
+      {
+        "day": 5,
+        "title": "Yang Penuh Kasih",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 7,
+            "verseEnd": 7
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "Siapa yang Tuhan tempatkan di jalan Anda hari ini yang membutuhkan Anda untuk menjadi Samaria daripada imam?"
+      },
+      {
+        "day": 6,
+        "title": "Murni dalam Hati",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 8,
+            "verseEnd": 8
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Motif tersembunyi apa yang perlu Anda bawa ke dalam terang agar hati Anda dapat fokus dalam pengabdiannya?"
+      },
+      {
+        "day": 7,
+        "title": "Pembawa Damai",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 9,
+            "verseEnd": 9
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": 9,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "Di mana Tuhan memanggil Anda untuk melakukan pekerjaan yang lebih sulit dalam menciptakan perdamaian daripada sekadar menjaganya?"
+      },
+      {
+        "day": 8,
+        "title": "Yang Dianiaya",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 10,
+            "verseEnd": 16
+          },
+          {
+            "bookID": "1PE",
+            "chapter": 4,
+            "verseStart": 12,
+            "verseEnd": 19
+          }
+        ],
+        "reflection": "Bagaimana sukacita yang dijanjikan Yesus dapat membentuk kembali cara Anda merespons saat kesetiaan Anda mengorbankan sesuatu?"
+      }
+    ]
+  },
+  {
+    "id": "holy-week",
+    "name": "Minggu Suci: Perjalanan Menuju Paskah",
+    "description": "Jalani Minggu Suci hari demi hari — dari masuknya yang triumfal melalui salib hingga kubur yang kosong — dan jalani minggu paling bersejarah dalam sejarah.",
+    "totalDays": 8,
+    "category": "Easter",
+    "gradientColors": [
+      "#5A2E2E",
+      "#2F1515"
+    ],
+    "iconName": "cross.fill",
+    "imageKey": "triumphal_entry",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "grief",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Hari Minggu Palma",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 21,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "Apa artinya menyambut Yesus sebagai Raja ketika Dia datang dengan cara yang tidak Anda harapkan?"
+      },
+      {
+        "day": 2,
+        "title": "Membersihkan Bait Allah",
+        "readings": [
+          {
+            "bookID": "MRK",
+            "chapter": 11,
+            "verseStart": 12,
+            "verseEnd": 25
+          }
+        ],
+        "reflection": "Tabel apa dalam hati Anda yang Yesus minta untuk dibalikkan agar kehadiran-Nya dapat diterima dengan benar?"
+      },
+      {
+        "day": 3,
+        "title": "Mengajar di Bait Allah",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 22,
+            "verseStart": 34,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "Bagaimana mencintai Tuhan dengan segala yang Anda miliki — dan sesama Anda seperti diri Anda sendiri — dapat mengatur ulang minggu Anda?"
+      },
+      {
+        "day": 4,
+        "title": "Pengurapan di Betania",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 12,
+            "verseStart": 1,
+            "verseEnd": 11
+          }
+        ],
+        "reflection": "Tindakan cinta yang berlebihan apa yang dapat Anda tawarkan kepada Yesus hari ini, meskipun dunia menyebutnya sebagai pemborosan?"
+      },
+      {
+        "day": 5,
+        "title": "Perjamuan Terakhir",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kaki siapa yang Yesus minta Anda cuci minggu ini, dan kebanggaan apa yang membuatnya sulit?"
+      },
+      {
+        "day": 6,
+        "title": "Getsemani",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 26,
+            "verseStart": 36,
+            "verseEnd": 56
+          }
+        ],
+        "reflection": "Di mana dalam hidupmu kamu perlu berdoa, 'Bukan kehendakku, tetapi kehendak-Mu yang terjadi' — dan benar-benar mengartikan itu?"
+      },
+      {
+        "day": 7,
+        "title": "Jumat Agung",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa hal yang belum selesai dalam hidupmu yang perlu mendengar kata-kata Yesus: 'Itu sudah selesai'?"
+      },
+      {
+        "day": 8,
+        "title": "Pagi Paskah",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Di mana kamu membutuhkan kuasa kebangkitan untuk menemuimu di dalam kubur harapan yang mati hari ini?"
+      }
+    ]
+  },
+  {
+    "id": "genesis-beginnings",
+    "name": "Kejadian: Pada Awal",
+    "description": "Sebuah perjalanan 12 hari melalui kitab pertama dalam Alkitab — penciptaan, kejatuhan, banjir, para patriark — melacak pengejaran setia Tuhan dari awal.",
+    "totalDays": 12,
+    "category": "Foundations",
+    "gradientColors": [
+      "#3A5A4A",
+      "#1C2D24"
+    ],
+    "iconName": "globe.americas.fill",
+    "imageKey": "noah_ark",
+    "applicableSeasons": [
+      "growing",
+      "startingOver",
+      "newlyMarried"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Pada Awal",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Area 'tanpa bentuk dan kosong' dalam hidupmu apa yang sedang Tuhan bicarakan untuk memberikan ketertiban dan cahaya saat ini?"
+      },
+      {
+        "day": 2,
+        "title": "Taman dan Gambar",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa artinya bagimu bahwa Tuhan membentukmu dengan tangan-Nya sendiri dan menghembuskan hidup-Nya ke dalam dirimu?"
+      },
+      {
+        "day": 3,
+        "title": "Kejatuhan",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kebohongan ular apa — 'Apakah Tuhan benar-benar berkata?' — yang terus kamu dengar, dan bagaimana kamu bisa menjawabnya dengan kebenaran?"
+      },
+      {
+        "day": 4,
+        "title": "Nuh dan Banjir",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "GEN",
+            "chapter": 9,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "Di mana kamu perlu mempercayai janji pelangi Tuhan di tengah musim yang masih terasa banjir?"
+      },
+      {
+        "day": 5,
+        "title": "Panggilan Abram",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Negara dan kerabat apa yang Tuhan minta kamu tinggalkan untuk mengikuti-Nya ke sesuatu yang baru?"
+      },
+      {
+        "day": 6,
+        "title": "Menghitung Bintang",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa janji yang tidak mungkin dari Tuhan yang perlu kamu percayai, bahkan di malam-malam ketika itu tampak konyol?"
+      },
+      {
+        "day": 7,
+        "title": "Persembahan Ishak",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa yang telah menjadi 'Ishak' bagimu — sebuah hadiah yang kamu cintai begitu banyak sehingga mulai bersaing dengan Tuhan sendiri?"
+      },
+      {
+        "day": 8,
+        "title": "Tangga Yakub",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Di mana Tuhan telah muncul secara tak terduga belakangan ini, pasti di tempat yang tidak kamu ketahui Dia ada?"
+      },
+      {
+        "day": 9,
+        "title": "Bergumul Sepanjang Malam",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa yang sedang kamu perjuangkan dengan Tuhan saat ini, dan apakah kamu bersedia berjalan dengan pincang jika itu berarti menerima berkat-Nya?"
+      },
+      {
+        "day": 10,
+        "title": "Mimpi Yusuf",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa 'lubang' yang sedang kamu alami saat ini yang mungkin Tuhan gunakan sebagai bab pertama dari cerita yang jauh lebih besar?"
+      },
+      {
+        "day": 11,
+        "title": "Bersatu Kembali di Mesir",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 45,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Hubungan apa dalam hidupmu yang siap untuk pengampunan yang dicontohkan Yusuf: 'Kamu berniat jahat, tetapi Tuhan berniat untuk kebaikan'?"
+      },
+      {
+        "day": 12,
+        "title": "Tuhan Menghendakinya untuk Kebaikan",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 50,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Melihat kembali pada hal tersulit yang telah kamu lalui, di mana kamu sekarang melihat tangan Tuhan menenun itu untuk kebaikan?"
+      }
+    ]
+  },
+  {
+    "id": "daniel-exile",
+    "name": "Daniel: Setia di Pengasingan",
+    "description": "Sebuah perjalanan 12 hari melalui kitab Daniel — berdiri teguh di pengadilan pagan, berdoa saat itu ilegal, dan mempercayai Tuhan dengan seluruh sejarah.",
+    "totalDays": 12,
+    "category": "Character Study",
+    "gradientColors": [
+      "#5A3A2A",
+      "#2E1F16"
+    ],
+    "iconName": "shield.fill",
+    "imageKey": "daniel_lions",
+    "applicableSeasons": [
+      "workingProfessional",
+      "hardSeason",
+      "student",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Bertekad untuk Tidak Najis",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kompromi kecil sehari-hari apa yang Tuhan mengundangmu untuk 'bertekad' tidak lagi kamu terima?"
+      },
+      {
+        "day": 2,
+        "title": "Mimpi Sang Raja",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Di mana kamu perlu mempercayai bahwa Tuhan yang mengungkapkan hal-hal yang dalam dan tersembunyi adalah penguasa atas kekaisaran di zamanmu?"
+      },
+      {
+        "day": 3,
+        "title": "Perapian yang Menyala",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Seperti apa iman 'tetapi jika tidak' bagimu minggu ini — kepercayaan yang taat bahkan tanpa jaminan penyelamatan?"
+      },
+      {
+        "day": 4,
+        "title": "Seorang Raja yang Direndahkan",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Di mana kebanggaan membisikkan bahwa kamu membangun apa yang kamu miliki, dan bagaimana Tuhan memanggilmu untuk mengangkat matamu?"
+      },
+      {
+        "day": 5,
+        "title": "Tulisan di Dinding",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa dalam hidupmu yang telah 'ditimbang' oleh Tuhan, dan pertobatan apa yang sedang diundang?"
+      },
+      {
+        "day": 6,
+        "title": "Kandang Singa",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Praktik doa dengan jendela terbuka mana yang layak dipertahankan, meskipun itu mengorbankan sesuatu secara sosial atau profesional?"
+      },
+      {
+        "day": 7,
+        "title": "Yang Tua Sejak Zaman",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana visi Yang Tua Sejak Zaman dan Anak Manusia memberimu pandangan yang lebih panjang tentang berita utama?"
+      },
+      {
+        "day": 8,
+        "title": "Domba Jantan dan Kambing",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ketika masa depan terasa membingungkan, apa yang mengikatmu pada Tuhan yang melihat akhir dari awal?"
+      },
+      {
+        "day": 9,
+        "title": "Doa Pengakuan",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Di mana komunitas atau keluargamu membutuhkanmu untuk berdiri di celah dengan doa pengakuan seperti Daniel?"
+      },
+      {
+        "day": 10,
+        "title": "Orang yang Berpakaian Linen",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana kenyataan pertempuran spiritual yang tak terlihat mengubah cara kamu bertahan dalam doa ketika tidak ada yang tampak bergerak?"
+      },
+      {
+        "day": 11,
+        "title": "Raja dan Kerajaan",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kerajaan dunia mana yang telah kamu berikan terlalu banyak bobot, dan bagaimana kamu bisa mengikat kembali harapanmu?"
+      },
+      {
+        "day": 12,
+        "title": "Orang Bijak Akan Bersinar",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bagaimana janji bahwa 'orang bijak akan bersinar seperti cahaya langit' memicu kesetiaanmu hari ini?"
+      }
+    ]
+  },
+  {
+    "id": "lords-prayer-deep-dive",
+    "name": "Doa Tuhan: Ajari Kami Berdoa",
+    "description": "Meditasi 7 hari tentang doa yang diajarkan Yesus kepada kita — satu permohonan per hari — melambat untuk berarti setiap kata.",
+    "totalDays": 7,
+    "category": "Prayer",
+    "gradientColors": [
+      "#4A5A7A",
+      "#242D3D"
+    ],
+    "iconName": "hands.sparkles.fill",
+    "imageKey": "lords_prayer",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "parenthood",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Bapa Kami di Surga",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 5,
+            "verseEnd": 13
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": 12,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "Apa yang berubah tentang doamu hari ini jika kamu benar-benar percaya bahwa kamu mendekati Bapamu, bukan hanya dewa yang jauh?"
+      },
+      {
+        "day": 2,
+        "title": "Dikuduskanlah Nama-Mu",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 99,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 6,
+            "verseStart": 1,
+            "verseEnd": 8
+          }
+        ],
+        "reflection": "Apa yang akan terlihat hari ini jika kamu memperlakukan nama Tuhan sebagai kudus dalam pikiranmu, mulutmu, dan pilihanmu?"
+      },
+      {
+        "day": 3,
+        "title": "Kerajaan-Mu Datang",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 13,
+            "verseStart": 31,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "Di mana kamu ingin melihat kerajaan Tuhan masuk ke dalam duniamu minggu ini — dan bagaimana kamu akan berdoa dengan harapan?"
+      },
+      {
+        "day": 4,
+        "title": "Kendak-Mu Terjadi",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 26,
+            "verseStart": 36,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "Doa mana yang menunggumu untuk 'bukan kehendakku, tetapi kehendak-Mu' yang jujur? Apa yang akan itu biayakan, dan apa yang akan itu bebaskan?"
+      },
+      {
+        "day": 5,
+        "title": "Berikan Kami Hari Ini",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 10,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "Bagaimana doa roti harian menyembuhkan kecemasan mencoba mengumpulkan anugerah besok hari ini?"
+      },
+      {
+        "day": 6,
+        "title": "Ampunilah Kami Seperti Kami Mengampuni",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 18,
+            "verseStart": 21,
+            "verseEnd": 35
+          }
+        ],
+        "reflection": "Utang siapa yang perlu kamu lepaskan agar doamu untuk pengampunan tidak terhalang oleh hati yang tertutup?"
+      },
+      {
+        "day": 7,
+        "title": "Lepaskan Kami dari yang Jahat",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 6,
+            "verseStart": 10,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "Di mana kamu perlu mengenakan perlengkapan Tuhan dan berdoa secara khusus untuk pembebasan dari yang jahat hari ini?"
+      }
+    ]
+  },
+  {
+    "id": "parables-kingdom",
+    "name": "Perumpamaan Kerajaan",
+    "description": "Jalan 10 hari melalui perumpamaan Yesus yang paling tajam — cerita pendek yang mengubah hati dan mengungkapkan kerajaan Tuhan yang terbalik.",
+    "totalDays": 10,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A4A2A",
+      "#3E2516"
+    ],
+    "iconName": "quote.opening",
+    "imageKey": "prodigal_son",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "workingProfessional",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "relationships",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Penabur",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 13,
+            "verseStart": 1,
+            "verseEnd": 23
+          }
+        ],
+        "reflection": "Jenis tanah apa yang ada di hatimu saat ini, dan apa yang perlu kamu lakukan untuk menjadi 'tanah yang baik' musim ini?"
+      },
+      {
+        "day": 2,
+        "title": "Samaritan yang Baik",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "Siapa yang kamu tergoda untuk lewatkan, dan bagaimana jika kamu menyeberang jalan sebagai gantinya?"
+      },
+      {
+        "day": 3,
+        "title": "Anak yang Hilang",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 15,
+            "verseStart": 11,
+            "verseEnd": 32
+          }
+        ],
+        "reflection": "Anak yang mana yang paling mirip denganmu hari ini — si pengembara atau kakak yang merasa iri — dan apa yang ingin diberikan Bapa kepadamu?"
+      },
+      {
+        "day": 4,
+        "title": "Domba dan Koin yang Hilang",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 15,
+            "verseStart": 1,
+            "verseEnd": 10
+          }
+        ],
+        "reflection": "Di mana dalam hidupmu kamu merasa hilang, dan bagaimana hal itu mengubah segalanya ketika kamu tahu bahwa surga sedang mencarimu?"
+      },
+      {
+        "day": 5,
+        "title": "Orang Bodoh yang Kaya",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 12,
+            "verseStart": 13,
+            "verseEnd": 34
+          }
+        ],
+        "reflection": "Apa 'gudang' yang lebih besar yang kamu tergoda untuk bangun, dan bagaimana kamu bisa kaya di hadapan Tuhan sebagai gantinya?"
+      },
+      {
+        "day": 6,
+        "title": "Hamba yang Tidak Mengampuni",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 18,
+            "verseStart": 21,
+            "verseEnd": 35
+          }
+        ],
+        "reflection": "Apa pelanggaran kecil yang masih kamu tahan terhadap seseorang, dan bagaimana gunung pengampunanmu mengubah hal itu?"
+      },
+      {
+        "day": 7,
+        "title": "Orang Farisi dan Pemungut Pajak",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 18,
+            "verseStart": 9,
+            "verseEnd": 14
+          }
+        ],
+        "reflection": "Di mana doamu secara diam-diam terdengar lebih seperti orang Farisi daripada pemungut pajak — dan bagaimana kamu bisa merendahkan diri hari ini?"
+      },
+      {
+        "day": 8,
+        "title": "Para Pekerja di Kebun Anggur",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 20,
+            "verseStart": 1,
+            "verseEnd": 16
+          }
+        ],
+        "reflection": "Siapa yang kamu rasa tidak adil dengan anugerah yang datang terlambat dalam hidupmu, dan bagaimana kemurahan hati Pemilik Tanah membebaskanmu dari itu?"
+      },
+      {
+        "day": 9,
+        "title": "Sepuluh Perawan",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 25,
+            "verseStart": 1,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "Apa 'minyak' dari hubungan yang berkelanjutan dengan Kristus yang mungkin mulai menipis, dan bagaimana kamu bisa merawatnya minggu ini?"
+      },
+      {
+        "day": 10,
+        "title": "Domba dan Kambing",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 25,
+            "verseStart": 31,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "Di wajah siapa, hari ini, Yesus menunggu untuk dikenali — dan apakah kamu akan merespons?"
+      }
+    ]
+  },
+  {
+    "id": "esther-for-such-a-time",
+    "name": "Esther: Untuk Saat Seperti Ini",
+    "description": "Sebuah perjalanan 10 hari melalui kitab Esther — 10 pasal, 10 hari — menelusuri providensi Tuhan yang tersembunyi melalui krisis, keberanian, dan pembalikan.",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6A3A5C",
+      "#2E1826"
+    ],
+    "iconName": "crown.fill",
+    "imageKey": "mordecai_triumph",
+    "applicableSeasons": [
+      "workingProfessional",
+      "student",
+      "hardSeason",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Pesta di Istana",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Di mana dalam kebisingan dan kelebihan duniamu kamu merasakan Tuhan diam-diam menyiapkan panggung?"
+      },
+      {
+        "day": 2,
+        "title": "Ratu yang Tak Terduga",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa keadaan yang tidak kamu pilih dalam hidupmu yang mungkin digunakan Tuhan untuk memposisikanmu untuk tujuan yang belum bisa kamu lihat?"
+      },
+      {
+        "day": 3,
+        "title": "Bayangan Haman",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ketika kejahatan tampaknya semakin kuat di duniamu, bagaimana kamu berpegang pada kebaikan Tuhan?"
+      },
+      {
+        "day": 4,
+        "title": "Untuk Saat Seperti Ini",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Apa langkah berisiko 'jika aku binasa, aku binasa' yang mungkin Tuhan minta darimu demi orang lain?"
+      },
+      {
+        "day": 5,
+        "title": "Mendekati Raja",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kapan kamu merasakan anugerah Tuhan membuka pintu yang kamu takut untuk lewati?"
+      },
+      {
+        "day": 6,
+        "title": "Malam Tanpa Tidur",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Di mana kamu telah melihat providensi Tuhan yang tak terlihat mengatur 'kebetulan' untuk kebaikanmu?"
+      },
+      {
+        "day": 7,
+        "title": "Pembalikan Besar",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Situasi apa yang terasa mustahil saat ini yang mungkin lebih dekat dengan pembalikan daripada yang kamu sadari?"
+      },
+      {
+        "day": 8,
+        "title": "Dekrit Baru",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Di mana kamu perlu berdoa dengan 'dekrit' baru yang berani atas situasi yang telah diabaikan?"
+      },
+      {
+        "day": 9,
+        "title": "Hari Purim",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Rescue apa yang sudah Tuhan kerjakan untukmu yang layak diingat dan dirayakan dengan sengaja?"
+      },
+      {
+        "day": 10,
+        "title": "Mordekai Sang Pembela",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Siapa di sekitarmu yang membutuhkanmu untuk menjadi Mordekai — seseorang yang berbicara untuk kesejahteraan mereka bahkan ketika itu mahal?"
+      }
+    ]
+  },
+  {
+    "id": "ruth-redemption",
+    "name": "Ruth: Sebuah Kisah Penebusan",
+    "description": "Sebuah perjalanan 4 hari melalui kitab kecil Ruth — di mana kehilangan bertemu kesetiaan, memungut bertemu providensi, dan seorang janda asing menjadi nenek buyut Raja Daud.",
+    "totalDays": 4,
+    "category": "Character Study",
+    "gradientColors": [
+      "#8B6642",
+      "#4A331F"
+    ],
+    "iconName": "heart.circle.fill",
+    "imageKey": "jacob_rachel_well",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "relationships",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Kehilangan dan Kesetiaan",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Naomi menyebut dirinya 'Mara' — pahit. Ruth merespons kehilangan dengan sebuah janji: 'Ke mana engkau pergi, aku akan pergi.' Suara manakah dari dua suara ini — kejujuran yang pahit atau kesetiaan yang keras kepala — yang lebih mendekati bagaimana kamu menghadapi musim ini, dan apa yang mungkin berubah jika keduanya diizinkan untuk berdampingan?"
+      },
+      {
+        "day": 2,
+        "title": "Kebaikan yang Tak Terduga",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Perhatikan bagaimana narator mengatakan Ruth 'terjadi' untuk memungut di ladang Boaz — sebuah isyarat halus bahwa tidak ada yang acak dalam cerita ini. Di mana dalam hidupmu mungkin Tuhan sedang mengatur apa yang terasa seperti kebetulan menjadi kebaikan yang tenang?"
+      },
+      {
+        "day": 3,
+        "title": "Iman yang Berani di Lumbung",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Pendekatan Ruth kepada Boaz mengingatkan pada konsep Ibrani tentang penebus — seorang kerabat yang membeli kembali tanah dan kehidupan yang telah hilang. Apa artinya bagimu bahwa gambaran Alkitab tentang penebusan dimulai di sini, di lumbung, bukan di sebuah kuil?"
+      },
+      {
+        "day": 4,
+        "title": "Penebus dan Garis Kerajaan",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 1,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "Ruth — seorang Moabit, seorang janda, seorang asing — muncul dalam pohon keluarga Yesus. Bagaimana akhir ini membentuk kembali pemahamanmu tentang siapa yang Tuhan jalin dalam cerita keselamatan-Nya, dan bagaimana Dia mungkin sedang menjalin kamu di dalamnya?"
+      }
+    ]
+  },
+  {
+    "id": "jonah-reluctant-prophet",
+    "name": "Yunus: Nabi yang Enggan",
+    "description": "Sebuah perjalanan 4 hari melalui Yunus — seorang nabi yang melarikan diri, sebuah badai yang menangkapnya, sebuah kota yang bertobat, dan Tuhan yang kasih-Nya lebih jauh daripada prasangka Yunus.",
+    "totalDays": 4,
+    "category": "Character Study",
+    "gradientColors": [
+      "#2E5A6B",
+      "#15303A"
+    ],
+    "iconName": "water.waves",
+    "imageKey": "jesus_calms_storm",
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "Melarikan Diri dari Tuhan",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Tuhan berkata 'pergilah ke Niniwe' dan Yunus naik perahu menuju Tarsis — ujung yang berlawanan dari dunia yang dikenal. Tugas apa dari Tuhan yang kamu tinggalkan, dan dari mana badai yang seharusnya memperingatkanmu sebenarnya berasal?"
+      },
+      {
+        "day": 2,
+        "title": "Doa dari Kedalaman",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Yunus berdoa dari dalam ikan — titik terendah yang bisa dibayangkan — dan menyebutnya 'kuil.' Bagaimana perubahan perspektif itu mengubah pandanganmu tentang tempat rendahmu sendiri? Dapatkah doa mengubah kedalaman apa pun menjadi tempat perlindungan?"
+      },
+      {
+        "day": 3,
+        "title": "Sebuah Kota yang Bertobat",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Niniwe adalah musuh terkejam Israel, dan yet mereka bertobat pada khotbah terpendek dalam Alkitab — hanya delapan kata. Apa yang itu ajarkan padamu tentang kekuatan misterius dari Firman Tuhan, bahkan ketika utusannya enggan?"
+      },
+      {
+        "day": 4,
+        "title": "Hati Tuhan",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Buku ini diakhiri dengan sebuah pertanyaan, bukan jawaban — Tuhan bertanya kepada Yunus apakah Dia harus mengasihi seratus dua puluh ribu orang. Siapa yang keselamatannya secara diam-diam akan mengecewakanmu, dan apa yang ditanyakan Tuhan terakhir ini memanggilmu untuk diletakkan?"
+      }
+    ]
+  },
+  {
+    "id": "fruit-of-the-spirit",
+    "name": "Buah Roh",
+    "description": "Sebuah studi 9 hari tentang karakter yang Roh Kudus tumbuhkan dalam diri kita — satu buah per hari, masing-masing berakar dalam Galatia 5 dan dipasangkan dengan bagian yang menghidupkannya.",
+    "totalDays": 9,
+    "category": "Discipleship",
+    "gradientColors": [
+      "#4A7A5C",
+      "#2A4A38"
+    ],
+    "iconName": "leaf.circle.fill",
+    "imageKey": "annunciation",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional",
+      "parenthood",
+      "newlyMarried"
+    ],
+    "applicableBurdens": [
+      "relationships",
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "Kasih",
+        "readings": [
+          {
+            "bookID": "GAL",
+            "chapter": 5,
+            "verseStart": 16,
+            "verseEnd": 26
+          },
+          {
+            "bookID": "1CO",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paulus mengatakan buah Roh adalah kasih — tunggal — seolah-olah delapan yang lain mengalir darinya. Garis mana dari 1 Korintus 13 yang paling mengungkap di mana kasihmu masih tumbuh, dan di mana Roh mengundangmu untuk bekerja sama?"
+      },
+      {
+        "day": 2,
+        "title": "Sukacita",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 4,
+            "verseEnd": 13
+          },
+          {
+            "bookID": "NEH",
+            "chapter": 8,
+            "verseStart": 1,
+            "verseEnd": 12
+          }
+        ],
+        "reflection": "Sukacita alkitabiah bukanlah ketiadaan kesedihan tetapi kegembiraan yang dalam yang berakar pada Tuhan. Di mana kamu salah mengira kebahagiaan sebagai sukacita, dan apa yang menambatkan sukacita ketika keadaan tidak mendukung?"
+      },
+      {
+        "day": 3,
+        "title": "Damai",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": 25,
+            "verseEnd": 31
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 26,
+            "verseStart": 1,
+            "verseEnd": 9
+          }
+        ],
+        "reflection": "Yesus memberikan damai 'bukan seperti yang diberikan dunia' — bukan ketiadaan konflik, tetapi kehadiran-Nya. Kekhawatiran apa yang kamu bawa hari ini yang Yesus tawarkan untuk ditukar dengan damai-Nya?"
+      },
+      {
+        "day": 4,
+        "title": "Kesabaran",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": 7,
+            "verseEnd": 11
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 11
+          }
+        ],
+        "reflection": "Kata Yunani di sini, 'makrothumia,' secara harfiah berarti 'panjang sabar' — lambat untuk mendidih. Di mana dalam hidupmu yang sabar pendek, dan seperti apa rasanya untuk menjadi panjang sabar dengan orang atau situasi tertentu itu?"
+      },
+      {
+        "day": 5,
+        "title": "Kebaikan",
+        "readings": [
+          {
+            "bookID": "COL",
+            "chapter": 3,
+            "verseStart": 12,
+            "verseEnd": 17
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "Kebaikan bukan sekadar bersikap baik — itu adalah pergi keluar dari jalanmu untuk seseorang yang tidak dapat membalasmu. Siapa yang Tuhan tempatkan di jalanmu minggu ini yang mengharuskanmu untuk berbuat baik?"
+      },
+      {
+        "day": 6,
+        "title": "Kebaikan",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": 9,
+            "verseEnd": 21
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kebaikan adalah integritas yang tetap ada bahkan ketika tidak ada yang melihat. Di mana dalam hidup pribadimu Roh dengan tenang mengundangmu untuk mencocokkan rahasiamu dengan reputasimu?"
+      },
+      {
+        "day": 7,
+        "title": "Kesetiaan",
+        "readings": [
+          {
+            "bookID": "LAM",
+            "chapter": 3,
+            "verseStart": 19,
+            "verseEnd": 33
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 16,
+            "verseStart": 10,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "Kesetiaan Tuhan baru setiap pagi; kesetiaan kita dimaksudkan untuk tetap dalam hal-hal kecil. Di mana Tuhan meminta kamu untuk setia dalam hal 'kecil' yang tidak ada yang mengapresiasi?"
+      },
+      {
+        "day": 8,
+        "title": "Kelemahlembutan",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 1,
+            "verseEnd": 9
+          },
+          {
+            "bookID": "PRO",
+            "chapter": 15,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "Kelemahlembutan adalah kekuatan yang terkontrol — jawaban lembut dari seseorang yang bisa saja mengaum. Siapa yang lukanya kamu sentuh dengan kata-katamu yang sebenarnya membutuhkan sentuhan lembut?"
+      },
+      {
+        "day": 9,
+        "title": "Penguasaan Diri",
+        "readings": [
+          {
+            "bookID": "2PE",
+            "chapter": 1,
+            "verseStart": 3,
+            "verseEnd": 11
+          },
+          {
+            "bookID": "PRO",
+            "chapter": 25,
+            "verseStart": 21,
+            "verseEnd": 28
+          }
+        ],
+        "reflection": "Amsal menggambarkan seseorang tanpa penguasaan diri sebagai kota dengan tembok yang rusak — terbuka untuk apa pun. Tembok 'apa' yang ingin dibangun kembali Roh dalam hidupmu minggu ini, dan siapa yang bisa membantumu merawatnya?"
+      }
+    ]
+  },
+  {
+    "id": "philippians-joy",
+    "name": "Filipi: Sukacita di Setiap Musim",
+    "description": "Sebuah perjalanan 4 hari melalui surat Paulus yang paling penuh sukacita — ditulis dari sel penjara — satu bab per hari, masing-masing mengungkapkan sisi berbeda dari sukacita yang tidak dapat dijangkau oleh keadaan.",
+    "totalDays": 4,
+    "category": "Epistles",
+    "gradientColors": [
+      "#7A6A2E",
+      "#3C3314"
+    ],
+    "iconName": "sun.max.fill",
+    "imageKey": "magi_journey",
+    "applicableSeasons": [
+      "hardSeason",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "Kebahagiaan dalam Penderitaan",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paulus menulis surat ini dalam belenggu dan tetap menyebutnya 'kebahagiaannya.' Ia mengubah penjara menjadi platform untuk Injil. Apa keadaan yang tidak diinginkan dalam hidupmu yang Tuhan undang untuk kamu ubah pandangannya daripada melarikan diri?"
+      },
+      {
+        "day": 2,
+        "title": "Kebahagiaan dalam Kerendahan Hati",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Lagu pujian dalam ayat 6–11 menggambarkan gerakan turun Yesus — setara dengan Tuhan, dikosongkan, manusia, taat, disalibkan — sebelum Bapa mengangkat-Nya. Di mana kamu berusaha meraih status di tempat yang Yesus contohkan dengan penyerahan, dan seperti apa 'pikiran yang sama' itu sebenarnya?"
+      },
+      {
+        "day": 3,
+        "title": "Kebahagiaan dalam Mengenal Kristus",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paulus menyebut résumé-nya yang mengesankan sebagai 'sampah' dibandingkan dengan mengenal Kristus. Bagian mana dari résumé-mu sendiri — kredensial, peran, pencapaian — yang diam-diam bersaing dengan Kristus untuk pusat identitasmu?"
+      },
+      {
+        "day": 4,
+        "title": "Kebahagiaan dalam Setiap Keadaan",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paulus mengatakan bahwa ia telah belajar — bentuk lampau, diperoleh dengan susah payah — rahasia untuk merasa cukup dalam kelimpahan atau kekurangan. Di mana dalam hidupmu Tuhan sedang mengajarkan rahasia itu sekarang, dan praktik apa (doa, rasa syukur, pemikiran yang benar) yang kamu tolak untuk benar-benar gunakan?"
+      }
+    ]
+  },
+  {
+    "id": "life-of-moses",
+    "name": "Kehidupan Musa",
+    "description": "Sebuah perjalanan 10 hari melalui kehidupan Musa — dari keranjang hingga semak yang terbakar, dari Laut Merah hingga Sinai — bertemu dengan Tuhan yang memanggil, menyelamatkan, berbicara, dan tinggal.",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6C4E2A",
+      "#382712"
+    ],
+    "iconName": "flame.circle.fill",
+    "imageKey": "manna_wilderness",
+    "applicableSeasons": [
+      "workingProfessional",
+      "startingOver",
+      "hardSeason",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Lahir dalam Sebuah Keranjang",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bidanku Ibrani menentang dekrit Firaun, seorang ibu meletakkan putranya dalam keranjang di Sungai Nil, dan Tuhan sudah menulis kisah penyelamatan. Di mana Tuhan telah diam-diam mempersiapkanmu, jauh sebelum kamu tahu bahwa penyelamatan dibutuhkan?"
+      },
+      {
+        "day": 2,
+        "title": "Semak yang Terbakar",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Musa berpaling untuk melihat semak yang terbakar tanpa terbakar, dan Tuhan memanggilnya dengan namanya. Apa hal biasa yang mungkin Tuhan gunakan untuk menarik perhatianmu, dan apakah kamu bersedia untuk berpaling untuk melihat?"
+      },
+      {
+        "day": 3,
+        "title": "Alasan dan Tanda",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Musa berdebat dengan Tuhan: 'Siapa aku? Bagaimana jika mereka tidak percaya padaku? Aku tidak fasih.' Tuhan menjawab setiap keberatan. Alasan mana dari Musa yang paling mirip dengan alasan yang terus kamu berikan kepada Tuhan, dan apa jawaban sabar Tuhan untukmu?"
+      },
+      {
+        "day": 4,
+        "title": "Biarkan Umatku Pergi",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Tulah-tulah secara sistematis menurunkan setiap dewa Mesir — Sungai Nil, matahari, ternak — menunjukkan siapa yang benar-benar memerintah. Dewa budaya mana yang perlu Tuhan ungkapkan sebagai tidak berdaya dalam hidupmu?"
+      },
+      {
+        "day": 5,
+        "title": "Paskah",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Israel diselamatkan bukan karena jasa mereka tetapi oleh darah seekor domba di ambang pintu mereka — bayangan dari Domba yang lebih besar yang akan datang. Bagaimana melihat Paskah sebagai potret Kristus memperdalam pemahamanmu tentang apa yang sebenarnya dicapai oleh darah-Nya?"
+      },
+      {
+        "day": 6,
+        "title": "Melalui Laut",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "'Diamlah dan lihat keselamatan Tuhan,' kata Musa kepada orang-orang yang terjebak — dan kemudian Tuhan berkata 'maju.' Di mana kamu tergoda untuk panik atau terhenti ketika Tuhan meminta ketenangan hati dan langkah iman?"
+      },
+      {
+        "day": 7,
+        "title": "Manna dan Air",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 7
+          }
+        ],
+        "reflection": "Tuhan memberikan roti yang tidak bisa disimpan dan air dari batu. Anugerah apa yang Dia tawarkan kepadamu setiap hari yang terus kamu coba kumpulkan untuk mengatasi kecemasan?"
+      },
+      {
+        "day": 8,
+        "title": "Sinai dan Sepuluh Perintah",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Tuhan memberikan hukum dalam konteks penyelamatan — 'Aku adalah Tuhanmu yang membawa kamu keluar' — bukan sebagai cara untuk mendapatkan kasih-Nya tetapi sebagai bentuk hidup bersamanya. Perintah mana yang paling sering kamu baca sebagai beban daripada sebagai batasan kebebasan?"
+      },
+      {
+        "day": 9,
+        "title": "Tunjukkan Kemuliaan-Mu",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 33,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Musa berkata, 'Jika hadirat-Mu tidak pergi bersama kami, jangan kirim kami dari sini.' Apa yang lebih kamu inginkan dari Tuhan — hadiah-Nya, atau Dia? Bagaimana hari ini akan terlihat berbeda jika kamu menginginkan Dia yang paling?"
+      },
+      {
+        "day": 10,
+        "title": "Hamba yang Setia",
+        "readings": [
+          {
+            "bookID": "DEU",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Musa meninggal tanpa memasuki Tanah Perjanjian, tetapi Tuhan sendiri menguburkannya. Apa hal-hal yang belum selesai dalam hidupmu yang Tuhan minta untuk kamu percayakan kepada-Nya, mengetahui bahwa kisah ini lebih besar dari dirimu?"
+      }
+    ]
+  },
+  {
+    "id": "psalm-23-deep-dive",
+    "name": "Mazmur 23: Lagu Gembala",
+    "description": "Meditasi 6 hari tentang mazmur yang paling dicintai dalam Kitab Suci — satu ayat pada satu waktu — dipasangkan dengan bagian Perjanjian Baru yang mengungkapkan Kristus sebagai Gembala yang selalu ditunjuk oleh mazmur.",
+    "totalDays": 6,
+    "category": "Worship",
+    "gradientColors": [
+      "#4A6B3F",
+      "#253A22"
+    ],
+    "iconName": "sparkle",
+    "imageKey": "suffer_little_children",
+    "applicableSeasons": [
+      "hardSeason",
+      "growing",
+      "retired",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Tuhan adalah Gembalaku",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 1,
+            "verseEnd": 1
+          },
+          {
+            "bookID": "JHN",
+            "chapter": 10,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "Daud adalah seorang gembala — ia tahu beban pekerjaan itu. Yesus menyebut diri-Nya 'Gembala yang Baik' yang menyerahkan hidup-Nya. Gembala palsu (pekerjaan, kesuksesan, hubungan) apa yang telah kamu biarkan mendefinisikan nilai dirimu, dan apa yang berubah ketika Tuhan sendiri memegang tongkat?"
+      },
+      {
+        "day": 2,
+        "title": "Padang Rumput Hijau, Air Tenang",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 2,
+            "verseEnd": 2
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 11,
+            "verseStart": 25,
+            "verseEnd": 30
+          }
+        ],
+        "reflection": "Domba tidak akan berbaring ketika mereka cemas, lapar, atau dalam konflik. Gembala 'memaksa' mereka. Di mana dalam hidupmu Yesus dengan lembut membuatmu beristirahat, dan apa yang kamu perjuangkan untuk tetap berdiri?"
+      },
+      {
+        "day": 3,
+        "title": "Jalan Kebenaran",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 3,
+            "verseEnd": 3
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Gembala 'memulihkan jiwaku' sebelum Dia memimpin di jalan yang benar — penghiburan mendahului koreksi. Di mana Tuhan telah memulihkan dirimu yang kamu salahartikan sebagai Tuhan yang diam, dan jalan mana yang mungkin Dia siap untuk berjalan bersamamu sekarang?"
+      },
+      {
+        "day": 4,
+        "title": "Melalui Lembah",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 4,
+            "verseEnd": 4
+          },
+          {
+            "bookID": "2CO",
+            "chapter": 4,
+            "verseStart": 7,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "Daud tidak mengatakan 'di sekitar' tetapi 'melalui' lembah, dan subjek berubah di sini dari 'Dia' menjadi 'Engkau' — semakin dekat bahaya, semakin pribadi Gembala menjadi. Lembah mana yang sedang kamu hadapi, dan bagaimana kedekatan Tuhan semakin intens di dalamnya?"
+      },
+      {
+        "day": 5,
+        "title": "Sebuah Meja di Hadapan Musuh",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 5,
+            "verseEnd": 5
+          },
+          {
+            "bookID": "REV",
+            "chapter": 19,
+            "verseStart": 1,
+            "verseEnd": 10
+          }
+        ],
+        "reflection": "Tuhan mengundangmu untuk berpesta di depan musuh yang ingin kau jauhkan. Apa artinya bahwa Dia tidak selalu menghilangkan masalahmu, tetapi kadang-kadang mengundangmu untuk duduk dan makan sementara masalah mengawasi?"
+      },
+      {
+        "day": 6,
+        "title": "Kebaikan, Kasih, dan Rumah",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 6,
+            "verseEnd": 6
+          },
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": 1,
+            "verseEnd": 6
+          }
+        ],
+        "reflection": "Dalam bahasa Ibrani, 'ikutlah aku' dapat dibaca sebagai 'kejar' — kebaikan dan kasih tidak berjalan di belakangmu, mereka mengejarmu. Bagaimana perubahan perspektif ini mengubah cara kamu mengingat masa lalumu dan melihat masa depanmu bersama Tuhan?"
+      }
+    ]
+  },
+  {
+    "id": "acts-early-church",
+    "name": "Kisah Para Rasul: Gereja Awal",
+    "description": "Sebuah perjalanan selama 14 hari melalui kitab Kisah Para Rasul — dua pasal per hari — dari Pentakosta ke Roma, menyaksikan Roh melahirkan sebuah gerakan yang masih bergema di setiap orang percaya hari ini.",
+    "totalDays": 14,
+    "category": "Foundations",
+    "gradientColors": [
+      "#7A4A1C",
+      "#3E2510"
+    ],
+    "iconName": "wind",
+    "imageKey": "loaves_fishes",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional",
+      "student"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Pentakosta",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Gereja lahir ketika orang-orang biasa dipenuhi Roh dan mulai memberitakan Yesus dalam bahasa yang tidak pernah mereka pelajari. Di mana dalam hidupmu kamu telah menunggu lebih banyak pelatihan daripada mempercayakan Roh untuk memberdayakan perkataan yang kamu miliki?"
+      },
+      {
+        "day": 2,
+        "title": "Berani di Hadapan Otoritas",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Petrus dan Yohanes diperintahkan untuk berhenti memberitakan — dan berdoalah untuk lebih berani, bukan kurang. Di mana tekanan sosial membuatmu diam tentang Yesus, dan doa apa yang akan mengubah sikapmu dari akomodasi menjadi keberanian?"
+      },
+      {
+        "day": 3,
+        "title": "Gereja yang Berkembang dan Menguji",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kebohongan Ananias dan Safira mengancam kemurnian komunitas muda; kemudian, para rasul mendelegasikan agar Firman dapat terus berjalan. Kompromi organisasi atau pribadi apa dalam hidup spiritualmu yang diam-diam menghambat misi?"
+      },
+      {
+        "day": 4,
+        "title": "Stefanus dan Penyebaran",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kematian Stefanus tampak seperti akhir gerakan — tetapi penganiayaan yang mengikuti menyebarkan Injil ke seluruh dunia yang dikenal. Akhir apa dalam hidupmu yang mungkin Tuhan gunakan sebagai awal yang belum bisa kamu lihat?"
+      },
+      {
+        "day": 5,
+        "title": "Saul Bertobat, Kornelius Diterima",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Musuh terhebat gereja menjadi misionaris terbesarnya, dan seorang centurion Romawi menjadi saudara. Siapa yang konversinya akan mengejutkanmu, dan apakah kamu bersedia berdoa untuk itu dengan harapan yang nyata?"
+      },
+      {
+        "day": 6,
+        "title": "Antiokhia dan Seorang Malaikat",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Orang percaya pertama kali disebut 'Kristen' di Antiokhia — sebuah gereja dari orang-orang luar yang menjadi pusat. Bagaimana Tuhan menggunakan orang-orang di pinggiran untuk menumbuhkan gereja-Nya dengan cara yang tidak dapat dilihat oleh pusat agama?"
+      },
+      {
+        "day": 7,
+        "title": "Perjalanan Misionaris Pertama",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Roh berkata, 'Pisahkan Paulus dan Barnabas untuk pekerjaan yang telah kutentukan bagi mereka.' Siapa yang pengutusannya kamu terlibat — baik sedang diutus atau mendukung dengan doa — dan seberapa serius kamu menganggap pengelolaan itu?"
+      },
+      {
+        "day": 8,
+        "title": "Konsili Yerusalem dan Penjara Filipi",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Gereja memutuskan bahwa kasih karunia benar-benar untuk orang-orang non-Yahudi, dan Paulus bernyanyi di sel penjara tengah malam. Di mana kamu masih menambahkan persyaratan yang tidak terucapkan pada kasih karunia Tuhan, dan lagu apa yang mungkin menunggu di tempat terberatmu?"
+      },
+      {
+        "day": 9,
+        "title": "Athena dan Korintus",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paulus berinteraksi dengan para filsuf pagan di Areopagus dengan mengutip penyair mereka sendiri. Bagaimana kamu bisa belajar untuk berbicara Injil dalam kosakata orang-orang di sekitarmu tanpa mengencerkan kebenaran?"
+      },
+      {
+        "day": 10,
+        "title": "Efesus dan Perpisahan yang Lembut",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paulus menangis bersama para penatua Efesus, mengingatkan mereka bahwa 'lebih berbahagia memberi daripada menerima.' Siapa yang Tuhan berikan kepadamu untuk digembalakan, dan bagaimana kamu perlu mencintai mereka dengan lebih sengaja minggu ini?"
+      },
+      {
+        "day": 11,
+        "title": "Paulus Ditangkap di Yerusalem",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paulus terus bergerak menuju penderitaan karena dia 'terikat dalam Roh.' Di mana Tuhan meminta kamu untuk bergerak menuju kesulitan karena itu adalah ketaatan, bukan menghindarinya karena itu sulit?"
+      },
+      {
+        "day": 12,
+        "title": "Keberanian di Hadapan Penguasa",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Tuhan berdiri di samping Paulus di malam hari dan berkata, 'Kuatkanlah hatimu.' Kapan kamu membutuhkan kata yang tak terlihat untuk terus melangkah, dan bagaimana Tuhan mungkin membisikannya kepadamu malam ini?"
+      },
+      {
+        "day": 13,
+        "title": "Hampir Terpikat",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Agrippa mengatakan Paulus 'hampir' membujuknya untuk menjadi seorang Kristen. Di mana dalam hidupmu sendiri kamu 'hampir' berkomitmen, dan apa yang diperlukan untuk menutup jarak antara keyakinan dan penyerahan?"
+      },
+      {
+        "day": 14,
+        "title": "Karam ke Roma",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Kisah Para Rasul berakhir secara mendadak — Paulus memberitakan kerajaan dari sebuah rumah sewaan, terikat pada seorang prajurit, dan ceritanya jelas belum berakhir. Kamu adalah bagian dari cerita yang belum selesai itu. Apa kalimat berikutnya yang Tuhan tulis melalui dirimu?"
+      }
+    ]
+  },
+  {
+    "id": "first-john-assurance",
+    "name": "1 Yohanes: Agar Kamu Tahu",
+    "description": "Sebuah perjalanan selama 5 hari melalui surat pertama Yohanes — ditulis agar orang percaya 'tahu bahwa kamu memiliki hidup yang kekal.' Setiap bab mengeksplorasi ujian yang berbeda dari iman yang tulus.",
+    "totalDays": 5,
+    "category": "Epistles",
+    "gradientColors": [
+      "#3D5A8B",
+      "#1C2D5C"
+    ],
+    "iconName": "checkmark.seal.fill",
+    "imageKey": "bethany_mary_martha",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "anxiety",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Berjalan dalam Terang",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Yohanes menegaskan bahwa persekutuan dengan Tuhan terkait dengan berjalan dalam terang — membawa apa yang tersembunyi ke dalam terang. Apa satu area di mana kamu telah berpura-pura bahwa pengakuan yang jujur sebenarnya akan membawa ke dalam persekutuan daripada aib?"
+      },
+      {
+        "day": 2,
+        "title": "Tinggal, Bukan Hanya Percaya",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ujian cinta Yohanes untuk Tuhan sederhana: 'Siapa pun yang memelihara firman-Nya, di dalamnya sungguh-sungguh kasih Tuhan disempurnakan.' Bagaimana hubungan terdekatmu menggambarkan perbedaan antara keyakinanmu dan perilakumu?"
+      },
+      {
+        "day": 3,
+        "title": "Anak-anak Allah",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "'Lihatlah betapa besar kasih yang diberikan Bapa kepada kita — sehingga kita disebut anak-anak Allah.' Bagaimana hari ini akan terlihat berbeda jika kamu memasuki hari ini dengan percaya bahwa identitas terdalammu adalah 'anak yang terkasih'?"
+      },
+      {
+        "day": 4,
+        "title": "Allah adalah Kasih",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Yohanes berkata 'kita mengasihi karena Ia lebih dahulu mengasihi kita' — kasih kita selalu merupakan respons. Kasih siapa yang telah kamu kejar seolah-olah kamu bisa memperolehnya, dan bagaimana kasih Allah yang lebih dahulu membebaskanmu untuk mengasihi orang itu dari tempat istirahat, bukan dari kebutuhan?"
+      },
+      {
+        "day": 5,
+        "title": "Agar Kamu Tahu",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Yohanes berkata ia menulis surat ini 'agar kamu tahu bahwa kamu memiliki hidup yang kekal.' Ujian mana dari Yohanes — iman kepada Yesus, kasih kepada sesama, ketaatan pada firman-Nya — yang paling ingin diyakinkan oleh Roh hari ini?"
+      }
+    ]
+  },
+  {
+    "id": "james-faith-that-works",
+    "name": "Yakobus: Iman yang Bekerja",
+    "description": "Studi 5 hari tentang Yakobus — surat yang paling praktis dalam Perjanjian Baru — menghadapi kesenjangan antara apa yang kita katakan kita percayai dan bagaimana kita sebenarnya hidup.",
+    "totalDays": 5,
+    "category": "Epistles",
+    "gradientColors": [
+      "#8B5A2E",
+      "#44290F"
+    ],
+    "iconName": "hammer.fill",
+    "imageKey": "davids_three_mighty_men",
+    "applicableSeasons": [
+      "workingProfessional",
+      "growing",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "relationships",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Hitunglah Semua Sebagai Sukacita",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Yakobus tidak mengatakan bahwa ujian adalah sukacita — ia berkata hitunglah mereka sebagai sukacita karena apa yang sedang Allah hasilkan. Ujian apa saat ini yang perlu diubah cara pandangnya minggu ini jika kamu benar-benar percaya bahwa Allah sedang mematangkan sesuatu dalam dirimu melalui itu?"
+      },
+      {
+        "day": 2,
+        "title": "Iman Tanpa Perbuatan adalah Mati",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Yakobus tidak menempatkan iman melawan perbuatan — ia mengatakan iman yang nyata selalu bekerja. Apa satu tindakan ketaatan spesifik yang akan membuat iman pribadimu terlihat minggu ini?"
+      },
+      {
+        "day": 3,
+        "title": "Menjinakkan Lidah",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Yakobus membandingkan lidah dengan kemudi kecil yang mengarahkan kapal besar dan percikan kecil yang membakar hutan. Di mana kata-katamu mengarahkan hidupmu atau hidup orang lain ke arah yang akan membuatmu malu untuk sampai di sana?"
+      },
+      {
+        "day": 4,
+        "title": "Persahabatan dengan Dunia",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Yakobus berkata perselisihan datang dari keinginan yang berperang di dalam kita — dan bahwa kita 'tidak memiliki karena kita tidak meminta.' Keinginan apa yang mendorong konflik dalam hidupmu saat ini, dan apakah kamu telah membawanya dengan jujur kepada Allah dalam doa?"
+      },
+      {
+        "day": 5,
+        "title": "Sabar dan Berdoa",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Yakobus mengakhiri dengan menyerukan gereja untuk saling berdoa, mengakui dosa agar penyembuhan datang. Siapa dalam hidupmu yang cukup aman untuk mendengar pengakuanmu, dan berapa biaya yang harus kamu bayar untuk benar-benar meminta mereka berdoa bersamamu?"
+      }
+    ]
+  },
+  {
+    "id": "hebrews-jesus-is-better",
+    "name": "Ibrani: Yesus Lebih Baik",
+    "description": "Pendakian 13 hari melalui Ibrani — satu pasal per hari — menunjukkan bagaimana Yesus memenuhi dan melampaui setiap gambaran Perjanjian Lama yang menunjuk kepada-Nya.",
+    "totalDays": 13,
+    "category": "Theology",
+    "gradientColors": [
+      "#5A2F2F",
+      "#2C1414"
+    ],
+    "iconName": "crown.fill",
+    "imageKey": "sacrifice_isaac",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Anak, Lebih Unggul dari Para Malaikat",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ibrani dibuka dengan menyatakan bahwa Allah telah berbicara paling lengkap dalam Anak-Nya — 'cahaya kemuliaan Allah.' Di mana kamu telah mendengarkan Allah dalam seribu sumber sekunder ketika Dia telah berbicara paling jelas dalam Yesus?"
+      },
+      {
+        "day": 2,
+        "title": "Sebuah Keselamatan yang Begitu Besar",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Yesus menjadi lebih rendah dari para malaikat — manusia, dicobai, menderita — agar Ia dapat 'merasakan kematian untuk semua orang.' Bagaimana Yesus yang berbagi dagingmu mengubah cara kamu membawa kelemahanmu kepada-Nya?"
+      },
+      {
+        "day": 3,
+        "title": "Lebih Besar dari Musa",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Musa setia sebagai pelayan di rumah Allah; Yesus setia sebagai Anak yang menguasainya. Di mana kamu melayani rumah Allah dengan cara yang secara diam-diam menjauh dari mempercayai Anak Allah?"
+      },
+      {
+        "day": 4,
+        "title": "Masuk ke Dalam Istirahat-Nya",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Penulis berkata istirahat Sabat tetap ada bagi umat Allah — tetapi kita harus berusaha untuk memasukinya. Apa usaha tanpa henti dalam hidupmu yang sebenarnya adalah ketidakmauan untuk berhenti dan percaya bahwa pekerjaan itu adalah milik Kristus, bukan milikmu?"
+      },
+      {
+        "day": 5,
+        "title": "Seorang Imam Agung",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Yesus adalah seorang imam yang 'di hari-hari daging-Nya mempersembahkan doa dan permohonan dengan jeritan dan air mata.' Bagaimana membayangkan Yesus sebagai imam yang menangis dan simpatik mengubah cara kamu membawa air matamu kepada-Nya?"
+      },
+      {
+        "day": 6,
+        "title": "Terus Maju Menuju Kedewasaan",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Penulis mendesak para pembaca untuk tidak tetap sebagai bayi rohani tetapi untuk terus maju. Kebenaran 'dasar' mana yang telah kamu terima daripada tumbuh menjadi makanan yang padat?"
+      },
+      {
+        "day": 7,
+        "title": "Seorang Imam Seperti Melkisedek",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Imamat Yesus adalah permanen — 'Ia selalu hidup untuk mengadakan syafaat.' Bagaimana mengetahui Yesus sedang berdoa untukmu saat ini membentuk kembali apa pun yang kamu bawa ke hari esok?"
+      },
+      {
+        "day": 8,
+        "title": "Perjanjian yang Lebih Baik",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Di bawah perjanjian baru, Allah menuliskan hukum-Nya 'di dalam hati mereka.' Di mana kamu masih berhubungan dengan Allah melalui aturan eksternal ketika Dia ingin mengubahmu dari dalam?"
+      },
+      {
+        "day": 9,
+        "title": "Sekali untuk Selamanya",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Para imam lama mempersembahkan korban harian yang tidak pernah bisa membersihkan hati nurani; pengorbanan tunggal Kristus melakukannya. Dosa apa yang terus kamu akui seolah-olah pekerjaan-Nya yang telah selesai membutuhkan pengulanganmu untuk membuatnya bertahan?"
+      },
+      {
+        "day": 10,
+        "title": "Mendekatlah dengan Percaya Diri",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Karena darah Yesus kita dapat mendekat 'dengan percaya diri' — tirai telah robek. Ketika kamu datang kepada Allah, apakah rasanya seperti mendekati takhta kasih karunia atau ruang tunggu pejabat yang enggan? Apa yang akan berubah?"
+      },
+      {
+        "day": 11,
+        "title": "Ruang Iman",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Setiap orang yang terdaftar di sini meninggal tanpa menerima apa yang dijanjikan, 'tetapi mereka melihatnya dan menyambutnya dari jauh.' Bagaimana kisah menunggu Anda dapat dihitung sebagai bab dari ruang iman yang sama ini?"
+      },
+      {
+        "day": 12,
+        "title": "Awan Saksi yang Besar",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Penulis mendorong kita untuk memfokuskan pandangan kita kepada Yesus, 'pendiri dan penyempurna iman kita,' dan berlari dengan ketekunan. Beban apa — tidak selalu berdosa, tetapi berat — yang memperlambat lari Anda, dan apakah Anda bersedia meletakkannya?"
+      },
+      {
+        "day": 13,
+        "title": "Di Luar Perkemahan",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Yesus menderita 'di luar perkemahan' — di luar penghormatan religius pada zamannya. Di mana Dia memanggil Anda keluar dari perkemahan nyaman Anda untuk bersama-Nya di antara mereka yang telah diabaikan oleh dunia yang terhormat?"
+      }
+    ]
+  }
+]

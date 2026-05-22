@@ -31,6 +31,29 @@ enum Analytics {
         case paywallPurchaseCompleted = "paywall_purchase_completed"
         case paywallRestoreTapped = "paywall_restore_tapped"
         case paywallPageAdvanced = "paywall_page_advanced"
+        case paywallExitSurveyShown = "paywall_exit_survey_shown"
+        case paywallExitSurveyAnswered = "paywall_exit_survey_answered"
+        case paywallTestimonialImpressed = "paywall_testimonial_impressed"
+
+        // Paywall — granular interaction tracking. These close the gap so we
+        // can measure which specific component (price card, CTA, testimonial,
+        // timeline) is actually driving conversion vs just shown.
+        case paywallPriceCardSelected = "paywall_price_card_selected"
+        case paywallCTATapped = "paywall_cta_tapped"
+        case paywallTestimonialSwiped = "paywall_testimonial_swiped"
+        case paywallTimelineViewed = "paywall_timeline_viewed"
+        case paywallDownsellShown = "paywall_downsell_shown"
+        case paywallDownsellAccepted = "paywall_downsell_accepted"
+
+        // Onboarding verse reveal (the aha moment before the paywall)
+        case personalVerseRevealShown = "personal_verse_reveal_shown"
+        case personalVerseRevealKept = "personal_verse_reveal_kept"
+        case personalVerseRevealResampled = "personal_verse_reveal_resampled"
+        case personalVerseRevealCompleted = "personal_verse_reveal_completed"
+
+        // Onboarding personalized plan reveal (JourneyReadyView)
+        case planGeneratedShown = "plan_generated_shown"
+        case planGeneratedCompleted = "plan_generated_completed"
 
         // AI Chat
         case aiMessageSent = "ai_message_sent"

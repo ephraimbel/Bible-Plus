@@ -45,4 +45,39 @@ enum BPFont {
 
     // Onboarding Body — SF Pro Rounded, Regular, 15pt
     static let onboardingBody = Font.system(size: 15, weight: .regular, design: .rounded)
+
+    // Elegant serif (Georgia) — used for card headers, section titles, and
+    // content-voice labels to match the "Ask anything about Scripture" pill
+    // and the onboarding/chat serif voice.
+    //
+    // These are computed — for CJK scripts (Chinese, Japanese, Korean) and
+    // Ethiopic (Amharic) Georgia has no glyphs, so iOS would fall back to a
+    // default system font that visually breaks the "elegant serif" line.
+    // Using `Font.system(design: .serif)` for those locales lets the OS pick
+    // the matching locale serif (PingFang / Hiragino / Apple SD Gothic / Kefa)
+    // so text renders in a consistent, native-looking weight.
+    static var elegantTitle: Font { elegantFont(size: 28, weight: .bold) }
+    static var elegantHeadingLarge: Font { elegantFont(size: 22, weight: .bold) }
+    static var elegantHeadingMedium: Font { elegantFont(size: 17, weight: .bold) }
+    static var elegantHeadingSmall: Font { elegantFont(size: 15, weight: .bold) }
+    static var elegantBody: Font { elegantFont(size: 15, weight: .regular) }
+    static var elegantSubtitle: Font { elegantFont(size: 13, weight: .regular) }
+    static var elegantCaption: Font { elegantFont(size: 11, weight: .regular) }
+
+    /// Scripts where iOS's system `.serif` design is a safer pick than
+    /// Georgia. Georgia ships with Latin + Cyrillic + Greek glyphs, so
+    /// European languages (es, pt, fr, de, it, pl, ru) look great with it.
+    /// These codes cover scripts that Georgia can't render at all.
+    private static let glyphGapScripts: Set<String> = [
+        "zh-Hans", "zh-Hant", "zh", "ja", "ko", "am", "hi", "bn", "ur", "ar", "he", "fa", "th"
+    ]
+
+    private static func elegantFont(size: CGFloat, weight: Font.Weight) -> Font {
+        let code = LocalizationService.currentLanguageCode() ?? ""
+        if glyphGapScripts.contains(code) {
+            return Font.system(size: size, weight: weight, design: .serif)
+        }
+        let name = weight == .bold ? "Georgia-Bold" : "Georgia"
+        return Font.custom(name, size: size)
+    }
 }

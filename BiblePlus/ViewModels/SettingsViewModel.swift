@@ -27,6 +27,7 @@ final class SettingsViewModel {
     var showLockWidgetGuide = false
     var showNotificationTopics = false
     var showPhotoPicker = false
+    var showLanguagePicker = false
 
     // MARK: - Local Editing Copies
 

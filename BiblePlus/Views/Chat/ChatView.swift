@@ -4,6 +4,10 @@ import SwiftData
 struct ChatView: View {
     let conversationId: UUID
     var initialContext: String? = nil
+    /// When non-nil, the messages list scrolls to this specific message
+    /// after load. Used by the Saved page to jump back to the original
+    /// chat moment when a user taps a saved AI reply.
+    var initialMessageId: UUID? = nil
 
     @Environment(\.modelContext) private var modelContext
     @Environment(\.bpPalette) private var palette
@@ -13,7 +17,7 @@ struct ChatView: View {
     var body: some View {
         Group {
             if let vm = viewModel {
-                ChatContentView(viewModel: vm)
+                ChatContentView(viewModel: vm, initialMessageId: initialMessageId)
             } else {
                 BPLoadingView().onAppear {
                     viewModel = ChatViewModel(
@@ -106,6 +110,8 @@ struct ChatView: View {
 
 private struct ChatContentView: View {
     @Bindable var viewModel: ChatViewModel
+    var initialMessageId: UUID? = nil
+
     @Environment(\.bpPalette) private var palette
     @Environment(\.colorScheme) private var colorScheme
     @State private var showPaywall = false
@@ -115,6 +121,11 @@ private struct ChatContentView: View {
     @State private var ttsService = ChatTTSService()
     @State private var scripturePreview: ScriptureReferenceTarget? = nil
     @State private var showVoiceChat = false
+    /// Set to false once `initialMessageId` has been scrolled to, so the
+    /// jump only fires on first appearance — subsequent re-renders (e.g.
+    /// when the user starts streaming a new reply) don't yank the view
+    /// back up to the saved message.
+    @State private var pendingInitialJump = true
 
     var body: some View {
         VStack(spacing: 0) {
@@ -215,9 +226,7 @@ private struct ChatContentView: View {
     // MARK: - Top Gold Gradient
 
     private var topGoldGradient: some View {
-        let tint: Color = colorScheme == .dark
-            ? palette.accent
-            : Color(red: 0.65, green: 0.48, blue: 0.25)
+        let tint = palette.accent
         let strength: CGFloat = colorScheme == .dark ? 0.20 : 0.28
         let bg = palette.background
 
@@ -306,8 +315,37 @@ private struct ChatContentView: View {
                 .ignoresSafeArea()
             )
             .scrollDismissesKeyboard(.interactively)
-            .onChange(of: viewModel.displayMessages.count) { _, _ in
-                scrollToBottom(proxy: proxy)
+            .onChange(of: viewModel.displayMessages.count) { _, newCount in
+                // First-load deep-link: if we have a target message, jump
+                // there instead of bottom. After the first scroll, fall
+                // back to the normal "follow the latest message" behavior.
+                if pendingInitialJump,
+                   let targetId = initialMessageId,
+                   newCount > 0,
+                   viewModel.displayMessages.contains(where: { $0.id == targetId }) {
+                    pendingInitialJump = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        withAnimation(.easeInOut(duration: 0.45)) {
+                            proxy.scrollTo(targetId, anchor: .center)
+                        }
+                    }
+                } else {
+                    scrollToBottom(proxy: proxy)
+                }
+            }
+            .onAppear {
+                // Cover the case where messages are already loaded (cached
+                // ChatViewModel) and the count-change above never fires.
+                guard pendingInitialJump,
+                      let targetId = initialMessageId,
+                      viewModel.displayMessages.contains(where: { $0.id == targetId })
+                else { return }
+                pendingInitialJump = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                    withAnimation(.easeInOut(duration: 0.45)) {
+                        proxy.scrollTo(targetId, anchor: .center)
+                    }
+                }
             }
         }
     }
@@ -663,7 +701,15 @@ private struct ChatContentView: View {
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
         }
-        .background(.ultraThinMaterial)
+        // Dark mode keeps the system material (it reads warm there).
+        // Light mode swaps to surfaceElevated — `.ultraThinMaterial` was
+        // landing as a cool gray in light mode that fought the warm
+        // tan/gold palette.
+        .background(
+            colorScheme == .dark
+                ? AnyShapeStyle(.ultraThinMaterial)
+                : AnyShapeStyle(palette.background)
+        )
     }
 
 }

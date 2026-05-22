@@ -18,7 +18,7 @@ enum ContentSeeder {
         }()
         let forceReseed = existingCount == 0
 
-        guard let url = Bundle.main.url(forResource: "feed-content", withExtension: "json") else {
+        guard let url = LocalizedContentLoader.url(forResource: "feed-content") else {
             NSLog("[ContentSeeder] feed-content.json missing from bundle")
             return
         }
@@ -92,7 +92,7 @@ enum ContentSeeder {
         }()
         let forceReseed = existingCount == 0
 
-        guard let url = Bundle.main.url(forResource: "reading-plans", withExtension: "json"),
+        guard let url = LocalizedContentLoader.url(forResource: "reading-plans"),
               let data = try? Data(contentsOf: url)
         else { return }
 
@@ -106,22 +106,46 @@ enum ContentSeeder {
 
         var maxVersion = lastVersion
         for item in newItems {
-            let plan = ReadingPlan(
-                id: item.id,
-                name: item.name,
-                planDescription: item.description,
-                totalDays: item.totalDays,
-                category: item.category,
-                gradientColors: item.gradientColors,
-                iconName: item.iconName,
-                days: item.days,
-                applicableSeasons: item.applicableSeasons,
-                applicableBurdens: item.applicableBurdens,
-                faithLevelMin: item.faithLevelMin,
-                isProOnly: item.isProOnly,
-                seedVersion: item.seedVersion
+            // Upsert: when a plan with this ID already exists (seedVersion bump
+            // scenario) update it in place; otherwise insert a fresh row.
+            // UserPlanProgress is keyed by planID (string) so it survives edits.
+            let itemID = item.id
+            let existingDescriptor = FetchDescriptor<ReadingPlan>(
+                predicate: #Predicate { $0.id == itemID }
             )
-            modelContext.insert(plan)
+            if let existing = try? modelContext.fetch(existingDescriptor).first {
+                existing.name = item.name
+                existing.planDescription = item.description
+                existing.totalDays = item.totalDays
+                existing.category = item.category
+                existing.gradientColors = item.gradientColors
+                existing.iconName = item.iconName
+                existing.imageKey = item.imageKey ?? ""
+                existing.daysJSON = (try? JSONEncoder().encode(item.days)) ?? Data()
+                existing.applicableSeasons = item.applicableSeasons
+                existing.applicableBurdens = item.applicableBurdens
+                existing.faithLevelMin = item.faithLevelMin
+                existing.isProOnly = item.isProOnly
+                existing.seedVersion = item.seedVersion
+            } else {
+                let plan = ReadingPlan(
+                    id: item.id,
+                    name: item.name,
+                    planDescription: item.description,
+                    totalDays: item.totalDays,
+                    category: item.category,
+                    gradientColors: item.gradientColors,
+                    iconName: item.iconName,
+                    imageKey: item.imageKey ?? "",
+                    days: item.days,
+                    applicableSeasons: item.applicableSeasons,
+                    applicableBurdens: item.applicableBurdens,
+                    faithLevelMin: item.faithLevelMin,
+                    isProOnly: item.isProOnly,
+                    seedVersion: item.seedVersion
+                )
+                modelContext.insert(plan)
+            }
             maxVersion = max(maxVersion, item.seedVersion)
         }
 
@@ -210,6 +234,7 @@ struct SeedPlanItem: Decodable {
     let category: String
     let gradientColors: [String]
     let iconName: String
+    let imageKey: String?
     let days: [PlanDay]
     let applicableSeasons: [String]
     let applicableBurdens: [String]

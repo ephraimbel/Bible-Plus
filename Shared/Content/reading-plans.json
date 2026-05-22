@@ -7,11 +7,12 @@
     "category": "Comfort",
     "gradientColors": ["#4A6741", "#2D4A3E"],
     "iconName": "leaf.fill",
+    "imageKey": "jesus_calms_storm",
     "applicableSeasons": ["hardSeason"],
     "applicableBurdens": ["anxiety", "grief"],
     "faithLevelMin": "justCurious",
     "isProOnly": true,
-    "seedVersion": 1,
+    "seedVersion": 3,
     "days": [
       {
         "day": 1,
@@ -79,11 +80,12 @@
     "category": "Gospel",
     "gradientColors": ["#8B6914", "#5C4A1C"],
     "iconName": "book.fill",
+    "imageKey": "baptism_jesus",
     "applicableSeasons": ["hardSeason", "newlyMarried", "parenthood", "student", "workingProfessional", "retired", "startingOver", "growing"],
     "applicableBurdens": ["anxiety", "grief", "purpose", "relationships", "health", "faith"],
     "faithLevelMin": "justCurious",
     "isProOnly": true,
-    "seedVersion": 1,
+    "seedVersion": 3,
     "days": [
       {
         "day": 1,
@@ -263,11 +265,12 @@
     "category": "Wisdom",
     "gradientColors": ["#6B4C8A", "#3D2B5C"],
     "iconName": "lightbulb.fill",
+    "imageKey": "ten_commandments",
     "applicableSeasons": ["workingProfessional", "parenthood"],
     "applicableBurdens": ["purpose"],
     "faithLevelMin": "justCurious",
     "isProOnly": true,
-    "seedVersion": 1,
+    "seedVersion": 3,
     "days": [
       {
         "day": 1,
@@ -519,11 +522,12 @@
     "category": "Theology",
     "gradientColors": ["#8B3A3A", "#5C2424"],
     "iconName": "flame.fill",
+    "imageKey": "crucifixion",
     "applicableSeasons": ["growing"],
     "applicableBurdens": ["faith"],
     "faithLevelMin": "deepInTheWord",
     "isProOnly": true,
-    "seedVersion": 1,
+    "seedVersion": 3,
     "days": [
       {
         "day": 1,
@@ -663,11 +667,12 @@
     "category": "Foundations",
     "gradientColors": ["#3A6B8B", "#1C3D5C"],
     "iconName": "sunrise.fill",
+    "imageKey": "samuel_called",
     "applicableSeasons": ["hardSeason", "newlyMarried", "parenthood", "student", "workingProfessional", "retired", "startingOver", "growing"],
     "applicableBurdens": ["anxiety", "grief", "purpose", "relationships", "health", "faith"],
     "faithLevelMin": "justCurious",
     "isProOnly": true,
-    "seedVersion": 1,
+    "seedVersion": 3,
     "days": [
       {
         "day": 1,
@@ -791,11 +796,12 @@
     "category": "Purpose",
     "gradientColors": ["#8B7B3A", "#5C5124"],
     "iconName": "star.fill",
+    "imageKey": "miraculous_catch",
     "applicableSeasons": ["workingProfessional", "startingOver"],
     "applicableBurdens": ["purpose"],
     "faithLevelMin": "justCurious",
     "isProOnly": true,
-    "seedVersion": 1,
+    "seedVersion": 3,
     "days": [
       {
         "day": 1,
@@ -887,11 +893,12 @@
     "category": "Comfort",
     "gradientColors": ["#5C7A8B", "#3A4F5C"],
     "iconName": "heart.fill",
+    "imageKey": "job_suffering",
     "applicableSeasons": ["hardSeason"],
     "applicableBurdens": ["grief", "health"],
     "faithLevelMin": "justCurious",
     "isProOnly": true,
-    "seedVersion": 1,
+    "seedVersion": 5,
     "days": [
       {
         "day": 1,
@@ -959,11 +966,12 @@
     "category": "Jesus' Teaching",
     "gradientColors": ["#7A8B5C", "#4F5C3A"],
     "iconName": "text.book.closed.fill",
+    "imageKey": "sermon_mount",
     "applicableSeasons": ["hardSeason", "newlyMarried", "parenthood", "student", "workingProfessional", "retired", "startingOver", "growing"],
     "applicableBurdens": ["anxiety", "grief", "purpose", "relationships", "health", "faith"],
     "faithLevelMin": "growing",
     "isProOnly": true,
-    "seedVersion": 1,
+    "seedVersion": 3,
     "days": [
       {
         "day": 1,
@@ -1033,11 +1041,12 @@
     "category": "Worship",
     "gradientColors": ["#3A5C8B", "#1C2D5C"],
     "iconName": "music.note",
+    "imageKey": "jacob_ladder",
     "applicableSeasons": ["hardSeason", "newlyMarried", "parenthood", "student", "workingProfessional", "retired", "startingOver", "growing"],
     "applicableBurdens": ["anxiety", "grief", "purpose", "relationships", "health", "faith"],
     "faithLevelMin": "growing",
     "isProOnly": true,
-    "seedVersion": 1,
+    "seedVersion": 3,
     "days": [
       {
         "day": 1,
@@ -1398,6 +1407,1771 @@
           { "bookID": "PSA", "chapter": 150, "verseStart": null, "verseEnd": null }
         ],
         "reflection": "As the Psalms close with 'let everything that has breath praise the Lord,' how will you make praise a daily habit?"
+      }
+    ]
+  },
+  {
+    "id": "life-of-david",
+    "name": "The Life of David",
+    "description": "A 14-day walk with the shepherd-king — from anointing to giant-slaying, from exile to the throne — paired with the psalms born of each season.",
+    "totalDays": 14,
+    "category": "Character Study",
+    "gradientColors": ["#6B2D2D", "#3A1818"],
+    "iconName": "shield.lefthalf.filled",
+    "imageKey": "david_goliath",
+    "applicableSeasons": ["hardSeason", "startingOver", "workingProfessional", "growing"],
+    "applicableBurdens": ["purpose", "faith", "anxiety"],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Anointed in Obscurity",
+        "readings": [
+          { "bookID": "1SA", "chapter": 16, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Where is God meeting you in the quiet, unseen places before the world ever notices?"
+      },
+      {
+        "day": 2,
+        "title": "Facing the Giant",
+        "readings": [
+          { "bookID": "1SA", "chapter": 17, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What giant are you facing today, and whose name will you face it in?"
+      },
+      {
+        "day": 3,
+        "title": "The Loyalty of Jonathan",
+        "readings": [
+          { "bookID": "1SA", "chapter": 18, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Who has been a Jonathan to you, and how can you be that friend to someone else?"
+      },
+      {
+        "day": 4,
+        "title": "Running for Your Life",
+        "readings": [
+          { "bookID": "1SA", "chapter": 21, "verseStart": null, "verseEnd": null },
+          { "bookID": "PSA", "chapter": 34, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does David's psalm in the cave teach you to praise God before the deliverance arrives?"
+      },
+      {
+        "day": 5,
+        "title": "Restraint in the Cave",
+        "readings": [
+          { "bookID": "1SA", "chapter": 24, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Where do you need to practice restraint when you could strike back at someone who has wronged you?"
+      },
+      {
+        "day": 6,
+        "title": "Wisdom from Abigail",
+        "readings": [
+          { "bookID": "1SA", "chapter": 25, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Whose wise counsel have you resisted lately that might be saving you from a foolish decision?"
+      },
+      {
+        "day": 7,
+        "title": "The Fall of Saul",
+        "readings": [
+          { "bookID": "1SA", "chapter": 31, "verseStart": null, "verseEnd": null },
+          { "bookID": "2SA", "chapter": 1, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does David's grief for his enemy Saul reshape how you see the people you struggle with?"
+      },
+      {
+        "day": 8,
+        "title": "The King Dances",
+        "readings": [
+          { "bookID": "2SA", "chapter": 6, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "When was the last time you worshiped with total abandon, unworried about what anyone thought?"
+      },
+      {
+        "day": 9,
+        "title": "An Everlasting Covenant",
+        "readings": [
+          { "bookID": "2SA", "chapter": 7, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does God's promise of an unending throne through David deepen your hope in Christ today?"
+      },
+      {
+        "day": 10,
+        "title": "The Fall of a Shepherd King",
+        "readings": [
+          { "bookID": "2SA", "chapter": 11, "verseStart": null, "verseEnd": null },
+          { "bookID": "2SA", "chapter": 12, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Where are you most vulnerable to small compromises that could grow into great sins if unconfronted?"
+      },
+      {
+        "day": 11,
+        "title": "A Broken Prayer",
+        "readings": [
+          { "bookID": "PSA", "chapter": 51, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What in your life needs the prayer 'create in me a clean heart' tonight?"
+      },
+      {
+        "day": 12,
+        "title": "Bless the Lord, O My Soul",
+        "readings": [
+          { "bookID": "PSA", "chapter": 103, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Which of the Lord's benefits listed here do you most need to remember today?"
+      },
+      {
+        "day": 13,
+        "title": "Fearfully Known",
+        "readings": [
+          { "bookID": "PSA", "chapter": 139, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What comfort — or challenge — do you feel knowing God sees every hidden corner of your heart?"
+      },
+      {
+        "day": 14,
+        "title": "The Shepherd Remains",
+        "readings": [
+          { "bookID": "PSA", "chapter": 23, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Through all of David's seasons, the Shepherd never left him — how have you experienced that same faithfulness in your own story?"
+      }
+    ]
+  },
+  {
+    "id": "christmas-story",
+    "name": "The Christmas Story",
+    "description": "A 7-day advent journey through the nativity — from ancient prophecy to the manger — rediscover the wonder of God coming near.",
+    "totalDays": 7,
+    "category": "Advent",
+    "gradientColors": ["#3C5A7A", "#1F2F45"],
+    "iconName": "star.fill",
+    "imageKey": "nativity",
+    "applicableSeasons": ["parenthood", "newlyMarried", "growing", "hardSeason"],
+    "applicableBurdens": ["faith", "grief", "purpose"],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "A Child Foretold",
+        "readings": [
+          { "bookID": "ISA", "chapter": 9, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Which of Isaiah's names for the coming child — Wonderful Counselor, Mighty God, Prince of Peace — do you most need right now?"
+      },
+      {
+        "day": 2,
+        "title": "From Little Bethlehem",
+        "readings": [
+          { "bookID": "MIC", "chapter": 5, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does God choosing the small and overlooked town of Bethlehem speak to the hidden places in your own life?"
+      },
+      {
+        "day": 3,
+        "title": "Mary's Yes",
+        "readings": [
+          { "bookID": "LUK", "chapter": 1, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Where is God asking for your 'let it be to me according to your word' in a season of uncertainty?"
+      },
+      {
+        "day": 4,
+        "title": "Joseph's Quiet Obedience",
+        "readings": [
+          { "bookID": "MAT", "chapter": 1, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does Joseph's silent, costly faithfulness challenge the way you think about being seen by others?"
+      },
+      {
+        "day": 5,
+        "title": "The Word Made Flesh",
+        "readings": [
+          { "bookID": "JHN", "chapter": 1, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What does it mean to you that the eternal Word chose to move into your neighborhood?"
+      },
+      {
+        "day": 6,
+        "title": "Shepherds and a Manger",
+        "readings": [
+          { "bookID": "LUK", "chapter": 2, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Why do you think the angels' 'good news of great joy' was announced first to shepherds, not kings?"
+      },
+      {
+        "day": 7,
+        "title": "Wise Men from Afar",
+        "readings": [
+          { "bookID": "MAT", "chapter": 2, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What would it look like for you to bring your best — your gold, frankincense, and myrrh — to Jesus today?"
+      }
+    ]
+  },
+  {
+    "id": "walking-with-elijah",
+    "name": "Walking with Elijah",
+    "description": "A 10-day study of the prophet who stood alone against a kingdom — and the God who met him in the ravens, the cave, and the still small voice.",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": ["#6E4A2C", "#3A2814"],
+    "iconName": "flame.fill",
+    "imageKey": "elijah_ravens",
+    "applicableSeasons": ["hardSeason", "workingProfessional", "growing"],
+    "applicableBurdens": ["faith", "purpose", "anxiety"],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Before Ahab",
+        "readings": [
+          { "bookID": "1KI", "chapter": 17, "verseStart": 1, "verseEnd": 6 }
+        ],
+        "reflection": "Where is God asking you to speak a difficult truth, and are you trusting Him to provide after you obey?"
+      },
+      {
+        "day": 2,
+        "title": "The Widow of Zarephath",
+        "readings": [
+          { "bookID": "1KI", "chapter": 17, "verseStart": 7, "verseEnd": 24 }
+        ],
+        "reflection": "What small 'last handful of flour' is God asking you to offer in faith this week?"
+      },
+      {
+        "day": 3,
+        "title": "Showdown on Carmel",
+        "readings": [
+          { "bookID": "1KI", "chapter": 18, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Which altar in your life do you need to rebuild — a place of worship that has fallen into neglect?"
+      },
+      {
+        "day": 4,
+        "title": "Running into the Wilderness",
+        "readings": [
+          { "bookID": "1KI", "chapter": 19, "verseStart": 1, "verseEnd": 8 }
+        ],
+        "reflection": "When have you experienced God's gentle provision — a meal, a nap, a friend — in the middle of your burnout?"
+      },
+      {
+        "day": 5,
+        "title": "The Still Small Voice",
+        "readings": [
+          { "bookID": "1KI", "chapter": 19, "verseStart": 9, "verseEnd": 21 }
+        ],
+        "reflection": "What noise do you need to silence so you can hear God's whisper instead of waiting for the earthquake?"
+      },
+      {
+        "day": 6,
+        "title": "Naboth's Vineyard",
+        "readings": [
+          { "bookID": "1KI", "chapter": 21, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does this story reshape how you view injustice that no one else seems willing to confront?"
+      },
+      {
+        "day": 7,
+        "title": "Fire from Heaven",
+        "readings": [
+          { "bookID": "2KI", "chapter": 1, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Where are you tempted to consult other 'gods of Ekron' instead of bringing your fears to the Lord?"
+      },
+      {
+        "day": 8,
+        "title": "The Mantle Passes",
+        "readings": [
+          { "bookID": "2KI", "chapter": 2, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Whose mantle is God asking you to pick up — or whose mantle are you ready to pass on?"
+      },
+      {
+        "day": 9,
+        "title": "Elijah on the Mountain with Christ",
+        "readings": [
+          { "bookID": "MAT", "chapter": 17, "verseStart": 1, "verseEnd": 13 }
+        ],
+        "reflection": "What does it mean that the same prophet who felt most alone was one day standing with Jesus in glory?"
+      },
+      {
+        "day": 10,
+        "title": "A Man Like Us",
+        "readings": [
+          { "bookID": "JAS", "chapter": 5, "verseStart": 13, "verseEnd": 20 }
+        ],
+        "reflection": "James says Elijah was 'a man with a nature like ours' — how does that change the way you pray this week?"
+      }
+    ]
+  },
+  {
+    "id": "beatitudes-deep-dive",
+    "name": "The Beatitudes: Eight Portraits",
+    "description": "An 8-day portrait study of the citizens of Jesus' kingdom — one beatitude at a time, each paired with a scripture that fills in the picture.",
+    "totalDays": 8,
+    "category": "Jesus' Teaching",
+    "gradientColors": ["#7A6B3A", "#4F4524"],
+    "iconName": "sparkles",
+    "imageKey": "beatitudes",
+    "applicableSeasons": ["growing", "hardSeason", "workingProfessional"],
+    "applicableBurdens": ["purpose", "faith", "relationships"],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Poor in Spirit",
+        "readings": [
+          { "bookID": "MAT", "chapter": 5, "verseStart": 1, "verseEnd": 3 },
+          { "bookID": "ISA", "chapter": 57, "verseStart": 14, "verseEnd": 21 }
+        ],
+        "reflection": "What would it look like today to come to God admitting your total dependence rather than performing your competence?"
+      },
+      {
+        "day": 2,
+        "title": "Those Who Mourn",
+        "readings": [
+          { "bookID": "MAT", "chapter": 5, "verseStart": 4, "verseEnd": 4 },
+          { "bookID": "PSA", "chapter": 42, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What loss or grief have you been trying to bypass that Jesus is inviting you to actually sit with?"
+      },
+      {
+        "day": 3,
+        "title": "The Meek",
+        "readings": [
+          { "bookID": "MAT", "chapter": 5, "verseStart": 5, "verseEnd": 5 },
+          { "bookID": "NUM", "chapter": 12, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Where do you confuse meekness with weakness, and how does Moses' example reshape that?"
+      },
+      {
+        "day": 4,
+        "title": "Hungry for Righteousness",
+        "readings": [
+          { "bookID": "MAT", "chapter": 5, "verseStart": 6, "verseEnd": 6 },
+          { "bookID": "PSA", "chapter": 63, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What lesser hungers have been crowding out your appetite for God's righteousness this week?"
+      },
+      {
+        "day": 5,
+        "title": "The Merciful",
+        "readings": [
+          { "bookID": "MAT", "chapter": 5, "verseStart": 7, "verseEnd": 7 },
+          { "bookID": "LUK", "chapter": 10, "verseStart": 25, "verseEnd": 37 }
+        ],
+        "reflection": "Who has God placed in your path today that needs you to be the Samaritan rather than the priest?"
+      },
+      {
+        "day": 6,
+        "title": "Pure in Heart",
+        "readings": [
+          { "bookID": "MAT", "chapter": 5, "verseStart": 8, "verseEnd": 8 },
+          { "bookID": "PSA", "chapter": 24, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What hidden motive do you need to bring into the light so your heart can be single in its devotion?"
+      },
+      {
+        "day": 7,
+        "title": "Peacemakers",
+        "readings": [
+          { "bookID": "MAT", "chapter": 5, "verseStart": 9, "verseEnd": 9 },
+          { "bookID": "ROM", "chapter": 12, "verseStart": 9, "verseEnd": 21 }
+        ],
+        "reflection": "Where is God calling you to do the harder work of making peace rather than simply keeping it?"
+      },
+      {
+        "day": 8,
+        "title": "The Persecuted",
+        "readings": [
+          { "bookID": "MAT", "chapter": 5, "verseStart": 10, "verseEnd": 16 },
+          { "bookID": "1PE", "chapter": 4, "verseStart": 12, "verseEnd": 19 }
+        ],
+        "reflection": "How can the joy Jesus promises reshape the way you respond the next time faithfulness costs you something?"
+      }
+    ]
+  },
+  {
+    "id": "holy-week",
+    "name": "Holy Week: The Journey to Easter",
+    "description": "Walk Holy Week day-by-day — from the triumphal entry through the cross to the empty tomb — and live the most consequential week in history.",
+    "totalDays": 8,
+    "category": "Easter",
+    "gradientColors": ["#5A2E2E", "#2F1515"],
+    "iconName": "cross.fill",
+    "imageKey": "triumphal_entry",
+    "applicableSeasons": ["growing", "hardSeason", "startingOver"],
+    "applicableBurdens": ["faith", "grief", "purpose"],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Palm Sunday",
+        "readings": [
+          { "bookID": "MAT", "chapter": 21, "verseStart": 1, "verseEnd": 17 }
+        ],
+        "reflection": "What does it mean to welcome Jesus as King when He comes in a way you didn't expect?"
+      },
+      {
+        "day": 2,
+        "title": "Cleansing the Temple",
+        "readings": [
+          { "bookID": "MRK", "chapter": 11, "verseStart": 12, "verseEnd": 25 }
+        ],
+        "reflection": "What 'tables' in your heart is Jesus asking to overturn so His presence can be rightly welcomed?"
+      },
+      {
+        "day": 3,
+        "title": "Teaching in the Temple",
+        "readings": [
+          { "bookID": "MAT", "chapter": 22, "verseStart": 34, "verseEnd": 46 }
+        ],
+        "reflection": "How would loving God with all you are — and your neighbor as yourself — reorder your week?"
+      },
+      {
+        "day": 4,
+        "title": "The Anointing at Bethany",
+        "readings": [
+          { "bookID": "JHN", "chapter": 12, "verseStart": 1, "verseEnd": 11 }
+        ],
+        "reflection": "What extravagant act of love can you offer Jesus today, even if the world calls it a waste?"
+      },
+      {
+        "day": 5,
+        "title": "The Last Supper",
+        "readings": [
+          { "bookID": "JHN", "chapter": 13, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Whose feet is Jesus asking you to wash this week, and what pride is making it hard?"
+      },
+      {
+        "day": 6,
+        "title": "Gethsemane",
+        "readings": [
+          { "bookID": "MAT", "chapter": 26, "verseStart": 36, "verseEnd": 56 }
+        ],
+        "reflection": "Where in your life do you need to pray, 'Not my will, but yours be done' — and actually mean it?"
+      },
+      {
+        "day": 7,
+        "title": "Good Friday",
+        "readings": [
+          { "bookID": "JHN", "chapter": 19, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What unfinished thing in your life needs to hear Jesus' words: 'It is finished'?"
+      },
+      {
+        "day": 8,
+        "title": "Easter Morning",
+        "readings": [
+          { "bookID": "JHN", "chapter": 20, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Where do you need the power of the resurrection to meet you in the tomb of a dead hope today?"
+      }
+    ]
+  },
+  {
+    "id": "genesis-beginnings",
+    "name": "Genesis: In the Beginning",
+    "description": "A 12-day walk through the first book of the Bible — creation, the fall, the flood, the patriarchs — tracing God's faithful pursuit from the start.",
+    "totalDays": 12,
+    "category": "Foundations",
+    "gradientColors": ["#3A5A4A", "#1C2D24"],
+    "iconName": "globe.americas.fill",
+    "imageKey": "noah_ark",
+    "applicableSeasons": ["growing", "startingOver", "newlyMarried"],
+    "applicableBurdens": ["faith", "purpose"],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "In the Beginning",
+        "readings": [
+          { "bookID": "GEN", "chapter": 1, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What 'formless and empty' area of your life is God speaking order and light into right now?"
+      },
+      {
+        "day": 2,
+        "title": "The Garden and the Image",
+        "readings": [
+          { "bookID": "GEN", "chapter": 2, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What does it mean to you that God shaped you with His own hands and breathed His own life into you?"
+      },
+      {
+        "day": 3,
+        "title": "The Fall",
+        "readings": [
+          { "bookID": "GEN", "chapter": 3, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What lie of the serpent — 'Did God really say?' — do you keep hearing, and how can you answer it with truth?"
+      },
+      {
+        "day": 4,
+        "title": "Noah and the Flood",
+        "readings": [
+          { "bookID": "GEN", "chapter": 6, "verseStart": null, "verseEnd": null },
+          { "bookID": "GEN", "chapter": 9, "verseStart": 1, "verseEnd": 17 }
+        ],
+        "reflection": "Where do you need to trust God's rainbow promises in the middle of a season that still feels flooded?"
+      },
+      {
+        "day": 5,
+        "title": "The Call of Abram",
+        "readings": [
+          { "bookID": "GEN", "chapter": 12, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What 'country and kindred' is God asking you to leave behind to follow Him into something new?"
+      },
+      {
+        "day": 6,
+        "title": "Counting the Stars",
+        "readings": [
+          { "bookID": "GEN", "chapter": 15, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What is the impossible promise from God that you need to keep believing, even on the nights it seems laughable?"
+      },
+      {
+        "day": 7,
+        "title": "The Offering of Isaac",
+        "readings": [
+          { "bookID": "GEN", "chapter": 22, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What has become an 'Isaac' to you — a gift you love so much that it is beginning to rival God Himself?"
+      },
+      {
+        "day": 8,
+        "title": "Jacob's Stairway",
+        "readings": [
+          { "bookID": "GEN", "chapter": 28, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Where has God shown up unexpectedly lately, surely in a place you didn't know He was?"
+      },
+      {
+        "day": 9,
+        "title": "Wrestling All Night",
+        "readings": [
+          { "bookID": "GEN", "chapter": 32, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What are you wrestling God for right now, and are you willing to walk with a limp if it means receiving His blessing?"
+      },
+      {
+        "day": 10,
+        "title": "Joseph's Dreams",
+        "readings": [
+          { "bookID": "GEN", "chapter": 37, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What 'pit' are you in right now that God may be using as the first chapter of a much bigger story?"
+      },
+      {
+        "day": 11,
+        "title": "Reunited in Egypt",
+        "readings": [
+          { "bookID": "GEN", "chapter": 45, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What relationship in your life is ready for the forgiveness Joseph modeled: 'You meant evil, but God meant it for good'?"
+      },
+      {
+        "day": 12,
+        "title": "God Meant It for Good",
+        "readings": [
+          { "bookID": "GEN", "chapter": 50, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Looking back on the hardest thing you've walked through, where do you now see God's hand weaving it for good?"
+      }
+    ]
+  },
+  {
+    "id": "daniel-exile",
+    "name": "Daniel: Faithful in Exile",
+    "description": "A 12-day journey through the book of Daniel — standing firm in a pagan court, praying when it's illegal, and trusting God with the whole sweep of history.",
+    "totalDays": 12,
+    "category": "Character Study",
+    "gradientColors": ["#5A3A2A", "#2E1F16"],
+    "iconName": "shield.fill",
+    "imageKey": "daniel_lions",
+    "applicableSeasons": ["workingProfessional", "hardSeason", "student", "growing"],
+    "applicableBurdens": ["purpose", "faith", "anxiety"],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Resolved Not to Defile",
+        "readings": [
+          { "bookID": "DAN", "chapter": 1, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What small daily compromise is God inviting you to 'resolve' you will no longer accept?"
+      },
+      {
+        "day": 2,
+        "title": "The King's Dream",
+        "readings": [
+          { "bookID": "DAN", "chapter": 2, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Where do you need to trust that the God who reveals deep and hidden things is sovereign over the empires of your day?"
+      },
+      {
+        "day": 3,
+        "title": "The Fiery Furnace",
+        "readings": [
+          { "bookID": "DAN", "chapter": 3, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What would 'but if not' faith look like for you this week — trust that obeys even without a guarantee of rescue?"
+      },
+      {
+        "day": 4,
+        "title": "A Humbled King",
+        "readings": [
+          { "bookID": "DAN", "chapter": 4, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Where is pride whispering that you built what you have, and how is God calling you to lift your eyes?"
+      },
+      {
+        "day": 5,
+        "title": "The Writing on the Wall",
+        "readings": [
+          { "bookID": "DAN", "chapter": 5, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What in your life have you been 'weighed' by God in, and what repentance is being invited?"
+      },
+      {
+        "day": 6,
+        "title": "The Lions' Den",
+        "readings": [
+          { "bookID": "DAN", "chapter": 6, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What open-window practice of prayer is worth keeping, even if it costs you something socially or professionally?"
+      },
+      {
+        "day": 7,
+        "title": "The Ancient of Days",
+        "readings": [
+          { "bookID": "DAN", "chapter": 7, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does the vision of the Ancient of Days and the Son of Man give you a longer view of the headlines?"
+      },
+      {
+        "day": 8,
+        "title": "The Ram and the Goat",
+        "readings": [
+          { "bookID": "DAN", "chapter": 8, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "When the future feels confusing, what anchors you in the God who sees the end from the beginning?"
+      },
+      {
+        "day": 9,
+        "title": "A Prayer of Confession",
+        "readings": [
+          { "bookID": "DAN", "chapter": 9, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Where does your community or family need you to stand in the gap with a prayer of confession like Daniel's?"
+      },
+      {
+        "day": 10,
+        "title": "The Man in Linen",
+        "readings": [
+          { "bookID": "DAN", "chapter": 10, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does the reality of unseen spiritual battle change the way you persevere in prayer when nothing seems to move?"
+      },
+      {
+        "day": 11,
+        "title": "Kings and Kingdoms",
+        "readings": [
+          { "bookID": "DAN", "chapter": 11, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Which earthly kingdom have you put too much weight on, and how can you re-anchor your hope?"
+      },
+      {
+        "day": 12,
+        "title": "Those Who Are Wise Will Shine",
+        "readings": [
+          { "bookID": "DAN", "chapter": 12, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "How does the promise that 'those who are wise will shine like the brightness of the heavens' fuel your faithfulness today?"
+      }
+    ]
+  },
+  {
+    "id": "lords-prayer-deep-dive",
+    "name": "The Lord's Prayer: Teach Us to Pray",
+    "description": "A 7-day meditation on the prayer Jesus taught us — one petition per day — slowing down to mean every word.",
+    "totalDays": 7,
+    "category": "Prayer",
+    "gradientColors": ["#4A5A7A", "#242D3D"],
+    "iconName": "hands.sparkles.fill",
+    "imageKey": "lords_prayer",
+    "applicableSeasons": ["growing", "hardSeason", "parenthood", "workingProfessional"],
+    "applicableBurdens": ["anxiety", "faith", "purpose"],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Our Father in Heaven",
+        "readings": [
+          { "bookID": "MAT", "chapter": 6, "verseStart": 5, "verseEnd": 13 },
+          { "bookID": "ROM", "chapter": 8, "verseStart": 12, "verseEnd": 17 }
+        ],
+        "reflection": "What does it change about your prayer today if you truly believe you are approaching your Father, not just a distant deity?"
+      },
+      {
+        "day": 2,
+        "title": "Hallowed Be Your Name",
+        "readings": [
+          { "bookID": "PSA", "chapter": 99, "verseStart": null, "verseEnd": null },
+          { "bookID": "ISA", "chapter": 6, "verseStart": 1, "verseEnd": 8 }
+        ],
+        "reflection": "What would it look like today for you to treat God's name as holy in your thoughts, your mouth, and your choices?"
+      },
+      {
+        "day": 3,
+        "title": "Your Kingdom Come",
+        "readings": [
+          { "bookID": "MAT", "chapter": 13, "verseStart": 31, "verseEnd": 46 }
+        ],
+        "reflection": "Where do you long to see God's kingdom break into your world this week — and how will you pray with expectation?"
+      },
+      {
+        "day": 4,
+        "title": "Your Will Be Done",
+        "readings": [
+          { "bookID": "MAT", "chapter": 26, "verseStart": 36, "verseEnd": 46 }
+        ],
+        "reflection": "What prayer of yours is waiting for the honest 'not my will, but yours'? What would that cost, and what would it free?"
+      },
+      {
+        "day": 5,
+        "title": "Give Us This Day",
+        "readings": [
+          { "bookID": "EXO", "chapter": 16, "verseStart": null, "verseEnd": null },
+          { "bookID": "PHP", "chapter": 4, "verseStart": 10, "verseEnd": 20 }
+        ],
+        "reflection": "How does daily-bread prayer cure the anxiety of trying to hoard tomorrow's grace today?"
+      },
+      {
+        "day": 6,
+        "title": "Forgive Us As We Forgive",
+        "readings": [
+          { "bookID": "MAT", "chapter": 18, "verseStart": 21, "verseEnd": 35 }
+        ],
+        "reflection": "Whose debt do you need to release so that your prayer for forgiveness doesn't bounce off a closed heart?"
+      },
+      {
+        "day": 7,
+        "title": "Deliver Us From Evil",
+        "readings": [
+          { "bookID": "EPH", "chapter": 6, "verseStart": 10, "verseEnd": 20 }
+        ],
+        "reflection": "Where do you need to put on the armor of God and pray specifically for deliverance from the evil one today?"
+      }
+    ]
+  },
+  {
+    "id": "parables-kingdom",
+    "name": "Parables of the Kingdom",
+    "description": "A 10-day walk through Jesus' most piercing parables — short stories that turn hearts and reveal the upside-down kingdom of God.",
+    "totalDays": 10,
+    "category": "Jesus' Teaching",
+    "gradientColors": ["#7A4A2A", "#3E2516"],
+    "iconName": "quote.opening",
+    "imageKey": "prodigal_son",
+    "applicableSeasons": ["growing", "hardSeason", "workingProfessional", "startingOver"],
+    "applicableBurdens": ["purpose", "relationships", "faith"],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "The Sower",
+        "readings": [
+          { "bookID": "MAT", "chapter": 13, "verseStart": 1, "verseEnd": 23 }
+        ],
+        "reflection": "What kind of soil is your heart right now, and what do you need to do to become 'good ground' this season?"
+      },
+      {
+        "day": 2,
+        "title": "The Good Samaritan",
+        "readings": [
+          { "bookID": "LUK", "chapter": 10, "verseStart": 25, "verseEnd": 37 }
+        ],
+        "reflection": "Who are you tempted to walk past, and what would it look like to cross the road instead?"
+      },
+      {
+        "day": 3,
+        "title": "The Prodigal Son",
+        "readings": [
+          { "bookID": "LUK", "chapter": 15, "verseStart": 11, "verseEnd": 32 }
+        ],
+        "reflection": "Which son are you most like today — the wanderer or the resentful older brother — and what does the Father want to give you?"
+      },
+      {
+        "day": 4,
+        "title": "The Lost Sheep and Coin",
+        "readings": [
+          { "bookID": "LUK", "chapter": 15, "verseStart": 1, "verseEnd": 10 }
+        ],
+        "reflection": "Where in your life do you feel lost, and how does it change things to know heaven is actively looking for you?"
+      },
+      {
+        "day": 5,
+        "title": "The Rich Fool",
+        "readings": [
+          { "bookID": "LUK", "chapter": 12, "verseStart": 13, "verseEnd": 34 }
+        ],
+        "reflection": "What bigger 'barn' are you tempted to build, and how can you be rich toward God instead?"
+      },
+      {
+        "day": 6,
+        "title": "The Unforgiving Servant",
+        "readings": [
+          { "bookID": "MAT", "chapter": 18, "verseStart": 21, "verseEnd": 35 }
+        ],
+        "reflection": "What small offense are you still choking someone over, and how does the mountain of your own forgiveness reshape that?"
+      },
+      {
+        "day": 7,
+        "title": "The Pharisee and the Tax Collector",
+        "readings": [
+          { "bookID": "LUK", "chapter": 18, "verseStart": 9, "verseEnd": 14 }
+        ],
+        "reflection": "Where does your prayer secretly sound more like the Pharisee than the tax collector — and how can you come low today?"
+      },
+      {
+        "day": 8,
+        "title": "The Workers in the Vineyard",
+        "readings": [
+          { "bookID": "MAT", "chapter": 20, "verseStart": 1, "verseEnd": 16 }
+        ],
+        "reflection": "Whose late-arriving grace in your life have you resented, and how does the Landowner's generosity free you from that?"
+      },
+      {
+        "day": 9,
+        "title": "The Ten Virgins",
+        "readings": [
+          { "bookID": "MAT", "chapter": 25, "verseStart": 1, "verseEnd": 13 }
+        ],
+        "reflection": "What 'oil' of ongoing relationship with Christ might be running low, and how can you tend to it this week?"
+      },
+      {
+        "day": 10,
+        "title": "The Sheep and the Goats",
+        "readings": [
+          { "bookID": "MAT", "chapter": 25, "verseStart": 31, "verseEnd": 46 }
+        ],
+        "reflection": "In whose face, today, is Jesus waiting to be recognized — and will you respond?"
+      }
+    ]
+  },
+  {
+    "id": "esther-for-such-a-time",
+    "name": "Esther: For Such a Time as This",
+    "description": "A 10-day walk through the book of Esther — 10 chapters, 10 days — tracing God's hidden providence through crisis, courage, and reversal.",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": ["#6A3A5C", "#2E1826"],
+    "iconName": "crown.fill",
+    "imageKey": "mordecai_triumph",
+    "applicableSeasons": ["workingProfessional", "student", "hardSeason", "growing"],
+    "applicableBurdens": ["purpose", "faith", "anxiety"],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "A Party at the Palace",
+        "readings": [
+          { "bookID": "EST", "chapter": 1, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Where in the noise and excess of your world do you sense God quietly setting a stage?"
+      },
+      {
+        "day": 2,
+        "title": "An Unlikely Queen",
+        "readings": [
+          { "bookID": "EST", "chapter": 2, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What unchosen circumstance in your life might God be using to position you for a purpose you can't yet see?"
+      },
+      {
+        "day": 3,
+        "title": "The Shadow of Haman",
+        "readings": [
+          { "bookID": "EST", "chapter": 3, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "When evil seems to be gathering momentum in your world, how do you hold onto God's goodness?"
+      },
+      {
+        "day": 4,
+        "title": "For Such a Time as This",
+        "readings": [
+          { "bookID": "EST", "chapter": 4, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What risky 'if I perish, I perish' step might God be asking of you for the sake of someone else?"
+      },
+      {
+        "day": 5,
+        "title": "Approaching the King",
+        "readings": [
+          { "bookID": "EST", "chapter": 5, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "When have you sensed God's favor opening a door you were afraid to walk through?"
+      },
+      {
+        "day": 6,
+        "title": "A Sleepless Night",
+        "readings": [
+          { "bookID": "EST", "chapter": 6, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Where have you seen God's unseen providence arranging 'coincidences' for your good?"
+      },
+      {
+        "day": 7,
+        "title": "The Great Reversal",
+        "readings": [
+          { "bookID": "EST", "chapter": 7, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What situation feels impossible right now that might be closer to a reversal than you realize?"
+      },
+      {
+        "day": 8,
+        "title": "New Decrees",
+        "readings": [
+          { "bookID": "EST", "chapter": 8, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Where do you need to pray bold new 'decrees' of hope over a situation that has been written off?"
+      },
+      {
+        "day": 9,
+        "title": "The Day of Purim",
+        "readings": [
+          { "bookID": "EST", "chapter": 9, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "What rescues has God already worked for you that deserve to be remembered and celebrated on purpose?"
+      },
+      {
+        "day": 10,
+        "title": "Mordecai the Advocate",
+        "readings": [
+          { "bookID": "EST", "chapter": 10, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Who around you needs you to be the Mordecai — someone who speaks for their welfare even when it is costly?"
+      }
+    ]
+  },
+  {
+    "id": "ruth-redemption",
+    "name": "Ruth: A Story of Redemption",
+    "description": "A 4-day walk through the little book of Ruth — where loss meets loyalty, gleaning meets providence, and a foreign widow becomes the great-grandmother of King David.",
+    "totalDays": 4,
+    "category": "Character Study",
+    "gradientColors": ["#8B6642", "#4A331F"],
+    "iconName": "heart.circle.fill",
+    "imageKey": "jacob_rachel_well",
+    "applicableSeasons": ["hardSeason", "newlyMarried", "startingOver", "growing"],
+    "applicableBurdens": ["grief", "relationships", "purpose"],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Loss and Loyalty",
+        "readings": [
+          { "bookID": "RUT", "chapter": 1, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Naomi calls herself 'Mara' — bitter. Ruth responds to loss with a vow: 'Where you go, I will go.' Which of the two voices — bitter honesty or stubborn loyalty — more closely describes how you're meeting this season, and what might change if both were allowed to coexist?"
+      },
+      {
+        "day": 2,
+        "title": "Unexpected Kindness",
+        "readings": [
+          { "bookID": "RUT", "chapter": 2, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Notice how the narrator says Ruth 'happened' to glean in Boaz's field — a quiet nod that nothing in this story is actually random. Where in your life might God be orchestrating what feels like coincidence into quiet kindness?"
+      },
+      {
+        "day": 3,
+        "title": "Bold Faith at the Threshing Floor",
+        "readings": [
+          { "bookID": "RUT", "chapter": 3, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Ruth's approach to Boaz invokes the Hebrew concept of the kinsman-redeemer — a relative who buys back land and lives that have been lost. What does it mean to you that the Bible's picture of redemption starts here, on a threshing floor, not in a temple?"
+      },
+      {
+        "day": 4,
+        "title": "The Redeemer and the Royal Line",
+        "readings": [
+          { "bookID": "RUT", "chapter": 4, "verseStart": null, "verseEnd": null },
+          { "bookID": "MAT", "chapter": 1, "verseStart": 1, "verseEnd": 17 }
+        ],
+        "reflection": "Ruth — a Moabite, a widow, a foreigner — shows up in Jesus' family tree. How does that ending reshape your understanding of who God weaves into His saving story, and how He might be weaving you in?"
+      }
+    ]
+  },
+  {
+    "id": "jonah-reluctant-prophet",
+    "name": "Jonah: The Reluctant Prophet",
+    "description": "A 4-day journey through Jonah — a prophet who ran, a storm that caught him, a city that repented, and a God whose mercy ran further than Jonah's prejudice.",
+    "totalDays": 4,
+    "category": "Character Study",
+    "gradientColors": ["#2E5A6B", "#15303A"],
+    "iconName": "water.waves",
+    "imageKey": "jesus_calms_storm",
+    "applicableSeasons": ["hardSeason", "startingOver", "growing"],
+    "applicableBurdens": ["faith", "purpose", "relationships"],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "Running from God",
+        "readings": [
+          { "bookID": "JON", "chapter": 1, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "God says 'go to Nineveh' and Jonah boards a boat for Tarshish — the opposite end of the known world. What assignment from God are you sailing away from, and where is the storm that should warn you actually coming from?"
+      },
+      {
+        "day": 2,
+        "title": "Prayer from the Deep",
+        "readings": [
+          { "bookID": "JON", "chapter": 2, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Jonah prays from inside a fish — the lowest point imaginable — and calls it 'the temple.' How does that reframing change your view of your own low places? Can prayer turn any depth into a sanctuary?"
+      },
+      {
+        "day": 3,
+        "title": "A City That Repented",
+        "readings": [
+          { "bookID": "JON", "chapter": 3, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Nineveh was Israel's cruelest enemy, and yet they repent at the shortest sermon in the Bible — just eight words. What does that teach you about the mysterious power of God's Word, even when the messenger is reluctant?"
+      },
+      {
+        "day": 4,
+        "title": "The Heart of God",
+        "readings": [
+          { "bookID": "JON", "chapter": 4, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "The book ends with a question, not an answer — God asks Jonah whether He should pity a hundred and twenty thousand people. Whose salvation would secretly disappoint you, and what does God's final question call you to lay down?"
+      }
+    ]
+  },
+  {
+    "id": "fruit-of-the-spirit",
+    "name": "Fruit of the Spirit",
+    "description": "A 9-day study of the character the Holy Spirit grows in us — one fruit per day, each rooted in Galatians 5 and paired with a passage that brings it to life.",
+    "totalDays": 9,
+    "category": "Discipleship",
+    "gradientColors": ["#4A7A5C", "#2A4A38"],
+    "iconName": "leaf.circle.fill",
+    "imageKey": "annunciation",
+    "applicableSeasons": ["growing", "workingProfessional", "parenthood", "newlyMarried"],
+    "applicableBurdens": ["relationships", "purpose", "faith"],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "Love",
+        "readings": [
+          { "bookID": "GAL", "chapter": 5, "verseStart": 16, "verseEnd": 26 },
+          { "bookID": "1CO", "chapter": 13, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Paul says the fruit of the Spirit is love — singular — as if the other eight flow from it. Which line of 1 Corinthians 13 most exposes where your love is still growing, and where is the Spirit inviting you to cooperate?"
+      },
+      {
+        "day": 2,
+        "title": "Joy",
+        "readings": [
+          { "bookID": "PHP", "chapter": 4, "verseStart": 4, "verseEnd": 13 },
+          { "bookID": "NEH", "chapter": 8, "verseStart": 1, "verseEnd": 12 }
+        ],
+        "reflection": "Biblical joy is not the absence of sorrow but a deep gladness rooted in God. Where are you mistaking happiness for joy, and what anchors joy when circumstances won't cooperate?"
+      },
+      {
+        "day": 3,
+        "title": "Peace",
+        "readings": [
+          { "bookID": "JHN", "chapter": 14, "verseStart": 25, "verseEnd": 31 },
+          { "bookID": "ISA", "chapter": 26, "verseStart": 1, "verseEnd": 9 }
+        ],
+        "reflection": "Jesus gives peace 'not as the world gives' — not the absence of conflict, but the presence of Him. What worry are you carrying today that Jesus is offering to trade for His peace?"
+      },
+      {
+        "day": 4,
+        "title": "Patience",
+        "readings": [
+          { "bookID": "JAS", "chapter": 5, "verseStart": 7, "verseEnd": 11 },
+          { "bookID": "ROM", "chapter": 5, "verseStart": 1, "verseEnd": 11 }
+        ],
+        "reflection": "The Greek word here, 'makrothumia,' literally means 'long-tempered' — slow to boil. Where in your life is your fuse short, and what would it look like to be long-tempered with that specific person or situation?"
+      },
+      {
+        "day": 5,
+        "title": "Kindness",
+        "readings": [
+          { "bookID": "COL", "chapter": 3, "verseStart": 12, "verseEnd": 17 },
+          { "bookID": "LUK", "chapter": 10, "verseStart": 25, "verseEnd": 37 }
+        ],
+        "reflection": "Kindness is not merely being nice — it is going out of your way for someone who cannot repay you. Who has God placed in your path this week that costs you something to be kind to?"
+      },
+      {
+        "day": 6,
+        "title": "Goodness",
+        "readings": [
+          { "bookID": "ROM", "chapter": 12, "verseStart": 9, "verseEnd": 21 },
+          { "bookID": "PSA", "chapter": 34, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Goodness is integrity that holds even when nobody is watching. Where in your private life is the Spirit quietly inviting you to match your secret to your reputation?"
+      },
+      {
+        "day": 7,
+        "title": "Faithfulness",
+        "readings": [
+          { "bookID": "LAM", "chapter": 3, "verseStart": 19, "verseEnd": 33 },
+          { "bookID": "LUK", "chapter": 16, "verseStart": 10, "verseEnd": 13 }
+        ],
+        "reflection": "God's faithfulness is new every morning; ours is meant to be steady in the small things. Where is the Lord asking you to be faithful in a 'small' thing that nobody applauds?"
+      },
+      {
+        "day": 8,
+        "title": "Gentleness",
+        "readings": [
+          { "bookID": "PHP", "chapter": 4, "verseStart": 1, "verseEnd": 9 },
+          { "bookID": "PRO", "chapter": 15, "verseStart": 1, "verseEnd": 18 }
+        ],
+        "reflection": "Gentleness is strength under control — the soft answer of someone who could have roared. Whose wound are you prodding with your words that really needs a gentle touch?"
+      },
+      {
+        "day": 9,
+        "title": "Self-Control",
+        "readings": [
+          { "bookID": "2PE", "chapter": 1, "verseStart": 3, "verseEnd": 11 },
+          { "bookID": "PRO", "chapter": 25, "verseStart": 21, "verseEnd": 28 }
+        ],
+        "reflection": "Proverbs pictures a person without self-control as a city with broken walls — open to anything. What one 'wall' does the Spirit want to rebuild in your life this week, and who could help you tend it?"
+      }
+    ]
+  },
+  {
+    "id": "philippians-joy",
+    "name": "Philippians: Joy in Every Season",
+    "description": "A 4-day walk through Paul's most joyful letter — written from a prison cell — one chapter per day, each unfolding a different facet of a joy that circumstances cannot reach.",
+    "totalDays": 4,
+    "category": "Epistles",
+    "gradientColors": ["#7A6A2E", "#3C3314"],
+    "iconName": "sun.max.fill",
+    "imageKey": "magi_journey",
+    "applicableSeasons": ["hardSeason", "workingProfessional", "growing"],
+    "applicableBurdens": ["anxiety", "purpose", "faith"],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "Joy in Suffering",
+        "readings": [
+          { "bookID": "PHP", "chapter": 1, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Paul writes this letter in chains and still calls it his 'joy.' He reframes his prison as a platform for the gospel. What unwanted circumstance in your life is God inviting you to reframe rather than escape?"
+      },
+      {
+        "day": 2,
+        "title": "Joy in Humility",
+        "readings": [
+          { "bookID": "PHP", "chapter": 2, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "The hymn in verses 6–11 traces Jesus' downward movement — equal with God, emptied, human, obedient, crucified — before the Father lifts Him up. Where are you grasping at status in a place Jesus is modeling surrender, and what would 'the same mind' actually look like?"
+      },
+      {
+        "day": 3,
+        "title": "Joy in Knowing Christ",
+        "readings": [
+          { "bookID": "PHP", "chapter": 3, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Paul calls his impressive résumé 'rubbish' compared to knowing Christ. What part of your own résumé — credentials, roles, accomplishments — is quietly competing with Christ for the center of your identity?"
+      },
+      {
+        "day": 4,
+        "title": "Joy in Every Circumstance",
+        "readings": [
+          { "bookID": "PHP", "chapter": 4, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Paul says he has learned — past tense, hard-won — the secret of being content in plenty or in want. Where in your life is the Lord teaching you that secret right now, and what practices (prayer, thankfulness, right thinking) are you refusing to actually use?"
+      }
+    ]
+  },
+  {
+    "id": "life-of-moses",
+    "name": "The Life of Moses",
+    "description": "A 10-day journey through the life of Moses — from basket to burning bush, from Red Sea to Sinai — meeting the God who calls, delivers, speaks, and stays.",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": ["#6C4E2A", "#382712"],
+    "iconName": "flame.circle.fill",
+    "imageKey": "manna_wilderness",
+    "applicableSeasons": ["workingProfessional", "startingOver", "hardSeason", "growing"],
+    "applicableBurdens": ["purpose", "faith"],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Born into a Basket",
+        "readings": [
+          { "bookID": "EXO", "chapter": 1, "verseStart": null, "verseEnd": null },
+          { "bookID": "EXO", "chapter": 2, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "The Hebrew midwives defy Pharaoh's decree, a mother puts her son in a basket on the Nile, and God is already writing a deliverance story. Where has God been quietly preparing you, long before you ever knew a rescue was needed?"
+      },
+      {
+        "day": 2,
+        "title": "The Burning Bush",
+        "readings": [
+          { "bookID": "EXO", "chapter": 3, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Moses turns aside to look at a bush that burns without burning up, and God calls him by name. What ordinary thing might God be using to get your attention, and are you willing to turn aside to look?"
+      },
+      {
+        "day": 3,
+        "title": "Excuses and Signs",
+        "readings": [
+          { "bookID": "EXO", "chapter": 4, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Moses argues with God: 'Who am I? What if they don't believe me? I'm not eloquent.' God meets each objection. Which of Moses' excuses most resembles the one you keep giving God, and what is God's patient answer to you?"
+      },
+      {
+        "day": 4,
+        "title": "Let My People Go",
+        "readings": [
+          { "bookID": "EXO", "chapter": 7, "verseStart": null, "verseEnd": null },
+          { "bookID": "EXO", "chapter": 10, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "The plagues systematically dethrone every Egyptian god — the Nile, the sun, the livestock — showing who truly reigns. What 'god' of your own culture do you need God to expose as powerless in your life?"
+      },
+      {
+        "day": 5,
+        "title": "The Passover",
+        "readings": [
+          { "bookID": "EXO", "chapter": 12, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Israel is rescued not by their merit but by the blood of a lamb on their doorposts — a shadow of the greater Lamb to come. How does seeing Passover as a portrait of Christ deepen your understanding of what His blood actually accomplished?"
+      },
+      {
+        "day": 6,
+        "title": "Through the Sea",
+        "readings": [
+          { "bookID": "EXO", "chapter": 14, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "'Stand still and see the salvation of the Lord,' Moses tells a trapped people — and then God says 'go forward.' Where are you tempted to either panic or stall when God is asking both stillness of heart and steps of faith?"
+      },
+      {
+        "day": 7,
+        "title": "Manna and Water",
+        "readings": [
+          { "bookID": "EXO", "chapter": 16, "verseStart": null, "verseEnd": null },
+          { "bookID": "EXO", "chapter": 17, "verseStart": 1, "verseEnd": 7 }
+        ],
+        "reflection": "God gives bread that cannot be hoarded and water from a rock. What grace is He offering you daily that you keep trying to stockpile for anxiety's sake?"
+      },
+      {
+        "day": 8,
+        "title": "Sinai and the Ten Words",
+        "readings": [
+          { "bookID": "EXO", "chapter": 19, "verseStart": null, "verseEnd": null },
+          { "bookID": "EXO", "chapter": 20, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "God gives the law in the context of rescue — 'I am the Lord your God who brought you out' — not as a way to earn His love but as a shape for life with Him. Which commandment do you most tend to read as a burden instead of as a boundary of freedom?"
+      },
+      {
+        "day": 9,
+        "title": "Show Me Your Glory",
+        "readings": [
+          { "bookID": "EXO", "chapter": 33, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Moses says, 'If your presence does not go with us, do not send us up from here.' What do you want from God more — His gifts, or Him? How would today look different if you wanted Him most?"
+      },
+      {
+        "day": 10,
+        "title": "The Faithful Servant",
+        "readings": [
+          { "bookID": "DEU", "chapter": 34, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Moses dies without entering the Promised Land, but God Himself buries him. What unfinished things in your life is God asking you to entrust to Him, knowing the story is bigger than you?"
+      }
+    ]
+  },
+  {
+    "id": "psalm-23-deep-dive",
+    "name": "Psalm 23: The Shepherd's Song",
+    "description": "A 6-day meditation on Scripture's most loved psalm — one verse at a time — paired with a New Testament passage that reveals Christ as the Shepherd the psalm was always pointing to.",
+    "totalDays": 6,
+    "category": "Worship",
+    "gradientColors": ["#4A6B3F", "#253A22"],
+    "iconName": "sparkle",
+    "imageKey": "suffer_little_children",
+    "applicableSeasons": ["hardSeason", "growing", "retired", "startingOver"],
+    "applicableBurdens": ["anxiety", "grief", "faith"],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "The Lord Is My Shepherd",
+        "readings": [
+          { "bookID": "PSA", "chapter": 23, "verseStart": 1, "verseEnd": 1 },
+          { "bookID": "JHN", "chapter": 10, "verseStart": 1, "verseEnd": 18 }
+        ],
+        "reflection": "David was a shepherd — he knew the weight of that job. Jesus calls Himself the 'Good Shepherd' who lays down His life. What false shepherd (job, success, relationship) have you been letting define your worth, and what changes when the Lord Himself holds the staff?"
+      },
+      {
+        "day": 2,
+        "title": "Green Pastures, Still Waters",
+        "readings": [
+          { "bookID": "PSA", "chapter": 23, "verseStart": 2, "verseEnd": 2 },
+          { "bookID": "MAT", "chapter": 11, "verseStart": 25, "verseEnd": 30 }
+        ],
+        "reflection": "Sheep will not lie down when they are anxious, hungry, or in conflict. The Shepherd 'makes' them. Where in your life is Jesus gently making you rest, and what are you fighting to stay on your feet about?"
+      },
+      {
+        "day": 3,
+        "title": "Paths of Righteousness",
+        "readings": [
+          { "bookID": "PSA", "chapter": 23, "verseStart": 3, "verseEnd": 3 },
+          { "bookID": "PSA", "chapter": 32, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "The Shepherd 'restores my soul' before He leads it in right paths — comfort precedes correction. Where has God been restoring you that you mistook for God being silent, and what path might He be ready to walk with you now?"
+      },
+      {
+        "day": 4,
+        "title": "Through the Valley",
+        "readings": [
+          { "bookID": "PSA", "chapter": 23, "verseStart": 4, "verseEnd": 4 },
+          { "bookID": "2CO", "chapter": 4, "verseStart": 7, "verseEnd": 18 }
+        ],
+        "reflection": "David does not say 'around' but 'through' the valley, and the subject changes here from 'He' to 'You' — the closer the danger, the more personal the Shepherd becomes. What valley are you in, and how has God's closeness intensified in it?"
+      },
+      {
+        "day": 5,
+        "title": "A Table in the Presence of Enemies",
+        "readings": [
+          { "bookID": "PSA", "chapter": 23, "verseStart": 5, "verseEnd": 5 },
+          { "bookID": "REV", "chapter": 19, "verseStart": 1, "verseEnd": 10 }
+        ],
+        "reflection": "God feasts you in front of the very enemies you wish would go away. What does it mean that He does not always remove your trouble, but sometimes invites you to sit and eat while trouble watches?"
+      },
+      {
+        "day": 6,
+        "title": "Goodness, Mercy, and Home",
+        "readings": [
+          { "bookID": "PSA", "chapter": 23, "verseStart": 6, "verseEnd": 6 },
+          { "bookID": "JHN", "chapter": 14, "verseStart": 1, "verseEnd": 6 }
+        ],
+        "reflection": "The Hebrew for 'follow me' can be read as 'pursue' — goodness and mercy aren't strolling behind you, they are chasing you down. How does that reframing change the way you remember your past and look toward your future with God?"
+      }
+    ]
+  },
+  {
+    "id": "acts-early-church",
+    "name": "Acts: The Early Church",
+    "description": "A 14-day journey through the book of Acts — two chapters per day — from Pentecost to Rome, watching the Spirit birth a movement that still echoes in every believer today.",
+    "totalDays": 14,
+    "category": "Foundations",
+    "gradientColors": ["#7A4A1C", "#3E2510"],
+    "iconName": "wind",
+    "imageKey": "loaves_fishes",
+    "applicableSeasons": ["growing", "workingProfessional", "student"],
+    "applicableBurdens": ["purpose", "faith"],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Pentecost",
+        "readings": [
+          { "bookID": "ACT", "chapter": 1, "verseStart": null, "verseEnd": null },
+          { "bookID": "ACT", "chapter": 2, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "The church is born when ordinary people are filled with the Spirit and begin to proclaim Jesus in languages they never studied. Where in your life have you been waiting for more training instead of trusting the Spirit to empower the speech you have?"
+      },
+      {
+        "day": 2,
+        "title": "Bold Before Authority",
+        "readings": [
+          { "bookID": "ACT", "chapter": 3, "verseStart": null, "verseEnd": null },
+          { "bookID": "ACT", "chapter": 4, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Peter and John are told to stop preaching — and pray for more boldness, not less. Where has social pressure made you quiet about Jesus, and what prayer would shift your posture from accommodation to courage?"
+      },
+      {
+        "day": 3,
+        "title": "A Growing, Testing Church",
+        "readings": [
+          { "bookID": "ACT", "chapter": 5, "verseStart": null, "verseEnd": null },
+          { "bookID": "ACT", "chapter": 6, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Ananias and Sapphira's lie threatens the purity of a young community; later, the apostles delegate so the Word can keep going. What organizational or personal compromise in your spiritual life is quietly stalling the mission?"
+      },
+      {
+        "day": 4,
+        "title": "Stephen and the Scattering",
+        "readings": [
+          { "bookID": "ACT", "chapter": 7, "verseStart": null, "verseEnd": null },
+          { "bookID": "ACT", "chapter": 8, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Stephen's death looks like the end of the movement — but the persecution that follows scatters the gospel across the known world. What ending in your life could God be using as a beginning you can't yet see?"
+      },
+      {
+        "day": 5,
+        "title": "Saul Converted, Cornelius Included",
+        "readings": [
+          { "bookID": "ACT", "chapter": 9, "verseStart": null, "verseEnd": null },
+          { "bookID": "ACT", "chapter": 10, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "The church's fiercest enemy becomes its greatest missionary, and a Roman centurion becomes a brother. Whose conversion would shock you most, and are you willing to pray for it with real expectation?"
+      },
+      {
+        "day": 6,
+        "title": "Antioch and an Angel",
+        "readings": [
+          { "bookID": "ACT", "chapter": 11, "verseStart": null, "verseEnd": null },
+          { "bookID": "ACT", "chapter": 12, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Believers are first called 'Christians' at Antioch — a church of outsiders becoming a hub. How is God using people at the margins to grow His church in ways the religious center can't see?"
+      },
+      {
+        "day": 7,
+        "title": "The First Missionary Journey",
+        "readings": [
+          { "bookID": "ACT", "chapter": 13, "verseStart": null, "verseEnd": null },
+          { "bookID": "ACT", "chapter": 14, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "The Spirit says, 'Set apart Paul and Barnabas for the work to which I have called them.' Whose sending are you part of — either being sent or prayerfully supporting — and how seriously do you take that stewardship?"
+      },
+      {
+        "day": 8,
+        "title": "Jerusalem Council and a Philippian Jail",
+        "readings": [
+          { "bookID": "ACT", "chapter": 15, "verseStart": null, "verseEnd": null },
+          { "bookID": "ACT", "chapter": 16, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "The church decides grace is truly for the Gentiles, and Paul sings in a midnight jail cell. Where do you still add unspoken requirements to God's grace, and what song might be waiting in your hardest place?"
+      },
+      {
+        "day": 9,
+        "title": "Athens and Corinth",
+        "readings": [
+          { "bookID": "ACT", "chapter": 17, "verseStart": null, "verseEnd": null },
+          { "bookID": "ACT", "chapter": 18, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Paul engages pagan philosophers at the Areopagus by quoting their own poets. How might you learn to speak the gospel in the vocabulary of the people around you without watering down the truth?"
+      },
+      {
+        "day": 10,
+        "title": "Ephesus and a Tender Farewell",
+        "readings": [
+          { "bookID": "ACT", "chapter": 19, "verseStart": null, "verseEnd": null },
+          { "bookID": "ACT", "chapter": 20, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Paul weeps with the Ephesian elders, reminding them that 'it is more blessed to give than to receive.' Who has God given you to shepherd, and how do you need to love them more intentionally this week?"
+      },
+      {
+        "day": 11,
+        "title": "Paul Arrested in Jerusalem",
+        "readings": [
+          { "bookID": "ACT", "chapter": 21, "verseStart": null, "verseEnd": null },
+          { "bookID": "ACT", "chapter": 22, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Paul keeps heading toward suffering because he is 'bound in the Spirit.' Where is God asking you to move toward difficulty because it is obedience, not avoid it because it is hard?"
+      },
+      {
+        "day": 12,
+        "title": "Courage Before Rulers",
+        "readings": [
+          { "bookID": "ACT", "chapter": 23, "verseStart": null, "verseEnd": null },
+          { "bookID": "ACT", "chapter": 24, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "The Lord stands by Paul at night and says, 'Take courage.' When have you needed an unseen word to keep going, and how might God be whispering it to you tonight?"
+      },
+      {
+        "day": 13,
+        "title": "Almost Persuaded",
+        "readings": [
+          { "bookID": "ACT", "chapter": 25, "verseStart": null, "verseEnd": null },
+          { "bookID": "ACT", "chapter": 26, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Agrippa says Paul 'almost' persuaded him to be a Christian. Where in your own life are you 'almost' committed, and what would it take to close the gap between conviction and surrender?"
+      },
+      {
+        "day": 14,
+        "title": "Shipwreck to Rome",
+        "readings": [
+          { "bookID": "ACT", "chapter": 27, "verseStart": null, "verseEnd": null },
+          { "bookID": "ACT", "chapter": 28, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Acts ends abruptly — Paul preaches the kingdom from a rented house, chained to a soldier, and the story is clearly not over. You are part of that unfinished story. What next line is God writing through you?"
+      }
+    ]
+  },
+  {
+    "id": "first-john-assurance",
+    "name": "1 John: That You May Know",
+    "description": "A 5-day walk through the first letter of John — written so that believers would 'know that you have eternal life.' Each chapter explores a different test of genuine faith.",
+    "totalDays": 5,
+    "category": "Epistles",
+    "gradientColors": ["#3D5A8B", "#1C2D5C"],
+    "iconName": "checkmark.seal.fill",
+    "imageKey": "bethany_mary_martha",
+    "applicableSeasons": ["growing", "hardSeason", "startingOver"],
+    "applicableBurdens": ["faith", "anxiety", "relationships"],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Walking in the Light",
+        "readings": [
+          { "bookID": "1JN", "chapter": 1, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "John insists that fellowship with God is tied to walking in the light — bringing what is hidden into the open. What is one area where you've been pretending that honest confession would actually bring into fellowship rather than disgrace?"
+      },
+      {
+        "day": 2,
+        "title": "Abiding, Not Just Believing",
+        "readings": [
+          { "bookID": "1JN", "chapter": 2, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "John's test of love for God is simple: 'Whoever keeps his word, in him truly the love of God is perfected.' How would your closest relationships describe the difference between your beliefs and your behavior?"
+      },
+      {
+        "day": 3,
+        "title": "Children of God",
+        "readings": [
+          { "bookID": "1JN", "chapter": 3, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "'See what kind of love the Father has given us — that we should be called children of God.' How would this day look different if you walked into it believing your truest identity is 'beloved child'?"
+      },
+      {
+        "day": 4,
+        "title": "God Is Love",
+        "readings": [
+          { "bookID": "1JN", "chapter": 4, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "John says 'we love because He first loved us' — our love is always a response. Whose love have you been chasing as if you could earn it, and how does God's prior love free you to love that person from rest, not from need?"
+      },
+      {
+        "day": 5,
+        "title": "That You May Know",
+        "readings": [
+          { "bookID": "1JN", "chapter": 5, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "John says he wrote this letter 'that you may know that you have eternal life.' Which of John's tests — belief in Jesus, love for others, obedience to His word — does the Spirit most want to reassure you in today?"
+      }
+    ]
+  },
+  {
+    "id": "james-faith-that-works",
+    "name": "James: Faith That Works",
+    "description": "A 5-day study of James — the most practical letter in the New Testament — confronting the gap between what we say we believe and how we actually live.",
+    "totalDays": 5,
+    "category": "Epistles",
+    "gradientColors": ["#8B5A2E", "#44290F"],
+    "iconName": "hammer.fill",
+    "imageKey": "davids_three_mighty_men",
+    "applicableSeasons": ["workingProfessional", "growing", "hardSeason"],
+    "applicableBurdens": ["purpose", "relationships", "faith"],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Count It All Joy",
+        "readings": [
+          { "bookID": "JAS", "chapter": 1, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "James doesn't say trials ARE joy — he says count them AS joy because of what God is producing. Which current trial would need to be reframed this week if you actually believed God was maturing something in you through it?"
+      },
+      {
+        "day": 2,
+        "title": "Faith Without Works Is Dead",
+        "readings": [
+          { "bookID": "JAS", "chapter": 2, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "James is not setting faith against works — he is saying real faith always works. What is one specific act of obedience that would make your private faith visible this week?"
+      },
+      {
+        "day": 3,
+        "title": "Taming the Tongue",
+        "readings": [
+          { "bookID": "JAS", "chapter": 3, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "James compares the tongue to a small rudder that steers a great ship and a small spark that burns a forest. Where are your words steering your life or other people's lives in a direction you'd be ashamed to arrive at?"
+      },
+      {
+        "day": 4,
+        "title": "Friendship with the World",
+        "readings": [
+          { "bookID": "JAS", "chapter": 4, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "James says quarrels come from desires that war within us — and that we 'do not have because we do not ask.' What desire is driving the conflict in your life right now, and have you brought it honestly to God in prayer?"
+      },
+      {
+        "day": 5,
+        "title": "Patient and Praying",
+        "readings": [
+          { "bookID": "JAS", "chapter": 5, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "James ends by calling the church to pray for one another, confessing sin so that healing comes. Who in your life is safe enough to hear you confess, and what would it cost you to actually ask them to pray with you?"
+      }
+    ]
+  },
+  {
+    "id": "hebrews-jesus-is-better",
+    "name": "Hebrews: Jesus Is Better",
+    "description": "A 13-day climb through Hebrews — one chapter per day — showing how Jesus fulfills and surpasses every Old Testament picture that pointed to Him.",
+    "totalDays": 13,
+    "category": "Theology",
+    "gradientColors": ["#5A2F2F", "#2C1414"],
+    "iconName": "crown.fill",
+    "imageKey": "sacrifice_isaac",
+    "applicableSeasons": ["growing", "workingProfessional"],
+    "applicableBurdens": ["faith", "purpose"],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "The Son, Superior to Angels",
+        "readings": [
+          { "bookID": "HEB", "chapter": 1, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Hebrews opens by declaring that God has spoken most fully in His Son — 'the radiance of the glory of God.' Where have you been listening for God in a thousand secondary sources when He has already spoken most clearly in Jesus?"
+      },
+      {
+        "day": 2,
+        "title": "A So Great Salvation",
+        "readings": [
+          { "bookID": "HEB", "chapter": 2, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Jesus became lower than the angels — human, tempted, suffering — so He could 'taste death for everyone.' How does Jesus sharing your exact flesh change the way you bring your weakness to Him?"
+      },
+      {
+        "day": 3,
+        "title": "Greater Than Moses",
+        "readings": [
+          { "bookID": "HEB", "chapter": 3, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Moses was faithful as a servant in God's house; Jesus is faithful as the Son over it. Where are you serving God's house in a way that is secretly drifting from trusting God's Son?"
+      },
+      {
+        "day": 4,
+        "title": "Enter His Rest",
+        "readings": [
+          { "bookID": "HEB", "chapter": 4, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "The writer says a Sabbath rest remains for the people of God — but we must strive to enter it. What restless striving in your life is actually an unwillingness to stop and trust that the work is Christ's, not yours?"
+      },
+      {
+        "day": 5,
+        "title": "A Great High Priest",
+        "readings": [
+          { "bookID": "HEB", "chapter": 5, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Jesus is a priest who 'in the days of his flesh offered up prayers and supplications with loud cries and tears.' How does picturing Jesus as a tearful, sympathetic priest change the way you bring your own tears to Him?"
+      },
+      {
+        "day": 6,
+        "title": "Pressing On to Maturity",
+        "readings": [
+          { "bookID": "HEB", "chapter": 6, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "The writer urges the readers not to stay as spiritual infants but to press on. Which 'elementary' truth have you settled into instead of growing into solid food?"
+      },
+      {
+        "day": 7,
+        "title": "A Priest Like Melchizedek",
+        "readings": [
+          { "bookID": "HEB", "chapter": 7, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Jesus' priesthood is permanent — 'He always lives to make intercession.' How does knowing Jesus is praying for you right now reshape whatever you're carrying into tomorrow?"
+      },
+      {
+        "day": 8,
+        "title": "A Better Covenant",
+        "readings": [
+          { "bookID": "HEB", "chapter": 8, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Under the new covenant, God writes His laws 'on their hearts.' Where are you still relating to God through external rules when He wants to transform you from the inside?"
+      },
+      {
+        "day": 9,
+        "title": "Once for All",
+        "readings": [
+          { "bookID": "HEB", "chapter": 9, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "The old priests offered daily sacrifices that could never cleanse the conscience; Christ's single sacrifice does. What sin do you keep re-confessing as if His finished work needs your repetition to make it stick?"
+      },
+      {
+        "day": 10,
+        "title": "Draw Near With Confidence",
+        "readings": [
+          { "bookID": "HEB", "chapter": 10, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Because of Jesus' blood we can draw near 'with confidence' — the curtain is torn. When you come to God, does it feel like approaching a throne of grace or the waiting room of a reluctant official? What would change?"
+      },
+      {
+        "day": 11,
+        "title": "The Hall of Faith",
+        "readings": [
+          { "bookID": "HEB", "chapter": 11, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Every person listed here died without receiving what was promised, 'but they saw it and greeted it from afar.' How might your story of waiting be counted as a chapter of this same hall of faith?"
+      },
+      {
+        "day": 12,
+        "title": "A Great Cloud of Witnesses",
+        "readings": [
+          { "bookID": "HEB", "chapter": 12, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "The writer urges us to fix our eyes on Jesus, 'the founder and perfecter of our faith,' and run with endurance. What weight — not necessarily sinful, but heavy — is slowing your run, and are you willing to lay it down?"
+      },
+      {
+        "day": 13,
+        "title": "Outside the Camp",
+        "readings": [
+          { "bookID": "HEB", "chapter": 13, "verseStart": null, "verseEnd": null }
+        ],
+        "reflection": "Jesus suffered 'outside the camp' — beyond the religious respectability of His day. Where is He calling you outside your own comfortable camp to be with Him among those the respectable world has written off?"
       }
     ]
   }

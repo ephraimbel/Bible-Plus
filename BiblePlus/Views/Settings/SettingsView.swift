@@ -7,12 +7,18 @@ struct SettingsView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(SoundscapeService.self) private var soundscapeService
     @Environment(AudioBibleService.self) private var audioBibleService
+    @Environment(LocalizationService.self) private var localization
     @State private var viewModel: SettingsViewModel?
 
     var body: some View {
         Group {
             if let vm = viewModel {
-                SettingsContentView(vm: vm, soundscapeService: soundscapeService, audioBibleService: audioBibleService)
+                SettingsContentView(
+                    vm: vm,
+                    soundscapeService: soundscapeService,
+                    audioBibleService: audioBibleService,
+                    localization: localization
+                )
             } else {
                 BPLoadingView().onAppear { initializeViewModel() }
             }
@@ -33,6 +39,7 @@ private struct SettingsContentView: View {
     @Bindable var vm: SettingsViewModel
     let soundscapeService: SoundscapeService
     let audioBibleService: AudioBibleService
+    let localization: LocalizationService
     @Environment(\.modelContext) private var modelContext
     @Environment(\.bpPalette) private var palette
     @Environment(\.colorScheme) private var colorScheme
@@ -129,6 +136,10 @@ private struct SettingsContentView: View {
             }
             .sheet(isPresented: $vm.showNotificationTopics) {
                 NotificationTopicsView(vm: vm, showPaywall: $showPaywall)
+                    .presentationDetents([.large])
+            }
+            .sheet(isPresented: $vm.showLanguagePicker) {
+                LanguagePickerView()
                     .presentationDetents([.large])
             }
             .sheet(isPresented: $showMemorySettings) {
@@ -234,7 +245,7 @@ private struct SettingsContentView: View {
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(vm.profile.firstName.isEmpty ? "Welcome" : vm.profile.firstName)
-                    .font(.system(size: 20, weight: .bold, design: .rounded))
+                    .font(.custom("Georgia-Bold", size: 20))
                     .foregroundStyle(palette.textPrimary)
 
                 HStack(spacing: 6) {
@@ -497,6 +508,16 @@ private struct SettingsContentView: View {
 
             sectionCard {
                 settingsRow(
+                    icon: "globe",
+                    label: "Language",
+                    value: languageRowValue
+                ) {
+                    vm.showLanguagePicker = true
+                }
+
+                rowDivider
+
+                settingsRow(
                     icon: "music.note",
                     label: "Soundscape",
                     value: vm.currentSoundscapeDisplay
@@ -518,6 +539,17 @@ private struct SettingsContentView: View {
             .offset(y: appeared ? 0 : 10)
             .animation(BPAnimation.spring.delay(0.15), value: appeared)
         }
+    }
+
+    /// Compact trailing label for the Language row. Uses `flag + nativeName`
+    /// so the user's eye lands on the emoji first — fastest way to confirm
+    /// the current pick without reading.
+    private var languageRowValue: String {
+        let lang = localization.current
+        if localization.currentCode == nil {
+            return "\(lang.flag) System"
+        }
+        return "\(lang.flag) \(lang.nativeName)"
     }
 
     // MARK: - Widgets Section
@@ -771,7 +803,7 @@ private struct SettingsContentView: View {
         case chevron, external
     }
 
-    private func aboutRow(icon: String, label: String, trailing: TrailingIcon, action: @escaping () -> Void) -> some View {
+    private func aboutRow(icon: String, label: LocalizedStringKey, trailing: TrailingIcon, action: @escaping () -> Void) -> some View {
         Button {
             HapticService.selection()
             action()
@@ -811,7 +843,7 @@ private struct SettingsContentView: View {
     }
 
     @ViewBuilder
-    private func settingsRow(icon: String, label: String, value: String?, action: @escaping () -> Void) -> some View {
+    private func settingsRow(icon: String, label: LocalizedStringKey, value: String?, action: @escaping () -> Void) -> some View {
         Button {
             HapticService.selection()
             action()
@@ -853,8 +885,8 @@ private struct SettingsContentView: View {
     @ViewBuilder
     private func toggleRow(
         icon: String,
-        label: String,
-        subtitle: String? = nil,
+        label: LocalizedStringKey,
+        subtitle: LocalizedStringKey? = nil,
         isOn: Binding<Bool>,
         useSymbolTransition: Bool = false
     ) -> some View {

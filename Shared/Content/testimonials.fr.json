@@ -1,0 +1,456 @@
+{
+  "version": 1,
+  "testimonials": [
+    {
+      "id": "t_001",
+      "name": "Sarah M.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "loneliness"
+      ],
+      "seasons": [
+        "single",
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "Ouvre-le avant l'email maintenant. Difficile à expliquer mais mes matins se sentent différents.",
+      "daysUsing": 94
+    },
+    {
+      "id": "t_002",
+      "name": "James T.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "purpose"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "J'ai lancé quelques questions théologiques aléatoires à l'IA en pensant que je l'embrouillerais. Je ne l'ai pas fait. Vraiment impressionné.",
+      "daysUsing": 142
+    },
+    {
+      "id": "t_003",
+      "name": "Lauren R.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "relationship"
+      ],
+      "seasons": [
+        "married",
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "L'anxiété de 3h du matin a maintenant un foyer. Réveille-toi, lis quelque chose, respire, retourne dormir. C'est tout.",
+      "daysUsing": 58
+    },
+    {
+      "id": "t_004",
+      "name": "David C.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "doubt"
+      ],
+      "seasons": [
+        "startingOver"
+      ],
+      "rating": 5,
+      "quote": "Je ne suis pas entré dans une église depuis plus de 12 ans. Cela ne ressemble pas à une église. Ça ressemble à un ami qui sait des Écritures.",
+      "daysUsing": 23
+    },
+    {
+      "id": "t_005",
+      "name": "Maria V.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "grief"
+      ],
+      "seasons": [
+        "hardSeason"
+      ],
+      "rating": 5,
+      "quote": "Après avoir perdu ma mère, les Psaumes qu'il m'a envoyés n'étaient pas génériques. C'étaient ceux dont j'avais besoin.",
+      "daysUsing": 77
+    },
+    {
+      "id": "t_006",
+      "name": "Marcus J.",
+      "faithStage": "growing",
+      "burdens": [
+        "purpose",
+        "temptation"
+      ],
+      "seasons": [
+        "student"
+      ],
+      "rating": 5,
+      "quote": "42 jours de suite et ça continue. Je n'ai rien maintenu aussi longtemps depuis le collège, honnêtement.",
+      "daysUsing": 42
+    },
+    {
+      "id": "t_007",
+      "name": "Elena K.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "financial"
+      ],
+      "seasons": [
+        "parent",
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "Le widget de verset me touche avant Twitter. Ça vaut le coup rien que pour ça.",
+      "daysUsing": 61
+    },
+    {
+      "id": "t_008",
+      "name": "Robert H.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "health"
+      ],
+      "seasons": [
+        "retired"
+      ],
+      "rating": 5,
+      "quote": "J'ai 68 ans. Je pensais avoir déjà tout lu. La Bible audio lors de mes promenades matinales me montre des passages que j'ai survolés toute ma vie.",
+      "daysUsing": 186
+    },
+    {
+      "id": "t_009",
+      "name": "Priya S.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "loneliness",
+        "purpose"
+      ],
+      "seasons": [
+        "single",
+        "startingOver"
+      ],
+      "rating": 5,
+      "quote": "Je n'ai pas grandi dans l'église. Je voulais comprendre les Écritures sans me sentir jugé. C'est la présentation la plus douce que j'ai trouvée.",
+      "daysUsing": 31
+    },
+    {
+      "id": "t_010",
+      "name": "Thomas W.",
+      "faithStage": "growing",
+      "burdens": [
+        "anger",
+        "relationship"
+      ],
+      "seasons": [
+        "married",
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "le journal de prière me rappelle doucement lol. je suis un meilleur mari grâce à ça",
+      "daysUsing": 89
+    },
+    {
+      "id": "t_011",
+      "name": "Naomi B.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "doubt",
+        "purpose"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "Je peux discuter avec ça. Il me renvoie à des Écritures, pas à des platitudes. C'est rare.",
+      "daysUsing": 119
+    },
+    {
+      "id": "t_012",
+      "name": "Hassan A.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety"
+      ],
+      "seasons": [
+        "student"
+      ],
+      "rating": 5,
+      "quote": "semaine des examens et d'une manière ou d'une autre je ne spirale pas. le verset de 8h me garde ancré.",
+      "daysUsing": 46
+    },
+    {
+      "id": "t_013",
+      "name": "Grace L.",
+      "faithStage": "growing",
+      "burdens": [
+        "relationship",
+        "loneliness"
+      ],
+      "seasons": [
+        "single"
+      ],
+      "rating": 5,
+      "quote": "applications de rencontre sur mon écran d'accueil à côté de celle-ci. décennie étrange pour être célibataire. celle-ci reste",
+      "daysUsing": 38
+    },
+    {
+      "id": "t_014",
+      "name": "Paul M.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "purpose"
+      ],
+      "seasons": [
+        "workingProfessional",
+        "married"
+      ],
+      "rating": 5,
+      "quote": "Je suis pasteur. J'utilise cela pour ma propre marche, pas seulement pour préparer des sermons. C'est le signe.",
+      "daysUsing": 203
+    },
+    {
+      "id": "t_015",
+      "name": "Rachel F.",
+      "faithStage": "growing",
+      "burdens": [
+        "grief",
+        "loneliness"
+      ],
+      "seasons": [
+        "hardSeason",
+        "startingOver"
+      ],
+      "rating": 5,
+      "quote": "année de divorce. Cela m'a gardé dans la Parole quand je ne pouvais pas ouvrir une Bible sans pleurer.",
+      "daysUsing": 67
+    },
+    {
+      "id": "t_016",
+      "name": "Kenji T.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "purpose",
+        "anxiety"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "J'ai quitté deux applications de méditation parce qu'elles me faisaient culpabiliser. Celle-ci ne le fait pas — et c'est en quelque sorte pourquoi je suis encore ici au jour 52.",
+      "daysUsing": 52
+    },
+    {
+      "id": "t_017",
+      "name": "Abigail O.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "health"
+      ],
+      "seasons": [
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "Ma fille a demandé à prier ensemble cette semaine. Première fois de ma vie. Je blâme cette application lol.",
+      "daysUsing": 104
+    },
+    {
+      "id": "t_018",
+      "name": "Jonathan P.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "temptation",
+        "purpose"
+      ],
+      "seasons": [
+        "single",
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "Le verset de 21h me prévient juste au moment où je commencerais normalement à faire défiler des nouvelles négatives. Ce changement seul en vaut la peine.",
+      "daysUsing": 131
+    },
+    {
+      "id": "t_019",
+      "name": "Mia D.",
+      "faithStage": "growing",
+      "burdens": [
+        "loneliness"
+      ],
+      "seasons": [
+        "student"
+      ],
+      "rating": 5,
+      "quote": "L'université est solitaire et mon groupe d'amis n'est pas croyant. C'est mon église jusqu'à ce que j'en trouve une.",
+      "daysUsing": 73
+    },
+    {
+      "id": "t_020",
+      "name": "Carlos G.",
+      "faithStage": "growing",
+      "burdens": [
+        "financial",
+        "anxiety"
+      ],
+      "seasons": [
+        "workingProfessional",
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "l'argent est serré en ce moment mais je paie quand même pour celle-ci. ça en dit probablement assez",
+      "daysUsing": 87
+    },
+    {
+      "id": "t_021",
+      "name": "Hannah W.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "grief"
+      ],
+      "seasons": [
+        "married"
+      ],
+      "rating": 5,
+      "quote": "Fausse couche en janvier. L'application ne le savait jamais, mais les versets le savaient. D'une manière ou d'une autre.",
+      "daysUsing": 112
+    },
+    {
+      "id": "t_022",
+      "name": "Samir N.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "doubt"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "Je suis un sceptique. Je suis venu prêt à plonger. Je suis resté pour les réponses honnêtes.",
+      "daysUsing": 29
+    },
+    {
+      "id": "t_023",
+      "name": "Olivia S.",
+      "faithStage": "growing",
+      "burdens": [
+        "relationship",
+        "purpose"
+      ],
+      "seasons": [
+        "single"
+      ],
+      "rating": 5,
+      "quote": "j'ai arrêté de comparer ma vie à Instagram autour de la semaine 3. le verset quotidien a remplacé cette habitude de défilement",
+      "daysUsing": 54
+    },
+    {
+      "id": "t_024",
+      "name": "Michael A.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "purpose"
+      ],
+      "seasons": [
+        "retired"
+      ],
+      "rating": 5,
+      "quote": "65 ans. La Bible audio lors de ma promenade matinale est le meilleur argent que j'ai dépensé cette année.",
+      "daysUsing": 168
+    },
+    {
+      "id": "t_025",
+      "name": "Victoria B.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "loneliness"
+      ],
+      "seasons": [
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "Le cerveau postpartum ne pouvait pas lire un chapitre complet. Le format un verset par jour m'a sauvé.",
+      "daysUsing": 48
+    },
+    {
+      "id": "t_026",
+      "name": "Nathan R.",
+      "faithStage": "growing",
+      "burdens": [
+        "temptation",
+        "anger"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "L'IA ne me flatte pas. Elle me dit la vérité. J'avais besoin de ça d'un outil, bizarrement.",
+      "daysUsing": 96
+    },
+    {
+      "id": "t_027",
+      "name": "Esther C.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "health"
+      ],
+      "seasons": [
+        "hardSeason",
+        "married"
+      ],
+      "rating": 5,
+      "quote": "Les jours de chimio sont des jours calmes. Les paysages sonores plus les Psaumes m'ont aidé à traverser les tours 4, 5 et 6.",
+      "daysUsing": 135
+    },
+    {
+      "id": "t_028",
+      "name": "Andre L.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "anxiety",
+        "loneliness"
+      ],
+      "seasons": [
+        "startingOver",
+        "single"
+      ],
+      "rating": 5,
+      "quote": "Sorti de réhabilitation depuis six mois. Cela a gardé le bruit à distance quand les réunions n'étaient pas suffisantes.",
+      "daysUsing": 78
+    },
+    {
+      "id": "t_029",
+      "name": "Faith M.",
+      "faithStage": "growing",
+      "burdens": [
+        "purpose",
+        "doubt"
+      ],
+      "seasons": [
+        "student"
+      ],
+      "rating": 5,
+      "quote": "Oui, mon nom est vraiment Foi. Oui, je sais. L'application m'a quand même surpris.",
+      "daysUsing": 41
+    },
+    {
+      "id": "t_030",
+      "name": "Isaac B.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "purpose",
+        "anger"
+      ],
+      "seasons": [
+        "workingProfessional",
+        "married"
+      ],
+      "rating": 5,
+      "quote": "Trois applications de Bible supprimées avant celle-ci. J'ouvre vraiment ma Bible maintenant, pas seulement en recevant un verset quotidien. C'est toute la différence.",
+      "daysUsing": 157
+    }
+  ]
+}

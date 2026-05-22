@@ -79,6 +79,167 @@ final class BibleRepository: @unchecked Sendable {
         return fetched
     }
 
+    // MARK: - Multi-language (helloao catalog) Access
+
+    /// In-memory cache of localized book names keyed by `translationID/bookID`.
+    /// helloao returns localized names as part of each chapter payload, so we
+    /// opportunistically cache them as we fetch chapters. Readers can query
+    /// `localizedBookName(…)` to show e.g. "Génesis" instead of "Genesis"
+    /// without waiting for a full book-list roundtrip.
+    private var localizedBookNames: [String: String] = [:]
+
+    /// Async fetch for a helloao-catalog translation. Routes through the same
+    /// disk cache as legacy API translations so a chapter read once is offline
+    /// forever. The `bookID` argument must be a USFM abbreviation (GEN, EXO,
+    /// …, REV) — helloao uses the same vocabulary as `BibleData`.
+    func verses(ref: TranslationRef, book: String, chapter: Int) async throws -> [(number: Int, text: String)] {
+        return try await verses(refID: ref.id, book: book, chapter: chapter)
+    }
+
+    /// ID-only overload. The Bible reader stores the user's pick as a String
+    /// (`UserProfile.preferredTranslationRefID`) and may try to fetch *before*
+    /// `TranslationCatalog` has finished its background manifest refresh —
+    /// without this overload, the fetch falls through to bundled KJV until
+    /// the catalog lands, which is a surprisingly common race on first launch.
+    /// We don't actually need any catalog metadata to fetch a chapter — just
+    /// the refID — so this skips the catalog lookup entirely.
+    func verses(refID: String, book: String, chapter: Int) async throws -> [(number: Int, text: String)] {
+        // Bundled refs map back to legacy path so existing cache/bundled JSON
+        // paths stay authoritative for KJV/WEB.
+        if refID.hasPrefix(TranslationRef.bundledPrefix) {
+            let legacy: BibleTranslation = (refID == TranslationRef.bundledWEB.id) ? .web : .kjv
+            return try await verses(book: book, chapter: chapter, translation: legacy)
+        }
+
+        let cacheKey = "ref:\(refID)/\(book)/\(chapter)" as NSString
+        if let cached = memoryCache.object(forKey: cacheKey) {
+            return cached.verses
+        }
+        if let diskVerses = readDiskCacheForRef(refID: refID, book: book, chapter: chapter) {
+            memoryCache.setObject(CachedChapter(verses: diskVerses), forKey: cacheKey)
+            return diskVerses
+        }
+
+        let result = try await BibleAPIService.fetchHelloAOChapter(
+            translationID: refID,
+            bookID: book,
+            chapter: chapter
+        )
+        lock.lock()
+        localizedBookNames["\(refID)/\(book)"] = result.bookName
+        lock.unlock()
+
+        memoryCache.setObject(CachedChapter(verses: result.verses), forKey: cacheKey)
+        writeDiskCacheForRef(verses: result.verses, refID: refID, book: book, chapter: chapter)
+        return result.verses
+    }
+
+    /// The last-seen localized book name for `(ref, bookID)`. Returns `nil`
+    /// if no chapter in that book has been fetched yet — callers should fall
+    /// back to `BibleData.allBooks` English names.
+    func localizedBookName(refID: String, bookID: String) -> String? {
+        lock.lock()
+        defer { lock.unlock() }
+        return localizedBookNames["\(refID)/\(bookID)"]
+    }
+
+    /// Prime the localized book-name cache for a translation by fetching
+    /// `/api/{id}/books.json` once. Call this when the user picks a ref so
+    /// `BookPickerView` can immediately show "Génesis"/"Salmos"/etc. without
+    /// waiting for each chapter to be opened. Idempotent: re-running is
+    /// effectively a no-op (just overwrites with the same values) and the
+    /// network fetch is short-circuited if the file is on disk.
+    func prefetchBookNames(refID: String) async {
+        // Skip when already populated — cheap check to avoid re-fetching.
+        lock.lock()
+        let alreadyPopulated = localizedBookNames.keys.contains(where: { $0.hasPrefix("\(refID)/") })
+        lock.unlock()
+        if alreadyPopulated { return }
+
+        // Try disk first.
+        if let disk = readBookNamesCacheForRef(refID: refID), !disk.isEmpty {
+            lock.lock()
+            for (bookID, name) in disk {
+                localizedBookNames["\(refID)/\(bookID)"] = name
+            }
+            lock.unlock()
+            return
+        }
+
+        // Network fetch. Silent failure is fine — we fall back to English.
+        guard let entries = try? await BibleAPIService.fetchHelloAOBooks(translationID: refID) else {
+            return
+        }
+        lock.lock()
+        for (bookID, name) in entries {
+            localizedBookNames["\(refID)/\(bookID)"] = name
+        }
+        lock.unlock()
+        writeBookNamesCacheForRef(refID: refID, entries: entries)
+    }
+
+    private func bookNamesCacheURL(refID: String) -> URL {
+        let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+        return base
+            .appendingPathComponent("BibleCache", isDirectory: true)
+            .appendingPathComponent("ref-\(refID)", isDirectory: true)
+            .appendingPathComponent("_books.json")
+    }
+
+    private func readBookNamesCacheForRef(refID: String) -> [(String, String)]? {
+        let url = bookNamesCacheURL(refID: refID)
+        guard let data = try? Data(contentsOf: url),
+              let dict = try? JSONSerialization.jsonObject(with: data) as? [String: String]
+        else { return nil }
+        return dict.map { ($0.key, $0.value) }
+    }
+
+    private func writeBookNamesCacheForRef(refID: String, entries: [(id: String, name: String)]) {
+        let url = bookNamesCacheURL(refID: refID)
+        let dir = url.deletingLastPathComponent()
+        try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        let dict = Dictionary(uniqueKeysWithValues: entries.map { ($0.id, $0.name) })
+        if let data = try? JSONSerialization.data(withJSONObject: dict, options: .sortedKeys) {
+            try? data.write(to: url, options: .atomic)
+        }
+    }
+
+    private func diskCacheURLForRef(refID: String, book: String, chapter: Int) -> URL {
+        let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+        return base
+            .appendingPathComponent("BibleCache", isDirectory: true)
+            .appendingPathComponent("ref-\(refID)", isDirectory: true)
+            .appendingPathComponent(book, isDirectory: true)
+            .appendingPathComponent("\(chapter).json")
+    }
+
+    private func readDiskCacheForRef(refID: String, book: String, chapter: Int) -> [(number: Int, text: String)]? {
+        let url = diskCacheURLForRef(refID: refID, book: book, chapter: chapter)
+        guard let data = try? Data(contentsOf: url),
+              let dict = try? JSONSerialization.jsonObject(with: data) as? [String: String]
+        else { return nil }
+        let verses = dict
+            .compactMap { key, value -> (number: Int, text: String)? in
+                guard let num = Int(key) else { return nil }
+                return (number: num, text: value)
+            }
+            .sorted { $0.number < $1.number }
+        return verses.isEmpty ? nil : verses
+    }
+
+    private func writeDiskCacheForRef(verses: [(number: Int, text: String)], refID: String, book: String, chapter: Int) {
+        let url = diskCacheURLForRef(refID: refID, book: book, chapter: chapter)
+        let dir = url.deletingLastPathComponent()
+        try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        var dict: [String: String] = [:]
+        for v in verses {
+            dict["\(v.number)"] = v.text
+        }
+        if let data = try? JSONSerialization.data(withJSONObject: dict, options: .sortedKeys) {
+            try? data.write(to: url, options: .atomic)
+        }
+    }
+
     // MARK: - Synchronous Access (Offline / Widget)
 
     func versesSync(book: String, chapter: Int, translation: BibleTranslation? = nil) -> [(number: Int, text: String)] {

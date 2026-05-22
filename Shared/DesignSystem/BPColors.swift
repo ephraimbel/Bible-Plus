@@ -17,21 +17,40 @@ struct BPColorPalette {
     let jesusWords: Color
     let parchment: Color
 
-    // MARK: Light — "Golden Hour"
+    // MARK: Light — "Sepia Paper" (Haven-inspired)
+    //
+    // Direct model: Haven Bible. Their canvas achieves what every prior
+    // attempt here missed: the warmth direction is TAN/PEACH, not
+    // cream/yellow. Technical distinction that makes all the difference:
+    //
+    //   Yellow-cream warmth:  R ≈ G > B   (both R and G lead)
+    //                         → reads as "eggshell" / "tinted"
+    //
+    //   Tan/peach warmth:     R > G > B   (red clearly leads)
+    //                         → reads as "paper" / "sepia" / editorial
+    //
+    // Previous palettes had R-G deltas of 2-4 (yellow territory). This
+    // palette uses R-G=11 on the canvas, pulling firmly into peach/tan
+    // space. Combined with warm sepia-brown text instead of neutral
+    // charcoal, the whole UI reads as "ink on aged paper" — Haven's
+    // exact aesthetic. Gold accent (#C9A96E) remains our signature;
+    // Haven uses a similar warm-gold for their back buttons.
+    //
+    // Dark mode is untouched.
     static let light = BPColorPalette(
-        background: Color(hex: "FAF8F4"),
-        surface: Color(hex: "F0E8D8"),
-        surfaceElevated: Color(hex: "FFFFFF"),
-        accent: Color(hex: "C9A96E"),
-        accentSoft: Color(hex: "F5EFE0"),
-        textPrimary: Color(hex: "2D2D2D"),
-        textSecondary: Color(hex: "7A7A7A"),
-        textMuted: Color(hex: "B8B0A0"),
-        border: Color(hex: "E0D8C8"),
-        error: Color(hex: "C0544F"),
-        success: Color(hex: "8BA888"),
-        jesusWords: Color(hex: "8B342E"),
-        parchment: Color(hex: "FAF8F4")
+        background: Color(hex: "EFE4D6"),        // Haven canvas — tan/peach cream (R-G=11)
+        surface: Color(hex: "E7D9C6"),           // deeper tan surface step
+        surfaceElevated: Color(hex: "FBF6EE"),   // warm near-white interior (like Haven's phone screen)
+        accent: Color(hex: "C9A96E"),            // gold — our signature
+        accentSoft: Color(hex: "EFE2CD"),        // gold-tan wash (matches the canvas temperature)
+        textPrimary: Color(hex: "3B2B1D"),       // deep sepia brown — "ink on tan paper"
+        textSecondary: Color(hex: "6B5949"),     // medium warm brown
+        textMuted: Color(hex: "9E8D7B"),         // muted warm tan
+        border: Color(hex: "D9CBB5"),            // warm tan hairline
+        error: Color(hex: "B54A42"),             // warm red (matched temperature)
+        success: Color(hex: "7D9E7A"),           // warm sage
+        jesusWords: Color(hex: "8B342E"),        // deep red
+        parchment: Color(hex: "EFE4D6")         // matches background
     )
 
     // MARK: Dark — "Midnight Study" (warm matte black)

@@ -1,0 +1,456 @@
+{
+  "version": 1,
+  "testimonials": [
+    {
+      "id": "t_001",
+      "name": "Sarah M.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "loneliness"
+      ],
+      "seasons": [
+        "single",
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "이메일을 열기 전에 지금 열어보세요. 설명하기 어렵지만 제 아침은 다르게 느껴집니다.",
+      "daysUsing": 94
+    },
+    {
+      "id": "t_002",
+      "name": "James T.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "purpose"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "AI에게 무작위 신학 질문을 던졌는데 제가 당황할 줄 알았어요. 아니었어요. 진심으로 감명받았습니다.",
+      "daysUsing": 142
+    },
+    {
+      "id": "t_003",
+      "name": "Lauren R.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "relationship"
+      ],
+      "seasons": [
+        "married",
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "새벽 3시의 불안이 이제 집을 찾았습니다. 일어나서 무언가를 읽고, 숨을 쉬고, 다시 잠에 듭니다. 그게 전부입니다.",
+      "daysUsing": 58
+    },
+    {
+      "id": "t_004",
+      "name": "David C.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "doubt"
+      ],
+      "seasons": [
+        "startingOver"
+      ],
+      "rating": 5,
+      "quote": "12년 넘게 교회에 가본 적이 없습니다. 이곳은 교회처럼 느껴지지 않습니다. 성경을 아는 친구처럼 느껴집니다.",
+      "daysUsing": 23
+    },
+    {
+      "id": "t_005",
+      "name": "Maria V.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "grief"
+      ],
+      "seasons": [
+        "hardSeason"
+      ],
+      "rating": 5,
+      "quote": "엄마를 잃은 후, 저에게 보내진 시편은 일반적이지 않았습니다. 제가 필요로 하는 것이었습니다.",
+      "daysUsing": 77
+    },
+    {
+      "id": "t_006",
+      "name": "Marcus J.",
+      "faithStage": "growing",
+      "burdens": [
+        "purpose",
+        "temptation"
+      ],
+      "seasons": [
+        "student"
+      ],
+      "rating": 5,
+      "quote": "42일 연속 중입니다. 솔직히 중학교 이후로 이렇게 오래 지속된 것은 없습니다.",
+      "daysUsing": 42
+    },
+    {
+      "id": "t_007",
+      "name": "Elena K.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "financial"
+      ],
+      "seasons": [
+        "parent",
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "구절 위젯이 저에게 트위터보다 먼저 다가옵니다. 그 자체로도 가치가 있습니다.",
+      "daysUsing": 61
+    },
+    {
+      "id": "t_008",
+      "name": "Robert H.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "health"
+      ],
+      "seasons": [
+        "retired"
+      ],
+      "rating": 5,
+      "quote": "저는 68세입니다. 모든 것을 이미 읽었다고 생각했습니다. 아침 산책 중에 듣는 오디오 성경이 제가 평생 스치듯 읽었던 구절들을 보여주고 있습니다.",
+      "daysUsing": 186
+    },
+    {
+      "id": "t_009",
+      "name": "Priya S.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "loneliness",
+        "purpose"
+      ],
+      "seasons": [
+        "single",
+        "startingOver"
+      ],
+      "rating": 5,
+      "quote": "저는 교회에서 자라지 않았습니다. 판단받지 않고 성경을 이해하고 싶었습니다. 이것이 제가 찾은 가장 부드러운 소개입니다.",
+      "daysUsing": 31
+    },
+    {
+      "id": "t_010",
+      "name": "Thomas W.",
+      "faithStage": "growing",
+      "burdens": [
+        "anger",
+        "relationship"
+      ],
+      "seasons": [
+        "married",
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "기도 일기가 저를 부드럽게 호출합니다. 덕분에 더 나은 남편이 되었습니다.",
+      "daysUsing": 89
+    },
+    {
+      "id": "t_011",
+      "name": "Naomi B.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "doubt",
+        "purpose"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "저는 그것과 논쟁할 수 있습니다. 그것은 격려가 아닌 성경으로 저에게 반박합니다. 그건 드물죠.",
+      "daysUsing": 119
+    },
+    {
+      "id": "t_012",
+      "name": "Hassan A.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety"
+      ],
+      "seasons": [
+        "student"
+      ],
+      "rating": 5,
+      "quote": "기말 주인데 어떻게든 무너지지 않고 있습니다. 오전 8시의 구절이 저를 안정시켜주고 있습니다.",
+      "daysUsing": 46
+    },
+    {
+      "id": "t_013",
+      "name": "Grace L.",
+      "faithStage": "growing",
+      "burdens": [
+        "relationship",
+        "loneliness"
+      ],
+      "seasons": [
+        "single"
+      ],
+      "rating": 5,
+      "quote": "이 앱 옆에 데이팅 앱들이 있습니다. 혼자인 것이 이상한 10년입니다. 이 앱은 남아있을 것입니다.",
+      "daysUsing": 38
+    },
+    {
+      "id": "t_014",
+      "name": "Paul M.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "purpose"
+      ],
+      "seasons": [
+        "workingProfessional",
+        "married"
+      ],
+      "rating": 5,
+      "quote": "저는 목사입니다. 설교 준비뿐만 아니라 제 개인적인 여정에서도 이 앱을 사용합니다. 그게 포인트입니다.",
+      "daysUsing": 203
+    },
+    {
+      "id": "t_015",
+      "name": "Rachel F.",
+      "faithStage": "growing",
+      "burdens": [
+        "grief",
+        "loneliness"
+      ],
+      "seasons": [
+        "hardSeason",
+        "startingOver"
+      ],
+      "rating": 5,
+      "quote": "이혼의 해입니다. 제가 성경을 열 수 없을 때 이 앱이 저를 말씀 안에 있게 해주었습니다.",
+      "daysUsing": 67
+    },
+    {
+      "id": "t_016",
+      "name": "Kenji T.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "purpose",
+        "anxiety"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "저는 두 개의 명상 앱을 그만두었습니다. 그들이 저를 죄책감에 빠뜨렸기 때문입니다. 이 앱은 그렇지 않습니다 — 그래서인지 저는 여전히 52일째 여기 있습니다.",
+      "daysUsing": 52
+    },
+    {
+      "id": "t_017",
+      "name": "Abigail O.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "health"
+      ],
+      "seasons": [
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "제 딸이 이번 주에 함께 기도하자고 했습니다. 처음 있는 일입니다. 이 앱 덕분입니다.",
+      "daysUsing": 104
+    },
+    {
+      "id": "t_018",
+      "name": "Jonathan P.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "temptation",
+        "purpose"
+      ],
+      "seasons": [
+        "single",
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "오후 9시의 구절이 제가 보통 우울한 스크롤을 시작할 때 알림이 옵니다. 그 교체만으로도 가치가 있습니다.",
+      "daysUsing": 131
+    },
+    {
+      "id": "t_019",
+      "name": "Mia D.",
+      "faithStage": "growing",
+      "burdens": [
+        "loneliness"
+      ],
+      "seasons": [
+        "student"
+      ],
+      "rating": 5,
+      "quote": "대학은 외롭고 제 친구 그룹은 신자가 아닙니다. 제가 교회를 찾을 때까지 이것이 제 교회입니다.",
+      "daysUsing": 73
+    },
+    {
+      "id": "t_020",
+      "name": "Carlos G.",
+      "faithStage": "growing",
+      "burdens": [
+        "financial",
+        "anxiety"
+      ],
+      "seasons": [
+        "workingProfessional",
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "지금 돈이 빠듯하지만 이 앱에는 여전히 돈을 지불합니다. 아마도 그게 충분히 말해줍니다.",
+      "daysUsing": 87
+    },
+    {
+      "id": "t_021",
+      "name": "Hannah W.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "grief"
+      ],
+      "seasons": [
+        "married"
+      ],
+      "rating": 5,
+      "quote": "1월에 유산을 겪었습니다. 앱은 결코 알지 못했지만 구절들은 알았습니다. 어떻게든.",
+      "daysUsing": 112
+    },
+    {
+      "id": "t_022",
+      "name": "Samir N.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "doubt"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "저는 회의론자입니다. 저는 던지기 위해 들어왔습니다. 솔직한 대답 때문에 남아있었습니다.",
+      "daysUsing": 29
+    },
+    {
+      "id": "t_023",
+      "name": "Olivia S.",
+      "faithStage": "growing",
+      "burdens": [
+        "relationship",
+        "purpose"
+      ],
+      "seasons": [
+        "single"
+      ],
+      "rating": 5,
+      "quote": "3주째 인스타그램과 제 삶을 비교하는 것을 중단했습니다. 매일의 구절이 그 스크롤 습관을 대체했습니다.",
+      "daysUsing": 54
+    },
+    {
+      "id": "t_024",
+      "name": "Michael A.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "purpose"
+      ],
+      "seasons": [
+        "retired"
+      ],
+      "rating": 5,
+      "quote": "65세입니다. 아침 산책 중에 듣는 오디오 성경은 올해 제가 쓴 최고의 돈입니다.",
+      "daysUsing": 168
+    },
+    {
+      "id": "t_025",
+      "name": "Victoria B.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "loneliness"
+      ],
+      "seasons": [
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "산후 뇌로 인해 전체 장을 읽을 수 없었습니다. 하루 한 구절 형식이 저를 구했습니다.",
+      "daysUsing": 48
+    },
+    {
+      "id": "t_026",
+      "name": "Nathan R.",
+      "faithStage": "growing",
+      "burdens": [
+        "temptation",
+        "anger"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "AI는 저를 아첨하지 않습니다. 저에게 진실을 말합니다. 이상하게도, 저는 도구에서 그것이 필요했습니다.",
+      "daysUsing": 96
+    },
+    {
+      "id": "t_027",
+      "name": "Esther C.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "health"
+      ],
+      "seasons": [
+        "hardSeason",
+        "married"
+      ],
+      "rating": 5,
+      "quote": "화학요법 날들은 조용한 날들입니다. 소리 풍경과 시편이 4, 5, 6라운드를 통과하게 해주었습니다.",
+      "daysUsing": 135
+    },
+    {
+      "id": "t_028",
+      "name": "Andre L.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "anxiety",
+        "loneliness"
+      ],
+      "seasons": [
+        "startingOver",
+        "single"
+      ],
+      "rating": 5,
+      "quote": "재활 치료를 받고 6개월이 지났습니다. 회의가 충분하지 않을 때 이 앱이 소음을 줄여주었습니다.",
+      "daysUsing": 78
+    },
+    {
+      "id": "t_029",
+      "name": "Faith M.",
+      "faithStage": "growing",
+      "burdens": [
+        "purpose",
+        "doubt"
+      ],
+      "seasons": [
+        "student"
+      ],
+      "rating": 5,
+      "quote": "네, 제 이름은 실제로 Faith입니다. 네, 알고 있습니다. 앱은 여전히 저를 놀라게 했습니다.",
+      "daysUsing": 41
+    },
+    {
+      "id": "t_030",
+      "name": "Isaac B.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "purpose",
+        "anger"
+      ],
+      "seasons": [
+        "workingProfessional",
+        "married"
+      ],
+      "rating": 5,
+      "quote": "이 앱 이전에 세 개의 성경 앱을 삭제했습니다. 이제 저는 매일 구절을 받는 것이 아니라 실제로 성경을 열고 있습니다. 그게 전부입니다.",
+      "daysUsing": 157
+    }
+  ]
+}

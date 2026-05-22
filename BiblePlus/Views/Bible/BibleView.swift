@@ -96,6 +96,7 @@ private struct BibleContentView: View {
     @State private var showImmersiveListening = false
     @State private var showPaywall = false
     @State private var showReadingPlans = false
+    @State private var showStillListeningAlert = false
     @State private var verseImageData: (text: String, reference: String, translation: String)?
     @State private var showSanctuary = false
     @State private var sanctuaryVerseText: String?
@@ -171,7 +172,9 @@ private struct BibleContentView: View {
 
         guard !viewModel.verses.isEmpty else { return }
 
-        // Set up auto-advance
+        // Set up auto-advance. `isAutoAdvance: true` keeps the consecutive
+        // counter climbing so the still-listening prompt triggers after a
+        // handful of chapters instead of playing indefinitely.
         audioService.setOnChapterComplete { [modelContext] in
             ActivityService.log(.audioChapterCompleted, detail: "\(viewModel.selectedBook.name) \(viewModel.selectedChapter)", in: modelContext)
             if viewModel.canGoForward {
@@ -183,7 +186,8 @@ private struct BibleContentView: View {
                         verses: viewModel.verses,
                         book: viewModel.selectedBook,
                         chapter: viewModel.selectedChapter,
-                        translation: viewModel.currentTranslation
+                        translation: viewModel.currentTranslation,
+                        isAutoAdvance: true
                     )
                 }
             }
@@ -553,7 +557,8 @@ private struct BibleContentView: View {
                                             verses: viewModel.verses,
                                             book: viewModel.selectedBook,
                                             chapter: viewModel.selectedChapter,
-                                            translation: viewModel.currentTranslation
+                                            translation: viewModel.currentTranslation,
+                                            isAutoAdvance: true
                                         )
                                     }
                                 }
@@ -757,14 +762,17 @@ private struct BibleContentView: View {
                 onSelectChapter: { book, chapter in
                     viewModel.selectedBook = book
                     viewModel.selectChapter(chapter)
-                }
+                },
+                activeRefID: viewModel.currentRefID
             )
         }
         .sheet(isPresented: $viewModel.showTranslationPicker) {
             BibleTranslationPickerView(
                 currentTranslation: viewModel.currentTranslation,
+                currentRefID: viewModel.currentRefID,
                 isPro: isPro,
-                onSelect: { viewModel.changeTranslation($0) }
+                onSelectLegacy: { viewModel.changeTranslation($0) },
+                onSelectRef: { viewModel.changeTranslationRef($0.id) }
             )
             .presentationDetents([.medium, .large])
         }
@@ -890,6 +898,15 @@ private struct BibleContentView: View {
             guard audioService.isPlaying, newIndex < viewModel.verses.count else { return }
             let verseNumber = viewModel.verses[newIndex].number
             viewModel.updateLastReadVerse(verseNumber)
+        }
+        .onChange(of: audioService.showStillListeningPrompt) { _, showing in
+            showStillListeningAlert = showing
+        }
+        .alert("Still listening?", isPresented: $showStillListeningAlert) {
+            Button("Keep going") { audioService.confirmStillListening() }
+            Button("Stop", role: .cancel) { audioService.dismissStillListening() }
+        } message: {
+            Text("You've listened for a while. Tap Keep going to continue, or Stop to pause playback.")
         }
         .onChange(of: audioService.isPaused) { _, paused in
             if paused {

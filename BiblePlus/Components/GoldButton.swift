@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct GoldButton: View {
-    let title: String
+    let title: LocalizedStringKey
     var isEnabled: Bool = true
     var showGlow: Bool = false
     let action: () -> Void

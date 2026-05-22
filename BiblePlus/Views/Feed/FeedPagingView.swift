@@ -126,7 +126,7 @@ struct FeedPagingView: View {
                 .font(.system(size: 36, weight: .light))
                 .foregroundStyle(.white.opacity(0.7))
             Text("Preparing your feed…")
-                .font(.system(size: 16, weight: .semibold, design: .rounded))
+                .font(.custom("Georgia-Bold", size: 16))
                 .foregroundStyle(.white.opacity(0.85))
             Button {
                 vm.loadInitialFeed()

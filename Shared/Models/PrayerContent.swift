@@ -17,6 +17,14 @@ final class PrayerContent {
     var isSaved: Bool
     var seedVersion: Int
     var createdAt: Date
+    /// When this content was saved from an AI chat reply, the originating
+    /// conversation + message IDs are captured so tapping the saved item
+    /// can navigate back to the original chat moment instead of opening
+    /// it in a feed-style sheet. Nil for non-chat content (feed saves,
+    /// seeded prayers, etc.); both fields are optional so existing rows
+    /// migrate cleanly.
+    var sourceConversationId: UUID?
+    var sourceMessageId: UUID?
 
     init(
         id: UUID = UUID(),
@@ -31,7 +39,9 @@ final class PrayerContent {
         faithLevelMin: FaithLevel = .justCurious,
         isProOnly: Bool = false,
         isSaved: Bool = false,
-        seedVersion: Int = 1
+        seedVersion: Int = 1,
+        sourceConversationId: UUID? = nil,
+        sourceMessageId: UUID? = nil
     ) {
         self.id = id
         self.type = type
@@ -47,5 +57,7 @@ final class PrayerContent {
         self.isSaved = isSaved
         self.seedVersion = seedVersion
         self.createdAt = Date()
+        self.sourceConversationId = sourceConversationId
+        self.sourceMessageId = sourceMessageId
     }
 }

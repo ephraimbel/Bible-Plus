@@ -43,6 +43,21 @@ final class PaywallViewModel {
     let personalizedHeadline: String
     let personalizedSubtitle: String
 
+    /// Raw profile data passed through for downstream matching (testimonials,
+    /// social proof). Captured once at init so the paywall view layer doesn't
+    /// need to re-query the ModelContext.
+    let userBurdens: Set<Burden>
+    let userSeasons: Set<LifeSeason>
+    let userFaithLevel: FaithLevel?
+    let userTranslation: BibleTranslation
+    let userPrayerTimes: Set<PrayerTimeSlot>
+
+    /// Short lines echoed under the subtitle to show the user that the plan
+    /// reflects their actual answers. "Prayers for anxiety", "Verses in NIV",
+    /// "Moments at 6:30 AM" — specific, not generic. Research pegs this kind
+    /// of echoed-quiz-input personalization at +15% lift.
+    let matchedFeatureLines: [String]
+
     // MARK: - Onboarding Init
 
     init(viewModel: OnboardingViewModel) {
@@ -54,12 +69,23 @@ final class PaywallViewModel {
 
         let burdens = viewModel.selectedBurdens
         let faithLevel = viewModel.selectedFaithLevel
+        let seasons = viewModel.selectedLifeSeasons
+        let translation = viewModel.selectedTranslation
+        let prayerTimes = viewModel.selectedPrayerTimes
 
-        self.personalizedHeadline = Self.headline(name: name, faithLevel: faithLevel)
-        self.personalizedSubtitle = name.isEmpty
-            ? "Your complete spiritual companion"
-            : "We built this just for you, \(name)"
+        self.personalizedHeadline = Self.headline(name: name, burdens: burdens, faithLevel: faithLevel)
+        self.personalizedSubtitle = Self.subtitle(name: name, burdens: burdens)
         self.benefits = Self.mapBenefits(burdens: burdens, faithLevel: faithLevel)
+        self.userBurdens = burdens
+        self.userSeasons = seasons
+        self.userFaithLevel = faithLevel
+        self.userTranslation = translation
+        self.userPrayerTimes = prayerTimes
+        self.matchedFeatureLines = Self.featureLines(
+            burdens: burdens,
+            translation: translation,
+            prayerTimes: prayerTimes
+        )
     }
 
     // MARK: - Standalone Init
@@ -72,13 +98,24 @@ final class PaywallViewModel {
         self.firstName = name
 
         let burdens: Set<Burden> = Set(profile?.currentBurdens ?? [])
+        let seasons: Set<LifeSeason> = Set(profile?.lifeSeasons ?? [])
         let faithLevel = profile?.faithLevel
+        let translation = profile?.preferredTranslation ?? .kjv
+        let prayerTimes: Set<PrayerTimeSlot> = Set(profile?.prayerTimes ?? [])
 
-        self.personalizedHeadline = Self.headline(name: name, faithLevel: faithLevel)
-        self.personalizedSubtitle = name.isEmpty
-            ? "Your complete spiritual companion"
-            : "We built this just for you, \(name)"
+        self.personalizedHeadline = Self.headline(name: name, burdens: burdens, faithLevel: faithLevel)
+        self.personalizedSubtitle = Self.subtitle(name: name, burdens: burdens)
         self.benefits = Self.mapBenefits(burdens: burdens, faithLevel: faithLevel)
+        self.userBurdens = burdens
+        self.userSeasons = seasons
+        self.userFaithLevel = faithLevel
+        self.userTranslation = translation
+        self.userPrayerTimes = prayerTimes
+        self.matchedFeatureLines = Self.featureLines(
+            burdens: burdens,
+            translation: translation,
+            prayerTimes: prayerTimes
+        )
     }
 
     // MARK: - Navigation Actions
@@ -147,8 +184,24 @@ final class PaywallViewModel {
 
     // MARK: - Personalization Logic
 
-    private static func headline(name: String, faithLevel: FaithLevel?) -> String {
+    /// Burden-first headline. If the user picked a specific burden, speak to
+    /// it — that's the strongest signal of what they're looking for. Falls
+    /// back to faith-level framing if they picked .none or skipped burdens.
+    private static func headline(name: String, burdens: Set<Burden>, faithLevel: FaithLevel?) -> String {
         let safeName = name.isEmpty ? nil : name
+
+        // Prefer a real burden over .none; deterministic order for ties.
+        let primary = burdens
+            .filter { $0 != .none }
+            .sorted { $0.rawValue < $1.rawValue }
+            .first
+
+        if let primary {
+            let tail = burdenHeadlineTail(primary)
+            return safeName.map { "\($0), \(tail)" }
+                ?? (tail.prefix(1).uppercased() + tail.dropFirst())
+        }
+
         switch faithLevel {
         case .justCurious:
             return safeName.map { "\($0), faith on your terms" }
@@ -163,6 +216,61 @@ final class PaywallViewModel {
             return safeName.map { "\($0), made for the way you believe" }
                 ?? "Made for the way you believe"
         }
+    }
+
+    private static func burdenHeadlineTail(_ burden: Burden) -> String {
+        switch burden {
+        case .anxiety: return "peace for the anxious moments"
+        case .grief: return "a companion through the valley"
+        case .doubt: return "honest answers when you wrestle"
+        case .loneliness: return "a friend who's always here"
+        case .anger: return "calm for the storms inside"
+        case .temptation: return "strength when it's hardest"
+        case .health: return "hope for the healing road"
+        case .financial: return "peace in uncertain seasons"
+        case .relationship: return "wisdom for the ones you love"
+        case .purpose: return "clarity for what's next"
+        case .none: return "made for the way you believe"
+        }
+    }
+
+    /// Secondary line under the headline — speaks directly to the user and
+    /// reinforces that this was built *from* their answers, not sold *at* them.
+    private static func subtitle(name: String, burdens: Set<Burden>) -> String {
+        if name.isEmpty {
+            return "Your complete spiritual companion"
+        }
+        if burdens.filter({ $0 != .none }).isEmpty {
+            return "We built this just for you, \(name)"
+        }
+        return "Built from what you shared, \(name)"
+    }
+
+    /// Three specific, concrete lines echoing the user's collected profile.
+    /// Each starts with a ✓ and speaks to a burden / translation / prayer time
+    /// they actually picked — no generic feature list here.
+    private static func featureLines(
+        burdens: Set<Burden>,
+        translation: BibleTranslation,
+        prayerTimes: Set<PrayerTimeSlot>
+    ) -> [String] {
+        var lines: [String] = []
+
+        if let primary = burdens.filter({ $0 != .none }).sorted(by: { $0.rawValue < $1.rawValue }).first {
+            lines.append("Prayers matched to \(primary.displayName.lowercased())")
+        } else {
+            lines.append("Daily prayers matched to you")
+        }
+
+        lines.append("Every verse in \(translation.abbreviation)")
+
+        if let firstTime = prayerTimes.sorted(by: { $0.rawValue < $1.rawValue }).first {
+            lines.append("Gentle moments at \(firstTime.displayName)")
+        } else {
+            lines.append("Gentle moments when you need them")
+        }
+
+        return lines
     }
 
     private static func mapBenefits(burdens: Set<Burden>, faithLevel: FaithLevel?) -> [PaywallBenefit] {
@@ -267,6 +375,21 @@ final class PaywallViewModel {
 
     func weeklyPriceLabel(_ storeKit: StoreKitService) -> String {
         storeKit.weeklyProduct?.localizedPriceString ?? "$4.99"
+    }
+
+    /// Annualized equivalent of the weekly price. Used as an anchor on the
+    /// weekly card so the user can see at a glance what committing to weekly
+    /// billing really costs over a year — makes the yearly plan feel rational
+    /// without requiring the user to do the math.
+    func weeklyAnnualEquivalent(_ storeKit: StoreKitService) -> String {
+        if let product = storeKit.weeklyProduct {
+            let annual = product.price * 52
+            if let formatter = product.priceFormatter {
+                return formatter.string(from: annual as NSNumber) ?? "$259.48"
+            }
+            return String(format: "$%.2f", (annual as NSDecimalNumber).doubleValue)
+        }
+        return "$259.48"
     }
 
     func yearlyWeeklyBreakdown(_ storeKit: StoreKitService) -> String {

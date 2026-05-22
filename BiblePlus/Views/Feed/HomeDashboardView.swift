@@ -108,25 +108,32 @@ struct HomeDashboardView: View {
     // MARK: - Full Page Background
 
     private var fullPageBackground: some View {
-        let tint: Color = colorScheme == .dark
-            ? palette.accent
-            : Color(red: 0.65, green: 0.48, blue: 0.25)
-        let strength: CGFloat = colorScheme == .dark ? 0.20 : 0.28
+        let tint = palette.accent
+        let strength: CGFloat = colorScheme == .dark ? 0.20 : 0.34
         let bg = palette.background
 
-        return LinearGradient(
-            stops: [
-                .init(color: bg, location: 0.0),
-                .init(color: bg, location: 0.50),
-                .init(color: bg.blend(with: tint, amount: strength * 0.3), location: 0.65),
-                .init(color: bg.blend(with: tint, amount: strength * 0.6), location: 0.80),
-                .init(color: bg.blend(with: tint, amount: strength * 0.85), location: 0.90),
-                .init(color: bg.blend(with: tint, amount: strength), location: 1.0)
-            ],
-            startPoint: .top,
-            endPoint: .bottom
-        )
-        .ignoresSafeArea()
+        return ZStack {
+            // Base background
+            bg.ignoresSafeArea()
+
+            // Bottom glow — mirrors the Ask page's top curve flipped, so the
+            // fade shape and peak color match exactly but sit at the bottom
+            // of the home page instead of the top.
+            LinearGradient(
+                stops: [
+                    .init(color: bg, location: 0.0),
+                    .init(color: bg, location: 0.35),
+                    .init(color: bg.blend(with: tint, amount: strength * 0.15), location: 0.45),
+                    .init(color: bg.blend(with: tint, amount: strength * 0.45), location: 0.60),
+                    .init(color: bg.blend(with: tint, amount: strength * 0.7), location: 0.75),
+                    .init(color: bg.blend(with: tint, amount: strength * 0.9), location: 0.88),
+                    .init(color: bg.blend(with: tint, amount: strength), location: 1.0)
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
+        }
     }
 
     // MARK: - Swipe Up Prompt
@@ -271,15 +278,14 @@ struct HomeDashboardView: View {
 
                     OrnamentalDivider(color: .white, opacity: 0.2)
 
-                    HStack(spacing: 4) {
+                    HStack(spacing: 6) {
                         Image(systemName: "book.closed.fill")
-                            .font(.system(size: 10))
+                            .font(.system(size: 12))
                             .foregroundStyle(Color(hex: "C9A96E"))
 
                         Text(verse.reference)
-                            .font(.system(size: 12, weight: .regular, design: .serif))
-                            .italic()
-                            .foregroundStyle(.white.opacity(0.7))
+                            .font(.custom("Georgia-Italic", size: 13))
+                            .foregroundStyle(.white.opacity(0.75))
                     }
 
                     Button {
@@ -354,11 +360,11 @@ struct HomeDashboardView: View {
 
                     VStack(alignment: .leading, spacing: 1) {
                         Text(vm.streakCount >= 2 ? "\(vm.streakCount)-day streak" : "This Week")
-                            .font(.system(size: 15, weight: .bold, design: .rounded))
+                            .font(BPFont.elegantHeadingSmall)
                             .foregroundStyle(palette.textPrimary)
 
                         Text("Your activity")
-                            .font(.system(size: 11, weight: .regular, design: .rounded))
+                            .font(BPFont.elegantCaption)
                             .foregroundStyle(palette.textMuted)
                     }
                 }
@@ -489,8 +495,8 @@ struct HomeDashboardView: View {
 
     private func quickActionCard(
         icon: String,
-        title: String,
-        subtitle: String,
+        title: LocalizedStringKey,
+        subtitle: LocalizedStringKey,
         action: @escaping () -> Void
     ) -> some View {
         VStack(spacing: 10) {
@@ -507,12 +513,12 @@ struct HomeDashboardView: View {
             }
 
             Text(title)
-                .font(.system(size: 17, weight: .bold, design: .rounded))
+                .font(BPFont.elegantHeadingMedium)
                 .foregroundStyle(palette.textPrimary)
                 .lineLimit(1)
 
             Text(subtitle)
-                .font(.system(size: 13, weight: .regular, design: .rounded))
+                .font(BPFont.elegantSubtitle)
                 .foregroundStyle(palette.textMuted)
                 .lineLimit(1)
         }
@@ -580,7 +586,7 @@ private struct InlineAskComposer: View {
                 .shadow(color: gold.opacity(0.5), radius: 10)
 
             Text("Ask anything about Scripture")
-                .font(.custom("Georgia", size: 15))
+                .font(BPFont.elegantBody)
                 .foregroundStyle(palette.textSecondary)
                 .lineLimit(1)
 

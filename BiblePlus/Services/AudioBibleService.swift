@@ -75,6 +75,30 @@ final class AudioBibleService {
 
     private var onChapterComplete: (() -> Void)?
 
+    // MARK: - Streaming State
+    //
+    // `hasQueuedAllVerses` flips to true only once every verse in the
+    // current chapter has been fetched and inserted into the queue. Until
+    // then, an empty queue means "waiting on more audio," NOT "chapter
+    // done." Before this flag existed, a slow TTS stream caused audio to
+    // cut after the first 2-4 verses because the queue drained faster
+    // than verses could arrive, which fired premature chapter completion.
+    private var hasQueuedAllVerses: Bool = false
+
+    // MARK: - Still-Listening Safeguard
+    //
+    // After this many consecutive auto-advances (no user interaction),
+    // playback pauses and prompts the user to confirm they're still
+    // listening. Prevents audio running all night when someone falls
+    // asleep, which would drive both the TTS cost and battery drain sky
+    // high. If the user doesn't answer the prompt within
+    // `stillListeningTimeoutSeconds`, playback stops automatically.
+    var showStillListeningPrompt: Bool = false
+    private var consecutiveAutoAdvances: Int = 0
+    private var stillListeningTimeoutTask: Task<Void, Never>?
+    private static let stillListeningThreshold: Int = 5
+    private static let stillListeningTimeoutSeconds: TimeInterval = 60
+
     // MARK: - Live Activity
 
     private var bibleActivity: Activity<BibleSessionAttributes>?
@@ -165,11 +189,19 @@ final class AudioBibleService {
         book: BibleBook,
         chapter: Int,
         translation: BibleTranslation,
-        startingFromVerseIndex: Int = 0
+        startingFromVerseIndex: Int = 0,
+        isAutoAdvance: Bool = false
     ) {
         stop()
 
         guard !verses.isEmpty else { return }
+
+        // A user-initiated play is fresh — reset the auto-advance counter.
+        // Chapter-complete callbacks pass `isAutoAdvance: true` so the
+        // counter keeps climbing toward the still-listening threshold.
+        if !isAutoAdvance {
+            consecutiveAutoAdvances = 0
+        }
 
         self.currentVerses = verses
         self.currentBook = book
@@ -181,6 +213,7 @@ final class AudioBibleService {
         self.currentVerseIndex = startingFromVerseIndex
         self.isLoading = true
         self.isFallbackMode = false
+        self.hasQueuedAllVerses = false
 
         let versesToPlay = Array(verses[startingFromVerseIndex...])
 
@@ -302,6 +335,13 @@ final class AudioBibleService {
                     let item = AVPlayerItem(url: fileURL)
                     self.itemToVerseIndex[item] = globalIdx
                     self.playerItems.append(item)
+
+                    // If the player drained its queue while we were still
+                    // fetching, capture that state BEFORE inserting — after
+                    // insert, currentItem becomes non-nil and we lose the
+                    // signal. We use this to call play() again so the
+                    // player picks up from where it stalled.
+                    let queueWentDry = firstVerseReady && player.currentItem == nil
                     player.insert(item, after: nil)
 
                     // Start playback as soon as the first verse is queued
@@ -328,6 +368,12 @@ final class AudioBibleService {
                             totalVerses: allVerses.count,
                             currentVerse: startIndex + 1
                         )
+                    } else if queueWentDry && self.isPlaying {
+                        // Queue ran dry mid-chapter while the user was
+                        // still listening. Kick playback back on — this is
+                        // the fix for "audio cuts after 2-4 verses."
+                        player.play()
+                        player.rate = Float(self.playbackSpeed.rawValue)
                     }
 
                     nextToQueue += 1
@@ -339,6 +385,11 @@ final class AudioBibleService {
         if !firstVerseReady {
             throw AudioBibleError.audioDecodingFailed
         }
+
+        // Every verse in this chapter has now been fetched and queued.
+        // The observer can safely treat an empty queue as "chapter done"
+        // from this point forward.
+        self.hasQueuedAllVerses = true
     }
 
     // MARK: - Fetch Single Verse Audio (with device cache)
@@ -437,10 +488,14 @@ final class AudioBibleService {
                         )
                     }
                 } else if self.itemToVerseIndex[finishedItem] != nil {
-                    // No more items — chapter complete
-                    // Small delay to ensure AVQueuePlayer has finished
+                    // The last-queued item just ended. If every verse for
+                    // this chapter has been queued, that's chapter done.
+                    // Otherwise the queue has drained faster than the
+                    // stream can fill it — don't complete, just wait;
+                    // the streaming loop will insert the next verse and
+                    // resume playback the moment it arrives.
                     try? await Task.sleep(nanoseconds: 100_000_000)
-                    if self.queuePlayer?.currentItem == nil {
+                    if self.queuePlayer?.currentItem == nil && self.hasQueuedAllVerses {
                         self.handlePlaybackCompletion()
                     }
                 }
@@ -580,6 +635,11 @@ final class AudioBibleService {
         autoStopTask?.cancel()
         autoStopTask = nil
 
+        stillListeningTimeoutTask?.cancel()
+        stillListeningTimeoutTask = nil
+        showStillListeningPrompt = false
+        hasQueuedAllVerses = false
+
         if let activity = bibleActivity {
             LiveActivityService.endBibleSession(activity)
             bibleActivity = nil
@@ -717,14 +777,27 @@ final class AudioBibleService {
         configureAudioSession()
         duckSoundscape()
 
-        let voice = selectedVoice.resolvedVoice
+        let voice = resolvePlaybackVoice()
         let rate = speechRate(for: playbackSpeed)
+
+        // Prefer the localized book name from the active translation ref so
+        // a Spanish listener hears "Génesis, capítulo 1." instead of
+        // "Genesis, chapter 1." (pronounced with English phonetics). Falls
+        // back to the English `book.name` when no translation was picked.
+        let spokenBookName: String = {
+            if let refID = LocalizationService.currentLanguageCode().flatMap({ LanguageDefaultBible.defaultRefID(for: $0) }),
+               let localized = BibleRepository.shared.localizedBookName(refID: refID, bookID: book.id) {
+                return localized
+            }
+            return book.name
+        }()
+        let intro = String(localized: "\(spokenBookName), chapter \(chapter).")
 
         for i in startingFromVerseIndex..<verses.count {
             let verse = verses[i]
             var text = verse.text
             if i == startingFromVerseIndex {
-                text = "\(book.name), chapter \(chapter). \(text)"
+                text = "\(intro) \(verse.text)"
             }
 
             let utterance = AVSpeechUtterance(string: text)
@@ -773,7 +846,7 @@ final class AudioBibleService {
             self.speechDelegate = delegate
         }
 
-        let voice = selectedVoice.resolvedVoice
+        let voice = resolvePlaybackVoice()
         let rate = speechRate(for: playbackSpeed)
 
         speechDelegate?.resetMappings()
@@ -791,6 +864,23 @@ final class AudioBibleService {
         currentVerseIndex = index
         isPlaying = true
         isPaused = false
+    }
+
+    /// Pick the `AVSpeechSynthesisVoice` appropriate for the current app
+    /// language. When the user is reading in Spanish, this returns a Spanish
+    /// system voice; for English (or for languages with no installed system
+    /// voice, like Amharic) it falls back to the user's chosen `BibleVoice`
+    /// persona so the familiar English-reader experience stays intact.
+    private func resolvePlaybackVoice() -> AVSpeechSynthesisVoice? {
+        // `effectiveLanguageCode` resolves "system" to the device's preferred
+        // language — so a Spanish-phone listener still gets Mónica even if
+        // they never touched the app's language picker.
+        let code = LocalizationService.shared.effectiveLanguageCode
+        if code != "en",
+           let localeVoice = LocaleVoiceResolver.voice(forLanguageCode: code) {
+            return localeVoice
+        }
+        return selectedVoice.resolvedVoice
     }
 
     private func speechRate(for speed: PlaybackSpeed) -> Float {
@@ -814,7 +904,52 @@ final class AudioBibleService {
         }
 
         restoreSoundscape()
+
+        // Count this completion toward the still-listening safeguard. If
+        // we've auto-advanced more than `stillListeningThreshold` chapters
+        // in a row, prompt the user to confirm instead of quietly rolling
+        // into the next chapter — stops runaway playback (and TTS cost)
+        // when someone falls asleep with headphones in.
+        consecutiveAutoAdvances += 1
+        if consecutiveAutoAdvances >= Self.stillListeningThreshold {
+            showStillListeningPrompt = true
+            scheduleStillListeningTimeout()
+        } else {
+            onChapterComplete?()
+        }
+    }
+
+    // MARK: - Still-Listening Actions
+
+    /// User confirmed they're still listening — reset the counter and
+    /// trigger the normal chapter advance that we deferred.
+    func confirmStillListening() {
+        stillListeningTimeoutTask?.cancel()
+        stillListeningTimeoutTask = nil
+        consecutiveAutoAdvances = 0
+        showStillListeningPrompt = false
         onChapterComplete?()
+    }
+
+    /// User chose to stop (or the timeout fired) — tear playback down.
+    func dismissStillListening() {
+        stillListeningTimeoutTask?.cancel()
+        stillListeningTimeoutTask = nil
+        consecutiveAutoAdvances = 0
+        showStillListeningPrompt = false
+        stop()
+    }
+
+    private func scheduleStillListeningTimeout() {
+        stillListeningTimeoutTask?.cancel()
+        stillListeningTimeoutTask = Task { @MainActor [weak self] in
+            try? await Task.sleep(nanoseconds: UInt64(Self.stillListeningTimeoutSeconds * 1_000_000_000))
+            guard !Task.isCancelled else { return }
+            guard let self else { return }
+            if self.showStillListeningPrompt {
+                self.dismissStillListening()
+            }
+        }
     }
 
     // MARK: - Audio Session

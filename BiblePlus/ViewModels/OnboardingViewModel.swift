@@ -83,6 +83,13 @@ final class OnboardingViewModel {
         audioService.stop()
         HapticService.notification(.success)
 
+        TikTokAnalyticsService.shared.trackOnboardingComplete()
+
+        Task { @MainActor in
+            try? await Task.sleep(nanoseconds: 700_000_000)
+            await TikTokAnalyticsService.shared.requestTrackingAuthorization()
+        }
+
         // ── First-session retention hooks ────────────────────────────────
         // Each of these is independently safe to fail — none of them throw
         // and none gate the onboarding completion. The user is now in the

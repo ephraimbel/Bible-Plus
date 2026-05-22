@@ -12,13 +12,13 @@ struct SplashView: View {
 
     var body: some View {
         ZStack {
-            (colorScheme == .dark ? Color(hex: "2B2A27") : Color(hex: "FAF8F4"))
+            (colorScheme == .dark ? Color(hex: "2B2A27") : Color(hex: "EFE4D6"))
                 .ignoresSafeArea()
 
             HStack(spacing: 2) {
                 Text("Bible")
                     .font(.system(size: 42, weight: .light, design: .serif))
-                    .foregroundStyle(colorScheme == .dark ? .white : Color(hex: "1A1A1A"))
+                    .foregroundStyle(colorScheme == .dark ? Color.white : Color(hex: "3B2B1D"))
 
                 Image(systemName: "sparkle")
                     .font(.system(size: 32, weight: .medium))

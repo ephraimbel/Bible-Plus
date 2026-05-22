@@ -26,6 +26,12 @@ final class BibleReaderViewModel {
 
     var verses: [(number: Int, text: String)] = []
     var currentTranslation: BibleTranslation = .kjv
+    /// When non-nil (and not a bundled-prefix id), the reader fetches chapters
+    /// from bible.helloao.org for this translation instead of using the legacy
+    /// enum path. Written in two ways: (a) user picks from the multilingual
+    /// picker, persisted to `UserProfile.preferredTranslationRefID`; or (b)
+    /// language change auto-seeds the default via `LanguageDefaultBible`.
+    var currentRefID: String? = nil
 
     // MARK: - Saved Verses
 
@@ -91,12 +97,34 @@ final class BibleReaderViewModel {
     /// Detail string for the chapter currently being read (e.g. "Genesis 1")
     private var pendingChapterDetail: String?
 
-    var translationName: String { currentTranslation.abbreviation }
+    /// Human-visible translation label. Prefers the catalog ref's shortName
+    /// (e.g. "R09" for Reina-Valera 1909) so non-English users don't see a
+    /// stale "KJV" badge, and falls back to the legacy enum's abbreviation.
+    var translationName: String {
+        if let refID = currentRefID,
+           !refID.hasPrefix(TranslationRef.bundledPrefix),
+           let ref = TranslationCatalog.shared.translation(id: refID) {
+            return ref.shortName
+        }
+        return currentTranslation.abbreviation
+    }
+
+    /// Localized book name for the active translation when available (e.g.
+    /// "Génesis" for Spanish Reina-Valera). Falls back to the English name
+    /// from `BibleData` until the first chapter of that book is fetched.
+    var localizedBookName: String {
+        if let refID = currentRefID,
+           !refID.hasPrefix(TranslationRef.bundledPrefix),
+           let localized = repository.localizedBookName(refID: refID, bookID: selectedBook.id) {
+            return localized
+        }
+        return selectedBook.name
+    }
 
     var hasContent: Bool { !verses.isEmpty }
 
     var chapterTitle: String {
-        "\(selectedBook.name) \(selectedChapter)"
+        "\(localizedBookName) \(selectedChapter)"
     }
 
     var canGoBack: Bool {
@@ -123,6 +151,31 @@ final class BibleReaderViewModel {
             readerLineSpacing = profile.readerLineSpacing
             readerTextAlignmentJustified = profile.textAlignmentJustified
             readerShowVerseNumbers = profile.showVerseNumbers
+
+            // Resolve the active translation ref. Precedence: explicit user
+            // pick > language default from `LanguageDefaultBible`. Nil means
+            // "use legacy bundled/API translation" — English users without an
+            // explicit pick land here and read the legacy KJV path.
+            if let stored = profile.preferredTranslationRefID, !stored.isEmpty {
+                currentRefID = stored
+            } else {
+                // `effectiveLanguageCode` resolves "follow system" to the
+                // device's preferred language, so a Spanish-phone user with
+                // no explicit pick still defaults to Reina-Valera.
+                let code = LocalizationService.shared.effectiveLanguageCode
+                if let defaultID = LanguageDefaultBible.defaultRefID(for: code),
+                   defaultID != LanguageDefaultBible.bundledEnglishID {
+                    currentRefID = defaultID
+                }
+            }
+
+            // Warm the localized-book-name cache for the active ref so the
+            // book picker shows "Génesis"/"Salmos"/etc. immediately instead
+            // of waiting for the user to open a chapter in each book.
+            if let refID = currentRefID,
+               !refID.hasPrefix(TranslationRef.bundledPrefix) {
+                Task { await repository.prefetchBookNames(refID: refID) }
+            }
 
             // Restore last read position
             if let book = BibleData.allBooks.first(where: { $0.id == profile.lastReadBookID }) {
@@ -204,9 +257,27 @@ final class BibleReaderViewModel {
 
     func changeTranslation(_ translation: BibleTranslation) {
         currentTranslation = translation
+        currentRefID = nil  // user explicitly picked a legacy enum; clear ref override
         repository.setTranslation(translation)
-        updateProfile { $0.preferredTranslation = translation }
+        updateProfile {
+            $0.preferredTranslation = translation
+            $0.preferredTranslationRefID = nil
+        }
         showTranslationPicker = false
+        loadChapter(logActivity: false)
+    }
+
+    /// Switch to a multilingual catalog translation (helloao-backed). Persists
+    /// to `UserProfile.preferredTranslationRefID` so reopening the app keeps
+    /// the pick. Pass `nil` to clear the override and revert to the legacy
+    /// `BibleTranslation` enum.
+    func changeTranslationRef(_ refID: String?) {
+        currentRefID = refID
+        updateProfile { $0.preferredTranslationRefID = refID }
+        showTranslationPicker = false
+        if let refID, !refID.hasPrefix(TranslationRef.bundledPrefix) {
+            Task { await repository.prefetchBookNames(refID: refID) }
+        }
         loadChapter(logActivity: false)
     }
 
@@ -310,10 +381,22 @@ final class BibleReaderViewModel {
 
         loadTask = Task {
             do {
-                let fetched = try await repository.verses(
-                    book: selectedBook.id,
-                    chapter: selectedChapter
-                )
+                let fetched: [(number: Int, text: String)]
+                if let refID = currentRefID, !refID.hasPrefix(TranslationRef.bundledPrefix) {
+                    // Use the ID-only overload — works even if TranslationCatalog
+                    // hasn't finished its background manifest fetch yet (common
+                    // race on first launch in non-English).
+                    fetched = try await repository.verses(
+                        refID: refID,
+                        book: selectedBook.id,
+                        chapter: selectedChapter
+                    )
+                } else {
+                    fetched = try await repository.verses(
+                        book: selectedBook.id,
+                        chapter: selectedChapter
+                    )
+                }
                 guard !Task.isCancelled else { return }
                 verses = fetched
                 isLoading = false
@@ -459,10 +542,22 @@ final class BibleReaderViewModel {
 
         loadTask = Task {
             do {
-                let fetched = try await repository.verses(
-                    book: selectedBook.id,
-                    chapter: selectedChapter
-                )
+                let fetched: [(number: Int, text: String)]
+                // Route through helloao when the user has picked (or defaulted
+                // to) a multilingual translation. Bundled prefixes collapse
+                // back to the legacy path inside BibleRepository.
+                if let refID = currentRefID, !refID.hasPrefix(TranslationRef.bundledPrefix) {
+                    fetched = try await repository.verses(
+                        refID: refID,
+                        book: selectedBook.id,
+                        chapter: selectedChapter
+                    )
+                } else {
+                    fetched = try await repository.verses(
+                        book: selectedBook.id,
+                        chapter: selectedChapter
+                    )
+                }
                 guard !Task.isCancelled else { return }
                 verses = fetched
                 isLoading = false

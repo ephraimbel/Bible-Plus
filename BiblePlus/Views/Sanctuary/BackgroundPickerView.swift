@@ -10,10 +10,10 @@ enum BackgroundFilter: CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .all: "All"
-        case .animated: "Animated"
-        case .images: "Images"
-        case .gradients: "Gradients"
+        case .all: String(localized: "All")
+        case .animated: String(localized: "Animated")
+        case .images: String(localized: "Images")
+        case .gradients: String(localized: "Gradients")
         }
     }
 

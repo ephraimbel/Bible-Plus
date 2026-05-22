@@ -1,0 +1,456 @@
+{
+  "version": 1,
+  "testimonials": [
+    {
+      "id": "t_001",
+      "name": "Sarah M.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "loneliness"
+      ],
+      "seasons": [
+        "single",
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "Fungua kabla ya barua pepe sasa. Ni ngumu kuelezea lakini asubuhi zangu zina hisia tofauti.",
+      "daysUsing": 94
+    },
+    {
+      "id": "t_002",
+      "name": "James T.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "purpose"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "Nilitupa maswali kadhaa ya teolojia yasiyo ya kawaida kwa AI nikidhani nitaweza kumshinda. Sikuwa na bahati. Nimevutiwa kwa dhati.",
+      "daysUsing": 142
+    },
+    {
+      "id": "t_003",
+      "name": "Lauren R.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "relationship"
+      ],
+      "seasons": [
+        "married",
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "Wasiwasi wa saa 3 asubuhi sasa una nyumba. Amka, soma kitu, pumua, rudi kulala. Hivyo ndivyo ilivyo.",
+      "daysUsing": 58
+    },
+    {
+      "id": "t_004",
+      "name": "David C.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "doubt"
+      ],
+      "seasons": [
+        "startingOver"
+      ],
+      "rating": 5,
+      "quote": "Sijawahi kuingia kanisani kwa zaidi ya miaka 12. Hii haisikii kama kanisa. Ina hisia kama rafiki anayejua maandiko.",
+      "daysUsing": 23
+    },
+    {
+      "id": "t_005",
+      "name": "Maria V.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "grief"
+      ],
+      "seasons": [
+        "hardSeason"
+      ],
+      "rating": 5,
+      "quote": "Baada ya kupoteza mama yangu, Zaburi zilizonitumia hazikuwa za kawaida. Zilikuwa zile nilizohitaji.",
+      "daysUsing": 77
+    },
+    {
+      "id": "t_006",
+      "name": "Marcus J.",
+      "faithStage": "growing",
+      "burdens": [
+        "purpose",
+        "temptation"
+      ],
+      "seasons": [
+        "student"
+      ],
+      "rating": 5,
+      "quote": "Mfululizo wa siku 42 na kuendelea. Sijawahi kudumisha kitu kwa muda huu mrefu tangu shule ya kati kwa ukweli.",
+      "daysUsing": 42
+    },
+    {
+      "id": "t_007",
+      "name": "Elena K.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "financial"
+      ],
+      "seasons": [
+        "parent",
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "Widget ya mistari inanigusa kabla ya Twitter. Inastahili kwa hiyo pekee.",
+      "daysUsing": 61
+    },
+    {
+      "id": "t_008",
+      "name": "Robert H.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "health"
+      ],
+      "seasons": [
+        "retired"
+      ],
+      "rating": 5,
+      "quote": "Mimi ni miaka 68. Nilidhani nilikuwa nimesoma kila kitu. Biblia ya sauti kwenye matembezi yangu ya asubuhi inanionesha vifungu nilivyokuwa nikivisoma kwa haraka maisha yangu yote.",
+      "daysUsing": 186
+    },
+    {
+      "id": "t_009",
+      "name": "Priya S.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "loneliness",
+        "purpose"
+      ],
+      "seasons": [
+        "single",
+        "startingOver"
+      ],
+      "rating": 5,
+      "quote": "Sikukulia kanisani. Nilitaka kuelewa Maandiko bila kuhisi kuhukumiwa. Hii ndiyo utangulizi mpole zaidi niliyopata.",
+      "daysUsing": 31
+    },
+    {
+      "id": "t_010",
+      "name": "Thomas W.",
+      "faithStage": "growing",
+      "burdens": [
+        "anger",
+        "relationship"
+      ],
+      "seasons": [
+        "married",
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "jarida la maombi linanipigia simu kwa upole lol. mimi ni mume bora kwa sababu yake",
+      "daysUsing": 89
+    },
+    {
+      "id": "t_011",
+      "name": "Naomi B.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "doubt",
+        "purpose"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "Naweza kujadili nayo. Inanipinga kwa Maandiko, si maneno ya kawaida. Hiyo ni nadra.",
+      "daysUsing": 119
+    },
+    {
+      "id": "t_012",
+      "name": "Hassan A.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety"
+      ],
+      "seasons": [
+        "student"
+      ],
+      "rating": 5,
+      "quote": "wiki ya mitihani na kwa namna fulani sianguki. mistari ya saa 8 asubuhi inanifanya niwe na mwelekeo.",
+      "daysUsing": 46
+    },
+    {
+      "id": "t_013",
+      "name": "Grace L.",
+      "faithStage": "growing",
+      "burdens": [
+        "relationship",
+        "loneliness"
+      ],
+      "seasons": [
+        "single"
+      ],
+      "rating": 5,
+      "quote": "programu za kuchumbiana kwenye skrini yangu ya nyumbani karibu na hii. ni kipindi cha ajabu kuwa single. hii itabaki",
+      "daysUsing": 38
+    },
+    {
+      "id": "t_014",
+      "name": "Paul M.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "purpose"
+      ],
+      "seasons": [
+        "workingProfessional",
+        "married"
+      ],
+      "rating": 5,
+      "quote": "Mimi ni mchungaji. Ninatumia hii katika safari yangu mwenyewe, si tu kwa ajili ya maandalizi ya mahubiri. Hiyo ndiyo ishara.",
+      "daysUsing": 203
+    },
+    {
+      "id": "t_015",
+      "name": "Rachel F.",
+      "faithStage": "growing",
+      "burdens": [
+        "grief",
+        "loneliness"
+      ],
+      "seasons": [
+        "hardSeason",
+        "startingOver"
+      ],
+      "rating": 5,
+      "quote": "Mwaka wa talaka. Hii ilinifanya niwe katika Neno wakati sikuweza kufungua Biblia bila kulia.",
+      "daysUsing": 67
+    },
+    {
+      "id": "t_016",
+      "name": "Kenji T.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "purpose",
+        "anxiety"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "Niliacha programu mbili za kutafakari kwa sababu zilinifanya nijisikie hatia. Hii haina hivyo - na kwa namna fulani hiyo ndiyo sababu nipo hapa siku ya 52.",
+      "daysUsing": 52
+    },
+    {
+      "id": "t_017",
+      "name": "Abigail O.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "health"
+      ],
+      "seasons": [
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "Binti yangu aliomba tuombe pamoja wiki hii. Mara ya kwanza kabisa. Ninamlaumu hii programu lol.",
+      "daysUsing": 104
+    },
+    {
+      "id": "t_018",
+      "name": "Jonathan P.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "temptation",
+        "purpose"
+      ],
+      "seasons": [
+        "single",
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "mistari ya saa 9 usiku inagonga wakati ambapo kawaida ningeanza kuangalia mambo mabaya. Kubadilisha hiyo pekee inastahili.",
+      "daysUsing": 131
+    },
+    {
+      "id": "t_019",
+      "name": "Mia D.",
+      "faithStage": "growing",
+      "burdens": [
+        "loneliness"
+      ],
+      "seasons": [
+        "student"
+      ],
+      "rating": 5,
+      "quote": "Chuo ni pekee na kundi langu la marafiki si waamini. Hii ndiyo kanisa langu hadi nipate lingine.",
+      "daysUsing": 73
+    },
+    {
+      "id": "t_020",
+      "name": "Carlos G.",
+      "faithStage": "growing",
+      "burdens": [
+        "financial",
+        "anxiety"
+      ],
+      "seasons": [
+        "workingProfessional",
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "pesa ni ngumu hivi sasa lakini bado nalipa kwa hii. labda inasema vya kutosha",
+      "daysUsing": 87
+    },
+    {
+      "id": "t_021",
+      "name": "Hannah W.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "grief"
+      ],
+      "seasons": [
+        "married"
+      ],
+      "rating": 5,
+      "quote": "Kujifungua kwa njia ya mimba mwezi Januari. Programu haikujua, lakini mistari ilijua. Kwa namna fulani.",
+      "daysUsing": 112
+    },
+    {
+      "id": "t_022",
+      "name": "Samir N.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "doubt"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "Mimi ni mkaidi. Nilikuja nikiwa tayari kuanguka. Nilibaki kwa sababu ya majibu ya dhati.",
+      "daysUsing": 29
+    },
+    {
+      "id": "t_023",
+      "name": "Olivia S.",
+      "faithStage": "growing",
+      "burdens": [
+        "relationship",
+        "purpose"
+      ],
+      "seasons": [
+        "single"
+      ],
+      "rating": 5,
+      "quote": "nilisimamisha kulinganisha maisha yangu na instagram karibu na wiki ya 3. mistari ya kila siku ilichukua desturi hiyo ya kusoma",
+      "daysUsing": 54
+    },
+    {
+      "id": "t_024",
+      "name": "Michael A.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "purpose"
+      ],
+      "seasons": [
+        "retired"
+      ],
+      "rating": 5,
+      "quote": "Mimi ni miaka 65. Biblia ya sauti kwenye matembezi yangu ya asubuhi ndiyo pesa bora niliyotumia mwaka huu.",
+      "daysUsing": 168
+    },
+    {
+      "id": "t_025",
+      "name": "Victoria B.",
+      "faithStage": "growing",
+      "burdens": [
+        "anxiety",
+        "loneliness"
+      ],
+      "seasons": [
+        "parent"
+      ],
+      "rating": 5,
+      "quote": "Ubongo wa baada ya kujifungua haukuweza kusoma sura kamili. muundo wa mistari mmoja kwa siku uliniokoa.",
+      "daysUsing": 48
+    },
+    {
+      "id": "t_026",
+      "name": "Nathan R.",
+      "faithStage": "growing",
+      "burdens": [
+        "temptation",
+        "anger"
+      ],
+      "seasons": [
+        "workingProfessional"
+      ],
+      "rating": 5,
+      "quote": "AI hainipambe. Inaniambia ukweli. Nilihitaji hiyo kutoka kwa chombo, kwa njia ya ajabu.",
+      "daysUsing": 96
+    },
+    {
+      "id": "t_027",
+      "name": "Esther C.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "health"
+      ],
+      "seasons": [
+        "hardSeason",
+        "married"
+      ],
+      "rating": 5,
+      "quote": "Siku za kemotherapy ni siku za kimya. Mandhari ya sauti pamoja na Zaburi zilinisaidia kupitia raundi ya 4, 5, na 6.",
+      "daysUsing": 135
+    },
+    {
+      "id": "t_028",
+      "name": "Andre L.",
+      "faithStage": "justCurious",
+      "burdens": [
+        "anxiety",
+        "loneliness"
+      ],
+      "seasons": [
+        "startingOver",
+        "single"
+      ],
+      "rating": 5,
+      "quote": "Nimeondoka katika rehab kwa miezi sita. Hii ilishika kelele chini wakati mikutano hayakutosha.",
+      "daysUsing": 78
+    },
+    {
+      "id": "t_029",
+      "name": "Faith M.",
+      "faithStage": "growing",
+      "burdens": [
+        "purpose",
+        "doubt"
+      ],
+      "seasons": [
+        "student"
+      ],
+      "rating": 5,
+      "quote": "Ndio, jina langu kwa kweli ni Faith. Ndio, najua. Programu bado ilinishangaza.",
+      "daysUsing": 41
+    },
+    {
+      "id": "t_030",
+      "name": "Isaac B.",
+      "faithStage": "deepInTheWord",
+      "burdens": [
+        "purpose",
+        "anger"
+      ],
+      "seasons": [
+        "workingProfessional",
+        "married"
+      ],
+      "rating": 5,
+      "quote": "Programu tatu za Biblia zilifutwa kabla ya hii. Kwa kweli sasa ninafungua Biblia yangu, si tu kupokea mistari ya kila siku. Hiyo ndiyo tofauti yote.",
+      "daysUsing": 157
+    }
+  ]
+}

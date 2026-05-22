@@ -1,0 +1,5943 @@
+[
+  {
+    "id": "psalms-of-peace",
+    "name": "평화의 시편",
+    "description": "불안한 마음을 직접적으로 다루는 시편을 통해 7일간의 여정을 떠나며, 오직 하나님만이 주실 수 있는 고요함과 평화로 인도합니다.",
+    "totalDays": 7,
+    "category": "Comfort",
+    "gradientColors": [
+      "#4A6741",
+      "#2D4A3E"
+    ],
+    "iconName": "leaf.fill",
+    "imageKey": "jesus_calms_storm",
+    "applicableSeasons": [
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "목자의 돌봄",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "이 삶의 계절에서 하나님이 당신의 목자라는 것은 무엇을 의미합니까?"
+      },
+      {
+        "day": 2,
+        "title": "빛 가운데 확신",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "어떤 어둠의 순간에 하나님을 당신의 빛으로 경험한 적이 있습니까?"
+      },
+      {
+        "day": 3,
+        "title": "맛보고 보라",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님이 당신을 한때 포로로 잡고 있던 두려움에서 어떻게 구해주셨습니까?"
+      },
+      {
+        "day": 4,
+        "title": "하나님은 우리의 피난처",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "오늘 당신이 '가만히 있어 내가 하나님 됨을 알라'고 알아야 할 곳은 어디입니까?"
+      },
+      {
+        "day": 5,
+        "title": "그의 날개 아래",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 91,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "지극히 높으신 분의 그늘에 거하는 것은 어떤 기분입니까?"
+      },
+      {
+        "day": 6,
+        "title": "결코 잠들지 않는 지킴이",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 121,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님이 결코 졸지 않으신다는 것을 아는 것이 오늘 밤을 대하는 방식을 어떻게 바꿉니까?"
+      },
+      {
+        "day": 7,
+        "title": "두려움과 경이로움으로 지음받은",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님이 당신을 아신다는 것에 대한 어떤 진리가 지금 가장 큰 위로가 됩니까?"
+      }
+    ]
+  },
+  {
+    "id": "gospel-of-john",
+    "name": "요한복음",
+    "description": "21일 동안 요한복음을 통과하며, 육신이 된 말씀인 예수님을 한 장씩 만나보세요.",
+    "totalDays": 21,
+    "category": "Gospel",
+    "gradientColors": [
+      "#8B6914",
+      "#5C4A1C"
+    ],
+    "iconName": "book.fill",
+    "imageKey": "baptism_jesus",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "육신이 된 말씀",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "예수님이 모든 것보다 먼저 존재하시고 우리 가운데 거하시기로 선택하신 것이 당신에게 무엇을 의미합니까?"
+      },
+      {
+        "day": 2,
+        "title": "물에서 포도주로",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 삶에서 예수님이 평범한 것을 기적적인 것으로 변화시키길 원하는 곳은 어디입니까?"
+      },
+      {
+        "day": 3,
+        "title": "다시 태어나야 합니다",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "'다시 태어난다'는 개념이 당신의 믿음 이해에 어떤 도전이나 격려가 됩니까?"
+      },
+      {
+        "day": 4,
+        "title": "생수",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신을 목마르게 하는 우물은 무엇이며, 생수는 어떤 모습일까요?"
+      },
+      {
+        "day": 5,
+        "title": "Pool에서의 치유",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "치유를 기다리고 있지만 예수님께 완전히 요청하지 않은 영역이 있습니까?"
+      },
+      {
+        "day": 6,
+        "title": "생명의 떡",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "매일 예수님을 생명의 떡으로 먹는 것은 어떤 모습입니까?"
+      },
+      {
+        "day": 7,
+        "title": "생수의 강",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "세상의 예수님에 대한 의견이 당신의 경험과 충돌할 때, 당신은 어떻게 반응합니까?"
+      },
+      {
+        "day": 8,
+        "title": "세상의 빛",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "예수님이 수치나 어둠의 장소에 빛을 비추시길 원하는 곳은 어디입니까?"
+      },
+      {
+        "day": 9,
+        "title": "맹인을 위한 시력",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "예수님이 당신의 눈을 열어주시길 원하는 영적 맹목의 영역은 무엇입니까?"
+      },
+      {
+        "day": 10,
+        "title": "선한 목자",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "예수님이 기꺼이 자신의 생명을 내어주셨다는 것을 아는 것이 그의 사랑에 대한 당신의 관점을 어떻게 바꿉니까?"
+      },
+      {
+        "day": 11,
+        "title": "나사로야, 나오너라",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 삶에서 예수님이 다시 살리길 원하는 죽은 영역은 무엇입니까?"
+      },
+      {
+        "day": 12,
+        "title": "장례를 위한 기름부음",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "오늘 예수님께 드릴 수 있는 가장 사치스러운 예배의 행위는 무엇인가요?"
+      },
+      {
+        "day": 13,
+        "title": "섬기는 왕",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "이번 주에 예수님께서 당신에게 겸손한 섬김을 통해 씻어주기를 요청하는 발은 누구의 것인가요?"
+      },
+      {
+        "day": 14,
+        "title": "길이요 진리요 생명",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "예수님께서 당신을 위해 자리를 준비하겠다고 하신 약속이 오늘 당신의 삶에 어떤 영향을 미치나요?"
+      },
+      {
+        "day": 15,
+        "title": "참 포도나무",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "이번 주에 당신이 예수님 안에 '거하는' 것이 실제로 어떤 모습인가요?"
+      },
+      {
+        "day": 16,
+        "title": "도우미가 오고 있습니다",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신은 어떻게 성령님께서 당신을 진리로 인도하시는 것을 경험했나요?"
+      },
+      {
+        "day": 17,
+        "title": "예수님이 당신을 위해 기도하십니다",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "예수님께서 당신과 아버지의 연합을 위해 개인적으로 기도하셨다는 것을 아는 것은 어떤 기분인가요?"
+      },
+      {
+        "day": 18,
+        "title": "배신과 체포",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신은 언제 베드로처럼 당신의 말이나 행동을 통해 예수님을 아는 것을 부인했나요?"
+      },
+      {
+        "day": 19,
+        "title": "다 이루었다",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "예수님께서 이미 십자가에서 이루신 짐은 무엇인가요?"
+      },
+      {
+        "day": 20,
+        "title": "그가 부활하셨습니다",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "부활의 현실이 당신이 가장 큰 두려움에 맞서는 방식에 어떻게 변화를 주나요?"
+      },
+      {
+        "day": 21,
+        "title": "나를 사랑하느냐?",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "만약 예수님께서 오늘 당신에게 '나를 사랑하느냐?'고 세 번 물으신다면, 당신의 대답이 당신의 행동에 어떻게 영향을 미칠까요?"
+      }
+    ]
+  },
+  {
+    "id": "30-days-of-wisdom",
+    "name": "30일의 지혜",
+    "description": "한 달의 각 날에 대한 잠언의 한 장 — 결정, 관계, 일, 그리고 일상 생활을 위한 시대를 초월한 지혜.",
+    "totalDays": 30,
+    "category": "Wisdom",
+    "gradientColors": [
+      "#6B4C8A",
+      "#3D2B5C"
+    ],
+    "iconName": "lightbulb.fill",
+    "imageKey": "ten_commandments",
+    "applicableSeasons": [
+      "workingProfessional",
+      "parenthood"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "지혜의 시작",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "주님을 두려워하는 것이 모든 지혜의 출발점이라는 것은 무엇을 의미하나요?"
+      },
+      {
+        "day": 2,
+        "title": "숨겨진 보물을 찾기",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "숨겨진 보물을 찾듯이 지혜를 얼마나 의도적으로 찾고 있나요?"
+      },
+      {
+        "day": 3,
+        "title": "온 마음으로 신뢰하기",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신이 자신의 이해에 의지하기보다는 하나님을 신뢰해야 하는 결정은 무엇인가요?"
+      },
+      {
+        "day": 4,
+        "title": "당신의 마음을 지키세요",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "지혜의 길에서 당신을 멀어지게 할 수 있는 것들을 당신의 마음에 허용하고 있나요?"
+      },
+      {
+        "day": 5,
+        "title": "어리석음의 위험",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 삶에서 하나님의 최선에서 멀어지는 지름길을 선택하고 싶은 유혹을 가장 많이 느끼는 곳은 어디인가요?"
+      },
+      {
+        "day": 6,
+        "title": "개미에게서 배우기",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "개미의 근면함이 현재의 책임에 대해 당신에게 무엇을 가르쳐 줄 수 있나요?"
+      },
+      {
+        "day": 7,
+        "title": "유혹의 대가",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "유혹으로부터 자신을 보호하기 위해 어떤 경계를 설정해야 하나요?"
+      },
+      {
+        "day": 8,
+        "title": "지혜가 부르짖습니다",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "일상 생활의 소음 속에서 지혜의 목소리를 어떻게 인식하나요?"
+      },
+      {
+        "day": 9,
+        "title": "두 가지 초대",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "어떤 초대를 더 자주 수용하고 있나요 — 지혜의 잔치인가요, 어리석음의 지름길인가요?"
+      },
+      {
+        "day": 10,
+        "title": "지혜로운 아들",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "집에서의 당신의 성격이 공공에서 당신이 추구하는 지혜를 어떻게 반영하고 있습니까?"
+      },
+      {
+        "day": 11,
+        "title": "정직한 저울",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 삶에서 더 큰 정직과 진실성을 추구해야 할 곳은 어디입니까?"
+      },
+      {
+        "day": 12,
+        "title": "치유하는 말",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "오늘 당신의 말이 주변 사람에게 해가 아닌 치유를 가져올 수 있는 방법은 무엇입니까?"
+      },
+      {
+        "day": 13,
+        "title": "지혜로운 자와 함께 걷기",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 삶에서 지혜로운 동반자는 누구이며, 그들로부터 더 많이 배울 수 있는 방법은 무엇입니까?"
+      },
+      {
+        "day": 14,
+        "title": "올바르게 보이는 길",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신에게 올바르게 보였던 길이 잘못된 방향으로 이끌었던 적은 언제입니까?"
+      },
+      {
+        "day": 15,
+        "title": "부드러운 대답",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 삶에서 누가 당신의 부드러운 대답이 필요한가요, 혹은 혹독한 말 대신에?"
+      },
+      {
+        "day": 16,
+        "title": "당신의 계획을 맡기세요",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "주님께 완전히 맡겨야 할 당신이 붙잡고 있는 계획은 무엇입니까?"
+      },
+      {
+        "day": 17,
+        "title": "항상 함께하는 친구",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "어려움을 겪고 있는 누군가에게 어떻게 더 신실한 친구가 될 수 있습니까?"
+      },
+      {
+        "day": 18,
+        "title": "강한 망대",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "문제가 생겼을 때, 당신은 먼저 주님의 이름으로 달려가나요, 아니면 다른 것에 달려가나요?"
+      },
+      {
+        "day": 19,
+        "title": "가난한 자에 대한 친절",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "이번 주에 예배의 행위로 도움이 필요한 누군가에게 어떻게 관대함을 보여줄 수 있습니까?"
+      },
+      {
+        "day": 20,
+        "title": "왕의 마음",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "지도자와 나라에 대한 하나님의 주권을 신뢰하는 것이 당신의 기도 방식에 어떻게 변화를 줍니까?"
+      },
+      {
+        "day": 21,
+        "title": "정의와 의",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "일상 생활에서 더 신실하게 정의와 의를 추구할 수 있는 곳은 어디입니까?"
+      },
+      {
+        "day": 22,
+        "title": "좋은 이름",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신은 어떤 종류의 평판을 쌓고 있으며, 그것이 그리스도의 성품을 반영하고 있습니까?"
+      },
+      {
+        "day": 23,
+        "title": "부러워하지 마십시오",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 마음에서 부러움을 유발하는 것은 무엇이며, 감사가 그것을 대체할 수 있는 방법은 무엇입니까?"
+      },
+      {
+        "day": 24,
+        "title": "어려움 속의 힘",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "어려움이 당신의 믿음의 힘을 시험할 때, 당신은 어떻게 반응합니까?"
+      },
+      {
+        "day": 25,
+        "title": "금 사과",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "누군가의 적절한 타이밍의 말이 당신에게 금 사과와 같았던 마지막 순간은 언제입니까?"
+      },
+      {
+        "day": 26,
+        "title": "게으른 자의 거울",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신을 하나님의 최선으로부터 방해하는 게으름이나 미루는 것의 영역은 무엇입니까?"
+      },
+      {
+        "day": 27,
+        "title": "철이 철을 날카롭게 한다",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 삶에서 누가 당신을 날카롭게 하고 있으며, 그 관계에 의도적으로 투자하고 있습니까?"
+      },
+      {
+        "day": 28,
+        "title": "의로운 자는 담대하다",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "올바른 것을 위해 더 많은 담대함이 필요한 곳은 어디입니까?"
+      },
+      {
+        "day": 29,
+        "title": "비전과 순종",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님의 말씀에 뿌리를 둔 비전을 가지는 것이 어떻게 당신이 방황하지 않도록 도와줍니까?"
+      },
+      {
+        "day": 30,
+        "title": "하나님의 모든 말씀",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 30,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "아구르의 기도 — '가난도 부유함도 주지 마소서' — 는 만족에 대해 당신에게 무엇을 가르쳐 줍니까?"
+      }
+    ]
+  },
+  {
+    "id": "romans-heart-of-the-gospel",
+    "name": "로마서: 복음의 심장",
+    "description": "바울의 로마서에 대한 16일간의 심층 탐구 — 지금까지 쓰여진 복음의 가장 완전한 제시입니다.",
+    "totalDays": 16,
+    "category": "Theology",
+    "gradientColors": [
+      "#8B3A3A",
+      "#5C2424"
+    ],
+    "iconName": "flame.fill",
+    "imageKey": "crucifixion",
+    "applicableSeasons": [
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "하나님의 복음",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "복음이 부끄러운 적이 있습니까? 부끄럽지 않게 사는 것은 어떤 모습일까요?"
+      },
+      {
+        "day": 2,
+        "title": "하나님의 공의로운 심판",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님이 공정하게 심판하신다는 것을 아는 것이 다른 사람을 판단하는 방식에 어떤 영향을 미칩니까?"
+      },
+      {
+        "day": 3,
+        "title": "모두가 죄를 지었습니다",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "모두가 죄를 지었다는 현실이 당신과 다른 사람들 사이의 평등을 어떻게 만들어 줍니까?"
+      },
+      {
+        "day": 4,
+        "title": "아브라함과 같은 믿음",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님께서 믿음으로 믿으라고 부르시는 불가능한 약속은 무엇입니까?"
+      },
+      {
+        "day": 5,
+        "title": "하나님과의 평화",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "고난이 인내를 낳는다는 것을 아는 것이 당신의 시련을 바라보는 방식을 어떻게 변화시킵니까?"
+      },
+      {
+        "day": 6,
+        "title": "죄에 대하여 죽고, 그리스도 안에서 살아있음",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "그리스도를 위해 온전히 살기 위해 당신이 죽었다고 여겨야 할 죄는 무엇입니까?"
+      },
+      {
+        "day": 7,
+        "title": "내면의 갈등",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "바울의 죄에 대한 솔직한 갈등이 당신의 싸움에 어떻게 격려가 됩니까?"
+      },
+      {
+        "day": 8,
+        "title": "정죄 없음",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "그리스도께서 이미 제거하신 정죄는 무엇입니까?"
+      },
+      {
+        "day": 9,
+        "title": "하나님의 주권적 선택",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님의 주권과 인간의 책임의 신비에 어떻게 반응합니까?"
+      },
+      {
+        "day": 10,
+        "title": "말씀이 당신 곁에 있습니다",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 삶에서 좋은 소식을 들어야 할 사람은 누구이며, 그것을 나누지 못하게 하는 것은 무엇입니까?"
+      },
+      {
+        "day": 11,
+        "title": "올리브 나무",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신이 '접붙임을 받은' 가지로서의 위치를 이해하는 것이 어떻게 감사함을 깊게 합니까?"
+      },
+      {
+        "day": 12,
+        "title": "살아있는 제사",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "오늘 당신의 몸을 살아있는 제사로 드리는 것은 실제로 어떤 모습입니까?"
+      },
+      {
+        "day": 13,
+        "title": "복종과 사랑",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "'사랑 외에는 아무에게도 빚지지 말라'는 명령이 이번 주 당신의 관계를 어떻게 재형성할 수 있습니까?"
+      },
+      {
+        "day": 14,
+        "title": "형제를 판단하지 말라",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 신념과 다른 신념을 가진 믿는 이에게 더 많은 은혜를 베풀어야 할 곳은 어디입니까?"
+      },
+      {
+        "day": 15,
+        "title": "하나님의 영광을 위한 연합",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님의 영광을 위해 다른 믿는 이들과의 연합을 더 적극적으로 추구할 수 있는 방법은 무엇입니까?"
+      },
+      {
+        "day": 16,
+        "title": "인사와 평화의 하나님",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 믿음을 강화하기 위해 하나님께서 당신 주위에 두신 사람들은 누구이며, 그들에게 감사했습니까?"
+      }
+    ]
+  },
+  {
+    "id": "new-believers-journey",
+    "name": "새로운 믿는 이의 여정",
+    "description": "기독교 신앙을 탐구하기 시작하는 모든 이에게 완벽한 성경의 가장 필수적인 장들을 통한 14일간의 안내 투어입니다.",
+    "totalDays": 14,
+    "category": "Foundations",
+    "gradientColors": [
+      "#3A6B8B",
+      "#1C3D5C"
+    ],
+    "iconName": "sunrise.fill",
+    "imageKey": "samuel_called",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "다시 태어남",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "완전히 새로운 영적 삶으로 다시 시작하는 것은 당신에게 어떤 의미입니까?"
+      },
+      {
+        "day": 2,
+        "title": "목자",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님을 당신을 돌보는 목자로 상상하는 것이 그에 대한 당신의 감정을 어떻게 변화시킵니까?"
+      },
+      {
+        "day": 3,
+        "title": "모두가 죄를 지었습니다",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "모두가 부족하다는 것을 이해하는 것이 하나님의 은혜를 부끄러움 없이 받아들이는 데 어떻게 도움이 됩니까?"
+      },
+      {
+        "day": 4,
+        "title": "은혜의 선물",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신이 스스로 얻을 수 없는 것을 받는 것은 무엇을 의미합니까?"
+      },
+      {
+        "day": 5,
+        "title": "정죄 없음",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "그리스도 안에 정죄가 없다는 진리에 비추어 당신이 놓아야 할 죄책감이나 부끄러움은 무엇입니까?"
+      },
+      {
+        "day": 6,
+        "title": "은혜로 구원받다",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "구원이 보상 아닌 선물이라는 것을 아는 것이 당신이 스스로에게 가하는 압력을 어떻게 변화시킵니까?"
+      },
+      {
+        "day": 7,
+        "title": "길이요 진리요 생명",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "예수님이 길이라는 것은 당신이 잃어버리거나 미래에 대해 불확실할 때 무엇을 의미합니까?"
+      },
+      {
+        "day": 8,
+        "title": "하나님은 사랑이십니다",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "'하나님은 사랑이십니다'라는 말이 하나님에 대한 당신의 이해를 어떻게 재형성합니까?"
+      },
+      {
+        "day": 9,
+        "title": "하나님의 평화",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "지금 당신이 하나님의 이해를 초월하는 평화와 교환할 수 있는 걱정은 무엇입니까?"
+      },
+      {
+        "day": 10,
+        "title": "믿음의 전당",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "이 장에서 당신에게 가장 영감을 주는 믿음의 사람은 누구이며, 그 이유는 무엇입니까?"
+      },
+      {
+        "day": 11,
+        "title": "시험과 지혜",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "현재의 시험을 처벌이 아닌 성장의 기회로 보기 시작하려면 어떻게 해야 합니까?"
+      },
+      {
+        "day": 12,
+        "title": "팔복",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "현재 당신의 삶에서 가장 직접적으로 말하는 팔복은 무엇입니까?"
+      },
+      {
+        "day": 13,
+        "title": "주기도문",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "주기도문이 매일 하나님과 대화하는 방식의 틀이 되려면 어떻게 해야 합니까?"
+      },
+      {
+        "day": 14,
+        "title": "모든 것이 새롭게",
+        "readings": [
+          {
+            "bookID": "REV",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님이 모든 것을 새롭게 하실 것이라는 약속이 미래에 대한 당신의 희망을 어떻게 줍니까?"
+      }
+    ]
+  },
+  {
+    "id": "finding-purpose",
+    "name": "목적 찾기",
+    "description": "신분, 부르심, 그리고 하나님이 당신의 삶에 엮어 놓으신 목적에 대한 성경의 가장 강력한 구절을 탐구하는 10일간의 여정입니다.",
+    "totalDays": 10,
+    "category": "Purpose",
+    "gradientColors": [
+      "#8B7B3A",
+      "#5C5124"
+    ],
+    "iconName": "star.fill",
+    "imageKey": "miraculous_catch",
+    "applicableSeasons": [
+      "workingProfessional",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "당신을 번영하게 할 계획",
+        "readings": [
+          {
+            "bookID": "JER",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님이 당신의 복지와 미래를 위한 계획을 가지고 계시다는 것을 아는 것이 불확실함에 맞서는 방식을 어떻게 변화시킵니까?"
+      },
+      {
+        "day": 2,
+        "title": "경이롭게 만들어진",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신이 두려움과 경이로움으로 만들어졌다는 것을 진정으로 믿는다면 무엇이 바뀔까요?"
+      },
+      {
+        "day": 3,
+        "title": "주님을 신뢰하라",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님을 인정하기보다는 스스로 방향을 정하려고 하는 길은 무엇입니까?"
+      },
+      {
+        "day": 4,
+        "title": "선한 일을 위해 창조됨",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님이 당신을 위해 미리 준비하신 선한 일은 무엇이라고 느끼십니까?"
+      },
+      {
+        "day": 5,
+        "title": "살아있는 제물",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "이번 주에 하나님이 당신에게 주신 독특한 은사를 사용하여 다른 사람들을 어떻게 섬길 수 있습니까?"
+      },
+      {
+        "day": 6,
+        "title": "이름으로 부름받다",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 43,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님이 당신을 이름으로 부르시고 당신을 자신의 것으로 삼으시는 것이 당신의 정체성에 어떤 영향을 미칩니까?"
+      },
+      {
+        "day": 7,
+        "title": "살아가는 것은 그리스도입니다",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "'살아가는 것은 그리스도입니다'라는 말은 당신의 일과 관계에 접근하는 방식에 어떤 의미가 있습니까?"
+      },
+      {
+        "day": 8,
+        "title": "마음을 위에 두십시오",
+        "readings": [
+          {
+            "bookID": "COL",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신을 위의 것들로부터 방해하는 세상의 어떤 것에 집착하고 있습니까?"
+      },
+      {
+        "day": 9,
+        "title": "택한 백성",
+        "readings": [
+          {
+            "bookID": "1PE",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "'왕같은 제사장'이라고 불리는 것이 당신의 목적과 소속감을 어떻게 재정의합니까?"
+      },
+      {
+        "day": 10,
+        "title": "주님 안에서 기뻐하십시오",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "모든 것보다 주님 안에서 기뻐하기로 결심할 때 당신의 욕망은 어떻게 변합니까?"
+      }
+    ]
+  },
+  {
+    "id": "comfort-in-hard-times",
+    "name": "어려운 시기의 위로",
+    "description": "고통의 계절을 위한 성경의 7일 피난처 — 이 구절들은 수천 년 동안 믿는 자들을 가장 어두운 골짜기를 지나게 해주었습니다.",
+    "totalDays": 7,
+    "category": "Comfort",
+    "gradientColors": [
+      "#5C7A8B",
+      "#3A4F5C"
+    ],
+    "iconName": "heart.fill",
+    "imageKey": "job_suffering",
+    "applicableSeasons": [
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "health"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "주님은 마음이 상한 자에게 가까이 계십니다",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님이 특히 마음이 상한 자에게 가까이 계신다는 것을 아는 것이 지금 당신에게 어떻게 위로가 됩니까?"
+      },
+      {
+        "day": 2,
+        "title": "두려워하지 마십시오, 내가 당신과 함께합니다",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 41,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님이 당신에게 그분의 손에 맡기라고 요청하는 두려움은 무엇입니까?"
+      },
+      {
+        "day": 3,
+        "title": "모든 위로의 하나님",
+        "readings": [
+          {
+            "bookID": "2CO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 고통이 어떻게 다른 누군가를 위로하는 데 도움이 될 수 있습니까?"
+      },
+      {
+        "day": 4,
+        "title": "아무도 우리를 갈라놓을 수 없습니다",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "어떤 상황이 당신을 하나님의 사랑으로부터 분리되었다고 느끼게 했으며, 이 장이 그것에 대해 어떻게 말하고 있습니까?"
+      },
+      {
+        "day": 5,
+        "title": "가만히 있어라, 내가 하나님인 줄 알라",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님이 '가만히 있어라'고 말씀하시는 것을 듣기 위해 당신의 삶에서 어떤 소음을 잠재워야 합니까?"
+      },
+      {
+        "day": 6,
+        "title": "내게 오고 쉬어라",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "예수님이 오늘 당신에게 내려놓으라고 초대하는 무거운 짐은 무엇입니까?"
+      },
+      {
+        "day": 7,
+        "title": "모든 눈물을 닦아주실 것입니다",
+        "readings": [
+          {
+            "bookID": "REV",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님이 당신의 눈에서 모든 눈물을 닦아주실 것이라는 약속이 오늘 당신에게 어떻게 힘을 줍니까?"
+      }
+    ]
+  },
+  {
+    "id": "sermon-on-the-mount",
+    "name": "산상수훈",
+    "description": "예수님의 가장 유명한 설교에 대한 7일간의 밀접한 연구 — 세상의 가치를 뒤집어 놓은 급진적인 가르침입니다.",
+    "totalDays": 7,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A8B5C",
+      "#4F5C3A"
+    ],
+    "iconName": "text.book.closed.fill",
+    "imageKey": "sermon_mount",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "복과 지구의 소금",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 26
+          }
+        ],
+        "reflection": "어떤 복이 당신에게 가장 도전이 되며, 오늘 그것을 어떻게 살아내는 것이 될까요?"
+      },
+      {
+        "day": 2,
+        "title": "더 높은 의",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 27,
+            "verseEnd": 48
+          }
+        ],
+        "reflection": "예수님이 '너희 아버지가 완전하신 것처럼 너희도 완전하라'고 부르시는 것이 어떻게 당신을 규칙 준수에서 마음의 변화로 이끌어 줍니까?"
+      },
+      {
+        "day": 3,
+        "title": "비밀 중에 주는 것, 기도하는 것, 금식하는 것",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "당신의 영적 실천을 다른 사람에게 보이는 것에서 하나님만 보이는 것으로 어떻게 전환해야 합니까?"
+      },
+      {
+        "day": 4,
+        "title": "하늘의 보물",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 19,
+            "verseEnd": 34
+          }
+        ],
+        "reflection": "예수님이 당신에게 완전히 신뢰하라고 요청하는 것에 대해 당신은 무엇을 걱정하고 있습니까?"
+      },
+      {
+        "day": 5,
+        "title": "판단하지 마십시오",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": 1,
+            "verseEnd": 14
+          }
+        ],
+        "reflection": "다른 사람의 티끌을 지적하기 전에 당신의 눈 속에 있는 어떤 들보를 다루어야 합니까?"
+      },
+      {
+        "day": 6,
+        "title": "반석 위에 세운 집",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": 15,
+            "verseEnd": 29
+          }
+        ],
+        "reflection": "당신의 삶은 예수님의 말씀이라는 반석 위에 세워져 있습니까, 아니면 세상의 지혜라는 모래 위에 세워져 있습니까?"
+      },
+      {
+        "day": 7,
+        "title": "전체 설교",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "산상수훈 전체를 읽은 후, 당신이 가장 실천하고 싶은 가르침은 무엇입니까?"
+      }
+    ]
+  },
+  {
+    "id": "psalms-in-30-days",
+    "name": "30일 동안의 시편",
+    "description": "30일 동안 150편의 시편을 모두 읽어보세요 — 하루에 다섯 편의 시편을 통해 성경의 가장 풍성한 예배, 기도, 찬양의 책에 몰입하세요.",
+    "totalDays": 30,
+    "category": "Worship",
+    "gradientColors": [
+      "#3A5C8B",
+      "#1C2D5C"
+    ],
+    "iconName": "music.note",
+    "imageKey": "jacob_ladder",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "시편 1–5: 복된 자와 부서진 자",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "주님의 법을 낮과 밤으로 즐거워하는 것이 당신에게는 어떤 의미인가요?"
+      },
+      {
+        "day": 2,
+        "title": "시편 6–10: 하나님께 부르짖기",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "시편 기자의 하나님께 부르짖는 솔직함이 당신이 자신의 감정을 그분께 가져올 수 있도록 어떻게 허락하나요?"
+      },
+      {
+        "day": 3,
+        "title": "시편 11–15: 의인과 악인",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "시편 15편이 하나님의 임재에 거할 수 있는 사람의 유형에 대해 무엇을 드러내고 있나요?"
+      },
+      {
+        "day": 4,
+        "title": "시편 16–20: 피난처와 구원",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "시편 19편에서 하늘이 하나님의 영광을 선포하는 것이 당신의 마음에서 예배를 어떻게 일으키나요?"
+      },
+      {
+        "day": 5,
+        "title": "시편 21–25: 목자와 찾는 자",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "시편 22편의 버림받음의 외침 — 예수님이 십자가에서 외친 — 이 당신의 그분의 희생에 대한 이해를 어떻게 깊게 하나요?"
+      },
+      {
+        "day": 6,
+        "title": "시편 26–30: 어둠 속의 빛",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 30,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "눈물이 밤새 지속될 수 있지만 아침에 기쁨이 온다는 것은 당신에게 어떤 의미인가요?"
+      },
+      {
+        "day": 7,
+        "title": "시편 31–35: 신뢰와 구원",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 31,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 33,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 35,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "시편 32편의 용서의 축복이 당신이 숨기고 있던 것을 고백하도록 어떻게 격려하나요?"
+      },
+      {
+        "day": 8,
+        "title": "시편 36–40: 변함없는 사랑",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 36,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 38,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 39,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 40,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "시편 37편의 '주님 안에서 기뻐하라'는 당신의 일상에서 어떻게 나타나나요?"
+      },
+      {
+        "day": 9,
+        "title": "시편 41–45: 하나님을 향한 갈증",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 41,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 42,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 43,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 44,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 45,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 영혼이 사슴이 물을 찾듯 하나님을 갈망했던 때는 언제인가요?"
+      },
+      {
+        "day": 10,
+        "title": "시편 46–50: 하나님은 우리의 요새",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 47,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 48,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 49,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 50,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "시편 46편의 '가만히 있어라'는 현재 당신의 삶의 혼란에 어떻게 말씀하고 있나요?"
+      },
+      {
+        "day": 11,
+        "title": "시편 51–55: 부서진 영혼",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 51,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 52,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 53,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 54,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 55,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "시편 51편에서 다윗이 깨끗한 마음을 위해 기도하는 것이 당신이 실패를 가지고 하나님께 나아갈 용기를 어떻게 주나요?"
+      },
+      {
+        "day": 12,
+        "title": "시편 56–60: 내가 두려울 때",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 56,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 57,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 58,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 59,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 60,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "시편 56편의 '내가 두려울 때, 나는 주님을 신뢰하리이다'는 현재 당신의 상황에서 어떻게 나타나나요?"
+      },
+      {
+        "day": 13,
+        "title": "시편 61–65: 오직 하나님 안에서의 쉼",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 61,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 62,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 63,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 64,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 65,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신은 어디에서 진정한 쉼을 찾고 있나요 — 오직 하나님 안에서, 아니면 다른 곳에서 평화를 찾고 있나요?"
+      },
+      {
+        "day": 14,
+        "title": "시편 66–70: 기쁨으로 외치라",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 66,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 67,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 68,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 69,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 70,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 삶에서 하나님이 행하신 놀라운 일들은 무엇이며, 그것을 다른 이들에게 전하고 싶나요?"
+      },
+      {
+        "day": 15,
+        "title": "시편 71–75: 영원한 희망",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 71,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 72,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 73,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 74,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 75,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "시편 73편에서 시편 기자가 질투와 씨름하는 것이 당신의 경험을 어떻게 반영하나요?"
+      },
+      {
+        "day": 16,
+        "title": "시편 76–80: 그의 놀라운 일을 기억하라",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 76,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 77,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 78,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 79,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 80,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "오늘 당신의 믿음을 강화하기 위해 기억하고 되새길 수 있는 하나님의 과거의 행위는 무엇인가요?"
+      },
+      {
+        "day": 17,
+        "title": "시편 81–85: 부흥과 회복",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 81,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 82,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 83,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 84,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 85,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "시편 84편에서 하나님의 뜰에 대한 갈망이 당신의 예배에 대한 열망과 어떻게 공명하나요?"
+      },
+      {
+        "day": 18,
+        "title": "시편 86–90: 영원에서 영원으로",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 86,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 87,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 88,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 89,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 90,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "시편 90편의 인생의 덧없음에 대한 관점이 당신이 시간을 어떻게 소중히 여기는 방식에 어떤 변화를 주나요?"
+      },
+      {
+        "day": 19,
+        "title": "시편 91–95: 피난처와 노래",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 91,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 92,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 93,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 94,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 95,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "가장 높으신 분의 피난처에 거하는 것이 무엇을 의미하며, 오늘 그것을 어떻게 실천할 수 있나요?"
+      },
+      {
+        "day": 20,
+        "title": "시편 96–100: 주님이 다스리신다",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 96,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 97,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 98,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 99,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 100,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "시편 100에서 '기쁜 소리를 내라'는 부름이 당신이 더 큰 열정으로 예배하도록 어떻게 도전합니까?"
+      },
+      {
+        "day": 21,
+        "title": "시편 101–105: 내 영혼아, 주님을 찬양하라",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 101,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 102,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 103,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 104,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 105,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "시편 103에 나열된 주님의 혜택 중 어떤 것을 감사하지 않았습니까?"
+      },
+      {
+        "day": 22,
+        "title": "시편 106–110: 하나님의 신실하심을 기억하라",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 106,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 107,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 108,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 109,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 110,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신은 하나님의 변함없는 사랑이 당신을 방황에서 구해주신 경험을 어떻게 했습니까?"
+      },
+      {
+        "day": 23,
+        "title": "시편 111–115: 주님을 찬양하라",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 111,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 112,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 113,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 114,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 115,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "시편 115에서 살아계신 하나님과 무생물 우상 사이의 대조가 당신의 신뢰를 어디에 두도록 도전합니까?"
+      },
+      {
+        "day": 24,
+        "title": "시편 116–120: 올라가는 노래가 시작된다",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 116,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 117,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 118,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 119,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 120,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "가장 긴 시편인 시편 119의 어떤 구절이 하나님의 말씀에 대한 당신의 사랑을 가장 강력하게 말합니까?"
+      },
+      {
+        "day": 25,
+        "title": "시편 121–125: 주님께 올라가다",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 121,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 122,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 123,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 124,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 125,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 도움은 어디에서 오며, 시편 121이 하나님의 보호에 대한 당신의 확신을 어떻게 강화합니까?"
+      },
+      {
+        "day": 26,
+        "title": "시편 126–130: 눈물로 씨를 뿌리다",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 126,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 127,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 128,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 129,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 130,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "지금 당신은 어떤 씨앗을 눈물로 뿌리고 있으며, 기쁨의 외침으로 거두게 될 것이라고 믿고 있습니까?"
+      },
+      {
+        "day": 27,
+        "title": "시편 131–135: 겸손한 신뢰",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 131,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 132,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 133,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 134,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 135,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "시편 133의 연합의 이미지가 다른 믿는 자들과 더 깊은 교제를 추구하도록 어떻게 영감을 줍니까?"
+      },
+      {
+        "day": 28,
+        "title": "시편 136–140: 그의 사랑은 영원하다",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 136,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 137,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 138,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 140,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "시편 136의 '그의 사랑은 영원하다'라는 후렴이 모든 것이 불확실할 때 당신을 어떻게 고정시킵니까?"
+      },
+      {
+        "day": 29,
+        "title": "시편 141–145: 저녁 기도",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 141,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 142,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 143,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 144,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 145,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님이 위대하시고 찬양받기에 합당하다는 다윗의 선언이 오늘 저녁 기도를 어떻게 형성합니까?"
+      },
+      {
+        "day": 30,
+        "title": "시편 146–150: 모든 것이 주님을 찬양하라",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 146,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 147,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 148,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 149,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 150,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "시편이 '숨 쉬는 모든 것이 주님을 찬양하라'로 끝날 때, 당신은 어떻게 찬양을 매일의 습관으로 만들 것입니까?"
+      }
+    ]
+  },
+  {
+    "id": "life-of-david",
+    "name": "다윗의 삶",
+    "description": "목자 왕과 함께하는 14일의 여정 — 기름 부음에서 거인 처치, 유배에서 왕좌까지 — 각 계절에서 태어난 시편과 함께.",
+    "totalDays": 14,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6B2D2D",
+      "#3A1818"
+    ],
+    "iconName": "shield.lefthalf.filled",
+    "imageKey": "david_goliath",
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "무명의 기름 부음",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "세상이 알아차리기 전에 조용하고 보이지 않는 곳에서 하나님이 당신을 어떻게 만나고 있습니까?"
+      },
+      {
+        "day": 2,
+        "title": "거인과 맞서다",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "오늘 당신이 맞서고 있는 거인은 무엇이며, 그 거인에게 어떤 이름으로 맞설 것입니까?"
+      },
+      {
+        "day": 3,
+        "title": "요나단의 충성",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "누가 당신에게 요나단이었으며, 당신은 다른 사람에게 어떻게 그런 친구가 될 수 있습니까?"
+      },
+      {
+        "day": 4,
+        "title": "생명을 위해 도망치다",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "동굴에서 다윗의 시편이 구원이 오기 전에 하나님을 찬양하도록 당신에게 어떻게 가르칩니까?"
+      },
+      {
+        "day": 5,
+        "title": "동굴에서의 자제",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신을 잘못한 사람에게 반격할 수 있을 때 어디에서 자제를 연습해야 합니까?"
+      },
+      {
+        "day": 6,
+        "title": "아비가일의 지혜",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "최근에 당신이 저항했던 누군가의 지혜로운 조언이 어리석은 결정을 피하는 데 어떻게 도움이 되었습니까?"
+      },
+      {
+        "day": 7,
+        "title": "사울의 몰락",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 31,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "2SA",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "다윗이 적 사울을 위해 슬퍼하는 모습이 당신이 힘들어하는 사람들을 어떻게 바라보도록 바꿉니까?"
+      },
+      {
+        "day": 8,
+        "title": "왕이 춤춘다",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "마지막으로 누가 당신이 다른 사람의 생각에 대해 걱정하지 않고 완전히 헌신하여 예배한 적이 있습니까?"
+      },
+      {
+        "day": 9,
+        "title": "영원한 언약",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님께서 다윗을 통해 주신 끝없는 왕좌의 약속이 오늘날 그리스도 안에서 당신의 희망을 어떻게 깊게 하나요?"
+      },
+      {
+        "day": 10,
+        "title": "목자 왕의 타락",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "2SA",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "작은 타협이 해결되지 않으면 큰 죄로 성장할 수 있는 가장 취약한 부분은 어디인가요?"
+      },
+      {
+        "day": 11,
+        "title": "부서진 기도",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 51,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 삶에서 오늘 밤 '내게 깨끗한 마음을 창조하소서'라는 기도가 필요한 것은 무엇인가요?"
+      },
+      {
+        "day": 12,
+        "title": "내 영혼아, 주님을 찬양하라",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 103,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "여기 나열된 주님의 은혜 중 오늘 가장 기억해야 할 것은 무엇인가요?"
+      },
+      {
+        "day": 13,
+        "title": "두려움 속에서 알려진",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님께서 당신의 마음의 모든 숨겨진 구석을 보신다는 것을 알 때 어떤 위안 — 또는 도전 — 을 느끼나요?"
+      },
+      {
+        "day": 14,
+        "title": "목자는 남아있다",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "다윗의 모든 계절을 통해 목자는 그를 떠나지 않았습니다 — 당신의 이야기에서 그 같은 신실함을 어떻게 경험했나요?"
+      }
+    ]
+  },
+  {
+    "id": "christmas-story",
+    "name": "크리스마스 이야기",
+    "description": "고대 예언에서 구유까지 — 7일간의 성탄절 여정을 통해 하나님이 가까이 오시는 경이로움을 재발견하세요.",
+    "totalDays": 7,
+    "category": "Advent",
+    "gradientColors": [
+      "#3C5A7A",
+      "#1F2F45"
+    ],
+    "iconName": "star.fill",
+    "imageKey": "nativity",
+    "applicableSeasons": [
+      "parenthood",
+      "newlyMarried",
+      "growing",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "grief",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "예고된 아기",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "오는 아기를 위한 이사야의 이름 중 — 놀라운 상담자, 전능하신 하나님, 평화의 왕 — 지금 당신에게 가장 필요한 것은 무엇인가요?"
+      },
+      {
+        "day": 2,
+        "title": "작은 베들레헴에서",
+        "readings": [
+          {
+            "bookID": "MIC",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님께서 작고 간과된 베들레헴 마을을 선택하신 것이 당신의 삶의 숨겨진 장소에 어떤 의미를 주나요?"
+      },
+      {
+        "day": 3,
+        "title": "마리아의 예",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "불확실한 계절 속에서 하나님께서 당신에게 '당신의 말씀대로 이루어지이다'라고 요청하시는 곳은 어디인가요?"
+      },
+      {
+        "day": 4,
+        "title": "요셉의 조용한 순종",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "요셉의 조용하고 값비싼 신실함이 다른 사람들에게 보이는 것에 대한 당신의 생각에 어떤 도전을 주나요?"
+      },
+      {
+        "day": 5,
+        "title": "육신이 된 말씀",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "영원한 말씀이 당신의 이웃으로 이사 온다는 것은 당신에게 어떤 의미인가요?"
+      },
+      {
+        "day": 6,
+        "title": "목자들과 구유",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "왜 천사들의 '큰 기쁨의 좋은 소식'이 먼저 목자들에게 전해졌다고 생각하나요?"
+      },
+      {
+        "day": 7,
+        "title": "먼 곳에서 온 지혜로운 자들",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "오늘 예수님께 당신의 최선을 — 금, 유향, 몰약 — 드리는 것은 어떤 모습일까요?"
+      }
+    ]
+  },
+  {
+    "id": "walking-with-elijah",
+    "name": "엘리야와 함께 걷기",
+    "description": "왕국에 맞서 홀로 서 있던 선지자와 그를 만나주신 하나님에 대한 10일간의 연구 — 까마귀, 동굴, 그리고 고요한 작은 목소리 속에서.",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6E4A2C",
+      "#3A2814"
+    ],
+    "iconName": "flame.fill",
+    "imageKey": "elijah_ravens",
+    "applicableSeasons": [
+      "hardSeason",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose",
+      "anxiety"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "아합 앞에서",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 6
+          }
+        ],
+        "reflection": "하나님께서 당신에게 어려운 진실을 말하라고 요청하시는 곳은 어디인가요? 그리고 당신은 순종한 후 그분이 공급해 주실 것이라고 믿고 있나요?"
+      },
+      {
+        "day": 2,
+        "title": "사르밧의 과부",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 17,
+            "verseStart": 7,
+            "verseEnd": 24
+          }
+        ],
+        "reflection": "이번 주 하나님께서 믿음으로 드리라고 요청하시는 작은 '마지막 한 줌의 밀가루'는 무엇인가요?"
+      },
+      {
+        "day": 3,
+        "title": "갈멜에서의 대결",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 삶에서 재건해야 할 제단은 무엇인가요 — 소홀히 여겨진 예배의 장소?"
+      },
+      {
+        "day": 4,
+        "title": "광야로 도망치다",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 19,
+            "verseStart": 1,
+            "verseEnd": 8
+          }
+        ],
+        "reflection": "당신의 탈진 중에 하나님께서 주신 부드러운 공급 — 식사, 낮잠, 친구 — 를 경험한 적이 있나요?"
+      },
+      {
+        "day": 5,
+        "title": "고요한 작은 목소리",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 19,
+            "verseStart": 9,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "당신이 하나님의 속삭임을 듣기 위해 침묵해야 할 소음은 무엇인가요? 지진을 기다리는 대신에요."
+      },
+      {
+        "day": 6,
+        "title": "나봇의 포도원",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "이 이야기가 당신이 다른 누구도 마주할 의지가 없는 불의를 바라보는 방식을 어떻게 바꾸게 합니까?"
+      },
+      {
+        "day": 7,
+        "title": "하늘에서 내리는 불",
+        "readings": [
+          {
+            "bookID": "2KI",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 두려움을 주님께 가져오기보다는 다른 '에크론의 신들'에게 의지하고 싶은 유혹이 드는 곳은 어디입니까?"
+      },
+      {
+        "day": 8,
+        "title": "망토가 넘어간다",
+        "readings": [
+          {
+            "bookID": "2KI",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님이 당신에게 주워야 할 망토는 누구의 것입니까 — 아니면 당신이 넘겨줄 준비가 된 망토는 누구입니까?"
+      },
+      {
+        "day": 9,
+        "title": "그리스도와 함께 산에 있는 엘리야",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "가장 외로움을 느꼈던 같은 선지자가 언젠가는 영광 중에 예수님과 함께 서 있었다는 것은 무엇을 의미합니까?"
+      },
+      {
+        "day": 10,
+        "title": "우리와 같은 사람",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": 13,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "야고보는 엘리야가 '우리와 같은 본성을 가진 사람'이라고 말합니다 — 이것이 이번 주 당신의 기도 방식을 어떻게 바꾸게 합니까?"
+      }
+    ]
+  },
+  {
+    "id": "beatitudes-deep-dive",
+    "name": "팔복: 여덟 개의 초상",
+    "description": "예수님의 왕국 시민들에 대한 8일간의 초상 연구 — 하나의 복이 한 번에, 각 복은 그림을 채우는 성경 구절과 쌍을 이룹니다.",
+    "totalDays": 8,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A6B3A",
+      "#4F4524"
+    ],
+    "iconName": "sparkles",
+    "imageKey": "beatitudes",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "영혼이 가난한 자",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 3
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 57,
+            "verseStart": 14,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "오늘 하나님께 오면서 당신의 완전한 의존을 인정하는 것은 어떤 모습일까요?"
+      },
+      {
+        "day": 2,
+        "title": "슬퍼하는 자",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 4,
+            "verseEnd": 4
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 42,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "예수님이 실제로 함께 앉기를 초대하는 어떤 상실이나 슬픔을 당신이 회피하고 있습니까?"
+      },
+      {
+        "day": 3,
+        "title": "온유한 자",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 5,
+            "verseEnd": 5
+          },
+          {
+            "bookID": "NUM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "어디에서 당신은 온유함과 연약함을 혼동하며, 모세의 본보기가 그것을 어떻게 바꾸게 합니까?"
+      },
+      {
+        "day": 4,
+        "title": "의에 주리고 목마른 자",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 6,
+            "verseEnd": 6
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 63,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "이번 주에 하나님의 의에 대한 당신의 갈망을 압도하고 있는 어떤 작은 갈망들이 있습니까?"
+      },
+      {
+        "day": 5,
+        "title": "긍휼히 여기는 자",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 7,
+            "verseEnd": 7
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "오늘 하나님이 당신의 길에 두신 사람은 누구이며, 당신이 제사장이 아닌 사마리아인이 되어야 하는 이유는 무엇입니까?"
+      },
+      {
+        "day": 6,
+        "title": "마음이 깨끗한 자",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 8,
+            "verseEnd": 8
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 마음이 헌신에 있어 단일할 수 있도록 어떤 숨겨진 동기를 드러내야 합니까?"
+      },
+      {
+        "day": 7,
+        "title": "화평케 하는 자",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 9,
+            "verseEnd": 9
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": 9,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "하나님이 당신에게 단순히 평화를 유지하는 것이 아니라 평화를 만드는 더 어려운 일을 하라고 부르고 있는 곳은 어디입니까?"
+      },
+      {
+        "day": 8,
+        "title": "박해받는 자",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 10,
+            "verseEnd": 16
+          },
+          {
+            "bookID": "1PE",
+            "chapter": 4,
+            "verseStart": 12,
+            "verseEnd": 19
+          }
+        ],
+        "reflection": "예수님이 약속하신 기쁨이 당신이 신실함이 당신에게 어떤 대가를 요구할 때 다음에 어떻게 반응하는지를 어떻게 바꿀 수 있습니까?"
+      }
+    ]
+  },
+  {
+    "id": "holy-week",
+    "name": "거룩한 주간: 부활절로 가는 여정",
+    "description": "거룩한 주간을 하루하루 걸어가세요 — 승리의 입성에서 십자가를 지나 빈 무덤까지 — 그리고 역사상 가장 중요한 한 주를 살아보세요.",
+    "totalDays": 8,
+    "category": "Easter",
+    "gradientColors": [
+      "#5A2E2E",
+      "#2F1515"
+    ],
+    "iconName": "cross.fill",
+    "imageKey": "triumphal_entry",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "grief",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "종려주일",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 21,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "예수님이 예상치 못한 방식으로 오실 때 그분을 왕으로 맞이하는 것은 무엇을 의미합니까?"
+      },
+      {
+        "day": 2,
+        "title": "성전 정화",
+        "readings": [
+          {
+            "bookID": "MRK",
+            "chapter": 11,
+            "verseStart": 12,
+            "verseEnd": 25
+          }
+        ],
+        "reflection": "예수님이 그분의 존재가 올바르게 환영받을 수 있도록 뒤엎기를 요청하는 당신의 마음 속 '탁자'는 무엇입니까?"
+      },
+      {
+        "day": 3,
+        "title": "성전에서 가르치심",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 22,
+            "verseStart": 34,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "당신이 가진 모든 것으로 하나님을 사랑하고 이웃을 자신처럼 사랑하는 것이 당신의 한 주를 어떻게 재정렬하게 할까요?"
+      },
+      {
+        "day": 4,
+        "title": "베다니의 기름부음",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 12,
+            "verseStart": 1,
+            "verseEnd": 11
+          }
+        ],
+        "reflection": "세상이 낭비라고 부르더라도 오늘 예수님께 어떤 사치스러운 사랑의 행동을 드릴 수 있습니까?"
+      },
+      {
+        "day": 5,
+        "title": "마지막 만찬",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "이번 주에 예수님이 당신에게 씻어주기를 요청하는 발은 누구의 것입니까, 그리고 어떤 자존심이 그것을 어렵게 만들고 있습니까?"
+      },
+      {
+        "day": 6,
+        "title": "겟세마네",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 26,
+            "verseStart": 36,
+            "verseEnd": 56
+          }
+        ],
+        "reflection": "당신의 삶에서 '내 뜻이 아니라, 주님의 뜻이 이루어지기를' 기도해야 할 곳은 어디이며, 그것을 진정으로 의미합니까?"
+      },
+      {
+        "day": 7,
+        "title": "성 금요일",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 삶에서 예수님의 말씀인 '다 이루었다'를 들어야 할 미완의 일은 무엇입니까?"
+      },
+      {
+        "day": 8,
+        "title": "부활절 아침",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "오늘 죽은 희망의 무덤에서 당신을 만나야 할 부활의 능력이 필요한 곳은 어디입니까?"
+      }
+    ]
+  },
+  {
+    "id": "genesis-beginnings",
+    "name": "창세기: 태초에",
+    "description": "성경의 첫 번째 책을 통해 12일간의 여정 — 창조, 타락, 홍수, 족장들 — 시작부터 하나님의 신실한 추적을 따라갑니다.",
+    "totalDays": 12,
+    "category": "Foundations",
+    "gradientColors": [
+      "#3A5A4A",
+      "#1C2D24"
+    ],
+    "iconName": "globe.americas.fill",
+    "imageKey": "noah_ark",
+    "applicableSeasons": [
+      "growing",
+      "startingOver",
+      "newlyMarried"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "태초에",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 삶에서 '형체가 없고 비어 있는' 영역에 하나님께서 지금 질서와 빛을 말씀하고 계신 것은 무엇입니까?"
+      },
+      {
+        "day": 2,
+        "title": "동산과 형상",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님께서 당신을 자신의 손으로 형성하시고 자신의 생명을 불어넣으셨다는 것이 당신에게 무엇을 의미합니까?"
+      },
+      {
+        "day": 3,
+        "title": "타락",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "뱀의 거짓말인 '하나님이 정말 말씀하셨습니까?'를 당신은 계속 듣고 있으며, 그것에 어떻게 진리로 대답할 수 있습니까?"
+      },
+      {
+        "day": 4,
+        "title": "노아와 홍수",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "GEN",
+            "chapter": 9,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "여전히 홍수처럼 느껴지는 계절 한가운데에서 하나님의 무지개 약속을 신뢰해야 할 곳은 어디입니까?"
+      },
+      {
+        "day": 5,
+        "title": "아브람의 부르심",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님께서 당신에게 새로운 것을 따르기 위해 떠나라고 하시는 '고향과 친척'은 무엇입니까?"
+      },
+      {
+        "day": 6,
+        "title": "별을 세다",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님께서 주신 불가능한 약속은 무엇이며, 그것을 믿어야 할 필요가 있습니까, 심지어 그것이 웃길 것 같은 밤에도?"
+      },
+      {
+        "day": 7,
+        "title": "이삭의 제물",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신에게 '이삭'이 된 것은 무엇입니까 — 하나님 자신과 경쟁할 정도로 사랑하는 선물은 무엇입니까?"
+      },
+      {
+        "day": 8,
+        "title": "야곱의 사다리",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님께서 최근에 예상치 못한 곳에서 나타나신 곳은 어디입니까, 분명히 당신이 그곳에 계신 줄 몰랐던 곳에서?"
+      },
+      {
+        "day": 9,
+        "title": "밤새 씨름하다",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "지금 하나님께 무엇을 씨름하고 있으며, 그분의 축복을 받기 위해 절뚝거리며 걸을 의향이 있습니까?"
+      },
+      {
+        "day": 10,
+        "title": "요셉의 꿈",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님께서 훨씬 더 큰 이야기의 첫 장으로 사용하고 계실지도 모르는 '구덩이'는 지금 어디입니까?"
+      },
+      {
+        "day": 11,
+        "title": "이집트에서 재회하다",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 45,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 삶에서 요셉이 본을 보인 용서가 필요한 관계는 무엇입니까: '당신은 악을 의도했지만, 하나님은 그것을 선으로 의도하셨습니다'?"
+      },
+      {
+        "day": 12,
+        "title": "하나님은 선으로 의도하셨습니다",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 50,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신이 겪었던 가장 힘든 일을 돌아보며, 이제 어디에서 하나님의 손이 그것을 선으로 엮고 있음을 보십니까?"
+      }
+    ]
+  },
+  {
+    "id": "daniel-exile",
+    "name": "다니엘: 포로 중의 신실함",
+    "description": "다니엘서를 통한 12일간의 여정 — 이방 법정에서 굳건히 서고, 불법적으로 기도하며, 역사 전체를 하나님께 맡기는 것입니다.",
+    "totalDays": 12,
+    "category": "Character Study",
+    "gradientColors": [
+      "#5A3A2A",
+      "#2E1F16"
+    ],
+    "iconName": "shield.fill",
+    "imageKey": "daniel_lions",
+    "applicableSeasons": [
+      "workingProfessional",
+      "hardSeason",
+      "student",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "더럽히지 않기로 결심하다",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님께서 당신에게 더 이상 받아들이지 않기로 '결심'하라고 초대하는 작은 일상적 타협은 무엇입니까?"
+      },
+      {
+        "day": 2,
+        "title": "왕의 꿈",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 시대의 제국들 위에 주권을 가지신 하나님께서 깊고 숨겨진 것을 드러내시는 것을 신뢰해야 할 곳은 어디입니까?"
+      },
+      {
+        "day": 3,
+        "title": "불타는 furnace",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "'그러나 그렇지 않더라도'라는 믿음은 이번 주 당신에게 어떤 모습일까요 — 구원의 보장이 없더라도 순종하는 신뢰는 어떤 모습일까요?"
+      },
+      {
+        "day": 4,
+        "title": "겸손한 왕",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "어디에서 교만이 당신이 가진 것을 세운 것이라고 속삭이고 있으며, 하나님은 당신에게 눈을 들어보라고 부르고 있습니까?"
+      },
+      {
+        "day": 5,
+        "title": "벽에 쓰인 글",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 삶에서 하나님께 '측정'당한 것은 무엇이며, 어떤 회개가 초대되고 있습니까?"
+      },
+      {
+        "day": 6,
+        "title": "사자 굴",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "사회적 또는 직업적으로 무언가를 잃더라도 지켜야 할 기도의 열린 창문은 무엇입니까?"
+      },
+      {
+        "day": 7,
+        "title": "고대의 날",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "고대의 날과 인자의 비전이 어떻게 당신에게 헤드라인을 더 넓게 바라보게 합니까?"
+      },
+      {
+        "day": 8,
+        "title": "수양과 염소",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "미래가 혼란스러울 때, 당신을 끝을 처음부터 보시는 하나님께 고정시켜주는 것은 무엇입니까?"
+      },
+      {
+        "day": 9,
+        "title": "고백의 기도",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 공동체나 가족이 다니엘처럼 고백의 기도로 간격을 메워주기를 필요로 하는 곳은 어디입니까?"
+      },
+      {
+        "day": 10,
+        "title": "린넨을 입은 사람",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "보이지 않는 영적 전투의 현실이 아무것도 움직이지 않을 때 당신의 기도를 어떻게 인내하게 만듭니까?"
+      },
+      {
+        "day": 11,
+        "title": "왕들과 왕국들",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "어떤 지상의 왕국에 너무 많은 무게를 두었으며, 어떻게 당신의 희망을 다시 고정할 수 있습니까?"
+      },
+      {
+        "day": 12,
+        "title": "지혜로운 자들은 빛날 것이다",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "‘지혜로운 자들은 하늘의 빛과 같이 빛날 것이다’라는 약속이 오늘 당신의 신실함을 어떻게 북돋아 줍니까?"
+      }
+    ]
+  },
+  {
+    "id": "lords-prayer-deep-dive",
+    "name": "주기도문: 기도를 가르쳐 주옵소서",
+    "description": "예수님이 가르쳐 주신 기도에 대한 7일간의 묵상 — 하루에 한 가지 청원 — 모든 단어를 의미 있게 하기 위해 속도를 늦추는 시간입니다.",
+    "totalDays": 7,
+    "category": "Prayer",
+    "gradientColors": [
+      "#4A5A7A",
+      "#242D3D"
+    ],
+    "iconName": "hands.sparkles.fill",
+    "imageKey": "lords_prayer",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "parenthood",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "하늘에 계신 우리 아버지",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 5,
+            "verseEnd": 13
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": 12,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "당신이 진정으로 아버지께, 먼 신이 아닌 아버지께 다가가고 있다고 믿는다면 오늘 당신의 기도는 어떻게 달라질까요?"
+      },
+      {
+        "day": 2,
+        "title": "거룩한 이름이 되소서",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 99,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 6,
+            "verseStart": 1,
+            "verseEnd": 8
+          }
+        ],
+        "reflection": "오늘 당신의 생각, 입, 선택에서 하나님의 이름을 거룩하게 대하는 것은 어떤 모습일까요?"
+      },
+      {
+        "day": 3,
+        "title": "당신의 왕국이 오소서",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 13,
+            "verseStart": 31,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "이번 주에 하나님의 왕국이 당신의 세상에 들어오는 것을 보고 싶은 곳은 어디이며, 어떻게 기대하며 기도할 것입니까?"
+      },
+      {
+        "day": 4,
+        "title": "당신의 뜻이 이루어지이다",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 26,
+            "verseStart": 36,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "어떤 기도가 당신의 정직한 '내 뜻이 아니라, 당신의 뜻이 이루어지이다'를 기다리고 있습니까? 그것은 어떤 대가를 치르게 하며, 무엇을 자유롭게 할까요?"
+      },
+      {
+        "day": 5,
+        "title": "오늘 우리에게 일용할 양식을 주옵소서",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 10,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "일용할 양식 기도가 오늘 내일의 은혜를 쌓으려는 불안을 어떻게 치유합니까?"
+      },
+      {
+        "day": 6,
+        "title": "우리가 용서받은 것 같이 우리도 용서하소서",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 18,
+            "verseStart": 21,
+            "verseEnd": 35
+          }
+        ],
+        "reflection": "당신의 용서를 위한 기도가 닫힌 마음에 튕겨 나가지 않도록 누구의 빚을 풀어줘야 합니까?"
+      },
+      {
+        "day": 7,
+        "title": "악에서 우리를 구하소서",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 6,
+            "verseStart": 10,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "오늘 당신이 하나님의 갑옷을 입고 악한 자로부터 구원을 위해 구체적으로 기도해야 할 곳은 어디입니까?"
+      }
+    ]
+  },
+  {
+    "id": "parables-kingdom",
+    "name": "왕국의 비유들",
+    "description": "예수님의 가장 날카로운 비유들을 10일 동안 걸어가는 시간 — 마음을 변화시키고 하나님의 뒤바뀐 왕국을 드러내는 짧은 이야기들입니다.",
+    "totalDays": 10,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A4A2A",
+      "#3E2516"
+    ],
+    "iconName": "quote.opening",
+    "imageKey": "prodigal_son",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "workingProfessional",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "relationships",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "씨 뿌리는 자",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 13,
+            "verseStart": 1,
+            "verseEnd": 23
+          }
+        ],
+        "reflection": "지금 당신의 마음은 어떤 종류의 땅이며, 이번 계절에 '좋은 땅'이 되기 위해 무엇을 해야 합니까?"
+      },
+      {
+        "day": 2,
+        "title": "선한 사마리아인",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "당신이 지나치고 싶은 유혹을 느끼는 사람은 누구이며, 대신 길을 건너는 것은 어떤 모습일까요?"
+      },
+      {
+        "day": 3,
+        "title": "탕자의 비유",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 15,
+            "verseStart": 11,
+            "verseEnd": 32
+          }
+        ],
+        "reflection": "오늘 당신은 어떤 아들과 가장 비슷한가요 — 방황하는 아들인가요, 아니면 원망하는 형인가요 — 그리고 아버지는 당신에게 무엇을 주고 싶어 하시나요?"
+      },
+      {
+        "day": 4,
+        "title": "잃어버린 양과 동전",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 15,
+            "verseStart": 1,
+            "verseEnd": 10
+          }
+        ],
+        "reflection": "당신의 삶에서 어디에서 잃어버린 기분이 드나요, 그리고 하늘이 당신을 적극적으로 찾고 있다는 것을 아는 것이 상황을 어떻게 변화시키나요?"
+      },
+      {
+        "day": 5,
+        "title": "부자 바보",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 12,
+            "verseStart": 13,
+            "verseEnd": 34
+          }
+        ],
+        "reflection": "어떤 더 큰 '헛간'을 짓고 싶어하는 유혹을 느끼고 있나요, 그리고 대신 하나님께 부유해질 수 있는 방법은 무엇인가요?"
+      },
+      {
+        "day": 6,
+        "title": "용서받지 못한 종",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 18,
+            "verseStart": 21,
+            "verseEnd": 35
+          }
+        ],
+        "reflection": "어떤 작은 범죄로 여전히 누군가를 괴롭히고 있나요, 그리고 당신 자신의 용서의 산이 그것을 어떻게 변화시키나요?"
+      },
+      {
+        "day": 7,
+        "title": "바리새인과 세리",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 18,
+            "verseStart": 9,
+            "verseEnd": 14
+          }
+        ],
+        "reflection": "당신의 기도가 비밀리에 바리새인처럼 들리는 곳은 어디인가요 — 그리고 오늘 어떻게 낮아질 수 있나요?"
+      },
+      {
+        "day": 8,
+        "title": "포도원 일꾼들",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 20,
+            "verseStart": 1,
+            "verseEnd": 16
+          }
+        ],
+        "reflection": "당신의 삶에서 늦게 도착한 은혜를 누가 원망했나요, 그리고 지주님의 관대함이 당신을 그로부터 어떻게 자유롭게 하나요?"
+      },
+      {
+        "day": 9,
+        "title": "열 처녀",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 25,
+            "verseStart": 1,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "그리스도와의 지속적인 관계의 어떤 '기름'이 부족해지고 있나요, 그리고 이번 주에 그것을 어떻게 돌볼 수 있나요?"
+      },
+      {
+        "day": 10,
+        "title": "양과 염소",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 25,
+            "verseStart": 31,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "오늘, 누가 예수님이 인식되기를 기다리고 있나요 — 그리고 당신은 응답할 것인가요?"
+      }
+    ]
+  },
+  {
+    "id": "esther-for-such-a-time",
+    "name": "에스더: 지금 이때를 위한",
+    "description": "에스더서의 10일 여행 — 10장, 10일 — 위기, 용기, 그리고 전환을 통해 하나님의 숨겨진 섭리를 추적합니다.",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6A3A5C",
+      "#2E1826"
+    ],
+    "iconName": "crown.fill",
+    "imageKey": "mordecai_triumph",
+    "applicableSeasons": [
+      "workingProfessional",
+      "student",
+      "hardSeason",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "왕궁의 잔치",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 세상의 소음과 과잉 속에서 하나님이 조용히 무대를 세우고 계신 것을 느끼는 곳은 어디인가요?"
+      },
+      {
+        "day": 2,
+        "title": "뜻밖의 여왕",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "당신의 삶에서 하나님이 당신을 보이지 않는 목적을 위해 위치시키기 위해 사용하고 있는 선택되지 않은 상황은 무엇인가요?"
+      },
+      {
+        "day": 3,
+        "title": "하만의 그림자",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "악이 당신의 세상에서 힘을 얻고 있는 것처럼 보일 때, 어떻게 하나님의 선하심을 붙잡고 있나요?"
+      },
+      {
+        "day": 4,
+        "title": "지금 이때를 위한",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "누군가를 위해 하나님이 당신에게 요구하고 있는 위험한 '내가 죽으면 죽으리라'는 단계는 무엇인가요?"
+      },
+      {
+        "day": 5,
+        "title": "왕에게 나아가기",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님의 은혜가 당신이 두려워했던 문을 열어주었을 때는 언제인가요?"
+      },
+      {
+        "day": 6,
+        "title": "잠 못 이루는 밤",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님의 보이지 않는 섭리가 당신의 유익을 위해 '우연'을 어떻게 배열하고 있는 것을 보았나요?"
+      },
+      {
+        "day": 7,
+        "title": "위대한 전환",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "지금 불가능하게 느껴지는 상황은 무엇인가요, 그리고 그것이 당신이 생각하는 것보다 전환에 더 가까울 수 있나요?"
+      },
+      {
+        "day": 8,
+        "title": "새로운 법령",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "버려진 상황에 대해 어떤 대담한 새로운 '법령'의 기도를 해야 할까요?"
+      },
+      {
+        "day": 9,
+        "title": "푸림의 날",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님이 이미 당신을 위해 행하신 구원은 무엇이며, 그것을 기억하고 의도적으로 기념할 가치가 있나요?"
+      },
+      {
+        "day": 10,
+        "title": "모르드개, 변호자",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "주변에서 누가 당신이 모르드개가 되어 그들의 복지를 위해 말해주기를 필요로 하나요, 비록 그것이 비용이 들더라도?"
+      }
+    ]
+  },
+  {
+    "id": "ruth-redemption",
+    "name": "룻: 구속의 이야기",
+    "description": "룻서의 작은 책을 통한 4일 여행 — 상실이 충성과 만나는 곳, 이삭줍기가 섭리와 만나는 곳, 그리고 외국 과부가 다윗 왕의 증조모가 되는 곳.",
+    "totalDays": 4,
+    "category": "Character Study",
+    "gradientColors": [
+      "#8B6642",
+      "#4A331F"
+    ],
+    "iconName": "heart.circle.fill",
+    "imageKey": "jacob_rachel_well",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "relationships",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "상실과 충성",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "나오미는 자신을 '마라' — 쓴맛이라고 부릅니다. 룻은 상실에 대해 '당신이 가는 곳에 나도 가리라'는 맹세로 응답합니다. 이 두 목소리 중 — 쓴 진실과 고집스러운 충성 — 어떤 것이 당신이 이 계절을 맞이하는 방식을 더 잘 설명하며, 두 가지가 공존할 수 있다면 무엇이 바뀔까요?"
+      },
+      {
+        "day": 2,
+        "title": "예상치 못한 친절",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "내레이터가 룻이 보아스의 밭에서 '우연히' 이삭을 줍게 되었다고 말하는 것을 주목하세요 — 이 이야기에서 아무것도 실제로 우연이 아니라는 조용한 고개 끄덕임입니다. 당신의 삶에서 하나님이 우연처럼 보이는 것을 조용한 친절로 orchestrating 하고 있는 곳은 어디인가요?"
+      },
+      {
+        "day": 3,
+        "title": "타작마당에서의 대담한 믿음",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "룻의 보아스에 대한 접근은 친족 구속자라는 히브리 개념을 불러일으킵니다 — 잃어버린 땅과 생명을 되찾는 친척입니다. 성경의 구속의 그림이 여기, 타작마당에서 시작된다는 것은 당신에게 어떤 의미인가요, 성전이 아닌?"
+      },
+      {
+        "day": 4,
+        "title": "구속자와 왕의 계보",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 1,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "모압 여인, 과부, 외국인인 룻이 예수의 가족 나무에 등장합니다. 이 결말이 하나님이 그의 구원 이야기 속에 어떤 사람들을 엮어가는지, 그리고 그가 당신을 어떻게 엮어가고 있을지에 대한 당신의 이해를 어떻게 재구성하나요?"
+      }
+    ]
+  },
+  {
+    "id": "jonah-reluctant-prophet",
+    "name": "요나: 마지못해 선지자",
+    "description": "도망친 선지자 요나, 그를 잡은 폭풍, 회개한 도시, 그리고 요나의 편견보다 더 멀리 나아간 하나님의 자비를 다룬 4일간의 여정입니다.",
+    "totalDays": 4,
+    "category": "Character Study",
+    "gradientColors": [
+      "#2E5A6B",
+      "#15303A"
+    ],
+    "iconName": "water.waves",
+    "imageKey": "jesus_calms_storm",
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "하나님으로부터 도망치기",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님은 '니느웨로 가라'고 말씀하시고 요나는 타르시스로 가는 배에 오릅니다 — 알려진 세계의 반대편입니다. 당신이 하나님으로부터 도망치고 있는 사명은 무엇이며, 당신을 경고해야 할 폭풍은 실제로 어디에서 오는 것인가요?"
+      },
+      {
+        "day": 2,
+        "title": "깊은 곳에서의 기도",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "요나는 물고기 속에서 기도합니다 — 상상할 수 있는 가장 낮은 지점에서 — 그리고 그것을 '성전'이라고 부릅니다. 이 재구성이 당신의 낮은 장소에 대한 관점을 어떻게 변화시키나요? 기도가 어떤 깊이도 성소로 바꿀 수 있을까요?"
+      },
+      {
+        "day": 3,
+        "title": "회개한 도시",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "니느웨는 이스라엘의 가장 잔인한 적이었지만, 그들은 성경에서 가장 짧은 설교 — 단 8단어 — 에 회개합니다. 그 일이 당신에게 하나님의 말씀의 신비로운 힘에 대해 무엇을 가르치나요, 설교자가 마지못해 할지라도?"
+      },
+      {
+        "day": 4,
+        "title": "하나님의 마음",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "책은 답이 아닌 질문으로 끝납니다 — 하나님은 요나에게 백이십만 명을 불쌍히 여겨야 하는지 묻습니다. 누군가의 구원이 당신을 비밀리에 실망하게 할 것인가요, 그리고 하나님의 마지막 질문이 당신에게 내려놓으라고 부르고 있는 것은 무엇인가요?"
+      }
+    ]
+  },
+  {
+    "id": "fruit-of-the-spirit",
+    "name": "성령의 열매",
+    "description": "성령이 우리 안에서 성장시키는 성품에 대한 9일간의 연구 — 하루에 하나의 열매, 각각 갈라디아서 5에 뿌리를 두고 그것을 생생하게 만드는 구절과 짝을 이룹니다.",
+    "totalDays": 9,
+    "category": "Discipleship",
+    "gradientColors": [
+      "#4A7A5C",
+      "#2A4A38"
+    ],
+    "iconName": "leaf.circle.fill",
+    "imageKey": "annunciation",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional",
+      "parenthood",
+      "newlyMarried"
+    ],
+    "applicableBurdens": [
+      "relationships",
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "사랑",
+        "readings": [
+          {
+            "bookID": "GAL",
+            "chapter": 5,
+            "verseStart": 16,
+            "verseEnd": 26
+          },
+          {
+            "bookID": "1CO",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "바울은 성령의 열매가 사랑이라고 말합니다 — 단수로 — 마치 다른 여덟 가지가 그것에서 흐르는 것처럼. 고린도전서 13의 어떤 구절이 당신의 사랑이 여전히 성장하고 있는 곳을 가장 드러내며, 성령이 당신에게 협력하라고 초대하는 곳은 어디인가요?"
+      },
+      {
+        "day": 2,
+        "title": "기쁨",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 4,
+            "verseEnd": 13
+          },
+          {
+            "bookID": "NEH",
+            "chapter": 8,
+            "verseStart": 1,
+            "verseEnd": 12
+          }
+        ],
+        "reflection": "성경의 기쁨은 슬픔의 부재가 아니라 하나님에 뿌리를 둔 깊은 기쁨입니다. 당신이 기쁨을 행복으로 착각하고 있는 곳은 어디이며, 상황이 협력하지 않을 때 기쁨을 고정시키는 것은 무엇인가요?"
+      },
+      {
+        "day": 3,
+        "title": "평화",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": 25,
+            "verseEnd": 31
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 26,
+            "verseStart": 1,
+            "verseEnd": 9
+          }
+        ],
+        "reflection": "예수님은 '세상이 주는 것과 같지 않게' 평화를 주십니다 — 갈등의 부재가 아니라 그분의 존재입니다. 오늘 당신이 지고 있는 걱정은 무엇이며, 예수님이 그 걱정을 그분의 평화로 바꾸기를 제안하고 있나요?"
+      },
+      {
+        "day": 4,
+        "title": "인내",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": 7,
+            "verseEnd": 11
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 11
+          }
+        ],
+        "reflection": "여기서 그리스어 단어 'makrothumia'는 문자 그대로 '긴 인내'를 의미합니다 — 끓는 데 시간이 걸립니다. 당신의 삶에서 어디에서 당신의 성격이 짧고, 특정한 사람이나 상황에 대해 긴 인내를 가지면 어떤 모습일까요?"
+      },
+      {
+        "day": 5,
+        "title": "친절",
+        "readings": [
+          {
+            "bookID": "COL",
+            "chapter": 3,
+            "verseStart": 12,
+            "verseEnd": 17
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "친절은 단순히 좋은 사람이 되는 것이 아닙니다 — 그것은 당신에게 보답할 수 없는 사람을 위해 길을 나서는 것입니다. 이번 주에 하나님이 당신의 길에 두신 사람은 누구이며, 그에게 친절을 베풀기 위해 당신에게 무엇이 필요할까요?"
+      },
+      {
+        "day": 6,
+        "title": "선함",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": 9,
+            "verseEnd": 21
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "선함은 아무도 지켜보지 않을 때에도 지켜지는 진실성입니다. 당신의 사생활에서 성령이 조용히 당신의 비밀과 평판을 일치시키도록 초대하고 있는 곳은 어디인가요?"
+      },
+      {
+        "day": 7,
+        "title": "신실함",
+        "readings": [
+          {
+            "bookID": "LAM",
+            "chapter": 3,
+            "verseStart": 19,
+            "verseEnd": 33
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 16,
+            "verseStart": 10,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "하나님의 신실함은 매일 아침 새롭습니다; 우리의 신실함은 작은 것들에서 꾸준해야 합니다. 주님이 당신에게 아무도 박수치지 않는 '작은' 일에서 신실하라고 요청하고 있는 곳은 어디인가요?"
+      },
+      {
+        "day": 8,
+        "title": "온유",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 1,
+            "verseEnd": 9
+          },
+          {
+            "bookID": "PRO",
+            "chapter": 15,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "온유는 통제된 힘입니다 — 포효할 수 있는 사람의 부드러운 대답입니다. 당신의 말로 상처를 주고 있는 사람은 누구이며, 그 사람에게 정말 필요한 것은 부드러운 터치인가요?"
+      },
+      {
+        "day": 9,
+        "title": "자기 절제",
+        "readings": [
+          {
+            "bookID": "2PE",
+            "chapter": 1,
+            "verseStart": 3,
+            "verseEnd": 11
+          },
+          {
+            "bookID": "PRO",
+            "chapter": 25,
+            "verseStart": 21,
+            "verseEnd": 28
+          }
+        ],
+        "reflection": "잠언은 자기 절제가 없는 사람을 무너진 성벽이 있는 도시로 묘사합니다 — 무엇이든 열려 있습니다. 이번 주에 성령이 당신의 삶에서 재건하고 싶어하는 '벽'은 무엇이며, 누가 그것을 돌보는 데 도움을 줄 수 있을까요?"
+      }
+    ]
+  },
+  {
+    "id": "philippians-joy",
+    "name": "빌립보서: 모든 계절의 기쁨",
+    "description": "바울의 가장 기쁜 편지를 통한 4일간의 여정 — 감옥에서 쓴 — 매일 한 장씩, 상황이 닿지 않는 기쁨의 다른 면을 펼쳐냅니다.",
+    "totalDays": 4,
+    "category": "Epistles",
+    "gradientColors": [
+      "#7A6A2E",
+      "#3C3314"
+    ],
+    "iconName": "sun.max.fill",
+    "imageKey": "magi_journey",
+    "applicableSeasons": [
+      "hardSeason",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "고난 중의 기쁨",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "바울은 이 편지를 쇠사슬에 묶여서 쓰고 있지만 여전히 그것을 그의 '기쁨'이라고 부릅니다. 그는 그의 감옥을 복음을 위한 플랫폼으로 재구성합니다. 당신의 삶에서 하나님이 당신에게 도망치기보다 재구성하라고 초대하는 원치 않는 상황은 무엇입니까?"
+      },
+      {
+        "day": 2,
+        "title": "겸손 중의 기쁨",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "6-11절의 찬송가는 예수님의 하강을 추적합니다 — 하나님과 동등하신, 비워진, 인간이신, 순종하신, 십자가에 못 박히신 — 아버지가 그를 높이기 전에. 당신이 예수님이 항복을 모델링하고 있는 곳에서 신분을 쥐고 있는 곳은 어디이며, '같은 마음'은 실제로 어떤 모습일까요?"
+      },
+      {
+        "day": 3,
+        "title": "그리스도를 아는 기쁨",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "바울은 그의 인상적인 이력서를 그리스도를 아는 것과 비교하여 '쓰레기'라고 부릅니다. 당신의 이력서의 어떤 부분 — 자격, 역할, 성취 — 이 그리스도와 당신의 정체성의 중심을 두고 조용히 경쟁하고 있습니까?"
+      },
+      {
+        "day": 4,
+        "title": "모든 상황에서의 기쁨",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "바울은 그가 배부르거나 궁핍할 때 만족하는 비결을 배웠다고 말합니다 — 과거형, 힘들게 얻은. 당신의 삶에서 주님이 지금 그 비결을 가르치고 있는 곳은 어디이며, 당신이 실제로 사용하기를 거부하고 있는 어떤 실천(기도, 감사, 올바른 사고)이 있습니까?"
+      }
+    ]
+  },
+  {
+    "id": "life-of-moses",
+    "name": "모세의 생애",
+    "description": "모세의 생애를 통한 10일 여정 — 바구니에서 타오르는 떨기나무까지, 홍해에서 시내산까지 — 부르시고, 구원하시고, 말씀하시고, 함께 하시는 하나님을 만나는 여정입니다.",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6C4E2A",
+      "#382712"
+    ],
+    "iconName": "flame.circle.fill",
+    "imageKey": "manna_wilderness",
+    "applicableSeasons": [
+      "workingProfessional",
+      "startingOver",
+      "hardSeason",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "바구니에 태어나다",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "히브리 산파들은 바로의 명령에 반대하고, 한 어머니는 아들을 나일강에 바구니에 넣고, 하나님은 이미 구원의 이야기를 쓰고 계십니다. 당신이 구원이 필요하다는 것을 알기 훨씬 이전에 하나님이 조용히 당신을 준비시키고 계신 곳은 어디입니까?"
+      },
+      {
+        "day": 2,
+        "title": "타오르는 떨기나무",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "모세는 타오르지 않는 떨기나무를 보려고 돌아서고, 하나님은 그를 이름으로 부르십니다. 하나님이 당신의 주의를 끌기 위해 사용하고 있는 평범한 것은 무엇이며, 당신은 돌아서서 볼 의향이 있습니까?"
+      },
+      {
+        "day": 3,
+        "title": "변명과 표적",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "모세는 하나님과 논쟁합니다: '나는 누구입니까? 그들이 나를 믿지 않으면 어떻게 합니까? 나는 유창하지 않습니다.' 하나님은 각 반대에 응답하십니다. 모세의 변명 중 당신이 하나님께 계속하는 변명과 가장 비슷한 것은 무엇이며, 하나님이 당신에게 주시는 인내의 대답은 무엇입니까?"
+      },
+      {
+        "day": 4,
+        "title": "내 백성을 보내라",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "재앙들은 체계적으로 모든 이집트 신을 무너뜨립니다 — 나일강, 태양, 가축 — 누가 진정으로 통치하는지를 보여줍니다. 당신의 문화에서 하나님이 당신의 삶에서 무력하다고 드러내야 할 '신'은 무엇입니까?"
+      },
+      {
+        "day": 5,
+        "title": "유월절",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "이스라엘은 그들의 공로로가 아니라 문설주에 어린 양의 피로 구원받습니다 — 다가올 더 큰 어린 양의 그림자입니다. 유월절을 그리스도의 초상으로 보는 것이 그분의 피가 실제로 성취한 것을 이해하는 데 어떻게 깊이를 더합니까?"
+      },
+      {
+        "day": 6,
+        "title": "바다를 지나",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "'가만히 서서 주님의 구원을 보라'고 모세는 갇힌 사람들에게 말합니다 — 그리고 하나님은 '앞으로 나아가라'고 말씀하십니다. 하나님이 마음의 고요함과 믿음의 걸음을 모두 요구할 때, 당신은 패닉에 빠지거나 멈추고 싶은 유혹을 느끼는 곳은 어디입니까?"
+      },
+      {
+        "day": 7,
+        "title": "만나와 물",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 7
+          }
+        ],
+        "reflection": "하나님은 쌓아둘 수 없는 빵과 바위에서 나는 물을 주십니다. 당신이 불안 때문에 쌓아두려고 애쓰고 있는 은혜는 무엇입니까?"
+      },
+      {
+        "day": 8,
+        "title": "시내산과 열 가지 말씀",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "하나님은 구원의 맥락에서 법을 주십니다 — '나는 너를 인도하여 낸 주 너의 하나님이다' — 그의 사랑을 얻기 위한 방법이 아니라 그와 함께하는 삶의 형태로서. 당신이 가장 부담으로 읽는 계명은 무엇이며, 그것이 자유의 경계로 읽히지 않는 이유는 무엇입니까?"
+      },
+      {
+        "day": 9,
+        "title": "당신의 영광을 보여주소서",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 33,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "모세가 말합니다, '주님의 임재가 우리와 함께하지 않으면, 여기서 우리를 보내지 마소서.' 당신이 하나님에게서 더 원하는 것은 무엇입니까 — 그의 선물, 아니면 그분 자신입니까? 오늘이 그분을 가장 원한다면 어떻게 다르게 보일까요?"
+      },
+      {
+        "day": 10,
+        "title": "신실한 종",
+        "readings": [
+          {
+            "bookID": "DEU",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "모세는 약속의 땅에 들어가지 못하고 죽지만, 하나님이 직접 그를 묻으십니다. 당신의 삶에서 하나님이 당신에게 맡기라고 요청하는 미완의 일은 무엇이며, 그 이야기가 당신보다 더 크다는 것을 아는 것은 무엇입니까?"
+      }
+    ]
+  },
+  {
+    "id": "psalm-23-deep-dive",
+    "name": "시편 23편: 목자의 노래",
+    "description": "성경에서 가장 사랑받는 시편에 대한 6일 명상 — 한 절씩 — 시편이 항상 가리키고 있는 목자로서 그리스도를 드러내는 신약 구절과 함께합니다.",
+    "totalDays": 6,
+    "category": "Worship",
+    "gradientColors": [
+      "#4A6B3F",
+      "#253A22"
+    ],
+    "iconName": "sparkle",
+    "imageKey": "suffer_little_children",
+    "applicableSeasons": [
+      "hardSeason",
+      "growing",
+      "retired",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "주님은 나의 목자",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 1,
+            "verseEnd": 1
+          },
+          {
+            "bookID": "JHN",
+            "chapter": 10,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "다윗은 목자였습니다 — 그는 그 직업의 무게를 알고 있었습니다. 예수님은 자신의 생명을 내어주는 '선한 목자'라고 부르십니다. 당신의 가치를 정의하도록 허락한 잘못된 목자(직업, 성공, 관계)는 무엇이며, 주님이 직접 지팡이를 잡을 때 무엇이 달라집니까?"
+      },
+      {
+        "day": 2,
+        "title": "푸른 풀과 잔잔한 물",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 2,
+            "verseEnd": 2
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 11,
+            "verseStart": 25,
+            "verseEnd": 30
+          }
+        ],
+        "reflection": "양들은 불안하거나 배고프거나 갈등이 있을 때 누울 수 없습니다. 목자는 그들을 '누이게' 하십니다. 당신의 삶에서 예수님이 부드럽게 당신을 쉬게 하고 있는 곳은 어디이며, 당신이 발을 딛고 있으려 애쓰고 있는 것은 무엇입니까?"
+      },
+      {
+        "day": 3,
+        "title": "의의 길",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 3,
+            "verseEnd": 3
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "목자는 '내 영혼을 회복하신다'고 말씀하신 후 올바른 길로 인도하십니다 — 위로가 교정을 앞서갑니다. 하나님이 당신을 회복시키고 계신 곳은 어디이며, 당신이 하나님이 침묵하고 있다고 착각했던 곳은 무엇입니까?"
+      },
+      {
+        "day": 4,
+        "title": "골짜기를 지나",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 4,
+            "verseEnd": 4
+          },
+          {
+            "bookID": "2CO",
+            "chapter": 4,
+            "verseStart": 7,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "다윗은 '주변'이 아니라 '통과'한다고 말하며, 여기서 주어가 '그'에서 '당신'으로 바뀝니다 — 위험이 가까워질수록 목자는 더욱 개인적으로 다가옵니다. 당신이 있는 골짜리는 어디이며, 그 안에서 하나님의 가까움이 어떻게 강해졌습니까?"
+      },
+      {
+        "day": 5,
+        "title": "원수 앞에 차려진 상",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 5,
+            "verseEnd": 5
+          },
+          {
+            "bookID": "REV",
+            "chapter": 19,
+            "verseStart": 1,
+            "verseEnd": 10
+          }
+        ],
+        "reflection": "하나님은 당신이 사라지기를 바라는 원수들 앞에서 당신을 만찬에 초대하십니다. 그분이 항상 당신의 문제를 제거하지 않으시고, 때때로 문제를 바라보는 동안 앉아 먹도록 초대하신다는 것은 무엇을 의미할까요?"
+      },
+      {
+        "day": 6,
+        "title": "선하심, 자비, 그리고 집",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 6,
+            "verseEnd": 6
+          },
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": 1,
+            "verseEnd": 6
+          }
+        ],
+        "reflection": "히브리어로 '나를 따르라'는 '추구하다'로 읽힐 수 있습니다 — 선하심과 자비는 당신 뒤에서 산책하는 것이 아니라, 당신을 쫓고 있습니다. 그 재구성이 당신의 과거를 기억하고 하나님과 함께 미래를 바라보는 방식을 어떻게 변화시킬까요?"
+      }
+    ]
+  },
+  {
+    "id": "acts-early-church",
+    "name": "사도행전: 초기 교회",
+    "description": "사도행전의 14일 여정 — 하루에 두 장씩 — 오순절부터 로마까지, 성령이 오늘날 모든 신자에게 여전히 메아리치는 운동을 탄생시키는 과정을 지켜보세요.",
+    "totalDays": 14,
+    "category": "Foundations",
+    "gradientColors": [
+      "#7A4A1C",
+      "#3E2510"
+    ],
+    "iconName": "wind",
+    "imageKey": "loaves_fishes",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional",
+      "student"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "오순절",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "교회는 평범한 사람들이 성령으로 충만해지고 그들이 공부하지 않은 언어로 예수님을 전파하기 시작할 때 태어납니다. 당신의 삶에서 성령이 당신이 가진 말을 능력 있게 하도록 신뢰하기보다는 더 많은 훈련을 기다리고 있는 곳은 어디인가요?"
+      },
+      {
+        "day": 2,
+        "title": "권위 앞에서의 담대함",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "베드로와 요한은 전도를 중단하라는 말을 듣고 — 더 적은 담대함이 아니라 더 많은 담대함을 기도합니다. 사회적 압력이 당신을 예수님에 대해 조용하게 만든 곳은 어디이며, 당신의 태도를 수용에서 용기로 바꿀 기도는 무엇인가요?"
+      },
+      {
+        "day": 3,
+        "title": "성장하는 시험의 교회",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "아나니아와 삽비라의 거짓말은 젊은 공동체의 순수성을 위협합니다; 이후 사도들은 말씀을 계속 전파할 수 있도록 위임합니다. 당신의 영적 삶에서 사명을 조용히 지연시키고 있는 조직적 또는 개인적 타협은 무엇인가요?"
+      },
+      {
+        "day": 4,
+        "title": "스데반과 흩어짐",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "스데반의 죽음은 운동의 끝처럼 보입니다 — 그러나 그 뒤에 오는 박해는 복음을 알려진 세계에 흩어지게 합니다. 당신의 삶에서 하나님이 아직 보지 못하는 시작으로 사용하고 계실 수 있는 끝은 무엇인가요?"
+      },
+      {
+        "day": 5,
+        "title": "사울의 회심, 고넬료의 포함",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "교회의 가장 강력한 적이 가장 위대한 선교사가 되고, 로마의 백부장이 형제가 됩니다. 누구의 회심이 당신을 가장 놀라게 할 것이며, 그것을 진정한 기대를 가지고 기도할 의향이 있나요?"
+      },
+      {
+        "day": 6,
+        "title": "안디옥과 천사",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "신자들은 안디옥에서 처음으로 '그리스도인'이라고 불립니다 — 외부인들이 중심이 되는 교회입니다. 하나님은 종교적 중심이 볼 수 없는 방식으로 교회를 성장시키기 위해 주변의 사람들을 어떻게 사용하고 계신가요?"
+      },
+      {
+        "day": 7,
+        "title": "첫 번째 선교 여행",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "성령이 말합니다, '바울과 바나바를 내가 부르신 일에 따로 세우라.' 당신은 누구의 파송에 참여하고 있나요 — 보내지거나 기도로 지원하고 있나요 — 그리고 그 청지기를 얼마나 진지하게 받아들이고 있나요?"
+      },
+      {
+        "day": 8,
+        "title": "예루살렘 회의와 빌립보 감옥",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "교회는 은혜가 정말로 이방인들에게 주어졌다고 결정하고, 바울은 한밤중 감옥에서 노래합니다. 당신은 여전히 하나님의 은혜에 무언의 요구를 추가하고 있는 곳은 어디이며, 당신의 가장 힘든 장소에서 기다리고 있는 노래는 무엇인가요?"
+      },
+      {
+        "day": 9,
+        "title": "아테네와 고린도",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "바울은 아레오파고스에서 이방 철학자들과 그들의 시인을 인용하며 대화합니다. 당신은 주변 사람들의 어휘로 복음을 전하는 법을 어떻게 배울 수 있을까요, 진리를 희석하지 않으면서?"
+      },
+      {
+        "day": 10,
+        "title": "에베소와 부드러운 작별",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "바울은 에베소의 장로들과 함께 울며 '주는 것이 받는 것보다 더 복이 있다'고 상기시킵니다. 하나님이 당신에게 목양하라고 주신 사람은 누구이며, 이번 주에 그들을 더 의도적으로 사랑하기 위해 무엇이 필요할까요?"
+      },
+      {
+        "day": 11,
+        "title": "예루살렘에서 체포된 바울",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "바울은 '성령에 묶여' 고난을 향해 계속 나아갑니다. 하나님이 당신에게 순종하기 위해 어려움 쪽으로 나아가라고 요청하고 있는 곳은 어디인가요, 그것이 어렵기 때문에 피하지 말고?"
+      },
+      {
+        "day": 12,
+        "title": "권력 앞에서의 용기",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "주님이 밤에 바울 곁에 서서 '용기를 내라'고 말씀하십니다. 당신이 계속 나아가기 위해 보이지 않는 말이 필요했던 때는 언제이며, 하나님이 오늘 밤 당신에게 그것을 속삭이고 계실 수 있는 방법은 무엇인가요?"
+      },
+      {
+        "day": 13,
+        "title": "거의 설득됨",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "아그립바는 바울이 그를 '거의' 그리스도인이 되도록 설득했다고 말합니다. 당신의 삶에서 '거의' 헌신하고 있는 곳은 어디이며, 확신과 항복 사이의 간극을 메우기 위해 무엇이 필요할까요?"
+      },
+      {
+        "day": 14,
+        "title": "로마로 가는 난파",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "사도행전은 갑자기 끝납니다 — 바울은 병사에게 쇠사슬에 묶인 채 임대된 집에서 왕국을 전파하고, 이야기는 분명히 끝나지 않았습니다. 당신은 그 미완성 이야기의 일부입니다. 하나님이 당신을 통해 쓰고 계신 다음 줄은 무엇인가요?"
+      }
+    ]
+  },
+  {
+    "id": "first-john-assurance",
+    "name": "요한일서: 너희가 알게 하려 함이라",
+    "description": "요한의 첫 번째 편지를 통한 5일의 여정 — 신자들이 '영생이 있음을 알게 하려'고 쓰여졌습니다. 각 장은 진정한 믿음의 다른 시험을 탐구합니다.",
+    "totalDays": 5,
+    "category": "Epistles",
+    "gradientColors": [
+      "#3D5A8B",
+      "#1C2D5C"
+    ],
+    "iconName": "checkmark.seal.fill",
+    "imageKey": "bethany_mary_martha",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "anxiety",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "빛 가운데 걷기",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "요한은 하나님과의 교제가 빛 가운데 걷는 것과 연결되어 있다고 주장합니다 — 숨겨진 것을 드러내는 것입니다. 당신이 정직한 고백이 수치가 아니라 교제로 이어질 것이라고 가장 많이 가장하고 있는 한 영역은 어디인가요?"
+      },
+      {
+        "day": 2,
+        "title": "거하는 것, 단순히 믿는 것이 아님",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "요한의 하나님에 대한 사랑의 시험은 간단합니다: '그의 말씀을 지키는 자에게는 하나님의 사랑이 온전히 이루어졌다.' 당신의 가장 가까운 관계들은 당신의 믿음과 행동 사이의 차이를 어떻게 설명할까요?"
+      },
+      {
+        "day": 3,
+        "title": "하나님의 자녀",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "'아버지께서 우리에게 주신 사랑이 어떤 것인지 보라 — 우리가 하나님의 자녀라 불리게 되었다.' 만약 당신이 '사랑받는 자녀'라는 진정한 정체성을 믿고 이 하루를 맞이한다면, 그 하루는 어떻게 달라질까요?"
+      },
+      {
+        "day": 4,
+        "title": "하나님은 사랑이시다",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "요한은 '우리가 사랑하는 것은 그가 먼저 우리를 사랑하셨기 때문'이라고 말합니다 — 우리의 사랑은 항상 반응입니다. 당신이 얻으려고 쫓아온 사랑은 누구의 사랑이며, 하나님의 선행 사랑이 당신을 어떻게 필요가 아닌 안식에서 그 사람을 사랑하도록 자유롭게 하나요?"
+      },
+      {
+        "day": 5,
+        "title": "당신이 알게 하려 함이라",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "요한은 '당신이 영생을 가졌다는 것을 알게 하려 이 편지를 썼다'고 말합니다. 요한의 시험 중 — 예수에 대한 믿음, 타인에 대한 사랑, 그의 말씀에 대한 순종 — 오늘 성령이 당신을 가장 안심시키고 싶어하는 것은 무엇인가요?"
+      }
+    ]
+  },
+  {
+    "id": "james-faith-that-works",
+    "name": "야고보: 행함이 있는 믿음",
+    "description": "야고보서에 대한 5일간의 연구 — 신약에서 가장 실용적인 편지 — 우리가 믿는다고 말하는 것과 실제로 사는 것 사이의 간극을 직면합니다.",
+    "totalDays": 5,
+    "category": "Epistles",
+    "gradientColors": [
+      "#8B5A2E",
+      "#44290F"
+    ],
+    "iconName": "hammer.fill",
+    "imageKey": "davids_three_mighty_men",
+    "applicableSeasons": [
+      "workingProfessional",
+      "growing",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "relationships",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "모든 일을 기쁨으로 여기라",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "야고보는 시련이 기쁨이라고 말하지 않습니다 — 그는 하나님이 생산하는 것 때문에 그것을 기쁨으로 여기라고 말합니다. 만약 당신이 하나님이 당신 안에서 무언가를 성숙시키고 있다고 실제로 믿는다면, 이번 주에 어떤 현재의 시련을 재구성해야 할까요?"
+      },
+      {
+        "day": 2,
+        "title": "행함이 없는 믿음은 죽은 믿음이다",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "야고보는 믿음을 행함과 대립시키고 있지 않습니다 — 그는 진정한 믿음은 항상 행함을 동반한다고 말합니다. 이번 주에 당신의 개인적인 믿음을 드러내게 할 수 있는 한 가지 구체적인 순종의 행동은 무엇인가요?"
+      },
+      {
+        "day": 3,
+        "title": "혀를 길들이기",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "야고보는 혀를 큰 배를 조종하는 작은 키와 숲을 태우는 작은 불꽃에 비유합니다. 당신의 말이 당신의 삶이나 다른 사람들의 삶을 어떤 방향으로 조종하고 있으며, 그 방향에 도달하는 것이 부끄럽다고 느끼는 곳은 어디인가요?"
+      },
+      {
+        "day": 4,
+        "title": "세상과의 우정",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "야고보는 다툼이 우리 안에서 전쟁하는 욕망에서 온다고 말합니다 — 그리고 우리가 '구하지 않기 때문에 가지지 못한다'고 합니다. 지금 당신의 삶에서 갈등을 일으키고 있는 욕망은 무엇이며, 그것을 하나님께 솔직하게 기도했나요?"
+      },
+      {
+        "day": 5,
+        "title": "인내하며 기도하라",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "야고보는 교회가 서로를 위해 기도하라고 부르며, 치유가 오도록 죄를 고백하라고 마무리합니다. 당신의 삶에서 누가 당신의 고백을 안전하게 들어줄 수 있으며, 그들과 함께 기도해달라고 실제로 요청하는 데 어떤 대가가 필요할까요?"
+      }
+    ]
+  },
+  {
+    "id": "hebrews-jesus-is-better",
+    "name": "히브리서: 예수는 더 나으시다",
+    "description": "히브리서를 통한 13일간의 여정 — 매일 한 장씩 — 예수가 그를 가리킨 모든 구약의 그림을 어떻게 성취하고 초월하는지를 보여줍니다.",
+    "totalDays": 13,
+    "category": "Theology",
+    "gradientColors": [
+      "#5A2F2F",
+      "#2C1414"
+    ],
+    "iconName": "crown.fill",
+    "imageKey": "sacrifice_isaac",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "천사들보다 뛰어난 아들",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "히브리서는 하나님이 그의 아들 안에서 가장 완전하게 말씀하셨다고 선언하며 시작합니다 — '하나님의 영광의 광채.' 당신은 하나님을 듣기 위해 수천 개의 이차적인 출처에서 듣고 있었던 곳이 어디인가요, 그가 이미 예수 안에서 가장 분명하게 말씀하셨는데?"
+      },
+      {
+        "day": 2,
+        "title": "이처럼 큰 구원",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "예수는 천사들보다 낮아지셨습니다 — 인간이시고, 시험을 받으시고, 고통을 당하셨습니다 — 그래서 그는 '모든 사람을 위해 죽음을 맛보실 수 있었습니다.' 예수가 당신의 정확한 육체를 나누는 것이 당신이 그의 앞에 당신의 약점을 가져오는 방식을 어떻게 변화시키나요?"
+      },
+      {
+        "day": 3,
+        "title": "모세보다 더 위대한",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "모세는 하나님의 집에서 종으로서 신실했습니다; 예수는 그 집의 아들로서 신실합니다. 당신은 하나님의 아들을 신뢰하는 것에서 비밀스럽게 벗어나고 있는 방식으로 하나님의 집을 어떻게 섬기고 있나요?"
+      },
+      {
+        "day": 4,
+        "title": "그의 안식에 들어가라",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "저자는 하나님의 백성을 위해 안식일의 안식이 남아 있다고 말합니다 — 그러나 우리는 그것에 들어가기 위해 힘써야 합니다. 당신의 삶에서 어떤 불안한 노력은 실제로 멈추고 그 일이 그리스도의 것이며 당신의 것이 아님을 신뢰하려는 의지가 부족한 것인가요?"
+      },
+      {
+        "day": 5,
+        "title": "위대한 대제사장",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "예수는 '그의 육체의 날들에 큰 소리와 눈물로 기도와 간구를 드리신' 제사장입니다. 눈물 흘리는 동정어린 제사장으로서의 예수를 상상하는 것이 당신이 자신의 눈물을 그에게 가져오는 방식을 어떻게 변화시키나요?"
+      },
+      {
+        "day": 6,
+        "title": "성숙을 향해 나아가라",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "저자는 독자들에게 영적인 유아로 남지 말고 나아가라고 촉구합니다. 당신이 단단한 음식으로 성장하는 대신 정착한 '기본적인' 진리는 무엇인가요?"
+      },
+      {
+        "day": 7,
+        "title": "멜기세덱과 같은 제사장",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "예수의 제사장은 영원합니다 — '그는 항상 중보하기 위해 살아계십니다.' 예수가 지금 당신을 위해 기도하고 있다는 것을 아는 것이 당신이 내일 지고 있는 것을 어떻게 재구성하나요?"
+      },
+      {
+        "day": 8,
+        "title": "더 나은 언약",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "새 언약 아래에서 하나님은 그의 법을 '그들의 마음에 새기신다.' 당신은 여전히 하나님과 외부 규칙을 통해 관계를 맺고 있는 곳이 어디이며, 그가 당신을 내면에서 변화시키고 싶어하는데?"
+      },
+      {
+        "day": 9,
+        "title": "한 번의 희생",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "옛 제사장들은 결코 양심을 깨끗하게 할 수 없는 매일의 희생을 드렸습니다; 그리스도의 단 한 번의 희생은 그렇습니다. 당신이 그의 완성된 일이 당신의 반복을 필요로 한다고 생각하며 계속해서 고백하는 죄는 무엇인가요?"
+      },
+      {
+        "day": 10,
+        "title": "담대히 가까이 나아가라",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "예수의 피로 우리는 '담대히' 가까이 나아갈 수 있습니다 — 휘장이 찢어졌습니다. 당신이 하나님께 나아갈 때, 그것이 은혜의 보좌에 접근하는 것처럼 느껴지나요, 아니면 마지못해 기다리는 관료의 대기실처럼 느껴지나요? 무엇이 바뀔까요?"
+      },
+      {
+        "day": 11,
+        "title": "믿음의 전당",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "여기 나열된 모든 사람은 약속된 것을 받지 못한 채로 죽었습니다. '그러나 그들은 그것을 멀리서 보고 인사했습니다.' 당신의 기다림의 이야기가 이 믿음의 전당의 한 장으로 간주될 수 있는 방법은 무엇입니까?"
+      },
+      {
+        "day": 12,
+        "title": "위대한 증인들의 구름",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "저자는 우리에게 '우리 믿음의 창시자이자 완성자'이신 예수님께 우리의 시선을 고정하고 인내로 달리라고 촉구합니다. 당신의 달리기를 느리게 하는 무게 — 반드시 죄악은 아니지만 무거운 — 가 무엇인지, 그리고 그것을 내려놓을 준비가 되어 있습니까?"
+      },
+      {
+        "day": 13,
+        "title": "진영 밖에서",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "예수님은 '진영 밖에서' 고난을 받으셨습니다 — 그 시대의 종교적 존경심을 넘어. 그분이 당신을 어디에서 편안한 진영 밖으로 부르셔서, 존경받는 세상이 외면한 사람들과 함께 하기를 원하십니까?"
+      }
+    ]
+  }
+]

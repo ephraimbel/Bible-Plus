@@ -76,6 +76,7 @@ struct SelectionCard: View {
 // MARK: - Compact Selection Card (for grid layouts)
 
 struct CompactSelectionCard: View {
+    // Receives already-localized displayName Strings — see SelectionCard.
     let title: String
     let icon: String
     let isSelected: Bool

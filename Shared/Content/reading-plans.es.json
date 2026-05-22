@@ -1,0 +1,5943 @@
+[
+  {
+    "id": "psalms-of-peace",
+    "name": "Salmos de Paz",
+    "description": "Un viaje de 7 días a través de los salmos que hablan directamente a tu corazón ansioso, guiándote hacia la quietud y la paz que solo Dios puede dar.",
+    "totalDays": 7,
+    "category": "Comfort",
+    "gradientColors": [
+      "#4A6741",
+      "#2D4A3E"
+    ],
+    "iconName": "leaf.fill",
+    "imageKey": "jesus_calms_storm",
+    "applicableSeasons": [
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "El Cuidado del Pastor",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué significa para ti que Dios sea tu pastor en esta temporada de tu vida?"
+      },
+      {
+        "day": 2,
+        "title": "Confiado en la Luz",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cuándo has experimentado a Dios como tu luz en un momento de oscuridad?"
+      },
+      {
+        "day": 3,
+        "title": "Prueba y Ve",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo te ha liberado Dios de un miedo que una vez te mantuvo cautivo?"
+      },
+      {
+        "day": 4,
+        "title": "Dios es Nuestro Refugio",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Dónde necesitas 'estar quieto y saber' que Él es Dios hoy?"
+      },
+      {
+        "day": 5,
+        "title": "Bajo Sus Alas",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 91,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo se siente habitar en el abrigo del Altísimo?"
+      },
+      {
+        "day": 6,
+        "title": "El Guardián que Nunca Duerme",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 121,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo cambia el saber que Dios nunca duerme la forma en que enfrentas esta noche?"
+      },
+      {
+        "day": 7,
+        "title": "Hechos con Temor y Maravilla",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué verdad sobre cómo Dios te conoce trae más consuelo en este momento?"
+      }
+    ]
+  },
+  {
+    "id": "gospel-of-john",
+    "name": "El Evangelio de Juan",
+    "description": "Recorre todo el Evangelio de Juan en 21 días y encuentra a Jesús — la Palabra hecha carne — un capítulo a la vez.",
+    "totalDays": 21,
+    "category": "Gospel",
+    "gradientColors": [
+      "#8B6914",
+      "#5C4A1C"
+    ],
+    "iconName": "book.fill",
+    "imageKey": "baptism_jesus",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "La Palabra Hecha Carne",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué significa para ti que Jesús existió antes de todas las cosas y eligió habitar entre nosotros?"
+      },
+      {
+        "day": 2,
+        "title": "Agua en Vino",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Dónde en tu vida necesitas que Jesús transforme lo ordinario en algo milagroso?"
+      },
+      {
+        "day": 3,
+        "title": "Es Necesario Nacer de Nuevo",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo desafía o anima la idea de 'nacer de nuevo' tu comprensión de la fe?"
+      },
+      {
+        "day": 4,
+        "title": "Agua Viva",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿De qué pozos estás sacando que te dejan sediento, y cómo sería el agua viva?"
+      },
+      {
+        "day": 5,
+        "title": "Sanidad en la Piscina",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Hay un área donde has estado esperando sanidad pero no has pedido completamente a Jesús por ella?"
+      },
+      {
+        "day": 6,
+        "title": "Pan de Vida",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo se ve alimentarse de Jesús como el pan de vida cada día?"
+      },
+      {
+        "day": 7,
+        "title": "Ríos de Agua Viva",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo respondes cuando las opiniones del mundo sobre Jesús entran en conflicto con tu propia experiencia de Él?"
+      },
+      {
+        "day": 8,
+        "title": "La Luz del Mundo",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Dónde necesitas que Jesús brille Su luz en un lugar de vergüenza u oscuridad?"
+      },
+      {
+        "day": 9,
+        "title": "Vista para los Ciegos",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cuál es un área de ceguera espiritual a la que te gustaría que Jesús te abriera los ojos?"
+      },
+      {
+        "day": 10,
+        "title": "El Buen Pastor",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo cambia el saber que Jesús entregó Su vida voluntariamente tu visión de Su amor?"
+      },
+      {
+        "day": 11,
+        "title": "Lázaro, Ven Fuera",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué área muerta en tu vida necesitas que Jesús devuelva a la vida?"
+      },
+      {
+        "day": 12,
+        "title": "Ungido para el Entierro",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cuál es el acto de adoración más extravagante que podrías ofrecer a Jesús hoy?"
+      },
+      {
+        "day": 13,
+        "title": "El Rey Siervo",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿De quiénes te está pidiendo Jesús que laves los pies a través del servicio humilde esta semana?"
+      },
+      {
+        "day": 14,
+        "title": "El Camino, la Verdad, la Vida",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo afecta la promesa de Jesús de preparar un lugar para ti la manera en que vives hoy?"
+      },
+      {
+        "day": 15,
+        "title": "La Vid Verdadera",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo se ve prácticamente para ti 'permanecer' en Jesús esta semana?"
+      },
+      {
+        "day": 16,
+        "title": "El Ayudador Viene",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo has experimentado al Espíritu Santo guiándote hacia la verdad?"
+      },
+      {
+        "day": 17,
+        "title": "Jesús Ora por Ti",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo se siente saber que Jesús oró personalmente por tu unidad con Él y el Padre?"
+      },
+      {
+        "day": 18,
+        "title": "Traición y Arresto",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cuándo has negado conocer a Jesús, como Pedro, a través de tus palabras o acciones?"
+      },
+      {
+        "day": 19,
+        "title": "Está Consumado",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué carga estás llevando que Jesús ya terminó en la cruz?"
+      },
+      {
+        "day": 20,
+        "title": "Él Ha Resucitado",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo cambia la realidad de la resurrección la forma en que enfrentas tu mayor miedo?"
+      },
+      {
+        "day": 21,
+        "title": "¿Me Aman?",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Si Jesús te preguntara '¿Me amas?' tres veces hoy, ¿cómo moldearía tu respuesta tus acciones?"
+      }
+    ]
+  },
+  {
+    "id": "30-days-of-wisdom",
+    "name": "30 Días de Sabiduría",
+    "description": "Un capítulo de Proverbios para cada día del mes — sabiduría atemporal para decisiones, relaciones, trabajo y vida diaria.",
+    "totalDays": 30,
+    "category": "Wisdom",
+    "gradientColors": [
+      "#6B4C8A",
+      "#3D2B5C"
+    ],
+    "iconName": "lightbulb.fill",
+    "imageKey": "ten_commandments",
+    "applicableSeasons": [
+      "workingProfessional",
+      "parenthood"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "El Comienzo de la Sabiduría",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué significa que el temor del Señor sea el punto de partida de toda sabiduría?"
+      },
+      {
+        "day": 2,
+        "title": "Buscando Tesoro Escondido",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Con qué intencionalidad estás buscando la sabiduría como buscarías un tesoro escondido?"
+      },
+      {
+        "day": 3,
+        "title": "Confía con Todo Tu Corazón",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué decisión estás enfrentando donde necesitas confiar en Dios en lugar de apoyarte en tu propio entendimiento?"
+      },
+      {
+        "day": 4,
+        "title": "Guarda Tu Corazón",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué estás permitiendo entrar en tu corazón que puede estar alejándote del camino de la sabiduría?"
+      },
+      {
+        "day": 5,
+        "title": "El Peligro de la Locura",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Dónde en tu vida estás más tentado a tomar atajos que te alejan de lo mejor de Dios?"
+      },
+      {
+        "day": 6,
+        "title": "Lecciones de la Hormiga",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué puede enseñarte la diligencia de la hormiga sobre tus responsabilidades actuales?"
+      },
+      {
+        "day": 7,
+        "title": "El Costo de la Tentación",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué límites necesitas establecer para protegerte de la tentación?"
+      },
+      {
+        "day": 8,
+        "title": "La Sabiduría Llama",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo reconoces la voz de la sabiduría llamándote en medio del ruido de la vida diaria?"
+      },
+      {
+        "day": 9,
+        "title": "Dos Invitaciones",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué invitación estás aceptando más a menudo — el banquete de la sabiduría o el atajo de la locura?"
+      },
+      {
+        "day": 10,
+        "title": "El Hijo Sabio",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo refleja tu carácter en casa la sabiduría que buscas en público?"
+      },
+      {
+        "day": 11,
+        "title": "Pesas Honestas",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Dónde en tu vida necesitas buscar una mayor honestidad e integridad?"
+      },
+      {
+        "day": 12,
+        "title": "Palabras que Sanan",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo pueden tus palabras hoy traer sanación en lugar de daño a alguien a tu alrededor?"
+      },
+      {
+        "day": 13,
+        "title": "Caminando con los Sabios",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Quiénes son los compañeros sabios en tu vida, y cómo puedes aprender más de ellos?"
+      },
+      {
+        "day": 14,
+        "title": "El Camino que Parece Correcto",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cuándo un camino que te parecía correcto resultó llevarte en la dirección equivocada?"
+      },
+      {
+        "day": 15,
+        "title": "Una Respuesta Suave",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Quién en tu vida necesita una respuesta suave de ti en lugar de una palabra dura?"
+      },
+      {
+        "day": 16,
+        "title": "Compromete tus Planes",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué planes estás aferrándote que necesitas comprometer completamente al Señor?"
+      },
+      {
+        "day": 17,
+        "title": "Un Amigo en Todo Tiempo",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo puedes ser un amigo más fiel para alguien que está atravesando adversidades?"
+      },
+      {
+        "day": 18,
+        "title": "Una Torre Fuerte",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Cuando vienen problemas, ¿corres primero al nombre del Señor o a otra cosa?"
+      },
+      {
+        "day": 19,
+        "title": "Bondad hacia los Pobres",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo puedes mostrar generosidad a alguien en necesidad esta semana como un acto de adoración?"
+      },
+      {
+        "day": 20,
+        "title": "El Corazón del Rey",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo cambia confiar en la soberanía de Dios sobre los líderes y naciones la forma en que oras?"
+      },
+      {
+        "day": 21,
+        "title": "Justicia y Rectitud",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Dónde puedes buscar justicia y rectitud de manera más fiel en tu vida cotidiana?"
+      },
+      {
+        "day": 22,
+        "title": "Un Buen Nombre",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué tipo de reputación estás construyendo, y refleja el carácter de Cristo?"
+      },
+      {
+        "day": 23,
+        "title": "No Envidies",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué desencadena la envidia en tu corazón, y cómo puede la gratitud reemplazarla?"
+      },
+      {
+        "day": 24,
+        "title": "Fortaleza en la Adversidad",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo respondes cuando la adversidad pone a prueba la fortaleza de tu fe?"
+      },
+      {
+        "day": 25,
+        "title": "Manzanas de Oro",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cuándo fue la última vez que las palabras bien cronometradas de alguien fueron como manzanas de oro para ti?"
+      },
+      {
+        "day": 26,
+        "title": "El Espejo del Perezoso",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué área de pereza o procrastinación te está deteniendo de lo mejor que Dios tiene para ti?"
+      },
+      {
+        "day": 27,
+        "title": "El Hierro Afilando el Hierro",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Quién en tu vida te afila, y estás invirtiendo intencionalmente en esa relación?"
+      },
+      {
+        "day": 28,
+        "title": "Los Justos Son Valientes",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Dónde necesitas más valentía para defender lo que es correcto?"
+      },
+      {
+        "day": 29,
+        "title": "Visión y Obediencia",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo tener una visión arraigada en la Palabra de Dios te mantiene de vagar sin rumbo?"
+      },
+      {
+        "day": 30,
+        "title": "Cada Palabra de Dios",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 30,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué te enseña la oración de Agur — 'no me des ni pobreza ni riquezas' — sobre la satisfacción?"
+      }
+    ]
+  },
+  {
+    "id": "romans-heart-of-the-gospel",
+    "name": "Romanos: Corazón del Evangelio",
+    "description": "Una inmersión profunda de 16 días en la carta de Pablo a los Romanos — la presentación más completa del evangelio jamás escrita.",
+    "totalDays": 16,
+    "category": "Theology",
+    "gradientColors": [
+      "#8B3A3A",
+      "#5C2424"
+    ],
+    "iconName": "flame.fill",
+    "imageKey": "crucifixion",
+    "applicableSeasons": [
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "El Evangelio de Dios",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Alguna vez te sientes avergonzado del evangelio, y cómo sería vivir sin vergüenza?"
+      },
+      {
+        "day": 2,
+        "title": "El Juicio Justo de Dios",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo afecta el saber que Dios juzga imparcialmente la forma en que juzgas a los demás?"
+      },
+      {
+        "day": 3,
+        "title": "Todos Han Pecado",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo nivela la realidad de que todos han pecado el terreno entre tú y los demás?"
+      },
+      {
+        "day": 4,
+        "title": "Fe como Abraham",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué promesa imposible de Dios se te está pidiendo que creas por fe?"
+      },
+      {
+        "day": 5,
+        "title": "Paz con Dios",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo cambia la forma en que ves tus pruebas el saber que el sufrimiento produce perseverancia?"
+      },
+      {
+        "day": 6,
+        "title": "Muertos al Pecado, Vivos en Cristo",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué pecado necesitas considerar como muerto para que puedas vivir plenamente para Cristo?"
+      },
+      {
+        "day": 7,
+        "title": "La Lucha Interna",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo te anima la lucha honesta de Pablo con el pecado en tu propia batalla?"
+      },
+      {
+        "day": 8,
+        "title": "Sin Condenación",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué condenación sigues cargando que Cristo ya ha removido?"
+      },
+      {
+        "day": 9,
+        "title": "La Elección Soberana de Dios",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo respondes al misterio de la soberanía de Dios y la responsabilidad humana?"
+      },
+      {
+        "day": 10,
+        "title": "La Palabra Está Cerca de Ti",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Quién en tu vida necesita escuchar las buenas nuevas, y qué te impide compartirlas?"
+      },
+      {
+        "day": 11,
+        "title": "El Olivo",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo profundiza tu gratitud entender tu lugar como una rama 'injertada'?"
+      },
+      {
+        "day": 12,
+        "title": "Un Sacrificio Vivo",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo se ve en la práctica ofrecer tu cuerpo como un sacrificio vivo hoy?"
+      },
+      {
+        "day": 13,
+        "title": "Sumisión y Amor",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo puede el mandato de 'no deber nada más que amor' remodelar tus relaciones esta semana?"
+      },
+      {
+        "day": 14,
+        "title": "No Juzgues a Tu Hermano",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Dónde necesitas extender más gracia a un compañero creyente cuyas convicciones difieren de las tuyas?"
+      },
+      {
+        "day": 15,
+        "title": "Unidad para la Gloria de Dios",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo puedes buscar más activamente la unidad con otros creyentes para la gloria de Dios?"
+      },
+      {
+        "day": 16,
+        "title": "Saludos y el Dios de Paz",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Quiénes son las personas que Dios ha puesto a tu alrededor para fortalecer tu fe, y les has agradecido?"
+      }
+    ]
+  },
+  {
+    "id": "new-believers-journey",
+    "name": "El Viaje del Nuevo Creyente",
+    "description": "Una gira guiada de 14 días a través de los capítulos más esenciales de la Biblia — perfecta para cualquiera que esté comenzando a explorar la fe cristiana.",
+    "totalDays": 14,
+    "category": "Foundations",
+    "gradientColors": [
+      "#3A6B8B",
+      "#1C3D5C"
+    ],
+    "iconName": "sunrise.fill",
+    "imageKey": "samuel_called",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Nacido de Nuevo",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué significa para ti comenzar de nuevo con una vida espiritual completamente nueva?"
+      },
+      {
+        "day": 2,
+        "title": "El Pastor",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo cambia la forma en que te sientes acerca de Él imaginar a Dios como un pastor que cuida de ti?"
+      },
+      {
+        "day": 3,
+        "title": "Todos Han Pecado",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo te ayuda entender que todos fallan a aceptar la gracia de Dios sin vergüenza?"
+      },
+      {
+        "day": 4,
+        "title": "El Regalo de la Gracia",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué significa recibir algo que nunca podrías ganar por tu cuenta?"
+      },
+      {
+        "day": 5,
+        "title": "Sin Condenación",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué culpa o vergüenza necesitas soltar a la luz de la verdad de que no hay condenación en Cristo?"
+      },
+      {
+        "day": 6,
+        "title": "Salvados por Gracia",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo cambia la presión que te pones saber que la salvación es un regalo — no una recompensa?"
+      },
+      {
+        "day": 7,
+        "title": "El Camino, la Verdad, la Vida",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué significa que Jesús sea el camino cuando te sientes perdido o incierto sobre el futuro?"
+      },
+      {
+        "day": 8,
+        "title": "Dios es Amor",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo reconfigura la afirmación 'Dios es amor' tu comprensión de quién es Dios?"
+      },
+      {
+        "day": 9,
+        "title": "La Paz de Dios",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué preocupaciones puedes llevar a Dios ahora mismo a cambio de Su paz que sobrepasa todo entendimiento?"
+      },
+      {
+        "day": 10,
+        "title": "El Salón de la Fe",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué persona de fe en este capítulo te inspira más, y por qué?"
+      },
+      {
+        "day": 11,
+        "title": "Pruebas y Sabiduría",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo puedes comenzar a ver tus pruebas actuales como una oportunidad para crecer en lugar de un castigo?"
+      },
+      {
+        "day": 12,
+        "title": "Las Bienaventuranzas",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cuál de las Bienaventuranzas habla más directamente a donde estás en la vida ahora mismo?"
+      },
+      {
+        "day": 13,
+        "title": "La Oración del Señor",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo puede la Oración del Señor convertirse en un marco para la forma en que hablas con Dios cada día?"
+      },
+      {
+        "day": 14,
+        "title": "Todas las Cosas Nuevas",
+        "readings": [
+          {
+            "bookID": "REV",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo te da esperanza para el futuro la promesa de que Dios hará todas las cosas nuevas?"
+      }
+    ]
+  },
+  {
+    "id": "finding-purpose",
+    "name": "Encontrando Propósito",
+    "description": "Una exploración de 10 días de los pasajes más poderosos de las Escrituras sobre identidad, llamado y el propósito que Dios ha tejido en tu vida.",
+    "totalDays": 10,
+    "category": "Purpose",
+    "gradientColors": [
+      "#8B7B3A",
+      "#5C5124"
+    ],
+    "iconName": "star.fill",
+    "imageKey": "miraculous_catch",
+    "applicableSeasons": [
+      "workingProfessional",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Planes para Prosperarte",
+        "readings": [
+          {
+            "bookID": "JER",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo cambia la forma en que enfrentas la incertidumbre saber que Dios tiene planes para tu bienestar y futuro?"
+      },
+      {
+        "day": 2,
+        "title": "Maravillosamente Hecho",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué cambiaría si realmente creyeras que fuiste hecho con temor y maravilla?"
+      },
+      {
+        "day": 3,
+        "title": "Confía en el Señor",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué camino estás tratando de dirigir por tu cuenta en lugar de reconocer a Dios en él?"
+      },
+      {
+        "day": 4,
+        "title": "Creado para Buenas Obras",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué buenas obras sientes que Dios preparó de antemano para que tú camines en ellas?"
+      },
+      {
+        "day": 5,
+        "title": "Un Sacrificio Vivo",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo puedes usar los dones únicos que Dios te dio para servir a otros esta semana?"
+      },
+      {
+        "day": 6,
+        "title": "Llamado por Nombre",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 43,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo moldea tu sentido de identidad el hecho de que Dios te llame por tu nombre y te reclame como Suyo?"
+      },
+      {
+        "day": 7,
+        "title": "Vivir es Cristo",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Si 'vivir es Cristo', ¿qué significa eso para la forma en que abordas tu trabajo y tus relaciones?"
+      },
+      {
+        "day": 8,
+        "title": "Pon tu Mente en lo Alto",
+        "readings": [
+          {
+            "bookID": "COL",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿A qué cosa terrenal te aferras que te distrae de las cosas de arriba?"
+      },
+      {
+        "day": 9,
+        "title": "Un Pueblo Elegido",
+        "readings": [
+          {
+            "bookID": "1PE",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo redefine ser llamado 'un sacerdocio real' tu sentido de propósito y pertenencia?"
+      },
+      {
+        "day": 10,
+        "title": "Deléitate en el Señor",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué sucede con tus deseos cuando te comprometes a deleitarte en el Señor sobre todas las cosas?"
+      }
+    ]
+  },
+  {
+    "id": "comfort-in-hard-times",
+    "name": "Consuelo en Tiempos Difíciles",
+    "description": "Un refugio de 7 días en las Escrituras para temporadas de sufrimiento — estos pasajes han sostenido a los creyentes a través de los valles más oscuros durante miles de años.",
+    "totalDays": 7,
+    "category": "Comfort",
+    "gradientColors": [
+      "#5C7A8B",
+      "#3A4F5C"
+    ],
+    "iconName": "heart.fill",
+    "imageKey": "job_suffering",
+    "applicableSeasons": [
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "health"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "El Señor Está Cerca de los Quebrantados de Corazón",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo te consuela saber que Dios está especialmente cerca de los quebrantados de corazón en este momento?"
+      },
+      {
+        "day": 2,
+        "title": "No Temas, Estoy Contigo",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 41,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué miedo llevas que Dios te está pidiendo que sueltes en Sus manos?"
+      },
+      {
+        "day": 3,
+        "title": "El Dios de Todo Consuelo",
+        "readings": [
+          {
+            "bookID": "2CO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo podría tu propio sufrimiento equiparte para consolar a alguien más que está sufriendo?"
+      },
+      {
+        "day": 4,
+        "title": "Nada Puede Separarnos",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué circunstancia te ha hecho sentir separado del amor de Dios, y cómo habla este capítulo sobre eso?"
+      },
+      {
+        "day": 5,
+        "title": "Estad Quietos y Conoced",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué ruido en tu vida necesitas silenciar para poder escuchar a Dios decir 'estad quietos'?"
+      },
+      {
+        "day": 6,
+        "title": "Ven a Mí y Descansa",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué carga pesada llevas que Jesús te está invitando a dejar hoy?"
+      },
+      {
+        "day": 7,
+        "title": "Cada Lágrima Será Secada",
+        "readings": [
+          {
+            "bookID": "REV",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo te da fuerza para soportar hoy la promesa de que Dios secará cada lágrima de tus ojos?"
+      }
+    ]
+  },
+  {
+    "id": "sermon-on-the-mount",
+    "name": "El Sermón del Monte",
+    "description": "Un estudio cercano de 7 días del sermón más famoso de Jesús — la enseñanza radical que dio la vuelta a los valores del mundo.",
+    "totalDays": 7,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A8B5C",
+      "#4F5C3A"
+    ],
+    "iconName": "text.book.closed.fill",
+    "imageKey": "sermon_mount",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Las Bienaventuranzas y la Sal de la Tierra",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 26
+          }
+        ],
+        "reflection": "¿Qué bienaventuranza te desafía más, y cómo sería vivirla hoy?"
+      },
+      {
+        "day": 2,
+        "title": "Una Justicia Superior",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 27,
+            "verseEnd": 48
+          }
+        ],
+        "reflection": "¿Cómo te empuja el llamado de Jesús a 'ser perfecto como tu Padre es perfecto' más allá de seguir reglas hacia la transformación del corazón?"
+      },
+      {
+        "day": 3,
+        "title": "Dar, Orar y Ayunar en Secreto",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "¿Dónde necesitas cambiar tus prácticas espirituales de ser visto por otros a ser visto solo por Dios?"
+      },
+      {
+        "day": 4,
+        "title": "Tesoro en el Cielo",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 19,
+            "verseEnd": 34
+          }
+        ],
+        "reflection": "¿Qué te preocupa que Jesús te está pidiendo que confíes completamente en Él?"
+      },
+      {
+        "day": 5,
+        "title": "No Juzgues",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": 1,
+            "verseEnd": 14
+          }
+        ],
+        "reflection": "¿Qué viga en tu propio ojo necesitas abordar antes de señalar la paja en el ojo de alguien más?"
+      },
+      {
+        "day": 6,
+        "title": "Construido sobre la Roca",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": 15,
+            "verseEnd": 29
+          }
+        ],
+        "reflection": "¿Está tu vida construida sobre la roca de las palabras de Jesús, o sobre la arena de la sabiduría del mundo?"
+      },
+      {
+        "day": 7,
+        "title": "El Sermón en su Conjunto",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Después de leer todo el Sermón del Monte, ¿qué enseñanza es la que más deseas poner en práctica?"
+      }
+    ]
+  },
+  {
+    "id": "psalms-in-30-days",
+    "name": "Salmos en 30 Días",
+    "description": "Lee todos los 150 Salmos en 30 días — cinco salmos al día para sumergirte en el libro de adoración, oración y alabanza más rico de la Biblia.",
+    "totalDays": 30,
+    "category": "Worship",
+    "gradientColors": [
+      "#3A5C8B",
+      "#1C2D5C"
+    ],
+    "iconName": "music.note",
+    "imageKey": "jacob_ladder",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Salmos 1–5: Los Benditos y los Rotos",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué significa para ti deleitarte en la ley del Señor día y noche?"
+      },
+      {
+        "day": 2,
+        "title": "Salmos 6–10: Gritando a Dios",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo te da la honestidad de los gritos del salmista a Dios permiso para llevar tus emociones crudas a Él?"
+      },
+      {
+        "day": 3,
+        "title": "Salmos 11–15: Los Justos y los Malvados",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué revela el Salmo 15 sobre el tipo de persona que puede habitar en la presencia de Dios?"
+      },
+      {
+        "day": 4,
+        "title": "Salmos 16–20: Refugio y Rescate",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo los cielos declarando la gloria de Dios en el Salmo 19 despiertan adoración en tu propio corazón?"
+      },
+      {
+        "day": 5,
+        "title": "Salmos 21–25: El Pastor y el Buscador",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo el grito de abandono del Salmo 22 — eco de Jesús en la cruz — profundiza tu comprensión de Su sacrificio?"
+      },
+      {
+        "day": 6,
+        "title": "Salmos 26–30: Luz en la Oscuridad",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 30,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué significa que el llanto puede durar una noche, pero la alegría viene por la mañana?"
+      },
+      {
+        "day": 7,
+        "title": "Salmos 31–35: Confianza y Liberación",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 31,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 33,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 35,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo la bendición del perdón en el Salmo 32 te anima a confesar lo que has estado ocultando?"
+      },
+      {
+        "day": 8,
+        "title": "Salmos 36–40: Amor Firme",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 36,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 38,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 39,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 40,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo se ve 'deleitarte en el Señor' del Salmo 37 en tu rutina diaria?"
+      },
+      {
+        "day": 9,
+        "title": "Salmos 41–45: Sed por Dios",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 41,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 42,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 43,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 44,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 45,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cuándo ha sediento tu alma por Dios como un ciervo busca agua?"
+      },
+      {
+        "day": 10,
+        "title": "Salmos 46–50: Dios es Nuestra Fortaleza",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 47,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 48,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 49,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 50,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo el recordatorio del Salmo 46 de 'estar quieto' habla al caos en tu vida en este momento?"
+      },
+      {
+        "day": 11,
+        "title": "Salmos 51–55: Un Espíritu Roto",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 51,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 52,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 53,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 54,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 55,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo la oración de David por un corazón limpio en el Salmo 51 te da valor para acercarte a Dios con tus fracasos?"
+      },
+      {
+        "day": 12,
+        "title": "Salmos 56–60: Cuando Temo",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 56,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 57,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 58,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 59,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 60,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo se ve 'cuando temo, confiaré en ti' del Salmo 56 en tus circunstancias actuales?"
+      },
+      {
+        "day": 13,
+        "title": "Salmos 61–65: Descanso en Dios Solo",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 61,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 62,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 63,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 64,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 65,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Dónde encuentras descanso — verdaderamente en Dios solo, o estás buscando otras fuentes de paz?"
+      },
+      {
+        "day": 14,
+        "title": "Salmos 66–70: Grita de Alegría",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 66,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 67,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 68,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 69,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 70,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué asombrosas obras de Dios en tu vida querrías contar a otros?"
+      },
+      {
+        "day": 15,
+        "title": "Salmos 71–75: Esperanza Eterna",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 71,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 72,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 73,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 74,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 75,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo la lucha del salmista con la envidia en el Salmo 73 refleja tu propia experiencia?"
+      },
+      {
+        "day": 16,
+        "title": "Salmos 76–80: Recuerda Sus Maravillas",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 76,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 77,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 78,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 79,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 80,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué actos pasados de Dios puedes recordar y ensayar para fortalecer tu fe hoy?"
+      },
+      {
+        "day": 17,
+        "title": "Salmos 81–85: Avivamiento y Restauración",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 81,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 82,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 83,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 84,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 85,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo el anhelo por los atrios de Dios en el Salmo 84 resuena con tu deseo de adoración?"
+      },
+      {
+        "day": 18,
+        "title": "Salmos 86–90: De Eternidad a Eternidad",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 86,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 87,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 88,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 89,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 90,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo la perspectiva del Salmo 90 sobre la brevedad de la vida cambia la forma en que valoras tu tiempo?"
+      },
+      {
+        "day": 19,
+        "title": "Salmos 91–95: Refugio y Canto",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 91,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 92,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 93,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 94,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 95,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué significa habitar en el refugio del Altísimo, y cómo puedes practicar eso hoy?"
+      },
+      {
+        "day": 20,
+        "title": "Salmos 96–100: El Señor Reina",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 96,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 97,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 98,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 99,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 100,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo te desafía el llamado a 'hacer un ruido de júbilo' en el Salmo 100 a adorar con mayor entusiasmo?"
+      },
+      {
+        "day": 21,
+        "title": "Salmos 101–105: Bendice, oh alma mía, al Señor",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 101,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 102,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 103,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 104,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 105,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué beneficios del Señor que se mencionan en el Salmo 103 has olvidado agradecerle?"
+      },
+      {
+        "day": 22,
+        "title": "Salmos 106–110: Recordando la Fidelidad de Dios",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 106,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 107,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 108,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 109,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 110,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo has experimentado el amor constante de Dios rescatándote de tu propia vagabundeo?"
+      },
+      {
+        "day": 23,
+        "title": "Salmos 111–115: Alaba al Señor",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 111,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 112,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 113,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 114,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 115,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo te desafía el contraste entre el Dios vivo y los ídolos sin vida en el Salmo 115 sobre dónde colocas tu confianza?"
+      },
+      {
+        "day": 24,
+        "title": "Salmos 116–120: Comienzan las Canciones de Ascenso",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 116,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 117,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 118,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 119,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 120,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué versículo del salmo más largo — Salmo 119 — habla más poderosamente a tu amor por la Palabra de Dios?"
+      },
+      {
+        "day": 25,
+        "title": "Salmos 121–125: Ascendiendo al Señor",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 121,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 122,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 123,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 124,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 125,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿De dónde viene tu ayuda y cómo te fortalece el Salmo 121 en tu confianza en la protección de Dios?"
+      },
+      {
+        "day": 26,
+        "title": "Salmos 126–130: Sembrando en Lloros",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 126,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 127,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 128,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 129,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 130,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué semillas estás sembrando en lágrimas en este momento, confiando en que cosecharás con gritos de alegría?"
+      },
+      {
+        "day": 27,
+        "title": "Salmos 131–135: Confianza Humilde",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 131,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 132,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 133,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 134,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 135,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo te inspira la imagen de unidad en el Salmo 133 a buscar una comunión más profunda con otros creyentes?"
+      },
+      {
+        "day": 28,
+        "title": "Salmos 136–140: Su Amor Dura Para Siempre",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 136,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 137,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 138,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 140,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo te ancla el estribillo 'Su amor dura para siempre' en el Salmo 136 cuando todo lo demás se siente incierto?"
+      },
+      {
+        "day": 29,
+        "title": "Salmos 141–145: Oraciones de la Tarde",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 141,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 142,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 143,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 144,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 145,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo moldea la declaración de David de que Dios es grande y muy digno de alabanza tu oración de esta noche?"
+      },
+      {
+        "day": 30,
+        "title": "Salmos 146–150: Que Todo Alabe al Señor",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 146,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 147,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 148,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 149,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 150,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "A medida que los Salmos cierran con 'que todo lo que tiene aliento alabe al Señor', ¿cómo harás de la alabanza un hábito diario?"
+      }
+    ]
+  },
+  {
+    "id": "life-of-david",
+    "name": "La Vida de David",
+    "description": "Un recorrido de 14 días con el rey pastor — desde la unción hasta la derrota del gigante, desde el exilio hasta el trono — emparejado con los salmos nacidos de cada temporada.",
+    "totalDays": 14,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6B2D2D",
+      "#3A1818"
+    ],
+    "iconName": "shield.lefthalf.filled",
+    "imageKey": "david_goliath",
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Ungido en la Oscuridad",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Dónde te está encontrando Dios en los lugares tranquilos y no vistos antes de que el mundo se dé cuenta?"
+      },
+      {
+        "day": 2,
+        "title": "Enfrentando al Gigante",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué gigante estás enfrentando hoy, y en nombre de quién lo enfrentarás?"
+      },
+      {
+        "day": 3,
+        "title": "La Lealtad de Jonatán",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Quién ha sido un Jonatán para ti, y cómo puedes ser ese amigo para alguien más?"
+      },
+      {
+        "day": 4,
+        "title": "Corriendo por Tu Vida",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo te enseña el salmo de David en la cueva a alabar a Dios antes de que llegue la liberación?"
+      },
+      {
+        "day": 5,
+        "title": "Moderación en la Cueva",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Dónde necesitas practicar la moderación cuando podrías responder a alguien que te ha hecho daño?"
+      },
+      {
+        "day": 6,
+        "title": "Sabiduría de Abigail",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿El consejo sabio de quién has resistido últimamente que podría estar salvándote de una decisión tonta?"
+      },
+      {
+        "day": 7,
+        "title": "La Caída de Saúl",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 31,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "2SA",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo transforma el duelo de David por su enemigo Saúl la forma en que ves a las personas con las que luchas?"
+      },
+      {
+        "day": 8,
+        "title": "El Rey Baila",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cuándo fue la última vez que adoraste con total abandono, sin preocuparte por lo que alguien pensara?"
+      },
+      {
+        "day": 9,
+        "title": "Un Pacto Eterno",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo profundiza la promesa de Dios de un trono interminable a través de David tu esperanza en Cristo hoy?"
+      },
+      {
+        "day": 10,
+        "title": "La Caída de un Rey Pastor",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "2SA",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Dónde eres más vulnerable a pequeños compromisos que podrían crecer en grandes pecados si no se confrontan?"
+      },
+      {
+        "day": 11,
+        "title": "Una Oración Rota",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 51,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué en tu vida necesita la oración 'crea en mí un corazón limpio' esta noche?"
+      },
+      {
+        "day": 12,
+        "title": "Bendice al Señor, Oh Alma Mía",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 103,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cuál de los beneficios del Señor enumerados aquí necesitas recordar más hoy?"
+      },
+      {
+        "day": 13,
+        "title": "Conocido con Temor",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué consuelo — o desafío — sientes al saber que Dios ve cada rincón oculto de tu corazón?"
+      },
+      {
+        "day": 14,
+        "title": "El Pastor Permanece",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "A través de todas las temporadas de David, el Pastor nunca lo dejó — ¿cómo has experimentado esa misma fidelidad en tu propia historia?"
+      }
+    ]
+  },
+  {
+    "id": "christmas-story",
+    "name": "La Historia de Navidad",
+    "description": "Un viaje de adviento de 7 días a través de la natividad — desde la profecía antigua hasta el pesebre — redescubre la maravilla de Dios acercándose.",
+    "totalDays": 7,
+    "category": "Advent",
+    "gradientColors": [
+      "#3C5A7A",
+      "#1F2F45"
+    ],
+    "iconName": "star.fill",
+    "imageKey": "nativity",
+    "applicableSeasons": [
+      "parenthood",
+      "newlyMarried",
+      "growing",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "grief",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Un Niño Anunciado",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cuál de los nombres de Isaías para el niño que viene — Maravilloso Consejero, Dios Poderoso, Príncipe de Paz — necesitas más ahora mismo?"
+      },
+      {
+        "day": 2,
+        "title": "Desde el Pequeño Belén",
+        "readings": [
+          {
+            "bookID": "MIC",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo habla el hecho de que Dios eligiera la pequeña y olvidada ciudad de Belén a los lugares ocultos en tu propia vida?"
+      },
+      {
+        "day": 3,
+        "title": "El Sí de María",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Dónde está Dios pidiendo tu 'hágase en mí según tu palabra' en una temporada de incertidumbre?"
+      },
+      {
+        "day": 4,
+        "title": "La Obediencia Silenciosa de José",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo desafía la fe silenciosa y costosa de José la manera en que piensas sobre ser visto por otros?"
+      },
+      {
+        "day": 5,
+        "title": "El Verbo Hecho Carne",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué significa para ti que el Verbo eterno eligiera mudarse a tu vecindario?"
+      },
+      {
+        "day": 6,
+        "title": "Pastores y un Pesebre",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Por qué crees que la 'buena noticia de gran gozo' de los ángeles fue anunciada primero a los pastores, no a los reyes?"
+      },
+      {
+        "day": 7,
+        "title": "Sabios de Lejos",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo sería para ti traer lo mejor — tu oro, incienso y mirra — a Jesús hoy?"
+      }
+    ]
+  },
+  {
+    "id": "walking-with-elijah",
+    "name": "Caminando con Elías",
+    "description": "Un estudio de 10 días sobre el profeta que se enfrentó solo a un reino — y el Dios que lo encontró en los cuervos, la cueva y la voz suave y delicada.",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6E4A2C",
+      "#3A2814"
+    ],
+    "iconName": "flame.fill",
+    "imageKey": "elijah_ravens",
+    "applicableSeasons": [
+      "hardSeason",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose",
+      "anxiety"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Ante Acab",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 6
+          }
+        ],
+        "reflection": "¿Dónde te está pidiendo Dios que hables una verdad difícil, y confías en Él para proveer después de que obedezcas?"
+      },
+      {
+        "day": 2,
+        "title": "La Viuda de Sarepta",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 17,
+            "verseStart": 7,
+            "verseEnd": 24
+          }
+        ],
+        "reflection": "¿Qué pequeña 'última mano de harina' te está pidiendo Dios que ofrezcas en fe esta semana?"
+      },
+      {
+        "day": 3,
+        "title": "Enfrentamiento en el Carmelo",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué altar en tu vida necesitas reconstruir — un lugar de adoración que ha caído en el descuido?"
+      },
+      {
+        "day": 4,
+        "title": "Corriendo al Desierto",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 19,
+            "verseStart": 1,
+            "verseEnd": 8
+          }
+        ],
+        "reflection": "¿Cuándo has experimentado la suave provisión de Dios — una comida, una siesta, un amigo — en medio de tu agotamiento?"
+      },
+      {
+        "day": 5,
+        "title": "La Voz Suave y Delicada",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 19,
+            "verseStart": 9,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "¿Qué ruido necesitas silenciar para poder escuchar el susurro de Dios en lugar de esperar el terremoto?"
+      },
+      {
+        "day": 6,
+        "title": "La Viña de Naboth",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo transforma esta historia la manera en que ves la injusticia que nadie más parece dispuesto a confrontar?"
+      },
+      {
+        "day": 7,
+        "title": "Fuego del Cielo",
+        "readings": [
+          {
+            "bookID": "2KI",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Dónde estás tentado a consultar otros 'dioses de Ecrón' en lugar de llevar tus miedos al Señor?"
+      },
+      {
+        "day": 8,
+        "title": "El Manto Pasa",
+        "readings": [
+          {
+            "bookID": "2KI",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿De quién es el manto que Dios te está pidiendo que recojas — o de quién estás listo para pasar el manto?"
+      },
+      {
+        "day": 9,
+        "title": "Elías en la Montaña con Cristo",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "¿Qué significa que el mismo profeta que se sintió más solo un día estaba de pie con Jesús en gloria?"
+      },
+      {
+        "day": 10,
+        "title": "Un Hombre Como Nosotros",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": 13,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "Santiago dice que Elías era 'un hombre con una naturaleza como la nuestra' — ¿cómo cambia eso la manera en que oras esta semana?"
+      }
+    ]
+  },
+  {
+    "id": "beatitudes-deep-dive",
+    "name": "Las Bienaventuranzas: Ocho Retratos",
+    "description": "Un estudio de retratos de 8 días sobre los ciudadanos del reino de Jesús — una bienaventuranza a la vez, cada una emparejada con una escritura que completa el cuadro.",
+    "totalDays": 8,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A6B3A",
+      "#4F4524"
+    ],
+    "iconName": "sparkles",
+    "imageKey": "beatitudes",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Pobres en Espíritu",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 3
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 57,
+            "verseStart": 14,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "¿Cómo se vería hoy venir a Dios admitiendo tu total dependencia en lugar de demostrar tu competencia?"
+      },
+      {
+        "day": 2,
+        "title": "Los Que Lloran",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 4,
+            "verseEnd": 4
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 42,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué pérdida o duelo has estado tratando de evitar que Jesús te invita a enfrentar realmente?"
+      },
+      {
+        "day": 3,
+        "title": "Los Mansos",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 5,
+            "verseEnd": 5
+          },
+          {
+            "bookID": "NUM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Dónde confundes mansedumbre con debilidad, y cómo el ejemplo de Moisés redefine eso?"
+      },
+      {
+        "day": 4,
+        "title": "Hambrientos de Justicia",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 6,
+            "verseEnd": 6
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 63,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué hambres menores han estado desplazando tu apetito por la justicia de Dios esta semana?"
+      },
+      {
+        "day": 5,
+        "title": "Los Misericordiosos",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 7,
+            "verseEnd": 7
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "¿Quién ha puesto Dios en tu camino hoy que necesita que seas el samaritano en lugar del sacerdote?"
+      },
+      {
+        "day": 6,
+        "title": "Puros de Corazón",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 8,
+            "verseEnd": 8
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué motivo oculto necesitas traer a la luz para que tu corazón pueda ser único en su devoción?"
+      },
+      {
+        "day": 7,
+        "title": "Los Pacificadores",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 9,
+            "verseEnd": 9
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": 9,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "¿Dónde te está llamando Dios a hacer el trabajo más difícil de hacer la paz en lugar de simplemente mantenerla?"
+      },
+      {
+        "day": 8,
+        "title": "Los Perseguidos",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 10,
+            "verseEnd": 16
+          },
+          {
+            "bookID": "1PE",
+            "chapter": 4,
+            "verseStart": 12,
+            "verseEnd": 19
+          }
+        ],
+        "reflection": "¿Cómo puede la alegría que Jesús promete redefinir la manera en que respondes la próxima vez que la fidelidad te cueste algo?"
+      }
+    ]
+  },
+  {
+    "id": "holy-week",
+    "name": "Semana Santa: El Viaje a la Pascua",
+    "description": "Camina la Semana Santa día a día — desde la entrada triunfal hasta la cruz y la tumba vacía — y vive la semana más trascendental de la historia.",
+    "totalDays": 8,
+    "category": "Easter",
+    "gradientColors": [
+      "#5A2E2E",
+      "#2F1515"
+    ],
+    "iconName": "cross.fill",
+    "imageKey": "triumphal_entry",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "grief",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Domingo de Ramos",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 21,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "¿Qué significa recibir a Jesús como Rey cuando Él viene de una manera que no esperabas?"
+      },
+      {
+        "day": 2,
+        "title": "Limpiando el Templo",
+        "readings": [
+          {
+            "bookID": "MRK",
+            "chapter": 11,
+            "verseStart": 12,
+            "verseEnd": 25
+          }
+        ],
+        "reflection": "¿Qué 'mesas' en tu corazón está pidiendo Jesús que derribes para que Su presencia sea bien recibida?"
+      },
+      {
+        "day": 3,
+        "title": "Enseñando en el Templo",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 22,
+            "verseStart": 34,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "¿Cómo reordenaría tu semana amar a Dios con todo lo que eres — y a tu prójimo como a ti mismo?"
+      },
+      {
+        "day": 4,
+        "title": "La Unción en Betania",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 12,
+            "verseStart": 1,
+            "verseEnd": 11
+          }
+        ],
+        "reflection": "¿Qué acto extravagante de amor puedes ofrecerle a Jesús hoy, incluso si el mundo lo llama un desperdicio?"
+      },
+      {
+        "day": 5,
+        "title": "La Última Cena",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿A quién le está pidiendo Jesús que le laves los pies esta semana, y qué orgullo lo está dificultando?"
+      },
+      {
+        "day": 6,
+        "title": "Getsemaní",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 26,
+            "verseStart": 36,
+            "verseEnd": 56
+          }
+        ],
+        "reflection": "¿Dónde en tu vida necesitas orar, 'No mi voluntad, sino la tuya sea hecha' — y realmente significarlo?"
+      },
+      {
+        "day": 7,
+        "title": "Viernes Santo",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué cosa inconclusa en tu vida necesita escuchar las palabras de Jesús: 'Está consumado'?"
+      },
+      {
+        "day": 8,
+        "title": "Mañana de Pascua",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Dónde necesitas que el poder de la resurrección te encuentre en la tumba de una esperanza muerta hoy?"
+      }
+    ]
+  },
+  {
+    "id": "genesis-beginnings",
+    "name": "Génesis: En el Principio",
+    "description": "Un recorrido de 12 días a través del primer libro de la Biblia — la creación, la caída, el diluvio, los patriarcas — rastreando la fiel búsqueda de Dios desde el principio.",
+    "totalDays": 12,
+    "category": "Foundations",
+    "gradientColors": [
+      "#3A5A4A",
+      "#1C2D24"
+    ],
+    "iconName": "globe.americas.fill",
+    "imageKey": "noah_ark",
+    "applicableSeasons": [
+      "growing",
+      "startingOver",
+      "newlyMarried"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "En el Principio",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué área 'vacía y desordenada' de tu vida está Dios hablando orden y luz en este momento?"
+      },
+      {
+        "day": 2,
+        "title": "El Jardín y la Imagen",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué significa para ti que Dios te formó con Sus propias manos y sopló Su propia vida en ti?"
+      },
+      {
+        "day": 3,
+        "title": "La Caída",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué mentira de la serpiente — '¿Realmente dijo Dios?' — sigues escuchando, y cómo puedes responderla con verdad?"
+      },
+      {
+        "day": 4,
+        "title": "Noé y el Diluvio",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "GEN",
+            "chapter": 9,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "¿Dónde necesitas confiar en las promesas del arcoíris de Dios en medio de una temporada que aún se siente inundada?"
+      },
+      {
+        "day": 5,
+        "title": "El Llamado de Abram",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué 'país y parentela' te está pidiendo Dios que dejes atrás para seguirlo hacia algo nuevo?"
+      },
+      {
+        "day": 6,
+        "title": "Contando las Estrellas",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cuál es la promesa imposible de Dios en la que necesitas seguir creyendo, incluso en las noches en que parece risible?"
+      },
+      {
+        "day": 7,
+        "title": "La Ofrenda de Isaac",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué se ha convertido en un 'Isaac' para ti — un regalo que amas tanto que está comenzando a rivalizar con Dios mismo?"
+      },
+      {
+        "day": 8,
+        "title": "La Escalera de Jacob",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Dónde se ha presentado Dios inesperadamente últimamente, seguramente en un lugar que no sabías que estaba?"
+      },
+      {
+        "day": 9,
+        "title": "Luchando Toda la Noche",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Por qué estás luchando con Dios en este momento, y estás dispuesto a caminar con una cojera si significa recibir Su bendición?"
+      },
+      {
+        "day": 10,
+        "title": "Los Sueños de José",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿En qué 'foso' te encuentras ahora que Dios puede estar usando como el primer capítulo de una historia mucho más grande?"
+      },
+      {
+        "day": 11,
+        "title": "Reunidos en Egipto",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 45,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué relación en tu vida está lista para el perdón que José modeló: 'Ustedes intentaron el mal, pero Dios lo convirtió en bien'?"
+      },
+      {
+        "day": 12,
+        "title": "Dios Lo Convirtió en Bien",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 50,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Mirando hacia atrás en la cosa más difícil que has atravesado, ¿dónde ahora ves la mano de Dios tejiéndolo para bien?"
+      }
+    ]
+  },
+  {
+    "id": "daniel-exile",
+    "name": "Daniel: Fiel en el Exilio",
+    "description": "Un viaje de 12 días a través del libro de Daniel — manteniéndose firme en una corte pagana, orando cuando es ilegal, y confiando en Dios con todo el curso de la historia.",
+    "totalDays": 12,
+    "category": "Character Study",
+    "gradientColors": [
+      "#5A3A2A",
+      "#2E1F16"
+    ],
+    "iconName": "shield.fill",
+    "imageKey": "daniel_lions",
+    "applicableSeasons": [
+      "workingProfessional",
+      "hardSeason",
+      "student",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Resuelto a No Contaminarse",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué pequeño compromiso diario te está invitando Dios a 'resolver' que ya no aceptarás?"
+      },
+      {
+        "day": 2,
+        "title": "El Sueño del Rey",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Dónde necesitas confiar en que el Dios que revela cosas profundas y ocultas es soberano sobre los imperios de tu tiempo?"
+      },
+      {
+        "day": 3,
+        "title": "El Horno de Fuego",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo se vería la fe de 'pero si no' para ti esta semana — una confianza que obedece incluso sin una garantía de rescate?"
+      },
+      {
+        "day": 4,
+        "title": "Un Rey Humilde",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Dónde está el orgullo susurrando que construiste lo que tienes, y cómo te está llamando Dios a levantar tus ojos?"
+      },
+      {
+        "day": 5,
+        "title": "La Escritura en la Pared",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué en tu vida has sido 'pesado' por Dios, y qué arrepentimiento se te está invitando?"
+      },
+      {
+        "day": 6,
+        "title": "El Foso de los Leones",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué práctica de oración a través de la ventana abierta vale la pena mantener, incluso si te cuesta algo social o profesionalmente?"
+      },
+      {
+        "day": 7,
+        "title": "El Anciano de Días",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo te da la visión del Anciano de Días y del Hijo del Hombre una perspectiva más amplia de los titulares?"
+      },
+      {
+        "day": 8,
+        "title": "El Carnero y el Macho Cabrío",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Cuando el futuro se siente confuso, ¿qué te ancla en el Dios que ve el final desde el principio?"
+      },
+      {
+        "day": 9,
+        "title": "Una Oración de Confesión",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Dónde necesita tu comunidad o familia que te pongas en la brecha con una oración de confesión como la de Daniel?"
+      },
+      {
+        "day": 10,
+        "title": "El Hombre de Lino",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo cambia la realidad de la batalla espiritual no vista la forma en que perseveras en la oración cuando nada parece moverse?"
+      },
+      {
+        "day": 11,
+        "title": "Reyes y Reinos",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué reino terrenal has puesto demasiado peso, y cómo puedes reanclar tu esperanza?"
+      },
+      {
+        "day": 12,
+        "title": "Los Sabios Resplandecerán",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cómo alimenta tu fidelidad hoy la promesa de que 'los sabios resplandecerán como el brillo de los cielos'?"
+      }
+    ]
+  },
+  {
+    "id": "lords-prayer-deep-dive",
+    "name": "La Oración del Señor: Enséñanos a Orar",
+    "description": "Una meditación de 7 días sobre la oración que Jesús nos enseñó — una petición por día — desacelerando para significar cada palabra.",
+    "totalDays": 7,
+    "category": "Prayer",
+    "gradientColors": [
+      "#4A5A7A",
+      "#242D3D"
+    ],
+    "iconName": "hands.sparkles.fill",
+    "imageKey": "lords_prayer",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "parenthood",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Nuestro Padre en los Cielos",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 5,
+            "verseEnd": 13
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": 12,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "¿Qué cambia sobre tu oración hoy si realmente crees que te estás acercando a tu Padre, no solo a una deidad distante?"
+      },
+      {
+        "day": 2,
+        "title": "Santificado Sea Tu Nombre",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 99,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 6,
+            "verseStart": 1,
+            "verseEnd": 8
+          }
+        ],
+        "reflection": "¿Cómo sería hoy para ti tratar el nombre de Dios como santo en tus pensamientos, tu boca y tus decisiones?"
+      },
+      {
+        "day": 3,
+        "title": "Venga Tu Reino",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 13,
+            "verseStart": 31,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "¿Dónde anhelas ver el reino de Dios irrumpir en tu mundo esta semana — y cómo orarás con expectativa?"
+      },
+      {
+        "day": 4,
+        "title": "Hágase Tu Voluntad",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 26,
+            "verseStart": 36,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "¿Qué oración tuya está esperando el honesto 'no mi voluntad, sino la tuya'? ¿Qué costaría eso, y qué liberaría?"
+      },
+      {
+        "day": 5,
+        "title": "Danos Hoy",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 10,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "¿Cómo cura la oración del pan diario la ansiedad de intentar acumular la gracia de mañana hoy?"
+      },
+      {
+        "day": 6,
+        "title": "Perdónanos Así Como Nosotros Perdonamos",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 18,
+            "verseStart": 21,
+            "verseEnd": 35
+          }
+        ],
+        "reflection": "¿A quién necesitas liberar de su deuda para que tu oración de perdón no rebote en un corazón cerrado?"
+      },
+      {
+        "day": 7,
+        "title": "Líbranos de Malos",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 6,
+            "verseStart": 10,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "¿Dónde necesitas ponerte la armadura de Dios y orar específicamente por liberación del maligno hoy?"
+      }
+    ]
+  },
+  {
+    "id": "parables-kingdom",
+    "name": "Parábolas del Reino",
+    "description": "Un recorrido de 10 días a través de las parábolas más penetrantes de Jesús — historias cortas que transforman corazones y revelan el reino al revés de Dios.",
+    "totalDays": 10,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A4A2A",
+      "#3E2516"
+    ],
+    "iconName": "quote.opening",
+    "imageKey": "prodigal_son",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "workingProfessional",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "relationships",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "El Sembrador",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 13,
+            "verseStart": 1,
+            "verseEnd": 23
+          }
+        ],
+        "reflection": "¿Qué tipo de suelo es tu corazón en este momento, y qué necesitas hacer para convertirte en 'buena tierra' esta temporada?"
+      },
+      {
+        "day": 2,
+        "title": "El Buen Samaritano",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "¿A quién te sientes tentado a pasar de largo, y cómo sería cruzar la calle en su lugar?"
+      },
+      {
+        "day": 3,
+        "title": "El Hijo Pródigo",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 15,
+            "verseStart": 11,
+            "verseEnd": 32
+          }
+        ],
+        "reflection": "¿A cuál hijo te pareces más hoy — al errante o al resentido hermano mayor — y qué quiere darte el Padre?"
+      },
+      {
+        "day": 4,
+        "title": "La Oveja y la Moneda Perdida",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 15,
+            "verseStart": 1,
+            "verseEnd": 10
+          }
+        ],
+        "reflection": "¿Dónde en tu vida te sientes perdido, y cómo cambia las cosas saber que el cielo te está buscando activamente?"
+      },
+      {
+        "day": 5,
+        "title": "El Rico Necio",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 12,
+            "verseStart": 13,
+            "verseEnd": 34
+          }
+        ],
+        "reflection": "¿Qué 'granero' más grande estás tentado a construir, y cómo puedes ser rico hacia Dios en su lugar?"
+      },
+      {
+        "day": 6,
+        "title": "El Siervo Ingrato",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 18,
+            "verseStart": 21,
+            "verseEnd": 35
+          }
+        ],
+        "reflection": "¿Qué pequeña ofensa todavía te está ahogando, y cómo transforma la montaña de tu propio perdón eso?"
+      },
+      {
+        "day": 7,
+        "title": "El Fariseo y el Recaudador de Impuestos",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 18,
+            "verseStart": 9,
+            "verseEnd": 14
+          }
+        ],
+        "reflection": "¿Dónde suena tu oración en secreto más como el fariseo que como el recaudador de impuestos — y cómo puedes humillarte hoy?"
+      },
+      {
+        "day": 8,
+        "title": "Los Trabajadores en la Viña",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 20,
+            "verseStart": 1,
+            "verseEnd": 16
+          }
+        ],
+        "reflection": "¿A quién has resentido por su gracia que llegó tarde en tu vida, y cómo te libera la generosidad del Dueño de la Tierra de eso?"
+      },
+      {
+        "day": 9,
+        "title": "Las Diez Vírgenes",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 25,
+            "verseStart": 1,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "¿Qué 'aceite' de relación continua con Cristo podría estar escaseando, y cómo puedes atenderlo esta semana?"
+      },
+      {
+        "day": 10,
+        "title": "Las Ovejas y las Cabras",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 25,
+            "verseStart": 31,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "¿En el rostro de quién, hoy, está Jesús esperando ser reconocido — y responderás?"
+      }
+    ]
+  },
+  {
+    "id": "esther-for-such-a-time",
+    "name": "Esther: Para Tal Tiempo Como Este",
+    "description": "Un recorrido de 10 días a través del libro de Esther — 10 capítulos, 10 días — trazando la providencia oculta de Dios a través de la crisis, el coraje y la inversión.",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6A3A5C",
+      "#2E1826"
+    ],
+    "iconName": "crown.fill",
+    "imageKey": "mordecai_triumph",
+    "applicableSeasons": [
+      "workingProfessional",
+      "student",
+      "hardSeason",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Una Fiesta en el Palacio",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Dónde en el ruido y el exceso de tu mundo sientes que Dios está preparando un escenario en silencio?"
+      },
+      {
+        "day": 2,
+        "title": "Una Reina Inesperada",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué circunstancia no elegida en tu vida podría estar usando Dios para posicionarte para un propósito que aún no puedes ver?"
+      },
+      {
+        "day": 3,
+        "title": "La Sombra de Amán",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Cuando el mal parece estar ganando impulso en tu mundo, ¿cómo te aferras a la bondad de Dios?"
+      },
+      {
+        "day": 4,
+        "title": "Para Tal Tiempo Como Este",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué arriesgado paso de 'si perezco, perezco' podría estar pidiéndote Dios por el bien de alguien más?"
+      },
+      {
+        "day": 5,
+        "title": "Acercándose al Rey",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Cuándo has sentido el favor de Dios abriendo una puerta que tenías miedo de cruzar?"
+      },
+      {
+        "day": 6,
+        "title": "Una Noche Sin Sueño",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Dónde has visto la providencia no vista de Dios organizando 'coincidencias' para tu bien?"
+      },
+      {
+        "day": 7,
+        "title": "La Gran Inversión",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué situación se siente imposible en este momento que podría estar más cerca de una inversión de lo que te das cuenta?"
+      },
+      {
+        "day": 8,
+        "title": "Nuevos Decretos",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Dónde necesitas orar nuevos 'decretos' audaces de esperanza sobre una situación que ha sido descartada?"
+      },
+      {
+        "day": 9,
+        "title": "El Día de Purim",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Qué rescates ha trabajado Dios ya por ti que merecen ser recordados y celebrados a propósito?"
+      },
+      {
+        "day": 10,
+        "title": "Mardoqueo el Abogado",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "¿Quién a tu alrededor necesita que seas el Mardoqueo — alguien que habla por su bienestar incluso cuando es costoso?"
+      }
+    ]
+  },
+  {
+    "id": "ruth-redemption",
+    "name": "Rut: Una Historia de Redención",
+    "description": "Un recorrido de 4 días a través del pequeño libro de Rut — donde la pérdida se encuentra con la lealtad, la recolección se encuentra con la providencia, y una viuda extranjera se convierte en la bisabuela del Rey David.",
+    "totalDays": 4,
+    "category": "Character Study",
+    "gradientColors": [
+      "#8B6642",
+      "#4A331F"
+    ],
+    "iconName": "heart.circle.fill",
+    "imageKey": "jacob_rachel_well",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "relationships",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Pérdida y Lealtad",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Noemí se llama a sí misma 'Mara' — amarga. Rut responde a la pérdida con un voto: 'Donde tú vayas, yo iré.' ¿Cuál de las dos voces — la amarga honestidad o la lealtad obstinada — describe más de cerca cómo estás enfrentando esta temporada, y qué podría cambiar si ambas pudieran coexistir?"
+      },
+      {
+        "day": 2,
+        "title": "Bondad Inesperada",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Observa cómo el narrador dice que Rut 'sucedió' a recoger espigas en el campo de Booz — un sutil guiño de que nada en esta historia es realmente aleatorio. ¿Dónde en tu vida podría estar Dios orquestando lo que parece una coincidencia en una bondad silenciosa?"
+      },
+      {
+        "day": 3,
+        "title": "Fe Audaz en la Era",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "El enfoque de Rut hacia Booz invoca el concepto hebreo del redentor — un pariente que recupera tierras y vidas que se han perdido. ¿Qué significa para ti que la imagen de redención en la Biblia comienza aquí, en una era, no en un templo?"
+      },
+      {
+        "day": 4,
+        "title": "El Redentor y la Línea Real",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 1,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "Rut — una moabita, una viuda, una extranjera — aparece en el árbol genealógico de Jesús. ¿Cómo reconfigura ese final tu comprensión de quién Dios entrelaza en Su historia de salvación, y cómo podría estar entrelazándote a ti?"
+      }
+    ]
+  },
+  {
+    "id": "jonah-reluctant-prophet",
+    "name": "Jonás: El Profeta Reacio",
+    "description": "Un viaje de 4 días a través de Jonás — un profeta que huyó, una tormenta que lo atrapó, una ciudad que se arrepintió, y un Dios cuya misericordia fue más allá del prejuicio de Jonás.",
+    "totalDays": 4,
+    "category": "Character Study",
+    "gradientColors": [
+      "#2E5A6B",
+      "#15303A"
+    ],
+    "iconName": "water.waves",
+    "imageKey": "jesus_calms_storm",
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "Huyendo de Dios",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Dios dice 've a Nínive' y Jonás aborda un barco hacia Tarsis — el extremo opuesto del mundo conocido. ¿Qué asignación de Dios estás navegando lejos, y de dónde proviene realmente la tormenta que debería advertirte?"
+      },
+      {
+        "day": 2,
+        "title": "Oración desde lo Profundo",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jonás ora desde dentro de un pez — el punto más bajo imaginable — y lo llama 'el templo.' ¿Cómo cambia esa reconfiguración tu visión de tus propios lugares bajos? ¿Puede la oración convertir cualquier profundidad en un santuario?"
+      },
+      {
+        "day": 3,
+        "title": "Una Ciudad que se Arrepintió",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nínive era el enemigo más cruel de Israel, y sin embargo se arrepienten en el sermón más corto de la Biblia — solo ocho palabras. ¿Qué te enseña eso sobre el poder misterioso de la Palabra de Dios, incluso cuando el mensajero es reacio?"
+      },
+      {
+        "day": 4,
+        "title": "El Corazón de Dios",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "El libro termina con una pregunta, no con una respuesta — Dios le pregunta a Jonás si debería compadecer a ciento veinte mil personas. ¿La salvación de quién te decepcionaría en secreto, y qué te llama la pregunta final de Dios a dejar de lado?"
+      }
+    ]
+  },
+  {
+    "id": "fruit-of-the-spirit",
+    "name": "Fruto del Espíritu",
+    "description": "Un estudio de 9 días sobre el carácter que el Espíritu Santo cultiva en nosotros — un fruto por día, cada uno arraigado en Gálatas 5 y emparejado con un pasaje que lo da vida.",
+    "totalDays": 9,
+    "category": "Discipleship",
+    "gradientColors": [
+      "#4A7A5C",
+      "#2A4A38"
+    ],
+    "iconName": "leaf.circle.fill",
+    "imageKey": "annunciation",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional",
+      "parenthood",
+      "newlyMarried"
+    ],
+    "applicableBurdens": [
+      "relationships",
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "Amor",
+        "readings": [
+          {
+            "bookID": "GAL",
+            "chapter": 5,
+            "verseStart": 16,
+            "verseEnd": 26
+          },
+          {
+            "bookID": "1CO",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Pablo dice que el fruto del Espíritu es amor — singular — como si los otros ocho fluyeran de él. ¿Qué línea de 1 Corintios 13 expone más dónde tu amor aún está creciendo, y dónde te está invitando el Espíritu a cooperar?"
+      },
+      {
+        "day": 2,
+        "title": "Gozo",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 4,
+            "verseEnd": 13
+          },
+          {
+            "bookID": "NEH",
+            "chapter": 8,
+            "verseStart": 1,
+            "verseEnd": 12
+          }
+        ],
+        "reflection": "El gozo bíblico no es la ausencia de tristeza, sino una profunda alegría arraigada en Dios. ¿Dónde estás confundiendo la felicidad con el gozo, y qué ancla el gozo cuando las circunstancias no cooperan?"
+      },
+      {
+        "day": 3,
+        "title": "Paz",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": 25,
+            "verseEnd": 31
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 26,
+            "verseStart": 1,
+            "verseEnd": 9
+          }
+        ],
+        "reflection": "Jesús da paz 'no como la da el mundo' — no la ausencia de conflicto, sino la presencia de Él. ¿Qué preocupación estás cargando hoy que Jesús está ofreciendo cambiar por Su paz?"
+      },
+      {
+        "day": 4,
+        "title": "Paciencia",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": 7,
+            "verseEnd": 11
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 11
+          }
+        ],
+        "reflection": "La palabra griega aquí, 'makrothumia,' significa literalmente 'de largo temperamento' — lento para hervir. ¿Dónde en tu vida es tu mecha corta, y cómo sería tener un largo temperamento con esa persona o situación específica?"
+      },
+      {
+        "day": 5,
+        "title": "Bondad",
+        "readings": [
+          {
+            "bookID": "COL",
+            "chapter": 3,
+            "verseStart": 12,
+            "verseEnd": 17
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "La bondad no es simplemente ser amable — es salir de tu camino por alguien que no puede devolverte el favor. ¿Quién ha puesto Dios en tu camino esta semana que te cuesta algo ser amable?"
+      },
+      {
+        "day": 6,
+        "title": "Bondad",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": 9,
+            "verseEnd": 21
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "La bondad es integridad que se mantiene incluso cuando nadie está mirando. ¿Dónde en tu vida privada te está invitando el Espíritu a alinear tu secreto con tu reputación?"
+      },
+      {
+        "day": 7,
+        "title": "Fidelidad",
+        "readings": [
+          {
+            "bookID": "LAM",
+            "chapter": 3,
+            "verseStart": 19,
+            "verseEnd": 33
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 16,
+            "verseStart": 10,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "La fidelidad de Dios es nueva cada mañana; la nuestra debe ser constante en las cosas pequeñas. ¿Dónde te está pidiendo el Señor que seas fiel en una 'pequeña' cosa que nadie aplaude?"
+      },
+      {
+        "day": 8,
+        "title": "Mansedumbre",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 1,
+            "verseEnd": 9
+          },
+          {
+            "bookID": "PRO",
+            "chapter": 15,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "La mansedumbre es fuerza bajo control — la respuesta suave de alguien que podría haber rugido. ¿Qué herida estás provocando con tus palabras que realmente necesita un toque gentil?"
+      },
+      {
+        "day": 9,
+        "title": "Dominio Propio",
+        "readings": [
+          {
+            "bookID": "2PE",
+            "chapter": 1,
+            "verseStart": 3,
+            "verseEnd": 11
+          },
+          {
+            "bookID": "PRO",
+            "chapter": 25,
+            "verseStart": 21,
+            "verseEnd": 28
+          }
+        ],
+        "reflection": "Proverbios retrata a una persona sin dominio propio como una ciudad con muros rotos — abierta a cualquier cosa. ¿Qué 'muro' quiere reconstruir el Espíritu en tu vida esta semana, y quién podría ayudarte a cuidarlo?"
+      }
+    ]
+  },
+  {
+    "id": "philippians-joy",
+    "name": "Filipenses: Gozo en Cada Temporada",
+    "description": "Un recorrido de 4 días a través de la carta más alegre de Pablo — escrita desde una celda de prisión — un capítulo por día, cada uno desplegando una faceta diferente de un gozo que las circunstancias no pueden alcanzar.",
+    "totalDays": 4,
+    "category": "Epistles",
+    "gradientColors": [
+      "#7A6A2E",
+      "#3C3314"
+    ],
+    "iconName": "sun.max.fill",
+    "imageKey": "magi_journey",
+    "applicableSeasons": [
+      "hardSeason",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "Gozo en el Sufrimiento",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Pablo escribe esta carta encadenado y aún así la llama su 'gozo'. Recontextualiza su prisión como una plataforma para el evangelio. ¿Qué circunstancia no deseada en tu vida te está invitando Dios a recontextualizar en lugar de escapar?"
+      },
+      {
+        "day": 2,
+        "title": "Gozo en la Humildad",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "El himno en los versículos 6–11 traza el movimiento descendente de Jesús — igual a Dios, vaciado, humano, obediente, crucificado — antes de que el Padre lo levante. ¿Dónde estás aferrándote al estatus en un lugar donde Jesús está modelando la entrega, y cómo sería 'el mismo sentir' en realidad?"
+      },
+      {
+        "day": 3,
+        "title": "Gozo en Conocer a Cristo",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Pablo llama a su impresionante currículum 'basura' en comparación con conocer a Cristo. ¿Qué parte de tu propio currículum — credenciales, roles, logros — está compitiendo silenciosamente con Cristo por el centro de tu identidad?"
+      },
+      {
+        "day": 4,
+        "title": "Gozo en Cada Circunstancia",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Pablo dice que ha aprendido — en pasado, con esfuerzo — el secreto de estar contento en abundancia o en necesidad. ¿Dónde en tu vida te está enseñando el Señor ese secreto ahora mismo, y qué prácticas (oración, gratitud, pensamiento correcto) te estás negando a usar realmente?"
+      }
+    ]
+  },
+  {
+    "id": "life-of-moses",
+    "name": "La Vida de Moisés",
+    "description": "Un viaje de 10 días a través de la vida de Moisés — de la canasta a la zarza ardiente, del Mar Rojo a Sinaí — encontrando al Dios que llama, libera, habla y permanece.",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6C4E2A",
+      "#382712"
+    ],
+    "iconName": "flame.circle.fill",
+    "imageKey": "manna_wilderness",
+    "applicableSeasons": [
+      "workingProfessional",
+      "startingOver",
+      "hardSeason",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Nacido en una Canasta",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Las parteras hebreas desafían el decreto de Faraón, una madre pone a su hijo en una canasta en el Nilo, y Dios ya está escribiendo una historia de liberación. ¿Dónde ha estado Dios preparándote en silencio, mucho antes de que supieras que se necesitaba un rescate?"
+      },
+      {
+        "day": 2,
+        "title": "La Zarza Ardiente",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Moisés se aparta para mirar una zarza que arde sin consumirse, y Dios lo llama por su nombre. ¿Qué cosa ordinaria podría estar usando Dios para llamar tu atención, y estás dispuesto a apartarte para mirar?"
+      },
+      {
+        "day": 3,
+        "title": "Excusas y Señales",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Moisés discute con Dios: '¿Quién soy yo? ¿Y si no me creen? No soy elocuente.' Dios responde a cada objeción. ¿Cuál de las excusas de Moisés se parece más a la que sigues dando a Dios, y cuál es la respuesta paciente de Dios para ti?"
+      },
+      {
+        "day": 4,
+        "title": "Deja Ir a Mi Pueblo",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Las plagas destronan sistemáticamente a cada dios egipcio — el Nilo, el sol, el ganado — mostrando quién realmente reina. ¿Qué 'dios' de tu propia cultura necesitas que Dios exponga como impotente en tu vida?"
+      },
+      {
+        "day": 5,
+        "title": "La Pascua",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Israel es rescatado no por su mérito sino por la sangre de un cordero en sus dinteles — una sombra del Cordero mayor que vendrá. ¿Cómo profundiza tu comprensión de lo que realmente logró Su sangre al ver la Pascua como un retrato de Cristo?"
+      },
+      {
+        "day": 6,
+        "title": "A Través del Mar",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "'Estén quietos y vean la salvación del Señor,' dice Moisés a un pueblo atrapado — y luego Dios dice 'avancen.' ¿Dónde estás tentado a entrar en pánico o detenerte cuando Dios está pidiendo tanto quietud del corazón como pasos de fe?"
+      },
+      {
+        "day": 7,
+        "title": "Maná y Agua",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 7
+          }
+        ],
+        "reflection": "Dios da pan que no puede ser acumulado y agua de una roca. ¿Qué gracia te está ofreciendo diariamente que sigues tratando de acumular por el bien de la ansiedad?"
+      },
+      {
+        "day": 8,
+        "title": "Sinaí y las Diez Palabras",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Dios da la ley en el contexto del rescate — 'Yo soy el Señor tu Dios que te sacó' — no como una forma de ganar Su amor, sino como una forma de vida con Él. ¿Cuál mandamiento tiendes a leer más como una carga en lugar de como un límite de libertad?"
+      },
+      {
+        "day": 9,
+        "title": "Muéstrame Tu Gloria",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 33,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Moisés dice: 'Si tu presencia no va con nosotros, no nos saques de aquí.' ¿Qué deseas más de Dios — Sus regalos, o a Él? ¿Cómo se vería hoy si lo quisieras a Él más?"
+      },
+      {
+        "day": 10,
+        "title": "El Siervo Fiel",
+        "readings": [
+          {
+            "bookID": "DEU",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Moisés muere sin entrar en la Tierra Prometida, pero Dios mismo lo entierra. ¿Qué cosas inacabadas en tu vida te está pidiendo Dios que le confíes, sabiendo que la historia es más grande que tú?"
+      }
+    ]
+  },
+  {
+    "id": "psalm-23-deep-dive",
+    "name": "Salmo 23: La Canción del Pastor",
+    "description": "Una meditación de 6 días sobre el salmo más amado de las Escrituras — un versículo a la vez — emparejado con un pasaje del Nuevo Testamento que revela a Cristo como el Pastor al que siempre apuntaba el salmo.",
+    "totalDays": 6,
+    "category": "Worship",
+    "gradientColors": [
+      "#4A6B3F",
+      "#253A22"
+    ],
+    "iconName": "sparkle",
+    "imageKey": "suffer_little_children",
+    "applicableSeasons": [
+      "hardSeason",
+      "growing",
+      "retired",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "El Señor es Mi Pastor",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 1,
+            "verseEnd": 1
+          },
+          {
+            "bookID": "JHN",
+            "chapter": 10,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "David era un pastor — conocía el peso de ese trabajo. Jesús se llama a sí mismo el 'Buen Pastor' que da su vida. ¿Qué falso pastor (trabajo, éxito, relación) has estado dejando que defina tu valor, y qué cambia cuando el Señor mismo sostiene el báculo?"
+      },
+      {
+        "day": 2,
+        "title": "Pastos Verdes, Aguas Tranquilas",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 2,
+            "verseEnd": 2
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 11,
+            "verseStart": 25,
+            "verseEnd": 30
+          }
+        ],
+        "reflection": "Las ovejas no se acuestan cuando están ansiosas, hambrientas o en conflicto. El Pastor 'las hace' descansar. ¿Dónde en tu vida está Jesús haciéndote descansar suavemente, y qué estás luchando por mantenerte de pie?"
+      },
+      {
+        "day": 3,
+        "title": "Caminos de Justicia",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 3,
+            "verseEnd": 3
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "El Pastor 'restaura mi alma' antes de guiarla por caminos rectos — el consuelo precede a la corrección. ¿Dónde ha estado Dios restaurándote que confundiste con el silencio de Dios, y qué camino podría estar listo para caminar contigo ahora?"
+      },
+      {
+        "day": 4,
+        "title": "A Través del Valle",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 4,
+            "verseEnd": 4
+          },
+          {
+            "bookID": "2CO",
+            "chapter": 4,
+            "verseStart": 7,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "David no dice 'alrededor' sino 'a través' del valle, y el sujeto cambia aquí de 'Él' a 'Tú' — cuanto más cerca está el peligro, más personal se vuelve el Pastor. ¿Qué valle estás atravesando, y cómo se ha intensificado la cercanía de Dios en él?"
+      },
+      {
+        "day": 5,
+        "title": "Una Mesa en la Presencia de los Enemigos",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 5,
+            "verseEnd": 5
+          },
+          {
+            "bookID": "REV",
+            "chapter": 19,
+            "verseStart": 1,
+            "verseEnd": 10
+          }
+        ],
+        "reflection": "Dios te da de comer frente a los mismos enemigos que desearías que se fueran. ¿Qué significa que Él no siempre quite tu problema, sino que a veces te invite a sentarte y comer mientras el problema observa?"
+      },
+      {
+        "day": 6,
+        "title": "Bondad, Misericordia y Hogar",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 6,
+            "verseEnd": 6
+          },
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": 1,
+            "verseEnd": 6
+          }
+        ],
+        "reflection": "El hebreo para 'sígueme' puede leerse como 'persigue' — la bondad y la misericordia no te siguen, te persiguen. ¿Cómo cambia esa reconfiguración la forma en que recuerdas tu pasado y miras hacia tu futuro con Dios?"
+      }
+    ]
+  },
+  {
+    "id": "acts-early-church",
+    "name": "Hechos: La Iglesia Primitiva",
+    "description": "Un viaje de 14 días a través del libro de Hechos — dos capítulos por día — desde Pentecostés hasta Roma, observando cómo el Espíritu da a luz un movimiento que todavía resuena en cada creyente hoy.",
+    "totalDays": 14,
+    "category": "Foundations",
+    "gradientColors": [
+      "#7A4A1C",
+      "#3E2510"
+    ],
+    "iconName": "wind",
+    "imageKey": "loaves_fishes",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional",
+      "student"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Pentecostés",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "La iglesia nace cuando personas ordinarias son llenas del Espíritu y comienzan a proclamar a Jesús en idiomas que nunca estudiaron. ¿Dónde en tu vida has estado esperando más entrenamiento en lugar de confiar en el Espíritu para empoderar el discurso que tienes?"
+      },
+      {
+        "day": 2,
+        "title": "Audaces Ante la Autoridad",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "A Pedro y Juan se les dice que dejen de predicar — y que oren por más audacia, no menos. ¿Dónde la presión social te ha hecho callar sobre Jesús, y qué oración podría cambiar tu postura de acomodación a valentía?"
+      },
+      {
+        "day": 3,
+        "title": "Una Iglesia en Crecimiento y Prueba",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "La mentira de Ananías y Safira amenaza la pureza de una comunidad joven; más tarde, los apóstoles delegan para que la Palabra pueda seguir adelante. ¿Qué compromiso organizacional o personal en tu vida espiritual está deteniendo silenciosamente la misión?"
+      },
+      {
+        "day": 4,
+        "title": "Esteban y la Dispersión",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "La muerte de Esteban parece el final del movimiento — pero la persecución que sigue dispersa el evangelio por el mundo conocido. ¿Qué final en tu vida podría estar usando Dios como un comienzo que aún no puedes ver?"
+      },
+      {
+        "day": 5,
+        "title": "Saulo Convertido, Cornelio Incluido",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "El enemigo más feroz de la iglesia se convierte en su mayor misionero, y un centurión romano se convierte en un hermano. ¿La conversión de quién te sorprendería más, y estás dispuesto a orar por ello con verdadera expectativa?"
+      },
+      {
+        "day": 6,
+        "title": "Antioquía y un Ángel",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "A los creyentes se les llama por primera vez 'cristianos' en Antioquía — una iglesia de forasteros que se convierte en un centro. ¿Cómo está Dios usando a las personas en los márgenes para hacer crecer Su iglesia de maneras que el centro religioso no puede ver?"
+      },
+      {
+        "day": 7,
+        "title": "El Primer Viaje Misionero",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "El Espíritu dice: 'Aparten a Pablo y a Bernabé para la obra a la que los he llamado.' ¿De qué envío eres parte — ya sea siendo enviado o apoyando en oración — y cuán en serio tomas esa mayordomía?"
+      },
+      {
+        "day": 8,
+        "title": "Concilio de Jerusalén y una Cárcel Filipense",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "La iglesia decide que la gracia es verdaderamente para los gentiles, y Pablo canta en una celda de cárcel a medianoche. ¿Dónde todavía añades requisitos no expresados a la gracia de Dios, y qué canción podría estar esperando en tu lugar más difícil?"
+      },
+      {
+        "day": 9,
+        "title": "Atenas y Corinto",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Pablo se enfrenta a filósofos paganos en el Areópago citando a sus propios poetas. ¿Cómo podrías aprender a hablar el evangelio en el vocabulario de las personas a tu alrededor sin diluir la verdad?"
+      },
+      {
+        "day": 10,
+        "title": "Éfeso y una Despedida Tierna",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Pablo llora con los ancianos de Éfeso, recordándoles que 'más bienaventurado es dar que recibir.' ¿A quién te ha dado Dios para pastorear, y cómo necesitas amarlo más intencionalmente esta semana?"
+      },
+      {
+        "day": 11,
+        "title": "Pablo Arrestado en Jerusalén",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Pablo sigue avanzando hacia el sufrimiento porque está 'atado en el Espíritu.' ¿Dónde te está pidiendo Dios que te muevas hacia la dificultad porque es obediencia, no que la evites porque es difícil?"
+      },
+      {
+        "day": 12,
+        "title": "Valor Ante los Gobernantes",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "El Señor se pone al lado de Pablo por la noche y le dice: 'Ten valor.' ¿Cuándo has necesitado una palabra no vista para seguir adelante, y cómo podría Dios susurrártela esta noche?"
+      },
+      {
+        "day": 13,
+        "title": "Casi Persuadido",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Agripa dice que Pablo 'casi' lo persuadió para ser cristiano. ¿Dónde en tu propia vida estás 'casi' comprometido, y qué se necesitaría para cerrar la brecha entre la convicción y la entrega?"
+      },
+      {
+        "day": 14,
+        "title": "Naufragio hacia Roma",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Hechos termina abruptamente — Pablo predica el reino desde una casa alquilada, encadenado a un soldado, y la historia claramente no ha terminado. Eres parte de esa historia inacabada. ¿Qué próxima línea está escribiendo Dios a través de ti?"
+      }
+    ]
+  },
+  {
+    "id": "first-john-assurance",
+    "name": "1 Juan: Para Que Sepas",
+    "description": "Un recorrido de 5 días a través de la primera carta de Juan — escrita para que los creyentes 'sepan que tienen vida eterna.' Cada capítulo explora una prueba diferente de fe genuina.",
+    "totalDays": 5,
+    "category": "Epistles",
+    "gradientColors": [
+      "#3D5A8B",
+      "#1C2D5C"
+    ],
+    "iconName": "checkmark.seal.fill",
+    "imageKey": "bethany_mary_martha",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "anxiety",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Caminando en la Luz",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Juan insiste en que la comunión con Dios está ligada a caminar en la luz — trayendo lo que está oculto a la luz. ¿Cuál es un área en la que has estado pretendiendo que una confesión honesta realmente traería comunión en lugar de deshonra?"
+      },
+      {
+        "day": 2,
+        "title": "Permanecer, No Solo Creer",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "La prueba de amor de Juan por Dios es simple: 'El que guarda su palabra, en él verdaderamente se ha perfeccionado el amor de Dios.' ¿Cómo describirían tus relaciones más cercanas la diferencia entre tus creencias y tu comportamiento?"
+      },
+      {
+        "day": 3,
+        "title": "Hijos de Dios",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "'Miren qué gran amor nos ha dado el Padre: que seamos llamados hijos de Dios.' ¿Cómo se vería este día diferente si entras a él creyendo que tu verdadera identidad es 'hijo amado'?"
+      },
+      {
+        "day": 4,
+        "title": "Dios Es Amor",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Juan dice 'amamos porque Él nos amó primero' — nuestro amor siempre es una respuesta. ¿De quién has estado persiguiendo el amor como si pudieras ganártelo, y cómo te libera el amor previo de Dios para amar a esa persona desde el descanso, no desde la necesidad?"
+      },
+      {
+        "day": 5,
+        "title": "Para Que Sepas",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Juan dice que escribió esta carta 'para que sepas que tienes vida eterna.' ¿Cuál de las pruebas de Juan — fe en Jesús, amor por los demás, obediencia a Su palabra — quiere más el Espíritu asegurarte hoy?"
+      }
+    ]
+  },
+  {
+    "id": "james-faith-that-works",
+    "name": "Santiago: Fe Que Funciona",
+    "description": "Un estudio de 5 días de Santiago — la carta más práctica del Nuevo Testamento — confrontando la brecha entre lo que decimos que creemos y cómo realmente vivimos.",
+    "totalDays": 5,
+    "category": "Epistles",
+    "gradientColors": [
+      "#8B5A2E",
+      "#44290F"
+    ],
+    "iconName": "hammer.fill",
+    "imageKey": "davids_three_mighty_men",
+    "applicableSeasons": [
+      "workingProfessional",
+      "growing",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "relationships",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Tenlo Todo por Gozo",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Santiago no dice que las pruebas SON gozo — dice que cuéntalas COMO gozo por lo que Dios está produciendo. ¿Qué prueba actual necesitaría ser replanteada esta semana si realmente creyeras que Dios está madurando algo en ti a través de ella?"
+      },
+      {
+        "day": 2,
+        "title": "La Fe Sin Obras Está Muerta",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Santiago no está poniendo la fe contra las obras — está diciendo que la fe real siempre funciona. ¿Cuál es un acto específico de obediencia que haría visible tu fe privada esta semana?"
+      },
+      {
+        "day": 3,
+        "title": "Domando la Lengua",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Santiago compara la lengua con un pequeño timón que dirige un gran barco y una pequeña chispa que quema un bosque. ¿Dónde están tus palabras dirigiendo tu vida o la vida de otras personas en una dirección de la que te avergonzarías al llegar?"
+      },
+      {
+        "day": 4,
+        "title": "Amistad con el Mundo",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Santiago dice que las peleas vienen de deseos que guerrean dentro de nosotros — y que 'no tenemos porque no pedimos.' ¿Qué deseo está impulsando el conflicto en tu vida en este momento, y lo has traído honestamente a Dios en oración?"
+      },
+      {
+        "day": 5,
+        "title": "Pacientes y Orando",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Santiago termina llamando a la iglesia a orar unos por otros, confesando el pecado para que venga la sanidad. ¿Quién en tu vida es lo suficientemente seguro para escucharte confesar, y qué te costaría realmente pedirles que oren contigo?"
+      }
+    ]
+  },
+  {
+    "id": "hebrews-jesus-is-better",
+    "name": "Hebreos: Jesús Es Mejor",
+    "description": "Una escalada de 13 días a través de Hebreos — un capítulo por día — mostrando cómo Jesús cumple y supera cada imagen del Antiguo Testamento que apuntaba a Él.",
+    "totalDays": 13,
+    "category": "Theology",
+    "gradientColors": [
+      "#5A2F2F",
+      "#2C1414"
+    ],
+    "iconName": "crown.fill",
+    "imageKey": "sacrifice_isaac",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "El Hijo, Superior a los Ángeles",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Hebreos comienza declarando que Dios ha hablado más plenamente en Su Hijo — 'la radiancia de la gloria de Dios.' ¿Dónde has estado escuchando a Dios en mil fuentes secundarias cuando Él ya ha hablado más claramente en Jesús?"
+      },
+      {
+        "day": 2,
+        "title": "Una Salvación Tan Grande",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jesús se hizo menor que los ángeles — humano, tentado, sufriendo — para que pudiera 'gustar la muerte por todos.' ¿Cómo cambia el hecho de que Jesús comparta tu carne exacta la forma en que traes tu debilidad a Él?"
+      },
+      {
+        "day": 3,
+        "title": "Mayor Que Moisés",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Moisés fue fiel como siervo en la casa de Dios; Jesús es fiel como el Hijo sobre ella. ¿Dónde estás sirviendo en la casa de Dios de una manera que se está alejando secretamente de confiar en el Hijo de Dios?"
+      },
+      {
+        "day": 4,
+        "title": "Entra en Su Descanso",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "El escritor dice que un descanso sabático permanece para el pueblo de Dios — pero debemos esforzarnos por entrar en él. ¿Qué esfuerzo inquieto en tu vida es en realidad una falta de voluntad para detenerte y confiar en que la obra es de Cristo, no tuya?"
+      },
+      {
+        "day": 5,
+        "title": "Un Gran Sumo Sacerdote",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jesús es un sacerdote que 'en los días de su carne ofreció oraciones y súplicas con fuertes gritos y lágrimas.' ¿Cómo cambia imaginar a Jesús como un sacerdote lloroso y compasivo la forma en que traes tus propias lágrimas a Él?"
+      },
+      {
+        "day": 6,
+        "title": "Siguiendo Hacia la Madurez",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "El escritor insta a los lectores a no quedarse como bebés espirituales, sino a seguir adelante. ¿Cuál 'verdad elemental' has aceptado en lugar de crecer hacia alimento sólido?"
+      },
+      {
+        "day": 7,
+        "title": "Un Sacerdote Como Melquisedec",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "El sacerdocio de Jesús es permanente — 'Él vive siempre para interceder.' ¿Cómo cambia saber que Jesús está orando por ti en este momento lo que llevas contigo hacia mañana?"
+      },
+      {
+        "day": 8,
+        "title": "Un Mejor Pacto",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Bajo el nuevo pacto, Dios escribe Sus leyes 'en sus corazones.' ¿Dónde aún te relacionas con Dios a través de reglas externas cuando Él quiere transformarte desde adentro?"
+      },
+      {
+        "day": 9,
+        "title": "Una Vez y Para Siempre",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Los antiguos sacerdotes ofrecían sacrificios diarios que nunca podían limpiar la conciencia; el único sacrificio de Cristo lo hace. ¿Qué pecado sigues confesando como si Su obra terminada necesitara tu repetición para que se mantenga?"
+      },
+      {
+        "day": 10,
+        "title": "Acércate Con Confianza",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Por la sangre de Jesús podemos acercarnos 'con confianza' — la cortina está rasgada. Cuando vienes a Dios, ¿sientes que te acercas a un trono de gracia o a la sala de espera de un funcionario reacio? ¿Qué cambiaría?"
+      },
+      {
+        "day": 11,
+        "title": "El Salón de la Fe",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Cada persona mencionada aquí murió sin recibir lo prometido, 'pero lo vieron y lo saludaron desde lejos.' ¿Cómo podría tu historia de espera ser contada como un capítulo de este mismo salón de fe?"
+      },
+      {
+        "day": 12,
+        "title": "Una Gran Nube de Testigos",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "El escritor nos insta a fijar nuestros ojos en Jesús, 'el autor y consumador de nuestra fe,' y correr con perseverancia. ¿Qué peso — no necesariamente pecaminoso, pero pesado — está ralentizando tu carrera, y estás dispuesto a dejarlo a un lado?"
+      },
+      {
+        "day": 13,
+        "title": "Fuera del Campamento",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jesús sufrió 'fuera del campamento' — más allá del respeto religioso de Su época. ¿Dónde te está llamando a salir de tu propio campamento cómodo para estar con Él entre aquellos que el mundo respetable ha desechado?"
+      }
+    ]
+  }
+]

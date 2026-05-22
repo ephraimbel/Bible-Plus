@@ -5,37 +5,43 @@ struct OnboardingBackground: View {
 
     var body: some View {
         ZStack {
-            // Blurred biblical art — matches the welcome screen aesthetic
+            // Palette tan canvas FIRST so nothing reads through as yellow
+            palette.background
+                .ignoresSafeArea()
+
+            // Biblical art as a whisper of texture (was 100% bg — now
+            // ~15% overlay so the tan/peach palette fully dominates).
             Image("biblical_jacob_ladder")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .blur(radius: 28)
-                .scaleEffect(1.15)
+                .blur(radius: 44)
+                .scaleEffect(1.22)
                 .clipped()
+                .opacity(0.15)
+                .ignoresSafeArea()
 
-            // Warm cream overlay for legibility
-            palette.background.opacity(0.72)
-
-            // Gold glow from top
+            // Subtle gold glow from top — palette accent
             RadialGradient(
-                colors: [Color(hex: "C9A96E").opacity(0.10), Color.clear],
+                colors: [palette.accent.opacity(0.06), Color.clear],
                 center: .init(x: 0.5, y: 0.12),
                 startRadius: 0,
                 endRadius: 350
             )
+            .ignoresSafeArea()
         }
-        .ignoresSafeArea()
     }
 }
 
 struct SunriseBackground: View {
+    @Environment(\.bpPalette) private var palette
+
     var body: some View {
         ZStack {
             LinearGradient(
                 colors: [
-                    Color(hex: "FFF1E0"),
-                    Color(hex: "FFDBB5"),
-                    Color(hex: "F5EFE0"),
+                    palette.surfaceElevated,
+                    palette.background,
+                    palette.surface
                 ],
                 startPoint: .top,
                 endPoint: .bottom
@@ -43,7 +49,7 @@ struct SunriseBackground: View {
 
             RadialGradient(
                 colors: [
-                    Color(hex: "C9A96E").opacity(0.15),
+                    palette.accent.opacity(0.18),
                     Color.clear,
                 ],
                 center: .top,

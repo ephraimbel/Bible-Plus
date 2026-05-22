@@ -1,0 +1,5943 @@
+[
+  {
+    "id": "psalms-of-peace",
+    "name": "የሰላም ወይዘሮች",
+    "description": "ወይዘሮች ወደ ሰላም የሚያመለክቱ የ7 ቀን ጉዞ ነው፣ ወደ ወደ ዝናብ እና የእግዚአብሔር ብቃት ይመርጣሉ።",
+    "totalDays": 7,
+    "category": "Comfort",
+    "gradientColors": [
+      "#4A6741",
+      "#2D4A3E"
+    ],
+    "iconName": "leaf.fill",
+    "imageKey": "jesus_calms_storm",
+    "applicableSeasons": [
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "የተራዳ እንደተራዳ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "በዚህ የሕይወት ወቅት እግዚአብሔር የተራዳ ይሆን ምን ይለዋል?"
+      },
+      {
+        "day": 2,
+        "title": "በብርሃን ውስጥ እምነት",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "በጨለማ ወቅት እግዚአብሔር ብርሃን እንደሆነ የምን ተሞክሮ እንደሆነ ይታወቃል?"
+      },
+      {
+        "day": 3,
+        "title": "ይገኙ እና ይወዳድሩ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "እግዚአብሔር ከአንደኛው የተወዳዳሪ ወይዘር ይወዳዳሉ?"
+      },
+      {
+        "day": 4,
+        "title": "እግዚአብሔር መርበብ ነው",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ዛሬ የእግዚአብሔር እንደሆነ እንዴት ማወቅ ይቻላል?"
+      },
+      {
+        "day": 5,
+        "title": "በወንጌል ውስጥ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 91,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የእግዚአብሔር የምስጢር ይሆን የሚለው ምን ይለዋል?"
+      },
+      {
+        "day": 6,
+        "title": "የማይወድድ አስተዳደር",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 121,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "እግዚአብሔር የማይወድድ ይሆን የሚለው እንዴት ይቻላል?"
+      },
+      {
+        "day": 7,
+        "title": "በአስቀድሞ የተሰሩ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "እግዚአብሔር የምን ይለዋል?"
+      }
+    ]
+  },
+  {
+    "id": "gospel-of-john",
+    "name": "የዮሐንስ ወይዘር",
+    "description": "በ21 ቀን የዮሐንስ ወይዘር ይዘው ወይዘር ይወዳዳሉ፣ አንድ የክፍል በማይወዳዳሉ።",
+    "totalDays": 21,
+    "category": "Gospel",
+    "gradientColors": [
+      "#8B6914",
+      "#5C4A1C"
+    ],
+    "iconName": "book.fill",
+    "imageKey": "baptism_jesus",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "ወይዘር ወይዘር",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "እግዚአብሔር ወይዘር ይሆን ምን ይለዋል?"
+      },
+      {
+        "day": 2,
+        "title": "ውሃ ወይዘር",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የምን ይለዋል?"
+      },
+      {
+        "day": 3,
+        "title": "ወይዘር ይሆን",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "እግዚአብሔር ይሆን የምን ይለዋል?"
+      },
+      {
+        "day": 4,
+        "title": "የምን ይለዋል?",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የምን ይለዋል?"
+      },
+      {
+        "day": 5,
+        "title": "ውሃ ይሆን",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የምን ይለዋል?"
+      },
+      {
+        "day": 6,
+        "title": "ውሃ ይሆን",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የምን ይለዋል?"
+      },
+      {
+        "day": 7,
+        "title": "ውሃ ይሆን",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የምን ይለዋል?"
+      },
+      {
+        "day": 8,
+        "title": "ውሃ ይሆን",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የምን ይለዋል?"
+      },
+      {
+        "day": 9,
+        "title": "ውሃ ይሆን",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የምን ይለዋል?"
+      },
+      {
+        "day": 10,
+        "title": "ውሃ ይሆን",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የምን ይለዋል?"
+      },
+      {
+        "day": 11,
+        "title": "ውሃ ይሆን",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የምን ይለዋል?"
+      },
+      {
+        "day": 12,
+        "title": "Anointed for Burial",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What is the most extravagant act of worship you could offer to Jesus today?"
+      },
+      {
+        "day": 13,
+        "title": "The Servant King",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Whose feet is Jesus asking you to wash through humble service this week?"
+      },
+      {
+        "day": 14,
+        "title": "The Way, the Truth, the Life",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How does Jesus' promise to prepare a place for you affect the way you live today?"
+      },
+      {
+        "day": 15,
+        "title": "The True Vine",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What does it practically look like for you to 'abide' in Jesus this week?"
+      },
+      {
+        "day": 16,
+        "title": "The Helper Is Coming",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How have you experienced the Holy Spirit guiding you into truth?"
+      },
+      {
+        "day": 17,
+        "title": "Jesus Prays for You",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How does it feel to know that Jesus personally prayed for your unity with Him and the Father?"
+      },
+      {
+        "day": 18,
+        "title": "Betrayal and Arrest",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "When have you, like Peter, denied knowing Jesus through your words or actions?"
+      },
+      {
+        "day": 19,
+        "title": "It Is Finished",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What burden are you carrying that Jesus already finished on the cross?"
+      },
+      {
+        "day": 20,
+        "title": "He Is Risen",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How does the reality of the resurrection change the way you face your greatest fear?"
+      },
+      {
+        "day": 21,
+        "title": "Do You Love Me?",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "If Jesus asked you 'Do you love me?' three times today, how would your answer shape your actions?"
+      }
+    ]
+  },
+  {
+    "id": "30-days-of-wisdom",
+    "name": "30 Days of Wisdom",
+    "description": "One chapter of Proverbs for each day of the month — timeless wisdom for decisions, relationships, work, and daily life.",
+    "totalDays": 30,
+    "category": "Wisdom",
+    "gradientColors": [
+      "#6B4C8A",
+      "#3D2B5C"
+    ],
+    "iconName": "lightbulb.fill",
+    "imageKey": "ten_commandments",
+    "applicableSeasons": [
+      "workingProfessional",
+      "parenthood"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "The Beginning of Wisdom",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What does it mean for the fear of the Lord to be the starting point of all wisdom?"
+      },
+      {
+        "day": 2,
+        "title": "Seeking Hidden Treasure",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How intentionally are you searching for wisdom the way you would search for hidden treasure?"
+      },
+      {
+        "day": 3,
+        "title": "Trust with All Your Heart",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What decision are you facing where you need to trust God rather than lean on your own understanding?"
+      },
+      {
+        "day": 4,
+        "title": "Guard Your Heart",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What are you allowing into your heart that may be pulling you away from the path of wisdom?"
+      },
+      {
+        "day": 5,
+        "title": "The Danger of Foolishness",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Where in your life are you most tempted to take shortcuts that lead away from God's best?"
+      },
+      {
+        "day": 6,
+        "title": "Lessons from the Ant",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What can the diligence of the ant teach you about your current responsibilities?"
+      },
+      {
+        "day": 7,
+        "title": "The Cost of Temptation",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What boundaries do you need to set to protect yourself from temptation?"
+      },
+      {
+        "day": 8,
+        "title": "Wisdom Calls Out",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How do you recognize the voice of wisdom calling to you amid the noise of daily life?"
+      },
+      {
+        "day": 9,
+        "title": "Two Invitations",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Which invitation are you accepting more often — wisdom's feast or folly's shortcut?"
+      },
+      {
+        "day": 10,
+        "title": "የጥበብ ልጅ",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "በቤት ውስጥ የአንተ ባህሪ በሕይወት ውስጥ የምትፈልገውን ጥበብ እንዴት ይወክል?"
+      },
+      {
+        "day": 11,
+        "title": "እውነታ መዋቅር",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "በሕይወት ውስጥ የምትፈልገውን እውነታ እና እንቅስቃሴ የምትወድድ የት ነው?"
+      },
+      {
+        "day": 12,
+        "title": "የሚያዳክም ቃላት",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ዛሬ የአንተ ቃላት በአንድ ሰው ላይ የሚያዳክም እንዴት ሊሆን ይችላል?"
+      },
+      {
+        "day": 13,
+        "title": "ጥበባት ጋር መሄድ",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "በሕይወት ውስጥ ጥበባት የሚሆኑ ጓደኞች ማነው እና ከእነርሱ በተጨማሪ ምን ማማር ይችላል?"
+      },
+      {
+        "day": 14,
+        "title": "የሚመስል መንገድ",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ወቅታዊ የሚመስል መንገድ ወደ ድንጋር እንዴት ተመለሰ?"
+      },
+      {
+        "day": 15,
+        "title": "የሚያስተላለፍ መልስ",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "በሕይወት ውስጥ ወደ አንድ ሰው የሚያስተላለፍ መልስ ይፈልጋል?"
+      },
+      {
+        "day": 16,
+        "title": "ዕቅዶችህን ወደ እግዚአብሔር ተወው",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ወደ እግዚአብሔር ሙሉ ወደ ምን ዕቅድ ተወው?"
+      },
+      {
+        "day": 17,
+        "title": "በሁሉም ጊዜ ወዳጅ",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "በአስቸጋሪ ጊዜ ወዳጅ እንዴት ይሆን?"
+      },
+      {
+        "day": 18,
+        "title": "የታላቅ ተራራ",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "በችግኝ ጊዜ ወደ የእግዚአብሔር ስም ይሂዱ ወይም ወደ ሌላ ነገር?"
+      },
+      {
+        "day": 19,
+        "title": "ወደ ድህነት የሚያደርግ",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ይህ ሳምንት ወደ ድህነት የሚያደርግ የምን ወደ ወንጌል ይወዳድሩ?"
+      },
+      {
+        "day": 20,
+        "title": "የንጉስ ልብ",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የአምላክ እምነት በአለም ላይ የሚያደርግ እንዴት ይሆን?"
+      },
+      {
+        "day": 21,
+        "title": "ፍትሕ እና ዕውቀት",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "በዕድል ውስጥ የምን ይሁን ወደ ፍትሕ ይወዳድሩ?"
+      },
+      {
+        "day": 22,
+        "title": "ጥሩ ስም",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የምን ዓይነት ስም እንዴት ነው ወይም ይወዳድሩ?"
+      },
+      {
+        "day": 23,
+        "title": "አይደለም ይቅርታ",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "በልብ የምን ይወዳድሩ ወይም ይቅርታ?"
+      },
+      {
+        "day": 24,
+        "title": "በችግኝ ውስጥ ኃይል",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "በችግኝ ጊዜ ወደ እምነት የምን ይሆን?"
+      },
+      {
+        "day": 25,
+        "title": "የወርቅ ምርጥ እንቁላል",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የተገኘ ወይም ወደ ወርቅ የምን ይሆን?"
+      },
+      {
+        "day": 26,
+        "title": "የተወሰነ የወርቅ እንቁላል",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የምን ዓይነት ወደ እግዚአብሔር ወይም ወደ ወርቅ ይሆን?"
+      },
+      {
+        "day": 27,
+        "title": "በወርቅ እንቁላል ይሆን",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የምን ዓይነት ወደ ወርቅ ይሆን?"
+      },
+      {
+        "day": 28,
+        "title": "የተወሰነ ወይም ወደ ወርቅ ይሆን",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "በእንዴት ይሆን?"
+      },
+      {
+        "day": 29,
+        "title": "የምን ዓይነት ወደ ወርቅ ይሆን",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የምን ዓይነት ወደ ወርቅ ይሆን?"
+      },
+      {
+        "day": 30,
+        "title": "የእግዚአብሔር ቃል ሁሉ",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 30,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "አጉር የሚያደርገው ጸሎት — 'እባክህ ድህነት ወይም ሀብት አትስጠኝ' — ምን ይማርክልህ ስለ የተረጋገጥ ሕይወት?"
+      }
+    ]
+  },
+  {
+    "id": "romans-heart-of-the-gospel",
+    "name": "ሮማዎች: የወንጌል ልብ",
+    "description": "ወደ ሮማውያን የተጻፈው የጳውሎስ ወንጌል ወደ 16 ቀን የተመለከተ ውስጥ ወደ ወንጌል የተሞላ የሚያቀርብ ዝርዝር ነው።",
+    "totalDays": 16,
+    "category": "Theology",
+    "gradientColors": [
+      "#8B3A3A",
+      "#5C2424"
+    ],
+    "iconName": "flame.fill",
+    "imageKey": "crucifixion",
+    "applicableSeasons": [
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith"
+    ],
+    "faithLevelMin": "deepInTheWord",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "የእግዚአብሔር ወንጌል",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የወንጌል አስቀድሞ ይቅርታ ትቀበላለህ? የማይቀበል መሆን ምን ይመስልህ?"
+      },
+      {
+        "day": 2,
+        "title": "የእግዚአብሔር የታላቅ ፍርድ",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "እግዚአብሔር የሚፈርድ በሚያገለግል መልኩ የሚያውቅ የማንነት መልኩ የሚያውቅ እንዴት ይቀይር ይባላል?"
+      },
+      {
+        "day": 3,
+        "title": "ሁሉም ወደ ቀይ ወደ ወይዘር",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ሁሉም ወደ ቀይ ወደ ወይዘር ይወዳድር ይሆን የሚያውቅ የሚያውቅ ይሆን?"
+      },
+      {
+        "day": 4,
+        "title": "እምነት እንደ አብርሃም",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "እግዚአብሔር የሚሰጥ የማይታሰብ ቃል ምን እንደ እምነት ይቀበላል?"
+      },
+      {
+        "day": 5,
+        "title": "ከእግዚአብሔር ጋር ሰላም",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "በምርኮ የሚያደርግ መሆን ይቀይር ይባላል?"
+      },
+      {
+        "day": 6,
+        "title": "ወደ ቀይ ወደ ክርስቶስ ይኖር",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ምን ይህ ወደ ክርስቶስ ይኖር ይባላል?"
+      },
+      {
+        "day": 7,
+        "title": "ውስጥ የሚያስቀር",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የጳውሎስ የሚያስቀር ውስጥ ይቀይር ይባላል?"
+      },
+      {
+        "day": 8,
+        "title": "የማይፈርድ",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የማይፈርድ ይቀይር ይባላል?"
+      },
+      {
+        "day": 9,
+        "title": "የእግዚአብሔር የሚሰጥ ይቀይር",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የእግዚአብሔር የሚሰጥ ይቀይር ይባላል?"
+      },
+      {
+        "day": 10,
+        "title": "ቃል እንደ ይወዳድር",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የሚሰጥ ይቀይር ይባላል?"
+      },
+      {
+        "day": 11,
+        "title": "የድንጋይ ዕፅ",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የሚሰጥ ይቀይር ይባላል?"
+      },
+      {
+        "day": 12,
+        "title": "እንደ ዕድል ይቀይር",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የሚሰጥ ይቀይር ይባላል?"
+      },
+      {
+        "day": 13,
+        "title": "ወደ ወይዘር ይቀይር",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ወደ ወይዘር ይቀይር ይባላል?"
+      },
+      {
+        "day": 14,
+        "title": "ወደ ወይዘር ይቀይር",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ወደ ወይዘር ይቀይር ይባላል?"
+      },
+      {
+        "day": 15,
+        "title": "ወደ ወይዘር ይቀይር",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ወደ ወይዘር ይቀይር ይባላል?"
+      },
+      {
+        "day": 16,
+        "title": "ምስጋና እና የሰላም እግዚአብሔር",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የሚሰጥ ይቀይር ይባላል?"
+      }
+    ]
+  },
+  {
+    "id": "new-believers-journey",
+    "name": "የአዲስ የእምነት ጉዞ",
+    "description": "የተመለከተ የአዲስ የእምነት ጉዞ ወደ 14 ቀን የተመለከተ ውስጥ ወደ ወንጌል የተሞላ የሚያቀርብ ዝርዝር ነው።",
+    "totalDays": 14,
+    "category": "Foundations",
+    "gradientColors": [
+      "#3A6B8B",
+      "#1C3D5C"
+    ],
+    "iconName": "sunrise.fill",
+    "imageKey": "samuel_called",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "አዲስ ወደ ወይዘር",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የአዲስ ወደ ወይዘር ይቀይር ይባላል?"
+      },
+      {
+        "day": 2,
+        "title": "The Shepherd",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How does picturing God as a shepherd caring for you change the way you feel about Him?"
+      },
+      {
+        "day": 3,
+        "title": "All Have Sinned",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How does understanding that everyone falls short help you accept God's grace without shame?"
+      },
+      {
+        "day": 4,
+        "title": "The Gift of Grace",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What does it mean to receive something you could never earn on your own?"
+      },
+      {
+        "day": 5,
+        "title": "No Condemnation",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What guilt or shame do you need to release in light of the truth that there is no condemnation in Christ?"
+      },
+      {
+        "day": 6,
+        "title": "Saved by Grace",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How does knowing that salvation is a gift — not a reward — change the pressure you put on yourself?"
+      },
+      {
+        "day": 7,
+        "title": "The Way, the Truth, the Life",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What does it mean for Jesus to be the way when you feel lost or uncertain about the future?"
+      },
+      {
+        "day": 8,
+        "title": "God Is Love",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How does the statement 'God is love' reshape your understanding of who God is?"
+      },
+      {
+        "day": 9,
+        "title": "The Peace of God",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What worries can you bring to God right now in exchange for His peace that passes understanding?"
+      },
+      {
+        "day": 10,
+        "title": "The Hall of Faith",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Which person of faith in this chapter inspires you most, and why?"
+      },
+      {
+        "day": 11,
+        "title": "Trials and Wisdom",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How can you begin to see your current trials as an opportunity for growth rather than punishment?"
+      },
+      {
+        "day": 12,
+        "title": "The Beatitudes",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Which of the Beatitudes speaks most directly to where you are in life right now?"
+      },
+      {
+        "day": 13,
+        "title": "The Lord's Prayer",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How can the Lord's Prayer become a framework for the way you talk to God each day?"
+      },
+      {
+        "day": 14,
+        "title": "All Things New",
+        "readings": [
+          {
+            "bookID": "REV",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How does the promise that God will make all things new give you hope for the future?"
+      }
+    ]
+  },
+  {
+    "id": "finding-purpose",
+    "name": "Finding Purpose",
+    "description": "A 10-day exploration of Scripture's most powerful passages about identity, calling, and the purpose God has woven into your life.",
+    "totalDays": 10,
+    "category": "Purpose",
+    "gradientColors": [
+      "#8B7B3A",
+      "#5C5124"
+    ],
+    "iconName": "star.fill",
+    "imageKey": "miraculous_catch",
+    "applicableSeasons": [
+      "workingProfessional",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Plans to Prosper You",
+        "readings": [
+          {
+            "bookID": "JER",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How does knowing God has plans for your welfare and future change the way you face uncertainty?"
+      },
+      {
+        "day": 2,
+        "title": "Wonderfully Made",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What would change if you truly believed you were fearfully and wonderfully made?"
+      },
+      {
+        "day": 3,
+        "title": "Trust in the Lord",
+        "readings": [
+          {
+            "bookID": "PRO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What path are you trying to direct on your own instead of acknowledging God in it?"
+      },
+      {
+        "day": 4,
+        "title": "Created for Good Works",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What good works do you sense God prepared in advance for you to walk in?"
+      },
+      {
+        "day": 5,
+        "title": "A Living Sacrifice",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How can you use the unique gifts God gave you to serve others this week?"
+      },
+      {
+        "day": 6,
+        "title": "Called by Name",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 43,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How does God calling you by name and claiming you as His own shape your sense of identity?"
+      },
+      {
+        "day": 7,
+        "title": "እንደ ክርስቶስ ሕይወት ነው",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "እንደ 'ሕይወት ክርስቶስ ነው' ይህ ምን ይህ ለሥራዎት እና ስምንት አንድ እንዴት ይሆን?"
+      },
+      {
+        "day": 8,
+        "title": "አንድ እንደ አስተዋፅኦ ይደርስ",
+        "readings": [
+          {
+            "bookID": "COL",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ወደ ላይ የሚያስደስት የሚያስደስት የምን ዓይነት ይወዳድር?"
+      },
+      {
+        "day": 9,
+        "title": "የተመረጡ ሕዝብ",
+        "readings": [
+          {
+            "bookID": "1PE",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "እንዴት የተጠርጣሪ የንጉሥ እና የአዳም ወይዘር ይህ የእርስዎን ዓላማ እና የአካባቢ አስተዋፅኦ ይለውጣል?"
+      },
+      {
+        "day": 10,
+        "title": "በጌታ ደስ ይለኝ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "እንዴት የተለየ የእርስዎን ፈላጊዎች ወደ ጌታ ደስ ይለኝ ይህ ይሆን?"
+      }
+    ]
+  },
+  {
+    "id": "comfort-in-hard-times",
+    "name": "በአስቸኳይ ጊዜ ደስታ",
+    "description": "በችግኝ ወቅት የመጽሐፍ ቅዱስ 7 ቀን መስተዋዕት — እነዚህ አንቀጽ እምነት ይወዳድር ወደ ጥላ ወንድም ይወስዳሉ።",
+    "totalDays": 7,
+    "category": "Comfort",
+    "gradientColors": [
+      "#5C7A8B",
+      "#3A4F5C"
+    ],
+    "iconName": "heart.fill",
+    "imageKey": "job_suffering",
+    "applicableSeasons": [
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "health"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "ጌታ ወደ ድኅነት ይቀርባል",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "እንዴት እንደ እግዚአብሔር በድኅነት ይቀርባል ይህ ይህ ይሆን?"
+      },
+      {
+        "day": 2,
+        "title": "ይፈርሱ እኔ ከእናንተ ጋር ነኝ",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 41,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "እንዴት የሚያስተዋወቅ ወደ እግዚአብሔር ይህ ይሆን?"
+      },
+      {
+        "day": 3,
+        "title": "የሁሉም ደስታ እግዚአብሔር",
+        "readings": [
+          {
+            "bookID": "2CO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "እንዴት የእርስዎ ድኅነት ወደ ሌላ ይህ ይሆን?"
+      },
+      {
+        "day": 4,
+        "title": "ምንም ይለይ",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የእግዚአብሔር ወደ ወይዘር ይህ ይሆን?"
+      },
+      {
+        "day": 5,
+        "title": "ይቀመጡ እና ይወዳድሩ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የሚያስተዋወቅ ወደ ይህ ይሆን?"
+      },
+      {
+        "day": 6,
+        "title": "ወደ እኔ ይመጡ እና ይወዳድሩ",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የሚያስተዋወቅ ወደ ይህ ይሆን?"
+      },
+      {
+        "day": 7,
+        "title": "እያንዳንዱ ድምፅ ይሰርዝ",
+        "readings": [
+          {
+            "bookID": "REV",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "እንዴት የእግዚአብሔር ወደ ይህ ይሆን?"
+      }
+    ]
+  },
+  {
+    "id": "sermon-on-the-mount",
+    "name": "የተነሱ ወይዘር",
+    "description": "የክርስቶስ ወይዘር 7 ቀን የተመለከተ ወይዘር — የዓለም ወይዘር ወይዘር ይህ ይሆን?",
+    "totalDays": 7,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A8B5C",
+      "#4F5C3A"
+    ],
+    "iconName": "text.book.closed.fill",
+    "imageKey": "sermon_mount",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "የተወዳዳሪዎች ወይዘር እና የምድር ጨው",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 26
+          }
+        ],
+        "reflection": "የተወዳዳሪዎች ወይዘር ይህ ይሆን?"
+      },
+      {
+        "day": 2,
+        "title": "ከአንድ ወይዘር",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 27,
+            "verseEnd": 48
+          }
+        ],
+        "reflection": "የእግዚአብሔር ወይዘር ይህ ይሆን?"
+      },
+      {
+        "day": 3,
+        "title": "ወደ ይህ ይሆን?",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "ወደ ይህ ይሆን?"
+      },
+      {
+        "day": 4,
+        "title": "ወደ ይህ ይሆን?",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 19,
+            "verseEnd": 34
+          }
+        ],
+        "reflection": "ወደ ይህ ይሆን?"
+      },
+      {
+        "day": 5,
+        "title": "አይታወቅ",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": 1,
+            "verseEnd": 14
+          }
+        ],
+        "reflection": "ወደ ይህ ይሆን?"
+      },
+      {
+        "day": 6,
+        "title": "በድንጋይ ይህ ይሆን?",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": 15,
+            "verseEnd": 29
+          }
+        ],
+        "reflection": "ወደ ይህ ይሆን?"
+      },
+      {
+        "day": 7,
+        "title": "የተነሱ ወይዘር እና ወይዘር",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ወደ ይህ ይሆን?"
+      }
+    ]
+  },
+  {
+    "id": "psalms-in-30-days",
+    "name": "30 ቀን ውስጥ የዘይቤ መዝ.ሐ",
+    "description": "በ30 ቀን ውስጥ 150 የዘይቤ መዝ.ሐ ሁሉንም እንዲያንቀሳቅስ — በየቀኑ አምስት መዝ.ሐ ወደ በይበይ በቃል ማስታወሻ ይወዳድሩ፣ ይህም የመዝ.ሐ በምርጥ መዝ.ሐ የተሞላ መዝ.ሐ ነው።",
+    "totalDays": 30,
+    "category": "Worship",
+    "gradientColors": [
+      "#3A5C8B",
+      "#1C2D5C"
+    ],
+    "iconName": "music.note",
+    "imageKey": "jacob_ladder",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "parenthood",
+      "student",
+      "workingProfessional",
+      "retired",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "purpose",
+      "relationships",
+      "health",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "መዝ.ሐ 1–5: ተዋሕዶ እና ወደቀ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "በዕለት እና በምሽት የጌታችን የሕግ ደስታ ማለት ምንድን ነው?"
+      },
+      {
+        "day": 2,
+        "title": "መዝ.ሐ 6–10: ወደ እግዚአብሔር መጥረይ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የመዝ.ሐ ወደ እግዚአብሔር የሚወጡ ድምፆች የእርስዎን የተወዳዳሪ ስሜት ወደ እርሱ መውጣት ይፈቅድዎታል?"
+      },
+      {
+        "day": 3,
+        "title": "መዝ.ሐ 11–15: የተወዳዳሪዎች እና ወደቀው",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "መዝ.ሐ 15 የእግዚአብሔር በአምላክ ቦታ የሚኖር ሰው ምን ይገልጻል?"
+      },
+      {
+        "day": 4,
+        "title": "መዝ.ሐ 16–20: መርበቅ እና ድንጋይ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "መዝ.ሐ 19 የማህበረ ሰላም የእግዚአብሔር ድምፅ ምን ይህ ወደ የእርስዎ ልብ ይወዳድር?"
+      },
+      {
+        "day": 5,
+        "title": "መዝ.ሐ 21–25: የተወዳዳሪ እና የማስታወሻ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "መዝ.ሐ 22 የተወዳዳሪነት ድምፅ — በክርስቶስ በመስቀል የተወሰነ — የእርሱ ቅዱስ ወደ እርሱ ይወዳድር?"
+      },
+      {
+        "day": 6,
+        "title": "መዝ.ሐ 26–30: በጨለማ ብርሃን",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 29,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 30,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የምሽት ድምፅ ወደ ዕለት የሚወድድ ምን ይህ ይሆናል?"
+      },
+      {
+        "day": 7,
+        "title": "መዝ.ሐ 31–35: ታማኝነት እና አስተዳደር",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 31,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 33,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 35,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "መዝ.ሐ 32 የይቅርታ በረከት የሚወዳድር የምን ይህ ይሆናል?"
+      },
+      {
+        "day": 8,
+        "title": "መዝ.ሐ 36–40: የታላቅ ፍቅር",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 36,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 38,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 39,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 40,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "መዝ.ሐ 37 ወደ ጌታ የሚወዳድር ምን ይህ ይሆናል?"
+      },
+      {
+        "day": 9,
+        "title": "መዝ.ሐ 41–45: ወደ እግዚአብሔር የሚወዳድር",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 41,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 42,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 43,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 44,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 45,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የእርስዎ ነፍስ ወደ እግዚአብሔር ወደ ውሃ የሚወዳድር ምን ይህ ይሆናል?"
+      },
+      {
+        "day": 10,
+        "title": "መዝ.ሐ 46–50: እግዚአብሔር የእኛ መዋቅር",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 46,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 47,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 48,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 49,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 50,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "መዝ.ሐ 46 የሚነገር ወደ ዕለት የሚወዳድር ምን ይህ ይሆናል?"
+      },
+      {
+        "day": 11,
+        "title": "መዝ.ሐ 51–55: የተወዳዳሪ መድኃኒት",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 51,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 52,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 53,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 54,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 55,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ዳዊት በመዝ.ሐ 51 የሚወዳድር የወይዘ ምን ይህ ይሆናል?"
+      },
+      {
+        "day": 12,
+        "title": "መዝ.ሐ 56–60: ምን እንደ አይቀር",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 56,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 57,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 58,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 59,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 60,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "መዝ.ሐ 56 ወደ ተወዳዳሪ የሚወዳድር ምን ይህ ይሆናል?"
+      },
+      {
+        "day": 13,
+        "title": "መዝ.ሐ 61–65: በእግዚአብሔር ብቻ ወደ ውስጥ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 61,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 62,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 63,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 64,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 65,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "በእግዚአብሔር የተወዳዳሪ የምን ይህ ይሆናል?"
+      },
+      {
+        "day": 14,
+        "title": "መዝ.ሐ 66–70: ወደ ደስታ ድምፅ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 66,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 67,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 68,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 69,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 70,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "በዕለት የእግዚአብሔር የሚወዳድር ምን ይህ ይሆናል?"
+      },
+      {
+        "day": 15,
+        "title": "መዝ.ሐ 71–75: የዘይቤ ተስፋ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 71,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 72,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 73,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 74,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 75,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "መዝ.ሐ 73 ወደ ተወዳዳሪ የሚወዳድር ምን ይህ ይሆናል?"
+      },
+      {
+        "day": 16,
+        "title": "መዝ.ሐ 76–80: የእግዚአብሔር የሚወዳድር",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 76,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 77,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 78,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 79,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 80,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የእግዚአብሔር የሚወዳድር ምን ይህ ይሆናል?"
+      },
+      {
+        "day": 17,
+        "title": "መዝ.ሐ 81–85: የማስታወሻ እና ወደ ውስጥ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 81,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 82,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 83,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 84,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 85,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "መዝ.ሐ 84 ወደ ውስጥ የሚወዳድር ምን ይህ ይሆናል?"
+      },
+      {
+        "day": 18,
+        "title": "መዝ.ሐ 86–90: ከዘይቤ ወደ ዘይቤ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 86,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 87,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 88,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 89,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 90,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "መዝ.ሐ 90 ወደ ውስጥ የሚወዳድር ምን ይህ ይሆናል?"
+      },
+      {
+        "day": 19,
+        "title": "መዝ.ሐ 91–95: የሚወዳድር እና ድምፅ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 91,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 92,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 93,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 94,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 95,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "በእግዚአብሔር የሚወዳድር ምን ይህ ይሆናል?"
+      },
+      {
+        "day": 20,
+        "title": "Psalms 96–100: The Lord Reigns",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 96,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 97,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 98,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 99,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 100,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How does the call to 'make a joyful noise' in Psalm 100 challenge you to worship with greater enthusiasm?"
+      },
+      {
+        "day": 21,
+        "title": "Psalms 101–105: Bless the Lord, O My Soul",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 101,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 102,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 103,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 104,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 105,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What benefits from the Lord listed in Psalm 103 have you forgotten to thank Him for?"
+      },
+      {
+        "day": 22,
+        "title": "Psalms 106–110: Remembering God's Faithfulness",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 106,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 107,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 108,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 109,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 110,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How have you experienced God's steadfast love rescuing you from your own wandering?"
+      },
+      {
+        "day": 23,
+        "title": "Psalms 111–115: Praise the Lord",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 111,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 112,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 113,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 114,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 115,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How does the contrast between living God and lifeless idols in Psalm 115 challenge where you place your trust?"
+      },
+      {
+        "day": 24,
+        "title": "Psalms 116–120: Songs of Ascent Begin",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 116,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 117,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 118,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 119,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 120,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What verse from the longest psalm — Psalm 119 — speaks most powerfully to your love for God's Word?"
+      },
+      {
+        "day": 25,
+        "title": "Psalms 121–125: Ascending to the Lord",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 121,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 122,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 123,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 124,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 125,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Where does your help come from, and how does Psalm 121 strengthen your confidence in God's protection?"
+      },
+      {
+        "day": 26,
+        "title": "Psalms 126–130: Sowing in Tears",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 126,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 127,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 128,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 129,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 130,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What seeds are you sowing in tears right now, trusting that you will reap with shouts of joy?"
+      },
+      {
+        "day": 27,
+        "title": "Psalms 131–135: Humble Trust",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 131,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 132,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 133,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 134,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 135,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How does the image of unity in Psalm 133 inspire you to pursue deeper fellowship with other believers?"
+      },
+      {
+        "day": 28,
+        "title": "Psalms 136–140: His Love Endures Forever",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 136,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 137,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 138,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 140,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How does the refrain 'His love endures forever' in Psalm 136 anchor you when everything else feels uncertain?"
+      },
+      {
+        "day": 29,
+        "title": "Psalms 141–145: Evening Prayers",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 141,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 142,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 143,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 144,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 145,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How does David's declaration that God is great and greatly to be praised shape your evening prayer tonight?"
+      },
+      {
+        "day": 30,
+        "title": "Psalms 146–150: Let Everything Praise the Lord",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 146,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 147,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 148,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 149,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 150,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "As the Psalms close with 'let everything that has breath praise the Lord,' how will you make praise a daily habit?"
+      }
+    ]
+  },
+  {
+    "id": "life-of-david",
+    "name": "The Life of David",
+    "description": "A 14-day walk with the shepherd-king — from anointing to giant-slaying, from exile to the throne — paired with the psalms born of each season.",
+    "totalDays": 14,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6B2D2D",
+      "#3A1818"
+    ],
+    "iconName": "shield.lefthalf.filled",
+    "imageKey": "david_goliath",
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Anointed in Obscurity",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Where is God meeting you in the quiet, unseen places before the world ever notices?"
+      },
+      {
+        "day": 2,
+        "title": "Facing the Giant",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What giant are you facing today, and whose name will you face it in?"
+      },
+      {
+        "day": 3,
+        "title": "The Loyalty of Jonathan",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Who has been a Jonathan to you, and how can you be that friend to someone else?"
+      },
+      {
+        "day": 4,
+        "title": "Running for Your Life",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How does David's psalm in the cave teach you to praise God before the deliverance arrives?"
+      },
+      {
+        "day": 5,
+        "title": "Restraint in the Cave",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Where do you need to practice restraint when you could strike back at someone who has wronged you?"
+      },
+      {
+        "day": 6,
+        "title": "Wisdom from Abigail",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Whose wise counsel have you resisted lately that might be saving you from a foolish decision?"
+      },
+      {
+        "day": 7,
+        "title": "The Fall of Saul",
+        "readings": [
+          {
+            "bookID": "1SA",
+            "chapter": 31,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "2SA",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How does David's grief for his enemy Saul reshape how you see the people you struggle with?"
+      },
+      {
+        "day": 8,
+        "title": "The King Dances",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "When was the last time you worshiped with total abandon, unworried about what anyone thought?"
+      },
+      {
+        "day": 9,
+        "title": "የዘላለም ውል",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ዳዊት በዚህ ዘመን የክርስቶስ ተስፋዎትን የሚጠንቀቅ የእግዚአብሔር የዘላለም ወንጌል ትንቢት እንዴት ነው?"
+      },
+      {
+        "day": 10,
+        "title": "የአስተዳደር ንጉስ ዝቅተኛ ወይዘር",
+        "readings": [
+          {
+            "bookID": "2SA",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "2SA",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "እንዴት እንደ ወይዘር ወይዘር የሚያደርጉ የተወሰኑ ተመሳሳይ አስተዳደር ይኖርዎት?"
+      },
+      {
+        "day": 11,
+        "title": "የተቋቋመ ጸሎት",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 51,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ዛሬ ምን ይደርስ ይህ ጸሎት 'በእኔ ውስጥ የተረጋገጠ ልብ ይፍጠር' ይህ ይሆናል?"
+      },
+      {
+        "day": 12,
+        "title": "ጌታ ይባርክ እንደ መንፈስ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 103,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ዛሬ የጌታ የተወሰኑ ጥቅሞች ውስጥ የሚያስታውስ የምን ነው?"
+      },
+      {
+        "day": 13,
+        "title": "በፍርሃት የተወደደ",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 139,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "እግዚአብሔር የሚያየው የልብዎን የደቀ በደብ አንድ ይህ ይደርስ?"
+      },
+      {
+        "day": 14,
+        "title": "የአስተዳደር ወይዘር",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ዳዊት ወይዘር በዚህ ዘመን የሚያደርጉ ይህ ይሆናል?"
+      }
+    ]
+  },
+  {
+    "id": "christmas-story",
+    "name": "የገና ታሪክ",
+    "description": "ከጥንታዊ ትንቢት ወደ ዳር የሚያደርጉ 7-ቀን የአውትዶር ጉዞ — የእግዚአብሔር እንደ ተመጣጣኝ ይወዳድር.",
+    "totalDays": 7,
+    "category": "Advent",
+    "gradientColors": [
+      "#3C5A7A",
+      "#1F2F45"
+    ],
+    "iconName": "star.fill",
+    "imageKey": "nativity",
+    "applicableSeasons": [
+      "parenthood",
+      "newlyMarried",
+      "growing",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "grief",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "የተነገረ ልጅ",
+        "readings": [
+          {
+            "bookID": "ISA",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የአይሱያ ስም የሚያደርጉ የሚወዳድር ይህ ይሆናል?"
+      },
+      {
+        "day": 2,
+        "title": "ከትንሽ ቤተሉባ",
+        "readings": [
+          {
+            "bookID": "MIC",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "እግዚአብሔር የተለየ ከተማ ይህ ይሆናል?"
+      },
+      {
+        "day": 3,
+        "title": "የማሪያም አይዞ",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የእግዚአብሔር የሚያደርጉ ይህ ይሆናል?"
+      },
+      {
+        "day": 4,
+        "title": "የዮሴፍ ዝንባር ትዕዛዝ",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የዮሴፍ ዝንባር የሚያደርጉ ይህ ይሆናል?"
+      },
+      {
+        "day": 5,
+        "title": "የቃል ወይዘር",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የዘላለም ቃል ወይዘር ይህ ይሆናል?"
+      },
+      {
+        "day": 6,
+        "title": "የአስተዳደር ወይዘር",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የወይዘር የሚያደርጉ ይህ ይሆናል?"
+      },
+      {
+        "day": 7,
+        "title": "የጥበብ ሰዎች ከሩቅ",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የዚህ ይሆናል?"
+      }
+    ]
+  },
+  {
+    "id": "walking-with-elijah",
+    "name": "ከኤልያስ ጋር መሄድ",
+    "description": "ከአስተዳደር ወይዘር ወይዘር ይህ ይሆናል?",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6E4A2C",
+      "#3A2814"
+    ],
+    "iconName": "flame.fill",
+    "imageKey": "elijah_ravens",
+    "applicableSeasons": [
+      "hardSeason",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose",
+      "anxiety"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "ከአሃብ በፊት",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 6
+          }
+        ],
+        "reflection": "የእግዚእነ ይህ ይሆናል?"
+      },
+      {
+        "day": 2,
+        "title": "የዛርፌታ ወይዘር",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 17,
+            "verseStart": 7,
+            "verseEnd": 24
+          }
+        ],
+        "reflection": "የዛርፌታ ወይዘር ይህ ይሆናል?"
+      },
+      {
+        "day": 3,
+        "title": "በካርመል ላይ የሚያደርጉ",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የዚህ ይሆናል?"
+      },
+      {
+        "day": 4,
+        "title": "ወደ ወይዘር ሂደት",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 19,
+            "verseStart": 1,
+            "verseEnd": 8
+          }
+        ],
+        "reflection": "የዚህ ይሆናል?"
+      },
+      {
+        "day": 5,
+        "title": "የተወሰነ ወይዘር",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 19,
+            "verseStart": 9,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "የዚህ ይሆናል?"
+      },
+      {
+        "day": 6,
+        "title": "Naboth's Vineyard",
+        "readings": [
+          {
+            "bookID": "1KI",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How does this story reshape how you view injustice that no one else seems willing to confront?"
+      },
+      {
+        "day": 7,
+        "title": "Fire from Heaven",
+        "readings": [
+          {
+            "bookID": "2KI",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Where are you tempted to consult other 'gods of Ekron' instead of bringing your fears to the Lord?"
+      },
+      {
+        "day": 8,
+        "title": "The Mantle Passes",
+        "readings": [
+          {
+            "bookID": "2KI",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Whose mantle is God asking you to pick up — or whose mantle are you ready to pass on?"
+      },
+      {
+        "day": 9,
+        "title": "Elijah on the Mountain with Christ",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "What does it mean that the same prophet who felt most alone was one day standing with Jesus in glory?"
+      },
+      {
+        "day": 10,
+        "title": "A Man Like Us",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": 13,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "James says Elijah was 'a man with a nature like ours' — how does that change the way you pray this week?"
+      }
+    ]
+  },
+  {
+    "id": "beatitudes-deep-dive",
+    "name": "The Beatitudes: Eight Portraits",
+    "description": "An 8-day portrait study of the citizens of Jesus' kingdom — one beatitude at a time, each paired with a scripture that fills in the picture.",
+    "totalDays": 8,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A6B3A",
+      "#4F4524"
+    ],
+    "iconName": "sparkles",
+    "imageKey": "beatitudes",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Poor in Spirit",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 3
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 57,
+            "verseStart": 14,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "What would it look like today to come to God admitting your total dependence rather than performing your competence?"
+      },
+      {
+        "day": 2,
+        "title": "Those Who Mourn",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 4,
+            "verseEnd": 4
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 42,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What loss or grief have you been trying to bypass that Jesus is inviting you to actually sit with?"
+      },
+      {
+        "day": 3,
+        "title": "The Meek",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 5,
+            "verseEnd": 5
+          },
+          {
+            "bookID": "NUM",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Where do you confuse meekness with weakness, and how does Moses' example reshape that?"
+      },
+      {
+        "day": 4,
+        "title": "Hungry for Righteousness",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 6,
+            "verseEnd": 6
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 63,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What lesser hungers have been crowding out your appetite for God's righteousness this week?"
+      },
+      {
+        "day": 5,
+        "title": "The Merciful",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 7,
+            "verseEnd": 7
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "Who has God placed in your path today that needs you to be the Samaritan rather than the priest?"
+      },
+      {
+        "day": 6,
+        "title": "Pure in Heart",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 8,
+            "verseEnd": 8
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What hidden motive do you need to bring into the light so your heart can be single in its devotion?"
+      },
+      {
+        "day": 7,
+        "title": "Peacemakers",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 9,
+            "verseEnd": 9
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": 9,
+            "verseEnd": 21
+          }
+        ],
+        "reflection": "Where is God calling you to do the harder work of making peace rather than simply keeping it?"
+      },
+      {
+        "day": 8,
+        "title": "The Persecuted",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 5,
+            "verseStart": 10,
+            "verseEnd": 16
+          },
+          {
+            "bookID": "1PE",
+            "chapter": 4,
+            "verseStart": 12,
+            "verseEnd": 19
+          }
+        ],
+        "reflection": "How can the joy Jesus promises reshape the way you respond the next time faithfulness costs you something?"
+      }
+    ]
+  },
+  {
+    "id": "holy-week",
+    "name": "Holy Week: The Journey to Easter",
+    "description": "Walk Holy Week day-by-day — from the triumphal entry through the cross to the empty tomb — and live the most consequential week in history.",
+    "totalDays": 8,
+    "category": "Easter",
+    "gradientColors": [
+      "#5A2E2E",
+      "#2F1515"
+    ],
+    "iconName": "cross.fill",
+    "imageKey": "triumphal_entry",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "grief",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Palm Sunday",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 21,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "What does it mean to welcome Jesus as King when He comes in a way you didn't expect?"
+      },
+      {
+        "day": 2,
+        "title": "Cleansing the Temple",
+        "readings": [
+          {
+            "bookID": "MRK",
+            "chapter": 11,
+            "verseStart": 12,
+            "verseEnd": 25
+          }
+        ],
+        "reflection": "What 'tables' in your heart is Jesus asking to overturn so His presence can be rightly welcomed?"
+      },
+      {
+        "day": 3,
+        "title": "Teaching in the Temple",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 22,
+            "verseStart": 34,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "How would loving God with all you are — and your neighbor as yourself — reorder your week?"
+      },
+      {
+        "day": 4,
+        "title": "The Anointing at Bethany",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 12,
+            "verseStart": 1,
+            "verseEnd": 11
+          }
+        ],
+        "reflection": "What extravagant act of love can you offer Jesus today, even if the world calls it a waste?"
+      },
+      {
+        "day": 5,
+        "title": "The Last Supper",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Whose feet is Jesus asking you to wash this week, and what pride is making it hard?"
+      },
+      {
+        "day": 6,
+        "title": "Gethsemane",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 26,
+            "verseStart": 36,
+            "verseEnd": 56
+          }
+        ],
+        "reflection": "Where in your life do you need to pray, 'Not my will, but yours be done' — and actually mean it?"
+      },
+      {
+        "day": 7,
+        "title": "Good Friday",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What unfinished thing in your life needs to hear Jesus' words: 'It is finished'?"
+      },
+      {
+        "day": 8,
+        "title": "Easter Morning",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Where do you need the power of the resurrection to meet you in the tomb of a dead hope today?"
+      }
+    ]
+  },
+  {
+    "id": "genesis-beginnings",
+    "name": "Genesis: In the Beginning",
+    "description": "A 12-day walk through the first book of the Bible — creation, the fall, the flood, the patriarchs — tracing God's faithful pursuit from the start.",
+    "totalDays": 12,
+    "category": "Foundations",
+    "gradientColors": [
+      "#3A5A4A",
+      "#1C2D24"
+    ],
+    "iconName": "globe.americas.fill",
+    "imageKey": "noah_ark",
+    "applicableSeasons": [
+      "growing",
+      "startingOver",
+      "newlyMarried"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "In the Beginning",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What 'formless and empty' area of your life is God speaking order and light into right now?"
+      },
+      {
+        "day": 2,
+        "title": "The Garden and the Image",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What does it mean to you that God shaped you with His own hands and breathed His own life into you?"
+      },
+      {
+        "day": 3,
+        "title": "The Fall",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What lie of the serpent — 'Did God really say?' — do you keep hearing, and how can you answer it with truth?"
+      },
+      {
+        "day": 4,
+        "title": "Noah and the Flood",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "GEN",
+            "chapter": 9,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "Where do you need to trust God's rainbow promises in the middle of a season that still feels flooded?"
+      },
+      {
+        "day": 5,
+        "title": "The Call of Abram",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What 'country and kindred' is God asking you to leave behind to follow Him into something new?"
+      },
+      {
+        "day": 6,
+        "title": "Counting the Stars",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What is the impossible promise from God that you need to keep believing, even on the nights it seems laughable?"
+      },
+      {
+        "day": 7,
+        "title": "The Offering of Isaac",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What has become an 'Isaac' to you — a gift you love so much that it is beginning to rival God Himself?"
+      },
+      {
+        "day": 8,
+        "title": "Jacob's Stairway",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Where has God shown up unexpectedly lately, surely in a place you didn't know He was?"
+      },
+      {
+        "day": 9,
+        "title": "Wrestling All Night",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What are you wrestling God for right now, and are you willing to walk with a limp if it means receiving His blessing?"
+      },
+      {
+        "day": 10,
+        "title": "Joseph's Dreams",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 37,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What 'pit' are you in right now that God may be using as the first chapter of a much bigger story?"
+      },
+      {
+        "day": 11,
+        "title": "Reunited in Egypt",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 45,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What relationship in your life is ready for the forgiveness Joseph modeled: 'You meant evil, but God meant it for good'?"
+      },
+      {
+        "day": 12,
+        "title": "God Meant It for Good",
+        "readings": [
+          {
+            "bookID": "GEN",
+            "chapter": 50,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Looking back on the hardest thing you've walked through, where do you now see God's hand weaving it for good?"
+      }
+    ]
+  },
+  {
+    "id": "daniel-exile",
+    "name": "Daniel: Faithful in Exile",
+    "description": "A 12-day journey through the book of Daniel — standing firm in a pagan court, praying when it's illegal, and trusting God with the whole sweep of history.",
+    "totalDays": 12,
+    "category": "Character Study",
+    "gradientColors": [
+      "#5A3A2A",
+      "#2E1F16"
+    ],
+    "iconName": "shield.fill",
+    "imageKey": "daniel_lions",
+    "applicableSeasons": [
+      "workingProfessional",
+      "hardSeason",
+      "student",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Resolved Not to Defile",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What small daily compromise is God inviting you to 'resolve' you will no longer accept?"
+      },
+      {
+        "day": 2,
+        "title": "The King's Dream",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Where do you need to trust that the God who reveals deep and hidden things is sovereign over the empires of your day?"
+      },
+      {
+        "day": 3,
+        "title": "The Fiery Furnace",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What would 'but if not' faith look like for you this week — trust that obeys even without a guarantee of rescue?"
+      },
+      {
+        "day": 4,
+        "title": "A Humbled King",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Where is pride whispering that you built what you have, and how is God calling you to lift your eyes?"
+      },
+      {
+        "day": 5,
+        "title": "The Writing on the Wall",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What in your life have you been 'weighed' by God in, and what repentance is being invited?"
+      },
+      {
+        "day": 6,
+        "title": "The Lions' Den",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "What open-window practice of prayer is worth keeping, even if it costs you something socially or professionally?"
+      },
+      {
+        "day": 7,
+        "title": "The Ancient of Days",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How does the vision of the Ancient of Days and the Son of Man give you a longer view of the headlines?"
+      },
+      {
+        "day": 8,
+        "title": "The Ram and the Goat",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "When the future feels confusing, what anchors you in the God who sees the end from the beginning?"
+      },
+      {
+        "day": 9,
+        "title": "A Prayer of Confession",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Where does your community or family need you to stand in the gap with a prayer of confession like Daniel's?"
+      },
+      {
+        "day": 10,
+        "title": "The Man in Linen",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How does the reality of unseen spiritual battle change the way you persevere in prayer when nothing seems to move?"
+      },
+      {
+        "day": 11,
+        "title": "Kings and Kingdoms",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Which earthly kingdom have you put too much weight on, and how can you re-anchor your hope?"
+      },
+      {
+        "day": 12,
+        "title": "Those Who Are Wise Will Shine",
+        "readings": [
+          {
+            "bookID": "DAN",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "How does the promise that 'those who are wise will shine like the brightness of the heavens' fuel your faithfulness today?"
+      }
+    ]
+  },
+  {
+    "id": "lords-prayer-deep-dive",
+    "name": "The Lord's Prayer: Teach Us to Pray",
+    "description": "A 7-day meditation on the prayer Jesus taught us — one petition per day — slowing down to mean every word.",
+    "totalDays": 7,
+    "category": "Prayer",
+    "gradientColors": [
+      "#4A5A7A",
+      "#242D3D"
+    ],
+    "iconName": "hands.sparkles.fill",
+    "imageKey": "lords_prayer",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "parenthood",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "Our Father in Heaven",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 6,
+            "verseStart": 5,
+            "verseEnd": 13
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 8,
+            "verseStart": 12,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "What does it change about your prayer today if you truly believe you are approaching your Father, not just a distant deity?"
+      },
+      {
+        "day": 2,
+        "title": "Hallowed Be Your Name",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 99,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 6,
+            "verseStart": 1,
+            "verseEnd": 8
+          }
+        ],
+        "reflection": "What would it look like today for you to treat God's name as holy in your thoughts, your mouth, and your choices?"
+      },
+      {
+        "day": 3,
+        "title": "Your Kingdom Come",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 13,
+            "verseStart": 31,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "Where do you long to see God's kingdom break into your world this week — and how will you pray with expectation?"
+      },
+      {
+        "day": 4,
+        "title": "Your Will Be Done",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 26,
+            "verseStart": 36,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "What prayer of yours is waiting for the honest 'not my will, but yours'? What would that cost, and what would it free?"
+      },
+      {
+        "day": 5,
+        "title": "Give Us This Day",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 10,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "How does daily-bread prayer cure the anxiety of trying to hoard tomorrow's grace today?"
+      },
+      {
+        "day": 6,
+        "title": "Forgive Us As We Forgive",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 18,
+            "verseStart": 21,
+            "verseEnd": 35
+          }
+        ],
+        "reflection": "Whose debt do you need to release so that your prayer for forgiveness doesn't bounce off a closed heart?"
+      },
+      {
+        "day": 7,
+        "title": "Deliver Us From Evil",
+        "readings": [
+          {
+            "bookID": "EPH",
+            "chapter": 6,
+            "verseStart": 10,
+            "verseEnd": 20
+          }
+        ],
+        "reflection": "Where do you need to put on the armor of God and pray specifically for deliverance from the evil one today?"
+      }
+    ]
+  },
+  {
+    "id": "parables-kingdom",
+    "name": "Parables of the Kingdom",
+    "description": "A 10-day walk through Jesus' most piercing parables — short stories that turn hearts and reveal the upside-down kingdom of God.",
+    "totalDays": 10,
+    "category": "Jesus' Teaching",
+    "gradientColors": [
+      "#7A4A2A",
+      "#3E2516"
+    ],
+    "iconName": "quote.opening",
+    "imageKey": "prodigal_son",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "workingProfessional",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "relationships",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "The Sower",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 13,
+            "verseStart": 1,
+            "verseEnd": 23
+          }
+        ],
+        "reflection": "What kind of soil is your heart right now, and what do you need to do to become 'good ground' this season?"
+      },
+      {
+        "day": 2,
+        "title": "The Good Samaritan",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "Who are you tempted to walk past, and what would it look like to cross the road instead?"
+      },
+      {
+        "day": 3,
+        "title": "የተወደደ ልጅ",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 15,
+            "verseStart": 11,
+            "verseEnd": 32
+          }
+        ],
+        "reflection": "ዛሬ እንዴት ይህ ልጅ ነህ — የሚሄድ ወይም የተቃወም አዳራሽ ወንድም — እና አባት ምን ማቅረብ ይፈልጋል?"
+      },
+      {
+        "day": 4,
+        "title": "የተገኘ በግርግር እና ገንዘብ",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 15,
+            "verseStart": 1,
+            "verseEnd": 10
+          }
+        ],
+        "reflection": "በዕድል የተገኘ የእርስዎ ሕይወት ውስጥ የምን እንደሚሰማዎት እና ደሴት የሚያደርግ የሚያውቅ ማድረግ ይለይ?"
+      },
+      {
+        "day": 5,
+        "title": "የተቀደሰ ድንጋይ",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 12,
+            "verseStart": 13,
+            "verseEnd": 34
+          }
+        ],
+        "reflection": "የተወደደ ድንጋይ ምን እንደሚሆን ይታወቃል እና ወደ እግዚአብሔር በተለይ የምን እንደሚሆን ይታወቃል?"
+      },
+      {
+        "day": 6,
+        "title": "የማይይዘው አገልግሎት",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 18,
+            "verseStart": 21,
+            "verseEnd": 35
+          }
+        ],
+        "reflection": "የምን አንዳንድ አስቀድሞ ይህ ይታወቃል እና የእርስዎ የአስቀድሞ ይህ ይታወቃል?"
+      },
+      {
+        "day": 7,
+        "title": "የፋሪሲ እና የግብር ተቀባይ",
+        "readings": [
+          {
+            "bookID": "LUK",
+            "chapter": 18,
+            "verseStart": 9,
+            "verseEnd": 14
+          }
+        ],
+        "reflection": "የምን ጸሎት ወደ ፋሪሲ ይህ ይታወቃል እና ወደ ዛሬ ይህ ይታወቃል?"
+      },
+      {
+        "day": 8,
+        "title": "በወይን ውስጥ የሥራ አቀራረብ",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 20,
+            "verseStart": 1,
+            "verseEnd": 16
+          }
+        ],
+        "reflection": "የምን ወደ ወይን ውስጥ ይታወቃል እና የምን ወደ ወይን ውስጥ ይታወቃል?"
+      },
+      {
+        "day": 9,
+        "title": "የአስር ወይዘሮች",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 25,
+            "verseStart": 1,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "የምን ወደ እርስዎ ይታወቃል እና ወደ ወይን ውስጥ ይታወቃል?"
+      },
+      {
+        "day": 10,
+        "title": "የወይን እና የበግ",
+        "readings": [
+          {
+            "bookID": "MAT",
+            "chapter": 25,
+            "verseStart": 31,
+            "verseEnd": 46
+          }
+        ],
+        "reflection": "የምን ወደ እርስዎ ይታወቃል እና ወደ ወይን ውስጥ ይታወቃል?"
+      }
+    ]
+  },
+  {
+    "id": "esther-for-such-a-time",
+    "name": "ኤስተር: እንደዚህ ያለ ጊዜ",
+    "description": "ወቅታዊ የኤስተር መጻፍ 10 ቀን — 10 ምዕራፍ, 10 ቀን — በክርስቶስ የተወደደ የእግዚአብሔር የሚያደርግ ይታወቃል?",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6A3A5C",
+      "#2E1826"
+    ],
+    "iconName": "crown.fill",
+    "imageKey": "mordecai_triumph",
+    "applicableSeasons": [
+      "workingProfessional",
+      "student",
+      "hardSeason",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith",
+      "anxiety"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 3,
+    "days": [
+      {
+        "day": 1,
+        "title": "በግርግር ውስጥ የምርጥ አይነት",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የምን ወደ እርስዎ ይታወቃል እና ወደ ወይን ውስጥ ይታወቃል?"
+      },
+      {
+        "day": 2,
+        "title": "የማይታወቅ ንግስት",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የምን ወደ እርስዎ ይታወቃል እና ወደ ወይን ውስጥ ይታወቃል?"
+      },
+      {
+        "day": 3,
+        "title": "የሐማን ጠባይ",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ወደ እርስዎ ይታወቃል እና ወደ ወይን ውስጥ ይታወቃል?"
+      },
+      {
+        "day": 4,
+        "title": "እንደዚህ ያለ ጊዜ",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የምን ወደ እርስዎ ይታወቃል እና ወደ ወይን ውስጥ ይታወቃል?"
+      },
+      {
+        "day": 5,
+        "title": "ወደ ንጉሥ መግባት",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ወደ እርስዎ ይታወቃል እና ወደ ወይን ውስጥ ይታወቃል?"
+      },
+      {
+        "day": 6,
+        "title": "የማይታወቅ ምሽት",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ወደ እርስዎ ይታወቃል እና ወደ ወይን ውስጥ ይታወቃል?"
+      },
+      {
+        "day": 7,
+        "title": "የታላቅ መለወጥ",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ወደ እርስዎ ይታወቃል እና ወደ ወይን ውስጥ ይታወቃል?"
+      },
+      {
+        "day": 8,
+        "title": "አዲስ ወይዘሮች",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ወደ እርስዎ ይታወቃል እና ወደ ወይን ውስጥ ይታወቃል?"
+      },
+      {
+        "day": 9,
+        "title": "የፑሪም ቀን",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የምን ወደ እርስዎ ይታወቃል እና ወደ ወይን ውስጥ ይታወቃል?"
+      },
+      {
+        "day": 10,
+        "title": "የሞርዴካይ ወንጌል",
+        "readings": [
+          {
+            "bookID": "EST",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ወደ እርስዎ ይታወቃል እና ወደ ወይን ውስጥ ይታወቃል?"
+      }
+    ]
+  },
+  {
+    "id": "ruth-redemption",
+    "name": "ሩት: የተወደደ ታሪክ",
+    "description": "ወቅታዊ የሩት መጻፍ 4 ቀን — የምን ወደ እርስዎ ይታወቃል እና ወደ ወይን ውስጥ ይታወቃል?",
+    "totalDays": 4,
+    "category": "Character Study",
+    "gradientColors": [
+      "#8B6642",
+      "#4A331F"
+    ],
+    "iconName": "heart.circle.fill",
+    "imageKey": "jacob_rachel_well",
+    "applicableSeasons": [
+      "hardSeason",
+      "newlyMarried",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "grief",
+      "relationships",
+      "purpose"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Loss and Loyalty",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Naomi calls herself 'Mara' — bitter. Ruth responds to loss with a vow: 'Where you go, I will go.' Which of the two voices — bitter honesty or stubborn loyalty — more closely describes how you're meeting this season, and what might change if both were allowed to coexist?"
+      },
+      {
+        "day": 2,
+        "title": "Unexpected Kindness",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Notice how the narrator says Ruth 'happened' to glean in Boaz's field — a quiet nod that nothing in this story is actually random. Where in your life might God be orchestrating what feels like coincidence into quiet kindness?"
+      },
+      {
+        "day": 3,
+        "title": "Bold Faith at the Threshing Floor",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ruth's approach to Boaz invokes the Hebrew concept of the kinsman-redeemer — a relative who buys back land and lives that have been lost. What does it mean to you that the Bible's picture of redemption starts here, on a threshing floor, not in a temple?"
+      },
+      {
+        "day": 4,
+        "title": "The Redeemer and the Royal Line",
+        "readings": [
+          {
+            "bookID": "RUT",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 1,
+            "verseStart": 1,
+            "verseEnd": 17
+          }
+        ],
+        "reflection": "Ruth — a Moabite, a widow, a foreigner — shows up in Jesus' family tree. How does that ending reshape your understanding of who God weaves into His saving story, and how He might be weaving you in?"
+      }
+    ]
+  },
+  {
+    "id": "jonah-reluctant-prophet",
+    "name": "Jonah: The Reluctant Prophet",
+    "description": "A 4-day journey through Jonah — a prophet who ran, a storm that caught him, a city that repented, and a God whose mercy ran further than Jonah's prejudice.",
+    "totalDays": 4,
+    "category": "Character Study",
+    "gradientColors": [
+      "#2E5A6B",
+      "#15303A"
+    ],
+    "iconName": "water.waves",
+    "imageKey": "jesus_calms_storm",
+    "applicableSeasons": [
+      "hardSeason",
+      "startingOver",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "Running from God",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "God says 'go to Nineveh' and Jonah boards a boat for Tarshish — the opposite end of the known world. What assignment from God are you sailing away from, and where is the storm that should warn you actually coming from?"
+      },
+      {
+        "day": 2,
+        "title": "Prayer from the Deep",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jonah prays from inside a fish — the lowest point imaginable — and calls it 'the temple.' How does that reframing change your view of your own low places? Can prayer turn any depth into a sanctuary?"
+      },
+      {
+        "day": 3,
+        "title": "A City That Repented",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Nineveh was Israel's cruelest enemy, and yet they repent at the shortest sermon in the Bible — just eight words. What does that teach you about the mysterious power of God's Word, even when the messenger is reluctant?"
+      },
+      {
+        "day": 4,
+        "title": "The Heart of God",
+        "readings": [
+          {
+            "bookID": "JON",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "The book ends with a question, not an answer — God asks Jonah whether He should pity a hundred and twenty thousand people. Whose salvation would secretly disappoint you, and what does God's final question call you to lay down?"
+      }
+    ]
+  },
+  {
+    "id": "fruit-of-the-spirit",
+    "name": "Fruit of the Spirit",
+    "description": "A 9-day study of the character the Holy Spirit grows in us — one fruit per day, each rooted in Galatians 5 and paired with a passage that brings it to life.",
+    "totalDays": 9,
+    "category": "Discipleship",
+    "gradientColors": [
+      "#4A7A5C",
+      "#2A4A38"
+    ],
+    "iconName": "leaf.circle.fill",
+    "imageKey": "annunciation",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional",
+      "parenthood",
+      "newlyMarried"
+    ],
+    "applicableBurdens": [
+      "relationships",
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "Love",
+        "readings": [
+          {
+            "bookID": "GAL",
+            "chapter": 5,
+            "verseStart": 16,
+            "verseEnd": 26
+          },
+          {
+            "bookID": "1CO",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paul says the fruit of the Spirit is love — singular — as if the other eight flow from it. Which line of 1 Corinthians 13 most exposes where your love is still growing, and where is the Spirit inviting you to cooperate?"
+      },
+      {
+        "day": 2,
+        "title": "Joy",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 4,
+            "verseEnd": 13
+          },
+          {
+            "bookID": "NEH",
+            "chapter": 8,
+            "verseStart": 1,
+            "verseEnd": 12
+          }
+        ],
+        "reflection": "Biblical joy is not the absence of sorrow but a deep gladness rooted in God. Where are you mistaking happiness for joy, and what anchors joy when circumstances won't cooperate?"
+      },
+      {
+        "day": 3,
+        "title": "Peace",
+        "readings": [
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": 25,
+            "verseEnd": 31
+          },
+          {
+            "bookID": "ISA",
+            "chapter": 26,
+            "verseStart": 1,
+            "verseEnd": 9
+          }
+        ],
+        "reflection": "Jesus gives peace 'not as the world gives' — not the absence of conflict, but the presence of Him. What worry are you carrying today that Jesus is offering to trade for His peace?"
+      },
+      {
+        "day": 4,
+        "title": "Patience",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": 7,
+            "verseEnd": 11
+          },
+          {
+            "bookID": "ROM",
+            "chapter": 5,
+            "verseStart": 1,
+            "verseEnd": 11
+          }
+        ],
+        "reflection": "The Greek word here, 'makrothumia,' literally means 'long-tempered' — slow to boil. Where in your life is your fuse short, and what would it look like to be long-tempered with that specific person or situation?"
+      },
+      {
+        "day": 5,
+        "title": "Kindness",
+        "readings": [
+          {
+            "bookID": "COL",
+            "chapter": 3,
+            "verseStart": 12,
+            "verseEnd": 17
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 10,
+            "verseStart": 25,
+            "verseEnd": 37
+          }
+        ],
+        "reflection": "Kindness is not merely being nice — it is going out of your way for someone who cannot repay you. Who has God placed in your path this week that costs you something to be kind to?"
+      },
+      {
+        "day": 6,
+        "title": "Goodness",
+        "readings": [
+          {
+            "bookID": "ROM",
+            "chapter": 12,
+            "verseStart": 9,
+            "verseEnd": 21
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Goodness is integrity that holds even when nobody is watching. Where in your private life is the Spirit quietly inviting you to match your secret to your reputation?"
+      },
+      {
+        "day": 7,
+        "title": "Faithfulness",
+        "readings": [
+          {
+            "bookID": "LAM",
+            "chapter": 3,
+            "verseStart": 19,
+            "verseEnd": 33
+          },
+          {
+            "bookID": "LUK",
+            "chapter": 16,
+            "verseStart": 10,
+            "verseEnd": 13
+          }
+        ],
+        "reflection": "God's faithfulness is new every morning; ours is meant to be steady in the small things. Where is the Lord asking you to be faithful in a 'small' thing that nobody applauds?"
+      },
+      {
+        "day": 8,
+        "title": "Gentleness",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": 1,
+            "verseEnd": 9
+          },
+          {
+            "bookID": "PRO",
+            "chapter": 15,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "Gentleness is strength under control — the soft answer of someone who could have roared. Whose wound are you prodding with your words that really needs a gentle touch?"
+      },
+      {
+        "day": 9,
+        "title": "Self-Control",
+        "readings": [
+          {
+            "bookID": "2PE",
+            "chapter": 1,
+            "verseStart": 3,
+            "verseEnd": 11
+          },
+          {
+            "bookID": "PRO",
+            "chapter": 25,
+            "verseStart": 21,
+            "verseEnd": 28
+          }
+        ],
+        "reflection": "Proverbs pictures a person without self-control as a city with broken walls — open to anything. What one 'wall' does the Spirit want to rebuild in your life this week, and who could help you tend it?"
+      }
+    ]
+  },
+  {
+    "id": "philippians-joy",
+    "name": "Philippians: Joy in Every Season",
+    "description": "A 4-day walk through Paul's most joyful letter — written from a prison cell — one chapter per day, each unfolding a different facet of a joy that circumstances cannot reach.",
+    "totalDays": 4,
+    "category": "Epistles",
+    "gradientColors": [
+      "#7A6A2E",
+      "#3C3314"
+    ],
+    "iconName": "sun.max.fill",
+    "imageKey": "magi_journey",
+    "applicableSeasons": [
+      "hardSeason",
+      "workingProfessional",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 5,
+    "days": [
+      {
+        "day": 1,
+        "title": "Joy in Suffering",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paul writes this letter in chains and still calls it his 'joy.' He reframes his prison as a platform for the gospel. What unwanted circumstance in your life is God inviting you to reframe rather than escape?"
+      },
+      {
+        "day": 2,
+        "title": "Joy in Humility",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "The hymn in verses 6–11 traces Jesus' downward movement — equal with God, emptied, human, obedient, crucified — before the Father lifts Him up. Where are you grasping at status in a place Jesus is modeling surrender, and what would 'the same mind' actually look like?"
+      },
+      {
+        "day": 3,
+        "title": "Joy in Knowing Christ",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paul calls his impressive résumé 'rubbish' compared to knowing Christ. What part of your own résumé — credentials, roles, accomplishments — is quietly competing with Christ for the center of your identity?"
+      },
+      {
+        "day": 4,
+        "title": "Joy in Every Circumstance",
+        "readings": [
+          {
+            "bookID": "PHP",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paul says he has learned — past tense, hard-won — the secret of being content in plenty or in want. Where in your life is the Lord teaching you that secret right now, and what practices (prayer, thankfulness, right thinking) are you refusing to actually use?"
+      }
+    ]
+  },
+  {
+    "id": "life-of-moses",
+    "name": "The Life of Moses",
+    "description": "A 10-day journey through the life of Moses — from basket to burning bush, from Red Sea to Sinai — meeting the God who calls, delivers, speaks, and stays.",
+    "totalDays": 10,
+    "category": "Character Study",
+    "gradientColors": [
+      "#6C4E2A",
+      "#382712"
+    ],
+    "iconName": "flame.circle.fill",
+    "imageKey": "manna_wilderness",
+    "applicableSeasons": [
+      "workingProfessional",
+      "startingOver",
+      "hardSeason",
+      "growing"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Born into a Basket",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "The Hebrew midwives defy Pharaoh's decree, a mother puts her son in a basket on the Nile, and God is already writing a deliverance story. Where has God been quietly preparing you, long before you ever knew a rescue was needed?"
+      },
+      {
+        "day": 2,
+        "title": "The Burning Bush",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Moses turns aside to look at a bush that burns without burning up, and God calls him by name. What ordinary thing might God be using to get your attention, and are you willing to turn aside to look?"
+      },
+      {
+        "day": 3,
+        "title": "Excuses and Signs",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Moses argues with God: 'Who am I? What if they don't believe me? I'm not eloquent.' God meets each objection. Which of Moses' excuses most resembles the one you keep giving God, and what is God's patient answer to you?"
+      },
+      {
+        "day": 4,
+        "title": "Let My People Go",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "The plagues systematically dethrone every Egyptian god — the Nile, the sun, the livestock — showing who truly reigns. What 'god' of your own culture do you need God to expose as powerless in your life?"
+      },
+      {
+        "day": 5,
+        "title": "The Passover",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Israel is rescued not by their merit but by the blood of a lamb on their doorposts — a shadow of the greater Lamb to come. How does seeing Passover as a portrait of Christ deepen your understanding of what His blood actually accomplished?"
+      },
+      {
+        "day": 6,
+        "title": "Through the Sea",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "'Stand still and see the salvation of the Lord,' Moses tells a trapped people — and then God says 'go forward.' Where are you tempted to either panic or stall when God is asking both stillness of heart and steps of faith?"
+      },
+      {
+        "day": 7,
+        "title": "Manna and Water",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 17,
+            "verseStart": 1,
+            "verseEnd": 7
+          }
+        ],
+        "reflection": "God gives bread that cannot be hoarded and water from a rock. What grace is He offering you daily that you keep trying to stockpile for anxiety's sake?"
+      },
+      {
+        "day": 8,
+        "title": "Sinai and the Ten Words",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "EXO",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "God gives the law in the context of rescue — 'I am the Lord your God who brought you out' — not as a way to earn His love but as a shape for life with Him. Which commandment do you most tend to read as a burden instead of as a boundary of freedom?"
+      },
+      {
+        "day": 9,
+        "title": "Show Me Your Glory",
+        "readings": [
+          {
+            "bookID": "EXO",
+            "chapter": 33,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Moses says, 'If your presence does not go with us, do not send us up from here.' What do you want from God more — His gifts, or Him? How would today look different if you wanted Him most?"
+      },
+      {
+        "day": 10,
+        "title": "The Faithful Servant",
+        "readings": [
+          {
+            "bookID": "DEU",
+            "chapter": 34,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Moses dies without entering the Promised Land, but God Himself buries him. What unfinished things in your life is God asking you to entrust to Him, knowing the story is bigger than you?"
+      }
+    ]
+  },
+  {
+    "id": "psalm-23-deep-dive",
+    "name": "Psalm 23: The Shepherd's Song",
+    "description": "A 6-day meditation on Scripture's most loved psalm — one verse at a time — paired with a New Testament passage that reveals Christ as the Shepherd the psalm was always pointing to.",
+    "totalDays": 6,
+    "category": "Worship",
+    "gradientColors": [
+      "#4A6B3F",
+      "#253A22"
+    ],
+    "iconName": "sparkle",
+    "imageKey": "suffer_little_children",
+    "applicableSeasons": [
+      "hardSeason",
+      "growing",
+      "retired",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "anxiety",
+      "grief",
+      "faith"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "The Lord Is My Shepherd",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 1,
+            "verseEnd": 1
+          },
+          {
+            "bookID": "JHN",
+            "chapter": 10,
+            "verseStart": 1,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "David was a shepherd — he knew the weight of that job. Jesus calls Himself the 'Good Shepherd' who lays down His life. What false shepherd (job, success, relationship) have you been letting define your worth, and what changes when the Lord Himself holds the staff?"
+      },
+      {
+        "day": 2,
+        "title": "Green Pastures, Still Waters",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 2,
+            "verseEnd": 2
+          },
+          {
+            "bookID": "MAT",
+            "chapter": 11,
+            "verseStart": 25,
+            "verseEnd": 30
+          }
+        ],
+        "reflection": "Sheep will not lie down when they are anxious, hungry, or in conflict. The Shepherd 'makes' them. Where in your life is Jesus gently making you rest, and what are you fighting to stay on your feet about?"
+      },
+      {
+        "day": 3,
+        "title": "Paths of Righteousness",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 3,
+            "verseEnd": 3
+          },
+          {
+            "bookID": "PSA",
+            "chapter": 32,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "The Shepherd 'restores my soul' before He leads it in right paths — comfort precedes correction. Where has God been restoring you that you mistook for God being silent, and what path might He be ready to walk with you now?"
+      },
+      {
+        "day": 4,
+        "title": "Through the Valley",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 4,
+            "verseEnd": 4
+          },
+          {
+            "bookID": "2CO",
+            "chapter": 4,
+            "verseStart": 7,
+            "verseEnd": 18
+          }
+        ],
+        "reflection": "David does not say 'around' but 'through' the valley, and the subject changes here from 'He' to 'You' — the closer the danger, the more personal the Shepherd becomes. What valley are you in, and how has God's closeness intensified in it?"
+      },
+      {
+        "day": 5,
+        "title": "A Table in the Presence of Enemies",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 5,
+            "verseEnd": 5
+          },
+          {
+            "bookID": "REV",
+            "chapter": 19,
+            "verseStart": 1,
+            "verseEnd": 10
+          }
+        ],
+        "reflection": "God feasts you in front of the very enemies you wish would go away. What does it mean that He does not always remove your trouble, but sometimes invites you to sit and eat while trouble watches?"
+      },
+      {
+        "day": 6,
+        "title": "Goodness, Mercy, and Home",
+        "readings": [
+          {
+            "bookID": "PSA",
+            "chapter": 23,
+            "verseStart": 6,
+            "verseEnd": 6
+          },
+          {
+            "bookID": "JHN",
+            "chapter": 14,
+            "verseStart": 1,
+            "verseEnd": 6
+          }
+        ],
+        "reflection": "The Hebrew for 'follow me' can be read as 'pursue' — goodness and mercy aren't strolling behind you, they are chasing you down. How does that reframing change the way you remember your past and look toward your future with God?"
+      }
+    ]
+  },
+  {
+    "id": "acts-early-church",
+    "name": "Acts: The Early Church",
+    "description": "A 14-day journey through the book of Acts — two chapters per day — from Pentecost to Rome, watching the Spirit birth a movement that still echoes in every believer today.",
+    "totalDays": 14,
+    "category": "Foundations",
+    "gradientColors": [
+      "#7A4A1C",
+      "#3E2510"
+    ],
+    "iconName": "wind",
+    "imageKey": "loaves_fishes",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional",
+      "student"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Pentecost",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "The church is born when ordinary people are filled with the Spirit and begin to proclaim Jesus in languages they never studied. Where in your life have you been waiting for more training instead of trusting the Spirit to empower the speech you have?"
+      },
+      {
+        "day": 2,
+        "title": "Bold Before Authority",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Peter and John are told to stop preaching — and pray for more boldness, not less. Where has social pressure made you quiet about Jesus, and what prayer would shift your posture from accommodation to courage?"
+      },
+      {
+        "day": 3,
+        "title": "A Growing, Testing Church",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Ananias and Sapphira's lie threatens the purity of a young community; later, the apostles delegate so the Word can keep going. What organizational or personal compromise in your spiritual life is quietly stalling the mission?"
+      },
+      {
+        "day": 4,
+        "title": "Stephen and the Scattering",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Stephen's death looks like the end of the movement — but the persecution that follows scatters the gospel across the known world. What ending in your life could God be using as a beginning you can't yet see?"
+      },
+      {
+        "day": 5,
+        "title": "Saul Converted, Cornelius Included",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "The church's fiercest enemy becomes its greatest missionary, and a Roman centurion becomes a brother. Whose conversion would shock you most, and are you willing to pray for it with real expectation?"
+      },
+      {
+        "day": 6,
+        "title": "Antioch and an Angel",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Believers are first called 'Christians' at Antioch — a church of outsiders becoming a hub. How is God using people at the margins to grow His church in ways the religious center can't see?"
+      },
+      {
+        "day": 7,
+        "title": "The First Missionary Journey",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 14,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "The Spirit says, 'Set apart Paul and Barnabas for the work to which I have called them.' Whose sending are you part of — either being sent or prayerfully supporting — and how seriously do you take that stewardship?"
+      },
+      {
+        "day": 8,
+        "title": "Jerusalem Council and a Philippian Jail",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 15,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 16,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "The church decides grace is truly for the Gentiles, and Paul sings in a midnight jail cell. Where do you still add unspoken requirements to God's grace, and what song might be waiting in your hardest place?"
+      },
+      {
+        "day": 9,
+        "title": "Athens and Corinth",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 17,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 18,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paul engages pagan philosophers at the Areopagus by quoting their own poets. How might you learn to speak the gospel in the vocabulary of the people around you without watering down the truth?"
+      },
+      {
+        "day": 10,
+        "title": "Ephesus and a Tender Farewell",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 19,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 20,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paul weeps with the Ephesian elders, reminding them that 'it is more blessed to give than to receive.' Who has God given you to shepherd, and how do you need to love them more intentionally this week?"
+      },
+      {
+        "day": 11,
+        "title": "Paul Arrested in Jerusalem",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 21,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 22,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Paul keeps heading toward suffering because he is 'bound in the Spirit.' Where is God asking you to move toward difficulty because it is obedience, not avoid it because it is hard?"
+      },
+      {
+        "day": 12,
+        "title": "Courage Before Rulers",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 23,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 24,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "The Lord stands by Paul at night and says, 'Take courage.' When have you needed an unseen word to keep going, and how might God be whispering it to you tonight?"
+      },
+      {
+        "day": 13,
+        "title": "Almost Persuaded",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 25,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 26,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Agrippa says Paul 'almost' persuaded him to be a Christian. Where in your own life are you 'almost' committed, and what would it take to close the gap between conviction and surrender?"
+      },
+      {
+        "day": 14,
+        "title": "Shipwreck to Rome",
+        "readings": [
+          {
+            "bookID": "ACT",
+            "chapter": 27,
+            "verseStart": null,
+            "verseEnd": null
+          },
+          {
+            "bookID": "ACT",
+            "chapter": 28,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Acts ends abruptly — Paul preaches the kingdom from a rented house, chained to a soldier, and the story is clearly not over. You are part of that unfinished story. What next line is God writing through you?"
+      }
+    ]
+  },
+  {
+    "id": "first-john-assurance",
+    "name": "1 John: That You May Know",
+    "description": "A 5-day walk through the first letter of John — written so that believers would 'know that you have eternal life.' Each chapter explores a different test of genuine faith.",
+    "totalDays": 5,
+    "category": "Epistles",
+    "gradientColors": [
+      "#3D5A8B",
+      "#1C2D5C"
+    ],
+    "iconName": "checkmark.seal.fill",
+    "imageKey": "bethany_mary_martha",
+    "applicableSeasons": [
+      "growing",
+      "hardSeason",
+      "startingOver"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "anxiety",
+      "relationships"
+    ],
+    "faithLevelMin": "justCurious",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "Walking in the Light",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "John insists that fellowship with God is tied to walking in the light — bringing what is hidden into the open. What is one area where you've been pretending that honest confession would actually bring into fellowship rather than disgrace?"
+      },
+      {
+        "day": 2,
+        "title": "Abiding, Not Just Believing",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "John's test of love for God is simple: 'Whoever keeps his word, in him truly the love of God is perfected.' How would your closest relationships describe the difference between your beliefs and your behavior?"
+      },
+      {
+        "day": 3,
+        "title": "የእግዚአብሔር ልጆች",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "'አባታችን የሰጠን የፍቅስ ዓይነት ይመልከቱ — እንደ የእግዚአብሔር ልጆች ይባላል.' ይህ ቀን የተለየ እንዴት ይታያል እንደሚያምኑ እንደ 'ውድ ልጅ' ይሆን?"
+      },
+      {
+        "day": 4,
+        "title": "እግዚአብሔር ፍቅር ነው",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ዮም ይላል 'እኛ ይወዳል ምክንያቱም እሱ በመጀመሪያ ይወደናል' — የእኛ ፍቅር ሁልጊዜ እንደ መልስ ነው። የምንዛሬ ፍቅር የምንዛሬ እንደ ወይን ይታያል፣ እና የእግዚአብሔር የቀደም ፍቅር እንዴት ይህን ሰው ወደ ምን ይወዳል ይሆን?"
+      },
+      {
+        "day": 5,
+        "title": "እንድታውቁ",
+        "readings": [
+          {
+            "bookID": "1JN",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ዮም ይላል ይህን ደብዳቤ እንድታውቁ እንደ ወይን ይወዳል ይሆን። የዮም ፈተናዎች የኢየሱስ በምን ይለይ ይሆን፣ ወይን ወይን ይወዳል ይሆን?"
+      }
+    ]
+  },
+  {
+    "id": "james-faith-that-works",
+    "name": "የጄምስ ፍቅር ይሰራ",
+    "description": "የጄምስ 5-ቀን ጥናት — በአዲስ የወይዘ ደብዳቤ ውስጥ የተለያዩ የሚኖሩ ይወዳል።",
+    "totalDays": 5,
+    "category": "Epistles",
+    "gradientColors": [
+      "#8B5A2E",
+      "#44290F"
+    ],
+    "iconName": "hammer.fill",
+    "imageKey": "davids_three_mighty_men",
+    "applicableSeasons": [
+      "workingProfessional",
+      "growing",
+      "hardSeason"
+    ],
+    "applicableBurdens": [
+      "purpose",
+      "relationships",
+      "faith"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "ይህን ሁሉ ደስ ይላል",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ጄምስ ምርጥ ነው ይላል — ይህን እንደ ደስ ይላል ይሆን ይህን ይለይ ይሆን?"
+      },
+      {
+        "day": 2,
+        "title": "የምንዛሬ ወይን ይሰራ",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ጄምስ የምንዛሬ ወይን ይሰራ ይሆን ይለይ ይሆን?"
+      },
+      {
+        "day": 3,
+        "title": "የአፍ የምርጥ",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ጄምስ የአፍ የምርጥ ይለይ ይሆን?"
+      },
+      {
+        "day": 4,
+        "title": "ከዓለም ጋር የመለኪያ",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ጄምስ ይላል የምንዛሬ ወይን ይሰራ ይሆን?"
+      },
+      {
+        "day": 5,
+        "title": "በተስፋ እና በጸሎት",
+        "readings": [
+          {
+            "bookID": "JAS",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "ጄምስ ይላል የምንዛሬ ወይን ይሰራ ይሆን?"
+      }
+    ]
+  },
+  {
+    "id": "hebrews-jesus-is-better",
+    "name": "የእብርይ ወይዘ ይሰራ",
+    "description": "የእብርይ 13-ቀን ጥናት — ወይዘ ይሰራ ይሆን?",
+    "totalDays": 13,
+    "category": "Theology",
+    "gradientColors": [
+      "#5A2F2F",
+      "#2C1414"
+    ],
+    "iconName": "crown.fill",
+    "imageKey": "sacrifice_isaac",
+    "applicableSeasons": [
+      "growing",
+      "workingProfessional"
+    ],
+    "applicableBurdens": [
+      "faith",
+      "purpose"
+    ],
+    "faithLevelMin": "growing",
+    "isProOnly": true,
+    "seedVersion": 4,
+    "days": [
+      {
+        "day": 1,
+        "title": "ወልደ ወይዘ ይሰራ",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 1,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የእብርይ ይላል ወይዘ ይሰራ ይሆን?"
+      },
+      {
+        "day": 2,
+        "title": "እንደ ወይዘ ይሰራ",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 2,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የእብርይ ይላል ወይዘ ይሰራ ይሆን?"
+      },
+      {
+        "day": 3,
+        "title": "ከሞሴ ይሰራ",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 3,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የእብርይ ይላል ወይዘ ይሰራ ይሆን?"
+      },
+      {
+        "day": 4,
+        "title": "ወይዘ ይሰራ",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 4,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የእብርይ ይላል ወይዘ ይሰራ ይሆን?"
+      },
+      {
+        "day": 5,
+        "title": "ወይዘ ይሰራ",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 5,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የእብርይ ይላል ወይዘ ይሰራ ይሆን?"
+      },
+      {
+        "day": 6,
+        "title": "ወይዘ ይሰራ",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 6,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የእብርይ ይላል ወይዘ ይሰራ ይሆን?"
+      },
+      {
+        "day": 7,
+        "title": "ወይዘ ይሰራ",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 7,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የእብርይ ይላል ወይዘ ይሰራ ይሆን?"
+      },
+      {
+        "day": 8,
+        "title": "ወይዘ ይሰራ",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 8,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የእብርይ ይላል ወይዘ ይሰራ ይሆን?"
+      },
+      {
+        "day": 9,
+        "title": "ወይዘ ይሰራ",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 9,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የእብርይ ይላል ወይዘ ይሰራ ይሆን?"
+      },
+      {
+        "day": 10,
+        "title": "ወይዘ ይሰራ",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 10,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "የእብርይ ይላል ወይዘ ይሰራ ይሆን?"
+      },
+      {
+        "day": 11,
+        "title": "The Hall of Faith",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 11,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Every person listed here died without receiving what was promised, 'but they saw it and greeted it from afar.' How might your story of waiting be counted as a chapter of this same hall of faith?"
+      },
+      {
+        "day": 12,
+        "title": "A Great Cloud of Witnesses",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 12,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "The writer urges us to fix our eyes on Jesus, 'the founder and perfecter of our faith,' and run with endurance. What weight — not necessarily sinful, but heavy — is slowing your run, and are you willing to lay it down?"
+      },
+      {
+        "day": 13,
+        "title": "Outside the Camp",
+        "readings": [
+          {
+            "bookID": "HEB",
+            "chapter": 13,
+            "verseStart": null,
+            "verseEnd": null
+          }
+        ],
+        "reflection": "Jesus suffered 'outside the camp' — beyond the religious respectability of His day. Where is He calling you outside your own comfortable camp to be with Him among those the respectable world has written off?"
+      }
+    ]
+  }
+]

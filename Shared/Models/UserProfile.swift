@@ -9,6 +9,10 @@ final class UserProfile {
     var lifeSeasons: [LifeSeason]
     var currentBurdens: [Burden]
     var preferredTranslation: BibleTranslation
+    /// When set, overrides `preferredTranslation` with a multilingual catalog
+    /// reference (see `TranslationRef` + `TranslationCatalog`). Optional so
+    /// existing rows migrate cleanly — nil means the legacy enum wins.
+    var preferredTranslationRefID: String? = nil
     var prayerTimes: [PrayerTimeSlot]
     var selectedThemeID: String
     var selectedSoundscapeID: String
