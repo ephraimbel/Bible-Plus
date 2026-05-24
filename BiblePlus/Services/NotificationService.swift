@@ -949,6 +949,7 @@ extension Notification.Name {
     static let switchToAskTab = Notification.Name("SwitchToAskTab")
     static let switchToSettingsTab = Notification.Name("SwitchToSettingsTab")
     static let switchToSavedTab = Notification.Name("SwitchToSavedTab")
+    static let switchToBibleTab = Notification.Name("SwitchToBibleTab")
     static let openAIWithContext = Notification.Name("OpenAIWithContext")
     static let navigateToConversation = Notification.Name("NavigateToConversation")
     static let bibleDeepLink = Notification.Name("BibleDeepLink")

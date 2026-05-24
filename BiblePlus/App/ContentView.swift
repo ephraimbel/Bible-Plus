@@ -153,6 +153,11 @@ struct ContentView: View {
                 selectedTab = .saved
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: .switchToBibleTab)) { _ in
+            withAnimation(.easeInOut(duration: 0.25)) {
+                selectedTab = .bible
+            }
+        }
     }
 
     var body: some View {
