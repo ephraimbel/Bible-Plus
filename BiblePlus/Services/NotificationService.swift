@@ -950,6 +950,9 @@ extension Notification.Name {
     static let switchToSettingsTab = Notification.Name("SwitchToSettingsTab")
     static let switchToSavedTab = Notification.Name("SwitchToSavedTab")
     static let switchToBibleTab = Notification.Name("SwitchToBibleTab")
+    /// Profile avatar in the home top bar fires this to present the main
+    /// menu sheet (History · Saved · Progress · Plans · Sanctuary · Settings).
+    static let openMainMenu = Notification.Name("OpenMainMenu")
     static let openAIWithContext = Notification.Name("OpenAIWithContext")
     static let navigateToConversation = Notification.Name("NavigateToConversation")
     static let bibleDeepLink = Notification.Name("BibleDeepLink")

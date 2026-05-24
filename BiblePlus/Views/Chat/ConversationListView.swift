@@ -3,6 +3,11 @@ import SwiftData
 
 struct ConversationListView: View {
     @Binding var pendingConversation: PendingConversation?
+    /// When set, selecting (or creating) a conversation routes the chat to
+    /// the parent's full-page NavigationStack instead of pushing inside this
+    /// view's own stack. Used when ConversationListView is presented as the
+    /// history sheet so chats open full-screen, not within the sheet.
+    var onOpenConversationFullPage: ((UUID, String?) -> Void)? = nil
     @Environment(\.modelContext) private var modelContext
     @Environment(\.bpPalette) private var palette
     @Environment(\.colorScheme) private var colorScheme
@@ -21,7 +26,7 @@ struct ConversationListView: View {
                     ConversationListContent(
                         viewModel: vm,
                         onNewConversation: { startNewConversation() },
-                        onSelectConversation: { navigationPath.append($0.id) },
+                        onSelectConversation: { selectConversation($0) },
                         onPromptTapped: { startNewConversationWithPrompt($0) }
                     )
                 } else {
@@ -61,12 +66,21 @@ struct ConversationListView: View {
         }
         .onChange(of: pendingConversation?.conversationId) { _, newValue in
             guard let pending = pendingConversation else { return }
-            pendingContext = pending.context
+            let ctx = pending.context
             pendingConversation = nil
             viewModel?.loadConversations()
-            navigationPath.append(pending.conversationId)
+            if let fullPage = onOpenConversationFullPage {
+                fullPage(pending.conversationId, ctx)
+            } else {
+                pendingContext = ctx
+                navigationPath.append(pending.conversationId)
+            }
         }
         .onReceive(NotificationCenter.default.publisher(for: .navigateToConversation)) { notification in
+            // In full-page mode the parent (ContentView) owns this
+            // notification and pushes the chat onto its own stack, so skip
+            // here to avoid a double push.
+            guard onOpenConversationFullPage == nil else { return }
             guard let idString = notification.userInfo?["conversationId"] as? String,
                   let conversationId = UUID(uuidString: idString) else { return }
             pendingContext = notification.userInfo?["context"] as? String
@@ -86,11 +100,23 @@ struct ConversationListView: View {
         return pendingMessageId
     }
 
+    private func selectConversation(_ conversation: Conversation) {
+        if let fullPage = onOpenConversationFullPage {
+            fullPage(conversation.id, nil)
+        } else {
+            navigationPath.append(conversation.id)
+        }
+    }
+
     private func startNewConversation() {
         guard let vm = viewModel else { return }
         let conversation = vm.createNewConversation()
-        navigationPath.append(conversation.id)
         HapticService.lightImpact()
+        if let fullPage = onOpenConversationFullPage {
+            fullPage(conversation.id, consumePendingContext())
+        } else {
+            navigationPath.append(conversation.id)
+        }
     }
 
     private func startNewConversationWithPrompt(_ prompt: String) {

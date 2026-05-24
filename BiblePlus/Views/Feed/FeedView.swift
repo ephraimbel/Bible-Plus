@@ -1,6 +1,14 @@
 import SwiftUI
 import SwiftData
 
+// MARK: - FeedView (now a thin home wrapper)
+//
+// The Feed itself is shelved for this release — the app is chat-first.
+// This view persists as the loader that creates `FeedViewModel` (still
+// the source of streak, daily verse, current background, etc.) and
+// hosts the sheets/covers that hang off the home dashboard.
+//
+// FeedPagingView is preserved in the repo but no longer routed to.
 struct FeedView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(SoundscapeService.self) private var soundscapeService
@@ -9,7 +17,7 @@ struct FeedView: View {
     var body: some View {
         Group {
             if let vm = viewModel {
-                FeedContentView(vm: vm, soundscapeService: soundscapeService)
+                HomeContentView(vm: vm, soundscapeService: soundscapeService)
             } else {
                 BPLoadingView().onAppear { initializeViewModel() }
             }
@@ -21,12 +29,18 @@ struct FeedView: View {
     }
 }
 
-// MARK: - Inner Content View
-
-private struct FeedContentView: View {
+// MARK: - Home Content View
+//
+// Hosts HomeDashboardView and all the sheets/covers it can present:
+// share preview, collection picker, sanctuary, soundscape picker,
+// background picker, progress sheet, and the streak celebration
+// overlay. Lives here so home stays focused on layout while ambient
+// presentation lives at the container level.
+private struct HomeContentView: View {
     @Bindable var vm: FeedViewModel
     let soundscapeService: SoundscapeService
     @Environment(\.modelContext) private var modelContext
+
     @State private var showSanctuary = false
     @State private var showSoundscapePicker = false
     @State private var showBackgroundPicker = false
@@ -35,36 +49,17 @@ private struct FeedContentView: View {
 
     var body: some View {
         ZStack {
-            if !vm.showFeed {
-                HomeDashboardView(
-                    vm: vm,
-                    soundscapeService: soundscapeService,
-                    onEnterFeed: {
-                        withAnimation(.easeInOut(duration: 0.3)) { vm.showFeed = true }
-                        HapticService.lightImpact()
-                    },
-                    onShowProgress: { showProgress = true },
-                    onDailyVerseTap: { deepLinkDailyVerse() },
-                    onContinueReading: { deepLinkContinueReading() },
-                    onOpenSanctuary: { showSanctuary = true }
-                )
-                .transition(.opacity)
-            } else {
-                FeedPagingView(
-                    vm: vm,
-                    soundscapeService: soundscapeService,
-                    onReturnHome: {
-                        withAnimation(.easeInOut(duration: 0.3)) { vm.showFeed = false }
-                        HapticService.lightImpact()
-                    },
-                    onShowSanctuary: { showSanctuary = true },
-                    onShowSoundscapePicker: { openSoundscapePicker() },
-                    onShowBackgroundPicker: { openBackgroundPicker() }
-                )
-                .transition(.opacity)
-            }
+            HomeDashboardView(
+                vm: vm,
+                soundscapeService: soundscapeService,
+                onEnterFeed: { /* feed shelved — no-op */ },
+                onShowProgress: { showProgress = true },
+                onDailyVerseTap: { deepLinkDailyVerse() },
+                onContinueReading: { deepLinkContinueReading() },
+                onOpenSanctuary: { showSanctuary = true }
+            )
 
-            // Streak celebration overlay (above both views)
+            // Streak celebration overlay (above home content)
             if vm.showStreakCelebration {
                 StreakCelebrationView(
                     streakCount: vm.streakCount,
@@ -109,31 +104,13 @@ private struct FeedContentView: View {
             MyProgressView()
         }
         .onReceive(NotificationCenter.default.publisher(for: SettingsViewModel.personalizationDidChange)) { _ in
-            vm.showFeed = false
             vm.refreshFeed()
         }
-        .onReceive(NotificationCenter.default.publisher(for: .enterFeedFromDashboard)) { _ in
-            withAnimation(.easeInOut(duration: 0.3)) { vm.showFeed = true }
-            HapticService.lightImpact()
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .feedContentDeepLink)) { notification in
-            if let contentID = notification.userInfo?["contentID"] as? UUID {
-                vm.navigateToContent(id: contentID)
-            }
-        }
         .onReceive(NotificationCenter.default.publisher(for: .showProgressFromWidget)) { _ in
-            vm.showFeed = false
             showProgress = true
         }
         .onReceive(NotificationCenter.default.publisher(for: .openSanctuaryFromWidget)) { _ in
             showSanctuary = true
-        }
-        .onChange(of: vm.showFeed) { _, showFeed in
-            NotificationCenter.default.post(
-                name: .dashboardShowFeedChanged,
-                object: nil,
-                userInfo: ["showFeed": showFeed]
-            )
         }
     }
 
@@ -147,16 +124,21 @@ private struct FeedContentView: View {
         return newVM
     }
 
-    private func openSoundscapePicker() {
-        _ = getOrCreateSanctuaryVM()
-        showSoundscapePicker = true
+    /// Open the Bible reader at the user's last-read position (or Genesis 1
+    /// if they haven't read yet). Drives the home "Continue" action card.
+    private func deepLinkContinueReading() {
+        let bookName = vm.continueReading?.bookName ?? "Genesis"
+        let chapter = vm.continueReading?.chapter ?? 1
+        NotificationCenter.default.post(
+            name: .scriptureDeepLink,
+            object: nil,
+            userInfo: ["bookName": bookName, "chapter": chapter]
+        )
     }
 
-    private func openBackgroundPicker() {
-        _ = getOrCreateSanctuaryVM()
-        showBackgroundPicker = true
-    }
-
+    /// Parse the daily verse reference into a scripture deep-link payload
+    /// so tapping the home hero card opens the Bible reader at the right
+    /// chapter/verse.
     private func deepLinkDailyVerse() {
         guard let verse = vm.dailyVerse else { return }
         let ref = verse.reference
@@ -176,15 +158,5 @@ private struct FeedContentView: View {
                 }
             }
         }
-    }
-
-    private func deepLinkContinueReading() {
-        let bookName = vm.continueReading?.bookName ?? "Genesis"
-        let chapter = vm.continueReading?.chapter ?? 1
-        NotificationCenter.default.post(
-            name: .scriptureDeepLink,
-            object: nil,
-            userInfo: ["bookName": bookName, "chapter": chapter]
-        )
     }
 }

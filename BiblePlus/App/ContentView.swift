@@ -2,6 +2,17 @@ import SwiftUI
 import SwiftData
 import WidgetKit
 
+// MARK: - ContentView (NavigationStack, no tab bar)
+//
+// Home is the only root. Bible, Saved, Settings, Reading Plans, and
+// Chat are pushed destinations on a single NavigationStack. Sanctuary
+// stays a fullScreenCover (its immersive UI needs to fully take over
+// the screen) and Conversation History is a presentation sheet hung
+// off the drawer (Phase 3).
+//
+// The notification-handler stack is extracted into a ViewModifier
+// because chaining ~10 `.onReceive` modifiers in `body` puts the Swift
+// type-checker over its complexity budget and the file fails to compile.
 struct ContentView: View {
     @Binding var deepLinkedContentID: UUID?
     @Environment(\.bpPalette) private var palette
@@ -12,73 +23,74 @@ struct ContentView: View {
     /// onboarding so the user lands inside their first chat instead of on
     /// Home. Persisted so re-launches don't keep hijacking the user.
     @AppStorage("hasRoutedToWelcomeConversation") private var hasRoutedToWelcomeConversation = false
-    @State private var selectedTab: Tab = .feed
+
+    @State private var navPath = NavigationPath()
     @State private var soundscapeService = SoundscapeService()
     @State private var audioBibleService = AudioBibleService()
-    // Single shared instance so Settings, onboarding, and any deep-link entry
-    // all read from the same `currentCode`. Reassigning language in Settings
-    // immediately re-renders every view tree under this environment.
+    /// Single shared instance so Settings, onboarding, and any deep-link
+    /// entry all read from the same `currentCode`. Reassigning language in
+    /// Settings immediately re-renders every view tree under this env.
     @State private var localizationService: LocalizationService = .shared
-    @State private var showFeedEntryButton = true
     @State private var pendingConversation: PendingConversation?
+    /// Conversation history is presented as a sheet from the drawer.
+    /// `.switchToAskTab` / `.askDeepLink` flip this flag.
+    @State private var showConversationHistory = false
+    /// Main menu drawer — opened by the home top-bar profile pill.
+    /// Routes to History · Saved · Progress · Plans · Sanctuary · Settings.
+    @State private var showMainMenu = false
     @Environment(\.scenePhase) private var scenePhase
 
-    enum Tab: String, CaseIterable {
-        case feed, bible, ask, saved, settings
+    /// Push targets reachable from the home NavigationStack. Hashable
+    /// because NavigationPath stores them by value.
+    enum HomeDestination: Hashable {
+        case bible
+        case chat(conversationId: UUID, initialContext: String?)
+        case settings
+        case saved
+        case plans
+    }
 
-        /// Returning `LocalizedStringKey` (not `String`) is what routes these
-        /// through the String Catalog. A raw `String` would bypass the
-        /// Bundle-swizzle lookup entirely — tab items would stay in English
-        /// even after the user switched languages.
-        var title: LocalizedStringKey {
-            switch self {
-            case .feed: "Home"
-            case .bible: "Bible"
-            case .ask: "Ask"
-            case .saved: "Saved"
-            case .settings: "Settings"
-            }
-        }
+    // MARK: - Body
 
-        var icon: String {
-            switch self {
-            case .feed: "house.fill"
-            case .bible: "book.fill"
-            case .ask: "sparkle"
-            case .saved: "bookmark.fill"
-            case .settings: "gearshape.fill"
+    var body: some View {
+        configuredRoot
+            .sheet(isPresented: $showConversationHistory) {
+                ConversationListView(
+                    pendingConversation: $pendingConversation,
+                    onOpenConversationFullPage: { conversationId, context in
+                        // Close the history sheet, then push the chat onto
+                        // the main stack so it opens full-screen rather than
+                        // inside the sheet. The delay lets the sheet finish
+                        // dismissing before the push animates.
+                        showConversationHistory = false
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            navPath.append(HomeDestination.chat(conversationId: conversationId, initialContext: context))
+                        }
+                    }
+                )
             }
-        }
+            .sheet(isPresented: $showMainMenu) {
+                MainMenuSheet()
+            }
+            .modifier(NotificationRouter(
+                navPath: $navPath,
+                showConversationHistory: $showConversationHistory,
+                showMainMenu: $showMainMenu,
+                modelContext: modelContext
+            ))
+            .onAppear(perform: handleAppear)
+            .onChange(of: scenePhase, handleScenePhaseChange)
     }
 
     @ViewBuilder
-    private var tabs: some View {
-        TabView(selection: $selectedTab) {
+    private var configuredRoot: some View {
+        NavigationStack(path: $navPath) {
             FeedView()
-                .tabItem { Label(Tab.feed.title, systemImage: Tab.feed.icon) }
-                .tag(Tab.feed)
-
-            BibleView()
-                .tabItem { Label(Tab.bible.title, systemImage: Tab.bible.icon) }
-                .tag(Tab.bible)
-
-            ConversationListView(pendingConversation: $pendingConversation)
-                .tabItem { Label(Tab.ask.title, systemImage: Tab.ask.icon) }
-                .tag(Tab.ask)
-
-            SavedView()
-                .tabItem { Label(Tab.saved.title, systemImage: Tab.saved.icon) }
-                .tag(Tab.saved)
-
-            SettingsView()
-                .tabItem { Label(Tab.settings.title, systemImage: Tab.settings.icon) }
-                .tag(Tab.settings)
+                .toolbar(.hidden, for: .navigationBar)
+                .navigationDestination(for: HomeDestination.self) { destination in
+                    destinationView(for: destination)
+                }
         }
-    }
-
-    @ViewBuilder
-    private var configuredTabs: some View {
-        tabs
         .environment(soundscapeService)
         .environment(audioBibleService)
         .environment(localizationService)
@@ -86,211 +98,73 @@ struct ContentView: View {
         .environment(\.layoutDirection, localizationService.layoutDirection)
         .id(localizationService.currentCode ?? "system")
         .tint(palette.accent)
-        .sensoryFeedback(.selection, trigger: selectedTab)
-        .onAppear {
-            audioBibleService.setSoundscapeService(soundscapeService)
+    }
 
-            // Log app opened for streak tracking
-            ActivityService.logAppOpenedIfNeeded(in: modelContext)
-            Analytics.track(.appOpened)
-
-            // Auto-play Evening Rest for new users entering after onboarding
-            if !hasAutoPlayedSoundscape {
-                soundscapeService.play(.eveningRest)
-                hasAutoPlayedSoundscape = true
-                // Update profile so Sanctuary/Settings reflect the selection
-                let descriptor = FetchDescriptor<UserProfile>()
-                if let profile = try? modelContext.fetch(descriptor).first {
-                    profile.selectedSoundscapeID = Soundscape.eveningRest.rawValue
-                    modelContext.safeSave()
-                }
-            }
-
-            // First-launch-after-onboarding deep link: drop the user
-            // directly inside their seeded welcome conversation. This is
-            // the single highest-impact retention move — the user lands
-            // INSIDE a personal AI conversation instead of on an empty
-            // Home tab. One-shot via @AppStorage flag.
-            routeToWelcomeConversationIfNeeded()
-
-            // Recovery path for the daily welcome-back notification.
-            // Catches users who denied notification permission during
-            // onboarding (so it was never scheduled) but later enabled
-            // notifications via Settings — without this, they'd be
-            // permanently locked out of the day-2 retention hook.
-            ensureWelcomeBackNotificationIfPossible()
-        }
-        .toolbarBackground(.hidden, for: .tabBar)
-        .onAppear {
-            // Force tab bar fully transparent at runtime
-            let tabBarAppearance = UITabBarAppearance()
-            tabBarAppearance.configureWithTransparentBackground()
-            tabBarAppearance.backgroundColor = .clear
-            tabBarAppearance.backgroundEffect = nil
-            tabBarAppearance.backgroundImage = UIImage()
-            tabBarAppearance.shadowColor = .clear
-            tabBarAppearance.shadowImage = UIImage()
-            UITabBar.appearance().standardAppearance = tabBarAppearance
-            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .dashboardShowFeedChanged)) { notification in
-            if let showFeed = notification.userInfo?["showFeed"] as? Bool {
-                showFeedEntryButton = !showFeed
-            }
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .switchToAskTab)) { _ in
-            withAnimation(.easeInOut(duration: 0.25)) {
-                selectedTab = .ask
-            }
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .switchToSettingsTab)) { _ in
-            withAnimation(.easeInOut(duration: 0.25)) {
-                selectedTab = .settings
-            }
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .switchToSavedTab)) { _ in
-            withAnimation(.easeInOut(duration: 0.25)) {
-                selectedTab = .saved
-            }
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .switchToBibleTab)) { _ in
-            withAnimation(.easeInOut(duration: 0.25)) {
-                selectedTab = .bible
-            }
+    @ViewBuilder
+    private func destinationView(for destination: HomeDestination) -> some View {
+        switch destination {
+        case .bible:
+            BibleView()
+        case .chat(let id, let ctx):
+            ChatView(conversationId: id, initialContext: ctx)
+        case .settings:
+            SettingsView()
+        case .saved:
+            SavedView()
+        case .plans:
+            ReadingPlansView(isPro: currentProfileIsPro)
         }
     }
 
-    var body: some View {
-        configuredTabs
-        .onChange(of: deepLinkedContentID) { _, newValue in
-            if let contentID = newValue {
-                selectedTab = .feed
-                // Post notification so FeedView can scroll to the content
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    NotificationCenter.default.post(
-                        name: .feedContentDeepLink,
-                        object: nil,
-                        userInfo: ["contentID": contentID]
-                    )
-                }
-                deepLinkedContentID = nil
-            }
-        }
-        .onChange(of: scenePhase) { _, newPhase in
-            if newPhase == .background {
-                soundscapeService.stop()
-            }
-            if newPhase == .active {
-                // Ensure widgets pick up the latest background on every foreground
-                WidgetCenter.shared.reloadAllTimelines()
-            }
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .openAIWithContext)) { notification in
-            let title = notification.userInfo?["title"] as? String ?? "New Conversation"
-            let context = notification.userInfo?["context"] as? String
+    /// Synchronous profile fetch for views that need a Pro flag at push
+    /// time. The query runs once per navigation push, not per body
+    /// recompute, so it's cheap.
+    private var currentProfileIsPro: Bool {
+        let descriptor = FetchDescriptor<UserProfile>()
+        return (try? modelContext.fetch(descriptor).first?.isPro) ?? false
+    }
 
-            // Create conversation
-            let conversation = Conversation(title: title)
-            modelContext.insert(conversation)
-            modelContext.safeSave()
+    // MARK: - Lifecycle handlers
 
-            // Set pending navigation — ConversationListView picks this up on appear
-            pendingConversation = PendingConversation(
-                conversationId: conversation.id,
-                context: context
-            )
+    private func handleAppear() {
+        audioBibleService.setSoundscapeService(soundscapeService)
 
-            // Switch to Ask tab
-            withAnimation(.easeInOut(duration: 0.25)) {
-                selectedTab = .ask
-            }
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .feedContentDeepLink)) { _ in
-            withAnimation(.easeInOut(duration: 0.25)) {
-                selectedTab = .feed
-            }
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .navigateToConversation)) { _ in
-            // SavedView and other call sites post this when they want to
-            // jump into an existing AI conversation. ConversationListView
-            // handles the actual nav-stack push; we just make sure the
-            // Ask tab is selected first so its NavigationStack is mounted.
-            withAnimation(.easeInOut(duration: 0.25)) {
-                selectedTab = .ask
-            }
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .scriptureDeepLink)) { notification in
-            if let bookName = notification.userInfo?["bookName"] as? String,
-               let chapter = notification.userInfo?["chapter"] as? Int {
-                let verse = notification.userInfo?["verse"] as? Int ?? 0
-                withAnimation(.easeInOut(duration: 0.25)) {
-                    selectedTab = .bible
-                }
-                // Delay so BibleView renders and its .onReceive is active
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    NotificationCenter.default.post(
-                        name: .scriptureBibleNavigate,
-                        object: nil,
-                        userInfo: ["bookName": bookName, "chapter": chapter, "verse": verse]
-                    )
-                }
-            }
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .notificationSaveAction)) { notification in
-            guard let uuid = notification.userInfo?["contentID"] as? UUID else { return }
-            let descriptor = FetchDescriptor<PrayerContent>(
-                predicate: #Predicate { $0.id == uuid }
-            )
-            if let content = try? modelContext.fetch(descriptor).first {
-                content.isSaved = true
+        ActivityService.logAppOpenedIfNeeded(in: modelContext)
+        Analytics.track(.appOpened)
+
+        if !hasAutoPlayedSoundscape {
+            soundscapeService.play(.eveningRest)
+            hasAutoPlayedSoundscape = true
+            let descriptor = FetchDescriptor<UserProfile>()
+            if let profile = try? modelContext.fetch(descriptor).first {
+                profile.selectedSoundscapeID = Soundscape.eveningRest.rawValue
                 modelContext.safeSave()
             }
         }
-        .onReceive(NotificationCenter.default.publisher(for: .progressDeepLink)) { _ in
-            withAnimation(.easeInOut(duration: 0.25)) {
-                selectedTab = .feed
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                NotificationCenter.default.post(name: .showProgressFromWidget, object: nil)
-            }
+
+        // First-launch-after-onboarding deep link: push the seeded
+        // welcome conversation immediately so the user lands inside
+        // their first chat instead of on an empty home screen.
+        routeToWelcomeConversationIfNeeded()
+
+        ensureWelcomeBackNotificationIfPossible()
+    }
+
+    private func handleScenePhaseChange(_ oldPhase: ScenePhase, _ newPhase: ScenePhase) {
+        if newPhase == .background {
+            soundscapeService.stop()
         }
-        .onReceive(NotificationCenter.default.publisher(for: .plansDeepLink)) { notification in
-            withAnimation(.easeInOut(duration: 0.25)) {
-                selectedTab = .feed
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                NotificationCenter.default.post(
-                    name: .showPlansFromWidget,
-                    object: nil,
-                    userInfo: notification.userInfo
-                )
-            }
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .bibleDeepLink)) { _ in
-            withAnimation(.easeInOut(duration: 0.25)) {
-                selectedTab = .bible
-            }
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .askDeepLink)) { _ in
-            withAnimation(.easeInOut(duration: 0.25)) {
-                selectedTab = .ask
-            }
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .sanctuaryDeepLink)) { _ in
-            withAnimation(.easeInOut(duration: 0.25)) {
-                selectedTab = .feed
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                NotificationCenter.default.post(name: .openSanctuaryFromWidget, object: nil)
-            }
+        if newPhase == .active {
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
+
+    // MARK: - Helpers
 
     /// Recovery path: every launch, if the user has notifications enabled
     /// and at least one prayer time set, but the daily welcome-back push
     /// isn't scheduled, schedule it. Idempotent — `ensureWelcomeBack…` no-ops
-    /// if a request is already pending. Catches users who denied permission
-    /// during onboarding then enabled it later via Settings.
+    /// if a request is already pending.
     private func ensureWelcomeBackNotificationIfPossible() {
         let descriptor = FetchDescriptor<UserProfile>()
         guard let profile = try? modelContext.fetch(descriptor).first,
@@ -306,8 +180,8 @@ struct ContentView: View {
         )
     }
 
-    /// Routes the user directly into their seeded welcome conversation on
-    /// the FIRST launch after onboarding completes. Subsequent launches are
+    /// Push the seeded welcome conversation onto the nav stack on the
+    /// FIRST launch after onboarding completes. Subsequent launches are
     /// no-ops because the @AppStorage flag has been flipped.
     private func routeToWelcomeConversationIfNeeded() {
         guard !hasRoutedToWelcomeConversation else { return }
@@ -318,17 +192,104 @@ struct ContentView: View {
         else { return }
 
         hasRoutedToWelcomeConversation = true
+        navPath.append(HomeDestination.chat(conversationId: convoID, initialContext: nil))
+    }
+}
 
-        // Instant, unanimated handoff: the user has just dismissed the
-        // paywall and hasn't seen Home yet, so animating a tab switch
-        // only adds visible flicker. Setting both values synchronously
-        // lets SwiftUI render Ask + push the welcome conversation in
-        // the same frame, before Home has a chance to appear.
-        selectedTab = .ask
-        pendingConversation = PendingConversation(
-            conversationId: convoID,
-            context: nil
-        )
+// MARK: - Notification Router
+//
+// All the global notification handlers (composer submit, widget deep
+// links, scripture deep links, save action, etc.) chained into a single
+// ViewModifier so ContentView's body stays inside the Swift compiler's
+// type-check complexity budget. Each handler maps a notification into
+// either a NavigationPath push or a sheet present.
+private struct NotificationRouter: ViewModifier {
+    @Binding var navPath: NavigationPath
+    @Binding var showConversationHistory: Bool
+    @Binding var showMainMenu: Bool
+    let modelContext: ModelContext
+
+    func body(content: Content) -> some View {
+        content
+            .onReceive(NotificationCenter.default.publisher(for: .openAIWithContext)) { notification in
+                let title = notification.userInfo?["title"] as? String ?? "New Conversation"
+                let context = notification.userInfo?["context"] as? String
+
+                let conversation = Conversation(title: title)
+                modelContext.insert(conversation)
+                modelContext.safeSave()
+
+                navPath.append(ContentView.HomeDestination.chat(conversationId: conversation.id, initialContext: context))
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .switchToBibleTab)) { _ in
+                navPath.append(ContentView.HomeDestination.bible)
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .switchToSettingsTab)) { _ in
+                navPath.append(ContentView.HomeDestination.settings)
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .switchToSavedTab)) { _ in
+                navPath.append(ContentView.HomeDestination.saved)
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .switchToAskTab)) { _ in
+                showConversationHistory = true
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .openMainMenu)) { _ in
+                showMainMenu = true
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .bibleDeepLink)) { _ in
+                navPath.append(ContentView.HomeDestination.bible)
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .askDeepLink)) { _ in
+                showConversationHistory = true
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .progressDeepLink)) { _ in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    NotificationCenter.default.post(name: .showProgressFromWidget, object: nil)
+                }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .plansDeepLink)) { notification in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    NotificationCenter.default.post(
+                        name: .showPlansFromWidget,
+                        object: nil,
+                        userInfo: notification.userInfo
+                    )
+                }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .sanctuaryDeepLink)) { _ in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    NotificationCenter.default.post(name: .openSanctuaryFromWidget, object: nil)
+                }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .scriptureDeepLink)) { notification in
+                guard let bookName = notification.userInfo?["bookName"] as? String,
+                      let chapter = notification.userInfo?["chapter"] as? Int else { return }
+                let verse = notification.userInfo?["verse"] as? Int ?? 0
+                navPath.append(ContentView.HomeDestination.bible)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    NotificationCenter.default.post(
+                        name: .scriptureBibleNavigate,
+                        object: nil,
+                        userInfo: ["bookName": bookName, "chapter": chapter, "verse": verse]
+                    )
+                }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .navigateToConversation)) { notification in
+                guard let idString = notification.userInfo?["conversationId"] as? String,
+                      let conversationId = UUID(uuidString: idString) else { return }
+                let context = notification.userInfo?["context"] as? String
+                navPath.append(ContentView.HomeDestination.chat(conversationId: conversationId, initialContext: context))
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .notificationSaveAction)) { notification in
+                guard let uuid = notification.userInfo?["contentID"] as? UUID else { return }
+                let descriptor = FetchDescriptor<PrayerContent>(
+                    predicate: #Predicate { $0.id == uuid }
+                )
+                if let content = try? modelContext.fetch(descriptor).first {
+                    content.isSaved = true
+                    modelContext.safeSave()
+                }
+            }
     }
 }
 

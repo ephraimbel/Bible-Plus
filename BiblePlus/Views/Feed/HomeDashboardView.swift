@@ -1,29 +1,28 @@
 import SwiftUI
 
-// MARK: - Home Dashboard (Chat-First)
+// MARK: - Home Dashboard (Haven-inspired, chat-first)
 //
-// One main page, composer at the center. The app's most differentiated
-// feature is the AI companion, so we put a real text input on the home
-// screen as the primary affordance. Reference apps: Haven, Bible Chat,
-// Truthly — all converged on this pattern.
+// One main page, composer pinned at the bottom. Layout draws on Haven
+// Bible Chat's organization: hero verse on a painterly background, a
+// "Today" card combining streak + CTA, a 2x2 topic grid of conversation
+// starters, and an "Ask anything..." composer at the very bottom.
 //
-// Layout, top to bottom:
-//   1. Top bar — Bible glyph (left) · wordmark (center) · profile (right)
-//   2. Verse of the day — compact italic + reference, tappable
-//   3. Streak strip — 7 dots, quiet anchor
-//   4. (vertical breathing room)
-//   5. Composer — TextField pinned via .safeAreaInset(.bottom)
-//   6. Prompt chips — 3 contextual chips below the composer
+// Composition (top to bottom):
+//   1. Top bar — Bible glyph (left) · wordmark (center) · profile+streak pill (right)
+//   2. ScrollView containing:
+//      - Daily Verse card (large hero with sanctuary-bg + dark overlay)
+//      - Today card (streak header · 7 day-of-week circles · CTA)
+//      - Topic grid (4 gradient cards → AI conversation starters)
+//   3. Composer (.safeAreaInset bottom) — TextField + send button
 //
 // Every infinite-repeat animation that was on the previous dashboard
 // (glow pulse, floating chevron, rotating composer halo) is gone. The
-// only motion left is one-shot appearance + a single focus-state border
-// transition. End state: home has zero forever-running animations.
+// only motion left is one-shot appearance + a focus-state border tween.
 struct HomeDashboardView: View {
     @Bindable var vm: FeedViewModel
     let soundscapeService: SoundscapeService
 
-    // Callbacks preserved for API compat with ContentView. Feed entry
+    // Callbacks preserved for API compat with FeedContentView. Feed entry
     // and Continue Reading are no longer surfaced on home — Bible Reader
     // is reached via the top-bar book glyph, the Feed is shelved.
     let onEnterFeed: () -> Void
@@ -41,8 +40,8 @@ struct HomeDashboardView: View {
     @State private var composerText: String = ""
     @FocusState private var composerFocused: Bool
 
-    private let dayLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-    private let dayWeekdays = [2, 3, 4, 5, 6, 7, 1]
+    private let dayLabels = ["S", "M", "T", "W", "T", "F", "S"]
+    private let dayWeekdays = [1, 2, 3, 4, 5, 6, 7]
 
     // MARK: - Body
 
@@ -50,25 +49,32 @@ struct HomeDashboardView: View {
         ZStack {
             palette.background.ignoresSafeArea()
 
-            VStack(spacing: 22) {
+            VStack(spacing: 0) {
                 topBar
-                compactVerseLine
-                streakStrip
-                Spacer()
+                    .padding(.horizontal, 20)
+                    .padding(.top, 8)
+                    .padding(.bottom, 4)
+
+                ScrollView {
+                    VStack(spacing: 14) {
+                        dailyVerseCard
+                        todayCard
+                        actionGrid
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.top, 6)
+                    .padding(.bottom, 16)
+                }
+                .scrollIndicators(.hidden)
             }
-            .padding(.horizontal, 20)
         }
         .safeAreaInset(edge: .bottom, spacing: 8) {
-            // Composer + chips pinned to the bottom safe area. SwiftUI's
-            // default keyboard avoidance lifts this inset with the keyboard,
-            // so the composer stays visible while typing without manual
-            // offset math.
-            VStack(spacing: 10) {
-                homeComposer
-                promptChips
-            }
-            .padding(.horizontal, 20)
-            .padding(.bottom, 4)
+            // Composer pinned at the bottom safe area. SwiftUI's default
+            // keyboard avoidance lifts this inset with the keyboard so
+            // the composer stays visible while typing.
+            homeComposer
+                .padding(.horizontal, 20)
+                .padding(.bottom, 6)
         }
         .sheet(isPresented: $showReadingPlans) {
             ReadingPlansView(isPro: vm.profile.isPro)
@@ -89,9 +95,7 @@ struct HomeDashboardView: View {
             showReadingPlans = true
         }
         .onTapGesture {
-            // Tap anywhere outside the composer dismisses the keyboard.
-            // Important on a chat-first surface — the composer is the
-            // primary interactive element, so users need a way out.
+            // Tap outside the composer dismisses the keyboard.
             if composerFocused {
                 composerFocused = false
             }
@@ -106,11 +110,10 @@ struct HomeDashboardView: View {
             Spacer()
             wordmark
             Spacer()
-            profileAvatar
+            profileStreakPill
         }
-        .padding(.top, 8)
         .opacity(appeared ? 1 : 0)
-        .offset(y: appeared ? 0 : 12)
+        .offset(y: appeared ? 0 : 10)
     }
 
     private var bibleGlyph: some View {
@@ -125,7 +128,7 @@ struct HomeDashboardView: View {
                 .background(
                     Circle()
                         .fill(palette.surfaceElevated)
-                        .shadow(color: .black.opacity(0.04), radius: 3, y: 1)
+                        .shadow(color: .black.opacity(0.05), radius: 3, y: 1)
                 )
                 .overlay(
                     Circle()
@@ -149,74 +152,141 @@ struct HomeDashboardView: View {
         }
     }
 
-    private var profileAvatar: some View {
+    /// Avatar + streak fused into a single pill. Opens the main menu
+    /// drawer (History · Saved · Progress · Plans · Sanctuary · Settings) —
+    /// the replacement for the old bottom tab bar.
+    private var profileStreakPill: some View {
         Button {
             HapticService.lightImpact()
-            // Phase 1 routes profile tap to Settings tab. Phase 3 replaces
-            // this with the side drawer (History · Saved · Progress · Plans
-            // · Sanctuary · Settings).
-            NotificationCenter.default.post(name: .switchToSettingsTab, object: nil)
+            NotificationCenter.default.post(name: .openMainMenu, object: nil)
         } label: {
-            ZStack {
-                Circle()
-                    .fill(
-                        LinearGradient(
-                            colors: [palette.accent, palette.accent.opacity(0.7)],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
+            HStack(spacing: 7) {
+                ZStack {
+                    Circle()
+                        .fill(
+                            LinearGradient(
+                                colors: [palette.accent, palette.accent.opacity(0.7)],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
                         )
-                    )
-                    .frame(width: 36, height: 36)
+                        .frame(width: 28, height: 28)
 
-                if let data = vm.profile.profileImageData,
-                   let uiImage = UIImage(data: data) {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 36, height: 36)
-                        .clipShape(Circle())
-                } else {
-                    Text(vm.profile.firstName.prefix(1).uppercased())
-                        .font(.system(size: 14, weight: .bold, design: .rounded))
-                        .foregroundStyle(.white)
+                    if let data = vm.profile.profileImageData,
+                       let uiImage = UIImage(data: data) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 28, height: 28)
+                            .clipShape(Circle())
+                    } else {
+                        Text(vm.profile.firstName.prefix(1).uppercased())
+                            .font(.system(size: 12, weight: .bold, design: .rounded))
+                            .foregroundStyle(.white)
+                    }
+                }
+
+                HStack(spacing: 3) {
+                    Image(systemName: "flame.fill")
+                        .font(.system(size: 10))
+                        .foregroundStyle(palette.accent)
+                    Text("\(vm.streakCount)")
+                        .font(.system(size: 13, weight: .semibold, design: .rounded))
+                        .foregroundStyle(palette.textPrimary)
                 }
             }
+            .padding(.leading, 4)
+            .padding(.trailing, 10)
+            .padding(.vertical, 4)
+            .background(
+                Capsule()
+                    .fill(palette.surfaceElevated)
+                    .shadow(color: .black.opacity(0.05), radius: 3, y: 1)
+            )
+            .overlay(
+                Capsule()
+                    .stroke(palette.border.opacity(0.35), lineWidth: 0.5)
+            )
         }
-        .accessibilityLabel("Open menu")
+        .accessibilityLabel("Open menu, \(vm.streakCount) day streak")
     }
 
-    // MARK: - Compact Verse Line
+    // MARK: - Daily Verse Card
 
     @ViewBuilder
-    private var compactVerseLine: some View {
+    private var dailyVerseCard: some View {
         if let verse = vm.dailyVerse {
+            let bgColors = vm.currentBackground.gradientColors.map { Color(hex: $0) }
+            let gradient = LinearGradient(
+                colors: bgColors.isEmpty ? [palette.accent, palette.accent.opacity(0.6)] : bgColors,
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+
             Button {
                 onDailyVerseTap()
                 HapticService.lightImpact()
             } label: {
-                VStack(spacing: 5) {
-                    Text("\u{201C}\(truncatedVerse(verse.text))\u{201D}")
-                        .font(.custom("Georgia-Italic", size: 15))
-                        .foregroundStyle(palette.textSecondary)
-                        .multilineTextAlignment(.center)
-                        .lineSpacing(3)
-                        .lineLimit(2)
+                ZStack {
+                    gradient
+                        .overlay {
+                            if let imageName = vm.currentBackground.imageName,
+                               let uiImage = SanctuaryBackground.loadImage(named: imageName) {
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                            }
+                        }
+                        .clipped()
 
-                    Text(verse.reference)
-                        .font(.custom("Georgia", size: 11))
-                        .foregroundStyle(palette.accent.opacity(0.85))
+                    // Dark scrim so white serif type reads cleanly over any
+                    // background art. 0.35 is the sweet spot — enough to
+                    // anchor text, not so much that the art is muted.
+                    Color.black.opacity(0.35)
+
+                    VStack(spacing: 12) {
+                        Text("DAILY VERSE \u{00B7} \(monthDayString)")
+                            .font(.system(size: 10, weight: .semibold, design: .rounded))
+                            .tracking(1.6)
+                            .foregroundStyle(.white.opacity(0.85))
+
+                        Spacer(minLength: 0)
+
+                        Text("\u{201C}\(truncatedVerse(verse.text))\u{201D}")
+                            .font(.custom("Georgia", size: 17))
+                            .foregroundStyle(.white)
+                            .multilineTextAlignment(.center)
+                            .lineSpacing(4)
+                            .lineLimit(4)
+
+                        Text(verse.reference)
+                            .font(.custom("Georgia-Italic", size: 13))
+                            .foregroundStyle(.white.opacity(0.85))
+
+                        Spacer(minLength: 0)
+                    }
+                    .padding(.horizontal, 22)
+                    .padding(.vertical, 20)
                 }
-                .frame(maxWidth: .infinity)
+                .frame(height: 210)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+                .shadow(color: .black.opacity(0.15), radius: 12, y: 6)
             }
             .buttonStyle(.plain)
             .opacity(appeared ? 1 : 0)
-            .offset(y: appeared ? 0 : 10)
+            .offset(y: appeared ? 0 : 14)
             .animation(BPAnimation.spring.delay(0.08), value: appeared)
         }
     }
 
+    private var monthDayString: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d"
+        return formatter.string(from: Date()).uppercased()
+    }
+
     /// Trims verse text to ~110 chars at a natural word boundary so the
-    /// quiet two-line layout never wraps awkwardly.
+    /// 4-line layout never wraps awkwardly on any phone width.
     private func truncatedVerse(_ text: String) -> String {
         let maxLength = 110
         guard text.count > maxLength else { return text }
@@ -227,70 +297,237 @@ struct HomeDashboardView: View {
         return String(prefix) + "..."
     }
 
-    // MARK: - Streak Strip
+    // MARK: - Today Card (streak + CTA)
     //
-    // Card-less strip — just flame + label + 7 dots. The previous card
-    // version was visually competing with the composer for attention on
-    // a chat-first home. Without a card it reads as quiet ambient context.
+    // Combines the streak day-circles, current streak count, and a
+    // primary action button. Tapping the card opens Reading Plans.
 
-    private var streakStrip: some View {
+    private var todayCard: some View {
         let activeDays = vm.activeDaysThisWeek
         let today = Calendar.current.component(.weekday, from: Date())
+        let plan = vm.activeReadingPlan
+        let ctaText: String = plan.map { "Continue Day \($0.day)" } ?? "Begin a Reading Plan"
 
         return Button {
-            onShowProgress()
-            HapticService.selection()
+            showReadingPlans = true
+            HapticService.lightImpact()
         } label: {
-            VStack(spacing: 10) {
-                HStack(spacing: 6) {
-                    Image(systemName: "flame.fill")
-                        .font(.system(size: 11, weight: .semibold))
-                        .foregroundStyle(palette.accent)
-
-                    Text(vm.streakCount >= 2 ? "\(vm.streakCount)-day streak" : "This week")
-                        .font(.system(size: 12, weight: .semibold, design: .rounded))
-                        .foregroundStyle(palette.textSecondary)
-                }
-
-                HStack(spacing: 0) {
-                    ForEach(Array(zip(dayLabels, dayWeekdays)), id: \.1) { _, weekday in
-                        let isActive = activeDays.contains(weekday)
-                        let isToday = weekday == today
-
-                        ZStack {
-                            if isActive {
-                                Circle()
-                                    .fill(palette.accent)
-                                    .frame(width: 14, height: 14)
-                                    .scaleEffect(animateStreak ? 1 : 0)
-                            } else if isToday {
-                                Circle()
-                                    .stroke(palette.accent, lineWidth: 1.4)
-                                    .frame(width: 14, height: 14)
-                            } else {
-                                Circle()
-                                    .fill(palette.border.opacity(0.45))
-                                    .frame(width: 14, height: 14)
-                            }
-                        }
-                        .frame(maxWidth: .infinity)
+            VStack(spacing: 16) {
+                HStack(alignment: .firstTextBaseline) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Today")
+                            .font(.custom("Georgia-Bold", size: 18))
+                            .foregroundStyle(palette.textPrimary)
+                        Text(longDateString)
+                            .font(.custom("Georgia", size: 12))
+                            .foregroundStyle(palette.textMuted)
                     }
+
+                    Spacer()
+
+                    HStack(spacing: 4) {
+                        Image(systemName: "flame.fill")
+                            .font(.system(size: 11))
+                            .foregroundStyle(palette.accent)
+                        Text("\(vm.streakCount)")
+                            .font(.system(size: 14, weight: .semibold, design: .rounded))
+                            .foregroundStyle(palette.textPrimary)
+                    }
+                    .padding(.horizontal, 9)
+                    .padding(.vertical, 5)
+                    .background(
+                        Capsule().fill(palette.background.opacity(0.7))
+                    )
+                    .overlay(
+                        Capsule().stroke(palette.border.opacity(0.3), lineWidth: 0.5)
+                    )
                 }
-                .frame(maxWidth: 220)
+
+                weekCircles(activeDays: activeDays, today: today)
+
+                Text(ctaText)
+                    .font(.custom("Georgia", size: 15))
+                    .foregroundStyle(palette.textPrimary)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
+                    .background(
+                        RoundedRectangle(cornerRadius: 14)
+                            .fill(palette.background.opacity(0.65))
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 14)
+                            .stroke(palette.border.opacity(0.3), lineWidth: 0.5)
+                    )
             }
+            .padding(18)
+            .background(
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(palette.surfaceElevated)
+                    .shadow(color: .black.opacity(0.06), radius: 10, y: 4)
+            )
         }
         .buttonStyle(.plain)
         .opacity(appeared ? 1 : 0)
-        .offset(y: appeared ? 0 : 10)
+        .offset(y: appeared ? 0 : 14)
         .animation(BPAnimation.spring.delay(0.16), value: appeared)
+    }
+
+    private func weekCircles(activeDays: Set<Int>, today: Int) -> some View {
+        HStack(spacing: 0) {
+            ForEach(Array(zip(dayLabels, dayWeekdays)), id: \.1) { label, weekday in
+                let isActive = activeDays.contains(weekday)
+                let isToday = weekday == today
+
+                ZStack {
+                    if isActive {
+                        Circle()
+                            .fill(palette.accent)
+                            .frame(width: 30, height: 30)
+                            .shadow(color: palette.accent.opacity(0.3), radius: 4, y: 2)
+                            .scaleEffect(animateStreak ? 1 : 0)
+                    } else if isToday {
+                        Circle()
+                            .stroke(palette.accent, lineWidth: 1.6)
+                            .frame(width: 30, height: 30)
+                    } else {
+                        Circle()
+                            .fill(palette.background.opacity(0.5))
+                            .frame(width: 30, height: 30)
+                            .overlay(
+                                Circle().stroke(palette.border.opacity(0.25), lineWidth: 0.5)
+                            )
+                    }
+
+                    Text(label)
+                        .font(.system(size: 11, weight: .semibold, design: .rounded))
+                        .foregroundStyle(
+                            isActive ? .white :
+                            (isToday ? palette.accent : palette.textMuted)
+                        )
+                }
+                .frame(maxWidth: .infinity)
+            }
+        }
+    }
+
+    private var longDateString: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM d"
+        return formatter.string(from: Date())
+    }
+
+    // MARK: - Action Grid (functional shortcuts)
+    //
+    // The 2x2 grid surfaces the practical navigation that the tab bar
+    // used to carry — Continue Reading, Reading Plans, Sanctuary, Saved.
+    // Each opens its full-page / sheet destination. Subtitles are live:
+    // the reading + plan cards reflect the user's actual position.
+
+    private var actionGrid: some View {
+        LazyVGrid(
+            columns: [
+                GridItem(.flexible(), spacing: 10),
+                GridItem(.flexible(), spacing: 10)
+            ],
+            spacing: 10
+        ) {
+            actionCard(
+                icon: "book.fill",
+                title: vm.continueReading != nil ? "Continue" : "Read",
+                subtitle: continueReadingSubtitle
+            ) {
+                onContinueReading()
+            }
+
+            actionCard(
+                icon: "calendar",
+                title: "Reading Plan",
+                subtitle: planSubtitle
+            ) {
+                showReadingPlans = true
+            }
+
+            actionCard(
+                icon: "moon.stars.fill",
+                title: "Sanctuary",
+                subtitle: "Prayer & sound"
+            ) {
+                onOpenSanctuary()
+            }
+
+            actionCard(
+                icon: "bookmark.fill",
+                title: "Saved",
+                subtitle: "Your bookmarks"
+            ) {
+                NotificationCenter.default.post(name: .switchToSavedTab, object: nil)
+            }
+        }
+        .opacity(appeared ? 1 : 0)
+        .offset(y: appeared ? 0 : 14)
+        .animation(BPAnimation.spring.delay(0.24), value: appeared)
+    }
+
+    private var continueReadingSubtitle: LocalizedStringKey {
+        if let r = vm.continueReading {
+            return "\(r.bookName) \(r.chapter)"
+        }
+        return "Open the Bible"
+    }
+
+    private var planSubtitle: LocalizedStringKey {
+        if let p = vm.activeReadingPlan {
+            return "Day \(p.day) of \(p.total)"
+        }
+        return "Browse plans"
+    }
+
+    private func actionCard(
+        icon: String,
+        title: LocalizedStringKey,
+        subtitle: LocalizedStringKey,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button {
+            HapticService.lightImpact()
+            action()
+        } label: {
+            VStack(alignment: .leading, spacing: 0) {
+                Image(systemName: icon)
+                    .font(.system(size: 17, weight: .medium))
+                    .foregroundStyle(palette.accent)
+                    .frame(width: 40, height: 40)
+                    .background(Circle().fill(palette.accent.opacity(0.10)))
+
+                Spacer(minLength: 10)
+
+                Text(title)
+                    .font(.custom("Georgia", size: 15))
+                    .foregroundStyle(palette.textPrimary)
+                    .lineLimit(1)
+
+                Text(subtitle)
+                    .font(.system(size: 11, weight: .regular, design: .rounded))
+                    .foregroundStyle(palette.textMuted)
+                    .lineLimit(1)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(14)
+            .frame(height: 108)
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(palette.surfaceElevated)
+                    .shadow(color: .black.opacity(0.05), radius: 8, y: 3)
+            )
+        }
+        .buttonStyle(.plain)
     }
 
     // MARK: - Composer (the centerpiece)
     //
     // Real TextField. Submits via the existing `.openAIWithContext`
-    // notification, which ContentView already handles: it creates a new
-    // Conversation, sets a pendingConversation, and switches to the Ask
-    // tab where ChatView picks up the context and starts streaming.
+    // notification — ContentView creates the conversation and routes
+    // the user into a streaming ChatView.
 
     private var homeComposer: some View {
         HStack(spacing: 10) {
@@ -340,7 +577,7 @@ struct HomeDashboardView: View {
         .animation(.easeOut(duration: 0.18), value: composerFocused)
         .opacity(appeared ? 1 : 0)
         .offset(y: appeared ? 0 : 14)
-        .animation(BPAnimation.spring.delay(0.24), value: appeared)
+        .animation(BPAnimation.spring.delay(0.32), value: appeared)
     }
 
     private var sendButton: some View {
@@ -378,9 +615,6 @@ struct HomeDashboardView: View {
         HapticService.lightImpact()
         composerFocused = false
 
-        // Title is the first 40 chars of the user's prompt — gives the
-        // conversation list a meaningful row title without forcing a
-        // round-trip to the AI for naming.
         NotificationCenter.default.post(
             name: .openAIWithContext,
             object: nil,
@@ -391,73 +625,5 @@ struct HomeDashboardView: View {
         )
 
         composerText = ""
-    }
-
-    // MARK: - Prompt Chips
-    //
-    // Three profile-aware chips. Tapping pre-fills the composer (does NOT
-    // auto-submit) so users can edit before sending. Pre-filling beats
-    // auto-submitting because it teaches users that the composer accepts
-    // free-form input, not just chip selections.
-
-    private var promptChips: some View {
-        // Horizontal scroll handles long burden-derived chips gracefully
-        // (e.g. "Pray for purpose" / "Pray for loneliness") without
-        // truncating, and leaves room to add more chips later without
-        // re-laying out the home.
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 8) {
-                ForEach(contextualChips, id: \.self) { chip in
-                    chipButton(chip)
-                }
-            }
-            .padding(.horizontal, 2)
-        }
-        .scrollClipDisabled()
-        .opacity(appeared ? 1 : 0)
-        .offset(y: appeared ? 0 : 10)
-        .animation(BPAnimation.spring.delay(0.32), value: appeared)
-    }
-
-    private func chipButton(_ chip: String) -> some View {
-        Button {
-            composerText = chip
-            composerFocused = true
-            HapticService.selection()
-        } label: {
-            Text(chip)
-                .font(.system(size: 12, weight: .medium, design: .rounded))
-                .foregroundStyle(palette.textSecondary)
-                .lineLimit(1)
-                .minimumScaleFactor(0.85)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 7)
-                .background(
-                    Capsule()
-                        .fill(palette.surfaceElevated)
-                        .shadow(color: .black.opacity(0.04), radius: 3, y: 1)
-                )
-                .overlay(
-                    Capsule()
-                        .stroke(palette.border.opacity(0.4), lineWidth: 0.5)
-                )
-        }
-        .buttonStyle(.plain)
-    }
-
-    private var contextualChips: [String] {
-        var chips: [String] = []
-
-        let primaryBurden = vm.profile.currentBurdens.first { $0 != .none }
-        if let burden = primaryBurden {
-            chips.append("Pray for \(burden.displayName.lowercased())")
-        } else {
-            chips.append("Pray for peace")
-        }
-
-        chips.append("Discuss today\u{2019}s verse")
-        chips.append("I need encouragement")
-
-        return chips
     }
 }
