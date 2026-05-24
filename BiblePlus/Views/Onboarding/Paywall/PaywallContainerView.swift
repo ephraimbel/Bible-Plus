@@ -26,7 +26,6 @@ struct PaywallContainerView: View {
     @State private var vm: PaywallViewModel?
     @State private var showCTA = false
     @State private var showExitSurvey = false
-    @State private var ctaPulse = false
 
     private let palette = BPColorPalette.light
     private let accentGold = Color(red: 0.79, green: 0.66, blue: 0.43)
@@ -67,7 +66,6 @@ struct PaywallContainerView: View {
             }
         }
         .environment(\.bpPalette, palette)
-        .environment(\.colorScheme, .light)
         .preferredColorScheme(.light)
         .onAppear {
             if vm == nil {
@@ -86,14 +84,13 @@ struct PaywallContainerView: View {
                 Task { await storeKitService.loadProducts() }
             }
 
+            // One-shot entrance for the sticky CTA. No infinite breath/pulse:
+            // a `.repeatForever` scaleEffect on a multi-shadow gradient capsule
+            // is the single biggest perf cost on this screen — it forces the
+            // GPU to recomposite the CTA stack at 60Hz and prevents display
+            // idling. Selection feedback + the gold gradient do the work.
             withAnimation(.spring(response: 0.5, dampingFraction: 0.8).delay(0.25)) {
                 showCTA = true
-            }
-
-            if !reduceMotion {
-                withAnimation(BPAnimation.ctaBreath.delay(1.0)) {
-                    ctaPulse = true
-                }
             }
         }
         .alert("Purchase Failed", isPresented: Binding(
@@ -364,24 +361,32 @@ struct PaywallContainerView: View {
     // MARK: - Comparison Table (Centerpiece)
 
     private struct ComparisonRow: Identifiable {
-        let id = UUID()
+        // Stable, content-derived ID. Previously this was a fresh UUID
+        // generated on every init — combined with `comparisonRows` being
+        // a computed property, every body recompute (every plan-card
+        // selection) produced 7 rows with brand-new IDs, so ForEach saw
+        // them as different identities and SwiftUI tore down + rebuilt
+        // all 7 row views per interaction. Using `feature` as the ID
+        // keeps identities stable across recomputes.
+        var id: String { feature }
         let icon: String
         let feature: String
         let free: String
         let pro: String
     }
 
-    private var comparisonRows: [ComparisonRow] {
-        [
-            ComparisonRow(icon: "sparkles",                       feature: "AI companion chats",   free: "10",  pro: "Unlimited"),
-            ComparisonRow(icon: "book.closed",                    feature: "Bible translations",   free: "2",   pro: "8"),
-            ComparisonRow(icon: "calendar",                       feature: "Reading plans",        free: "1",   pro: "29"),
-            ComparisonRow(icon: "waveform",                       feature: "Sanctuary soundscapes", free: "4",  pro: "31"),
-            ComparisonRow(icon: "photo.on.rectangle.angled",      feature: "Sanctuary backgrounds", free: "12", pro: "52"),
-            ComparisonRow(icon: "speaker.wave.2",                 feature: "Audio Bible voices",   free: "1",   pro: "9"),
-            ComparisonRow(icon: "rectangle.stack.badge.plus",     feature: "Home & Lock widgets",  free: "—",   pro: "10"),
-        ]
-    }
+    /// Static so the array is built exactly once at type load — not on
+    /// every body recompute. The data is invariant and large enough
+    /// that allocating it per interaction is wasted work.
+    private static let comparisonRows: [ComparisonRow] = [
+        ComparisonRow(icon: "sparkles",                       feature: "AI companion chats",    free: "10",  pro: "Unlimited"),
+        ComparisonRow(icon: "book.closed",                    feature: "Bible translations",    free: "2",   pro: "8"),
+        ComparisonRow(icon: "calendar",                       feature: "Reading plans",         free: "1",   pro: "29"),
+        ComparisonRow(icon: "waveform",                       feature: "Sanctuary soundscapes", free: "4",   pro: "31"),
+        ComparisonRow(icon: "photo.on.rectangle.angled",      feature: "Sanctuary backgrounds", free: "12",  pro: "52"),
+        ComparisonRow(icon: "speaker.wave.2",                 feature: "Audio Bible voices",    free: "1",   pro: "9"),
+        ComparisonRow(icon: "rectangle.stack.badge.plus",     feature: "Home & Lock widgets",   free: "—",   pro: "10"),
+    ]
 
     private let freeColumnWidth: CGFloat = 60
     private let proColumnWidth: CGFloat = 84
@@ -427,9 +432,9 @@ struct PaywallContainerView: View {
                 .fill(accentGold.opacity(0.30))
                 .frame(height: 0.6)
 
-            ForEach(Array(comparisonRows.enumerated()), id: \.element.id) { index, row in
+            ForEach(Array(Self.comparisonRows.enumerated()), id: \.element.id) { index, row in
                 comparisonRowView(row, metrics: metrics)
-                if index < comparisonRows.count - 1 {
+                if index < Self.comparisonRows.count - 1 {
                     Rectangle()
                         .fill(palette.border.opacity(0.22))
                         .frame(height: 0.5)
@@ -445,17 +450,11 @@ struct PaywallContainerView: View {
         )
         .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(
-                    LinearGradient(
-                        colors: [accentGold.opacity(0.45), accentGold.opacity(0.18)],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    ),
-                    lineWidth: 0.8
-                )
+                .stroke(accentGold.opacity(0.32), lineWidth: 0.8)
         )
-        .shadow(color: accentGold.opacity(0.10), radius: 12, y: 4)
-        .shadow(color: .black.opacity(0.04), radius: 4, y: 2)
+        // Single warm shadow — the previous stack of two shadows (gold + black)
+        // doubled offscreen compositing work for a barely-distinguishable effect.
+        .shadow(color: accentGold.opacity(0.12), radius: 10, y: 4)
     }
 
     private func comparisonRowView(_ row: ComparisonRow, metrics: Metrics) -> some View {
@@ -576,11 +575,10 @@ struct PaywallContainerView: View {
                     .offset(x: -10, y: -7)
             }
             .shadow(
-                color: isSelected ? accentGold.opacity(0.22) : .black.opacity(0.05),
+                color: isSelected ? accentGold.opacity(0.24) : .black.opacity(0.05),
                 radius: isSelected ? 14 : 4,
                 y: isSelected ? 6 : 2
             )
-            .scaleEffect(isSelected ? 1.010 : 1.0)
             // Reserve vertical space for the badge that protrudes 7pt
             // above the card. Padding the top by 8pt prevents the
             // surrounding VStack from clipping the ribbon when the cards
@@ -643,11 +641,10 @@ struct PaywallContainerView: View {
             .overlay(planCardBorder(isSelected: isSelected, isPrimary: false))
             .clipShape(RoundedRectangle(cornerRadius: 14))
             .shadow(
-                color: isSelected ? accentGold.opacity(0.20) : .black.opacity(0.03),
+                color: isSelected ? accentGold.opacity(0.22) : .black.opacity(0.03),
                 radius: isSelected ? 12 : 3,
                 y: isSelected ? 5 : 1
             )
-            .scaleEffect(isSelected ? 1.010 : 1.0)
         }
         .buttonStyle(PressableButtonStyle())
         .animation(.easeOut(duration: 0.22), value: isSelected)
@@ -730,41 +727,30 @@ struct PaywallContainerView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 16)
                     .background(
+                        // Single gold gradient — the lightening at the top
+                        // edge is built into the stops so we don't need a
+                        // separate white-highlight overlay (which was a
+                        // second offscreen pass for a barely-visible sheen).
                         Capsule()
                             .fill(
                                 LinearGradient(
-                                    colors: [
-                                        accentGold.blend(with: .white, amount: 0.1),
-                                        accentGold
+                                    stops: [
+                                        .init(color: accentGold.blend(with: .white, amount: 0.18), location: 0.0),
+                                        .init(color: accentGold.blend(with: .white, amount: 0.05), location: 0.45),
+                                        .init(color: accentGold, location: 1.0)
                                     ],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                )
-                            )
-                    )
-                    .overlay(
-                        Capsule()
-                            .fill(
-                                LinearGradient(
-                                    colors: [.white.opacity(0.30), .clear],
                                     startPoint: .top,
-                                    endPoint: .center
+                                    endPoint: .bottom
                                 )
                             )
                     )
                     .overlay(
                         Capsule()
-                            .stroke(
-                                LinearGradient(
-                                    colors: [.white.opacity(0.55), accentGold.opacity(0.30)],
-                                    startPoint: .topLeading, endPoint: .bottomTrailing
-                                ),
-                                lineWidth: 0.8
-                            )
+                            .stroke(accentGold.opacity(0.55), lineWidth: 0.6)
                     )
-                    .shadow(color: accentGold.opacity(0.35), radius: 16, y: 6)
-                    .shadow(color: .black.opacity(0.10), radius: 6, y: 3)
-                    .scaleEffect(ctaPulse ? 1.018 : 1.0)
+                    // One drop shadow — warm gold tone communicates the
+                    // premium feel without the doubled black+gold stack.
+                    .shadow(color: accentGold.opacity(0.28), radius: 12, y: 4)
             }
             .buttonStyle(PressableButtonStyle())
             .disabled(vm.isPurchasing)

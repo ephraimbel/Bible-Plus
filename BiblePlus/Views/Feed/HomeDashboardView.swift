@@ -452,31 +452,212 @@ struct HomeDashboardView: View {
         .animation(BPAnimation.spring.delay(0.16), value: appeared)
     }
 
-    // MARK: - Quick Actions Row
+    // MARK: - Quick Actions Row (Editorial Book Pages)
 
     private var quickActionsRow: some View {
         HStack(spacing: 10) {
-            quickActionCard(
-                icon: "book.fill",
-                title: vm.continueReading != nil ? "Continue" : "Read",
-                subtitle: vm.continueReading.map { "\($0.bookName) \($0.chapter)" } ?? "Open Bible"
-            ) {
-                onContinueReading()
-                HapticService.lightImpact()
-            }
-
-            quickActionCard(
-                icon: "calendar",
-                title: "Plan",
-                subtitle: vm.activeReadingPlan.map { "Day \($0.day)/\($0.total)" } ?? "Start"
-            ) {
-                showReadingPlans = true
-                HapticService.lightImpact()
-            }
+            readPageCard
+            planPageCard
         }
         .opacity(appeared ? 1 : 0)
         .offset(y: appeared ? 0 : 20)
         .animation(BPAnimation.spring.delay(0.24), value: appeared)
+    }
+
+    // MARK: - Read Page Card
+
+    private var readPageCard: some View {
+        let reading = vm.continueReading
+        let eyebrow = (reading?.bookName ?? "Bible").uppercased()
+        let numeral = reading.map { "\($0.chapter)" }
+        let microLabel: LocalizedStringKey = reading != nil ? "chapter" : "open the word"
+        let subtitle: LocalizedStringKey = reading != nil ? "Continue reading" : "Tap to open"
+        let progress: CGFloat = {
+            guard let r = reading, r.totalChapters > 0 else { return 0 }
+            return min(CGFloat(r.chapter) / CGFloat(r.totalChapters), 1.0)
+        }()
+
+        return bookPageCard(
+            eyebrow: eyebrow,
+            numeral: numeral,
+            fallbackIcon: "book.closed.fill",
+            microLabel: microLabel,
+            progress: progress,
+            subtitle: subtitle
+        )
+        .onTapGesture {
+            onContinueReading()
+            HapticService.lightImpact()
+        }
+    }
+
+    // MARK: - Plan Page Card
+
+    private var planPageCard: some View {
+        let plan = vm.activeReadingPlan
+        let eyebrow = "PLAN"
+        let numeral = plan.map { "\($0.day)" }
+        let microLabel: LocalizedStringKey = plan.map { "of \($0.total) days" } ?? "start today"
+        let subtitle: LocalizedStringKey = plan.map { LocalizedStringKey($0.name) } ?? "Begin a journey"
+        let progress: CGFloat = {
+            guard let p = plan, p.total > 0 else { return 0 }
+            return min(CGFloat(p.day) / CGFloat(p.total), 1.0)
+        }()
+
+        return bookPageCard(
+            eyebrow: eyebrow,
+            numeral: numeral,
+            fallbackIcon: "calendar",
+            microLabel: microLabel,
+            progress: progress,
+            subtitle: subtitle
+        )
+        .onTapGesture {
+            showReadingPlans = true
+            HapticService.lightImpact()
+        }
+    }
+
+    // MARK: - Book Page Card (shared shell)
+
+    private func bookPageCard(
+        eyebrow: String,
+        numeral: String?,
+        fallbackIcon: String,
+        microLabel: LocalizedStringKey,
+        progress: CGFloat,
+        subtitle: LocalizedStringKey
+    ) -> some View {
+        VStack(spacing: 0) {
+            // Eyebrow row — book/plan name in small caps + chevron
+            HStack(spacing: 6) {
+                Text(eyebrow)
+                    .font(.system(size: 10, weight: .semibold, design: .rounded))
+                    .tracking(1.8)
+                    .foregroundStyle(palette.accent.opacity(0.75))
+                    .lineLimit(1)
+                    .truncationMode(.middle)
+
+                Spacer(minLength: 0)
+
+                Image(systemName: "arrow.up.right")
+                    .font(.system(size: 9, weight: .semibold))
+                    .foregroundStyle(palette.accent.opacity(0.5))
+            }
+            .padding(.horizontal, 16)
+            .padding(.top, 14)
+
+            // Hero numeral (or fallback icon)
+            Group {
+                if let numeral {
+                    Text(numeral)
+                        .font(.custom("Georgia", size: 44))
+                        .foregroundStyle(palette.textPrimary)
+                        .shadow(color: palette.accent.opacity(0.20), radius: 6, y: 1)
+                        .shadow(color: palette.accent.opacity(0.08), radius: 14, y: 0)
+                } else {
+                    Image(systemName: fallbackIcon)
+                        .font(.system(size: 34, weight: .light))
+                        .foregroundStyle(
+                            LinearGradient(
+                                colors: [
+                                    palette.accent,
+                                    palette.accent.opacity(0.65)
+                                ],
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                        )
+                        .shadow(color: palette.accent.opacity(0.25), radius: 6, y: 1)
+                        .shadow(color: palette.accent.opacity(0.10), radius: 14, y: 0)
+                        .frame(height: 44)
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.top, 6)
+
+            // Micro label under numeral
+            Text(microLabel)
+                .font(.system(size: 10, weight: .medium, design: .rounded))
+                .tracking(0.6)
+                .foregroundStyle(palette.textMuted)
+                .padding(.top, 0)
+
+            Spacer(minLength: 6)
+
+            // Ornamental divider
+            OrnamentalDivider(color: palette.accent, opacity: 0.28)
+                .padding(.horizontal, 24)
+
+            // Animated progress bar
+            progressHairline(progress: progress)
+                .padding(.horizontal, 18)
+                .padding(.top, 8)
+
+            // Subtitle
+            Text(subtitle)
+                .font(.system(size: 11, weight: .medium, design: .rounded))
+                .foregroundStyle(palette.textSecondary)
+                .lineLimit(1)
+                .truncationMode(.tail)
+                .padding(.horizontal, 14)
+                .padding(.top, 6)
+                .padding(.bottom, 12)
+        }
+        .frame(maxWidth: .infinity)
+        .frame(height: 152)
+        .background(
+            RoundedRectangle(cornerRadius: 14)
+                .fill(palette.surfaceElevated)
+                .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
+        )
+        .overlay(
+            // Quiet top-edge sheen — suggests light catching paper
+            RoundedRectangle(cornerRadius: 14)
+                .strokeBorder(
+                    LinearGradient(
+                        colors: [
+                            palette.accent.opacity(colorScheme == .dark ? 0.18 : 0.22),
+                            palette.accent.opacity(0)
+                        ],
+                        startPoint: .top,
+                        endPoint: .center
+                    ),
+                    lineWidth: 0.6
+                )
+                .allowsHitTesting(false)
+        )
+    }
+
+    // MARK: - Progress Hairline
+
+    private func progressHairline(progress: CGFloat) -> some View {
+        GeometryReader { geo in
+            ZStack(alignment: .leading) {
+                Capsule()
+                    .fill(palette.border.opacity(0.22))
+                    .frame(height: 2)
+
+                Capsule()
+                    .fill(
+                        LinearGradient(
+                            colors: [
+                                palette.accent.opacity(0.55),
+                                palette.accent
+                            ],
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    )
+                    .frame(
+                        width: appeared ? geo.size.width * progress : 0,
+                        height: 2
+                    )
+                    .shadow(color: palette.accent.opacity(0.35), radius: 3, y: 0)
+                    .animation(.easeOut(duration: 1.0).delay(0.5), value: appeared)
+            }
+        }
+        .frame(height: 2)
     }
 
     // MARK: - Ask Card
@@ -491,47 +672,6 @@ struct HomeDashboardView: View {
         .animation(BPAnimation.spring.delay(0.32), value: appeared)
     }
 
-    // MARK: - Quick Action Card
-
-    private func quickActionCard(
-        icon: String,
-        title: LocalizedStringKey,
-        subtitle: LocalizedStringKey,
-        action: @escaping () -> Void
-    ) -> some View {
-        VStack(spacing: 10) {
-            ZStack {
-                Circle()
-                    .fill(palette.accent.opacity(0.06))
-                    .frame(width: 48, height: 48)
-                Circle()
-                    .fill(palette.accent.opacity(0.12))
-                    .frame(width: 40, height: 40)
-                Image(systemName: icon)
-                    .font(.system(size: 17, weight: .medium))
-                    .foregroundStyle(palette.accent)
-            }
-
-            Text(title)
-                .font(BPFont.elegantHeadingMedium)
-                .foregroundStyle(palette.textPrimary)
-                .lineLimit(1)
-
-            Text(subtitle)
-                .font(BPFont.elegantSubtitle)
-                .foregroundStyle(palette.textMuted)
-                .lineLimit(1)
-        }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 18)
-        .frame(maxWidth: .infinity)
-        .background(
-            RoundedRectangle(cornerRadius: 14)
-                .fill(palette.surfaceElevated)
-                .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
-        )
-        .onTapGesture(perform: action)
-    }
 }
 
 // MARK: - Inline Ask Composer
