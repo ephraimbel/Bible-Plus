@@ -31,32 +31,3 @@ struct OnboardingBackground: View {
         }
     }
 }
-
-struct SunriseBackground: View {
-    @Environment(\.bpPalette) private var palette
-
-    var body: some View {
-        ZStack {
-            LinearGradient(
-                colors: [
-                    palette.surfaceElevated,
-                    palette.background,
-                    palette.surface
-                ],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-
-            RadialGradient(
-                colors: [
-                    palette.accent.opacity(0.18),
-                    Color.clear,
-                ],
-                center: .top,
-                startRadius: 0,
-                endRadius: 400
-            )
-        }
-        .ignoresSafeArea()
-    }
-}
