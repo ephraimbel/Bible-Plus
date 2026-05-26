@@ -14,7 +14,13 @@ final class BibleReaderViewModel {
     var showTranslationPicker: Bool = false
     var showSearch: Bool = false
     var showReaderSettings: Bool = false
-    var selectedVerse: VerseItem? = nil
+    /// Verse numbers currently selected. A single tap selects one verse; tapping
+    /// additional verses extends the selection into a passage. Empty means no
+    /// selection (the floating toolbar is hidden).
+    var selectedVerseNumbers: Set<Int> = []
+    /// The most recently tapped verse — anchors the floating toolbar's position
+    /// and is the target for single-verse-oriented actions (note, play-from-here).
+    var anchorVerseNumber: Int? = nil
 
     // MARK: - Loading State
 
@@ -238,8 +244,115 @@ final class BibleReaderViewModel {
     }
 
     func selectVerse(_ verse: VerseItem) {
-        selectedVerse = verse
+        if selectedVerseNumbers.contains(verse.number) {
+            // Toggle off; collapse the anchor to the next remaining verse.
+            selectedVerseNumbers.remove(verse.number)
+            if anchorVerseNumber == verse.number {
+                anchorVerseNumber = selectedVerseNumbers.max()
+            }
+        } else {
+            selectedVerseNumbers.insert(verse.number)
+            anchorVerseNumber = verse.number
+        }
         HapticService.lightImpact()
+    }
+
+    func clearSelection() {
+        selectedVerseNumbers = []
+        anchorVerseNumber = nil
+    }
+
+    // MARK: - Selection (Passage) Helpers
+
+    var hasSelection: Bool { !selectedVerseNumbers.isEmpty }
+
+    /// Selected verses as VerseItems, sorted by verse number.
+    var selectedVersesSorted: [VerseItem] {
+        selectedVerseNumbers.sorted().compactMap { num in
+            verses.first(where: { $0.number == num }).map { VerseItem(number: $0.number, text: $0.text) }
+        }
+    }
+
+    /// The anchor (last-tapped) verse — used for toolbar position and for
+    /// note/play targeting, since those are inherently single-verse anchored.
+    var anchorVerse: VerseItem? {
+        guard let n = anchorVerseNumber,
+              let v = verses.first(where: { $0.number == n }) else { return nil }
+        return VerseItem(number: v.number, text: v.text)
+    }
+
+    /// True when every selected verse is already saved.
+    var allSelectionSaved: Bool {
+        !selectedVerseNumbers.isEmpty && selectedVerseNumbers.allSatisfy { savedVerseMap[$0] != nil }
+    }
+
+    /// The shared highlight color when all selected verses carry the same one.
+    var commonSelectionHighlight: VerseHighlightColor? {
+        let colors = Set(selectedVerseNumbers.compactMap { savedVerseMap[$0]?.highlightColor })
+        guard colors.count == 1,
+              selectedVerseNumbers.allSatisfy({ savedVerseMap[$0]?.highlightColor != nil })
+        else { return nil }
+        return colors.first
+    }
+
+    /// Note shown in the editor — the anchor verse's note (notes are per-verse).
+    var anchorNote: String? {
+        guard let n = anchorVerseNumber else { return nil }
+        return noteText(for: n)
+    }
+
+    /// Reference for the selection: "Genesis 1:3" / "1:3-5" / "1:3,5,7".
+    func selectionReference() -> String {
+        let nums = selectedVerseNumbers.sorted()
+        guard let first = nums.first, let last = nums.last else {
+            return "\(selectedBook.name) \(selectedChapter)"
+        }
+        let versePart: String
+        if nums.count == 1 {
+            versePart = "\(first)"
+        } else if last - first + 1 == nums.count {
+            versePart = "\(first)-\(last)"
+        } else {
+            versePart = nums.map(String.init).joined(separator: ",")
+        }
+        return "\(selectedBook.name) \(selectedChapter):\(versePart)"
+    }
+
+    /// Selected verse texts joined into one passage.
+    func selectionText() -> String {
+        selectedVersesSorted.map { $0.text }.joined(separator: " ")
+    }
+
+    func selectionCopyShareText() -> String {
+        "\(selectionText())\n— \(selectionReference()) (\(translationName))"
+    }
+
+    func selectionExplainPrompt() -> String {
+        let ref = selectionReference()
+        return "Help me understand what God is saying in \(ref): \"\(selectionText())\" — what did this mean in its original context, and what does it mean for my life today?"
+    }
+
+    // MARK: - Selection Bulk Actions
+
+    func copySelection() {
+        UIPasteboard.general.string = selectionCopyShareText()
+        HapticService.success()
+    }
+
+    func saveSelection() {
+        for verse in selectedVersesSorted { saveVerse(verse) }
+    }
+
+    func unsaveSelection() {
+        for verse in selectedVersesSorted { unsaveVerse(verse) }
+    }
+
+    func highlightSelection(_ color: VerseHighlightColor) {
+        for verse in selectedVersesSorted { highlightVerse(verse, color: color) }
+    }
+
+    func removeHighlightSelection() {
+        for verse in selectedVersesSorted { removeHighlight(verse) }
     }
 
     // MARK: - Profile Persistence Helper
@@ -286,27 +399,6 @@ final class BibleReaderViewModel {
     func retryLoading() {
         errorMessage = nil
         loadChapter(logActivity: false)
-    }
-
-    // MARK: - Actions
-
-    func copyVerse(_ verse: VerseItem) {
-        let text = "\(verse.text)\n— \(selectedBook.name) \(selectedChapter):\(verse.number) (\(translationName))"
-        UIPasteboard.general.string = text
-        HapticService.success()
-    }
-
-    func verseReference(for verse: VerseItem) -> String {
-        "\(selectedBook.name) \(selectedChapter):\(verse.number)"
-    }
-
-    func shareText(for verse: VerseItem) -> String {
-        "\(verse.text)\n— \(selectedBook.name) \(selectedChapter):\(verse.number) (\(translationName))"
-    }
-
-    func explainVersePrompt(for verse: VerseItem) -> String {
-        let ref = verseReference(for: verse)
-        return "Help me understand what God is saying in \(ref): \"\(verse.text)\" — what did this mean in its original context, and what does it mean for my life today?"
     }
 
     // MARK: - Reader Settings Persistence
@@ -373,7 +465,7 @@ final class BibleReaderViewModel {
         showSearch = false
 
         loadTask?.cancel()
-        selectedVerse = nil
+        clearSelection()
         verses = []
         isShowingOfflineFallback = false
         errorMessage = nil
@@ -402,7 +494,8 @@ final class BibleReaderViewModel {
                 isLoading = false
                 loadSavedVerses()
 
-                // Scroll to and highlight the target verse (not selectedVerse which opens action sheet)
+                // Scroll to and highlight the target verse (without selecting it,
+                // which would open the action toolbar)
                 if verseNumber > 0 {
                     lastReadVerseNumber = verseNumber
                 }
@@ -427,14 +520,6 @@ final class BibleReaderViewModel {
     }
 
     // MARK: - Save & Highlight
-
-    func isVerseSaved(_ number: Int) -> Bool {
-        savedVerseMap[number] != nil
-    }
-
-    func highlightColor(for number: Int) -> VerseHighlightColor? {
-        savedVerseMap[number]?.highlightColor
-    }
 
     func saveVerse(_ verse: VerseItem) {
         guard savedVerseMap[verse.number] == nil else { return }
@@ -534,7 +619,7 @@ final class BibleReaderViewModel {
 
     private func loadChapter(logActivity: Bool = true) {
         loadTask?.cancel()
-        selectedVerse = nil
+        clearSelection()
         verses = []
         isShowingOfflineFallback = false
         errorMessage = nil

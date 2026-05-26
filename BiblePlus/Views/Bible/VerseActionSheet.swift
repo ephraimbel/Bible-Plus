@@ -13,7 +13,6 @@ struct SelectedVerseFrameKey: PreferenceKey {
 // MARK: - Verse Toolbar Overlay
 
 struct VerseToolbarOverlay: View {
-    let verse: VerseItem
     let reference: String
     let isSaved: Bool
     let isPro: Bool
@@ -47,31 +46,33 @@ struct VerseToolbarOverlay: View {
             let containerSize = geo.size
             let cardHeight: CGFloat = showHighlightStrip ? 230 : 165
 
-            let showBelow = verseFrame != .zero
-                && verseFrame.maxY + cardHeight + 16 < containerSize.height
+            // Prefer ABOVE the anchor verse (like iOS's text-selection menu): the
+            // verses below stay visible so the reader can tap them to extend the
+            // passage downward — the natural reading direction. Falls back to
+            // below only when there's no room above (e.g. the first verse).
             let showAbove = verseFrame != .zero
-                && !showBelow
                 && verseFrame.minY - cardHeight - 16 > 0
+            let showBelow = verseFrame != .zero
+                && !showAbove
+                && verseFrame.maxY + cardHeight + 16 < containerSize.height
 
             let targetY: CGFloat = {
                 if verseFrame == .zero {
                     return containerSize.height / 2
-                } else if showBelow {
-                    return verseFrame.maxY + 12 + cardHeight / 2
                 } else if showAbove {
                     return verseFrame.minY - 12 - cardHeight / 2
+                } else if showBelow {
+                    return verseFrame.maxY + 12 + cardHeight / 2
                 } else {
                     return containerSize.height / 2
                 }
             }()
 
             ZStack {
-                // Scrim
-                Color.black.opacity(0.15)
-                    .ignoresSafeArea()
-                    .onTapGesture { onDismiss() }
-
-                // Toolbar card
+                // No dimming scrim: the reader stays interactive so the user can
+                // tap additional verses to extend the selection into a passage.
+                // Empty ZStack space doesn't capture taps, so they pass through to
+                // the verses below. Dismissal is the explicit header button.
                 toolbarCard
                     .frame(maxWidth: containerSize.width - 32)
                     .fixedSize(horizontal: false, vertical: true)
@@ -100,13 +101,28 @@ struct VerseToolbarOverlay: View {
 
     private var toolbarCard: some View {
         VStack(spacing: 0) {
-            // Reference header
-            Text(reference)
-                .font(.system(size: 13, weight: .semibold, design: .serif))
-                .foregroundStyle(palette.accent)
-                .frame(maxWidth: .infinity)
-                .padding(.top, 14)
-                .padding(.bottom, 10)
+            // Reference header with explicit dismiss (no scrim to tap)
+            HStack(spacing: 0) {
+                Color.clear.frame(width: 28, height: 28)
+                Spacer(minLength: 0)
+                Text(reference)
+                    .font(.system(size: 13, weight: .semibold, design: .serif))
+                    .foregroundStyle(palette.accent)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+                Spacer(minLength: 0)
+                Button { onDismiss() } label: {
+                    Image(systemName: "xmark")
+                        .font(.system(size: 10, weight: .bold))
+                        .foregroundStyle(palette.textMuted)
+                        .frame(width: 28, height: 28)
+                        .background(Circle().fill(palette.surface))
+                }
+                .accessibilityLabel("Done")
+            }
+            .padding(.horizontal, 12)
+            .padding(.top, 12)
+            .padding(.bottom, 10)
 
             Rectangle()
                 .fill(palette.border.opacity(0.15))
@@ -160,7 +176,9 @@ struct VerseToolbarOverlay: View {
                     }
                 }
 
-                // Row 2: Play (optional), Image, Note, Meditate
+                // Row 2: Play (optional), Image, Note, Meditate.
+                // Trailing filler cells keep these aligned under the first
+                // columns of the 5-up row above instead of spreading wide.
                 HStack(spacing: 0) {
                     if let playAction = onPlayFromHere {
                         actionItem(icon: "headphones", label: "Play") {
@@ -179,6 +197,12 @@ struct VerseToolbarOverlay: View {
 
                     actionItem(icon: "leaf.fill", label: "Meditate") {
                         onMeditateInSanctuary()
+                    }
+
+                    ForEach(0..<(onPlayFromHere != nil ? 1 : 2), id: \.self) { _ in
+                        Color.clear
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 56)
                     }
                 }
             }

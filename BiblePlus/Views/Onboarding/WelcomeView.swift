@@ -25,6 +25,10 @@ struct WelcomeView: View {
     private let warmCream = Color(red: 1.0, green: 0.96, blue: 0.88)
     private let softGold = Color(red: 0.95, green: 0.82, blue: 0.55)
     private let deepSepia = Color(red: 0.18, green: 0.12, blue: 0.06)
+    // Exact match for the onboarding Warm Paper background (#FBF8F3) so the
+    // opening bloom saturates to the SAME color the first question screen uses
+    // — the swell "becomes" the onboarding page with no color jump on handoff.
+    private let paperBright = Color(red: 0.984, green: 0.973, blue: 0.953)
 
     var body: some View {
         GeometryReader { geo in
@@ -69,9 +73,9 @@ struct WelcomeView: View {
                     .fill(
                         RadialGradient(
                             gradient: Gradient(stops: [
-                                .init(color: warmCream.opacity(0.85), location: 0.0),
-                                .init(color: warmCream.opacity(0.55), location: 0.30),
-                                .init(color: softGold.opacity(0.35), location: 0.58),
+                                .init(color: paperBright.opacity(0.90), location: 0.0),
+                                .init(color: paperBright.opacity(0.60), location: 0.30),
+                                .init(color: softGold.opacity(0.32), location: 0.58),
                                 .init(color: accentGold.opacity(0.10), location: 0.82),
                                 .init(color: .clear, location: 1.0)
                             ]),
@@ -97,10 +101,10 @@ struct WelcomeView: View {
                     .fill(
                         RadialGradient(
                             gradient: Gradient(stops: [
-                                .init(color: warmCream.opacity(0.95), location: 0.0),
-                                .init(color: warmCream.opacity(0.72), location: 0.22),
-                                .init(color: softGold.opacity(0.42), location: 0.50),
-                                .init(color: accentGold.opacity(0.14), location: 0.78),
+                                .init(color: paperBright, location: 0.0),
+                                .init(color: paperBright.opacity(0.95), location: 0.44),
+                                .init(color: softGold.opacity(0.30), location: 0.70),
+                                .init(color: accentGold.opacity(0.10), location: 0.88),
                                 .init(color: .clear, location: 1.0)
                             ]),
                             center: .center,

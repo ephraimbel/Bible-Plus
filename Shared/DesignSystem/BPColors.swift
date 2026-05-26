@@ -17,38 +17,34 @@ struct BPColorPalette {
     let jesusWords: Color
     let parchment: Color
 
-    // MARK: Light — "Warm Paper" (off-white editorial)
+    // MARK: Light — "Gallery White" (soft warm canvas, pure white cards)
     //
-    // Previous palette pushed the canvas into tan/peach territory (R-G=11
-    // on the bg, #EFE4D6) which read as yellow on screen even though it
-    // was technically warm-paper-coded. This version cools the cream
-    // toward off-white while keeping a whisper of warmth so the gold
-    // accent and serif typography still feel intentional, not orphaned
-    // against a stark white background.
+    // High-end editorial direction. A barely-warm white canvas — just
+    // enough tan to take the clinical edge off a pure-white screen —
+    // with PURE WHITE cards that pop cleanly on top. Gold accents + the
+    // home page's soft gold-tan bottom glow + sepia ink supply the
+    // warmth so the UI feels premium, not sterile.
     //
     // Hierarchy:
-    //   surfaceElevated = pure white (cards float above)
-    //   background      = warm off-white canvas (R-G=3, very slight)
-    //   surface         = step-down for recessed/inactive surfaces
-    //
-    // Text colors stay sepia-brown — the contrast of warm ink on cool
-    // paper is exactly how printed editorial books feel.
+    //   background      = soft warm white (R-B≈8, a whisper of tan)
+    //   surfaceElevated = pure white cards (brighter than canvas → they pop)
+    //   surface         = deeper beige for recessed elements inside cards
     //
     // Dark mode is untouched.
     static let light = BPColorPalette(
-        background: Color(hex: "F6F3ED"),        // cool off-white paper (R-G=3)
-        surface: Color(hex: "EFEAE0"),           // step-down surface for recessed elements
-        surfaceElevated: Color(hex: "FFFFFF"),   // true white — cards float above canvas
-        accent: Color(hex: "C9A96E"),            // gold — our signature
-        accentSoft: Color(hex: "F1E8D5"),        // softened gold-cream wash
+        background: Color(hex: "FBF8F3"),        // soft warm white — slight tan, not harsh
+        surface: Color(hex: "F4EFE6"),           // soft beige — recessed elements, tracks
+        surfaceElevated: Color(hex: "FFFFFF"),   // pure white — cards pop on the warm canvas
+        accent: Color(hex: "C9A96E"),            // gold — our signature accent
+        accentSoft: Color(hex: "F3EBDB"),        // softened gold-cream wash
         textPrimary: Color(hex: "3B2B1D"),       // deep sepia brown — "ink on paper"
         textSecondary: Color(hex: "6B5949"),     // medium warm brown
         textMuted: Color(hex: "9E8D7B"),         // muted warm tan
-        border: Color(hex: "E5DFD3"),            // soft warm hairline, cooler than before
+        border: Color(hex: "EBE4D6"),            // soft warm hairline
         error: Color(hex: "B54A42"),             // warm red
         success: Color(hex: "7D9E7A"),           // warm sage
         jesusWords: Color(hex: "8B342E"),        // deep red
-        parchment: Color(hex: "F6F3ED")          // matches background
+        parchment: Color(hex: "FBF8F3")          // warm paper, matches canvas
     )
 
     // MARK: Dark — "Midnight Study" (warm matte black)

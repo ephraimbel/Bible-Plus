@@ -14,22 +14,11 @@ struct PaywallBenefit: Identifiable {
 @MainActor @Observable
 final class PaywallViewModel {
 
-    // MARK: - Navigation
-
-    var currentPage: Int = 0
-    let totalPages = 1
-
     // MARK: - Purchase State
 
     var selectedProductID: String? = StoreKitService.yearlyID
     var isPurchasing = false
     var purchaseError: String? = nil
-
-    // MARK: - Per-Page Entrance Animation Flags
-
-    var page1Appeared = false
-    var page2Appeared = false
-    var page3Appeared = false
 
     // MARK: - Presentation Mode
 
@@ -118,32 +107,7 @@ final class PaywallViewModel {
         )
     }
 
-    // MARK: - Navigation Actions
-
-    func advancePage() {
-        guard currentPage < totalPages - 1 else { return }
-        HapticService.impact(.light)
-        withAnimation(BPAnimation.pageTransition) {
-            currentPage += 1
-        }
-        Analytics.track(.paywallPageAdvanced, properties: [
-            "from_page": "\(currentPage)",
-            "to_page": "\(currentPage + 1)",
-        ])
-    }
-
-    func dismissPaywall(dismiss: DismissAction) {
-        let reason = isOnboarding ? "free_plan" : "maybe_later"
-        Analytics.track(.paywallDismissed, properties: [
-            "reason": reason,
-            "page": "\(currentPage + 1)",
-        ])
-        if isOnboarding {
-            onboardingViewModel?.goNext()
-        } else {
-            dismiss()
-        }
-    }
+    // MARK: - Purchase
 
     func purchaseSelected(storeKitService: StoreKitService, dismiss: DismissAction) async {
         guard let productID = selectedProductID else { return }
@@ -347,9 +311,9 @@ final class PaywallViewModel {
                 subtitle: "Guided journeys through Scripture tailored to your season"
             ),
             PaywallBenefit(
-                icon: "music.note.list",
-                title: "30+ Soundscapes & 184 Backgrounds",
-                subtitle: "Create your perfect sanctuary for prayer and reflection"
+                icon: "headphones",
+                title: "Audio Bible in 9 Voices",
+                subtitle: "Listen to any chapter, narrated in a voice you love"
             ),
             PaywallBenefit(
                 icon: "sparkles",

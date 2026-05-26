@@ -36,7 +36,7 @@ struct ContentView: View {
             case .bible: "Bible"
             case .ask: "Ask"
             case .saved: "Saved"
-            case .settings: "Settings"
+            case .settings: "Profile"
             }
         }
 
@@ -46,7 +46,7 @@ struct ContentView: View {
             case .bible: "book.fill"
             case .ask: "sparkle"
             case .saved: "bookmark.fill"
-            case .settings: "gearshape.fill"
+            case .settings: "person.crop.circle.fill"
             }
         }
     }

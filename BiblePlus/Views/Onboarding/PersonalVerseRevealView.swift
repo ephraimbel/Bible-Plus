@@ -56,15 +56,28 @@ struct PersonalVerseRevealView: View {
             // Dark field — always under everything
             Color.black.opacity(0.94).ignoresSafeArea()
 
-            // Layer: soft biblical image through heavy blur for depth
-            Image("biblical_jacob_ladder")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .blur(radius: 48)
-                .scaleEffect(1.2)
-                .opacity(0.25)
-                .clipped()
-                .ignoresSafeArea()
+            // Layer: soft biblical image through heavy blur for depth.
+            // Matched to the verse being revealed (anxiety → Christ in the
+            // Storm, grief → Raising of Lazarus, etc.) so the ambient art
+            // belongs to the moment. Falls back to Jacob's Ladder.
+            Group {
+                if let art = BiblicalImageService.rawImage(
+                    for: BiblicalImageService.resolveKey(for: currentVerse.reference, context: currentVerse.text)
+                ) {
+                    Image(uiImage: art)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                } else {
+                    Image("biblical_jacob_ladder")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                }
+            }
+            .blur(radius: 48)
+            .scaleEffect(1.2)
+            .opacity(0.25)
+            .clipped()
+            .ignoresSafeArea()
 
             // Layer: gold radial bloom from center (this is the "breath")
             RadialGradient(
@@ -83,7 +96,7 @@ struct PersonalVerseRevealView: View {
                     .allowsHitTesting(false)
             }
 
-            // Content
+            // Content — verse + CTA grouped, centered
             VStack(spacing: 0) {
                 Spacer(minLength: 0)
 
@@ -139,7 +152,10 @@ struct PersonalVerseRevealView: View {
                 .multilineTextAlignment(.center)
                 .lineSpacing(8)
                 .fixedSize(horizontal: false, vertical: true)
-                .frame(maxWidth: .infinity)
+                // Concrete width cap so long verses wrap (the parent proposes
+                // an unbounded width here, so .frame(maxWidth: .infinity) let
+                // long text overflow). 330 fits every supported iPhone (≥375pt).
+                .frame(maxWidth: 330)
 
             // Ornament + reference
             VStack(spacing: 10) {
@@ -164,50 +180,47 @@ struct PersonalVerseRevealView: View {
 
             Spacer().frame(height: 8)
 
-            // Primary CTA — "Keep this with me"
-            Button {
-                keepVerseAndAdvance()
-            } label: {
-                HStack(spacing: 8) {
-                    Image(systemName: "heart.fill")
-                        .font(.system(size: 13, weight: .semibold))
+            // Primary CTA + secondary — kept with the verse. A COMPACT pill
+            // that hugs its label (no .frame(maxWidth: .infinity), so it reads
+            // as a button, not a full-width bar), centered under the verse.
+            VStack(spacing: 14) {
+                Button {
+                    keepVerseAndAdvance()
+                } label: {
                     Text("Keep this with me")
                         .font(.custom("Georgia-Bold", size: 16))
                         .tracking(0.3)
-                }
-                .foregroundStyle(.white)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 16)
-                .background(
-                    Capsule()
-                        .fill(
-                            LinearGradient(
-                                colors: [gold, gold.opacity(0.82)],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 40)
+                        .padding(.vertical, 15)
+                        .background(
+                            Capsule()
+                                .fill(
+                                    LinearGradient(
+                                        colors: [gold, gold.opacity(0.82)],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                )
+                                .shadow(color: gold.opacity(0.4), radius: 16, y: 6)
                         )
-                        .shadow(color: gold.opacity(0.35), radius: 16, y: 6)
-                )
-                .overlay(
-                    Capsule()
-                        .stroke(goldLight.opacity(0.4), lineWidth: 0.5)
-                )
-            }
-            .buttonStyle(PressableButtonStyle())
-            .opacity(primaryButtonOpacity)
-            .offset(y: primaryButtonOffset)
+                        .overlay(Capsule().stroke(goldLight.opacity(0.45), lineWidth: 0.5))
+                }
+                .buttonStyle(PressableButtonStyle())
+                .opacity(primaryButtonOpacity)
+                .offset(y: primaryButtonOffset)
 
-            // Secondary — "Show me another"
-            Button {
-                resampleVerse()
-            } label: {
-                Text("Show me another")
-                    .font(.custom("Georgia", size: 13))
-                    .foregroundStyle(.white.opacity(0.5))
-                    .underline(true, color: .white.opacity(0.2))
+                Button {
+                    resampleVerse()
+                } label: {
+                    Text("Show me another")
+                        .font(.custom("Georgia", size: 13))
+                        .foregroundStyle(.white.opacity(0.5))
+                        .underline(true, color: .white.opacity(0.2))
+                        .padding(.vertical, 4)
+                }
+                .opacity(secondaryButtonOpacity)
             }
-            .opacity(secondaryButtonOpacity)
         }
     }
 
@@ -327,6 +340,18 @@ struct PersonalVerseRevealView: View {
         // Mark the verse as favorited on its PrayerContent record so it lands
         // in the user's saved collection on day 1.
         PersonalVerseSelector.markKept(id: currentVerse.contentId, modelContext: modelContext)
+
+        // Persist the verse text + reference on the profile too. This works
+        // for curated fallback verses (which have no contentId, so markKept
+        // is a no-op for them) AND lets the home screen resurface it as the
+        // user's first daily verse — so the reveal moment actually pays off.
+        let descriptor = FetchDescriptor<UserProfile>()
+        if let profile = try? modelContext.fetch(descriptor).first {
+            profile.keptVerseText = currentVerse.text
+            profile.keptVerseReference = currentVerse.reference
+            profile.keptVerseDate = Date()
+            try? modelContext.save()
+        }
 
         // Fade the whole screen out before handing off.
         withAnimation(.easeIn(duration: 0.35)) {

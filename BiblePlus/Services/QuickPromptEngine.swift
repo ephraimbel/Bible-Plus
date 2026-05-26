@@ -89,7 +89,6 @@ enum QuickPromptEngine {
         profile: UserProfile
     ) -> [(icon: String, text: String)] {
         guard !topics.isEmpty else { return [] }
-        let name = profile.firstName.isEmpty ? "Friend" : profile.firstName
 
         var prompts: [(icon: String, text: String)] = []
         let calendar = Calendar.current

@@ -102,6 +102,8 @@ private struct BibleContentView: View {
     @State private var sanctuaryVerseText: String?
     @State private var sanctuaryVerseReference: String?
     @State private var selectedVerseFrame: CGRect = .zero
+    @State private var pinchStartFontSize: Double?
+    @State private var isPinching = false
     @Environment(SoundscapeService.self) private var soundscapeService
 
     // MARK: - Page Flip State
@@ -305,7 +307,8 @@ private struct BibleContentView: View {
                     chapterTitle: viewModel.chapterTitle,
                     bookID: viewModel.selectedBook.id,
                     chapterNumber: viewModel.selectedChapter,
-                    selectedVerseNumber: viewModel.selectedVerse?.number,
+                    selectedVerseNumbers: viewModel.selectedVerseNumbers,
+                    anchorVerseNumber: viewModel.anchorVerseNumber,
                     isLoading: viewModel.isLoading,
                     errorMessage: viewModel.errorMessage,
                     isShowingOfflineFallback: viewModel.isShowingOfflineFallback,
@@ -314,6 +317,7 @@ private struct BibleContentView: View {
                     highlightColors: viewModel.highlightColors,
                     verseNotes: viewModel.verseNotes,
                     audioVerseIndex: audioService.isPlaying ? audioService.currentVerseIndex : nil,
+                    isAudioPlayerVisible: audioService.hasActivePlayback,
                     lastReadVerseNumber: viewModel.lastReadVerseNumber,
                     readerFontSize: viewModel.readerFontSize,
                     readerFontDesign: viewModel.readerFontDesign,
@@ -340,7 +344,8 @@ private struct BibleContentView: View {
                         chapterTitle: cachedChapterTitle,
                         bookID: cachedBookID,
                         chapterNumber: cachedChapterNumber,
-                        selectedVerseNumber: nil,
+                        selectedVerseNumbers: [],
+                        anchorVerseNumber: nil,
                         isLoading: false,
                         errorMessage: nil,
                         isShowingOfflineFallback: false,
@@ -349,6 +354,7 @@ private struct BibleContentView: View {
                         highlightColors: cachedHighlightColors,
                         verseNotes: cachedVerseNotes,
                         audioVerseIndex: nil,
+                        isAudioPlayerVisible: false,
                         lastReadVerseNumber: nil,
                         readerFontSize: viewModel.readerFontSize,
                         readerFontDesign: viewModel.readerFontDesign,
@@ -396,12 +402,33 @@ private struct BibleContentView: View {
             .simultaneousGesture(
                 DragGesture(minimumDistance: 50)
                     .onEnded { value in
+                        // Don't let a pinch's centroid drift trigger a chapter flip.
+                        guard !isPinching else { return }
                         guard abs(value.translation.width) > abs(value.translation.height) * 2 else { return }
                         if value.translation.width < -50 {
                             performPageFlip(forward: true)
                         } else if value.translation.width > 50 {
                             performPageFlip(forward: false)
                         }
+                    }
+            )
+            // Pinch to adjust reading font size — the most common reading tweak,
+            // without digging into Reader Settings. Clamped to the same 14–30pt
+            // range as the slider and persisted on release.
+            .simultaneousGesture(
+                MagnifyGesture()
+                    .onChanged { value in
+                        if pinchStartFontSize == nil { pinchStartFontSize = viewModel.readerFontSize }
+                        isPinching = true
+                        let base = pinchStartFontSize ?? viewModel.readerFontSize
+                        let proposed = (base * Double(value.magnification)).rounded()
+                        viewModel.readerFontSize = min(max(proposed, 14), 30)
+                    }
+                    .onEnded { _ in
+                        pinchStartFontSize = nil
+                        isPinching = false
+                        viewModel.persistReaderSettings()
+                        HapticService.selection()
                     }
             )
 
@@ -474,17 +501,16 @@ private struct BibleContentView: View {
             }
 
             // Verse floating toolbar overlay
-            if let verse = viewModel.selectedVerse {
+            if viewModel.hasSelection {
                 VerseToolbarOverlay(
-                    verse: verse,
-                    reference: viewModel.verseReference(for: verse),
-                    isSaved: viewModel.isVerseSaved(verse.number),
+                    reference: viewModel.selectionReference(),
+                    isSaved: viewModel.allSelectionSaved,
                     isPro: {
                         let descriptor = FetchDescriptor<UserProfile>()
                         return (try? modelContext.fetch(descriptor).first?.isPro) ?? false
                     }(),
-                    currentHighlight: viewModel.highlightColor(for: verse.number),
-                    currentNote: viewModel.noteText(for: verse.number),
+                    currentHighlight: viewModel.commonSelectionHighlight,
+                    currentNote: viewModel.anchorNote,
                     verseFrame: selectedVerseFrame,
                     onExplain: {
                         // Verse explain counts toward AI rate limit
@@ -496,46 +522,49 @@ private struct BibleContentView: View {
                         )
                         let allMessages = (try? modelContext.fetch(allMsgDescriptor)) ?? []
                         if !AIService.canSendMessage(allMessages: allMessages, isPro: isPro) {
-                            viewModel.selectedVerse = nil
+                            viewModel.clearSelection()
                             showPaywall = true
                             return
                         }
 
-                        explainPrompt = viewModel.explainVersePrompt(for: verse)
+                        explainPrompt = viewModel.selectionExplainPrompt()
                         createExplainConversation()
-                        viewModel.selectedVerse = nil
+                        viewModel.clearSelection()
                         showExplainChat = true
                     },
                     onCopy: {
-                        viewModel.copyVerse(verse)
+                        viewModel.copySelection()
                         // stays open (multi-action)
                     },
                     onShare: {
-                        shareText = viewModel.shareText(for: verse)
-                        viewModel.selectedVerse = nil
+                        shareText = viewModel.selectionCopyShareText()
+                        viewModel.clearSelection()
                     },
                     onSave: {
-                        viewModel.saveVerse(verse)
+                        viewModel.saveSelection()
                         // stays open (multi-action)
                     },
                     onUnsave: {
-                        viewModel.unsaveVerse(verse)
+                        viewModel.unsaveSelection()
                         // stays open (multi-action)
                     },
                     onHighlight: { color in
-                        viewModel.highlightVerse(verse, color: color)
+                        viewModel.highlightSelection(color)
                         // stays open (multi-action)
                     },
                     onRemoveHighlight: {
-                        viewModel.removeHighlight(verse)
+                        viewModel.removeHighlightSelection()
                         // stays open (multi-action)
                     },
                     onSaveNote: { note in
-                        viewModel.saveNote(for: verse, note: note)
+                        if let target = viewModel.anchorVerse {
+                            viewModel.saveNote(for: target, note: note)
+                        }
                     },
                     onPlayFromHere: {
-                        let verseIndex = viewModel.verses.firstIndex(where: { $0.number == verse.number }) ?? 0
-                        viewModel.selectedVerse = nil
+                        let startNum = viewModel.selectedVerseNumbers.min() ?? 0
+                        let verseIndex = viewModel.verses.firstIndex(where: { $0.number == startNum }) ?? 0
+                        viewModel.clearSelection()
 
                         if audioService.hasActivePlayback {
                             audioService.seekToVerse(index: verseIndex)
@@ -575,24 +604,24 @@ private struct BibleContentView: View {
                     },
                     onCreateVerseImage: {
                         verseImageData = (
-                            text: verse.text,
-                            reference: viewModel.verseReference(for: verse),
+                            text: viewModel.selectionText(),
+                            reference: viewModel.selectionReference(),
                             translation: viewModel.currentTranslation.abbreviation
                         )
-                        viewModel.selectedVerse = nil
+                        viewModel.clearSelection()
                     },
                     onMeditateInSanctuary: {
-                        sanctuaryVerseText = verse.text
-                        sanctuaryVerseReference = viewModel.verseReference(for: verse)
-                        viewModel.selectedVerse = nil
+                        sanctuaryVerseText = viewModel.selectionText()
+                        sanctuaryVerseReference = viewModel.selectionReference()
+                        viewModel.clearSelection()
                         showSanctuary = true
                     },
                     onShowPaywall: {
-                        viewModel.selectedVerse = nil
+                        viewModel.clearSelection()
                         showPaywall = true
                     },
                     onDismiss: {
-                        viewModel.selectedVerse = nil
+                        viewModel.clearSelection()
                     }
                 )
                 .transition(.move(edge: .bottom).combined(with: .opacity))
@@ -602,7 +631,7 @@ private struct BibleContentView: View {
         .onPreferenceChange(SelectedVerseFrameKey.self) { frame in
             if frame != .zero { selectedVerseFrame = frame }
         }
-        .animation(BPAnimation.spring, value: viewModel.selectedVerse)
+        .animation(BPAnimation.spring, value: viewModel.anchorVerseNumber)
         .animation(BPAnimation.spring, value: audioService.hasActivePlayback)
         .animation(.easeInOut(duration: 0.3), value: audioService.errorMessage != nil)
         .navigationBarTitleDisplayMode(.inline)
@@ -630,6 +659,9 @@ private struct BibleContentView: View {
                     .disabled(!viewModel.canGoForward)
                     .accessibilityLabel("Next chapter")
                 }
+                // Reserve equal width to the trailing group so the principal
+                // title+translation centers on screen for any book name / device.
+                .frame(width: 104, alignment: .leading)
             }
 
             // MARK: Center — Book Title · Translation
@@ -752,6 +784,9 @@ private struct BibleContentView: View {
                             .foregroundStyle(palette.accent)
                     }
                 }
+                // Matches the leading group's reserved width so the centered
+                // title stays screen-centered, not biased toward either side.
+                .frame(width: 104, alignment: .trailing)
             }
         }
         .sheet(isPresented: $viewModel.showBookPicker) {
@@ -763,7 +798,9 @@ private struct BibleContentView: View {
                     viewModel.selectedBook = book
                     viewModel.selectChapter(chapter)
                 },
-                activeRefID: viewModel.currentRefID
+                activeRefID: viewModel.currentRefID,
+                currentBookID: viewModel.selectedBook.id,
+                currentChapter: viewModel.selectedChapter
             )
         }
         .sheet(isPresented: $viewModel.showTranslationPicker) {

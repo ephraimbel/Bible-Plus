@@ -38,7 +38,7 @@ struct OnboardingSocialProofView: View {
     private let voices: [Voice] = [
         Voice(quote: "I've downloaded probably 15 Bible apps. This is the only one I've kept past a week.",
               author: "Rachel T.", location: "Toronto, Canada"),
-        Voice(quote: "Use sanctuary mode every night. Finally an app that doesn't shove ads in my face.",
+        Voice(quote: "Do a reading plan with my wife every night now. Finally an app that doesn't shove ads in my face.",
               author: "David R.", location: "London, UK"),
         Voice(quote: "Honestly didn't expect to love this. The chat actually answers questions like a real person would.",
               author: "Amanda L.", location: "Nairobi, Kenya"),
@@ -52,7 +52,7 @@ struct OnboardingSocialProofView: View {
               author: "Hannah P.", location: "Melbourne, Australia"),
         Voice(quote: "I'm 67 and I love this app. Don't say that about much technology.",
               author: "Margaret L.", location: "Minneapolis, MN"),
-        Voice(quote: "The breathing prayers in sanctuary mode legitimately help my anxiety.",
+        Voice(quote: "The morning verses legitimately help my anxiety. First thing I read every day.",
               author: "Aisha R.", location: "Dubai, UAE"),
         Voice(quote: "Was going through depression. The prayers helped more than I expected.",
               author: "Daniel O.", location: "Lagos, Nigeria"),
@@ -227,26 +227,22 @@ struct OnboardingSocialProofView: View {
         let count: CGFloat = isCompact ? 19 : 22
         let small: CGFloat = isCompact ? 11 : 13
 
-        return VStack(spacing: 3) {
-            HStack(alignment: .firstTextBaseline, spacing: 5) {
-                Text("Loved by")
-                    .font(.custom("Georgia-Italic", size: primary))
-                    .foregroundStyle(palette.textSecondary)
+        _ = count // (number stat retired in favor of the phrasing below)
 
-                Text(formatThousandsPlus(believersCount))
-                    .font(.custom("Baskerville-Bold", size: count))
-                    .foregroundStyle(palette.textPrimary)
-                    .contentTransition(.numericText())
+        return VStack(spacing: 2) {
+            Text("Loved by")
+                .font(.custom("Georgia-Italic", size: primary))
+                .foregroundStyle(palette.textSecondary)
 
-                Text("believers")
-                    .font(.custom("Georgia-Italic", size: primary))
-                    .foregroundStyle(palette.textSecondary)
-            }
+            Text("Followers of Christ")
+                .font(.custom("Baskerville-Bold", size: primary + 5))
+                .foregroundStyle(palette.textPrimary)
 
-            Text("across every continent")
+            Text("across the globe")
                 .font(.custom("Georgia-Italic", size: small))
                 .foregroundStyle(palette.textMuted)
         }
+        .multilineTextAlignment(.center)
         .opacity(showStat ? 1 : 0)
         .offset(y: showStat ? 0 : 8)
     }

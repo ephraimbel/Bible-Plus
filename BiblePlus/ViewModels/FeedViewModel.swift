@@ -105,6 +105,20 @@ final class FeedViewModel {
     // MARK: - Dashboard Data
 
     var dailyVerse: (text: String, reference: String)? {
+        // Prefer the verse the user kept during onboarding's Personal Verse
+        // Reveal — so that "aha moment" pays off: the first thing they see on
+        // Home is the verse they chose to keep. Featured for the first 3 days
+        // after keeping, then normal daily rotation resumes (the verse still
+        // lives in the Saved collection).
+        if let keptText = profile.keptVerseText, !keptText.isEmpty,
+           let keptRef = profile.keptVerseReference, !keptRef.isEmpty {
+            let keptDate = profile.keptVerseDate ?? Date()
+            let daysSince = Calendar.current.dateComponents([.day], from: keptDate, to: Date()).day ?? 0
+            if daysSince <= 2 {
+                return (text: keptText, reference: keptRef)
+            }
+        }
+
         let popularVerses: [(text: String, reference: String)] = [
             ("For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.", "John 3:16"),
             ("Trust in the Lord with all thine heart; and lean not unto thine own understanding.", "Proverbs 3:5"),
