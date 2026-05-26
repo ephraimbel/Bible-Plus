@@ -57,7 +57,6 @@ struct HomeDashboardView: View {
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 56)
-            .frame(maxWidth: UIScreen.main.bounds.width)
             .offset(y: dragOffset)
             .scaleEffect(rubberBandScale, anchor: .bottom)
 
