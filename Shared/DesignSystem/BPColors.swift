@@ -17,40 +17,34 @@ struct BPColorPalette {
     let jesusWords: Color
     let parchment: Color
 
-    // MARK: Light — "Sepia Paper" (Haven-inspired)
+    // MARK: Light — "Gallery White" (soft warm canvas, pure white cards)
     //
-    // Direct model: Haven Bible. Their canvas achieves what every prior
-    // attempt here missed: the warmth direction is TAN/PEACH, not
-    // cream/yellow. Technical distinction that makes all the difference:
+    // High-end editorial direction. A barely-warm white canvas — just
+    // enough tan to take the clinical edge off a pure-white screen —
+    // with PURE WHITE cards that pop cleanly on top. Gold accents + the
+    // home page's soft gold-tan bottom glow + sepia ink supply the
+    // warmth so the UI feels premium, not sterile.
     //
-    //   Yellow-cream warmth:  R ≈ G > B   (both R and G lead)
-    //                         → reads as "eggshell" / "tinted"
-    //
-    //   Tan/peach warmth:     R > G > B   (red clearly leads)
-    //                         → reads as "paper" / "sepia" / editorial
-    //
-    // Previous palettes had R-G deltas of 2-4 (yellow territory). This
-    // palette uses R-G=11 on the canvas, pulling firmly into peach/tan
-    // space. Combined with warm sepia-brown text instead of neutral
-    // charcoal, the whole UI reads as "ink on aged paper" — Haven's
-    // exact aesthetic. Gold accent (#C9A96E) remains our signature;
-    // Haven uses a similar warm-gold for their back buttons.
+    // Hierarchy:
+    //   background      = soft warm white (R-B≈8, a whisper of tan)
+    //   surfaceElevated = pure white cards (brighter than canvas → they pop)
+    //   surface         = deeper beige for recessed elements inside cards
     //
     // Dark mode is untouched.
     static let light = BPColorPalette(
-        background: Color(hex: "EFE4D6"),        // Haven canvas — tan/peach cream (R-G=11)
-        surface: Color(hex: "E7D9C6"),           // deeper tan surface step
-        surfaceElevated: Color(hex: "FBF6EE"),   // warm near-white interior (like Haven's phone screen)
-        accent: Color(hex: "C9A96E"),            // gold — our signature
-        accentSoft: Color(hex: "EFE2CD"),        // gold-tan wash (matches the canvas temperature)
-        textPrimary: Color(hex: "3B2B1D"),       // deep sepia brown — "ink on tan paper"
+        background: Color(hex: "FBF8F3"),        // soft warm white — slight tan, not harsh
+        surface: Color(hex: "F4EFE6"),           // soft beige — recessed elements, tracks
+        surfaceElevated: Color(hex: "FFFFFF"),   // pure white — cards pop on the warm canvas
+        accent: Color(hex: "C9A96E"),            // gold — our signature accent
+        accentSoft: Color(hex: "F3EBDB"),        // softened gold-cream wash
+        textPrimary: Color(hex: "3B2B1D"),       // deep sepia brown — "ink on paper"
         textSecondary: Color(hex: "6B5949"),     // medium warm brown
         textMuted: Color(hex: "9E8D7B"),         // muted warm tan
-        border: Color(hex: "D9CBB5"),            // warm tan hairline
-        error: Color(hex: "B54A42"),             // warm red (matched temperature)
+        border: Color(hex: "EBE4D6"),            // soft warm hairline
+        error: Color(hex: "B54A42"),             // warm red
         success: Color(hex: "7D9E7A"),           // warm sage
         jesusWords: Color(hex: "8B342E"),        // deep red
-        parchment: Color(hex: "EFE4D6")         // matches background
+        parchment: Color(hex: "FBF8F3")          // warm paper, matches canvas
     )
 
     // MARK: Dark — "Midnight Study" (warm matte black)

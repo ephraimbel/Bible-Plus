@@ -5,7 +5,9 @@ struct ChapterReaderView: View {
     let chapterTitle: String
     let bookID: String
     let chapterNumber: Int
-    let selectedVerseNumber: Int?
+    let selectedVerseNumbers: Set<Int>
+    /// The anchor (last-tapped) verse, whose frame positions the floating toolbar.
+    let anchorVerseNumber: Int?
     let isLoading: Bool
     let errorMessage: String?
     let isShowingOfflineFallback: Bool
@@ -14,6 +16,10 @@ struct ChapterReaderView: View {
     let highlightColors: [Int: VerseHighlightColor]
     let verseNotes: [Int: String]
     let audioVerseIndex: Int?
+    /// True whenever the audio mini-player is on screen (playing OR paused), so
+    /// the chapter reserves bottom space and its last verse isn't hidden behind
+    /// it. Distinct from `audioVerseIndex`, which is non-nil only while playing.
+    let isAudioPlayerVisible: Bool
     let lastReadVerseNumber: Int?
     let readerFontSize: Double
     let readerFontDesign: Font.Design
@@ -86,7 +92,7 @@ struct ChapterReaderView: View {
                         }
                     }
                     .padding(.horizontal, 24)
-                    .padding(.bottom, audioVerseIndex != nil ? 140 : 80)
+                    .padding(.bottom, (audioVerseIndex != nil || isAudioPlayerVisible) ? 140 : 80)
                 }
                 .background(palette.parchment)
                 .overlay(
@@ -144,7 +150,7 @@ struct ChapterReaderView: View {
     // MARK: - Verse Row
 
     private func verseRow(number: Int, text: String, isRedLetter: Bool = false) -> some View {
-        let isSelected = selectedVerseNumber == number
+        let isSelected = selectedVerseNumbers.contains(number)
         let highlight = highlightColors[number]
         let isSaved = savedVerseNumbers.contains(number)
         let noteText = verseNotes[number]
@@ -188,7 +194,7 @@ struct ChapterReaderView: View {
                     ))
             )
             .overlay {
-                if isSelected {
+                if number == anchorVerseNumber {
                     GeometryReader { geo in
                         Color.clear.preference(
                             key: SelectedVerseFrameKey.self,

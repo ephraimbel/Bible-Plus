@@ -75,6 +75,18 @@ final class UserProfile {
     /// router can deep-link the user into it on first launch.
     var welcomeConversationID: UUID? = nil
 
+    /// The verse the user chose to "Keep this with me" during the onboarding
+    /// Personal Verse Reveal. Stored as plain text + reference (not just a
+    /// content ID) so it persists even for curated fallback verses, and so
+    /// the home screen can resurface it as the user's first daily verse —
+    /// making the reveal moment actually pay off.
+    var keptVerseText: String? = nil
+    var keptVerseReference: String? = nil
+    /// When the verse was kept. The home screen features the kept verse for
+    /// a few days after onboarding (the payoff), then resumes normal daily
+    /// rotation — the verse persists in the Saved collection regardless.
+    var keptVerseDate: Date? = nil
+
     /// Friendly accessor for pinned facts. Setting an empty array clears the
     /// field to nil so SwiftData stays tidy.
     var aiPinnedFacts: [String] {

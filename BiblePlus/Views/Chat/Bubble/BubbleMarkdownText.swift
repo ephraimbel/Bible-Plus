@@ -33,8 +33,8 @@ struct BubbleMarkdownText: View {
 
     private func paragraphTextView(_ text: String) -> some View {
         highlightedMarkdownText(text)
-            .font(.custom("Georgia", size: 17))
-            .lineSpacing(7)
+            .font(.system(size: 18, weight: .medium, design: .serif))
+            .lineSpacing(6)
             .environment(\.openURL, OpenURLAction { url in
                 if url.scheme == "bibleplus",
                    url.host == "bible",
@@ -124,11 +124,11 @@ struct BubbleMarkdownText: View {
                 attributed[attrStart..<attrEnd].link = url
                 attributed[attrStart..<attrEnd].foregroundColor = palette.accent
                 attributed[attrStart..<attrEnd].backgroundColor = palette.accent.opacity(0.10)
-                attributed[attrStart..<attrEnd].font = .system(size: 15.5, weight: .semibold, design: .rounded)
+                attributed[attrStart..<attrEnd].font = .system(size: 16, weight: .semibold, design: .rounded)
                 attributed[attrStart..<attrEnd].underlineStyle = nil
             } else {
                 attributed[attrStart..<attrEnd].foregroundColor = palette.accent
-                attributed[attrStart..<attrEnd].font = .system(size: 16, weight: .regular, design: .serif).italic()
+                attributed[attrStart..<attrEnd].font = .system(size: 17, weight: .medium, design: .serif).italic()
             }
         }
 

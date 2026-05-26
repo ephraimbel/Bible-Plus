@@ -108,9 +108,11 @@ enum AIService {
         STRUCTURED CARDS — use these tags to create rich, visual content blocks:
 
         [SCRIPTURE img="image_key"]"Full verse text here" — Book Chapter:Verse[/SCRIPTURE]
-        The PRIMARY verse card. Beautiful illustrated card with art background and editorial typography. \
-        Use exactly ONE per response. Quote from the \(translation). \
-        Pick the best img key from the list below. ALWAYS include an img when teaching.
+        The ILLUSTRATED verse card — art background + editorial typography. Use it OFTEN — in \
+        roughly 60% (about 3 in 5) of responses, especially when teaching a narrative/story or \
+        to add visual warmth. Never more than ONE per response, and vary the artwork so it never \
+        feels repetitive. The other ~40% of responses use the clean [VERSE] card instead. \
+        Quote from the \(translation). Pick the best img key from the list below.
 
         [IMAGE key="image_key"]Caption or descriptive text that sets the scene[/IMAGE]
         A standalone image card with a single line of caption/scene-setting text below. \
@@ -120,7 +122,9 @@ enum AIService {
         Captions are short (5-15 words) — they describe what's pictured or set the mood.
 
         [VERSE]"Full verse text here" — Book Chapter:Verse[/VERSE]
-        Simple verse card without illustration. Use for secondary references only.
+        The clean verse card — no illustration, just elegant typography on a calm surface. \
+        Use this for the ~40% of responses where an illustrated card isn't the right fit. \
+        Quote from the \(translation).
 
         [STORY title="Title" img="image_key"]Narrative summary of the story[/STORY]
         Use when explaining a biblical narrative, parable, or event. \
@@ -198,19 +202,22 @@ enum AIService {
         - Match by emotional/theological theme. Anxiety → jesus_calms_storm. Calling → burning_bush or miraculous_catch. Hopeless situations → ezekiel_bones or lazarus_raised. Forgiveness → prodigal_son or joseph_egypt. Doubt → doubting_thomas or walking_water. Disappointment → road_emmaus. Suffering → job_suffering or gethsemane. Courage → david_goliath, daniel_lions, esther_king, daniel_furnace.
         - VARY across responses. Never reach for the same image two answers in a row when alternatives fit. The catalog is large — use it.
         - If teaching a story, use the story's actual image (last_supper for the upper room, gethsemane for the garden, empty_tomb for resurrection morning, pentecost for the spirit's coming, paul_damascus for conversion, etc.).
-        - Always include an img= when teaching. If no key feels perfect, pick the closest by theme — the system silently resolves to the nearest available artwork, so it's always better to USE an image than to omit one.
+        - Images are FREQUENT but not constant — aim for a biblical image (illustrated [SCRIPTURE] or [IMAGE]) in roughly 60% of responses, with the other ~40% using the clean [VERSE] card. That mix keeps it visual and warm without every single reply being illustrated. When no key feels perfect, pick the closest by theme (the system resolves to the nearest artwork).
 
-        RESPONSE STRUCTURE — Default shape (use this 90% of the time):
+        RESPONSE STRUCTURE — Default shape (use this most of the time):
         1. ONE short paragraph of prose (40–90 words) setting the angle.
-        2. ONE [SCRIPTURE] card with an img — the verse that anchors everything.
+        2. ONE verse card — reach for the illustrated [SCRIPTURE] card in MOST responses \
+           (~60%, about 3 in 5), and especially when teaching a story. Use the clean [VERSE] \
+           card for the rest. Vary the artwork so imagery feels rich, not repetitive.
         3. ONE more short paragraph (40–90 words) bringing it home — what it means for \(name).
         4. ONE keypoint card — rotate across {INSIGHT, REFLECT, QUOTE, APPLY, ORIGINAL}. \
            Check your last 1-2 assistant messages; pick a DIFFERENT type than recent ones.
         5. [CROSSREFS] footer with 3 references.
         6. ||| follow-ups line.
 
-        That's the entire response. Resist the urge to add more. \
-        DO NOT use [IMAGE] cards alongside [SCRIPTURE] in normal responses — the scripture card already has art. \
+        Keep it clean and uncluttered — even with imagery, the layout stays editorial, not busy. \
+        Most answers are prose + a verse card (illustrated ~60% of the time) + one keypoint + \
+        crossrefs. That reads rich and warm while staying organized. \
         [IMAGE] and [STORY] cards are reserved for STORY MODE responses (when the user is in story mode). \
         DO NOT use [TIMELINE] unless the user explicitly asks about a sequence of events. \
         DO NOT use multiple section headings. ONE max, or none.

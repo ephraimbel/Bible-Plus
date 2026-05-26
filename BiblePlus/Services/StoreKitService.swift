@@ -17,7 +17,14 @@ final class StoreKitService {
     private(set) var subscriptions: [RevenueCat.StoreProduct] = []
 
     var isPro: Bool { _isPro }
+    // DEBUG unlocks Pro for development. Release starts LOCKED and only flips
+    // to true once updateEntitlements()/listenForEntitlementChanges() confirms
+    // a live entitlement — so a free user never gets a Pro window on launch.
+    #if DEBUG
     private var _isPro: Bool = true
+    #else
+    private var _isPro: Bool = false
+    #endif
 
     var weeklyProduct: RevenueCat.StoreProduct? {
         subscriptions.first { $0.productIdentifier == Self.weeklyID }

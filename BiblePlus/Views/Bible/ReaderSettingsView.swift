@@ -62,8 +62,8 @@ struct ReaderSettingsView: View {
                     settingsSection(title: "Line Spacing") {
                         VStack(spacing: 12) {
                             HStack {
-                                Image(systemName: "text.alignleft")
-                                    .font(.system(size: 14))
+                                Text("Tight")
+                                    .font(.system(size: 11, weight: .medium, design: .rounded))
                                     .foregroundStyle(palette.textMuted)
 
                                 Slider(
@@ -73,10 +73,14 @@ struct ReaderSettingsView: View {
                                 )
                                 .tint(palette.accent)
 
-                                Image(systemName: "text.alignleft")
-                                    .font(.system(size: 18))
+                                Text("Spacious")
+                                    .font(.system(size: 11, weight: .medium, design: .rounded))
                                     .foregroundStyle(palette.textMuted)
                             }
+
+                            Text(lineSpacingDescriptor)
+                                .font(BPFont.caption)
+                                .foregroundStyle(palette.textMuted)
                         }
                     }
 
@@ -147,6 +151,17 @@ struct ReaderSettingsView: View {
 
     private var currentWeight: Font.Weight {
         viewModel.readerFontWeight.fontWeight
+    }
+
+    /// Human-friendly description of the current line-spacing value so the
+    /// slider reads as "spacing" rather than an ambiguous font-size control.
+    private var lineSpacingDescriptor: String {
+        switch viewModel.readerLineSpacing {
+        case ..<5: return "Tight"
+        case 5..<8: return "Comfortable"
+        case 8..<11: return "Relaxed"
+        default: return "Spacious"
+        }
     }
 
     // MARK: - Live Preview

@@ -303,49 +303,59 @@ private struct ConversationListContent: View {
         VStack(spacing: 0) {
             Spacer()
 
-            // Icon with layered rings
+            // Quiet emblem — a soft ambient glow, hairline concentric rings,
+            // and a single gold-gradient mark. Restrained on purpose so the
+            // empty state reads calm and premium rather than busy.
             ZStack {
                 Circle()
-                    .stroke(palette.accent.opacity(0.06), lineWidth: 0.5)
-                    .frame(width: 170, height: 170)
+                    .fill(
+                        RadialGradient(
+                            colors: [palette.accent.opacity(0.13), palette.accent.opacity(0)],
+                            center: .center,
+                            startRadius: 4,
+                            endRadius: 118
+                        )
+                    )
+                    .frame(width: 230, height: 230)
 
                 Circle()
-                    .fill(palette.accent.opacity(0.04))
-                    .frame(width: 140, height: 140)
+                    .stroke(palette.accent.opacity(0.09), lineWidth: 1)
+                    .frame(width: 152, height: 152)
 
                 Circle()
-                    .fill(palette.accent.opacity(0.06))
-                    .frame(width: 100, height: 100)
+                    .stroke(palette.accent.opacity(0.15), lineWidth: 1)
+                    .frame(width: 112, height: 112)
 
                 Circle()
                     .fill(palette.surfaceElevated)
-                    .frame(width: 72, height: 72)
-                    .shadow(color: palette.accent.opacity(0.1), radius: 12, y: 4)
+                    .frame(width: 80, height: 80)
                     .overlay(
                         Circle()
-                            .stroke(palette.accent.opacity(0.12), lineWidth: 0.5)
+                            .stroke(palette.accent.opacity(0.18), lineWidth: 0.75)
                     )
+                    .shadow(color: palette.accent.opacity(0.18), radius: 18, y: 7)
 
                 Image(systemName: "sparkle")
-                    .font(.system(size: 28, weight: .light))
-                    .foregroundStyle(palette.accent)
-
-                // Small floating accent icon
-                Image(systemName: "bubble.left.fill")
-                    .font(.system(size: 11, weight: .semibold))
-                    .foregroundStyle(palette.accent.opacity(0.4))
-                    .offset(x: 38, y: -26)
+                    .font(.system(size: 30, weight: .light))
+                    .foregroundStyle(
+                        LinearGradient(
+                            colors: [palette.accent, palette.accent.opacity(0.68)],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
             }
             .opacity(appeared ? 1 : 0)
-            .scaleEffect(appeared ? 1 : 0.8)
+            .scaleEffect(appeared ? 1 : 0.82)
             .animation(BPAnimation.spring.delay(0.05), value: appeared)
 
             Spacer().frame(height: 28)
 
             // Header
             Text("Start a new conversation")
-                .font(.system(size: 21, weight: .semibold, design: .serif))
+                .font(.custom("NewYork-Semibold", size: 23))
                 .foregroundStyle(palette.textPrimary)
+                .tracking(0.2)
                 .opacity(appeared ? 1 : 0)
                 .offset(y: appeared ? 0 : 12)
                 .animation(BPAnimation.spring.delay(0.1), value: appeared)
@@ -376,18 +386,25 @@ private struct ConversationListContent: View {
                         .font(.system(size: 15, weight: .semibold, design: .rounded))
                 }
                 .foregroundStyle(.white)
-                .padding(.horizontal, 28)
-                .padding(.vertical, 14)
+                .padding(.horizontal, 30)
+                .padding(.vertical, 15)
                 .background(
                     Capsule()
                         .fill(
                             LinearGradient(
-                                colors: [palette.accent, palette.accent.opacity(0.85)],
-                                startPoint: .leading,
-                                endPoint: .trailing
+                                stops: [
+                                    .init(color: palette.accent.blend(with: .white, amount: 0.16), location: 0),
+                                    .init(color: palette.accent, location: 1)
+                                ],
+                                startPoint: .top,
+                                endPoint: .bottom
                             )
                         )
-                        .shadow(color: palette.accent.opacity(0.25), radius: 8, y: 4)
+                        .overlay(
+                            Capsule()
+                                .stroke(.white.opacity(0.18), lineWidth: 0.5)
+                        )
+                        .shadow(color: palette.accent.opacity(0.28), radius: 12, y: 5)
                 )
             }
             .buttonStyle(PressableButtonStyle())
@@ -397,17 +414,23 @@ private struct ConversationListContent: View {
 
             Spacer().frame(height: 40)
 
-            // Inspiring verse
-            VStack(spacing: 6) {
+            // Inspiring verse — a quiet editorial footer beneath a hairline.
+            VStack(spacing: 10) {
+                Capsule()
+                    .fill(palette.accent.opacity(0.3))
+                    .frame(width: 22, height: 1.5)
+
                 Text("\u{201C}\(inspiringVerse.text)\u{201D}")
-                    .font(.system(size: 13, weight: .regular, design: .serif))
-                    .foregroundStyle(palette.textSecondary.opacity(0.7))
+                    .font(.custom("NewYork-Regular", size: 13.5))
+                    .italic()
+                    .foregroundStyle(palette.textSecondary.opacity(0.72))
                     .multilineTextAlignment(.center)
                     .lineSpacing(3)
 
                 Text(inspiringVerse.reference)
-                    .font(.system(size: 11, weight: .medium, design: .serif))
-                    .foregroundStyle(palette.accent.opacity(0.5))
+                    .font(.system(size: 11, weight: .medium, design: .rounded))
+                    .tracking(0.4)
+                    .foregroundStyle(palette.accent.opacity(0.55))
             }
             .padding(.horizontal, 20)
             .opacity(appeared ? 1 : 0)
@@ -478,19 +501,9 @@ private struct ConversationRow: View {
                     Spacer(minLength: 6)
 
                     Text(formattedTimestamp)
-                        .font(.system(size: 9.5, weight: .semibold))
-                        .tracking(1.2)
-                        .foregroundStyle(palette.accent.opacity(0.8))
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .background(
-                            Capsule()
-                                .fill(palette.accent.opacity(colorScheme == .dark ? 0.10 : 0.08))
-                        )
-                        .overlay(
-                            Capsule()
-                                .stroke(palette.accent.opacity(0.18), lineWidth: 0.5)
-                        )
+                        .font(.system(size: 9.5, weight: .semibold, design: .rounded))
+                        .tracking(1.0)
+                        .foregroundStyle(palette.textMuted.opacity(0.85))
                 }
 
                 // Mode label as small caps
@@ -520,18 +533,12 @@ private struct ConversationRow: View {
         .background(rowBackground)
         .overlay(rowBorder)
         .shadow(
-            color: Color.black.opacity(colorScheme == .dark ? 0.22 : 0.06),
-            radius: 10,
+            color: Color.black.opacity(colorScheme == .dark ? 0.22 : 0.05),
+            radius: 8,
             x: 0,
-            y: 4
+            y: 3
         )
-        .shadow(
-            color: palette.accent.opacity(conversation.isPinned ? 0.10 : 0),
-            radius: 14,
-            x: 0,
-            y: 0
-        )
-        .contentShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .contentShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
     }
 
     private var gemSymbol: String {
@@ -541,48 +548,17 @@ private struct ConversationRow: View {
     }
 
     private var rowBackground: some View {
-        let base = palette.surfaceElevated.opacity(colorScheme == .dark ? 0.55 : 0.85)
-        return RoundedRectangle(cornerRadius: 20, style: .continuous)
-            .fill(
-                LinearGradient(
-                    colors: [
-                        base,
-                        base.opacity(0.92)
-                    ],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-            )
-            .overlay(
-                // Subtle gold inner glow at the top edge
-                RoundedRectangle(cornerRadius: 20, style: .continuous)
-                    .fill(
-                        LinearGradient(
-                            colors: [
-                                palette.accent.opacity(colorScheme == .dark ? 0.07 : 0.05),
-                                .clear
-                            ],
-                            startPoint: .top,
-                            endPoint: .center
-                        )
-                    )
-            )
+        // Clean crisp surface — no gradient or inner glow. The warm hairline
+        // border + single soft shadow do the lifting (matches the home cards).
+        RoundedRectangle(cornerRadius: 18, style: .continuous)
+            .fill(palette.surfaceElevated.opacity(colorScheme == .dark ? 0.6 : 1.0))
     }
 
     private var rowBorder: some View {
-        RoundedRectangle(cornerRadius: 20, style: .continuous)
+        RoundedRectangle(cornerRadius: 18, style: .continuous)
             .strokeBorder(
-                LinearGradient(
-                    colors: conversation.isPinned
-                        ? [palette.accent.opacity(0.55), palette.accent.opacity(0.18)]
-                        : [
-                            palette.accent.opacity(colorScheme == .dark ? 0.22 : 0.18),
-                            palette.border.opacity(colorScheme == .dark ? 0.30 : 0.35)
-                          ],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                ),
-                lineWidth: conversation.isPinned ? 0.8 : 0.6
+                conversation.isPinned ? palette.accent.opacity(0.5) : palette.border,
+                lineWidth: conversation.isPinned ? 1.0 : 0.75
             )
     }
 
@@ -634,35 +610,13 @@ private struct ConversationGemIcon: View {
                 .fill(palette.accent.opacity(colorScheme == .dark ? 0.10 : 0.08))
                 .frame(width: 46, height: 46)
 
-            // Gold gradient disc
+            // Soft gold disc — flat tint, hairline ring. Calm, not glossy.
             Circle()
-                .fill(
-                    LinearGradient(
-                        colors: [
-                            palette.accent.opacity(colorScheme == .dark ? 0.32 : 0.22),
-                            palette.accent.opacity(colorScheme == .dark ? 0.18 : 0.10)
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
+                .fill(palette.accent.opacity(colorScheme == .dark ? 0.20 : 0.12))
                 .frame(width: 38, height: 38)
                 .overlay(
                     Circle()
-                        .stroke(palette.accent.opacity(0.45), lineWidth: 0.6)
-                )
-                .overlay(
-                    // Subtle top highlight
-                    Circle()
-                        .fill(
-                            LinearGradient(
-                                colors: [Color.white.opacity(colorScheme == .dark ? 0.10 : 0.30), .clear],
-                                startPoint: .top,
-                                endPoint: .center
-                            )
-                        )
-                        .frame(width: 38, height: 38)
-                        .blendMode(.plusLighter)
+                        .stroke(palette.accent.opacity(0.35), lineWidth: 0.6)
                 )
 
             Image(systemName: symbol)

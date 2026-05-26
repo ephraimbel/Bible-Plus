@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 struct BookPickerView: View {
     let onSelectBook: (BibleBook) -> Void
@@ -8,11 +9,22 @@ struct BookPickerView: View {
     /// `BibleRepository.localizedBookName`. Falls back to `book.name` (English)
     /// when the cache hasn't been populated yet or when no ref is active.
     var activeRefID: String? = nil
+    /// The book/chapter currently open in the reader. When set, the matching
+    /// book gets a subtle ring and the matching chapter is filled, so users can
+    /// locate where they left off. Nil when unknown.
+    var currentBookID: String? = nil
+    var currentChapter: Int? = nil
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.bpPalette) private var palette
+    @Environment(\.modelContext) private var modelContext
     @State private var expandedBook: BibleBook? = nil
     @State private var appeared = false
+    /// Chapter numbers already read in the currently-expanded book, derived
+    /// from logged `.chapterRead` activity. Loaded when a book is expanded so
+    /// the chapter grid can mark progress. Single book at a time matches the
+    /// one-popover-open invariant.
+    @State private var readChapters: Set<Int> = []
 
     /// Resolve a book's display name, preferring the helloao-sourced localized
     /// name when the active translation has primed the cache. Thin wrapper
@@ -23,6 +35,37 @@ struct BookPickerView: View {
             return localized
         }
         return book.name
+    }
+
+    /// Populates `readChapters` for the given book from logged `.chapterRead`
+    /// events. Events store `detail` as "<Book> <Chapter>" (English book name,
+    /// e.g. "Genesis 1"), so we filter by the book-name prefix and parse the
+    /// trailing chapter number. Fetches all chapter-read events and filters in
+    /// memory — the set is small and this avoids relying on predicate string
+    /// prefix support.
+    private func loadReadChapters(for book: BibleBook) {
+        let raw = ActivityEventType.chapterRead.rawValue
+        let descriptor = FetchDescriptor<ActivityEvent>(
+            predicate: #Predicate { $0.typeRaw == raw }
+        )
+        let events = (try? modelContext.fetch(descriptor)) ?? []
+        let prefix = book.name + " "
+        var chapters: Set<Int> = []
+        for event in events where event.detail.hasPrefix(prefix) {
+            if let chapter = Int(event.detail.dropFirst(prefix.count)) {
+                chapters.insert(chapter)
+            }
+        }
+        readChapters = chapters
+    }
+
+    /// Header subtitle for the chapter grid: a quiet progress count once the
+    /// reader has read at least one chapter, otherwise the plain chapter total.
+    private func progressSubtitle(for book: BibleBook) -> String {
+        if readChapters.isEmpty {
+            return "\(book.chapterCount) chapters"
+        }
+        return "\(min(readChapters.count, book.chapterCount)) of \(book.chapterCount) read"
     }
 
     var body: some View {
@@ -40,6 +83,13 @@ struct BookPickerView: View {
                     .padding(.bottom, 24)
                 }
                 .background(palette.background)
+                .onAppear {
+                    // Open the list where the reader left off, so the current
+                    // book (and its gold ring) is in view, not off-screen.
+                    if let currentBookID {
+                        proxy.scrollTo(currentBookID, anchor: .center)
+                    }
+                }
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -111,6 +161,7 @@ struct BookPickerView: View {
             ) {
                 ForEach(Array(books.enumerated()), id: \.element.id) { index, book in
                     bookButton(book, index: index)
+                        .id(book.id)
                 }
             }
         }
@@ -120,6 +171,7 @@ struct BookPickerView: View {
 
     private func bookButton(_ book: BibleBook, index: Int) -> some View {
         let isExpanded = expandedBook == book
+        let isCurrentBook = currentBookID == book.id
 
         return Button {
             HapticService.selection()
@@ -130,6 +182,7 @@ struct BookPickerView: View {
                     expandedBook = nil
                 }
             } else {
+                loadReadChapters(for: book)
                 withAnimation(BPAnimation.selection) {
                     expandedBook = book
                 }
@@ -174,8 +227,8 @@ struct BookPickerView: View {
                     .stroke(
                         isExpanded
                             ? Color.clear
-                            : palette.border.opacity(0.1),
-                        lineWidth: 0.5
+                            : (isCurrentBook ? palette.accent.opacity(0.45) : palette.border.opacity(0.1)),
+                        lineWidth: (isCurrentBook && !isExpanded) ? 1.2 : 0.5
                     )
             )
             .scaleEffect(isExpanded ? 1.04 : 1.0)
@@ -195,7 +248,8 @@ struct BookPickerView: View {
     // MARK: - Chapter Grid Popover
 
     private func chapterGrid(for book: BibleBook) -> some View {
-        ScrollView {
+        ScrollViewReader { proxy in
+            ScrollView {
             VStack(alignment: .leading, spacing: 12) {
                 // Book header
                 HStack(spacing: 10) {
@@ -219,9 +273,9 @@ struct BookPickerView: View {
                             .font(.system(size: 16, weight: .semibold, design: .serif))
                             .foregroundStyle(palette.textPrimary)
 
-                        Text("\(book.chapterCount) chapters")
+                        Text(progressSubtitle(for: book))
                             .font(.system(size: 11, weight: .medium, design: .rounded))
-                            .foregroundStyle(palette.textMuted)
+                            .foregroundStyle(readChapters.isEmpty ? palette.textMuted : palette.accent)
                     }
                 }
                 .padding(.horizontal, 16)
@@ -235,34 +289,72 @@ struct BookPickerView: View {
                     spacing: 8
                 ) {
                     ForEach(1...book.chapterCount, id: \.self) { chapter in
+                        let isCurrent = currentBookID == book.id && currentChapter == chapter
+                        let isRead = readChapters.contains(chapter)
                         Button {
                             HapticService.lightImpact()
                             expandedBook = nil
                             onSelectChapter(book, chapter)
                         } label: {
                             Text("\(chapter)")
-                                .font(.system(size: 15, weight: .medium, design: .rounded))
-                                .foregroundStyle(palette.textPrimary)
+                                .font(.system(size: 15, weight: (isCurrent || isRead) ? .semibold : .medium, design: .rounded))
+                                .foregroundStyle(isCurrent ? .white : (isRead ? palette.accent : palette.textPrimary))
                                 .frame(width: 46, height: 46)
                                 .background(
                                     RoundedRectangle(cornerRadius: 10)
-                                        .fill(palette.surfaceElevated)
-                                        .shadow(color: .black.opacity(0.05), radius: 6, y: 3)
+                                        .fill(
+                                            isCurrent
+                                                ? AnyShapeStyle(
+                                                    LinearGradient(
+                                                        colors: [palette.accent, palette.accent.opacity(0.8)],
+                                                        startPoint: .topLeading,
+                                                        endPoint: .bottomTrailing
+                                                    )
+                                                )
+                                                : AnyShapeStyle(palette.surfaceElevated)
+                                        )
+                                        .shadow(
+                                            color: isCurrent ? palette.accent.opacity(0.3) : .black.opacity(0.05),
+                                            radius: 6, y: 3
+                                        )
                                 )
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 10)
-                                        .stroke(palette.border.opacity(0.08), lineWidth: 0.5)
+                                        .stroke(
+                                            isCurrent
+                                                ? Color.clear
+                                                : (isRead ? palette.accent.opacity(0.25) : palette.border.opacity(0.08)),
+                                            lineWidth: 0.5
+                                        )
                                 )
+                                .overlay(alignment: .bottom) {
+                                    if isRead && !isCurrent {
+                                        Circle()
+                                            .fill(palette.accent)
+                                            .frame(width: 4, height: 4)
+                                            .padding(.bottom, 5)
+                                    }
+                                }
                         }
                         .buttonStyle(ChapterButtonStyle(accent: palette.accent))
+                        .accessibilityLabel("Chapter \(chapter)\(isCurrent ? ", currently reading" : isRead ? ", read" : "")")
+                        .id(chapter)
                     }
                 }
                 .padding(.horizontal, 14)
                 .padding(.bottom, 16)
             }
         }
-        .frame(minWidth: 290, maxHeight: 340)
-        .background(palette.background)
+            .frame(minWidth: 290, maxHeight: 340)
+            .background(palette.background)
+            .onAppear {
+                // Bring the current chapter into view in long books (e.g.
+                // Psalms) so the highlighted cell isn't buried below the fold.
+                if currentBookID == book.id, let currentChapter, currentChapter > 1 {
+                    proxy.scrollTo(currentChapter, anchor: .center)
+                }
+            }
+        }
     }
 }
 

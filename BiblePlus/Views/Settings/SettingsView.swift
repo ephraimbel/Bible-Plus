@@ -77,7 +77,7 @@ private struct SettingsContentView: View {
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Settings")
+                    Text("Profile")
                         .font(.system(size: 18, weight: .semibold, design: .serif))
                         .foregroundStyle(palette.textPrimary)
                 }

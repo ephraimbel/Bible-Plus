@@ -38,16 +38,25 @@ struct HomeDashboardView: View {
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            VStack(spacing: 16) {
-                Spacer(minLength: 0)
+            // Tight, fixed gaps between sections; the verse card flexes to
+            // absorb the leftover height. That keeps the cards large and the
+            // gaps small while still adapting to every screen — the verse
+            // card grows on tall phones and shrinks toward its minimum on
+            // short ones, so nothing clips.
+            VStack(spacing: 14) {
                 headerSection
+
+                streakRow
+                    .padding(.top, 4)
+
                 heroVerseCard
-                streakCard
+
                 quickActionsRow
+
                 askCard
             }
             .padding(.horizontal, 20)
-            .padding(.bottom, 90)
+            .padding(.bottom, 56)
             .offset(y: dragOffset)
             .scaleEffect(rubberBandScale, anchor: .bottom)
 
@@ -107,26 +116,25 @@ struct HomeDashboardView: View {
 
     // MARK: - Full Page Background
 
+    /// Soft warm canvas with a gentle gold-tan glow rising from the bottom.
+    /// On the barely-warm white background this reads as a quiet pool of
+    /// warmth behind the composer — premium, not harsh. Strength is kept
+    /// low so it never reads as a heavy gold wash.
     private var fullPageBackground: some View {
         let tint = palette.accent
-        let strength: CGFloat = colorScheme == .dark ? 0.20 : 0.34
         let bg = palette.background
+        let strength: CGFloat = colorScheme == .dark ? 0.20 : 0.22
 
         return ZStack {
-            // Base background
             bg.ignoresSafeArea()
 
-            // Bottom glow — mirrors the Ask page's top curve flipped, so the
-            // fade shape and peak color match exactly but sit at the bottom
-            // of the home page instead of the top.
             LinearGradient(
                 stops: [
                     .init(color: bg, location: 0.0),
-                    .init(color: bg, location: 0.35),
-                    .init(color: bg.blend(with: tint, amount: strength * 0.15), location: 0.45),
-                    .init(color: bg.blend(with: tint, amount: strength * 0.45), location: 0.60),
-                    .init(color: bg.blend(with: tint, amount: strength * 0.7), location: 0.75),
-                    .init(color: bg.blend(with: tint, amount: strength * 0.9), location: 0.88),
+                    .init(color: bg, location: 0.42),
+                    .init(color: bg.blend(with: tint, amount: strength * 0.25), location: 0.60),
+                    .init(color: bg.blend(with: tint, amount: strength * 0.55), location: 0.76),
+                    .init(color: bg.blend(with: tint, amount: strength * 0.8), location: 0.90),
                     .init(color: bg.blend(with: tint, amount: strength), location: 1.0)
                 ],
                 startPoint: .top,
@@ -149,7 +157,7 @@ struct HomeDashboardView: View {
                 .font(.system(size: 12, weight: .medium, design: .rounded))
                 .foregroundStyle(palette.textMuted)
         }
-        .padding(.bottom, 56)
+        .padding(.bottom, 18)
         .frame(maxWidth: .infinity)
         .allowsHitTesting(false)
         .opacity(appeared ? 1 : 0)
@@ -164,23 +172,10 @@ struct HomeDashboardView: View {
     // MARK: - Header
 
     private var headerSection: some View {
-        HStack {
-            HStack(spacing: 2) {
-                Text("Bible")
-                    .font(.system(size: 28, weight: .light, design: .serif))
-                    .foregroundStyle(palette.textPrimary)
-
-                Image(systemName: "sparkle")
-                    .font(.system(size: 22, weight: .medium))
-                    .foregroundStyle(Color(red: 1.0, green: 0.84, blue: 0.3))
-                    .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 4)
-                    .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 10)
-                    .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(glowPulse ? 0.9 : 0.5), radius: 20)
-                    .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(glowPulse ? 0.5 : 0.2), radius: 40)
-            }
-
+        HStack(spacing: 10) {
+            wordmark
             Spacer()
-
+            streakPill
             profileAvatar
         }
         .padding(.top, 12)
@@ -190,6 +185,49 @@ struct HomeDashboardView: View {
             withAnimation(.easeInOut(duration: 2.5).repeatForever(autoreverses: true)) {
                 glowPulse = true
             }
+        }
+    }
+
+    /// Streak count as a compact top-bar pill (Cal AI pattern). Tapping
+    /// opens progress, same as the bare day-ring row below.
+    private var streakPill: some View {
+        Button {
+            HapticService.lightImpact()
+            onShowProgress()
+        } label: {
+            HStack(spacing: 4) {
+                Image(systemName: "flame.fill")
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(palette.accent)
+                Text("\(vm.streakCount)")
+                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .foregroundStyle(palette.textPrimary)
+            }
+            .padding(.horizontal, 10)
+            .padding(.vertical, 6)
+            .background(
+                Capsule()
+                    .fill(palette.surfaceElevated)
+                    .shadow(color: .black.opacity(0.05), radius: 3, y: 1)
+            )
+            .overlay(Capsule().stroke(palette.border.opacity(0.35), lineWidth: 0.5))
+        }
+        .accessibilityLabel("\(vm.streakCount) day streak")
+    }
+
+    private var wordmark: some View {
+        HStack(spacing: 2) {
+            Text("Bible")
+                .font(.system(size: 28, weight: .light, design: .serif))
+                .foregroundStyle(palette.textPrimary)
+
+            Image(systemName: "sparkle")
+                .font(.system(size: 22, weight: .medium))
+                .foregroundStyle(Color(red: 1.0, green: 0.84, blue: 0.3))
+                .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 4)
+                .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 10)
+                .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(glowPulse ? 0.9 : 0.5), radius: 20)
+                .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(glowPulse ? 0.5 : 0.2), radius: 40)
         }
     }
 
@@ -224,6 +262,40 @@ struct HomeDashboardView: View {
         }
     }
 
+    // MARK: - Curated Colorful Art
+    //
+    // The biblical-art catalog is mostly muted Tissot watercolors and B&W
+    // Doré engravings, so auto-matching by verse kept landing on gloomy /
+    // grayscale paintings that looked muddy on the clean white home. These
+    // are hand-picked for vivid color. Each home surface (hero / read /
+    // plan) gets a different one via a seed offset.
+    private static let colorfulArtKeys = [
+        "sermon_mount",     // Bloch — blue sky, scarlet robe
+        "beatitudes",       // blue lake, golden hills
+        "miraculous_catch", // orange tunic, blue water
+        "magi_journey",     // gold cloaks, warm desert
+    ]
+
+    private func colorfulArt(seed: Int) -> UIImage? {
+        let keys = Self.colorfulArtKeys
+        guard !keys.isEmpty else { return nil }
+        let key = keys[((seed % keys.count) + keys.count) % keys.count]
+        return BiblicalImageService.rawImage(for: key)
+    }
+
+    private var dayOfYearSeed: Int {
+        Calendar.current.ordinality(of: .day, in: .year, for: Date()) ?? 1
+    }
+
+    /// Seed that advances every 6 hours so the matched painting rotates
+    /// "every once in a while" through the day rather than staying fixed.
+    private var rotatingArtSeed: Int {
+        let cal = Calendar.current
+        let day = cal.ordinality(of: .day, in: .year, for: Date()) ?? 1
+        let sixHourBucket = cal.component(.hour, from: Date()) / 6
+        return day * 4 + sixHourBucket
+    }
+
     // MARK: - Hero Verse Card
 
     @ViewBuilder
@@ -243,6 +315,10 @@ struct HomeDashboardView: View {
     @ViewBuilder
     private var heroVerseCard: some View {
         if let verse = vm.dailyVerse {
+            // Use a curated vivid painting that rotates through the day
+            // (every ~6 hours) rather than auto-matching, which kept
+            // landing on dark/grayscale art.
+            let artImage = colorfulArt(seed: rotatingArtSeed)
             let bgColors = vm.currentBackground.gradientColors.map { Color(hex: $0) }
             let gradient = LinearGradient(
                 colors: bgColors.isEmpty ? [palette.accent] : bgColors,
@@ -251,30 +327,32 @@ struct HomeDashboardView: View {
             )
 
             ZStack {
-                gradient
-                    .overlay {
-                        if let videoName = vm.currentBackground.videoFileName {
-                            LoopingVideoPlayer(videoName: videoName, isPlaying: true)
-                        } else if let imageName = vm.currentBackground.imageName,
-                                  let uiImage = SanctuaryBackground.loadImage(named: imageName) {
-                            Image(uiImage: uiImage)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                        }
-                    }
-                    .clipped()
-
-                Color.black.opacity(0.35)
+                // Cinematic scrim — a soft dark vignette plus a vertical
+                // gradient so the centered verse stays legible over any
+                // painting, no matter how light or busy the art is, while
+                // the colour still reads through.
+                LinearGradient(
+                    colors: [.black.opacity(0.38), .black.opacity(0.30), .black.opacity(0.55)],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                RadialGradient(
+                    colors: [.black.opacity(0.34), .clear],
+                    center: .center,
+                    startRadius: 8,
+                    endRadius: 220
+                )
 
                 VStack(spacing: 10) {
                     Spacer(minLength: 0)
 
                     Text("\u{201C}\(truncatedVerse(verse.text))\u{201D}")
-                        .font(.custom("Georgia", size: 16))
+                        .font(.custom("Georgia", size: 17))
                         .foregroundStyle(.white)
                         .multilineTextAlignment(.center)
                         .lineSpacing(5)
                         .lineLimit(4)
+                        .shadow(color: .black.opacity(0.55), radius: 7, y: 1)
 
                     OrnamentalDivider(color: .white, opacity: 0.2)
 
@@ -285,8 +363,9 @@ struct HomeDashboardView: View {
 
                         Text(verse.reference)
                             .font(.custom("Georgia-Italic", size: 13))
-                            .foregroundStyle(.white.opacity(0.75))
+                            .foregroundStyle(.white.opacity(0.85))
                     }
+                    .shadow(color: .black.opacity(0.5), radius: 5, y: 1)
 
                     Button {
                         NotificationCenter.default.post(
@@ -300,9 +379,9 @@ struct HomeDashboardView: View {
                         HapticService.lightImpact()
                     } label: {
                         HStack(spacing: 5) {
-                            Image(systemName: "bubble.left.fill")
+                            Image(systemName: "sparkle")
                                 .font(.system(size: 10, weight: .medium))
-                            Text("Discuss")
+                            Text("Ask")
                                 .font(.system(size: 12, weight: .semibold, design: .rounded))
                         }
                         .foregroundStyle(.white.opacity(0.85))
@@ -321,7 +400,27 @@ struct HomeDashboardView: View {
                 .padding(.vertical, 24)
             }
             .frame(maxWidth: .infinity)
-            .frame(height: 220)
+            .frame(minHeight: 150, maxHeight: .infinity)
+            // The painting is a background so it fills the card without ever
+            // driving its width — on tall screens an aspect-fill image as a
+            // direct child would expand the card past its siblings.
+            .background {
+                if let artImage {
+                    Image(uiImage: artImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                } else {
+                    gradient
+                        .overlay {
+                            if let imageName = vm.currentBackground.imageName,
+                               let uiImage = SanctuaryBackground.loadImage(named: imageName) {
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                            }
+                        }
+                }
+            }
             .clipShape(RoundedRectangle(cornerRadius: 16))
             .shadow(color: .black.opacity(0.15), radius: 12, y: 6)
             .onTapGesture {
@@ -330,126 +429,72 @@ struct HomeDashboardView: View {
             }
             .opacity(appeared ? 1 : 0)
             .offset(y: appeared ? 0 : 20)
-            .animation(BPAnimation.spring.delay(0.08), value: appeared)
+            .animation(BPAnimation.spring.delay(0.16), value: appeared)
         }
     }
 
-    // MARK: - Streak Card
+    // MARK: - Streak Row (bare, Cal AI style)
+    //
+    // No card background — the day rings sit directly on the canvas so the
+    // verse + Read/Plan cards below read as floating above it, giving the
+    // screen depth. The streak count lives in the top-bar pill.
 
-    private var streakCard: some View {
+    private var streakRow: some View {
         let activeDays = vm.activeDaysThisWeek
         let today = Calendar.current.component(.weekday, from: Date())
 
-        return VStack(spacing: 14) {
-            HStack {
-                HStack(spacing: 6) {
-                    Image(systemName: "flame.fill")
-                        .font(.system(size: 13, weight: .semibold))
-                        .foregroundStyle(.white)
-                        .frame(width: 26, height: 26)
-                        .background(
+        return Button {
+            onShowProgress()
+            HapticService.selection()
+        } label: {
+            HStack(spacing: 0) {
+            ForEach(Array(zip(dayLabels, dayWeekdays)), id: \.1) { label, weekday in
+                let isActive = activeDays.contains(weekday)
+                let isToday = weekday == today
+
+                VStack(spacing: 7) {
+                    Text(String(label.prefix(1)))
+                        .font(.system(size: 11, weight: isToday ? .bold : .medium, design: .rounded))
+                        .foregroundStyle(isToday ? palette.accent : palette.textMuted)
+
+                    ZStack {
+                        if isActive {
                             Circle()
                                 .fill(
                                     LinearGradient(
-                                        colors: [palette.accent, palette.accent.opacity(0.7)],
-                                        startPoint: .top,
-                                        endPoint: .bottom
+                                        colors: [palette.accent, palette.accent.opacity(0.82)],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
                                     )
                                 )
-                        )
+                                .frame(width: 36, height: 36)
+                                .shadow(color: palette.accent.opacity(0.35), radius: 5, y: 2)
+                                .scaleEffect(animateStreak ? 1 : 0)
 
-                    VStack(alignment: .leading, spacing: 1) {
-                        Text(vm.streakCount >= 2 ? "\(vm.streakCount)-day streak" : "This Week")
-                            .font(BPFont.elegantHeadingSmall)
-                            .foregroundStyle(palette.textPrimary)
-
-                        Text("Your activity")
-                            .font(BPFont.elegantCaption)
-                            .foregroundStyle(palette.textMuted)
-                    }
-                }
-
-                Spacer()
-
-                HStack(spacing: 3) {
-                    Text("Details")
-                        .font(.system(size: 12, weight: .medium, design: .rounded))
-                        .foregroundStyle(palette.accent)
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 9, weight: .semibold))
-                        .foregroundStyle(palette.accent.opacity(0.6))
-                }
-            }
-
-            Rectangle()
-                .fill(palette.border.opacity(0.15))
-                .frame(height: 0.5)
-
-            HStack(spacing: 0) {
-                ForEach(Array(zip(dayLabels, dayWeekdays)), id: \.1) { label, weekday in
-                    let isActive = activeDays.contains(weekday)
-                    let isToday = weekday == today
-
-                    VStack(spacing: 8) {
-                        Text(label)
-                            .font(.system(size: 11, weight: isToday ? .bold : .medium, design: .rounded))
-                            .foregroundStyle(isToday ? palette.accent : palette.textMuted)
-
-                        ZStack {
-                            if isActive {
-                                Circle()
-                                    .fill(
-                                        LinearGradient(
-                                            colors: [palette.accent, palette.accent.opacity(0.8)],
-                                            startPoint: .topLeading,
-                                            endPoint: .bottomTrailing
-                                        )
-                                    )
-                                    .frame(width: 32, height: 32)
-                                    .shadow(color: palette.accent.opacity(0.3), radius: 4, y: 2)
-                                    .scaleEffect(animateStreak ? 1 : 0)
-
-                                Image(systemName: "checkmark")
-                                    .font(.system(size: 12, weight: .bold))
-                                    .foregroundStyle(.white)
-                                    .scaleEffect(animateStreak ? 1 : 0)
-                            } else if isToday {
-                                Circle()
-                                    .stroke(palette.accent, lineWidth: 2)
-                                    .frame(width: 32, height: 32)
-
-                                Circle()
-                                    .fill(palette.accent.opacity(0.08))
-                                    .frame(width: 32, height: 32)
-                            } else {
-                                Circle()
-                                    .fill(palette.background)
-                                    .frame(width: 32, height: 32)
-                                    .overlay(
-                                        Circle()
-                                            .stroke(palette.border.opacity(0.2), lineWidth: 1)
-                                    )
-                            }
+                            Image(systemName: "checkmark")
+                                .font(.system(size: 13, weight: .bold))
+                                .foregroundStyle(.white)
+                                .scaleEffect(animateStreak ? 1 : 0)
+                        } else if isToday {
+                            Circle()
+                                .stroke(palette.accent, lineWidth: 2)
+                                .frame(width: 36, height: 36)
+                        } else {
+                            Circle()
+                                .stroke(palette.border.opacity(0.6), lineWidth: 1.5)
+                                .frame(width: 36, height: 36)
                         }
                     }
-                    .frame(maxWidth: .infinity)
                 }
+                .frame(maxWidth: .infinity)
             }
+            }
+            .contentShape(Rectangle())
         }
-        .padding(.horizontal, 18)
-        .padding(.vertical, 16)
-        .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(palette.surfaceElevated)
-                .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
-        )
-        .onTapGesture {
-            onShowProgress()
-            HapticService.selection()
-        }
+        .buttonStyle(.plain)
         .opacity(appeared ? 1 : 0)
-        .offset(y: appeared ? 0 : 20)
-        .animation(BPAnimation.spring.delay(0.16), value: appeared)
+        .offset(y: appeared ? 0 : 16)
+        .animation(BPAnimation.spring.delay(0.08), value: appeared)
     }
 
     // MARK: - Quick Actions Row (Editorial Book Pages)
@@ -477,13 +522,17 @@ struct HomeDashboardView: View {
             return min(CGFloat(r.chapter) / CGFloat(r.totalChapters), 1.0)
         }()
 
+        // Curated vivid painting, offset so it differs from the hero + plan.
+        let artImage = colorfulArt(seed: rotatingArtSeed + 1)
+
         return bookPageCard(
             eyebrow: eyebrow,
             numeral: numeral,
             fallbackIcon: "book.closed.fill",
             microLabel: microLabel,
             progress: progress,
-            subtitle: subtitle
+            subtitle: subtitle,
+            artImage: artImage
         )
         .onTapGesture {
             onContinueReading()
@@ -504,13 +553,17 @@ struct HomeDashboardView: View {
             return min(CGFloat(p.day) / CGFloat(p.total), 1.0)
         }()
 
+        // Curated vivid painting, offset so it differs from the hero + read.
+        let artImage = colorfulArt(seed: rotatingArtSeed + 2)
+
         return bookPageCard(
             eyebrow: eyebrow,
             numeral: numeral,
             fallbackIcon: "calendar",
             microLabel: microLabel,
             progress: progress,
-            subtitle: subtitle
+            subtitle: subtitle,
+            artImage: artImage
         )
         .onTapGesture {
             showReadingPlans = true
@@ -526,107 +579,108 @@ struct HomeDashboardView: View {
         fallbackIcon: String,
         microLabel: LocalizedStringKey,
         progress: CGFloat,
-        subtitle: LocalizedStringKey
+        subtitle: LocalizedStringKey,
+        artImage: UIImage?
     ) -> some View {
         VStack(spacing: 0) {
-            // Eyebrow row — book/plan name in small caps + chevron
-            HStack(spacing: 6) {
-                Text(eyebrow)
-                    .font(.system(size: 10, weight: .semibold, design: .rounded))
-                    .tracking(1.8)
-                    .foregroundStyle(palette.accent.opacity(0.75))
-                    .lineLimit(1)
-                    .truncationMode(.middle)
-
-                Spacer(minLength: 0)
-
-                Image(systemName: "arrow.up.right")
-                    .font(.system(size: 9, weight: .semibold))
-                    .foregroundStyle(palette.accent.opacity(0.5))
-            }
-            .padding(.horizontal, 16)
-            .padding(.top, 14)
-
-            // Hero numeral (or fallback icon)
-            Group {
-                if let numeral {
-                    Text(numeral)
-                        .font(.custom("Georgia", size: 44))
-                        .foregroundStyle(palette.textPrimary)
-                        .shadow(color: palette.accent.opacity(0.20), radius: 6, y: 1)
-                        .shadow(color: palette.accent.opacity(0.08), radius: 14, y: 0)
-                } else {
-                    Image(systemName: fallbackIcon)
-                        .font(.system(size: 34, weight: .light))
-                        .foregroundStyle(
-                            LinearGradient(
-                                colors: [
-                                    palette.accent,
-                                    palette.accent.opacity(0.65)
-                                ],
-                                startPoint: .top,
-                                endPoint: .bottom
-                            )
+            // Painting header — matched art with the small-caps label set
+            // over a soft bottom scrim. Postcard treatment: art on top,
+            // crisp white info below.
+            ZStack(alignment: .bottomLeading) {
+                Group {
+                    if let artImage {
+                        Image(uiImage: artImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                    } else {
+                        LinearGradient(
+                            colors: [palette.accent.opacity(0.55), palette.accent.opacity(0.3)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
                         )
-                        .shadow(color: palette.accent.opacity(0.25), radius: 6, y: 1)
-                        .shadow(color: palette.accent.opacity(0.10), radius: 14, y: 0)
-                        .frame(height: 44)
+                    }
                 }
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.top, 6)
+                .frame(maxWidth: .infinity)
+                .frame(height: 88)
+                .clipped()
 
-            // Micro label under numeral
-            Text(microLabel)
-                .font(.system(size: 10, weight: .medium, design: .rounded))
-                .tracking(0.6)
-                .foregroundStyle(palette.textMuted)
-                .padding(.top, 0)
+                // Bottom scrim for label legibility over any painting
+                LinearGradient(
+                    colors: [.clear, .black.opacity(0.5)],
+                    startPoint: .center,
+                    endPoint: .bottom
+                )
+                .frame(height: 88)
+                .allowsHitTesting(false)
 
-            Spacer(minLength: 6)
+                HStack(spacing: 6) {
+                    Text(eyebrow)
+                        .font(.system(size: 10, weight: .semibold, design: .rounded))
+                        .tracking(1.6)
+                        .foregroundStyle(.white)
+                        .lineLimit(1)
+                        .truncationMode(.middle)
 
-            // Ornamental divider
-            OrnamentalDivider(color: palette.accent, opacity: 0.28)
-                .padding(.horizontal, 24)
+                    Spacer(minLength: 0)
 
-            // Animated progress bar
-            progressHairline(progress: progress)
-                .padding(.horizontal, 18)
-                .padding(.top, 8)
-
-            // Subtitle
-            Text(subtitle)
-                .font(.system(size: 11, weight: .medium, design: .rounded))
-                .foregroundStyle(palette.textSecondary)
-                .lineLimit(1)
-                .truncationMode(.tail)
+                    Image(systemName: "arrow.up.right")
+                        .font(.system(size: 9, weight: .semibold))
+                        .foregroundStyle(.white.opacity(0.85))
+                }
                 .padding(.horizontal, 14)
-                .padding(.top, 6)
-                .padding(.bottom, 12)
+                .padding(.bottom, 8)
+            }
+
+            // White info area
+            VStack(alignment: .leading, spacing: 0) {
+                HStack(alignment: .firstTextBaseline, spacing: 6) {
+                    if let numeral {
+                        Text(numeral)
+                            .font(.custom("Georgia", size: 26))
+                            .foregroundStyle(palette.textPrimary)
+                    } else {
+                        Image(systemName: fallbackIcon)
+                            .font(.system(size: 18, weight: .light))
+                            .foregroundStyle(palette.accent)
+                    }
+
+                    Text(microLabel)
+                        .font(.system(size: 10, weight: .medium, design: .rounded))
+                        .tracking(0.5)
+                        .foregroundStyle(palette.textMuted)
+                }
+                .padding(.top, 10)
+
+                Spacer(minLength: 8)
+
+                progressHairline(progress: progress)
+                    .padding(.top, 6)
+
+                Text(subtitle)
+                    .font(.system(size: 11, weight: .medium, design: .rounded))
+                    .foregroundStyle(palette.textSecondary)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+                    .padding(.top, 7)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 14)
+            .padding(.bottom, 11)
         }
         .frame(maxWidth: .infinity)
-        .frame(height: 152)
+        .frame(height: 184)
         .background(
             RoundedRectangle(cornerRadius: 14)
                 .fill(palette.surfaceElevated)
-                .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
         )
+        .clipShape(RoundedRectangle(cornerRadius: 14))
         .overlay(
-            // Quiet top-edge sheen — suggests light catching paper
+            // Full warm hairline — crisp edge definition on the white canvas.
             RoundedRectangle(cornerRadius: 14)
-                .strokeBorder(
-                    LinearGradient(
-                        colors: [
-                            palette.accent.opacity(colorScheme == .dark ? 0.18 : 0.22),
-                            palette.accent.opacity(0)
-                        ],
-                        startPoint: .top,
-                        endPoint: .center
-                    ),
-                    lineWidth: 0.6
-                )
+                .strokeBorder(palette.border, lineWidth: 0.75)
                 .allowsHitTesting(false)
         )
+        .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
     }
 
     // MARK: - Progress Hairline
