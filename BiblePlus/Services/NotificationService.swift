@@ -22,11 +22,6 @@ final class NotificationService {
         }
     }
 
-    func isAuthorized() async -> Bool {
-        let settings = await UNUserNotificationCenter.current().notificationSettings()
-        return settings.authorizationStatus == .authorized
-    }
-
     // MARK: - Categories
 
     func registerCategories() {

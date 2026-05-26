@@ -29,19 +29,9 @@ enum HapticService {
     // meaning tied to a moment in the app; the mapping to system feedback
     // can evolve without touching call sites.
 
-    /// Text field or input focus. Subtle.
-    static func fieldEntry() {
-        selection()
-    }
-
     /// Chip / option tap (onboarding, filter pills).
     static func chipTap() {
         impact(.soft)
-    }
-
-    /// Advance to next onboarding screen.
-    static func stepAdvance() {
-        impact(.light)
     }
 
     /// Name committed, verse revealed, answer accepted.
