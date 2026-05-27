@@ -179,19 +179,26 @@ private struct BibleContentView: View {
         // handful of chapters instead of playing indefinitely.
         audioService.setOnChapterComplete { [modelContext] in
             ActivityService.log(.audioChapterCompleted, detail: "\(viewModel.selectedBook.name) \(viewModel.selectedChapter)", in: modelContext)
-            if viewModel.canGoForward {
-                viewModel.goToNextChapter()
-                Task {
-                    try? await Task.sleep(nanoseconds: 500_000_000)
-                    guard !viewModel.verses.isEmpty else { return }
-                    audioService.play(
-                        verses: viewModel.verses,
-                        book: viewModel.selectedBook,
-                        chapter: viewModel.selectedChapter,
-                        translation: viewModel.currentTranslation,
-                        isAutoAdvance: true
-                    )
+            guard viewModel.canGoForward else { return }
+            // goToNextChapter() clears verses and starts an async load. Wait
+            // for that load to actually finish before playing — a fixed delay
+            // raced the load, so verses were often still empty and playback
+            // died at the chapter boundary (looked like "stops after a few
+            // verses" on short chapters).
+            viewModel.goToNextChapter()
+            Task {
+                let deadline = Date().addingTimeInterval(10)
+                while viewModel.verses.isEmpty && Date() < deadline {
+                    try? await Task.sleep(nanoseconds: 120_000_000)
                 }
+                guard !viewModel.verses.isEmpty else { return }
+                audioService.play(
+                    verses: viewModel.verses,
+                    book: viewModel.selectedBook,
+                    chapter: viewModel.selectedChapter,
+                    translation: viewModel.currentTranslation,
+                    isAutoAdvance: true
+                )
             }
         }
 

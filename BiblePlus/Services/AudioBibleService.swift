@@ -96,7 +96,7 @@ final class AudioBibleService {
     var showStillListeningPrompt: Bool = false
     private var consecutiveAutoAdvances: Int = 0
     private var stillListeningTimeoutTask: Task<Void, Never>?
-    private static let stillListeningThreshold: Int = 5
+    private static let stillListeningThreshold: Int = 4
     private static let stillListeningTimeoutSeconds: TimeInterval = 60
 
     // MARK: - Live Activity

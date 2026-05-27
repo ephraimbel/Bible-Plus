@@ -364,19 +364,23 @@ struct ImmersiveListeningView: View {
     private func setupAutoAdvance() {
         audioService.setOnChapterComplete { [modelContext] in
             ActivityService.log(.audioChapterCompleted, detail: "\(viewModel.selectedBook.name) \(viewModel.selectedChapter)", in: modelContext)
-            if viewModel.canGoForward {
-                viewModel.goToNextChapter()
-                Task {
-                    try? await Task.sleep(nanoseconds: 500_000_000)
-                    guard !viewModel.verses.isEmpty else { return }
-                    audioService.play(
-                        verses: viewModel.verses,
-                        book: viewModel.selectedBook,
-                        chapter: viewModel.selectedChapter,
-                        translation: viewModel.currentTranslation,
-                        isAutoAdvance: true
-                    )
+            guard viewModel.canGoForward else { return }
+            // Wait for the next chapter's async load to finish before playing
+            // (a fixed delay raced the load and killed audio at the boundary).
+            viewModel.goToNextChapter()
+            Task {
+                let deadline = Date().addingTimeInterval(10)
+                while viewModel.verses.isEmpty && Date() < deadline {
+                    try? await Task.sleep(nanoseconds: 120_000_000)
                 }
+                guard !viewModel.verses.isEmpty else { return }
+                audioService.play(
+                    verses: viewModel.verses,
+                    book: viewModel.selectedBook,
+                    chapter: viewModel.selectedChapter,
+                    translation: viewModel.currentTranslation,
+                    isAutoAdvance: true
+                )
             }
         }
     }
