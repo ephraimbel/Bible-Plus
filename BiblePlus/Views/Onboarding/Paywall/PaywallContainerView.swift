@@ -302,7 +302,7 @@ struct PaywallContainerView: View {
     // MARK: - Plan Section
 
     private func planSection(vm: PaywallViewModel) -> some View {
-        VStack(spacing: 11) {
+        VStack(spacing: 14) {
             HStack {
                 Text("CHOOSE YOUR PLAN")
                     .font(.system(size: 10, weight: .semibold, design: .rounded))
@@ -311,16 +311,58 @@ struct PaywallContainerView: View {
                 Spacer()
             }
             .padding(.horizontal, 4)
-            .padding(.bottom, 4)
+            .padding(.bottom, 2)
 
-            weeklyPlanCard(vm: vm)
-                .padding(.top, 7) // room for the floating trial badge
             yearlyPlanCard(vm: vm)
+                .padding(.top, 7) // room for the floating "Best Value" badge
+            weeklyPlanCard(vm: vm)
+                .padding(.top, 4) // room for the floating trial badge
         }
     }
 
-    // The featured option: taller, gold-emphasized, and topped with a floating
-    // "3-DAY FREE TRIAL" badge so the trial is the first thing the eye lands on.
+    // The featured "Best Value" option: taller, gold-emphasized, pre-selected,
+    // topped with a floating "BEST VALUE" badge. Frames the price as a small
+    // monthly equivalent so the annual commitment feels approachable.
+    private func yearlyPlanCard(vm: PaywallViewModel) -> some View {
+        let isSelected = vm.selectedProductID == StoreKitService.yearlyID
+        return Button {
+            vm.selectedProductID = StoreKitService.yearlyID
+            HapticService.impact(.medium)
+            Analytics.track(.paywallPriceCardSelected, properties: ["product": "yearly"])
+        } label: {
+            HStack(spacing: 13) {
+                selectionRadio(isSelected: isSelected)
+
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Yearly")
+                        .font(.custom("Georgia-Bold", size: 18))
+                        .foregroundStyle(palette.textPrimary)
+
+                    Text("Just \(vm.yearlyMonthlyEquivalent(storeKitService))/month (\(vm.yearlyPriceLabel(storeKitService))/yr). Billed yearly. Cancel anytime.")
+                        .font(.system(size: 12, weight: .medium, design: .rounded))
+                        .foregroundStyle(palette.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                Spacer(minLength: 6)
+
+                Text("\(vm.yearlyPriceLabel(storeKitService))/yr")
+                    .font(.custom("Georgia-Bold", size: 14))
+                    .foregroundStyle(palette.textPrimary)
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 18)
+            .background(planCardBackground(isSelected: isSelected, dominant: true))
+            .overlay(alignment: .topTrailing) {
+                planBadge(text: "BEST VALUE")
+            }
+        }
+        .buttonStyle(.plain)
+        .animation(.easeOut(duration: 0.18), value: isSelected)
+    }
+
+    // The price anchor: plain card carrying the 3-day trial badge. Its true
+    // monthly cost (~$19.96) is shown to dwarf the yearly $4.17/month.
     private func weeklyPlanCard(vm: PaywallViewModel) -> some View {
         let isSelected = vm.selectedProductID == StoreKitService.weeklyID
         return Button {
@@ -336,9 +378,9 @@ struct PaywallContainerView: View {
                         .font(.custom("Georgia-Bold", size: 18))
                         .foregroundStyle(palette.textPrimary)
 
-                    Text("Free for 3 days, then billed weekly")
-                        .font(.system(size: 12.5, weight: .medium, design: .rounded))
-                        .foregroundStyle(palette.textSecondary)
+                    Text("\(vm.weeklyPriceLabel(storeKitService))/wk (\(vm.weeklyMonthlyEquivalent(storeKitService))/mo after trial)")
+                        .font(.system(size: 12, weight: .regular, design: .rounded))
+                        .foregroundStyle(palette.textMuted)
                         .fixedSize(horizontal: false, vertical: true)
                 }
 
@@ -349,72 +391,34 @@ struct PaywallContainerView: View {
                     .foregroundStyle(palette.textPrimary)
             }
             .padding(.horizontal, 16)
-            .padding(.vertical, 18)
-            .background(planCardBackground(isSelected: isSelected, dominant: true))
-            .overlay(alignment: .top) {
-                Text("✦  3-DAY FREE TRIAL")
-                    .font(.system(size: 10, weight: .heavy, design: .rounded))
-                    .tracking(1.1)
-                    .foregroundStyle(.white)
-                    .padding(.horizontal, 13)
-                    .padding(.vertical, 5)
-                    .background(
-                        Capsule()
-                            .fill(accentGold)
-                            .shadow(color: accentGold.opacity(0.45), radius: 7, y: 2)
-                    )
-                    .offset(y: -11)
+            .padding(.vertical, 15)
+            .background(planCardBackground(isSelected: isSelected))
+            .overlay(alignment: .topTrailing) {
+                planBadge(text: "3-DAY FREE TRIAL")
             }
         }
         .buttonStyle(.plain)
         .animation(.easeOut(duration: 0.18), value: isSelected)
     }
 
-    // The value option: no trial, plain card. Keeps the SAVE % pill and a
-    // per-week reframe so committing yearly still reads as the rational deal.
-    private func yearlyPlanCard(vm: PaywallViewModel) -> some View {
-        let isSelected = vm.selectedProductID == StoreKitService.yearlyID
-        return Button {
-            vm.selectedProductID = StoreKitService.yearlyID
-            HapticService.impact(.medium)
-            Analytics.track(.paywallPriceCardSelected, properties: ["product": "yearly"])
-        } label: {
-            HStack(spacing: 13) {
-                selectionRadio(isSelected: isSelected)
-
-                VStack(alignment: .leading, spacing: 3) {
-                    HStack(spacing: 8) {
-                        Text("Yearly")
-                            .font(.custom("Georgia-Bold", size: 17))
-                            .foregroundStyle(palette.textPrimary)
-
-                        Text("SAVE \(vm.savingsPercent(storeKitService))%")
-                            .font(.system(size: 10.5, weight: .heavy, design: .rounded))
-                            .tracking(0.5)
-                            .foregroundStyle(saveGreen)
-                            .padding(.horizontal, 6)
-                            .padding(.vertical, 2.5)
-                            .background(Capsule().fill(saveGreen.opacity(0.15)))
-                    }
-
-                    Text("Just \(vm.yearlyWeeklyBreakdown(storeKitService))/week · billed yearly")
-                        .font(.system(size: 12, weight: .regular, design: .rounded))
-                        .foregroundStyle(palette.textMuted)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-
-                Spacer(minLength: 6)
-
-                Text("\(vm.yearlyPriceLabel(storeKitService))/yr")
-                    .font(.custom("Georgia-Bold", size: 14))
-                    .foregroundStyle(palette.textPrimary)
-            }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 15)
-            .background(planCardBackground(isSelected: isSelected))
+    // Shared floating gold badge used by both plan cards (Best Value / Trial).
+    private func planBadge(text: String) -> some View {
+        HStack(spacing: 4) {
+            Image(systemName: "sparkle")
+                .font(.system(size: 8, weight: .bold))
+            Text(text)
+                .font(.system(size: 10, weight: .heavy, design: .rounded))
+                .tracking(1.0)
         }
-        .buttonStyle(.plain)
-        .animation(.easeOut(duration: 0.18), value: isSelected)
+        .foregroundStyle(.white)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 5)
+        .background(
+            Capsule()
+                .fill(accentGold)
+                .shadow(color: accentGold.opacity(0.4), radius: 6, y: 2)
+        )
+        .offset(x: -12, y: -11)
     }
 
     private func planCardBackground(isSelected: Bool, dominant: Bool = false) -> some View {
@@ -453,23 +457,15 @@ struct PaywallContainerView: View {
                 ])
                 Task { await vm.purchaseSelected(storeKitService: storeKitService, dismiss: dismiss) }
             } label: {
-                let isTrial = vm.selectedProductID == StoreKitService.weeklyID
-                HStack(spacing: 7) {
-                    if isTrial {
-                        Image(systemName: "sparkle")
-                            .font(.system(size: 13, weight: .semibold))
-                    }
-                    Text(ctaTitle(vm: vm))
-                        .font(.custom("Georgia-Bold", size: isTrial ? 16.5 : 16))
-                        .tracking(0.3)
-                }
-                .foregroundStyle(.white)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, isTrial ? 18 : 17)
-                .background(ctaBackground(isTrial: isTrial))
-                .shadow(color: accentGold.opacity(isTrial ? 0.42 : 0.22), radius: isTrial ? 18 : 11, y: isTrial ? 7 : 4)
-                .shadow(color: .black.opacity(isTrial ? 0.16 : 0.08), radius: isTrial ? 6 : 4, y: 3)
-                .animation(.easeOut(duration: 0.28), value: isTrial)
+                Text(ctaTitle(vm: vm))
+                    .font(.custom("Georgia-Bold", size: 17))
+                    .tracking(0.3)
+                    .foregroundStyle(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 18)
+                    .background(ctaBackground())
+                    .shadow(color: accentGold.opacity(0.42), radius: 18, y: 7)
+                    .shadow(color: .black.opacity(0.16), radius: 6, y: 3)
             }
             .buttonStyle(PressableButtonStyle())
             .disabled(vm.isPurchasing)
@@ -521,9 +517,10 @@ struct PaywallContainerView: View {
         .opacity(showContent ? 1 : 0)
     }
 
-    // Trial CTA = richer gold + a sweeping shimmer + glossy top edge (feels
-    // special, "your free trial"). Weekly CTA = a plain, calm gold pill.
-    private func ctaBackground(isTrial: Bool) -> some View {
+    // Premium metallic gold CTA: champagne→bronze gradient, glossy top sheen,
+    // a slow shimmer sweep, and a beveled rim — used for both "Subscribe Now"
+    // and "Start Free Trial" so the primary action always feels high-end.
+    private func ctaBackground() -> some View {
         // Deep bronze for the bottom of the metallic gradient — gives the gold
         // pill real dimensionality instead of a flat fill.
         let deepGold = accentGold.blend(with: Color(red: 0.28, green: 0.18, blue: 0.06), amount: 0.34)
@@ -531,74 +528,67 @@ struct PaywallContainerView: View {
             Capsule()
                 .fill(
                     LinearGradient(
-                        stops: isTrial
-                            ? [
-                                .init(color: accentGold.blend(with: .white, amount: 0.36), location: 0.0),
-                                .init(color: accentGold, location: 0.52),
-                                .init(color: deepGold, location: 1.0)
-                              ]
-                            : [
-                                .init(color: accentGold.blend(with: .white, amount: 0.12), location: 0.0),
-                                .init(color: accentGold.opacity(0.95), location: 1.0)
-                              ],
+                        stops: [
+                            .init(color: accentGold.blend(with: .white, amount: 0.36), location: 0.0),
+                            .init(color: accentGold, location: 0.52),
+                            .init(color: deepGold, location: 1.0)
+                        ],
                         startPoint: .top, endPoint: .bottom
                     )
                 )
 
-            if isTrial {
-                // Glossy top sheen — light catching the top curve of the pill.
+            // Glossy top sheen — light catching the top curve of the pill.
+            Capsule()
+                .fill(
+                    LinearGradient(
+                        colors: [Color.white.opacity(0.34), Color.white.opacity(0.0)],
+                        startPoint: .top, endPoint: .center
+                    )
+                )
+
+            // Soft, wide shimmer sweep travelling across the metal.
+            GeometryReader { geo in
+                let w = geo.size.width
                 Capsule()
                     .fill(
                         LinearGradient(
-                            colors: [Color.white.opacity(0.34), Color.white.opacity(0.0)],
-                            startPoint: .top, endPoint: .center
+                            colors: [.clear, .white.opacity(0.30), .clear],
+                            startPoint: .leading, endPoint: .trailing
                         )
                     )
-
-                // Soft, wide shimmer sweep travelling across the metal.
-                GeometryReader { geo in
-                    let w = geo.size.width
-                    Capsule()
-                        .fill(
-                            LinearGradient(
-                                colors: [.clear, .white.opacity(0.30), .clear],
-                                startPoint: .leading, endPoint: .trailing
-                            )
-                        )
-                        .frame(width: w * 0.55)
-                        .offset(x: -w * 0.6 + shimmerPhase * (w * 1.8))
-                }
-                .clipShape(Capsule())
-                .allowsHitTesting(false)
+                    .frame(width: w * 0.55)
+                    .offset(x: -w * 0.6 + shimmerPhase * (w * 1.8))
             }
+            .clipShape(Capsule())
+            .allowsHitTesting(false)
         }
         .overlay(
             // Beveled metallic rim: bright at the top, shadowed at the bottom.
             Capsule().stroke(
                 LinearGradient(
-                    colors: isTrial
-                        ? [Color.white.opacity(0.55), accentGold.opacity(0.25), Color.black.opacity(0.16)]
-                        : [Color.white.opacity(0.20), Color.clear],
+                    colors: [Color.white.opacity(0.55), accentGold.opacity(0.25), Color.black.opacity(0.16)],
                     startPoint: .top, endPoint: .bottom
                 ),
-                lineWidth: isTrial ? 1 : 0.5
+                lineWidth: 1
             )
         )
     }
 
     private func ctaTitle(vm: PaywallViewModel) -> String {
         if vm.isPurchasing { return "Processing..." }
+        // Weekly is the only plan with a trial, so it's the only one that may
+        // honestly say "Start Free Trial". Yearly is an immediate purchase.
         if vm.selectedProductID == StoreKitService.weeklyID {
             return "Start Free Trial"
         }
-        return "Continue with Yearly"
+        return "Subscribe Now"
     }
 
     private func ctaSubtitle(vm: PaywallViewModel) -> String {
         if vm.selectedProductID == StoreKitService.weeklyID {
             return "Then \(vm.weeklyPriceLabel(storeKitService))/wk after 3 days · Cancel anytime"
         }
-        return "\(vm.yearlyPriceLabel(storeKitService))/yr · Cancel anytime"
+        return "Billed annually at \(vm.yearlyPriceLabel(storeKitService))/yr · Cancel anytime"
     }
 
     private func footerLink(_ title: String, action: @escaping () -> Void) -> some View {
