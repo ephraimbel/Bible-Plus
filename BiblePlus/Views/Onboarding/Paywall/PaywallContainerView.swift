@@ -138,36 +138,32 @@ struct PaywallContainerView: View {
     // MARK: - Scroll Content
 
     private func scrollContent(vm: PaywallViewModel) -> some View {
-        // GeometryReader + minHeight lets the feature list absorb leftover
-        // height (spreading its rows) so the page fills evenly on large phones
-        // — no stranded gap above the cards — while still scrolling cleanly on
-        // small phones (SE / mini) and at large Dynamic Type sizes.
-        GeometryReader { proxy in
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: 0) {
-                    heroLogo
-                        .padding(.top, 46)
+        // Top-aligned, Perplexity-style: the feature list is grouped under the
+        // header with consistent fixed spacing between rows; any leftover height
+        // falls as a single gap below the list (above the pinned cards). Scrolls
+        // on small phones / large Dynamic Type.
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 0) {
+                heroLogo
+                    .padding(.top, 46)
 
-                    eyebrow
-                        .padding(.top, 16)
+                eyebrow
+                    .padding(.top, 16)
 
-                    headline
-                        .padding(.top, 8)
+                headline
+                    .padding(.top, 8)
 
-                    subtitle(vm: vm)
-                        .padding(.top, 6)
+                subtitle(vm: vm)
+                    .padding(.top, 6)
 
-                    featureList
-                        .padding(.top, 34)
-                        .padding(.horizontal, 28)
-                        .frame(maxHeight: .infinity)
-                }
-                .frame(maxWidth: .infinity)
-                .frame(minHeight: proxy.size.height)
-                .padding(.bottom, 10)
-                .opacity(showContent ? 1 : 0)
-                .offset(y: showContent ? 0 : 10)
+                featureList
+                    .padding(.top, 34)
+                    .padding(.horizontal, 28)
             }
+            .frame(maxWidth: .infinity)
+            .padding(.bottom, 16)
+            .opacity(showContent ? 1 : 0)
+            .offset(y: showContent ? 0 : 10)
         }
     }
 
@@ -234,12 +230,11 @@ struct PaywallContainerView: View {
     ]
 
     private var featureList: some View {
-        // Spacers between rows are flexible (min 18pt): paired with the
-        // .frame(maxHeight: .infinity) in scrollContent, the rows spread to
-        // fill leftover height on tall phones and stay compact on short ones.
-        VStack(spacing: 0) {
-            ForEach(Array(proFeatures.enumerated()), id: \.element) { index, feature in
-                if index > 0 { Spacer(minLength: 18) }
+        // Uniform fixed spacing between rows — organized and consistent on every
+        // device (the leftover height becomes one gap below the list, not gaps
+        // between each feature).
+        VStack(alignment: .leading, spacing: 20) {
+            ForEach(proFeatures, id: \.self) { feature in
                 HStack(alignment: .center, spacing: 13) {
                     Image(systemName: "checkmark")
                         .font(.system(size: 13, weight: .bold))
