@@ -23,7 +23,6 @@ struct PaywallContainerView: View {
 
     @State private var vm: PaywallViewModel?
     @State private var showContent = false
-    @State private var shimmerPhase: CGFloat = 0   // sweeping light on the CTA
 
     private let palette = BPColorPalette.dark
     private let accentGold = Color(red: 0.79, green: 0.66, blue: 0.43)
@@ -50,10 +49,12 @@ struct PaywallContainerView: View {
                     }
             }
 
-            // Top bar: Restore is always reachable (top-right). The close (X,
-            // top-left) appears ONLY in the Settings presentation — the
-            // onboarding paywall is hard, so there is no skip/close there.
-            topBar
+            // Close (X, top-right) appears ONLY in the in-app / Settings
+            // presentation so a free user can leave. The onboarding paywall is
+            // hard — no close — the only way forward is choosing a plan.
+            if !isOnboarding {
+                topBar
+            }
         }
         .environment(\.bpPalette, palette)
         .preferredColorScheme(.dark)
@@ -76,11 +77,6 @@ struct PaywallContainerView: View {
 
             withAnimation(.easeOut(duration: 0.4).delay(0.1)) {
                 showContent = true
-            }
-            // Continuous, gentle shimmer sweep on the CTA. The band is off-screen
-            // at both ends, so the loop reset is invisible.
-            withAnimation(.linear(duration: 2.0).repeatForever(autoreverses: false)) {
-                shimmerPhase = 1
             }
         }
         .alert("Purchase Failed", isPresented: Binding(
@@ -115,14 +111,8 @@ struct PaywallContainerView: View {
     private var topBar: some View {
         VStack {
             HStack {
-                if !isOnboarding {
-                    closeButton
-                } else {
-                    // Keep Restore right-aligned even with no close button.
-                    Color.clear.frame(width: 32, height: 32)
-                }
                 Spacer()
-                restoreButton
+                closeButton
             }
             .padding(.horizontal, 18)
             .padding(.top, 6)
@@ -145,28 +135,13 @@ struct PaywallContainerView: View {
         .accessibilityLabel("Close")
     }
 
-    private var restoreButton: some View {
-        Button {
-            Analytics.track(.paywallRestoreTapped)
-            Task { await storeKitService.restorePurchases() }
-        } label: {
-            Text("Restore")
-                .font(.system(size: 14, weight: .medium))
-                .foregroundStyle(palette.textSecondary)
-                .padding(.horizontal, 15)
-                .padding(.vertical, 7)
-                .background(Capsule().fill(palette.surfaceElevated))
-        }
-        .accessibilityLabel("Restore purchases")
-    }
-
     // MARK: - Scroll Content
 
     private func scrollContent(vm: PaywallViewModel) -> some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 0) {
                 heroLogo
-                    .padding(.top, 52)
+                    .padding(.top, 46)
 
                 eyebrow
                     .padding(.top, 16)
@@ -280,17 +255,15 @@ struct PaywallContainerView: View {
                     productID: StoreKitService.weeklyID,
                     title: "Weekly",
                     price: vm.weeklyPriceLabel(storeKitService),
-                    sub: "3-day free trial",
-                    subHighlighted: true,
-                    badge: nil
+                    sub: "per week",
+                    badge: "3-DAY FREE TRIAL"
                 )
                 priceCard(
                     vm: vm,
                     productID: StoreKitService.yearlyID,
                     title: "Yearly",
                     price: vm.yearlyPriceLabel(storeKitService),
-                    sub: "\(vm.yearlyMonthlyEquivalent(storeKitService))/month",
-                    subHighlighted: false,
+                    sub: "\(vm.yearlyWeeklyBreakdown(storeKitService))/week",
                     badge: "SAVE \(vm.yearlySavingsAmount(storeKitService))"
                 )
             }
@@ -337,7 +310,6 @@ struct PaywallContainerView: View {
         title: String,
         price: String,
         sub: String,
-        subHighlighted: Bool,
         badge: String?
     ) -> some View {
         let isSelected = vm.selectedProductID == productID
@@ -359,39 +331,54 @@ struct PaywallContainerView: View {
 
                 Text(sub)
                     .font(.system(size: 12, weight: .medium, design: .rounded))
-                    .foregroundStyle(subHighlighted ? accentGold : palette.textMuted)
+                    .foregroundStyle(palette.textMuted)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 16)
-            .padding(.vertical, 16)
-            .background(
-                RoundedRectangle(cornerRadius: 18)
-                    .fill(isSelected ? accentGold.opacity(0.10) : palette.surfaceElevated)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 18)
-                            .stroke(
-                                isSelected ? accentGold : palette.border,
-                                lineWidth: isSelected ? 2 : 1
-                            )
-                    )
-            )
+            .padding(.vertical, 17)
+            .background(cardBackground(isSelected: isSelected))
             .overlay(alignment: .top) {
                 if let badge {
-                    savingsBadge(badge)
+                    planBadge(badge)
                 }
             }
         }
         .buttonStyle(.plain)
-        .animation(.easeOut(duration: 0.18), value: isSelected)
+        .animation(.easeOut(duration: 0.2), value: isSelected)
     }
 
-    // Warm gold pill floating over the yearly card's top edge — "SAVE $209".
-    private func savingsBadge(_ text: String) -> some View {
+    // Subtle, elegant card surface: an elevated base, a soft gold gradient
+    // overlay when selected (the "subtle overlay"), and a hairline border that
+    // warms to gold on selection.
+    private func cardBackground(isSelected: Bool) -> some View {
+        RoundedRectangle(cornerRadius: 18, style: .continuous)
+            .fill(palette.surfaceElevated)
+            .overlay {
+                if isSelected {
+                    RoundedRectangle(cornerRadius: 18, style: .continuous)
+                        .fill(
+                            LinearGradient(
+                                colors: [accentGold.opacity(0.16), accentGold.opacity(0.05)],
+                                startPoint: .top, endPoint: .bottom
+                            )
+                        )
+                }
+            }
+            .overlay(
+                RoundedRectangle(cornerRadius: 18, style: .continuous)
+                    .stroke(isSelected ? accentGold : palette.border, lineWidth: isSelected ? 1.5 : 1)
+            )
+    }
+
+    // Floating gold pill over a card's top edge — "3-DAY FREE TRIAL" / "SAVE $210".
+    private func planBadge(_ text: String) -> some View {
         Text(text)
-            .font(.system(size: 10.5, weight: .heavy, design: .rounded))
+            .font(.system(size: 10, weight: .heavy, design: .rounded))
             .tracking(0.4)
+            .lineLimit(1)
+            .fixedSize()
             .foregroundStyle(Color(red: 0.16, green: 0.11, blue: 0.04))
-            .padding(.horizontal, 11)
+            .padding(.horizontal, 10)
             .padding(.vertical, 5)
             .background(
                 Capsule()
@@ -401,7 +388,7 @@ struct PaywallContainerView: View {
                             startPoint: .top, endPoint: .bottom
                         )
                     )
-                    .shadow(color: accentGold.opacity(0.45), radius: 6, y: 2)
+                    .shadow(color: .black.opacity(0.28), radius: 4, y: 2)
             )
             .offset(y: -10)
     }
@@ -423,64 +410,25 @@ struct PaywallContainerView: View {
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 18)
                 .background(ctaBackground())
-                .shadow(color: accentGold.opacity(0.42), radius: 18, y: 7)
-                .shadow(color: .black.opacity(0.30), radius: 6, y: 3)
+                .shadow(color: accentGold.opacity(0.28), radius: 16, y: 6)
         }
         .buttonStyle(PressableButtonStyle())
         .disabled(vm.isPurchasing)
     }
 
-    // Premium metallic gold CTA: champagne→bronze gradient, glossy top sheen,
-    // a slow shimmer sweep, and a beveled rim — feels high-end on the dark bg.
+    // Clean, elegant gold CTA: a soft champagne→gold gradient with a single
+    // hairline top rim for a touch of dimension. No shimmer — calm and premium.
     private func ctaBackground() -> some View {
-        let deepGold = accentGold.blend(with: Color(red: 0.28, green: 0.18, blue: 0.06), amount: 0.34)
-        return ZStack {
-            Capsule()
-                .fill(
-                    LinearGradient(
-                        stops: [
-                            .init(color: accentGold.blend(with: .white, amount: 0.36), location: 0.0),
-                            .init(color: accentGold, location: 0.52),
-                            .init(color: deepGold, location: 1.0)
-                        ],
-                        startPoint: .top, endPoint: .bottom
-                    )
-                )
-
-            // Glossy top sheen — light catching the top curve of the pill.
-            Capsule()
-                .fill(
-                    LinearGradient(
-                        colors: [Color.white.opacity(0.34), Color.white.opacity(0.0)],
-                        startPoint: .top, endPoint: .center
-                    )
-                )
-
-            // Soft, wide shimmer sweep travelling across the metal.
-            GeometryReader { geo in
-                let w = geo.size.width
-                Capsule()
-                    .fill(
-                        LinearGradient(
-                            colors: [.clear, .white.opacity(0.30), .clear],
-                            startPoint: .leading, endPoint: .trailing
-                        )
-                    )
-                    .frame(width: w * 0.55)
-                    .offset(x: -w * 0.6 + shimmerPhase * (w * 1.8))
-            }
-            .clipShape(Capsule())
-            .allowsHitTesting(false)
-        }
-        .overlay(
-            Capsule().stroke(
+        Capsule()
+            .fill(
                 LinearGradient(
-                    colors: [Color.white.opacity(0.55), accentGold.opacity(0.25), Color.black.opacity(0.16)],
+                    colors: [accentGold.blend(with: .white, amount: 0.14), accentGold],
                     startPoint: .top, endPoint: .bottom
-                ),
-                lineWidth: 1
+                )
             )
-        )
+            .overlay(
+                Capsule().stroke(Color.white.opacity(0.18), lineWidth: 0.5)
+            )
     }
 
     private func ctaTitle(vm: PaywallViewModel) -> String {
@@ -490,7 +438,7 @@ struct PaywallContainerView: View {
         if vm.selectedProductID == StoreKitService.weeklyID {
             return "Start Free Trial"
         }
-        return "Get Bible Plus Pro"
+        return "Subscribe Now"
     }
 
     private func ctaSubtitle(vm: PaywallViewModel) -> String {
@@ -504,6 +452,11 @@ struct PaywallContainerView: View {
 
     private var footerLinks: some View {
         HStack(spacing: 14) {
+            footerLink("Restore") {
+                Analytics.track(.paywallRestoreTapped)
+                Task { await storeKitService.restorePurchases() }
+            }
+            footerDot
             footerLink("Terms") {
                 if let url = URL(string: "https://bibleplus.io/terms") { openURL(url) }
             }
