@@ -535,10 +535,23 @@ final class AudioBibleService {
         timeObserverToken = queuePlayer?.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] _ in
             guard let self else { return }
             MainActor.assumeIsolated {
-                guard let item = self.queuePlayer?.currentItem,
-                      let idx = self.itemToVerseIndex[item] else { return }
-                if self.currentVerseIndex != idx {
+                guard let player = self.queuePlayer else { return }
+
+                // Keep the highlight locked to the item actually playing.
+                if let item = player.currentItem, let idx = self.itemToVerseIndex[item],
+                   self.currentVerseIndex != idx {
                     self.currentVerseIndex = idx
+                }
+
+                // Stall watchdog: if we believe we're playing but the player
+                // has quietly stalled on a loaded item (AVQueuePlayer sometimes
+                // pauses itself after the queue briefly drains), nudge it back
+                // to life so audio never silently dies mid-chapter.
+                if self.isPlaying, !self.isPaused, !self.isFallbackMode,
+                   player.currentItem != nil,
+                   player.timeControlStatus == .paused {
+                    player.play()
+                    player.rate = Float(self.playbackSpeed.rawValue)
                 }
             }
         }
@@ -1072,40 +1085,12 @@ final class AudioBibleService {
 
     // MARK: - Auto-Stop (Background Timer)
 
-    private func setupBackgroundObservers() {
-        backgroundObserver = NotificationCenter.default.addObserver(
-            forName: UIApplication.didEnterBackgroundNotification,
-            object: nil,
-            queue: .main
-        ) { [weak self] _ in
-            Task { @MainActor [weak self] in
-                self?.startAutoStopTimer()
-            }
-        }
-
-        foregroundObserver = NotificationCenter.default.addObserver(
-            forName: UIApplication.willEnterForegroundNotification,
-            object: nil,
-            queue: .main
-        ) { [weak self] _ in
-            Task { @MainActor [weak self] in
-                self?.cancelAutoStopTimer()
-            }
-        }
-    }
-
-    private func startAutoStopTimer() {
-        guard hasActivePlayback else { return }
-        autoStopTask?.cancel()
-        autoStopTask = Task { [weak self] in
-            try? await Task.sleep(nanoseconds: UInt64(Self.autoStopDelay * 1_000_000_000))
-            guard !Task.isCancelled else { return }
-            guard let self else { return }
-            if self.isPlaying || self.isPaused {
-                self.stop()
-            }
-        }
-    }
+    // The audio Bible has the `audio` background mode and is meant to play with
+    // the screen off, like a podcast. We deliberately do NOT auto-stop on
+    // backgrounding any more — that 2-minute timer was cutting playback off
+    // ("stops after about a page and a half"). Runaway playback (someone asleep)
+    // is already handled by the "Still listening?" prompt after a few chapters.
+    private func setupBackgroundObservers() {}
 
     private func cancelAutoStopTimer() {
         autoStopTask?.cancel()
