@@ -138,28 +138,36 @@ struct PaywallContainerView: View {
     // MARK: - Scroll Content
 
     private func scrollContent(vm: PaywallViewModel) -> some View {
-        ScrollView(showsIndicators: false) {
-            VStack(spacing: 0) {
-                heroLogo
-                    .padding(.top, 46)
+        // GeometryReader + minHeight lets the feature list absorb leftover
+        // height (spreading its rows) so the page fills evenly on large phones
+        // — no stranded gap above the cards — while still scrolling cleanly on
+        // small phones (SE / mini) and at large Dynamic Type sizes.
+        GeometryReader { proxy in
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 0) {
+                    heroLogo
+                        .padding(.top, 46)
 
-                eyebrow
-                    .padding(.top, 16)
+                    eyebrow
+                        .padding(.top, 16)
 
-                headline
-                    .padding(.top, 8)
+                    headline
+                        .padding(.top, 8)
 
-                subtitle(vm: vm)
-                    .padding(.top, 6)
+                    subtitle(vm: vm)
+                        .padding(.top, 6)
 
-                featureList
-                    .padding(.top, 32)
-                    .padding(.horizontal, 28)
+                    featureList
+                        .padding(.top, 34)
+                        .padding(.horizontal, 28)
+                        .frame(maxHeight: .infinity)
+                }
+                .frame(maxWidth: .infinity)
+                .frame(minHeight: proxy.size.height)
+                .padding(.bottom, 10)
+                .opacity(showContent ? 1 : 0)
+                .offset(y: showContent ? 0 : 10)
             }
-            .frame(maxWidth: .infinity)
-            .padding(.bottom, 14)
-            .opacity(showContent ? 1 : 0)
-            .offset(y: showContent ? 0 : 10)
         }
     }
 
@@ -226,8 +234,12 @@ struct PaywallContainerView: View {
     ]
 
     private var featureList: some View {
-        VStack(alignment: .leading, spacing: 18) {
-            ForEach(proFeatures, id: \.self) { feature in
+        // Spacers between rows are flexible (min 18pt): paired with the
+        // .frame(maxHeight: .infinity) in scrollContent, the rows spread to
+        // fill leftover height on tall phones and stay compact on short ones.
+        VStack(spacing: 0) {
+            ForEach(Array(proFeatures.enumerated()), id: \.element) { index, feature in
+                if index > 0 { Spacer(minLength: 18) }
                 HStack(alignment: .center, spacing: 13) {
                     Image(systemName: "checkmark")
                         .font(.system(size: 13, weight: .bold))
