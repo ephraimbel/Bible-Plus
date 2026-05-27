@@ -53,7 +53,7 @@ struct PaywallContainerView: View {
             }
 
             // Hard paywall: during onboarding there is no skip/close — the only
-            // ways forward are the 3-day yearly trial or the weekly plan. The
+            // ways forward are the 3-day weekly trial or the yearly plan. The
             // close button is kept ONLY for the Settings presentation (where the
             // paywall is a dismissable sheet and must be closable).
             if !isOnboarding {
@@ -313,40 +313,30 @@ struct PaywallContainerView: View {
             .padding(.horizontal, 4)
             .padding(.bottom, 4)
 
-            yearlyPlanCard(vm: vm)
-                .padding(.top, 7) // room for the floating trial badge
             weeklyPlanCard(vm: vm)
+                .padding(.top, 7) // room for the floating trial badge
+            yearlyPlanCard(vm: vm)
         }
     }
 
-    // The dominant option: taller, gold-emphasized, and topped with a floating
+    // The featured option: taller, gold-emphasized, and topped with a floating
     // "3-DAY FREE TRIAL" badge so the trial is the first thing the eye lands on.
-    private func yearlyPlanCard(vm: PaywallViewModel) -> some View {
-        let isSelected = vm.selectedProductID == StoreKitService.yearlyID
+    private func weeklyPlanCard(vm: PaywallViewModel) -> some View {
+        let isSelected = vm.selectedProductID == StoreKitService.weeklyID
         return Button {
-            vm.selectedProductID = StoreKitService.yearlyID
+            vm.selectedProductID = StoreKitService.weeklyID
             HapticService.impact(.medium)
-            Analytics.track(.paywallPriceCardSelected, properties: ["product": "yearly"])
+            Analytics.track(.paywallPriceCardSelected, properties: ["product": "weekly"])
         } label: {
             HStack(spacing: 13) {
                 selectionRadio(isSelected: isSelected)
 
                 VStack(alignment: .leading, spacing: 4) {
-                    HStack(spacing: 8) {
-                        Text("Yearly")
-                            .font(.custom("Georgia-Bold", size: 18))
-                            .foregroundStyle(palette.textPrimary)
+                    Text("Weekly")
+                        .font(.custom("Georgia-Bold", size: 18))
+                        .foregroundStyle(palette.textPrimary)
 
-                        Text("SAVE \(vm.savingsPercent(storeKitService))%")
-                            .font(.system(size: 10.5, weight: .heavy, design: .rounded))
-                            .tracking(0.5)
-                            .foregroundStyle(saveGreen)
-                            .padding(.horizontal, 6)
-                            .padding(.vertical, 2.5)
-                            .background(Capsule().fill(saveGreen.opacity(0.15)))
-                    }
-
-                    Text("Free for 3 days, then just \(vm.yearlyWeeklyBreakdown(storeKitService))/week")
+                    Text("Free for 3 days, then billed weekly")
                         .font(.system(size: 12.5, weight: .medium, design: .rounded))
                         .foregroundStyle(palette.textSecondary)
                         .fixedSize(horizontal: false, vertical: true)
@@ -354,7 +344,7 @@ struct PaywallContainerView: View {
 
                 Spacer(minLength: 6)
 
-                Text("\(vm.yearlyPriceLabel(storeKitService))/yr")
+                Text("\(vm.weeklyPriceLabel(storeKitService))/wk")
                     .font(.custom("Georgia-Bold", size: 14))
                     .foregroundStyle(palette.textPrimary)
             }
@@ -380,29 +370,42 @@ struct PaywallContainerView: View {
         .animation(.easeOut(duration: 0.18), value: isSelected)
     }
 
-    private func weeklyPlanCard(vm: PaywallViewModel) -> some View {
-        let isSelected = vm.selectedProductID == StoreKitService.weeklyID
+    // The value option: no trial, plain card. Keeps the SAVE % pill and a
+    // per-week reframe so committing yearly still reads as the rational deal.
+    private func yearlyPlanCard(vm: PaywallViewModel) -> some View {
+        let isSelected = vm.selectedProductID == StoreKitService.yearlyID
         return Button {
-            vm.selectedProductID = StoreKitService.weeklyID
+            vm.selectedProductID = StoreKitService.yearlyID
             HapticService.impact(.medium)
-            Analytics.track(.paywallPriceCardSelected, properties: ["product": "weekly"])
+            Analytics.track(.paywallPriceCardSelected, properties: ["product": "yearly"])
         } label: {
             HStack(spacing: 13) {
                 selectionRadio(isSelected: isSelected)
 
                 VStack(alignment: .leading, spacing: 3) {
-                    Text("Weekly")
-                        .font(.custom("Georgia-Bold", size: 17))
-                        .foregroundStyle(palette.textPrimary)
+                    HStack(spacing: 8) {
+                        Text("Yearly")
+                            .font(.custom("Georgia-Bold", size: 17))
+                            .foregroundStyle(palette.textPrimary)
 
-                    Text("Billed weekly · cancel anytime")
+                        Text("SAVE \(vm.savingsPercent(storeKitService))%")
+                            .font(.system(size: 10.5, weight: .heavy, design: .rounded))
+                            .tracking(0.5)
+                            .foregroundStyle(saveGreen)
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 2.5)
+                            .background(Capsule().fill(saveGreen.opacity(0.15)))
+                    }
+
+                    Text("Just \(vm.yearlyWeeklyBreakdown(storeKitService))/week · billed yearly")
                         .font(.system(size: 12, weight: .regular, design: .rounded))
                         .foregroundStyle(palette.textMuted)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
 
                 Spacer(minLength: 6)
 
-                Text("\(vm.weeklyPriceLabel(storeKitService))/wk")
+                Text("\(vm.yearlyPriceLabel(storeKitService))/yr")
                     .font(.custom("Georgia-Bold", size: 14))
                     .foregroundStyle(palette.textPrimary)
             }
@@ -450,7 +453,7 @@ struct PaywallContainerView: View {
                 ])
                 Task { await vm.purchaseSelected(storeKitService: storeKitService, dismiss: dismiss) }
             } label: {
-                let isTrial = vm.selectedProductID == StoreKitService.yearlyID
+                let isTrial = vm.selectedProductID == StoreKitService.weeklyID
                 HStack(spacing: 7) {
                     if isTrial {
                         Image(systemName: "sparkle")
@@ -585,17 +588,17 @@ struct PaywallContainerView: View {
 
     private func ctaTitle(vm: PaywallViewModel) -> String {
         if vm.isPurchasing { return "Processing..." }
-        if vm.selectedProductID == StoreKitService.yearlyID {
+        if vm.selectedProductID == StoreKitService.weeklyID {
             return "Start Free Trial"
         }
-        return "Continue with Weekly"
+        return "Continue with Yearly"
     }
 
     private func ctaSubtitle(vm: PaywallViewModel) -> String {
-        if vm.selectedProductID == StoreKitService.yearlyID {
-            return "Then \(vm.yearlyPriceLabel(storeKitService))/yr after 3 days · Cancel anytime"
+        if vm.selectedProductID == StoreKitService.weeklyID {
+            return "Then \(vm.weeklyPriceLabel(storeKitService))/wk after 3 days · Cancel anytime"
         }
-        return "\(vm.weeklyPriceLabel(storeKitService))/wk · Cancel anytime"
+        return "\(vm.yearlyPriceLabel(storeKitService))/yr · Cancel anytime"
     }
 
     private func footerLink(_ title: String, action: @escaping () -> Void) -> some View {

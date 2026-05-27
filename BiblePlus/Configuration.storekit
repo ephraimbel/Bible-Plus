@@ -22,12 +22,7 @@
           "familyShareable" : false,
           "groupNumber" : 1,
           "internalID" : "A1B2C3D4",
-          "introductoryOffer" : {
-            "displayPrice" : "0",
-            "internalID" : "E5F6A7B8",
-            "paymentMode" : "free",
-            "subscriptionPeriod" : "P3D"
-          },
+          "introductoryOffer" : null,
           "localizations" : [
             {
               "description" : "Full access to Bible+ Pro — billed annually",
@@ -49,7 +44,12 @@
           "familyShareable" : false,
           "groupNumber" : 2,
           "internalID" : "C3D4E5F6",
-          "introductoryOffer" : null,
+          "introductoryOffer" : {
+            "displayPrice" : "0",
+            "internalID" : "E5F6A7B8",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P3D"
+          },
           "localizations" : [
             {
               "description" : "Full access to Bible+ Pro — billed weekly",
