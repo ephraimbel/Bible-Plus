@@ -177,30 +177,7 @@ private struct BibleContentView: View {
         // Set up auto-advance. `isAutoAdvance: true` keeps the consecutive
         // counter climbing so the still-listening prompt triggers after a
         // handful of chapters instead of playing indefinitely.
-        audioService.setOnChapterComplete { [modelContext] in
-            ActivityService.log(.audioChapterCompleted, detail: "\(viewModel.selectedBook.name) \(viewModel.selectedChapter)", in: modelContext)
-            guard viewModel.canGoForward else { return }
-            // goToNextChapter() clears verses and starts an async load. Wait
-            // for that load to actually finish before playing — a fixed delay
-            // raced the load, so verses were often still empty and playback
-            // died at the chapter boundary (looked like "stops after a few
-            // verses" on short chapters).
-            viewModel.goToNextChapter()
-            Task {
-                let deadline = Date().addingTimeInterval(10)
-                while viewModel.verses.isEmpty && Date() < deadline {
-                    try? await Task.sleep(nanoseconds: 120_000_000)
-                }
-                guard !viewModel.verses.isEmpty else { return }
-                audioService.play(
-                    verses: viewModel.verses,
-                    book: viewModel.selectedBook,
-                    chapter: viewModel.selectedChapter,
-                    translation: viewModel.currentTranslation,
-                    isAutoAdvance: true
-                )
-            }
-        }
+        configureChapterAutoAdvance()
 
         // Resume from last-read verse if available
         let startIndex: Int
@@ -221,6 +198,33 @@ private struct BibleContentView: View {
 
         // Prefetch next chapter
         prefetchNextChapter()
+    }
+
+    /// Installs the chapter-complete handler that auto-advances audio into the
+    /// next chapter. Runs entirely on the main actor — the view model is
+    /// @MainActor, so a plain Task would read `verses` off-main and never see
+    /// the next chapter's reload, which is what left audio dead at the chapter
+    /// boundary. We wait for the async reload to finish before playing.
+    private func configureChapterAutoAdvance() {
+        audioService.setOnChapterComplete { [modelContext] in
+            Task { @MainActor in
+                ActivityService.log(.audioChapterCompleted, detail: "\(viewModel.selectedBook.name) \(viewModel.selectedChapter)", in: modelContext)
+                guard viewModel.canGoForward else { return }
+                viewModel.goToNextChapter()
+                let deadline = Date().addingTimeInterval(10)
+                while viewModel.verses.isEmpty && Date() < deadline {
+                    try? await Task.sleep(nanoseconds: 120_000_000)
+                }
+                guard !viewModel.verses.isEmpty else { return }
+                audioService.play(
+                    verses: viewModel.verses,
+                    book: viewModel.selectedBook,
+                    chapter: viewModel.selectedChapter,
+                    translation: viewModel.currentTranslation,
+                    isAutoAdvance: true
+                )
+            }
+        }
     }
 
     // MARK: - Immersive Listening
@@ -332,7 +336,17 @@ private struct BibleContentView: View {
                     readerLineSpacing: viewModel.readerLineSpacing,
                     readerTextAlignmentJustified: viewModel.readerTextAlignmentJustified,
                     readerShowVerseNumbers: viewModel.readerShowVerseNumbers,
-                    onVerseTap: { viewModel.selectVerse($0) },
+                    onVerseTap: { item in
+                        // While audio is playing, tapping a verse jumps playback
+                        // to it. Otherwise the tap selects the verse (highlight /
+                        // note / share) as usual.
+                        if audioService.hasActivePlayback,
+                           let idx = viewModel.verses.firstIndex(where: { $0.number == item.number }) {
+                            audioService.seekToVerse(index: idx)
+                        } else {
+                            viewModel.selectVerse(item)
+                        }
+                    },
                     onNoteCardTap: { viewModel.selectVerse($0) },
                     onRetry: { viewModel.retryLoading() }
                 )
@@ -582,23 +596,7 @@ private struct BibleContentView: View {
                                 return
                             }
 
-                            audioService.setOnChapterComplete { [modelContext] in
-                                ActivityService.log(.audioChapterCompleted, detail: "\(viewModel.selectedBook.name) \(viewModel.selectedChapter)", in: modelContext)
-                                if viewModel.canGoForward {
-                                    viewModel.goToNextChapter()
-                                    Task {
-                                        try? await Task.sleep(nanoseconds: 500_000_000)
-                                        guard !viewModel.verses.isEmpty else { return }
-                                        audioService.play(
-                                            verses: viewModel.verses,
-                                            book: viewModel.selectedBook,
-                                            chapter: viewModel.selectedChapter,
-                                            translation: viewModel.currentTranslation,
-                                            isAutoAdvance: true
-                                        )
-                                    }
-                                }
-                            }
+                            configureChapterAutoAdvance()
 
                             audioService.play(
                                 verses: viewModel.verses,
