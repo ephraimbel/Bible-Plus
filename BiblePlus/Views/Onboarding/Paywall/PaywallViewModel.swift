@@ -16,10 +16,11 @@ final class PaywallViewModel {
 
     // MARK: - Purchase State
 
-    // Yearly is the featured "Best Value" plan and is pre-selected to steer
-    // plan mix toward the higher-LTV annual subscription. Weekly still carries
-    // the 3-day trial (per App Store Connect) and serves as the price anchor.
-    var selectedProductID: String? = StoreKitService.yearlyID
+    // Weekly (3-day free trial) is pre-selected: most users won't commit to
+    // paying upfront for a Bible app, so defaulting to the free trial lifts
+    // trial starts and weekly recurring revenue. The yearly "Save $X" badge
+    // still lets a ready buyer self-select the annual plan.
+    var selectedProductID: String? = StoreKitService.weeklyID
     var isPurchasing = false
     var purchaseError: String? = nil
 
@@ -344,47 +345,41 @@ final class PaywallViewModel {
         storeKit.weeklyProduct?.localizedPriceString ?? "$4.99"
     }
 
-    /// Monthly equivalent of the yearly plan (price ÷ 12). Used as the headline
-    /// framing on the featured yearly card — "$4.17/month" reads far smaller and
-    /// more approachable than "$49.99/yr".
-    func yearlyMonthlyEquivalent(_ storeKit: StoreKitService) -> String {
+    /// Weekly-equivalent of the yearly plan (price ÷ 52). Shown on the yearly
+    /// card as "$0.96/week" so it compares apples-to-apples against the weekly
+    /// plan — much starker than a monthly figure.
+    func yearlyWeeklyBreakdown(_ storeKit: StoreKitService) -> String {
         if let product = storeKit.yearlyProduct {
-            let monthly = product.price / 12
+            let weekly = product.price / 52
             if let formatter = product.priceFormatter {
-                return formatter.string(from: monthly as NSNumber) ?? "$4.17"
+                return formatter.string(from: weekly as NSNumber) ?? "$0.96"
             }
-            return String(format: "$%.2f", (monthly as NSDecimalNumber).doubleValue)
+            return String(format: "$%.2f", (weekly as NSDecimalNumber).doubleValue)
         }
-        return "$4.17"
+        return "$0.96"
     }
 
-    /// Monthly equivalent of the weekly plan (price × 4). Surfaced on the weekly
-    /// anchor card so its true monthly cost (~$19.96) towers over the yearly
-    /// plan's $4.17/month — making annual the obvious rational choice.
-    func weeklyMonthlyEquivalent(_ storeKit: StoreKitService) -> String {
-        if let product = storeKit.weeklyProduct {
-            let monthly = product.price * 4
-            if let formatter = product.priceFormatter {
-                return formatter.string(from: monthly as NSNumber) ?? "$19.96"
-            }
-            return String(format: "$%.2f", (monthly as NSDecimalNumber).doubleValue)
-        }
-        return "$19.96"
-    }
-
-    /// Exact dollars saved over a year by choosing yearly instead of paying the
-    /// weekly price for 52 weeks (52 × weekly − yearly). Shown on the yearly
-    /// card as "Save $X" — a concrete number lands harder than a percentage.
+    /// Dollars saved over a year by choosing yearly instead of paying the weekly
+    /// price for 52 weeks (52 × weekly − yearly), rounded UP to a whole dollar
+    /// (no cents). Shown on the yearly card as "Save $210" — a clean, concrete
+    /// number lands harder than a percentage or a cents figure.
     func yearlySavingsAmount(_ storeKit: StoreKitService) -> String {
         if let weekly = storeKit.weeklyProduct, let yearly = storeKit.yearlyProduct {
             let saved = (weekly.price * 52) - yearly.price
             if saved > 0 {
-                if let formatter = yearly.priceFormatter {
-                    return formatter.string(from: saved as NSNumber) ?? "$209"
+                let roundedUp = (saved as NSDecimalNumber).doubleValue.rounded(.up)
+                // Copy the product's currency formatter so we can drop cents
+                // without mutating the shared instance used by other helpers.
+                if let base = yearly.priceFormatter,
+                   let whole = base.copy() as? NumberFormatter {
+                    whole.maximumFractionDigits = 0
+                    whole.minimumFractionDigits = 0
+                    whole.roundingMode = .ceiling
+                    return whole.string(from: roundedUp as NSNumber) ?? "$\(Int(roundedUp))"
                 }
-                return String(format: "$%.2f", (saved as NSDecimalNumber).doubleValue)
+                return "$\(Int(roundedUp))"
             }
         }
-        return "$209"
+        return "$210"
     }
 }
