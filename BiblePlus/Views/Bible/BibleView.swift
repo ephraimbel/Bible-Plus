@@ -659,9 +659,6 @@ private struct BibleContentView: View {
                     .disabled(!viewModel.canGoForward)
                     .accessibilityLabel("Next chapter")
                 }
-                // Reserve equal width to the trailing group so the principal
-                // title+translation centers on screen for any book name / device.
-                .frame(width: 104, alignment: .leading)
             }
 
             // MARK: Center — Book Title · Translation
@@ -784,9 +781,6 @@ private struct BibleContentView: View {
                             .foregroundStyle(palette.accent)
                     }
                 }
-                // Matches the leading group's reserved width so the centered
-                // title stays screen-centered, not biased toward either side.
-                .frame(width: 104, alignment: .trailing)
             }
         }
         .sheet(isPresented: $viewModel.showBookPicker) {
