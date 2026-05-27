@@ -43,7 +43,10 @@ struct PaywallContainerView: View {
             backgroundLayers
 
             if let vm {
-                paywallContent(vm: vm)
+                scrollContent(vm: vm)
+                    .safeAreaInset(edge: .bottom, spacing: 0) {
+                        bottomRegion(vm: vm)
+                    }
             }
 
             // Close (X, top-right) appears ONLY in the in-app / Settings
@@ -134,57 +137,82 @@ struct PaywallContainerView: View {
 
     // MARK: - Content
     //
-    // One vertically-centered column: header → features → a FIXED gap → cards →
-    // CTA → footer. Only the top/bottom spacers are flexible, so the spacing
-    // *between* the features and the cards stays identical on every device
-    // (iPhone 16 == 17 Pro Max); the extra height on tall phones balances above
-    // the hero and below the footer instead of stranding a gap above the cards.
+    // Perplexity-style anchored layout: the header + feature list sit at the
+    // TOP (scrolling content) and the plan cards + CTA + footer are pinned to
+    // the BOTTOM. The leftover height on taller phones falls as a single gap
+    // between the features and the cards — no top/bottom void; the design is
+    // identical on every iPhone, it just breathes a little more on larger ones.
     // Scrolls on small phones (SE) and at large Dynamic Type sizes.
-    private func paywallContent(vm: PaywallViewModel) -> some View {
+    private func scrollContent(vm: PaywallViewModel) -> some View {
         GeometryReader { proxy in
+            // Scale the header + feature spacing with the available height so the
+            // top section fills proportionally on taller phones — keeping the gap
+            // above the pinned cards a consistent *fraction* of the screen rather
+            // than growing 1:1. Clamped to the iPhone-16 baseline at the low end
+            // so small phones (SE) keep their compact spacing and simply scroll.
+            let scale = min(max(proxy.size.height / 520, 0.8), 1.5)
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 0) {
-                    Spacer(minLength: 12)
-
                     heroLogo
-                    eyebrow.padding(.top, 16)
-                    headline.padding(.top, 8)
-                    subtitle(vm: vm).padding(.top, 6)
+                        .padding(.top, 44 * scale)
 
-                    featureList
-                        .padding(.top, 34)
+                    eyebrow
+                        .padding(.top, 16 * scale)
+
+                    headline
+                        .padding(.top, 8 * scale)
+
+                    subtitle(vm: vm)
+                        .padding(.top, 6)
+
+                    featureList(rowSpacing: 24 * scale)
+                        .padding(.top, 42 * scale)
                         .padding(.horizontal, 28)
-
-                    // FIXED gap between the feature list and the plan cards.
-                    Color.clear.frame(height: 30)
-
-                    planCards(vm: vm)
-                        .padding(.top, 10) // room for the floating badges
-                        .padding(.horizontal, 20)
-
-                    ctaButton(vm: vm)
-                        .padding(.top, 16)
-                        .padding(.horizontal, 20)
-
-                    Text(ctaSubtitle(vm: vm))
-                        .font(.system(size: 11, weight: .regular, design: .rounded))
-                        .foregroundStyle(palette.textMuted)
-                        .multilineTextAlignment(.center)
-                        .lineLimit(2)
-                        .padding(.top, 10)
-                        .padding(.horizontal, 24)
-
-                    footerLinks
-                        .padding(.top, 12)
-
-                    Spacer(minLength: 12)
                 }
                 .frame(maxWidth: .infinity)
-                .frame(minHeight: proxy.size.height)
+                .padding(.bottom, 16)
                 .opacity(showContent ? 1 : 0)
                 .offset(y: showContent ? 0 : 10)
             }
         }
+    }
+
+    private func bottomRegion(vm: PaywallViewModel) -> some View {
+        VStack(spacing: 14) {
+            planCards(vm: vm)
+                .padding(.top, 10) // room for the floating badges
+                .padding(.horizontal, 20)
+
+            ctaButton(vm: vm)
+                .padding(.horizontal, 20)
+
+            Text(ctaSubtitle(vm: vm))
+                .font(.system(size: 11, weight: .regular, design: .rounded))
+                .foregroundStyle(palette.textMuted)
+                .multilineTextAlignment(.center)
+                .lineLimit(2)
+                .padding(.horizontal, 24)
+
+            footerLinks
+                .padding(.top, 1)
+        }
+        .padding(.top, 14)
+        .padding(.bottom, 8)
+        .frame(maxWidth: .infinity)
+        .background(
+            // Short fade into an opaque base so the scrolling features dissolve
+            // cleanly behind the pinned region instead of bleeding through.
+            VStack(spacing: 0) {
+                LinearGradient(
+                    colors: [palette.background.opacity(0), palette.background],
+                    startPoint: .top, endPoint: .bottom
+                )
+                .frame(height: 22)
+                palette.background
+            }
+            .ignoresSafeArea(edges: .bottom)
+        )
+        .opacity(showContent ? 1 : 0)
     }
 
     private func planCards(vm: PaywallViewModel) -> some View {
@@ -270,11 +298,11 @@ struct PaywallContainerView: View {
         "Sanctuary soundscapes, widgets & more",
     ]
 
-    private var featureList: some View {
-        // Uniform fixed spacing between rows — organized and consistent on every
-        // device (the leftover height becomes one gap below the list, not gaps
-        // between each feature).
-        VStack(alignment: .leading, spacing: 20) {
+    private func featureList(rowSpacing: CGFloat) -> some View {
+        // Uniform spacing between rows (scaled per device) — organized and
+        // consistent everywhere; the leftover height becomes one gap below the
+        // list, not gaps between each feature.
+        VStack(alignment: .leading, spacing: rowSpacing) {
             ForEach(proFeatures, id: \.self) { feature in
                 HStack(alignment: .center, spacing: 13) {
                     Image(systemName: "checkmark")
