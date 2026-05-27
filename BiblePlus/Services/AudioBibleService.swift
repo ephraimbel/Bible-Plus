@@ -508,14 +508,16 @@ final class AudioBibleService {
     func seekToVerse(index: Int) {
         guard index >= 0, index < currentVerses.count else { return }
 
+        // A manual seek is an explicit "I'm here / keep going" — reset the
+        // still-listening counter so the prompt doesn't fire prematurely.
+        consecutiveAutoAdvances = 0
+
         if isFallbackMode {
             speechSynthesizer?.stopSpeaking(at: .immediate)
             currentVerseIndex = index
             requeueSpeechUtterances(from: index)
-            if isPaused {
-                isPlaying = true
-                isPaused = false
-            }
+            isPlaying = true
+            isPaused = false
         } else if let player = queuePlayer {
             // Find the player item for this verse index
             if itemToVerseIndex.values.contains(index) {
@@ -535,12 +537,13 @@ final class AudioBibleService {
                 }
 
                 currentVerseIndex = index
-                if isPaused {
-                    player.play()
-                    player.rate = Float(playbackSpeed.rawValue)
-                    isPlaying = true
-                    isPaused = false
-                }
+                // Always resume after a seek — the user tapped to hear from
+                // here. (Previously only resumed if already paused, so a tap
+                // mid-playback could silently stop the audio.)
+                player.play()
+                player.rate = Float(playbackSpeed.rawValue)
+                isPlaying = true
+                isPaused = false
             }
         }
     }
