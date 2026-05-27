@@ -43,10 +43,7 @@ struct PaywallContainerView: View {
             backgroundLayers
 
             if let vm {
-                scrollContent(vm: vm)
-                    .safeAreaInset(edge: .bottom, spacing: 0) {
-                        bottomRegion(vm: vm)
-                    }
+                paywallContent(vm: vm)
             }
 
             // Close (X, top-right) appears ONLY in the in-app / Settings
@@ -135,35 +132,79 @@ struct PaywallContainerView: View {
         .accessibilityLabel("Close")
     }
 
-    // MARK: - Scroll Content
+    // MARK: - Content
+    //
+    // One vertically-centered column: header → features → a FIXED gap → cards →
+    // CTA → footer. Only the top/bottom spacers are flexible, so the spacing
+    // *between* the features and the cards stays identical on every device
+    // (iPhone 16 == 17 Pro Max); the extra height on tall phones balances above
+    // the hero and below the footer instead of stranding a gap above the cards.
+    // Scrolls on small phones (SE) and at large Dynamic Type sizes.
+    private func paywallContent(vm: PaywallViewModel) -> some View {
+        GeometryReader { proxy in
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 0) {
+                    Spacer(minLength: 12)
 
-    private func scrollContent(vm: PaywallViewModel) -> some View {
-        // Top-aligned, Perplexity-style: the feature list is grouped under the
-        // header with consistent fixed spacing between rows; any leftover height
-        // falls as a single gap below the list (above the pinned cards). Scrolls
-        // on small phones / large Dynamic Type.
-        ScrollView(showsIndicators: false) {
-            VStack(spacing: 0) {
-                heroLogo
-                    .padding(.top, 46)
+                    heroLogo
+                    eyebrow.padding(.top, 16)
+                    headline.padding(.top, 8)
+                    subtitle(vm: vm).padding(.top, 6)
 
-                eyebrow
-                    .padding(.top, 16)
+                    featureList
+                        .padding(.top, 34)
+                        .padding(.horizontal, 28)
 
-                headline
-                    .padding(.top, 8)
+                    // FIXED gap between the feature list and the plan cards.
+                    Color.clear.frame(height: 30)
 
-                subtitle(vm: vm)
-                    .padding(.top, 6)
+                    planCards(vm: vm)
+                        .padding(.top, 10) // room for the floating badges
+                        .padding(.horizontal, 20)
 
-                featureList
-                    .padding(.top, 34)
-                    .padding(.horizontal, 28)
+                    ctaButton(vm: vm)
+                        .padding(.top, 16)
+                        .padding(.horizontal, 20)
+
+                    Text(ctaSubtitle(vm: vm))
+                        .font(.system(size: 11, weight: .regular, design: .rounded))
+                        .foregroundStyle(palette.textMuted)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(2)
+                        .padding(.top, 10)
+                        .padding(.horizontal, 24)
+
+                    footerLinks
+                        .padding(.top, 12)
+
+                    Spacer(minLength: 12)
+                }
+                .frame(maxWidth: .infinity)
+                .frame(minHeight: proxy.size.height)
+                .opacity(showContent ? 1 : 0)
+                .offset(y: showContent ? 0 : 10)
             }
-            .frame(maxWidth: .infinity)
-            .padding(.bottom, 16)
-            .opacity(showContent ? 1 : 0)
-            .offset(y: showContent ? 0 : 10)
+        }
+    }
+
+    private func planCards(vm: PaywallViewModel) -> some View {
+        HStack(spacing: 12) {
+            priceCard(
+                vm: vm,
+                productID: StoreKitService.weeklyID,
+                title: "Weekly",
+                price: vm.weeklyPriceLabel(storeKitService),
+                sub: "per week",
+                badge: "3-DAY FREE TRIAL"
+            )
+            priceCard(
+                vm: vm,
+                productID: StoreKitService.yearlyID,
+                title: "Yearly",
+                price: vm.yearlyPriceLabel(storeKitService),
+                sub: "\(vm.yearlyWeeklyBreakdown(storeKitService))/week",
+                badge: "SAVE \(vm.yearlySavingsAmount(storeKitService))"
+            )
         }
     }
 
@@ -250,63 +291,6 @@ struct PaywallContainerView: View {
                 }
             }
         }
-    }
-
-    // MARK: - Bottom Region (price cards + CTA + footer, pinned)
-
-    private func bottomRegion(vm: PaywallViewModel) -> some View {
-        VStack(spacing: 14) {
-            HStack(spacing: 12) {
-                priceCard(
-                    vm: vm,
-                    productID: StoreKitService.weeklyID,
-                    title: "Weekly",
-                    price: vm.weeklyPriceLabel(storeKitService),
-                    sub: "per week",
-                    badge: "3-DAY FREE TRIAL"
-                )
-                priceCard(
-                    vm: vm,
-                    productID: StoreKitService.yearlyID,
-                    title: "Yearly",
-                    price: vm.yearlyPriceLabel(storeKitService),
-                    sub: "\(vm.yearlyWeeklyBreakdown(storeKitService))/week",
-                    badge: "SAVE \(vm.yearlySavingsAmount(storeKitService))"
-                )
-            }
-            .padding(.top, 10) // room for the floating savings badge
-            .padding(.horizontal, 20)
-
-            ctaButton(vm: vm)
-                .padding(.horizontal, 20)
-
-            Text(ctaSubtitle(vm: vm))
-                .font(.system(size: 11, weight: .regular, design: .rounded))
-                .foregroundStyle(palette.textMuted)
-                .multilineTextAlignment(.center)
-                .lineLimit(2)
-                .padding(.horizontal, 24)
-
-            footerLinks
-                .padding(.top, 1)
-        }
-        .padding(.top, 14)
-        .padding(.bottom, 8)
-        .frame(maxWidth: .infinity)
-        .background(
-            VStack(spacing: 0) {
-                LinearGradient(
-                    colors: [palette.background.opacity(0), palette.background],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-                .frame(height: 22)
-
-                palette.background
-            }
-            .ignoresSafeArea(edges: .bottom)
-        )
-        .opacity(showContent ? 1 : 0)
     }
 
     // MARK: - Price Card
