@@ -371,4 +371,20 @@ final class PaywallViewModel {
         }
         return "$19.96"
     }
+
+    /// Exact dollars saved over a year by choosing yearly instead of paying the
+    /// weekly price for 52 weeks (52 × weekly − yearly). Shown on the yearly
+    /// card as "Save $X" — a concrete number lands harder than a percentage.
+    func yearlySavingsAmount(_ storeKit: StoreKitService) -> String {
+        if let weekly = storeKit.weeklyProduct, let yearly = storeKit.yearlyProduct {
+            let saved = (weekly.price * 52) - yearly.price
+            if saved > 0 {
+                if let formatter = yearly.priceFormatter {
+                    return formatter.string(from: saved as NSNumber) ?? "$209"
+                }
+                return String(format: "$%.2f", (saved as NSDecimalNumber).doubleValue)
+            }
+        }
+        return "$209"
+    }
 }
