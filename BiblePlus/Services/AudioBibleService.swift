@@ -48,6 +48,10 @@ final class AudioBibleService {
     private var playerItems: [AVPlayerItem] = []
     private var itemToVerseIndex: [AVPlayerItem: Int] = [:]
     nonisolated(unsafe) private var playerObserver: NSObjectProtocol?
+    /// Periodic observer that keeps `currentVerseIndex` (and thus the on-screen
+    /// highlight) locked to whatever item is actually playing — so the
+    /// highlight never drifts behind the audio over a long chapter.
+    nonisolated(unsafe) private var timeObserverToken: Any?
     private var tempFileURLs: [URL] = []
 
     // MARK: - Speech Fallback
@@ -102,6 +106,36 @@ final class AudioBibleService {
     // MARK: - Live Activity
 
     private var bibleActivity: Activity<BibleSessionAttributes>?
+    /// When true, the internal stop() done at the start of an auto-advanced
+    /// play() leaves the Live Activity alive so it can be UPDATED for the next
+    /// chapter rather than ended + recreated (recreation made a dismissed
+    /// activity keep reappearing each chapter).
+    private var preserveActivityOnStop = false
+
+    /// Starts the session's Live Activity if there isn't one, otherwise updates
+    /// the existing one — so a single activity carries through every chapter.
+    private func syncLiveActivity(isPlaying: Bool) {
+        guard let book = currentBook else { return }
+        if let activity = bibleActivity {
+            LiveActivityService.updateBibleSession(
+                activity,
+                bookName: book.name,
+                chapter: currentChapter,
+                translationName: currentTranslation.abbreviation,
+                totalVerses: currentTotalVerses,
+                currentVerse: currentVerseIndex + 1,
+                isPlaying: isPlaying
+            )
+        } else {
+            bibleActivity = LiveActivityService.startBibleSession(
+                bookName: book.name,
+                chapter: currentChapter,
+                translationName: currentTranslation.abbreviation,
+                totalVerses: currentTotalVerses,
+                currentVerse: currentVerseIndex + 1
+            )
+        }
+    }
 
     // MARK: - Interruption Handling
 
@@ -126,8 +160,16 @@ final class AudioBibleService {
 
     // MARK: - Concurrency
 
-    /// Max parallel TTS requests for verse generation
-    private static let maxConcurrentFetches = 5
+    /// Max parallel TTS requests for verse generation. Kept modest so a long
+    /// listening session doesn't burst the TTS API into rate-limiting (which
+    /// used to throw and drop playback to the robotic device voice).
+    private static let maxConcurrentFetches = 4
+
+    /// How many times to retry a single verse's TTS fetch before giving up.
+    /// Rate-limit (429), server (5xx), and transient network errors are all
+    /// retried with exponential backoff so we stay on the premium AI voice
+    /// instead of falling back to the device synthesizer.
+    private static let maxFetchRetries = 4
 
     // MARK: - Cache Directory
 
@@ -192,7 +234,11 @@ final class AudioBibleService {
         startingFromVerseIndex: Int = 0,
         isAutoAdvance: Bool = false
     ) {
+        // On auto-advance, keep the existing Live Activity alive across this
+        // internal stop() so the next chapter updates it (no respawn).
+        preserveActivityOnStop = isAutoAdvance && bibleActivity != nil
         stop()
+        preserveActivityOnStop = false
 
         guard !verses.isEmpty else { return }
 
@@ -361,13 +407,9 @@ final class AudioBibleService {
 
                         self.observePlayerAdvance()
 
-                        self.bibleActivity = LiveActivityService.startBibleSession(
-                            bookName: book.name,
-                            chapter: chapter,
-                            translationName: translation.abbreviation,
-                            totalVerses: allVerses.count,
-                            currentVerse: startIndex + 1
-                        )
+                        // Start (or, on auto-advance, reuse) the single session
+                        // Live Activity.
+                        self.syncLiveActivity(isPlaying: true)
                     } else if queueWentDry && self.isPlaying {
                         // Queue ran dry mid-chapter while the user was
                         // still listening. Kick playback back on — this is
@@ -440,30 +482,67 @@ final class AudioBibleService {
         ]
         request.httpBody = try JSONSerialization.data(withJSONObject: body)
 
-        let (data, response) = try await URLSession.shared.data(for: request)
+        do {
+            let (data, response) = try await URLSession.shared.data(for: request)
 
-        guard let httpResponse = response as? HTTPURLResponse else {
-            throw AudioBibleError.networkError(URLError(.badServerResponse))
-        }
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw AudioBibleError.networkError(URLError(.badServerResponse))
+            }
 
-        if httpResponse.statusCode == 200 {
-            guard !data.isEmpty else { throw AudioBibleError.audioDecodingFailed }
-            return data
-        }
+            if httpResponse.statusCode == 200 {
+                guard !data.isEmpty else { throw AudioBibleError.audioDecodingFailed }
+                return data
+            }
 
-        // Retry once on server error
-        if httpResponse.statusCode >= 500 && retryCount < 1 {
-            try await Task.sleep(nanoseconds: 500_000_000)
+            // Retry rate-limit (429) and server errors (5xx) with exponential
+            // backoff — these are transient, so retrying keeps us on the AI
+            // voice instead of dropping to the device fallback.
+            if (httpResponse.statusCode == 429 || httpResponse.statusCode >= 500),
+               retryCount < Self.maxFetchRetries {
+                try await Task.sleep(nanoseconds: Self.retryBackoff(attempt: retryCount))
+                return try await callTTSAPI(text: text, voice: voice, retryCount: retryCount + 1)
+            }
+
+            let errorMsg = String(data: data, encoding: .utf8) ?? "API error \(httpResponse.statusCode)"
+            throw AudioBibleError.apiError(errorMsg)
+        } catch let urlError as URLError {
+            // Transient network blip (timeout, connection lost) — back off and
+            // retry rather than abandoning the chapter to the device voice.
+            guard retryCount < Self.maxFetchRetries else { throw urlError }
+            try await Task.sleep(nanoseconds: Self.retryBackoff(attempt: retryCount))
             return try await callTTSAPI(text: text, voice: voice, retryCount: retryCount + 1)
         }
+    }
 
-        let errorMsg = String(data: data, encoding: .utf8) ?? "API error \(httpResponse.statusCode)"
-        throw AudioBibleError.apiError(errorMsg)
+    /// Exponential backoff (0.5s, 1s, 2s, 4s …) for TTS fetch retries.
+    private nonisolated static func retryBackoff(attempt: Int) -> UInt64 {
+        let seconds = 0.5 * pow(2.0, Double(attempt))
+        return UInt64(seconds * 1_000_000_000)
     }
 
     // MARK: - AVQueuePlayer Observation
 
     private func observePlayerAdvance() {
+        // Keep the highlighted verse locked to the item that's actually
+        // playing, four times a second. Relying only on the end-of-item
+        // notification let the highlight drift behind the audio over a long
+        // chapter; this corrects it continuously.
+        if let token = timeObserverToken {
+            queuePlayer?.removeTimeObserver(token)
+            timeObserverToken = nil
+        }
+        let interval = CMTime(seconds: 0.25, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        timeObserverToken = queuePlayer?.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] _ in
+            guard let self else { return }
+            MainActor.assumeIsolated {
+                guard let item = self.queuePlayer?.currentItem,
+                      let idx = self.itemToVerseIndex[item] else { return }
+                if self.currentVerseIndex != idx {
+                    self.currentVerseIndex = idx
+                }
+            }
+        }
+
         // Observe when AVQueuePlayer advances to the next item
         playerObserver = NotificationCenter.default.addObserver(
             forName: .AVPlayerItemDidPlayToEndTime,
@@ -480,13 +559,7 @@ final class AudioBibleService {
                 if let currentItem = self.queuePlayer?.currentItem,
                    let verseIdx = self.itemToVerseIndex[currentItem] {
                     self.currentVerseIndex = verseIdx
-                    if let activity = self.bibleActivity {
-                        LiveActivityService.updateBibleSession(
-                            activity,
-                            currentVerse: verseIdx + 1,
-                            isPlaying: true
-                        )
-                    }
+                    self.syncLiveActivity(isPlaying: true)
                 } else if self.itemToVerseIndex[finishedItem] != nil {
                     // The last-queued item just ended. If every verse for
                     // this chapter has been queued, that's chapter done.
@@ -561,13 +634,7 @@ final class AudioBibleService {
         isPaused = true
         restoreSoundscape()
 
-        if let activity = bibleActivity {
-            LiveActivityService.updateBibleSession(
-                activity,
-                currentVerse: currentVerseIndex + 1,
-                isPlaying: false
-            )
-        }
+        syncLiveActivity(isPlaying: false)
     }
 
     func resume() {
@@ -585,13 +652,7 @@ final class AudioBibleService {
         isPlaying = true
         isPaused = false
 
-        if let activity = bibleActivity {
-            LiveActivityService.updateBibleSession(
-                activity,
-                currentVerse: currentVerseIndex + 1,
-                isPlaying: true
-            )
-        }
+        syncLiveActivity(isPlaying: true)
     }
 
     func stop() {
@@ -605,6 +666,10 @@ final class AudioBibleService {
 
         // Stop AVQueuePlayer
         queuePlayer?.pause()
+        if let token = timeObserverToken {
+            queuePlayer?.removeTimeObserver(token)
+            timeObserverToken = nil
+        }
         queuePlayer?.removeAllItems()
         queuePlayer = nil
         if let obs = playerObserver {
@@ -643,7 +708,10 @@ final class AudioBibleService {
         showStillListeningPrompt = false
         hasQueuedAllVerses = false
 
-        if let activity = bibleActivity {
+        // Keep the activity alive through the internal stop() of an
+        // auto-advance so the next chapter updates it instead of spawning a
+        // fresh one. A real (user-initiated) stop ends it.
+        if let activity = bibleActivity, !preserveActivityOnStop {
             LiveActivityService.endBibleSession(activity)
             bibleActivity = nil
         }
@@ -761,13 +829,7 @@ final class AudioBibleService {
         let delegate = SpeechDelegate { [weak self] verseIndex in
             guard let self else { return }
             self.currentVerseIndex = verseIndex
-            if let activity = self.bibleActivity {
-                LiveActivityService.updateBibleSession(
-                    activity,
-                    currentVerse: verseIndex + 1,
-                    isPlaying: true
-                )
-            }
+            self.syncLiveActivity(isPlaying: true)
         } onComplete: { [weak self] in
             guard let self else { return }
             self.handlePlaybackCompletion()
@@ -816,13 +878,8 @@ final class AudioBibleService {
         isPaused = false
         isLoading = false
 
-        bibleActivity = LiveActivityService.startBibleSession(
-            bookName: book.name,
-            chapter: chapter,
-            translationName: translation.abbreviation,
-            totalVerses: verses.count,
-            currentVerse: startingFromVerseIndex + 1
-        )
+        // Start (or reuse, on auto-advance) the single session Live Activity.
+        syncLiveActivity(isPlaying: true)
     }
 
     private func requeueSpeechUtterances(from index: Int) {
@@ -833,13 +890,7 @@ final class AudioBibleService {
             let delegate = SpeechDelegate { [weak self] verseIndex in
                 guard let self else { return }
                 self.currentVerseIndex = verseIndex
-                if let activity = self.bibleActivity {
-                    LiveActivityService.updateBibleSession(
-                        activity,
-                        currentVerse: verseIndex + 1,
-                        isPlaying: true
-                    )
-                }
+                self.syncLiveActivity(isPlaying: true)
             } onComplete: { [weak self] in
                 guard let self else { return }
                 self.handlePlaybackCompletion()
@@ -901,13 +952,6 @@ final class AudioBibleService {
         isPlaying = false
         isPaused = false
 
-        if let activity = bibleActivity {
-            LiveActivityService.endBibleSession(activity)
-            bibleActivity = nil
-        }
-
-        restoreSoundscape()
-
         // Count this completion toward the still-listening safeguard. If
         // we've auto-advanced more than `stillListeningThreshold` chapters
         // in a row, prompt the user to confirm instead of quietly rolling
@@ -915,9 +959,17 @@ final class AudioBibleService {
         // when someone falls asleep with headphones in.
         consecutiveAutoAdvances += 1
         if consecutiveAutoAdvances >= Self.stillListeningThreshold {
+            // Pause and prompt. Keep the Live Activity alive (showing paused)
+            // — confirming continues it, dismissing/stop() ends it. We do NOT
+            // end+recreate per chapter, which is what made a dismissed
+            // notification keep coming back.
+            restoreSoundscape()
+            syncLiveActivity(isPlaying: false)
             showStillListeningPrompt = true
             scheduleStillListeningTimeout()
         } else {
+            // Auto-advance: leave the activity alive; the next chapter's
+            // play() updates it in place.
             onChapterComplete?()
         }
     }

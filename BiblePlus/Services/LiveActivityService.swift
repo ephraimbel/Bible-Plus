@@ -14,20 +14,18 @@ enum LiveActivityService {
     ) -> Activity<BibleSessionAttributes>? {
         guard ActivityAuthorizationInfo().areActivitiesEnabled else { return nil }
 
-        let attributes = BibleSessionAttributes(
+        let state = BibleSessionAttributes.ContentState(
             bookName: bookName,
             chapter: chapter,
             translationName: translationName,
-            totalVerses: totalVerses
-        )
-        let state = BibleSessionAttributes.ContentState(
+            totalVerses: totalVerses,
             currentVerse: currentVerse,
             isPlaying: true
         )
         let content = ActivityContent(state: state, staleDate: nil)
 
         do {
-            return try Activity.request(attributes: attributes, content: content)
+            return try Activity.request(attributes: BibleSessionAttributes(), content: content)
         } catch {
             return nil
         }
@@ -35,10 +33,18 @@ enum LiveActivityService {
 
     static func updateBibleSession(
         _ activity: Activity<BibleSessionAttributes>,
+        bookName: String,
+        chapter: Int,
+        translationName: String,
+        totalVerses: Int,
         currentVerse: Int,
         isPlaying: Bool
     ) {
         let state = BibleSessionAttributes.ContentState(
+            bookName: bookName,
+            chapter: chapter,
+            translationName: translationName,
+            totalVerses: totalVerses,
             currentVerse: currentVerse,
             isPlaying: isPlaying
         )
@@ -49,11 +55,10 @@ enum LiveActivityService {
     }
 
     static func endBibleSession(_ activity: Activity<BibleSessionAttributes>) {
-        let state = BibleSessionAttributes.ContentState(
-            currentVerse: 0,
-            isPlaying: false
-        )
-        let content = ActivityContent(state: state, staleDate: nil)
+        let state = activity.content.state
+        var ended = state
+        ended.isPlaying = false
+        let content = ActivityContent(state: ended, staleDate: nil)
         Task {
             await activity.end(content, dismissalPolicy: .immediate)
         }

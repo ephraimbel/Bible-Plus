@@ -17,16 +17,16 @@ struct BibleSessionLiveActivity: Widget {
                 }
                 DynamicIslandExpandedRegion(.center) {
                     VStack(spacing: 2) {
-                        Text("\(context.attributes.bookName) \(context.attributes.chapter)")
+                        Text("\(context.state.bookName) \(context.state.chapter)")
                             .font(.headline)
                             .foregroundStyle(.white)
-                        Text("Verse \(context.state.currentVerse) of \(context.attributes.totalVerses)")
+                        Text("Verse \(context.state.currentVerse) of \(context.state.totalVerses)")
                             .font(.caption)
                             .foregroundStyle(.white.opacity(0.7))
                     }
                 }
                 DynamicIslandExpandedRegion(.trailing) {
-                    Text(context.attributes.translationName)
+                    Text(context.state.translationName)
                         .font(.caption2)
                         .fontWeight(.medium)
                         .foregroundStyle(.white.opacity(0.6))
@@ -37,7 +37,7 @@ struct BibleSessionLiveActivity: Widget {
                 DynamicIslandExpandedRegion(.bottom) {
                     ProgressView(
                         value: Double(context.state.currentVerse),
-                        total: Double(context.attributes.totalVerses)
+                        total: Double(context.state.totalVerses)
                     )
                     .tint(Color(red: 0.79, green: 0.66, blue: 0.43)) // #C9A96E
                     .padding(.horizontal, 4)
@@ -47,7 +47,7 @@ struct BibleSessionLiveActivity: Widget {
                     .font(.caption)
                     .foregroundStyle(Color(red: 0.79, green: 0.66, blue: 0.43))
             } compactTrailing: {
-                Text("\(context.state.currentVerse)/\(context.attributes.totalVerses)")
+                Text("\(context.state.currentVerse)/\(context.state.totalVerses)")
                     .font(.caption2)
                     .fontWeight(.medium)
                     .foregroundStyle(.white.opacity(0.8))
@@ -58,7 +58,7 @@ struct BibleSessionLiveActivity: Widget {
                     Circle()
                         .trim(
                             from: 0,
-                            to: Double(context.state.currentVerse) / Double(max(context.attributes.totalVerses, 1))
+                            to: Double(context.state.currentVerse) / Double(max(context.state.totalVerses, 1))
                         )
                         .stroke(
                             Color(red: 0.79, green: 0.66, blue: 0.43),
@@ -81,11 +81,11 @@ struct BibleSessionLiveActivity: Widget {
             HStack {
                 Image(systemName: "book.fill")
                     .foregroundStyle(Color(red: 0.79, green: 0.66, blue: 0.43))
-                Text("\(context.attributes.bookName) \(context.attributes.chapter)")
+                Text("\(context.state.bookName) \(context.state.chapter)")
                     .font(.headline)
                     .foregroundStyle(.white)
                 Spacer()
-                Text(context.attributes.translationName)
+                Text(context.state.translationName)
                     .font(.caption2)
                     .fontWeight(.medium)
                     .foregroundStyle(.white.opacity(0.6))
@@ -98,7 +98,7 @@ struct BibleSessionLiveActivity: Widget {
                 Image(systemName: context.state.isPlaying ? "waveform" : "pause.fill")
                     .font(.caption)
                     .foregroundStyle(.white.opacity(0.6))
-                Text("Verse \(context.state.currentVerse) of \(context.attributes.totalVerses)")
+                Text("Verse \(context.state.currentVerse) of \(context.state.totalVerses)")
                     .font(.subheadline)
                     .foregroundStyle(.white.opacity(0.8))
                 Spacer()
@@ -106,7 +106,7 @@ struct BibleSessionLiveActivity: Widget {
 
             ProgressView(
                 value: Double(context.state.currentVerse),
-                total: Double(context.attributes.totalVerses)
+                total: Double(context.state.totalVerses)
             )
             .tint(Color(red: 0.79, green: 0.66, blue: 0.43))
         }
