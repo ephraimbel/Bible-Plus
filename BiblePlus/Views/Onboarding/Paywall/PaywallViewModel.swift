@@ -16,9 +16,10 @@ final class PaywallViewModel {
 
     // MARK: - Purchase State
 
-    // Weekly is the featured plan: it carries the 3-day free trial, so it's
-    // pre-selected to surface the trial CTA the moment the paywall opens.
-    var selectedProductID: String? = StoreKitService.weeklyID
+    // Yearly is the featured "Best Value" plan and is pre-selected to steer
+    // plan mix toward the higher-LTV annual subscription. Weekly still carries
+    // the 3-day trial (per App Store Connect) and serves as the price anchor.
+    var selectedProductID: String? = StoreKitService.yearlyID
     var isPurchasing = false
     var purchaseError: String? = nil
 
@@ -343,42 +344,47 @@ final class PaywallViewModel {
         storeKit.weeklyProduct?.localizedPriceString ?? "$4.99"
     }
 
-    /// Annualized equivalent of the weekly price. Used as an anchor on the
-    /// weekly card so the user can see at a glance what committing to weekly
-    /// billing really costs over a year — makes the yearly plan feel rational
-    /// without requiring the user to do the math.
-    func weeklyAnnualEquivalent(_ storeKit: StoreKitService) -> String {
-        if let product = storeKit.weeklyProduct {
-            let annual = product.price * 52
-            if let formatter = product.priceFormatter {
-                return formatter.string(from: annual as NSNumber) ?? "$259.48"
-            }
-            return String(format: "$%.2f", (annual as NSDecimalNumber).doubleValue)
-        }
-        return "$259.48"
-    }
-
-    func yearlyWeeklyBreakdown(_ storeKit: StoreKitService) -> String {
+    /// Monthly equivalent of the yearly plan (price ÷ 12). Used as the headline
+    /// framing on the featured yearly card — "$4.17/month" reads far smaller and
+    /// more approachable than "$49.99/yr".
+    func yearlyMonthlyEquivalent(_ storeKit: StoreKitService) -> String {
         if let product = storeKit.yearlyProduct {
-            let weeklyPrice = product.price / 52
+            let monthly = product.price / 12
             if let formatter = product.priceFormatter {
-                return formatter.string(from: weeklyPrice as NSNumber) ?? "$0.96"
+                return formatter.string(from: monthly as NSNumber) ?? "$4.17"
             }
-            return String(format: "$%.2f", (weeklyPrice as NSDecimalNumber).doubleValue)
+            return String(format: "$%.2f", (monthly as NSDecimalNumber).doubleValue)
         }
-        return "$0.96"
+        return "$4.17"
     }
 
-    func savingsPercent(_ storeKit: StoreKitService) -> Int {
-        guard let yearly = storeKit.yearlyProduct,
-              let weekly = storeKit.weeklyProduct,
-              weekly.price > 0, yearly.price > 0 else {
-            return 81
+    /// Monthly equivalent of the weekly plan (price × 4). Surfaced on the weekly
+    /// anchor card so its true monthly cost (~$19.96) towers over the yearly
+    /// plan's $4.17/month — making annual the obvious rational choice.
+    func weeklyMonthlyEquivalent(_ storeKit: StoreKitService) -> String {
+        if let product = storeKit.weeklyProduct {
+            let monthly = product.price * 4
+            if let formatter = product.priceFormatter {
+                return formatter.string(from: monthly as NSNumber) ?? "$19.96"
+            }
+            return String(format: "$%.2f", (monthly as NSDecimalNumber).doubleValue)
         }
-        let weeklyAnnual = (weekly.price as NSDecimalNumber).doubleValue * 52.0
-        let yearlyPrice = (yearly.price as NSDecimalNumber).doubleValue
-        guard weeklyAnnual > yearlyPrice else { return 81 }
-        let result = Int((weeklyAnnual - yearlyPrice) / weeklyAnnual * 100)
-        return result > 0 ? result : 81
+        return "$19.96"
+    }
+
+    /// Exact dollars saved over a year by choosing yearly instead of paying the
+    /// weekly price for 52 weeks (52 × weekly − yearly). Shown on the yearly
+    /// card as "Save $X" — a concrete number lands harder than a percentage.
+    func yearlySavingsAmount(_ storeKit: StoreKitService) -> String {
+        if let weekly = storeKit.weeklyProduct, let yearly = storeKit.yearlyProduct {
+            let saved = (weekly.price * 52) - yearly.price
+            if saved > 0 {
+                if let formatter = yearly.priceFormatter {
+                    return formatter.string(from: saved as NSNumber) ?? "$209"
+                }
+                return String(format: "$%.2f", (saved as NSDecimalNumber).doubleValue)
+            }
+        }
+        return "$209"
     }
 }
