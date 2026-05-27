@@ -16,7 +16,9 @@ final class PaywallViewModel {
 
     // MARK: - Purchase State
 
-    var selectedProductID: String? = StoreKitService.yearlyID
+    // Weekly is the featured plan: it carries the 3-day free trial, so it's
+    // pre-selected to surface the trial CTA the moment the paywall opens.
+    var selectedProductID: String? = StoreKitService.weeklyID
     var isPurchasing = false
     var purchaseError: String? = nil
 
