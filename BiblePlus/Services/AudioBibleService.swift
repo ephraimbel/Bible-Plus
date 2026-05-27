@@ -52,6 +52,17 @@ final class AudioBibleService {
     /// highlight) locked to whatever item is actually playing — so the
     /// highlight never drifts behind the audio over a long chapter.
     nonisolated(unsafe) private var timeObserverToken: Any?
+    /// Independent wall-clock watchdog. Unlike the player's periodic time
+    /// observer (which stops firing the instant the player clock freezes), this
+    /// ticks on its own schedule so it can detect AND recover from a stalled or
+    /// drained queue — including the dead-at-chapter-end case where the last
+    /// item finishes but the end-of-item notification never lands.
+    private var watchdogTask: Task<Void, Never>?
+    /// Last known playback position of the current item, with the time we
+    /// observed it. Lets the watchdog detect a "playing but frozen" stall (the
+    /// player reports `.playing` yet the clock hasn't moved) on the final item.
+    private var lastObservedTime: CMTime = .zero
+    private var lastObservedTimeAt: Date?
     private var tempFileURLs: [URL] = []
 
     // MARK: - Speech Fallback
@@ -88,6 +99,25 @@ final class AudioBibleService {
     // cut after the first 2-4 verses because the queue drained faster
     // than verses could arrive, which fired premature chapter completion.
     private var hasQueuedAllVerses: Bool = false
+
+    /// Highest verse index that has been inserted into the queue so far. The
+    /// watchdog uses this, together with `hasQueuedAllVerses`, to know whether
+    /// a drained queue means "chapter finished" or "still buffering the next
+    /// verse." Reset on every fresh `play()`.
+    private var highestQueuedIndex: Int = -1
+
+    /// Guards against `handlePlaybackCompletion()` firing twice for the same
+    /// chapter — both the end-of-item notification AND the periodic watchdog
+    /// can observe "queue empty + all verses queued," and without this flag a
+    /// double-fire would double-count the auto-advance counter and could even
+    /// skip a chapter. Cleared on every fresh `play()`.
+    private var didCompleteChapter: Bool = false
+
+    /// Wall-clock time the queue last went empty while we still believed we
+    /// were playing. Used by the watchdog to surface a brief buffering state
+    /// (and, if it persists abnormally long with all verses already queued, to
+    /// force chapter completion so playback never dies silently at the end).
+    private var queueDrainedAt: Date?
 
     // MARK: - Still-Listening Safeguard
     //
@@ -260,6 +290,9 @@ final class AudioBibleService {
         self.isLoading = true
         self.isFallbackMode = false
         self.hasQueuedAllVerses = false
+        self.highestQueuedIndex = -1
+        self.didCompleteChapter = false
+        self.queueDrainedAt = nil
 
         let versesToPlay = Array(verses[startingFromVerseIndex...])
 
@@ -381,6 +414,7 @@ final class AudioBibleService {
                     let item = AVPlayerItem(url: fileURL)
                     self.itemToVerseIndex[item] = globalIdx
                     self.playerItems.append(item)
+                    self.highestQueuedIndex = max(self.highestQueuedIndex, globalIdx)
 
                     // If the player drained its queue while we were still
                     // fetching, capture that state BEFORE inserting — after
@@ -410,12 +444,24 @@ final class AudioBibleService {
                         // Start (or, on auto-advance, reuse) the single session
                         // Live Activity.
                         self.syncLiveActivity(isPlaying: true)
-                    } else if queueWentDry && self.isPlaying {
-                        // Queue ran dry mid-chapter while the user was
-                        // still listening. Kick playback back on — this is
-                        // the fix for "audio cuts after 2-4 verses."
-                        player.play()
-                        player.rate = Float(self.playbackSpeed.rawValue)
+                    } else if self.isPlaying {
+                        // The queue may have drained mid-chapter while we were
+                        // still fetching this verse (generation can't always
+                        // keep pace with playback on an uncached chapter over a
+                        // slow network). Kick playback back on the instant the
+                        // next verse lands. We no longer rely SOLELY on the
+                        // pre-insert `queueWentDry` snapshot: `currentItem` can
+                        // read stale (the just-finished item) for a beat after
+                        // the queue empties, so that check sometimes missed the
+                        // drain and audio stalled forever. Nudging whenever the
+                        // player isn't actually playing is idempotent and the
+                        // periodic watchdog is the backstop.
+                        if queueWentDry || player.timeControlStatus != .playing {
+                            self.queueDrainedAt = nil
+                            self.isLoading = false
+                            player.play()
+                            player.rate = Float(self.playbackSpeed.rawValue)
+                        }
                     }
 
                     nextToQueue += 1
@@ -527,6 +573,13 @@ final class AudioBibleService {
         // playing, four times a second. Relying only on the end-of-item
         // notification let the highlight drift behind the audio over a long
         // chapter; this corrects it continuously.
+        //
+        // NOTE: the periodic time observer only fires while the player's clock
+        // is advancing — so it CANNOT be the watchdog. When the queue drains or
+        // the last item stalls, the clock freezes and this observer goes silent
+        // (this is what left audio dead at the end of an Acts chapter). The
+        // recovery watchdog therefore runs on an INDEPENDENT wall-clock timer
+        // (`startPlaybackWatchdog`) that ticks regardless of player state.
         if let token = timeObserverToken {
             queuePlayer?.removeTimeObserver(token)
             timeObserverToken = nil
@@ -536,25 +589,15 @@ final class AudioBibleService {
             guard let self else { return }
             MainActor.assumeIsolated {
                 guard let player = self.queuePlayer else { return }
-
                 // Keep the highlight locked to the item actually playing.
                 if let item = player.currentItem, let idx = self.itemToVerseIndex[item],
                    self.currentVerseIndex != idx {
                     self.currentVerseIndex = idx
                 }
-
-                // Stall watchdog: if we believe we're playing but the player
-                // has quietly stalled on a loaded item (AVQueuePlayer sometimes
-                // pauses itself after the queue briefly drains), nudge it back
-                // to life so audio never silently dies mid-chapter.
-                if self.isPlaying, !self.isPaused, !self.isFallbackMode,
-                   player.currentItem != nil,
-                   player.timeControlStatus == .paused {
-                    player.play()
-                    player.rate = Float(self.playbackSpeed.rawValue)
-                }
             }
         }
+
+        startPlaybackWatchdog()
 
         // Observe when AVQueuePlayer advances to the next item
         playerObserver = NotificationCenter.default.addObserver(
@@ -581,9 +624,113 @@ final class AudioBibleService {
                     // the streaming loop will insert the next verse and
                     // resume playback the moment it arrives.
                     try? await Task.sleep(nanoseconds: 100_000_000)
-                    if self.queuePlayer?.currentItem == nil && self.hasQueuedAllVerses {
+                    if self.queuePlayer?.currentItem == nil,
+                       self.hasQueuedAllVerses,
+                       !self.didCompleteChapter {
                         self.handlePlaybackCompletion()
                     }
+                }
+            }
+        }
+    }
+
+    // MARK: - Playback Watchdog (independent wall-clock timer)
+
+    /// Starts the self-driven watchdog loop. It runs every 0.4s for the life of
+    /// the playback session, independent of the player's clock, and is the
+    /// single guarantee that audio never silently dies in a long uncached
+    /// chapter. It recovers from three failure modes seen on device in Acts:
+    ///
+    ///   (A) Loaded-but-paused: an item is queued but the player sits at
+    ///       `.paused`/`.waiting`. Nudge `play()`.
+    ///   (B) Drained queue mid-chapter: the next verse hasn't generated yet.
+    ///       Surface a buffering state and resume the instant a verse arrives
+    ///       (a freshly inserted item is caught here even if the streaming
+    ///       loop's insert-time re-play missed the drain).
+    ///   (C) Stalled/finished last item: the final verse ends but the
+    ///       end-of-item notification never fires (or the player freezes at
+    ///       `.playing` with a stuck clock). Detected by either an empty queue
+    ///       with all verses queued, OR a non-advancing position at end of the
+    ///       last item — then drive chapter completion → auto-advance.
+    private func startPlaybackWatchdog() {
+        watchdogTask?.cancel()
+        lastObservedTime = .zero
+        lastObservedTimeAt = nil
+        watchdogTask = Task { @MainActor [weak self] in
+            while !Task.isCancelled {
+                try? await Task.sleep(nanoseconds: 400_000_000)
+                guard let self else { return }
+                self.playbackWatchdogTick()
+            }
+        }
+    }
+
+    private func stopPlaybackWatchdog() {
+        watchdogTask?.cancel()
+        watchdogTask = nil
+        lastObservedTime = .zero
+        lastObservedTimeAt = nil
+    }
+
+    private func playbackWatchdogTick() {
+        guard let player = queuePlayer else { return }
+        guard isPlaying, !isPaused, !isFallbackMode else { return }
+
+        if let item = player.currentItem {
+            // We have audio to play.
+            queueDrainedAt = nil
+            if isLoading { isLoading = false }
+
+            if player.timeControlStatus != .playing {
+                // (A) Loaded but not playing — nudge it. Idempotent; also the
+                // recovery for (B) the moment a buffered verse is inserted.
+                player.play()
+                player.rate = Float(playbackSpeed.rawValue)
+                lastObservedTimeAt = nil
+                return
+            }
+
+            // (C) Player claims it's playing — confirm the clock is actually
+            // moving. On the FINAL queued item, AVQueuePlayer can finish the
+            // file yet keep `currentItem` set and `timeControlStatus == .playing`
+            // with a frozen clock and no end-of-item notification — which left
+            // the chapter dead with no auto-advance. If position hasn't moved
+            // for ~2.5s and we're at/near the end of the last queued verse,
+            // treat the chapter as complete.
+            let now = player.currentTime()
+            let isLastQueuedItem = (itemToVerseIndex[item] ?? -1) >= highestQueuedIndex && hasQueuedAllVerses
+            if let last = lastObservedTimeAt, CMTimeCompare(now, lastObservedTime) == 0 {
+                let frozenFor = Date().timeIntervalSince(last)
+                if frozenFor >= 2.5, isLastQueuedItem, !didCompleteChapter {
+                    let duration = item.duration
+                    let atEnd = duration.isNumeric == false
+                        || CMTimeGetSeconds(duration) <= 0
+                        || CMTimeGetSeconds(now) >= CMTimeGetSeconds(duration) - 0.6
+                    if atEnd {
+                        handlePlaybackCompletion()
+                        return
+                    }
+                }
+            } else {
+                lastObservedTime = now
+                lastObservedTimeAt = Date()
+            }
+        } else {
+            // Queue is empty.
+            lastObservedTimeAt = nil
+            if hasQueuedAllVerses {
+                // (C) Every verse played and the queue is empty → chapter done.
+                // Fire completion even if the end-of-item notification was missed.
+                if !didCompleteChapter {
+                    handlePlaybackCompletion()
+                }
+            } else {
+                // (B) Buffering: drained while later verses still generate.
+                // Surface loading; resume happens in the has-item branch (and in
+                // the streaming loop) the instant the next verse is inserted.
+                if queueDrainedAt == nil {
+                    queueDrainedAt = Date()
+                    isLoading = true
                 }
             }
         }
@@ -630,6 +777,8 @@ final class AudioBibleService {
                 player.rate = Float(playbackSpeed.rawValue)
                 isPlaying = true
                 isPaused = false
+                // Reset the stall detector — the position legitimately jumped.
+                lastObservedTimeAt = nil
             }
         }
     }
@@ -664,6 +813,8 @@ final class AudioBibleService {
 
         isPlaying = true
         isPaused = false
+        // Reset the stall detector so the post-resume position isn't read as frozen.
+        lastObservedTimeAt = nil
 
         syncLiveActivity(isPlaying: true)
     }
@@ -676,6 +827,9 @@ final class AudioBibleService {
         for task in prefetchTasks { task.cancel() }
         prefetchTasks.removeAll()
         prefetchingChapters.removeAll()
+
+        // Stop the independent playback watchdog.
+        stopPlaybackWatchdog()
 
         // Stop AVQueuePlayer
         queuePlayer?.pause()
@@ -962,6 +1116,10 @@ final class AudioBibleService {
     // MARK: - Playback Completion
 
     private func handlePlaybackCompletion() {
+        // Latch so neither the periodic watchdog nor the end-of-item
+        // notification can fire completion a second time for this chapter.
+        guard !didCompleteChapter else { return }
+        didCompleteChapter = true
         isPlaying = false
         isPaused = false
 
