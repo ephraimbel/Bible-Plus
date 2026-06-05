@@ -31,6 +31,12 @@ struct ChatView: View {
         .onDisappear {
             viewModel?.stopStreaming()
         }
+        // Hide the bottom tab bar while a conversation is open so the chat is a
+        // focused, full-screen surface — the only way out is the back arrow,
+        // which pops to the conversation list. Applied here (on the pushed
+        // ChatView) so it hides for EVERY ask flow uniformly and the list keeps
+        // its tab bar.
+        .toolbar(.hidden, for: .tabBar)
         .navigationBarTitleDisplayMode(.inline)
         // Toolbar stays transparent so the chat gradient flows through
         // unbroken. Content bleed-through behind the toolbar buttons is
@@ -148,6 +154,15 @@ private struct ChatContentView: View {
                 messageList
             }
 
+            // Depth controls — let the reader retune the last answer to their
+            // level (deeper / simpler / by example). Shown only under a settled
+            // assistant answer.
+            if !viewModel.isStreaming,
+               let last = viewModel.displayMessages.last,
+               last.role == .assistant, !last.content.isEmpty {
+                depthControls
+            }
+
             // Follow-up suggestion chips
             if !viewModel.followUpSuggestions.isEmpty && !viewModel.isStreaming {
                 followUpChips
@@ -227,7 +242,8 @@ private struct ChatContentView: View {
 
     private var topGoldGradient: some View {
         let tint = palette.accent
-        let strength: CGFloat = colorScheme == .dark ? 0.20 : 0.28
+        // Whisper-soft now — the chat reads as calm warm paper, not a gold wash.
+        let strength: CGFloat = colorScheme == .dark ? 0.08 : 0.10
         let bg = palette.background
 
         return LinearGradient(
@@ -331,6 +347,22 @@ private struct ChatContentView: View {
                     }
                 } else {
                     scrollToBottom(proxy: proxy)
+                }
+            }
+            .onChange(of: viewModel.isStreaming) { wasStreaming, nowStreaming in
+                // When the AI finishes answering, lift the start of the exchange
+                // (the user's question) to the top so they read the response
+                // from the beginning instead of being stranded at its tail —
+                // the streaming anchor keeps the view pinned to the bottom while
+                // generating, so without this they'd land on the last line.
+                guard wasStreaming, !nowStreaming else { return }
+                guard let anchorId = viewModel.displayMessages.last(where: { $0.role == .user })?.id
+                        ?? viewModel.displayMessages.last(where: { $0.role == .assistant })?.id
+                else { return }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    withAnimation(.easeInOut(duration: 0.5)) {
+                        proxy.scrollTo(anchorId, anchor: .top)
+                    }
                 }
             }
             .onAppear {
@@ -451,6 +483,45 @@ private struct ChatContentView: View {
     // like a major UI element. The new design is subtle: capsule pills with
     // small rounded text, scrollable horizontally, sit just above the input
     // bar like keyboard suggestions.
+
+    // Fixed "retune the answer" controls under a completed reply. Deliberately
+    // quieter than the gold follow-up pills — these adjust the *last* answer
+    // rather than ask something new, so they read as controls, not suggestions.
+    private var depthControls: some View {
+        HStack(spacing: 8) {
+            depthChip(icon: "arrow.down.to.line", label: "Go deeper",
+                      prompt: "Go deeper on that — unpack it further.")
+            depthChip(icon: "wand.and.stars", label: "Simpler",
+                      prompt: "Can you put that more simply?")
+            depthChip(icon: "lightbulb", label: "Example",
+                      prompt: "Can you give me a concrete example of that?")
+            Spacer(minLength: 0)
+        }
+        .padding(.horizontal, 16)
+        .padding(.top, 8)
+        .transition(.opacity)
+    }
+
+    private func depthChip(icon: String, label: String, prompt: String) -> some View {
+        Button {
+            HapticService.lightImpact()
+            viewModel.sendQuickPrompt(prompt)
+        } label: {
+            HStack(spacing: 5) {
+                Image(systemName: icon)
+                    .font(.system(size: 10.5, weight: .semibold))
+                    .foregroundStyle(palette.accent.opacity(0.7))
+                Text(label)
+                    .font(.system(size: 12.5, weight: .medium, design: .rounded))
+                    .foregroundStyle(palette.textSecondary)
+            }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 7)
+            .background(Capsule().fill(palette.surface))
+            .overlay(Capsule().strokeBorder(palette.border.opacity(0.4), lineWidth: 0.5))
+        }
+        .buttonStyle(.plain)
+    }
 
     private var followUpChips: some View {
         ScrollView(.horizontal, showsIndicators: false) {
@@ -596,120 +667,101 @@ private struct ChatContentView: View {
     // MARK: - Input Bar
 
     private var inputBar: some View {
-        VStack(spacing: 0) {
-            // Subtle top divider
-            Rectangle()
-                .fill(palette.border.opacity(0.3))
-                .frame(height: 0.5)
+        // A clean, floating composer set on a subtly distinct surface so it
+        // reads clearly against the thread without feeling heavy: a warm
+        // recessed fill (a touch off the canvas), a whisper-fine border, and a
+        // soft lift. Minimal and high-end. Everything is vertically centered so
+        // the send button sits in the optical center of the row.
+        HStack(alignment: .center, spacing: 12) {
+            Button {
+                HapticService.lightImpact()
+                showVoiceChat = true
+            } label: {
+                Image(systemName: "waveform")
+                    .font(.system(size: 18, weight: .regular))
+                    .foregroundStyle(palette.textMuted.opacity(0.55))
+                    .frame(width: 28, height: 34)
+            }
+            .buttonStyle(.plain)
+            .disabled(viewModel.isStreaming)
+            .opacity(viewModel.isStreaming ? 0.3 : 1.0)
 
-            HStack(spacing: 12) {
-                // Voice chat entry — opens a hands-free conversation surface.
-                Button {
-                    HapticService.lightImpact()
-                    showVoiceChat = true
-                } label: {
-                    Image(systemName: "waveform")
+            TextField("Ask anything about Scripture…", text: $viewModel.inputText, axis: .vertical)
+                .font(.system(size: 17))
+                .foregroundStyle(palette.textPrimary)
+                .tint(palette.accent)
+                .lineLimit(1...6)
+                .padding(.vertical, 8)
+
+            sendButton
+        }
+        .padding(.leading, 16)
+        .padding(.trailing, 6)
+        .padding(.vertical, 6)
+        .background(
+            RoundedRectangle(cornerRadius: 26, style: .continuous)
+                .fill(palette.surface)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 26, style: .continuous)
+                        .strokeBorder(palette.border.opacity(0.5), lineWidth: 1)
+                )
+                .shadow(color: .black.opacity(colorScheme == .dark ? 0.22 : 0.05),
+                        radius: 12, y: 3)
+        )
+        .padding(.horizontal, 14)
+        .padding(.top, 8)
+        .padding(.bottom, 10)
+    }
+
+    // The single send / responding control. Idle: a calm up-arrow. While the
+    // AI responds: a gently pulsing gold sparkle (the app's signature star).
+    // The two symbols morph into each other with SF Symbols' `.replace`
+    // content transition for a clean, high-end swap.
+    private var sendButton: some View {
+        Button {
+            if viewModel.isStreaming {
+                viewModel.stopStreaming()
+            } else {
+                viewModel.send()
+            }
+            HapticService.lightImpact()
+        } label: {
+            Circle()
+                .fill(sendButtonFill)
+                .frame(width: 34, height: 34)
+                .overlay(
+                    Image(systemName: viewModel.isStreaming ? "sparkle" : "arrow.up")
                         .font(.system(size: 15, weight: .semibold))
-                        .foregroundStyle(palette.accent)
-                        .frame(width: 38, height: 38)
-                        .background(
-                            Circle().fill(palette.accent.opacity(0.10))
-                        )
-                        .overlay(
-                            Circle().stroke(palette.accent.opacity(0.18), lineWidth: 0.5)
-                        )
-                }
-                .buttonStyle(.plain)
-                .disabled(viewModel.isStreaming)
-                .opacity(viewModel.isStreaming ? 0.4 : 1.0)
-
-                TextField("Ask anything about Scripture...", text: $viewModel.inputText, axis: .vertical)
-                    .font(.system(size: 15, weight: .regular, design: .rounded))
-                    .lineLimit(1...5)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 12)
-                    .background(
-                        RoundedRectangle(cornerRadius: 22)
-                            .fill(palette.surfaceElevated)
-                            .shadow(color: .black.opacity(0.06), radius: 8, y: 4)
-                    )
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 22)
-                            .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
-                    )
-
-                Button {
-                    if viewModel.isStreaming {
-                        viewModel.stopStreaming()
-                    } else {
-                        viewModel.send()
-                    }
-                    HapticService.lightImpact()
-                } label: {
-                    ZStack {
-                        // Outer glow ring when active
-                        if viewModel.canSend || viewModel.isStreaming {
-                            Circle()
-                                .fill(palette.accent.opacity(0.08))
-                                .frame(width: 48, height: 48)
-                        }
-
-                        Circle()
-                            .fill(
-                                viewModel.canSend || viewModel.isStreaming
-                                    ? LinearGradient(
-                                        colors: [palette.accent, palette.accent.opacity(0.8)],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    )
-                                    : LinearGradient(
-                                        colors: [palette.surface, palette.surface],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    )
-                            )
-                            .frame(width: 38, height: 38)
-                            .shadow(
-                                color: viewModel.canSend || viewModel.isStreaming
-                                    ? palette.accent.opacity(0.25) : .clear,
-                                radius: 6, y: 3
-                            )
-
-                        Image(systemName: viewModel.isStreaming ? "stop.fill" : "arrow.up")
-                            .font(.system(size: viewModel.isStreaming ? 12 : 15, weight: .semibold))
-                            .foregroundStyle(
-                                viewModel.canSend || viewModel.isStreaming
-                                    ? .white
-                                    : palette.textMuted
-                            )
-                    }
-                    .scaleEffect(sendButtonScale)
-                }
-                .buttonStyle(PressableButtonStyle())
-                .disabled(!viewModel.canSend && !viewModel.isStreaming)
-                .onChange(of: viewModel.canSend) { _, canSend in
-                    withAnimation(BPAnimation.buttonPress) {
-                        sendButtonScale = canSend ? 1.1 : 1.0
-                    }
-                    if canSend {
-                        withAnimation(BPAnimation.spring.delay(0.15)) {
-                            sendButtonScale = 1.0
-                        }
-                    }
+                        .foregroundStyle(sendButtonIconColor)
+                        .contentTransition(.symbolEffect(.replace.downUp))
+                        .symbolEffect(.pulse, options: .repeating, isActive: viewModel.isStreaming)
+                )
+                .scaleEffect(sendButtonScale)
+        }
+        .buttonStyle(PressableButtonStyle())
+        .disabled(!viewModel.canSend && !viewModel.isStreaming)
+        .animation(.smooth(duration: 0.35), value: viewModel.isStreaming)
+        .animation(.smooth(duration: 0.3), value: viewModel.canSend)
+        .onChange(of: viewModel.canSend) { _, canSend in
+            withAnimation(BPAnimation.buttonPress) {
+                sendButtonScale = canSend ? 1.12 : 1.0
+            }
+            if canSend {
+                withAnimation(BPAnimation.spring.delay(0.15)) {
+                    sendButtonScale = 1.0
                 }
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
         }
-        // Dark mode keeps the system material (it reads warm there).
-        // Light mode swaps to surfaceElevated — `.ultraThinMaterial` was
-        // landing as a cool gray in light mode that fought the warm
-        // tan/gold palette.
-        .background(
-            colorScheme == .dark
-                ? AnyShapeStyle(.ultraThinMaterial)
-                : AnyShapeStyle(palette.background)
-        )
+    }
+
+    private var sendButtonFill: Color {
+        if viewModel.isStreaming { return palette.accent.opacity(0.16) }
+        return viewModel.canSend ? palette.accent : palette.textMuted.opacity(0.16)
+    }
+
+    private var sendButtonIconColor: Color {
+        if viewModel.isStreaming { return palette.accent }
+        return viewModel.canSend ? .white : palette.textMuted.opacity(0.8)
     }
 
 }

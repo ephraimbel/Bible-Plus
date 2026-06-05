@@ -123,7 +123,17 @@ struct BiblePlusApp: App {
         let seedContext = ModelContext(modelContainer)
         ContentSeeder.seedIfNeeded(modelContext: seedContext)
         ContentSeeder.seedPlansIfNeeded(modelContext: seedContext)
+        ContentSeeder.seedDailyPathsIfNeeded(modelContext: seedContext)
         ContentSeeder.migrateOrphanedMessages(modelContext: seedContext)
+
+        // Recovery: ensure the Daily Path reminder is correctly scheduled
+        // (or cancelled) for the user's current state. Cheap, idempotent,
+        // safe to call on every launch. Internal refresh logic cancels the
+        // existing pending request before scheduling, so duplicates can't
+        // accrue across launches.
+        Task { @MainActor in
+            NotificationService.shared.refreshDailyPathReminder(modelContext: seedContext)
+        }
 
         // Ensure widget has the current background frame
         let profileFetch = FetchDescriptor<UserProfile>()
@@ -458,6 +468,14 @@ struct RootView: View {
             NotificationCenter.default.post(name: .askDeepLink, object: nil)
         case "sanctuary":
             NotificationCenter.default.post(name: .sanctuaryDeepLink, object: nil)
+        case "path":
+            // bibleplus://path  or  bibleplus://path/{pathID}
+            let pathID = url.pathComponents.dropFirst().first
+            NotificationCenter.default.post(
+                name: .pathDeepLink,
+                object: nil,
+                userInfo: pathID.map { ["pathID": $0] } ?? [:]
+            )
         default:
             break
         }

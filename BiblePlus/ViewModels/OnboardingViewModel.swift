@@ -23,6 +23,14 @@ final class OnboardingViewModel {
     var selectedThemeID: String = "sunrise-mountains"
     var selectedBackgroundID: String = "warm-gold"
 
+    // Extended onboarding interview
+    var selectedGender: Gender? = nil
+    var age: Int = 0                                   // exact age, 0 = unanswered
+    var closenessRating: Int = 0                       // 1–5, 0 = unanswered
+    var selectedGrowthBlockers: Set<GrowthBlocker> = []
+    var selectedGoals: Set<AppGoal> = []
+    var selectedTimeCommitment: TimeCommitment? = nil
+
     // MARK: - Services
     private let personalizationService: PersonalizationService
     private let modelContext: ModelContext
@@ -95,7 +103,6 @@ final class OnboardingViewModel {
         // and none gate the onboarding completion. The user is now in the
         // app regardless of whether the seeding succeeds.
         seedDay1Streak()
-        seedWelcomeConversation()
         scheduleDay1WelcomeBackNotification()
     }
 
@@ -106,33 +113,6 @@ final class OnboardingViewModel {
     /// psychological foundation of the don't-break-the-chain loop.
     private func seedDay1Streak() {
         ActivityService.log(.appOpened, detail: "onboarding_completed", in: modelContext)
-    }
-
-    /// Change 2 — pre-seed an EMPTY Conversation marked `isOnboarding`.
-    /// We deliberately don't create any ChatMessage here. The greeting
-    /// itself is generated and typed out by `ChatViewModel` when the user
-    /// first opens the conversation, and the typewriter writes into a
-    /// non-persistent placeholder until completion — that way if the
-    /// user backs out mid-animation or the app dies, nothing partial is
-    /// ever saved to disk. On reopen the typewriter cleanly replays.
-    private func seedWelcomeConversation() {
-        let profile = personalizationService.getOrCreateProfile()
-        // If somehow already seeded (re-entry, debug), don't double-create.
-        if profile.welcomeConversationID != nil { return }
-
-        let conversation = Conversation(
-            id: UUID(),
-            title: "Your first conversation",
-            createdAt: .now,
-            updatedAt: .now,
-            isPinned: true,
-            isOnboarding: true
-        )
-
-        modelContext.insert(conversation)
-        profile.welcomeConversationID = conversation.id
-
-        try? modelContext.save()
     }
 
     /// Change 4 — schedule a recurring local notification at the user's
@@ -175,6 +155,22 @@ final class OnboardingViewModel {
             selectedPrayerTimes.remove(time)
         } else {
             selectedPrayerTimes.insert(time)
+        }
+    }
+
+    func toggleGrowthBlocker(_ blocker: GrowthBlocker) {
+        if selectedGrowthBlockers.contains(blocker) {
+            selectedGrowthBlockers.remove(blocker)
+        } else if selectedGrowthBlockers.count < 3 {
+            selectedGrowthBlockers.insert(blocker)
+        }
+    }
+
+    func toggleGoal(_ goal: AppGoal) {
+        if selectedGoals.contains(goal) {
+            selectedGoals.remove(goal)
+        } else if selectedGoals.count < 3 {
+            selectedGoals.insert(goal)
         }
     }
 
@@ -299,6 +295,36 @@ final class OnboardingViewModel {
 
     func persistPrayerTimes() {
         personalizationService.updatePrayerTimes(Array(selectedPrayerTimes))
+    }
+
+    func persistGender() {
+        if let gender = selectedGender {
+            personalizationService.updateGender(gender)
+        }
+    }
+
+    func persistAge() {
+        guard age > 0 else { return }
+        personalizationService.updateAge(age)
+    }
+
+    func persistCloseness() {
+        guard closenessRating > 0 else { return }
+        personalizationService.updateClosenessRating(closenessRating)
+    }
+
+    func persistGrowthBlockers() {
+        personalizationService.updateGrowthBlockers(Array(selectedGrowthBlockers))
+    }
+
+    func persistGoals() {
+        personalizationService.updateAppGoals(Array(selectedGoals))
+    }
+
+    func persistTimeCommitment() {
+        if let commitment = selectedTimeCommitment {
+            personalizationService.updateTimeCommitment(commitment)
+        }
     }
 
     func persistBackground() {

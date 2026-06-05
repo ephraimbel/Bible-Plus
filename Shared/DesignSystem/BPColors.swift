@@ -27,14 +27,15 @@ struct BPColorPalette {
     //
     // Hierarchy:
     //   background      = soft warm white (R-B≈8, a whisper of tan)
-    //   surfaceElevated = pure white cards (brighter than canvas → they pop)
+    //   surfaceElevated = warm ivory cards (brighter than canvas → they lift,
+    //                     but warmer than stark white so they don't read sterile)
     //   surface         = deeper beige for recessed elements inside cards
     //
     // Dark mode is untouched.
     static let light = BPColorPalette(
         background: Color(hex: "FBF8F3"),        // soft warm white — slight tan, not harsh
         surface: Color(hex: "F4EFE6"),           // soft beige — recessed elements, tracks
-        surfaceElevated: Color(hex: "FFFFFF"),   // pure white — cards pop on the warm canvas
+        surfaceElevated: Color(hex: "FEFBF4"),   // warm ivory — lifts off the canvas, gently warmer than stark white
         accent: Color(hex: "C9A96E"),            // gold — our signature accent
         accentSoft: Color(hex: "F3EBDB"),        // softened gold-cream wash
         textPrimary: Color(hex: "3B2B1D"),       // deep sepia brown — "ink on paper"

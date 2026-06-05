@@ -128,7 +128,13 @@ struct OnboardingJourneyProjectionView: View {
     }
 
     private var outcomeCaption: String {
-        "Deeper in the Word, stronger in faith, closer to Christ — a little more each day."
+        // Echo the felt-closeness "before" they gave earlier, so the projection
+        // reads as a personal trajectory rather than a generic promise.
+        let r = viewModel.closenessRating
+        if r > 0 {
+            return "Today, God feels about \(r) out of 5 close. Walk this path, and watch that grow — a little more each day."
+        }
+        return "Deeper in the Word, stronger in faith, closer to Christ — a little more each day."
     }
 
     // MARK: - The glowing figure

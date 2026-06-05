@@ -188,6 +188,44 @@ final class AudioBibleService {
     /// Tracks chapter keys currently being prefetched to avoid duplicate work.
     private var prefetchingChapters: Set<String> = []
 
+    // MARK: - Debug Log (TEMP — device diagnostics)
+    //
+    // Appends audio-engine events to Documents/audio-debug.log so we can pull
+    // the file off a physical device with `xcrun devicectl device copy from`
+    // and see exactly why playback stalls on real hardware. Remove once fixed.
+    #if DEBUG
+    private nonisolated static let debugLogURL: URL =
+        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("audio-debug.log")
+    #endif
+
+    // NOTE: gated to DEBUG only. The watchdog calls `alog` every 0.4s during
+    // playback; doing synchronous main-thread file I/O into an ever-growing
+    // file in the user-visible, iCloud-backed Documents directory on every tick
+    // is real battery/disk/jank harm in a long listening session. In release
+    // these are no-ops, so production playback does zero diagnostic I/O; the
+    // logs remain available on debug builds for device diagnostics.
+    nonisolated static func alog(_ msg: String) {
+        #if DEBUG
+        let ts = ISO8601DateFormatter().string(from: Date())
+        let line = "\(ts) \(msg)\n"
+        guard let data = line.data(using: .utf8) else { return }
+        if let handle = try? FileHandle(forWritingTo: debugLogURL) {
+            handle.seekToEndOfFile()
+            handle.write(data)
+            try? handle.close()
+        } else {
+            try? data.write(to: debugLogURL)
+        }
+        #endif
+    }
+
+    nonisolated static func alogReset() {
+        #if DEBUG
+        try? "".data(using: .utf8)?.write(to: debugLogURL)
+        #endif
+    }
+
     // MARK: - Concurrency
 
     /// Max parallel TTS requests for verse generation. Kept modest so a long
@@ -277,7 +315,9 @@ final class AudioBibleService {
         // counter keeps climbing toward the still-listening threshold.
         if !isAutoAdvance {
             consecutiveAutoAdvances = 0
+            Self.alogReset()
         }
+        Self.alog("PLAY \(book.name) \(chapter) from=\(startingFromVerseIndex) auto=\(isAutoAdvance) n=\(verses.count)")
 
         self.currentVerses = verses
         self.currentBook = book
@@ -309,11 +349,12 @@ final class AudioBibleService {
                     translation: translation
                 )
             } catch is CancellationError {
-                // Cancelled
+                Self.alog("stream CANCELLED")
             } catch AudioBibleError.cancelled {
-                // Cancelled
+                Self.alog("stream cancelled(err)")
             } catch {
                 guard !Task.isCancelled else { return }
+                Self.alog("stream THREW -> device-voice fallback: \(error)")
                 // Fallback to AVSpeechSynthesizer
                 self.errorMessage = "Using device voice"
                 self.playWithSpeechFallback(
@@ -464,6 +505,7 @@ final class AudioBibleService {
                         }
                     }
 
+                    Self.alog("queued idx=\(globalIdx) wentDry=\(queueWentDry) tcs=\(player.timeControlStatus.rawValue)")
                     nextToQueue += 1
                 }
             }
@@ -478,6 +520,7 @@ final class AudioBibleService {
         // The observer can safely treat an empty queue as "chapter done"
         // from this point forward.
         self.hasQueuedAllVerses = true
+        Self.alog("ALL QUEUED total=\(self.highestQueuedIndex + 1)")
     }
 
     // MARK: - Fetch Single Verse Audio (with device cache)
@@ -675,6 +718,9 @@ final class AudioBibleService {
     private func playbackWatchdogTick() {
         guard let player = queuePlayer else { return }
         guard isPlaying, !isPaused, !isFallbackMode else { return }
+
+        let itemIdx = player.currentItem.flatMap { itemToVerseIndex[$0] }.map(String.init) ?? "nil"
+        Self.alog("tick v=\(currentVerseIndex) item=\(itemIdx) tcs=\(player.timeControlStatus.rawValue) wait=\(player.reasonForWaitingToPlay?.rawValue ?? "-") t=\(String(format: "%.1f", CMTimeGetSeconds(player.currentTime()))) hiQ=\(highestQueuedIndex) allQ=\(hasQueuedAllVerses) load=\(isLoading) itemErr=\(player.currentItem?.error.map { "\($0)" } ?? "-")")
 
         if let item = player.currentItem {
             // We have audio to play.
@@ -900,11 +946,19 @@ final class AudioBibleService {
         playbackSpeed = speed
 
         if isFallbackMode {
-            guard let synthesizer = speechSynthesizer, synthesizer.isSpeaking || isPaused else { return }
+            // Re-rate only while actually speaking. When paused we must NOT
+            // requeue — `requeueSpeechUtterances` restarts speech, which would
+            // secretly resume playback the user had paused. The new speed is
+            // held in `playbackSpeed` and takes effect on the next resume/verse.
+            guard let synthesizer = speechSynthesizer, synthesizer.isSpeaking, !isPaused else { return }
             let resumeIndex = currentVerseIndex
             speechSynthesizer?.stopSpeaking(at: .immediate)
             requeueSpeechUtterances(from: resumeIndex)
-        } else if let player = queuePlayer {
+        } else if let player = queuePlayer, isPlaying {
+            // Setting a non-zero `rate` on an AVPlayer resumes it. Only apply the
+            // new speed live while we're genuinely playing; when paused the speed
+            // is stored in `playbackSpeed` and re-applied by resume(), so tapping
+            // the speed control mid-pause no longer silently restarts the audio.
             player.rate = Float(speed.rawValue)
         }
     }
@@ -1119,6 +1173,7 @@ final class AudioBibleService {
         // Latch so neither the periodic watchdog nor the end-of-item
         // notification can fire completion a second time for this chapter.
         guard !didCompleteChapter else { return }
+        Self.alog("CHAPTER COMPLETE \(currentBookName) \(currentChapter); nextAuto=\(consecutiveAutoAdvances + 1)")
         didCompleteChapter = true
         isPlaying = false
         isPaused = false
@@ -1226,13 +1281,13 @@ final class AudioBibleService {
                 guard let self else { return }
                 switch type {
                 case .began:
+                    Self.alog("INTERRUPTION began (isPlaying=\(self.isPlaying))")
                     if self.isPlaying { self.pause() }
                 case .ended:
-                    if let optionsValue = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt {
-                        let options = AVAudioSession.InterruptionOptions(rawValue: optionsValue)
-                        if options.contains(.shouldResume) && self.isPaused {
-                            self.resume()
-                        }
+                    let opts = (userInfo[AVAudioSessionInterruptionOptionKey] as? UInt).map { AVAudioSession.InterruptionOptions(rawValue: $0) }
+                    Self.alog("INTERRUPTION ended shouldResume=\(opts?.contains(.shouldResume) ?? false) isPaused=\(self.isPaused)")
+                    if let options = opts, options.contains(.shouldResume) && self.isPaused {
+                        self.resume()
                     }
                 @unknown default:
                     break

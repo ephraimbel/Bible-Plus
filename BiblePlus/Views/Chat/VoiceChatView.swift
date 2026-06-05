@@ -39,22 +39,27 @@ struct VoiceChatView: View {
 
                 Spacer()
 
+                // The orb IS the control — tap it to speak / send / stop. No
+                // separate button; the status label below tells you what a tap
+                // will do. Pure and minimal.
                 orb
+                    .contentShape(Circle())
+                    .onTapGesture {
+                        guard primaryButtonEnabled else { return }
+                        HapticService.lightImpact()
+                        handlePrimaryTap()
+                    }
 
-                Spacer().frame(height: 32)
+                Spacer().frame(height: 28)
 
                 statusLabel
 
-                Spacer().frame(height: 12)
+                Spacer().frame(height: 16)
 
                 transcriptArea
-                    .frame(maxHeight: 220)
+                    .frame(maxHeight: 200)
 
                 Spacer()
-
-                primaryButton
-
-                Spacer().frame(height: 48)
             }
             .padding(.horizontal, 24)
         }
@@ -87,43 +92,17 @@ struct VoiceChatView: View {
     // MARK: - Background
 
     private var background: some View {
-        ZStack {
-            // Deep gradient base — same warm tones as the rest of the app but
-            // pushed darker so the orb pops. Always uses dark-mode colors for
-            // visual consistency regardless of system theme.
-            LinearGradient(
-                colors: [
-                    Color(red: 0.08, green: 0.06, blue: 0.04),
-                    Color(red: 0.14, green: 0.10, blue: 0.06),
-                    Color(red: 0.06, green: 0.05, blue: 0.04),
-                ],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
-
-            // Radial accent glow behind the orb
-            RadialGradient(
-                colors: [
-                    palette.accent.opacity(stateGlowStrength),
-                    .clear,
-                ],
-                center: .center,
-                startRadius: 20,
-                endRadius: 320
-            )
-            .ignoresSafeArea()
-            .animation(.easeInOut(duration: 1.4), value: voiceService.state)
-        }
-    }
-
-    private var stateGlowStrength: Double {
-        switch voiceService.state {
-        case .idle: return 0.10
-        case .listening: return 0.28
-        case .processing: return 0.20
-        case .speaking: return 0.34
-        }
+        // A clean, flat near-black with a whisper of warmth — no glowing accent
+        // blob behind the orb. Lets the page read calm and minimal.
+        LinearGradient(
+            colors: [
+                Color(red: 0.09, green: 0.08, blue: 0.07),
+                Color(red: 0.05, green: 0.05, blue: 0.05),
+            ],
+            startPoint: .top,
+            endPoint: .bottom
+        )
+        .ignoresSafeArea()
     }
 
     // MARK: - Top Bar
@@ -158,54 +137,42 @@ struct VoiceChatView: View {
 
     private var orb: some View {
         ZStack {
-            // Outermost halo — fades in/out with state
+            // A single thin ring — barely there at idle, a touch brighter when
+            // active. The only accent on the page.
             Circle()
-                .stroke(palette.accent.opacity(0.20), lineWidth: 1)
-                .frame(width: 240, height: 240)
-                .scaleEffect(orbPulse ? 1.06 : 0.98)
-                .opacity(orbPulse ? 0.8 : 0.4)
+                .strokeBorder(palette.accent.opacity(ringOpacity), lineWidth: 1)
+                .frame(width: 172, height: 172)
+                .scaleEffect(orbPulse ? 1.03 : 1.0)
 
-            // Mid ring
+            // A calm frosted-glass disc — no fill colour, no glow. Premium and
+            // quiet; the material does the work.
             Circle()
-                .fill(
-                    RadialGradient(
-                        colors: [
-                            palette.accent.opacity(0.30),
-                            palette.accent.opacity(0.05),
-                        ],
-                        center: .center,
-                        startRadius: 30,
-                        endRadius: 110
-                    )
-                )
-                .frame(width: 200, height: 200)
-                .scaleEffect(orbPulse ? 1.04 : 1.0)
+                .fill(.ultraThinMaterial)
+                .environment(\.colorScheme, .dark)
+                .frame(width: 128, height: 128)
+                .overlay(Circle().strokeBorder(.white.opacity(0.10), lineWidth: 0.5))
+                .scaleEffect(orbPulse ? 1.015 : 1.0)
 
-            // Core orb — bright accent
-            Circle()
-                .fill(
-                    LinearGradient(
-                        colors: [
-                            palette.accent,
-                            palette.accent.opacity(0.7),
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
-                .frame(width: 130, height: 130)
-                .shadow(color: palette.accent.opacity(0.6), radius: 30, y: 0)
-                .scaleEffect(orbPulse ? 1.02 : 0.98)
-
-            // Iconography in the center reflects state
+            // The state icon — quiet gold, the single warm note.
             Image(systemName: orbIcon)
-                .font(.system(size: 38, weight: .light))
-                .foregroundStyle(.white)
+                .font(.system(size: 28, weight: .regular))
+                .foregroundStyle(palette.accent)
                 .symbolEffect(.pulse, options: orbPulseOptions, value: orbPulse)
         }
         .animation(orbAnimation, value: orbPulse)
         .animation(.spring(response: 0.5, dampingFraction: 0.7), value: voiceService.state)
         .onAppear { orbPulse = true }
+    }
+
+    /// The orb ring is nearly invisible at rest and strengthens subtly while
+    /// the assistant is listening or speaking — a quiet state cue.
+    private var ringOpacity: Double {
+        switch voiceService.state {
+        case .idle: return 0.22
+        case .listening: return 0.6
+        case .processing: return 0.4
+        case .speaking: return 0.5
+        }
     }
 
     private var orbIcon: String {
@@ -300,51 +267,10 @@ struct VoiceChatView: View {
         ChatTTSService.cleanForSpeech(content)
     }
 
-    // MARK: - Primary Button
+    // MARK: - Tap Handling
 
-    private var primaryButton: some View {
-        Button {
-            HapticService.lightImpact()
-            handlePrimaryTap()
-        } label: {
-            HStack(spacing: 10) {
-                Image(systemName: primaryButtonIcon)
-                    .font(.system(size: 16, weight: .semibold))
-                Text(primaryButtonLabel)
-                    .font(.system(size: 16, weight: .semibold, design: .rounded))
-            }
-            .foregroundStyle(.black)
-            .padding(.horizontal, 32)
-            .padding(.vertical, 16)
-            .background(
-                Capsule()
-                    .fill(.white.opacity(0.95))
-                    .shadow(color: palette.accent.opacity(0.4), radius: 18, y: 8)
-            )
-        }
-        .buttonStyle(.plain)
-        .opacity(primaryButtonEnabled ? 1.0 : 0.45)
-        .disabled(!primaryButtonEnabled)
-    }
-
-    private var primaryButtonLabel: String {
-        switch voiceService.state {
-        case .idle: return "Tap to speak"
-        case .listening: return "Send"
-        case .processing: return "Thinking…"
-        case .speaking: return "Stop"
-        }
-    }
-
-    private var primaryButtonIcon: String {
-        switch voiceService.state {
-        case .idle: return "mic.fill"
-        case .listening: return "checkmark"
-        case .processing: return "sparkle"
-        case .speaking: return "stop.fill"
-        }
-    }
-
+    /// Whether a tap on the orb does anything in the current state (disabled
+    /// only while the assistant is processing).
     private var primaryButtonEnabled: Bool {
         switch voiceService.state {
         case .processing: return false

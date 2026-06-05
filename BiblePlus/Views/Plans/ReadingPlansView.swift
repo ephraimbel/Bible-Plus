@@ -18,7 +18,7 @@ struct ReadingPlansView: View {
                     plansContent(vm)
                 } else {
                     // Loading state with layered rings
-                    VStack(spacing: 16) {
+                    VStack(spacing: BPSpacing.md) {
                         ZStack {
                             Circle()
                                 .fill(palette.accent.opacity(0.03))
@@ -104,7 +104,7 @@ struct ReadingPlansView: View {
                 emptyState
             } else {
                 ScrollView {
-                    VStack(alignment: .leading, spacing: 28) {
+                    VStack(alignment: .leading, spacing: BPSpacing.xxl) {
                         // Active plans
                         if !vm.activePlans.isEmpty {
                             activePlansSection(vm)
@@ -123,8 +123,8 @@ struct ReadingPlansView: View {
                         // All plans by category
                         allPlansSection(vm)
                     }
-                    .padding(.top, 12)
-                    .padding(.bottom, 40)
+                    .padding(.top, BPSpacing.md)
+                    .padding(.bottom, BPSpacing.huge)
                 }
             }
         }
@@ -139,7 +139,7 @@ struct ReadingPlansView: View {
     // MARK: - Empty State
 
     private var emptyState: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: BPSpacing.md) {
             ZStack {
                 Circle()
                     .fill(palette.accent.opacity(0.08))
@@ -159,75 +159,53 @@ struct ReadingPlansView: View {
                 .multilineTextAlignment(.center)
                 .lineSpacing(3)
         }
-        .padding(40)
+        .padding(BPSpacing.xxxl)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     // MARK: - Active Plans
 
     private func activePlansSection(_ vm: ReadingPlansViewModel) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            sectionHeader("YOUR ACTIVE PLANS", icon: "flame.fill")
+        VStack(alignment: .leading, spacing: BPSpacing.md) {
+            sectionHeader("CONTINUE")
 
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 14) {
-                    ForEach(Array(vm.activePlans.enumerated()), id: \.element.progress.id) { index, item in
-                        NavigationLink {
-                            PlanDetailView(
-                                plan: item.plan,
-                                viewModel: vm,
-                                isPro: isPro
-                            )
-                        } label: {
-                            PlanCardView(
-                                plan: item.plan,
-                                progress: item.progress,
-                                isCompleted: false,
-                                isPro: isPro
-                            )
-                            .frame(width: 260)
-                            .opacity(showContent ? 1 : 0)
-                            .animation(BPAnimation.staggered(index: index), value: showContent)
-                        }
-                        .buttonStyle(PressableButtonStyle())
+            // Active plans are the priority — full-width hero cards stacked
+            // vertically so there's never an awkward right-hand gap from a
+            // single item, and they align to the same margins as the grid below.
+            VStack(spacing: BPSpacing.md) {
+                ForEach(Array(vm.activePlans.enumerated()), id: \.element.progress.id) { index, item in
+                    NavigationLink {
+                        PlanDetailView(
+                            plan: item.plan,
+                            viewModel: vm,
+                            isPro: isPro
+                        )
+                    } label: {
+                        PlanCardView(
+                            plan: item.plan,
+                            progress: item.progress,
+                            isCompleted: false,
+                            isPro: isPro
+                        )
+                        .opacity(showContent ? 1 : 0)
+                        .animation(BPAnimation.staggered(index: index), value: showContent)
                     }
+                    .buttonStyle(PressableButtonStyle())
                 }
-                .padding(.horizontal, 20)
             }
+            .padding(.horizontal, BPSpacing.lg)
         }
     }
 
     // MARK: - Recommended
 
     private func recommendedSection(_ vm: ReadingPlansViewModel) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            sectionHeader("FOR YOU", icon: "sparkles")
-
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 14) {
-                    ForEach(Array(vm.recommendedPlans.enumerated()), id: \.element.id) { index, plan in
-                        NavigationLink {
-                            PlanDetailView(
-                                plan: plan,
-                                viewModel: vm,
-                                isPro: isPro
-                            )
-                        } label: {
-                            PlanCardView(
-                                plan: plan,
-                                progress: nil,
-                                isCompleted: vm.isCompleted(plan.id),
-                                isPro: isPro
-                            )
-                            .frame(width: 220)
-                            .opacity(showContent ? 1 : 0)
-                            .animation(BPAnimation.staggered(index: index), value: showContent)
-                        }
-                        .buttonStyle(PressableButtonStyle())
-                    }
-                }
-                .padding(.horizontal, 20)
-            }
+        // Cap at an even count so the grid never leaves a lone orphan card in
+        // the last row — keeps the section visually balanced.
+        let picks = Array(vm.recommendedPlans.prefix(4))
+        return VStack(alignment: .leading, spacing: BPSpacing.md) {
+            sectionHeader("FOR YOU")
+            planGrid(picks, vm: vm, staggerStart: 0)
         }
     }
 
@@ -257,16 +235,16 @@ struct ReadingPlansView: View {
 
     private func allPlansSection(_ vm: ReadingPlansViewModel) -> some View {
         let groups = groupedPlans(vm.allPlans)
-        return VStack(alignment: .leading, spacing: 20) {
-            sectionHeader("ALL PLANS", icon: "books.vertical.fill")
+        return VStack(alignment: .leading, spacing: BPSpacing.lg) {
+            sectionHeader("ALL PLANS", count: vm.allPlans.count)
 
             // Single flat grid when few plans, else group by category.
             if vm.allPlans.count <= 8 || groups.count == 1 {
                 planGrid(vm.allPlans, vm: vm, staggerStart: 0)
             } else {
-                VStack(alignment: .leading, spacing: 24) {
+                VStack(alignment: .leading, spacing: BPSpacing.xl) {
                     ForEach(Array(groups.enumerated()), id: \.element.category) { groupIndex, group in
-                        VStack(alignment: .leading, spacing: 14) {
+                        VStack(alignment: .leading, spacing: BPSpacing.md) {
                             categorySubheader(group.category, count: group.plans.count)
                             planGrid(group.plans, vm: vm, staggerStart: groupIndex * 6)
                         }
@@ -278,9 +256,9 @@ struct ReadingPlansView: View {
 
     private func planGrid(_ plans: [ReadingPlan], vm: ReadingPlansViewModel, staggerStart: Int) -> some View {
         LazyVGrid(columns: [
-            GridItem(.flexible(), spacing: 16, alignment: .top),
-            GridItem(.flexible(), spacing: 16, alignment: .top)
-        ], spacing: 20) {
+            GridItem(.flexible(), spacing: BPSpacing.md, alignment: .top),
+            GridItem(.flexible(), spacing: BPSpacing.md, alignment: .top)
+        ], spacing: BPSpacing.lg) {
             ForEach(Array(plans.enumerated()), id: \.element.id) { index, plan in
                 NavigationLink {
                     PlanDetailView(
@@ -304,30 +282,26 @@ struct ReadingPlansView: View {
                 .buttonStyle(PressableButtonStyle())
             }
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, BPSpacing.lg)
     }
 
-    /// Subheader used inside the All Plans section to label category groupings.
-    /// Less prominent than the main section header so it reads as a sub-level.
+    /// Subheader inside All Plans. A quiet serif category name — a clear step
+    /// below the gold eyebrow above it, so the hierarchy reads at a glance
+    /// without competing chips or all-caps.
     private func categorySubheader(_ title: String, count: Int) -> some View {
-        HStack(spacing: 8) {
-            Text(title.uppercased())
-                .font(.system(size: 10, weight: .bold, design: .rounded))
-                .tracking(1.3)
-                .foregroundStyle(palette.accent.opacity(0.85))
+        HStack(spacing: BPSpacing.xs) {
+            Text(title)
+                .font(.system(size: 14, weight: .semibold, design: .serif))
+                .foregroundStyle(palette.textSecondary)
 
             Text("\(count)")
-                .font(.system(size: 10, weight: .semibold, design: .rounded))
+                .font(.system(size: 12, weight: .regular, design: .serif))
+                .italic()
                 .foregroundStyle(palette.textMuted.opacity(0.6))
-                .padding(.horizontal, 6)
-                .padding(.vertical, 1)
-                .background(
-                    Capsule().fill(palette.accent.opacity(0.08))
-                )
 
             Spacer()
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, BPSpacing.lg)
     }
 
     /// Groups plans by category, ordering known categories per `categoryOrder`
@@ -366,7 +340,7 @@ struct ReadingPlansView: View {
             HapticService.lightImpact()
             vm.showPaywall = true
         } label: {
-            HStack(spacing: 16) {
+            HStack(spacing: BPSpacing.md) {
                 // Crown in gradient circle
                 Image(systemName: "crown.fill")
                     .font(.system(size: 20, weight: .medium))
@@ -384,7 +358,7 @@ struct ReadingPlansView: View {
                             .shadow(color: palette.accent.opacity(0.3), radius: 4, y: 2)
                     )
 
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: BPSpacing.xxs) {
                     Text("Unlock All \(proCount) Plans")
                         .font(.custom("Georgia-Bold", size: 16))
                         .foregroundStyle(palette.textPrimary)
@@ -402,7 +376,7 @@ struct ReadingPlansView: View {
                     .font(.system(size: 10, weight: .semibold))
                     .foregroundStyle(palette.textMuted.opacity(0.4))
             }
-            .padding(16)
+            .padding(BPSpacing.md)
             .background(
                 RoundedRectangle(cornerRadius: 16)
                     .fill(palette.surfaceElevated)
@@ -414,30 +388,30 @@ struct ReadingPlansView: View {
             )
         }
         .buttonStyle(.plain)
-        .padding(.horizontal, 20)
+        .padding(.horizontal, BPSpacing.lg)
     }
 
     // MARK: - Section Header
 
-    private func sectionHeader(_ title: String, icon: String = "book.fill") -> some View {
-        HStack(spacing: 8) {
-            Image(systemName: icon)
-                .font(.system(size: 10, weight: .semibold))
-                .foregroundStyle(palette.accent)
-                .frame(width: 22, height: 22)
-                .background(
-                    Circle()
-                        .fill(palette.accent.opacity(0.1))
-                )
-
+    /// One editorial eyebrow used for every top-level section, so the page
+    /// reads as a single clean system: a small-caps gold label, an optional
+    /// quiet count, no icon chips or dangling dividers.
+    private func sectionHeader(_ title: String, count: Int? = nil) -> some View {
+        HStack(spacing: BPSpacing.xs) {
             Text(title)
-                .font(.system(size: 11, weight: .bold, design: .rounded))
-                .tracking(1.5)
-                .foregroundStyle(palette.textMuted)
+                .font(.system(size: 11, weight: .semibold))
+                .tracking(2.4)
+                .foregroundStyle(palette.accent.opacity(0.85))
 
-            VStack { Divider() }
-                .padding(.leading, 4)
+            if let count {
+                Text("\(count)")
+                    .font(.system(size: 11, weight: .regular, design: .serif))
+                    .italic()
+                    .foregroundStyle(palette.textMuted.opacity(0.7))
+            }
+
+            Spacer()
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, BPSpacing.lg)
     }
 }

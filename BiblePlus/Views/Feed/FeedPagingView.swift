@@ -13,6 +13,12 @@ struct FeedPagingView: View {
 
     var body: some View {
         ZStack {
+            // Static feed background — rendered once, behind everything, so it
+            // never moves on swipe. Only the content (in the scroll below)
+            // slides, which removes the old paging seam/glitch.
+            FeedBackgroundView(background: vm.currentBackground)
+                .ignoresSafeArea()
+
             // Empty state — visible whenever the feed is somehow empty.
             // Without this the user gets a silent black screen, which is
             // exactly the bug reported. Tapping reload re-runs the seeder +

@@ -87,9 +87,6 @@ private struct BibleContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.bpPalette) private var palette
     @Environment(\.colorScheme) private var colorScheme
-    @State private var showExplainChat = false
-    @State private var explainPrompt = ""
-    @State private var explainConversationId = UUID()
     @State private var shareText: String?
     @State private var searchViewModel: BibleSearchViewModel?
     @State private var showVoicePicker = false
@@ -140,14 +137,6 @@ private struct BibleContentView: View {
 
     private var paperColor: Color {
         palette.parchment
-    }
-
-    private func createExplainConversation() {
-        let title = String(explainPrompt.prefix(40))
-        let conversation = Conversation(title: title)
-        modelContext.insert(conversation)
-        modelContext.safeSave()
-        explainConversationId = conversation.id
     }
 
     // MARK: - Pro Check
@@ -548,10 +537,20 @@ private struct BibleContentView: View {
                             return
                         }
 
-                        explainPrompt = viewModel.selectionExplainPrompt()
-                        createExplainConversation()
+                        // Route through the unified Ask flow: ContentView
+                        // creates the conversation, switches to the Ask tab and
+                        // pushes ChatView (tab bar hidden, back → conversation
+                        // list) — consistent with every other "Ask" entry point.
+                        let prompt = viewModel.selectionExplainPrompt()
                         viewModel.clearSelection()
-                        showExplainChat = true
+                        NotificationCenter.default.post(
+                            name: .openAIWithContext,
+                            object: nil,
+                            userInfo: [
+                                "context": prompt,
+                                "title": String(prompt.prefix(40)),
+                            ]
+                        )
                     },
                     onCopy: {
                         viewModel.copySelection()
@@ -649,7 +648,7 @@ private struct BibleContentView: View {
                     } label: {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 14, weight: .medium))
-                            .foregroundStyle(viewModel.canGoBack ? palette.accent : palette.textMuted)
+                            .foregroundStyle(viewModel.canGoBack ? palette.textSecondary : palette.textMuted.opacity(0.4))
                     }
                     .disabled(!viewModel.canGoBack)
                     .accessibilityLabel("Previous chapter")
@@ -659,7 +658,7 @@ private struct BibleContentView: View {
                     } label: {
                         Image(systemName: "chevron.right")
                             .font(.system(size: 14, weight: .medium))
-                            .foregroundStyle(viewModel.canGoForward ? palette.accent : palette.textMuted)
+                            .foregroundStyle(viewModel.canGoForward ? palette.textSecondary : palette.textMuted.opacity(0.4))
                     }
                     .disabled(!viewModel.canGoForward)
                     .accessibilityLabel("Next chapter")
@@ -720,7 +719,7 @@ private struct BibleContentView: View {
                     } label: {
                         Image(systemName: "magnifyingglass")
                             .font(.system(size: 14, weight: .medium))
-                            .foregroundStyle(palette.accent)
+                            .foregroundStyle(palette.textSecondary)
                     }
                     .accessibilityLabel("Search Bible")
 
@@ -730,7 +729,7 @@ private struct BibleContentView: View {
                     } label: {
                         Image(systemName: "calendar")
                             .font(.system(size: 14, weight: .medium))
-                            .foregroundStyle(palette.accent)
+                            .foregroundStyle(palette.textSecondary)
                     }
                     .accessibilityLabel("Reading Plans")
 
@@ -783,7 +782,7 @@ private struct BibleContentView: View {
                     } label: {
                         Image(systemName: "ellipsis.circle")
                             .font(.system(size: 14, weight: .medium))
-                            .foregroundStyle(palette.accent)
+                            .foregroundStyle(palette.textSecondary)
                     }
                 }
             }
@@ -825,14 +824,6 @@ private struct BibleContentView: View {
         .sheet(isPresented: $viewModel.showReaderSettings) {
             ReaderSettingsView(viewModel: viewModel)
                 .presentationDetents([.large])
-        }
-        .sheet(isPresented: $showExplainChat) {
-            NavigationStack {
-                ChatView(
-                    conversationId: explainConversationId,
-                    initialContext: explainPrompt
-                )
-            }
         }
         .sheet(isPresented: Binding(
             get: { shareText != nil },

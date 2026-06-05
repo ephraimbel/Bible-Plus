@@ -49,6 +49,50 @@ final class PersonalizationService {
         save()
     }
 
+    // MARK: - Extended Onboarding Profile
+
+    func updateGender(_ gender: Gender) {
+        let profile = getOrCreateProfile()
+        profile.gender = gender
+        profile.updatedAt = Date()
+        save()
+    }
+
+    func updateAge(_ age: Int) {
+        let profile = getOrCreateProfile()
+        profile.age = age
+        profile.updatedAt = Date()
+        save()
+    }
+
+    func updateClosenessRating(_ rating: Int) {
+        let profile = getOrCreateProfile()
+        profile.closenessRating = rating
+        profile.updatedAt = Date()
+        save()
+    }
+
+    func updateGrowthBlockers(_ blockers: [GrowthBlocker]) {
+        let profile = getOrCreateProfile()
+        profile.growthBlockers = blockers
+        profile.updatedAt = Date()
+        save()
+    }
+
+    func updateAppGoals(_ goals: [AppGoal]) {
+        let profile = getOrCreateProfile()
+        profile.appGoals = goals
+        profile.updatedAt = Date()
+        save()
+    }
+
+    func updateTimeCommitment(_ commitment: TimeCommitment) {
+        let profile = getOrCreateProfile()
+        profile.timeCommitment = commitment
+        profile.updatedAt = Date()
+        save()
+    }
+
     func updateTranslation(_ translation: BibleTranslation) {
         let profile = getOrCreateProfile()
         profile.preferredTranslation = translation

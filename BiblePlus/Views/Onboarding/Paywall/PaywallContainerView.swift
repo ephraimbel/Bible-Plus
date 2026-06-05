@@ -5,7 +5,7 @@ import SwiftUI
 //
 // Midnight palette. A centered serif hero + headline, a clean checkmark
 // benefit list, and two side-by-side price cards pinned above the CTA:
-// Weekly (3-day free trial) and Yearly (Best Value, showing the exact dollar
+// Monthly and Yearly (Best Value, 7-day free trial, showing the exact dollar
 // savings). Yearly is pre-selected to steer plan mix toward the higher-LTV
 // annual plan. Hard paywall in onboarding (no close); closable from Settings.
 //
@@ -65,6 +65,10 @@ struct PaywallContainerView: View {
                 } else {
                     vm = PaywallViewModel(profile: profiles.first)
                 }
+                // Onboarding leads with Yearly (the free-trial / funnel plan).
+                // The in-app paywall only offers Monthly (no trial), so it must
+                // select Monthly so the CTA reads correctly.
+                vm?.selectedProductID = isOnboarding ? StoreKitService.yearlyID : StoreKitService.monthlyID
             }
             Analytics.track(.paywallViewed, properties: [
                 "source": isOnboarding ? "onboarding" : "settings",
@@ -215,26 +219,36 @@ struct PaywallContainerView: View {
         .opacity(showContent ? 1 : 0)
     }
 
+    // Onboarding shows BOTH plans (Monthly + Yearly "best value") to steer a
+    // warm new user toward the higher-LTV annual plan with the free trial. The
+    // in-app paywall (hit from Settings / a locked feature) shows ONLY the
+    // monthly plan — a single, low-friction offer to unlock a feature.
     private func planCards(vm: PaywallViewModel) -> some View {
         HStack(spacing: 12) {
             priceCard(
                 vm: vm,
-                productID: StoreKitService.weeklyID,
-                title: "Weekly",
-                price: vm.weeklyPriceLabel(storeKitService),
-                sub: "per week",
-                badge: "3-DAY FREE TRIAL"
+                productID: StoreKitService.monthlyID,
+                title: "Monthly",
+                price: vm.monthlyPriceLabel(storeKitService),
+                sub: "per month",
+                badge: nil
             )
-            priceCard(
-                vm: vm,
-                productID: StoreKitService.yearlyID,
-                title: "Yearly",
-                price: vm.yearlyPriceLabel(storeKitService),
-                sub: "\(vm.yearlyWeeklyBreakdown(storeKitService))/week",
-                badge: "SAVE \(vm.yearlySavingsAmount(storeKitService))"
-            )
+            if isOnboarding {
+                priceCard(
+                    vm: vm,
+                    productID: StoreKitService.yearlyID,
+                    title: "Yearly",
+                    price: vm.yearlyPriceLabel(storeKitService),
+                    sub: "\(vm.yearlyMonthlyBreakdown(storeKitService))/month",
+                    badge: "7-DAY FREE TRIAL"
+                )
+            }
         }
     }
+
+    // Whether the plan cards are laid out as a single centered card (in-app,
+    // monthly-only) vs. two left-aligned cards side by side (onboarding).
+    private var isSinglePlan: Bool { !isOnboarding }
 
     // MARK: - Hero (glowing Bible star)
 
@@ -337,24 +351,51 @@ struct PaywallContainerView: View {
             HapticService.impact(.medium)
             Analytics.track(.paywallPriceCardSelected, properties: ["product": title.lowercased()])
         } label: {
-            VStack(alignment: .leading, spacing: 5) {
-                Text(title)
-                    .font(.custom("Georgia-Bold", size: 16))
-                    .foregroundStyle(isSelected ? accentGold : palette.textPrimary)
+            Group {
+                if isSinglePlan {
+                    // One full-width card → a horizontal row so the content
+                    // fills the button: name on the left, price on the right.
+                    // The centered stack used for the two-column layout looks
+                    // small and lost when stretched edge-to-edge.
+                    HStack(alignment: .center, spacing: 12) {
+                        Text(title)
+                            .font(.custom("Georgia-Bold", size: 23))
+                            .foregroundStyle(isSelected ? accentGold : palette.textPrimary)
 
-                Text(price)
-                    .font(.custom("Baskerville-Bold", size: 27))
-                    .foregroundStyle(isSelected ? accentGold : palette.textPrimary)
-                    .minimumScaleFactor(0.7)
-                    .lineLimit(1)
+                        Spacer(minLength: 0)
 
-                Text(sub)
-                    .font(.system(size: 12, weight: .medium, design: .rounded))
-                    .foregroundStyle(palette.textMuted)
+                        VStack(alignment: .trailing, spacing: 1) {
+                            Text(price)
+                                .font(.custom("Baskerville-Bold", size: 31))
+                                .foregroundStyle(isSelected ? accentGold : palette.textPrimary)
+                                .minimumScaleFactor(0.7)
+                                .lineLimit(1)
+                            Text(sub)
+                                .font(.system(size: 12, weight: .medium, design: .rounded))
+                                .foregroundStyle(palette.textMuted)
+                        }
+                    }
+                } else {
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text(title)
+                            .font(.custom("Georgia-Bold", size: 16))
+                            .foregroundStyle(isSelected ? accentGold : palette.textPrimary)
+
+                        Text(price)
+                            .font(.custom("Baskerville-Bold", size: 27))
+                            .foregroundStyle(isSelected ? accentGold : palette.textPrimary)
+                            .minimumScaleFactor(0.7)
+                            .lineLimit(1)
+
+                        Text(sub)
+                            .font(.system(size: 12, weight: .medium, design: .rounded))
+                            .foregroundStyle(palette.textMuted)
+                    }
+                }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, 16)
-            .padding(.vertical, 17)
+            .padding(.horizontal, isSinglePlan ? 22 : 16)
+            .padding(.vertical, isSinglePlan ? 22 : 17)
             .background(cardBackground(isSelected: isSelected))
             .overlay(alignment: .top) {
                 if let badge {
@@ -389,7 +430,7 @@ struct PaywallContainerView: View {
             )
     }
 
-    // Floating gold pill over a card's top edge — "3-DAY FREE TRIAL" / "SAVE $210".
+    // Floating gold pill over a card's top edge — "7-DAY FREE TRIAL" / "SAVE $44".
     private func planBadge(_ text: String) -> some View {
         Text(text)
             .font(.system(size: 10, weight: .heavy, design: .rounded))
@@ -423,13 +464,13 @@ struct PaywallContainerView: View {
             Task { await vm.purchaseSelected(storeKitService: storeKitService, dismiss: dismiss) }
         } label: {
             Text(ctaTitle(vm: vm))
-                .font(.custom("Georgia-Bold", size: 17))
-                .tracking(0.3)
-                .foregroundStyle(.white)
+                .font(.system(size: 19, weight: .bold, design: .rounded))
+                .tracking(0.2)
+                .foregroundStyle(Color(red: 0.16, green: 0.11, blue: 0.04))
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, 18)
+                .padding(.vertical, 17)
                 .background(ctaBackground())
-                .shadow(color: accentGold.opacity(0.28), radius: 16, y: 6)
+                .shadow(color: accentGold.opacity(0.25), radius: 12, y: 5)
         }
         .buttonStyle(PressableButtonStyle())
         .disabled(vm.isPurchasing)
@@ -452,19 +493,20 @@ struct PaywallContainerView: View {
 
     private func ctaTitle(vm: PaywallViewModel) -> String {
         if vm.isPurchasing { return "Processing..." }
-        // Weekly is the only plan with a trial, so it's the only one that may
-        // honestly say "Start Free Trial". Yearly is an immediate purchase.
-        if vm.selectedProductID == StoreKitService.weeklyID {
+        // Yearly is now the only plan with a free trial, so it's the only one
+        // that may honestly say "Start Free Trial". Monthly is an immediate
+        // (no-trial) purchase.
+        if vm.selectedProductID == StoreKitService.yearlyID {
             return "Start Free Trial"
         }
         return "Subscribe Now"
     }
 
     private func ctaSubtitle(vm: PaywallViewModel) -> String {
-        if vm.selectedProductID == StoreKitService.weeklyID {
-            return "Then \(vm.weeklyPriceLabel(storeKitService))/wk after 3 days · Cancel anytime"
+        if vm.selectedProductID == StoreKitService.yearlyID {
+            return "Then \(vm.yearlyPriceLabel(storeKitService))/yr after 7 days · Cancel anytime"
         }
-        return "Billed annually at \(vm.yearlyPriceLabel(storeKitService))/yr · Cancel anytime"
+        return "\(vm.monthlyPriceLabel(storeKitService))/mo · Cancel anytime"
     }
 
     // MARK: - Footer

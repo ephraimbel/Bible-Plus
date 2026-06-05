@@ -396,6 +396,12 @@ final class ChatViewModel {
                 "Tell me a story from the Bible",
                 "Pray with me",
             ]
+        default:
+            return [
+                "Send me a verse for what I'm carrying",
+                "Pray with me about this",
+                "What does the Bible say about this?",
+            ]
         }
     }
 
@@ -453,6 +459,7 @@ final class ChatViewModel {
         case .relationship: return "walking through relationship pain"
         case .purpose:      return "searching for purpose"
         case .none:         return "open to whatever this becomes"
+        default:            return "carrying something real"
         }
     }
 
@@ -470,6 +477,7 @@ final class ChatViewModel {
         case .retired:             return " in a season of rest"
         case .hardSeason:          return " through a hard season"
         case .startingOver:        return " while starting over"
+        default:                   return ""
         }
     }
 
@@ -1129,6 +1137,14 @@ final class ChatViewModel {
         //     conversations, not just the current one.
         let shouldFire: Bool = hasNoDigest ? sinceLast >= 2 : sinceLast >= 5
         guard shouldFire else { return }
+
+        // Reset the throttle counter the instant we decide to fire — NOT only
+        // on a successful, changed digest. Otherwise a failed or unchanged
+        // refresh leaves the counter above threshold, and the (paid) digest
+        // API re-fires on every subsequent message. One fire per window,
+        // regardless of outcome.
+        profile.aiMessagesSinceDigestRefresh = 0
+        try? modelContext.save()
 
         // Snapshot the most recent 30 messages across ALL conversations,
         // sorted chronologically. This is the actual cross-conversation

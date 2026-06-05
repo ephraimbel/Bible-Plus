@@ -7,11 +7,6 @@ struct ContentView: View {
     @Environment(\.bpPalette) private var palette
     @Environment(\.modelContext) private var modelContext
     @AppStorage("hasAutoPlayedSoundscape") private var hasAutoPlayedSoundscape = false
-    /// One-time flag: have we deep-linked the user into the seeded welcome
-    /// conversation yet? Trips on the first ContentView appear after
-    /// onboarding so the user lands inside their first chat instead of on
-    /// Home. Persisted so re-launches don't keep hijacking the user.
-    @AppStorage("hasRoutedToWelcomeConversation") private var hasRoutedToWelcomeConversation = false
     @State private var selectedTab: Tab = .feed
     @State private var soundscapeService = SoundscapeService()
     @State private var audioBibleService = AudioBibleService()
@@ -46,7 +41,7 @@ struct ContentView: View {
             case .bible: "book.fill"
             case .ask: "sparkle"
             case .saved: "bookmark.fill"
-            case .settings: "person.crop.circle.fill"
+            case .settings: "person.fill"
             }
         }
     }
@@ -106,13 +101,6 @@ struct ContentView: View {
                 }
             }
 
-            // First-launch-after-onboarding deep link: drop the user
-            // directly inside their seeded welcome conversation. This is
-            // the single highest-impact retention move — the user lands
-            // INSIDE a personal AI conversation instead of on an empty
-            // Home tab. One-shot via @AppStorage flag.
-            routeToWelcomeConversationIfNeeded()
-
             // Recovery path for the daily welcome-back notification.
             // Catches users who denied notification permission during
             // onboarding (so it was never scheduled) but later enabled
@@ -120,19 +108,10 @@ struct ContentView: View {
             // permanently locked out of the day-2 retention hook.
             ensureWelcomeBackNotificationIfPossible()
         }
-        .toolbarBackground(.hidden, for: .tabBar)
-        .onAppear {
-            // Force tab bar fully transparent at runtime
-            let tabBarAppearance = UITabBarAppearance()
-            tabBarAppearance.configureWithTransparentBackground()
-            tabBarAppearance.backgroundColor = .clear
-            tabBarAppearance.backgroundEffect = nil
-            tabBarAppearance.backgroundImage = UIImage()
-            tabBarAppearance.shadowColor = .clear
-            tabBarAppearance.shadowImage = UIImage()
-            UITabBar.appearance().standardAppearance = tabBarAppearance
-            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
-        }
+        // Let iOS 26 render its native Liquid Glass tab bar. The old
+        // UITabBarAppearance overrides (transparent background, nil effect)
+        // were holdovers from the flat-bar era that stripped the glass
+        // material — removing them restores the system glass at full quality.
         .onReceive(NotificationCenter.default.publisher(for: .dashboardShowFeedChanged)) { notification in
             if let showFeed = notification.userInfo?["showFeed"] as? Bool {
                 showFeedEntryButton = !showFeed
@@ -301,30 +280,6 @@ struct ContentView: View {
         )
     }
 
-    /// Routes the user directly into their seeded welcome conversation on
-    /// the FIRST launch after onboarding completes. Subsequent launches are
-    /// no-ops because the @AppStorage flag has been flipped.
-    private func routeToWelcomeConversationIfNeeded() {
-        guard !hasRoutedToWelcomeConversation else { return }
-        let descriptor = FetchDescriptor<UserProfile>()
-        guard let profile = try? modelContext.fetch(descriptor).first,
-              profile.hasCompletedOnboarding,
-              let convoID = profile.welcomeConversationID
-        else { return }
-
-        hasRoutedToWelcomeConversation = true
-
-        // Instant, unanimated handoff: the user has just dismissed the
-        // paywall and hasn't seen Home yet, so animating a tab switch
-        // only adds visible flicker. Setting both values synchronously
-        // lets SwiftUI render Ask + push the welcome conversation in
-        // the same frame, before Home has a chance to appear.
-        selectedTab = .ask
-        pendingConversation = PendingConversation(
-            conversationId: convoID,
-            context: nil
-        )
-    }
 }
 
 // MARK: - Pending Conversation

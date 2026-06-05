@@ -194,23 +194,44 @@ struct StreakCelebrationView: View {
 
     private var particleBurst: some View {
         ForEach(0..<8, id: \.self) { i in
-            Circle()
-                .fill(palette.accent.opacity(0.6))
-                .frame(width: 6, height: 6)
-                .offset(
-                    x: showParticles ? cos(Self.angle(for: i)) * 80 : 0,
-                    y: showParticles ? sin(Self.angle(for: i)) * 80 : 0
-                )
-                .opacity(showParticles ? 0 : 1)
-                .scaleEffect(showParticles ? 0.3 : 1.0)
-                .animation(
-                    BPAnimation.spring.delay(0.3 + Double(i) * 0.04),
-                    value: showParticles
-                )
+            ParticleBurstDot(
+                angle: Self.angle(for: i),
+                delay: 0.3 + Double(i) * 0.04,
+                color: palette.accent
+            )
         }
     }
 
     private static func angle(for index: Int) -> Double {
         Double(index) * (.pi * 2 / 8)
+    }
+}
+
+// MARK: - Particle Burst Dot
+//
+// A single milestone particle. It starts fully invisible at the center (so it
+// never flashes as a static cluster before the burst), then fades in as it
+// flies outward and finally fades out — a true one-shot emanate-and-fade driven
+// entirely from its own onAppear.
+private struct ParticleBurstDot: View {
+    let angle: Double
+    let delay: Double
+    let color: Color
+
+    @State private var flung = false
+    @State private var opacity: Double = 0
+
+    var body: some View {
+        Circle()
+            .fill(color.opacity(0.6))
+            .frame(width: 6, height: 6)
+            .scaleEffect(flung ? 0.3 : 1.0)
+            .offset(x: flung ? cos(angle) * 80 : 0, y: flung ? sin(angle) * 80 : 0)
+            .opacity(opacity)
+            .onAppear {
+                withAnimation(BPAnimation.spring.delay(delay)) { flung = true }
+                withAnimation(.easeOut(duration: 0.2).delay(delay)) { opacity = 0.9 }
+                withAnimation(.easeIn(duration: 0.4).delay(delay + 0.25)) { opacity = 0 }
+            }
     }
 }

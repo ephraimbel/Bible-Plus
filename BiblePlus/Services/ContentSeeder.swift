@@ -158,6 +158,90 @@ enum ContentSeeder {
         }
     }
 
+    // MARK: - Daily Paths Seeder
+
+    private static let pathsSeedVersionKey = "io.bibleplus.lastPathsSeedVersion"
+
+    static func seedDailyPathsIfNeeded(modelContext: ModelContext) {
+        let lastVersion = UserDefaults.standard.integer(forKey: pathsSeedVersionKey)
+
+        let existingCount: Int = {
+            let descriptor = FetchDescriptor<DailyPath>()
+            return (try? modelContext.fetchCount(descriptor)) ?? 0
+        }()
+        let forceReseed = existingCount == 0
+
+        guard let url = LocalizedContentLoader.url(forResource: "daily-paths"),
+              let data = try? Data(contentsOf: url)
+        else { return }
+
+        let decoder = JSONDecoder()
+        guard let items = try? decoder.decode([SeedPathItem].self, from: data) else {
+            NSLog("[ContentSeeder] daily-paths decode failed")
+            return
+        }
+
+        let newItems = forceReseed
+            ? items
+            : items.filter { $0.seedVersion > lastVersion }
+        guard !newItems.isEmpty else { return }
+
+        var maxVersion = lastVersion
+        for item in newItems {
+            let itemID = item.id
+            let existingDescriptor = FetchDescriptor<DailyPath>(
+                predicate: #Predicate { $0.id == itemID }
+            )
+            let chapters = item.chapters ?? []
+            if let existing = try? modelContext.fetch(existingDescriptor).first {
+                existing.name = item.name
+                existing.pathDescription = item.description
+                existing.totalDays = item.totalDays
+                existing.category = item.category
+                existing.gradientColors = item.gradientColors
+                existing.iconName = item.iconName
+                existing.imageKey = item.imageKey ?? ""
+                existing.daysJSON = (try? JSONEncoder().encode(item.days)) ?? Data()
+                existing.chaptersJSON = (try? JSONEncoder().encode(chapters)) ?? Data()
+                existing.applicableSeasons = item.applicableSeasons
+                existing.applicableBurdens = item.applicableBurdens
+                existing.faithLevelMin = item.faithLevelMin
+                existing.isProOnly = item.isProOnly
+                existing.freeDaysAllowed = item.freeDaysAllowed
+                existing.seedVersion = item.seedVersion
+            } else {
+                let path = DailyPath(
+                    id: item.id,
+                    name: item.name,
+                    pathDescription: item.description,
+                    totalDays: item.totalDays,
+                    category: item.category,
+                    gradientColors: item.gradientColors,
+                    iconName: item.iconName,
+                    imageKey: item.imageKey ?? "",
+                    days: item.days,
+                    chapters: chapters,
+                    applicableSeasons: item.applicableSeasons,
+                    applicableBurdens: item.applicableBurdens,
+                    faithLevelMin: item.faithLevelMin,
+                    isProOnly: item.isProOnly,
+                    freeDaysAllowed: item.freeDaysAllowed,
+                    seedVersion: item.seedVersion
+                )
+                modelContext.insert(path)
+            }
+            maxVersion = max(maxVersion, item.seedVersion)
+        }
+
+        do {
+            try modelContext.save()
+            UserDefaults.standard.set(maxVersion, forKey: pathsSeedVersionKey)
+            NSLog("[ContentSeeder] seeded \(newItems.count) daily paths, version=\(maxVersion)")
+        } catch {
+            NSLog("[ContentSeeder] daily path save failed: \(error)")
+        }
+    }
+
     private static let migrationCompleteKey = "io.bibleplus.migrationComplete"
 
     /// Migrate orphaned chat messages from pre-threading era into a legacy conversation.
@@ -240,5 +324,24 @@ struct SeedPlanItem: Decodable {
     let applicableBurdens: [String]
     let faithLevelMin: String
     let isProOnly: Bool
+    let seedVersion: Int
+}
+
+struct SeedPathItem: Decodable {
+    let id: String
+    let name: String
+    let description: String
+    let totalDays: Int
+    let category: String
+    let gradientColors: [String]
+    let iconName: String
+    let imageKey: String?
+    let days: [PathDay]
+    let chapters: [PathChapter]?
+    let applicableSeasons: [String]
+    let applicableBurdens: [String]
+    let faithLevelMin: String
+    let isProOnly: Bool
+    let freeDaysAllowed: Int?
     let seedVersion: Int
 }

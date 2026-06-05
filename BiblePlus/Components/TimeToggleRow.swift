@@ -13,89 +13,47 @@ struct TimeToggleRow: View {
             action()
         }) {
             VStack(alignment: .leading, spacing: 0) {
-                HStack(spacing: 14) {
-                    // Icon in circle
-                    Image(systemName: slot.icon)
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundStyle(isSelected ? .white : palette.accent)
-                        .frame(width: 38, height: 38)
-                        .background(
-                            Circle()
-                                .fill(
-                                    isSelected
-                                        ? AnyShapeStyle(
-                                            LinearGradient(
-                                                colors: [palette.accent, palette.accent.opacity(0.8)],
-                                                startPoint: .topLeading,
-                                                endPoint: .bottomTrailing
-                                            )
-                                        )
-                                        : AnyShapeStyle(palette.accent.opacity(0.08))
-                                )
-                                .shadow(
-                                    color: isSelected ? palette.accent.opacity(0.3) : .clear,
-                                    radius: 4, y: 2
-                                )
-                        )
-
-                    // Labels
-                    VStack(alignment: .leading, spacing: 3) {
+                HStack(spacing: 12) {
+                    // Text-forward labels — no icon gem. The moment name in serif
+                    // with its clock window in gold, matching the library/onboarding.
+                    HStack(alignment: .firstTextBaseline, spacing: 8) {
                         Text(slot.displayName)
-                            .font(.system(size: 15, weight: .semibold, design: .rounded))
+                            .font(.system(size: 16, weight: .semibold, design: .serif))
                             .foregroundStyle(palette.textPrimary)
 
                         Text(slot.timeRange)
-                            .font(.system(size: 13, weight: .regular, design: .rounded))
-                            .foregroundStyle(palette.textMuted)
+                            .font(.system(size: 11.5, weight: .semibold))
+                            .tracking(0.4)
+                            .foregroundStyle(palette.accent)
                     }
 
                     Spacer()
 
-                    // Toggle circle
+                    // Selection check — gold fill with a white check when on.
                     ZStack {
                         Circle()
-                            .stroke(
-                                isSelected ? palette.accent : palette.border.opacity(0.4),
-                                lineWidth: isSelected ? 0 : 1.5
-                            )
-                            .frame(width: 26, height: 26)
-
+                            .fill(isSelected ? palette.accent : Color.clear)
+                        Circle()
+                            .strokeBorder(isSelected ? Color.clear : palette.border.opacity(0.55), lineWidth: 1.5)
                         if isSelected {
-                            Circle()
-                                .fill(
-                                    LinearGradient(
-                                        colors: [palette.accent, palette.accent.opacity(0.85)],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    )
-                                )
-                                .frame(width: 26, height: 26)
-                                .shadow(color: palette.accent.opacity(0.25), radius: 3, y: 1)
-
                             Image(systemName: "checkmark")
                                 .font(.system(size: 11, weight: .bold))
                                 .foregroundStyle(.white)
                         }
                     }
+                    .frame(width: 24, height: 24)
                 }
                 .padding(16)
 
-                // Notification preview (shown when selected)
+                // Notification preview (shown when selected) — quiet italic line.
                 if isSelected {
-                    HStack(spacing: 8) {
-                        Image(systemName: "bell.fill")
-                            .font(.system(size: 10, weight: .medium))
-                            .foregroundStyle(palette.accent)
-
-                        Text(slot.notificationPreview(name: userName))
-                            .font(.system(size: 13, weight: .regular, design: .rounded))
-                            .foregroundStyle(palette.textSecondary)
-                            .italic()
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.bottom, 14)
-                    .padding(.leading, 52)
-                    .transition(.move(edge: .top).combined(with: .opacity))
+                    Text(slot.notificationPreview(name: userName))
+                        .font(.custom("Georgia-Italic", size: 13))
+                        .foregroundStyle(palette.textSecondary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 16)
+                        .padding(.bottom, 14)
+                        .transition(.move(edge: .top).combined(with: .opacity))
                 }
             }
             .background(

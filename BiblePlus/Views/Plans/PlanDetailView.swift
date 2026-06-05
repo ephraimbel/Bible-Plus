@@ -41,7 +41,7 @@ struct PlanDetailView: View {
         guard plan.totalDays >= 8 else { return [] }
         var set = Set<Int>()
         for pct in [25, 50, 75] {
-            let target = Int((Double(pct) / 100.0) * Double(plan.totalDays).rounded())
+            let target = Int(((Double(pct) / 100.0) * Double(plan.totalDays)).rounded())
             set.insert(target)
         }
         return set
@@ -134,6 +134,9 @@ struct PlanDetailView: View {
         .onChange(of: viewModel.navigateToPlanDayID) { _, newID in
             guard newID == plan.id else { return }
             viewModel.navigateToPlanDayID = nil
+            // A deep-link can arrive before onAppear caches `days`; load it now
+            // so `nextDayData` is non-nil and the push isn't an empty screen.
+            if days.isEmpty { days = plan.days }
             showNextDay = true
         }
     }
@@ -361,6 +364,7 @@ struct PlanDetailView: View {
         } else if let progress {
             let nextDay = progress.nextDay(totalDays: plan.totalDays)
             GoldButton(title: "Continue — Day \(nextDay)", showGlow: true) {
+                if days.isEmpty { days = plan.days }
                 showNextDay = true
             }
         } else {

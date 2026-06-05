@@ -72,7 +72,12 @@ final class ReadingPlansViewModel {
         let completedDescriptor = FetchDescriptor<UserPlanProgress>(
             predicate: #Predicate { $0.completedDate != nil }
         )
-        completedPlanIDs = Set(((try? modelContext.fetch(completedDescriptor)) ?? []).map { $0.planID })
+        let completedRaw = Set(((try? modelContext.fetch(completedDescriptor)) ?? []).map { $0.planID })
+        // A plan the user is actively doing again (e.g. after Restart) must not
+        // show the "DONE" badge just because a prior run was completed — the
+        // lingering completed row keeps its planID here otherwise. Active state
+        // wins over a historical completion; history itself is preserved.
+        completedPlanIDs = completedRaw.subtracting(activeProgressByPlanID.keys)
 
         computeRecommendations()
         refreshToken += 1

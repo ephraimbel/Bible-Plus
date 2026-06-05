@@ -18,6 +18,12 @@ struct OnboardingQuestionScaffold<Content: View, Footer: View>: View {
     var subtitle: String? = nil
     var showBack: Bool = true
     var onBack: () -> Void = {}
+    /// When true, the content is laid out in a non-scrolling, vertically
+    /// centered column (header pinned near the top, content floated into the
+    /// middle of the space above the footer). For sparse screens like the
+    /// closeness scale where a top-aligned ScrollView leaves a big empty gap
+    /// down to the button.
+    var centerContent: Bool = false
     @ViewBuilder var content: () -> Content
     @ViewBuilder var footer: () -> Footer
 
@@ -27,6 +33,11 @@ struct OnboardingQuestionScaffold<Content: View, Footer: View>: View {
 
     private let accentGold = Color(red: 0.79, green: 0.66, blue: 0.43)
 
+    private var progressFraction: CGFloat {
+        guard totalSteps > 0 else { return 0 }
+        return CGFloat(stepNumber) / CGFloat(totalSteps)
+    }
+
     var body: some View {
         ZStack {
             background
@@ -34,24 +45,48 @@ struct OnboardingQuestionScaffold<Content: View, Footer: View>: View {
             VStack(spacing: 0) {
                 topBar
 
-                ScrollView(showsIndicators: false) {
+                if centerContent {
                     VStack(alignment: .leading, spacing: 0) {
                         header
                             .opacity(appeared ? 1 : 0)
                             .offset(y: appeared ? 0 : 14)
 
+                        Spacer(minLength: 24)
+
                         content()
-                            .padding(.top, 28)
+                            .frame(maxWidth: .infinity)
                             .opacity(appeared ? 1 : 0)
                             .offset(y: appeared ? 0 : 20)
                             .animation(
                                 reduceMotion ? nil : .spring(response: 0.55, dampingFraction: 0.86).delay(0.10),
                                 value: appeared
                             )
+
+                        Spacer(minLength: 24)
                     }
                     .padding(.horizontal, 26)
                     .padding(.top, 22)
-                    .padding(.bottom, 24)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else {
+                    ScrollView(showsIndicators: false) {
+                        VStack(alignment: .leading, spacing: 0) {
+                            header
+                                .opacity(appeared ? 1 : 0)
+                                .offset(y: appeared ? 0 : 14)
+
+                            content()
+                                .padding(.top, 28)
+                                .opacity(appeared ? 1 : 0)
+                                .offset(y: appeared ? 0 : 20)
+                                .animation(
+                                    reduceMotion ? nil : .spring(response: 0.55, dampingFraction: 0.86).delay(0.10),
+                                    value: appeared
+                                )
+                        }
+                        .padding(.horizontal, 26)
+                        .padding(.top, 22)
+                        .padding(.bottom, 24)
+                    }
                 }
 
                 footer()
@@ -114,13 +149,18 @@ struct OnboardingQuestionScaffold<Content: View, Footer: View>: View {
             .opacity(showBack ? 1 : 0)
             .allowsHitTesting(showBack)
 
-            HStack(spacing: 5) {
-                ForEach(0..<totalSteps, id: \.self) { i in
+            // Continuous fill bar — scales cleanly to a long interview where
+            // a dozen-plus separate segments would read as cramped slivers.
+            GeometryReader { geo in
+                ZStack(alignment: .leading) {
                     Capsule()
-                        .fill(i < stepNumber ? accentGold : palette.border.opacity(0.30))
-                        .frame(height: 4)
+                        .fill(palette.border.opacity(0.30))
+                    Capsule()
+                        .fill(accentGold)
+                        .frame(width: max(0, geo.size.width * progressFraction))
                 }
             }
+            .frame(height: 4)
             .animation(.spring(response: 0.45, dampingFraction: 0.8), value: stepNumber)
         }
         .padding(.horizontal, 22)
@@ -184,8 +224,10 @@ struct OnboardingSelectableCard: View {
                 }
             }
             .padding(.horizontal, fullWidth ? 20 : 12)
-            .padding(.vertical, fullWidth ? 17 : 15)
-            .frame(maxWidth: .infinity, alignment: fullWidth ? .leading : .center)
+            .padding(.vertical, fullWidth ? 17 : 8)
+            // Grid chips get a uniform fixed height so 1-line and 2-line labels
+            // render identically — keeps every selection grid clean and even.
+            .frame(maxWidth: .infinity, minHeight: fullWidth ? 0 : 56, alignment: fullWidth ? .leading : .center)
             .background(
                 RoundedRectangle(cornerRadius: 15, style: .continuous)
                     .fill(isSelected ? accentGold : palette.surfaceElevated)

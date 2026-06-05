@@ -105,4 +105,73 @@ enum BibleData {
         guard let index = allBooks.firstIndex(where: { $0.id == bookID }) else { return nil }
         return index + 1
     }
+
+    // MARK: - Robust Book Resolution
+    //
+    // Maps a loosely-written book name to a canonical `BibleBook`. Handles the
+    // exact name, common abbreviations, and frequent variants the AI (or a
+    // cross-reference) produces — e.g. "Psalm" → Psalms, "Songs"/"Song of Songs"
+    // → Song of Solomon, "Rom"/"1 Cor"/"Rev". Numeral prefixes are normalized
+    // ("I John", "First John", "1st John" → "1 John") before lookup.
+
+    /// alias (lowercased, no periods, single-spaced) → canonical book id.
+    private static let bookAliases: [String: String] = {
+        var map: [String: String] = [:]
+        // Every canonical name resolves to itself.
+        for b in allBooks { map[b.name.lowercased()] = b.id }
+        // Curated abbreviations & variants, keyed by the EXACT canonical name
+        // (lowercased) so each always resolves to a real book regardless of id.
+        let extra: [String: [String]] = [
+            "genesis": ["gen", "gn"], "exodus": ["exod", "exo", "ex"], "leviticus": ["lev", "lv"],
+            "numbers": ["num", "nm", "nb"], "deuteronomy": ["deut", "deu", "dt"], "joshua": ["josh", "jos", "jsh"],
+            "judges": ["judg", "jdg", "jg"], "ruth": ["rth", "ru"],
+            "1 samuel": ["1 sam", "1 sm"], "2 samuel": ["2 sam", "2 sm"],
+            "1 kings": ["1 kgs", "1 ki"], "2 kings": ["2 kgs", "2 ki"],
+            "1 chronicles": ["1 chron", "1 chr", "1 ch"], "2 chronicles": ["2 chron", "2 chr", "2 ch"],
+            "ezra": ["ezr"], "nehemiah": ["neh", "ne"], "esther": ["esth", "est"], "job": ["jb"],
+            "psalms": ["psalm", "ps", "psa", "pss", "pslm"], "proverbs": ["prov", "prv", "pro", "pr"],
+            "ecclesiastes": ["eccl", "eccles", "ecc", "qoh"],
+            "song of solomon": ["song of songs", "song", "songs", "sos", "canticles", "sng"],
+            "isaiah": ["isa", "is"], "jeremiah": ["jer", "je"], "lamentations": ["lam", "la"],
+            "ezekiel": ["ezek", "eze", "ezk"], "daniel": ["dan", "dn"], "hosea": ["hos", "ho"],
+            "joel": ["jl", "joe"], "amos": ["am"], "obadiah": ["obad", "oba", "ob"],
+            "jonah": ["jon", "jnh"], "micah": ["mic", "mc"], "nahum": ["nah", "na"], "habakkuk": ["hab"],
+            "zephaniah": ["zeph", "zep", "zp"], "haggai": ["hag", "hg"], "zechariah": ["zech", "zec", "zc"],
+            "malachi": ["mal", "ml"], "matthew": ["matt", "mat", "mt"], "mark": ["mrk", "mk", "mr"],
+            "luke": ["luk", "lk"], "john": ["jhn", "jn"], "acts": ["act", "ac"], "romans": ["rom", "rm", "ro"],
+            "1 corinthians": ["1 cor", "1 co"], "2 corinthians": ["2 cor", "2 co"],
+            "galatians": ["gal", "ga"], "ephesians": ["eph", "ephes"], "philippians": ["phil", "php", "pp"],
+            "colossians": ["col"], "1 thessalonians": ["1 thess", "1 thes", "1 th"],
+            "2 thessalonians": ["2 thess", "2 thes", "2 th"], "1 timothy": ["1 tim", "1 ti"],
+            "2 timothy": ["2 tim", "2 ti"], "titus": ["tit"], "philemon": ["philem", "phlm", "phm"],
+            "hebrews": ["heb"], "james": ["jas", "jm", "jms"], "1 peter": ["1 pet", "1 pt", "1 pe"],
+            "2 peter": ["2 pet", "2 pt", "2 pe"], "1 john": ["1 jn", "1 jhn", "1 jo"],
+            "2 john": ["2 jn", "2 jhn"], "3 john": ["3 jn", "3 jhn"], "jude": ["jud", "jd"],
+            "revelation": ["revelations", "rev", "rv", "re"],
+        ]
+        for (canonical, aliases) in extra {
+            guard let book = allBooks.first(where: { $0.name.lowercased() == canonical }) else { continue }
+            for a in aliases { map[a] = book.id }
+        }
+        return map
+    }()
+
+    /// Resolve a loosely-written book name (e.g. "Psalm", "1 Cor", "Songs").
+    static func resolveBook(_ rawName: String) -> BibleBook? {
+        var s = rawName.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        s = s.replacingOccurrences(of: ".", with: "")
+        s = s.split(whereSeparator: { $0 == " " }).joined(separator: " ")
+        // Normalize numeral prefixes: "i/ii/iii", "first/second/third", "1st/2nd/3rd".
+        let prefixes: [(String, String)] = [
+            ("first ", "1 "), ("second ", "2 "), ("third ", "3 "),
+            ("1st ", "1 "), ("2nd ", "2 "), ("3rd ", "3 "),
+            ("iii ", "3 "), ("ii ", "2 "), ("i ", "1 "),
+        ]
+        for (k, v) in prefixes where s.hasPrefix(k) {
+            s = v + String(s.dropFirst(k.count))
+            break
+        }
+        guard let id = bookAliases[s] else { return nil }
+        return allBooks.first { $0.id == id }
+    }
 }

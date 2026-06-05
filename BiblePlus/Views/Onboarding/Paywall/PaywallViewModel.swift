@@ -16,11 +16,12 @@ final class PaywallViewModel {
 
     // MARK: - Purchase State
 
-    // Weekly (3-day free trial) is pre-selected: most users won't commit to
-    // paying upfront for a Bible app, so defaulting to the free trial lifts
-    // trial starts and weekly recurring revenue. The yearly "Save $X" badge
-    // still lets a ready buyer self-select the annual plan.
-    var selectedProductID: String? = StoreKitService.weeklyID
+    // Yearly (7-day free trial) is pre-selected: it's the plan we want — the
+    // free trial removes upfront commitment, and the annual term means far
+    // lower churn and higher LTV than the no-trial monthly. The Monthly card
+    // stays available for users who don't want the year-long commitment. (The
+    // in-app paywall overrides this to Monthly on appear — see PaywallContainerView.)
+    var selectedProductID: String? = StoreKitService.yearlyID
     var isPurchasing = false
     var purchaseError: String? = nil
 
@@ -199,6 +200,7 @@ final class PaywallViewModel {
         case .relationship: return "wisdom for the ones you love"
         case .purpose: return "clarity for what's next"
         case .none: return "made for the way you believe"
+        default: return "comfort for what you're carrying"
         }
     }
 
@@ -338,34 +340,34 @@ final class PaywallViewModel {
     // MARK: - Price Helpers
 
     func yearlyPriceLabel(_ storeKit: StoreKitService) -> String {
-        storeKit.yearlyProduct?.localizedPriceString ?? "$49.99"
+        storeKit.yearlyProduct?.localizedPriceString ?? "$39.99"
     }
 
-    func weeklyPriceLabel(_ storeKit: StoreKitService) -> String {
-        storeKit.weeklyProduct?.localizedPriceString ?? "$4.99"
+    func monthlyPriceLabel(_ storeKit: StoreKitService) -> String {
+        storeKit.monthlyProduct?.localizedPriceString ?? "$6.99"
     }
 
-    /// Weekly-equivalent of the yearly plan (price ÷ 52). Shown on the yearly
-    /// card as "$0.96/week" so it compares apples-to-apples against the weekly
-    /// plan — much starker than a monthly figure.
-    func yearlyWeeklyBreakdown(_ storeKit: StoreKitService) -> String {
+    /// Monthly-equivalent of the yearly plan (price ÷ 12). Shown on the yearly
+    /// card as "$3.33/month" so it compares apples-to-apples against the $6.99
+    /// monthly plan.
+    func yearlyMonthlyBreakdown(_ storeKit: StoreKitService) -> String {
         if let product = storeKit.yearlyProduct {
-            let weekly = product.price / 52
+            let monthly = product.price / 12
             if let formatter = product.priceFormatter {
-                return formatter.string(from: weekly as NSNumber) ?? "$0.96"
+                return formatter.string(from: monthly as NSNumber) ?? "$3.33"
             }
-            return String(format: "$%.2f", (weekly as NSDecimalNumber).doubleValue)
+            return String(format: "$%.2f", (monthly as NSDecimalNumber).doubleValue)
         }
-        return "$0.96"
+        return "$3.33"
     }
 
-    /// Dollars saved over a year by choosing yearly instead of paying the weekly
-    /// price for 52 weeks (52 × weekly − yearly), rounded UP to a whole dollar
-    /// (no cents). Shown on the yearly card as "Save $210" — a clean, concrete
-    /// number lands harder than a percentage or a cents figure.
+    /// Dollars saved over a year by choosing yearly instead of paying the
+    /// monthly price for 12 months (12 × monthly − yearly), rounded UP to a
+    /// whole dollar (no cents). Shown as "Save $44" — a clean, concrete number
+    /// lands harder than a percentage or a cents figure.
     func yearlySavingsAmount(_ storeKit: StoreKitService) -> String {
-        if let weekly = storeKit.weeklyProduct, let yearly = storeKit.yearlyProduct {
-            let saved = (weekly.price * 52) - yearly.price
+        if let monthly = storeKit.monthlyProduct, let yearly = storeKit.yearlyProduct {
+            let saved = (monthly.price * 12) - yearly.price
             if saved > 0 {
                 let roundedUp = (saved as NSDecimalNumber).doubleValue.rounded(.up)
                 // Copy the product's currency formatter so we can drop cents
@@ -380,6 +382,6 @@ final class PaywallViewModel {
                 return "$\(Int(roundedUp))"
             }
         }
-        return "$210"
+        return "$44"
     }
 }

@@ -187,7 +187,7 @@ struct PersonalVerseRevealView: View {
                 Button {
                     keepVerseAndAdvance()
                 } label: {
-                    Text("Keep this with me")
+                    Text("Save this verse")
                         .font(.custom("Georgia-Bold", size: 16))
                         .tracking(0.3)
                         .foregroundStyle(.white)
@@ -483,6 +483,20 @@ enum PersonalVerseSelector {
         // "Show me another" loop.
         var seen: Set<String> = []
         var pool: [PersonalVerse] = []
+
+        // Lead with a hand-curated, comforting verse for the primary burden so
+        // the reveal is always on-tone. The raw feed can score a *warning*
+        // verse highest (e.g. "Be alert and of sober mind" for anxiety), which
+        // is the wrong note for an emotional aha moment. The "Show me another"
+        // loop then continues into the personalized feed verses below.
+        if !viewModel.selectedBurdens.isEmpty {
+            let curated = PersonalVerse.fallback(for: viewModel.selectedBurdens)
+            if !curated.reference.isEmpty {
+                pool.append(curated)
+                seen.insert(curated.reference)
+            }
+        }
+
         for item in feed where item.type == .verse {
             guard let ref = item.verseReference, let text = item.verseText,
                   !ref.isEmpty, !text.isEmpty else { continue }

@@ -7,7 +7,7 @@ final class StoreKitService {
     private(set) var productsLoaded = false
     private(set) var productsLoadError = false
 
-    static let weeklyID = "io.bibleplus.pro.weekly"
+    static let monthlyID = "io.bibleplus.pro.monthly"
     static let yearlyID = "io.bibleplus.pro.yearly"
 
     // RevenueCat packages for purchasing
@@ -26,8 +26,8 @@ final class StoreKitService {
     private var _isPro: Bool = false
     #endif
 
-    var weeklyProduct: RevenueCat.StoreProduct? {
-        subscriptions.first { $0.productIdentifier == Self.weeklyID }
+    var monthlyProduct: RevenueCat.StoreProduct? {
+        subscriptions.first { $0.productIdentifier == Self.monthlyID }
     }
 
     var yearlyProduct: RevenueCat.StoreProduct? {

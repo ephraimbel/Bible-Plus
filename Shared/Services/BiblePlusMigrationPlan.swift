@@ -23,6 +23,8 @@ enum BiblePlusSchemaV1: VersionedSchema {
             ReadingPlan.self,
             UserPlanProgress.self,
             ActivityEvent.self,
+            DailyPath.self,
+            UserPathProgress.self,
         ]
     }
 }

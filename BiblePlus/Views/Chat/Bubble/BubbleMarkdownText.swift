@@ -33,8 +33,8 @@ struct BubbleMarkdownText: View {
 
     private func paragraphTextView(_ text: String) -> some View {
         highlightedMarkdownText(text)
-            .font(.system(size: 18, weight: .medium, design: .serif))
-            .lineSpacing(6)
+            .font(.system(size: 18, weight: .regular, design: .serif))
+            .lineSpacing(7)
             .environment(\.openURL, OpenURLAction { url in
                 if url.scheme == "bibleplus",
                    url.host == "bible",
@@ -121,11 +121,16 @@ struct BubbleMarkdownText: View {
             if let (bookName, chapter, verse) = ScriptureParser.parseReference(segment),
                let encoded = bookName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
                let url = URL(string: "bibleplus://bible?book=\(encoded)&ch=\(chapter)&v=\(verse)") {
+                // A tappable reference: clean gold serif in our voice with a
+                // soft gold underline — interactive but editorial, no blocky
+                // background highlight (Claude-style).
                 attributed[attrStart..<attrEnd].link = url
                 attributed[attrStart..<attrEnd].foregroundColor = palette.accent
-                attributed[attrStart..<attrEnd].backgroundColor = palette.accent.opacity(0.10)
-                attributed[attrStart..<attrEnd].font = .system(size: 16, weight: .semibold, design: .rounded)
-                attributed[attrStart..<attrEnd].underlineStyle = nil
+                attributed[attrStart..<attrEnd].font = .system(size: 17, weight: .semibold, design: .serif)
+                attributed[attrStart..<attrEnd].underlineStyle = Text.LineStyle(
+                    pattern: .solid,
+                    color: palette.accent.opacity(0.35)
+                )
             } else {
                 attributed[attrStart..<attrEnd].foregroundColor = palette.accent
                 attributed[attrStart..<attrEnd].font = .system(size: 17, weight: .medium, design: .serif).italic()

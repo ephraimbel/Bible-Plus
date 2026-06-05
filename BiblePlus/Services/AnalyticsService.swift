@@ -91,5 +91,19 @@ enum Analytics {
         case welcomeTypewriterCompleted = "welcome_typewriter_completed"
         case welcomeReplied = "welcome_replied"
         case welcomeNotificationTapped = "welcome_notification_tapped"
+
+        // Daily Path — the habit-formation engine. These events form the core
+        // conversion funnel: path_started → day_opened → step_advanced → day_completed
+        // → (eventually) path_paywall_shown → path_completed. Together they
+        // measure habit formation, AI engagement inside the path, and the
+        // paywall's day-15 trigger conversion rate.
+        case pathStarted = "path_started"
+        case pathDayOpened = "path_day_opened"
+        case pathStepAdvanced = "path_step_advanced"
+        case pathQuizAnswered = "path_quiz_answered"
+        case pathDayCompleted = "path_day_completed"
+        case pathCompleted = "path_completed"
+        case pathAIInvoked = "path_ai_invoked"
+        case pathPaywallShown = "path_paywall_shown"
     }
 }

@@ -199,8 +199,13 @@ private struct ConversationListContent: View {
         VStack(alignment: .leading, spacing: 0) {
             sectionHeader(title, icon: icon)
 
-            VStack(spacing: 12) {
+            VStack(spacing: 0) {
                 ForEach(Array(conversations.enumerated()), id: \.element.id) { index, conversation in
+                    if index > 0 {
+                        Rectangle()
+                            .fill(palette.border.opacity(0.6))
+                            .frame(height: 1)
+                    }
                     conversationRow(conversation)
                         .opacity(appeared ? 1 : 0)
                         .offset(y: appeared ? 0 : 10)
@@ -210,7 +215,7 @@ private struct ConversationListContent: View {
                         )
                 }
             }
-            .padding(.horizontal, 16)
+            .padding(.horizontal, 24)
         }
     }
 
@@ -303,87 +308,92 @@ private struct ConversationListContent: View {
         VStack(spacing: 0) {
             Spacer()
 
-            // Quiet emblem — a soft ambient glow, hairline concentric rings,
-            // and a single gold-gradient mark. Restrained on purpose so the
-            // empty state reads calm and premium rather than busy.
+            // Emblem — a single glowing gold mark inside a soft halo and one
+            // hairline ring. Floating (no disc) so it echoes the Bible✦ star and
+            // reads calm and premium rather than busy.
             ZStack {
                 Circle()
                     .fill(
                         RadialGradient(
-                            colors: [palette.accent.opacity(0.13), palette.accent.opacity(0)],
+                            colors: [palette.accent.opacity(0.12), palette.accent.opacity(0)],
                             center: .center,
-                            startRadius: 4,
-                            endRadius: 118
+                            startRadius: 2,
+                            endRadius: 120
                         )
                     )
-                    .frame(width: 230, height: 230)
+                    .frame(width: 224, height: 224)
 
                 Circle()
-                    .stroke(palette.accent.opacity(0.09), lineWidth: 1)
-                    .frame(width: 152, height: 152)
-
-                Circle()
-                    .stroke(palette.accent.opacity(0.15), lineWidth: 1)
-                    .frame(width: 112, height: 112)
-
-                Circle()
-                    .fill(palette.surfaceElevated)
-                    .frame(width: 80, height: 80)
-                    .overlay(
-                        Circle()
-                            .stroke(palette.accent.opacity(0.18), lineWidth: 0.75)
-                    )
-                    .shadow(color: palette.accent.opacity(0.18), radius: 18, y: 7)
+                    .stroke(palette.accent.opacity(0.13), lineWidth: 1)
+                    .frame(width: 118, height: 118)
 
                 Image(systemName: "sparkle")
-                    .font(.system(size: 30, weight: .light))
+                    .font(.system(size: 36, weight: .light))
                     .foregroundStyle(
                         LinearGradient(
-                            colors: [palette.accent, palette.accent.opacity(0.68)],
+                            colors: [palette.accent, palette.accent.opacity(0.62)],
                             startPoint: .top,
                             endPoint: .bottom
                         )
                     )
+                    .shadow(color: palette.accent.opacity(0.30), radius: 12)
+                    .shadow(color: palette.accent.opacity(0.16), radius: 26)
             }
             .opacity(appeared ? 1 : 0)
             .scaleEffect(appeared ? 1 : 0.82)
             .animation(BPAnimation.spring.delay(0.05), value: appeared)
 
-            Spacer().frame(height: 28)
+            Spacer().frame(height: 30)
 
-            // Header
-            Text("Start a new conversation")
-                .font(.custom("NewYork-Semibold", size: 23))
+            // Gold eyebrow — echoes the welcome screen's "A Sacred Companion".
+            Text("YOUR COMPANION")
+                .font(.system(size: 11, weight: .semibold))
+                .tracking(2.8)
+                .foregroundStyle(palette.accent.opacity(0.9))
+                .opacity(appeared ? 1 : 0)
+                .offset(y: appeared ? 0 : 10)
+                .animation(BPAnimation.spring.delay(0.10), value: appeared)
+
+            Spacer().frame(height: 14)
+
+            // Headline — Baskerville serif, a warm invitation.
+            Text("What's on your heart?")
+                .font(.custom("Baskerville-Bold", size: 30))
                 .foregroundStyle(palette.textPrimary)
-                .tracking(0.2)
-                .opacity(appeared ? 1 : 0)
-                .offset(y: appeared ? 0 : 12)
-                .animation(BPAnimation.spring.delay(0.1), value: appeared)
-
-            Spacer().frame(height: 10)
-
-            // Subtitle
-            Text("Your personal guide for scripture,\nprayer, and reflection")
-                .font(.system(size: 14, weight: .regular))
-                .foregroundStyle(palette.textSecondary)
                 .multilineTextAlignment(.center)
-                .lineSpacing(3)
+                .minimumScaleFactor(0.85)
+                .lineLimit(1)
                 .opacity(appeared ? 1 : 0)
                 .offset(y: appeared ? 0 : 12)
-                .animation(BPAnimation.spring.delay(0.15), value: appeared)
+                .animation(BPAnimation.spring.delay(0.14), value: appeared)
 
-            Spacer().frame(height: 32)
+            Spacer().frame(height: 12)
 
-            // New Conversation button
+            // Subtitle — italic serif, simplified to a single calm line.
+            Text("Scripture, prayer, or whatever you're carrying.")
+                .font(.custom("NewYork-Regular", size: 15))
+                .italic()
+                .foregroundStyle(palette.textSecondary.opacity(0.85))
+                .multilineTextAlignment(.center)
+                .lineSpacing(4)
+                .opacity(appeared ? 1 : 0)
+                .offset(y: appeared ? 0 : 12)
+                .animation(BPAnimation.spring.delay(0.18), value: appeared)
+
+            Spacer().frame(height: 34)
+
+            // Primary action — clean gold pill, crisp SF semibold label (no
+            // rounded face, no "+") with a quiet forward arrow.
             Button {
                 HapticService.lightImpact()
                 onNewConversation()
             } label: {
-                HStack(spacing: 8) {
-                    Image(systemName: "plus")
+                HStack(spacing: 9) {
+                    Text("Start a conversation")
+                        .font(.system(size: 15.5, weight: .semibold))
+                        .tracking(0.3)
+                    Image(systemName: "arrow.right")
                         .font(.system(size: 13, weight: .semibold))
-                    Text("New Conversation")
-                        .font(.system(size: 15, weight: .semibold, design: .rounded))
                 }
                 .foregroundStyle(.white)
                 .padding(.horizontal, 30)
@@ -410,11 +420,12 @@ private struct ConversationListContent: View {
             .buttonStyle(PressableButtonStyle())
             .opacity(appeared ? 1 : 0)
             .offset(y: appeared ? 0 : 10)
-            .animation(BPAnimation.spring.delay(0.2), value: appeared)
+            .animation(BPAnimation.spring.delay(0.22), value: appeared)
 
-            Spacer().frame(height: 40)
+            Spacer()
 
-            // Inspiring verse — a quiet editorial footer beneath a hairline.
+            // Inspiring verse — a quiet editorial footer pinned near the bottom,
+            // beneath a hairline. Same serif voice as the rest of the screen.
             VStack(spacing: 10) {
                 Capsule()
                     .fill(palette.accent.opacity(0.3))
@@ -428,15 +439,14 @@ private struct ConversationListContent: View {
                     .lineSpacing(3)
 
                 Text(inspiringVerse.reference)
-                    .font(.system(size: 11, weight: .medium, design: .rounded))
-                    .tracking(0.4)
-                    .foregroundStyle(palette.accent.opacity(0.55))
+                    .font(.system(size: 11, weight: .semibold))
+                    .tracking(1.2)
+                    .foregroundStyle(palette.accent.opacity(0.6))
             }
-            .padding(.horizontal, 20)
+            .padding(.horizontal, 28)
+            .padding(.bottom, 28)
             .opacity(appeared ? 1 : 0)
             .animation(BPAnimation.spring.delay(0.3), value: appeared)
-
-            Spacer()
         }
         .padding(.horizontal, 24)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -481,85 +491,43 @@ private struct ConversationRow: View {
     @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
-        HStack(alignment: .top, spacing: 14) {
-            // Premium gem icon — gold gradient circle with mode/sparkle glyph.
-            ConversationGemIcon(
-                symbol: gemSymbol,
-                palette: palette,
-                colorScheme: colorScheme,
-                isPinned: conversation.isPinned
-            )
+        // A clean, editorial row — no gem, no card chrome. Serif title, a quiet
+        // timestamp, an optional mode label, and a dimmed serif preview. The
+        // hairline divider between rows (in the section) does the separating.
+        VStack(alignment: .leading, spacing: 5) {
+            HStack(alignment: .firstTextBaseline, spacing: 10) {
+                Text(conversation.title)
+                    .font(.system(size: 17, weight: .regular, design: .serif))
+                    .foregroundStyle(palette.textPrimary)
+                    .lineLimit(1)
 
-            VStack(alignment: .leading, spacing: 6) {
-                // Title row: serif title + timestamp pill on the right.
-                HStack(alignment: .firstTextBaseline, spacing: 10) {
-                    Text(conversation.title)
-                        .font(.system(size: 16.5, weight: .semibold, design: .serif))
-                        .foregroundStyle(palette.textPrimary)
-                        .lineLimit(1)
+                Spacer(minLength: 8)
 
-                    Spacer(minLength: 6)
-
-                    Text(formattedTimestamp)
-                        .font(.system(size: 9.5, weight: .semibold, design: .rounded))
-                        .tracking(1.0)
-                        .foregroundStyle(palette.textMuted.opacity(0.85))
-                }
-
-                // Mode label as small caps
-                if let mode = conversation.mode {
-                    Text(mode.displayName.uppercased())
-                        .font(.system(size: 9, weight: .semibold))
-                        .tracking(1.6)
-                        .foregroundStyle(palette.accent.opacity(0.78))
-                }
-
-                // Preview as italic serif — reads as a journal excerpt.
-                Text(preview)
-                    .font(.system(size: 13.5, weight: .regular, design: .serif))
-                    .italic()
-                    .foregroundStyle(palette.textSecondary.opacity(0.82))
-                    .lineSpacing(3)
-                    .lineLimit(2)
-                    .multilineTextAlignment(.leading)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(.top, 1)
+                Text(formattedTimestamp)
+                    .font(.system(size: 10.5, weight: .medium))
+                    .tracking(0.6)
+                    .foregroundStyle(palette.textMuted.opacity(0.8))
             }
+
+            if let mode = conversation.mode {
+                Text(mode.displayName.uppercased())
+                    .font(.system(size: 9, weight: .semibold))
+                    .tracking(1.6)
+                    .foregroundStyle(palette.accent.opacity(0.8))
+            }
+
+            Text(preview)
+                .font(.system(size: 14, weight: .regular, design: .serif))
+                .italic()
+                .foregroundStyle(palette.textSecondary.opacity(0.7))
+                .lineSpacing(2)
+                .lineLimit(2)
+                .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
         }
-        .padding(.leading, 16)
-        .padding(.trailing, 18)
-        .padding(.vertical, 18)
+        .padding(.vertical, 15)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(rowBackground)
-        .overlay(rowBorder)
-        .shadow(
-            color: Color.black.opacity(colorScheme == .dark ? 0.22 : 0.05),
-            radius: 8,
-            x: 0,
-            y: 3
-        )
-        .contentShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
-    }
-
-    private var gemSymbol: String {
-        if conversation.character != nil { return "person.fill" }
-        if let mode = conversation.mode { return mode.icon }
-        return "sparkle"
-    }
-
-    private var rowBackground: some View {
-        // Clean crisp surface — no gradient or inner glow. The warm hairline
-        // border + single soft shadow do the lifting (matches the home cards).
-        RoundedRectangle(cornerRadius: 18, style: .continuous)
-            .fill(palette.surfaceElevated.opacity(colorScheme == .dark ? 0.6 : 1.0))
-    }
-
-    private var rowBorder: some View {
-        RoundedRectangle(cornerRadius: 18, style: .continuous)
-            .strokeBorder(
-                conversation.isPinned ? palette.accent.opacity(0.5) : palette.border,
-                lineWidth: conversation.isPinned ? 1.0 : 0.75
-            )
+        .contentShape(Rectangle())
     }
 
     /// Smarter relative timestamp:
@@ -588,56 +556,6 @@ private struct ConversationRow: View {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM d"
         return formatter.string(from: date).uppercased()
-    }
-}
-
-// MARK: - Conversation Gem Icon
-//
-// A small premium "gem" used as the leading avatar on each conversation row.
-// Layered: outer soft halo + gold gradient disc + inner highlight + glyph.
-// When the conversation is pinned, an additional pin badge floats top-right.
-
-private struct ConversationGemIcon: View {
-    let symbol: String
-    let palette: BPColorPalette
-    let colorScheme: ColorScheme
-    let isPinned: Bool
-
-    var body: some View {
-        ZStack {
-            // Outer soft halo
-            Circle()
-                .fill(palette.accent.opacity(colorScheme == .dark ? 0.10 : 0.08))
-                .frame(width: 46, height: 46)
-
-            // Soft gold disc — flat tint, hairline ring. Calm, not glossy.
-            Circle()
-                .fill(palette.accent.opacity(colorScheme == .dark ? 0.20 : 0.12))
-                .frame(width: 38, height: 38)
-                .overlay(
-                    Circle()
-                        .stroke(palette.accent.opacity(0.35), lineWidth: 0.6)
-                )
-
-            Image(systemName: symbol)
-                .font(.system(size: 14, weight: .semibold))
-                .foregroundStyle(palette.accent)
-
-            // Pin badge floats above the gem
-            if isPinned {
-                Image(systemName: "pin.fill")
-                    .font(.system(size: 8, weight: .bold))
-                    .foregroundStyle(.white)
-                    .frame(width: 14, height: 14)
-                    .background(
-                        Circle()
-                            .fill(palette.accent)
-                            .shadow(color: palette.accent.opacity(0.4), radius: 3, y: 1)
-                    )
-                    .offset(x: 16, y: -16)
-            }
-        }
-        .frame(width: 46, height: 46)
     }
 }
 
