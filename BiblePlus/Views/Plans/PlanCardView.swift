@@ -89,15 +89,15 @@ struct PlanCardView: View {
                 // Top-right status badge (DONE / PRO) sits over the image
                 if isCompleted {
                     statusBadge(icon: "checkmark", text: "DONE", tint: .white)
-                        .padding(10)
+                        .padding(BPSpacing.sm)
                 } else if plan.isProOnly && !isPro {
                     statusBadge(icon: "crown.fill", text: "PRO", tint: .white)
-                        .padding(10)
+                        .padding(BPSpacing.sm)
                 }
             }
 
             // MARK: Text content area (sits on the card's surface color)
-            VStack(alignment: .leading, spacing: 6) {
+            VStack(alignment: .leading, spacing: BPSpacing.xs) {
                 Text(plan.name)
                     .font(.system(size: 17, weight: .regular, design: .serif))
                     .foregroundStyle(palette.textPrimary)
@@ -105,7 +105,7 @@ struct PlanCardView: View {
                     .multilineTextAlignment(.leading)
                     .fixedSize(horizontal: false, vertical: true)
 
-                HStack(spacing: 6) {
+                HStack(spacing: BPSpacing.xs) {
                     Text("\(plan.totalDays) days")
                         .font(.system(size: 11, weight: .regular, design: .serif))
                         .italic()
@@ -149,12 +149,12 @@ struct PlanCardView: View {
                         }
                     }
                     .frame(height: 7)
-                    .padding(.top, 4)
+                    .padding(.top, BPSpacing.xxs)
                 }
             }
-            .padding(.horizontal, 14)
-            .padding(.top, 2)
-            .padding(.bottom, 14)
+            .padding(.horizontal, BPSpacing.md)
+            .padding(.top, BPSpacing.xxs)
+            .padding(.bottom, BPSpacing.md)
             .frame(maxWidth: .infinity, minHeight: 90, alignment: .topLeading)
         }
         // Fixed total card height so every card in the All Plans grid is
@@ -173,7 +173,7 @@ struct PlanCardView: View {
 
     @ViewBuilder
     private func statusBadge(icon: String, text: String, tint: Color) -> some View {
-        HStack(spacing: 3) {
+        HStack(spacing: BPSpacing.xxs) {
             Image(systemName: icon)
                 .font(.system(size: 9, weight: .bold))
             Text(text)
@@ -181,8 +181,8 @@ struct PlanCardView: View {
                 .tracking(0.8)
         }
         .foregroundStyle(tint)
-        .padding(.horizontal, 8)
-        .padding(.vertical, 4)
+        .padding(.horizontal, BPSpacing.xs)
+        .padding(.vertical, BPSpacing.xxs)
         .background(
             Capsule().fill(.black.opacity(0.35))
         )

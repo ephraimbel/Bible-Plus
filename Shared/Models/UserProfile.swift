@@ -87,6 +87,59 @@ final class UserProfile {
     /// rotation — the verse persists in the Saved collection regardless.
     var keptVerseDate: Date? = nil
 
+    // MARK: - Extended Onboarding Profile
+    //
+    // Captured during the expanded onboarding interview. All optional / raw-
+    // string backed (mirroring `selectedNotificationTopicsRaw`) so existing
+    // rows migrate cleanly via SwiftData's automatic lightweight migration.
+    var genderRaw: String? = nil
+    /// Exact age the user typed during onboarding (0 = not answered).
+    var age: Int = 0
+    var christianBackgroundRaw: String? = nil
+    var devotionFrequencyRaw: String? = nil
+    var timeCommitmentRaw: String? = nil
+    var referralSourceRaw: String? = nil
+    /// 1–5 felt-closeness to God captured at onboarding (0 = not answered).
+    /// The emotional "before" echoed back on the journey projection.
+    var closenessRating: Int = 0
+    var growthBlockersRaw: [String]? = nil
+    var appGoalsRaw: [String]? = nil
+
+    var gender: Gender? {
+        get { genderRaw.flatMap(Gender.init) }
+        set { genderRaw = newValue?.rawValue }
+    }
+
+    var christianBackground: ChristianBackground? {
+        get { christianBackgroundRaw.flatMap(ChristianBackground.init) }
+        set { christianBackgroundRaw = newValue?.rawValue }
+    }
+
+    var devotionFrequency: DevotionFrequency? {
+        get { devotionFrequencyRaw.flatMap(DevotionFrequency.init) }
+        set { devotionFrequencyRaw = newValue?.rawValue }
+    }
+
+    var timeCommitment: TimeCommitment? {
+        get { timeCommitmentRaw.flatMap(TimeCommitment.init) }
+        set { timeCommitmentRaw = newValue?.rawValue }
+    }
+
+    var referralSource: ReferralSource? {
+        get { referralSourceRaw.flatMap(ReferralSource.init) }
+        set { referralSourceRaw = newValue?.rawValue }
+    }
+
+    var growthBlockers: [GrowthBlocker] {
+        get { (growthBlockersRaw ?? []).compactMap(GrowthBlocker.init) }
+        set { growthBlockersRaw = newValue.isEmpty ? nil : newValue.map(\.rawValue) }
+    }
+
+    var appGoals: [AppGoal] {
+        get { (appGoalsRaw ?? []).compactMap(AppGoal.init) }
+        set { appGoalsRaw = newValue.isEmpty ? nil : newValue.map(\.rawValue) }
+    }
+
     /// Friendly accessor for pinned facts. Setting an empty array clears the
     /// field to nil so SwiftData stays tidy.
     var aiPinnedFacts: [String] {

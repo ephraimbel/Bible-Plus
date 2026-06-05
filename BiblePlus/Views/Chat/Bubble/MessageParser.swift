@@ -17,6 +17,12 @@ enum MessageParser {
         case quoteCard(text: String, attribution: String)
         case applyCard(title: String, items: [String])
         case originalWordCard(word: String, language: String, transliteration: String, meaning: String)
+        case passageCard(book: String, chapter: Int, startVerse: Int?, endVerse: Int?, focusVerse: Int?)
+        case memorizeCard(book: String, chapter: Int, verse: Int)
+        case quizCard(question: String, options: [String], answerIndex: Int, explanation: String)
+        case compareCard(book: String, chapter: Int, verse: Int, translations: [String])
+        case planCard(id: String, title: String, category: String, days: [PlanDay])
+        case mapCard(place: String, journey: String, caption: String)
     }
 
     private static var cache: [String: [Segment]] = [:]
@@ -59,7 +65,7 @@ enum MessageParser {
     private static let knownTagNames = [
         "VERSE", "PRAYER", "REFLECT", "ACTION",
         "SCRIPTURE", "STORY", "TIMELINE", "INSIGHT", "IMAGE", "CROSSREFS",
-        "TOOLRESULT", "QUOTE", "APPLY", "ORIGINAL"
+        "TOOLRESULT", "QUOTE", "APPLY", "ORIGINAL", "PASSAGE", "MEMORIZE", "QUIZ", "COMPARE", "PLAN", "MAP"
     ]
 
     private static func stripUnclosedOpener(_ text: String) -> String {
@@ -80,7 +86,7 @@ enum MessageParser {
         return text
     }
 
-    private static let tagPattern = #"\[(VERSE|PRAYER|REFLECT|ACTION|SCRIPTURE|STORY|TIMELINE|INSIGHT|IMAGE|CROSSREFS|TOOLRESULT|QUOTE|APPLY|ORIGINAL)(?:\s+[^\]]*?)?\](.*?)\[/\1\]"#
+    private static let tagPattern = #"\[(VERSE|PRAYER|REFLECT|ACTION|SCRIPTURE|STORY|TIMELINE|INSIGHT|IMAGE|CROSSREFS|TOOLRESULT|QUOTE|APPLY|ORIGINAL|PASSAGE|MEMORIZE|QUIZ|COMPARE|PLAN|MAP)(?:\s+[^\]]*?)?\](.*?)\[/\1\]"#
 
     private static func extractAttribute(_ name: String, from tag: String) -> String {
         let pattern = name + #"="([^"]+)""#
@@ -92,7 +98,7 @@ enum MessageParser {
     }
 
     private static let strayTagRegex: NSRegularExpression? = {
-        try? NSRegularExpression(pattern: #"\[/?(VERSE|PRAYER|REFLECT|ACTION|SCRIPTURE|STORY|TIMELINE|INSIGHT|IMAGE|CROSSREFS|TOOLRESULT|QUOTE|APPLY|ORIGINAL)(?:\s+[^\]]*)?\]"#)
+        try? NSRegularExpression(pattern: #"\[/?(VERSE|PRAYER|REFLECT|ACTION|SCRIPTURE|STORY|TIMELINE|INSIGHT|IMAGE|CROSSREFS|TOOLRESULT|QUOTE|APPLY|ORIGINAL|PASSAGE|MEMORIZE|QUIZ|COMPARE|PLAN|MAP)(?:\s+[^\]]*)?\]"#)
     }()
 
     private static func stripStrayTags(_ text: String) -> String {
@@ -124,7 +130,7 @@ enum MessageParser {
     }
 
     private static func parseWithTags(_ content: String) -> [Segment] {
-        let fullTagPattern = #"\[(VERSE|PRAYER|REFLECT|ACTION|SCRIPTURE|STORY|TIMELINE|INSIGHT|IMAGE|CROSSREFS|TOOLRESULT|QUOTE|APPLY|ORIGINAL)(\s+[^\]]*)?\](.*?)\[/\1\]"#
+        let fullTagPattern = #"\[(VERSE|PRAYER|REFLECT|ACTION|SCRIPTURE|STORY|TIMELINE|INSIGHT|IMAGE|CROSSREFS|TOOLRESULT|QUOTE|APPLY|ORIGINAL|PASSAGE|MEMORIZE|QUIZ|COMPARE|PLAN|MAP)(\s+[^\]]*)?\](.*?)\[/\1\]"#
         guard let regex = try? NSRegularExpression(pattern: fullTagPattern, options: .dotMatchesLineSeparators) else {
             return [.text(content)]
         }
@@ -250,6 +256,81 @@ enum MessageParser {
                     transliteration: translit,
                     meaning: trimmedBody
                 ))
+            case "PASSAGE":
+                let bookAttr = extractAttribute("book", from: attrs)
+                guard !bookAttr.isEmpty,
+                      let chapter = Int(extractAttribute("chapter", from: attrs))
+                else { break }
+                let (startV, endV) = parsePassageRange(extractAttribute("range", from: attrs))
+                let focus = Int(extractAttribute("focus", from: attrs))
+                segments.append(.passageCard(
+                    book: bookAttr,
+                    chapter: chapter,
+                    startVerse: startV,
+                    endVerse: endV,
+                    focusVerse: focus
+                ))
+            case "MEMORIZE":
+                let bookAttr = extractAttribute("book", from: attrs)
+                guard !bookAttr.isEmpty,
+                      let chapter = Int(extractAttribute("chapter", from: attrs)),
+                      let verse = Int(extractAttribute("verse", from: attrs))
+                else { break }
+                segments.append(.memorizeCard(book: bookAttr, chapter: chapter, verse: verse))
+            case "QUIZ":
+                // Body: "Question || Option || Option [|| Option] ~~ Explanation".
+                // The explanation lives in the body (not an attribute) so it can
+                // safely contain quotes/punctuation.
+                let halves = trimmedBody.components(separatedBy: "~~")
+                let explanation = halves.count > 1
+                    ? halves[1].trimmingCharacters(in: .whitespacesAndNewlines) : ""
+                let parts = halves[0].components(separatedBy: "||")
+                    .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                    .filter { !$0.isEmpty }
+                guard parts.count >= 3 else { break }   // question + ≥2 options
+                let question = parts[0]
+                let options = Array(parts.dropFirst().prefix(4)).map { stripOptionLabel($0) }
+                let answerIndex = quizAnswerIndex(extractAttribute("answer", from: attrs),
+                                                  optionCount: options.count)
+                segments.append(.quizCard(
+                    question: question,
+                    options: options,
+                    answerIndex: answerIndex,
+                    explanation: explanation
+                ))
+            case "COMPARE":
+                let bookAttr = extractAttribute("book", from: attrs)
+                guard !bookAttr.isEmpty,
+                      let chapter = Int(extractAttribute("chapter", from: attrs)),
+                      let verse = Int(extractAttribute("verse", from: attrs))
+                else { break }
+                let translations = extractAttribute("translations", from: attrs)
+                    .split(separator: ",")
+                    .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                    .filter { !$0.isEmpty }
+                segments.append(.compareCard(
+                    book: bookAttr, chapter: chapter, verse: verse, translations: translations
+                ))
+            case "PLAN":
+                let title = extractAttribute("title", from: attrs)
+                guard !title.isEmpty else { break }
+                let category = extractAttribute("topic", from: attrs)
+                let days = parsePlanDays(trimmedBody)
+                guard days.count >= 2 else { break }
+                let slug = title.lowercased()
+                    .replacingOccurrences(of: #"[^a-z0-9]+"#, with: "-", options: .regularExpression)
+                    .trimmingCharacters(in: CharacterSet(charactersIn: "-"))
+                segments.append(.planCard(
+                    id: "ai-\(slug)-d\(days.count)",
+                    title: title,
+                    category: category,
+                    days: days
+                ))
+            case "MAP":
+                let place = extractAttribute("place", from: attrs)
+                let journey = extractAttribute("journey", from: attrs)
+                guard !place.isEmpty || !journey.isEmpty else { break }
+                segments.append(.mapCard(place: place, journey: journey, caption: trimmedBody))
             default:
                 if !trimmedBody.isEmpty {
                     segments.append(.text(trimmedBody))
@@ -267,6 +348,80 @@ enum MessageParser {
         }
 
         return segments
+    }
+
+    /// Parses a `range="1-21"` style attribute into start/end verse numbers.
+    /// A single number ("16") collapses to start==end. Empty → (nil, nil),
+    /// meaning "the whole chapter".
+    private static func parsePassageRange(_ raw: String) -> (start: Int?, end: Int?) {
+        let trimmed = raw.trimmingCharacters(in: .whitespaces)
+        guard !trimmed.isEmpty else { return (nil, nil) }
+        let nums = trimmed
+            .split(whereSeparator: { $0 == "-" || $0 == "\u{2013}" || $0 == "\u{2014}" })
+            .compactMap { Int($0.trimmingCharacters(in: .whitespaces)) }
+        if nums.count >= 2 { return (min(nums[0], nums[1]), max(nums[0], nums[1])) }
+        if nums.count == 1 { return (nums[0], nums[0]) }
+        return (nil, nil)
+    }
+
+    /// Parses a [PLAN] body into days. Each non-empty line is one day:
+    /// `Day Title | Reading; Reading | Optional reflection`. Readings are real
+    /// references resolved to PlanReading so the persisted plan slots straight
+    /// into the existing reading-plan views.
+    private static func parsePlanDays(_ body: String) -> [PlanDay] {
+        var days: [PlanDay] = []
+        var dayNumber = 1
+        for line in body.components(separatedBy: .newlines) {
+            let trimmed = line.trimmingCharacters(in: .whitespaces)
+            guard !trimmed.isEmpty else { continue }
+            let parts = trimmed.components(separatedBy: "|").map { $0.trimmingCharacters(in: .whitespaces) }
+            guard parts.count >= 2 else { continue }
+            let title = parts[0]
+            let readings = parts[1].components(separatedBy: ";").compactMap { parsePlanReading($0) }
+            guard !title.isEmpty, !readings.isEmpty else { continue }
+            let reflection = parts.count >= 3 && !parts[2].isEmpty ? parts[2] : nil
+            days.append(PlanDay(day: dayNumber, title: title, readings: readings, reflection: reflection))
+            dayNumber += 1
+            if days.count >= 14 { break }
+        }
+        return days
+    }
+
+    /// Resolves a single reference ("Psalm 46", "Philippians 4:6-7", "John 14:27")
+    /// into a PlanReading with a USFM book id + optional verse range.
+    private static func parsePlanReading(_ raw: String) -> PlanReading? {
+        let pattern = #"^\s*((?:[1-3]\s+)?[A-Za-z][A-Za-z.\s]*?)\s+(\d{1,3})(?::(\d{1,3})(?:\s*[-–—]\s*(\d{1,3}))?)?\s*$"#
+        guard let regex = try? NSRegularExpression(pattern: pattern),
+              let match = regex.firstMatch(in: raw, range: NSRange(location: 0, length: (raw as NSString).length))
+        else { return nil }
+        let ns = raw as NSString
+        func group(_ i: Int) -> String {
+            let r = match.range(at: i)
+            return r.location == NSNotFound ? "" : ns.substring(with: r)
+        }
+        let bookName = group(1).trimmingCharacters(in: .whitespaces)
+        guard let book = BibleData.resolveBook(bookName), let chapter = Int(group(2)) else { return nil }
+        let verseStart = Int(group(3))
+        let verseEnd = Int(group(4)) ?? verseStart
+        return PlanReading(bookID: book.id, chapter: chapter, verseStart: verseStart, verseEnd: verseEnd)
+    }
+
+    /// Maps a quiz `answer` attribute to a 0-based option index. Accepts a
+    /// letter ("A"–"D") or a 1-based number ("1"–"4"); clamps to range.
+    private static func quizAnswerIndex(_ raw: String, optionCount: Int) -> Int {
+        let t = raw.trimmingCharacters(in: .whitespaces).uppercased()
+        if let n = Int(t) { return min(max(n - 1, 0), optionCount - 1) }
+        if let scalar = t.unicodeScalars.first, scalar.value >= 65, scalar.value <= 90 {
+            return min(Int(scalar.value - 65), optionCount - 1)
+        }
+        return 0
+    }
+
+    /// Strips a leading option label the model may have written ("A) ", "B. ",
+    /// "(C) ") so the card can render its own letter badges.
+    private static func stripOptionLabel(_ s: String) -> String {
+        s.replacingOccurrences(of: #"^\(?[A-Da-d]\)?[.\):\-]\s+"#, with: "", options: .regularExpression)
+            .trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
     private static func parseQuoteBody(_ body: String, attrs: String) -> (text: String, attribution: String) {
@@ -475,31 +630,43 @@ enum MessageParser {
 }
 
 enum ScriptureParser {
-    /// Parses "Romans 8:28" -> ("Romans", 8, 28) or "1 John 4:8" -> ("1 John", 4, 8).
+    /// Parses a loosely-written reference into (canonicalBookName, chapter, verse).
+    /// `verse` is 0 for chapter-only refs like "Psalm 23". Handles abbreviations
+    /// and variants ("Psalm"→Psalms, "1 Cor", "Songs", "Rev") and the verse part
+    /// being optional — anything `BibleData.resolveBook` knows resolves and taps.
+    ///
+    ///   "Romans 8:28"   -> ("Romans", 8, 28)
+    ///   "Psalm 23:1"    -> ("Psalms", 23, 1)
+    ///   "1 Cor 13:4-7"  -> ("1 Corinthians", 13, 4)
+    ///   "Jude 1:24"     -> ("Jude", 1, 24)
+    ///   "Psalm 23"      -> ("Psalms", 23, 0)
     static func parseReference(_ reference: String) -> (String, Int, Int)? {
-        let pattern = #"^((?:\d\s+)?[A-Z][a-z]+(?:\s+(?:of\s+)?[A-Z][a-z]+)*)\s+(\d{1,3}):(\d{1,3})"#
+        // Book token (optional leading numeral / roman numeral, then letters,
+        // spaces, periods), a chapter, and an optional ":verse".
+        // The numeral prefix must be followed by whitespace, so "Isaiah" isn't
+        // mistaken for roman-numeral "I" + "saiah".
+        let pattern = #"^\s*((?:[1-3]|I{1,3})\s+)?([A-Za-z][A-Za-z.\s]*?)\s+(\d{1,3})(?::(\d{1,3}))?"#
         guard let regex = try? NSRegularExpression(pattern: pattern),
               let match = regex.firstMatch(in: reference, range: NSRange(location: 0, length: (reference as NSString).length))
         else { return nil }
 
-        guard let bookRange = Range(match.range(at: 1), in: reference),
-              let chapterRange = Range(match.range(at: 2), in: reference),
-              let chapter = Int(reference[chapterRange])
-        else { return nil }
-
-        let bookName = String(reference[bookRange])
-
-        var verse = 0
-        if match.range(at: 3).location != NSNotFound,
-           let verseRange = Range(match.range(at: 3), in: reference),
-           let v = Int(reference[verseRange]) {
-            verse = v
+        let ns = reference as NSString
+        func group(_ i: Int) -> String {
+            let r = match.range(at: i)
+            return r.location == NSNotFound ? "" : ns.substring(with: r)
         }
 
-        guard let book = BibleData.allBooks.first(where: { $0.name == bookName }),
+        let numeral = group(1).trimmingCharacters(in: .whitespaces)
+        let bookWords = group(2).trimmingCharacters(in: .whitespaces)
+        let rawBook = numeral.isEmpty ? bookWords : "\(numeral) \(bookWords)"
+
+        guard let chapter = Int(group(3)) else { return nil }
+        let verse = Int(group(4)) ?? 0
+
+        guard let book = BibleData.resolveBook(rawBook),
               chapter >= 1, chapter <= book.chapterCount
         else { return nil }
 
-        return (bookName, chapter, verse)
+        return (book.name, chapter, verse)
     }
 }

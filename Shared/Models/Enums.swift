@@ -48,12 +48,30 @@ enum FaithLevel: String, Codable, CaseIterable, Identifiable {
 // MARK: - Life Season
 
 enum LifeSeason: String, Codable, CaseIterable, Identifiable {
+    // Stage / vocation
     case student
     case workingProfessional
-    case parent
+    case entrepreneur
+    case military
+    // Relationship
     case single
+    case dating
+    case engaged
+    case newlywed
     case married
+    // Family
+    case newParent
+    case parent
+    case emptyNester
+    case divorced
+    case widowed
+    case caregiver
     case retired
+    // Transition / circumstance
+    case betweenJobs
+    case careerChange
+    case healthJourney
+    case newToFaith
     case hardSeason
     case startingOver
 
@@ -63,10 +81,24 @@ enum LifeSeason: String, Codable, CaseIterable, Identifiable {
         switch self {
         case .student: String(localized: "Student")
         case .workingProfessional: String(localized: "Working Professional")
-        case .parent: String(localized: "Parent")
+        case .entrepreneur: String(localized: "Entrepreneur")
+        case .military: String(localized: "Military / Service")
         case .single: String(localized: "Single")
+        case .dating: String(localized: "Dating")
+        case .engaged: String(localized: "Engaged")
+        case .newlywed: String(localized: "Newly Married")
         case .married: String(localized: "Married")
+        case .newParent: String(localized: "New Parent")
+        case .parent: String(localized: "Parent")
+        case .emptyNester: String(localized: "Empty Nester")
+        case .divorced: String(localized: "Divorced / Separated")
+        case .widowed: String(localized: "Widowed")
+        case .caregiver: String(localized: "Caregiver")
         case .retired: String(localized: "Retired / Elder")
+        case .betweenJobs: String(localized: "Between Jobs")
+        case .careerChange: String(localized: "Career Change")
+        case .healthJourney: String(localized: "Health Journey")
+        case .newToFaith: String(localized: "New to Faith")
         case .hardSeason: String(localized: "In a Hard Season")
         case .startingOver: String(localized: "Starting Over")
         }
@@ -76,10 +108,24 @@ enum LifeSeason: String, Codable, CaseIterable, Identifiable {
         switch self {
         case .student: "graduationcap"
         case .workingProfessional: "briefcase"
-        case .parent: "figure.and.child.holdinghands"
-        case .single: "heart"
+        case .entrepreneur: "lightbulb"
+        case .military: "shield"
+        case .single: "person"
+        case .dating: "heart"
+        case .engaged: "hands.sparkles"
+        case .newlywed: "heart.circle.fill"
         case .married: "heart.circle"
+        case .newParent: "stroller"
+        case .parent: "figure.and.child.holdinghands"
+        case .emptyNester: "house"
+        case .divorced: "heart.slash"
+        case .widowed: "heart.slash.circle"
+        case .caregiver: "heart.text.square"
         case .retired: "leaf.circle"
+        case .betweenJobs: "magnifyingglass"
+        case .careerChange: "arrow.triangle.2.circlepath"
+        case .healthJourney: "cross.case"
+        case .newToFaith: "sparkles"
         case .hardSeason: "water.waves"
         case .startingOver: "sunrise"
         }
@@ -90,15 +136,26 @@ enum LifeSeason: String, Codable, CaseIterable, Identifiable {
 
 enum Burden: String, Codable, CaseIterable, Identifiable {
     case anxiety
+    case stress
+    case depression
+    case fear
     case grief
     case doubt
-    case loneliness
     case anger
+    case loneliness
+    case shame
     case temptation
+    case addiction
     case health
     case financial
+    case work
     case relationship
+    case marriage
+    case family
+    case parenting
+    case forgiveness
     case purpose
+    case selfWorth
     case none
 
     var id: String { rawValue }
@@ -106,15 +163,26 @@ enum Burden: String, Codable, CaseIterable, Identifiable {
     var displayName: String {
         switch self {
         case .anxiety: String(localized: "Anxiety & Worry")
+        case .stress: String(localized: "Stress & Burnout")
+        case .depression: String(localized: "Depression & Sadness")
+        case .fear: String(localized: "Fear")
         case .grief: String(localized: "Grief & Loss")
         case .doubt: String(localized: "Doubt & Uncertainty")
-        case .loneliness: String(localized: "Loneliness")
         case .anger: String(localized: "Anger & Frustration")
+        case .loneliness: String(localized: "Loneliness")
+        case .shame: String(localized: "Shame & Guilt")
         case .temptation: String(localized: "Temptation")
+        case .addiction: String(localized: "Addiction & Habits")
         case .health: String(localized: "Health Concerns")
         case .financial: String(localized: "Financial Stress")
+        case .work: String(localized: "Work & Career")
         case .relationship: String(localized: "Relationship Pain")
+        case .marriage: String(localized: "Marriage Struggles")
+        case .family: String(localized: "Family Conflict")
+        case .parenting: String(localized: "Parenting")
+        case .forgiveness: String(localized: "Forgiveness")
         case .purpose: String(localized: "Purpose & Direction")
+        case .selfWorth: String(localized: "Self-Worth & Identity")
         case .none: String(localized: "Nothing Specific")
         }
     }
@@ -122,15 +190,26 @@ enum Burden: String, Codable, CaseIterable, Identifiable {
     var icon: String {
         switch self {
         case .anxiety: "cloud.rain"
+        case .stress: "bolt.heart"
+        case .depression: "cloud.fill"
+        case .fear: "exclamationmark.shield"
         case .grief: "heart.slash"
         case .doubt: "questionmark.circle"
-        case .loneliness: "person.crop.circle.badge.minus"
         case .anger: "flame"
+        case .loneliness: "person.crop.circle.badge.minus"
+        case .shame: "eye.slash"
         case .temptation: "exclamationmark.triangle"
+        case .addiction: "arrow.triangle.2.circlepath"
         case .health: "cross.case"
         case .financial: "dollarsign.circle"
+        case .work: "briefcase"
         case .relationship: "person.2.slash"
+        case .marriage: "heart.slash.circle"
+        case .family: "house"
+        case .parenting: "figure.and.child.holdinghands"
+        case .forgiveness: "hands.sparkles"
         case .purpose: "compass.drawing"
+        case .selfWorth: "person.fill.questionmark"
         case .none: "checkmark.circle"
         }
     }
@@ -139,26 +218,287 @@ enum Burden: String, Codable, CaseIterable, Identifiable {
         switch self {
         case .anxiety:
             "\(name), cast all your anxiety on Him, because He cares for you. — 1 Peter 5:7"
+        case .stress:
+            "\(name), come to Me, all who are weary and burdened, and I will give you rest. — Matthew 11:28"
+        case .depression:
+            "\(name), the Lord is near to the brokenhearted. Joy comes in the morning. — Psalm 34:18"
+        case .fear:
+            "\(name), do not fear, for I am with you; I am your God. — Isaiah 41:10"
         case .grief:
             "\(name), the Lord is close to the brokenhearted. He's near you right now."
         case .doubt:
             "\(name), faith isn't the absence of doubt. It's trusting God in the middle of it."
-        case .loneliness:
-            "\(name), you are never truly alone. The Creator of the universe is with you."
         case .anger:
             "\(name), be quick to listen, slow to speak, slow to anger. — James 1:19"
+        case .loneliness:
+            "\(name), you are never truly alone. The Creator of the universe is with you."
+        case .shame:
+            "\(name), there is now no condemnation for those in Christ Jesus. You are not your worst moment."
         case .temptation:
             "\(name), no temptation has overtaken you except what is common. God provides a way out."
+        case .addiction:
+            "\(name), where the Spirit of the Lord is, there is freedom. He is setting you free."
         case .health:
             "\(name), He heals the brokenhearted and binds up their wounds. — Psalm 147:3"
         case .financial:
             "\(name), God owns the cattle on a thousand hills. Trust His provision today."
+        case .work:
+            "\(name), whatever you do, work at it with all your heart, as for the Lord. He sees you."
         case .relationship:
             "\(name), love is patient, love is kind. Pray for grace in this season."
+        case .marriage:
+            "\(name), may grace fill your home and soften every word. Love covers a multitude."
+        case .family:
+            "\(name), as for me and my house, we will serve the Lord. He can restore what feels broken."
+        case .parenting:
+            "\(name), train up a child in the way they should go. You're doing holy work — lean on His strength."
+        case .forgiveness:
+            "\(name), be kind and compassionate, forgiving as in Christ God forgave you. — Ephesians 4:32"
         case .purpose:
             "\(name), God is working all things together for your good. The path will become clear."
+        case .selfWorth:
+            "\(name), you are fearfully and wonderfully made. You are His, and that is enough."
         case .none:
             "\(name), you're here. That's enough. Let's grow together."
+        }
+    }
+}
+
+// MARK: - Gender
+//
+// Used only to make onboarding copy feel personal ("walking with you"). Light
+// personalization — never gates content.
+
+enum Gender: String, Codable, CaseIterable, Identifiable {
+    case woman
+    case man
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .woman: String(localized: "Woman")
+        case .man: String(localized: "Man")
+        }
+    }
+}
+
+// MARK: - Christian Background
+//
+// A broad denomination/tradition list so users can self-identify precisely.
+// Ordered roughly by prevalence, with the catch-alls ("Other", "Still
+// exploring") last. Used to tailor language/tone — never gates content.
+
+enum ChristianBackground: String, Codable, CaseIterable, Identifiable {
+    case christian
+    case catholic
+    case baptist
+    case nonDenominational
+    case methodist
+    case pentecostal
+    case evangelical
+    case lutheran
+    case presbyterian
+    case anglican
+    case reformed
+    case easternOrthodox
+    case orientalOrthodox
+    case adventist
+    case assembliesOfGod
+    case churchOfChrist
+    case nazarene
+    case anabaptist
+    case quaker
+    case latterDaySaint
+    case jehovahsWitness
+    case other
+    case exploring
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .christian: String(localized: "Christian")
+        case .catholic: String(localized: "Catholic")
+        case .baptist: String(localized: "Baptist")
+        case .nonDenominational: String(localized: "Non-denominational")
+        case .methodist: String(localized: "Methodist")
+        case .pentecostal: String(localized: "Pentecostal")
+        case .evangelical: String(localized: "Evangelical")
+        case .lutheran: String(localized: "Lutheran")
+        case .presbyterian: String(localized: "Presbyterian")
+        case .anglican: String(localized: "Anglican / Episcopal")
+        case .reformed: String(localized: "Reformed")
+        case .easternOrthodox: String(localized: "Eastern Orthodox")
+        case .orientalOrthodox: String(localized: "Oriental Orthodox")
+        case .adventist: String(localized: "Seventh-day Adventist")
+        case .assembliesOfGod: String(localized: "Assemblies of God")
+        case .churchOfChrist: String(localized: "Church of Christ")
+        case .nazarene: String(localized: "Nazarene")
+        case .anabaptist: String(localized: "Mennonite / Anabaptist")
+        case .quaker: String(localized: "Quaker")
+        case .latterDaySaint: String(localized: "Latter-day Saint")
+        case .jehovahsWitness: String(localized: "Jehovah's Witness")
+        case .other: String(localized: "Other")
+        case .exploring: String(localized: "Still exploring")
+        }
+    }
+}
+
+// MARK: - Devotion Frequency
+//
+// The BEHAVIORAL baseline — how often the user currently spends time in the
+// Word/prayer right now. Deliberately distinct from `FaithLevel` (which is
+// IDENTITY/maturity) so the two questions never feel redundant. Combines
+// reading + prayer into one question on purpose. Sets the "before" the daily
+// rhythm builds on.
+
+enum DevotionFrequency: String, Codable, CaseIterable, Identifiable {
+    case notYet
+    case onceInAWhile
+    case fewTimesAWeek
+    case mostDays
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .notYet: String(localized: "Not yet — I'm just starting")
+        case .onceInAWhile: String(localized: "Once in a while")
+        case .fewTimesAWeek: String(localized: "A few times a week")
+        case .mostDays: String(localized: "Most days")
+        }
+    }
+}
+
+// MARK: - Growth Blocker
+//
+// Practical obstacles to building a daily habit. Kept strictly about what gets
+// in the WAY of showing up (busyness, distraction) so it doesn't overlap with
+// `Burden` (life pains like grief/anxiety). Multi-select.
+
+enum GrowthBlocker: String, Codable, CaseIterable, Identifiable {
+    case busyness
+    case distraction
+    case whereToStart
+    case consistency
+    case tooTired
+    case boredom
+    case comprehension
+    case focus
+    case accountability
+    case unworthy
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .busyness: String(localized: "I'm too busy")
+        case .distraction: String(localized: "Too many distractions")
+        case .whereToStart: String(localized: "Don't know where to start")
+        case .consistency: String(localized: "I lose consistency")
+        case .tooTired: String(localized: "Too tired or drained")
+        case .boredom: String(localized: "It starts to feel boring")
+        case .comprehension: String(localized: "Hard to understand the Bible")
+        case .focus: String(localized: "Hard to stay focused")
+        case .accountability: String(localized: "No one to keep me going")
+        case .unworthy: String(localized: "I feel unworthy")
+        }
+    }
+}
+
+// MARK: - App Goal
+//
+// Forward-looking aspirations — what the user wants OUT of the app. Drives the
+// "Your Plan" reveal. Multi-select.
+
+enum AppGoal: String, Codable, CaseIterable, Identifiable {
+    case closerToGod
+    case dailyHabit
+    case peace
+    case understandBible
+    case prayConsistently
+    case hearFromGod
+    case overcomeStruggle
+    case readWholeBible
+    case memorizeScripture
+    case strengthenFamily
+    case gratitude
+    case shareFaith
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .closerToGod: String(localized: "Grow closer to God")
+        case .dailyHabit: String(localized: "Build a daily habit")
+        case .peace: String(localized: "Find peace & calm")
+        case .understandBible: String(localized: "Understand the Bible")
+        case .prayConsistently: String(localized: "Pray consistently")
+        case .hearFromGod: String(localized: "Hear from God")
+        case .overcomeStruggle: String(localized: "Overcome a struggle")
+        case .readWholeBible: String(localized: "Read the whole Bible")
+        case .memorizeScripture: String(localized: "Memorize Scripture")
+        case .strengthenFamily: String(localized: "Strengthen my family")
+        case .gratitude: String(localized: "Grow in gratitude")
+        case .shareFaith: String(localized: "Share my faith")
+        }
+    }
+}
+
+// MARK: - Time Commitment
+
+enum TimeCommitment: String, Codable, CaseIterable, Identifiable {
+    case threeMin
+    case fiveMin
+    case tenMin
+    case fifteenPlus
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .threeMin: String(localized: "3 minutes")
+        case .fiveMin: String(localized: "5 minutes")
+        case .tenMin: String(localized: "10 minutes")
+        case .fifteenPlus: String(localized: "15+ minutes")
+        }
+    }
+
+    /// Bare number for inline copy ("a 5-minute daily rhythm").
+    var minutesLabel: String {
+        switch self {
+        case .threeMin: "3"
+        case .fiveMin: "5"
+        case .tenMin: "10"
+        case .fifteenPlus: "15"
+        }
+    }
+}
+
+// MARK: - Referral Source
+//
+// Pure attribution — where the user heard about the app. No personalization
+// value; collected for marketing insight.
+
+enum ReferralSource: String, Codable, CaseIterable, Identifiable {
+    case appStore
+    case friendOrFamily
+    case instagramFacebook
+    case tiktok
+    case youtube
+    case other
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .appStore: String(localized: "App Store")
+        case .friendOrFamily: String(localized: "Friend or family")
+        case .instagramFacebook: String(localized: "Instagram / Facebook")
+        case .tiktok: String(localized: "TikTok")
+        case .youtube: String(localized: "YouTube")
+        case .other: String(localized: "Somewhere else")
         }
     }
 }

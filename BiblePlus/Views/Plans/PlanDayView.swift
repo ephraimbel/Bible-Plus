@@ -676,7 +676,7 @@ struct PlanDayView: View {
         let total = plan.totalDays
         guard total >= 8 else { return false }
         for pct in [25, 50, 75] {
-            let target = Int((Double(pct) / 100.0) * Double(total).rounded())
+            let target = Int(((Double(pct) / 100.0) * Double(total)).rounded())
             if target == day { return true }
         }
         return false

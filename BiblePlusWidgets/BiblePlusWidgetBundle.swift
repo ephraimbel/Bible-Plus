@@ -19,6 +19,7 @@ struct BiblePlusWidgetBundle: WidgetBundle {
         BiblePlusLockScreenWidget()
         StreakWidget()
         PlanProgressWidget()
+        DailyPathWidget()
         ActivityGridWidget()
         ChaptersWidget()
         QuickActionsWidget()

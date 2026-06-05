@@ -50,13 +50,14 @@ private struct SettingsContentView: View {
     @State private var isRestoringPurchases = false
     @State private var appeared = false
     @State private var showMemorySettings = false
+    @State private var showPathSettings = false
     @State private var pickedPhoto: PhotosPickerItem?
     @State private var showPhotoActions = false
 
     var body: some View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: false) {
-                VStack(spacing: 24) {
+                VStack(spacing: BPSpacing.xxl) {
                     profileHeader
                     profileSection
                     notificationsSection
@@ -68,8 +69,8 @@ private struct SettingsContentView: View {
 
                     Spacer().frame(height: 40)
                 }
-                .padding(.horizontal, 20)
-                .padding(.top, 8)
+                .padding(.horizontal, BPSpacing.lg)
+                .padding(.top, BPSpacing.xs)
             }
             .background(palette.background)
             .navigationBarTitleDisplayMode(.inline)
@@ -146,6 +147,10 @@ private struct SettingsContentView: View {
                 MemorySettingsView(profile: vm.profile)
                     .presentationDetents([.large])
             }
+            .sheet(isPresented: $showPathSettings) {
+                PathSettingsSheet(isPro: vm.profile.isPro)
+                    .presentationDetents([.large])
+            }
             .fullScreenCover(isPresented: $showPaywall) {
                 PaywallContainerView()
             }
@@ -194,110 +199,76 @@ private struct SettingsContentView: View {
         }
     }
 
-    // MARK: - Profile Header (Hero Card)
+    // MARK: - Profile Header (Editorial Hero)
+    //
+    // Calm, centered identity: a clean avatar with a thin gold ring (no gradient
+    // fill), the name in serif, and one muted status line. Accent (gold) is
+    // reserved for the ring and the camera badge only — everything else is
+    // neutral text hierarchy.
 
     private var profileHeader: some View {
-        HStack(spacing: 16) {
-            // Avatar circle — tappable to set/change/remove the user's PFP
+        VStack(spacing: BPSpacing.md) {
+            // Avatar — tappable to set/change/remove the user's PFP
             Button {
                 HapticService.lightImpact()
                 showPhotoActions = true
             } label: {
                 ZStack {
                     Circle()
-                        .fill(
-                            LinearGradient(
-                                colors: [palette.accent, palette.accent.opacity(0.7)],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                        )
-                        .frame(width: 56, height: 56)
-                        .shadow(color: palette.accent.opacity(0.25), radius: 8, y: 3)
+                        .fill(palette.surfaceElevated)
+                        .frame(width: 86, height: 86)
+                        .overlay(Circle().strokeBorder(palette.accent.opacity(0.45), lineWidth: 1.5))
+                        .shadow(color: palette.accent.opacity(0.12), radius: 10, y: 4)
 
                     if let data = vm.profile.profileImageData,
                        let uiImage = UIImage(data: data) {
                         Image(uiImage: uiImage)
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 56, height: 56)
+                            .frame(width: 86, height: 86)
                             .clipShape(Circle())
                     } else {
                         Text(vm.profile.firstName.prefix(1).uppercased())
-                            .font(.system(size: 22, weight: .bold, design: .rounded))
-                            .foregroundStyle(.white)
+                            .font(.custom("Georgia", size: 38))
+                            .foregroundStyle(palette.accent)
                     }
 
-                    // Tiny camera badge so the avatar reads as editable
+                    // Crisp gold camera badge so the avatar reads as editable
                     Circle()
-                        .fill(palette.surfaceElevated)
-                        .frame(width: 20, height: 20)
+                        .fill(palette.accent)
+                        .frame(width: 26, height: 26)
                         .overlay(
                             Image(systemName: "camera.fill")
-                                .font(.system(size: 9, weight: .bold))
-                                .foregroundStyle(palette.accent)
+                                .font(.system(size: 10, weight: .semibold))
+                                .foregroundStyle(.white)
                         )
-                        .overlay(Circle().stroke(palette.background, lineWidth: 1.5))
-                        .offset(x: 20, y: 20)
+                        .overlay(Circle().strokeBorder(palette.background, lineWidth: 2.5))
+                        .offset(x: 31, y: 31)
                 }
             }
             .buttonStyle(.plain)
 
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(spacing: BPSpacing.xxs) {
                 Text(vm.profile.firstName.isEmpty ? "Welcome" : vm.profile.firstName)
-                    .font(.custom("Georgia-Bold", size: 20))
+                    .font(.custom("Georgia-Bold", size: 24))
                     .foregroundStyle(palette.textPrimary)
 
-                HStack(spacing: 6) {
-                    Text(vm.profile.faithLevel.displayName)
-                        .font(.system(size: 12, weight: .semibold, design: .rounded))
-                        .foregroundStyle(palette.accent)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 3)
-                        .background(
-                            Capsule().fill(palette.accent.opacity(0.1))
-                        )
-
-                    if vm.profile.isPro {
-                        HStack(spacing: 3) {
-                            Image(systemName: "crown.fill")
-                                .font(.system(size: 8, weight: .bold))
-                            Text("PRO")
-                                .font(.system(size: 9, weight: .bold, design: .rounded))
-                                .tracking(0.5)
-                        }
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 3)
-                        .background(
-                            Capsule()
-                                .fill(
-                                    LinearGradient(
-                                        colors: [palette.accent, palette.accent.opacity(0.8)],
-                                        startPoint: .leading,
-                                        endPoint: .trailing
-                                    )
-                                )
-                        )
-                    }
-                }
+                Text(statusLine)
+                    .font(.system(size: 13, weight: .medium))
+                    .foregroundStyle(palette.textSecondary)
             }
-
-            Spacer()
         }
-        .padding(16)
-        .background(
-            RoundedRectangle(cornerRadius: 18)
-                .fill(palette.surfaceElevated)
-                .shadow(color: .black.opacity(0.06), radius: 12, y: 5)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 18)
-                .stroke(palette.accent.opacity(0.08), lineWidth: 0.5)
-        )
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, BPSpacing.xs)
         .opacity(appeared ? 1 : 0)
         .offset(y: appeared ? 0 : 10)
         .animation(BPAnimation.spring.delay(0.02), value: appeared)
+    }
+
+    /// Muted one-liner under the name: faith stage · plan.
+    private var statusLine: String {
+        let faith = vm.profile.faithLevel.displayName
+        return vm.profile.isPro ? "\(faith) · Bible+ Pro" : "\(faith) · Free"
     }
 
     // MARK: - Section Helpers
@@ -311,46 +282,40 @@ private struct SettingsContentView: View {
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(palette.surfaceElevated)
-                .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
         )
         .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
+                .stroke(palette.border.opacity(0.12), lineWidth: 0.5)
         )
+        .shadow(color: .black.opacity(0.03), radius: 6, y: 3)
     }
 
+    /// Plain, quiet section label — no icon, no divider line. The label is the
+    /// hierarchy; whitespace does the separating.
     private func sectionHeader(_ title: String, icon: String, index: Int) -> some View {
-        HStack(spacing: 8) {
-            Image(systemName: icon)
-                .font(.system(size: 9, weight: .bold))
-                .foregroundStyle(palette.accent)
-
-            Text(title.uppercased())
-                .font(.system(size: 11, weight: .bold, design: .rounded))
-                .foregroundStyle(palette.textMuted)
-                .tracking(1.5)
-
-            VStack { Divider() }
-                .padding(.leading, 4)
-        }
-        .padding(.leading, 4)
-        .opacity(appeared ? 1 : 0)
-        .animation(BPAnimation.spring.delay(Double(index) * 0.05), value: appeared)
+        Text(title.uppercased())
+            .font(.system(size: 11, weight: .semibold))
+            .tracking(2.2)
+            .foregroundStyle(palette.textMuted)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.leading, BPSpacing.xs)
+            .opacity(appeared ? 1 : 0)
+            .animation(BPAnimation.spring.delay(Double(index) * 0.05), value: appeared)
     }
 
     private func sectionFooter(_ text: String) -> some View {
         Text(text)
             .font(.system(size: 12, weight: .regular, design: .rounded))
             .foregroundStyle(palette.textMuted)
-            .padding(.leading, 4)
-            .padding(.top, 4)
+            .padding(.leading, BPSpacing.xxs)
+            .padding(.top, BPSpacing.xxs)
     }
 
     // MARK: - Profile Section
 
     private var profileSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            sectionHeader("Profile", icon: "person.fill", index: 0)
+        VStack(alignment: .leading, spacing: BPSpacing.sm) {
+            sectionHeader("You", icon: "person.fill", index: 0)
 
             sectionCard {
                 settingsRow(
@@ -394,6 +359,16 @@ private struct SettingsContentView: View {
                 rowDivider
 
                 settingsRow(
+                    icon: "figure.walk",
+                    label: "Daily Path",
+                    value: "Browse"
+                ) {
+                    showPathSettings = true
+                }
+
+                rowDivider
+
+                settingsRow(
                     icon: "brain.head.profile",
                     label: "AI Memory",
                     value: memoryRowValue
@@ -421,7 +396,7 @@ private struct SettingsContentView: View {
     // MARK: - Notifications Section
 
     private var notificationsSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: BPSpacing.sm) {
             sectionHeader("Notifications", icon: "bell.fill", index: 1)
 
             sectionCard {
@@ -503,7 +478,7 @@ private struct SettingsContentView: View {
     // MARK: - Appearance Section
 
     private var appearanceSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: BPSpacing.sm) {
             sectionHeader("Appearance", icon: "paintbrush.fill", index: 2)
 
             sectionCard {
@@ -555,7 +530,7 @@ private struct SettingsContentView: View {
     // MARK: - Widgets Section
 
     private var widgetsSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: BPSpacing.sm) {
             sectionHeader("Widgets", icon: "square.grid.2x2.fill", index: 3)
 
             sectionCard {
@@ -596,35 +571,19 @@ private struct SettingsContentView: View {
     // MARK: - Subscription Section
 
     private var subscriptionSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: BPSpacing.sm) {
             sectionHeader("Subscription", icon: "crown.fill", index: 4)
 
             if vm.profile.isPro {
                 // Pro status — accent gradient card
-                HStack(spacing: 14) {
-                    ZStack {
-                        Circle()
-                            .fill(
-                                LinearGradient(
-                                    colors: [palette.accent, palette.accent.opacity(0.7)],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                )
-                            )
-                            .frame(width: 40, height: 40)
-
-                        Image(systemName: "crown.fill")
-                            .font(.system(size: 16, weight: .medium))
-                            .foregroundStyle(.white)
-                    }
-
-                    VStack(alignment: .leading, spacing: 3) {
+                HStack(spacing: BPSpacing.md) {
+                    VStack(alignment: .leading, spacing: BPSpacing.xxs) {
                         (Text("Bible") + Text(Image(systemName: "sparkle")) + Text(" Pro"))
-                            .font(.system(size: 16, weight: .bold, design: .rounded))
+                            .font(.custom("Georgia-Bold", size: 19))
                             .foregroundStyle(palette.textPrimary)
 
                         Text("All features unlocked")
-                            .font(.system(size: 12, weight: .regular, design: .rounded))
+                            .font(.system(size: 13))
                             .foregroundStyle(palette.textSecondary)
                     }
 
@@ -636,16 +595,18 @@ private struct SettingsContentView: View {
                         }
                     } label: {
                         Text("Manage")
-                            .font(.system(size: 12, weight: .semibold, design: .rounded))
+                            .font(.system(size: 13, weight: .semibold))
                             .foregroundStyle(palette.accent)
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 6)
+                            .padding(.horizontal, BPSpacing.md)
+                            .padding(.vertical, BPSpacing.xs)
                             .background(
-                                Capsule().fill(palette.accent.opacity(0.1))
+                                Capsule()
+                                    .fill(palette.accent.opacity(0.12))
+                                    .overlay(Capsule().strokeBorder(palette.accent.opacity(0.45), lineWidth: 0.8))
                             )
                     }
                 }
-                .padding(16)
+                .padding(BPSpacing.md)
                 .background(
                     RoundedRectangle(cornerRadius: 16)
                         .fill(palette.surfaceElevated)
@@ -660,38 +621,27 @@ private struct SettingsContentView: View {
                 Button {
                     showPaywall = true
                 } label: {
-                    HStack(spacing: 14) {
-                        ZStack {
-                            Circle()
-                                .fill(palette.accent.opacity(0.12))
-                                .frame(width: 40, height: 40)
-
-                            Image(systemName: "crown")
-                                .font(.system(size: 16, weight: .medium))
-                                .foregroundStyle(palette.accent)
-                        }
-
-                        VStack(alignment: .leading, spacing: 3) {
+                    HStack(spacing: BPSpacing.md) {
+                        VStack(alignment: .leading, spacing: BPSpacing.xxs) {
                             Text("Upgrade to Pro")
-                                .font(.system(size: 16, weight: .bold, design: .rounded))
+                                .font(.custom("Georgia-Bold", size: 19))
                                 .foregroundStyle(palette.textPrimary)
 
                             Text("Unlock all features & content")
-                                .font(.system(size: 12, weight: .regular, design: .rounded))
+                                .font(.system(size: 13))
                                 .foregroundStyle(palette.textSecondary)
                         }
 
                         Spacer()
 
-                        Image(systemName: "chevron.right")
-                            .font(.system(size: 12, weight: .semibold))
-                            .foregroundStyle(palette.accent)
-                            .frame(width: 28, height: 28)
-                            .background(
-                                Circle().fill(palette.accent.opacity(0.1))
-                            )
+                        Text("Upgrade")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, BPSpacing.md)
+                            .padding(.vertical, BPSpacing.xs)
+                            .background(Capsule().fill(palette.accent))
                     }
-                    .padding(16)
+                    .padding(BPSpacing.md)
                     .background(
                         RoundedRectangle(cornerRadius: 16)
                             .fill(palette.surfaceElevated)
@@ -714,7 +664,7 @@ private struct SettingsContentView: View {
                         isRestoringPurchases = false
                     }
                 } label: {
-                    HStack(spacing: 6) {
+                    HStack(spacing: BPSpacing.xs) {
                         if isRestoringPurchases {
                             ProgressView()
                                 .tint(palette.accent)
@@ -728,7 +678,7 @@ private struct SettingsContentView: View {
                     }
                     .foregroundStyle(palette.textMuted)
                     .frame(maxWidth: .infinity, alignment: .center)
-                    .padding(.top, 6)
+                    .padding(.top, BPSpacing.xs)
                 }
                 .disabled(isRestoringPurchases)
             }
@@ -741,7 +691,7 @@ private struct SettingsContentView: View {
     // MARK: - About Section
 
     private var aboutSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: BPSpacing.sm) {
             sectionHeader("About", icon: "info.circle.fill", index: 5)
 
             sectionCard {
@@ -794,7 +744,7 @@ private struct SettingsContentView: View {
             .font(.system(size: 12, weight: .medium, design: .rounded))
             .foregroundStyle(palette.textMuted.opacity(0.6))
             .frame(maxWidth: .infinity, alignment: .center)
-            .padding(.top, 4)
+            .padding(.top, BPSpacing.xxs)
     }
 
     // MARK: - About Row Helper
@@ -808,28 +758,19 @@ private struct SettingsContentView: View {
             HapticService.selection()
             action()
         } label: {
-            HStack(spacing: 14) {
-                Image(systemName: icon)
-                    .font(.system(size: 13, weight: .medium))
-                    .foregroundStyle(palette.accent)
-                    .frame(width: 32, height: 32)
-                    .background(
-                        Circle()
-                            .fill(palette.accent.opacity(0.08))
-                    )
-
+            HStack(spacing: BPSpacing.sm) {
                 Text(label)
-                    .font(.system(size: 15, weight: .medium, design: .rounded))
+                    .font(.system(size: 16))
                     .foregroundStyle(palette.textPrimary)
 
                 Spacer()
 
                 Image(systemName: trailing == .external ? "arrow.up.right" : "chevron.right")
-                    .font(.system(size: 10, weight: .semibold))
-                    .foregroundStyle(palette.textMuted.opacity(0.4))
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(palette.textMuted.opacity(0.35))
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
+            .padding(.horizontal, BPSpacing.lg)
+            .padding(.vertical, BPSpacing.md)
         }
     }
 
@@ -839,7 +780,7 @@ private struct SettingsContentView: View {
         Rectangle()
             .fill(palette.border.opacity(0.1))
             .frame(height: 0.5)
-            .padding(.leading, 62)
+            .padding(.leading, BPSpacing.lg)
     }
 
     @ViewBuilder
@@ -848,35 +789,27 @@ private struct SettingsContentView: View {
             HapticService.selection()
             action()
         } label: {
-            HStack(spacing: 14) {
-                Image(systemName: icon)
-                    .font(.system(size: 13, weight: .medium))
-                    .foregroundStyle(palette.accent)
-                    .frame(width: 32, height: 32)
-                    .background(
-                        Circle()
-                            .fill(palette.accent.opacity(0.08))
-                    )
-
+            HStack(spacing: BPSpacing.sm) {
                 Text(label)
-                    .font(.system(size: 15, weight: .medium, design: .rounded))
+                    .font(.system(size: 16))
                     .foregroundStyle(palette.textPrimary)
 
-                Spacer()
+                Spacer(minLength: 12)
 
                 if let value {
                     Text(value)
-                        .font(.system(size: 13, weight: .medium, design: .rounded))
-                        .foregroundStyle(palette.accent)
+                        .font(.system(size: 15))
+                        .foregroundStyle(palette.textSecondary)
                         .lineLimit(1)
+                        .truncationMode(.tail)
                 }
 
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 10, weight: .semibold))
-                    .foregroundStyle(palette.textMuted.opacity(0.4))
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(palette.textMuted.opacity(0.35))
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
+            .padding(.horizontal, BPSpacing.lg)
+            .padding(.vertical, BPSpacing.md)
         }
     }
 
@@ -890,27 +823,15 @@ private struct SettingsContentView: View {
         isOn: Binding<Bool>,
         useSymbolTransition: Bool = false
     ) -> some View {
-        HStack(spacing: 14) {
-            Image(systemName: icon)
-                .font(.system(size: 13, weight: .medium))
-                .foregroundStyle(palette.accent)
-                .frame(width: 32, height: 32)
-                .background(
-                    Circle()
-                        .fill(palette.accent.opacity(0.08))
-                )
-                .if(useSymbolTransition) { view in
-                    view.contentTransition(.symbolEffect(.replace))
-                }
-
-            VStack(alignment: .leading, spacing: 2) {
+        HStack(spacing: BPSpacing.sm) {
+            VStack(alignment: .leading, spacing: BPSpacing.xxs) {
                 Text(label)
-                    .font(.system(size: 15, weight: .medium, design: .rounded))
+                    .font(.system(size: 16))
                     .foregroundStyle(palette.textPrimary)
 
                 if let subtitle {
                     Text(subtitle)
-                        .font(.system(size: 12, weight: .regular, design: .rounded))
+                        .font(.system(size: 13))
                         .foregroundStyle(palette.textMuted)
                 }
             }
@@ -921,8 +842,8 @@ private struct SettingsContentView: View {
                 .tint(palette.accent)
                 .labelsHidden()
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 12)
+        .padding(.horizontal, BPSpacing.lg)
+        .padding(.vertical, BPSpacing.sm)
     }
 }
 

@@ -11,24 +11,18 @@ struct HomeDashboardView: View {
 
     @Environment(\.bpPalette) private var palette
     @Environment(\.colorScheme) private var colorScheme
-    @State private var animateStreak = false
+    @Environment(\.modelContext) private var modelContext
     @State private var showReadingPlans = false
+    @State private var showPathDetail = false
     @State private var appeared = false
     @State private var floatingOffset: CGFloat = 0
     @State private var dragOffset: CGFloat = 0
     @State private var hasTriggeredHaptic = false
-    @State private var glowPulse = false
+    @State private var dailyPathVM = DailyPathHomeViewModel()
 
     private var rubberBandScale: CGFloat {
         let progress = min(abs(dragOffset) / 120, 1.0)
         return 1.0 - (progress * 0.03)
-    }
-
-    /// Card border opacity. Bumped in light mode because the warm cream
-    /// background washes out a 30% gold stroke; dark mode reads cleanly at
-    /// the lower value so borders never feel heavy on the dark surface.
-    private var cardBorderOpacity: Double {
-        colorScheme == .dark ? 0.30 : 0.55
     }
 
     private let dayLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
@@ -38,25 +32,29 @@ struct HomeDashboardView: View {
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            // Tight, fixed gaps between sections; the verse card flexes to
-            // absorb the leftover height. That keeps the cards large and the
-            // gaps small while still adapting to every screen — the verse
-            // card grows on tall phones and shrinks toward its minimum on
-            // short ones, so nothing clips.
-            VStack(spacing: 14) {
-                headerSection
+            // Fixed-height sections with a trailing spacer that lets any
+            // leftover height collect quietly above the swipe prompt. No
+            // GeometryReader / flexible art height — those caused the layout
+            // to mis-size (zoom / shift) on cold launch.
+            VStack(spacing: 0) {
+                greetingHeader
+                    .padding(.bottom, BPSpacing.sm)
 
-                streakRow
-                    .padding(.top, 4)
+                weeklyStreakRow
 
-                heroVerseCard
+                heroVerseArtCard
+                    .padding(.top, BPSpacing.sm)
 
-                quickActionsRow
+                VStack(spacing: BPSpacing.sm) {
+                    askCard
+                    quickLinksRow
+                }
+                .padding(.top, BPSpacing.md)
 
-                askCard
+                Spacer(minLength: BPSpacing.xs)
             }
-            .padding(.horizontal, 20)
-            .padding(.bottom, 56)
+            .padding(.horizontal, BPSpacing.lg)
+            .padding(.bottom, BPSpacing.giant)
             .offset(y: dragOffset)
             .scaleEffect(rubberBandScale, anchor: .bottom)
 
@@ -97,20 +95,29 @@ struct HomeDashboardView: View {
         .sheet(isPresented: $showReadingPlans) {
             ReadingPlansView(isPro: vm.profile.isPro)
         }
+        .sheet(isPresented: $showPathDetail, onDismiss: {
+            dailyPathVM.refresh(modelContext: modelContext, profile: vm.profile)
+        }) {
+            if let path = dailyPathVM.activePath {
+                PathDetailView(path: path, homeVM: dailyPathVM, isPro: vm.profile.isPro)
+            }
+        }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 withAnimation(BPAnimation.spring) {
                     appeared = true
                 }
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                withAnimation(.easeOut(duration: 0.6)) {
-                    animateStreak = true
-                }
-            }
+            dailyPathVM.refresh(modelContext: modelContext, profile: vm.profile)
         }
         .onReceive(NotificationCenter.default.publisher(for: .showPlansFromWidget)) { _ in
             showReadingPlans = true
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .pathDeepLink)) { _ in
+            dailyPathVM.refresh(modelContext: modelContext, profile: vm.profile)
+            if dailyPathVM.activePath != nil {
+                showPathDetail = true
+            }
         }
     }
 
@@ -147,7 +154,7 @@ struct HomeDashboardView: View {
     // MARK: - Swipe Up Prompt
 
     private var swipeUpPrompt: some View {
-        VStack(spacing: 4) {
+        VStack(spacing: BPSpacing.xxs) {
             Image(systemName: "chevron.up")
                 .font(.system(size: 12, weight: .semibold))
                 .foregroundStyle(palette.accent.opacity(0.5))
@@ -157,7 +164,7 @@ struct HomeDashboardView: View {
                 .font(.system(size: 12, weight: .medium, design: .rounded))
                 .foregroundStyle(palette.textMuted)
         }
-        .padding(.bottom, 18)
+        .padding(.bottom, BPSpacing.xl)
         .frame(maxWidth: .infinity)
         .allowsHitTesting(false)
         .opacity(appeared ? 1 : 0)
@@ -169,25 +176,6 @@ struct HomeDashboardView: View {
         }
     }
 
-    // MARK: - Header
-
-    private var headerSection: some View {
-        HStack(spacing: 10) {
-            wordmark
-            Spacer()
-            streakPill
-            profileAvatar
-        }
-        .padding(.top, 12)
-        .opacity(appeared ? 1 : 0)
-        .offset(y: appeared ? 0 : 20)
-        .onAppear {
-            withAnimation(.easeInOut(duration: 2.5).repeatForever(autoreverses: true)) {
-                glowPulse = true
-            }
-        }
-    }
-
     /// Streak count as a compact top-bar pill (Cal AI pattern). Tapping
     /// opens progress, same as the bare day-ring row below.
     private var streakPill: some View {
@@ -195,7 +183,7 @@ struct HomeDashboardView: View {
             HapticService.lightImpact()
             onShowProgress()
         } label: {
-            HStack(spacing: 4) {
+            HStack(spacing: BPSpacing.xxs) {
                 Image(systemName: "flame.fill")
                     .font(.system(size: 11, weight: .semibold))
                     .foregroundStyle(palette.accent)
@@ -203,32 +191,16 @@ struct HomeDashboardView: View {
                     .font(.system(size: 13, weight: .semibold, design: .rounded))
                     .foregroundStyle(palette.textPrimary)
             }
-            .padding(.horizontal, 10)
-            .padding(.vertical, 6)
+            .padding(.horizontal, BPSpacing.sm)
+            .padding(.vertical, BPSpacing.xs)
             .background(
                 Capsule()
                     .fill(palette.surfaceElevated)
-                    .shadow(color: .black.opacity(0.05), radius: 3, y: 1)
+                    .shadow(color: .black.opacity(0.05), radius: 4, y: 1)
             )
             .overlay(Capsule().stroke(palette.border.opacity(0.35), lineWidth: 0.5))
         }
         .accessibilityLabel("\(vm.streakCount) day streak")
-    }
-
-    private var wordmark: some View {
-        HStack(spacing: 2) {
-            Text("Bible")
-                .font(.system(size: 28, weight: .light, design: .serif))
-                .foregroundStyle(palette.textPrimary)
-
-            Image(systemName: "sparkle")
-                .font(.system(size: 22, weight: .medium))
-                .foregroundStyle(Color(red: 1.0, green: 0.84, blue: 0.3))
-                .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 4)
-                .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3), radius: 10)
-                .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(glowPulse ? 0.9 : 0.5), radius: 20)
-                .shadow(color: Color(red: 1.0, green: 0.84, blue: 0.3).opacity(glowPulse ? 0.5 : 0.2), radius: 40)
-        }
     }
 
     private var profileAvatar: some View {
@@ -262,6 +234,355 @@ struct HomeDashboardView: View {
         }
     }
 
+    // MARK: - Greeting Header (calm, Granola-style)
+
+    private var timeGreeting: String {
+        let hour = Calendar.current.component(.hour, from: Date())
+        switch hour {
+        case 5..<12: return "Good morning"
+        case 12..<17: return "Good afternoon"
+        case 17..<22: return "Good evening"
+        default: return "Peace to you"
+        }
+    }
+
+    private var greetingHeader: some View {
+        HStack(alignment: .center, spacing: BPSpacing.sm) {
+            VStack(alignment: .leading, spacing: BPSpacing.xxs) {
+                Text(timeGreeting.uppercased())
+                    .font(.system(size: 11, weight: .semibold))
+                    .tracking(2.2)
+                    .foregroundStyle(palette.accent.opacity(0.85))
+
+                Text(vm.profile.firstName.isEmpty ? "Welcome" : vm.profile.firstName)
+                    .font(.system(size: 30, weight: .semibold, design: .serif))
+                    .foregroundStyle(palette.textPrimary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+            }
+
+            Spacer()
+
+            streakPill
+            profileAvatar
+        }
+        .padding(.top, BPSpacing.sm)
+        .opacity(appeared ? 1 : 0)
+        .offset(y: appeared ? 0 : 16)
+        .animation(BPAnimation.spring.delay(0.04), value: appeared)
+    }
+
+    // MARK: - Weekly Streak Row (calm, Claude-style)
+    //
+    // Seven quiet day markers — a small filled gold dot for a day you showed
+    // up, a ring for today, a faint dot for the rest. No glossy circles or
+    // shadows. Tapping anywhere opens the progress page.
+
+    private var weeklyStreakRow: some View {
+        let activeDays = vm.activeDaysThisWeek
+        let today = Calendar.current.component(.weekday, from: Date())
+
+        return Button {
+            HapticService.lightImpact()
+            onShowProgress()
+        } label: {
+            HStack(spacing: 0) {
+                ForEach(dayWeekdays.indices, id: \.self) { index in
+                    let weekday = dayWeekdays[index]
+                    streakDayCell(
+                        letter: String(dayLabels[index].prefix(1)),
+                        isActive: activeDays.contains(weekday),
+                        isToday: weekday == today,
+                        index: index
+                    )
+                }
+            }
+            .padding(.vertical, BPSpacing.xxs)
+            .frame(maxWidth: .infinity)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("\(vm.streakCount) day streak. Opens progress.")
+        .opacity(appeared ? 1 : 0)
+        .animation(BPAnimation.spring.delay(0.14), value: appeared)
+    }
+
+    // One day in the weekly streak: a filled gold disc with a white check for a
+    // completed day, a gold ring for today, and a quiet outlined disc for the
+    // rest. Each pops in with a soft staggered scale on first appear.
+    @ViewBuilder
+    private func streakDayCell(letter: String, isActive: Bool, isToday: Bool, index: Int) -> some View {
+        VStack(spacing: BPSpacing.xs) {
+            Text(letter)
+                .font(.system(size: 12, weight: isToday ? .bold : .medium, design: .rounded))
+                .foregroundStyle(isToday ? palette.accent : palette.textMuted)
+
+            ZStack {
+                if isActive {
+                    Circle()
+                        .fill(
+                            LinearGradient(
+                                colors: [palette.accent, palette.accent.opacity(0.82)],
+                                startPoint: .topLeading, endPoint: .bottomTrailing
+                            )
+                        )
+                        .shadow(color: palette.accent.opacity(0.32), radius: 4, y: 2)
+                    Image(systemName: "checkmark")
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundStyle(.white)
+                } else if isToday {
+                    Circle()
+                        .fill(palette.accent.opacity(0.10))
+                    Circle()
+                        .strokeBorder(palette.accent, lineWidth: 1.8)
+                } else {
+                    Circle()
+                        .fill(palette.surface)
+                        .overlay(Circle().strokeBorder(palette.border.opacity(0.6), lineWidth: 1))
+                }
+            }
+            .frame(width: 28, height: 28)
+            .scaleEffect(appeared ? 1 : 0.5)
+            .opacity(appeared ? 1 : 0)
+            .animation(BPAnimation.spring.delay(0.18 + Double(index) * 0.04), value: appeared)
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    @ViewBuilder
+    private var heroVerseArtCard: some View {
+        if let verse = vm.dailyVerse {
+            let art = colorfulArt(seed: rotatingArtSeed)
+            // The content VStack OWNS the card's fixed 256pt height and bottom-
+            // aligns within it; the art + scrim render BEHIND as a .background so
+            // they inherit that same clamped size. This is what keeps the verse,
+            // reference and Ask button always fully on the card for any verse of
+            // any length — the earlier ZStack approach let the full-bleed image's
+            // .frame(maxHeight: .infinity) drive the internal layout taller than
+            // 256, so the bottom-aligned content overflowed and clipped the
+            // reference row.
+            VStack(alignment: .leading, spacing: BPSpacing.sm) {
+                Text("VERSE FOR TODAY")
+                    .font(.system(size: 10.5, weight: .semibold))
+                    .tracking(2.6)
+                    .foregroundStyle(.white.opacity(0.82))
+                    .shadow(color: .black.opacity(0.35), radius: 3, y: 1)
+
+                Text(verse.text)
+                    .font(.system(size: 21, weight: .regular, design: .serif))
+                    .italic()
+                    .foregroundStyle(.white)
+                    .lineSpacing(6)
+                    .lineLimit(5)
+                    .minimumScaleFactor(0.4)
+                    .shadow(color: .black.opacity(0.45), radius: 6, y: 1)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                HStack(spacing: BPSpacing.md) {
+                    HStack(spacing: BPSpacing.xs) {
+                        Rectangle()
+                            .fill(Color(red: 1.0, green: 0.84, blue: 0.4).opacity(0.9))
+                            .frame(width: 16, height: 1)
+                        Text(verse.reference)
+                            .font(.system(size: 13, weight: .semibold, design: .serif))
+                            .foregroundStyle(.white)
+                            .shadow(color: .black.opacity(0.5), radius: 4, y: 1)
+                    }
+
+                    Spacer()
+
+                    Button {
+                        NotificationCenter.default.post(
+                            name: .openAIWithContext,
+                            object: nil,
+                            userInfo: [
+                                "context": "Walk me through this verse: \"\(verse.text)\" \u{2014} \(verse.reference)",
+                                "title": verse.reference,
+                            ]
+                        )
+                        HapticService.lightImpact()
+                    } label: {
+                        HStack(spacing: BPSpacing.xxs) {
+                            Image(systemName: "sparkle")
+                                .font(.system(size: 11, weight: .medium))
+                            Text("Ask")
+                                .font(.system(size: 13, weight: .semibold))
+                        }
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, BPSpacing.sm)
+                        .padding(.vertical, BPSpacing.xs)
+                        .background(
+                            Capsule()
+                                .fill(.ultraThinMaterial)
+                                .environment(\.colorScheme, .dark)
+                        )
+                        .overlay(Capsule().strokeBorder(.white.opacity(0.35), lineWidth: 0.5))
+                        .shadow(color: .black.opacity(0.25), radius: 4, y: 2)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .padding(BPSpacing.lg)
+            .frame(maxWidth: .infinity, minHeight: 256, maxHeight: 256, alignment: .bottomLeading)
+            .background {
+                // Full-bleed biblical art — the whole card is the painting —
+                // with a legibility scrim that deepens toward the bottom so the
+                // verse + footer stay crisp over any painting.
+                ZStack {
+                    Group {
+                        if let art {
+                            Image(uiImage: art)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                        } else {
+                            LinearGradient(colors: [palette.accent.opacity(0.55), palette.accent.opacity(0.3)],
+                                           startPoint: .topLeading, endPoint: .bottomTrailing)
+                        }
+                    }
+
+                    LinearGradient(
+                        stops: [
+                            .init(color: .black.opacity(0.0), location: 0.0),
+                            .init(color: .black.opacity(0.10), location: 0.34),
+                            .init(color: .black.opacity(0.45), location: 0.60),
+                            .init(color: .black.opacity(0.74), location: 0.82),
+                            .init(color: .black.opacity(0.88), location: 1.0),
+                        ],
+                        startPoint: .top, endPoint: .bottom
+                    )
+                }
+                .allowsHitTesting(false)
+            }
+            .clipShape(RoundedRectangle(cornerRadius: BPRadius.lg, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: BPRadius.lg, style: .continuous)
+                    .strokeBorder(palette.border.opacity(0.35), lineWidth: 0.7)
+            )
+            .shadow(color: .black.opacity(0.12), radius: 16, y: 8)
+            .contentShape(Rectangle())
+            .onTapGesture {
+                onDailyVerseTap()
+                HapticService.lightImpact()
+            }
+            .opacity(appeared ? 1 : 0)
+            .offset(y: appeared ? 0 : 16)
+            .animation(BPAnimation.spring.delay(0.12), value: appeared)
+        }
+    }
+
+    // MARK: - Quiet Quick Links (Bible / Plan as stacked editorial rows)
+
+    private var quickLinksRow: some View {
+        let reading = vm.continueReading
+        let readContext = reading.map { "\($0.bookName) \($0.chapter)" }
+        let readProgress: CGFloat = {
+            guard let r = reading, r.totalChapters > 0 else { return 0 }
+            return min(CGFloat(r.chapter) / CGFloat(r.totalChapters), 1)
+        }()
+        let plan = vm.activeReadingPlan
+        let planContext = plan.map { "Day \($0.day) of \($0.total)" }
+        let planProgress: CGFloat = {
+            guard let p = plan, p.total > 0 else { return 0 }
+            return min(CGFloat(p.day) / CGFloat(p.total), 1)
+        }()
+
+        return VStack(spacing: 0) {
+            quickLink(
+                eyebrow: "BIBLE",
+                title: reading != nil ? "Continue reading" : "Open the Word",
+                context: readContext,
+                progress: reading != nil ? readProgress : nil
+            ) {
+                onContinueReading()
+                HapticService.lightImpact()
+            }
+
+            // Subtle hairline separating the Bible row from the Plan row. Inset
+            // a touch from the card edges so it reads as an intentional editorial
+            // divider rather than a full-bleed rule.
+            Rectangle()
+                .fill(palette.border.opacity(0.55))
+                .frame(height: 1)
+                .padding(.vertical, BPSpacing.xxs)
+
+            quickLink(
+                eyebrow: "PLAN",
+                title: plan != nil ? "Continue your plan" : "Reading plans",
+                context: planContext,
+                progress: plan != nil ? planProgress : nil
+            ) {
+                showReadingPlans = true
+                HapticService.lightImpact()
+            }
+        }
+        .padding(.horizontal, BPSpacing.md)
+        // A small symmetric inset so the rows (and the PLAN progress bar) aren't
+        // pressed against the card's top/bottom edges — lets the card breathe.
+        .padding(.vertical, BPSpacing.xs)
+        .background(
+            RoundedRectangle(cornerRadius: BPRadius.md, style: .continuous)
+                .fill(palette.surfaceElevated)
+                .overlay(
+                    RoundedRectangle(cornerRadius: BPRadius.md, style: .continuous)
+                        .strokeBorder(palette.border.opacity(0.5), lineWidth: 0.7)
+                )
+        )
+        .opacity(appeared ? 1 : 0)
+        .offset(y: appeared ? 0 : 18)
+        .animation(BPAnimation.spring.delay(0.30), value: appeared)
+    }
+
+    /// One stacked row inside the combined Bible/Plan card: a gold eyebrow with
+    /// the place you left off + arrow on the right, the action in serif, and a
+    /// thin gold progress bar where progress is meaningful.
+    private func quickLink(eyebrow: String, title: String, context: String?, progress: CGFloat?, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            VStack(alignment: .leading, spacing: BPSpacing.xxs) {
+                HStack(alignment: .firstTextBaseline, spacing: BPSpacing.xs) {
+                    Text(eyebrow)
+                        .font(.system(size: 10, weight: .semibold))
+                        .tracking(1.6)
+                        .foregroundStyle(palette.accent.opacity(0.8))
+
+                    Spacer()
+
+                    if let context {
+                        Text(context)
+                            .font(.system(size: 12))
+                            .foregroundStyle(palette.textMuted)
+                            .lineLimit(1)
+                    }
+
+                    Image(systemName: "arrow.up.right")
+                        .font(.system(size: 11, weight: .semibold))
+                        .foregroundStyle(palette.accent.opacity(0.6))
+                }
+
+                Text(title)
+                    .font(.system(size: 16, weight: .regular, design: .serif))
+                    .foregroundStyle(palette.textPrimary)
+                    .lineLimit(1)
+
+                if let progress {
+                    GeometryReader { geo in
+                        ZStack(alignment: .leading) {
+                            Capsule()
+                                .fill(palette.accent.opacity(0.12))
+                                .frame(height: 4)
+                            Capsule()
+                                .fill(palette.accent)
+                                .frame(width: max(4, geo.size.width * progress), height: 4)
+                        }
+                    }
+                    .frame(height: 4)
+                }
+            }
+            .padding(.vertical, BPSpacing.xs)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+    }
+
     // MARK: - Curated Colorful Art
     //
     // The biblical-art catalog is mostly muted Tissot watercolors and B&W
@@ -283,10 +604,6 @@ struct HomeDashboardView: View {
         return BiblicalImageService.rawImage(for: key)
     }
 
-    private var dayOfYearSeed: Int {
-        Calendar.current.ordinality(of: .day, in: .year, for: Date()) ?? 1
-    }
-
     /// Seed that advances every 6 hours so the matched painting rotates
     /// "every once in a while" through the day rather than staying fixed.
     private var rotatingArtSeed: Int {
@@ -296,431 +613,24 @@ struct HomeDashboardView: View {
         return day * 4 + sixHourBucket
     }
 
-    // MARK: - Hero Verse Card
-
-    @ViewBuilder
-    /// Trims verse text to ~100 chars at a natural word boundary so it
-    /// always fits cleanly on the card without SwiftUI truncation.
-    private func truncatedVerse(_ text: String) -> String {
-        let maxLength = 100
-        guard text.count > maxLength else { return text }
-        // Find the last space before the limit
-        let prefix = text.prefix(maxLength)
-        if let lastSpace = prefix.lastIndex(of: " ") {
-            return String(text[text.startIndex..<lastSpace]) + "..."
-        }
-        return String(prefix) + "..."
-    }
-
-    @ViewBuilder
-    private var heroVerseCard: some View {
-        if let verse = vm.dailyVerse {
-            // Use a curated vivid painting that rotates through the day
-            // (every ~6 hours) rather than auto-matching, which kept
-            // landing on dark/grayscale art.
-            let artImage = colorfulArt(seed: rotatingArtSeed)
-            let bgColors = vm.currentBackground.gradientColors.map { Color(hex: $0) }
-            let gradient = LinearGradient(
-                colors: bgColors.isEmpty ? [palette.accent] : bgColors,
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-
-            ZStack {
-                // Cinematic scrim — a soft dark vignette plus a vertical
-                // gradient so the centered verse stays legible over any
-                // painting, no matter how light or busy the art is, while
-                // the colour still reads through.
-                LinearGradient(
-                    colors: [.black.opacity(0.38), .black.opacity(0.30), .black.opacity(0.55)],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-                RadialGradient(
-                    colors: [.black.opacity(0.34), .clear],
-                    center: .center,
-                    startRadius: 8,
-                    endRadius: 220
-                )
-
-                VStack(spacing: 10) {
-                    Spacer(minLength: 0)
-
-                    Text("\u{201C}\(truncatedVerse(verse.text))\u{201D}")
-                        .font(.custom("Georgia", size: 17))
-                        .foregroundStyle(.white)
-                        .multilineTextAlignment(.center)
-                        .lineSpacing(5)
-                        .lineLimit(4)
-                        .shadow(color: .black.opacity(0.55), radius: 7, y: 1)
-
-                    OrnamentalDivider(color: .white, opacity: 0.2)
-
-                    HStack(spacing: 6) {
-                        Image(systemName: "book.closed.fill")
-                            .font(.system(size: 12))
-                            .foregroundStyle(Color(hex: "C9A96E"))
-
-                        Text(verse.reference)
-                            .font(.custom("Georgia-Italic", size: 13))
-                            .foregroundStyle(.white.opacity(0.85))
-                    }
-                    .shadow(color: .black.opacity(0.5), radius: 5, y: 1)
-
-                    Button {
-                        NotificationCenter.default.post(
-                            name: .openAIWithContext,
-                            object: nil,
-                            userInfo: [
-                                "context": "Walk me through this verse: \"\(verse.text)\" \u{2014} \(verse.reference)",
-                                "title": verse.reference,
-                            ]
-                        )
-                        HapticService.lightImpact()
-                    } label: {
-                        HStack(spacing: 5) {
-                            Image(systemName: "sparkle")
-                                .font(.system(size: 10, weight: .medium))
-                            Text("Ask")
-                                .font(.system(size: 12, weight: .semibold, design: .rounded))
-                        }
-                        .foregroundStyle(.white.opacity(0.85))
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 6)
-                        .background(
-                            Capsule()
-                                .fill(.white.opacity(0.15))
-                        )
-                    }
-                    .padding(.top, 4)
-
-                    Spacer(minLength: 0)
-                }
-                .padding(.horizontal, 20)
-                .padding(.vertical, 24)
-            }
-            .frame(maxWidth: .infinity)
-            .frame(minHeight: 150, maxHeight: .infinity)
-            // The painting is a background so it fills the card without ever
-            // driving its width — on tall screens an aspect-fill image as a
-            // direct child would expand the card past its siblings.
-            .background {
-                if let artImage {
-                    Image(uiImage: artImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                } else {
-                    gradient
-                        .overlay {
-                            if let imageName = vm.currentBackground.imageName,
-                               let uiImage = SanctuaryBackground.loadImage(named: imageName) {
-                                Image(uiImage: uiImage)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                            }
-                        }
-                }
-            }
-            .clipShape(RoundedRectangle(cornerRadius: 16))
-            .shadow(color: .black.opacity(0.15), radius: 12, y: 6)
-            .onTapGesture {
-                onDailyVerseTap()
-                HapticService.lightImpact()
-            }
-            .opacity(appeared ? 1 : 0)
-            .offset(y: appeared ? 0 : 20)
-            .animation(BPAnimation.spring.delay(0.16), value: appeared)
-        }
-    }
-
-    // MARK: - Streak Row (bare, Cal AI style)
-    //
-    // No card background — the day rings sit directly on the canvas so the
-    // verse + Read/Plan cards below read as floating above it, giving the
-    // screen depth. The streak count lives in the top-bar pill.
-
-    private var streakRow: some View {
-        let activeDays = vm.activeDaysThisWeek
-        let today = Calendar.current.component(.weekday, from: Date())
-
-        return Button {
-            onShowProgress()
-            HapticService.selection()
-        } label: {
-            HStack(spacing: 0) {
-            ForEach(Array(zip(dayLabels, dayWeekdays)), id: \.1) { label, weekday in
-                let isActive = activeDays.contains(weekday)
-                let isToday = weekday == today
-
-                VStack(spacing: 7) {
-                    Text(String(label.prefix(1)))
-                        .font(.system(size: 11, weight: isToday ? .bold : .medium, design: .rounded))
-                        .foregroundStyle(isToday ? palette.accent : palette.textMuted)
-
-                    ZStack {
-                        if isActive {
-                            Circle()
-                                .fill(
-                                    LinearGradient(
-                                        colors: [palette.accent, palette.accent.opacity(0.82)],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    )
-                                )
-                                .frame(width: 36, height: 36)
-                                .shadow(color: palette.accent.opacity(0.35), radius: 5, y: 2)
-                                .scaleEffect(animateStreak ? 1 : 0)
-
-                            Image(systemName: "checkmark")
-                                .font(.system(size: 13, weight: .bold))
-                                .foregroundStyle(.white)
-                                .scaleEffect(animateStreak ? 1 : 0)
-                        } else if isToday {
-                            Circle()
-                                .stroke(palette.accent, lineWidth: 2)
-                                .frame(width: 36, height: 36)
-                        } else {
-                            Circle()
-                                .stroke(palette.border.opacity(0.6), lineWidth: 1.5)
-                                .frame(width: 36, height: 36)
-                        }
-                    }
-                }
-                .frame(maxWidth: .infinity)
-            }
-            }
-            .contentShape(Rectangle())
-        }
-        .buttonStyle(.plain)
-        .opacity(appeared ? 1 : 0)
-        .offset(y: appeared ? 0 : 16)
-        .animation(BPAnimation.spring.delay(0.08), value: appeared)
-    }
-
-    // MARK: - Quick Actions Row (Editorial Book Pages)
-
-    private var quickActionsRow: some View {
-        HStack(spacing: 10) {
-            readPageCard
-            planPageCard
-        }
-        .opacity(appeared ? 1 : 0)
-        .offset(y: appeared ? 0 : 20)
-        .animation(BPAnimation.spring.delay(0.24), value: appeared)
-    }
-
-    // MARK: - Read Page Card
-
-    private var readPageCard: some View {
-        let reading = vm.continueReading
-        let eyebrow = (reading?.bookName ?? "Bible").uppercased()
-        let numeral = reading.map { "\($0.chapter)" }
-        let microLabel: LocalizedStringKey = reading != nil ? "chapter" : "open the word"
-        let subtitle: LocalizedStringKey = reading != nil ? "Continue reading" : "Tap to open"
-        let progress: CGFloat = {
-            guard let r = reading, r.totalChapters > 0 else { return 0 }
-            return min(CGFloat(r.chapter) / CGFloat(r.totalChapters), 1.0)
-        }()
-
-        // Curated vivid painting, offset so it differs from the hero + plan.
-        let artImage = colorfulArt(seed: rotatingArtSeed + 1)
-
-        return bookPageCard(
-            eyebrow: eyebrow,
-            numeral: numeral,
-            fallbackIcon: "book.closed.fill",
-            microLabel: microLabel,
-            progress: progress,
-            subtitle: subtitle,
-            artImage: artImage
-        )
-        .onTapGesture {
-            onContinueReading()
-            HapticService.lightImpact()
-        }
-    }
-
-    // MARK: - Plan Page Card
-
-    private var planPageCard: some View {
-        let plan = vm.activeReadingPlan
-        let eyebrow = "PLAN"
-        let numeral = plan.map { "\($0.day)" }
-        let microLabel: LocalizedStringKey = plan.map { "of \($0.total) days" } ?? "start today"
-        let subtitle: LocalizedStringKey = plan.map { LocalizedStringKey($0.name) } ?? "Begin a journey"
-        let progress: CGFloat = {
-            guard let p = plan, p.total > 0 else { return 0 }
-            return min(CGFloat(p.day) / CGFloat(p.total), 1.0)
-        }()
-
-        // Curated vivid painting, offset so it differs from the hero + read.
-        let artImage = colorfulArt(seed: rotatingArtSeed + 2)
-
-        return bookPageCard(
-            eyebrow: eyebrow,
-            numeral: numeral,
-            fallbackIcon: "calendar",
-            microLabel: microLabel,
-            progress: progress,
-            subtitle: subtitle,
-            artImage: artImage
-        )
-        .onTapGesture {
-            showReadingPlans = true
-            HapticService.lightImpact()
-        }
-    }
-
-    // MARK: - Book Page Card (shared shell)
-
-    private func bookPageCard(
-        eyebrow: String,
-        numeral: String?,
-        fallbackIcon: String,
-        microLabel: LocalizedStringKey,
-        progress: CGFloat,
-        subtitle: LocalizedStringKey,
-        artImage: UIImage?
-    ) -> some View {
-        VStack(spacing: 0) {
-            // Painting header — matched art with the small-caps label set
-            // over a soft bottom scrim. Postcard treatment: art on top,
-            // crisp white info below.
-            ZStack(alignment: .bottomLeading) {
-                Group {
-                    if let artImage {
-                        Image(uiImage: artImage)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                    } else {
-                        LinearGradient(
-                            colors: [palette.accent.opacity(0.55), palette.accent.opacity(0.3)],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    }
-                }
-                .frame(maxWidth: .infinity)
-                .frame(height: 88)
-                .clipped()
-
-                // Bottom scrim for label legibility over any painting
-                LinearGradient(
-                    colors: [.clear, .black.opacity(0.5)],
-                    startPoint: .center,
-                    endPoint: .bottom
-                )
-                .frame(height: 88)
-                .allowsHitTesting(false)
-
-                HStack(spacing: 6) {
-                    Text(eyebrow)
-                        .font(.system(size: 10, weight: .semibold, design: .rounded))
-                        .tracking(1.6)
-                        .foregroundStyle(.white)
-                        .lineLimit(1)
-                        .truncationMode(.middle)
-
-                    Spacer(minLength: 0)
-
-                    Image(systemName: "arrow.up.right")
-                        .font(.system(size: 9, weight: .semibold))
-                        .foregroundStyle(.white.opacity(0.85))
-                }
-                .padding(.horizontal, 14)
-                .padding(.bottom, 8)
-            }
-
-            // White info area
-            VStack(alignment: .leading, spacing: 0) {
-                HStack(alignment: .firstTextBaseline, spacing: 6) {
-                    if let numeral {
-                        Text(numeral)
-                            .font(.custom("Georgia", size: 26))
-                            .foregroundStyle(palette.textPrimary)
-                    } else {
-                        Image(systemName: fallbackIcon)
-                            .font(.system(size: 18, weight: .light))
-                            .foregroundStyle(palette.accent)
-                    }
-
-                    Text(microLabel)
-                        .font(.system(size: 10, weight: .medium, design: .rounded))
-                        .tracking(0.5)
-                        .foregroundStyle(palette.textMuted)
-                }
-                .padding(.top, 10)
-
-                Spacer(minLength: 8)
-
-                progressHairline(progress: progress)
-                    .padding(.top, 6)
-
-                Text(subtitle)
-                    .font(.system(size: 11, weight: .medium, design: .rounded))
-                    .foregroundStyle(palette.textSecondary)
-                    .lineLimit(1)
-                    .truncationMode(.tail)
-                    .padding(.top, 7)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, 14)
-            .padding(.bottom, 11)
-        }
-        .frame(maxWidth: .infinity)
-        .frame(height: 184)
-        .background(
-            RoundedRectangle(cornerRadius: 14)
-                .fill(palette.surfaceElevated)
-        )
-        .clipShape(RoundedRectangle(cornerRadius: 14))
-        .overlay(
-            // Full warm hairline — crisp edge definition on the white canvas.
-            RoundedRectangle(cornerRadius: 14)
-                .strokeBorder(palette.border, lineWidth: 0.75)
-                .allowsHitTesting(false)
-        )
-        .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
-    }
-
-    // MARK: - Progress Hairline
-
-    private func progressHairline(progress: CGFloat) -> some View {
-        GeometryReader { geo in
-            ZStack(alignment: .leading) {
-                Capsule()
-                    .fill(palette.border.opacity(0.22))
-                    .frame(height: 2)
-
-                Capsule()
-                    .fill(
-                        LinearGradient(
-                            colors: [
-                                palette.accent.opacity(0.55),
-                                palette.accent
-                            ],
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        )
-                    )
-                    .frame(
-                        width: appeared ? geo.size.width * progress : 0,
-                        height: 2
-                    )
-                    .shadow(color: palette.accent.opacity(0.35), radius: 3, y: 0)
-                    .animation(.easeOut(duration: 1.0).delay(0.5), value: appeared)
-            }
-        }
-        .frame(height: 2)
-    }
-
     // MARK: - Ask Card
 
     private var askCard: some View {
-        InlineAskComposer(
-            firstName: vm.profile.firstName,
+        DailyPathCTA(
+            pathTitle: dailyPathVM.pathTitle,
+            currentDay: dailyPathVM.currentDay,
+            totalDays: dailyPathVM.totalDays,
+            completedDays: dailyPathVM.completedDayNumbers,
+            hasStarted: dailyPathVM.hasStarted,
+            hasPath: dailyPathVM.activePath != nil,
+            completedToday: dailyPathVM.completedToday,
+            currentDayTitle: dailyPathVM.currentDayTitle,
             palette: palette
-        )
+        ) {
+            guard dailyPathVM.activePath != nil else { return }
+            HapticService.lightImpact()
+            showPathDetail = true
+        }
         .opacity(appeared ? 1 : 0)
         .offset(y: appeared ? 0 : 20)
         .animation(BPAnimation.spring.delay(0.32), value: appeared)
@@ -728,108 +638,126 @@ struct HomeDashboardView: View {
 
 }
 
-// MARK: - Inline Ask Composer
+// MARK: - Daily Path CTA
 //
-// Real text input on the Home dashboard. Tapping it focuses the field and
-// the keyboard pushes the entire dashboard up so the composer stays visible
-// (SwiftUI's default keyboard avoidance handles this for free as long as
-// the parent isn't pinned with .ignoresSafeArea(.keyboard)). Submitting
-// posts `.openAIWithContext` — the same pipeline used by Feed "Discuss" and
-// Plan deep links — which ContentView listens for and routes into a fresh
-// streaming Conversation in the Ask tab.
+// The home-screen entry into the user's Daily Path. A calm, editorial card:
+// a soft icon chip, a quiet eyebrow, the path name in serif, and a thin
+// progress line once the journey is underway. No motion, no glow — stillness
+// reads as premium. Path content gets the prominence because it's the engine
+// for daily habit formation; AI gets contextual entry points inside the path
+// session (Scripture step, Reflection step) instead of a home button.
 
-private struct InlineAskComposer: View {
-    let firstName: String
+private struct DailyPathCTA: View {
+    let pathTitle: String
+    let currentDay: Int
+    let totalDays: Int
+    let completedDays: [Int]
+    let hasStarted: Bool
+    let hasPath: Bool
+    let completedToday: Bool
+    let currentDayTitle: String
     let palette: BPColorPalette
+    let onTap: () -> Void
 
-    @Environment(\.colorScheme) private var colorScheme
-    @State private var borderRotation: Double = 0
-
-    private var cardBorderOpacity: Double {
-        colorScheme == .dark ? 0.30 : 0.55
+    private var eyebrow: String {
+        hasPath ? "DEVOTIONAL \(currentDay)" : "DAILY PATH"
     }
 
-    /// Personalized placeholder. Shows once focus enters/leaves.
-    private var placeholder: String {
-        let trimmed = firstName.trimmingCharacters(in: .whitespacesAndNewlines)
-        if trimmed.isEmpty {
-            return "What\u{2019}s on your heart?"
-        }
-        return "Hey \(trimmed), what\u{2019}s on your heart?"
+    private var title: String {
+        if !hasPath { return "Start your journey" }
+        return pathTitle.isEmpty ? "Your daily path" : pathTitle
     }
 
-    private let gold = Color(red: 1.0, green: 0.84, blue: 0.3)
+    private var subtitle: String {
+        if !hasPath { return "A few quiet minutes each day" }
+        if completedToday { return "Complete · back tomorrow" }
+        return currentDayTitle.isEmpty ? "About 5 minutes" : currentDayTitle
+    }
+
+    private var progressFraction: CGFloat {
+        guard totalDays > 0 else { return 0 }
+        return min(CGFloat(completedDays.count) / CGFloat(totalDays), 1)
+    }
+
+    private var accessibilityLabel: String {
+        if !hasPath { return "Begin your daily path" }
+        if !hasStarted { return "Begin day one of \(pathTitle)" }
+        return "Day \(currentDay) of \(pathTitle). \(completedDays.count) of \(totalDays) days complete."
+    }
 
     var body: some View {
-        HStack(spacing: 12) {
-            // Golden sparkle icon
-            Image(systemName: "sparkle")
-                .font(.system(size: 18, weight: .semibold))
-                .foregroundStyle(
-                    LinearGradient(
-                        colors: [
-                            Color(red: 1.0, green: 0.95, blue: 0.6),
-                            gold,
-                            palette.accent
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
-                .shadow(color: gold, radius: 4)
-                .shadow(color: gold.opacity(0.5), radius: 10)
+        VStack(alignment: .leading, spacing: BPSpacing.md) {
+            HStack(alignment: .firstTextBaseline, spacing: BPSpacing.sm) {
+                VStack(alignment: .leading, spacing: BPSpacing.xxs) {
+                    Text(eyebrow)
+                        .font(.system(size: 11, weight: .semibold))
+                        .tracking(1.8)
+                        .foregroundStyle(palette.accent.opacity(0.85))
 
-            Text("Ask anything about Scripture")
-                .font(BPFont.elegantBody)
-                .foregroundStyle(palette.textSecondary)
-                .lineLimit(1)
+                    Text(title)
+                        .font(BPFont.elegantHeadingMedium)
+                        .foregroundStyle(palette.textPrimary)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.85)
 
-            Spacer(minLength: 0)
+                    Text(subtitle)
+                        .font(.system(size: 13))
+                        .foregroundStyle(palette.textSecondary)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.85)
+                }
 
-            Image(systemName: "chevron.right")
-                .font(.system(size: 12, weight: .semibold))
-                .foregroundStyle(palette.textMuted)
-        }
-        .padding(.horizontal, 18)
-        .padding(.vertical, 16)
-        .background(
-            // Solid card surface so the gradient border reads cleanly
-            RoundedRectangle(cornerRadius: 22)
-                .fill(palette.surfaceElevated)
-                .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
-        )
-        .overlay(
-            // Animated halo — an angular gold gradient that rotates slowly
-            // around the border. The bright→dim→bright→dim→bright stops
-            // create two visible "highlights" that sweep around the field
-            // continuously, like a candle flickering on gold leaf.
-            RoundedRectangle(cornerRadius: 22)
-                .strokeBorder(
-                    AngularGradient(
-                        gradient: Gradient(colors: [
-                            palette.accent.opacity(0.95),
-                            palette.accent.opacity(0.10),
-                            palette.accent.opacity(0.95),
-                            palette.accent.opacity(0.10),
-                            palette.accent.opacity(0.95),
-                        ]),
-                        center: .center,
-                        angle: .degrees(borderRotation)
-                    ),
-                    lineWidth: 1.6
-                )
-                .blur(radius: 0.4)
-                .allowsHitTesting(false)
-        )
-        .contentShape(Rectangle())
-        .onTapGesture {
-            HapticService.lightImpact()
-            NotificationCenter.default.post(name: .switchToAskTab, object: nil)
-        }
-        .onAppear {
-            withAnimation(.linear(duration: 6).repeatForever(autoreverses: false)) {
-                borderRotation = 360
+                Spacer(minLength: 0)
+
+                // Subtle corner indicator — matches the tiles' arrow; a
+                // checkmark once today's reading is done.
+                if completedToday {
+                    Image(systemName: "checkmark.circle.fill")
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundStyle(palette.accent)
+                } else {
+                    Image(systemName: "arrow.up.right")
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundStyle(palette.accent.opacity(0.6))
+                }
+            }
+
+            if hasPath && hasStarted {
+                progressBar
+                    .accessibilityHidden(true)
             }
         }
+        .padding(BPSpacing.lg)
+        .background(
+            RoundedRectangle(cornerRadius: BPRadius.lg, style: .continuous)
+                .fill(palette.surfaceElevated)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: BPRadius.lg, style: .continuous)
+                .strokeBorder(palette.border.opacity(0.5), lineWidth: 0.7)
+        )
+        .shadow(color: .black.opacity(0.04), radius: 8, y: 4)
+        .contentShape(Rectangle())
+        .onTapGesture { onTap() }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(accessibilityLabel)
+        .accessibilityHint("Opens your daily path")
+        .accessibilityAddTraits(.isButton)
+    }
+
+    // Thin gold progress line — filled portion = days complete. Clean and flat,
+    // matching the Plan tile's bar.
+    private var progressBar: some View {
+        GeometryReader { geo in
+            ZStack(alignment: .leading) {
+                Capsule()
+                    .fill(palette.accent.opacity(0.14))
+                    .frame(height: 4)
+                Capsule()
+                    .fill(palette.accent)
+                    .frame(width: geo.size.width * progressFraction, height: 4)
+            }
+        }
+        .frame(height: 4)
     }
 }

@@ -3,6 +3,7 @@ import AVFoundation
 import Foundation
 
 @Observable
+@MainActor
 final class SoundscapeService {
     // MARK: - State
 
@@ -21,9 +22,11 @@ final class SoundscapeService {
     // MARK: - Private
 
     private var activePlayer: AVAudioPlayer?
-    private var sleepTimerTask: Task<Void, Never>?
-    private var timerTickTask: Task<Void, Never>?
-    private var interruptionObserver: NSObjectProtocol?
+    // Accessed from the nonisolated `deinit`, so they can't be main-actor
+    // isolated. They're only ever assigned/cancelled on the main actor.
+    nonisolated(unsafe) private var sleepTimerTask: Task<Void, Never>?
+    nonisolated(unsafe) private var timerTickTask: Task<Void, Never>?
+    nonisolated(unsafe) private var interruptionObserver: NSObjectProtocol?
 
     // MARK: - Init
 
@@ -64,24 +67,28 @@ final class SoundscapeService {
             object: AVAudioSession.sharedInstance(),
             queue: .main
         ) { [weak self] notification in
-            guard let self,
-                  let userInfo = notification.userInfo,
+            guard let userInfo = notification.userInfo,
                   let typeValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
                   let type = AVAudioSession.InterruptionType(rawValue: typeValue) else { return }
 
-            switch type {
-            case .began:
-                self.isPlaying = false
-            case .ended:
-                if let optionsValue = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt {
-                    let options = AVAudioSession.InterruptionOptions(rawValue: optionsValue)
-                    if options.contains(.shouldResume) {
-                        self.activePlayer?.play()
-                        self.isPlaying = true
+            // Delivered on `.main` (see queue: above), so we're already on the
+            // main actor — assert it to touch the actor-isolated state directly.
+            MainActor.assumeIsolated {
+                guard let self else { return }
+                switch type {
+                case .began:
+                    self.isPlaying = false
+                case .ended:
+                    if let optionsValue = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt {
+                        let options = AVAudioSession.InterruptionOptions(rawValue: optionsValue)
+                        if options.contains(.shouldResume) {
+                            self.activePlayer?.play()
+                            self.isPlaying = true
+                        }
                     }
+                @unknown default:
+                    break
                 }
-            @unknown default:
-                break
             }
         }
     }
@@ -205,14 +212,14 @@ final class SoundscapeService {
         player.setVolume(target, fadeDuration: duration)
     }
 
-    private func fadeOut(player: AVAudioPlayer?, duration: TimeInterval, completion: @escaping () -> Void) {
+    private func fadeOut(player: AVAudioPlayer?, duration: TimeInterval, completion: @escaping @MainActor () -> Void) {
         guard let player else {
             completion()
             return
         }
         player.setVolume(0, fadeDuration: duration)
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-            completion()
+            MainActor.assumeIsolated { completion() }
         }
     }
 

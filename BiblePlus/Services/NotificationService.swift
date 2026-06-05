@@ -1,4 +1,5 @@
 import Foundation
+import SwiftData
 import UserNotifications
 
 @MainActor
@@ -279,6 +280,46 @@ final class NotificationService {
             if let error {
                 print("[NotificationService] Failed to schedule welcome-back: \(error)")
             }
+        }
+    }
+
+    // MARK: - Memorize Spaced Repetition
+
+    /// Schedules a small spaced-repetition ladder (next morning, +3 days,
+    /// +7 days) nudging the user to recite a verse they're locking in. Each
+    /// notification deep-links back to the verse so a tap reopens it. Best
+    /// effort — silently no-ops if permission is denied.
+    func scheduleMemoryReminders(bookName: String, chapter: Int, verse: Int, reference: String) async {
+        let granted = await requestAuthorization()
+        guard granted else { return }
+
+        let center = UNUserNotificationCenter.current()
+        let calendar = Calendar.current
+
+        for offset in [1, 3, 7] {
+            guard let fireDate = calendar.date(byAdding: .day, value: offset, to: Date()) else { continue }
+            var comps = calendar.dateComponents([.year, .month, .day], from: fireDate)
+            comps.hour = 9
+            comps.minute = 0
+
+            let content = UNMutableNotificationContent()
+            content.title = "Can you recite \(reference)?"
+            content.body = "Say it from memory, then tap to check yourself."
+            content.sound = .default
+            content.userInfo = [
+                "type": "memorize_review",
+                "bookName": bookName,
+                "chapter": chapter,
+                "verse": verse,
+            ]
+
+            let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
+            let request = UNNotificationRequest(
+                identifier: "memorize-\(reference)-day\(offset)",
+                content: content,
+                trigger: trigger
+            )
+            try? await center.add(request)
         }
     }
 
@@ -635,6 +676,109 @@ final class NotificationService {
         }
     }
 
+    // MARK: - Daily Path Reminders
+    //
+    // The Daily Path reminder is the habit-formation lever for the Path
+    // pillar. Single repeating UNCalendarNotificationTrigger at the user's
+    // primary prayer time. Content is path-title-specific but day-agnostic
+    // (we keep it accurate by not committing to a day number — repeating
+    // triggers can't update their body, and a notification service extension
+    // would be heavier than this is worth). The compelling specifics (day N,
+    // theme, scripture) live inside the app; the notification's job is to
+    // pull users back to where those specifics are.
+    //
+    // Lifecycle: scheduled on path start, refreshed on day completion, on
+    // app launch, and on path completion (which cancels). All call sites
+    // route through `refreshDailyPathReminder(modelContext:)` which figures
+    // out whether to schedule, refresh, or cancel — callers don't need to
+    // know the rules.
+
+    static let pathReminderIdentifier = "bibleplus.path.daily"
+
+    /// Top-level coordinator. Inspects current user state and either
+    /// schedules, refreshes, or cancels the path reminder. Safe to call
+    /// repeatedly — internally cancels the existing pending request before
+    /// scheduling a new one, so duplicates aren't possible.
+    func refreshDailyPathReminder(modelContext: ModelContext) {
+        let progressDescriptor = FetchDescriptor<UserPathProgress>(
+            predicate: #Predicate { $0.isActive == true && $0.completedDate == nil }
+        )
+        guard let progress = (try? modelContext.fetch(progressDescriptor))?.first else {
+            cancelDailyPathReminder()
+            return
+        }
+
+        let pathID = progress.pathID
+        let pathDescriptor = FetchDescriptor<DailyPath>(
+            predicate: #Predicate { $0.id == pathID }
+        )
+        guard let path = (try? modelContext.fetch(pathDescriptor))?.first else {
+            cancelDailyPathReminder()
+            return
+        }
+
+        let profileDescriptor = FetchDescriptor<UserProfile>()
+        guard let profile = (try? modelContext.fetch(profileDescriptor))?.first,
+              profile.notificationsEnabled,
+              let slot = profile.prayerTimes.first else {
+            cancelDailyPathReminder()
+            return
+        }
+
+        scheduleDailyPathReminder(pathTitle: path.name, slot: slot)
+    }
+
+    func scheduleDailyPathReminder(pathTitle: String, slot: PrayerTimeSlot) {
+        let center = UNUserNotificationCenter.current()
+        center.removePendingNotificationRequests(withIdentifiers: [Self.pathReminderIdentifier])
+
+        let content = UNMutableNotificationContent()
+        content.title = pathTitle
+        content.body = pathReminderBody(for: slot)
+        content.sound = .default
+        content.userInfo = [
+            "type": "path_reminder",
+            "deep_link": "bibleplus://path"
+        ]
+
+        var components = DateComponents()
+        components.hour = scheduleHour(for: slot)
+        components.minute = scheduleMinute(for: slot)
+
+        let trigger = UNCalendarNotificationTrigger(
+            dateMatching: components,
+            repeats: true
+        )
+        let request = UNNotificationRequest(
+            identifier: Self.pathReminderIdentifier,
+            content: content,
+            trigger: trigger
+        )
+        center.add(request) { error in
+            if let error {
+                print("[NotificationService] Failed to schedule path reminder: \(error)")
+            }
+        }
+    }
+
+    func cancelDailyPathReminder() {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(
+            withIdentifiers: [Self.pathReminderIdentifier]
+        )
+    }
+
+    /// Slot-aware body copy. Keeps tone matched to time of day rather than
+    /// the generic "your path is ready" — small touch, big difference in
+    /// notification-shelf feel.
+    private func pathReminderBody(for slot: PrayerTimeSlot) -> String {
+        switch slot {
+        case .morning:  String(localized: "A new day on your path. Start when you're ready.")
+        case .midday:   String(localized: "A quiet pause is waiting on your path.")
+        case .evening:  String(localized: "Today's day on your path is ready.")
+        case .bedtime:  String(localized: "Close the day with your path.")
+        }
+    }
+
     // MARK: - Schedule Times
 
     private func scheduleHour(for slot: PrayerTimeSlot) -> Int {
@@ -950,4 +1094,5 @@ extension Notification.Name {
     static let askDeepLink = Notification.Name("AskDeepLink")
     static let sanctuaryDeepLink = Notification.Name("SanctuaryDeepLink")
     static let openSanctuaryFromWidget = Notification.Name("OpenSanctuaryFromWidget")
+    static let pathDeepLink = Notification.Name("PathDeepLink")
 }

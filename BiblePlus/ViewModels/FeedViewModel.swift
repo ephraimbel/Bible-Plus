@@ -14,8 +14,6 @@ final class FeedViewModel {
     var doubleTapHeartID: UUID? = nil
     var shareContent: PrayerContent? = nil
     var collectionContent: PrayerContent? = nil
-    var askAIContent: PrayerContent? = nil
-    var askAIConversationId: UUID = UUID()
     var deepLinkScrollIndex: Int? = nil
 
     // Streak state
@@ -284,6 +282,11 @@ final class FeedViewModel {
         )
         if let content = try? modelContext.fetch(descriptor).first {
             cards.insert(content, at: 0)
+            // Mark the deep-linked card as shown so a later `loadMoreIfNeeded`
+            // (which generates with `excluding: shownIDs`) can't re-emit the
+            // same content and append a duplicate — two cards sharing an `.id`
+            // breaks the feed's ForEach and the paging scroll position.
+            markAsShown([content])
             showFeed = true
             if wasShowingFeed {
                 deepLinkScrollIndex = 0
@@ -342,9 +345,19 @@ final class FeedViewModel {
     }
 
     func askAI(about content: PrayerContent) {
-        askAIConversationId = createConversationForAI(content)
-        askAIContent = content
         HapticService.selection()
+        // Route through the unified Ask flow: ContentView creates the
+        // conversation, switches to the Ask tab and pushes ChatView (tab bar
+        // hidden, back → conversation list) — consistent with every other
+        // "Ask" entry point.
+        NotificationCenter.default.post(
+            name: .openAIWithContext,
+            object: nil,
+            userInfo: [
+                "context": askAIPrompt(for: content),
+                "title": String(personalizedText(for: content).prefix(40)),
+            ]
+        )
     }
 
     func askAIPrompt(for content: PrayerContent) -> String {
@@ -353,14 +366,6 @@ final class FeedViewModel {
             return "Walk me through this verse and help me understand what God is saying to me: \"\(text)\" — \(ref)"
         }
         return "This really spoke to me. Can you help me go deeper? \"\(text)\""
-    }
-
-    func createConversationForAI(_ content: PrayerContent) -> UUID {
-        let title = String(personalizedText(for: content).prefix(40))
-        let conversation = Conversation(title: title)
-        modelContext.insert(conversation)
-        modelContext.safeSave()
-        return conversation.id
     }
 
     func pinToCollection(_ content: PrayerContent) {

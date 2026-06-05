@@ -182,12 +182,12 @@ struct QuickPromptsView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background(palette.surfaceElevated)
             }
-            .clipShape(RoundedRectangle(cornerRadius: 18))
+            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
             .overlay(
-                RoundedRectangle(cornerRadius: 18)
-                    .stroke(palette.accent.opacity(0.12), lineWidth: 0.5)
+                RoundedRectangle(cornerRadius: 18, style: .continuous)
+                    .strokeBorder(palette.border.opacity(0.5), lineWidth: 0.7)
             )
-            .shadow(color: .black.opacity(0.12), radius: 22, y: 10)
+            .shadow(color: .black.opacity(0.08), radius: 14, y: 7)
         }
         .buttonStyle(.plain)
         .opacity(appeared ? 1 : 0)
@@ -210,7 +210,7 @@ struct QuickPromptsView: View {
                         .foregroundStyle(palette.accent.opacity(0.7))
                     Spacer()
                     Text("Day \(plan.nextDay) of \(plan.totalDays)")
-                        .font(.system(size: 11, weight: .medium, design: .rounded))
+                        .font(.system(size: 11, weight: .medium))
                         .foregroundStyle(palette.textMuted)
                 }
 
@@ -234,25 +234,24 @@ struct QuickPromptsView: View {
 
                 HStack(spacing: 6) {
                     Text("Continue today's reading")
-                        .font(.system(size: 13, weight: .medium, design: .rounded))
+                        .font(.system(size: 13, weight: .semibold))
                         .foregroundStyle(palette.accent)
-                    Image(systemName: "arrow.right")
-                        .font(.system(size: 11, weight: .semibold))
-                        .foregroundStyle(palette.accent)
+                    Image(systemName: "arrow.up.right")
+                        .font(.system(size: 10, weight: .semibold))
+                        .foregroundStyle(palette.accent.opacity(0.7))
                 }
                 .padding(.top, 2)
             }
             .padding(20)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(
-                RoundedRectangle(cornerRadius: 16)
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
                     .fill(palette.surfaceElevated)
             )
             .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(palette.accent.opacity(0.12), lineWidth: 0.5)
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .strokeBorder(palette.border.opacity(0.5), lineWidth: 0.7)
             )
-            .shadow(color: .black.opacity(0.06), radius: 14, y: 6)
         }
         .buttonStyle(.plain)
         .opacity(appeared ? 1 : 0)
@@ -304,23 +303,27 @@ struct QuickPromptsView: View {
                         .lineLimit(1)
 
                     Text(topic.subtitle)
-                        .font(.system(size: 12, weight: .regular, design: .rounded))
+                        .font(.system(size: 12))
                         .foregroundStyle(palette.textMuted.opacity(0.85))
                         .lineLimit(1)
                 }
 
                 Spacer(minLength: 8)
+
+                Image(systemName: "arrow.up.right")
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(palette.accent.opacity(0.55))
             }
-            .padding(.horizontal, 18)
-            .padding(.vertical, 14)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 15)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(
-                RoundedRectangle(cornerRadius: 14)
-                    .fill(palette.surfaceElevated.opacity(0.7))
+                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                    .fill(palette.surfaceElevated)
             )
             .overlay(
-                RoundedRectangle(cornerRadius: 14)
-                    .stroke(palette.border.opacity(0.08), lineWidth: 0.5)
+                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                    .strokeBorder(palette.border.opacity(0.5), lineWidth: 0.7)
             )
         }
         .buttonStyle(.plain)
@@ -400,41 +403,37 @@ struct QuickPromptsView: View {
             action()
             HapticService.lightImpact()
         } label: {
-            HStack(spacing: 14) {
-                ZStack {
-                    Circle()
-                        .fill(palette.accent.opacity(0.06))
-                        .frame(width: 36, height: 36)
-
-                    Image(systemName: icon)
-                        .font(.system(size: 13, weight: .medium))
-                        .foregroundStyle(palette.accent)
-                }
-
-                VStack(alignment: .leading, spacing: subtitle != nil ? 2 : 0) {
+            HStack(spacing: 12) {
+                VStack(alignment: .leading, spacing: subtitle != nil ? 3 : 0) {
                     Text(title)
-                        .font(.system(size: 14.5, weight: .regular, design: .rounded))
+                        .font(.system(size: 16, weight: .regular, design: .serif))
                         .foregroundStyle(palette.textPrimary)
                         .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
 
                     if let subtitle {
                         Text(subtitle)
-                            .font(.system(size: 12, weight: .regular, design: .rounded))
+                            .font(.system(size: 12.5, design: .serif))
+                            .italic()
                             .foregroundStyle(palette.textMuted)
                     }
                 }
 
                 Spacer(minLength: 8)
+
+                Image(systemName: "arrow.up.right")
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(palette.accent.opacity(0.55))
             }
             .padding(.horizontal, 16)
-            .padding(.vertical, 14)
+            .padding(.vertical, 15)
             .background(
-                RoundedRectangle(cornerRadius: 14)
+                RoundedRectangle(cornerRadius: 14, style: .continuous)
                     .fill(palette.surfaceElevated)
             )
             .overlay(
-                RoundedRectangle(cornerRadius: 14)
-                    .stroke(palette.border.opacity(0.08), lineWidth: 0.5)
+                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                    .strokeBorder(palette.border.opacity(0.5), lineWidth: 0.7)
             )
         }
     }

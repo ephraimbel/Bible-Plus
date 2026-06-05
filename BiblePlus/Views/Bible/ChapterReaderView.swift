@@ -54,18 +54,11 @@ struct ChapterReaderView: View {
                             offlineBanner
                         }
 
-                        // Chapter heading
-                        Text(chapterTitle)
-                            .font(.system(size: 32, weight: .bold, design: .serif))
-                            .foregroundStyle(palette.textPrimary)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .padding(.top, 28)
-                            .padding(.bottom, 8)
-
-                        // Ornamental divider below chapter heading
-                        OrnamentalDivider(color: palette.accent, opacity: 0.3)
-                            .frame(maxWidth: .infinity)
-                            .padding(.bottom, 20)
+                        // Editorial chapter masthead — the book reads as a
+                        // quiet gold eyebrow, the chapter as a large serif
+                        // numeral, parted by a single hairline. Crisp and
+                        // editorial rather than a heavy repeated bold title.
+                        chapterMasthead
 
                         // Psalm heading (bracketed superscription)
                         if let firstVerse = displayVerses.first,
@@ -86,7 +79,7 @@ struct ChapterReaderView: View {
                                 chapter: chapterNumber,
                                 verse: verse.number
                             )
-                            let cleanText = stripPsalmHeading(verse.text)
+                            let cleanText = normalizedVerseText(stripPsalmHeading(verse.text))
                             verseRow(number: verse.number, text: cleanText, isRedLetter: isRed)
                                 .id(verse.number)
                         }
@@ -127,6 +120,40 @@ struct ChapterReaderView: View {
         }
     }
 
+    // MARK: - Chapter Masthead
+
+    /// Book name without the trailing chapter number, e.g. "Ecclesiastes 2" →
+    /// "Ecclesiastes". Falls back to the full title if the suffix isn't present.
+    private var bookDisplayName: String {
+        let suffix = " \(chapterNumber)"
+        if chapterTitle.hasSuffix(suffix) {
+            return String(chapterTitle.dropLast(suffix.count))
+        }
+        return chapterTitle
+    }
+
+    private var chapterMasthead: some View {
+        VStack(spacing: 9) {
+            Text(bookDisplayName.uppercased())
+                .font(.system(size: 12, weight: .semibold))
+                .tracking(3.5)
+                .foregroundStyle(palette.accent.opacity(0.85))
+                .multilineTextAlignment(.center)
+
+            Text("\(chapterNumber)")
+                .font(.system(size: 44, weight: .regular, design: .serif))
+                .foregroundStyle(palette.textPrimary)
+
+            Rectangle()
+                .fill(palette.accent.opacity(0.3))
+                .frame(width: 26, height: 1)
+                .padding(.top, 2)
+        }
+        .frame(maxWidth: .infinity, alignment: .center)
+        .padding(.top, 30)
+        .padding(.bottom, 22)
+    }
+
     // MARK: - Psalm Heading Extraction
 
     /// Extracts bracketed heading from Psalm verses, e.g. "[A Psalm of David.]"
@@ -145,6 +172,21 @@ struct ChapterReaderView: View {
         let afterBracket = text[text.index(after: closingIndex)...]
         let cleaned = afterBracket.trimmingCharacters(in: .whitespaces)
         return cleaned.isEmpty ? text : cleaned
+    }
+
+    /// Cleans up verse text that arrives with missing whitespace — e.g.
+    /// "elder,To" or "water.Go" where a space was dropped after punctuation,
+    /// and stray line breaks that should read as spaces. Adds a space after
+    /// sentence/clause punctuation when it's glued directly to a letter, turns
+    /// newlines/tabs into spaces, and collapses any double spaces. The
+    /// punctuation rule only fires before a letter, so verse references and
+    /// numbers like "3:16" or "1,000" are left untouched.
+    private func normalizedVerseText(_ text: String) -> String {
+        var t = text
+        t = t.replacingOccurrences(of: "[\\n\\r\\t]+", with: " ", options: .regularExpression)
+        t = t.replacingOccurrences(of: "([,.;:!?])([\\p{L}])", with: "$1 $2", options: .regularExpression)
+        t = t.replacingOccurrences(of: " {2,}", with: " ", options: .regularExpression)
+        return t.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
     // MARK: - Verse Row
@@ -193,6 +235,17 @@ struct ChapterReaderView: View {
                         isLastRead: isLastRead
                     ))
             )
+            // Resume marker — a quiet gold tick in the margin where you left
+            // off. Suppressed when the verse is saved (the ribbon already marks
+            // the left edge) to avoid two stacked indicators.
+            .overlay(alignment: .leading) {
+                if isLastRead && !isSaved {
+                    Capsule()
+                        .fill(palette.accent)
+                        .frame(width: 2.5, height: 20)
+                        .padding(.leading, -8)
+                }
+            }
             .overlay {
                 if number == anchorVerseNumber {
                     GeometryReader { geo in
@@ -234,9 +287,11 @@ struct ChapterReaderView: View {
                     .foregroundColor(palette.accent)
             } else {
                 let superscriptSize = max(9, readerFontSize * 0.55)
+                // Quiet neutral superscripts so the gold drop-cap is the single
+                // warm accent on the page; the numbers recede into marginalia.
                 result = result + Text("\(number)")
                     .font(.system(size: superscriptSize, weight: .semibold, design: .serif))
-                    .foregroundColor(palette.accent)
+                    .foregroundColor(palette.textMuted)
                     .baselineOffset(scaledBaselineOffset)
 
                 result = result + Text("\u{2009}")
@@ -266,9 +321,8 @@ struct ChapterReaderView: View {
             let hex = colorScheme == .dark ? highlight.darkTint : highlight.lightTint
             return Color(hex: hex)
         }
-        if isLastRead {
-            return palette.accent.opacity(0.08)
-        }
+        // The "resume here" cue is now a thin gold left-tick (see verseRow),
+        // not a full background box — cleaner and less boxy on the page.
         return .clear
     }
 

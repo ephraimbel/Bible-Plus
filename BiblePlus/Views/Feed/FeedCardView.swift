@@ -28,18 +28,16 @@ struct FeedCardView: View {
 
     var body: some View {
         ZStack {
-            // LAYER 1: Background gradient from user's theme
-            backgroundLayer
-                .accessibilityHidden(true)
+            // Transparent base. The feed background + scrim are now a single
+            // STATIC layer behind the paging scroll (see FeedPagingView), so on
+            // swipe only the content slides — the background never moves, which
+            // kills the old paging seam/glitch.
+            Color.clear
 
-            // LAYER 2: Readability overlay
-            overlayLayer
-                .accessibilityHidden(true)
-
-            // LAYER 3 + 4: Content + Reference
+            // Content + Reference
             contentLayer
 
-            // LAYER 5: Action bar (right side)
+            // Action bar (right side)
             actionBarLayer
 
             // Double-tap heart overlay
@@ -69,50 +67,6 @@ struct FeedCardView: View {
                     }
                 }
             }
-        }
-    }
-
-    // MARK: - Layer 1: Background
-
-    @ViewBuilder
-    private var backgroundLayer: some View {
-        // Gradient fills all available space and establishes layout size;
-        // image/video is rendered as an overlay so it can't skew the layout.
-        LinearGradient(
-            colors: background.gradientColors.map { Color(hex: $0) },
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-        )
-        .overlay {
-            if isCurrentCard, let videoName = background.videoFileName {
-                LoopingVideoPlayer(videoName: videoName, isPlaying: true)
-            } else if let imageName = background.imageName,
-                      let uiImage = SanctuaryBackground.loadImage(named: imageName) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-            }
-        }
-        .clipped()
-    }
-
-    // MARK: - Layer 2: Subtle Vignette
-
-    private var overlayLayer: some View {
-        ZStack {
-            // Thin uniform tint for text legibility
-            Color.black.opacity(0.06)
-
-            // Gentle vignette — keeps the background vibrant, just softens the edges
-            RadialGradient(
-                colors: [
-                    Color.clear,
-                    Color.black.opacity(0.1),
-                ],
-                center: .center,
-                startRadius: 200,
-                endRadius: 500
-            )
         }
     }
 
@@ -246,5 +200,46 @@ struct FeedCardView: View {
             .shadow(color: .black.opacity(0.3), radius: 8, y: 4)
             .scaleEffect(heartVisible ? 1.0 : 0.3)
             .opacity(heartVisible ? 1.0 : 0)
+    }
+}
+
+// MARK: - Feed Background (static layer)
+//
+// The feed's background + readability scrim, rendered ONCE behind the paging
+// scroll so it never moves on swipe. Pulling it out of the per-card stack is
+// what removes the old paging seam: only the content slides now.
+
+struct FeedBackgroundView: View {
+    let background: SanctuaryBackground
+
+    var body: some View {
+        ZStack {
+            LinearGradient(
+                colors: background.gradientColors.map { Color(hex: $0) },
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .overlay {
+                if let videoName = background.videoFileName {
+                    LoopingVideoPlayer(videoName: videoName, isPlaying: true)
+                } else if let imageName = background.imageName,
+                          let uiImage = SanctuaryBackground.loadImage(named: imageName) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                }
+            }
+            .clipped()
+
+            // Readability scrim — uniform tint + gentle vignette.
+            Color.black.opacity(0.06)
+            RadialGradient(
+                colors: [Color.clear, Color.black.opacity(0.1)],
+                center: .center,
+                startRadius: 200,
+                endRadius: 500
+            )
+        }
+        .accessibilityHidden(true)
     }
 }

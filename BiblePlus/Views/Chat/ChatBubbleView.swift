@@ -42,40 +42,38 @@ struct ChatBubbleView: View {
     }
 
     var body: some View {
-        HStack(alignment: .top, spacing: 8) {
+        Group {
             if message.role == .user {
-                Spacer(minLength: 56)
-            } else if !isTypingPlaceholder {
-                if isFirstInAssistantSequence {
-                    aiIndicator
-                } else {
-                    Spacer().frame(width: 32)
-                }
-            }
-
-            VStack(alignment: message.role == .user ? .trailing : .leading, spacing: 4) {
-                if isTypingPlaceholder {
-                    TypingDotsView(contextLabel: typingContextLabel)
-                        .transition(.opacity)
-                } else if message.role == .user {
+                // User — a quiet, contained block, right-aligned.
+                HStack(spacing: 0) {
+                    Spacer(minLength: 56)
                     userContent
-                } else {
-                    assistantContent
-
-                    if isLastInAssistantSequence && !isStreaming {
-                        actionRow
-                    }
                 }
-            }
-            .animation(BPAnimation.spring, value: isTypingPlaceholder)
+            } else {
+                // Assistant — a flowing document. No avatar, no indent: the
+                // words run full-width like a letter on paper, our serif voice.
+                HStack(spacing: 0) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        if isTypingPlaceholder {
+                            TypingDotsView(contextLabel: typingContextLabel)
+                                .transition(.opacity)
+                        } else {
+                            assistantContent
 
-            if message.role == .assistant {
-                Spacer(minLength: 32)
+                            if isLastInAssistantSequence && !isStreaming {
+                                actionRow
+                            }
+                        }
+                    }
+                    .animation(BPAnimation.spring, value: isTypingPlaceholder)
+
+                    Spacer(minLength: 16)
+                }
             }
         }
-        .padding(.horizontal, 16)
-        .padding(.top, showRoleGap ? 14 : 2)
-        .padding(.bottom, 2)
+        .padding(.horizontal, 20)
+        .padding(.top, showRoleGap ? 18 : 3)
+        .padding(.bottom, 3)
         .opacity(appeared ? 1 : 0)
         .offset(y: appeared ? 0 : 6)
         .contextMenu(message.role == .assistant && !isStreaming ? contextMenuItems : nil)
@@ -90,64 +88,27 @@ struct ChatBubbleView: View {
         }
     }
 
-    // MARK: - AI Indicator
-
-    private var aiIndicator: some View {
-        ZStack {
-            Circle()
-                .fill(palette.accent.opacity(0.08))
-                .frame(width: 38, height: 38)
-
-            Circle()
-                .fill(
-                    LinearGradient(
-                        colors: [palette.accent.opacity(0.18), palette.accent.opacity(0.06)],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
-                .frame(width: 32, height: 32)
-
-            Image(systemName: "sparkle")
-                .font(.system(size: 14, weight: .medium))
-                .foregroundStyle(
-                    LinearGradient(
-                        colors: [Color(red: 1.0, green: 0.84, blue: 0.3), palette.accent],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                )
-        }
-        .padding(.top, 2)
-        .scaleEffect(appeared ? 1 : 0.5)
-        .opacity(appeared ? 1 : 0)
-    }
-
     // MARK: - User Message
+    //
+    // A quiet, contained block in the recessed paper tone — the user's words
+    // sit calmly so the AI's flowing response is the focus (Claude-style).
 
     private var userContent: some View {
         VStack(alignment: .trailing, spacing: 4) {
             Text(message.content)
-                .font(.custom("Georgia", size: 17))
+                .font(.custom("Georgia", size: 16.5))
                 .lineSpacing(4)
-                .foregroundColor(.white)
-                .padding(.horizontal, 16)
+                .foregroundStyle(palette.textPrimary)
+                .multilineTextAlignment(.leading)
+                .padding(.horizontal, 15)
                 .padding(.vertical, 11)
                 .background(
-                    UnevenRoundedRectangle(
-                        topLeadingRadius: 18,
-                        bottomLeadingRadius: 18,
-                        bottomTrailingRadius: 18,
-                        topTrailingRadius: 6
-                    )
-                    .fill(
-                        LinearGradient(
-                            colors: [palette.accent, palette.accent.opacity(0.8)],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
+                    RoundedRectangle(cornerRadius: 18, style: .continuous)
+                        .fill(palette.surface)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                                .strokeBorder(palette.border.opacity(0.55), lineWidth: 0.6)
                         )
-                    )
-                    .shadow(color: palette.accent.opacity(0.25), radius: 10, y: 5)
                 )
                 .textSelection(.enabled)
 
@@ -156,7 +117,7 @@ struct ChatBubbleView: View {
                     Image(systemName: "exclamationmark.circle.fill")
                         .font(.system(size: 11))
                     Text("Failed to send")
-                        .font(.system(size: 11, weight: .medium, design: .rounded))
+                        .font(.system(size: 11, weight: .medium))
                 }
                 .foregroundStyle(palette.error)
                 .padding(.top, 2)
@@ -264,6 +225,25 @@ struct ChatBubbleView: View {
                 transliteration: transliteration,
                 meaning: meaning
             )
+        case .passageCard(let book, let chapter, let startVerse, let endVerse, let focusVerse):
+            PassageCard(
+                book: book,
+                chapter: chapter,
+                startVerse: startVerse,
+                endVerse: endVerse,
+                focusVerse: focusVerse,
+                onScriptureTap: onScriptureTap
+            )
+        case .memorizeCard(let book, let chapter, let verse):
+            MemorizeCard(book: book, chapter: chapter, verse: verse)
+        case .quizCard(let question, let options, let answerIndex, let explanation):
+            QuizCard(question: question, options: options, answerIndex: answerIndex, explanation: explanation)
+        case .compareCard(let book, let chapter, let verse, let translations):
+            CompareTranslationsCard(book: book, chapter: chapter, verse: verse, translations: translations)
+        case .planCard(let id, let title, let category, let days):
+            PlanBuilderCard(planId: id, title: title, category: category, days: days)
+        case .mapCard(let place, let journey, let caption):
+            MapCard(place: place, journey: journey, caption: caption)
         }
     }
 
@@ -306,7 +286,7 @@ struct ChatBubbleView: View {
     // MARK: - Action Row
 
     private var actionRow: some View {
-        HStack(spacing: 4) {
+        HStack(spacing: 18) {
             if let onListen {
                 listenButton(action: onListen)
             }
@@ -322,7 +302,7 @@ struct ChatBubbleView: View {
                 }
             }
         }
-        .padding(.top, 6)
+        .padding(.top, 8)
     }
 
     private func saveActionButton(onSave: @escaping () -> Void) -> some View {
@@ -341,22 +321,15 @@ struct ChatBubbleView: View {
         } label: {
             HStack(spacing: 5) {
                 Image(systemName: isSaved ? "bookmark.fill" : "bookmark")
-                    .font(.system(size: 10, weight: .medium))
+                    .font(.system(size: 11, weight: .medium))
                 Text(isSaved ? "Saved" : "Save")
-                    .font(.system(size: 11, weight: .medium, design: .rounded))
+                    .font(.system(size: 12, weight: .medium))
                     .lineLimit(1)
                     .fixedSize(horizontal: true, vertical: false)
             }
-            .foregroundStyle(isSaved ? palette.accent : palette.textMuted.opacity(0.5))
-            .padding(.horizontal, 10)
-            .padding(.vertical, 7)
-            .background(
-                Capsule().fill(isSaved ? palette.accent.opacity(0.06) : palette.surface.opacity(0.6))
-            )
-            .overlay(
-                Capsule()
-                    .stroke(isSaved ? palette.accent.opacity(0.2) : palette.border.opacity(0.08), lineWidth: 0.5)
-            )
+            .foregroundStyle(isSaved ? palette.accent : palette.textMuted.opacity(0.7))
+            .padding(.vertical, 6)
+            .padding(.trailing, 4)
             .scaleEffect(saveScale)
         }
         .buttonStyle(.plain)
@@ -369,22 +342,15 @@ struct ChatBubbleView: View {
         } label: {
             HStack(spacing: 5) {
                 Image(systemName: isPlayingTTS ? "stop.fill" : "speaker.wave.2.fill")
-                    .font(.system(size: 10, weight: .medium))
+                    .font(.system(size: 11, weight: .medium))
                 Text(isPlayingTTS ? "Stop" : "Listen")
-                    .font(.system(size: 11, weight: .medium, design: .rounded))
+                    .font(.system(size: 12, weight: .medium))
                     .lineLimit(1)
                     .fixedSize(horizontal: true, vertical: false)
             }
-            .foregroundStyle(isPlayingTTS ? palette.accent : palette.textMuted.opacity(0.5))
-            .padding(.horizontal, 10)
-            .padding(.vertical, 7)
-            .background(
-                Capsule().fill(isPlayingTTS ? palette.accent.opacity(0.06) : palette.surface.opacity(0.6))
-            )
-            .overlay(
-                Capsule()
-                    .stroke(isPlayingTTS ? palette.accent.opacity(0.2) : palette.border.opacity(0.08), lineWidth: 0.5)
-            )
+            .foregroundStyle(isPlayingTTS ? palette.accent : palette.textMuted.opacity(0.7))
+            .padding(.vertical, 6)
+            .padding(.trailing, 4)
         }
         .buttonStyle(.plain)
     }
@@ -395,22 +361,15 @@ struct ChatBubbleView: View {
         } label: {
             HStack(spacing: 5) {
                 Image(systemName: icon)
-                    .font(.system(size: 10, weight: .medium))
+                    .font(.system(size: 11, weight: .medium))
                 Text(label)
-                    .font(.system(size: 11, weight: .medium, design: .rounded))
+                    .font(.system(size: 12, weight: .medium))
                     .lineLimit(1)
                     .fixedSize(horizontal: true, vertical: false)
             }
-            .foregroundStyle(palette.textMuted.opacity(disabled ? 0.3 : 0.5))
-            .padding(.horizontal, 10)
-            .padding(.vertical, 7)
-            .background(
-                Capsule().fill(palette.surface.opacity(0.6))
-            )
-            .overlay(
-                Capsule()
-                    .stroke(palette.border.opacity(0.08), lineWidth: 0.5)
-            )
+            .foregroundStyle(palette.textMuted.opacity(disabled ? 0.4 : 0.7))
+            .padding(.vertical, 6)
+            .padding(.trailing, 4)
         }
         .disabled(disabled)
         .buttonStyle(.plain)

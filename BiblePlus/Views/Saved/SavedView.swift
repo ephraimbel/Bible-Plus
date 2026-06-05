@@ -118,22 +118,18 @@ private struct SavedContentView: View {
             }
             HapticService.selection()
         } label: {
-            HStack(spacing: 5) {
-                Image(systemName: icon)
-                    .font(.system(size: 11, weight: .medium))
-                Text(title)
-                    .font(.system(size: 13, weight: .semibold, design: .rounded))
-            }
-            .foregroundStyle(isSelected ? .white : palette.textSecondary)
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 10)
-            .background {
-                if isSelected {
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(palette.accent)
-                        .matchedGeometryEffect(id: "activeTab", in: tabNamespace)
+            Text(title)
+                .font(.system(size: 14, weight: isSelected ? .semibold : .regular, design: .serif))
+                .foregroundStyle(isSelected ? .white : palette.textSecondary)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 9)
+                .background {
+                    if isSelected {
+                        RoundedRectangle(cornerRadius: 9, style: .continuous)
+                            .fill(palette.accent)
+                            .matchedGeometryEffect(id: "activeTab", in: tabNamespace)
+                    }
                 }
-            }
         }
     }
 
@@ -312,26 +308,16 @@ private struct SavedContentView: View {
     // MARK: - Summary Bar
 
     private func summaryBar(icon: String, text: String) -> some View {
-        HStack(spacing: 6) {
-            Image(systemName: icon)
-                .font(.system(size: 10, weight: .semibold))
-                .foregroundStyle(palette.accent)
-
-            Text(text)
-                .font(.system(size: 12, weight: .semibold, design: .rounded))
-                .foregroundStyle(palette.accent)
-        }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 6)
-        .background(
-            Capsule().fill(palette.accent.opacity(0.08))
-        )
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, 24)
-        .padding(.top, 8)
-        .padding(.bottom, 6)
-        .opacity(appeared ? 1 : 0)
-        .animation(BPAnimation.spring.delay(0.05), value: appeared)
+        Text(text.uppercased())
+            .font(.system(size: 10.5, weight: .semibold))
+            .tracking(1.8)
+            .foregroundStyle(palette.textMuted)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 24)
+            .padding(.top, 12)
+            .padding(.bottom, 8)
+            .opacity(appeared ? 1 : 0)
+            .animation(BPAnimation.spring.delay(0.05), value: appeared)
     }
 
     // MARK: - Empty State
@@ -341,35 +327,31 @@ private struct SavedContentView: View {
             Spacer()
 
             ZStack {
-                // Outer glow ring
                 Circle()
-                    .fill(palette.accent.opacity(0.04))
-                    .frame(width: 140, height: 140)
-
-                // Inner glow ring
-                Circle()
-                    .fill(palette.accent.opacity(0.06))
-                    .frame(width: 100, height: 100)
-
-                // Center icon circle
-                Circle()
-                    .fill(palette.surfaceElevated)
-                    .frame(width: 72, height: 72)
-                    .shadow(color: palette.accent.opacity(0.1), radius: 12, y: 4)
-                    .overlay(
-                        Circle()
-                            .stroke(palette.accent.opacity(0.12), lineWidth: 0.5)
+                    .fill(
+                        RadialGradient(
+                            colors: [palette.accent.opacity(0.10), palette.accent.opacity(0)],
+                            center: .center,
+                            startRadius: 2,
+                            endRadius: 110
+                        )
                     )
+                    .frame(width: 200, height: 200)
+
+                Circle()
+                    .stroke(palette.accent.opacity(0.13), lineWidth: 1)
+                    .frame(width: 104, height: 104)
 
                 Image(systemName: icon)
-                    .font(.system(size: 28, weight: .light))
-                    .foregroundStyle(palette.accent)
-
-                // Small floating accent icon
-                Image(systemName: accentIcon)
-                    .font(.system(size: 12, weight: .semibold))
-                    .foregroundStyle(palette.accent.opacity(0.5))
-                    .offset(x: 36, y: -28)
+                    .font(.system(size: 30, weight: .light))
+                    .foregroundStyle(
+                        LinearGradient(
+                            colors: [palette.accent, palette.accent.opacity(0.6)],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
+                    .shadow(color: palette.accent.opacity(0.25), radius: 10)
             }
             .opacity(appeared ? 1 : 0)
             .scaleEffect(appeared ? 1 : 0.8)
@@ -407,69 +389,41 @@ private struct SavedFavoriteCard: View {
     let onUnsave: () -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            // Type + reference row
+        VStack(alignment: .leading, spacing: 11) {
+            // Type label + reference — small caps, gold, no icon or colored pill.
             HStack(spacing: 8) {
-                HStack(spacing: 4) {
-                    Image(systemName: typeIcon)
-                        .font(.system(size: 10, weight: .medium))
-                    Text(content.type.displayName)
-                        .font(.system(size: 11, weight: .medium, design: .rounded))
-                }
-                .foregroundStyle(typeColor)
-                .padding(.horizontal, 8)
-                .padding(.vertical, 4)
-                .background(
-                    Capsule().fill(typeColor.opacity(0.1))
-                )
+                Text(content.type.displayName.uppercased())
+                    .font(.system(size: 9.5, weight: .semibold))
+                    .tracking(1.6)
+                    .foregroundStyle(palette.accent.opacity(0.8))
 
                 Spacer()
 
                 if let ref = content.verseReference, !ref.isEmpty {
-                    HStack(spacing: 4) {
-                        Image(systemName: "book.closed")
-                            .font(.system(size: 9))
-                        Text(ref)
-                            .font(.system(size: 11, weight: .regular, design: .serif))
-                            .italic()
-                    }
-                    .foregroundStyle(palette.accent)
+                    Text(ref)
+                        .font(.system(size: 12, weight: .regular, design: .serif))
+                        .italic()
+                        .foregroundStyle(palette.accent)
                 }
-
-                Image(systemName: "chevron.right")
-                    .font(.system(size: 10, weight: .semibold))
-                    .foregroundStyle(palette.textMuted.opacity(0.5))
             }
 
-            // Content text
+            // Content text — serif, the editorial voice.
             Text(displayText)
-                .font(.system(size: 15, weight: .regular, design: content.type == .verse ? .serif : .rounded))
+                .font(.system(size: 16, weight: .regular, design: .serif))
                 .foregroundStyle(palette.textPrimary)
                 .lineLimit(3)
-                .lineSpacing(3)
+                .lineSpacing(4)
         }
         .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
-            RoundedRectangle(cornerRadius: 16)
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
                 .fill(palette.surfaceElevated)
-                .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
         )
         .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .strokeBorder(palette.border.opacity(0.5), lineWidth: 0.7)
         )
-        // Left accent colored by content type
-        .overlay(alignment: .leading) {
-            UnevenRoundedRectangle(
-                topLeadingRadius: 16,
-                bottomLeadingRadius: 16,
-                bottomTrailingRadius: 0,
-                topTrailingRadius: 0
-            )
-            .fill(typeColor.opacity(0.6))
-            .frame(width: 3)
-        }
         .contextMenu {
             Button(role: .destructive) {
                 onUnsave()
@@ -480,25 +434,6 @@ private struct SavedFavoriteCard: View {
         }
     }
 
-    private var typeColor: Color {
-        switch content.type {
-        case .prayer: Color(hex: "9B7BD5")
-        case .verse: Color(hex: "C9A96E")
-        case .devotional: Color(hex: "5B9BD5")
-        case .quote: Color(hex: "E8944A")
-        case .reflection: Color(hex: "4ABFB5")
-        }
-    }
-
-    private var typeIcon: String {
-        switch content.type {
-        case .prayer: "hands.sparkles"
-        case .verse: "book.closed"
-        case .devotional: "text.book.closed"
-        case .quote: "quote.opening"
-        case .reflection: "bubble.left.and.text.bubble.right"
-        }
-    }
 }
 
 // MARK: - Saved Verse Card
@@ -514,39 +449,31 @@ private struct SavedVerseCard: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            // Reference + translation row
+        VStack(alignment: .leading, spacing: 11) {
+            // Reference + translation — a subtle highlight dot (user's colour),
+            // serif reference, quiet translation label. No icons, no chevron.
             HStack(spacing: 8) {
-                HStack(spacing: 5) {
-                    Image(systemName: "bookmark.fill")
-                        .font(.system(size: 10, weight: .medium))
-                        .foregroundStyle(accentColor)
-
-                    Text("\(verse.bookName) \(verse.chapter):\(verse.verseNumber)")
-                        .font(.system(size: 13, weight: .semibold, design: .rounded))
-                        .foregroundStyle(palette.textPrimary)
+                if verse.highlightColor != nil {
+                    Circle()
+                        .fill(accentColor)
+                        .frame(width: 7, height: 7)
                 }
+
+                Text("\(verse.bookName) \(verse.chapter):\(verse.verseNumber)")
+                    .font(.system(size: 13, weight: .semibold, design: .serif))
+                    .foregroundStyle(palette.textPrimary)
 
                 Spacer()
 
                 Text(verse.translation)
-                    .font(.system(size: 10, weight: .semibold, design: .rounded))
-                    .foregroundStyle(palette.textMuted)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 3)
-                    .background(
-                        Capsule().fill(palette.surface)
-                    )
-
-                Image(systemName: "chevron.right")
                     .font(.system(size: 10, weight: .semibold))
-                    .foregroundStyle(palette.textMuted.opacity(0.5))
+                    .tracking(0.6)
+                    .foregroundStyle(palette.textMuted)
             }
 
-            // Verse text
             Text(verse.text)
-                .font(.system(size: 15, weight: .regular, design: .serif))
-                .foregroundStyle(palette.textSecondary)
+                .font(.system(size: 16, weight: .regular, design: .serif))
+                .foregroundStyle(palette.textPrimary)
                 .lineLimit(3)
                 .lineSpacing(4)
 
@@ -554,14 +481,14 @@ private struct SavedVerseCard: View {
             if !verse.notes.isEmpty {
                 HStack(alignment: .top, spacing: 0) {
                     RoundedRectangle(cornerRadius: 1)
-                        .fill(palette.accent.opacity(0.4))
+                        .fill(palette.accent.opacity(0.45))
                         .frame(width: 2)
 
                     VStack(alignment: .leading, spacing: 2) {
                         Text("NOTE")
-                            .font(.system(size: 8, weight: .bold))
-                            .tracking(0.6)
-                            .foregroundStyle(palette.accent.opacity(0.6))
+                            .font(.system(size: 8.5, weight: .semibold))
+                            .tracking(1.2)
+                            .foregroundStyle(palette.accent.opacity(0.7))
 
                         Text(verse.notes)
                             .font(.system(size: 13, weight: .regular, design: .serif))
@@ -577,34 +504,13 @@ private struct SavedVerseCard: View {
         .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
-            RoundedRectangle(cornerRadius: 16)
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
                 .fill(palette.surfaceElevated)
-                .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
         )
         .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .strokeBorder(palette.border.opacity(0.5), lineWidth: 0.7)
         )
-        // Highlight color tinted background wash
-        .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(
-                    verse.highlightColor.map {
-                        Color(hex: colorScheme == .dark ? $0.darkTint : $0.lightTint).opacity(0.3)
-                    } ?? Color.clear
-                )
-        )
-        // Left accent with highlight color
-        .overlay(alignment: .leading) {
-            UnevenRoundedRectangle(
-                topLeadingRadius: 16,
-                bottomLeadingRadius: 16,
-                bottomTrailingRadius: 0,
-                topTrailingRadius: 0
-            )
-            .fill(accentColor.opacity(0.6))
-            .frame(width: 3)
-        }
         .contextMenu {
             Button(role: .destructive) {
                 onDelete()
@@ -623,43 +529,30 @@ private struct NoteCard: View {
     let palette: BPColorPalette
     let onClearNote: () -> Void
 
-    private var accentColor: Color {
-        verse.highlightColor.map { Color(hex: $0.dotColor) } ?? palette.accent
-    }
-
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
-            // Gold accent bar
+            // Quiet gold marginalia rule.
             RoundedRectangle(cornerRadius: 1.5)
-                .fill(accentColor)
-                .frame(width: 3)
+                .fill(palette.accent.opacity(0.5))
+                .frame(width: 2.5)
 
             VStack(alignment: .leading, spacing: 10) {
-                // Reference row
                 HStack(spacing: 8) {
-                    HStack(spacing: 4) {
-                        Image(systemName: "pencil.line")
-                            .font(.system(size: 9, weight: .semibold))
-                        Text("NOTE")
-                            .font(.system(size: 9, weight: .bold))
-                            .tracking(0.8)
-                    }
-                    .foregroundStyle(accentColor)
+                    Text("NOTE")
+                        .font(.system(size: 9, weight: .semibold))
+                        .tracking(1.4)
+                        .foregroundStyle(palette.accent.opacity(0.8))
 
                     Text("\(verse.bookName) \(verse.chapter):\(verse.verseNumber)")
-                        .font(.system(size: 12, weight: .medium, design: .rounded))
+                        .font(.system(size: 12, weight: .medium, design: .serif))
                         .foregroundStyle(palette.textMuted)
 
                     Spacer()
-
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 10, weight: .semibold))
-                        .foregroundStyle(palette.textMuted.opacity(0.5))
                 }
 
                 // Note text (primary — italic serif)
                 Text(verse.notes)
-                    .font(.system(size: 15, weight: .regular, design: .serif))
+                    .font(.system(size: 16, weight: .regular, design: .serif))
                     .italic()
                     .foregroundStyle(palette.textPrimary)
                     .lineLimit(4)
@@ -672,19 +565,18 @@ private struct NoteCard: View {
                     .lineLimit(2)
                     .lineSpacing(3)
             }
-            .padding(.leading, 12)
+            .padding(.leading, 14)
             .padding(.vertical, 14)
             .padding(.trailing, 16)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
-            RoundedRectangle(cornerRadius: 14)
-                .fill(palette.surfaceElevated.opacity(0.9))
-                .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .fill(palette.surfaceElevated)
         )
         .overlay(
-            RoundedRectangle(cornerRadius: 14)
-                .stroke(palette.border.opacity(0.1), lineWidth: 0.5)
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .strokeBorder(palette.border.opacity(0.5), lineWidth: 0.7)
         )
         .contextMenu {
             Button(role: .destructive) {

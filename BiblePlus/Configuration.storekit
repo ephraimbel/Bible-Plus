@@ -18,11 +18,16 @@
         {
           "adHocOffers" : [],
           "codeOffers" : [],
-          "displayPrice" : "49.99",
+          "displayPrice" : "39.99",
           "familyShareable" : false,
           "groupNumber" : 1,
           "internalID" : "A1B2C3D4",
-          "introductoryOffer" : null,
+          "introductoryOffer" : {
+            "displayPrice" : "0",
+            "internalID" : "E5F6A7B8",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P7D"
+          },
           "localizations" : [
             {
               "description" : "Full access to Bible+ Pro — billed annually",
@@ -40,26 +45,21 @@
         {
           "adHocOffers" : [],
           "codeOffers" : [],
-          "displayPrice" : "4.99",
+          "displayPrice" : "6.99",
           "familyShareable" : false,
           "groupNumber" : 2,
           "internalID" : "C3D4E5F6",
-          "introductoryOffer" : {
-            "displayPrice" : "0",
-            "internalID" : "E5F6A7B8",
-            "paymentMode" : "free",
-            "subscriptionPeriod" : "P3D"
-          },
+          "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "Full access to Bible+ Pro — billed weekly",
-              "displayName" : "Bible+ Pro Weekly",
+              "description" : "Full access to Bible+ Pro — billed monthly",
+              "displayName" : "Bible+ Pro Monthly",
               "locale" : "en_US"
             }
           ],
-          "productID" : "io.bibleplus.pro.weekly",
-          "recurringSubscriptionPeriod" : "P1W",
-          "referenceName" : "Bible+ Pro Weekly",
+          "productID" : "io.bibleplus.pro.monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Bible+ Pro Monthly",
           "subscriptionGroupID" : "21514616",
           "type" : "RecurringSubscription",
           "winbackOffers" : []

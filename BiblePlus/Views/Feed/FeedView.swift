@@ -88,14 +88,6 @@ private struct FeedContentView: View {
                 isPro: vm.profile.isPro
             )
         }
-        .sheet(item: $vm.askAIContent) { content in
-            NavigationStack {
-                ChatView(
-                    conversationId: vm.askAIConversationId,
-                    initialContext: vm.askAIPrompt(for: content)
-                )
-            }
-        }
         .fullScreenCover(isPresented: $showSanctuary) {
             SanctuaryView(soundscapeService: soundscapeService)
         }
