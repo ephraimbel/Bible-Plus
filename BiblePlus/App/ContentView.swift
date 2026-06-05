@@ -19,7 +19,7 @@ struct ContentView: View {
     @Environment(\.scenePhase) private var scenePhase
 
     enum Tab: String, CaseIterable {
-        case feed, bible, ask, saved, settings
+        case feed, bible, ask, journal, settings
 
         /// Returning `LocalizedStringKey` (not `String`) is what routes these
         /// through the String Catalog. A raw `String` would bypass the
@@ -30,7 +30,7 @@ struct ContentView: View {
             case .feed: "Home"
             case .bible: "Bible"
             case .ask: "Ask"
-            case .saved: "Saved"
+            case .journal: "Journal"
             case .settings: "Profile"
             }
         }
@@ -40,7 +40,7 @@ struct ContentView: View {
             case .feed: "house.fill"
             case .bible: "book.fill"
             case .ask: "sparkle"
-            case .saved: "bookmark.fill"
+            case .journal: "book.closed.fill"
             case .settings: "person.fill"
             }
         }
@@ -61,9 +61,9 @@ struct ContentView: View {
                 .tabItem { Label(Tab.ask.title, systemImage: Tab.ask.icon) }
                 .tag(Tab.ask)
 
-            SavedView()
-                .tabItem { Label(Tab.saved.title, systemImage: Tab.saved.icon) }
-                .tag(Tab.saved)
+            JournalView()
+                .tabItem { Label(Tab.journal.title, systemImage: Tab.journal.icon) }
+                .tag(Tab.journal)
 
             SettingsView()
                 .tabItem { Label(Tab.settings.title, systemImage: Tab.settings.icon) }
@@ -125,11 +125,6 @@ struct ContentView: View {
         .onReceive(NotificationCenter.default.publisher(for: .switchToSettingsTab)) { _ in
             withAnimation(.easeInOut(duration: 0.25)) {
                 selectedTab = .settings
-            }
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .switchToSavedTab)) { _ in
-            withAnimation(.easeInOut(duration: 0.25)) {
-                selectedTab = .saved
             }
         }
     }
