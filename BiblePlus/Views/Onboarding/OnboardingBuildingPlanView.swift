@@ -4,11 +4,12 @@ import SwiftData
 // MARK: - Building Your Plan (Reveal-Act Loader)
 //
 // The Cal AI signature beat: a short, animated "we're crafting this just for
-// you" moment. A thin gold ring with the Bible✦ star glowing at its center and
-// a small bead riding the arc; beneath it, a personalized checklist ticks each
-// line from spinner to gold check as the ring fills. On completion the whole
-// ring blooms to the star's gold. Making the effort visible is what makes the
-// reveal that follows feel earned. Warm Paper / light.
+// you" moment. A thin gold ring with the Bible✦ star glowing at its center
+// sweeps smoothly from empty to full in one continuous arc; beneath it, a
+// personalized checklist ticks each line from spinner to gold check as the ring
+// passes its slice. On completion the whole ring blooms to the star's gold.
+// Making the effort visible is what makes the reveal that follows feel earned.
+// Warm Paper / light.
 struct OnboardingBuildingPlanView: View {
     @Bindable var viewModel: OnboardingViewModel
     var onContinue: () -> Void = {}
@@ -98,12 +99,22 @@ struct OnboardingBuildingPlanView: View {
             Circle()
                 .stroke(accentGold.opacity(0.12), lineWidth: ringStroke)
 
-            // Progress arc — the warm accent gold as it fills.
+            // Progress arc — a smooth sweep of warm gold with a gentle sheen that
+            // brightens toward the leading edge, so the head reads as "alive"
+            // without any bead. Round cap keeps the tip soft.
             Circle()
                 .trim(from: 0, to: progress)
                 .stroke(
-                    LinearGradient(colors: [accentGold.opacity(0.75), accentGold],
-                                   startPoint: .topLeading, endPoint: .bottomTrailing),
+                    AngularGradient(
+                        gradient: Gradient(stops: [
+                            .init(color: accentGold.opacity(0.55), location: 0.0),
+                            .init(color: accentGold, location: 0.85),
+                            .init(color: accentGold, location: 1.0)
+                        ]),
+                        center: .center,
+                        startAngle: .degrees(0),
+                        endAngle: .degrees(360)
+                    ),
                     style: StrokeStyle(lineWidth: ringStroke, lineCap: .round)
                 )
                 .rotationEffect(.degrees(-90))
@@ -117,17 +128,6 @@ struct OnboardingBuildingPlanView: View {
                 .shadow(color: starGold.opacity(finished ? 0.3 : 0), radius: finished ? 18 : 0)
                 .opacity(finished ? 1 : 0)
                 .scaleEffect(finished ? 1 : 0.96)
-
-            // A small gold bead riding the head of the arc — the detail that
-            // makes the loader feel precise and alive rather than static. Fades
-            // out as the ring completes and turns gold.
-            Circle()
-                .fill(starGold)
-                .frame(width: 6, height: 6)
-                .shadow(color: starGold.opacity(0.7), radius: 3)
-                .offset(y: -(ringSize - ringStroke) / 2)
-                .rotationEffect(.degrees(Double(progress) * 360))
-                .opacity(progress > 0.015 && progress < 0.995 && !finished ? 1 : 0)
 
             // The Bible✦ glowing star — the exact mark from the home wordmark.
             Image(systemName: "sparkle")
@@ -208,24 +208,27 @@ struct OnboardingBuildingPlanView: View {
         choreography = Task { @MainActor in
             let count = steps.count
             try? await Task.sleep(nanoseconds: 400_000_000)
+            if Task.isCancelled { return }
+
+            // One continuous, even sweep from empty to full — no stepped jumps,
+            // no pauses. The checklist lines tick off as the ring passes each
+            // slice, so the loader reads as a single smooth gesture.
+            let fillSeconds: Double = 5.6
+            withAnimation(.linear(duration: fillSeconds)) { progress = 1 }
+
+            let perStep = UInt64((fillSeconds / Double(count)) * 1_000_000_000)
             for i in 0..<count {
+                try? await Task.sleep(nanoseconds: perStep)
                 if Task.isCancelled { return }
-                // Fill this line's slice of the ring while its spinner turns.
-                withAnimation(.easeInOut(duration: 0.95)) {
-                    progress = CGFloat(i + 1) / CGFloat(count)
-                }
-                try? await Task.sleep(nanoseconds: 900_000_000)
-                if Task.isCancelled { return }
-                // Tick the line off.
-                withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
+                withAnimation(.spring(response: 0.45, dampingFraction: 0.72)) {
                     completed = i + 1
                 }
                 HapticService.lightImpact()
-                try? await Task.sleep(nanoseconds: 200_000_000)
             }
+
             // The arc is full — let it settle, then bloom the whole ring to the
             // star's gold in one clean, beautiful crossfade.
-            try? await Task.sleep(nanoseconds: 180_000_000)
+            try? await Task.sleep(nanoseconds: 260_000_000)
             if Task.isCancelled { return }
             withAnimation(.easeInOut(duration: 0.6)) { finished = true }
             HapticService.commit()
