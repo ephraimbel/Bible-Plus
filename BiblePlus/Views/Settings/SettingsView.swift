@@ -60,6 +60,7 @@ private struct SettingsContentView: View {
                 VStack(spacing: BPSpacing.xxl) {
                     profileHeader
                     profileSection
+                    librarySection
                     notificationsSection
                     appearanceSection
                     widgetsSection
@@ -381,6 +382,40 @@ private struct SettingsContentView: View {
             .animation(BPAnimation.spring.delay(0.05), value: appeared)
 
             sectionFooter("Changes to your profile will refresh your feed.")
+        }
+    }
+
+    // MARK: - Library Section
+
+    private var librarySection: some View {
+        VStack(alignment: .leading, spacing: BPSpacing.sm) {
+            sectionHeader("Library", icon: "bookmark.fill", index: 0)
+
+            sectionCard {
+                NavigationLink {
+                    SavedView()
+                } label: {
+                    HStack(spacing: BPSpacing.sm) {
+                        Text("Saved")
+                            .font(.system(size: 16))
+                            .foregroundStyle(palette.textPrimary)
+                        Spacer(minLength: 12)
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 12, weight: .semibold))
+                            .foregroundStyle(palette.textMuted.opacity(0.35))
+                    }
+                    .contentShape(Rectangle())
+                    .padding(.horizontal, BPSpacing.lg)
+                    .padding(.vertical, BPSpacing.md)
+                }
+                .buttonStyle(.plain)
+                .simultaneousGesture(TapGesture().onEnded { HapticService.selection() })
+            }
+            .opacity(appeared ? 1 : 0)
+            .offset(y: appeared ? 0 : 10)
+            .animation(BPAnimation.spring.delay(0.05), value: appeared)
+
+            sectionFooter("Your saved verses, prayers, and notes.")
         }
     }
 

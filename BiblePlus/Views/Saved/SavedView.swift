@@ -8,25 +8,25 @@ struct SavedView: View {
     @State private var viewModel: SavedViewModel?
 
     var body: some View {
-        NavigationStack {
-            Group {
-                if let vm = viewModel {
-                    SavedContentView(viewModel: vm)
-                } else {
-                    BPLoadingView().onAppear {
-                        viewModel = SavedViewModel(modelContext: modelContext)
-                    }
+        // No own NavigationStack — pushed from Settings (Profile ▸ Bible),
+        // which already provides one.
+        Group {
+            if let vm = viewModel {
+                SavedContentView(viewModel: vm)
+            } else {
+                BPLoadingView().onAppear {
+                    viewModel = SavedViewModel(modelContext: modelContext)
                 }
             }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbarBackground(palette.background, for: .navigationBar)
-            .toolbarBackground(.visible, for: .navigationBar)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("Saved")
-                        .font(.system(size: 18, weight: .semibold, design: .serif))
-                        .foregroundStyle(palette.textPrimary)
-                }
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbarBackground(palette.background, for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("Saved")
+                    .font(.system(size: 18, weight: .semibold, design: .serif))
+                    .foregroundStyle(palette.textPrimary)
             }
         }
     }
