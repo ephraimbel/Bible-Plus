@@ -44,7 +44,23 @@ final class PathDayViewModel {
 
     func saveReflection() {
         progress.setReflection(reflectionText, for: dayNumber)
+        JournalSync.upsertReflection(
+            sourceKey: "path:\(path.id):day:\(dayNumber)",
+            title: reflectionJournalTitle,
+            text: reflectionText,
+            in: modelContext
+        )
         try? modelContext.save()
+    }
+
+    /// Title for the Journal entry mirrored from this day's reflection — the
+    /// day's theme if it has one, otherwise the path name + day number.
+    private var reflectionJournalTitle: String {
+        if let theme = day?.themeLabel?.trimmingCharacters(in: .whitespacesAndNewlines),
+           !theme.isEmpty {
+            return theme
+        }
+        return "\(path.name) · Day \(dayNumber)"
     }
 
     func selectQuizOption(_ index: Int) {

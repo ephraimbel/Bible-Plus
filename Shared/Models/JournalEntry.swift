@@ -16,13 +16,20 @@ final class JournalEntry {
     var createdAt: Date = Date()
     var updatedAt: Date = Date()
 
+    /// Links an entry back to the devotional/plan reflection that created it,
+    /// e.g. `"path:peace-14:day:3"` or `"plan:psalms-of-peace:day:5"`. Empty
+    /// for entries the user wrote directly in the Journal. Used to keep the
+    /// auto-synced entry idempotent (one entry per reflection, never duplicated).
+    var sourceKey: String = ""
+
     init(
         id: UUID = UUID(),
         title: String = "",
         text: String = "",
         moodRaw: String = "",
         createdAt: Date = Date(),
-        updatedAt: Date = Date()
+        updatedAt: Date = Date(),
+        sourceKey: String = ""
     ) {
         self.id = id
         self.title = title
@@ -30,6 +37,7 @@ final class JournalEntry {
         self.moodRaw = moodRaw
         self.createdAt = createdAt
         self.updatedAt = updatedAt
+        self.sourceKey = sourceKey
     }
 
     var mood: JournalMood? {
