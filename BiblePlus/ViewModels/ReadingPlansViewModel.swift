@@ -182,6 +182,13 @@ final class ReadingPlansViewModel {
 
     func saveReflection(_ text: String, for day: Int, progress: UserPlanProgress) {
         progress.setReflection(text, for: day)
+        let planName = allPlans.first { $0.id == progress.planID }?.name ?? "Reading Plan"
+        JournalSync.upsertReflection(
+            sourceKey: "plan:\(progress.planID):day:\(day)",
+            title: "\(planName) · Day \(day)",
+            text: text,
+            in: modelContext
+        )
         modelContext.safeSave()
         refreshToken += 1
     }
