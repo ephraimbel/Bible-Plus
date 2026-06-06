@@ -65,10 +65,9 @@ struct PaywallContainerView: View {
                 } else {
                     vm = PaywallViewModel(profile: profiles.first)
                 }
-                // Onboarding leads with Yearly (the free-trial / funnel plan).
-                // The in-app paywall only offers Monthly (no trial), so it must
-                // select Monthly so the CTA reads correctly.
-                vm?.selectedProductID = isOnboarding ? StoreKitService.yearlyID : StoreKitService.monthlyID
+                // Both paywalls lead with Yearly (the free-trial / funnel plan),
+                // pre-selected so the CTA opens as "Start Free Trial".
+                vm?.selectedProductID = StoreKitService.yearlyID
             }
             Analytics.track(.paywallViewed, properties: [
                 "source": isOnboarding ? "onboarding" : "settings",
@@ -219,10 +218,13 @@ struct PaywallContainerView: View {
         .opacity(showContent ? 1 : 0)
     }
 
-    // Onboarding shows BOTH plans (Monthly + Yearly "best value") to steer a
-    // warm new user toward the higher-LTV annual plan with the free trial. The
-    // in-app paywall (hit from Settings / a locked feature) shows ONLY the
-    // monthly plan — a single, low-friction offer to unlock a feature.
+    // Both presentations (onboarding and in-app) show the same two plans —
+    // Monthly + Yearly "best value" — to steer toward the higher-LTV annual
+    // plan with the free trial. The only difference is the in-app paywall is
+    // closable (see the `!isOnboarding` close button above); the offer itself
+    // is identical. Apple enforces trial eligibility at purchase, so a
+    // returning user who already used the trial simply gets charged the
+    // regular price — no second trial is granted regardless of the copy.
     private func planCards(vm: PaywallViewModel) -> some View {
         HStack(spacing: 12) {
             priceCard(
@@ -233,22 +235,16 @@ struct PaywallContainerView: View {
                 sub: "per month",
                 badge: nil
             )
-            if isOnboarding {
-                priceCard(
-                    vm: vm,
-                    productID: StoreKitService.yearlyID,
-                    title: "Yearly",
-                    price: vm.yearlyPriceLabel(storeKitService),
-                    sub: "\(vm.yearlyMonthlyBreakdown(storeKitService))/month",
-                    badge: "7-DAY FREE TRIAL"
-                )
-            }
+            priceCard(
+                vm: vm,
+                productID: StoreKitService.yearlyID,
+                title: "Yearly",
+                price: vm.yearlyPriceLabel(storeKitService),
+                sub: "\(vm.yearlyMonthlyBreakdown(storeKitService))/month",
+                badge: "7-DAY FREE TRIAL"
+            )
         }
     }
-
-    // Whether the plan cards are laid out as a single centered card (in-app,
-    // monthly-only) vs. two left-aligned cards side by side (onboarding).
-    private var isSinglePlan: Bool { !isOnboarding }
 
     // MARK: - Hero (glowing Bible star)
 
@@ -351,51 +347,24 @@ struct PaywallContainerView: View {
             HapticService.impact(.medium)
             Analytics.track(.paywallPriceCardSelected, properties: ["product": title.lowercased()])
         } label: {
-            Group {
-                if isSinglePlan {
-                    // One full-width card → a horizontal row so the content
-                    // fills the button: name on the left, price on the right.
-                    // The centered stack used for the two-column layout looks
-                    // small and lost when stretched edge-to-edge.
-                    HStack(alignment: .center, spacing: 12) {
-                        Text(title)
-                            .font(.custom("Georgia-Bold", size: 23))
-                            .foregroundStyle(isSelected ? accentGold : palette.textPrimary)
+            VStack(alignment: .leading, spacing: 5) {
+                Text(title)
+                    .font(.custom("Georgia-Bold", size: 16))
+                    .foregroundStyle(isSelected ? accentGold : palette.textPrimary)
 
-                        Spacer(minLength: 0)
+                Text(price)
+                    .font(.custom("Baskerville-Bold", size: 27))
+                    .foregroundStyle(isSelected ? accentGold : palette.textPrimary)
+                    .minimumScaleFactor(0.7)
+                    .lineLimit(1)
 
-                        VStack(alignment: .trailing, spacing: 1) {
-                            Text(price)
-                                .font(.custom("Baskerville-Bold", size: 31))
-                                .foregroundStyle(isSelected ? accentGold : palette.textPrimary)
-                                .minimumScaleFactor(0.7)
-                                .lineLimit(1)
-                            Text(sub)
-                                .font(.system(size: 12, weight: .medium, design: .rounded))
-                                .foregroundStyle(palette.textMuted)
-                        }
-                    }
-                } else {
-                    VStack(alignment: .leading, spacing: 5) {
-                        Text(title)
-                            .font(.custom("Georgia-Bold", size: 16))
-                            .foregroundStyle(isSelected ? accentGold : palette.textPrimary)
-
-                        Text(price)
-                            .font(.custom("Baskerville-Bold", size: 27))
-                            .foregroundStyle(isSelected ? accentGold : palette.textPrimary)
-                            .minimumScaleFactor(0.7)
-                            .lineLimit(1)
-
-                        Text(sub)
-                            .font(.system(size: 12, weight: .medium, design: .rounded))
-                            .foregroundStyle(palette.textMuted)
-                    }
-                }
+                Text(sub)
+                    .font(.system(size: 12, weight: .medium, design: .rounded))
+                    .foregroundStyle(palette.textMuted)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, isSinglePlan ? 22 : 16)
-            .padding(.vertical, isSinglePlan ? 22 : 17)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 17)
             .background(cardBackground(isSelected: isSelected))
             .overlay(alignment: .top) {
                 if let badge {
