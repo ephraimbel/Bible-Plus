@@ -249,26 +249,54 @@ private struct MapSnapshotView: View {
     @State private var image: UIImage?
     @State private var points: [CGPoint] = []
 
+    // A process-wide cache of rendered snapshots. The chat list is a LazyVStack:
+    // scrolling a MapCard off-screen and back destroys and recreates this view,
+    // resetting @State. Without a cache that meant re-running MKMapSnapshotter
+    // every time — a visible flash to the gray placeholder, then a reload. The
+    // cache lets a recreated view paint the finished map instantly (read
+    // synchronously in `body`), so there is no flicker.
+    private final class Entry {
+        let image: UIImage
+        let points: [CGPoint]
+        init(image: UIImage, points: [CGPoint]) { self.image = image; self.points = points }
+    }
+    private static let cache = NSCache<NSString, Entry>()
+
+    private func cacheKey(size: CGSize) -> NSString {
+        let c = region.center, s = region.span
+        return String(
+            format: "%.4f,%.4f,%.4f,%.4f,%d,%d,%d",
+            c.latitude, c.longitude, s.latitudeDelta, s.longitudeDelta,
+            Int(size.width), Int(size.height), colorScheme == .dark ? 1 : 0
+        ) as NSString
+    }
+
     var body: some View {
         GeometryReader { geo in
+            // Fall back to the cache synchronously so a recreated view shows the
+            // finished map on the very first frame — no placeholder flash.
+            let cached = Self.cache.object(forKey: cacheKey(size: geo.size))
+            let shownImage = image ?? cached?.image
+            let shownPoints = points.isEmpty ? (cached?.points ?? []) : points
+
             ZStack {
-                if let image {
-                    Image(uiImage: image)
+                if let shownImage {
+                    Image(uiImage: shownImage)
                         .resizable()
                         .frame(width: geo.size.width, height: geo.size.height)
-                    overlay
+                    overlay(points: shownPoints)
                 } else {
                     Rectangle().fill(accent.opacity(0.06))
                 }
             }
             .frame(width: geo.size.width, height: geo.size.height)
-            .task(id: "\(Int(geo.size.width))x\(Int(geo.size.height))") {
+            .task(id: cacheKey(size: geo.size)) {
                 await generate(size: geo.size)
             }
         }
     }
 
-    @ViewBuilder private var overlay: some View {
+    @ViewBuilder private func overlay(points: [CGPoint]) -> some View {
         if points.count > 1 {
             Path { path in
                 path.move(to: points[0])
@@ -305,6 +333,12 @@ private struct MapSnapshotView: View {
 
     private func generate(size: CGSize) async {
         guard size.width > 1, size.height > 1 else { return }
+        let key = cacheKey(size: size)
+        if let hit = Self.cache.object(forKey: key) {
+            if image == nil { await MainActor.run { self.image = hit.image; self.points = hit.points } }
+            return
+        }
+
         let options = MKMapSnapshotter.Options()
         options.region = region
         options.size = CGSize(width: size.width, height: size.height + brandingMargin)
@@ -315,6 +349,7 @@ private struct MapSnapshotView: View {
         guard let snapshot = try? await snapshotter.start() else { return }
         let converted = stops.map { snapshot.point(for: $0) }
         let trimmed = Self.cropFromTop(snapshot.image, toHeight: size.height)
+        Self.cache.setObject(Entry(image: trimmed, points: converted), forKey: key)
         await MainActor.run {
             self.image = trimmed
             self.points = converted
