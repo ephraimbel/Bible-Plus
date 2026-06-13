@@ -53,8 +53,10 @@ struct PersonalVerseRevealView: View {
 
     var body: some View {
         ZStack {
-            // Dark field — always under everything
-            Color.black.opacity(0.94).ignoresSafeArea()
+            // Dark field — always under everything. Fully opaque so the light
+            // window behind never bleeds through at the top (status-bar region)
+            // or edges; the whole page reads as one Midnight-dark surface.
+            Color.black.ignoresSafeArea()
 
             // Layer: soft biblical image through heavy blur for depth.
             // Matched to the verse being revealed (anxiety → Christ in the

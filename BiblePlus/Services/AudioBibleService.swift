@@ -63,6 +63,11 @@ final class AudioBibleService {
     /// player reports `.playing` yet the clock hasn't moved) on the final item.
     private var lastObservedTime: CMTime = .zero
     private var lastObservedTimeAt: Date?
+    /// When the current item has been sitting NOT playing (loaded-but-paused or
+    /// wedged in a `.waiting` state) since. Lets the watchdog stop nudging a
+    /// dead item and skip past it, instead of looping `play()` on it forever —
+    /// the silent-stall that cut a chapter after a couple of verses.
+    private var stuckNotPlayingSince: Date?
     private var tempFileURLs: [URL] = []
 
     // MARK: - Speech Fallback
@@ -228,16 +233,27 @@ final class AudioBibleService {
 
     // MARK: - Concurrency
 
-    /// Max parallel TTS requests for verse generation. Kept modest so a long
-    /// listening session doesn't burst the TTS API into rate-limiting (which
-    /// used to throw and drop playback to the robotic device voice).
-    private static let maxConcurrentFetches = 4
+    /// Max parallel TTS requests for verse generation. Tuned up from 4 → 6 so an
+    /// uncached chapter fills fast enough to stay ahead of playback (the "takes
+    /// forever / keeps buffering" symptom), while staying modest enough that a
+    /// long session doesn't burst the TTS API into rate-limiting. Transient 429s
+    /// are still retried with backoff, so a brief burst won't drop the AI voice.
+    private static let maxConcurrentFetches = 6
 
     /// How many times to retry a single verse's TTS fetch before giving up.
     /// Rate-limit (429), server (5xx), and transient network errors are all
     /// retried with exponential backoff so we stay on the premium AI voice
     /// instead of falling back to the device synthesizer.
     private static let maxFetchRetries = 4
+
+    /// Minimum byte count for a response to be accepted as real verse audio.
+    /// A valid TTS MP3 — even for the shortest verse — is several KB; a
+    /// truncated stream or a stray error payload returned with a 200 is far
+    /// smaller. Anything under this floor would decode into a dead AVPlayerItem
+    /// that silently wedges the queue, so we treat it as a transient failure and
+    /// retry/re-fetch instead of caching and queuing it. Deliberately
+    /// conservative (1 KB) so a legitimately short verse is never rejected.
+    private static let minValidAudioBytes = 1024
 
     // MARK: - Cache Directory
 
@@ -315,6 +331,9 @@ final class AudioBibleService {
         // counter keeps climbing toward the still-listening threshold.
         if !isAutoAdvance {
             consecutiveAutoAdvances = 0
+            // Fresh user-initiated play → reset the drain-recovery progress guard.
+            lastDrainRecoveryIndex = -1
+            drainRecoveryAttempts = 0
             Self.alogReset()
         }
         Self.alog("PLAY \(book.name) \(chapter) from=\(startingFromVerseIndex) auto=\(isAutoAdvance) n=\(verses.count)")
@@ -389,7 +408,12 @@ final class AudioBibleService {
         for (i, verse) in verses.enumerated() {
             let globalIndex = startIndex + i
             var text = verse.text
-            if i == 0 {
+            // Announce the chapter ONLY at the true top of the chapter (verse 0).
+            // A mid-chapter start — resuming from a tapped verse, or a drain
+            // recovery re-streaming from where playback stopped — must NOT
+            // re-announce "Book, chapter N" (that was the "repeats the chapter
+            // mid-page" bug).
+            if globalIndex == 0 {
                 text = "\(book.name), chapter \(chapter). \(text)"
             }
             verseTexts.append((index: globalIndex, text: text))
@@ -405,6 +429,15 @@ final class AudioBibleService {
         var firstVerseReady = false
         let player = AVQueuePlayer()
         player.actionAtItemEnd = .advance
+        // Keep automatic stall-avoidance ON (the default). A freshly written
+        // temp-file item needs a brief moment to parse its MP3 header and reach
+        // `.readyToPlay`; with waits OFF the player reported `.playing` while the
+        // clock sat pinned at 0, and the watchdog then misread that as a "frozen"
+        // verse and SKIPPED it — the cause of audio skipping verses. With waits
+        // ON, the player simply waits the few milliseconds for each item to be
+        // ready and plays every verse in order; the watchdog (nudge + buffering)
+        // covers genuine drains, and only truly `.failed` items are skipped.
+        player.automaticallyWaitsToMinimizeStalling = true
 
         try await withThrowingTaskGroup(of: (Int, Data).self) { group in
             var queued = 0      // how many tasks are in-flight
@@ -457,6 +490,14 @@ final class AudioBibleService {
                     self.playerItems.append(item)
                     self.highestQueuedIndex = max(self.highestQueuedIndex, globalIdx)
 
+                    // Assign the player early (on the first item) so pause/stop/
+                    // seek behave even while we're still buffering the head-start,
+                    // before playback has begun.
+                    if self.queuePlayer == nil {
+                        self.queuePlayer = player
+                        self.configureAudioSession()
+                    }
+
                     // If the player drained its queue while we were still
                     // fetching, capture that state BEFORE inserting — after
                     // insert, currentItem becomes non-nil and we lose the
@@ -465,13 +506,25 @@ final class AudioBibleService {
                     let queueWentDry = firstVerseReady && player.currentItem == nil
                     player.insert(item, after: nil)
 
-                    // Start playback as soon as the first verse is queued
+                    // Buffer a small head-start before beginning playback. The
+                    // 6 parallel fetches land the first verses in one wave, so
+                    // waiting for ~4 (instead of starting on verse 0) costs
+                    // almost no extra time but gives a cushion that keeps
+                    // generation comfortably ahead of the reader — so audio
+                    // doesn't stop to generate mid-chapter. A short or fully
+                    // cached chapter satisfies this instantly.
+                    let queuedNow = nextToQueue + 1
+                    let startLead = min(count, 4)
                     if !firstVerseReady {
+                        guard queuedNow >= startLead || queuedNow == count else {
+                            // Keep buffering (isLoading stays true); don't start yet.
+                            Self.alog("buffering head-start \(queuedNow)/\(startLead)")
+                            nextToQueue += 1
+                            continue
+                        }
                         firstVerseReady = true
-                        self.queuePlayer = player
                         player.rate = Float(self.playbackSpeed.rawValue)
 
-                        self.configureAudioSession()
                         self.duckSoundscape()
                         player.play()
 
@@ -505,7 +558,7 @@ final class AudioBibleService {
                         }
                     }
 
-                    Self.alog("queued idx=\(globalIdx) wentDry=\(queueWentDry) tcs=\(player.timeControlStatus.rawValue)")
+                    Self.alog("queued idx=\(globalIdx) wentDry=\(queueWentDry) tcs=\(player.timeControlStatus.rawValue) qn=\(player.items().count)")
                     nextToQueue += 1
                 }
             }
@@ -529,8 +582,10 @@ final class AudioBibleService {
         let cacheKey = verseCacheKey(voice: voice, text: text)
         let cachedURL = Self.cacheDirectory.appendingPathComponent("\(cacheKey).mp3")
 
-        // Device cache hit
-        if let data = try? Data(contentsOf: cachedURL), !data.isEmpty {
+        // Device cache hit. Apply the same size floor as the network path so a
+        // previously-cached truncated/garbage file is discarded and re-fetched
+        // rather than served back as a dead AVPlayerItem.
+        if let data = try? Data(contentsOf: cachedURL), data.count >= Self.minValidAudioBytes {
             return data
         }
 
@@ -579,7 +634,17 @@ final class AudioBibleService {
             }
 
             if httpResponse.statusCode == 200 {
-                guard !data.isEmpty else { throw AudioBibleError.audioDecodingFailed }
+                // A too-small 200 body is a truncated/garbage response, not real
+                // audio. Retry it (transient, like a 5xx) so we re-fetch valid
+                // audio and stay on the AI voice; only give up after exhausting
+                // retries, at which point the caller's skip/fallback handles it.
+                guard data.count >= Self.minValidAudioBytes else {
+                    if retryCount < Self.maxFetchRetries {
+                        try await Task.sleep(nanoseconds: Self.retryBackoff(attempt: retryCount))
+                        return try await callTTSAPI(text: text, voice: voice, retryCount: retryCount + 1)
+                    }
+                    throw AudioBibleError.audioDecodingFailed
+                }
                 return data
             }
 
@@ -670,7 +735,13 @@ final class AudioBibleService {
                     if self.queuePlayer?.currentItem == nil,
                        self.hasQueuedAllVerses,
                        !self.didCompleteChapter {
-                        self.handlePlaybackCompletion()
+                        // Only complete if we genuinely reached the last verse.
+                        // An empty queue before then means AVQueuePlayer dropped
+                        // the rest — let the watchdog rebuild it (recoverDrain)
+                        // instead of skipping ahead.
+                        if self.currentVerseIndex >= self.currentVerses.count - 1 {
+                            self.handlePlaybackCompletion()
+                        }
                     }
                 }
             }
@@ -699,6 +770,7 @@ final class AudioBibleService {
         watchdogTask?.cancel()
         lastObservedTime = .zero
         lastObservedTimeAt = nil
+        stuckNotPlayingSince = nil
         watchdogTask = Task { @MainActor [weak self] in
             while !Task.isCancelled {
                 try? await Task.sleep(nanoseconds: 400_000_000)
@@ -713,6 +785,7 @@ final class AudioBibleService {
         watchdogTask = nil
         lastObservedTime = .zero
         lastObservedTimeAt = nil
+        stuckNotPlayingSince = nil
     }
 
     private func playbackWatchdogTick() {
@@ -720,65 +793,290 @@ final class AudioBibleService {
         guard isPlaying, !isPaused, !isFallbackMode else { return }
 
         let itemIdx = player.currentItem.flatMap { itemToVerseIndex[$0] }.map(String.init) ?? "nil"
-        Self.alog("tick v=\(currentVerseIndex) item=\(itemIdx) tcs=\(player.timeControlStatus.rawValue) wait=\(player.reasonForWaitingToPlay?.rawValue ?? "-") t=\(String(format: "%.1f", CMTimeGetSeconds(player.currentTime()))) hiQ=\(highestQueuedIndex) allQ=\(hasQueuedAllVerses) load=\(isLoading) itemErr=\(player.currentItem?.error.map { "\($0)" } ?? "-")")
+        Self.alog("tick v=\(currentVerseIndex) item=\(itemIdx) tcs=\(player.timeControlStatus.rawValue) qn=\(player.items().count) wait=\(player.reasonForWaitingToPlay?.rawValue ?? "-") t=\(String(format: "%.1f", CMTimeGetSeconds(player.currentTime()))) hiQ=\(highestQueuedIndex) allQ=\(hasQueuedAllVerses) load=\(isLoading) itemErr=\(player.currentItem?.error.map { "\($0)" } ?? "-")")
 
-        if let item = player.currentItem {
-            // We have audio to play.
+        let item = player.currentItem
+        let playing = player.timeControlStatus == .playing
+        let now = player.currentTime()
+
+        // --- Maintain the stall anchors (stateful) BEFORE deciding, so the pure
+        // decision below sees correct durations. ---
+
+        // Not-playing stall clock: starts the moment a current item stops
+        // making progress; cleared whenever there's no item or we're playing.
+        if item != nil && !playing {
+            if stuckNotPlayingSince == nil { stuckNotPlayingSince = Date() }
+        } else {
+            stuckNotPlayingSince = nil
+        }
+
+        // Frozen-clock detection: "playing" but the position hasn't moved since
+        // the last sample. While the clock keeps advancing we re-anchor it;
+        // once frozen we deliberately hold the anchor so `frozenFor` grows.
+        let clockFrozen = item != nil && playing
+            && lastObservedTimeAt != nil && CMTimeCompare(now, lastObservedTime) == 0
+        if item != nil && playing && !clockFrozen {
+            lastObservedTime = now
+            lastObservedTimeAt = Date()
+        }
+
+        // --- Build the pure decision input ---
+        let isLastQueuedItem = (item.flatMap { itemToVerseIndex[$0] } ?? -1) >= highestQueuedIndex && hasQueuedAllVerses
+        let atEnd: Bool = {
+            guard let item else { return false }
+            let duration = item.duration
+            return duration.isNumeric == false
+                || CMTimeGetSeconds(duration) <= 0
+                || CMTimeGetSeconds(now) >= CMTimeGetSeconds(duration) - 0.6
+        }()
+        let input = WatchdogInput(
+            hasCurrentItem: item != nil,
+            isPlaying: playing,
+            itemFailed: item?.status == .failed,
+            clockFrozen: clockFrozen,
+            frozenFor: clockFrozen ? Date().timeIntervalSince(lastObservedTimeAt ?? Date()) : 0,
+            notPlayingFor: (item != nil && !playing) ? Date().timeIntervalSince(stuckNotPlayingSince ?? Date()) : 0,
+            isLastQueuedItem: isLastQueuedItem,
+            atEnd: atEnd,
+            hasQueuedAllVerses: hasQueuedAllVerses,
+            didCompleteChapter: didCompleteChapter,
+            reachedLastVerse: currentVerseIndex >= currentTotalVerses - 1
+        )
+
+        // --- Dispatch the resulting action ---
+        switch Self.watchdogAction(input) {
+        case .idle:
+            // Healthy playback, frozen-but-not-yet-past-threshold, or an
+            // already-completed empty queue. Just keep bookkeeping tidy.
+            if item != nil {
+                queueDrainedAt = nil
+                if isLoading { isLoading = false }
+            } else {
+                lastObservedTimeAt = nil
+            }
+
+        case .nudge:
+            // (A) Loaded but not playing, still within the grace window — kick
+            // it back to life. Idempotent; also the instant-recovery for a
+            // freshly inserted buffered verse.
             queueDrainedAt = nil
             if isLoading { isLoading = false }
-
-            if player.timeControlStatus != .playing {
-                // (A) Loaded but not playing — nudge it. Idempotent; also the
-                // recovery for (B) the moment a buffered verse is inserted.
-                player.play()
-                player.rate = Float(playbackSpeed.rawValue)
-                lastObservedTimeAt = nil
-                return
-            }
-
-            // (C) Player claims it's playing — confirm the clock is actually
-            // moving. On the FINAL queued item, AVQueuePlayer can finish the
-            // file yet keep `currentItem` set and `timeControlStatus == .playing`
-            // with a frozen clock and no end-of-item notification — which left
-            // the chapter dead with no auto-advance. If position hasn't moved
-            // for ~2.5s and we're at/near the end of the last queued verse,
-            // treat the chapter as complete.
-            let now = player.currentTime()
-            let isLastQueuedItem = (itemToVerseIndex[item] ?? -1) >= highestQueuedIndex && hasQueuedAllVerses
-            if let last = lastObservedTimeAt, CMTimeCompare(now, lastObservedTime) == 0 {
-                let frozenFor = Date().timeIntervalSince(last)
-                if frozenFor >= 2.5, isLastQueuedItem, !didCompleteChapter {
-                    let duration = item.duration
-                    let atEnd = duration.isNumeric == false
-                        || CMTimeGetSeconds(duration) <= 0
-                        || CMTimeGetSeconds(now) >= CMTimeGetSeconds(duration) - 0.6
-                    if atEnd {
-                        handlePlaybackCompletion()
-                        return
-                    }
-                }
-            } else {
-                lastObservedTime = now
-                lastObservedTimeAt = Date()
-            }
-        } else {
-            // Queue is empty.
+            player.play()
+            player.rate = Float(playbackSpeed.rawValue)
             lastObservedTimeAt = nil
-            if hasQueuedAllVerses {
-                // (C) Every verse played and the queue is empty → chapter done.
-                // Fire completion even if the end-of-item notification was missed.
-                if !didCompleteChapter {
-                    handlePlaybackCompletion()
-                }
+
+        case .skipStalled:
+            // A `.failed` item, a chronically un-played item, or a frozen middle
+            // verse — skip it so one bad verse can't wedge the chapter in silence.
+            queueDrainedAt = nil
+            if isLoading { isLoading = false }
+            advancePastStalledItem()
+
+        case .completeChapter:
+            // The final verse ended but the end-of-item notification never
+            // landed (frozen last item, or an empty queue with all verses
+            // played). Drive completion → auto-advance.
+            if item != nil {
+                queueDrainedAt = nil
+                if isLoading { isLoading = false }
             } else {
-                // (B) Buffering: drained while later verses still generate.
-                // Surface loading; resume happens in the has-item branch (and in
-                // the streaming loop) the instant the next verse is inserted.
-                if queueDrainedAt == nil {
-                    queueDrainedAt = Date()
-                    isLoading = true
-                }
+                lastObservedTimeAt = nil
             }
+            handlePlaybackCompletion()
+
+        case .startBuffering:
+            // (B) Queue drained mid-chapter while later verses still generate.
+            // Surface loading; resume happens the instant the next verse is
+            // inserted (here and in the streaming loop).
+            lastObservedTimeAt = nil
+            if queueDrainedAt == nil {
+                queueDrainedAt = Date()
+                isLoading = true
+            }
+
+        case .recoverDrain:
+            // (D) AVQueuePlayer dropped the rest of its queue before we reached
+            // the last verse. Rebuild playback from where it died instead of
+            // skipping the remaining verses.
+            lastObservedTimeAt = nil
+            recoverFromDrain()
+        }
+    }
+
+    // MARK: - Drain Recovery
+    //
+    // AVQueuePlayer can silently flush its entire queue mid-chapter (observed on
+    // device: a 20-item queue collapsing to 0 between two verses). When that
+    // happens we re-stream the remaining verses from where playback stopped,
+    // rather than letting the empty queue masquerade as "chapter complete" and
+    // skip ahead. A small progress guard prevents a tight loop if recovery keeps
+    // failing at the same verse — after a few attempts it drops to the device
+    // voice for the rest of the chapter so the listener always hears every verse.
+    private var lastDrainRecoveryIndex: Int = -1
+    private var drainRecoveryAttempts: Int = 0
+    private static let maxDrainRecoveryAttempts = 3
+
+    private func recoverFromDrain() {
+        guard let book = currentBook else { return }
+        let resumeFrom = currentVerseIndex + 1
+        guard resumeFrom < currentVerses.count else {
+            // Nothing left — this really was the end.
+            handlePlaybackCompletion()
+            return
+        }
+
+        if resumeFrom == lastDrainRecoveryIndex {
+            drainRecoveryAttempts += 1
+        } else {
+            lastDrainRecoveryIndex = resumeFrom
+            drainRecoveryAttempts = 1
+        }
+
+        let verses = currentVerses
+        let chapter = currentChapter
+        let translation = currentTranslation
+
+        if drainRecoveryAttempts > Self.maxDrainRecoveryAttempts {
+            // Repeated collapse at the same verse — finish the chapter on the
+            // reliable device voice so playback never stalls or skips.
+            Self.alog("WATCHDOG drain recovery exhausted at \(resumeFrom) -> device voice")
+            stop()
+            currentVerses = verses
+            currentBook = book
+            currentChapter = chapter
+            currentTranslation = translation
+            currentTotalVerses = verses.count
+            playWithSpeechFallback(
+                verses: verses, book: book, chapter: chapter,
+                translation: translation, startingFromVerseIndex: resumeFrom
+            )
+            return
+        }
+
+        Self.alog("WATCHDOG recover drain -> re-stream from \(resumeFrom) (attempt \(drainRecoveryAttempts))")
+        // `play()` stop()s the dead player and re-streams from `resumeFrom`.
+        // isAutoAdvance:true keeps the still-listening counter + Live Activity
+        // and (deliberately) does NOT reset the drain-recovery progress guard.
+        play(
+            verses: verses, book: book, chapter: chapter,
+            translation: translation, startingFromVerseIndex: resumeFrom,
+            isAutoAdvance: true
+        )
+    }
+
+    // MARK: - Watchdog Decision (pure, unit-testable)
+
+    /// Seconds the player position may stay frozen while reporting `.playing`
+    /// before the watchdog treats the current item as wedged.
+    static let watchdogStallSeconds: TimeInterval = 2.5
+
+    /// Seconds a current item may sit not-playing (a stuck `.waiting` state)
+    /// before the watchdog gives up nudging it and skips past it.
+    static let watchdogNotPlayingGraceSeconds: TimeInterval = 5
+
+    /// Everything the watchdog needs to decide, captured as plain values so the
+    /// decision is pure and testable without driving a real `AVQueuePlayer`.
+    struct WatchdogInput: Equatable {
+        var hasCurrentItem: Bool
+        /// `timeControlStatus == .playing`.
+        var isPlaying: Bool
+        /// `currentItem.status == .failed` — will never play, no point nudging.
+        var itemFailed: Bool
+        /// Reporting `.playing` but the position hasn't advanced since the last sample.
+        var clockFrozen: Bool
+        /// How long the clock has been frozen (0 when not frozen).
+        var frozenFor: TimeInterval
+        /// How long a current item has sat not-playing (0 when playing / no item).
+        var notPlayingFor: TimeInterval
+        /// The current item is the last verse that will ever be queued.
+        var isLastQueuedItem: Bool
+        /// Playback position is at (or within 0.6s of) the item's end.
+        var atEnd: Bool
+        /// Every verse for the chapter has been fetched and queued.
+        var hasQueuedAllVerses: Bool
+        /// Chapter completion already fired (latch).
+        var didCompleteChapter: Bool
+        /// Playback has actually reached the final verse of the chapter. An
+        /// empty queue only means "chapter done" when this is true; otherwise
+        /// `AVQueuePlayer` dropped the rest of the queue mid-chapter and we must
+        /// rebuild it rather than skip to the next chapter.
+        var reachedLastVerse: Bool
+    }
+
+    /// What the watchdog should do this tick. Pure function of `WatchdogInput`.
+    enum WatchdogAction: Equatable {
+        case idle              // healthy / nothing actionable
+        case nudge             // not playing but recoverable → play()
+        case skipStalled       // wedged item → advance past it
+        case completeChapter   // chapter finished (end-of-item was missed)
+        case startBuffering    // queue drained mid-chapter → show loading
+        case recoverDrain      // queue lost mid-chapter → rebuild from where we were
+    }
+
+    /// The single source of truth for the watchdog's recovery decisions. Kept
+    /// free of AVFoundation so it can be exhaustively unit-tested — including
+    /// the regression that a corrupt/stalled verse is *skipped* rather than
+    /// looped on forever in silence.
+    nonisolated static func watchdogAction(_ s: WatchdogInput) -> WatchdogAction {
+        guard s.hasCurrentItem else {
+            // Empty queue.
+            if s.didCompleteChapter { return .idle }  // already finished — do nothing
+            if s.hasQueuedAllVerses {
+                // We genuinely played through to the last verse → chapter done.
+                if s.reachedLastVerse { return .completeChapter }
+                // Every verse was queued, the queue is empty, yet we never
+                // reached the final verse — AVQueuePlayer dropped the rest of
+                // the queue mid-chapter. Rebuild it rather than falsely
+                // completing and skipping to the next chapter (the skip bug).
+                return .recoverDrain
+            }
+            // Still streaming the remaining verses.
+            return .startBuffering
+        }
+
+        // The ONLY item we ever skip is one that has genuinely `.failed` — it
+        // can never play, so leaving it current would wedge the chapter in
+        // silence. Every other not-yet-playing item is given the chance to
+        // buffer and play. Skipping merely-slow or briefly-stalled verses is
+        // what dropped audio the listener never heard ("skips verses").
+        if s.itemFailed { return .skipStalled }
+
+        if !s.isPlaying {
+            // (A) Loaded/buffering but not yet playing — nudge it (idempotent).
+            // With stall-avoidance on, a slow verse becomes ready and plays; we
+            // never skip it just for being slow to start.
+            return .nudge
+        }
+
+        // (C) Playing but the clock is frozen. The only safe interpretation is
+        // the very end of the FINAL verse, where AVQueuePlayer can finish the
+        // file without firing the end-of-item notification — complete the
+        // chapter so auto-advance proceeds. A frozen clock anywhere else is
+        // transient buffering between items; leave it to recover rather than
+        // skipping a verse the listener hasn't heard.
+        if s.clockFrozen, s.frozenFor >= watchdogStallSeconds,
+           s.isLastQueuedItem, s.atEnd, !s.didCompleteChapter {
+            return .completeChapter
+        }
+        return .idle
+    }
+
+    /// Skips the current player item when it is wedged — `.failed`, or
+    /// "playing" with a frozen clock — so a single bad/slow verse can't kill
+    /// the whole chapter in silence. Advancing to the next queued item keeps
+    /// playback moving; if it empties the queue, the watchdog's drain branch
+    /// resumes the instant the next streamed verse arrives, or completes the
+    /// chapter if every verse already played.
+    private func advancePastStalledItem() {
+        guard let player = queuePlayer else { return }
+        Self.alog("WATCHDOG skip stalled v=\(currentVerseIndex) status=\(player.currentItem?.status.rawValue ?? -1) err=\(player.currentItem?.error.map { "\($0)" } ?? "-")")
+        player.advanceToNextItem()
+        lastObservedTime = .zero
+        lastObservedTimeAt = nil
+        stuckNotPlayingSince = nil
+        if player.currentItem != nil {
+            player.play()
+            player.rate = Float(playbackSpeed.rawValue)
         }
     }
 
@@ -825,6 +1123,7 @@ final class AudioBibleService {
                 isPaused = false
                 // Reset the stall detector — the position legitimately jumped.
                 lastObservedTimeAt = nil
+                stuckNotPlayingSince = nil
             }
         }
     }
@@ -861,6 +1160,7 @@ final class AudioBibleService {
         isPaused = false
         // Reset the stall detector so the post-resume position isn't read as frozen.
         lastObservedTimeAt = nil
+        stuckNotPlayingSince = nil
 
         syncLiveActivity(isPlaying: true)
     }
@@ -1082,7 +1382,9 @@ final class AudioBibleService {
         for i in startingFromVerseIndex..<verses.count {
             let verse = verses[i]
             var text = verse.text
-            if i == startingFromVerseIndex {
+            // Announce the chapter only at the true top (verse 0), never on a
+            // mid-chapter resume / recovery.
+            if i == 0 {
                 text = "\(intro) \(verse.text)"
             }
 
@@ -1175,6 +1477,9 @@ final class AudioBibleService {
         guard !didCompleteChapter else { return }
         Self.alog("CHAPTER COMPLETE \(currentBookName) \(currentChapter); nextAuto=\(consecutiveAutoAdvances + 1)")
         didCompleteChapter = true
+        // The chapter genuinely finished → the next chapter is a clean start.
+        lastDrainRecoveryIndex = -1
+        drainRecoveryAttempts = 0
         isPlaying = false
         isPaused = false
 

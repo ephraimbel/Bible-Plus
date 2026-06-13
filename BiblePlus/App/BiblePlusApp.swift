@@ -345,17 +345,23 @@ struct RootView: View {
             Group {
                 if hasCompletedOnboarding {
                     ContentView(deepLinkedContentID: $deepLinkedContentID)
+                        .preferredColorScheme(resolvedColorScheme)
                         .transition(.asymmetric(
                             insertion: .opacity.combined(with: .scale(scale: 0.96)),
                             removal: .opacity
                         ))
                 } else {
+                    // Onboarding owns its own per-page color scheme: the question
+                    // screens force light, while the personal-verse reveal and
+                    // paywall force dark. A global override here would sit above
+                    // those and leave the dark reveal page's status-bar/header
+                    // region in light mode (white). So scope the scheme to the
+                    // completed-onboarding app instead.
                     ConversationalOnboardingView()
                         .transition(.opacity)
                 }
             }
             .environment(storeKitService)
-            .preferredColorScheme(resolvedColorScheme)
             .environment(
                 \.bpPalette,
                 BPColorPalette.resolve(
@@ -381,7 +387,11 @@ struct RootView: View {
 
             // Review prompt overlay
             if reviewService.showPrompt {
-                Color.black.opacity(0.4)
+                // Frosted scrim — blurs the app behind the card for a premium
+                // modal feel, with a soft dark tint so the prompt reads clearly.
+                Rectangle()
+                    .fill(.ultraThinMaterial)
+                    .overlay(Color.black.opacity(0.28))
                     .ignoresSafeArea()
                     .zIndex(2)
                     .onTapGesture { reviewService.userTappedNotYet() }

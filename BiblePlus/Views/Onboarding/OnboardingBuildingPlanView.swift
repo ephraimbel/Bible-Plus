@@ -196,7 +196,7 @@ struct OnboardingBuildingPlanView: View {
             progress = 1
             finished = true
             choreography = Task { @MainActor in
-                try? await Task.sleep(nanoseconds: 900_000_000)
+                try? await Task.sleep(nanoseconds: 500_000_000)
                 onContinue()
             }
             return
@@ -207,13 +207,14 @@ struct OnboardingBuildingPlanView: View {
 
         choreography = Task { @MainActor in
             let count = steps.count
-            try? await Task.sleep(nanoseconds: 400_000_000)
+            try? await Task.sleep(nanoseconds: 250_000_000)
             if Task.isCancelled { return }
 
             // One continuous, even sweep from empty to full — no stepped jumps,
             // no pauses. The checklist lines tick off as the ring passes each
-            // slice, so the loader reads as a single smooth gesture.
-            let fillSeconds: Double = 5.6
+            // slice, so the loader reads as a single smooth gesture. Tuned to
+            // ~3.2s (from 5.6s) so "effort made visible" lands without dead air.
+            let fillSeconds: Double = 3.2
             withAnimation(.linear(duration: fillSeconds)) { progress = 1 }
 
             let perStep = UInt64((fillSeconds / Double(count)) * 1_000_000_000)
@@ -228,11 +229,11 @@ struct OnboardingBuildingPlanView: View {
 
             // The arc is full — let it settle, then bloom the whole ring to the
             // star's gold in one clean, beautiful crossfade.
-            try? await Task.sleep(nanoseconds: 260_000_000)
+            try? await Task.sleep(nanoseconds: 200_000_000)
             if Task.isCancelled { return }
             withAnimation(.easeInOut(duration: 0.6)) { finished = true }
             HapticService.commit()
-            try? await Task.sleep(nanoseconds: 800_000_000)
+            try? await Task.sleep(nanoseconds: 450_000_000)
             if Task.isCancelled { return }
             onContinue()
         }

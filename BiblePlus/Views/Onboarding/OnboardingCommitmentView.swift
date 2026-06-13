@@ -15,7 +15,6 @@ struct OnboardingCommitmentView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     @State private var appeared = false
-    @State private var sealPulse = false
 
     private let accentGold = Color(red: 0.79, green: 0.66, blue: 0.43)
 
@@ -40,7 +39,6 @@ struct OnboardingCommitmentView: View {
                     Circle()
                         .fill(accentGold.opacity(0.10))
                         .frame(width: 116, height: 116)
-                        .scaleEffect(sealPulse ? 1.06 : 0.96)
                     Circle()
                         .stroke(accentGold.opacity(0.4), lineWidth: 1)
                         .frame(width: 116, height: 116)
@@ -97,10 +95,6 @@ struct OnboardingCommitmentView: View {
         .onAppear {
             withAnimation(reduceMotion ? nil : .spring(response: 0.65, dampingFraction: 0.86)) {
                 appeared = true
-            }
-            guard !reduceMotion else { return }
-            withAnimation(.easeInOut(duration: 1.8).repeatForever(autoreverses: true)) {
-                sealPulse = true
             }
         }
     }

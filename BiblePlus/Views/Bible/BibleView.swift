@@ -90,7 +90,7 @@ private struct BibleContentView: View {
     @State private var shareText: String?
     @State private var searchViewModel: BibleSearchViewModel?
     @State private var showVoicePicker = false
-    @State private var showImmersiveListening = false
+    @State private var showSaved = false
     @State private var showPaywall = false
     @State private var showReadingPlans = false
     @State private var showStillListeningAlert = false
@@ -116,12 +116,6 @@ private struct BibleContentView: View {
     @State private var cachedBookID: String = ""
     @State private var cachedChapterNumber: Int = 0
 
-    private var resolvedBackground: SanctuaryBackground {
-        let descriptor = FetchDescriptor<UserProfile>()
-        let bgID = (try? modelContext.fetch(descriptor).first?.selectedBackgroundID) ?? "warm-gold"
-        return SanctuaryBackground.background(for: bgID)
-            ?? SanctuaryBackground.allBackgrounds[0]
-    }
 
     private var currentColorMode: ColorMode {
         let descriptor = FetchDescriptor<UserProfile>()
@@ -214,25 +208,6 @@ private struct BibleContentView: View {
                 )
             }
         }
-    }
-
-    // MARK: - Immersive Listening
-
-    private func handleImmersiveListeningTap() {
-        if audioService.hasActivePlayback {
-            showImmersiveListening = true
-            return
-        }
-
-        // Pro gate
-        guard isPro else {
-            showPaywall = true
-            return
-        }
-
-        guard !viewModel.verses.isEmpty else { return }
-
-        showImmersiveListening = true
     }
 
     // MARK: - Prefetch
@@ -737,18 +712,20 @@ private struct BibleContentView: View {
                     Menu {
                         Section {
                             Button {
+                                showSaved = true
+                            } label: {
+                                Label("Saved", systemImage: "bookmark")
+                            }
+                        }
+
+                        Section {
+                            Button {
                                 handleAudioTap()
                             } label: {
                                 Label(
                                     audioService.hasActivePlayback ? "Pause Audio" : "Listen to Chapter",
                                     systemImage: audioService.hasActivePlayback ? "pause.circle" : "headphones"
                                 )
-                            }
-
-                            Button {
-                                handleImmersiveListeningTap()
-                            } label: {
-                                Label("Immersive Listening", systemImage: "tv.and.mediabox")
                             }
 
                             Button {
@@ -895,13 +872,16 @@ private struct BibleContentView: View {
                 }()
             )
         }
-        .fullScreenCover(isPresented: $showImmersiveListening) {
-            ImmersiveListeningView(
-                viewModel: viewModel,
-                audioService: audioService,
-                initialBackground: resolvedBackground,
-                wasAlreadyPlaying: audioService.hasActivePlayback
-            )
+        .sheet(isPresented: $showSaved) {
+            NavigationStack {
+                SavedView()
+                    .toolbar {
+                        ToolbarItem(placement: .topBarLeading) {
+                            Button("Done") { showSaved = false }
+                                .foregroundStyle(palette.accent)
+                        }
+                    }
+            }
         }
         .fullScreenCover(isPresented: $showSanctuary) {
             SanctuaryView(

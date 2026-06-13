@@ -119,12 +119,12 @@ struct OnboardingProofStatsView: View {
         guard !reduceMotion else { barsIn = true; pct = targetPct; return }
         barsIn = true
         countTask = Task { @MainActor in
-            try? await Task.sleep(nanoseconds: 500_000_000)
-            let steps = 40
+            try? await Task.sleep(nanoseconds: 300_000_000)
+            let steps = 28
             for s in 0...steps {
                 if Task.isCancelled { return }
                 pct = Int(Double(targetPct) * Double(s) / Double(steps))
-                try? await Task.sleep(nanoseconds: 26_000_000)
+                try? await Task.sleep(nanoseconds: 18_000_000)
             }
             pct = targetPct
         }
