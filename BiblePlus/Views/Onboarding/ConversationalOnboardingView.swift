@@ -6,8 +6,7 @@ import SwiftData
 // The onboarding flow. Welcome → a short, focused interview (name, faith,
 // season, burdens, what's holding you back → an empathy "mirror" + a motivation
 // stat → how much time / when to reach you) → the reveal act (building your
-// plan → your first plan → the personal-verse reveal) → commitment pledge →
-// review ask → paywall.
+// plan → a personalized growth-plan reveal) → review ask → paywall.
 //
 // The question screens are built on `OnboardingQuestionScaffold`: Warm Paper,
 // gold eyebrow, Baskerville headline, clean selectable cards, a pinned gold
@@ -108,10 +107,12 @@ struct ConversationalOnboardingView: View {
             ))
 
         case .yourPlan:
-            // Reveal act 2 — the reading plan auto-chosen from their burden.
-            // Flows straight to the personal-verse reveal.
-            OnboardingYourPlanView(viewModel: vm) {
-                moveTo(.personalVerseReveal)
+            // Reveal act 2 — the personalization reveal: a "spiritual profile"
+            // card that assembles itself from every answer they gave, showing
+            // how Bible+ has been shaped around them. The payoff that makes the
+            // loader's effort tangible. Flows into the review moment, then paywall.
+            OnboardingPersonalizationView(viewModel: vm) {
+                moveTo(.appReview, animation: .easeInOut(duration: 0.5))
             }
             .environment(\.bpPalette, BPColorPalette.light)
             .preferredColorScheme(.light)
@@ -119,31 +120,6 @@ struct ConversationalOnboardingView: View {
                 insertion: .opacity.combined(with: .scale(scale: 1.02)),
                 removal: .opacity
             ))
-
-        case .personalVerseReveal:
-            // The cinematic dark moment — palette flips to Midnight regardless
-            // of user prefs so the gold-on-black reveal lands consistently.
-            PersonalVerseRevealView(viewModel: vm) {
-                moveTo(.commitment)
-            }
-            .preferredColorScheme(.dark)
-            .environment(\.bpPalette, BPColorPalette.dark)
-            .transition(.asymmetric(
-                insertion: .opacity.combined(with: .scale(scale: 1.04)),
-                removal: .opacity
-            ))
-
-        case .commitment:
-            // The micro-commitment pledge right before the paywall — a single
-            // "I'm ready" tap that primes the user to follow through (and buy).
-            OnboardingCommitmentView(viewModel: vm) {
-                // After the pledge, ask for a review (the warmest, highest-intent
-                // moment in the funnel) before handing off to the paywall.
-                moveTo(.appReview, animation: .easeInOut(duration: 0.5))
-            }
-            .environment(\.bpPalette, BPColorPalette.light)
-            .preferredColorScheme(.light)
-            .transition(.opacity)
 
         case .appReview:
             // A clean "love Bible+? leave a review" moment. The native App Store
@@ -217,13 +193,13 @@ struct ConversationalOnboardingView: View {
 
     private func eyebrow(_ step: ConversationalStep) -> String {
         switch step {
-        case .name: return "WELCOME"
-        case .faith: return "YOUR JOURNEY"
-        case .seasons: return "YOUR SEASON"
-        case .burdens: return "YOUR HEART"
-        case .holdingBack: return "THE REAL TALK"
-        case .timeCommitment: return "YOUR TIME"
-        case .notifications: return "DAILY MOMENTS"
+        case .name: return "Let's get to know you"
+        case .faith: return "Wherever you're at"
+        case .seasons: return "Tell us where you are"
+        case .burdens: return "We're listening"
+        case .holdingBack: return "Let's be honest"
+        case .timeCommitment: return "You're doing great"
+        case .notifications: return "One last thing"
         default: return ""
         }
     }
@@ -333,7 +309,7 @@ struct ConversationalOnboardingView: View {
                     advanceFromNotifications(vm: vm, enableNotifications: false)
                 } label: {
                     Text("Not now")
-                        .font(.custom("Georgia", size: 15))
+                        .font(.system(size: 15, weight: .medium))
                         .foregroundStyle(palette.textSecondary)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 12)
@@ -427,7 +403,8 @@ struct ConversationalOnboardingView: View {
                         VStack(alignment: .leading, spacing: 3) {
                             HStack(spacing: 8) {
                                 Text(slot.displayName)
-                                    .font(.custom("Georgia", size: 17))
+                                    .font(.system(size: 16, weight: isSelected ? .semibold : .medium))
+                                    .tracking(0.2)
                                     .foregroundStyle(isSelected ? .white : palette.textPrimary)
                                 Text(slot.timeRange)
                                     .font(.system(size: 11.5, weight: .semibold))
@@ -499,7 +476,8 @@ struct ConversationalOnboardingView: View {
                     HStack(spacing: 14) {
                         VStack(alignment: .leading, spacing: 3) {
                             Text(option.displayName)
-                                .font(.custom("Georgia", size: 17))
+                                .font(.system(size: 16, weight: isSelected ? .semibold : .medium))
+                                .tracking(0.2)
                                 .foregroundStyle(isSelected ? .white : palette.textPrimary)
                             Text(timeBlurb(option))
                                 .font(.custom("Georgia-Italic", size: 13.5))
@@ -656,8 +634,6 @@ private enum ConversationalStep: Hashable {
     case mirrorBlockers
     case buildingPlan
     case yourPlan
-    case personalVerseReveal
-    case commitment
     case appReview
     case paywall
 }

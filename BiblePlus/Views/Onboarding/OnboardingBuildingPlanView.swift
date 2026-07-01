@@ -60,12 +60,12 @@ struct OnboardingBuildingPlanView: View {
 
                 VStack(spacing: 10) {
                     Text("CRAFTING YOUR PLAN")
-                        .font(.system(size: 12, weight: .semibold, design: .rounded))
+                        .font(.system(size: 11, weight: .semibold, design: .rounded))
                         .tracking(2.8)
                         .foregroundStyle(accentGold)
 
                     Text(name.isEmpty ? "Building something just for you" : "Building this just for you, \(name)")
-                        .font(.custom("Baskerville-Bold", size: 25))
+                        .font(.custom("Baskerville", size: 26))
                         .multilineTextAlignment(.center)
                         .foregroundStyle(palette.textPrimary)
                         .fixedSize(horizontal: false, vertical: true)

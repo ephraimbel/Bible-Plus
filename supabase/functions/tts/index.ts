@@ -140,6 +140,7 @@ Deno.serve(async (req) => {
 
     if (cachedFile && !downloadError) {
       // Cache hit — return stored audio
+      console.log(`[tts-cache] HIT ${cacheKey}`);
       const arrayBuffer = await cachedFile.arrayBuffer();
       return new Response(new Uint8Array(arrayBuffer), {
         status: 200,
@@ -150,6 +151,14 @@ Deno.serve(async (req) => {
         },
       });
     }
+
+    // A download error other than "not found" means storage is misconfigured
+    // (wrong bucket, bad permissions) — every request would silently miss
+    // the cache and pay for OpenAI generation. Surface it loudly.
+    if (downloadError && downloadError.message !== "The resource was not found") {
+      console.error(`[tts-cache] Unexpected cache lookup error for ${cacheKey}:`, downloadError.message);
+    }
+    console.log(`[tts-cache] MISS ${cacheKey} — generating via OpenAI`);
 
     // Cache miss — generate audio via OpenAI TTS
     const openaiResponse = await fetch(OPENAI_TTS_URL, {
@@ -183,21 +192,27 @@ Deno.serve(async (req) => {
     const audioData = await openaiResponse.arrayBuffer();
     const audioBytes = new Uint8Array(audioData);
 
-    // Save to Supabase Storage (fire-and-forget with error logging)
-    supabase.storage
-      .from(BUCKET_NAME)
-      .upload(cacheKey, audioBytes, {
-        contentType: `audio/${response_format}`,
-        upsert: true,
-      })
-      .then(({ error: uploadError }) => {
-        if (uploadError) {
-          console.error(`[tts-cache] Upload failed for ${cacheKey}:`, uploadError.message);
-        }
-      })
-      .catch((err: unknown) => {
-        console.error(`[tts-cache] Upload exception for ${cacheKey}:`, err);
-      });
+    // Save to Supabase Storage. This is awaited (not fire-and-forget) —
+    // Deno.serve can tear down the isolate the instant the response is
+    // returned, which was silently dropping unawaited uploads and making
+    // every play for that verse+voice re-pay for OpenAI generation forever.
+    let cacheWriteOK = false;
+    try {
+      const { error: uploadError } = await supabase.storage
+        .from(BUCKET_NAME)
+        .upload(cacheKey, audioBytes, {
+          contentType: `audio/${response_format}`,
+          upsert: true,
+        });
+      if (uploadError) {
+        console.error(`[tts-cache] Upload failed for ${cacheKey}:`, uploadError.message);
+      } else {
+        cacheWriteOK = true;
+        console.log(`[tts-cache] STORED ${cacheKey}`);
+      }
+    } catch (err: unknown) {
+      console.error(`[tts-cache] Upload exception for ${cacheKey}:`, err);
+    }
 
     // Return audio to client
     return new Response(audioBytes, {
@@ -205,6 +220,7 @@ Deno.serve(async (req) => {
       headers: {
         "Content-Type": `audio/${response_format}`,
         "X-Cache": "MISS",
+        "X-Cache-Write": cacheWriteOK ? "OK" : "FAILED",
         ...CORS_HEADERS,
       },
     });

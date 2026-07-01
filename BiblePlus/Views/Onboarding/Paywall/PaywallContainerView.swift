@@ -1,16 +1,15 @@
 import SwiftData
 import SwiftUI
 
-// MARK: - Paywall (Dark, two-card, Perplexity-inspired)
+// MARK: - Paywall (cinematic photo hero + plans)
 //
-// Midnight palette. A centered serif hero + headline, a clean checkmark
-// benefit list, and two side-by-side price cards pinned above the CTA:
-// Monthly and Yearly (Best Value, 7-day free trial, showing the exact dollar
-// savings). Yearly is pre-selected to steer plan mix toward the higher-LTV
-// annual plan. Hard paywall in onboarding (no close); closable from Settings.
-//
-// Locked to the DARK palette so the paywall reads identically across system
-// theme settings and conversion stays predictable.
+// Premium paywall pattern (Calm / Masterclass / Lifesum): a full-bleed
+// photographic hero — our editorial model shot with a gentle Ken Burns — that
+// dissolves seamlessly into a deep base. An elegant
+// serif promise sits over the image; a tight benefit list, the recommended
+// Yearly plan, and one gold CTA sit below. Dark Midnight palette so the moody
+// photography and gold accents read cinematic. Typography matches onboarding:
+// regular Baskerville headlines, clean sans labels.
 struct PaywallContainerView: View {
     var onboardingViewModel: OnboardingViewModel? = nil
     var isOnboarding: Bool = true
@@ -22,11 +21,20 @@ struct PaywallContainerView: View {
     @Query private var profiles: [UserProfile]
 
     @State private var vm: PaywallViewModel?
-    @State private var showContent = false
+    @State private var heroIndex = 0
+    @State private var kenBurns = false
+    @State private var contentIn = false
 
+    private let heroImages = [
+        "PaywallSlide1",
+    ]
+
+    // A deep, warm near-black base so the church photography melts into it.
+    private let base = Color(red: 0.09, green: 0.08, blue: 0.07)
     private let palette = BPColorPalette.dark
-    private let accentGold = Color(red: 0.79, green: 0.66, blue: 0.43)
+    private let accentGold = Color(red: 0.82, green: 0.67, blue: 0.42)
     private let starGold = Color(red: 1.0, green: 0.84, blue: 0.3)
+    private let cream = Color(red: 0.96, green: 0.93, blue: 0.87)
 
     init() {
         self.onboardingViewModel = nil
@@ -38,386 +46,279 @@ struct PaywallContainerView: View {
         self.isOnboarding = true
     }
 
+    // The hero ignores the top safe area, so SwiftUI's GeometryReader reports a
+    // 0 top inset here — read the real inset off the key window so the close
+    // button always clears the Dynamic Island / status bar on every device.
+    private var topSafeInset: CGFloat {
+        let scenes = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }
+        let scene = scenes.first { $0.activationState == .foregroundActive } ?? scenes.first
+        let window = scene?.windows.first { $0.isKeyWindow } ?? scene?.windows.first
+        return window?.safeAreaInsets.top ?? 47
+    }
+
+    private let benefits: [String] = [
+        "Unlimited AI companion, anytime",
+        "Listen to the Bible in 9 lifelike voices",
+        "All 29 plans \u{2014} free unlocks just one",
+        "Every Bible translation",
+        "1,500+ prayers & verses for your season",
+        "Soundscapes, widgets & full Sanctuary",
+    ]
+
     var body: some View {
-        ZStack {
-            backgroundLayers
+        GeometryReader { geo in
+            let heroHeight = geo.size.height * 0.49
 
-            if let vm {
-                scrollContent(vm: vm)
-                    .safeAreaInset(edge: .bottom, spacing: 0) {
-                        bottomRegion(vm: vm)
+            ZStack(alignment: .top) {
+                base.ignoresSafeArea()
+
+                if let vm {
+                    VStack(spacing: 0) {
+                        hero(height: heroHeight, topInset: geo.safeAreaInsets.top)
+                        content(vm: vm)
+                            .padding(.horizontal, 26)
+                            .padding(.top, 18)
+                            .padding(.bottom, max(geo.safeAreaInsets.bottom, 14) + 8)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                            .opacity(contentIn ? 1 : 0)
+                            .offset(y: contentIn ? 0 : 14)
                     }
-            }
+                    .ignoresSafeArea(edges: .top)
+                }
 
-            // Close (X, top-right) appears ONLY in the in-app / Settings
-            // presentation so a free user can leave. The onboarding paywall is
-            // hard — no close — the only way forward is choosing a plan.
-            if !isOnboarding {
-                topBar
+                topBar.padding(.top, max(topSafeInset - 52, 2))
             }
         }
         .environment(\.bpPalette, palette)
         .preferredColorScheme(.dark)
         .onAppear {
             if vm == nil {
-                if let onboardingViewModel {
-                    vm = PaywallViewModel(viewModel: onboardingViewModel)
-                } else {
-                    vm = PaywallViewModel(profile: profiles.first)
-                }
-                // Both paywalls lead with Yearly (the free-trial / funnel plan),
-                // pre-selected so the CTA opens as "Start Free Trial".
+                vm = onboardingViewModel.map { PaywallViewModel(viewModel: $0) } ?? PaywallViewModel(profile: profiles.first)
                 vm?.selectedProductID = StoreKitService.yearlyID
             }
             Analytics.track(.paywallViewed, properties: [
-                "source": isOnboarding ? "onboarding" : "settings",
-                "version": "dark_two_card",
+                "source": isOnboarding ? "onboarding" : "settings", "version": "photo_hero",
             ])
-
             if storeKitService.subscriptions.isEmpty && !storeKitService.productsLoadError {
                 Task { await storeKitService.loadProducts() }
             }
-
-            withAnimation(.easeOut(duration: 0.4).delay(0.1)) {
-                showContent = true
-            }
+            withAnimation(.easeOut(duration: 0.6).delay(0.15)) { contentIn = true }
+            withAnimation(.easeInOut(duration: 22).repeatForever(autoreverses: true)) { kenBurns = true }
         }
         .alert("Purchase Failed", isPresented: Binding(
             get: { vm?.purchaseError != nil },
             set: { if !$0 { vm?.purchaseError = nil } }
         )) {
             Button("OK", role: .cancel) {}
-        } message: {
-            Text(vm?.purchaseError ?? "")
-        }
+        } message: { Text(vm?.purchaseError ?? "") }
     }
 
-    // MARK: - Background
+    // MARK: - Hero (crossfading photos → fade into base)
 
-    private var backgroundLayers: some View {
-        ZStack {
-            palette.background.ignoresSafeArea()
-
-            // Soft gold halo behind the hero — quiet ambient light at the top.
-            RadialGradient(
-                colors: [accentGold.opacity(0.16), accentGold.opacity(0.0)],
-                center: .init(x: 0.5, y: 0.08),
-                startRadius: 0,
-                endRadius: 280
-            )
-            .ignoresSafeArea()
-        }
-    }
-
-    // MARK: - Top Bar
-
-    private var topBar: some View {
-        VStack {
-            HStack {
-                Spacer()
-                closeButton
-            }
-            .padding(.horizontal, 18)
-            .padding(.top, 6)
-            Spacer()
-        }
-    }
-
-    private var closeButton: some View {
-        Button {
-            HapticService.lightImpact()
-            Analytics.track(.paywallDismissed, properties: ["reason": "close"])
-            dismiss()
-        } label: {
-            Image(systemName: "xmark")
-                .font(.system(size: 13, weight: .semibold))
-                .foregroundStyle(palette.textSecondary)
-                .frame(width: 32, height: 32)
-                .background(Circle().fill(palette.surfaceElevated))
-        }
-        .accessibilityLabel("Close")
-    }
-
-    // MARK: - Content
-    //
-    // Perplexity-style anchored layout: the header + feature list sit at the
-    // TOP (scrolling content) and the plan cards + CTA + footer are pinned to
-    // the BOTTOM. The leftover height on taller phones falls as a single gap
-    // between the features and the cards — no top/bottom void; the design is
-    // identical on every iPhone, it just breathes a little more on larger ones.
-    // Scrolls on small phones (SE) and at large Dynamic Type sizes.
-    private func scrollContent(vm: PaywallViewModel) -> some View {
-        GeometryReader { proxy in
-            // Scale the header + feature spacing with the available height so the
-            // top section fills proportionally on taller phones — keeping the gap
-            // above the pinned cards a consistent *fraction* of the screen rather
-            // than growing 1:1. Clamped to the iPhone-16 baseline at the low end
-            // so small phones (SE) keep their compact spacing and simply scroll.
-            let scale = min(max(proxy.size.height / 520, 0.8), 1.5)
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: 0) {
-                    heroLogo
-                        .padding(.top, 44 * scale)
-
-                    eyebrow
-                        .padding(.top, 16 * scale)
-
-                    headline
-                        .padding(.top, 8 * scale)
-
-                    subtitle(vm: vm)
-                        .padding(.top, 6)
-
-                    featureList(rowSpacing: 24 * scale)
-                        .padding(.top, 42 * scale)
-                        .padding(.horizontal, 28)
+    private func hero(height: CGFloat, topInset: CGFloat) -> some View {
+        ZStack(alignment: .bottom) {
+            // Crossfading photographs — each fills the hero frame with a center
+            // crop (a square photo into this near-square frame trims only the
+            // sides, so faces stay fully visible). Slow Ken Burns drift.
+            ZStack {
+                ForEach(heroImages.indices, id: \.self) { i in
+                    Image(heroImages[i])
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: UIScreen.main.bounds.width, height: height)
+                        .clipped()
+                        .opacity(i == heroIndex ? 1 : 0)
                 }
-                .frame(maxWidth: .infinity)
-                .padding(.bottom, 16)
-                .opacity(showContent ? 1 : 0)
-                .offset(y: showContent ? 0 : 10)
+            }
+            // Slight scale-up + downward shift so the subjects sit a touch lower
+            // in the frame (more headroom up top), with no gap exposed.
+            .scaleEffect(kenBurns ? 1.16 : 1.12)
+            .offset(y: 22)
+
+            // Long, smooth dissolve into the base so the photo melts into the
+            // content with no seam.
+            LinearGradient(
+                stops: [
+                    .init(color: .clear, location: 0.0),
+                    .init(color: .clear, location: 0.20),
+                    .init(color: base.opacity(0.06), location: 0.38),
+                    .init(color: base.opacity(0.18), location: 0.52),
+                    .init(color: base.opacity(0.36), location: 0.64),
+                    .init(color: base.opacity(0.58), location: 0.75),
+                    .init(color: base.opacity(0.80), location: 0.86),
+                    .init(color: base.opacity(0.95), location: 0.95),
+                    .init(color: base, location: 1.0),
+                ],
+                startPoint: .top, endPoint: .bottom
+            )
+
+            // The Bible✦ wordmark sits above the promise, centered over the
+            // faded base of the photo.
+            VStack(spacing: 12) {
+                wordmark
+                Text("Everything you need\nto grow closer to God.")
+                    .font(.custom("Baskerville", size: 28))
+                    .foregroundStyle(cream)
+                    .multilineTextAlignment(.center)
+                    .lineSpacing(2)
+                    .shadow(color: .black.opacity(0.45), radius: 10, y: 2)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.horizontal, 24)
+            .padding(.bottom, 18)
+        }
+        .frame(height: height)
+        .clipped()
+        .task {
+            while !Task.isCancelled {
+                try? await Task.sleep(for: .seconds(4.5))
+                withAnimation(.easeInOut(duration: 1.6)) {
+                    heroIndex = (heroIndex + 1) % heroImages.count
+                }
             }
         }
     }
 
-    private func bottomRegion(vm: PaywallViewModel) -> some View {
-        VStack(spacing: 14) {
-            planCards(vm: vm)
-                .padding(.top, 10) // room for the floating badges
-                .padding(.horizontal, 20)
-
-            ctaButton(vm: vm)
-                .padding(.horizontal, 20)
-
-            Text(ctaSubtitle(vm: vm))
-                .font(.system(size: 11, weight: .regular, design: .rounded))
-                .foregroundStyle(palette.textMuted)
-                .multilineTextAlignment(.center)
-                .lineLimit(2)
-                .padding(.horizontal, 24)
-
-            footerLinks
-                .padding(.top, 1)
-        }
-        .padding(.top, 14)
-        .padding(.bottom, 8)
-        .frame(maxWidth: .infinity)
-        .background(
-            // Short fade into an opaque base so the scrolling features dissolve
-            // cleanly behind the pinned region instead of bleeding through.
-            VStack(spacing: 0) {
-                LinearGradient(
-                    colors: [palette.background.opacity(0), palette.background],
-                    startPoint: .top, endPoint: .bottom
-                )
-                .frame(height: 22)
-                palette.background
-            }
-            .ignoresSafeArea(edges: .bottom)
-        )
-        .opacity(showContent ? 1 : 0)
-    }
-
-    // Both presentations (onboarding and in-app) show the same two plans —
-    // Monthly + Yearly "best value" — to steer toward the higher-LTV annual
-    // plan with the free trial. The only difference is the in-app paywall is
-    // closable (see the `!isOnboarding` close button above); the offer itself
-    // is identical. Apple enforces trial eligibility at purchase, so a
-    // returning user who already used the trial simply gets charged the
-    // regular price — no second trial is granted regardless of the copy.
-    private func planCards(vm: PaywallViewModel) -> some View {
-        HStack(spacing: 12) {
-            priceCard(
-                vm: vm,
-                productID: StoreKitService.monthlyID,
-                title: "Monthly",
-                price: vm.monthlyPriceLabel(storeKitService),
-                sub: "per month",
-                badge: nil
-            )
-            priceCard(
-                vm: vm,
-                productID: StoreKitService.yearlyID,
-                title: "Yearly",
-                price: vm.yearlyPriceLabel(storeKitService),
-                sub: "\(vm.yearlyMonthlyBreakdown(storeKitService))/month",
-                badge: "7-DAY FREE TRIAL"
-            )
-        }
-    }
-
-    // MARK: - Hero (glowing Bible star)
-
-    private var heroLogo: some View {
+    private var wordmark: some View {
         HStack(spacing: 5) {
             Text("Bible")
-                .font(.system(size: 34, weight: .light, design: .serif))
-                .foregroundStyle(palette.textPrimary)
-
+                .font(.custom("Baskerville", size: 22))
+                .foregroundStyle(cream)
             Image(systemName: "sparkle")
-                .font(.system(size: 28, weight: .medium))
+                .font(.system(size: 16, weight: .medium))
                 .foregroundStyle(starGold)
-                .shadow(color: starGold, radius: 6)
-                .shadow(color: starGold.opacity(0.7), radius: 14)
-                .shadow(color: starGold.opacity(0.4), radius: 26)
+                .shadow(color: starGold.opacity(0.8), radius: 8)
         }
-        .frame(maxWidth: .infinity)
+        .shadow(color: .black.opacity(0.35), radius: 8, y: 1)
     }
 
-    private var eyebrow: some View {
-        HStack(spacing: 5) {
-            Image(systemName: "sparkle")
-                .font(.system(size: 8, weight: .semibold))
-            Text("BIBLE PLUS PRO")
-                .font(.system(size: 11, weight: .semibold, design: .rounded))
-                .tracking(2.2)
-        }
-        .foregroundStyle(accentGold)
-        .frame(maxWidth: .infinity)
-    }
+    // MARK: - Content (benefits + plans + CTA)
 
-    private var headline: some View {
-        Text("Everything, unlocked.")
-            .font(.custom("Baskerville-Bold", size: 30))
-            .foregroundStyle(palette.textPrimary)
-            .multilineTextAlignment(.center)
-            .frame(maxWidth: .infinity)
-    }
-
-    private func subtitle(vm: PaywallViewModel) -> some View {
-        let name = vm.firstName.trimmingCharacters(in: .whitespaces)
-        let text = name.isEmpty
-            ? "Built around the way you believe."
-            : "Built around the way you believe, \(name)."
-        return Text(text)
-            .font(.custom("Georgia-Italic", size: 14))
-            .foregroundStyle(palette.textSecondary)
-            .multilineTextAlignment(.center)
-            .frame(maxWidth: .infinity)
-            .padding(.horizontal, 32)
-    }
-
-    // MARK: - Feature List (clean checkmarks)
-
-    private let proFeatures: [String] = [
-        "Unlimited AI companion \u{2014} ask anything, anytime",
-        "All 29 guided reading plans",
-        "Every Bible translation \u{2014} all 8",
-        "Audio Bible in 9 lifelike voices",
-        "1,500+ daily prayers, verses & devotionals",
-        "Sanctuary soundscapes, widgets & more",
-    ]
-
-    private func featureList(rowSpacing: CGFloat) -> some View {
-        // Uniform spacing between rows (scaled per device) — organized and
-        // consistent everywhere; the leftover height becomes one gap below the
-        // list, not gaps between each feature.
-        VStack(alignment: .leading, spacing: rowSpacing) {
-            ForEach(proFeatures, id: \.self) { feature in
-                HStack(alignment: .center, spacing: 13) {
-                    Image(systemName: "checkmark")
-                        .font(.system(size: 13, weight: .bold))
-                        .foregroundStyle(accentGold)
-                        .frame(width: 18)
-
-                    Text(feature)
-                        .font(.system(size: 15, weight: .regular))
-                        .foregroundStyle(palette.textSecondary)
-                        .fixedSize(horizontal: false, vertical: true)
-
-                    Spacer(minLength: 0)
+    private func content(vm: PaywallViewModel) -> some View {
+        VStack(spacing: 0) {
+            // Benefits sit just under the hero with comfortable, even spacing.
+            VStack(alignment: .leading, spacing: 13) {
+                ForEach(benefits, id: \.self) { benefit in
+                    HStack(alignment: .center, spacing: 12) {
+                        Image(systemName: "checkmark.circle.fill")
+                            .font(.system(size: 15, weight: .semibold))
+                            .foregroundStyle(accentGold)
+                        Text(benefit)
+                            .font(.system(size: 14, weight: .regular))
+                            .foregroundStyle(cream.opacity(0.92))
+                            .fixedSize(horizontal: false, vertical: true)
+                        Spacer(minLength: 0)
+                    }
                 }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+            // Flexible gap so the list never crowds the plan cards; absorbs the
+            // leftover height and keeps the plans + CTA anchored at the bottom.
+            Spacer(minLength: 14)
+
+            VStack(spacing: 12) {
+                planCards(vm: vm)
+                ctaButton(vm: vm)
+
+                Text(ctaSubtitle(vm: vm))
+                    .font(.system(size: 11.5))
+                    .foregroundStyle(cream.opacity(0.5))
+                    .multilineTextAlignment(.center)
+                    .lineLimit(2)
+
+                footerLinks
             }
         }
     }
 
-    // MARK: - Price Card
+    // MARK: - Top bar (close)
 
-    private func priceCard(
-        vm: PaywallViewModel,
-        productID: String,
-        title: String,
-        price: String,
-        sub: String,
-        badge: String?
-    ) -> some View {
+    private var topBar: some View {
+        HStack {
+            Spacer()
+            Button {
+                HapticService.lightImpact()
+                if isOnboarding {
+                    Analytics.track(.paywallDismissed, properties: ["reason": "skip_onboarding"])
+                    onboardingViewModel?.goNext()
+                } else {
+                    Analytics.track(.paywallDismissed, properties: ["reason": "close"])
+                    dismiss()
+                }
+            } label: {
+                Image(systemName: "xmark")
+                    .font(.system(size: 12, weight: .light))
+                    .foregroundStyle(.white.opacity(0.05))
+                    .frame(width: 38, height: 38)
+                    .contentShape(Rectangle())
+            }
+            .accessibilityLabel("Close")
+        }
+        .padding(.horizontal, 14)
+    }
+
+    // MARK: - Plans
+
+    private func planCards(vm: PaywallViewModel) -> some View {
+        HStack(spacing: 12) {
+            priceCard(vm: vm, productID: StoreKitService.monthlyID, title: "Monthly",
+                      price: vm.monthlyPriceLabel(storeKitService), sub: "per month", badge: nil)
+            priceCard(vm: vm, productID: StoreKitService.yearlyID, title: "Yearly",
+                      price: vm.yearlyPriceLabel(storeKitService),
+                      sub: "\(vm.yearlyMonthlyBreakdown(storeKitService))/month", badge: "7-DAY FREE TRIAL")
+        }
+    }
+
+    private func priceCard(vm: PaywallViewModel, productID: String, title: String,
+                           price: String, sub: String, badge: String?) -> some View {
         let isSelected = vm.selectedProductID == productID
         return Button {
             vm.selectedProductID = productID
             HapticService.impact(.medium)
             Analytics.track(.paywallPriceCardSelected, properties: ["product": title.lowercased()])
         } label: {
-            VStack(alignment: .leading, spacing: 5) {
+            VStack(alignment: .leading, spacing: 4) {
                 Text(title)
-                    .font(.custom("Georgia-Bold", size: 16))
-                    .foregroundStyle(isSelected ? accentGold : palette.textPrimary)
-
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(isSelected ? accentGold : cream)
                 Text(price)
-                    .font(.custom("Baskerville-Bold", size: 27))
-                    .foregroundStyle(isSelected ? accentGold : palette.textPrimary)
-                    .minimumScaleFactor(0.7)
-                    .lineLimit(1)
-
+                    .font(.custom("Baskerville", size: 26))
+                    .foregroundStyle(isSelected ? accentGold : cream)
+                    .minimumScaleFactor(0.7).lineLimit(1)
                 Text(sub)
-                    .font(.system(size: 12, weight: .medium, design: .rounded))
-                    .foregroundStyle(palette.textMuted)
+                    .font(.system(size: 11.5, weight: .medium))
+                    .foregroundStyle(cream.opacity(0.5))
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 16)
-            .padding(.vertical, 17)
-            .background(cardBackground(isSelected: isSelected))
-            .overlay(alignment: .top) {
-                if let badge {
-                    planBadge(badge)
-                }
-            }
+            .padding(.vertical, 16)
+            .background(
+                RoundedRectangle(cornerRadius: 18, style: .continuous)
+                    .fill(isSelected ? accentGold.opacity(0.10) : Color.white.opacity(0.05))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 18, style: .continuous)
+                            .stroke(isSelected ? accentGold : Color.white.opacity(0.15),
+                                    lineWidth: isSelected ? 1.5 : 1)
+                    )
+            )
+            .overlay(alignment: .top) { if let badge { planBadge(badge) } }
         }
         .buttonStyle(.plain)
         .animation(.easeOut(duration: 0.2), value: isSelected)
     }
 
-    // Subtle, elegant card surface: an elevated base, a soft gold gradient
-    // overlay when selected (the "subtle overlay"), and a hairline border that
-    // warms to gold on selection.
-    private func cardBackground(isSelected: Bool) -> some View {
-        RoundedRectangle(cornerRadius: 18, style: .continuous)
-            .fill(palette.surfaceElevated)
-            .overlay {
-                if isSelected {
-                    RoundedRectangle(cornerRadius: 18, style: .continuous)
-                        .fill(
-                            LinearGradient(
-                                colors: [accentGold.opacity(0.16), accentGold.opacity(0.05)],
-                                startPoint: .top, endPoint: .bottom
-                            )
-                        )
-                }
-            }
-            .overlay(
-                RoundedRectangle(cornerRadius: 18, style: .continuous)
-                    .stroke(isSelected ? accentGold : palette.border, lineWidth: isSelected ? 1.5 : 1)
-            )
-    }
-
-    // Floating gold pill over a card's top edge — "7-DAY FREE TRIAL" / "SAVE $44".
     private func planBadge(_ text: String) -> some View {
         Text(text)
-            .font(.system(size: 10, weight: .heavy, design: .rounded))
-            .tracking(0.4)
-            .lineLimit(1)
-            .fixedSize()
-            .foregroundStyle(Color(red: 0.16, green: 0.11, blue: 0.04))
-            .padding(.horizontal, 10)
-            .padding(.vertical, 5)
+            .font(.system(size: 9.5, weight: .heavy, design: .rounded))
+            .tracking(0.4).lineLimit(1).fixedSize()
+            .foregroundStyle(Color(red: 0.12, green: 0.09, blue: 0.04))
+            .padding(.horizontal, 10).padding(.vertical, 5)
             .background(
                 Capsule()
-                    .fill(
-                        LinearGradient(
-                            colors: [accentGold.blend(with: .white, amount: 0.28), accentGold],
-                            startPoint: .top, endPoint: .bottom
-                        )
-                    )
-                    .shadow(color: .black.opacity(0.28), radius: 4, y: 2)
+                    .fill(LinearGradient(colors: [accentGold.blend(with: .white, amount: 0.3), accentGold],
+                                         startPoint: .top, endPoint: .bottom))
+                    .shadow(color: .black.opacity(0.3), radius: 4, y: 2)
             )
             .offset(y: -10)
     }
@@ -427,55 +328,36 @@ struct PaywallContainerView: View {
     private func ctaButton(vm: PaywallViewModel) -> some View {
         Button {
             HapticService.impact(.light)
-            Analytics.track(.paywallCTATapped, properties: [
-                "product": vm.selectedProductID ?? "unknown",
-            ])
+            Analytics.track(.paywallCTATapped, properties: ["product": vm.selectedProductID ?? "unknown"])
             Task { await vm.purchaseSelected(storeKitService: storeKitService, dismiss: dismiss) }
         } label: {
             Text(ctaTitle(vm: vm))
-                .font(.system(size: 19, weight: .bold, design: .rounded))
+                .font(.system(size: 18, weight: .semibold))
                 .tracking(0.2)
-                .foregroundStyle(Color(red: 0.16, green: 0.11, blue: 0.04))
+                .foregroundStyle(Color(red: 0.12, green: 0.09, blue: 0.04))
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 17)
-                .background(ctaBackground())
-                .shadow(color: accentGold.opacity(0.25), radius: 12, y: 5)
+                .background(
+                    RoundedRectangle(cornerRadius: 16, style: .continuous)
+                        .fill(LinearGradient(colors: [accentGold.blend(with: .white, amount: 0.16), accentGold],
+                                             startPoint: .top, endPoint: .bottom))
+                )
+                .shadow(color: accentGold.opacity(0.35), radius: 16, y: 6)
         }
         .buttonStyle(PressableButtonStyle())
         .disabled(vm.isPurchasing)
     }
 
-    // Clean, elegant gold CTA: a soft champagne→gold gradient with a single
-    // hairline top rim for a touch of dimension. No shimmer — calm and premium.
-    private func ctaBackground() -> some View {
-        Capsule()
-            .fill(
-                LinearGradient(
-                    colors: [accentGold.blend(with: .white, amount: 0.14), accentGold],
-                    startPoint: .top, endPoint: .bottom
-                )
-            )
-            .overlay(
-                Capsule().stroke(Color.white.opacity(0.18), lineWidth: 0.5)
-            )
-    }
-
     private func ctaTitle(vm: PaywallViewModel) -> String {
         if vm.isPurchasing { return "Processing..." }
-        // Yearly is now the only plan with a free trial, so it's the only one
-        // that may honestly say "Start Free Trial". Monthly is an immediate
-        // (no-trial) purchase.
-        if vm.selectedProductID == StoreKitService.yearlyID {
-            return "Start Free Trial"
-        }
-        return "Subscribe Now"
+        return vm.selectedProductID == StoreKitService.yearlyID ? "Start Free Trial" : "Subscribe Now"
     }
 
     private func ctaSubtitle(vm: PaywallViewModel) -> String {
         if vm.selectedProductID == StoreKitService.yearlyID {
-            return "Then \(vm.yearlyPriceLabel(storeKitService))/yr after 7 days · Cancel anytime"
+            return "Then \(vm.yearlyPriceLabel(storeKitService))/yr after 7 days \u{00B7} Cancel anytime"
         }
-        return "\(vm.monthlyPriceLabel(storeKitService))/mo · Cancel anytime"
+        return "\(vm.monthlyPriceLabel(storeKitService))/mo \u{00B7} Cancel anytime"
     }
 
     // MARK: - Footer
@@ -487,25 +369,19 @@ struct PaywallContainerView: View {
                 Task { await storeKitService.restorePurchases() }
             }
             footerDot
-            footerLink("Terms") {
-                if let url = URL(string: "https://bibleplus.io/terms") { openURL(url) }
-            }
+            footerLink("Terms") { if let url = URL(string: "https://bibleplus.io/terms") { openURL(url) } }
             footerDot
-            footerLink("Privacy") {
-                if let url = URL(string: "https://bibleplus.io/privacy") { openURL(url) }
-            }
+            footerLink("Privacy") { if let url = URL(string: "https://bibleplus.io/privacy") { openURL(url) } }
         }
     }
 
     private func footerLink(_ title: String, action: @escaping () -> Void) -> some View {
         Button(action: action) {
-            Text(title)
-                .font(.system(size: 11, weight: .regular, design: .rounded))
-                .foregroundStyle(palette.textMuted)
+            Text(title).font(.system(size: 11)).foregroundStyle(cream.opacity(0.45))
         }
     }
 
     private var footerDot: some View {
-        Circle().fill(palette.border).frame(width: 2.5, height: 2.5)
+        Circle().fill(cream.opacity(0.3)).frame(width: 2.5, height: 2.5)
     }
 }

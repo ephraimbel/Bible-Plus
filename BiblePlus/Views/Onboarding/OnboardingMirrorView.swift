@@ -66,17 +66,17 @@ struct OnboardingMirrorView: View {
                     .foregroundStyle(accentGold.opacity(0.9))
 
                 Text("THE REAL TALK")
-                    .font(.system(size: 12, weight: .semibold))
-                    .tracking(2.4)
+                    .font(.system(size: 11, weight: .semibold, design: .rounded))
+                    .tracking(2.8)
                     .foregroundStyle(accentGold)
 
                 headline
-                    .font(.custom("Baskerville-Bold", size: 28))
+                    .font(.custom("Baskerville", size: 30))
                     .multilineTextAlignment(.center)
                     .lineSpacing(4)
 
                 Text(supportLine)
-                    .font(.custom("Georgia", size: 16))
+                    .font(.custom("Georgia-Italic", size: 16))
                     .foregroundStyle(palette.textSecondary)
                     .multilineTextAlignment(.center)
                     .lineSpacing(4)

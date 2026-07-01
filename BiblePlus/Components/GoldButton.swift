@@ -7,7 +7,6 @@ struct GoldButton: View {
     let action: () -> Void
 
     @Environment(\.bpPalette) private var palette
-    @State private var glowOpacity: Double = 0.3
 
     var body: some View {
         Button(action: {
@@ -15,45 +14,24 @@ struct GoldButton: View {
             action()
         }) {
             Text(title)
-                .font(.system(size: 17, weight: .medium, design: .serif))
-                .tracking(0.3)
-                .foregroundStyle(.white)
+                .font(.system(size: 17, weight: .semibold))
+                .tracking(0.2)
+                .foregroundStyle(isEnabled ? .white : palette.textMuted)
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, 18)
+                .padding(.vertical, 17)
                 .background(
-                    Capsule()
-                        .fill(
-                            isEnabled
-                                ? AnyShapeStyle(
-                                    LinearGradient(
-                                        colors: [palette.accent, palette.accent.opacity(0.85)],
-                                        startPoint: .leading,
-                                        endPoint: .trailing
-                                    )
-                                )
-                                : AnyShapeStyle(Color.gray.opacity(0.3))
-                        )
-                )
-                .overlay(
-                    Capsule()
-                        .stroke(palette.accent.opacity(0.5), lineWidth: 1.5)
-                        .blur(radius: showGlow ? 8 : 0)
-                        .opacity(showGlow ? glowOpacity : 0)
+                    RoundedRectangle(cornerRadius: 16, style: .continuous)
+                        .fill(isEnabled
+                              ? AnyShapeStyle(palette.accent)
+                              : AnyShapeStyle(palette.textPrimary.opacity(0.08)))
                 )
                 .shadow(
-                    color: isEnabled ? palette.accent.opacity(0.35) : .clear,
-                    radius: 12,
-                    y: 4
+                    color: isEnabled ? palette.accent.opacity(showGlow ? 0.38 : 0.26) : .clear,
+                    radius: 16,
+                    y: 6
                 )
         }
         .buttonStyle(PressableButtonStyle())
         .disabled(!isEnabled)
-        .onAppear {
-            if showGlow {
-                withAnimation(BPAnimation.glowPulse) {
-                    glowOpacity = 0.8
-                }
-            }
-        }
     }
 }

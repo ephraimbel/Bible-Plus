@@ -62,12 +62,12 @@ struct OnboardingReviewView: View {
 
                 VStack(spacing: 14) {
                     Text("BEFORE YOU BEGIN")
-                        .font(.system(size: 12, weight: .semibold, design: .rounded))
-                        .tracking(2.6)
+                        .font(.system(size: 11, weight: .semibold, design: .rounded))
+                        .tracking(2.8)
                         .foregroundStyle(accentGold)
 
                     Text("Would you leave a review?")
-                        .font(.custom("Baskerville-Bold", size: 30))
+                        .font(.custom("Baskerville", size: 31))
                         .multilineTextAlignment(.center)
                         .foregroundStyle(palette.textPrimary)
                         .fixedSize(horizontal: false, vertical: true)

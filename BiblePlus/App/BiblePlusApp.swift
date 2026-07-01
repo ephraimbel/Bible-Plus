@@ -323,10 +323,17 @@ struct RootView: View {
     @Query private var profiles: [UserProfile]
     @Environment(\.modelContext) private var modelContext
     @Environment(\.colorScheme) private var systemScheme
+    @Environment(\.scenePhase) private var scenePhase
     @State private var deepLinkedContentID: UUID?
     @State private var showSplash = true
     @State private var storeKitService = StoreKitService()
     @State private var reviewService = ReviewService.shared
+    // StoreKitService already loads offerings once at launch. This skips
+    // that first `.active` transition so we don't double-fetch on cold
+    // start, and only refreshes on subsequent foregrounds — keeps paywall
+    // pricing current (e.g. a scheduled App Store Connect price change)
+    // without waiting for the user to relaunch the app.
+    @State private var didBecomeActiveOnce = false
     // LocalizationService is a singleton; holding it in @State gives SwiftUI
     // a stable identity for observation so the whole tree re-renders when
     // the user switches languages from Settings.
@@ -377,6 +384,14 @@ struct RootView: View {
                 if let uuid = notification.userInfo?["contentID"] as? UUID {
                     deepLinkedContentID = uuid
                 }
+            }
+            .onChange(of: scenePhase) { _, newPhase in
+                guard newPhase == .active else { return }
+                guard didBecomeActiveOnce else {
+                    didBecomeActiveOnce = true
+                    return
+                }
+                Task { await storeKitService.loadProducts() }
             }
 
             if showSplash {

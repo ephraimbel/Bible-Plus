@@ -31,11 +31,11 @@ struct OnboardingProofStatsView: View {
 
             VStack(spacing: 8) {
                 Text("WHY DAILY WORKS")
-                    .font(.system(size: 12, weight: .semibold))
-                    .tracking(2.4)
+                    .font(.system(size: 11, weight: .semibold, design: .rounded))
+                    .tracking(2.8)
                     .foregroundStyle(accentGold)
                 Text("Showing up changes\neverything.")
-                    .font(.custom("Baskerville-Bold", size: 30))
+                    .font(.custom("Baskerville", size: 31))
                     .foregroundStyle(palette.textPrimary)
                     .multilineTextAlignment(.center)
             }
