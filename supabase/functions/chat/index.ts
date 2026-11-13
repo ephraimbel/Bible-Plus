@@ -28,7 +28,7 @@ const MAX_MESSAGES = 30;
 // future headroom for additional prompt sections.
 const MAX_MESSAGE_LENGTH = 30000;
 
-// Server-enforced policy, prepended to every primary-tier request so it holds
+// Server-enforced policy, prepended to every request so it holds
 // even for old app builds or tampered clients.
 //   1. Scripture licensing — Bible+ is a paid app; only public-domain /
 //      openly licensed translations may be quoted. Copyrighted translations
@@ -165,7 +165,8 @@ Deno.serve(async (req) => {
     //   - tool messages have content + tool_call_id + role:"tool"
     //   - everything else still requires content as a string
     for (const msg of body.messages) {
-      if (!msg.role || typeof msg.role !== "string") {
+      if (!msg || typeof msg !== "object" ||
+          !["system", "user", "assistant", "tool"].includes(msg.role)) {
         return new Response(
           JSON.stringify({ error: "Each message must have a role" }),
           { status: 400, headers: { "Content-Type": "application/json", ...CORS_HEADERS } },
@@ -214,7 +215,9 @@ Deno.serve(async (req) => {
     // by the client because the schemas reference Swift-side resources.
     const openaiPayload: Record<string, unknown> = {
       model: model,
-      messages: body.tier === "utility" ? body.messages : withServerPolicy(body.messages),
+      // Tier is client-controlled. Neither safety nor licensing may be
+      // bypassed by choosing the cheaper utility model.
+      messages: withServerPolicy(body.messages),
       max_tokens: maxTokens,
       temperature: Math.min(Math.max(body.temperature ?? 0.75, 0), 2),
       stream: body.stream ?? true,
