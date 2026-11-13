@@ -18,9 +18,9 @@ struct VoicePickerView: View {
     @State private var showAIConsent = false
     @State private var pendingPreviewVoice: BibleVoice?
 
-    private static let sampleText = "The Lord is my shepherd; I shall not want. He maketh me to lie down in green pastures."
+    private static let sampleText = "Yahweh is my shepherd; I shall lack nothing. He makes me lie down in green pastures. He leads me beside still waters."
 
-    private static let ttsEndpoint = URL(string: "\(Secrets.supabaseURL)/functions/v1/tts")!
+    private static let ttsEndpoint = URL(string: "\(Secrets.aiRelayURL)/bibleplus-tts")!
 
     private static var cacheDirectory: URL {
         let dir = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
@@ -271,8 +271,8 @@ struct VoicePickerView: View {
         var request = URLRequest(url: Self.ttsEndpoint)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("Bearer \(Secrets.supabaseAnonKey)", forHTTPHeaderField: "Authorization")
-        request.setValue(Secrets.supabaseAnonKey, forHTTPHeaderField: "apikey")
+        request.setValue("Bearer \(Secrets.aiRelayClientToken)", forHTTPHeaderField: "Authorization")
+        request.setValue(Secrets.aiRelayClientToken, forHTTPHeaderField: "apikey")
         request.timeoutInterval = 30
 
         let body: [String: Any] = [

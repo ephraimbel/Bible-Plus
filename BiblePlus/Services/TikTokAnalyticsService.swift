@@ -61,7 +61,7 @@ final class TikTokAnalyticsService {
     }
 
     func identify(userId: String) {
-        guard initialized else { return }
+        guard initialized, ATTrackingManager.trackingAuthorizationStatus == .authorized else { return }
         TikTokBusiness.identify(
             withExternalID: userId,
             externalUserName: nil,
@@ -71,25 +71,25 @@ final class TikTokAnalyticsService {
     }
 
     func trackOnboardingComplete() {
-        guard initialized else { return }
+        guard initialized, ATTrackingManager.trackingAuthorizationStatus == .authorized else { return }
         let event = TikTokBaseEvent(eventName: TTEventName.completeTutorial.rawValue)
         TikTokBusiness.trackTTEvent(event)
     }
 
     func trackTrialStarted() {
-        guard initialized else { return }
+        guard initialized, ATTrackingManager.trackingAuthorizationStatus == .authorized else { return }
         let event = TikTokBaseEvent(eventName: TTEventName.startTrial.rawValue)
         TikTokBusiness.trackTTEvent(event)
     }
 
     func trackSubscribed() {
-        guard initialized else { return }
+        guard initialized, ATTrackingManager.trackingAuthorizationStatus == .authorized else { return }
         let event = TikTokBaseEvent(eventName: TTEventName.subscribe.rawValue)
         TikTokBusiness.trackTTEvent(event)
     }
 
     func trackPurchase(productId: String, revenue: Decimal, currency: String = "USD") {
-        guard initialized else { return }
+        guard initialized, ATTrackingManager.trackingAuthorizationStatus == .authorized else { return }
         let event = TikTokPurchaseEvent()
         event.setContentId(productId)
         event.setCurrency(TikTokAnalyticsService.currency(for: currency))

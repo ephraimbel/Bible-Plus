@@ -41,7 +41,7 @@ struct AIConsentView: View {
                     .font(.system(size: 15))
                     .foregroundStyle(palette.textSecondary)
 
-                Text("By continuing, you confirm you are 18 or older, or that a parent or guardian has agreed to you using the AI companion.")
+                Text("By continuing, you confirm you are at least 13 years old. If you are under 18, a parent or guardian must have agreed to you using the AI companion.")
                     .font(.system(size: 14, weight: .medium))
                     .foregroundStyle(palette.textPrimary)
 

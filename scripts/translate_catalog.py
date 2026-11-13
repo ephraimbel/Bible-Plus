@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Translate all keys in Resources/Localizable.xcstrings to Tier 1 languages
+"""Translate all keys in Resources/Localizable.xcstrings to every supported language
 via the OpenAI Chat Completions API. One request per (language), asking the
 model to return a JSON object mapping English → target-language for all keys
 missing a translation.
 
 Usage:
-  OPENAI_API_KEY=sk-... python3 Scripts/translate_catalog.py                # all tier 1
+  OPENAI_API_KEY=sk-... python3 Scripts/translate_catalog.py                # all supported locales
   OPENAI_API_KEY=sk-... python3 Scripts/translate_catalog.py --langs es de  # subset
   OPENAI_API_KEY=sk-... python3 Scripts/translate_catalog.py --dry-run      # print plan
 
@@ -22,6 +22,8 @@ import argparse
 import concurrent.futures
 import json
 import os
+import re
+from collections import Counter
 import sys
 import threading
 import time
@@ -40,24 +42,12 @@ def _import_openai():
 ROOT = Path(__file__).resolve().parent.parent
 CATALOG = ROOT / "Resources" / "Localizable.xcstrings"
 
-# Tier 1 = the 15 languages the user approved for v1.0.7.
-TIER_1 = [
-    ("es", "Spanish"),
-    ("pt-BR", "Brazilian Portuguese"),
-    ("fr", "French"),
-    ("de", "German"),
-    ("it", "Italian"),
-    ("pl", "Polish"),
-    ("ru", "Russian"),
-    ("zh-Hans", "Simplified Chinese"),
-    ("zh-Hant", "Traditional Chinese"),
-    ("ko", "Korean"),
-    ("ja", "Japanese"),
-    ("id", "Indonesian"),
-    ("tl", "Filipino / Tagalog"),
-    ("sw", "Swahili"),
-    ("am", "Amharic"),
-]
+# Keep the target list tied to the app's actual 40-language catalog.
+ALL_LANGUAGES = re.findall(
+    r'SupportedLanguage\(code: "([^"]+)",\s*nativeName: "[^"]+",\s*englishName: "([^"]+)"',
+    (ROOT / "Shared/Models/SupportedLanguage.swift").read_text(),
+)
+TARGET_LANGUAGES = [(code, name) for code, name in ALL_LANGUAGES if code != "en"]
 
 SYSTEM_PROMPT = """You are translating UI strings for a Christian Bible app called Bible Plus.
 
@@ -70,7 +60,11 @@ Translation rules:
 4. UI section headers that are ALL CAPS in English should remain ALL CAPS in the target language (where the script supports case).
 5. Short button labels stay short. Never expand "OK" into a paragraph.
 6. Do NOT translate: "Bible Plus" (product name), "Pro" (as in subscription tier — keep English), "AI", "KJV"/"WEB"/etc. (Bible translation abbreviations).
-7. Return ONLY valid JSON. No commentary. No markdown fences.
+7. This batch includes legal consent and subscription disclosures. Preserve the exact
+meaning of explicit permission, auto-renewal, cancellation deadlines, and third-party
+sharing. Never weaken these statements. Preserve Bible+, OpenAI, WEB, KJV, BSB,
+CC BY, CC BY-SA, 988, 911, and 112 verbatim. Do not translate Scripture quotations.
+8. Return ONLY valid JSON. No commentary. No markdown fences.
 """
 
 USER_TEMPLATE = """Translate the following English UI strings to {language}.
@@ -94,7 +88,7 @@ def missing_keys_for(cat: dict, lang_code: str) -> list[str]:
     missing = []
     for key, val in cat["strings"].items():
         locs = val.get("localizations", {})
-        if lang_code not in locs:
+        if locs.get(lang_code, {}).get("stringUnit", {}).get("state") != "translated":
             missing.append(key)
     return missing
 
@@ -111,7 +105,8 @@ def translate_batch(client, keys: list[str], lang_code: str, lang_name: str) -> 
     payload = json.dumps(keys, ensure_ascii=False, indent=2)
     user = USER_TEMPLATE.format(language=lang_name, payload=payload)
     resp = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-4.1-mini",
+        max_tokens=6000,
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": user},
@@ -126,9 +121,22 @@ def translate_batch(client, keys: list[str], lang_code: str, lang_name: str) -> 
         return parsed["translations"]
     return parsed
 
+
+def valid_translation(source: str, target: str) -> bool:
+    if not target.strip():
+        return False
+    # Positional markers may reorder placeholders; their type/count must match.
+    pattern = r"%(?:\d+\$)?(?:lld|ld|d|@|f|s)"
+    normalize = lambda text: Counter(re.sub(r"%\d+\$", "%", p) for p in re.findall(pattern, text))
+    if normalize(source) != normalize(target):
+        return False
+    protected = ["Bible+", "Bible Plus", "OpenAI", "WEB", "KJV", "BSB", "CC BY-SA", "CC BY", "988", "911", "112", "{name}"]
+    return all(source.count(term) == target.count(term) for term in protected if term in source)
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--langs", nargs="*", help="Subset of language codes (default: all Tier 1)")
+    ap.add_argument("--langs", nargs="*", help="Subset of language codes (default: all supported locales)")
+    ap.add_argument("--keys-file", type=Path, help="Translate only keys in this JSON list")
     ap.add_argument("--dry-run", action="store_true", help="Print scope, skip API calls")
     ap.add_argument("--chunk", type=int, default=80, help="Keys per API request (default 80)")
     ap.add_argument("--concurrency", type=int, default=14,
@@ -139,19 +147,24 @@ def main():
         print("ERROR: OPENAI_API_KEY not set. Run with --dry-run to preview scope.", file=sys.stderr)
         sys.exit(1)
 
-    targets = [(c, n) for c, n in TIER_1 if (not args.langs or c in args.langs)]
+    targets = [(c, n) for c, n in TARGET_LANGUAGES if (not args.langs or c in args.langs)]
     if not targets:
         print("No matching languages.", file=sys.stderr)
         sys.exit(1)
 
     cat = load_catalog()
+    if args.keys_file:
+        selected_keys = set(json.loads(args.keys_file.read_text()))
+        working_cat = {"strings": {k: v for k, v in cat["strings"].items() if k in selected_keys}}
+    else:
+        working_cat = cat
     print(f"Catalog: {len(cat['strings'])} keys", file=sys.stderr)
     print(f"Languages: {[c for c, _ in targets]}", file=sys.stderr)
 
     total_calls = 0
     total_keys = 0
     for code, name in targets:
-        missing = missing_keys_for(cat, code)
+        missing = missing_keys_for(working_cat, code)
         print(f"  [{code}] {len(missing)} missing", file=sys.stderr)
         total_keys += len(missing)
         for _ in chunked(missing, args.chunk):
@@ -170,7 +183,7 @@ def main():
     write_lock = threading.Lock()
 
     def run_language(code: str, name: str) -> tuple[str, int, int]:
-        missing = missing_keys_for(cat, code)
+        missing = missing_keys_for(working_cat, code)
         if not missing:
             return (code, 0, 0)
         written = 0
@@ -184,7 +197,7 @@ def main():
                 continue
             with write_lock:
                 for key in chunk:
-                    if key in result and isinstance(result[key], str):
+                    if key in result and isinstance(result[key], str) and valid_translation(key, result[key]):
                         set_translation(cat, key, code, result[key])
                         written += 1
                 save_catalog(cat)
@@ -202,7 +215,10 @@ def main():
             code, written, attempted = fut.result()
             print(f"[{code}] {written}/{attempted} translated", file=sys.stderr)
 
-    print(f"done in {time.time() - t0:.1f}s.", file=sys.stderr)
+    remaining = sum(len(missing_keys_for(working_cat, code)) for code, _ in targets)
+    print(f"done in {time.time() - t0:.1f}s; {remaining} translations remaining.", file=sys.stderr)
+    if remaining:
+        raise SystemExit(1)
 
 if __name__ == "__main__":
     main()

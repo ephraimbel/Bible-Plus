@@ -318,7 +318,7 @@ final class PaywallViewModel {
             ),
             PaywallBenefit(
                 icon: "headphones",
-                title: "Audio Bible in 9 Voices",
+                title: "Audio Bible in 5 Voices",
                 subtitle: "Listen to any chapter, narrated in a voice you love"
             ),
             PaywallBenefit(

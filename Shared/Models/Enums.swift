@@ -532,7 +532,7 @@ enum BibleTranslation: String, Codable, CaseIterable, Identifiable {
     var isBundled: Bool { isLicensedForUse }
     var isProOnly: Bool { false }
     var john316: String {
-        "For God so loved the world, that he gave his one and only Son, that whoever believes in him should not perish, but have eternal life."
+        "For God so loved the world, that he gave his only born Son, that whoever believes in him should not perish, but have eternal life."
     }
 }
 

@@ -59,7 +59,7 @@ struct PaywallContainerView: View {
 
     private var benefits: [String] { [
         String(localized: "AI companion — up to 200 messages a day"),
-        String(localized: "Audio Bible in 9 AI-generated voices"),
+        String(localized: "Audio Bible in 5 AI-generated voices"),
         String(localized: "All 29 guided reading plans"),
         String(localized: "1,500+ daily prayers, verses & devotionals"),
         String(localized: "Sanctuary soundscapes, widgets & more"),
