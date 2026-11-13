@@ -424,9 +424,9 @@ struct ChatBubbleView: View {
     private var reportURL: URL? {
         var components = URLComponents()
         components.scheme = "mailto"
-        components.path = "support@bibleplus.io"
+        components.path = "hello@nursemind.app"
         components.queryItems = [
-            URLQueryItem(name: "subject", value: "Report AI response"),
+            URLQueryItem(name: "subject", value: "Bible+ — Report AI response"),
             URLQueryItem(name: "body", value: "What's wrong with this response?\n\n\n---\nResponse:\n\(String(message.content.prefix(1500)))"),
         ]
         return components.url

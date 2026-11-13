@@ -1,4 +1,4 @@
-# Bible+ 1.1.3 (36): licensing and release verification
+# Bible+ 1.1.3 (37): licensing and release verification
 
 Updated 2026-11-13. This is an engineering verification record, not a legal opinion or a guarantee of App Review approval.
 
@@ -39,13 +39,13 @@ A dedicated Bible+ OpenAI key is stored in server secrets and the owner's Mac Ke
 
 The former Bible+ Supabase project remains paused. Installed older app versions continue to point at it; the restored relay is available through this new build. No other project was paused. Do not rotate unrelated or legacy keys as part of this release.
 
-The updated public website is published with Sites because Vercel rejected deployments for its team fair-use limit. Site ID: `appgprj_6af6bcb3a3d08191bf48c964129e2ff6`. Source is retained in the Sites repository and mirrored in `website/`. The custom-domain change awaits GoDaddy identity verification; final HTTPS verification is required before submission.
+The updated public website is published with Sites because Vercel rejected deployments for its team fair-use limit. Site ID: `appgprj_6af6bcb3a3d08191bf48c964129e2ff6`. Source is retained in the Sites repository and mirrored in `website/`. The custom domain is connected through GoDaddy; apex HTTPS is active. Automatic domain renewal was disabled at the owner’s request; GoDaddy billing shows cancellation on February 13, 2027 at the end of the paid term. The domain must be manually renewed or app URLs migrated before expiry.
 
 ## Verification performed
 
 - App and widget built and archived with Xcode 26.2, zero errors. Existing concurrency/deprecation warnings remain; this is not a zero-warning build.
 - 22 tests across Compliance and AudioBibleWatchdog suites passed. Coverage includes allowlist rejection, all English editions loading Genesis 1/John 3 offline, all bundled editions loading John 3, source credits, Indonesian Psalms fallback to WEB, offline search, legacy selection/cache migration, quote-card sanitization, consent and audio watchdog behavior.
-- Release archive audit: version 1.1.3/build 36, 18 permitted Bible files, no KJV, five valid app/extension/SDK privacy manifests. The widget contains shared WEB only; it excludes the 17 additional Bible bundles and migration hash map.
+- Release archive audit: version 1.1.3/build 36 (and rechecked for build 37), 18 permitted Bible files, no KJV, five valid app/extension/SDK privacy manifests. The widget contains shared WEB only; it excludes the 17 additional Bible bundles and migration hash map.
 - Live relay: normal and streamed chat, crisis response, refusal of NIV requests, invalid admission token (401), malformed request (400), all five MP3 voices, invalid voice (400), and cache-hit behavior verified. Both Deno entrypoints type-check.
 - Fresh simulator onboarding went directly to the paywall without a review request. Psalm 1:2 replaced the unsupported survey claim. Restore without a purchase displayed the result; free continuation worked; trial/renewal information displayed.
 - First chat: Not Now retained the draft; permission allowed a real streamed answer. Revoking permission caused voice chat to ask again. Spanish, Arabic and Japanese consent screens were visually checked.
@@ -65,4 +65,4 @@ The age questionnaire uses a 13+ override and disclosed relevant infrequent bibl
 - A sandbox Apple account with an already-consumed introductory trial was not available. Trial eligibility logic was checked in code/tests; an eligible offer and no-purchase restore were exercised manually.
 - Background video/sound assets predate this migration. The repository does not contain a complete per-file provenance ledger. The identified Christ the Redeemer asset was removed; this release does not certify all historical asset rights. Retain or obtain original asset license records.
 - Server Free/Pro entitlement enforcement and stronger app attestation remain a separate hardening change. The embedded admission token is extractable, and per-instance IP limits are not a durable user quota.
-- Submission and custom-domain completion must be recorded after the final checks. Do not merge the PR without the owner's approval.
+- Build 37 changes the broken support/report address to the owner’s existing publicly listed, receiving developer inbox, hello@nursemind.app, with Bible+ in the subject. No new mail service was created and no test email was sent. Final submission status must be recorded after processing build 37. Do not merge the PR without the owner's approval.
