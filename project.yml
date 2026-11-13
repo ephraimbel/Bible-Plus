@@ -58,8 +58,8 @@ options:
 settings:
   base:
     SWIFT_VERSION: "5.9"
-    MARKETING_VERSION: "1.1.2"
-    CURRENT_PROJECT_VERSION: "35"
+    MARKETING_VERSION: "1.1.3"
+    CURRENT_PROJECT_VERSION: "36"
     GENERATE_INFOPLIST_FILE: true
     SWIFT_EMIT_LOC_STRINGS: "YES"
 
@@ -187,6 +187,8 @@ targets:
       - path: Shared/Content
         includes:
           - "*.json"
+        excludes:
+          - "licensed-verse-replacements.json"
         buildPhase: resources
       # Share the same String Catalog as the app so widget text localizes
       # into the user's chosen language instead of staying English.
