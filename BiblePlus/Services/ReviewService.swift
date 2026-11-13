@@ -21,6 +21,14 @@ final class ReviewService {
 
     private init() {}
 
+    /// Call once per launch so the "days since first use" window starts at install.
+    func recordFirstLaunchIfNeeded() {
+        let defaults = UserDefaults.standard
+        if defaults.object(forKey: firstSeenDateKey) == nil {
+            defaults.set(Date(), forKey: firstSeenDateKey)
+        }
+    }
+
     /// Call after a genuine positive moment (finished a plan, etc.).
     func requestIfAppropriate() {
         let defaults = UserDefaults.standard
@@ -52,7 +60,7 @@ final class ReviewService {
 
     /// Opens the App Store "Write a Review" page. Use for an explicit,
     /// user-initiated "Rate the App" button (the native prompt may not show).
-    static let writeReviewURL = URL(string: "https://apps.apple.com/app/id6759114318?action=write-review")!
+    nonisolated static let writeReviewURL = URL(string: "https://apps.apple.com/app/id6759114318?action=write-review")!
 
     private func daysBetween(_ a: Date, _ b: Date) -> Int {
         Calendar.current.dateComponents([.day], from: a, to: b).day ?? 0

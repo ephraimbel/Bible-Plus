@@ -38,6 +38,7 @@ struct TranslationRef: Codable, Hashable, Identifiable, Sendable {
         let commercialUse: String?   // "allowed" | "not-allowed"
         let derivatives: String?     // "allowed" | "not-allowed"
         let publicDomain: Bool?
+        var copyleft: Bool? = nil
 
         /// Bible+ is a paid subscription app, so any translation we show
         /// must allow commercial use. We also require derivatives to be

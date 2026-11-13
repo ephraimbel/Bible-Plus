@@ -20,8 +20,18 @@ enum TranslationLicensePolicy {
         attribution: "not-required", commercialUse: "allowed", derivatives: "allowed", publicDomain: true
     )
     private static let ccBySA = TranslationRef.License(
-        attribution: "required", commercialUse: "allowed", derivatives: "allowed", publicDomain: false
+        attribution: "required", commercialUse: "allowed", derivatives: "allowed", publicDomain: false, copyleft: true
     )
+    private static let ccBy = TranslationRef.License(
+        attribution: "required", commercialUse: "allowed", derivatives: "allowed", publicDomain: false, copyleft: false
+    )
+
+    /// Display names for vetted attribution-required IDs, used before the
+    /// catalog has loaded so the credit line never shows a raw ID.
+    private static let knownNames: [String: String] = [
+        "por_blj": "Bíblia Livre", "pol_bib": "Polish OPLNT", "ind_tsi": "Plain Indonesian Translation",
+        "tgl_ulb": "Tagalog Unlocked Literal Bible", "swh_bib": "Kiswahili Contemporary Version",
+    ]
 
     /// Licenses for translations the app references by ID before the helloao
     /// catalog has loaded (featured English refs + per-language defaults).
@@ -35,7 +45,7 @@ enum TranslationLicensePolicy {
         "ita_riv": publicDomain, "rus_syn": publicDomain, "cmn_cu1": publicDomain,
         "cmn_cuv": publicDomain, "kor_old": publicDomain, "jpn_kou": publicDomain,
         // Language defaults — CC BY-SA (attribution required)
-        "por_blj": ccBySA, "pol_bib": ccBySA, "ind_tsi": ccBySA,
+        "por_blj": ccBy, "pol_bib": ccBySA, "ind_tsi": ccBySA,
         "tgl_ulb": ccBySA, "swh_bib": ccBySA,
     ]
 
@@ -86,8 +96,11 @@ enum TranslationLicensePolicy {
         let ref = catalogRef(id: refID)
         let license = knownLicenses[refID] ?? ref?.license
         guard license?.requiresAttribution ?? true else { return nil }
-        let name = ref?.englishName ?? refID
+        let name = ref?.englishName ?? knownNames[refID] ?? refID
         let source = ref?.licenseUrl ?? "https://ebible.org"
-        return String(localized: "Scripture text: \(name). Licensed under Creative Commons Attribution-ShareAlike. Source: \(source)")
+        if license?.copyleft == true {
+            return String(localized: "Scripture text: \(name). Licensed under Creative Commons Attribution-ShareAlike (CC BY-SA). Source: \(source)")
+        }
+        return String(localized: "Scripture text: \(name). Licensed under Creative Commons Attribution (CC BY). Source: \(source)")
     }
 }

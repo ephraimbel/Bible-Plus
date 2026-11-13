@@ -218,7 +218,13 @@ private struct ChatContentView: View {
                 onAllow: {
                     AIConsent.grant()
                     viewModel.shouldShowAIConsent = false
-                    viewModel.send()
+                    // Resume whatever triggered the sheet: a typed message or a retry.
+                    if viewModel.inputText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+                       viewModel.failedMessageContent != nil {
+                        viewModel.retryLastMessage()
+                    } else {
+                        viewModel.send()
+                    }
                 },
                 onDecline: { viewModel.shouldShowAIConsent = false }
             )

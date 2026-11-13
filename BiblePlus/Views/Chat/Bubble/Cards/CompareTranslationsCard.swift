@@ -212,11 +212,12 @@ struct CompareTranslationsCard: View {
         if chosen.count < 2 {
             // A sensible default spread: the reader's translation, a modern
             // readable one, and a strictly literal one.
-            chosen += [
+            let defaults: [Source?] = [
                 .bundled(BibleRepository.shared.currentTranslation.licensed),
                 Source.from(abbreviation: "BSB"),
                 Source.from(abbreviation: "YLT"),
-            ].compactMap { $0 }
+            ]
+            chosen += defaults.compactMap { $0 }
         }
         var seen = Set<String>()
         return Array(chosen.filter { seen.insert($0.abbr).inserted }.prefix(3))

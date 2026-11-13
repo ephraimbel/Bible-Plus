@@ -129,6 +129,7 @@ struct BiblePlusApp: App {
         // Licensing: move users off copyrighted / non-commercial translations
         // and delete any such text cached on disk.
         LicenseCompliance.migrate(modelContext: seedContext)
+        ReviewService.shared.recordFirstLaunchIfNeeded()
 
         // Recovery: ensure the Daily Path reminder is correctly scheduled
         // (or cancelled) for the user's current state. Cheap, idempotent,

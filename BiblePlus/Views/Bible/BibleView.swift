@@ -687,7 +687,7 @@ private struct BibleContentView: View {
                         viewModel.showTranslationPicker = true
                     } label: {
                         HStack(spacing: 3) {
-                            Text(viewModel.currentTranslation.apiCode)
+                            Text(viewModel.translationName)
                                 .font(.system(size: 11, weight: .semibold))
                             Image(systemName: "chevron.down")
                                 .font(.system(size: 7, weight: .bold))
