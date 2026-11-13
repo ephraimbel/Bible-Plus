@@ -7,15 +7,15 @@ import Testing
 @MainActor
 struct ComplianceTests {
     private func container() throws -> ModelContainer {
-        try ModelContainer(for: UserProfile.self, SavedBibleVerse.self, ActivityEvent.self,
+        try ModelContainer(for: UserProfile.self, SavedBibleVerse.self, ActivityEvent.self, PrayerContent.self,
                            configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     }
 
     @Test func allowlistRejectsUnknownAndRestrictedIDs() {
-        for id in ["NIV", "ESV", "ind_ayt", "pol_ubg", "amh_amh", "bundled_niv", "unknown"] {
+        for id in ["NIV", "ESV", "ind_ayt", "pol_ubg", "amh_amh", "bundled_niv", "unknown", "bundled_kjv"] {
             #expect(!TranslationLicensePolicy.isAllowed(refID: id), "Unexpected permission: \(id)")
         }
-        #expect(BibleTranslation.available == [.kjv, .web])
+        #expect(BibleTranslation.available == [.web])
         for translation in BibleTranslation.allCases where !translation.isLicensedForUse {
             #expect(translation.licensed == .web)
         }
@@ -26,7 +26,7 @@ struct ComplianceTests {
 
     @Test func allEnglishTranslationsLoadGenesisAndJohnOffline() async throws {
         let repo = BibleRepository.shared
-        for id in ["bundled_kjv", "bundled_web", "BSB", "eng_asv", "eng_ylt", "eng_dra"] {
+        for id in ["bundled_web", "BSB", "eng_asv", "eng_ylt", "eng_dra"] {
             let genesis = try await repo.verses(refID: id, book: "GEN", chapter: 1)
             let john = try await repo.verses(refID: id, book: "JHN", chapter: 3)
             #expect(genesis.count == 31, "Genesis missing: \(id)")
@@ -45,7 +45,7 @@ struct ComplianceTests {
         }
     }
 
-    @Test func offlineSearchFindsVerseInBothLegacyBundles() {
+    @Test func offlineSearchFindsVerseInWEB() {
         let repo = BibleRepository.shared
         for translation in BibleTranslation.available {
             let results = repo.searchBundled(query: "God", translation: translation)
@@ -54,7 +54,7 @@ struct ComplianceTests {
         }
     }
 
-    @Test func indonesianMissingBookReallyUsesKJVAfterWEBSelection() async throws {
+    @Test func indonesianMissingBookReallyUsesWEBAfterWEBSelection() async throws {
         let container = try container()
         let context = container.mainContext
         let profile = UserProfile(preferredTranslation: .web, lastReadBookID: "PSA")
@@ -65,10 +65,10 @@ struct ComplianceTests {
         for _ in 0..<100 where vm.isLoading { try await Task.sleep(for: .milliseconds(20)) }
         #expect(!vm.isLoading)
         #expect(vm.isShowingOfflineFallback)
-        #expect(vm.translationName == "KJV")
-        let expected = BibleRepository.shared.versesSync(book: "PSA", chapter: 1, translation: .kjv)
+        #expect(vm.translationName == "WEB")
+        let expected = BibleRepository.shared.versesSync(book: "PSA", chapter: 1, translation: .web)
         #expect(vm.verses.map(\.text) == expected.map(\.text))
-        #expect(vm.translationAttribution?.contains("Crown") == true)
+        #expect(vm.translationAttribution == nil)
         vm.changeTranslationRef("BSB")
         for _ in 0..<100 where vm.isLoading { try await Task.sleep(for: .milliseconds(20)) }
         #expect(vm.translationName == "BSB")

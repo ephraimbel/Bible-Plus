@@ -35,7 +35,7 @@ final class SettingsViewModel {
     var editingFaithLevel: FaithLevel = .growing
     var editingLifeSeasons: [LifeSeason] = []
     var editingBurdens: [Burden] = []
-    var editingTranslation: BibleTranslation = .kjv
+    var editingTranslation: BibleTranslation = .web
     var editingPrayerTimes: [PrayerTimeSlot] = []
 
     // MARK: - Sanctuary

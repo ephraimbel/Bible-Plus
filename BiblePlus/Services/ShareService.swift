@@ -40,6 +40,7 @@ enum ShareService {
         verseText: String,
         reference: String,
         translation: String,
+        attribution: String? = nil,
         background: SanctuaryBackground,
         aspectRatio: ShareAspectRatio
     ) -> UIImage? {
@@ -47,6 +48,7 @@ enum ShareService {
             verseText: verseText,
             reference: reference,
             translation: translation,
+            attribution: attribution,
             background: background,
             aspectRatio: aspectRatio
         )

@@ -522,7 +522,7 @@ struct ChapterReaderView: View {
                         .fill(palette.accent.opacity(0.1))
                 )
 
-            Text("This book isn't included in your selected translation, so it's shown in the KJV.")
+            Text("This book isn't included in your selected translation, so it's shown in the WEB.")
                 .font(.system(size: 12, weight: .medium, design: .rounded))
                 .foregroundStyle(palette.textSecondary)
         }

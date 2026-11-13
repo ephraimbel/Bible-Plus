@@ -31,7 +31,7 @@ final class BibleReaderViewModel {
     // MARK: - Data
 
     var verses: [(number: Int, text: String)] = []
-    var currentTranslation: BibleTranslation = .kjv
+    var currentTranslation: BibleTranslation = .web
     /// When non-nil (and not a bundled-prefix id), the reader fetches chapters
     /// from bible.helloao.org for this translation instead of using the legacy
     /// enum path. Written in two ways: (a) user picks from the multilingual
@@ -105,11 +105,11 @@ final class BibleReaderViewModel {
 
     /// Human-visible translation label. Prefers the catalog ref's shortName
     /// (e.g. "R09" for Reina-Valera 1909) so non-English users don't see a
-    /// stale "KJV" badge, and falls back to the legacy enum's abbreviation.
+    /// stale "WEB" badge, and falls back to the legacy enum's abbreviation.
     var translationName: String {
-        // While showing the KJV fallback, label it as KJV.
+        // While showing the WEB fallback, label it as WEB.
         if isShowingOfflineFallback, currentRefID.map({ !$0.hasPrefix(TranslationRef.bundledPrefix) }) == true {
-            return BibleTranslation.kjv.abbreviation
+            return BibleTranslation.web.abbreviation
         }
         if let refID = currentRefID,
            !refID.hasPrefix(TranslationRef.bundledPrefix),
@@ -124,11 +124,6 @@ final class BibleReaderViewModel {
     var translationAttribution: String? {
         if let refID = currentRefID, !refID.hasPrefix(TranslationRef.bundledPrefix), !isShowingOfflineFallback {
             return TranslationLicensePolicy.attribution(for: refID)
-        }
-        // KJV is public domain worldwide except the UK, where the Crown holds
-        // perpetual rights; this is the customary notice.
-        if currentTranslation.licensed == .kjv || isShowingOfflineFallback {
-            return String(localized: "King James Version. Rights in the Authorized Version in the United Kingdom are vested in the Crown.")
         }
         return nil
     }
@@ -179,7 +174,7 @@ final class BibleReaderViewModel {
             // Resolve the active translation ref. Precedence: explicit user
             // pick > language default from `LanguageDefaultBible`. Nil means
             // "use legacy bundled/API translation" — English users without an
-            // explicit pick land here and read the legacy KJV path.
+            // explicit pick land here and read the legacy WEB path.
             if let stored = profile.preferredTranslationRefID, !stored.isEmpty,
                TranslationLicensePolicy.isAllowed(refID: stored) {
                 currentRefID = stored
@@ -209,7 +204,7 @@ final class BibleReaderViewModel {
                 lastReadVerseNumber = profile.lastReadVerseNumber
             }
         }
-        if currentRefID == TranslationRef.bundledKJV.id { currentTranslation = .kjv }
+        if currentRefID == TranslationRef.bundledKJV.id { currentTranslation = .web }
         if currentRefID == TranslationRef.bundledWEB.id { currentTranslation = .web }
         repository.setTranslation(currentTranslation)
         loadChapter()
@@ -345,7 +340,8 @@ final class BibleReaderViewModel {
     }
 
     func selectionCopyShareText() -> String {
-        "\(selectionText())\n— \(selectionReference()) (\(translationName))"
+        let text = "\(selectionText())\n— \(selectionReference()) (\(translationName))"
+        return text + (translationAttribution.map { "\n\n" + $0 } ?? "")
     }
 
     func selectionExplainPrompt() -> String {
@@ -408,7 +404,7 @@ final class BibleReaderViewModel {
     /// `BibleTranslation` enum.
     func changeTranslationRef(_ refID: String?) {
         let refID = refID.flatMap { TranslationLicensePolicy.isAllowed(refID: $0) ? $0 : nil }
-        if refID == TranslationRef.bundledKJV.id { changeTranslation(.kjv); return }
+        if refID == TranslationRef.bundledKJV.id { changeTranslation(.web); return }
         if refID == TranslationRef.bundledWEB.id { changeTranslation(.web); return }
         currentRefID = refID
         updateProfile { $0.preferredTranslationRefID = refID }
@@ -529,13 +525,13 @@ final class BibleReaderViewModel {
                 let fallback = repository.versesSync(
                     book: selectedBook.id,
                     chapter: selectedChapter,
-                    translation: .kjv
+                    translation: .web
                 )
                 if !fallback.isEmpty {
                     verses = fallback
-                    // Fell back to bundled KJV: either a non-KJV legacy pick, or
+                    // Fell back to bundled WEB: either a non-WEB legacy pick, or
                     // a ref translation that doesn't include this book.
-                    isShowingOfflineFallback = currentTranslation != .kjv
+                    isShowingOfflineFallback = currentTranslation != .web
                         || (currentRefID.map { !$0.hasPrefix(TranslationRef.bundledPrefix) } ?? false)
                     isLoading = false
                     loadSavedVerses()
@@ -684,18 +680,18 @@ final class BibleReaderViewModel {
             } catch {
                 guard !Task.isCancelled else { return }
 
-                // Graceful fallback: try sync path (cached or bundled KJV)
+                // Graceful fallback: try sync path (cached or bundled WEB)
                 let fallback = repository.versesSync(
                     book: selectedBook.id,
                     chapter: selectedChapter,
-                    translation: .kjv
+                    translation: .web
                 )
 
                 if !fallback.isEmpty {
                     verses = fallback
-                    // Fell back to bundled KJV: either a non-KJV legacy pick, or
+                    // Fell back to bundled WEB: either a non-WEB legacy pick, or
                     // a ref translation that doesn't include this book.
-                    isShowingOfflineFallback = currentTranslation != .kjv
+                    isShowingOfflineFallback = currentTranslation != .web
                         || (currentRefID.map { !$0.hasPrefix(TranslationRef.bundledPrefix) } ?? false)
                     isLoading = false
                     loadSavedVerses()

@@ -87,8 +87,8 @@ enum AIService {
         Reads the \(translation).
 
         SCRIPTURE LICENSING — NON-NEGOTIABLE: Quote Scripture ONLY from the \(translation), \
-        or from these public-domain texts: KJV, WEB, BSB, ASV, YLT. NEVER quote, reproduce, \
-        or imitate the wording of copyrighted translations — NIV, ESV, NLT, NASB, NKJV, CSB, \
+        or from these public-domain texts: WEB, BSB, ASV, YLT. NEVER quote, reproduce, \
+        or imitate the wording of copyrighted translations — KJV (UK territorial rights), NIV, ESV, NLT, NASB, NKJV, CSB, \
         NRSV, AMP, The Message (MSG), or any other — even if \(name) asks for one. If asked, \
         say kindly that Bible+ uses openly licensed translations and quote the \(translation) \
         instead. You may still *discuss* how other translations render a word, briefly and \
@@ -181,13 +181,13 @@ enum AIService {
         one [MEMORIZE] per response. Don't also add a [VERSE]/[SCRIPTURE] card for the same \
         verse — the memorize card already shows the text.
 
-        [COMPARE book="John" chapter="3" verse="16" translations="KJV,BSB,YLT"][/COMPARE]
+        [COMPARE book="John" chapter="3" verse="16" translations="WEB,BSB,YLT"][/COMPARE]
         The SIDE-BY-SIDE card — shows ONE verse across 2–3 translations so \(name) can see the \
         nuance (where a literal rendering and a readable one differ). Use it when the WORDING \
         itself is the point: when \(name) asks why versions differ, when a key word is \
         translated differently, or when comparing a literal vs. dynamic reading deepens the \
         teaching. The card loads each translation itself — give book, chapter, verse, and 2–3 \
-        translation abbreviations from ONLY: KJV, WEB, BSB, ASV, YLT, DRA (pick a \
+        translation abbreviations from ONLY: WEB, BSB, ASV, YLT, DRA (pick a \
         meaningful spread, e.g. YLT for literal + BSB for readable). Any other abbreviation \
         will not load. One [COMPARE] per response.
 

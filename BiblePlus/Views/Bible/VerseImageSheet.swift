@@ -4,6 +4,7 @@ struct VerseImageSheet: View {
     let verseText: String
     let reference: String
     let translation: String
+    var attribution: String? = nil
     let isPro: Bool
 
     @Environment(\.dismiss) private var dismiss
@@ -42,6 +43,7 @@ struct VerseImageSheet: View {
                         verseText: verseText,
                         reference: reference,
                         translation: translation,
+                        attribution: attribution,
                         background: selectedBackground,
                         aspectRatio: selectedRatio
                     )
@@ -182,6 +184,7 @@ struct VerseImageSheet: View {
             verseText: verseText,
             reference: reference,
             translation: translation,
+                        attribution: attribution,
             background: selectedBackground,
             aspectRatio: selectedRatio
         )

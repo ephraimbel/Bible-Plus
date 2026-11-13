@@ -2,7 +2,7 @@
 """Download the openly licensed Bible translations Bible+ offers and bundle
 them into the app as JSON, so the app makes NO runtime calls to any Bible API.
 
-Output: Resources/Bible/bible-<ID>.json, same shape as Shared/Content/bible-kjv.json
+Output: Resources/Bible/bible-<ID>.json, same shape as Shared/Content/bible-web.json
 plus a "bookNames" map of localized book names:
     {"translation": ID, "bookNames": {"GEN": "Génesis"}, "books": {"GEN": {"1": {"1": "..."}}}}
 

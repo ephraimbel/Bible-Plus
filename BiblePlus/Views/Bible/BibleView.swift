@@ -94,7 +94,7 @@ private struct BibleContentView: View {
     @State private var showPaywall = false
     @State private var showReadingPlans = false
     @State private var showStillListeningAlert = false
-    @State private var verseImageData: (text: String, reference: String, translation: String)?
+    @State private var verseImageData: (text: String, reference: String, translation: String, attribution: String?)?
     @State private var showSanctuary = false
     @State private var sanctuaryVerseText: String?
     @State private var sanctuaryVerseReference: String?
@@ -586,7 +586,8 @@ private struct BibleContentView: View {
                         verseImageData = (
                             text: viewModel.selectionText(),
                             reference: viewModel.selectionReference(),
-                            translation: viewModel.currentTranslation.abbreviation
+                            translation: viewModel.translationName,
+                            attribution: viewModel.translationAttribution
                         )
                         viewModel.clearSelection()
                     },
@@ -820,6 +821,7 @@ private struct BibleContentView: View {
                     verseText: data.text,
                     reference: data.reference,
                     translation: data.translation,
+                    attribution: data.attribution,
                     isPro: {
                         let descriptor = FetchDescriptor<UserProfile>()
                         return (try? modelContext.fetch(descriptor).first?.isPro) ?? false

@@ -18,7 +18,7 @@ final class OnboardingViewModel {
     var selectedFaithLevel: FaithLevel? = nil
     var selectedLifeSeasons: Set<LifeSeason> = []
     var selectedBurdens: Set<Burden> = []
-    var selectedTranslation: BibleTranslation = .kjv
+    var selectedTranslation: BibleTranslation = .web
     var selectedPrayerTimes: Set<PrayerTimeSlot> = []
     var selectedThemeID: String = "sunrise-mountains"
     var selectedBackgroundID: String = "warm-gold"

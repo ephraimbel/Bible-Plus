@@ -94,7 +94,7 @@ final class PaywallViewModel {
         let burdens: Set<Burden> = Set(profile?.currentBurdens ?? [])
         let seasons: Set<LifeSeason> = Set(profile?.lifeSeasons ?? [])
         let faithLevel = profile?.faithLevel
-        let translation = profile?.preferredTranslation ?? .kjv
+        let translation = profile?.preferredTranslation ?? .web
         let prayerTimes: Set<PrayerTimeSlot> = Set(profile?.prayerTimes ?? [])
 
         self.personalizedHeadline = Self.headline(name: name, burdens: burdens, faithLevel: faithLevel)

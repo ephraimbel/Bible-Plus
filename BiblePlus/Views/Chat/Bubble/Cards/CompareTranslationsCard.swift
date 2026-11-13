@@ -8,10 +8,10 @@ import SwiftUI
 // itself from BibleRepository. Tap a row to focus it (the others recede) so a
 // single reading can be isolated while comparing.
 //
-//   [COMPARE book="John" chapter="3" verse="16" translations="KJV,BSB,YLT"][/COMPARE]
+//   [COMPARE book="John" chapter="3" verse="16" translations="WEB,BSB,YLT"][/COMPARE]
 //
 // LICENSING: only public-domain translations can appear here (bundled
-// KJV/WEB + the bundled BSB/ASV/YLT/DRA). Any other abbreviation the model
+// WEB + the bundled BSB/ASV/YLT/DRA). Any other abbreviation the model
 // emits — e.g. NIV/ESV/NLT from an older conversation — is ignored.
 struct CompareTranslationsCard: View {
     let book: String
@@ -173,7 +173,7 @@ struct CompareTranslationsCard: View {
     private var bookDisplayName: String { BibleData.resolveBook(book)?.name ?? book }
     private var referenceLabel: String { "\(bookDisplayName) \(chapter):\(verse)" }
 
-    /// A translation the card may load: either bundled (KJV/WEB) or a
+    /// A translation the card may load: either bundled (WEB) or a
     /// bundled public-domain ref (BSB/ASV/YLT/DRA).
     private enum Source: Hashable {
         case bundled(BibleTranslation)

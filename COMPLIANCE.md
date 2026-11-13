@@ -21,19 +21,21 @@ Audit date: 2026-11-13. This file records what was changed in code, and what
 - **One policy** (`Shared/Services/TranslationLicensePolicy.swift`): a translation is allowed only if it is public domain, or its license allows **both commercial use and derivatives**. Unknown licenses are denied.
 - **bolls.life removed entirely.** NIV/ESV/etc. can't be selected, fetched, searched, compared or quoted. The enum cases remain only so old saved data still loads. `BibleTranslation.licensed` maps them to WEB.
 - **Launch migration** (`LicenseCompliance.swift`): moves NIV/ESV users to WEB and clears restricted helloao picks. It also **deletes cached copyrighted text** from devices.
-- **Translations offered (17 bundled + KJV/WEB):**
-  - English, public domain: BSB (Berean Standard Bible, a modern NIV/ESV-style translation; public domain since 30 April 2023), ASV, YLT, Douay-Rheims, KJV and WEB.
+- **Translations offered (18 bundled):**
+  - English, public domain: BSB (Berean Standard Bible, a modern NIV/ESV-style translation; public domain since 30 April 2023), ASV, YLT, Douay-Rheims and WEB.
   - Other languages, public domain: Spanish RV1909, French LSG, German Luther 1912, Italian Riveduta, Russian Synodal, Chinese CUV (simplified and traditional), Korean 1910, Japanese Kougo-yaku.
   - Other languages, CC BY/BY-SA (credited in the reader): Portuguese Bíblia Livre, Indonesian TSI, Tagalog ULB, Swahili ULB.
-  - We deliberately avoid Biblica's "open" editions. Polish and Amharic fall back to English because no suitable open text exists.
-- **Attribution** line shown under chapters for CC BY-SA translations (Portuguese, Polish, Indonesian, Tagalog, Swahili defaults).
-- **KJV**: shows the customary UK Crown-rights notice. **WEB**: text is used unmodified (the name "World English Bible" is an eBible.org trademark and must not be put on altered text).
-- **AI**: must quote Scripture **word-for-word** and label paraphrases as its own words. This keeps us inside the WEB trademark rule and the CC BY-SA ShareAlike terms. The client prompt and a **server-side policy** (`supabase/functions/chat/index.ts`) forbid quoting copyrighted translations. The Compare card only accepts KJV/WEB/BSB/ASV/YLT/DRA.
+  - We deliberately avoid Biblica's "open" editions. Polish and Amharic fall back to English because we have not verified a suitable open text.
+- **Attribution** line shown under chapters for CC BY-SA translations (Portuguese, Indonesian, Tagalog, Swahili defaults).
+- **KJV**: removed because a Crown notice does not grant permission for full commercial distribution in the UK. Legacy selections resolve to WEB. **WEB**: text is used unmodified (the name "World English Bible" is an eBible.org trademark and must not be put on altered text).
+- **AI**: must quote Scripture **word-for-word** and label paraphrases as its own words. These instructions reduce risk, but prompt instructions alone are not a guarantee of model behavior. The client prompt and a **server-side policy** (`supabase/functions/chat/index.ts`) forbid quoting copyrighted translations. The Compare card only accepts WEB/BSB/ASV/YLT/DRA.
 - Search runs offline over the bundled public-domain text.
+- Feed/widget Scripture excerpts use verbatim public-domain editions, with WEB as the fallback. The 308 daily-path passages also use verbatim WEB. Existing feed wording is migrated using SHA-256 lookup keys, without redistributing retired text.
+- Shared verse images and copied text carry the active translation badge and Creative Commons credits.
 
 ### Still to do
 - **Deploy the edge function**: `supabase functions deploy chat`.
-- Users' existing *saved verses / highlights* may contain NIV/ESV text they saved earlier. That is the user's own data on their device, and we left it alone.
+- Users' existing *saved verses / highlights* may contain NIV/ESV text they saved earlier. The migration replaces retired-edition wording with WEB while preserving their notes and highlights.
 - If you ever want NIV/ESV/NLT back, license them properly through **API.Bible** (American Bible Society) or the publishers directly. Read the AI clauses: API.Bible forbids using its content to train or fine-tune AI without written consent, and Biblica forbids derivative works.
 
 ---
@@ -44,8 +46,8 @@ Audit date: 2026-11-13. This file records what was changed in code, and what
 | OpenAI API | Disclose that AI voices are AI-generated | Shown in the voice picker and the Terms |
 | OpenAI API | Minors may use it only with parental consent; extra safeguards for under-18s | The consent screen requires confirming 18+ or parental permission; crisis safety rules are in place |
 | OpenAI API | No impersonation without disclosure | Biblical-figure chats are labelled as an AI portrayal (server policy and Terms) |
-| BSB, KJV, WEB, ASV, YLT, DRA and the other public-domain texts | None (public domain); KJV has a UK Crown notice; WEB name only on unmodified text | Done |
-| CC BY / BY-SA texts | Attribution, license link, ShareAlike for adaptations | Credit line in the reader; AI quotes verbatim |
+| BSB, WEB, ASV, YLT, DRA and the other public-domain texts | None (public domain); WEB name only on unmodified text | Done |
+| CC BY / BY-SA texts | Attribution, license link, ShareAlike for adaptations | Credits accompany reader text, copy/share text, and verse images; model instructions require verbatim quotations |
 | TikTok Business SDK | IDFA and cross-app tracking only with ATT | The SDK is not started without ATT |
 | RevenueCat / TelemetryDeck | Disclose in the privacy policy | Disclosed |
 

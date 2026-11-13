@@ -9,7 +9,7 @@ final class SavedBibleVerse {
     var chapter: Int = 1
     var verseNumber: Int = 1
     var text: String = ""
-    var translation: String = "KJV"
+    var translation: String = "WEB"
     var highlightColorRaw: String? = nil
     var notes: String = ""
     var createdAt: Date = Date()

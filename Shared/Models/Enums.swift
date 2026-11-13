@@ -507,21 +507,13 @@ enum ReferralSource: String, Codable, CaseIterable, Identifiable {
 
 /// Bible translations backed by bundled, public-domain text.
 ///
-/// LICENSING: Only `.kjv` and `.web` are public domain and may be shown,
-/// quoted, searched, sent to AI, or sold access to in a commercial app.
-/// The remaining cases (NIV, ESV, NLT, NASB, MSG, NKJV) are copyrighted by
-/// their publishers (Biblica, Crossway, Tyndale, Lockman, NavPress, Thomas
-/// Nelson) and require a paid license we do not hold. They were previously
-/// streamed from bolls.life without a license and have been removed.
-///
-/// The cases are kept ONLY so existing SwiftData rows that persisted one of
-/// those raw values still decode. Nothing may display them — every read goes
-/// through `licensed` / `available`, and `LicenseCompliance.migrate` rewrites
-/// stored profiles to `.web` on launch.
+/// WEB is the supported legacy enum value. Other raw values remain decodable
+/// for existing saved data; all active use resolves through `licensed`.
+/// KJV is excluded because we do not hold the territorial permission needed
+/// for distribution in the UK. The multi-language allowlist lives separately.
 enum BibleTranslation: String, Codable, CaseIterable, Identifiable {
     case kjv
     case web
-    // Unlicensed — decode-compatibility only. Never surface these.
     case niv
     case esv
     case nlt
@@ -530,56 +522,17 @@ enum BibleTranslation: String, Codable, CaseIterable, Identifiable {
     case nkjv
 
     var id: String { rawValue }
-
-    /// Translations the app is legally allowed to offer. Use this instead of
-    /// `allCases` in every picker / comparison / prompt.
-    static let available: [BibleTranslation] = [.kjv, .web]
-
-    /// True for public-domain translations we may use commercially.
+    static let available: [BibleTranslation] = [.web]
     var isLicensedForUse: Bool { Self.available.contains(self) }
-
-    /// The translation to actually use for this value. Unlicensed legacy
-    /// values resolve to the World English Bible (modern English, public domain).
-    var licensed: BibleTranslation { isLicensedForUse ? self : .web }
-
-    var displayName: String {
-        switch licensed {
-        case .kjv: String(localized: "King James Version")
-        default: String(localized: "World English Bible")
-        }
-    }
-
-    /// Short abbreviation shown in compact UI (toolbar badge, etc.)
-    var abbreviation: String {
-        switch licensed {
-        case .kjv: "KJV"
-        default: "WEB"
-        }
-    }
-
-    var subtitle: String {
-        switch licensed {
-        case .kjv: String(localized: "Classic and poetic language")
-        default: String(localized: "Modern English, public domain")
-        }
-    }
-
-    /// Stable key used for on-disk cache paths.
+    var licensed: BibleTranslation { .web }
+    var displayName: String { String(localized: "World English Bible") }
+    var abbreviation: String { "WEB" }
+    var subtitle: String { String(localized: "Modern English, public domain") }
     var apiCode: String { abbreviation }
-
-    /// All licensed translations are bundled offline.
     var isBundled: Bool { isLicensedForUse }
-
-    /// Public-domain Scripture is never paywalled.
     var isProOnly: Bool { false }
-
     var john316: String {
-        switch licensed {
-        case .kjv:
-            "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life."
-        default:
-            "For God so loved the world, that he gave his one and only Son, that whoever believes in him should not perish, but have eternal life."
-        }
+        "For God so loved the world, that he gave his one and only Son, that whoever believes in him should not perish, but have eternal life."
     }
 }
 

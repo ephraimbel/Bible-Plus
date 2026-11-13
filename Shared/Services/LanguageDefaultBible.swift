@@ -10,18 +10,18 @@ import Foundation
 /// listed in `TranslationLicensePolicy.bundled`. Re-vetted 2026-11-13.
 ///
 /// Coverage notes:
-///   - Indonesian (`ind_tsi`): 48 books. Missing books fall back to KJV.
+///   - Indonesian (`ind_tsi`): 48 books. Missing books fall back to WEB.
 enum LanguageDefaultBible {
 
-    /// English always uses the bundled KJV — we don't use a ref for
+    /// English always uses the bundled WEB — we don't use a ref for
     /// English users because the bundled translations are offline-first and
     /// compile-time guaranteed.
-    static let bundledEnglishID = "bundled_kjv"
+    static let bundledEnglishID = "bundled_web"
 
     /// Tier 1 language → default bundled translation id. Keys are the `code`
     /// values from `SupportedLanguage.all`.
     static let defaults: [String: String] = [
-        "en":      "bundled_kjv",   // Bundled
+        "en":      "bundled_web",   // Bundled
         "es":      "spa_r09",       // Reina Valera 1909 — classic, PD
         "pt-BR":   "por_blj",       // Bíblia Livre
         "pt-PT":   "por_blj",       // same — closest open-licensed option for PT-PT
@@ -29,7 +29,7 @@ enum LanguageDefaultBible {
         "de":      "deu_l12",       // Luther Bibel 1912 — classic
         "it":      "ita_riv",       // Riveduta
         // "pl": no non-Biblica Polish text allows commercial use + derivatives
-        // (UBG is CC BY-ND), so Polish falls back to KJV.
+        // (UBG is CC BY-ND), so Polish falls back to WEB.
         "ru":      "rus_syn",       // Synodal 1876 — the Russian Bible
         "zh-Hans": "cmn_cu1",       // 新标点和合本 simplified CUV
         "zh-Hant": "cmn_cuv",       // 新標點和合本 traditional CUV
@@ -39,13 +39,13 @@ enum LanguageDefaultBible {
         "tl":      "tgl_ulb",       // Tagalog ULB
         "sw":      "swh_ulb",       // Swahili Unlocked Literal Bible — CC BY-SA
         // "am": no Amharic translation we found has a commercial-use
-        // license (amh_amh publishes none), so Amharic falls back to KJV.
+        // license (amh_amh publishes none), so Amharic falls back to WEB.
     ]
 
     /// Resolve a language code (possibly with a region tag like `pt-BR` or
     /// `zh-Hans`) to the right bundled id. Tries exact match first, then
     /// falls back to the base language ("pt" → first "pt-*" entry). Returns
-    /// nil for unknown locales so callers can route to the legacy KJV path.
+    /// nil for unknown locales so callers can route to the legacy WEB path.
     static func defaultRefID(for languageCode: String) -> String? {
         if let hit = defaults[languageCode] { return hit }
         let base = String(languageCode.prefix { $0 != "-" })

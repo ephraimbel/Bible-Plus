@@ -146,6 +146,7 @@ extension TranslationRef {
     /// fast path (no network, no disk download).
     static let bundledPrefix = "bundled_"
 
+    /// Decode-compatibility identifier only; excluded from the allowlist.
     static let bundledKJV = TranslationRef(
         id: bundledPrefix + "kjv",
         shortName: "KJV",
@@ -182,7 +183,7 @@ extension TranslationRef {
         website: nil
     )
 
-    var isBundled: Bool { id == Self.bundledKJV.id || id == Self.bundledWEB.id }
+    var isBundled: Bool { id == Self.bundledWEB.id }
 
     /// Hand-vetted, public-domain English translations offered in the reader's
     /// translation picker alongside the bundled KJV/WEB. These replace the
@@ -219,7 +220,7 @@ extension TranslationRef {
     /// helloao-sourced translation.
     var legacyBundled: BibleTranslation? {
         switch id {
-        case Self.bundledKJV.id: .kjv
+        case Self.bundledKJV.id: .web
         case Self.bundledWEB.id: .web
         default: nil
         }

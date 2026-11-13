@@ -3,7 +3,7 @@ import SwiftUI
 /// Picker for the active Bible translation.
 ///
 /// Shows only translations Bible+ is licensed to distribute commercially:
-/// the bundled public-domain KJV/WEB (`BibleTranslation.available`) plus
+/// the bundled public-domain WEB (`BibleTranslation.available`) plus
 /// bundled public-domain refs (`TranslationRef.featuredEnglish`:
 /// BSB, ASV, YLT, DRA). Copyrighted translations (NIV/ESV/NLT/NASB/MSG/NKJV)
 /// were removed — see `TranslationLicensePolicy`.

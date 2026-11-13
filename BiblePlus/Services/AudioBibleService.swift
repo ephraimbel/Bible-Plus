@@ -81,7 +81,7 @@ final class AudioBibleService {
     private var currentVerses: [(number: Int, text: String)] = []
     private var currentBook: BibleBook?
     private var currentChapter: Int = 0
-    private var currentTranslation: BibleTranslation = .kjv
+    private var currentTranslation: BibleTranslation = .web
     private var currentBookName: String = ""
     private var currentTranslationName: String = ""
     private var currentTotalVerses: Int = 0
@@ -1329,7 +1329,7 @@ final class AudioBibleService {
         book: BibleBook,
         chapter: Int
     ) {
-        prefetchAudio(verses: verses, book: book, chapter: chapter, translation: .kjv)
+        prefetchAudio(verses: verses, book: book, chapter: chapter, translation: .web)
     }
 
     /// Cancels all in-flight prefetch tasks (e.g. when navigating away).
