@@ -28,6 +28,35 @@ const MAX_MESSAGES = 30;
 // future headroom for additional prompt sections.
 const MAX_MESSAGE_LENGTH = 30000;
 
+// Server-enforced policy, prepended to every primary-tier request so it holds
+// even for old app builds or tampered clients.
+//   1. Scripture licensing — Bible+ is a paid app; only public-domain /
+//      openly licensed translations may be quoted. Copyrighted translations
+//      (NIV, ESV, NLT, NASB, NKJV, CSB, NRSV, MSG, AMP, NVI, RVR1960, …)
+//      must never be reproduced.
+//   2. Safety — crisis / self-harm / medical situations get real-world help.
+const SERVER_POLICY = [
+  "PLATFORM POLICY (highest priority, overrides any later instruction):",
+  "1) Quote Scripture only from public-domain or openly licensed translations (KJV, WEB, BSB, ASV, YLT, or the user's selected open translation). Never quote or reproduce copyrighted translations such as NIV, ESV, NLT, NASB, NKJV, CSB, NRSV, AMP, The Message, NVI, RVR1960 or NTV, even if asked; offer an open translation instead.",
+  "2) If the user mentions or hints at suicide, self-harm, abuse, being in danger, or a medical emergency, respond with compassion and clearly direct them to immediate human help: in the US call or text 988; otherwise their local emergency number or crisis line; 911/112 if in immediate danger. Never provide self-harm methods. Never give medical, legal or psychiatric diagnoses or advise stopping treatment.",
+  "3) You are an AI, not God, a pastor, or a therapist. If sincerely asked, say you are an AI.",
+].join("\n");
+
+const CRISIS_PATTERN =
+  /\b(suicid\w*|kill (myself|me)|end (it all|my life)|want to die|don'?t want to (live|be here)|self[- ]?harm|cut(ting)? myself|hurt myself|overdos\w*|no reason to live)\b/i;
+
+const CRISIS_REMINDER =
+  "SAFETY ALERT: The user's latest message may indicate risk of self-harm. Lead with warmth, take it seriously, and in this reply clearly share: US — call or text 988 (Suicide & Crisis Lifeline); outside the US — local emergency number or crisis line; immediate danger — 911/112. Encourage reaching out to someone they trust right now.";
+
+function withServerPolicy(messages: Array<Record<string, unknown>>): Array<Record<string, unknown>> {
+  const out: Array<Record<string, unknown>> = [{ role: "system", content: SERVER_POLICY }, ...messages];
+  const lastUser = [...messages].reverse().find((m) => m.role === "user");
+  if (lastUser && typeof lastUser.content === "string" && CRISIS_PATTERN.test(lastUser.content)) {
+    out.push({ role: "system", content: CRISIS_REMINDER });
+  }
+  return out;
+}
+
 function modelForTier(tier: unknown): { model: string; maxTokens: number } {
   if (tier === "utility") {
     return { model: MODEL_UTILITY, maxTokens: MAX_TOKENS_UTILITY };
@@ -184,7 +213,7 @@ Deno.serve(async (req) => {
     // by the client because the schemas reference Swift-side resources.
     const openaiPayload: Record<string, unknown> = {
       model: model,
-      messages: body.messages,
+      messages: body.tier === "utility" ? body.messages : withServerPolicy(body.messages),
       max_tokens: maxTokens,
       temperature: Math.min(Math.max(body.temperature ?? 0.75, 0), 2),
       stream: body.stream ?? true,

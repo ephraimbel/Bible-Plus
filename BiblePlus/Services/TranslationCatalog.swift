@@ -7,8 +7,12 @@ import Foundation
 /// than once per `refreshInterval`. The UI reads from the in-memory list;
 /// the fetch itself is triggered at app launch (fire-and-forget).
 ///
-/// No API key, MIT license, commercial use permitted — see
-/// bible.helloao.org/docs/guide/a-biblical-model-for-licensing-the-bible.html.
+/// LICENSING: helloao's *API code* is MIT, but each translation carries its
+/// own license. ~half the catalog is CC BY-NC (non-commercial) or CC BY-ND
+/// (no derivatives), which a paid app with an AI companion cannot use. The
+/// decoded list is therefore filtered through
+/// `TranslationRef.isLicensedForCommercialUse` — restricted translations are
+/// never shown, fetched, or sent to the AI. See `TranslationLicensePolicy`.
 @Observable
 @MainActor
 final class TranslationCatalog {
@@ -26,6 +30,7 @@ final class TranslationCatalog {
 
     private init() {
         loadFromDisk()
+        TranslationLicensePolicy.updateCatalog(translations)
     }
 
     // MARK: - Public API
@@ -73,6 +78,7 @@ final class TranslationCatalog {
             }
             let decoded = try Self.decodeManifest(data)
             translations = decoded
+            TranslationLicensePolicy.updateCatalog(decoded)
             Self.writeDisk(data: data, timestamp: Date())
         } catch {
             lastRefreshError = error.localizedDescription
@@ -85,11 +91,17 @@ final class TranslationCatalog {
     /// a top-level `translations` key — decode both defensively.
     private static func decodeManifest(_ data: Data) throws -> [TranslationRef] {
         let decoder = JSONDecoder()
+        let entries: [TranslationRef.HelloAOEntry]
         if let wrapper = try? decoder.decode(Wrapper.self, from: data) {
-            return wrapper.translations.map(TranslationRef.init(from:))
+            entries = wrapper.translations
+        } else {
+            entries = try decoder.decode([TranslationRef.HelloAOEntry].self, from: data)
         }
-        let bare = try decoder.decode([TranslationRef.HelloAOEntry].self, from: data)
-        return bare.map(TranslationRef.init(from:))
+        // Drop every translation whose license forbids commercial use or
+        // derivatives, or that publishes no license at all.
+        return entries
+            .map(TranslationRef.init(from:))
+            .filter(\.isLicensedForCommercialUse)
     }
 
     private struct Wrapper: Decodable {

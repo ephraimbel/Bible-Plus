@@ -30,53 +30,29 @@ final class BibleRepository: @unchecked Sendable {
 
     func setTranslation(_ translation: BibleTranslation) {
         lock.lock()
-        _currentTranslation = translation
+        // Never allow an unlicensed (copyrighted) translation to become active.
+        _currentTranslation = translation.licensed
         lock.unlock()
     }
 
     // MARK: - Async Access
 
     func verses(book: String, chapter: Int, translation: BibleTranslation? = nil) async throws -> [(number: Int, text: String)] {
-        let trans = translation ?? currentTranslation
+        // Only public-domain bundled translations (KJV/WEB) exist on this
+        // path. Copyrighted translations (NIV/ESV/NLT/…) were previously
+        // streamed from bolls.life without a license — that path is gone.
+        let trans = (translation ?? currentTranslation).licensed
         let cacheKey = Self.cacheKey(book: book, chapter: chapter, translation: trans)
 
-        // 1. Memory cache
         if let cached = memoryCache.object(forKey: cacheKey as NSString) {
             return cached.verses
         }
 
-        // 2. Disk cache
-        if let diskVerses = readDiskCache(book: book, chapter: chapter, translation: trans) {
-            let cached = CachedChapter(verses: diskVerses)
-            memoryCache.setObject(cached, forKey: cacheKey as NSString)
-            return diskVerses
+        let bundled = bundledFallback(book: book, chapter: chapter, translation: trans)
+        if !bundled.isEmpty {
+            memoryCache.setObject(CachedChapter(verses: bundled), forKey: cacheKey as NSString)
         }
-
-        // 3. Bundled data (KJV + WEB — full Bible offline, no network needed)
-        if trans.isBundled {
-            let bundled = bundledFallback(book: book, chapter: chapter, translation: trans)
-            if !bundled.isEmpty {
-                let cached = CachedChapter(verses: bundled)
-                memoryCache.setObject(cached, forKey: cacheKey as NSString)
-                return bundled
-            }
-        }
-
-        // 4. Network fetch (for non-bundled translations)
-        guard let bookNumber = BibleData.apiBookNumber(for: book) else { return [] }
-
-        let fetched = try await BibleAPIService.fetchChapter(
-            translation: trans.apiCode,
-            bookNumber: bookNumber,
-            chapter: chapter
-        )
-
-        // Cache results
-        let cached = CachedChapter(verses: fetched)
-        memoryCache.setObject(cached, forKey: cacheKey as NSString)
-        writeDiskCache(verses: fetched, book: book, chapter: chapter, translation: trans)
-
-        return fetched
+        return bundled
     }
 
     // MARK: - Multi-language (helloao catalog) Access
@@ -109,6 +85,13 @@ final class BibleRepository: @unchecked Sendable {
         if refID.hasPrefix(TranslationRef.bundledPrefix) {
             let legacy: BibleTranslation = (refID == TranslationRef.bundledWEB.id) ? .web : .kjv
             return try await verses(book: book, chapter: chapter, translation: legacy)
+        }
+
+        // Licensing gate: never fetch or show a translation whose license
+        // forbids commercial use / derivatives (or is unknown). Fall back to
+        // the bundled public-domain text instead.
+        guard TranslationLicensePolicy.isAllowed(refID: refID) else {
+            return try await verses(book: book, chapter: chapter, translation: nil)
         }
 
         let cacheKey = "ref:\(refID)/\(book)/\(chapter)" as NSString
@@ -243,19 +226,12 @@ final class BibleRepository: @unchecked Sendable {
     // MARK: - Synchronous Access (Offline / Widget)
 
     func versesSync(book: String, chapter: Int, translation: BibleTranslation? = nil) -> [(number: Int, text: String)] {
-        let trans = translation ?? currentTranslation
+        let trans = (translation ?? currentTranslation).licensed
         let cacheKey = Self.cacheKey(book: book, chapter: chapter, translation: trans)
 
         // Memory cache
         if let cached = memoryCache.object(forKey: cacheKey as NSString) {
             return cached.verses
-        }
-
-        // Disk cache
-        if let diskVerses = readDiskCache(book: book, chapter: chapter, translation: trans) {
-            let cached = CachedChapter(verses: diskVerses)
-            memoryCache.setObject(cached, forKey: cacheKey as NSString)
-            return diskVerses
         }
 
         // Bundled fallback
@@ -367,46 +343,29 @@ final class BibleRepository: @unchecked Sendable {
         "\(translation.apiCode)/\(book)/\(chapter)"
     }
 
-    // MARK: - Disk Cache
+    // MARK: - License Cleanup
 
-    private func diskCacheURL(book: String, chapter: Int, translation: BibleTranslation) -> URL {
-        let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-        return base
+    /// Deletes Bible text cached on disk from translations we are not
+    /// licensed to distribute: the old bolls.life downloads (NIV, ESV, NLT,
+    /// NASB, MSG, NKJV, plus legacy KJV/WEB API copies) and any helloao
+    /// translation whose license forbids commercial use or derivatives.
+    /// Safe and cheap to run on every launch.
+    func purgeUnlicensedCaches() {
+        let fm = FileManager.default
+        let base = fm.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("BibleCache", isDirectory: true)
-            .appendingPathComponent(translation.apiCode, isDirectory: true)
-            .appendingPathComponent(book, isDirectory: true)
-            .appendingPathComponent("\(chapter).json")
-    }
-
-    private func readDiskCache(book: String, chapter: Int, translation: BibleTranslation) -> [(number: Int, text: String)]? {
-        let url = diskCacheURL(book: book, chapter: chapter, translation: translation)
-        guard let data = try? Data(contentsOf: url),
-              let dict = try? JSONSerialization.jsonObject(with: data) as? [String: String]
-        else { return nil }
-
-        let verses = dict
-            .compactMap { key, value -> (number: Int, text: String)? in
-                guard let num = Int(key) else { return nil }
-                return (number: num, text: value)
+        guard let entries = try? fm.contentsOfDirectory(atPath: base.path) else { return }
+        for name in entries {
+            let shouldDelete: Bool
+            if name.hasPrefix("ref-") {
+                shouldDelete = !TranslationLicensePolicy.isAllowed(refID: String(name.dropFirst(4)))
+            } else {
+                // Legacy bolls.life cache folders (keyed by apiCode).
+                shouldDelete = true
             }
-            .sorted { $0.number < $1.number }
-
-        return verses.isEmpty ? nil : verses
-    }
-
-    private func writeDiskCache(verses: [(number: Int, text: String)], book: String, chapter: Int, translation: BibleTranslation) {
-        let url = diskCacheURL(book: book, chapter: chapter, translation: translation)
-        let dir = url.deletingLastPathComponent()
-
-        try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
-
-        var dict: [String: String] = [:]
-        for v in verses {
-            dict["\(v.number)"] = v.text
-        }
-
-        if let data = try? JSONSerialization.data(withJSONObject: dict, options: .sortedKeys) {
-            try? data.write(to: url, options: .atomic)
+            if shouldDelete {
+                try? fm.removeItem(at: base.appendingPathComponent(name, isDirectory: true))
+            }
         }
     }
 }

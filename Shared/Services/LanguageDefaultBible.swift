@@ -6,14 +6,13 @@ import Foundation
 /// flip to Japanese we pick what's available. Users can still override in the
 /// translation picker.
 ///
-/// IDs here must exactly match helloao's `available_translations.json`. Hand-
-/// picked on 2026-04-23 by scanning the live catalog — see the inline comment
-/// next to each entry for the chosen rationale.
+/// IDs here must exactly match helloao's `available_translations.json` AND be
+/// listed in `TranslationLicensePolicy.knownLicenses` (commercial use +
+/// derivatives allowed). Re-vetted for licensing on 2026-11-13.
 ///
 /// Coverage notes:
-///   - Japanese (`jpn_loc`): NT only (27 books). OT reads fall back to the
-///     legacy enum until a complete JA option lands in the catalog.
-///   - Amharic (`amh_amh`): NT only. Same fallback behavior.
+///   - Polish (`pol_bib`): NT only (27 books). OT reads fall back to the
+///     bundled English text.
 enum LanguageDefaultBible {
 
     /// English always uses the bundled KJV — we don't point at helloao for
@@ -31,16 +30,17 @@ enum LanguageDefaultBible {
         "fr":      "fra_lsg",       // Louis Segond 1910 — classic
         "de":      "deu_l12",       // Luther Bibel 1912 — classic
         "it":      "ita_riv",       // Riveduta
-        "pl":      "pol_ubg",       // Updated Gdansk
+        "pl":      "pol_bib",       // Polish OPLNT — CC BY-SA, NT only (UBG is CC BY-ND)
         "ru":      "rus_syn",       // Synodal 1876 — the Russian Bible
         "zh-Hans": "cmn_cu1",       // 新标点和合本 simplified CUV
         "zh-Hant": "cmn_cuv",       // 新標點和合本 traditional CUV
         "ko":      "kor_old",       // Korean 1910
-        "ja":      "jpn_loc",       // Japanese NT only
-        "id":      "ind_ayt",       // Indonesian AYT
+        "ja":      "jpn_kou",       // Kougo-yaku 1955 — public domain, complete
+        "id":      "ind_tsi",       // Plain Indonesian — CC BY-SA, 48 books (AYT is CC BY-NC)
         "tl":      "tgl_ulb",       // Tagalog ULB
         "sw":      "swh_bib",       // Kiswahili Contemporary
-        "am":      "amh_amh",       // Amharic NT only
+        // "am": no Amharic translation in helloao has a commercial-use
+        // license (amh_amh publishes none), so Amharic falls back to KJV.
     ]
 
     /// Resolve a language code (possibly with a region tag like `pt-BR` or
@@ -62,6 +62,6 @@ enum LanguageDefaultBible {
     /// BibleReaderViewModel uses this to warn users and to fall back to the
     /// bundled English path when an OT chapter is requested.
     static func isNewTestamentOnly(refID: String) -> Bool {
-        refID == "jpn_loc" || refID == "amh_amh"
+        refID == "jpn_loc" || refID == "pol_bib"
     }
 }

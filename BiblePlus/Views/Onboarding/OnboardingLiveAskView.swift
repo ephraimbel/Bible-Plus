@@ -32,6 +32,8 @@ struct OnboardingLiveAskView: View {
     @State private var answer = ""
     @State private var streamTask: Task<Void, Never>? = nil
     @State private var introIn = false
+    @State private var showAIConsent = false
+    @State private var pendingQuestion = ""
     @FocusState private var fieldFocused: Bool
 
     private let accentGold = Color(red: 0.79, green: 0.66, blue: 0.43)
@@ -55,6 +57,19 @@ struct OnboardingLiveAskView: View {
             withAnimation(reduceMotion ? nil : .easeOut(duration: 0.6)) { introIn = true }
         }
         .onDisappear { streamTask?.cancel(); streamTask = nil }
+        .sheet(isPresented: $showAIConsent) {
+            AIConsentView(
+                onAllow: {
+                    AIConsent.grant()
+                    showAIConsent = false
+                    submit(pendingQuestion)
+                },
+                onDecline: {
+                    showAIConsent = false
+                    questionText = pendingQuestion
+                }
+            )
+        }
     }
 
     // MARK: - Idle (ask)
@@ -260,6 +275,11 @@ struct OnboardingLiveAskView: View {
     private func submit(_ raw: String) {
         let q = raw.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !q.isEmpty, phase == .idle else { return }
+        guard AIConsent.isGranted else {
+            pendingQuestion = q
+            showAIConsent = true
+            return
+        }
         HapticService.commit()
         fieldFocused = false
         submittedQuestion = q

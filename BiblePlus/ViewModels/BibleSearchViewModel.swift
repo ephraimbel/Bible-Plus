@@ -91,7 +91,7 @@ final class BibleSearchViewModel {
     }()
 
     init(translation: BibleTranslation) {
-        self.currentTranslation = translation
+        self.currentTranslation = translation.licensed
     }
 
     func searchDebounced() {
@@ -384,11 +384,10 @@ final class BibleSearchViewModel {
             errorMessage = nil
         }
 
-        if currentTranslation.isBundled {
-            await fetchBundledPage(page: page, append: append)
-        } else {
-            await fetchAPIPage(page: page, append: append)
-        }
+        // All licensed translations are bundled, so search runs fully
+        // offline. (The old bolls.life remote search served copyrighted
+        // translations and has been removed.)
+        await fetchBundledPage(page: page, append: append)
     }
 
     private func fetchBundledPage(page: Int, append: Bool) async {
@@ -423,47 +422,5 @@ final class BibleSearchViewModel {
         totalResults = response.total
         hasMoreResults = results.count < response.total
         isSearching = false
-    }
-
-    private func fetchAPIPage(page: Int, append: Bool) async {
-        do {
-            let response = try await BibleAPIService.searchVerses(
-                translation: currentTranslation.apiCode,
-                query: query.trimmingCharacters(in: .whitespaces),
-                page: page,
-                limit: pageLimit
-            )
-
-            guard !Task.isCancelled else { return }
-
-            let mapped = response.results.compactMap { verse -> BibleSearchResult? in
-                let bookIndex = verse.book - 1
-                guard bookIndex >= 0, bookIndex < BibleData.allBooks.count else { return nil }
-                let book = BibleData.allBooks[bookIndex]
-                return BibleSearchResult(
-                    book: book,
-                    chapter: verse.chapter,
-                    verseNumber: verse.verse,
-                    text: verse.text
-                )
-            }
-
-            if append {
-                results.append(contentsOf: mapped)
-            } else {
-                results = mapped
-            }
-
-            totalResults = response.total
-            hasMoreResults = results.count < response.total
-            isSearching = false
-        } catch {
-            guard !Task.isCancelled else { return }
-            if !append {
-                results = []
-            }
-            errorMessage = error.localizedDescription
-            isSearching = false
-        }
     }
 }

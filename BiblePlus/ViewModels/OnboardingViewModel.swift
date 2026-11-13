@@ -91,11 +91,12 @@ final class OnboardingViewModel {
         audioService.stop()
         HapticService.notification(.success)
 
-        TikTokAnalyticsService.shared.trackOnboardingComplete()
-
         Task { @MainActor in
             try? await Task.sleep(nanoseconds: 700_000_000)
+            // TikTok only initializes (and only receives events) if the user
+            // allows tracking here — see TikTokAnalyticsService.
             await TikTokAnalyticsService.shared.requestTrackingAuthorization()
+            TikTokAnalyticsService.shared.trackOnboardingComplete()
         }
 
         // ── First-session retention hooks ────────────────────────────────

@@ -2,16 +2,14 @@ import SwiftUI
 
 /// Picker for the active Bible translation.
 ///
-/// Shows the eight main English translations (`BibleTranslation.allCases`) as a
-/// fixed, in-memory list so the sheet opens instantly with no lag — no catalog
-/// build, no language grouping, and no network fetch on open. KJV and WEB are
-/// bundled and offline; NIV/ESV/NLT/etc. stream and are Pro-gated.
+/// Shows only translations Bible+ is licensed to distribute commercially:
+/// the bundled public-domain KJV/WEB (`BibleTranslation.available`) plus
+/// hand-vetted public-domain helloao refs (`TranslationRef.featuredEnglish`:
+/// BSB, ASV, YLT, DRA). Copyrighted translations (NIV/ESV/NLT/NASB/MSG/NKJV)
+/// were removed — see `TranslationLicensePolicy`.
 ///
-/// Selection flows through `onSelectLegacy`, which persists to
-/// `UserProfile.preferredTranslation` via `BibleReaderViewModel.changeTranslation(_:)`
-/// and reloads the current chapter. `onSelectRef` / `currentRefID` are retained
-/// in the signature for the caller but are not used by this fast 8-translation
-/// picker.
+/// Bundled picks flow through `onSelectLegacy`; featured refs through
+/// `onSelectRef`. Fixed in-memory list, so the sheet opens instantly.
 struct BibleTranslationPickerView: View {
     let currentTranslation: BibleTranslation
     let currentRefID: String?
@@ -31,8 +29,11 @@ struct BibleTranslationPickerView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     sectionHeader("English")
                     VStack(spacing: 8) {
-                        ForEach(BibleTranslation.allCases) { translation in
+                        ForEach(BibleTranslation.available) { translation in
                             legacyRow(translation)
+                        }
+                        ForEach(TranslationRef.featuredEnglish) { ref in
+                            refRow(ref)
                         }
                     }
                 }
@@ -106,6 +107,54 @@ struct BibleTranslationPickerView: View {
             .opacity(locked ? 0.7 : 1.0)
         }
         .buttonStyle(.plain)
+    }
+
+    private func refRow(_ ref: TranslationRef) -> some View {
+        let isSelected = currentRefID == ref.id
+        return Button {
+            onSelectRef(ref)
+        } label: {
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack(spacing: 8) {
+                        Text(ref.shortName)
+                            .font(.system(size: 14, weight: .bold, design: .rounded))
+                            .foregroundStyle(isSelected ? .white : palette.accent)
+                            .frame(width: 44, alignment: .leading)
+                        Text(ref.englishName)
+                            .font(BPFont.button)
+                            .foregroundStyle(isSelected ? .white : palette.textPrimary)
+                    }
+                    Text(Self.subtitle(for: ref.id))
+                        .font(BPFont.caption)
+                        .foregroundStyle(isSelected ? .white.opacity(0.8) : palette.textMuted)
+                        .padding(.leading, 52)
+                }
+                Spacer()
+                if isSelected {
+                    Image(systemName: "checkmark")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundStyle(.white)
+                }
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 14)
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(isSelected ? palette.accent : palette.surface)
+            )
+        }
+        .buttonStyle(.plain)
+    }
+
+    private static func subtitle(for id: String) -> String {
+        switch id {
+        case "BSB": String(localized: "Modern, clear, and accurate")
+        case "eng_asv": String(localized: "Formal, word-for-word classic")
+        case "eng_ylt": String(localized: "Strictly literal rendering")
+        case "eng_dra": String(localized: "Traditional Catholic translation")
+        default: String(localized: "Public domain")
+        }
     }
 
     // MARK: - Helpers

@@ -126,6 +126,10 @@ struct BiblePlusApp: App {
         ContentSeeder.seedDailyPathsIfNeeded(modelContext: seedContext)
         ContentSeeder.migrateOrphanedMessages(modelContext: seedContext)
 
+        // Licensing: move users off copyrighted / non-commercial translations
+        // and delete any such text cached on disk.
+        LicenseCompliance.migrate(modelContext: seedContext)
+
         // Recovery: ensure the Daily Path reminder is correctly scheduled
         // (or cancelled) for the user's current state. Cheap, idempotent,
         // safe to call on every launch. Internal refresh logic cancels the
@@ -326,7 +330,6 @@ struct RootView: View {
     @State private var deepLinkedContentID: UUID?
     @State private var showSplash = true
     @State private var storeKitService = StoreKitService()
-    @State private var reviewService = ReviewService.shared
     // LocalizationService is a singleton; holding it in @State gives SwiftUI
     // a stable identity for observation so the whole tree re-renders when
     // the user switches languages from Settings.
@@ -379,22 +382,7 @@ struct RootView: View {
                     .zIndex(1)
             }
 
-            // Review prompt overlay
-            if reviewService.showPrompt {
-                Color.black.opacity(0.4)
-                    .ignoresSafeArea()
-                    .zIndex(2)
-                    .onTapGesture { reviewService.userTappedNotYet() }
-
-                ReviewPromptView(
-                    onYes: { reviewService.userTappedYes() },
-                    onNotYet: { reviewService.userTappedNotYet() }
-                )
-                .zIndex(3)
-                .transition(.scale(scale: 0.85).combined(with: .opacity))
-            }
         }
-        .environment(reviewService)
         .environment(localizationService)
         .environment(\.locale, localizationService.locale)
         .environment(\.layoutDirection, localizationService.layoutDirection)
@@ -402,7 +390,6 @@ struct RootView: View {
         // ensures every cached `Text(...)` re-resolves immediately without
         // requiring an app relaunch.
         .id(localizationService.currentCode ?? "system")
-        .animation(.spring(response: 0.4, dampingFraction: 0.8), value: reviewService.showPrompt)
         .onAppear {
             // Splash hold tuned to let the glow bloom land (~1.0s) plus a
             // short beat so the handoff to Welcome feels intentional, not

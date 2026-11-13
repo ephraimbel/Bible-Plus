@@ -12,6 +12,8 @@ struct ChapterReaderView: View {
     let errorMessage: String?
     let isShowingOfflineFallback: Bool
     let offlineTranslationName: String
+    /// License credit line for CC BY-SA translations; nil for public domain.
+    var translationAttribution: String? = nil
     let savedVerseNumbers: Set<Int>
     let highlightColors: [Int: VerseHighlightColor]
     let verseNotes: [Int: String]
@@ -82,6 +84,16 @@ struct ChapterReaderView: View {
                             let cleanText = normalizedVerseText(stripPsalmHeading(verse.text))
                             verseRow(number: verse.number, text: cleanText, isRedLetter: isRed)
                                 .id(verse.number)
+                        }
+
+                        // Required by the translation's license (CC BY-SA).
+                        if let attribution = translationAttribution, !displayVerses.isEmpty {
+                            Text(attribution)
+                                .font(.system(size: 11))
+                                .foregroundStyle(palette.textMuted)
+                                .multilineTextAlignment(.center)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .padding(.top, 24)
                         }
                     }
                     .padding(.horizontal, 24)

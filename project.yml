@@ -151,6 +151,9 @@ targets:
       - path: BiblePlusWidgets
         excludes:
           - "**/.DS_Store"
+          - "PrivacyInfo.xcprivacy"
+      - path: BiblePlusWidgets/PrivacyInfo.xcprivacy
+        buildPhase: resources
       - path: Shared
         excludes:
           - "**/.DS_Store"

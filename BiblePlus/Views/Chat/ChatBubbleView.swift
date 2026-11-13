@@ -20,6 +20,7 @@ struct ChatBubbleView: View {
     var appearDelay: Double = 0
 
     @Environment(\.bpPalette) private var palette
+    @Environment(\.openURL) private var openURL
     @State private var appeared: Bool = false
     @State private var isSaved: Bool = false
     @State private var saveScale: CGFloat = 1.0
@@ -409,6 +410,25 @@ struct ChatBubbleView: View {
                     Label("Share as Card", systemImage: "photo.artframe")
                 }
             }
+
+            // Let users flag harmful or inaccurate AI output (Guidelines 1.1 / 1.2).
+            Button(role: .destructive) {
+                if let url = reportURL { openURL(url) }
+            } label: {
+                Label("Report Response", systemImage: "exclamationmark.bubble")
+            }
         }
+    }
+
+    /// Pre-filled email to support containing the flagged AI response.
+    private var reportURL: URL? {
+        var components = URLComponents()
+        components.scheme = "mailto"
+        components.path = "support@bibleplus.io"
+        components.queryItems = [
+            URLQueryItem(name: "subject", value: "Report AI response"),
+            URLQueryItem(name: "body", value: "What's wrong with this response?\n\n\n---\nResponse:\n\(String(message.content.prefix(1500)))"),
+        ]
+        return components.url
     }
 }

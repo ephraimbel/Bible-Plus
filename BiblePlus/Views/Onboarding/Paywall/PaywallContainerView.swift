@@ -5,9 +5,9 @@ import SwiftUI
 //
 // Midnight palette. A centered serif hero + headline, a clean checkmark
 // benefit list, and two side-by-side price cards pinned above the CTA:
-// Monthly and Yearly (Best Value, 7-day free trial, showing the exact dollar
+// Monthly and Yearly (Best Value, free trial when eligible, showing the exact dollar
 // savings). Yearly is pre-selected to steer plan mix toward the higher-LTV
-// annual plan. Hard paywall in onboarding (no close); closable from Settings.
+// annual plan. Onboarding offers "Continue with the free version"; closable from Settings.
 //
 // Locked to the DARK palette so the paywall reads identically across system
 // theme settings and conversion stays predictable.
@@ -23,6 +23,7 @@ struct PaywallContainerView: View {
 
     @State private var vm: PaywallViewModel?
     @State private var showContent = false
+    @State private var restoreMessage: String?
 
     private let palette = BPColorPalette.dark
     private let accentGold = Color(red: 0.79, green: 0.66, blue: 0.43)
@@ -81,6 +82,14 @@ struct PaywallContainerView: View {
             withAnimation(.easeOut(duration: 0.4).delay(0.1)) {
                 showContent = true
             }
+        }
+        .alert("Restore Purchases", isPresented: Binding(
+            get: { restoreMessage != nil },
+            set: { if !$0 { restoreMessage = nil } }
+        )) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(restoreMessage ?? "")
         }
         .alert("Purchase Failed", isPresented: Binding(
             get: { vm?.purchaseError != nil },
@@ -196,8 +205,26 @@ struct PaywallContainerView: View {
                 .lineLimit(2)
                 .padding(.horizontal, 24)
 
+            renewalDisclosure
+
             footerLinks
                 .padding(.top, 1)
+
+            // The app has a real free tier, so the onboarding paywall offers a
+            // visible way to continue without subscribing (reduces 3.1.2 /
+            // "hard paywall hides free features" review risk).
+            if isOnboarding {
+                Button {
+                    Analytics.track(.paywallDismissed, properties: ["reason": "continue_free"])
+                    onboardingViewModel?.goNext()
+                } label: {
+                    Text("Continue with the free version")
+                        .font(.system(size: 12, weight: .medium, design: .rounded))
+                        .foregroundStyle(palette.textSecondary)
+                        .underline()
+                }
+                .padding(.top, 2)
+            }
         }
         .padding(.top, 14)
         .padding(.bottom, 8)
@@ -241,7 +268,10 @@ struct PaywallContainerView: View {
                 title: "Yearly",
                 price: vm.yearlyPriceLabel(storeKitService),
                 sub: "\(vm.yearlyMonthlyBreakdown(storeKitService))/month",
-                badge: "7-DAY FREE TRIAL"
+                // Only advertise a trial this Apple ID will actually get.
+                badge: storeKitService.showsYearlyTrial
+                    ? "\((storeKitService.yearlyTrialLengthLabel ?? "").uppercased()) FREE TRIAL"
+                    : nil
             )
         }
     }
@@ -300,10 +330,9 @@ struct PaywallContainerView: View {
     // MARK: - Feature List (clean checkmarks)
 
     private let proFeatures: [String] = [
-        "Unlimited AI companion \u{2014} ask anything, anytime",
+        "AI companion \u{2014} up to 200 messages a day",
         "All 29 guided reading plans",
-        "Every Bible translation \u{2014} all 8",
-        "Audio Bible in 9 lifelike voices",
+        "Audio Bible in 9 AI-generated voices",
         "1,500+ daily prayers, verses & devotionals",
         "Sanctuary soundscapes, widgets & more",
     ]
@@ -465,7 +494,7 @@ struct PaywallContainerView: View {
         // Yearly is now the only plan with a free trial, so it's the only one
         // that may honestly say "Start Free Trial". Monthly is an immediate
         // (no-trial) purchase.
-        if vm.selectedProductID == StoreKitService.yearlyID {
+        if vm.selectedProductID == StoreKitService.yearlyID, storeKitService.showsYearlyTrial {
             return "Start Free Trial"
         }
         return "Subscribe Now"
@@ -473,9 +502,23 @@ struct PaywallContainerView: View {
 
     private func ctaSubtitle(vm: PaywallViewModel) -> String {
         if vm.selectedProductID == StoreKitService.yearlyID {
-            return "Then \(vm.yearlyPriceLabel(storeKitService))/yr after 7 days · Cancel anytime"
+            if storeKitService.showsYearlyTrial, let trial = storeKitService.yearlyTrialLengthLabel {
+                return "\(trial) free trial, then \(vm.yearlyPriceLabel(storeKitService)) per year. Auto-renews until cancelled."
+            }
+            return "\(vm.yearlyPriceLabel(storeKitService)) per year. Auto-renews until cancelled."
         }
-        return "\(vm.monthlyPriceLabel(storeKitService))/mo · Cancel anytime"
+        return "\(vm.monthlyPriceLabel(storeKitService)) per month. Auto-renews until cancelled."
+    }
+
+    /// Auto-renewable subscription disclosure (App Store Guideline 3.1.2,
+    /// Schedule 2 §3.8(b)).
+    private var renewalDisclosure: some View {
+        Text("Payment is charged to your Apple ID at confirmation of purchase (or when the free trial ends). Your subscription renews automatically unless cancelled at least 24 hours before the end of the current period. Manage or cancel anytime in your Apple ID Settings.")
+            .font(.system(size: 9.5, weight: .regular, design: .rounded))
+            .foregroundStyle(palette.textMuted.opacity(0.85))
+            .multilineTextAlignment(.center)
+            .fixedSize(horizontal: false, vertical: true)
+            .padding(.horizontal, 24)
     }
 
     // MARK: - Footer
@@ -484,14 +527,26 @@ struct PaywallContainerView: View {
         HStack(spacing: 14) {
             footerLink("Restore") {
                 Analytics.track(.paywallRestoreTapped)
-                Task { await storeKitService.restorePurchases() }
+                Task {
+                    let outcome = await storeKitService.restorePurchases()
+                    if outcome == .restored {
+                        // Same path as a successful purchase.
+                        if isOnboarding {
+                            onboardingViewModel?.goNext()
+                        } else {
+                            dismiss()
+                        }
+                    } else {
+                        restoreMessage = outcome.message
+                    }
+                }
             }
             footerDot
-            footerLink("Terms") {
+            footerLink("Terms of Use (EULA)") {
                 if let url = URL(string: "https://bibleplus.io/terms") { openURL(url) }
             }
             footerDot
-            footerLink("Privacy") {
+            footerLink("Privacy Policy") {
                 if let url = URL(string: "https://bibleplus.io/privacy") { openURL(url) }
             }
         }

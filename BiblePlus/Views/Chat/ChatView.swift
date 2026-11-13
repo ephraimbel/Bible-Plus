@@ -184,7 +184,16 @@ private struct ChatContentView: View {
             }
 
             // Input bar
-            inputBar
+            VStack(spacing: 4) {
+                inputBar
+                // Guideline 1.4.1 / 5.1.2: always-visible AI disclosure.
+                Text("AI can make mistakes. Not a substitute for a pastor, counselor, or doctor.")
+                    .font(.system(size: 10))
+                    .foregroundStyle(palette.textMuted.opacity(0.8))
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 24)
+                    .padding(.bottom, 2)
+            }
         }
         .background(topGoldGradient)
         .onAppear {
@@ -203,6 +212,16 @@ private struct ChatContentView: View {
                 showPaywall = true
                 viewModel.shouldShowPaywall = false
             }
+        }
+        .sheet(isPresented: $viewModel.shouldShowAIConsent) {
+            AIConsentView(
+                onAllow: {
+                    AIConsent.grant()
+                    viewModel.shouldShowAIConsent = false
+                    viewModel.send()
+                },
+                onDecline: { viewModel.shouldShowAIConsent = false }
+            )
         }
         .sheet(item: $viewModel.shareText) { text in
             ShareSheet(text: text)
@@ -675,7 +694,11 @@ private struct ChatContentView: View {
         HStack(alignment: .center, spacing: 12) {
             Button {
                 HapticService.lightImpact()
-                showVoiceChat = true
+                if AIConsent.isGranted {
+                    showVoiceChat = true
+                } else {
+                    viewModel.shouldShowAIConsent = true
+                }
             } label: {
                 Image(systemName: "waveform")
                     .font(.system(size: 18, weight: .regular))

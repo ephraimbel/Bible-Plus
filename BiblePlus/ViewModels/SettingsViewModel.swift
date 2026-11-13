@@ -35,7 +35,7 @@ final class SettingsViewModel {
     var editingFaithLevel: FaithLevel = .growing
     var editingLifeSeasons: [LifeSeason] = []
     var editingBurdens: [Burden] = []
-    var editingTranslation: BibleTranslation = .niv
+    var editingTranslation: BibleTranslation = .kjv
     var editingPrayerTimes: [PrayerTimeSlot] = []
 
     // MARK: - Sanctuary
@@ -89,7 +89,7 @@ final class SettingsViewModel {
     }
 
     func beginEditingTranslation() {
-        editingTranslation = profile.preferredTranslation
+        editingTranslation = profile.preferredTranslation.licensed
         showEditTranslation = true
     }
 

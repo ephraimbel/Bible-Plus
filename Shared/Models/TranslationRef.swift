@@ -27,6 +27,41 @@ struct TranslationRef: Codable, Hashable, Identifiable, Sendable {
     let booksApiPath: String
     let licenseUrl: String?
     let website: String?
+    /// Structured license terms from helloao's manifest. `nil` for refs we
+    /// construct by hand (bundled + vetted public-domain featured refs).
+    var license: License? = nil
+
+    /// Machine-readable license terms published per-translation in
+    /// helloao's `available_translations.json`.
+    struct License: Codable, Hashable, Sendable {
+        let attribution: String?     // "required" | "not-required"
+        let commercialUse: String?   // "allowed" | "not-allowed"
+        let derivatives: String?     // "allowed" | "not-allowed"
+        let publicDomain: Bool?
+
+        /// Bible+ is a paid subscription app, so any translation we show
+        /// must allow commercial use. We also require derivatives to be
+        /// allowed because the AI companion quotes, excerpts, paraphrases
+        /// and explains the text, and features like Memorize alter it.
+        var permitsCommercialAppUse: Bool {
+            commercialUse == "allowed" && derivatives == "allowed"
+        }
+
+        var requiresAttribution: Bool {
+            publicDomain != true && attribution != "not-required"
+        }
+    }
+
+    /// True when this translation may legally be used in Bible+.
+    /// Bundled refs and refs in `TranslationLicensePolicy.knownLicenses` use vetted terms; catalog refs must
+    /// carry a license that permits commercial use and derivatives. Refs with
+    /// no license info are rejected — unknown terms are treated as restricted.
+    var isLicensedForCommercialUse: Bool {
+        if isBundled { return true }
+        if TranslationLicensePolicy.knownRestrictedRefIDs.contains(id) { return false }
+        let terms = license ?? TranslationLicensePolicy.knownLicenses[id]
+        return terms?.permitsCommercialAppUse ?? false
+    }
 
     enum TextDirection: String, Codable, Sendable {
         case ltr
@@ -82,6 +117,7 @@ extension TranslationRef {
         let totalNumberOfVerses: Int
         let languageName: String?
         let languageEnglishName: String?
+        let license: License?
     }
 
     init(from entry: HelloAOEntry) {
@@ -100,6 +136,7 @@ extension TranslationRef {
         self.booksApiPath = entry.listOfBooksApiLink
         self.licenseUrl = entry.licenseUrl
         self.website = entry.website
+        self.license = entry.license
     }
 }
 
@@ -148,6 +185,37 @@ extension TranslationRef {
     )
 
     var isBundled: Bool { id.hasPrefix(Self.bundledPrefix) }
+
+    /// Hand-vetted, public-domain English translations offered in the reader's
+    /// translation picker alongside the bundled KJV/WEB. These replace the
+    /// copyrighted NIV/ESV/NLT/NASB/MSG/NKJV that were removed. Every entry
+    /// was verified as public domain in helloao's manifest on 2026-11-13.
+    static let featuredEnglish: [TranslationRef] = [
+        .publicDomainEnglish(id: "BSB", short: "BSB", name: "Berean Standard Bible"),
+        .publicDomainEnglish(id: "eng_asv", short: "ASV", name: "American Standard Version (1901)"),
+        .publicDomainEnglish(id: "eng_ylt", short: "YLT", name: "Young's Literal Translation"),
+        .publicDomainEnglish(id: "eng_dra", short: "DRA", name: "Douay-Rheims 1899"),
+    ]
+
+    private static func publicDomainEnglish(id: String, short: String, name: String) -> TranslationRef {
+        TranslationRef(
+            id: id,
+            shortName: short,
+            englishName: name,
+            nativeName: name,
+            languageCode: "eng",
+            languageNameNative: "English",
+            languageNameEnglish: "English",
+            textDirection: .ltr,
+            numberOfBooks: 66,
+            totalNumberOfChapters: 1189,
+            totalNumberOfVerses: 31102,
+            completeApiPath: "",
+            booksApiPath: "",
+            licenseUrl: nil,
+            website: nil
+        )
+    }
 
     /// Bridge to the legacy enum for bundled refs. Returns nil for any
     /// helloao-sourced translation.

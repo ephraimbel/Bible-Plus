@@ -29,7 +29,7 @@ struct TranslationPickerView: View {
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
-                    ForEach(BibleTranslation.allCases) { translation in
+                    ForEach(BibleTranslation.available) { translation in
                         TranslationPreviewCard(
                             translation: translation,
                             isSelected: viewModel.selectedTranslation == translation,

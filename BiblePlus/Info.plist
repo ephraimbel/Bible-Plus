@@ -15,9 +15,11 @@
 	<key>NSSupportsLiveActivities</key>
 	<true/>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Bible+ uses your microphone for voice conversations with the AI companion. Audio is processed on-device and never recorded.</string>
+	<string>Bible+ uses your microphone for voice conversations with the AI companion. Your speech is converted to text, and the text is sent to the AI companion to generate a reply. Audio recordings are not stored.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Bible+ saves the verse images you create to your photo library.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>Bible+ converts your spoken words to text so you can talk with the AI companion hands-free. Recognition runs on-device when possible.</string>
+	<string>Bible+ converts your spoken words to text so you can talk with the AI companion hands-free. Recognition runs on-device when possible; otherwise it is processed by Apple.</string>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>Bible Plus uses this to measure ad performance and help us reach people who would benefit from the app. Your data is never sold.</string>
 	<key>UIBackgroundModes</key>

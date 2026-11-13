@@ -22,12 +22,15 @@ struct MemorySettingsView: View {
     @State private var editedDigestText: String = ""
     @State private var showClearConfirm: Bool = false
     @FocusState private var newFactFocused: Bool
+    @State private var aiSharingAllowed: Bool = AIConsent.isGranted
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
                     header
+
+                    aiSharingSection
 
                     pinnedFactsSection
 
@@ -46,7 +49,7 @@ struct MemorySettingsView: View {
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("AI Memory")
+                    Text("AI & Privacy")
                         .font(.system(size: 17, weight: .semibold, design: .serif))
                         .foregroundStyle(palette.textPrimary)
                 }
@@ -67,6 +70,28 @@ struct MemorySettingsView: View {
                 Text("This deletes every pinned fact and the rolling digest. The AI will start fresh from your next message. This cannot be undone.")
             }
         }
+    }
+
+    // MARK: - AI Data Sharing (Guideline 5.1.2(i))
+
+    private var aiSharingSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Toggle(isOn: $aiSharingAllowed) {
+                Text("Share data with AI provider")
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundStyle(palette.textPrimary)
+            }
+            .tint(palette.accent)
+            .onChange(of: aiSharingAllowed) { _, allowed in
+                if allowed { AIConsent.grant() } else { AIConsent.revoke() }
+            }
+            Text("The AI companion is powered by OpenAI. When on, your chat messages, first name, onboarding answers, and the memory below are sent to OpenAI to generate responses. When off, the AI companion is paused; everything else in Bible+ keeps working.")
+                .font(.system(size: 13))
+                .foregroundStyle(palette.textMuted)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(16)
+        .background(RoundedRectangle(cornerRadius: 14).fill(palette.surface))
     }
 
     // MARK: - Header

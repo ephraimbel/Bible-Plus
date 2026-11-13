@@ -109,10 +109,18 @@ final class BibleReaderViewModel {
     var translationName: String {
         if let refID = currentRefID,
            !refID.hasPrefix(TranslationRef.bundledPrefix),
-           let ref = TranslationCatalog.shared.translation(id: refID) {
+           let ref = TranslationRef.featuredEnglish.first(where: { $0.id == refID })
+                ?? TranslationCatalog.shared.translation(id: refID) {
             return ref.shortName
         }
         return currentTranslation.abbreviation
+    }
+
+    /// Credit line required by the active translation's license (CC BY-SA
+    /// texts). Nil for public-domain translations.
+    var translationAttribution: String? {
+        guard let refID = currentRefID else { return nil }
+        return TranslationLicensePolicy.attribution(for: refID)
     }
 
     /// Localized book name for the active translation when available (e.g.
@@ -150,7 +158,7 @@ final class BibleReaderViewModel {
         // Read user preferences
         let descriptor = FetchDescriptor<UserProfile>()
         if let profile = try? modelContext.fetch(descriptor).first {
-            currentTranslation = profile.preferredTranslation
+            currentTranslation = profile.preferredTranslation.licensed
             readerFontSize = profile.readerFontSize
             readerFontStyle = profile.readerFontStyle
             readerFontWeight = profile.readerFontWeight
@@ -162,7 +170,8 @@ final class BibleReaderViewModel {
             // pick > language default from `LanguageDefaultBible`. Nil means
             // "use legacy bundled/API translation" — English users without an
             // explicit pick land here and read the legacy KJV path.
-            if let stored = profile.preferredTranslationRefID, !stored.isEmpty {
+            if let stored = profile.preferredTranslationRefID, !stored.isEmpty,
+               TranslationLicensePolicy.isAllowed(refID: stored) {
                 currentRefID = stored
             } else {
                 // `effectiveLanguageCode` resolves "follow system" to the
@@ -369,6 +378,7 @@ final class BibleReaderViewModel {
     // MARK: - Translation
 
     func changeTranslation(_ translation: BibleTranslation) {
+        let translation = translation.licensed
         currentTranslation = translation
         currentRefID = nil  // user explicitly picked a legacy enum; clear ref override
         repository.setTranslation(translation)
@@ -385,6 +395,7 @@ final class BibleReaderViewModel {
     /// the pick. Pass `nil` to clear the override and revert to the legacy
     /// `BibleTranslation` enum.
     func changeTranslationRef(_ refID: String?) {
+        let refID = refID.flatMap { TranslationLicensePolicy.isAllowed(refID: $0) ? $0 : nil }
         currentRefID = refID
         updateProfile { $0.preferredTranslationRefID = refID }
         showTranslationPicker = false

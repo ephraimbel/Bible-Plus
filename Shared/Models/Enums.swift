@@ -505,9 +505,23 @@ enum ReferralSource: String, Codable, CaseIterable, Identifiable {
 
 // MARK: - Bible Translation
 
+/// Bible translations backed by bundled, public-domain text.
+///
+/// LICENSING: Only `.kjv` and `.web` are public domain and may be shown,
+/// quoted, searched, sent to AI, or sold access to in a commercial app.
+/// The remaining cases (NIV, ESV, NLT, NASB, MSG, NKJV) are copyrighted by
+/// their publishers (Biblica, Crossway, Tyndale, Lockman, NavPress, Thomas
+/// Nelson) and require a paid license we do not hold. They were previously
+/// streamed from bolls.life without a license and have been removed.
+///
+/// The cases are kept ONLY so existing SwiftData rows that persisted one of
+/// those raw values still decode. Nothing may display them — every read goes
+/// through `licensed` / `available`, and `LicenseCompliance.migrate` rewrites
+/// stored profiles to `.web` on launch.
 enum BibleTranslation: String, Codable, CaseIterable, Identifiable {
     case kjv
     case web
+    // Unlicensed — decode-compatibility only. Never surface these.
     case niv
     case esv
     case nlt
@@ -517,93 +531,54 @@ enum BibleTranslation: String, Codable, CaseIterable, Identifiable {
 
     var id: String { rawValue }
 
+    /// Translations the app is legally allowed to offer. Use this instead of
+    /// `allCases` in every picker / comparison / prompt.
+    static let available: [BibleTranslation] = [.kjv, .web]
+
+    /// True for public-domain translations we may use commercially.
+    var isLicensedForUse: Bool { Self.available.contains(self) }
+
+    /// The translation to actually use for this value. Unlicensed legacy
+    /// values resolve to the World English Bible (modern English, public domain).
+    var licensed: BibleTranslation { isLicensedForUse ? self : .web }
+
     var displayName: String {
-        switch self {
+        switch licensed {
         case .kjv: String(localized: "King James Version")
-        case .web: String(localized: "World English Bible")
-        case .niv: String(localized: "New International Version")
-        case .esv: String(localized: "English Standard Version")
-        case .nlt: String(localized: "New Living Translation")
-        case .nasb: String(localized: "New American Standard Bible")
-        case .message: String(localized: "The Message")
-        case .nkjv: String(localized: "New King James Version")
+        default: String(localized: "World English Bible")
         }
     }
 
     /// Short abbreviation shown in compact UI (toolbar badge, etc.)
     var abbreviation: String {
-        switch self {
+        switch licensed {
         case .kjv: "KJV"
-        case .web: "WEB"
-        case .niv: "NIV"
-        case .esv: "ESV"
-        case .nlt: "NLT"
-        case .nasb: "NASB"
-        case .message: "MSG"
-        case .nkjv: "NKJV"
+        default: "WEB"
         }
     }
 
     var subtitle: String {
-        switch self {
+        switch licensed {
         case .kjv: String(localized: "Classic and poetic language")
-        case .web: String(localized: "Modern English, public domain")
-        case .niv: String(localized: "Clear, accurate, and widely trusted")
-        case .esv: String(localized: "Precise and faithful to the original texts")
-        case .nlt: String(localized: "Simple, natural, and easy to read")
-        case .nasb: String(localized: "Literal word-for-word accuracy")
-        case .message: String(localized: "Conversational and contemporary paraphrase")
-        case .nkjv: String(localized: "Modern update of the classic King James")
+        default: String(localized: "Modern English, public domain")
         }
     }
 
-    var apiCode: String {
-        switch self {
-        case .kjv: "KJV"
-        case .web: "WEB"
-        case .niv: "NIV"
-        case .esv: "ESV"
-        case .nlt: "NLT"
-        case .nasb: "NASB"
-        case .message: "MSG"
-        case .nkjv: "NKJV"
-        }
-    }
+    /// Stable key used for on-disk cache paths.
+    var apiCode: String { abbreviation }
 
-    /// Whether this translation is bundled offline (public domain).
-    var isBundled: Bool {
-        switch self {
-        case .kjv, .web: true
-        default: false
-        }
-    }
+    /// All licensed translations are bundled offline.
+    var isBundled: Bool { isLicensedForUse }
 
-    /// Whether this translation requires Pro subscription.
-    var isProOnly: Bool {
-        switch self {
-        case .kjv, .web: false
-        default: true
-        }
-    }
+    /// Public-domain Scripture is never paywalled.
+    var isProOnly: Bool { false }
 
     var john316: String {
-        switch self {
+        switch licensed {
         case .kjv:
             "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life."
-        case .web:
+        default:
             "For God so loved the world, that he gave his one and only Son, that whoever believes in him should not perish, but have eternal life."
-        case .niv:
-            "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life."
-        case .esv:
-            "For God so loved the world, that he gave his only Son, that whoever believes in him should not perish but have eternal life."
-        case .nlt:
-            "For this is how God loved the world: He gave his one and only Son, so that everyone who believes in him will not perish but have eternal life."
-        case .nasb:
-            "For God so loved the world, that He gave His only Son, so that everyone who believes in Him will not perish, but have eternal life."
-        case .message:
-            "This is how much God loved the world: He gave his Son, his one and only Son. And this is why: so that no one need be destroyed; by believing in him, anyone can have a whole and lasting life."
-        case .nkjv:
-            "For God so loved the world that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life."
         }
     }
 }
@@ -1382,7 +1357,6 @@ struct SanctuaryBackground: Identifiable, Hashable {
 
         // MARK: Heavenly (32 — all Pro)
         bgs.append(contentsOf: [
-            SanctuaryBackground(id: "christ-redeemer", name: "Christ the Redeemer", collection: .heavenly, gradientColors: ["3A5F8A", "6B9FCE", "A8D4F0"], imageName: "christ-redeemer-rio", isProOnly: true),
             SanctuaryBackground(id: "cross-at-sunset", name: "Cross at Sunset", collection: .heavenly, gradientColors: ["8B3A0A", "D4700A", "F0A030"], imageName: "cross-at-sunset", isProOnly: true),
             SanctuaryBackground(id: "glowing-cross-night", name: "Glowing Cross", collection: .heavenly, gradientColors: ["0A0A1A", "1A1A3A", "2A2A5A"], imageName: "glowing-cross-night", isProOnly: true),
             SanctuaryBackground(id: "heaven-sun-rays", name: "Heaven's Rays", collection: .heavenly, gradientColors: ["4A6080", "8AAAC0", "D0E8F8"], imageName: "heaven-sun-rays", isProOnly: true),
@@ -1400,7 +1374,6 @@ struct SanctuaryBackground: Identifiable, Hashable {
             SanctuaryBackground(id: "heavenly-light-beams-img", name: "Light Beams", collection: .heavenly, gradientColors: ["3A4A5A", "5A7A8A", "8AAABB"], imageName: "heavenly-light-beams", isProOnly: true),
             SanctuaryBackground(id: "aerial-coastline-img", name: "Aerial Coastline", collection: .heavenly, gradientColors: ["1A5A6A", "2D8A9A", "4ABACC"], imageName: "aerial-coastline", isProOnly: true),
             SanctuaryBackground(id: "cross-light-video", name: "Cross in Light", collection: .heavenly, gradientColors: ["0A0A1A", "1A1A2A", "3A3A4A"], videoFileName: "black-cross-light", isProOnly: true),
-            SanctuaryBackground(id: "christ-redeemer-video", name: "Christ Redeemer", collection: .heavenly, gradientColors: ["3A5A8A", "6A8ABB", "9AB0D0"], videoFileName: "christ-redeemer-video", isProOnly: true),
             SanctuaryBackground(id: "religious-image-video", name: "Sacred Glow", collection: .heavenly, gradientColors: ["2A1A0A", "5A3A1A", "8A6A3A"], videoFileName: "religious-image", isProOnly: true),
             SanctuaryBackground(id: "sunrays-window-video", name: "Holy Light", collection: .heavenly, gradientColors: ["3A2A1A", "6A5A3A", "9A8A6A"], videoFileName: "sunrays-through-window", isProOnly: true),
             SanctuaryBackground(id: "cathedral-glass-video", name: "Cathedral Glass", collection: .heavenly, gradientColors: ["1A1A3A", "3A3A6A", "5A5A9A"], videoFileName: "cathedral-stained-glass", isProOnly: true),

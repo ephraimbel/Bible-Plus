@@ -95,7 +95,7 @@ final class PersonalizationService {
 
     func updateTranslation(_ translation: BibleTranslation) {
         let profile = getOrCreateProfile()
-        profile.preferredTranslation = translation
+        profile.preferredTranslation = translation.licensed
         profile.updatedAt = Date()
         save()
     }

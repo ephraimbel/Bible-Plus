@@ -59,6 +59,7 @@ final class StoreKitService {
                 .sorted { $0.price < $1.price }
             productsLoaded = true
             productsLoadError = false
+            await refreshTrialEligibility()
         } catch {
             productsLoadError = true
             #if DEBUG
@@ -108,16 +109,70 @@ final class StoreKitService {
         }
     }
 
-    func restorePurchases() async {
+    enum RestoreOutcome: Equatable {
+        case restored
+        case nothingToRestore
+        case failed(String)
+
+        /// User-facing message for the result alert (nil on success).
+        var message: String? {
+            switch self {
+            case .restored: nil
+            case .nothingToRestore: "No active Bible+ Pro subscription was found for this Apple ID."
+            case .failed(let reason): "Couldn't restore purchases. \(reason)"
+            }
+        }
+    }
+
+    /// Restores purchases and reports the outcome so the UI can always give
+    /// feedback (App Review taps Restore on every paywall).
+    @discardableResult
+    func restorePurchases() async -> RestoreOutcome {
         do {
             let customerInfo = try await Purchases.shared.restorePurchases()
             let active = customerInfo.entitlements["bibleplus Pro"]?.isActive == true
             await MainActor.run { _isPro = active }
+            return active ? .restored : .nothingToRestore
         } catch {
             #if DEBUG
             print("[RevenueCat] Restore failed: \(error)")
             #endif
+            return .failed(error.localizedDescription)
         }
+    }
+
+    // MARK: - Introductory offer eligibility
+
+    /// Whether this Apple ID can still get the yearly plan's free trial.
+    /// Defaults to false until confirmed, so we never advertise a trial the
+    /// user won't receive (Guideline 3.1.2 / 2.3.1).
+    private(set) var isEligibleForYearlyTrial: Bool = false
+
+    /// Free-trial length of the yearly plan as configured in App Store
+    /// Connect, e.g. "7-day". Nil when the product has no intro offer.
+    var yearlyTrialLengthLabel: String? {
+        guard let period = yearlyProduct?.introductoryDiscount?.subscriptionPeriod,
+              yearlyProduct?.introductoryDiscount?.paymentMode == .freeTrial else { return nil }
+        switch period.unit {
+        case .day: return "\(period.value)-day"
+        case .week: return period.value == 1 ? "7-day" : "\(period.value)-week"
+        case .month: return "\(period.value)-month"
+        case .year: return "\(period.value)-year"
+        @unknown default: return nil
+        }
+    }
+
+    /// True only when the yearly plan has a free trial AND this user is
+    /// eligible for it. Gate every "free trial" word in the UI on this.
+    var showsYearlyTrial: Bool { isEligibleForYearlyTrial && yearlyTrialLengthLabel != nil }
+
+    private func refreshTrialEligibility() async {
+        guard let product = yearlyProduct else { return }
+        let status = await Purchases.shared.checkTrialOrIntroDiscountEligibility(product: product)
+        // `.unknown` is rare with StoreKit 2; treat it as eligible so new users
+        // aren't hidden the trial, but never show it to a known-ineligible user.
+        let eligible = status != .ineligible && status != .noIntroOfferExists
+        await MainActor.run { isEligibleForYearlyTrial = eligible }
     }
 
     /// Listen for real-time entitlement changes (renewal, expiry, upgrade, etc.)

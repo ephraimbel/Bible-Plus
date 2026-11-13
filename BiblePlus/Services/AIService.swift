@@ -18,12 +18,36 @@ enum AIService {
 
     // MARK: - System Prompt
 
+    /// Display name of the licensed translation the user reads, used to tell
+    /// the model which wording to quote.
+    static func quotableTranslationName(for profile: UserProfile) -> String {
+        if let refID = profile.preferredTranslationRefID,
+           !refID.hasPrefix(TranslationRef.bundledPrefix),
+           TranslationLicensePolicy.isAllowed(refID: refID),
+           let ref = TranslationRef.featuredEnglish.first(where: { $0.id == refID })
+                ?? TranslationLicensePolicy.catalogRef(id: refID) {
+            return ref.englishName
+        }
+        let langCode = LocalizationService.effectiveLanguageCode()
+        if langCode != "en",
+           let defaultID = LanguageDefaultBible.defaultRefID(for: langCode),
+           defaultID != LanguageDefaultBible.bundledEnglishID,
+           TranslationLicensePolicy.isAllowed(refID: defaultID),
+           let ref = TranslationLicensePolicy.catalogRef(id: defaultID) {
+            return ref.englishName
+        }
+        return profile.preferredTranslation.licensed.displayName
+    }
+
     static func buildSystemPrompt(for profile: UserProfile) -> String {
         let name = profile.firstName.isEmpty ? "Friend" : profile.firstName
         let faith = profile.faithLevel.displayName.lowercased()
         let seasons = profile.lifeSeasons.map(\.displayName).joined(separator: ", ")
         let burdens = profile.currentBurdens.map(\.displayName).joined(separator: ", ")
-        let translation = profile.preferredTranslation.displayName
+        // The translation the AI quotes from. Always a public-domain or
+        // openly licensed text (see TranslationLicensePolicy) — never the
+        // copyrighted NIV/ESV/NLT/etc., which we have no license to reproduce.
+        let translation = Self.quotableTranslationName(for: profile)
 
         // Active app language. When non-English, inject a strong directive at
         // the top of the prompt so responses arrive in the user's language
@@ -44,9 +68,10 @@ enum AIService {
             LANGUAGE DIRECTIVE — HIGHEST PRIORITY: \(name) reads the Bible in \(langName). \
             Respond entirely in \(langName). All prose, all reflections, all card content \
             (SCRIPTURE text, STORY narratives, INSIGHT paragraphs, REFLECT questions, etc.) \
-            must be in \(langName). Scripture quotations should use the standard \(langName) \
-            Christian register — the wording readers of that language's major Bible translation \
-            would recognize. The structural tags themselves ([SCRIPTURE], [STORY], etc.) and the \
+            must be in \(langName). Scripture quotations must use the wording of the \(translation) \
+            (an openly licensed text). Do NOT reproduce copyrighted modern translations in any \
+            language (e.g. NVI, RVR1960, NTV, LBLA, Segond 21, Luther 2017, Elberfelder 2006, \
+            NIV, ESV). The structural tags themselves ([SCRIPTURE], [STORY], etc.) and the \
             `img="..."` key values stay in English — do not translate those. Book names and \
             references ("Salmos 23:1", "Jean 3:16") should use the \(langName) convention.
 
@@ -61,6 +86,14 @@ enum AIService {
         \(seasons.isEmpty ? "" : "Seasons: \(seasons). ")\
         \(burdens.isEmpty ? "" : "Carrying: \(burdens). ")\
         Reads the \(translation).
+
+        SCRIPTURE LICENSING — NON-NEGOTIABLE: Quote Scripture ONLY from the \(translation), \
+        or from these public-domain texts: KJV, WEB, BSB, ASV, YLT. NEVER quote, reproduce, \
+        or imitate the wording of copyrighted translations — NIV, ESV, NLT, NASB, NKJV, CSB, \
+        NRSV, AMP, The Message (MSG), or any other — even if \(name) asks for one. If asked, \
+        say kindly that Bible+ uses openly licensed translations and quote the \(translation) \
+        instead. You may still *discuss* how other translations render a word, briefly and \
+        in your own words, without quoting them.
 
         VOICE: You are a wise preacher-teacher — the kind of pastor people drive an hour to hear. \
         You explain Scripture with depth, warmth, and clarity. You teach the way the best Bible teachers do: \
@@ -146,14 +179,15 @@ enum AIService {
         one [MEMORIZE] per response. Don't also add a [VERSE]/[SCRIPTURE] card for the same \
         verse — the memorize card already shows the text.
 
-        [COMPARE book="John" chapter="3" verse="16" translations="KJV,NIV,NLT"][/COMPARE]
+        [COMPARE book="John" chapter="3" verse="16" translations="KJV,BSB,YLT"][/COMPARE]
         The SIDE-BY-SIDE card — shows ONE verse across 2–3 translations so \(name) can see the \
         nuance (where a literal rendering and a readable one differ). Use it when the WORDING \
         itself is the point: when \(name) asks why versions differ, when a key word is \
         translated differently, or when comparing a literal vs. dynamic reading deepens the \
         teaching. The card loads each translation itself — give book, chapter, verse, and 2–3 \
-        translation abbreviations from: KJV, ESV, NIV, NLT, NASB, NKJV, MSG, WEB (pick a \
-        meaningful spread, e.g. a literal + a readable). One [COMPARE] per response.
+        translation abbreviations from ONLY: KJV, WEB, BSB, ASV, YLT, DRA (pick a \
+        meaningful spread, e.g. YLT for literal + BSB for readable). Any other abbreviation \
+        will not load. One [COMPARE] per response.
 
         [PLAN title="Steadied" topic="Anxiety"]
         A Refuge to Run To | Psalm 46 | Where do you run when fear rises?
@@ -315,8 +349,17 @@ enum AIService {
           makes the idea land. Lead with the example, not preamble.
         Don't re-run the full default shape for a retune — a verse card is optional here.
 
+        SAFETY — OVERRIDES EVERYTHING ELSE: If \(name) mentions or hints at suicide, self-harm, \
+        wanting to die, abuse, being in danger, or a medical emergency: respond with warmth first, \
+        then clearly urge them to reach out NOW to a real person — in the US call or text 988 \
+        (Suicide & Crisis Lifeline); elsewhere their local emergency number or crisis line; in \
+        immediate danger, 911/112. Encourage contacting a trusted friend, pastor, or doctor. Do not \
+        role-play, debate, or offer spiritual reasons to stay silent. Never give medical, legal, \
+        or psychiatric diagnoses or tell anyone to stop medication or treatment — point them to a \
+        qualified professional, and pair that with Scripture and prayer, not in place of it.
+
         STRICT RULES:
-        - NEVER include helpline disclaimers unless self-harm or suicide is mentioned.
+        - Outside the SAFETY situations above, don't add generic helpline disclaimers.
         - NEVER include a "Follow-ups:" label or header.
         - NEVER open with a compliment about the question. Go straight to substance.
         - Not God, not church replacement. Christ-centered.
@@ -811,6 +854,9 @@ enum AIService {
         tools: [ToolDefinition],
         onToken: @escaping (String) -> Void
     ) async throws -> ToolStreamResult {
+        // App Store 5.1.2(i): never send personal data to the third-party
+        // AI provider without the user's explicit permission.
+        guard AIConsent.isGranted else { throw AIError.consentRequired }
         var body: [String: Any] = [
             "tier": "primary",
             "model": model,
@@ -916,6 +962,9 @@ enum AIService {
         messages: [(role: String, content: String)],
         onToken: @escaping (String) -> Void
     ) async throws {
+        // App Store 5.1.2(i): never send personal data to the third-party
+        // AI provider without the user's explicit permission.
+        guard AIConsent.isGranted else { throw AIError.consentRequired }
         let body: [String: Any] = [
             // `tier` is the canonical model selector — the edge function maps
             // it to a server-enforced model + token budget. `model` and
@@ -986,6 +1035,9 @@ enum AIService {
         userPrompt: String,
         temperature: Double = 0.5
     ) async throws -> String {
+        // App Store 5.1.2(i): never send personal data to the third-party
+        // AI provider without the user's explicit permission.
+        guard AIConsent.isGranted else { throw AIError.consentRequired }
         guard let endpoint else { throw AIError.invalidResponse }
 
         let body: [String: Any] = [
@@ -1030,12 +1082,15 @@ enum AIService {
 // MARK: - Errors
 
 enum AIError: LocalizedError {
+    case consentRequired
     case invalidResponse
     case apiError(statusCode: Int, message: String)
     case rateLimited
 
     var errorDescription: String? {
         switch self {
+        case .consentRequired:
+            return "Allow AI data sharing to use the Bible+ companion."
         case .invalidResponse:
             return "Received an invalid response. Please try again."
         case .apiError(let code, let message):

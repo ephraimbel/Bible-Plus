@@ -4,8 +4,8 @@ import SwiftUI
 //
 // The "why this works" beat — an animated growth chart + a counting headline
 // stat, the proof pattern that lifts paywall conversion. Warm Paper, gold bars
-// that spring up, a percentage that counts from zero. Framed as a member survey
-// (self-reported) rather than a clinical claim — softer and App-Store-safer.
+// that spring up, and a Scripture anchor. The chart is illustrative only — no
+// statistics are claimed (Guideline 2.3.1).
 struct OnboardingProofStatsView: View {
     var onContinue: () -> Void
 
@@ -48,25 +48,27 @@ struct OnboardingProofStatsView: View {
                 .padding(.horizontal, 44)
                 .opacity(contentIn ? 1 : 0)
 
-            VStack(spacing: 6) {
-                Text("\(pct)%")
-                    .font(.custom("Baskerville-Bold", size: 54))
+            // App Store 2.3.1: no unverified statistics. (Previously showed
+            // "92% of members felt closer to God… 2026 member survey".) If a
+            // real, documented survey exists, the stat can be restored with a
+            // citation; until then we use Scripture, not numbers.
+            VStack(spacing: 10) {
+                Text("A few minutes a day,\nevery day.")
+                    .font(.custom("Baskerville-Bold", size: 26))
                     .foregroundStyle(accentGold)
-                    .monospacedDigit()
-                Text("of members felt closer to God\nwithin their first two weeks.")
-                    .font(.custom("Georgia", size: 16))
+                    .multilineTextAlignment(.center)
+                Text("\u{201C}His delight is in the law of the LORD; and in his law doth he meditate day and night.\u{201D}")
+                    .font(.custom("Georgia-Italic", size: 15))
                     .foregroundStyle(palette.textSecondary)
                     .multilineTextAlignment(.center)
                     .lineSpacing(3)
+                    .padding(.horizontal, 32)
+                Text("Psalm 1:2 (KJV)")
+                    .font(.system(size: 11))
+                    .foregroundStyle(palette.textMuted)
             }
             .padding(.top, 30)
             .opacity(contentIn ? 1 : 0)
-
-            Text("Based on a 2026 member survey.")
-                .font(.system(size: 11))
-                .foregroundStyle(palette.textMuted)
-                .padding(.top, 14)
-                .opacity(contentIn ? 1 : 0)
 
             Spacer(minLength: 0)
 

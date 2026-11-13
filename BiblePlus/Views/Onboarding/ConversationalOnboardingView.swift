@@ -135,20 +135,9 @@ struct ConversationalOnboardingView: View {
             // The micro-commitment pledge right before the paywall — a single
             // "I'm ready" tap that primes the user to follow through (and buy).
             OnboardingCommitmentView(viewModel: vm) {
-                // After the pledge, ask for a review (the warmest, highest-intent
-                // moment in the funnel) before handing off to the paywall.
-                moveTo(.appReview, animation: .easeInOut(duration: 0.5))
-            }
-            .environment(\.bpPalette, BPColorPalette.light)
-            .preferredColorScheme(.light)
-            .transition(.opacity)
-
-        case .appReview:
-            // A clean "love Bible+? leave a review" moment. The native App Store
-            // rating sheet pops up over this page; the CTA hands off to the
-            // paywall. Stays on the light Warm Paper palette like commitment, so
-            // the light → dark handoff happens as the paywall arrives.
-            OnboardingReviewView {
+                // No review prompt during onboarding (App Store Guideline
+                // 5.6.1 — users can't rate an app they haven't used yet, and
+                // asking before the paywall reads as review manipulation).
                 moveTo(.paywall, delay: 180_000_000, animation: .easeInOut(duration: 0.55))
             }
             .environment(\.bpPalette, BPColorPalette.light)
@@ -255,7 +244,7 @@ struct ConversationalOnboardingView: View {
         case .faith: return "There's no wrong answer — it just helps us meet you where you are."
         case .closeness: return "Some seasons He feels near; others, distant. Wherever you are is okay."
         case .seasons: return "Choose anything that fits — you can pick a few."
-        case .burdens: return "This stays between us, and it shapes everything we send you."
+        case .burdens: return "This shapes the verses and prayers we choose for you."
         case .holdingBack: return "Name it, and we'll help you work around it. Pick any."
         case .goals: return "Pick what matters most — we'll build around it."
         case .timeCommitment: return "Even a few minutes, done daily, changes everything."
@@ -760,7 +749,6 @@ private enum ConversationalStep: Hashable {
     case yourPlan
     case personalVerseReveal
     case commitment
-    case appReview
     case paywall
 }
 

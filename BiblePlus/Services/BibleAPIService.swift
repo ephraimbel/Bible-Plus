@@ -5,6 +5,7 @@ enum BibleAPIError: LocalizedError {
     case networkError(Error)
     case invalidResponse(Int)
     case decodingError
+    case notLicensed
 
     var errorDescription: String? {
         switch self {
@@ -16,110 +17,20 @@ enum BibleAPIError: LocalizedError {
             "Server returned status \(code)."
         case .decodingError:
             "Could not read chapter data."
+        case .notLicensed:
+            "This translation isn't available in Bible+."
         }
     }
 }
 
+/// Network access to Bible text.
+///
+/// LICENSING: the only remote source is bible.helloao.org, and only for
+/// translations that `TranslationLicensePolicy` allows (public domain, or a
+/// license permitting commercial use + derivatives). The former bolls.life
+/// integration was removed: it served copyrighted translations (NIV, ESV,
+/// NLT, NASB, MSG, NKJV) that Bible+ has no license to distribute.
 enum BibleAPIService {
-    private static let baseURL = "https://bolls.life/get-text"
-
-    private struct APIVerse: Decodable {
-        let pk: Int
-        let verse: Int
-        let text: String
-    }
-
-    static func fetchChapter(
-        translation: String,
-        bookNumber: Int,
-        chapter: Int
-    ) async throws -> [(number: Int, text: String)] {
-        guard let url = URL(string: "\(baseURL)/\(translation)/\(bookNumber)/\(chapter)/") else {
-            throw BibleAPIError.invalidURL
-        }
-
-        var request = URLRequest(url: url)
-        request.timeoutInterval = 15
-
-        let data: Data
-        let response: URLResponse
-        do {
-            (data, response) = try await URLSession.shared.data(for: request)
-        } catch {
-            throw BibleAPIError.networkError(error)
-        }
-
-        if let http = response as? HTTPURLResponse, !(200...299).contains(http.statusCode) {
-            throw BibleAPIError.invalidResponse(http.statusCode)
-        }
-
-        guard let verses = try? JSONDecoder().decode([APIVerse].self, from: data) else {
-            throw BibleAPIError.decodingError
-        }
-
-        return verses.map { (number: $0.verse, text: cleanText($0.text)) }
-    }
-
-    // MARK: - Search
-
-    struct SearchResultVerse: Decodable {
-        let pk: Int
-        let verse: Int
-        let text: String
-        let book: Int
-        let chapter: Int
-    }
-
-    struct SearchResponse: Decodable {
-        let results: [SearchResultVerse]
-        let total: Int
-    }
-
-    static func searchVerses(
-        translation: String,
-        query: String,
-        page: Int = 1,
-        limit: Int = 30
-    ) async throws -> SearchResponse {
-        guard let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-              let url = URL(string: "https://bolls.life/v2/find/\(translation)?search=\(encodedQuery)&page=\(page)&limit=\(limit)")
-        else {
-            throw BibleAPIError.invalidURL
-        }
-
-        var request = URLRequest(url: url)
-        request.timeoutInterval = 15
-
-        let data: Data
-        let response: URLResponse
-        do {
-            (data, response) = try await URLSession.shared.data(for: request)
-        } catch {
-            throw BibleAPIError.networkError(error)
-        }
-
-        if let http = response as? HTTPURLResponse, !(200...299).contains(http.statusCode) {
-            throw BibleAPIError.invalidResponse(http.statusCode)
-        }
-
-        guard let searchResponse = try? JSONDecoder().decode(SearchResponse.self, from: data) else {
-            throw BibleAPIError.decodingError
-        }
-
-        return SearchResponse(
-            results: searchResponse.results.map {
-                SearchResultVerse(
-                    pk: $0.pk,
-                    verse: $0.verse,
-                    text: cleanText($0.text),
-                    book: $0.book,
-                    chapter: $0.chapter
-                )
-            },
-            total: searchResponse.total
-        )
-    }
-
     // MARK: - HelloAO (multi-language catalog)
 
     /// Response shape for `bible.helloao.org/api/{translation_id}/{book}/{chapter}.json`.
@@ -172,6 +83,9 @@ enum BibleAPIService {
         bookID: String,
         chapter: Int
     ) async throws -> (bookName: String, verses: [(number: Int, text: String)]) {
+        guard TranslationLicensePolicy.isAllowed(refID: translationID) else {
+            throw BibleAPIError.notLicensed
+        }
         guard let url = URL(string: "https://bible.helloao.org/api/\(translationID)/\(bookID)/\(chapter).json") else {
             throw BibleAPIError.invalidURL
         }
@@ -225,6 +139,9 @@ enum BibleAPIService {
     /// localized book names in the picker *before* any chapter is opened.
     /// Cheaper than per-chapter fetches and uses the same helloao catalog.
     static func fetchHelloAOBooks(translationID: String) async throws -> [(id: String, name: String)] {
+        guard TranslationLicensePolicy.isAllowed(refID: translationID) else {
+            throw BibleAPIError.notLicensed
+        }
         guard let url = URL(string: "https://bible.helloao.org/api/\(translationID)/books.json") else {
             throw BibleAPIError.invalidURL
         }

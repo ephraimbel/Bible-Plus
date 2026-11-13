@@ -313,6 +313,7 @@ private struct BibleContentView: View {
                     errorMessage: viewModel.errorMessage,
                     isShowingOfflineFallback: viewModel.isShowingOfflineFallback,
                     offlineTranslationName: viewModel.translationName,
+                    translationAttribution: viewModel.translationAttribution,
                     savedVerseNumbers: viewModel.savedVerseNumbers,
                     highlightColors: viewModel.highlightColors,
                     verseNotes: viewModel.verseNotes,
