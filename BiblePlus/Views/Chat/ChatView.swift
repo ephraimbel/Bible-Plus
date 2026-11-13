@@ -133,6 +133,8 @@ private struct ChatContentView: View {
     /// when the user starts streaming a new reply) don't yank the view
     /// back up to the saved message.
     @State private var pendingInitialJump = true
+    @FocusState private var isInputFocused: Bool
+    @State private var inputGlowPulse = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -730,6 +732,7 @@ private struct ChatContentView: View {
                 .tint(palette.accent)
                 .lineLimit(1...6)
                 .padding(.vertical, 8)
+                .focused($isInputFocused)
 
             sendButton
         }
@@ -741,14 +744,34 @@ private struct ChatContentView: View {
                 .fill(palette.surface)
                 .overlay(
                     RoundedRectangle(cornerRadius: 26, style: .continuous)
-                        .strokeBorder(palette.border.opacity(0.5), lineWidth: 1)
+                        .strokeBorder(
+                            isInputFocused
+                                ? palette.accent.opacity(inputGlowPulse ? 0.9 : 0.55)
+                                : palette.border.opacity(0.5),
+                            lineWidth: isInputFocused ? 1.5 : 1
+                        )
                 )
-                .shadow(color: .black.opacity(colorScheme == .dark ? 0.22 : 0.05),
-                        radius: 12, y: 3)
+                .shadow(
+                    color: isInputFocused
+                        ? palette.accent.opacity(inputGlowPulse ? 0.4 : 0.22)
+                        : .black.opacity(colorScheme == .dark ? 0.22 : 0.05),
+                    radius: isInputFocused ? 14 : 12,
+                    y: isInputFocused ? 0 : 3
+                )
         )
+        .animation(.easeInOut(duration: 0.3), value: isInputFocused)
         .padding(.horizontal, 14)
-        .padding(.top, 8)
-        .padding(.bottom, 10)
+        .padding(.top, 10)
+        .padding(.bottom, 6)
+        .onChange(of: isInputFocused) { _, focused in
+            if focused {
+                withAnimation(.easeInOut(duration: 1.3).repeatForever(autoreverses: true)) {
+                    inputGlowPulse = true
+                }
+            } else {
+                inputGlowPulse = false
+            }
+        }
     }
 
     // The single send / responding control. Idle: a calm up-arrow. While the

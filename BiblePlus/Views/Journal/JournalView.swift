@@ -119,14 +119,34 @@ struct JournalView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(BPSpacing.md)
+            .padding(.leading, entry.mood != nil ? 4 : 0)
             .background(
                 RoundedRectangle(cornerRadius: BPRadius.md, style: .continuous)
-                    .fill(palette.surfaceElevated)
+                    .fill(
+                        LinearGradient(
+                            colors: [
+                                palette.surfaceElevated,
+                                palette.surfaceElevated.blend(with: palette.surface, amount: 0.35),
+                            ],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
+                    .overlay(alignment: .leading) {
+                        if let mood = entry.mood {
+                            RoundedRectangle(cornerRadius: 2)
+                                .fill(mood.tint)
+                                .frame(width: 3)
+                                .padding(.vertical, 10)
+                                .padding(.leading, 6)
+                        }
+                    }
                     .overlay(
                         RoundedRectangle(cornerRadius: BPRadius.md, style: .continuous)
                             .strokeBorder(palette.border.opacity(0.5), lineWidth: 0.7)
                     )
             )
+            .shadow(color: .black.opacity(0.06), radius: 8, y: 3)
         }
         .buttonStyle(PressableButtonStyle())
         .contextMenu {
@@ -142,7 +162,17 @@ struct JournalView: View {
         VStack(spacing: BPSpacing.lg) {
             Spacer()
             ZStack {
-                Circle().fill(palette.accent.opacity(0.10)).frame(width: 88, height: 88)
+                Circle()
+                    .fill(
+                        RadialGradient(
+                            colors: [palette.accent.opacity(0.16), palette.accent.opacity(0.06)],
+                            center: .center,
+                            startRadius: 0,
+                            endRadius: 44
+                        )
+                    )
+                    .frame(width: 88, height: 88)
+                    .shadow(color: palette.accent.opacity(0.15), radius: 14, y: 6)
                 Image(systemName: "book.closed.fill")
                     .font(.system(size: 32, weight: .light))
                     .foregroundStyle(palette.accent)

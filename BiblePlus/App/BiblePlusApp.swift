@@ -321,9 +321,16 @@ struct RootView: View {
     @Query private var profiles: [UserProfile]
     @Environment(\.modelContext) private var modelContext
     @Environment(\.colorScheme) private var systemScheme
+    @Environment(\.scenePhase) private var scenePhase
     @State private var deepLinkedContentID: UUID?
     @State private var showSplash = true
     @State private var storeKitService = StoreKitService()
+    // StoreKitService already loads offerings once at launch. This skips
+    // that first `.active` transition so we don't double-fetch on cold
+    // start, and only refreshes on subsequent foregrounds — keeps paywall
+    // pricing current (e.g. a scheduled App Store Connect price change)
+    // without waiting for the user to relaunch the app.
+    @State private var didBecomeActiveOnce = false
     // LocalizationService is a singleton; holding it in @State gives SwiftUI
     // a stable identity for observation so the whole tree re-renders when
     // the user switches languages from Settings.
@@ -342,17 +349,23 @@ struct RootView: View {
             Group {
                 if hasCompletedOnboarding {
                     ContentView(deepLinkedContentID: $deepLinkedContentID)
+                        .preferredColorScheme(resolvedColorScheme)
                         .transition(.asymmetric(
                             insertion: .opacity.combined(with: .scale(scale: 0.96)),
                             removal: .opacity
                         ))
                 } else {
+                    // Onboarding owns its own per-page color scheme: the question
+                    // screens force light, while the personal-verse reveal and
+                    // paywall force dark. A global override here would sit above
+                    // those and leave the dark reveal page's status-bar/header
+                    // region in light mode (white). So scope the scheme to the
+                    // completed-onboarding app instead.
                     ConversationalOnboardingView()
                         .transition(.opacity)
                 }
             }
             .environment(storeKitService)
-            .preferredColorScheme(resolvedColorScheme)
             .environment(
                 \.bpPalette,
                 BPColorPalette.resolve(
@@ -368,6 +381,14 @@ struct RootView: View {
                 if let uuid = notification.userInfo?["contentID"] as? UUID {
                     deepLinkedContentID = uuid
                 }
+            }
+            .onChange(of: scenePhase) { _, newPhase in
+                guard newPhase == .active else { return }
+                guard didBecomeActiveOnce else {
+                    didBecomeActiveOnce = true
+                    return
+                }
+                Task { await storeKitService.loadProducts() }
             }
 
             if showSplash {
