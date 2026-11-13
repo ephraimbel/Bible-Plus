@@ -169,9 +169,9 @@ final class StoreKitService {
     private func refreshTrialEligibility() async {
         guard let product = yearlyProduct else { return }
         let status = await Purchases.shared.checkTrialOrIntroDiscountEligibility(product: product)
-        // `.unknown` is rare with StoreKit 2; treat it as eligible so new users
-        // aren't hidden the trial, but never show it to a known-ineligible user.
-        let eligible = status != .ineligible && status != .noIntroOfferExists
+        // Unknown is not permission to advertise a trial. Only Apple's
+        // confirmed eligible result may enable trial copy.
+        let eligible = status == .eligible
         await MainActor.run { isEligibleForYearlyTrial = eligible }
     }
 
