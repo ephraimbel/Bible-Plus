@@ -1,12 +1,13 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 
-const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
+const OPENAI_API_KEY = Deno.env.get("BIBLEPLUS_OPENAI_API_KEY") ?? Deno.env.get("OPENAI_API_KEY");
+const CLIENT_TOKEN = Deno.env.get("BIBLEPLUS_CLIENT_TOKEN") ?? Deno.env.get("SUPABASE_ANON_KEY");
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
 
 const OPENAI_TTS_URL = "https://api.openai.com/v1/audio/speech";
-const BUCKET_NAME = "tts-cache";
+const BUCKET_NAME = "bibleplus-tts-cache";
 
 // Rate limiting: in-memory store (per edge function instance)
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
@@ -54,7 +55,7 @@ Deno.serve(async (req) => {
   }
 
   // Validate server configuration
-  if (!OPENAI_API_KEY) {
+  if (!OPENAI_API_KEY || !CLIENT_TOKEN) {
     return new Response(
       JSON.stringify({ error: "Server configuration error" }),
       { status: 500, headers: { "Content-Type": "application/json", ...CORS_HEADERS } },
@@ -66,6 +67,14 @@ Deno.serve(async (req) => {
       JSON.stringify({ error: "Server configuration error" }),
       { status: 500, headers: { "Content-Type": "application/json", ...CORS_HEADERS } },
     );
+  }
+
+  const providedToken = req.headers.get("apikey") ??
+    req.headers.get("Authorization")?.replace(/^Bearer /i, "");
+  if (providedToken !== CLIENT_TOKEN) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), {
+      status: 401, headers: { "Content-Type": "application/json", ...CORS_HEADERS },
+    });
   }
 
   // Rate limiting by client IP
@@ -84,12 +93,13 @@ Deno.serve(async (req) => {
   try {
     const body = await req.json();
     const {
-      model = "tts-1",
       input,
       voice = "onyx",
       response_format = "mp3",
       speed = 1.0,
     } = body;
+
+    const model = "tts-1"; // Never let a client select a more expensive model.
 
     // Validate input text
     if (!input || typeof input !== "string" || input.trim().length === 0) {
@@ -122,9 +132,15 @@ Deno.serve(async (req) => {
       );
     }
 
+    if (typeof speed !== "number" || !Number.isFinite(speed) || speed < 0.25 || speed > 4) {
+      return new Response(JSON.stringify({ error: "Invalid speech speed" }), {
+        status: 400, headers: { "Content-Type": "application/json", ...CORS_HEADERS },
+      });
+    }
+
     // Build cache key: voice + SHA-256 hash of input text
     const encoder = new TextEncoder();
-    const data = encoder.encode(`${voice}:${input}`);
+    const data = encoder.encode(`${model}:${voice}:${response_format}:${speed}:${input}`);
     const hashBuffer = await crypto.subtle.digest("SHA-256", data);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
     const hashHex = hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
@@ -140,6 +156,7 @@ Deno.serve(async (req) => {
 
     if (cachedFile && !downloadError) {
       // Cache hit — return stored audio
+      console.log(`[tts-cache] HIT ${cacheKey}`);
       const arrayBuffer = await cachedFile.arrayBuffer();
       return new Response(new Uint8Array(arrayBuffer), {
         status: 200,
@@ -150,6 +167,14 @@ Deno.serve(async (req) => {
         },
       });
     }
+
+    // A download error other than "not found" means storage is misconfigured
+    // (wrong bucket, bad permissions) — every request would silently miss
+    // the cache and pay for OpenAI generation. Surface it loudly.
+    if (downloadError && downloadError.message !== "The resource was not found") {
+      console.error(`[tts-cache] Unexpected cache lookup error for ${cacheKey}:`, downloadError.message);
+    }
+    console.log(`[tts-cache] MISS ${cacheKey} — generating via OpenAI`);
 
     // Cache miss — generate audio via OpenAI TTS
     const openaiResponse = await fetch(OPENAI_TTS_URL, {
@@ -183,21 +208,27 @@ Deno.serve(async (req) => {
     const audioData = await openaiResponse.arrayBuffer();
     const audioBytes = new Uint8Array(audioData);
 
-    // Save to Supabase Storage (fire-and-forget with error logging)
-    supabase.storage
-      .from(BUCKET_NAME)
-      .upload(cacheKey, audioBytes, {
-        contentType: `audio/${response_format}`,
-        upsert: true,
-      })
-      .then(({ error: uploadError }) => {
-        if (uploadError) {
-          console.error(`[tts-cache] Upload failed for ${cacheKey}:`, uploadError.message);
-        }
-      })
-      .catch((err: unknown) => {
-        console.error(`[tts-cache] Upload exception for ${cacheKey}:`, err);
-      });
+    // Save to Supabase Storage. This is awaited (not fire-and-forget) —
+    // Deno.serve can tear down the isolate the instant the response is
+    // returned, which was silently dropping unawaited uploads and making
+    // every play for that verse+voice re-pay for OpenAI generation forever.
+    let cacheWriteOK = false;
+    try {
+      const { error: uploadError } = await supabase.storage
+        .from(BUCKET_NAME)
+        .upload(cacheKey, audioBytes, {
+          contentType: `audio/${response_format}`,
+          upsert: true,
+        });
+      if (uploadError) {
+        console.error(`[tts-cache] Upload failed for ${cacheKey}:`, uploadError.message);
+      } else {
+        cacheWriteOK = true;
+        console.log(`[tts-cache] STORED ${cacheKey}`);
+      }
+    } catch (err: unknown) {
+      console.error(`[tts-cache] Upload exception for ${cacheKey}:`, err);
+    }
 
     // Return audio to client
     return new Response(audioBytes, {
@@ -205,6 +236,7 @@ Deno.serve(async (req) => {
       headers: {
         "Content-Type": `audio/${response_format}`,
         "X-Cache": "MISS",
+        "X-Cache-Write": cacheWriteOK ? "OK" : "FAILED",
         ...CORS_HEADERS,
       },
     });

@@ -57,6 +57,7 @@ enum Analytics {
 
         // AI Chat
         case aiMessageSent = "ai_message_sent"
+        case aiConsentGranted = "ai_consent_granted"
         case aiConversationStarted = "ai_conversation_started"
         case aiRateLimitHit = "ai_rate_limit_hit"
         case aiFollowUpTapped = "ai_followup_tapped"

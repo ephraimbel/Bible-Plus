@@ -51,6 +51,9 @@ final class ChatViewModel {
     var failedMessageContent: String? = nil
     var failedMessageId: UUID? = nil
     var shouldShowPaywall: Bool = false
+    /// Set when the user tries to message the AI before granting permission
+    /// to share data with the third-party AI provider (Guideline 5.1.2(i)).
+    var shouldShowAIConsent: Bool = false
 
     // MARK: - Private
 
@@ -490,6 +493,12 @@ final class ChatViewModel {
     func send() {
         let text = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !text.isEmpty, !isStreaming, !isSending else { return }
+        guard AIConsent.isGranted else {
+            // Keep the typed text; ChatView presents AIConsentView and calls
+            // send() again if the user allows.
+            shouldShowAIConsent = true
+            return
+        }
         isSending = true
         defer { isSending = false }
 
@@ -535,15 +544,6 @@ final class ChatViewModel {
             #endif
         }
         ActivityService.log(.aiChatSent, detail: String(text.prefix(50)), in: modelContext)
-
-        // Ask for review after the user's FIRST AI message — they've now
-        // experienced the AI's response and can give an informed rating.
-        // ReviewService internally gates frequency so this won't fire on
-        // every message, just the first eligible one.
-        let userMsgCount = messages.filter { $0.role == .user }.count
-        if userMsgCount == 1 {
-            ReviewService.shared.requestIfAppropriate()
-        }
 
         // Start streaming
         let assistantMessage = ChatMessage(
@@ -597,6 +597,7 @@ final class ChatViewModel {
     /// duplicate user message.)
     func retryLastMessage() {
         guard failedMessageContent != nil else { return }
+        guard AIConsent.isGranted else { shouldShowAIConsent = true; return }
         guard !isStreaming, !isSending else { return }
 
         // Confirm the failed user message is still present in the conversation.
@@ -932,6 +933,7 @@ final class ChatViewModel {
             // Wait for buffer to fully drain
             await drainRemainingBuffer(into: assistantMessage)
 
+            assistantMessage.content = VerifiedScripture.replacingGeneratedCards(in: assistantMessage.content)
             let (cleaned, suggestions) = AIService.extractSuggestions(from: assistantMessage.content)
             if !suggestions.isEmpty {
                 assistantMessage.content = cleaned

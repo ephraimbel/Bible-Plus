@@ -43,8 +43,8 @@ Xcode will handle scaling. Recommended: crop to 16:9 landscape for card display.
 |-----|-------|--------|--------|
 | `biblical_burning_bush` | The Burning Bush | Sébastien Bourdon | [Wikimedia](https://commons.wikimedia.org/wiki/File:S%C3%A9bastien_Bourdon_-_Burning_bush.jpg) |
 | `biblical_parting_red_sea` | Parting the Red Sea | Gustave Doré | [Wikimedia](https://commons.wikimedia.org/wiki/File:Dor%C3%A9_-_The_Egyptians_Drowned_in_the_Red_Sea.jpg) |
-| `biblical_ten_commandments` | Moses with Tablets | Rembrandt | [Wikimedia](https://commons.wikimxedia.org/wiki/File:Rembrandt_-_Moses_with_the_Ten_Commandments_-_Google_Art_Project.jpg) |
-| `biblical_david_goliath` | David and Goliath | Caravaggio | [Wikimedia](https://commons.wikimedia.orgx/wiki/File:Caravaggio_-_David_with_the_Head_of_Goliath_-_Vienna.jpg) |
+| `biblical_ten_commandments` | Moses with Tablets | Rembrandt | [Wikimedia](https://commons.wikimedia.org/wiki/File:Rembrandt_-_Moses_with_the_Ten_Commandments_-_Google_Art_Project.jpg) |
+| `biblical_david_goliath` | David and Goliath | Caravaggio | [Wikimedia](https://commons.wikimedia.org/wiki/File:Caravaggio_-_David_with_the_Head_of_Goliath_-_Vienna.jpg) |
 | `biblical_elijah_chariot` | Elijah's Chariot | Gustave Doré | [Archive.org](https://archive.org/details/gustavedore) |
 | `biblical_daniel_lions` | Daniel in Lions' Den | Rubens | [Wikimedia](https://commons.wikimedia.org/wiki/File:Peter_Paul_Rubens_-_Daniel_in_the_Lions%27_Den_-_Google_Art_Project.jpg) |
 | `biblical_jonah_whale` | Jonah and the Whale | Gustave Doré | [Archive.org](https://archive.org/details/gustavedore) |

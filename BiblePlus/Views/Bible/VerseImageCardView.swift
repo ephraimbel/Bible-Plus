@@ -4,6 +4,7 @@ struct VerseImageCardView: View {
     let verseText: String
     let reference: String
     let translation: String
+    var attribution: String? = nil
     let background: SanctuaryBackground
     let aspectRatio: ShareAspectRatio
 
@@ -101,6 +102,15 @@ struct VerseImageCardView: View {
                     .tracking(1.0)
                     .padding(.top, 4)
 
+                if let attribution {
+                    Text(attribution)
+                        .font(.system(size: 8))
+                        .foregroundStyle(.white.opacity(0.85))
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.horizontal, 18)
+                        .padding(.top, 10)
+                }
                 Spacer()
             }
 

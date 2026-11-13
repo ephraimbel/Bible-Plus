@@ -197,7 +197,7 @@ struct ReaderSettingsView: View {
             result = result + Text("\u{2009}")
                 .font(.system(size: viewModel.readerFontSize, design: currentDesign))
         }
-        result = result + Text("For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life. ")
+        result = result + Text(verbatim: "For God so loved the world, that he gave his only born Son, that whoever believes in him should not perish, but have eternal life. ")
             .font(.system(size: viewModel.readerFontSize, weight: currentWeight, design: currentDesign))
             .foregroundColor(palette.textPrimary)
 
@@ -211,7 +211,7 @@ struct ReaderSettingsView: View {
             result = result + Text("\u{2009}")
                 .font(.system(size: viewModel.readerFontSize, design: currentDesign))
         }
-        result = result + Text("For God sent not his Son into the world to condemn the world; but that the world through him might be saved. ")
+        result = result + Text(verbatim: "For God didn’t send his Son into the world to judge the world, but that the world should be saved through him. ")
             .font(.system(size: viewModel.readerFontSize, weight: currentWeight, design: currentDesign))
             .foregroundColor(palette.textPrimary)
 

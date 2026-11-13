@@ -1,52 +1,51 @@
 import Foundation
 
 /// Maps UI language codes to a reasonable default `TranslationRef.id` from
-/// bible.helloao.org's catalog. When a user switches the app to Spanish and
+/// a translation bundled in the app. When a user switches the app to Spanish and
 /// hasn't chosen a Bible yet, we pick Reina-Valera 1909 for them; when they
 /// flip to Japanese we pick what's available. Users can still override in the
 /// translation picker.
 ///
-/// IDs here must exactly match helloao's `available_translations.json`. Hand-
-/// picked on 2026-04-23 by scanning the live catalog — see the inline comment
-/// next to each entry for the chosen rationale.
+/// Every ID here must be bundled (`Resources/Bible/bible-<ID>.json`) and
+/// listed in `TranslationLicensePolicy.bundled`. Re-vetted 2026-11-13.
 ///
 /// Coverage notes:
-///   - Japanese (`jpn_loc`): NT only (27 books). OT reads fall back to the
-///     legacy enum until a complete JA option lands in the catalog.
-///   - Amharic (`amh_amh`): NT only. Same fallback behavior.
+///   - Indonesian (`ind_tsi`): 48 books. Missing books fall back to WEB.
 enum LanguageDefaultBible {
 
-    /// English always uses the bundled KJV — we don't point at helloao for
+    /// English always uses the bundled WEB — we don't use a ref for
     /// English users because the bundled translations are offline-first and
     /// compile-time guaranteed.
-    static let bundledEnglishID = "bundled_kjv"
+    static let bundledEnglishID = "bundled_web"
 
-    /// Tier 1 language → default helloao translation id. Keys are the `code`
+    /// Tier 1 language → default bundled translation id. Keys are the `code`
     /// values from `SupportedLanguage.all`.
     static let defaults: [String: String] = [
-        "en":      "bundled_kjv",   // Bundled
+        "en":      "bundled_web",   // Bundled
         "es":      "spa_r09",       // Reina Valera 1909 — classic, PD
         "pt-BR":   "por_blj",       // Bíblia Livre
-        "pt-PT":   "por_blj",       // same — closest thing to PT-PT in helloao
+        "pt-PT":   "por_blj",       // same — closest open-licensed option for PT-PT
         "fr":      "fra_lsg",       // Louis Segond 1910 — classic
         "de":      "deu_l12",       // Luther Bibel 1912 — classic
         "it":      "ita_riv",       // Riveduta
-        "pl":      "pol_ubg",       // Updated Gdansk
+        // "pl": no non-Biblica Polish text allows commercial use + derivatives
+        // (UBG is CC BY-ND), so Polish falls back to WEB.
         "ru":      "rus_syn",       // Synodal 1876 — the Russian Bible
         "zh-Hans": "cmn_cu1",       // 新标点和合本 simplified CUV
         "zh-Hant": "cmn_cuv",       // 新標點和合本 traditional CUV
         "ko":      "kor_old",       // Korean 1910
-        "ja":      "jpn_loc",       // Japanese NT only
-        "id":      "ind_ayt",       // Indonesian AYT
+        "ja":      "jpn_kou",       // Kougo-yaku 1955 — public domain, complete
+        "id":      "ind_tsi",       // Plain Indonesian — CC BY-SA, 48 books (AYT is CC BY-NC)
         "tl":      "tgl_ulb",       // Tagalog ULB
-        "sw":      "swh_bib",       // Kiswahili Contemporary
-        "am":      "amh_amh",       // Amharic NT only
+        "sw":      "swh_ulb",       // Swahili Unlocked Literal Bible — CC BY-SA
+        // "am": no Amharic translation we found has a commercial-use
+        // license (amh_amh publishes none), so Amharic falls back to WEB.
     ]
 
     /// Resolve a language code (possibly with a region tag like `pt-BR` or
-    /// `zh-Hans`) to the right helloao id. Tries exact match first, then
+    /// `zh-Hans`) to the right bundled id. Tries exact match first, then
     /// falls back to the base language ("pt" → first "pt-*" entry). Returns
-    /// nil for unknown locales so callers can route to the legacy KJV path.
+    /// nil for unknown locales so callers can route to the legacy WEB path.
     static func defaultRefID(for languageCode: String) -> String? {
         if let hit = defaults[languageCode] { return hit }
         let base = String(languageCode.prefix { $0 != "-" })
@@ -56,12 +55,5 @@ enum LanguageDefaultBible {
             return match.value
         }
         return nil
-    }
-
-    /// True when the default translation for `languageCode` is NT-only.
-    /// BibleReaderViewModel uses this to warn users and to fall back to the
-    /// bundled English path when an OT chapter is requested.
-    static func isNewTestamentOnly(refID: String) -> Bool {
-        refID == "jpn_loc" || refID == "amh_amh"
     }
 }

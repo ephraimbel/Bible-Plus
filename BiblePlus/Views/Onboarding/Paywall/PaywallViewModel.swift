@@ -94,7 +94,7 @@ final class PaywallViewModel {
         let burdens: Set<Burden> = Set(profile?.currentBurdens ?? [])
         let seasons: Set<LifeSeason> = Set(profile?.lifeSeasons ?? [])
         let faithLevel = profile?.faithLevel
-        let translation = profile?.preferredTranslation ?? .kjv
+        let translation = profile?.preferredTranslation ?? .web
         let prayerTimes: Set<PrayerTimeSlot> = Set(profile?.prayerTimes ?? [])
 
         self.personalizedHeadline = Self.headline(name: name, burdens: burdens, faithLevel: faithLevel)
@@ -318,7 +318,7 @@ final class PaywallViewModel {
             ),
             PaywallBenefit(
                 icon: "headphones",
-                title: "Audio Bible in 9 Voices",
+                title: "Audio Bible in 5 Voices",
                 subtitle: "Listen to any chapter, narrated in a voice you love"
             ),
             PaywallBenefit(
@@ -340,30 +340,30 @@ final class PaywallViewModel {
     // MARK: - Price Helpers
 
     func yearlyPriceLabel(_ storeKit: StoreKitService) -> String {
-        storeKit.yearlyProduct?.localizedPriceString ?? "$39.99"
+        storeKit.yearlyProduct?.localizedPriceString ?? "$59.99"
     }
 
     func monthlyPriceLabel(_ storeKit: StoreKitService) -> String {
-        storeKit.monthlyProduct?.localizedPriceString ?? "$6.99"
+        storeKit.monthlyProduct?.localizedPriceString ?? "$9.99"
     }
 
     /// Monthly-equivalent of the yearly plan (price ÷ 12). Shown on the yearly
-    /// card as "$3.33/month" so it compares apples-to-apples against the $6.99
+    /// card as "$5.00/month" so it compares apples-to-apples against the $9.99
     /// monthly plan.
     func yearlyMonthlyBreakdown(_ storeKit: StoreKitService) -> String {
         if let product = storeKit.yearlyProduct {
             let monthly = product.price / 12
             if let formatter = product.priceFormatter {
-                return formatter.string(from: monthly as NSNumber) ?? "$3.33"
+                return formatter.string(from: monthly as NSNumber) ?? "$5.00"
             }
             return String(format: "$%.2f", (monthly as NSDecimalNumber).doubleValue)
         }
-        return "$3.33"
+        return "$5.00"
     }
 
     /// Dollars saved over a year by choosing yearly instead of paying the
     /// monthly price for 12 months (12 × monthly − yearly), rounded UP to a
-    /// whole dollar (no cents). Shown as "Save $44" — a clean, concrete number
+    /// whole dollar (no cents). Shown as "Save $60" — a clean, concrete number
     /// lands harder than a percentage or a cents figure.
     func yearlySavingsAmount(_ storeKit: StoreKitService) -> String {
         if let monthly = storeKit.monthlyProduct, let yearly = storeKit.yearlyProduct {
@@ -382,6 +382,6 @@ final class PaywallViewModel {
                 return "$\(Int(roundedUp))"
             }
         }
-        return "$44"
+        return "$60"
     }
 }

@@ -43,13 +43,13 @@ private struct SettingsContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.bpPalette) private var palette
     @Environment(\.colorScheme) private var colorScheme
-    @Environment(\.requestReview) private var requestReview
     @Environment(\.openURL) private var openURL
     @Environment(StoreKitService.self) private var storeKitService
     @State private var showPaywall = false
     @State private var isRestoringPurchases = false
     @State private var appeared = false
     @State private var showMemorySettings = false
+    @State private var restoreResultMessage: String?
     @State private var showPathSettings = false
     @State private var pickedPhoto: PhotosPickerItem?
     @State private var showPhotoActions = false
@@ -143,6 +143,14 @@ private struct SettingsContentView: View {
             .sheet(isPresented: $vm.showLanguagePicker) {
                 LanguagePickerView()
                     .presentationDetents([.large])
+            }
+            .alert("Restore Purchases", isPresented: Binding(
+                get: { restoreResultMessage != nil },
+                set: { if !$0 { restoreResultMessage = nil } }
+            )) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text(restoreResultMessage ?? "")
             }
             .sheet(isPresented: $showMemorySettings) {
                 MemorySettingsView(profile: vm.profile)
@@ -371,7 +379,7 @@ private struct SettingsContentView: View {
 
                 settingsRow(
                     icon: "brain.head.profile",
-                    label: "AI Memory",
+                    label: "AI & Privacy",
                     value: memoryRowValue
                 ) {
                     showMemorySettings = true
@@ -695,8 +703,9 @@ private struct SettingsContentView: View {
                 Button {
                     isRestoringPurchases = true
                     Task {
-                        await storeKitService.restorePurchases()
+                        let outcome = await storeKitService.restorePurchases()
                         isRestoringPurchases = false
+                        restoreResultMessage = outcome.message ?? String(localized: "Your Bible+ Pro subscription has been restored.")
                     }
                 } label: {
                     HStack(spacing: BPSpacing.xs) {
@@ -730,8 +739,8 @@ private struct SettingsContentView: View {
             sectionHeader("About", icon: "info.circle.fill", index: 5)
 
             sectionCard {
-                aboutRow(icon: "star", label: "Rate the App", trailing: .chevron) {
-                    requestReview()
+                aboutRow(icon: "star", label: "Rate the App", trailing: .external) {
+                    openURL(ReviewService.writeReviewURL)
                 }
 
                 rowDivider

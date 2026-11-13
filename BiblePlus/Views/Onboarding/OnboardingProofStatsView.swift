@@ -4,8 +4,8 @@ import SwiftUI
 //
 // The "why this works" beat — an animated growth chart + a counting headline
 // stat, the proof pattern that lifts paywall conversion. Warm Paper, gold bars
-// that spring up, a percentage that counts from zero. Framed as a member survey
-// (self-reported) rather than a clinical claim — softer and App-Store-safer.
+// that spring up, and a Scripture anchor. The chart is illustrative only — no
+// statistics are claimed (Guideline 2.3.1).
 struct OnboardingProofStatsView: View {
     var onContinue: () -> Void
 
@@ -13,12 +13,9 @@ struct OnboardingProofStatsView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     @State private var barsIn = false
-    @State private var pct: Int = 0
     @State private var contentIn = false
-    @State private var countTask: Task<Void, Never>?
 
     private let accentGold = Color(red: 0.79, green: 0.66, blue: 0.43)
-    private let targetPct = 92
 
     // Relative bar heights — a clear upward trend across the first month.
     private let bars: [(label: String, value: CGFloat)] = [
@@ -31,11 +28,11 @@ struct OnboardingProofStatsView: View {
 
             VStack(spacing: 8) {
                 Text("WHY DAILY WORKS")
-                    .font(.system(size: 12, weight: .semibold))
-                    .tracking(2.4)
+                    .font(.system(size: 11, weight: .semibold, design: .rounded))
+                    .tracking(2.8)
                     .foregroundStyle(accentGold)
                 Text("Showing up changes\neverything.")
-                    .font(.custom("Baskerville-Bold", size: 30))
+                    .font(.custom("Baskerville", size: 31))
                     .foregroundStyle(palette.textPrimary)
                     .multilineTextAlignment(.center)
             }
@@ -48,30 +45,31 @@ struct OnboardingProofStatsView: View {
                 .padding(.horizontal, 44)
                 .opacity(contentIn ? 1 : 0)
 
-            VStack(spacing: 6) {
-                Text("\(pct)%")
-                    .font(.custom("Baskerville-Bold", size: 54))
+            // App Store 2.3.1: no unverified statistics. (Previously showed
+            // "92% of members felt closer to God… 2026 member survey".) If a
+            // real, documented survey exists, the stat can be restored with a
+            // citation; until then we use Scripture, not numbers.
+            VStack(spacing: 10) {
+                Text("A few minutes a day,\nevery day.")
+                    .font(.custom("Baskerville-Bold", size: 26))
                     .foregroundStyle(accentGold)
-                    .monospacedDigit()
-                Text("of members felt closer to God\nwithin their first two weeks.")
-                    .font(.custom("Georgia", size: 16))
+                    .multilineTextAlignment(.center)
+                Text(verbatim: "but his delight is in Yahweh’s law. On his law he meditates day and night.")
+                    .font(.custom("Georgia-Italic", size: 15))
                     .foregroundStyle(palette.textSecondary)
                     .multilineTextAlignment(.center)
                     .lineSpacing(3)
+                    .padding(.horizontal, 32)
+                Text(verbatim: "Psalm 1:2 (WEB)")
+                    .font(.system(size: 11))
+                    .foregroundStyle(palette.textMuted)
             }
             .padding(.top, 30)
             .opacity(contentIn ? 1 : 0)
 
-            Text("Based on a 2026 member survey.")
-                .font(.system(size: 11))
-                .foregroundStyle(palette.textMuted)
-                .padding(.top, 14)
-                .opacity(contentIn ? 1 : 0)
-
             Spacer(minLength: 0)
 
             GoldButton(title: "Continue", showGlow: true) {
-                countTask?.cancel()
                 HapticService.lightImpact()
                 onContinue()
             }
@@ -82,7 +80,6 @@ struct OnboardingProofStatsView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(palette.background.ignoresSafeArea())
         .onAppear { animateIn() }
-        .onDisappear { countTask?.cancel() }
     }
 
     private var chart: some View {
@@ -116,17 +113,6 @@ struct OnboardingProofStatsView: View {
 
     private func animateIn() {
         withAnimation(.easeOut(duration: 0.6)) { contentIn = true }
-        guard !reduceMotion else { barsIn = true; pct = targetPct; return }
         barsIn = true
-        countTask = Task { @MainActor in
-            try? await Task.sleep(nanoseconds: 500_000_000)
-            let steps = 40
-            for s in 0...steps {
-                if Task.isCancelled { return }
-                pct = Int(Double(targetPct) * Double(s) / Double(steps))
-                try? await Task.sleep(nanoseconds: 26_000_000)
-            }
-            pct = targetPct
-        }
     }
 }

@@ -17,14 +17,9 @@ final class StoreKitService {
     private(set) var subscriptions: [RevenueCat.StoreProduct] = []
 
     var isPro: Bool { _isPro }
-    // DEBUG unlocks Pro for development. Release starts LOCKED and only flips
-    // to true once updateEntitlements()/listenForEntitlementChanges() confirms
-    // a live entitlement — so a free user never gets a Pro window on launch.
-    #if DEBUG
-    private var _isPro: Bool = true
-    #else
+    // Start locked in every configuration so sandbox QA exercises the same
+    // entitlement behavior as production.
     private var _isPro: Bool = false
-    #endif
 
     var monthlyProduct: RevenueCat.StoreProduct? {
         subscriptions.first { $0.productIdentifier == Self.monthlyID }
@@ -37,12 +32,8 @@ final class StoreKitService {
     init() {
         Task {
             await loadProducts()
-            #if DEBUG
-            // Skip entitlement checks — _isPro defaults to true in DEBUG
-            #else
             await updateEntitlements()
             await listenForEntitlementChanges()
-            #endif
         }
     }
 
@@ -59,6 +50,7 @@ final class StoreKitService {
                 .sorted { $0.price < $1.price }
             productsLoaded = true
             productsLoadError = false
+            await refreshTrialEligibility()
         } catch {
             productsLoadError = true
             #if DEBUG
@@ -108,16 +100,77 @@ final class StoreKitService {
         }
     }
 
-    func restorePurchases() async {
+    enum RestoreOutcome: Equatable {
+        case restored
+        case nothingToRestore
+        case failed(String)
+
+        /// User-facing message for the result alert (nil on success).
+        var message: String? {
+            switch self {
+            case .restored: nil
+            case .nothingToRestore: String(localized: "No active Bible+ Pro subscription was found for this Apple ID.")
+            case .failed(let reason): String(localized: "Couldn't restore purchases. \(reason)")
+            }
+        }
+    }
+
+    /// Restores purchases and reports the outcome so the UI can always give
+    /// feedback (App Review taps Restore on every paywall).
+    @discardableResult
+    func restorePurchases() async -> RestoreOutcome {
         do {
             let customerInfo = try await Purchases.shared.restorePurchases()
             let active = customerInfo.entitlements["bibleplus Pro"]?.isActive == true
             await MainActor.run { _isPro = active }
+            return active ? .restored : .nothingToRestore
         } catch {
             #if DEBUG
             print("[RevenueCat] Restore failed: \(error)")
             #endif
+            return .failed(error.localizedDescription)
         }
+    }
+
+    // MARK: - Introductory offer eligibility
+
+    /// Whether this Apple ID can still get the yearly plan's free trial.
+    /// Defaults to false until confirmed, so we never advertise a trial the
+    /// user won't receive (Guideline 3.1.2 / 2.3.1).
+    private(set) var isEligibleForYearlyTrial: Bool = false
+
+    /// Free-trial length of the yearly plan as configured in App Store
+    /// Connect, e.g. "7-day". Nil when the product has no intro offer.
+    var yearlyTrialLengthLabel: String? {
+        guard let period = yearlyProduct?.introductoryDiscount?.subscriptionPeriod,
+              yearlyProduct?.introductoryDiscount?.paymentMode == .freeTrial else { return nil }
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .full
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.locale = Locale(identifier: LocalizationService.effectiveLanguageCode())
+        formatter.calendar = calendar
+        let components: DateComponents
+        switch period.unit {
+        case .day: formatter.allowedUnits = [.day]; components = DateComponents(day: period.value)
+        case .week: formatter.allowedUnits = [.day]; components = DateComponents(day: period.value * 7)
+        case .month: formatter.allowedUnits = [.month]; components = DateComponents(month: period.value)
+        case .year: formatter.allowedUnits = [.year]; components = DateComponents(year: period.value)
+        @unknown default: return nil
+        }
+        return formatter.string(from: components)
+    }
+
+    /// True only when the yearly plan has a free trial AND this user is
+    /// eligible for it. Gate every "free trial" word in the UI on this.
+    var showsYearlyTrial: Bool { isEligibleForYearlyTrial && yearlyTrialLengthLabel != nil }
+
+    private func refreshTrialEligibility() async {
+        guard let product = yearlyProduct else { return }
+        let status = await Purchases.shared.checkTrialOrIntroDiscountEligibility(product: product)
+        // Unknown is not permission to advertise a trial. Only Apple's
+        // confirmed eligible result may enable trial copy.
+        let eligible = status == .eligible
+        await MainActor.run { isEligibleForYearlyTrial = eligible }
     }
 
     /// Listen for real-time entitlement changes (renewal, expiry, upgrade, etc.)

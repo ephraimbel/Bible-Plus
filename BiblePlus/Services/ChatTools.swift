@@ -235,7 +235,7 @@ struct ChatToolResult {
     /// Should be plain text (not JSON) for best model comprehension.
     let modelContent: String
 
-    /// One-line human summary, e.g. "Looked up Romans 8:28 in your KJV Bible".
+    /// One-line human summary, e.g. "Looked up Romans 8:28 in your WEB Bible".
     /// Rendered in the chat as an inline TOOLRESULT card.
     let humanSummary: String
 

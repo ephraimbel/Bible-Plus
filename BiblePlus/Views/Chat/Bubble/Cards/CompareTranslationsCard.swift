@@ -8,7 +8,11 @@ import SwiftUI
 // itself from BibleRepository. Tap a row to focus it (the others recede) so a
 // single reading can be isolated while comparing.
 //
-//   [COMPARE book="John" chapter="3" verse="16" translations="KJV,NIV,NLT"][/COMPARE]
+//   [COMPARE book="John" chapter="3" verse="16" translations="WEB,BSB,YLT"][/COMPARE]
+//
+// LICENSING: only public-domain translations can appear here (bundled
+// WEB + the bundled BSB/ASV/YLT/DRA). Any other abbreviation the model
+// emits — e.g. NIV/ESV/NLT from an older conversation — is ignored.
 struct CompareTranslationsCard: View {
     let book: String
     let chapter: Int
@@ -169,17 +173,54 @@ struct CompareTranslationsCard: View {
     private var bookDisplayName: String { BibleData.resolveBook(book)?.name ?? book }
     private var referenceLabel: String { "\(bookDisplayName) \(chapter):\(verse)" }
 
-    private func resolveTranslations() -> [BibleTranslation] {
-        var chosen: [BibleTranslation] = translations.compactMap { abbr in
-            BibleTranslation.allCases.first { $0.abbreviation.caseInsensitiveCompare(abbr) == .orderedSame }
+    /// A translation the card may load: either bundled (WEB) or a
+    /// bundled public-domain ref (BSB/ASV/YLT/DRA).
+    private enum Source: Hashable {
+        case bundled(BibleTranslation)
+        case ref(TranslationRef)
+
+        var abbr: String {
+            switch self {
+            case .bundled(let t): t.abbreviation
+            case .ref(let r): r.shortName
+            }
         }
-        if chosen.isEmpty {
-            // A sensible default spread: the reader's current translation plus a
-            // precise one and a readable one, so the range is visible.
-            chosen = [BibleRepository.shared.currentTranslation, .esv, .nlt]
+        var name: String {
+            switch self {
+            case .bundled(let t): t.displayName
+            case .ref(let r): r.englishName
+            }
         }
-        var seen = Set<BibleTranslation>()
-        return Array(chosen.filter { seen.insert($0).inserted }.prefix(3))
+
+        static func from(abbreviation abbr: String) -> Source? {
+            if let t = BibleTranslation.available.first(where: {
+                $0.abbreviation.caseInsensitiveCompare(abbr) == .orderedSame
+            }) {
+                return .bundled(t)
+            }
+            if let r = TranslationRef.featuredEnglish.first(where: {
+                $0.shortName.caseInsensitiveCompare(abbr) == .orderedSame
+            }) {
+                return .ref(r)
+            }
+            return nil
+        }
+    }
+
+    private func resolveTranslations() -> [Source] {
+        var chosen: [Source] = translations.compactMap(Source.from(abbreviation:))
+        if chosen.count < 2 {
+            // A sensible default spread: the reader's translation, a modern
+            // readable one, and a strictly literal one.
+            let defaults: [Source?] = [
+                .bundled(BibleRepository.shared.currentTranslation.licensed),
+                Source.from(abbreviation: "BSB"),
+                Source.from(abbreviation: "YLT"),
+            ]
+            chosen += defaults.compactMap { $0 }
+        }
+        var seen = Set<String>()
+        return Array(chosen.filter { seen.insert($0.abbr).inserted }.prefix(3))
     }
 
     // MARK: Load
@@ -190,13 +231,20 @@ struct CompareTranslationsCard: View {
             return
         }
         var results: [Row] = []
-        for translation in resolveTranslations() {
-            if let verses = try? await BibleRepository.shared.verses(
-                    book: resolved.id, chapter: chapter, translation: translation),
-               let match = verses.first(where: { $0.number == verse }),
+        for source in resolveTranslations() {
+            let verses: [(number: Int, text: String)]?
+            switch source {
+            case .bundled(let t):
+                verses = try? await BibleRepository.shared.verses(
+                    book: resolved.id, chapter: chapter, translation: t)
+            case .ref(let r):
+                verses = try? await BibleRepository.shared.verses(
+                    refID: r.id, book: resolved.id, chapter: chapter)
+            }
+            if let match = verses?.first(where: { $0.number == verse }),
                !match.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                results.append(Row(abbr: translation.abbreviation,
-                                   name: translation.displayName,
+                results.append(Row(abbr: source.abbr,
+                                   name: source.name,
                                    text: normalized(match.text)))
             }
         }

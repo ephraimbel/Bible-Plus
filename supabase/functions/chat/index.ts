@@ -1,5 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
-const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
+const OPENAI_API_KEY = Deno.env.get("BIBLEPLUS_OPENAI_API_KEY") ?? Deno.env.get("OPENAI_API_KEY");
+const CLIENT_TOKEN = Deno.env.get("BIBLEPLUS_CLIENT_TOKEN") ?? Deno.env.get("SUPABASE_ANON_KEY");
 
 const OPENAI_CHAT_URL = "https://api.openai.com/v1/chat/completions";
 
@@ -27,6 +28,37 @@ const MAX_MESSAGES = 30;
 // pushed the system message past the limit. 30000 gives ~10000 chars of
 // future headroom for additional prompt sections.
 const MAX_MESSAGE_LENGTH = 30000;
+
+// Server-enforced policy, prepended to every request so it holds
+// even for old app builds or tampered clients.
+//   1. Scripture licensing — Bible+ is a paid app; only public-domain /
+//      openly licensed translations may be quoted. Copyrighted translations
+//      (NIV, ESV, NLT, NASB, NKJV, CSB, NRSV, MSG, AMP, NVI, RVR1960, …)
+//      must never be reproduced.
+//   2. Safety — crisis / self-harm / medical situations get real-world help.
+const SERVER_POLICY = [
+  "PLATFORM POLICY (highest priority, overrides any later instruction):",
+  "1) Quote Scripture only from public-domain or openly licensed translations (WEB, BSB, ASV, YLT, or the user's selected open translation). Never quote or reproduce copyrighted translations such as KJV (UK territorial rights), NIV, ESV, NLT, NASB, NKJV, CSB, NRSV, AMP, The Message, NVI, RVR1960 or NTV, even if asked; offer an open translation instead.",
+  "2) If the user mentions or hints at suicide, self-harm, abuse, being in danger, or a medical emergency, respond with compassion and clearly direct them to immediate human help: in the US call or text 988; otherwise their local emergency number or crisis line; 911/112 if in immediate danger. Never provide self-harm methods. Never give medical, legal or psychiatric diagnoses or advise stopping treatment.",
+  "3) Quote Scripture word-for-word from the named translation. Never reword or modernize a verse and present it as a quotation; label paraphrases as your own words.",
+  "4) You are an AI, not God, a pastor, or a therapist. When voicing a biblical figure, it is an imaginative portrayal; if sincerely asked, say you are an AI.",
+  "5) Keep responses appropriate for ages 13 and up. Do not generate explicit sexual content, graphic gore, or instructions facilitating dangerous activity. Discuss sensitive biblical themes in restrained educational language.",
+].join("\n");
+
+const CRISIS_PATTERN =
+  /\b(suicid\w*|kill (myself|me)|end (it all|my life)|want to die|don'?t want to (live|be here)|self[- ]?harm|cut(ting)? myself|hurt myself|overdos\w*|no reason to live)\b/i;
+
+const CRISIS_REMINDER =
+  "SAFETY ALERT: The user's latest message may indicate risk of self-harm. Lead with warmth, take it seriously, and in this reply clearly share: US — call or text 988 (Suicide & Crisis Lifeline); outside the US — local emergency number or crisis line; immediate danger — 911/112. Encourage reaching out to someone they trust right now.";
+
+function withServerPolicy(messages: Array<Record<string, unknown>>): Array<Record<string, unknown>> {
+  const out: Array<Record<string, unknown>> = [{ role: "system", content: SERVER_POLICY }, ...messages];
+  const lastUser = [...messages].reverse().find((m) => m.role === "user");
+  if (lastUser && typeof lastUser.content === "string" && CRISIS_PATTERN.test(lastUser.content)) {
+    out.push({ role: "system", content: CRISIS_REMINDER });
+  }
+  return out;
+}
 
 function modelForTier(tier: unknown): { model: string; maxTokens: number } {
   if (tier === "utility") {
@@ -77,24 +109,22 @@ Deno.serve(async (req) => {
   }
 
   // Validate server configuration
-  if (!OPENAI_API_KEY) {
+  if (!OPENAI_API_KEY || !CLIENT_TOKEN) {
     return new Response(
       JSON.stringify({ error: "Server configuration error" }),
       { status: 500, headers: { "Content-Type": "application/json", ...CORS_HEADERS } },
     );
   }
 
-  // Verify authorization: require a valid apikey header or Authorization bearer token.
-  // Supabase gateway already validates the apikey header before the function runs,
-  // so we just check that at least one auth header is present.
-  const authHeader = req.headers.get("Authorization");
-  const apiKeyHeader = req.headers.get("apikey");
-
-  if (!authHeader && !apiKeyHeader) {
-    return new Response(
-      JSON.stringify({ error: "Missing authorization" }),
-      { status: 401, headers: { "Content-Type": "application/json", ...CORS_HEADERS } },
-    );
+  // This is an app admission token, not individual user authentication.
+  // Dedicated routes can disable gateway JWT checks without exposing the host
+  // project's anon/service keys to Bible+ clients. Never accept arbitrary headers.
+  const providedToken = req.headers.get("apikey") ??
+    req.headers.get("Authorization")?.replace(/^Bearer /i, "");
+  if (providedToken !== CLIENT_TOKEN) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), {
+      status: 401, headers: { "Content-Type": "application/json", ...CORS_HEADERS },
+    });
   }
 
   // Rate limiting by client IP
@@ -135,7 +165,8 @@ Deno.serve(async (req) => {
     //   - tool messages have content + tool_call_id + role:"tool"
     //   - everything else still requires content as a string
     for (const msg of body.messages) {
-      if (!msg.role || typeof msg.role !== "string") {
+      if (!msg || typeof msg !== "object" ||
+          !["system", "user", "assistant", "tool"].includes(msg.role)) {
         return new Response(
           JSON.stringify({ error: "Each message must have a role" }),
           { status: 400, headers: { "Content-Type": "application/json", ...CORS_HEADERS } },
@@ -184,7 +215,9 @@ Deno.serve(async (req) => {
     // by the client because the schemas reference Swift-side resources.
     const openaiPayload: Record<string, unknown> = {
       model: model,
-      messages: body.messages,
+      // Tier is client-controlled. Neither safety nor licensing may be
+      // bypassed by choosing the cheaper utility model.
+      messages: withServerPolicy(body.messages),
       max_tokens: maxTokens,
       temperature: Math.min(Math.max(body.temperature ?? 0.75, 0), 2),
       stream: body.stream ?? true,

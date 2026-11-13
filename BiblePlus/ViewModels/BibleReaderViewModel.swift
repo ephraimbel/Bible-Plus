@@ -31,7 +31,7 @@ final class BibleReaderViewModel {
     // MARK: - Data
 
     var verses: [(number: Int, text: String)] = []
-    var currentTranslation: BibleTranslation = .kjv
+    var currentTranslation: BibleTranslation = .web
     /// When non-nil (and not a bundled-prefix id), the reader fetches chapters
     /// from bible.helloao.org for this translation instead of using the legacy
     /// enum path. Written in two ways: (a) user picks from the multilingual
@@ -105,14 +105,27 @@ final class BibleReaderViewModel {
 
     /// Human-visible translation label. Prefers the catalog ref's shortName
     /// (e.g. "R09" for Reina-Valera 1909) so non-English users don't see a
-    /// stale "KJV" badge, and falls back to the legacy enum's abbreviation.
+    /// stale "WEB" badge, and falls back to the legacy enum's abbreviation.
     var translationName: String {
+        // While showing the WEB fallback, label it as WEB.
+        if isShowingOfflineFallback, currentRefID.map({ !$0.hasPrefix(TranslationRef.bundledPrefix) }) == true {
+            return BibleTranslation.web.abbreviation
+        }
         if let refID = currentRefID,
            !refID.hasPrefix(TranslationRef.bundledPrefix),
-           let ref = TranslationCatalog.shared.translation(id: refID) {
-            return ref.shortName
+           let short = TranslationLicensePolicy.shortName(for: refID) {
+            return short
         }
         return currentTranslation.abbreviation
+    }
+
+    /// Credit line required by the active translation's license (CC BY-SA
+    /// texts). Nil for public-domain translations.
+    var translationAttribution: String? {
+        if let refID = currentRefID, !refID.hasPrefix(TranslationRef.bundledPrefix), !isShowingOfflineFallback {
+            return TranslationLicensePolicy.attribution(for: refID)
+        }
+        return nil
     }
 
     /// Localized book name for the active translation when available (e.g.
@@ -150,7 +163,7 @@ final class BibleReaderViewModel {
         // Read user preferences
         let descriptor = FetchDescriptor<UserProfile>()
         if let profile = try? modelContext.fetch(descriptor).first {
-            currentTranslation = profile.preferredTranslation
+            currentTranslation = profile.preferredTranslation.licensed
             readerFontSize = profile.readerFontSize
             readerFontStyle = profile.readerFontStyle
             readerFontWeight = profile.readerFontWeight
@@ -161,8 +174,9 @@ final class BibleReaderViewModel {
             // Resolve the active translation ref. Precedence: explicit user
             // pick > language default from `LanguageDefaultBible`. Nil means
             // "use legacy bundled/API translation" — English users without an
-            // explicit pick land here and read the legacy KJV path.
-            if let stored = profile.preferredTranslationRefID, !stored.isEmpty {
+            // explicit pick land here and read the legacy WEB path.
+            if let stored = profile.preferredTranslationRefID, !stored.isEmpty,
+               TranslationLicensePolicy.isAllowed(refID: stored) {
                 currentRefID = stored
             } else {
                 // `effectiveLanguageCode` resolves "follow system" to the
@@ -190,6 +204,8 @@ final class BibleReaderViewModel {
                 lastReadVerseNumber = profile.lastReadVerseNumber
             }
         }
+        if currentRefID == TranslationRef.bundledKJV.id { currentTranslation = .web }
+        if currentRefID == TranslationRef.bundledWEB.id { currentTranslation = .web }
         repository.setTranslation(currentTranslation)
         loadChapter()
     }
@@ -324,12 +340,13 @@ final class BibleReaderViewModel {
     }
 
     func selectionCopyShareText() -> String {
-        "\(selectionText())\n— \(selectionReference()) (\(translationName))"
+        let text = "\(selectionText())\n— \(selectionReference()) (\(translationName))"
+        return text + (translationAttribution.map { "\n\n" + $0 } ?? "")
     }
 
     func selectionExplainPrompt() -> String {
         let ref = selectionReference()
-        return "Help me understand what God is saying in \(ref): \"\(selectionText())\" — what did this mean in its original context, and what does it mean for my life today?"
+        return "Help me understand what God is saying in \(ref): \"\(selectionText())\" \(translationAttribution ?? translationName) — what did this mean in its original context, and what does it mean for my life today?"
     }
 
     // MARK: - Selection Bulk Actions
@@ -369,6 +386,7 @@ final class BibleReaderViewModel {
     // MARK: - Translation
 
     func changeTranslation(_ translation: BibleTranslation) {
+        let translation = translation.licensed
         currentTranslation = translation
         currentRefID = nil  // user explicitly picked a legacy enum; clear ref override
         repository.setTranslation(translation)
@@ -385,6 +403,9 @@ final class BibleReaderViewModel {
     /// the pick. Pass `nil` to clear the override and revert to the legacy
     /// `BibleTranslation` enum.
     func changeTranslationRef(_ refID: String?) {
+        let refID = refID.flatMap { TranslationLicensePolicy.isAllowed(refID: $0) ? $0 : nil }
+        if refID == TranslationRef.bundledKJV.id { changeTranslation(.web); return }
+        if refID == TranslationRef.bundledWEB.id { changeTranslation(.web); return }
         currentRefID = refID
         updateProfile { $0.preferredTranslationRefID = refID }
         showTranslationPicker = false
@@ -503,11 +524,15 @@ final class BibleReaderViewModel {
                 guard !Task.isCancelled else { return }
                 let fallback = repository.versesSync(
                     book: selectedBook.id,
-                    chapter: selectedChapter
+                    chapter: selectedChapter,
+                    translation: .web
                 )
                 if !fallback.isEmpty {
                     verses = fallback
-                    isShowingOfflineFallback = currentTranslation != .kjv
+                    // Fell back to bundled WEB: either a non-WEB legacy pick, or
+                    // a ref translation that doesn't include this book.
+                    isShowingOfflineFallback = currentTranslation != .web
+                        || (currentRefID.map { !$0.hasPrefix(TranslationRef.bundledPrefix) } ?? false)
                     isLoading = false
                     loadSavedVerses()
                 } else {
@@ -529,7 +554,7 @@ final class BibleReaderViewModel {
             chapter: selectedChapter,
             verseNumber: verse.number,
             text: verse.text,
-            translation: currentTranslation.abbreviation
+            translation: translationName
         )
         modelContext.insert(saved)
         modelContext.safeSave()
@@ -557,7 +582,7 @@ final class BibleReaderViewModel {
                 chapter: selectedChapter,
                 verseNumber: verse.number,
                 text: verse.text,
-                translation: currentTranslation.abbreviation,
+                translation: translationName,
                 highlightColor: color
             )
             modelContext.insert(saved)
@@ -591,7 +616,7 @@ final class BibleReaderViewModel {
                 chapter: selectedChapter,
                 verseNumber: verse.number,
                 text: verse.text,
-                translation: currentTranslation.abbreviation,
+                translation: translationName,
                 notes: note
             )
             modelContext.insert(saved)
@@ -628,7 +653,7 @@ final class BibleReaderViewModel {
         loadTask = Task {
             do {
                 let fetched: [(number: Int, text: String)]
-                // Route through helloao when the user has picked (or defaulted
+                // Use the bundled ref translation when the user has picked (or defaulted
                 // to) a multilingual translation. Bundled prefixes collapse
                 // back to the legacy path inside BibleRepository.
                 if let refID = currentRefID, !refID.hasPrefix(TranslationRef.bundledPrefix) {
@@ -655,15 +680,19 @@ final class BibleReaderViewModel {
             } catch {
                 guard !Task.isCancelled else { return }
 
-                // Graceful fallback: try sync path (cached or bundled KJV)
+                // Graceful fallback: try sync path (cached or bundled WEB)
                 let fallback = repository.versesSync(
                     book: selectedBook.id,
-                    chapter: selectedChapter
+                    chapter: selectedChapter,
+                    translation: .web
                 )
 
                 if !fallback.isEmpty {
                     verses = fallback
-                    isShowingOfflineFallback = currentTranslation != .kjv
+                    // Fell back to bundled WEB: either a non-WEB legacy pick, or
+                    // a ref translation that doesn't include this book.
+                    isShowingOfflineFallback = currentTranslation != .web
+                        || (currentRefID.map { !$0.hasPrefix(TranslationRef.bundledPrefix) } ?? false)
                     isLoading = false
                     loadSavedVerses()
                     persistReadPosition()

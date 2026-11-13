@@ -90,11 +90,11 @@ private struct BibleContentView: View {
     @State private var shareText: String?
     @State private var searchViewModel: BibleSearchViewModel?
     @State private var showVoicePicker = false
-    @State private var showImmersiveListening = false
+    @State private var showSaved = false
     @State private var showPaywall = false
     @State private var showReadingPlans = false
     @State private var showStillListeningAlert = false
-    @State private var verseImageData: (text: String, reference: String, translation: String)?
+    @State private var verseImageData: (text: String, reference: String, translation: String, attribution: String?)?
     @State private var showSanctuary = false
     @State private var sanctuaryVerseText: String?
     @State private var sanctuaryVerseReference: String?
@@ -116,12 +116,6 @@ private struct BibleContentView: View {
     @State private var cachedBookID: String = ""
     @State private var cachedChapterNumber: Int = 0
 
-    private var resolvedBackground: SanctuaryBackground {
-        let descriptor = FetchDescriptor<UserProfile>()
-        let bgID = (try? modelContext.fetch(descriptor).first?.selectedBackgroundID) ?? "warm-gold"
-        return SanctuaryBackground.background(for: bgID)
-            ?? SanctuaryBackground.allBackgrounds[0]
-    }
 
     private var currentColorMode: ColorMode {
         let descriptor = FetchDescriptor<UserProfile>()
@@ -216,25 +210,6 @@ private struct BibleContentView: View {
         }
     }
 
-    // MARK: - Immersive Listening
-
-    private func handleImmersiveListeningTap() {
-        if audioService.hasActivePlayback {
-            showImmersiveListening = true
-            return
-        }
-
-        // Pro gate
-        guard isPro else {
-            showPaywall = true
-            return
-        }
-
-        guard !viewModel.verses.isEmpty else { return }
-
-        showImmersiveListening = true
-    }
-
     // MARK: - Prefetch
 
     private func prefetchNextChapter() {
@@ -313,6 +288,7 @@ private struct BibleContentView: View {
                     errorMessage: viewModel.errorMessage,
                     isShowingOfflineFallback: viewModel.isShowingOfflineFallback,
                     offlineTranslationName: viewModel.translationName,
+                    translationAttribution: viewModel.translationAttribution,
                     savedVerseNumbers: viewModel.savedVerseNumbers,
                     highlightColors: viewModel.highlightColors,
                     verseNotes: viewModel.verseNotes,
@@ -610,7 +586,8 @@ private struct BibleContentView: View {
                         verseImageData = (
                             text: viewModel.selectionText(),
                             reference: viewModel.selectionReference(),
-                            translation: viewModel.currentTranslation.abbreviation
+                            translation: viewModel.translationName,
+                            attribution: viewModel.translationAttribution
                         )
                         viewModel.clearSelection()
                     },
@@ -686,7 +663,7 @@ private struct BibleContentView: View {
                         viewModel.showTranslationPicker = true
                     } label: {
                         HStack(spacing: 3) {
-                            Text(viewModel.currentTranslation.apiCode)
+                            Text(viewModel.translationName)
                                 .font(.system(size: 11, weight: .semibold))
                             Image(systemName: "chevron.down")
                                 .font(.system(size: 7, weight: .bold))
@@ -737,18 +714,20 @@ private struct BibleContentView: View {
                     Menu {
                         Section {
                             Button {
+                                showSaved = true
+                            } label: {
+                                Label("Saved", systemImage: "bookmark")
+                            }
+                        }
+
+                        Section {
+                            Button {
                                 handleAudioTap()
                             } label: {
                                 Label(
                                     audioService.hasActivePlayback ? "Pause Audio" : "Listen to Chapter",
                                     systemImage: audioService.hasActivePlayback ? "pause.circle" : "headphones"
                                 )
-                            }
-
-                            Button {
-                                handleImmersiveListeningTap()
-                            } label: {
-                                Label("Immersive Listening", systemImage: "tv.and.mediabox")
                             }
 
                             Button {
@@ -842,6 +821,7 @@ private struct BibleContentView: View {
                     verseText: data.text,
                     reference: data.reference,
                     translation: data.translation,
+                    attribution: data.attribution,
                     isPro: {
                         let descriptor = FetchDescriptor<UserProfile>()
                         return (try? modelContext.fetch(descriptor).first?.isPro) ?? false
@@ -895,13 +875,16 @@ private struct BibleContentView: View {
                 }()
             )
         }
-        .fullScreenCover(isPresented: $showImmersiveListening) {
-            ImmersiveListeningView(
-                viewModel: viewModel,
-                audioService: audioService,
-                initialBackground: resolvedBackground,
-                wasAlreadyPlaying: audioService.hasActivePlayback
-            )
+        .sheet(isPresented: $showSaved) {
+            NavigationStack {
+                SavedView()
+                    .toolbar {
+                        ToolbarItem(placement: .topBarLeading) {
+                            Button("Done") { showSaved = false }
+                                .foregroundStyle(palette.accent)
+                        }
+                    }
+            }
         }
         .fullScreenCover(isPresented: $showSanctuary) {
             SanctuaryView(

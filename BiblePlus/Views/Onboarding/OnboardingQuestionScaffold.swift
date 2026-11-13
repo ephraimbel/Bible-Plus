@@ -110,28 +110,42 @@ struct OnboardingQuestionScaffold<Content: View, Footer: View>: View {
     // MARK: - Header
 
     private var header: some View {
-        VStack(alignment: .leading, spacing: 11) {
-            Text(eyebrow)
-                .font(.system(size: 12, weight: .semibold, design: .rounded))
-                .tracking(2.6)
-                .foregroundStyle(accentGold)
+        VStack(spacing: 14) {
+            // Friendly guide line — a small gold brand mark + warm, encouraging
+            // microcopy, in place of a cold tracked-caps eyebrow.
+            HStack(spacing: 8) {
+                ZStack {
+                    Circle().fill(accentGold)
+                    Image(systemName: "sparkle")
+                        .font(.system(size: 11, weight: .bold))
+                        .foregroundStyle(.white)
+                }
+                .frame(width: 24, height: 24)
+
+                Text(eyebrow)
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(palette.textSecondary)
+            }
 
             Text(headline)
-                .font(.custom("Baskerville-Bold", size: 30))
+                .font(.custom("Baskerville", size: 33))
                 .foregroundStyle(palette.textPrimary)
-                .lineSpacing(2)
+                .multilineTextAlignment(.center)
+                .lineSpacing(3)
                 .fixedSize(horizontal: false, vertical: true)
 
             if let subtitle {
                 Text(subtitle)
-                    .font(.custom("Georgia-Italic", size: 16))
+                    .font(.custom("Georgia-Italic", size: 15.5))
                     .foregroundStyle(palette.textSecondary)
+                    .multilineTextAlignment(.center)
                     .lineSpacing(3)
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.top, 1)
+                    .padding(.horizontal, 8)
             }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: .infinity, alignment: .center)
     }
 
     // MARK: - Top bar (back + segmented progress)
@@ -149,18 +163,16 @@ struct OnboardingQuestionScaffold<Content: View, Footer: View>: View {
             .opacity(showBack ? 1 : 0)
             .allowsHitTesting(showBack)
 
-            // Continuous fill bar — scales cleanly to a long interview where
-            // a dozen-plus separate segments would read as cramped slivers.
-            GeometryReader { geo in
-                ZStack(alignment: .leading) {
+            // Segmented progress — one slim pill per step, filled up to the
+            // current question. Reads cleaner and more premium than a single
+            // continuous bar for a short interview.
+            HStack(spacing: 6) {
+                ForEach(0..<max(totalSteps, 1), id: \.self) { index in
                     Capsule()
-                        .fill(palette.border.opacity(0.30))
-                    Capsule()
-                        .fill(accentGold)
-                        .frame(width: max(0, geo.size.width * progressFraction))
+                        .fill(index < stepNumber ? accentGold : palette.border.opacity(0.35))
+                        .frame(height: 4)
                 }
             }
-            .frame(height: 4)
             .animation(.spring(response: 0.45, dampingFraction: 0.8), value: stepNumber)
         }
         .padding(.horizontal, 22)
@@ -203,7 +215,8 @@ struct OnboardingSelectableCard: View {
         Button(action: action) {
             HStack(spacing: 8) {
                 Text(label)
-                    .font(.custom(fullWidth ? "Georgia" : "Georgia", size: fullWidth ? 17 : 15.5))
+                    .font(.system(size: fullWidth ? 16 : 14.5, weight: isSelected ? .semibold : .medium))
+                    .tracking(0.2)
                     .foregroundStyle(isSelected ? .white : palette.textPrimary)
                     .multilineTextAlignment(fullWidth ? .leading : .center)
                     .lineLimit(2)
@@ -229,11 +242,11 @@ struct OnboardingSelectableCard: View {
             // render identically — keeps every selection grid clean and even.
             .frame(maxWidth: .infinity, minHeight: fullWidth ? 0 : 56, alignment: fullWidth ? .leading : .center)
             .background(
-                RoundedRectangle(cornerRadius: 15, style: .continuous)
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
                     .fill(isSelected ? accentGold : palette.surfaceElevated)
             )
             .overlay(
-                RoundedRectangle(cornerRadius: 15, style: .continuous)
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
                     .stroke(isSelected ? Color.white.opacity(0.25) : accentGold.opacity(0.18), lineWidth: isSelected ? 1 : 0.7)
             )
             .shadow(

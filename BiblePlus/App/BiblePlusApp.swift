@@ -104,13 +104,6 @@ struct BiblePlusApp: App {
         UINavigationBar.appearance().compactAppearance = navAppearance
         UINavigationBar.appearance().tintColor = UIColor(red: 0.79, green: 0.66, blue: 0.43, alpha: 1) // #C9A96E accent
 
-        // Kick off a background refresh of the multilingual translation
-        // catalog (bible.helloao.org). Fire-and-forget — the reader falls
-        // back to bundled KJV if the manifest hasn't landed yet.
-        Task { @MainActor in
-            TranslationCatalog.shared.refreshIfNeeded()
-        }
-
         // RevenueCat — full integration (handles purchases, entitlements, renewals)
         Purchases.configure(withAPIKey: "appl_FjknWibdqNxzGBryURSpcNKbxcv")
 
@@ -125,6 +118,11 @@ struct BiblePlusApp: App {
         ContentSeeder.seedPlansIfNeeded(modelContext: seedContext)
         ContentSeeder.seedDailyPathsIfNeeded(modelContext: seedContext)
         ContentSeeder.migrateOrphanedMessages(modelContext: seedContext)
+
+        // Licensing: move users off copyrighted / non-commercial translations
+        // and delete any such text cached on disk.
+        LicenseCompliance.migrate(modelContext: seedContext)
+        ReviewService.shared.recordFirstLaunchIfNeeded()
 
         // Recovery: ensure the Daily Path reminder is correctly scheduled
         // (or cancelled) for the user's current state. Cheap, idempotent,
@@ -323,10 +321,16 @@ struct RootView: View {
     @Query private var profiles: [UserProfile]
     @Environment(\.modelContext) private var modelContext
     @Environment(\.colorScheme) private var systemScheme
+    @Environment(\.scenePhase) private var scenePhase
     @State private var deepLinkedContentID: UUID?
     @State private var showSplash = true
     @State private var storeKitService = StoreKitService()
-    @State private var reviewService = ReviewService.shared
+    // StoreKitService already loads offerings once at launch. This skips
+    // that first `.active` transition so we don't double-fetch on cold
+    // start, and only refreshes on subsequent foregrounds — keeps paywall
+    // pricing current (e.g. a scheduled App Store Connect price change)
+    // without waiting for the user to relaunch the app.
+    @State private var didBecomeActiveOnce = false
     // LocalizationService is a singleton; holding it in @State gives SwiftUI
     // a stable identity for observation so the whole tree re-renders when
     // the user switches languages from Settings.
@@ -345,17 +349,23 @@ struct RootView: View {
             Group {
                 if hasCompletedOnboarding {
                     ContentView(deepLinkedContentID: $deepLinkedContentID)
+                        .preferredColorScheme(resolvedColorScheme)
                         .transition(.asymmetric(
                             insertion: .opacity.combined(with: .scale(scale: 0.96)),
                             removal: .opacity
                         ))
                 } else {
+                    // Onboarding owns its own per-page color scheme: the question
+                    // screens force light, while the personal-verse reveal and
+                    // paywall force dark. A global override here would sit above
+                    // those and leave the dark reveal page's status-bar/header
+                    // region in light mode (white). So scope the scheme to the
+                    // completed-onboarding app instead.
                     ConversationalOnboardingView()
                         .transition(.opacity)
                 }
             }
             .environment(storeKitService)
-            .preferredColorScheme(resolvedColorScheme)
             .environment(
                 \.bpPalette,
                 BPColorPalette.resolve(
@@ -372,6 +382,14 @@ struct RootView: View {
                     deepLinkedContentID = uuid
                 }
             }
+            .onChange(of: scenePhase) { _, newPhase in
+                guard newPhase == .active else { return }
+                guard didBecomeActiveOnce else {
+                    didBecomeActiveOnce = true
+                    return
+                }
+                Task { await storeKitService.loadProducts() }
+            }
 
             if showSplash {
                 SplashView()
@@ -379,22 +397,7 @@ struct RootView: View {
                     .zIndex(1)
             }
 
-            // Review prompt overlay
-            if reviewService.showPrompt {
-                Color.black.opacity(0.4)
-                    .ignoresSafeArea()
-                    .zIndex(2)
-                    .onTapGesture { reviewService.userTappedNotYet() }
-
-                ReviewPromptView(
-                    onYes: { reviewService.userTappedYes() },
-                    onNotYet: { reviewService.userTappedNotYet() }
-                )
-                .zIndex(3)
-                .transition(.scale(scale: 0.85).combined(with: .opacity))
-            }
         }
-        .environment(reviewService)
         .environment(localizationService)
         .environment(\.locale, localizationService.locale)
         .environment(\.layoutDirection, localizationService.layoutDirection)
@@ -402,7 +405,6 @@ struct RootView: View {
         // ensures every cached `Text(...)` re-resolves immediately without
         // requiring an app relaunch.
         .id(localizationService.currentCode ?? "system")
-        .animation(.spring(response: 0.4, dampingFraction: 0.8), value: reviewService.showPrompt)
         .onAppear {
             // Splash hold tuned to let the glow bloom land (~1.0s) plus a
             // short beat so the handoff to Welcome feels intentional, not

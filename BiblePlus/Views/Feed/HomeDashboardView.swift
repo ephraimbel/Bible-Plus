@@ -177,7 +177,7 @@ struct HomeDashboardView: View {
     }
 
     /// Streak count as a compact top-bar pill (Cal AI pattern). Tapping
-    /// opens progress, same as the bare day-ring row below.
+    /// opens progress, same as the day-ring row below.
     private var streakPill: some View {
         Button {
             HapticService.lightImpact()
@@ -234,32 +234,11 @@ struct HomeDashboardView: View {
         }
     }
 
-    // MARK: - Greeting Header (calm, Granola-style)
-
-    private var timeGreeting: String {
-        let hour = Calendar.current.component(.hour, from: Date())
-        switch hour {
-        case 5..<12: return "Good morning"
-        case 12..<17: return "Good afternoon"
-        case 17..<22: return "Good evening"
-        default: return "Peace to you"
-        }
-    }
+    // MARK: - Header (Bible ✦ wordmark)
 
     private var greetingHeader: some View {
         HStack(alignment: .center, spacing: BPSpacing.sm) {
-            VStack(alignment: .leading, spacing: BPSpacing.xxs) {
-                Text(timeGreeting.uppercased())
-                    .font(.system(size: 11, weight: .semibold))
-                    .tracking(2.2)
-                    .foregroundStyle(palette.accent.opacity(0.85))
-
-                Text(vm.profile.firstName.isEmpty ? "Welcome" : vm.profile.firstName)
-                    .font(.system(size: 30, weight: .semibold, design: .serif))
-                    .foregroundStyle(palette.textPrimary)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.8)
-            }
+            bibleWordmark
 
             Spacer()
 
@@ -270,6 +249,39 @@ struct HomeDashboardView: View {
         .opacity(appeared ? 1 : 0)
         .offset(y: appeared ? 0 : 16)
         .animation(BPAnimation.spring.delay(0.04), value: appeared)
+    }
+
+    /// The "Bible ✦" wordmark — the app's gold glowing-sparkle logo — anchored
+    /// top-left of the home screen in place of the time-of-day greeting. Mirrors
+    /// the SplashView lockup so the brand identity carries through.
+    private var bibleWordmark: some View {
+        // Warm gold, a touch brighter than the muted palette accent, for a
+        // luminous-but-restrained logo glow.
+        let gold = Color(red: 1.0, green: 0.84, blue: 0.4)
+        return HStack(spacing: 3) {
+            Text("Bible")
+                .font(.system(size: 30, weight: .regular, design: .serif))
+                .foregroundStyle(palette.textPrimary)
+
+            Image(systemName: "sparkle")
+                .font(.system(size: 22, weight: .medium))
+                // Gradient sheen on the star itself — bright highlight up top
+                // falling to the warm gold below.
+                .foregroundStyle(
+                    LinearGradient(
+                        colors: [Color(red: 1.0, green: 0.92, blue: 0.6), gold],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                )
+                // Layered gold bloom — brighter and wider than before, but kept
+                // mid-opacity so it glows without blowing out.
+                .shadow(color: gold.opacity(0.7), radius: 4)
+                .shadow(color: gold.opacity(0.55), radius: 9)
+                .shadow(color: gold.opacity(0.3), radius: 16)
+        }
+        .accessibilityElement()
+        .accessibilityLabel("Bible Plus")
     }
 
     // MARK: - Weekly Streak Row (calm, Claude-style)
@@ -362,21 +374,31 @@ struct HomeDashboardView: View {
             // 256, so the bottom-aligned content overflowed and clipped the
             // reference row.
             VStack(alignment: .leading, spacing: BPSpacing.sm) {
-                Text("VERSE FOR TODAY")
-                    .font(.system(size: 10.5, weight: .semibold))
-                    .tracking(2.6)
-                    .foregroundStyle(.white.opacity(0.82))
-                    .shadow(color: .black.opacity(0.35), radius: 3, y: 1)
+                // Eyebrow + verse, vertically centered in the space above the
+                // footer so a SHORT verse sits mid-card instead of sinking to the
+                // bottom; a long verse (up to 5 lines) simply fills the space.
+                VStack(alignment: .leading, spacing: BPSpacing.sm) {
+                    Text("VERSE FOR TODAY")
+                        .font(.system(size: 10.5, weight: .semibold))
+                        .tracking(2.6)
+                        .foregroundStyle(.white.opacity(0.82))
+                        .shadow(color: .black.opacity(0.35), radius: 3, y: 1)
 
-                Text(verse.text)
-                    .font(.system(size: 21, weight: .regular, design: .serif))
-                    .italic()
-                    .foregroundStyle(.white)
-                    .lineSpacing(6)
-                    .lineLimit(5)
-                    .minimumScaleFactor(0.4)
-                    .shadow(color: .black.opacity(0.45), radius: 6, y: 1)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    Text(verse.text)
+                        .font(.system(size: 21, weight: .regular, design: .serif))
+                        .italic()
+                        .foregroundStyle(.white)
+                        .lineSpacing(6)
+                        .lineLimit(5)
+                        .minimumScaleFactor(0.4)
+                        // Two shadows keep the verse crisp now that it can float
+                        // over the lighter middle of the scrim: a soft glow plus
+                        // a tight contour.
+                        .shadow(color: .black.opacity(0.45), radius: 6, y: 1)
+                        .shadow(color: .black.opacity(0.55), radius: 2, y: 1)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
 
                 HStack(spacing: BPSpacing.md) {
                     HStack(spacing: BPSpacing.xs) {
@@ -423,7 +445,7 @@ struct HomeDashboardView: View {
                 }
             }
             .padding(BPSpacing.lg)
-            .frame(maxWidth: .infinity, minHeight: 256, maxHeight: 256, alignment: .bottomLeading)
+            .frame(maxWidth: .infinity, minHeight: 256, maxHeight: 256, alignment: .topLeading)
             .background {
                 // Full-bleed biblical art — the whole card is the painting —
                 // with a legibility scrim that deepens toward the bottom so the
@@ -453,12 +475,9 @@ struct HomeDashboardView: View {
                 }
                 .allowsHitTesting(false)
             }
-            .clipShape(RoundedRectangle(cornerRadius: BPRadius.lg, style: .continuous))
-            .overlay(
-                RoundedRectangle(cornerRadius: BPRadius.lg, style: .continuous)
-                    .strokeBorder(palette.border.opacity(0.35), lineWidth: 0.7)
-            )
-            .shadow(color: .black.opacity(0.12), radius: 16, y: 8)
+            // Shares the app card spec (radius / border / elevation); `filled:
+            // false` keeps the full-bleed painting as the background.
+            .bpCardSurface(palette, filled: false)
             .contentShape(Rectangle())
             .onTapGesture {
                 onDailyVerseTap()
@@ -519,14 +538,7 @@ struct HomeDashboardView: View {
         // A small symmetric inset so the rows (and the PLAN progress bar) aren't
         // pressed against the card's top/bottom edges — lets the card breathe.
         .padding(.vertical, BPSpacing.xs)
-        .background(
-            RoundedRectangle(cornerRadius: BPRadius.md, style: .continuous)
-                .fill(palette.surfaceElevated)
-                .overlay(
-                    RoundedRectangle(cornerRadius: BPRadius.md, style: .continuous)
-                        .strokeBorder(palette.border.opacity(0.5), lineWidth: 0.7)
-                )
-        )
+        .bpCardSurface(palette)
         .opacity(appeared ? 1 : 0)
         .offset(y: appeared ? 0 : 18)
         .animation(BPAnimation.spring.delay(0.30), value: appeared)
@@ -728,15 +740,10 @@ private struct DailyPathCTA: View {
             }
         }
         .padding(BPSpacing.lg)
-        .background(
-            RoundedRectangle(cornerRadius: BPRadius.lg, style: .continuous)
-                .fill(palette.surfaceElevated)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: BPRadius.lg, style: .continuous)
-                .strokeBorder(palette.border.opacity(0.5), lineWidth: 0.7)
-        )
-        .shadow(color: .black.opacity(0.04), radius: 8, y: 4)
+        // Primary-action treatment: a subtle gold trim around the whole card
+        // marks the Daily Path as the day's main action — clean and elegant,
+        // distinct from the neutral verse / Bible / Plan cards.
+        .bpCardSurface(palette, borderColor: palette.accent.opacity(0.45), borderWidth: 1)
         .contentShape(Rectangle())
         .onTapGesture { onTap() }
         .accessibilityElement(children: .ignore)

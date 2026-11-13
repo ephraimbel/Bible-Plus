@@ -12,6 +12,8 @@ struct ChapterReaderView: View {
     let errorMessage: String?
     let isShowingOfflineFallback: Bool
     let offlineTranslationName: String
+    /// License credit line for CC BY-SA translations; nil for public domain.
+    var translationAttribution: String? = nil
     let savedVerseNumbers: Set<Int>
     let highlightColors: [Int: VerseHighlightColor]
     let verseNotes: [Int: String]
@@ -82,6 +84,17 @@ struct ChapterReaderView: View {
                             let cleanText = normalizedVerseText(stripPsalmHeading(verse.text))
                             verseRow(number: verse.number, text: cleanText, isRedLetter: isRed)
                                 .id(verse.number)
+                        }
+
+                        // Required by the translation's license (CC BY-SA).
+                        if let attribution = translationAttribution, !displayVerses.isEmpty {
+                            Text(attribution)
+                                .textSelection(.enabled)
+                                .font(.system(size: 11))
+                                .foregroundStyle(palette.textMuted)
+                                .multilineTextAlignment(.center)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .padding(.top, 24)
                         }
                     }
                     .padding(.horizontal, 24)
@@ -509,7 +522,7 @@ struct ChapterReaderView: View {
                         .fill(palette.accent.opacity(0.1))
                 )
 
-            Text("Showing KJV offline. Connect to load \(offlineTranslationName).")
+            Text("This book isn't included in your selected translation, so it's shown in the WEB.")
                 .font(.system(size: 12, weight: .medium, design: .rounded))
                 .foregroundStyle(palette.textSecondary)
         }

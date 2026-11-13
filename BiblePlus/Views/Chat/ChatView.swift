@@ -127,11 +127,14 @@ private struct ChatContentView: View {
     @State private var ttsService = ChatTTSService()
     @State private var scripturePreview: ScriptureReferenceTarget? = nil
     @State private var showVoiceChat = false
+    @State private var pendingVoiceChat = false
     /// Set to false once `initialMessageId` has been scrolled to, so the
     /// jump only fires on first appearance — subsequent re-renders (e.g.
     /// when the user starts streaming a new reply) don't yank the view
     /// back up to the saved message.
     @State private var pendingInitialJump = true
+    @FocusState private var isInputFocused: Bool
+    @State private var inputGlowPulse = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -184,7 +187,16 @@ private struct ChatContentView: View {
             }
 
             // Input bar
-            inputBar
+            VStack(spacing: 4) {
+                inputBar
+                // Guideline 1.4.1 / 5.1.2: always-visible AI disclosure.
+                Text("AI can make mistakes. Not a substitute for a pastor, counselor, or doctor.")
+                    .font(.system(size: 10))
+                    .foregroundStyle(palette.textMuted.opacity(0.8))
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 24)
+                    .padding(.bottom, 2)
+            }
         }
         .background(topGoldGradient)
         .onAppear {
@@ -203,6 +215,29 @@ private struct ChatContentView: View {
                 showPaywall = true
                 viewModel.shouldShowPaywall = false
             }
+        }
+        .sheet(isPresented: $viewModel.shouldShowAIConsent, onDismiss: {
+            if pendingVoiceChat && AIConsent.isGranted { showVoiceChat = true }
+            pendingVoiceChat = false
+        }) {
+            AIConsentView(
+                onAllow: {
+                    AIConsent.grant()
+                    viewModel.shouldShowAIConsent = false
+                    guard !pendingVoiceChat else { return }
+                    // Resume whatever triggered the sheet: a typed message or a retry.
+                    if viewModel.inputText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+                       viewModel.failedMessageContent != nil {
+                        viewModel.retryLastMessage()
+                    } else {
+                        viewModel.send()
+                    }
+                },
+                onDecline: {
+                    pendingVoiceChat = false
+                    viewModel.shouldShowAIConsent = false
+                }
+            )
         }
         .sheet(item: $viewModel.shareText) { text in
             ShareSheet(text: text)
@@ -675,7 +710,12 @@ private struct ChatContentView: View {
         HStack(alignment: .center, spacing: 12) {
             Button {
                 HapticService.lightImpact()
-                showVoiceChat = true
+                if AIConsent.isGranted {
+                    showVoiceChat = true
+                } else {
+                    pendingVoiceChat = true
+                    viewModel.shouldShowAIConsent = true
+                }
             } label: {
                 Image(systemName: "waveform")
                     .font(.system(size: 18, weight: .regular))
@@ -692,6 +732,7 @@ private struct ChatContentView: View {
                 .tint(palette.accent)
                 .lineLimit(1...6)
                 .padding(.vertical, 8)
+                .focused($isInputFocused)
 
             sendButton
         }
@@ -703,14 +744,34 @@ private struct ChatContentView: View {
                 .fill(palette.surface)
                 .overlay(
                     RoundedRectangle(cornerRadius: 26, style: .continuous)
-                        .strokeBorder(palette.border.opacity(0.5), lineWidth: 1)
+                        .strokeBorder(
+                            isInputFocused
+                                ? palette.accent.opacity(inputGlowPulse ? 0.9 : 0.55)
+                                : palette.border.opacity(0.5),
+                            lineWidth: isInputFocused ? 1.5 : 1
+                        )
                 )
-                .shadow(color: .black.opacity(colorScheme == .dark ? 0.22 : 0.05),
-                        radius: 12, y: 3)
+                .shadow(
+                    color: isInputFocused
+                        ? palette.accent.opacity(inputGlowPulse ? 0.4 : 0.22)
+                        : .black.opacity(colorScheme == .dark ? 0.22 : 0.05),
+                    radius: isInputFocused ? 14 : 12,
+                    y: isInputFocused ? 0 : 3
+                )
         )
+        .animation(.easeInOut(duration: 0.3), value: isInputFocused)
         .padding(.horizontal, 14)
-        .padding(.top, 8)
-        .padding(.bottom, 10)
+        .padding(.top, 10)
+        .padding(.bottom, 6)
+        .onChange(of: isInputFocused) { _, focused in
+            if focused {
+                withAnimation(.easeInOut(duration: 1.3).repeatForever(autoreverses: true)) {
+                    inputGlowPulse = true
+                }
+            } else {
+                inputGlowPulse = false
+            }
+        }
     }
 
     // The single send / responding control. Idle: a calm up-arrow. While the

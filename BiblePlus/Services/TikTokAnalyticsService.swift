@@ -2,6 +2,12 @@ import Foundation
 import AppTrackingTransparency
 import TikTokBusinessSDK
 
+/// TikTok ad-attribution SDK.
+///
+/// App Store Guideline 5.1.2 / ATT: TikTok attribution links app events to
+/// TikTok's ad data, which is "tracking". The SDK is therefore initialized
+/// ONLY after the user grants App Tracking Transparency permission, and every
+/// event is dropped until then. Users who decline are never sent to TikTok.
 @MainActor
 final class TikTokAnalyticsService {
     static let shared = TikTokAnalyticsService()
@@ -12,6 +18,7 @@ final class TikTokAnalyticsService {
 
     func initializeSDK() {
         guard !initialized else { return }
+        guard ATTrackingManager.trackingAuthorizationStatus == .authorized else { return }
         guard Secrets.tikTokAppId != "REPLACE_WITH_TIKTOK_APP_ID" else {
             #if DEBUG
             print("[TikTok] SDK init skipped — tikTokAppId placeholder not set in Secrets.swift")
@@ -50,9 +57,11 @@ final class TikTokAnalyticsService {
         #if DEBUG
         print("[TikTok] ATT status: \(status.rawValue)")
         #endif
+        if status == .authorized { initializeSDK() }
     }
 
     func identify(userId: String) {
+        guard initialized, ATTrackingManager.trackingAuthorizationStatus == .authorized else { return }
         TikTokBusiness.identify(
             withExternalID: userId,
             externalUserName: nil,
@@ -62,21 +71,25 @@ final class TikTokAnalyticsService {
     }
 
     func trackOnboardingComplete() {
+        guard initialized, ATTrackingManager.trackingAuthorizationStatus == .authorized else { return }
         let event = TikTokBaseEvent(eventName: TTEventName.completeTutorial.rawValue)
         TikTokBusiness.trackTTEvent(event)
     }
 
     func trackTrialStarted() {
+        guard initialized, ATTrackingManager.trackingAuthorizationStatus == .authorized else { return }
         let event = TikTokBaseEvent(eventName: TTEventName.startTrial.rawValue)
         TikTokBusiness.trackTTEvent(event)
     }
 
     func trackSubscribed() {
+        guard initialized, ATTrackingManager.trackingAuthorizationStatus == .authorized else { return }
         let event = TikTokBaseEvent(eventName: TTEventName.subscribe.rawValue)
         TikTokBusiness.trackTTEvent(event)
     }
 
     func trackPurchase(productId: String, revenue: Decimal, currency: String = "USD") {
+        guard initialized, ATTrackingManager.trackingAuthorizationStatus == .authorized else { return }
         let event = TikTokPurchaseEvent()
         event.setContentId(productId)
         event.setCurrency(TikTokAnalyticsService.currency(for: currency))
