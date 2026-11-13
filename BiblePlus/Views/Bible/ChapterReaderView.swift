@@ -521,7 +521,7 @@ struct ChapterReaderView: View {
                         .fill(palette.accent.opacity(0.1))
                 )
 
-            Text("Showing KJV offline. Connect to load \(offlineTranslationName).")
+            Text("This book isn't included in your selected translation, so it's shown in the KJV.")
                 .font(.system(size: 12, weight: .medium, design: .rounded))
                 .foregroundStyle(palette.textSecondary)
         }

@@ -104,13 +104,6 @@ struct BiblePlusApp: App {
         UINavigationBar.appearance().compactAppearance = navAppearance
         UINavigationBar.appearance().tintColor = UIColor(red: 0.79, green: 0.66, blue: 0.43, alpha: 1) // #C9A96E accent
 
-        // Kick off a background refresh of the multilingual translation
-        // catalog (bible.helloao.org). Fire-and-forget — the reader falls
-        // back to bundled KJV if the manifest hasn't landed yet.
-        Task { @MainActor in
-            TranslationCatalog.shared.refreshIfNeeded()
-        }
-
         // RevenueCat — full integration (handles purchases, entitlements, renewals)
         Purchases.configure(withAPIKey: "appl_FjknWibdqNxzGBryURSpcNKbxcv")
 

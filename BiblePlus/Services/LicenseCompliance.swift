@@ -9,14 +9,12 @@ import SwiftData
 ///   English Bible, the closest modern public-domain equivalent.
 /// - Users whose stored helloao translation is non-commercial / no-derivatives
 ///   / unlicensed fall back to their language default (or bundled KJV).
-/// - Bible text cached on disk from unlicensed sources is deleted.
+/// - All Bible text previously downloaded from third-party Bible APIs
+///   (bolls.life, bible.helloao.org) is deleted — the app now ships every
+///   translation it offers and makes no Bible API calls.
 enum LicenseCompliance {
     @MainActor
     static func migrate(modelContext: ModelContext) {
-        // Load the (license-filtered) catalog from disk first so the policy
-        // can recognise every permitted translation before we judge stored IDs.
-        _ = TranslationCatalog.shared
-
         if let profile = try? modelContext.fetch(FetchDescriptor<UserProfile>()).first {
             var changed = false
             if !profile.preferredTranslation.isLicensedForUse {

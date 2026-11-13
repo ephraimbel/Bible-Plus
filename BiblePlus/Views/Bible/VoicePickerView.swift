@@ -30,6 +30,15 @@ struct VoicePickerView: View {
     var body: some View {
         NavigationStack {
             List {
+                // OpenAI usage policy: end users must be told TTS voices are
+                // AI-generated, not human.
+                Section {
+                    Label("These narrator voices are AI-generated, not recordings of real people.", systemImage: "waveform")
+                        .font(BPFont.caption)
+                        .foregroundStyle(palette.textMuted)
+                }
+                .listRowBackground(Color.clear)
+
                 // Pro banner
                 if !isPro {
                     Section {

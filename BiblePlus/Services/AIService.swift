@@ -24,17 +24,16 @@ enum AIService {
         if let refID = profile.preferredTranslationRefID,
            !refID.hasPrefix(TranslationRef.bundledPrefix),
            TranslationLicensePolicy.isAllowed(refID: refID),
-           let ref = TranslationRef.featuredEnglish.first(where: { $0.id == refID })
-                ?? TranslationLicensePolicy.catalogRef(id: refID) {
-            return ref.englishName
+           let name = TranslationLicensePolicy.displayName(for: refID) {
+            return name
         }
         let langCode = LocalizationService.effectiveLanguageCode()
         if langCode != "en",
            let defaultID = LanguageDefaultBible.defaultRefID(for: langCode),
            defaultID != LanguageDefaultBible.bundledEnglishID,
            TranslationLicensePolicy.isAllowed(refID: defaultID),
-           let ref = TranslationLicensePolicy.catalogRef(id: defaultID) {
-            return ref.englishName
+           let name = TranslationLicensePolicy.displayName(for: defaultID) {
+            return name
         }
         return profile.preferredTranslation.licensed.displayName
     }
@@ -93,7 +92,10 @@ enum AIService {
         NRSV, AMP, The Message (MSG), or any other — even if \(name) asks for one. If asked, \
         say kindly that Bible+ uses openly licensed translations and quote the \(translation) \
         instead. You may still *discuss* how other translations render a word, briefly and \
-        in your own words, without quoting them.
+        in your own words, without quoting them. Inside quotation marks and in [SCRIPTURE], \
+        [VERSE] and [CROSSREFS] cards, reproduce the translation's wording EXACTLY — never \
+        reword, modernize, or blend Scripture and present it as a quotation. When you \
+        paraphrase, say so ("in other words…") and don't attach a translation name to it.
 
         VOICE: You are a wise preacher-teacher — the kind of pastor people drive an hour to hear. \
         You explain Scripture with depth, warmth, and clarity. You teach the way the best Bible teachers do: \

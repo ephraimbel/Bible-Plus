@@ -40,6 +40,10 @@ struct AIConsentView: View {
                     .font(.system(size: 15))
                     .foregroundStyle(palette.textSecondary)
 
+                Text("By continuing, you confirm you are 18 or older, or that a parent or guardian has agreed to you using the AI companion.")
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundStyle(palette.textPrimary)
+
                 Text("AI can make mistakes. It is not a pastor, counselor, or medical professional. If you are in crisis, call or text 988 (US) or your local emergency number.")
                     .font(.system(size: 13))
                     .foregroundStyle(palette.textMuted)

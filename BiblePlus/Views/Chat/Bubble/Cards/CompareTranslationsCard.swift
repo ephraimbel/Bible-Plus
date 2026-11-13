@@ -11,7 +11,7 @@ import SwiftUI
 //   [COMPARE book="John" chapter="3" verse="16" translations="KJV,BSB,YLT"][/COMPARE]
 //
 // LICENSING: only public-domain translations can appear here (bundled
-// KJV/WEB + the featured helloao refs). Any other abbreviation the model
+// KJV/WEB + the bundled BSB/ASV/YLT/DRA). Any other abbreviation the model
 // emits — e.g. NIV/ESV/NLT from an older conversation — is ignored.
 struct CompareTranslationsCard: View {
     let book: String
@@ -174,7 +174,7 @@ struct CompareTranslationsCard: View {
     private var referenceLabel: String { "\(bookDisplayName) \(chapter):\(verse)" }
 
     /// A translation the card may load: either bundled (KJV/WEB) or a
-    /// public-domain helloao ref (BSB/ASV/YLT/DRA).
+    /// bundled public-domain ref (BSB/ASV/YLT/DRA).
     private enum Source: Hashable {
         case bundled(BibleTranslation)
         case ref(TranslationRef)

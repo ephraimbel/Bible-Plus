@@ -107,11 +107,14 @@ final class BibleReaderViewModel {
     /// (e.g. "R09" for Reina-Valera 1909) so non-English users don't see a
     /// stale "KJV" badge, and falls back to the legacy enum's abbreviation.
     var translationName: String {
+        // While showing the KJV fallback, label it as KJV.
+        if isShowingOfflineFallback, currentRefID.map({ !$0.hasPrefix(TranslationRef.bundledPrefix) }) == true {
+            return BibleTranslation.kjv.abbreviation
+        }
         if let refID = currentRefID,
            !refID.hasPrefix(TranslationRef.bundledPrefix),
-           let ref = TranslationRef.featuredEnglish.first(where: { $0.id == refID })
-                ?? TranslationCatalog.shared.translation(id: refID) {
-            return ref.shortName
+           let short = TranslationLicensePolicy.shortName(for: refID) {
+            return short
         }
         return currentTranslation.abbreviation
     }
@@ -119,8 +122,15 @@ final class BibleReaderViewModel {
     /// Credit line required by the active translation's license (CC BY-SA
     /// texts). Nil for public-domain translations.
     var translationAttribution: String? {
-        guard let refID = currentRefID else { return nil }
-        return TranslationLicensePolicy.attribution(for: refID)
+        if let refID = currentRefID, !refID.hasPrefix(TranslationRef.bundledPrefix), !isShowingOfflineFallback {
+            return TranslationLicensePolicy.attribution(for: refID)
+        }
+        // KJV is public domain worldwide except the UK, where the Crown holds
+        // perpetual rights; this is the customary notice.
+        if currentTranslation.licensed == .kjv || isShowingOfflineFallback {
+            return String(localized: "King James Version. Rights in the Authorized Version in the United Kingdom are vested in the Crown.")
+        }
+        return nil
     }
 
     /// Localized book name for the active translation when available (e.g.
@@ -518,7 +528,10 @@ final class BibleReaderViewModel {
                 )
                 if !fallback.isEmpty {
                     verses = fallback
+                    // Fell back to bundled KJV: either a non-KJV legacy pick, or
+                    // a ref translation that doesn't include this book.
                     isShowingOfflineFallback = currentTranslation != .kjv
+                        || (currentRefID.map { !$0.hasPrefix(TranslationRef.bundledPrefix) } ?? false)
                     isLoading = false
                     loadSavedVerses()
                 } else {
@@ -639,7 +652,7 @@ final class BibleReaderViewModel {
         loadTask = Task {
             do {
                 let fetched: [(number: Int, text: String)]
-                // Route through helloao when the user has picked (or defaulted
+                // Use the bundled ref translation when the user has picked (or defaulted
                 // to) a multilingual translation. Bundled prefixes collapse
                 // back to the legacy path inside BibleRepository.
                 if let refID = currentRefID, !refID.hasPrefix(TranslationRef.bundledPrefix) {
@@ -674,7 +687,10 @@ final class BibleReaderViewModel {
 
                 if !fallback.isEmpty {
                     verses = fallback
+                    // Fell back to bundled KJV: either a non-KJV legacy pick, or
+                    // a ref translation that doesn't include this book.
                     isShowingOfflineFallback = currentTranslation != .kjv
+                        || (currentRefID.map { !$0.hasPrefix(TranslationRef.bundledPrefix) } ?? false)
                     isLoading = false
                     loadSavedVerses()
                     persistReadPosition()
