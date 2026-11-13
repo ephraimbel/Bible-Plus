@@ -39,7 +39,7 @@ A dedicated Bible+ OpenAI key is stored in server secrets and the owner's Mac Ke
 
 The former Bible+ Supabase project remains paused. Installed older app versions continue to point at it; the restored relay is available through this new build. No other project was paused. Do not rotate unrelated or legacy keys as part of this release.
 
-The updated public website is published with Sites because Vercel rejected deployments for its team fair-use limit. Site ID: `appgprj_6af6bcb3a3d08191bf48c964129e2ff6`. Source is retained in the Sites repository and mirrored in `website/`. The custom domain is connected through GoDaddy; apex HTTPS is active. Automatic domain renewal was disabled at the owner’s request; GoDaddy billing shows cancellation on February 13, 2027 at the end of the paid term. The domain must be manually renewed or app URLs migrated before expiry.
+The updated public website is published with Sites because Vercel rejected deployments for its team fair-use limit. Site ID: `appgprj_6af6bcb3a3d08191bf48c964129e2ff6`. Source is retained in the Sites repository and mirrored in `website/`. The apex and www custom domains are connected through GoDaddy and both certificates are active. The app uses apex URLs; all four apex pages returned HTTPS 200 after publication. Some clients can retain the previous www routing during DNS propagation. Automatic domain renewal was disabled at the owner’s request; GoDaddy billing shows cancellation on February 13, 2027 at the end of the paid term. The domain must be manually renewed or app URLs migrated before expiry.
 
 ## Verification performed
 
@@ -51,7 +51,7 @@ The updated public website is published with Sites because Vercel rejected deplo
 - First chat: Not Now retained the draft; permission allowed a real streamed answer. Revoking permission caused voice chat to ask again. Spanish, Arabic and Japanese consent screens were visually checked.
 - WEB and BSB reader chapters loaded. A BSB verse image exported through the native share sheet, requested Photos permission and was saved successfully.
 - Four new App Store screenshots from build 36 replaced obsolete quotation, testimonial and ranking claims; all four assets reached COMPLETE.
-- Build 36 uploaded, processed as VALID/APP_STORE_ELIGIBLE and was attached to version 1.1.3. Non-exempt encryption is false. Release remains manual after approval.
+- Final build 37 uploaded without errors, processed as VALID, and replaced build 36 on version 1.1.3. Submission `ec2e49f0-6b97-4b4f-b022-571b840ea43a` was submitted at 2026-11-13 08:40:21 UTC. Both submission and version report WAITING_FOR_REVIEW; the browser also confirms Waiting for Review. Non-exempt encryption is false. Release remains manual after approval.
 
 ## App Store configuration
 
@@ -65,4 +65,4 @@ The age questionnaire uses a 13+ override and disclosed relevant infrequent bibl
 - A sandbox Apple account with an already-consumed introductory trial was not available. Trial eligibility logic was checked in code/tests; an eligible offer and no-purchase restore were exercised manually.
 - Background video/sound assets predate this migration. The repository does not contain a complete per-file provenance ledger. The identified Christ the Redeemer asset was removed; this release does not certify all historical asset rights. Retain or obtain original asset license records.
 - Server Free/Pro entitlement enforcement and stronger app attestation remain a separate hardening change. The embedded admission token is extractable, and per-instance IP limits are not a durable user quota.
-- Build 37 changes the broken support/report address to the owner’s existing publicly listed, receiving developer inbox, hello@nursemind.app, with Bible+ in the subject. No new mail service was created and no test email was sent. Final submission status must be recorded after processing build 37. Do not merge the PR without the owner's approval.
+- Build 37 changes the broken support/report address to the owner’s existing publicly listed, receiving developer inbox, hello@nursemind.app, with Bible+ in the subject. No new mail service was created and no test email was sent. Build 37 is submitted and awaiting Apple review. Do not merge the PR without the owner's approval.
