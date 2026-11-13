@@ -273,7 +273,7 @@ final class AudioBibleService {
 
     // MARK: - TTS Endpoint
 
-    private nonisolated static let ttsEndpoint = URL(string: "\(Secrets.supabaseURL)/functions/v1/tts")!
+    private nonisolated static let ttsEndpoint = URL(string: "\(Secrets.aiRelayURL)/bibleplus-tts")!
 
     // MARK: - Init
 
@@ -616,8 +616,8 @@ final class AudioBibleService {
         var request = URLRequest(url: Self.ttsEndpoint)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("Bearer \(Secrets.supabaseAnonKey)", forHTTPHeaderField: "Authorization")
-        request.setValue(Secrets.supabaseAnonKey, forHTTPHeaderField: "apikey")
+        request.setValue("Bearer \(Secrets.aiRelayClientToken)", forHTTPHeaderField: "Authorization")
+        request.setValue(Secrets.aiRelayClientToken, forHTTPHeaderField: "apikey")
         request.timeoutInterval = 30
 
         let body: [String: Any] = [

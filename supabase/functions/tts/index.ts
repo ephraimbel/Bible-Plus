@@ -1,12 +1,13 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 
-const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
+const OPENAI_API_KEY = Deno.env.get("BIBLEPLUS_OPENAI_API_KEY") ?? Deno.env.get("OPENAI_API_KEY");
+const CLIENT_TOKEN = Deno.env.get("BIBLEPLUS_CLIENT_TOKEN") ?? Deno.env.get("SUPABASE_ANON_KEY");
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
 
 const OPENAI_TTS_URL = "https://api.openai.com/v1/audio/speech";
-const BUCKET_NAME = "tts-cache";
+const BUCKET_NAME = "bibleplus-tts-cache";
 
 // Rate limiting: in-memory store (per edge function instance)
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
@@ -54,7 +55,7 @@ Deno.serve(async (req) => {
   }
 
   // Validate server configuration
-  if (!OPENAI_API_KEY) {
+  if (!OPENAI_API_KEY || !CLIENT_TOKEN) {
     return new Response(
       JSON.stringify({ error: "Server configuration error" }),
       { status: 500, headers: { "Content-Type": "application/json", ...CORS_HEADERS } },
@@ -66,6 +67,14 @@ Deno.serve(async (req) => {
       JSON.stringify({ error: "Server configuration error" }),
       { status: 500, headers: { "Content-Type": "application/json", ...CORS_HEADERS } },
     );
+  }
+
+  const providedToken = req.headers.get("apikey") ??
+    req.headers.get("Authorization")?.replace(/^Bearer /i, "");
+  if (providedToken !== CLIENT_TOKEN) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), {
+      status: 401, headers: { "Content-Type": "application/json", ...CORS_HEADERS },
+    });
   }
 
   // Rate limiting by client IP
@@ -84,12 +93,13 @@ Deno.serve(async (req) => {
   try {
     const body = await req.json();
     const {
-      model = "tts-1",
       input,
       voice = "onyx",
       response_format = "mp3",
       speed = 1.0,
     } = body;
+
+    const model = "tts-1"; // Never let a client select a more expensive model.
 
     // Validate input text
     if (!input || typeof input !== "string" || input.trim().length === 0) {
@@ -122,9 +132,15 @@ Deno.serve(async (req) => {
       );
     }
 
+    if (typeof speed !== "number" || !Number.isFinite(speed) || speed < 0.25 || speed > 4) {
+      return new Response(JSON.stringify({ error: "Invalid speech speed" }), {
+        status: 400, headers: { "Content-Type": "application/json", ...CORS_HEADERS },
+      });
+    }
+
     // Build cache key: voice + SHA-256 hash of input text
     const encoder = new TextEncoder();
-    const data = encoder.encode(`${voice}:${input}`);
+    const data = encoder.encode(`${model}:${voice}:${response_format}:${speed}:${input}`);
     const hashBuffer = await crypto.subtle.digest("SHA-256", data);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
     const hashHex = hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");

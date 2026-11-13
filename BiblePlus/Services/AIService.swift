@@ -2,7 +2,7 @@ import Foundation
 import SwiftData
 
 enum AIService {
-    private static let endpoint = URL(string: "\(Secrets.supabaseURL)/functions/v1/chat")
+    private static let endpoint = URL(string: "\(Secrets.aiRelayURL)/bibleplus-chat")
 
     /// Primary teaching/chat model. Sweet spot for cost vs. quality —
     /// ~5× the cost of nano with substantially better theological reasoning,
@@ -18,24 +18,10 @@ enum AIService {
 
     // MARK: - System Prompt
 
-    /// Display name of the licensed translation the user reads, used to tell
-    /// the model which wording to quote.
+    /// All AI quotation cards resolve to local WEB text. Reader editions and
+    /// the comparison card remain independently selectable.
     static func quotableTranslationName(for profile: UserProfile) -> String {
-        if let refID = profile.preferredTranslationRefID,
-           !refID.hasPrefix(TranslationRef.bundledPrefix),
-           TranslationLicensePolicy.isAllowed(refID: refID),
-           let name = TranslationLicensePolicy.displayName(for: refID) {
-            return name
-        }
-        let langCode = LocalizationService.effectiveLanguageCode()
-        if langCode != "en",
-           let defaultID = LanguageDefaultBible.defaultRefID(for: langCode),
-           defaultID != LanguageDefaultBible.bundledEnglishID,
-           TranslationLicensePolicy.isAllowed(refID: defaultID),
-           let name = TranslationLicensePolicy.displayName(for: defaultID) {
-            return name
-        }
-        return profile.preferredTranslation.licensed.displayName
+        "World English Bible (WEB)"
     }
 
     static func buildSystemPrompt(for profile: UserProfile) -> String {
@@ -84,7 +70,9 @@ enum AIService {
         \(languageDirective)USER: \(name). Faith: \(faith). \
         \(seasons.isEmpty ? "" : "Seasons: \(seasons). ")\
         \(burdens.isEmpty ? "" : "Carrying: \(burdens). ")\
-        Reads the \(translation).
+        Use \(translation) for quotation cards; the Bible reader may use a different edition.
+        Keep Scripture quotations in the source edition's original language; never machine-translate them.
+        Explain their meaning in the user's language.
 
         SCRIPTURE LICENSING — NON-NEGOTIABLE: Quote Scripture ONLY from the \(translation), \
         or from these public-domain texts: WEB, BSB, ASV, YLT. NEVER quote, reproduce, \
@@ -875,8 +863,8 @@ enum AIService {
         guard let endpoint else { throw AIError.invalidResponse }
         var request = URLRequest(url: endpoint)
         request.httpMethod = "POST"
-        request.setValue("Bearer \(Secrets.supabaseAnonKey)", forHTTPHeaderField: "Authorization")
-        request.setValue(Secrets.supabaseAnonKey, forHTTPHeaderField: "apikey")
+        request.setValue("Bearer \(Secrets.aiRelayClientToken)", forHTTPHeaderField: "Authorization")
+        request.setValue(Secrets.aiRelayClientToken, forHTTPHeaderField: "apikey")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try JSONSerialization.data(withJSONObject: body)
         request.timeoutInterval = 60
@@ -983,8 +971,8 @@ enum AIService {
         guard let endpoint else { throw AIError.invalidResponse }
         var request = URLRequest(url: endpoint)
         request.httpMethod = "POST"
-        request.setValue("Bearer \(Secrets.supabaseAnonKey)", forHTTPHeaderField: "Authorization")
-        request.setValue(Secrets.supabaseAnonKey, forHTTPHeaderField: "apikey")
+        request.setValue("Bearer \(Secrets.aiRelayClientToken)", forHTTPHeaderField: "Authorization")
+        request.setValue(Secrets.aiRelayClientToken, forHTTPHeaderField: "apikey")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try JSONSerialization.data(withJSONObject: body)
         request.timeoutInterval = 30
@@ -1054,8 +1042,8 @@ enum AIService {
 
         var request = URLRequest(url: endpoint)
         request.httpMethod = "POST"
-        request.setValue("Bearer \(Secrets.supabaseAnonKey)", forHTTPHeaderField: "Authorization")
-        request.setValue(Secrets.supabaseAnonKey, forHTTPHeaderField: "apikey")
+        request.setValue("Bearer \(Secrets.aiRelayClientToken)", forHTTPHeaderField: "Authorization")
+        request.setValue(Secrets.aiRelayClientToken, forHTTPHeaderField: "apikey")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try JSONSerialization.data(withJSONObject: body)
         request.timeoutInterval = 30

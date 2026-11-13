@@ -1,5 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
-const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
+const OPENAI_API_KEY = Deno.env.get("BIBLEPLUS_OPENAI_API_KEY") ?? Deno.env.get("OPENAI_API_KEY");
+const CLIENT_TOKEN = Deno.env.get("BIBLEPLUS_CLIENT_TOKEN") ?? Deno.env.get("SUPABASE_ANON_KEY");
 
 const OPENAI_CHAT_URL = "https://api.openai.com/v1/chat/completions";
 
@@ -41,6 +42,7 @@ const SERVER_POLICY = [
   "2) If the user mentions or hints at suicide, self-harm, abuse, being in danger, or a medical emergency, respond with compassion and clearly direct them to immediate human help: in the US call or text 988; otherwise their local emergency number or crisis line; 911/112 if in immediate danger. Never provide self-harm methods. Never give medical, legal or psychiatric diagnoses or advise stopping treatment.",
   "3) Quote Scripture word-for-word from the named translation. Never reword or modernize a verse and present it as a quotation; label paraphrases as your own words.",
   "4) You are an AI, not God, a pastor, or a therapist. When voicing a biblical figure, it is an imaginative portrayal; if sincerely asked, say you are an AI.",
+  "5) Keep responses appropriate for ages 13 and up. Do not generate explicit sexual content, graphic gore, or instructions facilitating dangerous activity. Discuss sensitive biblical themes in restrained educational language.",
 ].join("\n");
 
 const CRISIS_PATTERN =
@@ -107,24 +109,22 @@ Deno.serve(async (req) => {
   }
 
   // Validate server configuration
-  if (!OPENAI_API_KEY) {
+  if (!OPENAI_API_KEY || !CLIENT_TOKEN) {
     return new Response(
       JSON.stringify({ error: "Server configuration error" }),
       { status: 500, headers: { "Content-Type": "application/json", ...CORS_HEADERS } },
     );
   }
 
-  // Verify authorization: require a valid apikey header or Authorization bearer token.
-  // Supabase gateway already validates the apikey header before the function runs,
-  // so we just check that at least one auth header is present.
-  const authHeader = req.headers.get("Authorization");
-  const apiKeyHeader = req.headers.get("apikey");
-
-  if (!authHeader && !apiKeyHeader) {
-    return new Response(
-      JSON.stringify({ error: "Missing authorization" }),
-      { status: 401, headers: { "Content-Type": "application/json", ...CORS_HEADERS } },
-    );
+  // This is an app admission token, not individual user authentication.
+  // Dedicated routes can disable gateway JWT checks without exposing the host
+  // project's anon/service keys to Bible+ clients. Never accept arbitrary headers.
+  const providedToken = req.headers.get("apikey") ??
+    req.headers.get("Authorization")?.replace(/^Bearer /i, "");
+  if (providedToken !== CLIENT_TOKEN) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), {
+      status: 401, headers: { "Content-Type": "application/json", ...CORS_HEADERS },
+    });
   }
 
   // Rate limiting by client IP
