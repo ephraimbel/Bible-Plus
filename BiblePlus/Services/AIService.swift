@@ -1092,7 +1092,7 @@ enum AIError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .consentRequired:
-            return "Allow AI data sharing to use the Bible+ companion."
+            return String(localized: "Allow AI data sharing to use the Bible+ companion.")
         case .invalidResponse:
             return "Received an invalid response. Please try again."
         case .apiError(let code, let message):

@@ -13,12 +13,9 @@ struct OnboardingProofStatsView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     @State private var barsIn = false
-    @State private var pct: Int = 0
     @State private var contentIn = false
-    @State private var countTask: Task<Void, Never>?
 
     private let accentGold = Color(red: 0.79, green: 0.66, blue: 0.43)
-    private let targetPct = 92
 
     // Relative bar heights — a clear upward trend across the first month.
     private let bars: [(label: String, value: CGFloat)] = [
@@ -57,13 +54,13 @@ struct OnboardingProofStatsView: View {
                     .font(.custom("Baskerville-Bold", size: 26))
                     .foregroundStyle(accentGold)
                     .multilineTextAlignment(.center)
-                Text("\u{201C}His delight is in the law of the LORD; and in his law doth he meditate day and night.\u{201D}")
+                Text(verbatim: "But his delight is in the law of the LORD; and in his law doth he meditate day and night.")
                     .font(.custom("Georgia-Italic", size: 15))
                     .foregroundStyle(palette.textSecondary)
                     .multilineTextAlignment(.center)
                     .lineSpacing(3)
                     .padding(.horizontal, 32)
-                Text("Psalm 1:2 (KJV)")
+                Text(verbatim: "Psalm 1:2 (KJV)")
                     .font(.system(size: 11))
                     .foregroundStyle(palette.textMuted)
             }
@@ -73,7 +70,6 @@ struct OnboardingProofStatsView: View {
             Spacer(minLength: 0)
 
             GoldButton(title: "Continue", showGlow: true) {
-                countTask?.cancel()
                 HapticService.lightImpact()
                 onContinue()
             }
@@ -84,7 +80,6 @@ struct OnboardingProofStatsView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(palette.background.ignoresSafeArea())
         .onAppear { animateIn() }
-        .onDisappear { countTask?.cancel() }
     }
 
     private var chart: some View {
@@ -118,17 +113,6 @@ struct OnboardingProofStatsView: View {
 
     private func animateIn() {
         withAnimation(.easeOut(duration: 0.6)) { contentIn = true }
-        guard !reduceMotion else { barsIn = true; pct = targetPct; return }
         barsIn = true
-        countTask = Task { @MainActor in
-            try? await Task.sleep(nanoseconds: 500_000_000)
-            let steps = 40
-            for s in 0...steps {
-                if Task.isCancelled { return }
-                pct = Int(Double(targetPct) * Double(s) / Double(steps))
-                try? await Task.sleep(nanoseconds: 26_000_000)
-            }
-            pct = targetPct
-        }
     }
 }

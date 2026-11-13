@@ -291,7 +291,7 @@ enum BibleTextError: LocalizedError {
     case chapterUnavailable
 
     var errorDescription: String? {
-        "This chapter isn't included in this translation."
+        String(localized: "This chapter isn't included in this translation.")
     }
 }
 

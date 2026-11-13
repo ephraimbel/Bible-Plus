@@ -244,7 +244,7 @@ struct ConversationalOnboardingView: View {
         case .faith: return "There's no wrong answer — it just helps us meet you where you are."
         case .closeness: return "Some seasons He feels near; others, distant. Wherever you are is okay."
         case .seasons: return "Choose anything that fits — you can pick a few."
-        case .burdens: return "This shapes the verses and prayers we choose for you."
+        case .burdens: return String(localized: "This shapes the verses and prayers we choose for you.")
         case .holdingBack: return "Name it, and we'll help you work around it. Pick any."
         case .goals: return "Pick what matters most — we'll build around it."
         case .timeCommitment: return "Even a few minutes, done daily, changes everything."

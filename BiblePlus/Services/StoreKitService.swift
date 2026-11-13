@@ -118,8 +118,8 @@ final class StoreKitService {
         var message: String? {
             switch self {
             case .restored: nil
-            case .nothingToRestore: "No active Bible+ Pro subscription was found for this Apple ID."
-            case .failed(let reason): "Couldn't restore purchases. \(reason)"
+            case .nothingToRestore: String(localized: "No active Bible+ Pro subscription was found for this Apple ID.")
+            case .failed(let reason): String(localized: "Couldn't restore purchases. \(reason)")
             }
         }
     }
@@ -153,13 +153,20 @@ final class StoreKitService {
     var yearlyTrialLengthLabel: String? {
         guard let period = yearlyProduct?.introductoryDiscount?.subscriptionPeriod,
               yearlyProduct?.introductoryDiscount?.paymentMode == .freeTrial else { return nil }
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .full
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.locale = Locale(identifier: LocalizationService.effectiveLanguageCode())
+        formatter.calendar = calendar
+        let components: DateComponents
         switch period.unit {
-        case .day: return "\(period.value)-day"
-        case .week: return period.value == 1 ? "7-day" : "\(period.value)-week"
-        case .month: return "\(period.value)-month"
-        case .year: return "\(period.value)-year"
+        case .day: formatter.allowedUnits = [.day]; components = DateComponents(day: period.value)
+        case .week: formatter.allowedUnits = [.day]; components = DateComponents(day: period.value * 7)
+        case .month: formatter.allowedUnits = [.month]; components = DateComponents(month: period.value)
+        case .year: formatter.allowedUnits = [.year]; components = DateComponents(year: period.value)
         @unknown default: return nil
         }
+        return formatter.string(from: components)
     }
 
     /// True only when the yearly plan has a free trial AND this user is

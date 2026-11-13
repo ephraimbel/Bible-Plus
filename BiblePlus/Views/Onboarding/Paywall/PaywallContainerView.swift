@@ -52,7 +52,7 @@ struct PaywallContainerView: View {
 
             // Close (X, top-right) appears ONLY in the in-app / Settings
             // presentation so a free user can leave. The onboarding paywall is
-            // hard — no close — the only way forward is choosing a plan.
+            // completed by subscribing or continuing with the free version.
             if !isOnboarding {
                 topBar
             }
@@ -202,7 +202,7 @@ struct PaywallContainerView: View {
                 .font(.system(size: 11, weight: .regular, design: .rounded))
                 .foregroundStyle(palette.textMuted)
                 .multilineTextAlignment(.center)
-                .lineLimit(2)
+                .fixedSize(horizontal: false, vertical: true)
                 .padding(.horizontal, 24)
 
             renewalDisclosure
@@ -257,20 +257,20 @@ struct PaywallContainerView: View {
             priceCard(
                 vm: vm,
                 productID: StoreKitService.monthlyID,
-                title: "Monthly",
+                title: String(localized: "Monthly"),
                 price: vm.monthlyPriceLabel(storeKitService),
-                sub: "per month",
+                sub: String(localized: "per month"),
                 badge: nil
             )
             priceCard(
                 vm: vm,
                 productID: StoreKitService.yearlyID,
-                title: "Yearly",
+                title: String(localized: "Yearly"),
                 price: vm.yearlyPriceLabel(storeKitService),
-                sub: "\(vm.yearlyMonthlyBreakdown(storeKitService))/month",
+                sub: String(localized: "\(vm.yearlyMonthlyBreakdown(storeKitService))/month"),
                 // Only advertise a trial this Apple ID will actually get.
                 badge: storeKitService.showsYearlyTrial
-                    ? "\((storeKitService.yearlyTrialLengthLabel ?? "").uppercased()) FREE TRIAL"
+                    ? String(localized: "\(storeKitService.yearlyTrialLengthLabel ?? "") FREE TRIAL")
                     : nil
             )
         }
@@ -317,8 +317,8 @@ struct PaywallContainerView: View {
     private func subtitle(vm: PaywallViewModel) -> some View {
         let name = vm.firstName.trimmingCharacters(in: .whitespaces)
         let text = name.isEmpty
-            ? "Built around the way you believe."
-            : "Built around the way you believe, \(name)."
+            ? String(localized: "Built around the way you believe.")
+            : String(localized: "Built around the way you believe, \(name).")
         return Text(text)
             .font(.custom("Georgia-Italic", size: 14))
             .foregroundStyle(palette.textSecondary)
@@ -329,13 +329,13 @@ struct PaywallContainerView: View {
 
     // MARK: - Feature List (clean checkmarks)
 
-    private let proFeatures: [String] = [
-        "AI companion \u{2014} up to 200 messages a day",
-        "All 29 guided reading plans",
-        "Audio Bible in 9 AI-generated voices",
-        "1,500+ daily prayers, verses & devotionals",
-        "Sanctuary soundscapes, widgets & more",
-    ]
+    private var proFeatures: [String] { [
+        String(localized: "AI companion \u{2014} up to 200 messages a day"),
+        String(localized: "All 29 guided reading plans"),
+        String(localized: "Audio Bible in 9 AI-generated voices"),
+        String(localized: "1,500+ daily prayers, verses & devotionals"),
+        String(localized: "Sanctuary soundscapes, widgets & more"),
+    ] }
 
     private func featureList(rowSpacing: CGFloat) -> some View {
         // Uniform spacing between rows (scaled per device) — organized and
@@ -490,24 +490,24 @@ struct PaywallContainerView: View {
     }
 
     private func ctaTitle(vm: PaywallViewModel) -> String {
-        if vm.isPurchasing { return "Processing..." }
+        if vm.isPurchasing { return String(localized: "Processing...") }
         // Yearly is now the only plan with a free trial, so it's the only one
         // that may honestly say "Start Free Trial". Monthly is an immediate
         // (no-trial) purchase.
         if vm.selectedProductID == StoreKitService.yearlyID, storeKitService.showsYearlyTrial {
-            return "Start Free Trial"
+            return String(localized: "Start Free Trial")
         }
-        return "Subscribe Now"
+        return String(localized: "Subscribe Now")
     }
 
     private func ctaSubtitle(vm: PaywallViewModel) -> String {
         if vm.selectedProductID == StoreKitService.yearlyID {
             if storeKitService.showsYearlyTrial, let trial = storeKitService.yearlyTrialLengthLabel {
-                return "\(trial) free trial, then \(vm.yearlyPriceLabel(storeKitService)) per year. Auto-renews until cancelled."
+                return String(localized: "\(trial) free trial, then \(vm.yearlyPriceLabel(storeKitService)) per year. Auto-renews until cancelled.")
             }
-            return "\(vm.yearlyPriceLabel(storeKitService)) per year. Auto-renews until cancelled."
+            return String(localized: "\(vm.yearlyPriceLabel(storeKitService)) per year. Auto-renews until cancelled.")
         }
-        return "\(vm.monthlyPriceLabel(storeKitService)) per month. Auto-renews until cancelled."
+        return String(localized: "\(vm.monthlyPriceLabel(storeKitService)) per month. Auto-renews until cancelled.")
     }
 
     /// Auto-renewable subscription disclosure (App Store Guideline 3.1.2,
@@ -525,7 +525,7 @@ struct PaywallContainerView: View {
 
     private var footerLinks: some View {
         HStack(spacing: 14) {
-            footerLink("Restore") {
+            footerLink("Restore Purchases") {
                 Analytics.track(.paywallRestoreTapped)
                 Task {
                     let outcome = await storeKitService.restorePurchases()
@@ -552,7 +552,7 @@ struct PaywallContainerView: View {
         }
     }
 
-    private func footerLink(_ title: String, action: @escaping () -> Void) -> some View {
+    private func footerLink(_ title: LocalizedStringKey, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Text(title)
                 .font(.system(size: 11, weight: .regular, design: .rounded))

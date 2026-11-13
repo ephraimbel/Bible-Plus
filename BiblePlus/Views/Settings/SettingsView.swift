@@ -705,7 +705,7 @@ private struct SettingsContentView: View {
                     Task {
                         let outcome = await storeKitService.restorePurchases()
                         isRestoringPurchases = false
-                        restoreResultMessage = outcome.message ?? "Your Bible+ Pro subscription has been restored."
+                        restoreResultMessage = outcome.message ?? String(localized: "Your Bible+ Pro subscription has been restored.")
                     }
                 } label: {
                     HStack(spacing: BPSpacing.xs) {
