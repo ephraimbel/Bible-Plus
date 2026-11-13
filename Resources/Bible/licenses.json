@@ -1,0 +1,279 @@
+{
+  "verifiedDate": "2026-11-13",
+  "sourceTerms": "https://bible.helloao.org/docs/",
+  "formattingChanges": "Verse fragments joined, footnote markers omitted, whitespace normalized; no machine translation of Scripture.",
+  "translations": [
+    {
+      "id": "BSB",
+      "name": "Berean Standard Bible",
+      "license": {
+        "attribution": "not-required",
+        "commercialUse": "allowed",
+        "derivatives": "allowed",
+        "copyleft": false,
+        "publicDomain": true
+      },
+      "licenseNotice": null,
+      "sourceURL": "https://berean.bible/",
+      "licenseURL": "https://berean.bible/",
+      "downloadURL": "https://bible.helloao.org/api/BSB/complete.json",
+      "bundledSHA256": "96778cf78ad1a7aa1f45b42b8546728bd68838473a5b15c5bf39b6d9ff633ed5"
+    },
+    {
+      "id": "cmn_cu1",
+      "name": "Chinese Union Version (simplified)",
+      "license": {
+        "attribution": "not-required",
+        "commercialUse": "allowed",
+        "derivatives": "allowed",
+        "copyleft": false,
+        "publicDomain": true
+      },
+      "licenseNotice": null,
+      "sourceURL": "https://ebible.org/Scriptures/details.php?id=cmn-cu89s",
+      "licenseURL": "https://ebible.org/Scriptures/details.php?id=cmn-cu89s",
+      "downloadURL": "https://bible.helloao.org/api/cmn_cu1/complete.json",
+      "bundledSHA256": "d94e52a2b464af20232d2d3c814bf711e5a57cd526e4e40b7d1bca4217584c4c"
+    },
+    {
+      "id": "cmn_cuv",
+      "name": "Chinese Union Version (traditional)",
+      "license": {
+        "attribution": "not-required",
+        "commercialUse": "allowed",
+        "derivatives": "allowed",
+        "copyleft": false,
+        "publicDomain": true
+      },
+      "licenseNotice": null,
+      "sourceURL": "https://ebible.org/Scriptures/details.php?id=cmn-cu89t",
+      "licenseURL": "https://ebible.org/Scriptures/details.php?id=cmn-cu89t",
+      "downloadURL": "https://bible.helloao.org/api/cmn_cuv/complete.json",
+      "bundledSHA256": "df0f5b942017f1970efeeba16f7f2f65845aa238918bca8e3fe01d961b59d8ce"
+    },
+    {
+      "id": "deu_l12",
+      "name": "German Luther Bible 1912",
+      "license": {
+        "attribution": "not-required",
+        "commercialUse": "allowed",
+        "derivatives": "allowed",
+        "copyleft": false,
+        "publicDomain": true
+      },
+      "licenseNotice": null,
+      "sourceURL": "https://ebible.org/Scriptures/details.php?id=deu1912",
+      "licenseURL": "https://ebible.org/Scriptures/details.php?id=deu1912",
+      "downloadURL": "https://bible.helloao.org/api/deu_l12/complete.json",
+      "bundledSHA256": "c891b3752cea13f9c24fa9d634302764c37b1c3a893c3c076c4fc7ff80e466d3"
+    },
+    {
+      "id": "eng_asv",
+      "name": "American Standard Version (1901)",
+      "license": {
+        "attribution": "not-required",
+        "commercialUse": "allowed",
+        "derivatives": "allowed",
+        "copyleft": false,
+        "publicDomain": true
+      },
+      "licenseNotice": null,
+      "sourceURL": "https://ebible.org/Scriptures/details.php?id=eng-asv",
+      "licenseURL": "https://ebible.org/Scriptures/details.php?id=eng-asv",
+      "downloadURL": "https://bible.helloao.org/api/eng_asv/complete.json",
+      "bundledSHA256": "7a681eca664ed6f76b5b7e0e7c941b44a6eab256734a040c05c7a3e9624e8b3a"
+    },
+    {
+      "id": "eng_dra",
+      "name": "Douay-Rheims 1899",
+      "license": {
+        "attribution": "not-required",
+        "commercialUse": "allowed",
+        "derivatives": "allowed",
+        "copyleft": false,
+        "publicDomain": true
+      },
+      "licenseNotice": null,
+      "sourceURL": "https://ebible.org/Scriptures/details.php?id=engDRA",
+      "licenseURL": "https://ebible.org/Scriptures/details.php?id=engDRA",
+      "downloadURL": "https://bible.helloao.org/api/eng_dra/complete.json",
+      "bundledSHA256": "315093b7fdba8da3e87e5bf38926fe3c1b90a89b24cefafd39c44e0ad5238bbc"
+    },
+    {
+      "id": "eng_ylt",
+      "name": "Young's Literal Translation",
+      "license": {
+        "attribution": "not-required",
+        "commercialUse": "allowed",
+        "derivatives": "allowed",
+        "copyleft": false,
+        "publicDomain": true
+      },
+      "licenseNotice": null,
+      "sourceURL": "https://ebible.org/Scriptures/details.php?id=engylt",
+      "licenseURL": "https://ebible.org/Scriptures/details.php?id=engylt",
+      "downloadURL": "https://bible.helloao.org/api/eng_ylt/complete.json",
+      "bundledSHA256": "91a89a5862cb1b323cf0815eb1fc5f4234c58d7577ae120967a038a717d60606"
+    },
+    {
+      "id": "fra_lsg",
+      "name": "French Louis Segond 1910 Bible",
+      "license": {
+        "attribution": "not-required",
+        "commercialUse": "allowed",
+        "derivatives": "allowed",
+        "copyleft": false,
+        "publicDomain": true
+      },
+      "licenseNotice": null,
+      "sourceURL": "https://ebible.org/Scriptures/details.php?id=fraLSG",
+      "licenseURL": "https://ebible.org/Scriptures/details.php?id=fraLSG",
+      "downloadURL": "https://bible.helloao.org/api/fra_lsg/complete.json",
+      "bundledSHA256": "bc14ffac5cbcf60865f91574a98e9a53efaa538d1461719de630983c4493369a"
+    },
+    {
+      "id": "ind_tsi",
+      "name": "Plain Indonesian Translation",
+      "license": {
+        "attribution": "required",
+        "commercialUse": "allowed",
+        "derivatives": "allowed",
+        "copyleft": true,
+        "publicDomain": false
+      },
+      "licenseNotice": "The Our Language Bible Organization",
+      "sourceURL": "https://app.library.bible/content/2dd568eeff29fb3c",
+      "licenseURL": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "downloadURL": "https://bible.helloao.org/api/ind_tsi/complete.json",
+      "bundledSHA256": "cab6e3c8629e30027c8a9c47a6b9bb294af4d623b9878342cbc3110fb1fae447"
+    },
+    {
+      "id": "ita_riv",
+      "name": "Italian Riveduta Bible",
+      "license": {
+        "attribution": "not-required",
+        "commercialUse": "allowed",
+        "derivatives": "allowed",
+        "copyleft": false,
+        "publicDomain": true
+      },
+      "licenseNotice": null,
+      "sourceURL": "https://ebible.org/Scriptures/details.php?id=ita1927",
+      "licenseURL": "https://ebible.org/Scriptures/details.php?id=ita1927",
+      "downloadURL": "https://bible.helloao.org/api/ita_riv/complete.json",
+      "bundledSHA256": "741c9e042100c4b9dc7ec8ed54e4cd5dd2dab6edf56e8cb8c212eb566ccd673c"
+    },
+    {
+      "id": "jpn_kou",
+      "name": "Japanese Kougo-yaku (1955)",
+      "license": {
+        "publicDomain": true,
+        "attribution": "not-required",
+        "commercialUse": "allowed",
+        "derivatives": "allowed",
+        "copyleft": false
+      },
+      "licenseNotice": "The public domain Japan Bible Society 口語訳 edition, published in 1954 (New Testament) and 1955 (Old Testament), is taken from open-bibles commit 3ca49fb73163f42297a32b7b1b1c40cf3dafd84b with furigana removed.",
+      "sourceURL": "https://github.com/seven1m/open-bibles/blob/3ca49fb73163f42297a32b7b1b1c40cf3dafd84b/jpn-kougo.osis.xml",
+      "licenseURL": "https://github.com/seven1m/open-bibles/blob/3ca49fb73163f42297a32b7b1b1c40cf3dafd84b/jpn-kougo.osis.xml",
+      "downloadURL": "https://bible.helloao.org/api/jpn_kou/complete.json",
+      "bundledSHA256": "18f16cfe943efe1617aa847decaf3a593445a82d78e052d4631cf12f664ac452"
+    },
+    {
+      "id": "kor_old",
+      "name": "Korean Bible 1910",
+      "license": {
+        "attribution": "not-required",
+        "commercialUse": "allowed",
+        "derivatives": "allowed",
+        "copyleft": false,
+        "publicDomain": true
+      },
+      "licenseNotice": null,
+      "sourceURL": "https://ebible.org/Scriptures/details.php?id=kor",
+      "licenseURL": "https://ebible.org/Scriptures/details.php?id=kor",
+      "downloadURL": "https://bible.helloao.org/api/kor_old/complete.json",
+      "bundledSHA256": "1fbe54ec626daf9414fbad82b9d399b840907202a101c97e5f0508a540fcb9de"
+    },
+    {
+      "id": "por_blj",
+      "name": "Portuguese Bíblia Livre",
+      "license": {
+        "attribution": "required",
+        "commercialUse": "allowed",
+        "derivatives": "allowed",
+        "copyleft": false,
+        "publicDomain": false
+      },
+      "licenseNotice": null,
+      "sourceURL": "https://ebible.org/Scriptures/details.php?id=porbr2018",
+      "licenseURL": "https://ebible.org/Scriptures/details.php?id=porbr2018",
+      "downloadURL": "https://bible.helloao.org/api/por_blj/complete.json",
+      "bundledSHA256": "b5b498bba141a113f454ec7a7daec31deb1e5cff5d842c1b7ca20bad6406868d"
+    },
+    {
+      "id": "rus_syn",
+      "name": "Russian Synodal Bible",
+      "license": {
+        "attribution": "not-required",
+        "commercialUse": "allowed",
+        "derivatives": "allowed",
+        "copyleft": false,
+        "publicDomain": true
+      },
+      "licenseNotice": null,
+      "sourceURL": "https://ebible.org/Scriptures/details.php?id=russyn",
+      "licenseURL": "https://ebible.org/Scriptures/details.php?id=russyn",
+      "downloadURL": "https://bible.helloao.org/api/rus_syn/complete.json",
+      "bundledSHA256": "eca3e6b1abd555302f02fb6862400c06bbd4389b0771b5735515a9976a064c3b"
+    },
+    {
+      "id": "spa_r09",
+      "name": "Reina Valera 1909",
+      "license": {
+        "attribution": "not-required",
+        "commercialUse": "allowed",
+        "derivatives": "allowed",
+        "copyleft": false,
+        "publicDomain": true
+      },
+      "licenseNotice": null,
+      "sourceURL": "https://ebible.org/Scriptures/details.php?id=spaRV1909",
+      "licenseURL": "https://ebible.org/Scriptures/details.php?id=spaRV1909",
+      "downloadURL": "https://bible.helloao.org/api/spa_r09/complete.json",
+      "bundledSHA256": "b38726a03ccd5b99b11c8fb5b540dcb017a62b2ce7ca64352c206ace3e735a25"
+    },
+    {
+      "id": "swh_ulb",
+      "name": "Swahili Unlocked Literal Bible",
+      "license": {
+        "attribution": "required",
+        "commercialUse": "allowed",
+        "derivatives": "allowed",
+        "copyleft": true,
+        "publicDomain": false
+      },
+      "licenseNotice": null,
+      "sourceURL": "https://ebible.org/Scriptures/details.php?id=swhulb",
+      "licenseURL": "https://ebible.org/Scriptures/details.php?id=swhulb",
+      "downloadURL": "https://bible.helloao.org/api/swh_ulb/complete.json",
+      "bundledSHA256": "0cbe0c4e08e809fe2b8c0fac7d980dc7c0c2615396ef9c37da1d10a7c3157ef6"
+    },
+    {
+      "id": "tgl_ulb",
+      "name": "Tagalog Bible",
+      "license": {
+        "attribution": "required",
+        "commercialUse": "allowed",
+        "derivatives": "allowed",
+        "copyleft": true,
+        "publicDomain": false
+      },
+      "licenseNotice": null,
+      "sourceURL": "https://ebible.org/Scriptures/details.php?id=tglulb",
+      "licenseURL": "https://ebible.org/Scriptures/details.php?id=tglulb",
+      "downloadURL": "https://bible.helloao.org/api/tgl_ulb/complete.json",
+      "bundledSHA256": "9c7baf5797b72baed4489af8e3ce2e22a1fd8842ecc4a951225d6ccde51dbc40"
+    }
+  ]
+}

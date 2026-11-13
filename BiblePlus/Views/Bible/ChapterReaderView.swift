@@ -89,6 +89,7 @@ struct ChapterReaderView: View {
                         // Required by the translation's license (CC BY-SA).
                         if let attribution = translationAttribution, !displayVerses.isEmpty {
                             Text(attribution)
+                                .textSelection(.enabled)
                                 .font(.system(size: 11))
                                 .foregroundStyle(palette.textMuted)
                                 .multilineTextAlignment(.center)

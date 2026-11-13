@@ -21,6 +21,8 @@ enum TranslationLicensePolicy {
         let license: TranslationRef.License
         /// Where the license / source is documented (shown in attribution).
         let sourceURL: String
+        var copyrightNotice: String? = nil
+        var licenseURL: String? = nil
     }
 
     private static let publicDomain = TranslationRef.License(
@@ -51,10 +53,10 @@ enum TranslationLicensePolicy {
         "kor_old": Entry(shortName: "KOR", englishName: "Korean Bible 1910", license: publicDomain, sourceURL: "https://ebible.org/details.php?id=kor"),
         "jpn_kou": Entry(shortName: "口語訳", englishName: "Japanese Kougo-yaku (1955)", license: publicDomain, sourceURL: "https://github.com/seven1m/open-bibles"),
         // Other languages — Creative Commons (attribution required)
-        "por_blj": Entry(shortName: "BLJ", englishName: "Bíblia Livre", license: ccBy, sourceURL: "https://ebible.org/details.php?id=porbr2018"),
-        "ind_tsi": Entry(shortName: "TSI", englishName: "Plain Indonesian Translation", license: ccBySA, sourceURL: "https://creativecommons.org/licenses/by-sa/4.0/"),
-        "tgl_ulb": Entry(shortName: "ULB", englishName: "Tagalog Unlocked Literal Bible", license: ccBySA, sourceURL: "https://ebible.org/details.php?id=tglulb"),
-        "swh_ulb": Entry(shortName: "ULB", englishName: "Swahili Unlocked Literal Bible", license: ccBySA, sourceURL: "https://ebible.org/details.php?id=swhulb"),
+        "por_blj": Entry(shortName: "BLJ", englishName: "Bíblia Livre", license: ccBy, sourceURL: "https://ebible.org/details.php?id=porbr2018", copyrightNotice: "© 2018 Diego Santos, Mario Sérgio, e Marco Teles", licenseURL: "https://creativecommons.org/licenses/by/4.0/"),
+        "ind_tsi": Entry(shortName: "TSI", englishName: "Plain Indonesian Translation", license: ccBySA, sourceURL: "https://ebible.org/details.php?id=ind", copyrightNotice: "© 2021 Yayasan Alkitab Bahasa Kita (Albata) and Pioneer Bible Translators International; The Our Language Bible Organization", licenseURL: "https://creativecommons.org/licenses/by-sa/4.0/"),
+        "tgl_ulb": Entry(shortName: "ULB", englishName: "Tagalog Unlocked Literal Bible", license: ccBySA, sourceURL: "https://ebible.org/details.php?id=tglulb", copyrightNotice: "© 2018 Door43 World Missions Community", licenseURL: "https://creativecommons.org/licenses/by-sa/4.0/"),
+        "swh_ulb": Entry(shortName: "ULB", englishName: "Swahili Unlocked Literal Bible", license: ccBySA, sourceURL: "https://ebible.org/details.php?id=swhulb", copyrightNotice: "© 2019 Door43 World Missions Community", licenseURL: "https://creativecommons.org/licenses/by-sa/4.0/"),
     ]
 
     /// License terms by ID (used by `TranslationRef.isLicensedForCommercialUse`).
@@ -89,9 +91,11 @@ enum TranslationLicensePolicy {
     /// none is required (public domain).
     static func attribution(for refID: String) -> String? {
         guard let entry = bundled[refID], entry.license.requiresAttribution else { return nil }
+        let notice = entry.copyrightNotice ?? entry.englishName
+        let licenseURL = entry.licenseURL ?? entry.sourceURL
         if entry.license.copyleft == true {
-            return String(localized: "Scripture text: \(entry.englishName). Licensed under Creative Commons Attribution-ShareAlike (CC BY-SA). Source: \(entry.sourceURL)")
+            return String(localized: "Scripture text: \(entry.englishName). \(notice). CC BY-SA 4.0: \(licenseURL). Source: \(entry.sourceURL). Formatting adapted for this app; verse wording unchanged. Adaptations of this text are shared under the same license.")
         }
-        return String(localized: "Scripture text: \(entry.englishName). Licensed under Creative Commons Attribution (CC BY). Source: \(entry.sourceURL)")
+        return String(localized: "Scripture text: \(entry.englishName). \(notice). CC BY 4.0: \(licenseURL). Source: \(entry.sourceURL). Formatting adapted for this app; verse wording unchanged.")
     }
 }
