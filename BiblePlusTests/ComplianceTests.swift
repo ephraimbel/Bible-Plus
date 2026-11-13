@@ -99,6 +99,24 @@ struct ComplianceTests {
         #expect(profile.preferredTranslation == .web)
     }
 
+    @Test func generatedScriptureCardsUseVerbatimBundleText() {
+        let expected = BibleRepository.shared.versesSync(book: "JHN", chapter: 3, translation: .web)
+            .first { $0.number == 16 }!.text
+        let source = "[SCRIPTURE img=\"test\"]\"invented wording\" — John 3:16 (NIV)[/SCRIPTURE]"
+        let result = VerifiedScripture.replacingGeneratedCards(in: source)
+        #expect(result.contains(expected))
+        #expect(result.contains("John 3:16 (WEB)"))
+        #expect(!result.contains("invented wording"))
+        #expect(!result.contains("NIV"))
+        #expect(VerifiedScripture.quote(reference: "John 3:16-17")?.text.contains(expected) == true)
+        let crossRefs = VerifiedScripture.replacingGeneratedCards(in: "[CROSSREFS]John 3:16 (NIV) || invented text\nInvalid 3:999 || also invented[/CROSSREFS]")
+        #expect(crossRefs.contains(expected))
+        #expect(!crossRefs.contains("invented"))
+        #expect(!crossRefs.contains("NIV"))
+        #expect(VerifiedScripture.quote(reference: "John 3:999") == nil)
+        #expect(VerifiedScripture.replacingGeneratedCards(in: "[VERSE]invented quotation[/VERSE]").isEmpty)
+    }
+
     @Test func allAIEntrypointsRejectMissingConsent() async {
         AIConsent.revoke()
         #expect(!AIConsent.isGranted)

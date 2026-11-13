@@ -346,7 +346,7 @@ final class BibleReaderViewModel {
 
     func selectionExplainPrompt() -> String {
         let ref = selectionReference()
-        return "Help me understand what God is saying in \(ref): \"\(selectionText())\" — what did this mean in its original context, and what does it mean for my life today?"
+        return "Help me understand what God is saying in \(ref): \"\(selectionText())\" \(translationAttribution ?? translationName) — what did this mean in its original context, and what does it mean for my life today?"
     }
 
     // MARK: - Selection Bulk Actions

@@ -933,6 +933,7 @@ final class ChatViewModel {
             // Wait for buffer to fully drain
             await drainRemainingBuffer(into: assistantMessage)
 
+            assistantMessage.content = VerifiedScripture.replacingGeneratedCards(in: assistantMessage.content)
             let (cleaned, suggestions) = AIService.extractSuggestions(from: assistantMessage.content)
             if !suggestions.isEmpty {
                 assistantMessage.content = cleaned

@@ -274,6 +274,22 @@
       "licenseURL": "https://ebible.org/Scriptures/details.php?id=tglulb",
       "downloadURL": "https://bible.helloao.org/api/tgl_ulb/complete.json",
       "bundledSHA256": "9c7baf5797b72baed4489af8e3ce2e22a1fd8842ecc4a951225d6ccde51dbc40"
+    },
+    {
+      "id": "bundled_web",
+      "name": "World English Bible Classic",
+      "license": {
+        "attribution": "not-required",
+        "commercialUse": "allowed",
+        "derivatives": "allowed",
+        "copyleft": false,
+        "publicDomain": true
+      },
+      "sourceURL": "https://ebible.org/eng-web/",
+      "licenseURL": "https://ebible.org/eng-web/copyright.htm",
+      "downloadURL": "https://bible.helloao.org/api/eng_web/complete.json",
+      "bundledSHA256": "46395df9a8d909bdc274b7bae91680077e0c9787f016f38c89fe79a3e80b01e7",
+      "formattingChanges": "Canonical 66-book subset; fragments joined and whitespace normalized, no machine translation or rewriting."
     }
   ]
 }

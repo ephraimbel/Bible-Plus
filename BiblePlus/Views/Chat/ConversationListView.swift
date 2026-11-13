@@ -462,13 +462,13 @@ private struct ConversationListContent: View {
 
     private var inspiringVerse: (text: String, reference: String) {
         let verses: [(String, String)] = [
-            ("Trust in the Lord with all thine heart; and lean not unto thine own understanding.", "Proverbs 3:5"),
-            ("Be still, and know that I am God.", "Psalm 46:10"),
-            ("Cast thy burden upon the Lord, and he shall sustain thee.", "Psalm 55:22"),
-            ("The Lord is my shepherd; I shall not want.", "Psalm 23:1"),
-            ("I can do all things through Christ which strengtheneth me.", "Philippians 4:13"),
-            ("Come unto me, all ye that labour and are heavy laden, and I will give you rest.", "Matthew 11:28"),
-            ("For God so loved the world, that he gave his only begotten Son.", "John 3:16"),
+            ("Trust in Yahweh with all your heart, and don’t lean on your own understanding.", "Proverbs 3:5 (WEB)"),
+            ("“Be still, and know that I am God. I will be exalted among the nations. I will be exalted on the earth.”", "Psalm 46:10 (WEB)"),
+            ("Cast your burden on Yahweh and he will sustain you. He will never allow the righteous to be moved.", "Psalm 55:22 (WEB)"),
+            ("Yahweh is my shepherd; I shall lack nothing.", "Psalm 23:1 (WEB)"),
+            ("I can do all things through Christ who strengthens me.", "Philippians 4:13 (WEB)"),
+            ("“Come to me, all you who labor and are heavily burdened, and I will give you rest.", "Matthew 11:28 (WEB)"),
+            ("For God so loved the world, that he gave his only born Son, that whoever believes in him should not perish, but have eternal life.", "John 3:16 (WEB)"),
         ]
         let dayIndex = Calendar.current.ordinality(of: .day, in: .year, for: .now) ?? 0
         let verse = verses[dayIndex % verses.count]

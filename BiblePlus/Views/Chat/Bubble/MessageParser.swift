@@ -487,9 +487,8 @@ enum MessageParser {
                     .filter { !$0.isEmpty }
                 guard parts.count >= 2 else { return nil }
                 let reference = parts[0]
-                let quote = parts.dropFirst().joined(separator: " ")
-                    .trimmingCharacters(in: CharacterSet(charactersIn: "\"\u{201C}\u{201D}"))
-                return (reference, quote)
+                guard let verified = VerifiedScripture.quote(reference: reference) else { return nil }
+                return (verified.reference, verified.text)
             }
             .prefix(4)
             .map { $0 }
@@ -525,11 +524,14 @@ enum MessageParser {
                     .trimmingCharacters(in: .whitespacesAndNewlines)
                     .replacingOccurrences(of: #"^\*{1,2}|\*{1,2}$"#, with: "", options: .regularExpression)
                 if !quote.isEmpty && !reference.isEmpty {
-                    return (quote, reference)
+                    if let verified = VerifiedScripture.quote(reference: reference) {
+                        return (verified.text, verified.reference)
+                    }
+                    return ("", reference)
                 }
             }
         }
-        return (body, "")
+        return ("", "")
     }
 
     private static let refPattern = #"(?:\d\s+)?[A-Z][a-z]{2,}(?:\s+(?:of\s+)?[A-Z][a-z]+)*\s+\d{1,3}:\d{1,3}(?:\s*[-–]\s*\d{1,3})?(?:,\s*\d{1,3}(?:\s*[-–]\s*\d{1,3})?)*"#
@@ -611,7 +613,9 @@ enum MessageParser {
                     segments.append(.text(textBefore))
                 }
             }
-            segments.append(.verseCard(quote: vm.quote, reference: vm.reference))
+            if let verified = VerifiedScripture.quote(reference: vm.reference) {
+                segments.append(.verseCard(quote: verified.text, reference: verified.reference))
+            }
             cursor = vm.range.upperBound
         }
 
