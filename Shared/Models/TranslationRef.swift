@@ -58,10 +58,7 @@ struct TranslationRef: Codable, Hashable, Identifiable, Sendable {
     /// carry a license that permits commercial use and derivatives. Refs with
     /// no license info are rejected — unknown terms are treated as restricted.
     var isLicensedForCommercialUse: Bool {
-        if isBundled { return true }
-        if TranslationLicensePolicy.knownRestrictedRefIDs.contains(id) { return false }
-        let terms = license ?? TranslationLicensePolicy.knownLicenses[id]
-        return terms?.permitsCommercialAppUse ?? false
+        TranslationLicensePolicy.isAllowed(refID: id)
     }
 
     enum TextDirection: String, Codable, Sendable {
@@ -185,7 +182,7 @@ extension TranslationRef {
         website: nil
     )
 
-    var isBundled: Bool { id.hasPrefix(Self.bundledPrefix) }
+    var isBundled: Bool { id == Self.bundledKJV.id || id == Self.bundledWEB.id }
 
     /// Hand-vetted, public-domain English translations offered in the reader's
     /// translation picker alongside the bundled KJV/WEB. These replace the

@@ -209,6 +209,8 @@ final class BibleReaderViewModel {
                 lastReadVerseNumber = profile.lastReadVerseNumber
             }
         }
+        if currentRefID == TranslationRef.bundledKJV.id { currentTranslation = .kjv }
+        if currentRefID == TranslationRef.bundledWEB.id { currentTranslation = .web }
         repository.setTranslation(currentTranslation)
         loadChapter()
     }
@@ -406,6 +408,8 @@ final class BibleReaderViewModel {
     /// `BibleTranslation` enum.
     func changeTranslationRef(_ refID: String?) {
         let refID = refID.flatMap { TranslationLicensePolicy.isAllowed(refID: $0) ? $0 : nil }
+        if refID == TranslationRef.bundledKJV.id { changeTranslation(.kjv); return }
+        if refID == TranslationRef.bundledWEB.id { changeTranslation(.web); return }
         currentRefID = refID
         updateProfile { $0.preferredTranslationRefID = refID }
         showTranslationPicker = false
@@ -524,7 +528,8 @@ final class BibleReaderViewModel {
                 guard !Task.isCancelled else { return }
                 let fallback = repository.versesSync(
                     book: selectedBook.id,
-                    chapter: selectedChapter
+                    chapter: selectedChapter,
+                    translation: .kjv
                 )
                 if !fallback.isEmpty {
                     verses = fallback
@@ -553,7 +558,7 @@ final class BibleReaderViewModel {
             chapter: selectedChapter,
             verseNumber: verse.number,
             text: verse.text,
-            translation: currentTranslation.abbreviation
+            translation: translationName
         )
         modelContext.insert(saved)
         modelContext.safeSave()
@@ -581,7 +586,7 @@ final class BibleReaderViewModel {
                 chapter: selectedChapter,
                 verseNumber: verse.number,
                 text: verse.text,
-                translation: currentTranslation.abbreviation,
+                translation: translationName,
                 highlightColor: color
             )
             modelContext.insert(saved)
@@ -615,7 +620,7 @@ final class BibleReaderViewModel {
                 chapter: selectedChapter,
                 verseNumber: verse.number,
                 text: verse.text,
-                translation: currentTranslation.abbreviation,
+                translation: translationName,
                 notes: note
             )
             modelContext.insert(saved)
@@ -682,7 +687,8 @@ final class BibleReaderViewModel {
                 // Graceful fallback: try sync path (cached or bundled KJV)
                 let fallback = repository.versesSync(
                     book: selectedBook.id,
-                    chapter: selectedChapter
+                    chapter: selectedChapter,
+                    translation: .kjv
                 )
 
                 if !fallback.isEmpty {

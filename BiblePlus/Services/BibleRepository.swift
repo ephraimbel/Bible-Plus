@@ -71,14 +71,12 @@ final class BibleRepository: @unchecked Sendable {
     /// to any third-party Bible API. Throws `chapterUnavailable` for books a
     /// partial translation doesn't include, so the reader falls back to KJV.
     func verses(refID: String, book: String, chapter: Int) async throws -> [(number: Int, text: String)] {
+        guard TranslationLicensePolicy.isAllowed(refID: refID) else {
+            throw BibleTextError.chapterUnavailable
+        }
         if refID.hasPrefix(TranslationRef.bundledPrefix) {
             let legacy: BibleTranslation = (refID == TranslationRef.bundledWEB.id) ? .web : .kjv
             return try await verses(book: book, chapter: chapter, translation: legacy)
-        }
-
-        // Licensing gate: only translations vetted in TranslationLicensePolicy.
-        guard TranslationLicensePolicy.isAllowed(refID: refID) else {
-            return try await verses(book: book, chapter: chapter, translation: nil)
         }
 
         let cacheKey = "ref:\(refID)/\(book)/\(chapter)" as NSString
@@ -174,7 +172,7 @@ final class BibleRepository: @unchecked Sendable {
     // MARK: - Bundled Data (Loaded Once Per Translation, Cached in Memory)
 
     func bundledFallback(book: String, chapter: Int, translation: BibleTranslation? = nil) -> [(number: Int, text: String)] {
-        let trans = translation ?? currentTranslation
+        let trans = (translation ?? currentTranslation).licensed
         let resourceName = bundledResourceName(for: trans)
 
         lock.lock()
@@ -201,7 +199,7 @@ final class BibleRepository: @unchecked Sendable {
     }
 
     private func bundledResourceName(for translation: BibleTranslation) -> String {
-        switch translation {
+        switch translation.licensed {
         case .kjv: "bible-kjv"
         case .web: "bible-web"
         default: "bible-kjv" // Fallback to KJV for non-bundled translations

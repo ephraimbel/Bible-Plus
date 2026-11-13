@@ -75,7 +75,7 @@ enum TranslationLicensePolicy {
 
     /// Whether a translation ID may be loaded and shown.
     static func isAllowed(refID: String) -> Bool {
-        if refID.hasPrefix(TranslationRef.bundledPrefix) { return true }
+        if refID == TranslationRef.bundledKJV.id || refID == TranslationRef.bundledWEB.id { return true }
         return bundled[refID]?.license.permitsCommercialAppUse ?? false
     }
 
