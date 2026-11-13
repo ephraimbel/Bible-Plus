@@ -555,6 +555,9 @@ final class AudioBibleService {
     // MARK: - TTS API Call
 
     private nonisolated func callTTSAPI(text: String, voice: BibleVoice, retryCount: Int = 0) async throws -> Data {
+        // Recheck for every request, including retries and background prefetch.
+        // Without permission, play() uses the existing on-device voice fallback.
+        guard AIConsent.isGranted else { throw AIError.consentRequired }
         var request = URLRequest(url: Self.ttsEndpoint)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -981,6 +984,7 @@ final class AudioBibleService {
         chapter: Int,
         translation: BibleTranslation
     ) {
+        guard AIConsent.isGranted else { return }
         let voice = selectedVoice
         let chapterKey = "\(book.id)-\(chapter)-\(voice.apiVoice)"
 

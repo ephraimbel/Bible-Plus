@@ -23,6 +23,7 @@ struct MemorySettingsView: View {
     @State private var showClearConfirm: Bool = false
     @FocusState private var newFactFocused: Bool
     @State private var aiSharingAllowed: Bool = AIConsent.isGranted
+    @State private var showAIConsent = false
 
     var body: some View {
         NavigationStack {
@@ -69,6 +70,16 @@ struct MemorySettingsView: View {
             } message: {
                 Text("This deletes every pinned fact and the rolling digest. The AI will start fresh from your next message. This cannot be undone.")
             }
+            .sheet(isPresented: $showAIConsent) {
+                AIConsentView(onAllow: {
+                    AIConsent.grant()
+                    aiSharingAllowed = true
+                    showAIConsent = false
+                }, onDecline: {
+                    aiSharingAllowed = false
+                    showAIConsent = false
+                })
+            }
         }
     }
 
@@ -76,15 +87,19 @@ struct MemorySettingsView: View {
 
     private var aiSharingSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Toggle(isOn: $aiSharingAllowed) {
+            Toggle(isOn: Binding(get: { aiSharingAllowed }, set: { allowed in
+                if allowed {
+                    showAIConsent = true
+                } else {
+                    AIConsent.revoke()
+                    aiSharingAllowed = false
+                }
+            })) {
                 Text("Share data with AI provider")
                     .font(.system(size: 16, weight: .semibold))
                     .foregroundStyle(palette.textPrimary)
             }
             .tint(palette.accent)
-            .onChange(of: aiSharingAllowed) { _, allowed in
-                if allowed { AIConsent.grant() } else { AIConsent.revoke() }
-            }
             Text("The AI companion is powered by OpenAI. When on, your chat messages, first name, onboarding answers, and the memory below are sent to OpenAI to generate responses. When off, the AI companion is paused; everything else in Bible+ keeps working.")
                 .font(.system(size: 13))
                 .foregroundStyle(palette.textMuted)

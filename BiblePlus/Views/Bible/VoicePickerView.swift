@@ -15,6 +15,8 @@ struct VoicePickerView: View {
     @State private var previewDelegate: PreviewAudioDelegate?
     @State private var previewTask: Task<Void, Never>?
     @State private var showPaywall = false
+    @State private var showAIConsent = false
+    @State private var pendingPreviewVoice: BibleVoice?
 
     private static let sampleText = "The Lord is my shepherd; I shall not want. He maketh me to lie down in green pastures."
 
@@ -115,6 +117,18 @@ struct VoicePickerView: View {
         .fullScreenCover(isPresented: $showPaywall) {
             PaywallContainerView()
         }
+        .sheet(isPresented: $showAIConsent, onDismiss: {
+            if AIConsent.isGranted, let voice = pendingPreviewVoice { previewVoice(voice) }
+            pendingPreviewVoice = nil
+        }) {
+            AIConsentView(onAllow: {
+                AIConsent.grant()
+                showAIConsent = false
+            }, onDecline: {
+                pendingPreviewVoice = nil
+                showAIConsent = false
+            })
+        }
     }
 
     // MARK: - Voice Row
@@ -186,6 +200,11 @@ struct VoicePickerView: View {
     // MARK: - Preview (OpenAI TTS with delegate)
 
     private func previewVoice(_ voice: BibleVoice) {
+        guard AIConsent.isGranted else {
+            pendingPreviewVoice = voice
+            showAIConsent = true
+            return
+        }
         // Toggle off if already previewing this voice
         if previewingVoice == voice {
             stopPreview()
@@ -199,7 +218,7 @@ struct VoicePickerView: View {
         previewingVoice = voice
         isLoadingPreview = true
 
-        previewTask = Task { [weak audioService] in
+        previewTask = Task {
             do {
                 let audioData = try await fetchPreviewAudio(voice: voice)
                 guard !Task.isCancelled else { return }
@@ -247,7 +266,8 @@ struct VoicePickerView: View {
             return data
         }
 
-        // Call TTS API
+        // Call TTS API only while permission remains granted.
+        guard AIConsent.isGranted else { throw AIError.consentRequired }
         var request = URLRequest(url: Self.ttsEndpoint)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")

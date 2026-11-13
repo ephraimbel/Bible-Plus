@@ -34,6 +34,7 @@ struct AIConsentView: View {
                     bullet("Your first name")
                     bullet("Your onboarding answers: faith level, life season, and what you're carrying (for example grief or anxiety)")
                     bullet("Short memory notes Bible+ keeps about past conversations (you can clear these in Settings)")
+                    bullet("Bible text and your selected narrator voice when generating audio")
                 }
 
                 Text("OpenAI processes this data to generate responses; under its API terms it is not used to train OpenAI's models. We never sell your data. Your journal is never sent.")
@@ -41,6 +42,10 @@ struct AIConsentView: View {
                     .foregroundStyle(palette.textSecondary)
 
                 Text("By continuing, you confirm you are 18 or older, or that a parent or guardian has agreed to you using the AI companion.")
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundStyle(palette.textPrimary)
+
+                Text("By tapping Allow and Continue, you give explicit permission to share this data with OpenAI.")
                     .font(.system(size: 14, weight: .medium))
                     .foregroundStyle(palette.textPrimary)
 

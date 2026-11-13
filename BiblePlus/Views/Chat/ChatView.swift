@@ -127,6 +127,7 @@ private struct ChatContentView: View {
     @State private var ttsService = ChatTTSService()
     @State private var scripturePreview: ScriptureReferenceTarget? = nil
     @State private var showVoiceChat = false
+    @State private var pendingVoiceChat = false
     /// Set to false once `initialMessageId` has been scrolled to, so the
     /// jump only fires on first appearance — subsequent re-renders (e.g.
     /// when the user starts streaming a new reply) don't yank the view
@@ -213,11 +214,15 @@ private struct ChatContentView: View {
                 viewModel.shouldShowPaywall = false
             }
         }
-        .sheet(isPresented: $viewModel.shouldShowAIConsent) {
+        .sheet(isPresented: $viewModel.shouldShowAIConsent, onDismiss: {
+            if pendingVoiceChat && AIConsent.isGranted { showVoiceChat = true }
+            pendingVoiceChat = false
+        }) {
             AIConsentView(
                 onAllow: {
                     AIConsent.grant()
                     viewModel.shouldShowAIConsent = false
+                    guard !pendingVoiceChat else { return }
                     // Resume whatever triggered the sheet: a typed message or a retry.
                     if viewModel.inputText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
                        viewModel.failedMessageContent != nil {
@@ -226,7 +231,10 @@ private struct ChatContentView: View {
                         viewModel.send()
                     }
                 },
-                onDecline: { viewModel.shouldShowAIConsent = false }
+                onDecline: {
+                    pendingVoiceChat = false
+                    viewModel.shouldShowAIConsent = false
+                }
             )
         }
         .sheet(item: $viewModel.shareText) { text in
@@ -703,6 +711,7 @@ private struct ChatContentView: View {
                 if AIConsent.isGranted {
                     showVoiceChat = true
                 } else {
+                    pendingVoiceChat = true
                     viewModel.shouldShowAIConsent = true
                 }
             } label: {
